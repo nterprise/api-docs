@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "type": "object",
+  "properties": {
+    "self": {
+      "type": "string",
+      "format": "url",
+      "readOnly": true,
+      "example": "https://api.nterprise.com/{entity}/{entity_id}"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "operationId": "fetchRolePermissions",
+  "summary": "Fetch permission collection for a Role",
+  "description": "List all permissions for role",
+  "tags": [
+    "roles"
+  ],
+  "parameters": [
+    {
+      "$ref": "/v2/components/parameters/roleId.json"
+    },
+    {
+      "$ref": "/v2/components/parameters/limit.json"
+    },
+    {
+      "$ref": "/v2/components/parameters/offset.json"
+    }
+  ],
+  "responses": {
+    "200": {
+      "$ref": "/v2/components/responses/permissionCollection.json"
+    },
+    "default": {
+      "$ref": "/v2/components/responses/problem.json"
+    }
+  }
+}

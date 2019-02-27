@@ -1,0 +1,39 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "description": "A registered permission",
+  "type": "object",
+  "required": [
+    "label",
+    "allows"
+  ],
+  "properties": {
+    "label": {
+      "description": "The label of the permission",
+      "type": "string",
+      "pattern": "/(^[a-z]|[A-Z0-9])[a-z]*/",
+      "example": "createProject"
+    },
+    "allows": {
+      "description": "Describes what the permission allows",
+      "type": "string",
+      "example": "Allows creation of projects"
+    },
+    "_links": {
+      "type": "object",
+      "readOnly": true,
+      "allOf": [
+        {
+          "$ref": "/v2/components/schemas/linkSelf.json"
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "/v2/components/schemas/dateCreated.json"
+    },
+    {
+      "$ref": "/v2/components/schemas/dateUpdated.json"
+    }
+  ]
+}

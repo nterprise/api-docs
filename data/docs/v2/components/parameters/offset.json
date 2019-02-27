@@ -1,0 +1,9 @@
+{
+  "name": "offset",
+  "in": "query",
+  "description": "Continue from last offset",
+  "required": false,
+  "schema": {
+    "type": "string"
+  }
+}

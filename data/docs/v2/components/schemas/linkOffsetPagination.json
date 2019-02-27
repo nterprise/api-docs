@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "type": "object",
+  "properties": {
+    "_links": {
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "next": {
+          "type": "string",
+          "format": "url",
+          "readOnly": true,
+          "example": "https://api.nterprise.com/{entity}?offset=363yHhUhhI&limit=50"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "/v2/components/schemas/linkSelf.json"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "operationId": "fetchMe",
+  "summary": "Information about the current user",
+  "description": "Fetches the current user information",
+  "tags": [
+    "Me"
+  ],
+  "responses": {
+    "200": {
+      "description": "Entry point for the application",
+      "content": {
+        "application/vnd.nterprise.entry.v2+json": {
+          "schema": {
+            "allOf": [
+              {
+                "$ref": "/v2/components/schemas/me.json"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

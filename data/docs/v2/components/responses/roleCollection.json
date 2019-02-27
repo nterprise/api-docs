@@ -1,0 +1,27 @@
+{
+  "description": "A paged collection of roles",
+  "content": {
+    "application/vnd.nterprise.collection.roles.v2+json": {
+      "schema": {
+        "properties": {
+          "_embedded": {
+            "type": "object",
+            "properties": {
+              "roles": {
+                "type": "array",
+                "items": {
+                  "$ref": "/v2/components/schemas/role.json"
+                }
+              }
+            }
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "/v2/components/schemas/paginationOffset.json"
+          }
+        ]
+      }
+    }
+  }
+}

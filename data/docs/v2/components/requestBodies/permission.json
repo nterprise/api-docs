@@ -1,0 +1,20 @@
+{
+  "description": "Detail of a permission",
+  "content": {
+    "application/vnd.nterprise.permission.v2+json": {
+      "schema": {
+        "$ref": "/v2/components/schemas/permission.json"
+      }
+    },
+    "application/vnd.nterprise.permission+json": {
+      "schema": {
+        "$ref": "/v2/components/schemas/permission.json"
+      }
+    },
+    "application/json": {
+      "schema": {
+        "$ref": "/v2/components/schemas/permission.json"
+      }
+    }
+  }
+}

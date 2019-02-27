@@ -1,0 +1,11 @@
+{
+  "get": {
+    "$ref": "/v2/paths/operations/fetchRolePermissions.json"
+  },
+  "post": {
+    "$ref": "/v2/paths/operations/grantPermission.json"
+  },
+  "delete": {
+    "$ref": "/v2/paths/operations/revokeAllRolePermissions.json"
+  }
+}

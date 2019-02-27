@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "description": "User Information",
+  "properties": {
+    "email": {
+      "type": "string",
+      "format": "email",
+      "description": "Email address",
+      "example": "chuck.reeves@zones.com"
+    },
+    "name": {
+      "type": "string",
+      "description": "Human readable name",
+      "nullable": true,
+      "example": "Chuck Reeves"
+    },
+    "title": {
+      "type": "string",
+      "description": "Title or posistion the user holds",
+      "nullable": true,
+      "example": "Master of the Universe"
+    },
+    "_links": {
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "profile": {
+          "type": "string",
+          "format": "url",
+          "readOnly": true,
+          "example": "https://en.gravatar.com/userimage/9117096/34c181143a150434bba3ad0876468c9a.jpeg"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "/v2/components/schemas/linkSelf.json"
+        }
+      ]
+    }
+  }
+}

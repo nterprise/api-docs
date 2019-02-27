@@ -1,0 +1,21 @@
+{
+  "operationId": "fetchRoleById",
+  "summary": "Info for a specific role",
+  "description": "Fetches the role information",
+  "tags": [
+    "roles"
+  ],
+  "parameters": [
+    {
+      "$ref": "/v2/components/parameters/roleId.json"
+    }
+  ],
+  "responses": {
+    "200": {
+      "$ref": "/v2/components/responses/role.json"
+    },
+    "default": {
+      "$ref": "/v2/components/responses/problem.json"
+    }
+  }
+}

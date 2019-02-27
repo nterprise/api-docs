@@ -1,0 +1,24 @@
+{
+  "operationId": "fetchAllRoles",
+  "summary": "List all roles",
+  "description": "Allows fetching all of roles registered to the system",
+  "tags": [
+    "roles"
+  ],
+  "parameters": [
+    {
+      "$ref": "/v2/components/parameters/limit.json"
+    },
+    {
+      "$ref": "/v2/components/parameters/offset.json"
+    }
+  ],
+  "responses": {
+    "200": {
+      "$ref": "/v2/components/responses/roleCollection.json"
+    },
+    "default": {
+      "$ref": "/v2/components/responses/problem.json"
+    }
+  }
+}

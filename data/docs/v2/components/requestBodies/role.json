@@ -1,0 +1,20 @@
+{
+  "description": "Sending a role",
+  "content": {
+    "application/vnd.nterprise.role.v2+json": {
+      "schema": {
+        "$ref": "/v2/components/schemas/role.json"
+      }
+    },
+    "application/vnd.nterprise.role+json": {
+      "schema": {
+        "$ref": "/v2/components/schemas/role.json"
+      }
+    },
+    "application/json": {
+      "schema": {
+        "$ref": "/v2/components/schemas/role.json"
+      }
+    }
+  }
+}

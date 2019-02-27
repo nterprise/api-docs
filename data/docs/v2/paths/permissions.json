@@ -1,0 +1,8 @@
+{
+  "get": {
+    "$ref": "/v2/paths/operations/fetchAllPermissions.json"
+  },
+  "post": {
+    "$ref": "/v2/paths/operations/createNewPermission.json"
+  }
+}

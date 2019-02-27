@@ -1,0 +1,10 @@
+{
+  "description": "API Problem",
+  "content": {
+    "application/problem+json": {
+      "schema": {
+        "$ref": "/v2/components/schemas/problem.json"
+      }
+    }
+  }
+}

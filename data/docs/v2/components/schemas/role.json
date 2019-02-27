@@ -1,0 +1,68 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "description": "Roles",
+  "type": "object",
+  "required": [
+    "label"
+  ],
+  "properties": {
+    "role_id": {
+      "description": "Role identifier",
+      "type": "string",
+      "format": "uuid",
+      "pattern": "/\\b[0-9a-f]{8}\\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\\b[0-9a-f]{12}\\b/",
+      "example": "27156767-1937-45dc-a191-1b6b8b42ee3b"
+    },
+    "label": {
+      "description": "The label of the permission",
+      "type": "string",
+      "example": "Super Admin"
+    },
+    "is_system": {
+      "description": "Marks the role for use by the system. System roles cannot be managed by tenants and cannot be removed from the API\n",
+      "type": "boolean"
+    },
+    "total_permissions": {
+      "description": "A total count of permissions for this role",
+      "type": "number",
+      "readOnly": true,
+      "example": 10
+    },
+    "_embedded": {
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "permissions": {
+          "description": "List of allowed Permissions",
+          "type": "array",
+          "items": {
+            "$ref": "/v2/components/schemas/permission.json"
+          }
+        }
+      }
+    },
+    "_links": {
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "permissions": {
+          "type": "string",
+          "format": "url",
+          "readOnly": true,
+          "description": "Link all the role permissions",
+          "example": "https://api.nterprise.com/roles/{role_id}/permissions"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "/v2/components/schemas/linkSelf.json"
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "/v2/components/schemas/allDates.json"
+    }
+  ]
+}

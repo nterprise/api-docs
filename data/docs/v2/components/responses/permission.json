@@ -1,0 +1,14 @@
+{
+  "description": "Details about the permission",
+  "content": {
+    "application/vnd.nterprise.permission.v2+json": {
+      "schema": {
+        "allOf": [
+          {
+            "$ref": "/v2/components/schemas/permission.json"
+          }
+        ]
+      }
+    }
+  }
+}
