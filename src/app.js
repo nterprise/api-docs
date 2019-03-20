@@ -10,6 +10,7 @@ app.use('/v2', express.static(`${__dirname}/../data/docs/v2`));
 
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(null, {
     swaggerUrls: [
+        {url: '/v1/openapi.json', name: 'Version 1 API'},
         {url: '/v2/openapi.json', name: 'Version 2 API'},
     ],
     explorer: true,
