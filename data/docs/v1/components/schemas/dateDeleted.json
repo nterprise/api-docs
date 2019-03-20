@@ -1,0 +1,13 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "type": "object",
+  "properties": {
+    "deleted": {
+      "type": "string",
+      "description": "Date deleted",
+      "format": "date-time",
+      "readOnly": true,
+      "nullable": true
+    }
+  }
+}

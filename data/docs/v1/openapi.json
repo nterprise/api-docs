@@ -1,0 +1,47 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "description": "API for the nterprise application",
+    "title": "nterprise API",
+    "termsOfService": "https://www.nterprise.com/tos",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.nterprise.com",
+      "description": "Production api"
+    },
+    {
+      "url": "https://api.staging.nterprise",
+      "description": "Testing server"
+    }
+  ],
+  "paths": {
+    "/customers/{customer_id}": {
+      "$ref": "/v1/paths/customer.json"
+    },
+    "/customers/": {
+      "$ref": "/v1/paths/customers.json"
+    },
+    "/customers/{customer_id}/projects": {
+      "$ref": "/v1/paths/projectsByCustomer.json"
+    },
+    "/projects/{project_id}": {
+      "$ref": "/v1/paths/project.json"
+    },
+    "/projects/": {
+      "$ref": "/v1/paths/projects.json"
+    }
+  },
+  "components": {
+    "schemas": {
+      "Customer": {"$ref": "/v1/components/schemas/customer.json"},
+      "Project": {"$ref": "/v1/components/schemas/project.json"},
+      "Problem": {"$ref": "/v1/components/schemas/problem.json"}
+    }
+  }
+}
