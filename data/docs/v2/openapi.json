@@ -21,6 +21,12 @@
     }
   ],
   "paths": {
+    "/": {
+      "$ref": "/v2/paths/entry.json"
+    },
+    "/login": {
+      "$ref": "/v2/paths/login.json"
+    },
     "/me": {
       "$ref": "/v2/paths/me.json"
     },
@@ -56,6 +62,12 @@
       },
       "Problem": {
         "$ref": "/v2/components/schemas/problem.json"
+      },
+      "Entry": {
+        "$ref": "/v2/components/schemas/entry.json"
+      },
+      "Login": {
+        "$ref": "/v2/components/schemas/login.json"
       }
     }
   }

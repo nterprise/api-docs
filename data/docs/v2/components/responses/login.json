@@ -1,0 +1,14 @@
+{
+  "description": "Login",
+  "content": {
+    "application/vnd.nterprise.login.v2+json": {
+      "schema": {
+        "allOf": [
+          {
+            "$ref": "/v2/components/schemas/login.json"
+          }
+        ]
+      }
+    }
+  }
+}
