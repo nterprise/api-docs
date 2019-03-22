@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "type": "object",
+  "properties": {
+    "total_count": {
+      "type": "number",
+      "format": "int32",
+      "readOnly": true,
+      "minimum": 0,
+      "example": 32
+    },
+    "per_page": {
+      "type": "number",
+      "format": "int32",
+      "readOnly": true,
+      "minimum": 1,
+      "maximum": 100,
+      "example": 50
+    },
+    "page": {
+      "type": "number",
+      "format": "int32",
+      "readOnly": true,
+      "minimum": 1,
+      "maximum": 100,
+      "example": 50
+    },
+    "_links": {
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "next": {
+          "type": "object",
+          "description": "Link to the next page",
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "url",
+              "example": "https://api.neterprise.com/foo?page=2&per_page=50"
+            }
+          }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {"$ref": "/v1/components/schemas/linkSelf.json"}
+  ]
+}

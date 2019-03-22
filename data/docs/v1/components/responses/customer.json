@@ -1,0 +1,39 @@
+{
+  "description": "Details about the customer",
+  "content": {
+    "application/vnd.nterprise.customer.v1+json": {
+      "schema": {
+        "properties": {
+          "_links": {
+            "readOnly": true,
+            "type": "object",
+            "properties": {
+              "nter:projects": {
+                "type": "object",
+                "readOnly": true,
+                "properties": {
+                  "href": {
+                    "type": "string",
+                    "format": "url",
+                    "example": "https://api.nterprise.com/customers/333/projects"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "/v1/components/schemas/customer.json"
+          },
+          {
+            "$ref": "/v1/components/schemas/linkSelf.json"
+          },
+          {
+            "$ref": "/v1/components/schemas/linkNterCurie.json"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "description": "A Project",
+  "type": "object",
+  "required": [
+    "pLabel"
+  ],
+  "properties": {
+    "project_id": {
+      "description": "The Project Id",
+      "readOnly": true,
+      "type": "number",
+      "format": "int32",
+      "minimum": 0
+    },
+    "pLabel": {
+      "description": "The name of the project",
+      "type": "string",
+      "example": "Zones"
+    },
+    "pStart_dt": {
+      "description": "Project Start date",
+      "type": "string",
+      "nullable": true,
+      "format": "date-time"
+    },
+    "pEnd_dt": {
+      "description": "Project end date",
+      "type": "string",
+      "nullable": true,
+      "format": "date-time"
+    },
+    "total_work_orders": {
+      "description": "Total work orders for the project",
+      "type": "number",
+      "format": "int32",
+      "readOnly": true,
+      "minimum": 0
+    },
+    "total_work_orders_status": {
+      "description": "Work order counts by status",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "active": {
+          "type": "number",
+          "format": "int32",
+          "example": 10
+        },
+        "pending": {
+          "type": "number",
+          "format": "int32",
+          "example": 10
+        },
+        "complete": {
+          "type": "number",
+          "format": "int32",
+          "example": 5
+        }
+      }
+    }
+  }
+}
