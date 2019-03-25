@@ -1,0 +1,112 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "description": "Entry point response",
+  "properties": {
+    "_links": {
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "nter:dashboard": {
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "url",
+              "example": "https://api.nterprise.com/dashboard"
+            }
+          }
+        },
+        "nter:customers": {
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "url",
+              "example": "https://api.nterprise.com/customers/{customer_id}"
+            },
+            "templated": {
+              "type": "boolean",
+              "description": "Whether the link is templated"
+            }
+          }
+        },
+        "nter:extentions": {
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "url",
+              "example": "https://api.nterprise.com/extensions"
+            }
+          }
+        },
+        "nter:settings": {
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "url",
+              "example": "https://api.nterprise.com/settings"
+            }
+          }
+        },
+        "nter:techs": {
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "url",
+              "example": "https://api.nterprise.com/techs"
+            }
+          }
+        },
+        "nter:login": {
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "url",
+              "example": "https://auth.nterprise.com/login"
+            }
+          }
+        },
+        "nter:logout": {
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "url",
+              "example": "https://api.nterprise.com/logout"
+            }
+          }
+        },
+        "nter:forgot": {
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "url",
+              "example": "https://auth.nterprise.com/forgot"
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "/v2/components/schemas/linkSelf.json"
+        },
+        {
+          "$ref": "/v2/components/schemas/linkNterCurie.json"
+        }
+      ]
+    }
+  }
+}

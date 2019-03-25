@@ -1,0 +1,20 @@
+{
+  "description": "Tenant Login",
+  "content": {
+    "application/vnd.nterprise.login.v2+json": {
+      "schema": {
+        "$ref": "/v2/components/schemas/login.json"
+      }
+    },
+    "application/vnd.nterprise.login+json": {
+      "schema": {
+        "$ref": "/v2/components/schemas/login.json"
+      }
+    },
+    "application/json": {
+      "schema": {
+        "$ref": "/v2/components/schemas/login.json"
+      }
+    }
+  }
+}
