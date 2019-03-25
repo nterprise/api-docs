@@ -9,7 +9,7 @@
     "200": {
       "description": "Entry point for the application",
       "content": {
-        "application/vnd.nterprise.entry.v2+json": {
+        "application/vnd.nterprise.me.v2+json": {
           "schema": {
             "allOf": [
               {

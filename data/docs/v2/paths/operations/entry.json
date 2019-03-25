@@ -1,0 +1,21 @@
+{
+  "operationId": "entry",
+  "summary": "Entry point",
+  "description": "Fetches the links to the rest of the API",
+  "responses": {
+    "200": {
+      "description": "Entry point for the application",
+      "content": {
+        "application/vnd.nterprise.entry.v2+json": {
+          "schema": {
+            "allOf": [
+              {
+                "$ref": "/v2/components/schemas/entry.json"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

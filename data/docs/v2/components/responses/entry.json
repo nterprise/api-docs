@@ -1,0 +1,14 @@
+{
+  "description": "Entry",
+  "content": {
+    "application/vnd.nterprise.entry.v2+json": {
+      "schema": {
+        "allOf": [
+          {
+            "$ref": "/v2/components/schemas/entry.json"
+          }
+        ]
+      }
+    }
+  }
+}
