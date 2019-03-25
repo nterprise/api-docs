@@ -1,0 +1,19 @@
+{
+  "operationId": "createNewTenant",
+  "summary": "Creates a new tenant",
+  "description": "Create new tenant",
+  "tags": [
+    "tenants"
+  ],
+  "requestBody": {
+    "$ref": "/v2/components/requestBodies/tenant.json"
+  },
+  "responses": {
+    "201": {
+      "$ref": "/v2/components/responses/tenant.json"
+    },
+    "default": {
+      "$ref": "/v2/components/responses/problem.json"
+    }
+  }
+}

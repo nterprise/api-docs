@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "description": "A registered tenant",
+  "type": "object",
+  "required": [
+    "name",
+    "active"
+  ],
+  "properties": {
+    "name": {
+      "description": "The name of the tenant",
+      "type": "string",
+      "example": "tenant name"
+    },
+    "key": {
+      "description": "Tenant Identifier. The slugified version of original tenant name ",
+      "type": "string",
+      "example": "tenant-name"
+    },
+    "active": {
+      "description": "Marks the status of the tenant",
+      "type": "boolean"
+    },
+    "dns": {
+      "description": "The DNS record for the tenant",
+      "type": "string",
+      "example": "0.0.0.0"
+    },
+    "bucket": {
+      "description": "The name of the S3 bucket the tenant references",
+      "type": "string",
+      "example": "s3-api-bucket"
+    },
+    "_links": {
+      "type": "object",
+      "readOnly": true,
+      "allOf": [
+        {
+          "$ref": "/v2/components/schemas/linkSelf.json"
+        }
+      ]
+    }
+  },
+
+  "allOf": [
+    {
+      "$ref": "/v2/components/schemas/allDates.json"
+    }
+  ]
+}

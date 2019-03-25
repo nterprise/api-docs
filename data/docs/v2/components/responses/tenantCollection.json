@@ -1,0 +1,27 @@
+{
+  "description": "A paged collection of tenants",
+  "content": {
+    "application/vnd.nterprise.collection.tenants.v2+json": {
+      "schema": {
+        "properties": {
+          "_embedded": {
+            "type": "object",
+            "properties": {
+              "tenants": {
+                "type": "array",
+                "items": {
+                  "$ref": "/v2/components/schemas/tenant.json"
+                }
+              }
+            }
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "/v2/components/schemas/paginationOffset.json"
+          }
+        ]
+      }
+    }
+  }
+}

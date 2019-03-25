@@ -1,0 +1,14 @@
+{
+  "description": "Details about the tenant",
+  "content": {
+    "application/vnd.nterprise.tenants.v2+json": {
+      "schema": {
+        "allOf": [
+          {
+            "$ref": "/v2/components/schemas/tenant.json"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "operationId": "fetchAllTenants",
+  "summary": "Return a collection of tenants",
+  "description": "Fetches all tenants",
+  "tags": [
+    "tenants"
+  ],
+  "parameters": [
+    {
+      "$ref": "/v2/components/parameters/limit.json"
+    },
+    {
+      "$ref": "/v2/components/parameters/offset.json"
+    }
+  ],
+  "responses": {
+    "200": {
+      "$ref": "/v2/components/responses/tenantCollection.json"
+    },
+    "default": {
+      "$ref": "/v2/components/responses/problem.json"
+    }
+  }
+}

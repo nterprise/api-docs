@@ -1,0 +1,8 @@
+{
+  "get": {
+    "$ref": "/v2/paths/operations/fetchAllTenants.json"
+  },
+  "post": {
+    "$ref": "/v2/paths/operations/createTenants.json"
+  }
+}
