@@ -1,5 +1,5 @@
 {
-  "name": "per_page",
+  "name": "page_size",
   "description": "How many items to return at one time (max 100)",
   "in": "query",
   "required": false,

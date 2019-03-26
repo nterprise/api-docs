@@ -1,0 +1,60 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "description": "A product",
+  "type": "object",
+  "required": [
+    "ProductType"
+  ],
+  "properties": {
+    "project_id": {
+      "description": "The Project Id",
+      "readOnly": true,
+      "type": "number",
+      "format": "int32",
+      "minimum": 0
+    },
+    "product_id": {
+      "description": "The Product Id",
+      "readOnly": true,
+      "type": "number",
+      "format": "int32",
+      "minimum": 0
+    },
+    "ProductType": {
+      "description": "The product type",
+      "type": "string",
+      "example": "Printer Accessory"
+    },
+    "ProductName": {
+      "description": "The product name",
+      "type": "string",
+      "example": "Face down exit assembly"
+    },
+    "AltPartNo": {
+      "description": "Alternate Part Number",
+      "type": "string",
+      "example": "0040X1027"
+    },
+    "PartNo": {
+      "description": "Part Number",
+      "type": "string",
+      "example": "0040X1027"
+    },
+    "TrackingType": {
+      "description": "Tracking type",
+      "type": "string",
+      "example": "Face down exit assembly"
+    },
+    "total_inventory": {
+      "description": "Total Inventory",
+      "type": "number",
+      "format": "int32",
+      "minimum": 0
+    },
+    "total_inventory_status": {
+      "description": "Total Inventory",
+      "type": "string",
+      "example": "Face down exit assembly"
+    },
+  }
+}

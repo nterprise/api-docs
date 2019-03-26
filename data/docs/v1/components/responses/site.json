@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "description": "Details about the site",
+  "content": {
+    "application/vnd.nterprise.site.v1+json": {
+      "schema": {
+        "allOf": [
+          {
+            "$ref": "/v1/components/schemas/site.json"
+          },
+          {
+            "$ref": "/v1/components/schemas/siteLinks.json"
+          }
+        ]
+      }
+    }
+  }
+}
