@@ -27,6 +27,69 @@
     "/customers/": {
       "$ref": "/v1/paths/customers.json"
     },
+    "/work-orders/": {
+      "$ref": "/v1/paths/workOrders.json"
+    },
+    "/work-orders/{work_order_id}": {
+      "$ref": "/v1/paths/workOrder.json"
+    },
+    "/work-orders/{work_order_id}/attachments/": {
+      "$ref": "/v1/paths/attachments.json"
+    },
+    "/work-orders/{work_order_id}/attachments/{attachment_id}": {
+      "$ref": "/v1/paths/attachment.json"
+    },
+    "/work-orders/{work_order_id}/notes/": {
+      "$ref": "/v1/paths/notes.json"
+    },
+    "/work-orders/{work_order_id}/notes/{note_id}": {
+      "$ref": "/v1/paths/note.json"
+    },
+    "/sites/": {
+      "$ref": "/v1/paths/sites.json"
+    },
+    "/sites/{site_id}": {
+      "$ref": "/v1/paths/site.json"
+    },
+    "/customers/{customer_id}/sites/": {
+      "$ref": "/v1/paths/sites.json"
+    },
+    "/customers/{customer_id}/sites/{site_id}": {
+      "$ref": "/v1/paths/site.json"
+    },
+    "/products/": {
+      "$ref": "/v1/paths/products.json"
+    },
+    "/products/{product_id}": {
+      "$ref": "/v1/paths/product.json"
+    },
+    "/projects/{project_id}/kits": {
+      "$ref": "/v1/paths/kits.json"
+    },
+    "/projects/{project_id}/kits/{kit_id}": {
+      "$ref": "/v1/paths/kit.json"
+    },
+    "/work-request/": {
+      "$ref": "/v1/paths/workRequests.json"
+    },
+    "/work-request/{work_request_id}": {
+      "$ref": "/v1/paths/workRequest.json"
+    },
+    "/work-request/{work_request_id}{/work_request_submission_id}": {
+      "$ref": "/v1/paths/workRequest.json"
+    },
+    "/inventory/{inventory_id}": {
+      "$ref": "/v1/paths/inventory.json"
+    },
+    "/inventory/": {
+      "$ref": "/v1/paths/inventories.json"
+    },
+    "/projects/{project_id}/inventory": {
+      "$ref": "/v1/paths/inventories.json"
+    },
+    "/projects/{project_id}/inventory/{inventory_id}": {
+      "$ref": "/v1/paths/inventory.json"
+    },
     "/customers/{customer_id}/projects": {
       "$ref": "/v1/paths/projectsByCustomer.json"
     },
@@ -41,6 +104,14 @@
     "schemas": {
       "Customer": {"$ref": "/v1/components/schemas/customer.json"},
       "Project": {"$ref": "/v1/components/schemas/project.json"},
+      "Fields": {"$ref": "/v1/components/schemas/fields.json"},
+      "Inventory": {"$ref": "/v1/components/schemas/inventory.json"},
+      "Kit": {"$ref": "/v1/components/schemas/kit.json"},
+      "Note": {"$ref": "/v1/components/schemas/note.json"},
+      "Product": {"$ref": "/v1/components/schemas/product.json"},
+      "Site": {"$ref": "/v1/components/schemas/site.json"},
+      "WorkOrder": {"$ref": "/v1/components/schemas/workOrder.json"},
+      "WorkRequest": {"$ref": "/v1/components/schemas/workRequest.json"},
       "Problem": {"$ref": "/v1/components/schemas/problem.json"}
     }
   }

@@ -1,7 +1,7 @@
 {
   "operationId": "fetchAllProjectsByCustomer",
   "summary": "List all projects for a customer",
-  "description": "Fetches all projects based on a customer",
+  "description": "Fetches all projects based on a customer that this user has access too",
   "tags": [
     "Projects"
   ],

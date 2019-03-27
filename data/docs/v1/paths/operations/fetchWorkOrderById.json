@@ -1,0 +1,21 @@
+{
+  "operationId": "fetchWorkOrderById",
+  "summary": "Info for a specific work order",
+  "description": "Fetches information about a work order that this user has access too",
+  "tags": [
+    "work order"
+  ],
+  "parameters": [
+    {
+      "$ref": "/v1/components/parameters/workOrderId.json"
+    }
+  ],
+  "responses": {
+    "200": {
+      "$ref": "/v1/components/responses/workOrder.json"
+    },
+    "default": {
+      "$ref": "/v1/components/responses/problem.json"
+    }
+  }
+}

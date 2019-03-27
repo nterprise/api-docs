@@ -1,0 +1,21 @@
+{
+  "operationId": "fetchKitById",
+  "summary": "Info for a specific kit",
+  "description": "Fetches information about a kit that this user has access too",
+  "tags": [
+    "Kit"
+  ],
+  "parameters": [
+    {
+      "$ref": "/v1/components/parameters/kitId.json"
+    }
+  ],
+  "responses": {
+    "200": {
+      "$ref": "/v1/components/responses/kit.json"
+    },
+    "default": {
+      "$ref": "/v1/components/responses/problem.json"
+    }
+  }
+}

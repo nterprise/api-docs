@@ -7,7 +7,7 @@
   ],
   "properties": {
     "project_id": {
-      "description": "The Project Id",
+      "description": "The project Id",
       "readOnly": true,
       "type": "number",
       "format": "int32",

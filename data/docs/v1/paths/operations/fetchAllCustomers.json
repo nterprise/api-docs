@@ -1,7 +1,7 @@
 {
   "operationId": "fetchAllCustomers",
   "summary": "List all customers",
-  "description": "Fetches all the user has access too",
+  "description": "Fetches all customers that this user has access too",
   "tags": [
     "Customers"
   ],

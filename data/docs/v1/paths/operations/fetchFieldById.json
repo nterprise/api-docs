@@ -1,0 +1,21 @@
+{
+  "operationId": "fetchFieldById",
+  "summary": "Info for a specific field",
+  "description": "Fetches information about a field that this user has access too",
+  "tags": [
+    "Field"
+  ],
+  "parameters": [
+    {
+      "$ref": "/v1/components/parameters/fieldId.json"
+    }
+  ],
+  "responses": {
+    "200": {
+      "$ref": "/v1/components/responses/field.json"
+    },
+    "default": {
+      "$ref": "/v1/components/responses/problem.json"
+    }
+  }
+}

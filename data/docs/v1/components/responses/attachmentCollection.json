@@ -1,20 +1,20 @@
 {
   "$schema": "http://json-schema.org/draft-06/schema#",
-  "description": "A paged array of products",
+  "description": "A paged array of attachments",
   "content": {
-    "application/vnd.nterprise.collection.product.v1+json": {
+    "application/vnd.nterprise.collection.attachment.v1+json": {
       "schema": {
         "properties": {
           "_embedded": {
             "type": "object",
             "properties": {
-              "projects": {
+              "attachment": {
                 "type": "array",
                 "items": {
                   "type": "object",
                   "allOf": [
                     {
-                      "$ref": "/v1/components/schemas/product.json"
+                      "$ref": "/v1/components/schemas/attachment.json"
                     },
                     {
                       "$ref": "/v1/components/schemas/linkSelf.json"
@@ -24,7 +24,6 @@
               }
             }
           }
-
         },
         "allOf": [
           {

@@ -1,0 +1,21 @@
+{
+  "operationId": "fetchInventoryById",
+  "summary": "Info for a specific inventory",
+  "description": "Fetches information about a Inventory that this user has access too",
+  "tags": [
+    "Inventory"
+  ],
+  "parameters": [
+    {
+      "$ref": "/v1/components/parameters/inventoryId.json"
+    }
+  ],
+  "responses": {
+    "200": {
+      "$ref": "/v1/components/responses/inventory.json"
+    },
+    "default": {
+      "$ref": "/v1/components/responses/problem.json"
+    }
+  }
+}

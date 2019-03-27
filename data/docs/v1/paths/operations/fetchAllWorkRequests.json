@@ -1,0 +1,18 @@
+{
+  "operationId": "fetchAllWorkRequests",
+  "summary": "List all Work Request",
+  "description": "Fetches all the work request that this user has access too",
+  "tags": [
+    "Work Request"
+  ],
+  "parameters": [
+    {"$ref": "/v1/components/parameters/page.json"},
+    {"$ref": "/v1/components/parameters/perPage.json"}
+  ],
+  "responses": {
+    "200": {"$ref": "/v1/components/responses/workRequestCollection.json"},
+    "default": {
+      "$ref": "/v1/components/responses/problem.json"
+    }
+  }
+}

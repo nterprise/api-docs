@@ -1,16 +1,16 @@
 {
-  "operationId": "fetchAllProjects",
-  "summary": "List all projects",
-  "description": "Fetches all the projects that this user has access too",
+  "operationId": "fetchAllInventory",
+  "summary": "List all inventory",
+  "description": "Fetches all the inventory that this user has access too",
   "tags": [
-    "Projects"
+    "Inventory"
   ],
   "parameters": [
     {"$ref": "/v1/components/parameters/page.json"},
     {"$ref": "/v1/components/parameters/perPage.json"}
   ],
   "responses": {
-    "200": {"$ref": "/v1/components/responses/projectCollection.json"},
+    "200": {"$ref": "/v1/components/responses/inventoryCollection.json"},
     "default": {
       "$ref": "/v1/components/responses/problem.json"
     }

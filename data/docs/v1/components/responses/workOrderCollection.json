@@ -1,20 +1,19 @@
 {
-  "$schema": "http://json-schema.org/draft-06/schema#",
-  "description": "A paged array of products",
+  "description": "A paged array of work order",
   "content": {
-    "application/vnd.nterprise.collection.product.v1+json": {
+    "application/vnd.nterprise.collection.workOrder.v1+json": {
       "schema": {
         "properties": {
           "_embedded": {
             "type": "object",
             "properties": {
-              "projects": {
+              "workOrder": {
                 "type": "array",
                 "items": {
                   "type": "object",
                   "allOf": [
                     {
-                      "$ref": "/v1/components/schemas/product.json"
+                      "$ref": "/v1/components/schemas/workOrder.json"
                     },
                     {
                       "$ref": "/v1/components/schemas/linkSelf.json"
@@ -24,7 +23,6 @@
               }
             }
           }
-
         },
         "allOf": [
           {

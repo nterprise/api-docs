@@ -1,0 +1,104 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "description": "Work Order",
+  "type": "object",
+  "required": [
+    "wLabel"
+  ],
+  "properties": {
+    "work_order_id": {
+      "description": "Work Order Id",
+      "readOnly": true,
+      "type": "number",
+      "format": "int32",
+      "minimum": 0
+    },
+    "wLabel": {
+      "description": "Work Order Label",
+      "type": "string",
+      "example": "Building A"
+    },
+    "status": {
+      "description": "Work Order Status",
+      "type": "string",
+      "example": "active"
+    },
+    "group": {
+      "description": "Work Order Group",
+      "type": "string",
+      "example": "Team A"
+    },
+    "wType": {
+      "description": "Work Order Type",
+      "type": "string",
+      "example": "type"
+    },
+    "wStart_dt": {
+      "description": "Start Date/Time",
+      "type": "datetime",
+      "example": "2019-01-01 13:21:00"
+    },
+    "wEnd_dt": {
+      "description": "Start Date/Time",
+      "type": "datetime",
+      "example": "2019-01-01 13:21:00"
+    },
+    "wDesc": {
+      "description": "Work Order Description",
+      "type": "string",
+      "example": "This is the WO"
+    },
+    "wNote": {
+      "description": "Work Order Note",
+      "type": "string",
+      "example": "Hello this is a WO note"
+    },
+    "wServiceNowTicket": {
+      "description": "Work Order Service-Now Ticket Reference",
+      "type": "string",
+      "example": "123AB"
+    },
+    "Site": {
+      "description": "Assigned Site Object",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "siteName": {
+          "description": "customer unique site name",
+          "type": "string",
+          "example": "Site 196"
+        },
+        "siteLabel": {
+          "description": "site label",
+          "type": "string",
+          "example": "Zones"
+        },
+        "addr1": {
+          "description": "address line 1",
+          "type": "string",
+          "example": "Town Squire Pl"
+        },
+        "addr2": {
+          "description": "address line 2",
+          "type": "string",
+          "example": "329 Glenmont Rd"
+        },
+        "city": {
+          "description": "The city",
+          "type": "string",
+          "example": "Glenmont"
+        },
+        "state": {
+          "description": "The state",
+          "type": "string",
+          "example": "NY"
+        },
+        "zip": {
+          "description": "The zip/postal code",
+          "type": "string",
+          "example": "12345"
+        }
+      }
+    }
+  }
+}

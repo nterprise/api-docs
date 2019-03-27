@@ -1,7 +1,7 @@
 {
   "operationId": "fetchProjectById",
   "summary": "Info for a specific project",
-  "description": "Fetches information about a project the user has access too",
+  "description": "Fetches information about a project that this user has access too",
   "tags": [
     "Projects"
   ],

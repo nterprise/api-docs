@@ -1,0 +1,10 @@
+{
+  "name": "kit_id",
+  "in": "path",
+  "required": true,
+  "description": "The id of the kit to retrieve",
+  "schema": {
+    "type": "number",
+    "format": "int32"
+  }
+}

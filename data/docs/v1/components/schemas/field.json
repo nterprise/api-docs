@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "description": "Fields",
+  "type": "object",
+  "required": [
+    "fieldGroup"
+  ],
+  "properties": {
+    "field_id": {
+      "description": "the field Id ",
+      "readOnly": true,
+      "type": "number",
+      "format": "int32",
+      "minimum": 0
+    },
+    "work_order_id": {
+      "description": "the work order id",
+      "readOnly": true,
+      "type": "number",
+      "format": "int32",
+      "minimum": 0
+    },
+    "fieldGroup": {
+      "description": "field group",
+      "type": "string",
+      "example": "hello"
+    },
+    "fieldNam": {
+      "description": "field name",
+      "type": "string",
+      "example": "Second Tech"
+    },
+    "fieldDesc": {
+      "description": "field description",
+      "type": "string",
+      "example": "Name of the second tech"
+    },
+    "fieldDefVal": {
+      "description": "field default value",
+      "type": "string",
+      "example": "John"
+    },
+    "fieldTags": {
+      "description": "field tags csv",
+      "type": "string",
+      "example": "Glen"
+    },
+    "fieldMask": {
+      "description": "field value validation regular expression",
+      "type": "string",
+      "example": "([A-Z])\w+"
+    },
+    "fieldVal": {
+      "description": "work order specific field value",
+      "type": "string",
+      "example": "Jordan"
+    },
+    "readonly": {
+      "description": "read only boolean",
+      "type": "boolean",
+      "example": 1
+    },
+    "sortOrder": {
+      "description": "suggested view sort order",
+      "type": "int",
+      "example": 1
+    },
+    "last_update_dt": {
+      "description": "date/time of last fieldVal update",
+      "type": "datetime",
+      "example": "2019-01-01 13:21:00"
+    }
+  }
+}

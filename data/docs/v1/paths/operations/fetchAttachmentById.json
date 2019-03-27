@@ -1,0 +1,21 @@
+{
+  "operationId": "fetchAttachmentById",
+  "summary": "Info for a specific attachment",
+  "description": "Fetches information about a attachment that this user has access too",
+  "tags": [
+    "Attachment"
+  ],
+  "parameters": [
+    {
+      "$ref": "/v1/components/parameters/attachmentId.json"
+    }
+  ],
+  "responses": {
+    "200": {
+      "$ref": "/v1/components/responses/attachment.json"
+    },
+    "default": {
+      "$ref": "/v1/components/responses/problem.json"
+    }
+  }
+}

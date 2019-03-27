@@ -1,0 +1,21 @@
+{
+  "operationId": "fetchSiteById",
+  "summary": "Info for a specific site",
+  "description": "Fetches information about a site that this user has access too",
+  "tags": [
+    "Sites"
+  ],
+  "parameters": [
+    {
+      "$ref": "/v1/components/parameters/siteId.json"
+    }
+  ],
+  "responses": {
+    "200": {
+      "$ref": "/v1/components/responses/site.json"
+    },
+    "default": {
+      "$ref": "/v1/components/responses/problem.json"
+    }
+  }
+}
