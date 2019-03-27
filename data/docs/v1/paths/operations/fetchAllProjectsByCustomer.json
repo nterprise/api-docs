@@ -1,0 +1,19 @@
+{
+  "operationId": "fetchAllProjectsByCustomer",
+  "summary": "List all projects for a customer",
+  "description": "Fetches all projects based on a customer",
+  "tags": [
+    "Projects"
+  ],
+  "parameters": [
+    {"$ref": "/v1/components/parameters/customerId.json"},
+    {"$ref": "/v1/components/parameters/page.json"},
+    {"$ref": "/v1/components/parameters/perPage.json"}
+  ],
+  "responses": {
+    "200": {"$ref": "/v1/components/responses/projectCollection.json"},
+    "default": {
+      "$ref": "/v1/components/responses/problem.json"
+    }
+  }
+}
