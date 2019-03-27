@@ -14,8 +14,14 @@
     "200": {
       "$ref": "/v2/components/responses/tenant.json"
     },
+    "400": {
+      "$ref": "/v2/components/responses/problem.json"
+    },
+    "404": {
+      "$ref": "/v2/components/responses/problem.json"
+    },
     "500": {
-      "$ref": "/v2/components/responses/tenantProblem.json"
+      "$ref": "/v2/components/responses/problem.json"
     },
     "default": {
       "$ref": "/v2/components/responses/problem.json"
