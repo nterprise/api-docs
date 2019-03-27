@@ -1,0 +1,10 @@
+{
+  "description": "Tenant creation problem",
+  "content": {
+    "application/problem+json": {
+      "schema": {
+        "$ref": "/v2/components/schemas/tenantProblem.json"
+      }
+    }
+  }
+}

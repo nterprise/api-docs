@@ -17,6 +17,9 @@
     "201": {
       "$ref": "/v2/components/responses/tenant.json"
     },
+    "500": {
+      "$ref": "/v2/components/responses/tenantProblem.json"
+    },
     "default": {
       "$ref": "/v2/components/responses/problem.json"
     }
