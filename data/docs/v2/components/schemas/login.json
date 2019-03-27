@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "description": "Login schema",
+  "properties": {
+    "email": {
+      "description": "Email Address",
+      "type": "string",
+      "format": "email"
+    },
+    "_links": {
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "nter:tenantLogin": {
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "url",
+              "example": "https://zones.nterprise.com/login"
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "/v2/components/schemas/linkSelf.json"
+        },
+        {
+          "$ref": "/v2/components/schemas/linkNterCurie.json"
+        }
+      ]
+    }
+  }
+}

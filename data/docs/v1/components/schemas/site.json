@@ -104,7 +104,7 @@
     "contactEmail": {
       "description": "site contact email",
       "type": "string",
-      "example": "(555) 555-5555 "
+      "example": "jim@zones.com"
     }
   }
 }
