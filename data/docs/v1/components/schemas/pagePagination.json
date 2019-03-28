@@ -29,17 +29,6 @@
       "type": "object",
       "readOnly": true,
       "properties": {
-        "next": {
-          "type": "object",
-          "description": "Link to the next page",
-          "properties": {
-            "href": {
-              "type": "string",
-              "format": "url",
-              "example": "https://api.neterprise.com/foo?page=2&per_page=50"
-            }
-          }
-        }
       }
     }
   },

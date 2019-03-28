@@ -1,0 +1,16 @@
+{
+  "operationId": "createWorkRequest",
+  "summary": "Create a work request",
+  "description": "create a work request",
+  "tags": [
+    "Work Request"
+  ],
+  "responses": {
+    "200": {
+      "$ref": "/v1/components/responses/workRequestCreation.json"
+    },
+    "default": {
+      "$ref": "/v1/components/responses/problem.json"
+    }
+  }
+}

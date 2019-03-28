@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "description": "Details about the work request",
+  "content": {
+    "application/vnd.nterprise.work.request.v1+json": {
+      "schema": {
+        "allOf": [
+          {
+            "$ref": "/v1/components/schemas/workRequest.json"
+          },
+          {
+            "$ref": "/v1/components/schemas/workRequestLinks.json"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "operationId": "fetchWorkRequestById",
+  "summary": "Info for a specific work request",
+  "description": "Fetches information about a work request that this user has access too",
+  "tags": [
+    "Work Request"
+  ],
+  "parameters": [
+    {
+      "$ref": "/v1/components/parameters/workRequestId.json"
+    }
+  ],
+  "responses": {
+    "200": {
+      "$ref": "/v1/components/responses/workRequest.json"
+    },
+    "default": {
+      "$ref": "/v1/components/responses/problem.json"
+    }
+  }
+}

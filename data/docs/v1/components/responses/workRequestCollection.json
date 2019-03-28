@@ -1,0 +1,35 @@
+{
+  "description": "A paged array of work requests",
+  "content": {
+    "application/vnd.nterprise.collection.work.request.v1+json": {
+      "schema": {
+        "properties": {
+          "_embedded": {
+            "type": "object",
+            "properties": {
+              "workRequest": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "allOf": [
+                    {
+                      "$ref": "/v1/components/schemas/workRequest.json"
+                    },
+                    {
+                      "$ref": "/v1/components/schemas/linkSelf.json"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "/v1/components/schemas/pagePagination.json"
+          }
+        ]
+      }
+    }
+  }
+}

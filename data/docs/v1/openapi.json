@@ -34,13 +34,20 @@
     },
     "/projects/": {
       "$ref": "/v1/paths/projects.json"
+    },
+    "/work-request/{work_request_id}": {
+      "$ref": "/v1/paths/workRequest.json"
+    },
+    "/work-request/": {
+      "$ref": "/v1/paths/workRequests.json"
     }
   },
   "components": {
     "schemas": {
       "Customer": {"$ref": "/v1/components/schemas/customer.json"},
       "Project": {"$ref": "/v1/components/schemas/project.json"},
-      "Problem": {"$ref": "/v1/components/schemas/problem.json"}
+      "Problem": {"$ref": "/v1/components/schemas/problem.json"},
+      "Work Request": {"$ref": "/v1/components/schemas/workRequest.json"}
     },
     "securitySchemes": {
       "signedToken": {

@@ -1,0 +1,89 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "description": "A work request",
+  "type": "object",
+  "required": [
+    "wrStatus"
+  ],
+  "properties": {
+    "work_request_id": {
+      "description": "Work Request ID",
+      "readOnly": true,
+      "type": "number",
+      "format": "int",
+      "minimum": 0
+    },
+    "work_request_submission_id": {
+      "description": "Work Request Submission ID",
+      "readOnly": true,
+      "type": "number",
+      "format": "int",
+      "minimum": 0
+    },
+    "project_id": {
+      "description": "The Project ID",
+      "readOnly": true,
+      "type": "number",
+      "format": "int",
+      "minimum": 0
+    },
+    "requestor": {
+      "description": "Work Request Submission submitter user name",
+      "type": "string",
+      "example": "123"
+    },
+    "insert_dt": {
+      "description": "Work Request Submission insert date/time",
+      "type": "string",
+      "example": "2019-02-01 14:32:00"
+    },
+    "wrStatus": {
+      "description": "Work Request Submission status",
+      "type": "string",
+      "example": "new"
+    },
+    "is_approved": {
+      "description": "Approved boolean",
+      "type": "number",
+      "format": "int",
+      "example": 0
+    },
+    "approved_by": {
+      "description": "User that approved the Work Request Submission",
+      "type": "string",
+      "example": "John"
+    },
+    "approved_dt": {
+      "description": "Date the Work Request Submission was approved",
+      "type": "string",
+      "example": "2019-02-01 14:32:00"
+    },
+    "data_count": {
+      "description": "Date the Work Request Submission was approved",
+      "type": "number",
+      "example": "1",
+      "minimum": 0
+    },
+    "data": {
+      "description": "Work Request data",
+      "type": "array",
+      "example": "[]",
+      "items": {
+        "title": "Work Request fields",
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "The name of the work request property",
+            "type": "string",
+            "example": "d_prop1"
+          },
+          "value": {
+            "description": "The value of the property",
+            "type": "string",
+            "example": "value1"
+          }
+        }
+      }
+    }
+  }
+}

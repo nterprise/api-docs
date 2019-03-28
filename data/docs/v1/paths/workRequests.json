@@ -1,0 +1,9 @@
+{
+  "get": {
+    "$ref": "/v1/paths/operations/fetchAllWorkRequests.json"
+  },
+  "post": {
+    "$ref": "/v1/paths/operations/createWorkRequest.json"
+  }
+}
+
