@@ -1,0 +1,19 @@
+{
+  "operationId": "fetchAllSitesByCustomer",
+  "summary": "List all sites for a customer",
+  "description": "Fetches all sites based on a customer",
+  "tags": [
+    "Sites"
+  ],
+  "parameters": [
+    {"$ref": "/v1/components/parameters/customerId.json"},
+    {"$ref": "/v1/components/parameters/page.json"},
+    {"$ref": "/v1/components/parameters/perPage.json"}
+  ],
+  "responses": {
+    "200": {"$ref": "/v1/components/responses/siteCollection.json"},
+    "default": {
+      "$ref": "/v1/components/responses/problem.json"
+    }
+  }
+}
