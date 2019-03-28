@@ -1,0 +1,18 @@
+{
+  "operationId": "fetchAllSites",
+  "summary": "List all Sites",
+  "description": "Fetches all the sites that this user has access too",
+  "tags": [
+    "Sites"
+  ],
+  "parameters": [
+    {"$ref": "/v1/components/parameters/page.json"},
+    {"$ref": "/v1/components/parameters/perPage.json"}
+  ],
+  "responses": {
+    "200": {"$ref": "/v1/components/responses/siteCollection.json"},
+    "default": {
+      "$ref": "/v1/components/responses/problem.json"
+    }
+  }
+}

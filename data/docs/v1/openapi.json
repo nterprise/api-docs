@@ -30,6 +30,15 @@
     "/customers/{customer_id}/projects": {
       "$ref": "/v1/paths/projectsByCustomer.json"
     },
+    "/customers/{customer_id}/sites": {
+      "$ref": "/v1/paths/sitesByCustomer.json"
+    },
+    "/sites/{site_id}": {
+      "$ref": "/v1/paths/site.json"
+    },
+    "/sites/": {
+      "$ref": "/v1/paths/sites.json"
+    },
     "/projects/{project_id}": {
       "$ref": "/v1/paths/project.json"
     },
@@ -40,6 +49,7 @@
   "components": {
     "schemas": {
       "Customer": {"$ref": "/v1/components/schemas/customer.json"},
+      "Site": {"$ref": "/v1/components/schemas/site.json"},
       "Project": {"$ref": "/v1/components/schemas/project.json"},
       "Problem": {"$ref": "/v1/components/schemas/problem.json"}
     }
