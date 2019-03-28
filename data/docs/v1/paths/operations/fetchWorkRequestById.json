@@ -3,7 +3,7 @@
   "summary": "Info for a specific work request",
   "description": "Fetches information about a work request that this user has access too",
   "tags": [
-    "work request"
+    "Work Request"
   ],
   "parameters": [
     {

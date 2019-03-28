@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-06/schema#",
   "description": "Details about the work request",
   "content": {
-    "application/vnd.nterprise.workRequest.v1+json": {
+    "application/vnd.nterprise.work.request.v1+json": {
       "schema": {
         "allOf": [
           {

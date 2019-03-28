@@ -1,7 +1,7 @@
 {
   "description": "A paged array of work requests",
   "content": {
-    "application/vnd.nterprise.collection.workRequest.v1+json": {
+    "application/vnd.nterprise.collection.work.request.v1+json": {
       "schema": {
         "properties": {
           "_embedded": {

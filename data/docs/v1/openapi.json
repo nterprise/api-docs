@@ -30,14 +30,11 @@
     "/customers/{customer_id}/projects": {
       "$ref": "/v1/paths/projectsByCustomer.json"
     },
-    "/work-request/": {
-      "$ref": "/v1/paths/workRequests.json"
-    },
     "/work-request/{work_request_id}": {
       "$ref": "/v1/paths/workRequest.json"
     },
-    "/work-request/{work_request_id}/{work_request_submission_id}": {
-      "$ref": "/v1/paths/workRequest.json"
+    "/work-request/": {
+      "$ref": "/v1/paths/workRequests.json"
     },
     "/projects/{project_id}": {
       "$ref": "/v1/paths/project.json"
@@ -49,9 +46,9 @@
   "components": {
     "schemas": {
       "Customer": {"$ref": "/v1/components/schemas/customer.json"},
-      "WorkRequest": {"$ref": "/v1/components/schemas/workRequest.json"},
       "Project": {"$ref": "/v1/components/schemas/project.json"},
-      "Problem": {"$ref": "/v1/components/schemas/problem.json"}
+      "Problem": {"$ref": "/v1/components/schemas/problem.json"},
+      "Work Request": {"$ref": "/v1/components/schemas/workRequest.json"}
     }
   }
 }
