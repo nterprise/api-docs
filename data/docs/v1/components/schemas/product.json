@@ -49,12 +49,14 @@
       "description": "Total Inventory",
       "type": "number",
       "format": "int32",
-      "minimum": 0
+      "minimum": 0,
+      "readOnly": true
     },
     "total_inventory_status": {
       "description": "Total Inventory",
       "type": "string",
-      "example": "Face down exit assembly"
-    },
+      "example": "Face down exit assembly",
+      "readOnly": true
+    }
   }
 }

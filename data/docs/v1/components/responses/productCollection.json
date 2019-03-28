@@ -17,13 +17,7 @@
                       "$ref": "/v1/components/schemas/product.json"
                     },
                     {
-                      "$ref": "/v1/components/schemas/linkNterCurie.json"
-                    },
-                    {
                       "$ref": "/v1/components/schemas/linkSelf.json"
-                    },
-                    {
-                      "$ref": "/v1/components/schemas/productLinks.json"
                     }
                   ]
                 }

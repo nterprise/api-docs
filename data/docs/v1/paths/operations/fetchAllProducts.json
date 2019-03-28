@@ -1,0 +1,18 @@
+{
+  "operationId": "fetchAllProducts",
+  "summary": "List all products",
+  "description": "Fetches all the products that this user has access too",
+  "tags": [
+    "Products"
+  ],
+  "parameters": [
+    {"$ref": "/v1/components/parameters/page.json"},
+    {"$ref": "/v1/components/parameters/perPage.json"}
+  ],
+  "responses": {
+    "200": {"$ref": "/v1/components/responses/productCollection.json"},
+    "default": {
+      "$ref": "/v1/components/responses/problem.json"
+    }
+  }
+}
