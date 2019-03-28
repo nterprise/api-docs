@@ -1,0 +1,89 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "description": "A work request",
+  "type": "object",
+  "required": [
+    "wrStatus"
+  ],
+  "properties": {
+    "work_request_id": {
+      "description": "Work Request template ID",
+      "readOnly": true,
+      "type": "number",
+      "format": "int",
+      "minimum": 0
+    },
+    "work_request_submission_id": {
+      "description": "Work Request Submission ID",
+      "readOnly": true,
+      "type": "number",
+      "format": "int",
+      "minimum": 0
+    },
+    "project_id": {
+      "description": "FTM Project ID",
+      "readOnly": true,
+      "type": "number",
+      "format": "int",
+      "minimum": 0
+    },
+    "requestor": {
+      "description": "Work Request Submission submitter user name",
+      "type": "string",
+      "example": "123"
+    },
+    "insert_dt": {
+      "description": "Work Request Submission insert date/time",
+      "type": "datetime",
+      "example": "2019-02-01 14:32:00"
+    },
+    "wrStatus": {
+      "description": "Work Request Submission status",
+      "type": "string",
+      "example": "new"
+    },
+    "is_approved": {
+      "description": "Approved boolean",
+      "type": "number",
+      "format": "int",
+      "example": 0
+    },
+    "approved_by": {
+      "description": "User that approved the Work Request Submission",
+      "type": "string",
+      "example": "John"
+    },
+    "approved_dt": {
+      "description": "Date the Work Request Submission was approved",
+      "type": "datetime",
+      "example": "2019-02-01 14:32:00"
+    },
+    "data_count": {
+      "description": "Date the Work Request Submission was approved",
+      "type": "int",
+      "example": "1",
+      "minimum": 0
+    },
+    "date": {
+      "description": "array of Work Request Submission name/value records",
+      "type": "array",
+      "readOnly": true,
+      "properties": [
+        {
+            "name": {
+            "description": "The name of the work request property to set",
+            "type": "string",
+            "example": "d_prop1"
+          }
+        },
+        {
+            "value": {
+            "description": "the value to set to the property",
+            "type": "string",
+            "example": "value1"
+          }
+        }
+      ]
+    }
+  }
+}
