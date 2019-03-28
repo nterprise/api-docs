@@ -29,6 +29,12 @@
     "/customers/{customer_id}/projects": {
       "$ref": "/v1/paths/projectsByCustomer.json"
     },
+    "/work-orders/{work_order_id}": {
+      "$ref": "/v1/paths/workOrder.json"
+    },
+    "/work-orders/": {
+      "$ref": "/v1/paths/workOrders.json"
+    },
     "/projects/{project_id}": {
       "$ref": "/v1/paths/project.json"
     },
@@ -39,6 +45,7 @@
   "components": {
     "schemas": {
       "Customer": {"$ref": "/v1/components/schemas/customer.json"},
+      "WorkOrder": {"$ref": "/v1/components/schemas/workOrder.json"},
       "Project": {"$ref": "/v1/components/schemas/project.json"},
       "Problem": {"$ref": "/v1/components/schemas/problem.json"}
     },

@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "type": "object",
+  "properties": {
+    "_links": {
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "nter:projects": {
+          "type": "object",
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "url",
+              "example": "https://api.nterprise.com/projects/333"
+            }
+          }
+        },
+        "nter:customer": {
+          "type": "object",
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "url",
+              "example": "https://api.nterprise.com/customers/42"
+            }
+          }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "/v1/components/schemas/linkNterCurie.json"
+    },
+    {
+      "$ref": "/v1/components/schemas/linkSelf.json"
+    }
+  ]
+}

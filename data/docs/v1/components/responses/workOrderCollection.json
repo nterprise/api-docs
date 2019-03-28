@@ -1,0 +1,35 @@
+{
+  "description": "A paged array of work order",
+  "content": {
+    "application/vnd.nterprise.collection.workOrder.v1+json": {
+      "schema": {
+        "properties": {
+          "_embedded": {
+            "type": "object",
+            "properties": {
+              "workOrder": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "allOf": [
+                    {
+                      "$ref": "/v1/components/schemas/workOrder.json"
+                    },
+                    {
+                      "$ref": "/v1/components/schemas/linkSelf.json"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "/v1/components/schemas/pagePagination.json"
+          }
+        ]
+      }
+    }
+  }
+}

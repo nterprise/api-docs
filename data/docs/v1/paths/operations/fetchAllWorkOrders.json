@@ -1,0 +1,18 @@
+{
+  "operationId": "fetchAllWorkOrders",
+  "summary": "List all Work Orders",
+  "description": "Fetches all the work orders that this user has access too",
+  "tags": [
+    "Work Orders"
+  ],
+  "parameters": [
+    {"$ref": "/v1/components/parameters/page.json"},
+    {"$ref": "/v1/components/parameters/perPage.json"}
+  ],
+  "responses": {
+    "200": {"$ref": "/v1/components/responses/workOrderCollection.json"},
+    "default": {
+      "$ref": "/v1/components/responses/problem.json"
+    }
+  }
+}
