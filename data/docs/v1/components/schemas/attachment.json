@@ -1,0 +1,79 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "description": "Attachment",
+  "type": "object",
+  "required": [
+    "filename"
+  ],
+  "properties": {
+    "attachment_id": {
+      "description": "The Attachment id",
+      "readOnly": true,
+      "type": "number",
+      "format": "int32",
+      "minimum": 0
+    },
+    "work_order_id": {
+      "description": "The Work Order id",
+      "readOnly": true,
+      "type": "number",
+      "format": "int32",
+      "minimum": 0
+    },
+    "project_id": {
+      "description": "The Project Id",
+      "readOnly": true,
+      "type": "number",
+      "format": "int32",
+      "minimum": 0
+    },
+    "dataform_submit_id": {
+      "description": "The Dataform Submit Id",
+      "readOnly": true,
+      "type": "number",
+      "format": "int32",
+      "minimum": 0
+    },
+    "filename": {
+      "description": "Origin posted file name",
+      "type": "string",
+      "example": "Hello"
+    },
+    "label": {
+      "description": "Attachment label",
+      "type": "string",
+      "example": "attachment label"
+    },
+    "insert_dt": {
+      "description": "Attachment insert datetime",
+      "readOnly": true,
+      "type": "datetime",
+      "example": "2019-01-01 13:21:00"
+    },
+    "folderName": {
+      "description": "Attachment assigned folder",
+      "type": "string",
+      "example": "a.1232"
+    },
+    "resolved": {
+      "description": "Issue resolved",
+      "type": "boolean",
+      "example": 1
+    },
+    "resolvedBy": {
+      "description": "Issue resolved by user",
+      "type": "string",
+      "example": "Jordan"
+    },
+    "resolved_dt": {
+      "description": "Date the issue was resolved",
+      "type": "datetime",
+      "example": "2019-01-01 13:21:00"
+    },
+    "tags": {
+      "description": "Set attachment tag CSV",
+      "type": "string",
+      "example": "tag1"
+    }
+  }
+}
