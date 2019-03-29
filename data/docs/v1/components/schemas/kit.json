@@ -1,0 +1,39 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "description": "Kit",
+  "type": "object",
+  "required": [
+    "project_id"
+  ],
+  "properties": {
+    "project_id": {
+      "description": "FTM Project ID",
+      "readOnly": true,
+      "type": "number",
+      "format": "int32",
+      "minimum": 0
+    },
+    "kit_id": {
+      "description": "Kit definition id",
+      "readOnly": true,
+      "type": "number",
+      "format": "int32",
+      "minimum": 0
+    },
+    "KitName": {
+      "description": "Kit name",
+      "type": "string",
+      "example": "Hello"
+    },
+    "KitType": {
+      "description": "Kit Type P ( Part ) or C ( Component )",
+      "type": "string",
+      "example": "P"
+    },
+    "MainPartNo": {
+      "description": "Kit referenced Part Number. Always null for Parts",
+      "type": "string",
+      "example": ""
+    }
+  }
+}

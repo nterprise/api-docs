@@ -1,0 +1,19 @@
+{
+  "operationId": "fetchAllKits",
+  "summary": "List all kits",
+  "description": "Fetches all the kits this user has access too",
+  "tags": [
+    "Kits"
+  ],
+  "parameters": [
+    {"$ref": "/v1/components/parameters/projectId.json"},
+    {"$ref": "/v1/components/parameters/page.json"},
+    {"$ref": "/v1/components/parameters/perPage.json"}
+  ],
+  "responses": {
+    "200": {"$ref": "/v1/components/responses/kitCollection.json"},
+    "default": {
+      "$ref": "/v1/components/responses/problem.json"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "get": {
+    "$ref": "/v1/paths/operations/fetchAllKitsByProject.json"
+  }
+}
+

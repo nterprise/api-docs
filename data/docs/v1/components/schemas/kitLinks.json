@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "type": "object",
+  "properties": {
+    "_links": {
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "nter:products": {
+          "type": "object",
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "url",
+              "example": "https://api.nterprise.com/products/333"
+            }
+          }
+        }
+      }
+    },
+    "_embedded": {
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "projects":
+        {
+          "$ref": "/v1/components/schemas/project.json"
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "/v1/components/schemas/linkSelf.json"
+    }
+  ]
+}
+

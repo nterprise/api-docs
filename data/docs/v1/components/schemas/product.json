@@ -55,6 +55,6 @@
       "description": "Total Inventory",
       "type": "string",
       "example": "Face down exit assembly"
-    },
+    }
   }
 }
