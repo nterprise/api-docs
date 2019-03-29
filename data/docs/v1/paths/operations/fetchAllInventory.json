@@ -1,0 +1,19 @@
+{
+  "operationId": "fetchAllInventory",
+  "summary": "List all inventory",
+  "description": "Fetches all the inventory in this project and the user has access too",
+  "tags": [
+    "Inventory"
+  ],
+  "parameters": [
+    {"$ref": "/v1/components/parameters/projectId.json"},
+    {"$ref": "/v1/components/parameters/page.json"},
+    {"$ref": "/v1/components/parameters/perPage.json"}
+  ],
+  "responses": {
+    "200": {"$ref": "/v1/components/responses/inventoryCollection.json"},
+    "default": {
+      "$ref": "/v1/components/responses/problem.json"
+    }
+  }
+}

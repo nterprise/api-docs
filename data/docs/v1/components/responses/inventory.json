@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "description": "Details about the inventory",
+  "content": {
+    "application/vnd.nterprise.inventory.v1+json": {
+      "schema": {
+        "allOf": [
+          {
+            "$ref": "/v1/components/schemas/inventory.json"
+          },
+          {
+            "$ref": "/v1/components/schemas/inventoryLinks.json"
+          }
+        ]
+      }
+    }
+  }
+}

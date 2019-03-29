@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "description": "Inventory",
+  "type": "object",
+  "required": [
+    "PartNo"
+  ],
+  "properties": {
+    "inventory_id": {
+      "description": "The Inventory id, not required for 'Q' ( quantity ) type inventory",
+      "readOnly": true,
+      "type": "number",
+      "format": "int32",
+      "minimum": 0
+    },
+    "project_id": {
+      "description": "The Project id",
+      "readOnly": true,
+      "type": "number",
+      "format": "int32",
+      "minimum": 0
+    },
+    "PartNo": {
+      "description": "Product referenced part number",
+      "type": "string",
+      "example": "12X"
+    },
+    "InventoryType": {
+      "description": "Inventory type, 'Q' ( quantity ) or 'S' (serialized)",
+      "type": "string",
+      "example": "Q"
+    },
+    "Status": {
+      "description": "Inventory status",
+      "type": "string",
+      "example": "raw"
+    },
+    "Quantity": {
+      "description": "Inventory count, will be '1' for S (serialized) type inventory",
+      "type": "number",
+      "minimum": 0
+    },
+    "SerialNumber": {
+      "description": "Inventory serial number, will be empty for Q ( quantity ) type inventory",
+      "type": "string",
+      "example": "abcd12345"
+    }
+  }
+}

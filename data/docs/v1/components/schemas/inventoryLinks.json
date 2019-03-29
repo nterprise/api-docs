@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "type": "object",
+  "properties": {
+    "_links": {
+      "type": "object",
+      "readOnly": true
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "/v1/components/schemas/linkSelf.json"
+    }
+  ]
+}

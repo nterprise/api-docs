@@ -34,13 +34,20 @@
     },
     "/projects/": {
       "$ref": "/v1/paths/projects.json"
+    },
+    "/projects/{project_id}/inventory/{inventory_id}": {
+      "$ref": "/v1/paths/inventory.json"
+    },
+    "/projects/{project_id}/inventory": {
+      "$ref": "/v1/paths/inventories.json"
     }
   },
   "components": {
     "schemas": {
       "Customer": {"$ref": "/v1/components/schemas/customer.json"},
       "Project": {"$ref": "/v1/components/schemas/project.json"},
-      "Problem": {"$ref": "/v1/components/schemas/problem.json"}
+      "Problem": {"$ref": "/v1/components/schemas/problem.json"},
+      "Inventory": {"$ref": "/v1/components/schemas/inventory.json"}
     },
     "securitySchemes": {
       "signedToken": {
