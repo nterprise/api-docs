@@ -1,0 +1,18 @@
+{
+  "operationId": "fetchAllNotes",
+  "summary": "List all notes",
+  "description": "Fetches all the notes that this user has access too",
+  "tags": [
+    "Notes"
+  ],
+  "parameters": [
+    {"$ref": "/v1/components/parameters/page.json"},
+    {"$ref": "/v1/components/parameters/perPage.json"}
+  ],
+  "responses": {
+    "200": {"$ref": "/v1/components/responses/noteCollection.json"},
+    "default": {
+      "$ref": "/v1/components/responses/problem.json"
+    }
+  }
+}

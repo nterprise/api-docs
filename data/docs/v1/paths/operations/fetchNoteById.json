@@ -1,0 +1,21 @@
+{
+  "operationId": "fetchNoteById",
+  "summary": "Info for a specific note",
+  "description": "Fetches information about a note that this user has access too",
+  "tags": [
+    "Notes"
+  ],
+  "parameters": [
+    {
+      "$ref": "/v1/components/parameters/noteId.json"
+    }
+  ],
+  "responses": {
+    "200": {
+      "$ref": "/v1/components/responses/note.json"
+    },
+    "default": {
+      "$ref": "/v1/components/responses/problem.json"
+    }
+  }
+}
