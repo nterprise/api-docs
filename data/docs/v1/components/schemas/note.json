@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "description": "The Note",
+  "type": "object",
+  "required": [
+    "work_order_id"
+  ],
+  "properties": {
+    "note_id": {
+      "description": "The note id",
+      "readOnly": true,
+      "type": "number",
+      "format": "int32",
+      "minimum": 0
+    },
+    "work_order_id": {
+      "description": "The work order id",
+      "readOnly": true,
+      "type": "number",
+      "format": "int32",
+      "minimum": 0
+    },
+    "note": {
+      "description": "Note text",
+      "type": "string",
+      "example": "hello! I am a note"
+    },
+    "user": {
+      "description": "Login user that posted the note",
+      "type": "string",
+      "example": "John"
+    },
+    "create_dt": {
+      "description": "Note create datetime",
+      "type": "datetime",
+      "example": "2019-01-01 13:21:00"
+    },
+    "issue": {
+      "description": "Note flagged as an issue",
+      "type": "boolean",
+      "example": 1
+    },
+    "resolved": {
+      "description": "Issue resolved",
+      "type": "boolean",
+      "example": 1
+    },
+    "resolvedBy": {
+      "description": "Issue resolved by user",
+      "type": "string",
+      "example": "Jordan"
+    },
+    "resolved_dt": {
+      "description": "Date the issue was resolved",
+      "type": "datetime",
+      "example": "2019-01-01 13:21:00"
+    },
+    "tags": {
+      "description": "Set note tag CSV",
+      "type": "string",
+      "example": 1
+    }
+  }
+}

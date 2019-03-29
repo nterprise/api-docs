@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "type": "object",
+  "properties": {
+    "_links": {
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "nter:self": {
+          "type": "object",
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "url",
+              "example": "https://api.nterprise.com/work-orders/333/note/{entity_id}"
+            }
+          }
+        },
+        "nter:work-order": {
+          "type": "object",
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "url",
+              "example": "https://api.nterprise.com/work-orders/333"
+            }
+          }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "/v1/components/schemas/linkNterCurie.json"
+    }
+  ]
+}
