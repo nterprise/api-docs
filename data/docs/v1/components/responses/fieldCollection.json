@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "description": "A paged array of fields",
+  "content": {
+    "application/vnd.nterprise.collection.field.v1+json": {
+      "schema": {
+        "properties": {
+          "_embedded": {
+            "type": "object",
+            "properties": {
+              "field": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "allOf": [
+                    {
+                      "$ref": "/v1/components/schemas/field.json"
+                    },
+                    {
+                      "$ref": "/v1/components/schemas/linkSelf.json"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "/v1/components/schemas/pagePagination.json"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "operationId": "fetchAllField",
+  "summary": "List all field",
+  "description": "Fetches all the fields that this user has access too",
+  "tags": [
+    "Field"
+  ],
+  "parameters": [
+    {"$ref": "/v1/components/parameters/page.json"},
+    {"$ref": "/v1/components/parameters/perPage.json"}
+  ],
+  "responses": {
+    "200": {"$ref": "/v1/components/responses/fieldCollection.json"},
+    "default": {
+      "$ref": "/v1/components/responses/problem.json"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "name": "field_id",
+  "in": "path",
+  "required": true,
+  "description": "The id of the field to retrieve",
+  "schema": {
+    "type": "number",
+    "format": "int32"
+  }
+}

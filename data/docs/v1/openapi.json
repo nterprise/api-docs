@@ -40,6 +40,7 @@
   "components": {
     "schemas": {
       "Customer": {"$ref": "/v1/components/schemas/customer.json"},
+      "Fields": {"$ref": "/v1/components/schemas/fields.json"},
       "Project": {"$ref": "/v1/components/schemas/project.json"},
       "Problem": {"$ref": "/v1/components/schemas/problem.json"}
     }
