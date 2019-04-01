@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "type": "object",
+  "properties": {
+    "_links": {
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "self": {
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "url",
+              "readOnly": true,
+              "example": "https://api.nterprise.com/{entity}/{entity_id}"
+            }
+          }
+        }
+      }
+    }
+  }
+}

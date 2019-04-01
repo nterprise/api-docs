@@ -1,0 +1,35 @@
+{
+  "description": "A paged array of customers",
+  "content": {
+    "application/vnd.nterprise.collection.customers.v1+json": {
+      "schema": {
+        "properties": {
+          "_embedded": {
+            "type": "object",
+            "properties": {
+              "customers": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "allOf": [
+                    {
+                      "$ref": "/v1/components/schemas/customer.json"
+                    },
+                    {
+                      "$ref": "/v1/components/schemas/linkSelf.json"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "/v1/components/schemas/pagePagination.json"
+          }
+        ]
+      }
+    }
+  }
+}

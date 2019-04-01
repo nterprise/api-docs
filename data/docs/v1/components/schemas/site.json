@@ -1,0 +1,104 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "description": "A Site",
+  "type": "object",
+  "required": [
+    "siteName"
+  ],
+  "properties": {
+    "project_id": {
+      "description": "The Project Id",
+      "readOnly": true,
+      "type": "number",
+      "format": "int32",
+      "minimum": 0
+    },
+    "customer_id": {
+      "description": "The Customer Id",
+      "readOnly": true,
+      "type": "number",
+      "format": "int32",
+      "minimum": 0
+    },
+    "siteName": {
+      "description": "The name of the site",
+      "type": "string",
+      "example": "Site 196"
+    },
+    "siteLabel": {
+      "description": "The label of the site",
+      "type": "string",
+      "example": "Zones"
+    },
+    "siteGroup": {
+      "description": "The group name of the site",
+      "type": "string",
+      "example": "Group A"
+    },
+    "addr1": {
+      "description": "The address",
+      "type": "string",
+      "example": "Town Squire Pl"
+    },
+    "addr2": {
+      "description": "The address",
+      "type": "string",
+      "example": "329 Glenmont Rd"
+    },
+    "city": {
+      "description": "The city",
+      "type": "string",
+      "example": "Glenmont"
+    },
+    "state": {
+      "description": "The state",
+      "type": "string",
+      "example": "NY"
+    },
+    "zip": {
+      "description": "The zip code",
+      "type": "string",
+      "example": "12345"
+    },
+    "country": {
+      "description": "The country",
+      "type": "string",
+      "example": "US"
+    },
+    "lng": {
+      "description": "The longitude coordinates",
+      "type": "float",
+      "example": -73.7831,
+      "minimum": -180,
+      "maximum": 180
+    },
+    "lat": {
+      "description": "The latitude coordinates",
+      "type": "float",
+      "example": 42.6014,
+      "minimum": -180,
+      "maximum": 180
+    },
+    "sTZ": {
+      "description": "Standard time zone",
+      "type": "string",
+      "example": "America/New_York"
+    },
+    "contactName": {
+      "description": "Name of the site contact",
+      "type": "string",
+      "example": "Carlo DiLorenzo"
+    },
+    "contactPhone": {
+      "description": "Phone number of the site contact",
+      "type": "string",
+      "example": "(555) 555-5555 "
+    },
+    "contactEmail": {
+      "description": "Email of the site contact",
+      "type": "string",
+      "example": "(555) 555-5555 "
+    },
+
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "page",
+  "description": "The page number to fetch",
+  "in": "query",
+  "required": false,
+  "schema": {
+    "type": "integer",
+    "format": "int32",
+    "minimum": 1
+  }
+}
