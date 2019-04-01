@@ -1,0 +1,11 @@
+{
+  "name": "tenant_key",
+  "in": "path",
+  "required": true,
+  "description": "The key of the tenant to retrieve",
+  "schema": {
+    "type": "string",
+    "pattern": "/^[a-z]([a-z]|[-])+[a-z]$/",
+    "example": "tenant-key"
+  }
+}

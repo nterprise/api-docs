@@ -47,6 +47,12 @@
     },
     "/roles/{role_id}/permissions/{permission_id}": {
       "$ref": "/v2/paths/rolePermission.json"
+    },
+    "/tenants": {
+      "$ref": "/v2/paths/tenants.json"
+    },
+    "/tenants/{tenant_key}": {
+      "$ref": "/v2/paths/tenant.json"
     }
   },
   "components": {
@@ -68,6 +74,9 @@
       },
       "Login": {
         "$ref": "/v2/components/schemas/login.json"
+      },
+      "Tenants": {
+        "$ref": "/v2/components/schemas/tenants.json"
       }
     }
   }

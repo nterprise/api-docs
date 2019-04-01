@@ -10,7 +10,8 @@
     "url": "git+https://github.com/nfrastructuredev/api-docs.git"
   },
   "authors": [
-    "Chuck \"MANCHUCK\" Reeves"
+    "Chuck \"MANCHUCK\" Reeves",
+    "Michael Pepe"
   ],
   "license": "UNLICENSED",
   "eslintConfig": {

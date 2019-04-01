@@ -1,0 +1,20 @@
+{
+  "description": "Creating a tenant",
+  "content": {
+    "application/vnd.nterprise.tenant.v2+json": {
+      "schema": {
+        "$ref": "/v2/components/schemas/tenant.json"
+      }
+    },
+    "application/vnd.nterprise.tenant+json": {
+      "schema": {
+        "$ref": "/v2/components/schemas/tenant.json"
+      }
+    },
+    "application/json": {
+      "schema": {
+        "$ref": "/v2/components/schemas/tenant.json"
+      }
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "operationId": "deleteTenant",
+  "summary": "Deletes an existing Tenant",
+  "description": "Delete Tenant",
+  "tags": [
+    "tenants"
+  ],
+  "parameters": [
+    {
+      "$ref": "/v2/components/parameters/tenantKey.json"
+    }
+  ],
+  "requestBody": {
+    "$ref": "/v2/components/requestBodies/tenant.json"
+  },
+  "responses": {
+    "200": {
+      "$ref": "/v2/components/responses/tenant.json"
+    },
+    "404": {
+      "$ref": "/v2/components/responses/problem.json"
+    },
+    "500": {
+      "$ref": "/v2/components/responses/problem.json"
+    },
+    "default": {
+      "$ref": "/v2/components/responses/problem.json"
+    }
+  }
+}
