@@ -1,7 +1,7 @@
 {
-  "operationId": "updateTenant",
-  "summary": "Updates an existing Tenant",
-  "description": "Update Tenant",
+  "operationId": "deleteTenant",
+  "summary": "Deletes an existing Tenant",
+  "description": "Delete Tenant",
   "tags": [
     "tenants"
   ],
@@ -14,11 +14,8 @@
     "$ref": "/v2/components/requestBodies/tenant.json"
   },
   "responses": {
-    "204": {
+    "200": {
       "$ref": "/v2/components/responses/tenant.json"
-    },
-    "400": {
-      "$ref": "/v2/components/responses/problem.json"
     },
     "404": {
       "$ref": "/v2/components/responses/problem.json"

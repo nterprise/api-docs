@@ -33,18 +33,8 @@
       "type": "string",
       "readOnly": true,
       "example": "s3-api-bucket"
-    },
-    "_links": {
-      "type": "object",
-      "readOnly": true,
-      "allOf": [
-        {
-          "$ref": "/v2/components/schemas/linkSelf.json"
-        }
-      ]
     }
   },
-
   "allOf": [
     {
       "$ref": "/v2/components/schemas/allDates.json"

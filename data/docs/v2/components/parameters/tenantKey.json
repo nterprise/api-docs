@@ -5,7 +5,7 @@
   "description": "The key of the tenant to retrieve",
   "schema": {
     "type": "string",
-    "pattern": "/(^[a-z]|[A-Z0-9])[a-z]*/",
+    "pattern": "/^[a-z]([a-z]|[-])+[a-z]$/",
     "example": "tenant-key"
   }
 }

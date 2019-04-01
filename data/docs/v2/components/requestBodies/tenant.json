@@ -1,12 +1,12 @@
 {
-  "description": "Sending a tenant",
+  "description": "Creating a tenant",
   "content": {
-    "application/vnd.nterprise.tenants.v2+json": {
+    "application/vnd.nterprise.tenant.v2+json": {
       "schema": {
         "$ref": "/v2/components/schemas/tenant.json"
       }
     },
-    "application/vnd.nterprise.tenants+json": {
+    "application/vnd.nterprise.tenant+json": {
       "schema": {
         "$ref": "/v2/components/schemas/tenant.json"
       }

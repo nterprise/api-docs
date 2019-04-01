@@ -20,9 +20,6 @@
     "400": {
       "$ref": "/v2/components/responses/problem.json"
     },
-    "404": {
-      "$ref": "/v2/components/responses/problem.json"
-    },
     "500": {
       "$ref": "/v2/components/responses/problem.json"
     },

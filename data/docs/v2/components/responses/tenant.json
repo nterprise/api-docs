@@ -1,8 +1,19 @@
 {
   "description": "Details about the tenant",
   "content": {
-    "application/vnd.nterprise.tenants.v2+json": {
+    "application/vnd.nterprise.collection.tenant.v2+json": {
       "schema": {
+        "properties": {
+          "_links": {
+            "type": "object",
+            "readOnly": true,
+            "allOf": [
+              {
+                "$ref": "/v2/components/schemas/linkSelf.json"
+              }
+            ]
+          }
+        },
         "allOf": [
           {
             "$ref": "/v2/components/schemas/tenant.json"
@@ -12,3 +23,4 @@
     }
   }
 }
+
