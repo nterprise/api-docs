@@ -10,7 +10,8 @@
     "url": "git+https://github.com/nfrastructuredev/api-docs.git"
   },
   "authors": [
-    "Chuck \"MANCHUCK\" Reeves"
+    "Chuck \"MANCHUCK\" Reeves",
+    "Michael Pepe"
   ],
   "license": "UNLICENSED",
   "eslintConfig": {
@@ -65,15 +66,11 @@
     }
   },
   "dependencies": {
+    "aws-serverless-express": "^3.3.5",
     "swagger": "^0.7.5",
-    "swagger2": "^1.0.4",
-    "mpath": ">=0.5.1",
-    "superagent": ">=3.7.0",
-    "lodash": ">=4.17.11",
-    "growl": ">=1.10.0"
-  },
-  "devDependencies": {
     "express": "^4.16.4",
-    "swagger-ui-express": "^4.0.2"
-  }
+    "swagger-ui-express": "^4.0.2",
+    "swagger2": "^1.0.4"
+  },
+  "devDependencies": {}
 }
