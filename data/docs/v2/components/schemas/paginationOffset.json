@@ -1,5 +1,4 @@
 {
-  "$schema": "http://json-schema.org/draft-06/schema#",
   "type": "object",
   "properties": {
     "total_count": {
@@ -22,10 +21,5 @@
       "readOnly": true,
       "example": "363yHhUhhI"
     }
-  },
-  "allOf": [
-    {
-      "$ref": "/v2/components/schemas/linkOffsetPagination.json"
-    }
-  ]
+  }
 }

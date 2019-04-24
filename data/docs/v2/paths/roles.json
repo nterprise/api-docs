@@ -1,8 +1,0 @@
-{
-  "get": {
-    "$ref": "/v2/paths/operations/fetchAllRoles.json"
-  },
-  "post": {
-    "$ref": "/v2/paths/operations/createRole.json"
-  }
-}

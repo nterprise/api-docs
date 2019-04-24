@@ -5,7 +5,7 @@
       "type": "object",
       "readOnly": true,
       "properties": {
-        "self": {
+        "nter:me": {
           "type": "object",
           "description": "Link to the /me endpoint",
           "readOnly": true,
@@ -14,7 +14,7 @@
               "type": "string",
               "format": "url",
               "readOnly": true,
-              "example": "https://api.nterprise.com/{entity}/{entity_id}"
+              "example": "https://api.nterprise.com/me"
             }
           }
         }

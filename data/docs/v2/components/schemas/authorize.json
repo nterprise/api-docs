@@ -1,0 +1,53 @@
+{
+  "description": "Authorization",
+  "require": [
+    "client_id"
+  ],
+  "properties": {
+    "grant_type": {
+      "summary": "Grant type",
+      "type": "string",
+      "enum": ["password", "client_credentials"],
+      "example": "password"
+    },
+    "response_type": {
+      "summary": "Grant type",
+      "type": "string",
+      "enum": ["password", "client_credentials"],
+      "example": "password"
+    },
+    "client_id": {
+      "summary": "Grant type",
+      "description": "The tenant key or client id",
+      "type": "string",
+      "example": "zones"
+    },
+    "client_secret": {
+      "summary": "Grant type",
+      "description": "The tenant key or client id",
+      "type": "string",
+      "example": "zones"
+    },
+    "username": {
+      "summary": "Email address or Username for the user",
+      "description": "Required if the grant_type is password. If used with other grant types, will be used to set the hint_login parameter",
+      "type": "string",
+      "format": "email",
+      "example": "chuck.reeves@zones.com"
+    },
+    "password": {
+      "summary": "User password",
+      "description": "Used only if grant_type is password",
+      "type": "string",
+      "format": "email",
+      "example": "chuck.reeves@zones.com"
+    },
+    "scope": {
+      "summary": "Scope request",
+      "description": "Used only if grant_type is ",
+      "type": "string",
+      "format": "email",
+      "example": "chuck.reeves@zones.com"
+    }
+  }
+}

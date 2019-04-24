@@ -5,16 +5,16 @@
       "type": "object",
       "readOnly": true,
       "properties": {
-        "self": {
+        "nter:logout": {
           "type": "object",
-          "description": "Link to the /me endpoint",
+          "description": "Link to the /logout endpoint",
           "readOnly": true,
           "properties": {
             "href": {
               "type": "string",
               "format": "url",
               "readOnly": true,
-              "example": "https://api.nterprise.com/{entity}/{entity_id}"
+              "example": "https://auth.nterprise.com/logout"
             }
           }
         }

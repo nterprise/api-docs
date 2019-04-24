@@ -1,0 +1,17 @@
+{
+  "description": "Dashboard",
+  "properties": {
+    "type": {
+      "description": "Describes type of dashboard. Embedded link to ",
+      "type": "string",
+      "enum": ["quickSight", "widget"],
+      "example": "quickSight"
+    },
+    "data": {
+      "summary": "Contains the data for the dashboard",
+      "description": "Data will be JSON data",
+      "type": "object",
+      "example": "{\n  \"url\": \"https://us-east-1.quicksight.aws.amazon.com/sn/dashboards/dashboardId?isauthcode=true&identityprovider=quicksight&code=authcode\",\n  \"parameters\": {\n    \"country\": \"United States\",\n    \"states\": [\n      \"California\",\n      \"Washington\"\n    ]\n  }\n}"
+    }
+  }
+}

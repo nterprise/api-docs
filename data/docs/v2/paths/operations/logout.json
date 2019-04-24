@@ -1,0 +1,38 @@
+{
+  "operationId": "logout",
+  "summary": "Logout",
+  "tags": [
+    "Authentication"
+  ],
+  "servers": [
+    {
+      "url": "https://{auth}.nterprise.com",
+      "variables": {
+        "auth": {
+          "default": "api",
+          "enum": [
+            "auth",
+            "auth.dev",
+            "auth.staging"
+          ]
+        }
+      }
+    }
+  ],
+  "responses": {
+    "200": {
+      "description": "Entry point for the application",
+      "content": {
+        "application/vnd.nterprise.me.v2+json": {
+          "schema": {
+            "allOf": [
+              {
+                "$ref": "/v2/components/schemas/me.json"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

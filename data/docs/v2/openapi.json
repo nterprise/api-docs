@@ -4,7 +4,6 @@
     "version": "2.0.0",
     "description": "API for the nterprise application",
     "title": "nterprise API",
-    "termsOfService": "https://www.nterprise.com/tos",
     "license": {
       "name": "MIT",
       "url": "https://opensource.org/licenses/MIT"
@@ -12,59 +11,65 @@
   },
   "servers": [
     {
-      "url": "https://api.nterprise.com",
-      "description": "Production api"
-    },
-    {
-      "url": "https://api.staging.nterprise",
-      "description": "Testing server"
+      "url": "https://{environment}.nterprise.com",
+      "variables": {
+        "environment": {
+          "default": "api",
+          "enum": [
+            "api",
+            "api.dev",
+            "api.staging"
+          ]
+        }
+      }
     }
   ],
   "paths": {
     "/": {
       "$ref": "/v2/paths/entry.json"
     },
-    "/login": {
-      "$ref": "/v2/paths/login.json"
+    "/oauth/authorize": {
+      "$ref": "/v2/paths/authorize.json"
     },
     "/me": {
       "$ref": "/v2/paths/me.json"
     },
-    "/permissions": {
-      "$ref": "/v2/paths/permissions.json"
+    "/dashboard": {
+      "$ref": "/v2/paths/dashboard.json"
     },
-    "/permissions/{permission_label}": {
-      "$ref": "/v2/paths/permission.json"
+    "/logout": {
+      "$ref": "/v2/paths/logout.json"
     },
-    "/roles": {
-      "$ref": "/v2/paths/roles.json"
-    },
-    "/roles/{role_id}": {
-      "$ref": "/v2/paths/role.json"
-    },
-    "/roles/{role_id}/permissions": {
-      "$ref": "/v2/paths/rolePermissions.json"
-    },
-    "/roles/{role_id}/permissions/{permission_id}": {
-      "$ref": "/v2/paths/rolePermission.json"
-    },
-    "/tenants": {
-      "$ref": "/v2/paths/tenants.json"
-    },
-    "/tenants/{tenant_key}": {
-      "$ref": "/v2/paths/tenant.json"
+    "/oauth/token": {
+      "$ref": "/v2/paths/token.json"
     }
   },
+  "security": [
+    {
+      "oauth2": [
+        "read",
+        "write"
+      ]
+    }
+  ],
   "components": {
+    "securitySchemes": {
+      "oauth2": {
+        "type": "oauth2",
+        "flows": {
+          "password": {
+            "authorizationUrl": "https://auth.nterprise.com/oauth/authorize",
+            "tokenUrl": "https://auth.nterprise.com/oauth/token",
+            "scopes": {
+              "access":  "Access the API"
+            }
+          }
+        },
+      }
+    },
     "schemas": {
       "Me": {
         "$ref": "/v2/components/schemas/me.json"
-      },
-      "Permission": {
-        "$ref": "/v2/components/schemas/permission.json"
-      },
-      "Role": {
-        "$ref": "/v2/components/schemas/role.json"
       },
       "Problem": {
         "$ref": "/v2/components/schemas/problem.json"
@@ -72,11 +77,8 @@
       "Entry": {
         "$ref": "/v2/components/schemas/entry.json"
       },
-      "Login": {
-        "$ref": "/v2/components/schemas/login.json"
-      },
-      "Tenants": {
-        "$ref": "/v2/components/schemas/tenants.json"
+      "Dashboard": {
+        "$ref": "/v2/components/schemas/dashboard.json"
       }
     }
   }

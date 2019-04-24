@@ -1,0 +1,43 @@
+{
+  "operationId": "fetchEntry",
+  "summary": "Entry point",
+  "tags": [
+    "Entry"
+  ],
+  "security": [],
+  "responses": {
+    "200": {
+      "description": "Entry point for the application",
+      "content": {
+        "application/vnd.nterprise.entry.v2+json": {
+          "schema": {
+            "description": "Entry point",
+            "allOf": [
+              {
+                "$ref": "/v2/components/schemas/linkDashboard.json"
+              },
+              {
+                "$ref": "/v2/components/schemas/linkAuthorize.json"
+              },
+              {
+                "$ref": "/v2/components/schemas/linkLogout.json"
+              },
+              {
+                "$ref": "/v2/components/schemas/linkMe.json"
+              },
+              {
+                "$ref": "/v2/components/schemas/linkToken.json"
+              },
+              {
+                "$ref": "/v2/components/schemas/linkSelf.json"
+              },
+              {
+                "$ref": "/v2/components/schemas/linkNterCurie.json"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

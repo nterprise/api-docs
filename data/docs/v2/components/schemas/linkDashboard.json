@@ -5,16 +5,22 @@
       "type": "object",
       "readOnly": true,
       "properties": {
-        "self": {
+        "nter:dashboard": {
           "type": "object",
-          "description": "Link to the /me endpoint",
+          "description": "Link to the /dashboard endpoint",
           "readOnly": true,
           "properties": {
             "href": {
               "type": "string",
               "format": "url",
               "readOnly": true,
-              "example": "https://api.nterprise.com/{entity}/{entity_id}"
+              "example": "https://api.nterprise.com/dashboard{/dashboard_id}"
+            },
+            "templated": {
+              "type": "boolean",
+              "readOnly": true,
+              "description": "Describes the link as being a template",
+              "example": true
             }
           }
         }
