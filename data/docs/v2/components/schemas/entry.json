@@ -1,0 +1,17 @@
+{
+  "description": "Main entry point",
+  "allOf": [
+    {
+      "$ref": "../schemas/linkNterCurie.json"
+    },
+    {
+      "$ref": "../schemas/linkDashboard.json"
+    },
+    {
+      "$ref": "../schemas/linkMe.json"
+    },
+    {
+      "$ref": "./linkSelf.json"
+    }
+  ]
+}

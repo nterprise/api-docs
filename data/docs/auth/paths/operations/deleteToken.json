@@ -1,0 +1,34 @@
+{
+  "operationId": "deleteToken",
+  "summary": "Revoke token",
+  "tags": [
+    "oAuth"
+  ],
+  "security": [
+    {
+      "oauth2": [
+        "api",
+        "admin"
+      ]
+    }
+  ],
+  "responses": {
+    "400": {
+      "$ref": "../../components/responses/badRequest.json"
+    },
+    "404": {
+      "$ref": "../../components/responses/notFound.json"
+    },
+    "302": {
+      "description": "Authorization endpoint for oauth",
+      "headers": {
+        "Location": {
+          "schema": {
+            "type": "string",
+            "example": "https://auth.nterprise.com/auth"
+          }
+        }
+      }
+    }
+  }
+}

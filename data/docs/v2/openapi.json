@@ -3,7 +3,7 @@
   "info": {
     "version": "2.0.0",
     "description": "API for the nterprise application",
-    "title": "nterprise API",
+    "title": "nterprise-api",
     "license": {
       "name": "MIT",
       "url": "https://opensource.org/licenses/MIT"
@@ -26,22 +26,13 @@
   ],
   "paths": {
     "/": {
-      "$ref": "/v2/paths/entry.json"
-    },
-    "/oauth/authorize": {
-      "$ref": "/v2/paths/authorize.json"
+      "$ref": "./paths/entry.json"
     },
     "/me": {
-      "$ref": "/v2/paths/me.json"
+      "$ref": "./paths/me.json"
     },
     "/dashboard": {
-      "$ref": "/v2/paths/dashboard.json"
-    },
-    "/logout": {
-      "$ref": "/v2/paths/logout.json"
-    },
-    "/oauth/token": {
-      "$ref": "/v2/paths/token.json"
+      "$ref": "./paths/dashboard.json"
     }
   },
   "security": [
@@ -58,27 +49,24 @@
         "type": "oauth2",
         "flows": {
           "password": {
-            "authorizationUrl": "https://auth.nterprise.com/oauth/authorize",
-            "tokenUrl": "https://auth.nterprise.com/oauth/token",
+            "authorizationUrl": "https://auth{.env}.nterprise.com/oauth/authorize",
+            "tokenUrl": "https://auth{.env}.nterprise.com/oauth/token",
             "scopes": {
-              "access":  "Access the API"
+              "access": "Access the API"
             }
           }
-        },
+        }
       }
     },
     "schemas": {
       "Me": {
-        "$ref": "/v2/components/schemas/me.json"
+        "$ref": "./components/schemas/me.json"
       },
       "Problem": {
-        "$ref": "/v2/components/schemas/problem.json"
+        "$ref": "./components/schemas/problem.json"
       },
-      "Entry": {
-        "$ref": "/v2/components/schemas/entry.json"
-      },
-      "Dashboard": {
-        "$ref": "/v2/components/schemas/dashboard.json"
+      "User": {
+        "$ref": "./components/schemas/user.json"
       }
     }
   }

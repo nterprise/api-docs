@@ -1,0 +1,26 @@
+{
+  "type": "object",
+  "description": "oAuth Error",
+  "properties": {
+    "error": {
+      "type": "string",
+      "format": "uri",
+      "enum": [
+        "client_id",
+        "access_denied",
+        "invalid_request",
+        "unauthorized_client",
+        "unsupported_response_type",
+        "invalid_scope",
+        "server_error",
+        "temporarily_unavailable"
+      ],
+      "description": "An absolute URI that identifies the error type",
+      "example": "https://docs.nterprise.com/problem/constraint-violation"
+    },
+    "error_description": {
+      "type": "string",
+      "description": "A short, summary of the error type"
+    }
+  }
+}

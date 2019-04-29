@@ -1,5 +1,0 @@
-{
-  "post": {
-    "$ref": "/v2/paths/operations/authorize.json"
-  }
-}

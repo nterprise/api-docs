@@ -3,7 +3,7 @@
   "content": {
     "application/problem+json": {
       "schema": {
-        "$ref": "/v2/components/schemas/problem.json"
+        "$ref": "../schemas/problem.json"
       }
     }
   }

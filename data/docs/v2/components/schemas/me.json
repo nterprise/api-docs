@@ -1,18 +1,8 @@
 {
   "description": "Logged in users information",
   "allOf": [
-
     {
-      "$ref": "/v2/components/schemas/linkNterCurie.json"
-    },
-    {
-      "$ref": "/v2/components/schemas/linkDashboard.json"
-    },
-    {
-      "$ref": "/v2/components/schemas/linkLogout.json"
-    },
-    {
-      "$ref": "/v2/components/schemas/linkSelf.json"
+      "$ref": "./user.json"
     }
   ]
 }

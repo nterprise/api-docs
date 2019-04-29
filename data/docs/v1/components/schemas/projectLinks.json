@@ -1,5 +1,4 @@
 {
-  "$schema": "http://json-schema.org/draft-06/schema#",
   "type": "object",
   "properties": {
     "_links": {
@@ -41,10 +40,10 @@
   },
   "allOf": [
     {
-      "$ref": "/v1/components/schemas/linkNterCurie.json"
+      "$ref": "../schemas/linkNterCurie.json"
     },
     {
-      "$ref": "/v1/components/schemas/linkSelf.json"
+      "$ref": "../schemas/linkSelf.json"
     }
   ]
 }

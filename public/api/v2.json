@@ -1,0 +1,556 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "2.0.0",
+    "description": "API for the nterprise application",
+    "title": "nterprise-api",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://{environment}.nterprise.com",
+      "variables": {
+        "environment": {
+          "default": "api",
+          "enum": [
+            "api",
+            "api.dev",
+            "api.staging"
+          ]
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "operationId": "fetchEntry",
+        "summary": "Entry point",
+        "tags": [
+          "Entry"
+        ],
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Entry point for the application",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "description": "Main entry point",
+                      "allOf": [
+                        {
+                          "type": "object",
+                          "title": "Curie Link",
+                          "properties": {
+                            "_links": {
+                              "type": "object",
+                              "readOnly": true,
+                              "properties": {
+                                "curies": {
+                                  "type": "array",
+                                  "description": "the nterprise or oauth CURIE",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "name": {
+                                        "type": "string",
+                                        "readOnly": true,
+                                        "description": "Name of CURIE",
+                                        "enum": [
+                                          "nter",
+                                          "oauth"
+                                        ],
+                                        "example": "nter"
+                                      },
+                                      "href": {
+                                        "type": "string",
+                                        "format": "url",
+                                        "readOnly": true,
+                                        "description": "A Link to the CURIE reference",
+                                        "example": "https://docs.nterprise.com/rel/{rel}"
+                                      },
+                                      "templated": {
+                                        "type": "boolean",
+                                        "readOnly": true,
+                                        "description": "Describes the link as being a template",
+                                        "example": true
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "type": "object",
+                          "title": "Dashboard Link",
+                          "properties": {
+                            "_links": {
+                              "type": "object",
+                              "readOnly": true,
+                              "properties": {
+                                "nter:dashboard": {
+                                  "type": "object",
+                                  "description": "Link to the /dashboard endpoint",
+                                  "readOnly": true,
+                                  "properties": {
+                                    "href": {
+                                      "type": "string",
+                                      "format": "url",
+                                      "readOnly": true,
+                                      "example": "https://api.nterprise.com/dashboard{/dashboard_id}"
+                                    },
+                                    "templated": {
+                                      "type": "boolean",
+                                      "readOnly": true,
+                                      "description": "Describes the link as being a template",
+                                      "example": true
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "type": "object",
+                          "title": "Me Link",
+                          "properties": {
+                            "_links": {
+                              "type": "object",
+                              "readOnly": true,
+                              "properties": {
+                                "nter:me": {
+                                  "type": "object",
+                                  "description": "Link to the /me endpoint",
+                                  "readOnly": true,
+                                  "properties": {
+                                    "href": {
+                                      "type": "string",
+                                      "format": "url",
+                                      "readOnly": true,
+                                      "example": "https://api.nterprise.com/me"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "type": "object",
+                          "title": "Self Link",
+                          "properties": {
+                            "_links": {
+                              "type": "object",
+                              "readOnly": true,
+                              "properties": {
+                                "self": {
+                                  "type": "object",
+                                  "description": "Link to the /me endpoint",
+                                  "readOnly": true,
+                                  "properties": {
+                                    "href": {
+                                      "type": "string",
+                                      "format": "url",
+                                      "readOnly": true,
+                                      "example": "https://api.nterprise.com/{entity}/{entity_id}"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/me": {
+      "get": {
+        "operationId": "fetchMe",
+        "summary": "Information about the current user",
+        "description": "Fetches the current user information along with resources they can access",
+        "tags": [
+          "Me"
+        ],
+        "responses": {
+          "200": {
+            "description": "Current consumers access",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "description": "Logged in users information",
+                      "allOf": [
+                        {
+                          "description": "User Information",
+                          "properties": {
+                            "email": {
+                              "type": "string",
+                              "format": "email",
+                              "description": "Email address",
+                              "example": "chuck.reeves@zones.com"
+                            },
+                            "name": {
+                              "type": "string",
+                              "description": "Human readable name",
+                              "nullable": true,
+                              "example": "Chuck Reeves"
+                            },
+                            "picture": {
+                              "type": "string",
+                              "description": "Image for the user",
+                              "nullable": true,
+                              "example": "https://bit.ly/2RxOgEV"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "title": "Profile Link",
+                      "properties": {
+                        "_links": {
+                          "type": "object",
+                          "readOnly": true,
+                          "properties": {
+                            "profile": {
+                              "type": "object",
+                              "description": "Link to a users profile",
+                              "readOnly": true,
+                              "properties": {
+                                "href": {
+                                  "type": "string",
+                                  "format": "url",
+                                  "readOnly": true,
+                                  "example": "https://api.nterprise.com/user/manchuck"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "title": "Self Link",
+                      "properties": {
+                        "_links": {
+                          "type": "object",
+                          "readOnly": true,
+                          "properties": {
+                            "self": {
+                              "type": "object",
+                              "description": "Link to the /me endpoint",
+                              "readOnly": true,
+                              "properties": {
+                                "href": {
+                                  "type": "string",
+                                  "format": "url",
+                                  "readOnly": true,
+                                  "example": "https://api.nterprise.com/{entity}/{entity_id}"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "description": "Logged in users information",
+                      "allOf": [
+                        {
+                          "description": "User Information",
+                          "properties": {
+                            "email": {
+                              "type": "string",
+                              "format": "email",
+                              "description": "Email address",
+                              "example": "chuck.reeves@zones.com"
+                            },
+                            "name": {
+                              "type": "string",
+                              "description": "Human readable name",
+                              "nullable": true,
+                              "example": "Chuck Reeves"
+                            },
+                            "picture": {
+                              "type": "string",
+                              "description": "Image for the user",
+                              "nullable": true,
+                              "example": "https://bit.ly/2RxOgEV"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "title": "Profile Link",
+                      "properties": {
+                        "_links": {
+                          "type": "object",
+                          "readOnly": true,
+                          "properties": {
+                            "profile": {
+                              "type": "object",
+                              "description": "Link to a users profile",
+                              "readOnly": true,
+                              "properties": {
+                                "href": {
+                                  "type": "string",
+                                  "format": "url",
+                                  "readOnly": true,
+                                  "example": "https://api.nterprise.com/user/manchuck"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "title": "Self Link",
+                      "properties": {
+                        "_links": {
+                          "type": "object",
+                          "readOnly": true,
+                          "properties": {
+                            "self": {
+                              "type": "object",
+                              "description": "Link to the /me endpoint",
+                              "readOnly": true,
+                              "properties": {
+                                "href": {
+                                  "type": "string",
+                                  "format": "url",
+                                  "readOnly": true,
+                                  "example": "https://api.nterprise.com/{entity}/{entity_id}"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dashboard": {
+      "get": {
+        "operationId": "fetchDashboard",
+        "summary": "Dashboard page",
+        "description": "Fetches the dashboard",
+        "tags": [
+          "Dashboard"
+        ],
+        "responses": {
+          "200": {
+            "description": "Entry point for the application",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "description": "Dashboard",
+                      "properties": {
+                        "type": {
+                          "description": "Describes type of dashboard. Embedded link to ",
+                          "type": "string",
+                          "enum": [
+                            "quickSight",
+                            "widget"
+                          ],
+                          "example": "quickSight"
+                        },
+                        "data": {
+                          "description": "Data will be JSON data",
+                          "type": "object",
+                          "example": {
+                            "url": "https://us-east-1.quicksight.aws.amazon.com/sn/dashboards/dashboardId?isauthcode=true&identityprovider=quicksight&code=authcode",
+                            "parameters": {
+                              "country": "United States",
+                              "states": [
+                                "California",
+                                "Washington"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "title": "Self Link",
+                      "properties": {
+                        "_links": {
+                          "type": "object",
+                          "readOnly": true,
+                          "properties": {
+                            "self": {
+                              "type": "object",
+                              "description": "Link to the /me endpoint",
+                              "readOnly": true,
+                              "properties": {
+                                "href": {
+                                  "type": "string",
+                                  "format": "url",
+                                  "readOnly": true,
+                                  "example": "https://api.nterprise.com/{entity}/{entity_id}"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "oauth2": [
+        "read",
+        "write"
+      ]
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "oauth2": {
+        "type": "oauth2",
+        "flows": {
+          "password": {
+            "authorizationUrl": "https://auth{.env}.nterprise.com/oauth/authorize",
+            "tokenUrl": "https://auth{.env}.nterprise.com/oauth/token",
+            "scopes": {
+              "access": "Access the API"
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "Me": {
+        "description": "Logged in users information",
+        "allOf": [
+          {
+            "description": "User Information",
+            "properties": {
+              "email": {
+                "type": "string",
+                "format": "email",
+                "description": "Email address",
+                "example": "chuck.reeves@zones.com"
+              },
+              "name": {
+                "type": "string",
+                "description": "Human readable name",
+                "nullable": true,
+                "example": "Chuck Reeves"
+              },
+              "picture": {
+                "type": "string",
+                "description": "Image for the user",
+                "nullable": true,
+                "example": "https://bit.ly/2RxOgEV"
+              }
+            }
+          }
+        ]
+      },
+      "Problem": {
+        "type": "object",
+        "description": "API Error",
+        "properties": {
+          "type": {
+            "type": "string",
+            "format": "uri",
+            "description": "An absolute URI that identifies the problem type.  When dereferenced, it SHOULD provide human-readable documentation for the problem type (e.g., using HTML).\n",
+            "default": "about:blank",
+            "example": "https://docs.nterprise.com/problem/constraint-violation"
+          },
+          "title": {
+            "type": "string",
+            "description": "A short, summary of the problem type. Written in english and readable for engineers (usually not suited for non technical stakeholders and not localized); example: Service Unavailable\n"
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The HTTP status code generated by the origin server for this occurrence of the problem.\n",
+            "minimum": 100,
+            "maximum": 600,
+            "example": 503
+          },
+          "detail": {
+            "type": "string",
+            "description": "A human readable explanation specific to this occurrence of the\nproblem.\n",
+            "example": "Connection to database timed out"
+          },
+          "instance": {
+            "type": "string",
+            "format": "uri",
+            "description": "An absolute URI that identifies the specific occurrence of the problem.It may or may not yield further information if dereferenced.\n"
+          }
+        }
+      },
+      "User": {
+        "description": "User Information",
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "Email address",
+            "example": "chuck.reeves@zones.com"
+          },
+          "name": {
+            "type": "string",
+            "description": "Human readable name",
+            "nullable": true,
+            "example": "Chuck Reeves"
+          },
+          "picture": {
+            "type": "string",
+            "description": "Image for the user",
+            "nullable": true,
+            "example": "https://bit.ly/2RxOgEV"
+          }
+        }
+      }
+    }
+  }
+}
+

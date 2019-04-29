@@ -1,0 +1,15 @@
+{
+  "description": "Bad Request",
+  "content": {
+    "application/json": {
+      "schema": {
+        "title": "Bad Request",
+        "allOf": [
+          {
+            "$ref": "../schemas/error.json"
+          }
+        ]
+      }
+    }
+  }
+}

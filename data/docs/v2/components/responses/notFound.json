@@ -1,9 +1,14 @@
 {
   "description": "Resource not found",
   "content": {
-    "application/problem+json": {
+    "application/json": {
       "schema": {
-        "$ref": "/v2/components/schemas/problem.json"
+        "title": "Not Found",
+        "allOf": [
+          {
+            "$ref": "../schemas/problem.json"
+          }
+        ]
       }
     }
   }

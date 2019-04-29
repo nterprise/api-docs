@@ -1,0 +1,35 @@
+{
+  "description": "Me Response",
+  "content": {
+    "application/hal+json": {
+      "schema": {
+        "allOf": [
+          {
+            "$ref": "../schemas/me.json"
+          },
+          {
+            "$ref": "../schemas/linkUser.json"
+          },
+          {
+            "$ref": "../schemas/linkSelf.json"
+          }
+        ]
+      }
+    },
+    "application/json": {
+      "schema": {
+        "allOf": [
+          {
+            "$ref": "../schemas/me.json"
+          },
+          {
+            "$ref": "../schemas/linkUser.json"
+          },
+          {
+            "$ref": "../schemas/linkSelf.json"
+          }
+        ]
+      }
+    }
+  }
+}

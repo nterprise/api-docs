@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "Swagger documentation",
   "scripts": {
-    "start": "node $NODE_DEBUG_OPTION bin/www"
+    "start": "gulp serve",
+    "lint": "gulp lint",
+    "precommit": "gulp"
   },
   "repository": {
     "type": "git",
@@ -72,5 +74,15 @@
     "swagger-ui-express": "^4.0.2",
     "swagger2": "^1.0.4"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "git-pre-commit": "^2.1.4",
+    "glob": "^7.1.3",
+    "gulp": "^4.0.1",
+    "gulp-cli": "^2.2.0",
+    "gulp-fn": "0.0.3",
+    "gulp-nodemon": "^2.4.2",
+    "gulp-shell": "^0.7.0",
+    "lodash": "^4.17.11",
+    "swagger-cli": "^2.2.1"
+  }
 }

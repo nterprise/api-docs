@@ -1,0 +1,74 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "2.0.0",
+    "description": "Authentication API for nterprise-api",
+    "title": "authentication-api",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://{environment}.nterprise.com",
+      "variables": {
+        "environment": {
+          "default": "auth",
+          "enum": [
+            "auth",
+            "auth.dev",
+            "auth.staging"
+          ]
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/elevio/sign-in": {
+      "$ref": "./paths/elevioSignin.json"
+    },
+    "/elevio/verify": {
+      "$ref": "./paths/elevioVerify.json"
+    },
+    "/oauth/authorize": {
+      "$ref": "./paths/authorize.json"
+    },
+    "/oauth/token": {
+      "$ref": "./paths/token.json"
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "oauth2": {
+        "type": "oauth2",
+        "flows": {
+          "password": {
+            "authorizationUrl": "https://auth{.env}.nterprise.com/oauth/authorize",
+            "tokenUrl": "https://auth{.env}.nterprise.com/oauth/token",
+            "scopes": {
+              "access": "Access the API",
+              "admin": "Access the API",
+            }
+          },
+          "authorizationCode": {
+            "authorizationUrl": "https://auth{.env}.nterprise.com/oauth/authorize",
+            "tokenUrl": "https://auth{.env}.nterprise.com/oauth/token",
+            "scopes": {
+              "access": "Access the API",
+              "admin": "Access the Admin API"
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "Problem": {
+        "$ref": "./components/schemas/error.json"
+      },
+      "Token": {
+        "$ref": "./components/schemas/token.json"
+      }
+    }
+  }
+}

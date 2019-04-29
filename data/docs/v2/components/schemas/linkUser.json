@@ -1,19 +1,21 @@
 {
   "type": "object",
+  "title": "Profile Link",
   "properties": {
     "_links": {
       "type": "object",
       "readOnly": true,
       "properties": {
-        "oauth:token": {
+        "profile": {
           "type": "object",
+          "description": "Link to a users profile",
           "readOnly": true,
           "properties": {
             "href": {
               "type": "string",
               "format": "url",
               "readOnly": true,
-              "example": "https://api.nterprise.com/oauth/token"
+              "example": "https://api.nterprise.com/user/manchuck"
             }
           }
         }

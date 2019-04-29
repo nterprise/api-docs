@@ -8,17 +8,7 @@
   "responses": {
     "200": {
       "description": "Entry point for the application",
-      "content": {
-        "application/vnd.nterprise.dashboard.v2+json": {
-          "schema": {
-            "allOf": [
-              {
-                "$ref": "/v2/components/schemas/dashboard.json"
-              }
-            ]
-          }
-        }
-      }
+      "$ref": "../../components/responses/dashboard.json"
     }
   }
 }

@@ -1,9 +1,14 @@
 {
   "description": "Bad Request",
   "content": {
-    "application/problem+json": {
+    "application/json": {
       "schema": {
-        "$ref": "/v2/components/schemas/problem.json"
+        "title": "Bad Request",
+        "allOf": [
+          {
+            "$ref": "../schemas/problem.json"
+          }
+        ]
       }
     }
   }

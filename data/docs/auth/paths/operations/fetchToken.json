@@ -1,0 +1,23 @@
+{
+  "operationId": "fetchToken",
+  "summary": "OAuth code exchange",
+  "description": "Fetches the current user information",
+  "tags": [
+    "oAuth"
+  ],
+  "requestBody": {
+    "$ref": "../../components/requestBodies/token.json"
+  },
+  "responses": {
+    "200": {
+      "description": "Entry point for the application",
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "../../components/schemas/token.json"
+          }
+        }
+      }
+    }
+  }
+}

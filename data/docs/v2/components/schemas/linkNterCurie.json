@@ -1,5 +1,6 @@
 {
   "type": "object",
+  "title": "Curie Link",
   "properties": {
     "_links": {
       "type": "object",
