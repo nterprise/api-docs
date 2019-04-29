@@ -1,0 +1,17 @@
+{
+  "description": "Me Response",
+  "content": {
+    "application/json": {
+      "schema": {
+        "allOf": [
+          {
+            "$ref": "../schemas/dashboard.json"
+          },
+          {
+            "$ref": "../schemas/linkSelf.json"
+          }
+        ]
+      }
+    }
+  }
+}

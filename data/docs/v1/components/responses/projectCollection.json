@@ -1,5 +1,4 @@
 {
-  "$schema": "http://json-schema.org/draft-06/schema#",
   "description": "A paged array of projects",
   "content": {
     "application/vnd.nterprise.collection.projects.v1+json": {
@@ -14,16 +13,16 @@
                   "type": "object",
                   "allOf": [
                     {
-                      "$ref": "/v1/components/schemas/project.json"
+                      "$ref": "../schemas/project.json"
                     },
                     {
-                      "$ref": "/v1/components/schemas/linkNterCurie.json"
+                      "$ref": "../schemas/linkNterCurie.json"
                     },
                     {
-                      "$ref": "/v1/components/schemas/linkSelf.json"
+                      "$ref": "../schemas/linkSelf.json"
                     },
                     {
-                      "$ref": "/v1/components/schemas/projectLinks.json"
+                      "$ref": "../schemas/projectLinks.json"
                     }
                   ]
                 }
@@ -34,7 +33,7 @@
         },
         "allOf": [
           {
-            "$ref": "/v1/components/schemas/pagePagination.json"
+            "$ref": "../schemas/pagePagination.json"
           }
         ]
       }

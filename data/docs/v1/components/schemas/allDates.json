@@ -1,15 +1,14 @@
 {
-  "$schema": "http://json-schema.org/draft-06/schema#",
   "type": "object",
   "allOf": [
     {
-      "$ref": "/v2/components/schemas/dateCreated.json"
+      "$ref": "./dateCreated.json"
     },
     {
-      "$ref": "/v2/components/schemas/dateUpdated.json"
+      "$ref": "./dateUpdated.json"
     },
     {
-      "$ref": "/v2/components/schemas/dateDeleted.json"
+      "$ref": "./dateDeleted.json"
     }
   ]
 }

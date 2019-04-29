@@ -1,6 +1,6 @@
 {
-  "$schema": "http://json-schema.org/draft-06/schema#",
   "type": "object",
+  "description": "API Error",
   "properties": {
     "type": {
       "type": "string",

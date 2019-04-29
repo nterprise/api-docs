@@ -1,24 +1,14 @@
 {
   "operationId": "fetchMe",
   "summary": "Information about the current user",
-  "description": "Fetches the current user information",
+  "description": "Fetches the current user information along with resources they can access",
   "tags": [
     "Me"
   ],
   "responses": {
     "200": {
-      "description": "Entry point for the application",
-      "content": {
-        "application/vnd.nterprise.me.v2+json": {
-          "schema": {
-            "allOf": [
-              {
-                "$ref": "/v2/components/schemas/me.json"
-              }
-            ]
-          }
-        }
-      }
+      "description": "Current consumers access",
+      "$ref": "../../components/responses/me.json"
     }
   }
 }

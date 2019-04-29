@@ -1,5 +1,0 @@
-{
-  "delete": {
-    "$ref": "/v2/paths/operations/revokeRolePermission.json"
-  }
-}

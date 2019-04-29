@@ -1,15 +1,14 @@
 {
-  "$schema": "http://json-schema.org/draft-06/schema#",
   "description": "Details about the product",
   "content": {
     "application/vnd.nterprise.product.v1+json": {
       "schema": {
         "allOf": [
           {
-            "$ref": "/v1/components/schemas/product.json"
+            "$ref": "../schemas/product.json"
           },
           {
-            "$ref": "/v1/components/schemas/productLinks.json"
+            "$ref": "../schemas/productLinks.json"
           }
         ]
       }

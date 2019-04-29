@@ -1,0 +1,14 @@
+{
+  "operationId": "fetchDashboard",
+  "summary": "Dashboard page",
+  "description": "Fetches the dashboard",
+  "tags": [
+    "Dashboard"
+  ],
+  "responses": {
+    "200": {
+      "description": "Entry point for the application",
+      "$ref": "../../components/responses/dashboard.json"
+    }
+  }
+}

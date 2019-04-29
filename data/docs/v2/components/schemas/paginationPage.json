@@ -1,5 +1,4 @@
 {
-  "$schema": "http://json-schema.org/draft-06/schema#",
   "type": "object",
   "properties": {
     "total_count": {
@@ -25,10 +24,5 @@
       "maximum": 100,
       "example": 50
     }
-  },
-  "allOf": [
-    {
-      "$ref": "/v1/schemas/properties/links/pagePagination.json"
-    }
-  ]
+  }
 }

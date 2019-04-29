@@ -1,12 +1,25 @@
 {
-  "$schema": "http://json-schema.org/draft-06/schema#",
   "type": "object",
+  "title": "Self Link",
   "properties": {
-    "self": {
-      "type": "string",
-      "format": "url",
+    "_links": {
+      "type": "object",
       "readOnly": true,
-      "example": "https://api.nterprise.com/{entity}/{entity_id}"
+      "properties": {
+        "self": {
+          "type": "object",
+          "description": "Link to the /me endpoint",
+          "readOnly": true,
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "url",
+              "readOnly": true,
+              "example": "https://api.nterprise.com/{entity}/{entity_id}"
+            }
+          }
+        }
+      }
     }
   }
 }

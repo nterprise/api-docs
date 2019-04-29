@@ -1,31 +1,41 @@
 {
-  "$schema": "http://json-schema.org/draft-06/schema#",
   "type": "object",
+  "title": "Curie Link",
   "properties": {
-    "curies": {
-      "type": "array",
-      "description": "the Nterprise CURIE",
-      "items": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "readOnly": true,
-            "description": "Name of CURIE",
-            "example": "nter"
-          },
-          "href": {
-            "type": "string",
-            "format": "url",
-            "readOnly": true,
-            "description": "A Link to the CURIE reference",
-            "example": "https://docs.nterprise.com/rel/{rel}"
-          },
-          "templated": {
-            "type": "boolean",
-            "readOnly": true,
-            "description": "Describes the link as being a template",
-            "example": true
+    "_links": {
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "curies": {
+          "type": "array",
+          "description": "the nterprise or oauth CURIE",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "readOnly": true,
+                "description": "Name of CURIE",
+                "enum": [
+                  "nter",
+                  "oauth"
+                ],
+                "example": "nter"
+              },
+              "href": {
+                "type": "string",
+                "format": "url",
+                "readOnly": true,
+                "description": "A Link to the CURIE reference",
+                "example": "https://docs.nterprise.com/rel/{rel}"
+              },
+              "templated": {
+                "type": "boolean",
+                "readOnly": true,
+                "description": "Describes the link as being a template",
+                "example": true
+              }
+            }
           }
         }
       }

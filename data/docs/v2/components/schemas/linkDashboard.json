@@ -1,0 +1,31 @@
+{
+  "type": "object",
+  "title": "Dashboard Link",
+  "properties": {
+    "_links": {
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "nter:dashboard": {
+          "type": "object",
+          "description": "Link to the /dashboard endpoint",
+          "readOnly": true,
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "url",
+              "readOnly": true,
+              "example": "https://api.nterprise.com/dashboard{/dashboard_id}"
+            },
+            "templated": {
+              "type": "boolean",
+              "readOnly": true,
+              "description": "Describes the link as being a template",
+              "example": true
+            }
+          }
+        }
+      }
+    }
+  }
+}

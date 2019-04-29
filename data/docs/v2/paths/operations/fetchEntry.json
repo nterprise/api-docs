@@ -1,0 +1,14 @@
+{
+  "operationId": "fetchEntry",
+  "summary": "Entry point",
+  "tags": [
+    "Entry"
+  ],
+  "security": [],
+  "responses": {
+    "200": {
+      "description": "Entry point for the application",
+      "$ref": "../../components/responses/entry.json"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "type": "object",
+  "title": "Me Link",
+  "properties": {
+    "_links": {
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "nter:me": {
+          "type": "object",
+          "description": "Link to the /me endpoint",
+          "readOnly": true,
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "url",
+              "readOnly": true,
+              "example": "https://api.nterprise.com/me"
+            }
+          }
+        }
+      }
+    }
+  }
+}

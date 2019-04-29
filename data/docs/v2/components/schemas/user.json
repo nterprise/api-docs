@@ -1,5 +1,4 @@
 {
-  "$schema": "http://json-schema.org/draft-06/schema#",
   "description": "User Information",
   "properties": {
     "email": {
@@ -14,28 +13,11 @@
       "nullable": true,
       "example": "Chuck Reeves"
     },
-    "title": {
+    "picture": {
       "type": "string",
-      "description": "Title or posistion the user holds",
+      "description": "Image for the user",
       "nullable": true,
-      "example": "Master of the Universe"
-    },
-    "_links": {
-      "type": "object",
-      "readOnly": true,
-      "properties": {
-        "profile": {
-          "type": "string",
-          "format": "url",
-          "readOnly": true,
-          "example": "https://en.gravatar.com/userimage/9117096/34c181143a150434bba3ad0876468c9a.jpeg"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "/v2/components/schemas/linkSelf.json"
-        }
-      ]
+      "example": "https://bit.ly/2RxOgEV"
     }
   }
 }

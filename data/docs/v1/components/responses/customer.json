@@ -24,13 +24,13 @@
         },
         "allOf": [
           {
-            "$ref": "/v1/components/schemas/customer.json"
+            "$ref": "../schemas/customer.json"
           },
           {
-            "$ref": "/v1/components/schemas/linkSelf.json"
+            "$ref": "../schemas/linkSelf.json"
           },
           {
-            "$ref": "/v1/components/schemas/linkNterCurie.json"
+            "$ref": "../schemas/linkNterCurie.json"
           }
         ]
       }

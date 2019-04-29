@@ -2,8 +2,8 @@
   "openapi": "3.0.0",
   "info": {
     "version": "1.0.0",
-    "description": "API for the nterprise application",
-    "title": "nterprise API",
+    "description": "Customer API for FTM and CIMS",
+    "title": "customer-accessible-api",
     "termsOfService": "https://www.nterprise.com/tos",
     "license": {
       "name": "MIT",
@@ -21,26 +21,26 @@
   ],
   "paths": {
     "/customers/{customer_id}": {
-      "$ref": "/v1/paths/customer.json"
+      "$ref": "./paths/customer.json"
     },
     "/customers/": {
-      "$ref": "/v1/paths/customers.json"
+      "$ref": "./paths/customers.json"
     },
     "/customers/{customer_id}/projects": {
-      "$ref": "/v1/paths/projectsByCustomer.json"
+      "$ref": "./paths/projectsByCustomer.json"
     },
     "/projects/{project_id}": {
-      "$ref": "/v1/paths/project.json"
+      "$ref": "./paths/project.json"
     },
     "/projects/": {
-      "$ref": "/v1/paths/projects.json"
+      "$ref": "./paths/project.json"
     }
   },
   "components": {
     "schemas": {
-      "Customer": {"$ref": "/v1/components/schemas/customer.json"},
-      "Project": {"$ref": "/v1/components/schemas/project.json"},
-      "Problem": {"$ref": "/v1/components/schemas/problem.json"}
+      "Customer": {"$ref": "./components/schemas/customer.json"},
+      "Project": {"$ref": "./components/schemas/project.json"},
+      "Problem": {"$ref": "./components/schemas/problem.json"}
     },
     "securitySchemes": {
       "signedToken": {

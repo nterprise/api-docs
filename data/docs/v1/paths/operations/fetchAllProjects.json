@@ -6,13 +6,13 @@
     "Projects"
   ],
   "parameters": [
-    {"$ref": "/v1/components/parameters/page.json"},
-    {"$ref": "/v1/components/parameters/perPage.json"}
+    {"$ref": "../../components/parameters/page.json"},
+    {"$ref": "../../components/parameters/perPage.json"}
   ],
   "responses": {
-    "200": {"$ref": "/v1/components/responses/projectCollection.json"},
+    "200": {"$ref": "../../components/responses/projectCollection.json"},
     "default": {
-      "$ref": "/v1/components/responses/problem.json"
+      "$ref": "../../components/responses/problem.json"
     }
   }
 }

@@ -1,6 +1,6 @@
 {
-  "$schema": "http://json-schema.org/draft-06/schema#",
   "type": "object",
+  "title": "Pagination Offset Link",
   "properties": {
     "_links": {
       "type": "object",
@@ -12,12 +12,7 @@
           "readOnly": true,
           "example": "https://api.nterprise.com/{entity}?offset=363yHhUhhI&limit=50"
         }
-      },
-      "allOf": [
-        {
-          "$ref": "/v2/components/schemas/linkSelf.json"
-        }
-      ]
+      }
     }
   }
 }

@@ -7,15 +7,15 @@
   ],
   "parameters": [
     {
-      "$ref": "/v1/components/parameters/projectId.json"
+      "$ref": "../../components/parameters/projectId.json"
     }
   ],
   "responses": {
     "200": {
-      "$ref": "/v1/components/responses/project.json"
+      "$ref": "../../components/responses/project.json"
     },
     "default": {
-      "$ref": "/v1/components/responses/problem.json"
+      "$ref": "../../components/responses/problem.json"
     }
   }
 }

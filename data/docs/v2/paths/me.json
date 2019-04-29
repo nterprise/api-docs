@@ -1,5 +1,5 @@
 {
   "get": {
-    "$ref": "/v2/paths/operations/fetchMe.json"
+    "$ref": "./operations/fetchMe.json"
   }
 }

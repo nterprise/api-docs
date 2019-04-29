@@ -1,0 +1,45 @@
+{
+  "get":{
+    "operationId": "elevioVerify",
+    "summary": "Verify Elevio",
+    "tags": [
+      "Elevio"
+    ],
+    "parameters": [
+      {
+        "name": "code",
+        "description": "oAuth Access code",
+        "in": "query",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "state",
+        "description": "State parameter",
+        "in": "query",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "400": {
+        "$ref": "../components/responses/badRequest.json"
+      },
+      "302": {
+        "description": "Authorization endpoint for oauth",
+        "headers": {
+          "Location": {
+            "schema": {
+              "type": "string",
+              "example": "https://auth.nterprise.com/auth"
+            }
+          }
+        }
+      }
+    }
+  }
+}

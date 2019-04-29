@@ -1,0 +1,36 @@
+{
+  "get":{
+    "operationId": "elevioSignin",
+    "summary": "Sign-in to elevio",
+    "tags": [
+      "Elevio"
+    ],
+    "parameters": [
+      {
+        "name": "return_url",
+        "description": "The url to return back to elevio",
+        "in": "query",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "400": {
+        "$ref": "../components/responses/badRequest.json"
+      },
+      "302": {
+        "description": "Authorization endpoint for oauth",
+        "headers": {
+          "Location": {
+            "schema": {
+              "type": "string",
+              "example": "https://auth.nterprise.com/auth"
+            }
+          }
+        }
+      }
+    }
+  }
+}
