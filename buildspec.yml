@@ -3,10 +3,10 @@ version: 0.2
 phases:
   pre_build:
     commands:
-    - gulp
+    - npm install
   build:
     commands:
-    - npm prune --production
+    - gulp build
   post_build:
     commands:
     - aws s3 sync --delete ./public "s3://docs.nterprise.com"
