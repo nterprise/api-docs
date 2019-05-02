@@ -17,7 +17,7 @@
       "type": "string",
       "description": "Image for the user",
       "nullable": true,
-      "example": "https://bit.ly/2RxOgEV"
+      "example": "https://bit.ly/18gECvy"
     }
   }
 }

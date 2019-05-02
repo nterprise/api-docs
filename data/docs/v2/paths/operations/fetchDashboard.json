@@ -7,7 +7,7 @@
   ],
   "responses": {
     "200": {
-      "description": "Entry point for the application",
+      "description": "Dashboards",
       "$ref": "../../components/responses/dashboard.json"
     }
   }
