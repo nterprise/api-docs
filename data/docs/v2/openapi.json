@@ -67,6 +67,9 @@
       },
       "User": {
         "$ref": "./components/schemas/user.json"
+      },
+      "Dashboard": {
+        "$ref": "./components/schemas/dashboard.json"
       }
     }
   }
