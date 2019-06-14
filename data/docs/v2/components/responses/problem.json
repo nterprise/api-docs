@@ -1,7 +1,7 @@
 {
   "description": "API Problem",
   "content": {
-    "application/json": {
+    "application/problem+json": {
       "schema": {
         "$ref": "../schemas/problem.json"
       }

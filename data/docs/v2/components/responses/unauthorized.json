@@ -1,20 +1,20 @@
 {
-  "description": "Resource not found",
+  "description": "Unauthorized",
   "content": {
     "application/problem+json": {
       "schema": {
         "properties": {
           "title": {
-            "example": "Not Found"
+            "example": "Unauthorized"
           },
           "type": {
-            "example": "https://docs.nterprise.com/api/problem/NotFound"
+            "example": "https://docs.nterprise.com/api/problem/Unauthorized"
           },
           "status": {
-            "example": 404
+            "example": 401
           },
           "detail": {
-            "example": "Entity not found"
+            "example": "You are not authorized to access this resource"
           }
         },
         "allOf": [

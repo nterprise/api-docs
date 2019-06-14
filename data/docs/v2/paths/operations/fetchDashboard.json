@@ -9,6 +9,10 @@
     "200": {
       "description": "Dashboards",
       "$ref": "../../components/responses/dashboard.json"
+    },
+    "401": {
+      "description": "Unauthorized to access dashboard",
+      "$ref": "../../components/responses/unauthorized.json"
     }
   }
 }

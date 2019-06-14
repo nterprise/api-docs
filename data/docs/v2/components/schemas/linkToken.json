@@ -1,0 +1,47 @@
+{
+  "type": "object",
+  "title": "Token Link",
+  "properties": {
+    "_links": {
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "oauth:logout": {
+          "type": "object",
+          "description": "Link for oAuth2 logout",
+          "readOnly": true,
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "url",
+              "readOnly": true,
+              "example": "https://auth.nterprise.com/oauth/token"
+            },
+            "title": {
+              "type": "string",
+              "example": "Logout"
+            },
+            "method": {
+              "type": "string",
+              "readOnly": true,
+              "example": "DELETE"
+            }
+          }
+        },
+        "oauth:token": {
+          "type": "object",
+          "description": "Link for Oauth2 token exchange",
+          "readOnly": true,
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "url",
+              "readOnly": true,
+              "example": "https://auth.nterprise.com/oauth/token"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,7 +1,7 @@
 {
   "description": "Entry",
   "content": {
-    "application/json": {
+    "application/hal+json": {
       "schema": {
         "allOf": [
           {

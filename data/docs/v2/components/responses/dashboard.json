@@ -1,7 +1,7 @@
 {
-  "description": "Me Response",
+  "description": "Dashboard Response",
   "content": {
-    "application/json": {
+    "application/hal+json": {
       "schema": {
         "allOf": [
           {

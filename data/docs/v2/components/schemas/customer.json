@@ -1,0 +1,71 @@
+{
+  "description": "Customer",
+  "required": [
+    "business_name"
+  ],
+  "properties": {
+    "customer_id": {
+      "type": "string",
+      "description": "Customer identifier",
+      "example": "e530652e-28e8-4f64-84af-e1cf0ff7c805",
+      "readOnly": true,
+      "pattern": "[0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}"
+    },
+    "slug": {
+      "type": "string",
+      "description": "Slug for the customer",
+      "example": "zones-inc",
+      "readOnly": true,
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "name": {
+      "type": "string",
+      "description": "Customer Name",
+      "example": "Zones Inc"
+    },
+    "contact": {
+      "type": "object",
+      "description": "Contact Information",
+      "nullable": true,
+      "allOf": [
+        {
+          "$ref": "./contact.json"
+        }
+      ]
+    },
+    "created_by": {
+      "type": "object",
+      "description": "User who created the customer",
+      "readOnly": true,
+      "allOf": [
+        {
+          "$ref": "./user.json"
+        }
+      ]
+    },
+    "sales_relationship": {
+      "type": "object",
+      "description": "Sales contact information",
+      "nullable": true,
+      "allOf": [
+        {
+          "$ref": "./contact.json"
+        }
+      ]
+    },
+    "external_platform": {
+      "type": "object",
+      "description": "External Identifiers for the customer",
+      "nullable": true,
+      "additionalProperties": {
+        "type": "string"
+      },
+      "example": {
+        "ax_customer_id": "eff3ada3-0966-42be-a5e8-78efd3c52d39"
+      }
+    }
+  },
+  "allOf": [
+    {"$ref": "./allDates.json"}
+  ]
+}

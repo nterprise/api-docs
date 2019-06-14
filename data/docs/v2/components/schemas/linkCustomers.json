@@ -1,31 +1,30 @@
 {
   "type": "object",
-  "title": "Dashboard Link",
+  "title": "Customers Link",
   "properties": {
     "_links": {
       "type": "object",
       "readOnly": true,
       "properties": {
-        "nter:dashboard": {
+        "nter:customers": {
           "type": "object",
-          "description": "Link to the /dashboard endpoint",
+          "description": "Link to the /customers endpoint",
           "readOnly": true,
           "properties": {
             "href": {
               "type": "string",
               "format": "url",
               "readOnly": true,
-              "example": "https://api.nterprise.com/dashboard"
+              "example": "https://api.nterprise.com/customers{/customer_id}"
             },
             "title": {
               "type": "string",
               "description": "Describes the name used for the link",
-              "example": "Dashboard"
+              "example": "Customers"
             },
             "templated": {
               "type": "boolean",
               "readOnly": true,
-              "description": "Describes the link as being a template",
               "example": true
             }
           }

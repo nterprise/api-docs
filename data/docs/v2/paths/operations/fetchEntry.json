@@ -8,7 +8,18 @@
   "responses": {
     "200": {
       "description": "Entry point for the application",
-      "$ref": "../../components/responses/entry.json"
+      "$ref": "../../components/responses/entry.json",
+      "links": {
+        "customers": {
+          "operationId": "fetchAllCustomers"
+        },
+        "dashboard": {
+          "operationId": "fetchDashboard"
+        },
+        "me": {
+          "operationId": "fetchMe"
+        }
+      }
     }
   }
 }

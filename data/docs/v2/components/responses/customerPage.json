@@ -1,0 +1,69 @@
+{
+  "description": "Paged customer response",
+  "content": {
+    "application/ha+json": {
+      "schema": {
+        "properties": {
+          "_embedded": {
+            "type": "object",
+            "properties": {
+              "customers": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "allOf": [
+                    {
+                      "$ref": "../schemas/customer.json"
+                    },
+                    {
+                      "$ref": "../schemas/linkSelf.json"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "_links": {
+            "type": "object",
+            "properties": {
+              "next": {
+                "type": "object",
+                "properties": {
+                  "href": {
+                    "type": "string",
+                    "example": "https://api.nterprise.com/customers?limit=50&offset=363yHhUhhI"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "../schemas/paginationOffset.json"
+          },
+          {
+            "properties": {
+              "_links": {
+                "properties": {
+                  "self": {
+                    "properties": {
+                      "href":{
+                        "example": "https://api.nterprise.com/customers"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "allOf": [
+              {
+                "$ref": "../schemas/linkSelf.json"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

@@ -33,6 +33,12 @@
     },
     "/dashboard": {
       "$ref": "./paths/dashboard.json"
+    },
+    "/customers": {
+      "$ref": "./paths/customers.json"
+    },
+    "/customers/:customer_id": {
+      "$ref": "./paths/customer.json"
     }
   },
   "security": [
@@ -67,6 +73,9 @@
       },
       "User": {
         "$ref": "./components/schemas/user.json"
+      },
+      "Customer": {
+        "$ref": "./components/schemas/customer.json"
       },
       "Dashboard": {
         "$ref": "./components/schemas/dashboard.json"

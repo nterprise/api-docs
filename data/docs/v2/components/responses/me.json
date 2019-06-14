@@ -15,21 +15,6 @@
           }
         ]
       }
-    },
-    "application/json": {
-      "schema": {
-        "allOf": [
-          {
-            "$ref": "../schemas/me.json"
-          },
-          {
-            "$ref": "../schemas/linkUser.json"
-          },
-          {
-            "$ref": "../schemas/linkSelf.json"
-          }
-        ]
-      }
     }
   }
 }
