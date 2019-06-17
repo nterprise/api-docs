@@ -1,20 +1,20 @@
 {
-  "description": "Resource not found",
+  "description": "Conflict",
   "content": {
     "application/problem+json": {
       "schema": {
         "properties": {
           "title": {
-            "example": "Not Found"
+            "example": "Conflict"
           },
           "type": {
-            "example": "https://docs.nterprise.com/api/problem/NotFound"
+            "example": "https://docs.nterprise.com/api/problem/Conflict"
           },
           "status": {
-            "example": 404
+            "example": 409
           },
           "detail": {
-            "example": "Entity not found"
+            "example": "This request contains a conflict to another resource"
           }
         },
         "allOf": [

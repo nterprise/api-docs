@@ -1,0 +1,30 @@
+{
+  "description": "Customer response",
+  "content": {
+    "application/ha+json": {
+      "schema": {
+        "allOf": [
+          {
+            "$ref": "../schemas/customer.json"
+          },
+          {
+            "properties": {
+              "_links": {
+                "properties": {
+                  "self": {
+                    "example": "https://api.nterprise.com/customers/e530652e-28e8-4f64-84af-e1cf0ff7c805"
+                  }
+                }
+              }
+            },
+            "allOf": [
+              {
+                "$ref": "../schemas/linkSelf.json"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

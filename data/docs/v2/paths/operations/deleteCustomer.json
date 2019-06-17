@@ -1,0 +1,21 @@
+{
+  "operationId": "deleteCustomer",
+  "summary": "Deletes a customer",
+  "description": "This will remove the customer from the system",
+  "tags": [
+    "Customer"
+  ],
+  "responses": {
+    "205": {
+      "description": "Customer deleted"
+    },
+    "401": {
+      "description": "User is not allowed to delete this customer",
+      "$ref": "../../components/responses/unauthorized.json"
+    },
+    "404": {
+      "description": "Customer not found",
+      "$ref": "../../components/responses/notFound.json"
+    }
+  }
+}

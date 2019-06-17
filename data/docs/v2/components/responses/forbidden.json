@@ -1,20 +1,20 @@
 {
-  "description": "Resource not found",
+  "description": "Forbidden",
   "content": {
     "application/problem+json": {
       "schema": {
         "properties": {
           "title": {
-            "example": "Not Found"
+            "example": "Forbidden"
           },
           "type": {
-            "example": "https://docs.nterprise.com/api/problem/NotFound"
+            "example": "https://docs.nterprise.com/api/problem/Forbidden"
           },
           "status": {
-            "example": 404
+            "example": 403
           },
           "detail": {
-            "example": "Entity not found"
+            "example": "You are not forbidden from accesing this resource"
           }
         },
         "allOf": [

@@ -9,6 +9,10 @@
     "200": {
       "description": "Current consumers access",
       "$ref": "../../components/responses/me.json"
+    },
+    "401": {
+      "description": "Unauthorized to access me data",
+      "$ref": "../../components/responses/unauthorized.json"
     }
   }
 }

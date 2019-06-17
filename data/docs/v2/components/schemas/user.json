@@ -1,6 +1,14 @@
 {
   "description": "User Information",
   "properties": {
+    "user_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The identifier for the user",
+      "example": "3dddba3e-6122-46a8-ae26-8c7c95bd82d7",
+      "readOnly": true,
+      "pattern": "[0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}"
+    },
     "email": {
       "type": "string",
       "format": "email",
@@ -16,6 +24,12 @@
     "picture": {
       "type": "string",
       "description": "Image for the user",
+      "nullable": true,
+      "example": "https://bit.ly/18gECvy"
+    },
+    "profile": {
+      "type": "string",
+      "description": "Link to the users profile",
       "nullable": true,
       "example": "https://bit.ly/18gECvy"
     }

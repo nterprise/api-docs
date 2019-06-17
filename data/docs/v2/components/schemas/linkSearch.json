@@ -1,26 +1,26 @@
 {
   "type": "object",
-  "title": "Dashboard Link",
+  "title": "Search Link",
   "properties": {
     "_links": {
       "type": "object",
       "readOnly": true,
       "properties": {
-        "nter:dashboard": {
+        "nter:search": {
           "type": "object",
-          "description": "Link to the /dashboard endpoint",
+          "description": "Link to the /search endpoint",
           "readOnly": true,
           "properties": {
             "href": {
               "type": "string",
               "format": "url",
               "readOnly": true,
-              "example": "https://api.nterprise.com/dashboard"
+              "example": "https://api.nterprise.com/search"
             },
             "title": {
               "type": "string",
               "description": "Describes the name used for the link",
-              "example": "Dashboard"
+              "example": "Search"
             },
             "templated": {
               "type": "boolean",

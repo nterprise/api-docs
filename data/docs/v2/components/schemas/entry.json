@@ -11,6 +11,15 @@
       "$ref": "../schemas/linkMe.json"
     },
     {
+      "$ref": "../schemas/linkCustomers.json"
+    },
+    {
+      "$ref": "../schemas/linkAuthorize.json"
+    },
+    {
+      "$ref": "../schemas/linkToken.json"
+    },
+    {
       "$ref": "./linkSelf.json"
     }
   ]

@@ -1,0 +1,10 @@
+{
+  "description": "The customer to create",
+  "content": {
+    "application/json": {
+      "schema": {
+        "$ref": "../../components/schemas/customer.json"
+      }
+    }
+  }
+}
