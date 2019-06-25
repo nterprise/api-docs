@@ -1,0 +1,34 @@
+{
+  "description": "The part definition to create",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "required": [
+          "part_number",
+          "label",
+          "manufacturer_id"
+        ],
+        "properties": {
+          "part_definition_id": {
+            "$ref": "../../components/schemas/partDefinition.json#/properties/part_definition_id"
+          },
+          "customer_id": {
+            "$ref": "../../components/schemas/customer.json#/properties/customer_id"
+          },
+          "label": {
+            "$ref": "../../components/schemas/part.json#/properties/label"
+          },
+          "manufacturer_id": {
+            "readOnly": false,
+            "description": "Id for the parts manufacturer",
+            "$ref": "../../components/schemas/manufacturer.json#/properties/manufacturer_id"
+          },
+          "input_filter": {
+            "$ref": "../../components/schemas/part.json#/properties/input_filter"
+          }
+        }
+      }
+    }
+  }
+}

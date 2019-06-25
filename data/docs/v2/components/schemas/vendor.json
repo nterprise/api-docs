@@ -1,0 +1,26 @@
+{
+  "description": "A Vendor which sells parts",
+  "properties": {
+    "vendor_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "unique id",
+      "example": "3beea89a-3367-4beb-aa43-2aadc0873785",
+      "readOnly": true,
+      "pattern": "[0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}"
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the vendor",
+      "example": "HUGO's house of pancakes"
+    },
+    "slug": {
+      "type": "string",
+      "format": "slug",
+      "description": "Slug for the vendor",
+      "example": "hugos-house-of-pancakes",
+      "readOnly": true,
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    }
+  }
+}

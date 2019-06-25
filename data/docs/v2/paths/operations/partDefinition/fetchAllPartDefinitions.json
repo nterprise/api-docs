@@ -1,0 +1,76 @@
+{
+  "operationId": "fetchAllPartDefinitions",
+  "summary": "Fetches A Page of partDefinitions",
+  "description": "Fetch PartDefinition",
+  "tags": [
+    "Part Definition"
+  ],
+  "parameters": [
+    {"$ref": "../../../components/parameters/limit.json"},
+    {"$ref": "../../../components/parameters/offset.json"},
+    {
+      "schema": {
+        "enum": [
+          "label",
+          "-label",
+          "manufacturer",
+          "-manufacturer",
+          "part_number",
+          "-part_number",
+          "customer",
+          "-customer"
+        ]
+      },
+      "$ref": "../../../components/parameters/sort.json"
+    },
+    {
+      "name": "filter",
+      "in": "query",
+      "description": "Filter results",
+      "style": "deepObject",
+      "explode": true,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "part_number": {
+            "type": "string",
+            "description": "Finds parts that contain this value",
+            "example": "THX-1138"
+          },
+          "customer_id": {
+            "type": "string",
+            "description": "Filters parts for this customer id",
+            "example": "32e91e84-2b51-4c90-b4c1-522bedc6f01d"
+          },
+          "manufacturer": {
+            "type": "string",
+            "description": "Filters parts for this manufacturer_id",
+            "example": "763b454b-1a9b-47e7-9166-0fae9c0166fc"
+          }
+        }
+      }
+    }
+  ],
+  "responses": {
+    "200": {
+      "$ref": "../../../components/responses/partDefinitionPage.json",
+      "links": {
+        "partDefinition": {
+          "operationId": "fetchPartDefinitionById",
+          "description": "Load details for a partDefinition in the response",
+          "parameters": {
+            "partDefinition_id": "$response._embedded.nter:partDefinitions[*].partDefinition_id"
+          }
+        }
+      }
+    },
+    "401": {
+      "description": "Authorization invalid",
+      "$ref": "../../../components/responses/unauthorized.json"
+    },
+    "403": {
+      "description": "You are not allowed to fetch all the part definitions",
+      "$ref": "../../../components/responses/forbidden.json"
+    }
+  }
+}

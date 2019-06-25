@@ -1,0 +1,93 @@
+{
+  "description": "Defines the properties for a part unit",
+  "properties": {
+    "part_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "The identifier for the definition",
+      "example": "ec5db56d-32e6-4e5d-9bef-1016f3e13670",
+      "readOnly": true,
+      "pattern": "[0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}"
+    },
+    "tenant_part_number": {
+      "type": "string",
+      "description": "Identifier set by the tenant",
+      "example": "AX-44333"
+    },
+    "label": {
+      "type": "string",
+      "description": "Custom label for the part (defaults to manufacturer label)",
+      "example": "Building 23 Security terminal"
+    },
+    "slug": {
+      "type": "string",
+      "format": "slug",
+      "description": "Slug for the part unit based on the label",
+      "example": "apple-inc",
+      "readOnly": true,
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "manufacturer": {
+      "type": "object",
+      "description": "Manufacturer for the part",
+      "properties": {
+        "manufacturer_part_id": {
+          "type": "string",
+          "description": "Part number from the manufacturer",
+          "example": "910-004842"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./manufacturer.json"
+        }
+      ]
+    },
+    "vendor": {
+      "type": "object",
+      "description": "Vendor whom sold the part",
+      "properties": {
+        "vendor_part_number": {
+          "type": "string",
+          "description": "Part number from the vendor",
+          "example": "FBA_KM-P3"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./vendor.json"
+        }
+      ]
+    },
+    "part_definition": {
+      "type": "object",
+      "description": "The part definition which describes this part",
+      "allOf": [
+        {
+          "$ref": "./partDefinition.json"
+        }
+      ]
+    },
+    "customer": {
+      "type": "object",
+      "description": "The customer this definition is for",
+      "allOf": [
+        {
+          "$ref": "./customer.json"
+        }
+      ]
+    },
+    "input_filter": {
+      "type": "array",
+      "description": "Input filter use to create this part unit",
+      "items": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "./inputFilterSpecification.json"
+          }
+        ]
+      }
+    }
+  }
+}

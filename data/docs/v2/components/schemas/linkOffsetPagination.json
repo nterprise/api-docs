@@ -1,6 +1,5 @@
 {
   "type": "object",
-  "title": "Pagination Offset Link",
   "properties": {
     "_links": {
       "type": "object",

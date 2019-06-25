@@ -3,6 +3,9 @@
   "content": {
     "application/json": {
       "schema": {
+        "required": [
+          "name"
+        ],
         "$ref": "../../components/schemas/customer.json"
       }
     }

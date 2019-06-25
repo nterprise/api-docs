@@ -1,0 +1,32 @@
+{
+  "operationId": "updatePart",
+  "summary": "Updates a part definition",
+  "description": "Updates a part definition",
+  "tags": [
+    "Part"
+  ],
+  "requestBody": {
+    "$ref": "../../../components/requestBodies/part.json"
+  },
+  "parameters": [
+    {"$ref": "../../../components/parameters/partId.json"}
+  ],
+  "responses": {
+    "200": {
+      "description": "Updated part definition",
+      "$ref": "../../../components/responses/part.json"
+    },
+    "400": {
+      "description": "Invalid part definition passed",
+      "$ref": "../../../components/responses/badRequest.json"
+    },
+    "403": {
+      "description": "You are not allowed to update this part definition",
+      "$ref": "../../../components/responses/forbidden.json"
+    },
+    "409": {
+      "description": "Part definition conflicts with another part definition",
+      "$ref": "../../../components/responses/conflict.json"
+    }
+  }
+}

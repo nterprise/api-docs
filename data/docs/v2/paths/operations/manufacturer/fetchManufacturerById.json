@@ -1,0 +1,29 @@
+{
+  "operationId": "fetchManufacturerById",
+  "summary": "Fetches a manufacturer by Id",
+  "description": "Fetch Manufacturer",
+  "tags": [
+    "Manufacturer"
+  ],
+  "parameters": [
+    {"$ref": "../../../components/parameters/manufacturerId.json"}
+  ],
+  "responses": {
+    "200": {
+      "description": "Manufacturer",
+      "$ref": "../../../components/responses/manufacturer.json"
+    },
+    "401": {
+      "description": "You authorization is invalid",
+      "$ref": "../../../components/responses/unauthorized.json"
+    },
+    "403": {
+      "description": "Access to this manufacturer is forbidden",
+      "$ref": "../../../components/responses/forbidden.json"
+    },
+    "404": {
+      "description": "Manufacturer not found",
+      "$ref": "../../../components/responses/notFound.json"
+    }
+  }
+}

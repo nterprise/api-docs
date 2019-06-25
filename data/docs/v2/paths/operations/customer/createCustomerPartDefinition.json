@@ -1,0 +1,40 @@
+{
+  "operationId": "createCustomerPartDefinition",
+  "summary": "Creates a partDefinition for a customer",
+  "description": "Creates a new part definition for the customer",
+  "tags": [
+    "Customer"
+  ],
+  "parameters": [
+    {"$ref": "../../../components/parameters/customerId.json"}
+  ],
+  "requestBody": {
+    "$ref": "../../../components/requestBodies/partDefinition.json"
+  },
+  "responses": {
+    "200": {
+      "description": "Created partDefinition",
+      "$ref": "../../../components/responses/partDefinition.json"
+    },
+    "400": {
+      "description": "Invalid partDefinition",
+      "$ref": "../../../components/responses/badRequest.json"
+    },
+    "401": {
+      "description": "Authorization invalid",
+      "$ref": "../../../components/responses/unauthorized.json"
+    },
+    "403": {
+      "description": "Creating partDefinitions is forbidden",
+      "$ref": "../../../components/responses/forbidden.json"
+    },
+    "404": {
+      "description": "Customer is not found",
+      "$ref": "../../../components/responses/notFound.json"
+    },
+    "409": {
+      "description": "PartDefinition conflicts with another partDefinition",
+      "$ref": "../../../components/responses/conflict.json"
+    }
+  }
+}

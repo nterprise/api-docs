@@ -1,0 +1,8 @@
+{
+  "get": {
+    "$ref": "../operations/customer/fetchAllCustomerPartDefinitions.json"
+  },
+  "post": {
+    "$ref": "../operations/customer/createCustomerPartDefinition.json"
+  }
+}

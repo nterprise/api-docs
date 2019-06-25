@@ -1,0 +1,28 @@
+{
+  "operationId": "deletePartDefinition",
+  "summary": "Deletes a part definition",
+  "description": "This will remove the part definition from the system",
+  "tags": [
+    "Part Definition"
+  ],
+  "parameters": [
+    {"$ref": "../../../components/parameters/partDefinitionId.json"}
+  ],
+  "responses": {
+    "205": {
+      "description": "Part definition deleted"
+    },
+    "401": {
+      "description": "Authorization invalid",
+      "$ref": "../../../components/responses/unauthorized.json"
+    },
+    "403": {
+      "description": "User is not allowed to delete this part definition",
+      "$ref": "../../../components/responses/forbidden.json"
+    },
+    "404": {
+      "description": "PartDefinition not found",
+      "$ref": "../../../components/responses/notFound.json"
+    }
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "description": "Paged Part Definition response",
+  "content": {
+    "application/hal+json": {
+      "schema": {
+        "properties": {
+          "_embedded": {
+            "type": "object",
+            "properties": {
+              "nter:part-definitions": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+
+                  "allOf": [
+                    {
+                      "$ref": "../schemas/partDefinition.json"
+                    },
+                    {
+                      "$ref": "../schemas/linkSelf.json"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "_links": {
+            "type": "object",
+            "properties": {
+              "next": {
+                "type": "object",
+                "properties": {
+                  "href": {
+                    "type": "string",
+                    "example": "https://api.nterprise.com/part-definitions?limit=50&offset=363yHhUhhI"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "../schemas/paginationOffset.json"
+          },
+          {
+            "$ref": "../schemas/linkSelf.json"
+          }
+        ]
+      }
+    }
+  }
+}

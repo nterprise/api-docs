@@ -18,7 +18,6 @@
           "enum": [
             "api",
             "api.dev",
-            "api.staging"
           ]
         }
       }
@@ -35,10 +34,43 @@
       "$ref": "./paths/dashboard.json"
     },
     "/customers": {
-      "$ref": "./paths/customers.json"
+      "$ref": "./paths/customer/customers.json"
     },
     "/customers/:customer_id": {
-      "$ref": "./paths/customer.json"
+      "$ref": "./paths/customer/customer.json"
+    },
+    "/customers/:customer_id/contacts": {
+      "$ref": "./paths/customer/contacts.json"
+    },
+    "/customers/:customer_id/contacts/:contact_id": {
+      "$ref": "./paths/customer/contact.json"
+    },
+    "/customers/:customer_id/part-definitions": {
+      "$ref": "./paths/customer/partDefinitions.json"
+    },
+    "/part-definitions": {
+      "$ref": "./paths/partDefinitions.json"
+    },
+    "/part-definitions/:part_definition_id": {
+      "$ref": "./paths/partDefinition.json"
+    },
+    "/manufacturers": {
+      "$ref": "./paths/manufacturers.json"
+    },
+    "/manufacturers/:manufacturer_id": {
+      "$ref": "./paths/manufacturer.json"
+    },
+    "/vendors": {
+      "$ref": "./paths/vendors.json"
+    },
+    "/vendors/:vendor_id": {
+      "$ref": "./paths/vendor.json"
+    },
+    "/parts": {
+      "$ref": "./paths/parts.json"
+    },
+    "/parts/:part_id": {
+      "$ref": "./paths/part.json"
     }
   },
   "security": [
@@ -77,8 +109,20 @@
       "Customer": {
         "$ref": "./components/schemas/customer.json"
       },
+      "Contact": {
+        "$ref": "./components/schemas/contact.json"
+      },
       "Dashboard": {
         "$ref": "./components/schemas/dashboard.json"
+      },
+      "Part Definition": {
+        "$ref": "./components/schemas/partDefinition.json"
+      },
+      "Manufacturer": {
+        "$ref": "./components/schemas/manufacturer.json"
+      },
+      "Vendor": {
+        "$ref": "./components/schemas/vendor.json"
       }
     }
   }

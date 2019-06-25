@@ -1,0 +1,31 @@
+{
+  "operationId": "fetchContactById",
+  "summary": "Fetches a contact by the contact Id",
+  "description": "Fetch Contact",
+  "tags": [
+    "Contact"
+  ],
+  "parameters": [
+    {
+      "$ref": "../../../components/parameters/contactId.json"
+    }
+  ],
+  "responses": {
+    "200": {
+      "description": "Contacts",
+      "$ref": "../../../components/responses/contact.json"
+    },
+    "401": {
+      "description": "Unauthorized to access contact",
+      "$ref": "../../../components/responses/unauthorized.json"
+    },
+    "403": {
+      "description": "Contact is forbidden",
+      "$ref": "../../../components/responses/forbidden.json"
+    },
+    "404": {
+      "description": "Contact not found",
+      "$ref": "../../../components/responses/notFound.json"
+    }
+  }
+}
