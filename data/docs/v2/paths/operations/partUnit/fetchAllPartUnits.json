@@ -1,0 +1,99 @@
+{
+  "operationId": "fetchAllPartUnits",
+  "summary": "Fetches A Page of part units",
+  "description": "Fetch Part Unit",
+  "tags": [
+    "Part Unit"
+  ],
+  "parameters": [
+    {"$ref": "../../../components/parameters/limit.json"},
+    {"$ref": "../../../components/parameters/offset.json"},
+    {
+      "schema": {
+        "enum": [
+          "label",
+          "-label",
+          "manufacturer",
+          "-manufacturer",
+          "part_unit_number",
+          "-part_unit_number",
+          "vendor",
+          "-vendor",
+          "customer",
+          "-customer"
+        ]
+      },
+      "$ref": "../../../components/parameters/sort.json"
+    },
+    {
+      "name": "filter",
+      "in": "query",
+      "description": "Filter results",
+      "style": "deepObject",
+      "explode": true,
+      "schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "part_number": {
+            "type": "string",
+            "description": "Finds a part units which have a part number like this value",
+            "example": "THX-1138"
+          },
+          "manufacturer_id": {
+            "type": "string",
+            "description": "Filters part units for this manufacturer_id",
+            "example": "763b454b-1a9b-47e7-9166-0fae9c0166fc"
+          },
+          "manufacturer_part_number": {
+            "type": "string",
+            "description": "Filters part units which are like this manufacturer part number",
+            "example": "763b454b-1a9b-47e7-9166-0fae9c0166fc"
+          },
+          "tenant_part_number": {
+            "type": "string",
+            "description": "Filters part units which are like this part number from the tenant",
+            "example": "763b454b-1a9b-47e7-9166-0fae9c0166fc"
+          },
+          "customer_id": {
+            "type": "string",
+            "description": "Filters part units for this customer",
+            "example": "32e91e84-2b51-4c90-b4c1-522bedc6f01d"
+          },
+          "label": {
+            "type": "string",
+            "description": "Filters part which are like this name",
+            "example": "32e91e84-2b51-4c90-b4c1-522bedc6f01d"
+          },
+          "part_id": {
+            "type": "string",
+            "description": "Filters part units which use this part_id",
+            "example": "32e91e84-2b51-4c90-b4c1-522bedc6f01d"
+          }
+        }
+      }
+    }
+  ],
+  "responses": {
+    "200": {
+      "$ref": "../../../components/responses/partUnitPage.json",
+      "links": {
+        "partUnit": {
+          "operationId": "fetchPartUnitById",
+          "description": "Load details for a partUnit in the response",
+          "parameters": {
+            "partUnit_id": "$response._embedded.nter:partUnits[*].partUnit_id"
+          }
+        }
+      }
+    },
+    "401": {
+      "description": "Authorization invalid",
+      "$ref": "../../../components/responses/unauthorized.json"
+    },
+    "403": {
+      "description": "You are not allowed to fetch all the partUnit definitions",
+      "$ref": "../../../components/responses/forbidden.json"
+    }
+  }
+}

@@ -1,20 +1,56 @@
 {
   "operationId": "createPart",
-  "summary": "Creates a part definition",
-  "description": "Creates a new part",
+  "summary": "Creates a part ",
+  "description": "Creates a new part  following the part  schema",
   "tags": [
     "Part"
   ],
   "requestBody": {
-    "$ref": "../../../components/requestBodies/part.json"
+    "content": {
+      "application/json": {
+        "schema": {
+          "type": "object",
+          "required": [
+            "customer_id",
+            "part_number",
+            "label",
+            "manufacturer_id"
+          ],
+          "properties": {
+            "customer_id": {
+              "readOnly": false,
+              "$ref": "../../../components/schemas/customer.json#/properties/customer_id"
+            },
+            "manufacturer": {
+              "type": "object",
+              "properties": {
+                "manufacturer_part_number": {
+                  "$ref": "../../../components/schemas/part.json#/properties/manufacturer/properties/part_number"
+                },
+                "manufacturer_id": {
+                  "readOnly": false,
+                  "$ref": "../../../components/schemas/manufacturer.json#/properties/manufacturer_id"
+                }
+              }
+            },
+            "label": {
+              "$ref": "../../../components/schemas/part.json#/properties/label"
+            },
+            "input_filter": {
+              "$ref": "../../../components/schemas/part.json#/properties/input_filter"
+            }
+          }
+        }
+      }
+    }
   },
   "responses": {
     "200": {
-      "description": "The created part definition",
+      "description": "The created part ",
       "$ref": "../../../components/responses/part.json"
     },
     "400": {
-      "description": "Invalid part definition supplied in request",
+      "description": "Invalid part  supplied in request",
       "$ref": "../../../components/responses/badRequest.json"
     },
     "401": {
@@ -22,11 +58,11 @@
       "$ref": "../../../components/responses/unauthorized.json"
     },
     "403": {
-      "description": "You are not allowed to create a part definitions",
+      "description": "You are not allowed to create a part s",
       "$ref": "../../../components/responses/forbidden.json"
     },
     "409": {
-      "description": "Part definition conflicts with another part definition",
+      "description": "Part  conflicts with another part ",
       "$ref": "../../../components/responses/conflict.json"
     }
   }

@@ -1,7 +1,7 @@
 {
   "description": "Manufacturer response",
   "content": {
-    "application/hal+json": {
+    "application/vnd.nterprise.collection.manufacturers.v2+json": {
       "schema": {
         "allOf": [
           {

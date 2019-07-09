@@ -1,7 +1,7 @@
 {
   "description": "Vendor response",
   "content": {
-    "application/hal+json": {
+    "application/vnd.nterprise.vendors.v2+json": {
       "schema": {
         "allOf": [
           {

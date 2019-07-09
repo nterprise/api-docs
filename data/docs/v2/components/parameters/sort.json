@@ -3,6 +3,6 @@
   "in": "query",
   "description": "Sort entity on field",
   "schema": {
-    "type": "enum"
+    "type": "string"
   }
 }

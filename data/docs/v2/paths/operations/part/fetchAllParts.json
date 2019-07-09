@@ -10,6 +10,7 @@
     {"$ref": "../../../components/parameters/offset.json"},
     {
       "schema": {
+        "type": "string",
         "enum": [
           "label",
           "-label",
@@ -28,9 +29,10 @@
       "in": "query",
       "description": "Filter results",
       "style": "deepObject",
-      "explode": true,
+      "explode": false,
       "schema": {
         "type": "object",
+        "additionalProperties": false,
         "properties": {
           "part_number": {
             "type": "string",
@@ -69,7 +71,7 @@
       "$ref": "../../../components/responses/unauthorized.json"
     },
     "403": {
-      "description": "You are not allowed to fetch all the part definitions",
+      "description": "You are not allowed to fetch all the part s",
       "$ref": "../../../components/responses/forbidden.json"
     }
   }

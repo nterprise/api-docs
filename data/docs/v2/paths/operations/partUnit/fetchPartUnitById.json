@@ -1,0 +1,29 @@
+{
+  "operationId": "fetchPartUnitById",
+  "summary": "Fetches a part unit unit by Id",
+  "description": "Fetch PartUnit Unit",
+  "tags": [
+    "Part Unit"
+  ],
+  "parameters": [
+    {"$ref": "../../../components/parameters/partUnitId.json"}
+  ],
+  "responses": {
+    "200": {
+      "description": "Part Unit",
+      "$ref": "../../../components/responses/partUnit.json"
+    },
+    "401": {
+      "description": "You authorization is invalid",
+      "$ref": "../../../components/responses/unauthorized.json"
+    },
+    "403": {
+      "description": "Access to this part unit is forbidden",
+      "$ref": "../../../components/responses/forbidden.json"
+    },
+    "404": {
+      "description": "Part unit not found",
+      "$ref": "../../../components/responses/notFound.json"
+    }
+  }
+}

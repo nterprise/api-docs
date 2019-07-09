@@ -1,0 +1,8 @@
+{
+  "get": {
+    "$ref": "./operations/partUnit/fetchAllPartUnits.json"
+  },
+  "post": {
+    "$ref": "./operations/partUnit/createPartUnit.json"
+  }
+}

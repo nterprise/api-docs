@@ -1,0 +1,37 @@
+{
+  "description": "The part unit to create",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "required": [
+          "part_id"
+        ],
+        "properties": {
+          "part_id": {
+            "$ref": "../../components/schemas/part.json#/properties/part_id"
+          },
+          "customer_id": {
+            "$ref": "../../components/schemas/customer.json#/properties/customer_id"
+          },
+          "label": {
+            "$ref": "../../components/schemas/partUnit.json#/properties/label"
+          },
+          "manufacturer_id": {
+            "readOnly": false,
+            "description": "Id for the partUnits manufacturer",
+            "$ref": "../../components/schemas/manufacturer.json#/properties/manufacturer_id"
+          },
+          "vendor_id": {
+            "readOnly": false,
+            "description": "Id for the partUnits manufacturer",
+            "$ref": "../../components/schemas/manufacturer.json#/properties/manufacturer_id"
+          },
+          "input_filter": {
+            "$ref": "../../components/schemas/partUnit.json#/properties/input_filter"
+          }
+        }
+      }
+    }
+  }
+}

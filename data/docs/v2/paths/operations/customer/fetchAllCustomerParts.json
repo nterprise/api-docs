@@ -1,7 +1,7 @@
 {
-  "operationId": "fetchAllCustomerPartDefinitions",
-  "summary": "Fetches A Page of part definitions for the customer",
-  "description": "Fetch customer partDefinitions",
+  "operationId": "fetchAllCustomerParts",
+  "summary": "Fetches A Page of parts for the customer",
+  "description": "Fetch customer parts",
   "tags": [
     "Customer"
   ],

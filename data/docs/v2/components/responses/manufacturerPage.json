@@ -1,7 +1,7 @@
 {
   "description": "Paged manufacturer response",
   "content": {
-    "application/ha+json": {
+    "application/vnd.nterprise.manufacturers.v2+json": {
       "schema": {
         "properties": {
           "_embedded": {

@@ -1,7 +1,7 @@
 {
   "description": "Dashboard Response",
   "content": {
-    "application/hal+json": {
+    "application/vnd.nterprise.dashboard.v2+json": {
       "schema": {
         "allOf": [
           {

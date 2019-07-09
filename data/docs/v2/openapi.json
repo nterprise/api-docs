@@ -45,14 +45,14 @@
     "/customers/:customer_id/contacts/:contact_id": {
       "$ref": "./paths/customer/contact.json"
     },
-    "/customers/:customer_id/part-definitions": {
-      "$ref": "./paths/customer/partDefinitions.json"
+    "/customers/:customer_id/parts": {
+      "$ref": "./paths/customer/parts.json"
     },
-    "/part-definitions": {
-      "$ref": "./paths/partDefinitions.json"
+    "/parts": {
+      "$ref": "./paths/parts.json"
     },
-    "/part-definitions/:part_definition_id": {
-      "$ref": "./paths/partDefinition.json"
+    "/parts/:part_id": {
+      "$ref": "./paths/part.json"
     },
     "/manufacturers": {
       "$ref": "./paths/manufacturers.json"
@@ -66,11 +66,11 @@
     "/vendors/:vendor_id": {
       "$ref": "./paths/vendor.json"
     },
-    "/parts": {
-      "$ref": "./paths/parts.json"
+    "/part-units": {
+      "$ref": "./paths/partUnits.json"
     },
-    "/parts/:part_id": {
-      "$ref": "./paths/part.json"
+    "/part-units/:part_unit_id": {
+      "$ref": "./paths/partUnit.json"
     }
   },
   "security": [
@@ -115,8 +115,11 @@
       "Dashboard": {
         "$ref": "./components/schemas/dashboard.json"
       },
-      "Part Definition": {
-        "$ref": "./components/schemas/partDefinition.json"
+      "Part Unit": {
+        "$ref": "./components/schemas/partUnit.json"
+      },
+      "Part": {
+        "$ref": "./components/schemas/part.json"
       },
       "Manufacturer": {
         "$ref": "./components/schemas/manufacturer.json"

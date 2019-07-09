@@ -1,20 +1,19 @@
 {
-  "description": "Paged Part Definition response",
+  "description": "A paged part unit Definition response",
   "content": {
-    "application/hal+json": {
+    "application/vnd.nterprise.collection.part-units.v2+json": {
       "schema": {
         "properties": {
           "_embedded": {
             "type": "object",
             "properties": {
-              "nter:part-definitions": {
+              "nter:part-units": {
                 "type": "array",
                 "items": {
                   "type": "object",
-
                   "allOf": [
                     {
-                      "$ref": "../schemas/partDefinition.json"
+                      "$ref": "../schemas/partUnit.json"
                     },
                     {
                       "$ref": "../schemas/linkSelf.json"
@@ -32,7 +31,7 @@
                 "properties": {
                   "href": {
                     "type": "string",
-                    "example": "https://api.nterprise.com/part-definitions?limit=50&offset=363yHhUhhI"
+                    "example": "https://api.nterprise.com/partUnit-definitions?limit=50&offset=VGhlIGZ1dGlsaXR5IG9mIHZpZXdpbmcgc2lubmVycyBpcyBwaWN0b3JpYWwu"
                   }
                 }
               }

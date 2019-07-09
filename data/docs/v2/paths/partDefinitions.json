@@ -1,8 +1,0 @@
-{
-  "get": {
-    "$ref": "./operations/partDefinition/fetchAllPartDefinitions.json"
-  },
-  "post": {
-    "$ref": "./operations/partDefinition/createPartDefinition.json"
-  }
-}

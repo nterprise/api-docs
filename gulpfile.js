@@ -74,7 +74,6 @@ const build = (cb) => {
         });
 };
 
-
 const serve = (done) => {
     const stream = nodemon({
         script: 'bin/www',
@@ -95,6 +94,7 @@ const serve = (done) => {
 
 exports.lint = lint;
 exports.build = build;
+exports.test = lint;
 exports.serve = series(lint, build, serve);
 
 exports.default = series(lint, build);

@@ -1,16 +1,17 @@
 {
-  "description": "Paged Part Definition response",
+  "description": "Paged part response",
   "content": {
-    "application/hal+json": {
+    "application/vnd.nterprise.collection.parts.v2+json": {
       "schema": {
         "properties": {
           "_embedded": {
             "type": "object",
             "properties": {
-              "nter:part-definitions": {
+              "nter:parts": {
                 "type": "array",
                 "items": {
                   "type": "object",
+
                   "allOf": [
                     {
                       "$ref": "../schemas/part.json"
@@ -31,7 +32,7 @@
                 "properties": {
                   "href": {
                     "type": "string",
-                    "example": "https://api.nterprise.com/part-definitions?limit=50&offset=VGhlIGZ1dGlsaXR5IG9mIHZpZXdpbmcgc2lubmVycyBpcyBwaWN0b3JpYWwu"
+                    "example": "https://api.nterprise.com/parts?limit=50&offset=363yHhUhhI"
                   }
                 }
               }

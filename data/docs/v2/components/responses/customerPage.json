@@ -1,7 +1,7 @@
 {
   "description": "Paged customer response",
   "content": {
-    "application/hal+json": {
+    "application/vnd.nterprise.collection.customers.v2+json": {
       "schema": {
         "properties": {
           "_embedded": {

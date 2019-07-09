@@ -1,5 +1,5 @@
 {
-  "description": "The part definition to create",
+  "description": "The part to create",
   "content": {
     "application/json": {
       "schema": {
@@ -10,12 +10,6 @@
           "manufacturer_id"
         ],
         "properties": {
-          "part_definition_id": {
-            "$ref": "../../components/schemas/partDefinition.json#/properties/part_definition_id"
-          },
-          "customer_id": {
-            "$ref": "../../components/schemas/customer.json#/properties/customer_id"
-          },
           "label": {
             "$ref": "../../components/schemas/part.json#/properties/label"
           },

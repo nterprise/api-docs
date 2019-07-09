@@ -1,7 +1,7 @@
 {
   "description": "Customer response",
   "content": {
-    "application/hal+json": {
+    "application/vnd.nterprise.customers.v2+json": {
       "schema": {
         "type": "object",
         "properties": {

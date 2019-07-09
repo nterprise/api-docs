@@ -1,7 +1,7 @@
 {
   "operationId": "fetchPartById",
-  "summary": "Fetches a part definition by Id",
-  "description": "Fetch Part Definition",
+  "summary": "Fetches a part  by Id",
+  "description": "Fetch Part ",
   "tags": [
     "Part"
   ],
@@ -10,7 +10,7 @@
   ],
   "responses": {
     "200": {
-      "description": "Part Definition",
+      "description": "Part ",
       "$ref": "../../../components/responses/part.json"
     },
     "401": {
@@ -18,11 +18,11 @@
       "$ref": "../../../components/responses/unauthorized.json"
     },
     "403": {
-      "description": "Access to this part definition is forbidden",
+      "description": "Access to this part  is forbidden",
       "$ref": "../../../components/responses/forbidden.json"
     },
     "404": {
-      "description": "Part definition not found",
+      "description": "Part  not found",
       "$ref": "../../../components/responses/notFound.json"
     }
   }

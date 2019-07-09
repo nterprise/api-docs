@@ -1,7 +1,7 @@
 {
   "description": "Contact response",
   "content": {
-    "application/hal+json": {
+    "application/vnd.nterprise.contacts.v2+json": {
       "schema": {
         "type": "object",
         "allOf": [

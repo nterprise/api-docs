@@ -1,0 +1,28 @@
+{
+  "operationId": "updatePartUnit",
+  "summary": "Updates a part unit",
+  "description": "Updates a part unit",
+  "tags": [
+    "Part Unit"
+  ],
+  "requestBody": {
+    "$ref": "../../../components/requestBodies/partUnit.json"
+  },
+  "parameters": [
+    {"$ref": "../../../components/parameters/partUnitId.json"}
+  ],
+  "responses": {
+    "200": {
+      "description": "Updated part unit",
+      "$ref": "../../../components/responses/partUnit.json"
+    },
+    "400": {
+      "description": "Invalid part unit",
+      "$ref": "../../../components/responses/badRequest.json"
+    },
+    "403": {
+      "description": "You are not allowed to update this part unit",
+      "$ref": "../../../components/responses/forbidden.json"
+    }
+  }
+}
