@@ -1,0 +1,70 @@
+{
+  "description": "Paged contact response",
+  "content": {
+    "application/vnd.nterprise.collection.contacts.v2+json": {
+      "schema": {
+        "properties": {
+          "_embedded": {
+            "type": "object",
+            "properties": {
+              "nter:contacts": {
+                "type": "array",
+                "maxItems": 10,
+                "items": {
+                  "type": "object",
+                  "allOf": [
+                    {
+                      "$ref": "../schemas/contact.json"
+                    },
+                    {
+                      "$ref": "../schemas/linkSelf.json"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "_links": {
+            "type": "object",
+            "properties": {
+              "next": {
+                "type": "object",
+                "properties": {
+                  "href": {
+                    "type": "string",
+                    "example": "https://api.nterprise.com/contacts?limit=50&offset=363yHhUhhI"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "../schemas/paginationOffset.json"
+          },
+          {
+            "properties": {
+              "_links": {
+                "properties": {
+                  "self": {
+                    "properties": {
+                      "href":{
+                        "example": "https://api.nterprise.com/contacts"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "allOf": [
+              {
+                "$ref": "../schemas/linkSelf.json"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

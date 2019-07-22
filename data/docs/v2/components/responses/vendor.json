@@ -1,0 +1,30 @@
+{
+  "description": "Vendor response",
+  "content": {
+    "application/vnd.nterprise.vendors.v2+json": {
+      "schema": {
+        "allOf": [
+          {
+            "$ref": "../schemas/vendor.json"
+          },
+          {
+            "properties": {
+              "_links": {
+                "properties": {
+                  "self": {
+                    "example": "https://api.nterprise.com/vendors/e530652e-28e8-4f64-84af-e1cf0ff7c805"
+                  }
+                }
+              }
+            },
+            "allOf": [
+              {
+                "$ref": "../schemas/linkSelf.json"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

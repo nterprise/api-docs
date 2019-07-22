@@ -1,0 +1,10 @@
+{
+  "description": "The manufacturer to create",
+  "content": {
+    "application/json": {
+      "schema": {
+        "$ref": "../../components/schemas/manufacturer.json"
+      }
+    }
+  }
+}

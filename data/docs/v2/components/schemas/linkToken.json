@@ -1,6 +1,5 @@
 {
   "type": "object",
-  "title": "Token Link",
   "properties": {
     "_links": {
       "type": "object",

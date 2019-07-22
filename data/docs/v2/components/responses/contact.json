@@ -1,0 +1,15 @@
+{
+  "description": "Contact response",
+  "content": {
+    "application/vnd.nterprise.contacts.v2+json": {
+      "schema": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "../schemas/contact.json"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "operationId": "createVendor",
+  "summary": "Creates a vendor",
+  "description": "Creates a new vendor",
+  "tags": [
+    "Vendor"
+  ],
+  "requestBody": {
+    "$ref": "../../../components/requestBodies/vendor.json"
+  },
+  "responses": {
+    "200": {
+      "description": "The created vendor",
+      "$ref": "../../../components/responses/vendor.json"
+    },
+    "400": {
+      "description": "Invalid vendor supplied in request",
+      "$ref": "../../../components/responses/badRequest.json"
+    },
+    "401": {
+      "description": "Authorization invalid",
+      "$ref": "../../../components/responses/unauthorized.json"
+    },
+    "403": {
+      "description": "You are not allowed to create a vendors",
+      "$ref": "../../../components/responses/forbidden.json"
+    },
+    "409": {
+      "description": "Vendor conflicts with another vendor",
+      "$ref": "../../../components/responses/conflict.json"
+    }
+  }
+}

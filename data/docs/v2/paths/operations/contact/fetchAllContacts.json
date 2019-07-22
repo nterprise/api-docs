@@ -1,0 +1,40 @@
+{
+  "operationId": "fetchAllContacts",
+  "summary": "Fetches A Page of contacts",
+  "description": "Fetch Contact",
+  "tags": [
+    "Contact"
+  ],
+  "parameters": [
+    {"$ref": "../../../components/parameters/limit.json"},
+    {"$ref": "../../../components/parameters/offset.json"},
+    {
+      "schema": {
+        "enum": ["name","-name"]
+      },
+      "$ref": "../../../components/parameters/sort.json"
+    }
+  ],
+  "responses": {
+    "200": {
+      "$ref": "../../../components/responses/contactPage.json",
+      "links": {
+        "contact": {
+          "operationId": "fetchContactById",
+          "description": "Load details for a contact in the response",
+          "parameters": {
+            "contact_id": "$response._embedded.nter:contacts[*].contact_id"
+          }
+        }
+      }
+    },
+    "401": {
+      "description": "Authorization invalid",
+      "$ref": "../../../components/responses/unauthorized.json"
+    },
+    "403": {
+      "description": "You are not allowed to fetch contacts",
+      "$ref": "../../../components/responses/forbidden.json"
+    }
+  }
+}

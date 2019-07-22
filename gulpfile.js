@@ -14,7 +14,7 @@ const folders = {
     docs: 'data/docs/',
     package: 'data/build/nodejs',
     temp_dir: 'data/tmp/',
-}
+};
 
 const lint = (cb) => {
     const files = glob.sync(`${folders.docs}**/*/openapi.json`);
@@ -34,14 +34,14 @@ const lint = (cb) => {
                         resolve();
                     }
                 );
-            }))
+            }));
         })
     ).
         then(() => cb()).
-        catch(err => {
+        catch((err) => {
             cb(err);
         });
-}
+};
 
 const build = (cb) => {
     const files = glob.sync(`${folders.docs}**/*/openapi.json`);
@@ -65,26 +65,26 @@ const build = (cb) => {
                         resolve();
                     }
                 );
-            }))
+            }));
         })
     ).
         then(() => cb()).
-        catch(err => {
+        catch((err) => {
             cb(err);
         });
-}
-
+};
 
 const serve = (done) => {
     const stream = nodemon({
         script: 'bin/www',
         watch: folders.docs,
         ext: 'html js json',
-        done: done
-    })
+        done: done,
+    });
 
     stream.on('restart', () => {
-        console.log('restarted!')
+        console.log('restarted!');
+        lint(() => {});
         build(() => {});
     }).on('crash', () => {
         console.error('Application has crashed!\n')
@@ -94,6 +94,7 @@ const serve = (done) => {
 
 exports.lint = lint;
 exports.build = build;
+exports.test = lint;
 exports.serve = series(lint, build, serve);
 
 exports.default = series(lint, build);

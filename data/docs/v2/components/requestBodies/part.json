@@ -1,0 +1,28 @@
+{
+  "description": "The part to create",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "required": [
+          "part_number",
+          "label",
+          "manufacturer_id"
+        ],
+        "properties": {
+          "label": {
+            "$ref": "../../components/schemas/part.json#/properties/label"
+          },
+          "manufacturer_id": {
+            "readOnly": false,
+            "description": "Id for the parts manufacturer",
+            "$ref": "../../components/schemas/manufacturer.json#/properties/manufacturer_id"
+          },
+          "input_filter": {
+            "$ref": "../../components/schemas/part.json#/properties/input_filter"
+          }
+        }
+      }
+    }
+  }
+}

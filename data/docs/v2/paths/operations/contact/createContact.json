@@ -1,0 +1,33 @@
+{
+  "operationId": "createContact",
+  "summary": "Creates a contact",
+  "description": "Creates a new contact following the contact schema",
+  "tags": [
+    "Contact"
+  ],
+  "requestBody": {
+    "$ref": "../../../components/requestBodies/contact.json"
+  },
+  "responses": {
+    "200": {
+      "description": "Created contact",
+      "$ref": "../../../components/responses/contact.json"
+    },
+    "400": {
+      "description": "Invalid contact",
+      "$ref": "../../../components/responses/badRequest.json"
+    },
+    "401": {
+      "description": "Authorization invalid",
+      "$ref": "../../../components/responses/unauthorized.json"
+    },
+    "403": {
+      "description": "Creating contacts is forbidden",
+      "$ref": "../../../components/responses/forbidden.json"
+    },
+    "409": {
+      "description": "Contact conflicts with another contact",
+      "$ref": "../../../components/responses/conflict.json"
+    }
+  }
+}

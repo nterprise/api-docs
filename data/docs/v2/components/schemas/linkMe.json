@@ -1,6 +1,5 @@
 {
   "type": "object",
-  "title": "Me Link",
   "properties": {
     "_links": {
       "type": "object",

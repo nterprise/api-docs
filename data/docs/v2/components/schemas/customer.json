@@ -13,6 +13,7 @@
     },
     "slug": {
       "type": "string",
+      "format": "slug",
       "description": "Slug for the customer",
       "example": "zones-inc",
       "readOnly": true,
@@ -22,36 +23,6 @@
       "type": "string",
       "description": "Customer Name",
       "example": "Zones Inc"
-    },
-    "contact": {
-      "type": "object",
-      "description": "Contact Information",
-      "nullable": true,
-      "allOf": [
-        {
-          "$ref": "./contact.json"
-        }
-      ]
-    },
-    "created_by": {
-      "type": "object",
-      "description": "User who created the customer",
-      "readOnly": true,
-      "allOf": [
-        {
-          "$ref": "./user.json"
-        }
-      ]
-    },
-    "sales_relationship": {
-      "type": "object",
-      "description": "Sales contact information",
-      "nullable": true,
-      "allOf": [
-        {
-          "$ref": "./contact.json"
-        }
-      ]
     },
     "external_platform": {
       "type": "object",

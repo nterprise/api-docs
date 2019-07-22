@@ -5,7 +5,6 @@
       "type": "string",
       "description": "Date deleted",
       "format": "date-time",
-      "readOnly": true,
       "nullable": true
     }
   }

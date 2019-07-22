@@ -1,6 +1,5 @@
 {
   "type": "object",
-  "title": "Self Link",
   "properties": {
     "_links": {
       "type": "object",
@@ -8,7 +7,7 @@
       "properties": {
         "self": {
           "type": "object",
-          "description": "Link to the /me endpoint",
+          "description": "Link to the entity",
           "readOnly": true,
           "properties": {
             "href": {

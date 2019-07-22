@@ -5,17 +5,24 @@
   "tags": [
     "Customer"
   ],
+  "parameters": [
+    {"$ref": "../../../components/parameters/customerId.json"}
+  ],
   "responses": {
     "205": {
       "description": "Customer deleted"
     },
     "401": {
+      "description": "Authorization invalid",
+      "$ref": "../../../components/responses/unauthorized.json"
+    },
+    "403": {
       "description": "User is not allowed to delete this customer",
-      "$ref": "../../components/responses/unauthorized.json"
+      "$ref": "../../../components/responses/forbidden.json"
     },
     "404": {
       "description": "Customer not found",
-      "$ref": "../../components/responses/notFound.json"
+      "$ref": "../../../components/responses/notFound.json"
     }
   }
 }

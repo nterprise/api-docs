@@ -6,9 +6,6 @@
     },
     {
       "$ref": "./dateUpdated.json"
-    },
-    {
-      "$ref": "./dateDeleted.json"
     }
   ]
 }

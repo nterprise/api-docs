@@ -1,0 +1,28 @@
+{
+  "operationId": "deleteContact",
+  "summary": "Deletes a contact",
+  "description": "This will remove the contact from the system",
+  "tags": [
+    "Contact"
+  ],
+  "parameters": [
+    {"$ref": "../../../components/parameters/contactId.json"}
+  ],
+  "responses": {
+    "205": {
+      "description": "Contact deleted"
+    },
+    "401": {
+      "description": "Authorization invalid",
+      "$ref": "../../../components/responses/unauthorized.json"
+    },
+    "403": {
+      "description": "User is not allowed to delete this contact",
+      "$ref": "../../../components/responses/forbidden.json"
+    },
+    "404": {
+      "description": "Contact not found",
+      "$ref": "../../../components/responses/notFound.json"
+    }
+  }
+}

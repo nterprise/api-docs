@@ -1,0 +1,10 @@
+{
+  "description": "The vendor to create",
+  "content": {
+    "application/json": {
+      "schema": {
+        "$ref": "../../components/schemas/vendor.json"
+      }
+    }
+  }
+}

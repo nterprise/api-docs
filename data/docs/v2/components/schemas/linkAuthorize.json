@@ -1,6 +1,5 @@
 {
   "type": "object",
-  "title": "Authorize Link",
   "properties": {
     "_links": {
       "type": "object",

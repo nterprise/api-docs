@@ -1,0 +1,11 @@
+{
+  "get": {
+    "$ref": "../operations/customer/fetchCustomerById.json"
+  },
+  "put": {
+    "$ref": "../operations/customer/updateCustomer.json"
+  },
+  "delete": {
+    "$ref": "../operations/customer/deleteCustomer.json"
+  }
+}

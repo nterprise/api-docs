@@ -1,0 +1,45 @@
+{
+  "operationId": "fetchAllCustomerParts",
+  "summary": "Fetches A Page of parts for the customer",
+  "description": "Fetch customer parts",
+  "tags": [
+    "Customer"
+  ],
+  "parameters": [
+    {"$ref": "../../../components/parameters/customerId.json"},
+    {"$ref": "../../../components/parameters/limit.json"},
+    {"$ref": "../../../components/parameters/offset.json"},
+    {
+      "schema": {
+        "enum": ["name","-name"]
+      },
+      "$ref": "../../../components/parameters/sort.json"
+    }
+  ],
+  "responses": {
+    "200": {
+      "$ref": "../../../components/responses/contactPage.json",
+      "links": {
+        "contact": {
+          "operationId": "fetchContactById",
+          "description": "Load details for a contact in the response",
+          "parameters": {
+            "contact_id": "$response._embedded.nter:partDefinitions[*].contact_id"
+          }
+        }
+      }
+    },
+    "401": {
+      "description": "Authorization invalid",
+      "$ref": "../../../components/responses/unauthorized.json"
+    },
+    "404": {
+      "description": "Customer Not found",
+      "$ref": "../../../components/responses/notFound.json"
+    },
+    "403": {
+      "description": "You are not allowed to fetch partDefinitions",
+      "$ref": "../../../components/responses/forbidden.json"
+    }
+  }
+}

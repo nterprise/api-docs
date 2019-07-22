@@ -1,0 +1,40 @@
+{
+  "operationId": "fetchAllCustomers",
+  "summary": "Fetches A Page of customers",
+  "description": "Fetch Customer",
+  "tags": [
+    "Customer"
+  ],
+  "parameters": [
+    {"$ref": "../../../components/parameters/limit.json"},
+    {"$ref": "../../../components/parameters/offset.json"},
+    {
+      "schema": {
+        "enum": ["name","-name"]
+      },
+      "$ref": "../../../components/parameters/sort.json"
+    }
+  ],
+  "responses": {
+    "200": {
+      "$ref": "../../../components/responses/customerPage.json",
+      "links": {
+        "customer": {
+          "operationId": "fetchCustomerById",
+          "description": "Load details for a customer in the response",
+          "parameters": {
+            "customer_id": "$response._embedded.nter:customers[*].customer_id"
+          }
+        }
+      }
+    },
+    "401": {
+      "description": "Authorization invalid",
+      "$ref": "../../../components/responses/unauthorized.json"
+    },
+    "403": {
+      "description": "You are not allowed to fetch customers",
+      "$ref": "../../../components/responses/forbidden.json"
+    }
+  }
+}

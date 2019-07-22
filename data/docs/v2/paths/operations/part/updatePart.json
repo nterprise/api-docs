@@ -1,0 +1,32 @@
+{
+  "operationId": "updatePart",
+  "summary": "Updates a part ",
+  "description": "Updates a part ",
+  "tags": [
+    "Part"
+  ],
+  "requestBody": {
+    "$ref": "../../../components/requestBodies/part.json"
+  },
+  "parameters": [
+    {"$ref": "../../../components/parameters/partId.json"}
+  ],
+  "responses": {
+    "200": {
+      "description": "Updated part ",
+      "$ref": "../../../components/responses/part.json"
+    },
+    "400": {
+      "description": "Invalid part  passed",
+      "$ref": "../../../components/responses/badRequest.json"
+    },
+    "403": {
+      "description": "You are not allowed to update this part ",
+      "$ref": "../../../components/responses/forbidden.json"
+    },
+    "409": {
+      "description": "Part  conflicts with another part ",
+      "$ref": "../../../components/responses/conflict.json"
+    }
+  }
+}
