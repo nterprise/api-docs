@@ -39,29 +39,6 @@
     }
   },
   "components": {
-    "securitySchemes": {
-      "oauth2": {
-        "type": "oauth2",
-        "flows": {
-          "password": {
-            "authorizationUrl": "https://auth{.env}.nterprise.com/oauth/authorize",
-            "tokenUrl": "https://auth{.env}.nterprise.com/oauth/token",
-            "scopes": {
-              "access": "Access the API",
-              "admin": "Access the API",
-            }
-          },
-          "authorizationCode": {
-            "authorizationUrl": "https://auth{.env}.nterprise.com/oauth/authorize",
-            "tokenUrl": "https://auth{.env}.nterprise.com/oauth/token",
-            "scopes": {
-              "access": "Access the API",
-              "admin": "Access the Admin API"
-            }
-          }
-        }
-      }
-    },
     "schemas": {
       "Problem": {
         "$ref": "./components/schemas/error.json"

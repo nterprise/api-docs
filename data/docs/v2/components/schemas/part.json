@@ -23,6 +23,28 @@
       "description": "Label for the part assigned from the manufacturer",
       "example": "iPod touch (32GB) - Blue"
     },
+    "total_workflows": {
+      "type": "number",
+      "description": "Total number of workflows this part belongs too",
+      "example": 42,
+      "readOnly": true
+    },
+    "workflows": {
+      "type": "array",
+      "description": "List of the top five workflows this part belongs too",
+      "readOnly": true,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the workflow",
+            "example": "iPod configuration"
+          }
+        }
+      }
+    },
     "manufacturer": {
       "type": "object",
       "description": "Manufacturer information for the part",
