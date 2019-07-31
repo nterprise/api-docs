@@ -76,8 +76,7 @@
   "security": [
     {
       "oauth2": [
-        "read",
-        "write"
+        "access"
       ]
     }
   ],
@@ -86,7 +85,7 @@
       "oauth2": {
         "type": "oauth2",
         "flows": {
-          "password": {
+          "authorizationCode": {
             "authorizationUrl": "https://auth{.env}.nterprise.com/oauth/authorize",
             "tokenUrl": "https://auth{.env}.nterprise.com/oauth/token",
             "scopes": {
