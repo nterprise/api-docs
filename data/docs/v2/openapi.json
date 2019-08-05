@@ -66,11 +66,11 @@
     "/vendors/:vendor_id": {
       "$ref": "./paths/vendor.json"
     },
-    "/part-units": {
-      "$ref": "./paths/partUnits.json"
+    "/units": {
+      "$ref": "./paths/units.json"
     },
-    "/part-units/:part_unit_id": {
-      "$ref": "./paths/partUnit.json"
+    "/units/:unit_id": {
+      "$ref": "./paths/unit.json"
     }
   },
   "security": [
@@ -114,8 +114,8 @@
       "Dashboard": {
         "$ref": "./components/schemas/dashboard.json"
       },
-      "Part Unit": {
-        "$ref": "./components/schemas/partUnit.json"
+      "Unit": {
+        "$ref": "./components/schemas/unit.json"
       },
       "Part": {
         "$ref": "./components/schemas/part.json"

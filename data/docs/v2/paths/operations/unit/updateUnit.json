@@ -1,20 +1,20 @@
 {
   "operationId": "updatePartUnit",
-  "summary": "Updates a part unit",
-  "description": "Updates a part unit",
+  "summary": "Updates a unit",
+  "description": "Updates a unit",
   "tags": [
-    "Part Unit"
+    "Unit"
   ],
   "requestBody": {
-    "$ref": "../../../components/requestBodies/partUnit.json"
+    "$ref": "../../../components/requestBodies/unit.json"
   },
   "parameters": [
-    {"$ref": "../../../components/parameters/partUnitId.json"}
+    {"$ref": "../../../components/parameters/unitId.json"}
   ],
   "responses": {
     "200": {
       "description": "Updated part unit",
-      "$ref": "../../../components/responses/partUnit.json"
+      "$ref": "../../../components/responses/unit.json"
     },
     "400": {
       "description": "Invalid part unit",

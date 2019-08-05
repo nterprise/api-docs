@@ -1,7 +1,7 @@
 {
   "description": "Defines the properties for a part unit",
   "properties": {
-    "part_unit_id": {
+    "unit_id": {
       "type": "string",
       "format": "uuid",
       "description": "The identifier for the definition",
@@ -26,28 +26,6 @@
       "example": "building-23-security-terminal",
       "readOnly": true,
       "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-    },
-    "total_workflows": {
-      "type": "number",
-      "description": "Total number of workflows this part-unit belongs too",
-      "example": 42,
-      "readOnly": true
-    },
-    "workflows": {
-      "type": "array",
-      "description": "List of the top five workflows this part-unit belongs too",
-      "readOnly": true,
-      "maxItems": 5,
-      "items": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "Name of the workflow",
-            "example": "iPod configuration"
-          }
-        }
-      }
     },
     "manufacturer": {
       "type": "object",

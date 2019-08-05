@@ -1,17 +1,17 @@
 {
-  "operationId": "fetchPartUnitById",
-  "summary": "Fetches a part unit unit by Id",
-  "description": "Fetch PartUnit Unit",
+  "operationId": "fetchUnitById",
+  "summary": "Fetches a unit by Id",
+  "description": "Fetch Unit",
   "tags": [
-    "Part Unit"
+    "Unit"
   ],
   "parameters": [
-    {"$ref": "../../../components/parameters/partUnitId.json"}
+    {"$ref": "../../../components/parameters/unitId.json"}
   ],
   "responses": {
     "200": {
       "description": "Part Unit",
-      "$ref": "../../../components/responses/partUnit.json"
+      "$ref": "../../../components/responses/unit.json"
     },
     "401": {
       "description": "You authorization is invalid",
