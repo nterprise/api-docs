@@ -1,9 +1,9 @@
 {
   "operationId": "fetchAllPartUnits",
-  "summary": "Fetches A Page of part units",
-  "description": "Fetch Part Unit",
+  "summary": "Fetches A Page of units",
+  "description": "Fetch Unit",
   "tags": [
-    "Part Unit"
+    "Unit"
   ],
   "parameters": [
     {"$ref": "../../../components/parameters/limit.json"},
@@ -76,7 +76,7 @@
   ],
   "responses": {
     "200": {
-      "$ref": "../../../components/responses/partUnitPage.json",
+      "$ref": "../../../components/responses/unitPage.json",
       "links": {
         "partUnit": {
           "operationId": "fetchPartUnitById",

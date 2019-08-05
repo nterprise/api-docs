@@ -1,7 +1,7 @@
 {
-  "name": "part_unit_id",
+  "name": "unit_id",
   "in": "path",
-  "description": "Id for the part unit",
+  "description": "Id for the unit",
   "required": true,
   "schema": {
     "type": "string",

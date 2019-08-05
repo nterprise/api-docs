@@ -1,7 +1,7 @@
 {
-  "description": "Part unit response",
+  "description": "Unit response",
   "content": {
-    "application/vnd.nterprise.part-units.v2+json": {
+    "application/vnd.nterprise.units.v2+json": {
       "schema": {
         "properties": {
           "_embedded": {
@@ -10,7 +10,7 @@
               "nter:customers": {
                 "type": "array",
                 "maxItems": 1,
-                "description": "The customer that owns this part unit",
+                "description": "The customer that owns this unit",
                 "items": {
                   "type": "object",
                   "properties": {
@@ -102,7 +102,7 @@
         },
         "allOf": [
           {
-            "$ref": "../schemas/partUnit.json"
+            "$ref": "../schemas/unit.json"
           },
           {
             "properties": {
@@ -112,7 +112,7 @@
                     "type": "object",
                     "properties": {
                       "href": {
-                        "example": "https://api.nterprise.com/part-units/ec5db56d-32e6-4e5d-9bef-1016f3e13670"
+                        "example": "https://api.nterprise.com/units/ec5db56d-32e6-4e5d-9bef-1016f3e13670"
                       }
                     }
                   }

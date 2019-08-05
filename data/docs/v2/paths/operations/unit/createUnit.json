@@ -1,17 +1,17 @@
 {
   "operationId": "createPartUnit",
-  "summary": "Creates a part unit",
-  "description": "Creates a new part unit",
+  "summary": "Creates a unit",
+  "description": "Creates a new unit",
   "tags": [
-    "Part Unit"
+    "Unit"
   ],
   "requestBody": {
-    "$ref": "../../../components/requestBodies/partUnit.json"
+    "$ref": "../../../components/requestBodies/unit.json"
   },
   "responses": {
     "200": {
       "description": "The created part unit",
-      "$ref": "../../../components/responses/partUnit.json"
+      "$ref": "../../../components/responses/unit.json"
     },
     "400": {
       "description": "Invalid part unit supplied in request",

@@ -1,12 +1,12 @@
 {
   "operationId": "deletePartUnit",
-  "summary": "Deletes a part unit",
-  "description": "This will soft delete the part unit",
+  "summary": "Deletes a unit",
+  "description": "This will soft delete the unit",
   "tags": [
-    "Part Unit"
+    "Unit"
   ],
   "parameters": [
-    {"$ref": "../../../components/parameters/partUnitId.json"}
+    {"$ref": "../../../components/parameters/unitId.json"}
   ],
   "responses": {
     "205": {
