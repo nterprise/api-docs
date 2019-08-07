@@ -1,0 +1,44 @@
+{
+  "description": "Defines the properties for a program",
+  "allOf": [
+    {
+      "$ref": "./allDates.json"
+    }
+  ],
+  "properties": {
+    "program_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier",
+      "example": "ec5db56d-32e6-4e5d-9bef-1016f3e13670",
+      "readOnly": true,
+      "pattern": "[0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}"
+    },
+    "customer": {
+      "type": "object",
+      "description": "The customer this program is for",
+      "allOf": [
+        {
+          "$ref": "./customer.json"
+        }
+      ]
+    },
+    "label": {
+      "type": "string",
+      "description": "Label for the program",
+      "example": "Frombulate new manchuck stores"
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Start date for the program",
+      "example": "2019-08-07T18:10:53+00:00"
+    },
+    "end_date": {
+      "type": "string",
+      "format": "date",
+      "description": "End date for the program",
+      "example": "2020-08-07T18:10:53+00:00"
+    }
+  }
+}

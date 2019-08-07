@@ -1,0 +1,29 @@
+{
+  "operationId": "createProgram",
+  "summary": "Creates a program",
+  "description": "Creates a new program",
+  "tags": [
+    "Program"
+  ],
+  "requestBody": {
+    "$ref": "../../../components/requestBodies/createProgram.json"
+  },
+  "responses": {
+    "200": {
+      "description": "The created program",
+      "$ref": "../../../components/responses/program.json"
+    },
+    "400": {
+      "description": "Invalid program supplied in request",
+      "$ref": "../../../components/responses/badRequest.json"
+    },
+    "401": {
+      "description": "Authorization invalid",
+      "$ref": "../../../components/responses/unauthorized.json"
+    },
+    "403": {
+      "description": "You are not allowed to create a program",
+      "$ref": "../../../components/responses/forbidden.json"
+    }
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "description": "Program response",
+  "content": {
+    "application/vnd.nterprise.programs.v2+json": {
+      "schema": {
+        "properties": {
+          "_embedded": {
+            "type": "object",
+            "properties": {
+              "nter:customers": {
+                "type": "array",
+                "maxItems": 1,
+                "description": "The customer that owns this program",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "_links": {
+                      "properties": {
+                        "self": {
+                          "type": "object",
+                          "properties": {
+                            "href": {
+                              "example": "https://api.nterprise.com/customers/e530652e-28e8-4f64-84af-e1cf0ff7c805"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "allOf": [
+                    {
+                      "$ref": "../schemas/customer.json"
+                    },
+                    {
+                      "$ref": "../schemas/linkSelf.json"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "../schemas/program.json"
+          },
+          {
+            "properties": {
+              "_links": {
+                "properties": {
+                  "self": {
+                    "type": "object",
+                    "properties": {
+                      "href": {
+                        "example": "https://api.nterprise.com/programs/ec5db56d-32e6-4e5d-9bef-1016f3e13670"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "allOf": [
+              {
+                "$ref": "../schemas/linkSelf.json"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
