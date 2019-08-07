@@ -1,0 +1,25 @@
+{
+  "description": "The program to update",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "required": [
+          "customer_id",
+          "label"
+        ],
+        "properties": {
+          "label": {
+            "$ref": "../../components/schemas/program.json#/properties/label"
+          },
+          "start_date": {
+            "$ref": "../../components/schemas/program.json#/properties/start_date"
+          },
+          "end_date": {
+            "$ref": "../../components/schemas/program.json#/properties/end_date"
+          }
+        }
+      }
+    }
+  }
+}

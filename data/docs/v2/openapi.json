@@ -71,6 +71,12 @@
     },
     "/units/:unit_id": {
       "$ref": "./paths/unit.json"
+    },
+    "/programs": {
+      "$ref": "./paths/programs.json"
+    },
+    "/programs/:program_id": {
+      "$ref": "./paths/program.json"
     }
   },
   "security": [
@@ -116,6 +122,9 @@
       },
       "Unit": {
         "$ref": "./components/schemas/unit.json"
+      },
+      "Program": {
+        "$ref": "./components/schemas/program.json"
       },
       "Part": {
         "$ref": "./components/schemas/part.json"
