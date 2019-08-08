@@ -7,16 +7,47 @@
         "required": [
           "part_number",
           "label",
-          "manufacturer_id"
+          "manufacturer"
         ],
         "properties": {
           "label": {
             "$ref": "../../components/schemas/part.json#/properties/label"
           },
-          "manufacturer_id": {
-            "readOnly": false,
-            "description": "Id for the parts manufacturer",
-            "$ref": "../../components/schemas/manufacturer.json#/properties/manufacturer_id"
+          "manufacturer": {
+            "type": "object",
+            "required": [
+              "manufacturer_id",
+              "part_number"
+            ],
+            "properties": {
+              "manufacturer_id": {
+                "readOnly": false,
+                "description": "Id for the parts manufacturer",
+                "$ref": "../../components/schemas/manufacturer.json#/properties/manufacturer_id"
+              },
+              "part_number": {
+                "readOnly": false,
+                "$ref": "../../components/schemas/part.json#/properties/manufacturer/properties/part_number"
+              }
+            }
+          },
+          "vendor": {
+            "type": "object",
+            "required": [
+              "vendor_id",
+              "part_number"
+            ],
+            "properties": {
+              "vendor_id": {
+                "readOnly": false,
+                "description": "Id for the parts vendor",
+                "$ref": "../../components/schemas/vendor.json#/properties/vendor_id"
+              },
+              "part_number": {
+                "readOnly": false,
+                "$ref": "../../components/schemas/part.json#/properties/vendor/properties/part_number"
+              }
+            }
           },
           "input_filter": {
             "$ref": "../../components/schemas/part.json#/properties/input_filter"

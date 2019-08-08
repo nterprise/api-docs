@@ -61,6 +61,22 @@
         }
       ]
     },
+    "vendor": {
+      "type": "object",
+      "description": "Vendor information for the part",
+      "properties": {
+        "part_number": {
+          "type": "string",
+          "description": "Vendor part number",
+          "example": "602-3075-01"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./vendor.json"
+        }
+      ]
+    },
     "input_filter": {
       "type": "array",
       "items": {

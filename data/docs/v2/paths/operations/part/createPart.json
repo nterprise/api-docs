@@ -6,43 +6,7 @@
     "Part"
   ],
   "requestBody": {
-    "content": {
-      "application/json": {
-        "schema": {
-          "type": "object",
-          "required": [
-            "customer_id",
-            "part_number",
-            "label",
-            "manufacturer_id"
-          ],
-          "properties": {
-            "customer_id": {
-              "readOnly": false,
-              "$ref": "../../../components/schemas/customer.json#/properties/customer_id"
-            },
-            "manufacturer": {
-              "type": "object",
-              "properties": {
-                "manufacturer_part_number": {
-                  "$ref": "../../../components/schemas/part.json#/properties/manufacturer/properties/part_number"
-                },
-                "manufacturer_id": {
-                  "readOnly": false,
-                  "$ref": "../../../components/schemas/manufacturer.json#/properties/manufacturer_id"
-                }
-              }
-            },
-            "label": {
-              "$ref": "../../../components/schemas/part.json#/properties/label"
-            },
-            "input_filter": {
-              "$ref": "../../../components/schemas/part.json#/properties/input_filter"
-            }
-          }
-        }
-      }
-    }
+    "$ref": "../../../components/requestBodies/part.json"
   },
   "responses": {
     "200": {
