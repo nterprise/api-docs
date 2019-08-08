@@ -23,27 +23,16 @@
       "description": "Label for the part assigned from the manufacturer",
       "example": "iPod touch (32GB) - Blue"
     },
-    "total_workflows": {
+    "total_allocated": {
       "type": "number",
-      "description": "Total number of workflows this part belongs too",
+      "description": "Total number of units allocated for this part",
       "example": 42,
       "readOnly": true
     },
-    "workflows": {
-      "type": "array",
-      "description": "List of the top five workflows this part belongs too",
-      "readOnly": true,
-      "maxItems": 5,
-      "items": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "Name of the workflow",
-            "example": "iPod configuration"
-          }
-        }
-      }
+    "total_unallocated": {
+      "description": "Total number of units that are available for allocation",
+      "example": 84,
+      "readOnly": true
     },
     "manufacturer": {
       "type": "object",
@@ -61,23 +50,7 @@
         }
       ]
     },
-    "vendor": {
-      "type": "object",
-      "description": "Vendor information for the part",
-      "properties": {
-        "part_number": {
-          "type": "string",
-          "description": "Vendor part number",
-          "example": "602-3075-01"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./vendor.json"
-        }
-      ]
-    },
-    "input_filter": {
+        "input_filter": {
       "type": "array",
       "items": {
         "type": "object",
