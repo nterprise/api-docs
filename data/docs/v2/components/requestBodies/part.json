@@ -6,12 +6,18 @@
         "type": "object",
         "required": [
           "part_number",
+          "customer_id",
           "label",
           "manufacturer"
         ],
         "properties": {
           "label": {
             "$ref": "../../components/schemas/part.json#/properties/label"
+          },
+          "customer_id": {
+            "readOnly": false,
+            "description": "Id for the parts customer",
+            "$ref": "../../components/schemas/customer.json#/properties/customer_id"
           },
           "manufacturer": {
             "type": "object",
@@ -28,24 +34,6 @@
               "part_number": {
                 "readOnly": false,
                 "$ref": "../../components/schemas/part.json#/properties/manufacturer/properties/part_number"
-              }
-            }
-          },
-          "vendor": {
-            "type": "object",
-            "required": [
-              "vendor_id",
-              "part_number"
-            ],
-            "properties": {
-              "vendor_id": {
-                "readOnly": false,
-                "description": "Id for the parts vendor",
-                "$ref": "../../components/schemas/vendor.json#/properties/vendor_id"
-              },
-              "part_number": {
-                "readOnly": false,
-                "$ref": "../../components/schemas/part.json#/properties/vendor/properties/part_number"
               }
             }
           },
