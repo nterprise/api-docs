@@ -1,0 +1,11 @@
+{
+  "get": {
+    "$ref": "./operations/project/fetchProjectById.json"
+  },
+  "put": {
+    "$ref": "./operations/project/updateProject.json"
+  },
+  "delete": {
+    "$ref": "./operations/project/deleteProject.json"
+  }
+}

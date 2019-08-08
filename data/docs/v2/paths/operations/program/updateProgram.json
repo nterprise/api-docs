@@ -6,7 +6,7 @@
     "Program"
   ],
   "requestBody": {
-    "$ref": "../../../components/requestBodies/updateProgram.json"
+    "$ref": "../../../components/requestBodies/updateProject.json"
   },
   "parameters": [
     {"$ref": "../../../components/parameters/programId.json"}

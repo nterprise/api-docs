@@ -1,0 +1,65 @@
+{
+  "description": "Defines the properties for a project",
+  "allOf": [
+    {
+      "$ref": "./allDates.json"
+    }
+  ],
+  "properties": {
+    "project_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier",
+      "example": "ec5db56d-32e6-4e5d-9bef-1016f3e13670",
+      "readOnly": true,
+      "pattern": "[0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}"
+    },
+    "customer": {
+      "type": "object",
+      "description": "The customer this project is for",
+      "allOf": [
+        {
+          "$ref": "./customer.json"
+        }
+      ]
+    },
+    "program": {
+      "type": "object",
+      "description": "The program this project is for",
+      "properties": {
+        "program_id": {
+          "$ref": "./program.json#/properties/program_id"
+        },
+        "label": {
+          "$ref": "./program.json#/properties/label"
+        },
+        "start_date": {
+          "$ref": "./program.json#/properties/start_date"
+        },
+        "end_date": {
+          "$ref": "./program.json#/properties/end_date"
+        }
+      },
+      "allOf": [
+        {"$ref": "./allDates.json"}
+      ]
+    },
+    "label": {
+      "type": "string",
+      "description": "Label for the project",
+      "example": "Install Gadgets at store THX-1138"
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Start date for the project",
+      "example": "2019-08-07T18:10:53+00:00"
+    },
+    "end_date": {
+      "type": "string",
+      "format": "date",
+      "description": "End date for the project",
+      "example": "2020-08-07T18:10:53+00:00"
+    }
+  }
+}
