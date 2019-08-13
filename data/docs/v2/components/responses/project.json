@@ -7,6 +7,30 @@
           "_embedded": {
             "type": "object",
             "properties": {
+              "nter:contacts": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "description": "Contact Information",
+                  "properties": {
+                    "_links": {
+                      "properties": {
+                        "self": {
+                          "example": "https://api.nterprise.com/contacts/1c022258-afcd-4bf2-a576-ae59b7a15d73"
+                        }
+                      }
+                    }
+                  },
+                  "allOf": [
+                    {
+                      "$ref": "../schemas/contact.json"
+                    },
+                    {
+                      "$ref": "../schemas/linkSelf.json"
+                    }
+                  ]
+                }
+              },
               "nter:customers": {
                 "type": "array",
                 "maxItems": 1,
@@ -85,7 +109,15 @@
                         "example": "https://api.nterprise.com/projects/ec5db56d-32e6-4e5d-9bef-1016f3e13670"
                       }
                     }
-                  }
+                  },
+                  "nter:contacts": {
+                    "type": "object",
+                    "properties": {
+                      "href": {
+                        "example": "https://api.nterprise.com/projects/ec5db56d-32e6-4e5d-9bef-1016f3e13670/contacts"
+                      }
+                    }
+                  },
                 }
               }
             },
