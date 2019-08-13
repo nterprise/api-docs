@@ -1,0 +1,28 @@
+{
+  "operationId": "updateProject",
+  "summary": "Updates a project",
+  "description": "Updates a project",
+  "tags": [
+    "Project"
+  ],
+  "requestBody": {
+    "$ref": "../../../components/requestBodies/updateProject.json"
+  },
+  "parameters": [
+    {"$ref": "../../../components/parameters/projectId.json"}
+  ],
+  "responses": {
+    "200": {
+      "description": "Updated project",
+      "$ref": "../../../components/responses/project.json"
+    },
+    "400": {
+      "description": "Invalid project",
+      "$ref": "../../../components/responses/badRequest.json"
+    },
+    "403": {
+      "description": "You are not allowed to update this project",
+      "$ref": "../../../components/responses/forbidden.json"
+    }
+  }
+}

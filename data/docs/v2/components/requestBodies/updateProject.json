@@ -1,0 +1,25 @@
+{
+  "description": "The project to update",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "required": [
+          "customer_id",
+          "label"
+        ],
+        "properties": {
+          "label": {
+            "$ref": "../../components/schemas/project.json#/properties/label"
+          },
+          "start_date": {
+            "$ref": "../../components/schemas/project.json#/properties/start_date"
+          },
+          "end_date": {
+            "$ref": "../../components/schemas/project.json#/properties/end_date"
+          }
+        }
+      }
+    }
+  }
+}

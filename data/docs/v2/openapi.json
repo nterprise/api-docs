@@ -77,6 +77,12 @@
     },
     "/programs/:program_id": {
       "$ref": "./paths/program.json"
+    },
+    "/projects": {
+      "$ref": "./paths/projects.json"
+    },
+    "/projects/:project_id": {
+      "$ref": "./paths/project.json"
     }
   },
   "security": [
@@ -125,6 +131,9 @@
       },
       "Program": {
         "$ref": "./components/schemas/program.json"
+      },
+      "Project": {
+        "$ref": "./components/schemas/project.json"
       },
       "Part": {
         "$ref": "./components/schemas/part.json"

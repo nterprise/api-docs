@@ -1,0 +1,29 @@
+{
+  "operationId": "fetchProjectById",
+  "summary": "Fetches a project by Id",
+  "description": "Fetch Project",
+  "tags": [
+    "Project"
+  ],
+  "parameters": [
+    {"$ref": "../../../components/parameters/projectId.json"}
+  ],
+  "responses": {
+    "200": {
+      "description": "Project",
+      "$ref": "../../../components/responses/project.json"
+    },
+    "401": {
+      "description": "You authorization is invalid",
+      "$ref": "../../../components/responses/unauthorized.json"
+    },
+    "403": {
+      "description": "Access to this project is forbidden",
+      "$ref": "../../../components/responses/forbidden.json"
+    },
+    "404": {
+      "description": "Project not found",
+      "$ref": "../../../components/responses/notFound.json"
+    }
+  }
+}
