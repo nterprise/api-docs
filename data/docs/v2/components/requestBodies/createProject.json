@@ -5,12 +5,12 @@
       "schema": {
         "type": "object",
         "required": [
-          "customer_id",
+          "program_id",
           "label"
         ],
         "properties": {
-          "customer_id": {
-            "$ref": "../../components/schemas/customer.json#/properties/customer_id",
+          "program_id": {
+            "$ref": "../../components/schemas/program.json#/properties/program_id",
             "readOnly": false
           },
           "label": {
