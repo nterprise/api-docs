@@ -1,0 +1,39 @@
+{
+  "operationId": "fetchAllManufacturerParts",
+  "summary": "Fetches A Page of parts for the manufacturer",
+  "description": "Fetch manufacturer parts",
+  "tags": [
+    "Manufacturer"
+  ],
+  "parameters": [
+    {
+      "$ref": "../../../components/parameters/manufacturerId.json"
+    },
+    {
+      "$ref": "../../../components/parameters/limit.json"
+    },
+    {
+      "$ref": "../../../components/parameters/offset.json"
+    },
+    {
+      "$ref": "../../../components/parameters/partSort.json"
+    },
+    {
+      "$ref": "../../../components/parameters/filterLabel.json"
+    }
+  ],
+  "responses": {
+    "200": {
+      "$ref": "../../../components/responses/contactPage.json"
+    },
+    "401": {
+      "$ref": "../../../components/responses/unauthorized.json"
+    },
+    "404": {
+      "$ref": "../../../components/responses/notFound.json"
+    },
+    "403": {
+      "$ref": "../../../components/responses/forbidden.json"
+    }
+  }
+}

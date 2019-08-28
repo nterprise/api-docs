@@ -1,5 +1,5 @@
 {
   "get": {
-    "$ref": "../operations/customer/fetchAllCustomerParts.json"
+    "$ref": "../operations/customer/fetchAllCustomerUnits.json"
   }
 }

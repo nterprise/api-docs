@@ -9,23 +9,21 @@
     "$ref": "../../../components/requestBodies/manufacturer.json"
   },
   "parameters": [
-    {"$ref": "../../../components/parameters/manufacturerId.json"}
+    {
+      "$ref": "../../../components/parameters/manufacturerId.json"
+    }
   ],
   "responses": {
     "200": {
-      "description": "Updated manufacturer",
       "$ref": "../../../components/responses/manufacturer.json"
     },
     "400": {
-      "description": "Invalid manufacturer passed",
       "$ref": "../../../components/responses/badRequest.json"
     },
     "403": {
-      "description": "You are not allowed to update this manufacturer",
       "$ref": "../../../components/responses/forbidden.json"
     },
     "409": {
-      "description": "Manufacturer conflicts with another manufacturer",
       "$ref": "../../../components/responses/conflict.json"
     }
   }

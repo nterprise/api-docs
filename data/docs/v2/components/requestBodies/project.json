@@ -1,0 +1,47 @@
+{
+  "description": "The project to create",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "description": "Program to create",
+        "required": [
+          "label",
+          "program"
+        ],
+        "properties": {
+          "label": {
+            "allOf": [
+              {
+                "$ref": "../../components/schemas/entityCommon.json#/properties/label"
+              },
+              {
+                "$ref": "../../components/schemas/project.json#/properties/label"
+              }
+            ]
+          },
+          "program": {
+            "type": "object",
+            "required": [
+              "program_id"
+            ],
+            "properties": {
+              "program_id": {
+                "allOf": [
+                  {
+                    "$ref": "../../components/schemas/program.json#/properties/program_id"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "../../components/schemas/dateRange.json"
+          }
+        ]
+      }
+    }
+  }
+}

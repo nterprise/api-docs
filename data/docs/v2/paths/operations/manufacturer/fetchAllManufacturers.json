@@ -6,57 +6,27 @@
     "Manufacturer"
   ],
   "parameters": [
-    {"$ref": "../../../components/parameters/limit.json"},
-    {"$ref": "../../../components/parameters/offset.json"},
     {
-      "schema": {
-        "enum": ["name","-name"]
-      },
-      "$ref": "../../../components/parameters/sort.json"
+      "$ref": "../../../components/parameters/limit.json"
     },
     {
-      "name": "filter",
-      "in": "query",
-      "description": "Filter results",
-      "style": "deepObject",
-      "explode": true,
-      "schema": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "Finds manufacturers where the name contains this value",
-            "example": "dell"
-          },
-          "slug": {
-            "type": "string",
-            "description": "Finds manufacturers where the slug is this value",
-            "example": "dell"
-          }
-        }
-      }
+      "$ref": "../../../components/parameters/offset.json"
+    },
+    {
+      "$ref": "../../../components/parameters/standardSort.json"
+    },
+    {
+      "$ref": "../../../components/parameters/filterLabel.json"
     }
   ],
   "responses": {
     "200": {
-      "$ref": "../../../components/responses/manufacturerPage.json",
-      "links": {
-        "manufacturer": {
-          "operationId": "fetchManufacturerById",
-          "description": "Load details for a manufacturer in the response",
-          "parameters": {
-            "manufacturer_id": "$response._embedded.nter:manufacturer[*].manufacturer_id"
-          }
-        }
-      }
+      "$ref": "../../../components/responses/manufacturerPage.json"
     },
     "401": {
-      "description": "Authorization invalid",
       "$ref": "../../../components/responses/unauthorized.json"
     },
     "403": {
-      "description": "You are not allowed to fetch all the manufacturers",
       "$ref": "../../../components/responses/forbidden.json"
     }
   }

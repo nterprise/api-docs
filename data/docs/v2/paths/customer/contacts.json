@@ -3,6 +3,6 @@
     "$ref": "../operations/customer/fetchAllCustomerContacts.json"
   },
   "post": {
-    "$ref": "../operations/customer/createCustomerContact.json"
+    "$ref": "../operations/customer/attachCustomerContact.json"
   }
 }

@@ -6,23 +6,21 @@
     "Program"
   ],
   "parameters": [
-    {"$ref": "../../../components/parameters/programId.json"}
+    {
+      "$ref": "../../../components/parameters/programId.json"
+    }
   ],
   "responses": {
     "200": {
-      "description": "Program",
       "$ref": "../../../components/responses/program.json"
     },
     "401": {
-      "description": "You authorization is invalid",
       "$ref": "../../../components/responses/unauthorized.json"
     },
     "403": {
-      "description": "Access to this program is forbidden",
       "$ref": "../../../components/responses/forbidden.json"
     },
     "404": {
-      "description": "Program not found",
       "$ref": "../../../components/responses/notFound.json"
     }
   }

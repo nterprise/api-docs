@@ -1,0 +1,11 @@
+{
+  "get": {
+    "$ref": "../operations/program/fetchProgramById.json"
+  },
+  "put": {
+    "$ref": "../operations/program/updateProgram.json"
+  },
+  "delete": {
+    "$ref": "../operations/program/deleteProgram.json"
+  }
+}

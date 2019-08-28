@@ -1,0 +1,8 @@
+{
+  "name": "filter[label]",
+  "in": "query",
+  "description": "Filter where the label contains this value",
+  "schema": {
+    "type": "string"
+  }
+}

@@ -6,23 +6,19 @@
     "Project"
   ],
   "requestBody": {
-    "$ref": "../../../components/requestBodies/createProject.json"
+    "$ref": "../../../components/requestBodies/project.json"
   },
   "responses": {
     "200": {
-      "description": "The created project",
       "$ref": "../../../components/responses/project.json"
     },
     "400": {
-      "description": "Invalid project supplied in request",
       "$ref": "../../../components/responses/badRequest.json"
     },
     "401": {
-      "description": "Authorization invalid",
       "$ref": "../../../components/responses/unauthorized.json"
     },
     "403": {
-      "description": "You are not allowed to create a project",
       "$ref": "../../../components/responses/forbidden.json"
     }
   }

@@ -1,14 +1,14 @@
 {
   "description": "Dashboard Response",
   "content": {
-    "application/vnd.nterprise.dashboard.v2+json": {
+    "application/hal+json": {
       "schema": {
         "allOf": [
           {
             "$ref": "../schemas/dashboard.json"
           },
           {
-            "$ref": "../schemas/linkSelf.json"
+            "$ref": "../schemas/links/self.json"
           }
         ]
       }

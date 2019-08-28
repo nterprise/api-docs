@@ -6,22 +6,21 @@
     "Program"
   ],
   "requestBody": {
-    "$ref": "../../../components/requestBodies/updateProject.json"
+    "$ref": "../../../components/requestBodies/program.json"
   },
   "parameters": [
-    {"$ref": "../../../components/parameters/programId.json"}
+    {
+      "$ref": "../../../components/parameters/programId.json"
+    }
   ],
   "responses": {
     "200": {
-      "description": "Updated program",
       "$ref": "../../../components/responses/program.json"
     },
     "400": {
-      "description": "Invalid program",
       "$ref": "../../../components/responses/badRequest.json"
     },
     "403": {
-      "description": "You are not allowed to update this program",
       "$ref": "../../../components/responses/forbidden.json"
     }
   }

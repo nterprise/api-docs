@@ -1,7 +1,7 @@
 {
   "description": "A paged unit response",
   "content": {
-    "application/vnd.nterprise.collection.units.v2+json": {
+    "application/hal+json": {
       "schema": {
         "properties": {
           "_embedded": {
@@ -16,23 +16,9 @@
                       "$ref": "../schemas/unit.json"
                     },
                     {
-                      "$ref": "../schemas/linkSelf.json"
+                      "$ref": "../schemas/links/self.json"
                     }
                   ]
-                }
-              }
-            }
-          },
-          "_links": {
-            "type": "object",
-            "properties": {
-              "next": {
-                "type": "object",
-                "properties": {
-                  "href": {
-                    "type": "string",
-                    "example": "https://api.nterprise.com/units?limit=50&offset=VGhlIGZ1dGlsaXR5IG9mIHZpZXdpbmcgc2lubmVycyBpcyBwaWN0b3JpYWwu"
-                  }
                 }
               }
             }
@@ -40,10 +26,10 @@
         },
         "allOf": [
           {
-            "$ref": "../schemas/paginationOffset.json"
+            "$ref": "../schemas/links/nextOffset.json"
           },
           {
-            "$ref": "../schemas/linkSelf.json"
+            "$ref": "../schemas/links/self.json"
           }
         ]
       }

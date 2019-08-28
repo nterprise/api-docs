@@ -1,7 +1,7 @@
 {
   "description": "Entry",
   "content": {
-    "application/vnd.nterprise.entry.v2+json": {
+    "application/hal+json": {
       "schema": {
         "allOf": [
           {

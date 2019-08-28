@@ -1,0 +1,39 @@
+{
+  "operationId": "fetchAllCustomerPrograms",
+  "summary": "Fetches A Page of programs for the customer",
+  "description": "Fetch customer programs",
+  "tags": [
+    "Customer"
+  ],
+  "parameters": [
+    {
+      "$ref": "../../../components/parameters/customerId.json"
+    },
+    {
+      "$ref": "../../../components/parameters/limit.json"
+    },
+    {
+      "$ref": "../../../components/parameters/offset.json"
+    },
+    {
+      "$ref": "../../../components/parameters/programSort.json"
+    },
+    {
+      "$ref": "../../../components/parameters/filterLabel.json"
+    }
+  ],
+  "responses": {
+    "200": {
+      "$ref": "../../../components/responses/contactPage.json"
+    },
+    "401": {
+      "$ref": "../../../components/responses/unauthorized.json"
+    },
+    "404": {
+      "$ref": "../../../components/responses/notFound.json"
+    },
+    "403": {
+      "$ref": "../../../components/responses/forbidden.json"
+    }
+  }
+}

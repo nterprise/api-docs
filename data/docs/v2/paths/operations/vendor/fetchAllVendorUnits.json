@@ -1,0 +1,39 @@
+{
+  "operationId": "fetchAllVendorUnits",
+  "summary": "Fetches A Page of units for the vendor",
+  "description": "Fetch vendor units",
+  "tags": [
+    "Vendor"
+  ],
+  "parameters": [
+    {
+      "$ref": "../../../components/parameters/vendorId.json"
+    },
+    {
+      "$ref": "../../../components/parameters/limit.json"
+    },
+    {
+      "$ref": "../../../components/parameters/offset.json"
+    },
+    {
+      "$ref": "../../../components/parameters/unitSort.json"
+    },
+    {
+      "$ref": "../../../components/parameters/filterLabel.json"
+    }
+  ],
+  "responses": {
+    "200": {
+      "$ref": "../../../components/responses/contactPage.json"
+    },
+    "401": {
+      "$ref": "../../../components/responses/unauthorized.json"
+    },
+    "404": {
+      "$ref": "../../../components/responses/notFound.json"
+    },
+    "403": {
+      "$ref": "../../../components/responses/forbidden.json"
+    }
+  }
+}

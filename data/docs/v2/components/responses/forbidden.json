@@ -14,7 +14,7 @@
             "example": 403
           },
           "detail": {
-            "example": "You are not forbidden from accesing this resource"
+            "example": "You are forbidden to access this resource"
           }
         },
         "allOf": [

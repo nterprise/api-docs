@@ -4,8 +4,6 @@
   "description": "Id of the manufacturer",
   "required": true,
   "schema": {
-    "type": "string",
-    "format": "uuid",
-    "pattern": "[0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}"
+    "$ref": "../schemas/manufacturer.json#/properties/manufacturer_id"
   }
 }

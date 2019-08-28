@@ -5,19 +5,36 @@
       "schema": {
         "type": "object",
         "required": [
-          "part_number",
-          "customer_id",
           "label",
-          "manufacturer"
+          "customer",
+          "manufacturer",
+          "input_filter"
         ],
         "properties": {
           "label": {
-            "$ref": "../../components/schemas/part.json#/properties/label"
+            "allOf": [
+              {
+                "$ref": "../../components/schemas/entityCommon.json#/properties/label"
+              },
+              {
+                "$ref": "../../components/schemas/part.json#/properties/label"
+              }
+            ]
           },
-          "customer_id": {
-            "readOnly": false,
-            "description": "Id for the parts customer",
-            "$ref": "../../components/schemas/customer.json#/properties/customer_id"
+          "customer": {
+            "type": "object",
+            "required": [
+              "customer_id"
+            ],
+            "properties": {
+              "customer_id": {
+                "allOf": [
+                  {
+                    "$ref": "../../components/schemas/customer.json#/properties/customer_id"
+                  }
+                ]
+              }
+            }
           },
           "manufacturer": {
             "type": "object",
@@ -27,18 +44,26 @@
             ],
             "properties": {
               "manufacturer_id": {
-                "readOnly": false,
-                "description": "Id for the parts manufacturer",
-                "$ref": "../../components/schemas/manufacturer.json#/properties/manufacturer_id"
+                "allOf": [
+                  {
+                    "$ref": "../../components/schemas/manufacturer.json#/properties/manufacturer_id"
+                  }
+                ]
               },
               "part_number": {
-                "readOnly": false,
-                "$ref": "../../components/schemas/part.json#/properties/manufacturer/properties/part_number"
+                "allOf": [
+                  {
+                    "$ref": "../../components/schemas/part.json#/properties/manufacturer/properties/part_number"
+                  }
+                ]
               }
             }
           },
           "input_filter": {
-            "$ref": "../../components/schemas/part.json#/properties/input_filter"
+            "type": "array",
+            "items": {
+              "$ref": "../../components/schemas/inputFilter.json"
+            }
           }
         }
       }

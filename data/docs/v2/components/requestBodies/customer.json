@@ -3,10 +3,29 @@
   "content": {
     "application/json": {
       "schema": {
+        "type": "object",
         "required": [
-          "name"
+          "label"
         ],
-        "$ref": "../../components/schemas/customer.json"
+        "properties": {
+          "label": {
+            "allOf": [
+              {
+                "$ref": "../../components/schemas/entityCommon.json#/properties/label"
+              },
+              {
+                "$ref": "../../components/schemas/customer.json#/properties/label"
+              }
+            ]
+          },
+          "external_platform": {
+            "allOf": [
+              {
+                "$ref": "../../components/schemas/customer.json#/properties/external_platform"
+              }
+            ]
+          }
+        }
       }
     }
   }

@@ -6,70 +6,30 @@
     "Project"
   ],
   "parameters": [
-    {"$ref": "../../../components/parameters/limit.json"},
-    {"$ref": "../../../components/parameters/offset.json"},
     {
-      "schema": {
-        "enum": [
-          "label",
-          "-label",
-          "start_date",
-          "-start_date",
-          "end_date",
-          "-end_date",
-          "created",
-          "-created",
-          "updated",
-          "-updated",
-          "customer",
-          "-customer"
-        ]
-      },
-      "$ref": "../../../components/parameters/sort.json"
+      "$ref": "../../../components/parameters/limit.json"
     },
     {
-      "name": "filter",
-      "in": "query",
-      "description": "Filter results",
-      "style": "deepObject",
-      "explode": true,
-      "schema": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "customer_id": {
-            "type": "string",
-            "description": "Filters projects for this customer",
-            "example": "32e91e84-2b51-4c90-b4c1-522bedc6f01d"
-          },
-          "label": {
-            "type": "string",
-            "description": "Filters projects which are like this name",
-            "example": "32e91e84-2b51-4c90-b4c1-522bedc6f01d"
-          }
-        }
-      }
+      "$ref": "../../../components/parameters/offset.json"
+    },
+    {
+      "$ref": "../../../components/parameters/projectSort.json"
+    },
+    {
+      "$ref": "../../../components/parameters/filterLabel.json"
+    },
+    {
+      "$ref": "../../../components/parameters/filterCustomer.json"
     }
   ],
   "responses": {
     "200": {
-      "$ref": "../../../components/responses/projectPage.json",
-      "links": {
-        "project": {
-          "operationId": "fetchProjectById",
-          "description": "Load details for a project in the response",
-          "parameters": {
-            "project_id": "$response._embedded.nter:projects[*].project_id"
-          }
-        }
-      }
+      "$ref": "../../../components/responses/projectPage.json"
     },
     "401": {
-      "description": "Authorization invalid",
       "$ref": "../../../components/responses/unauthorized.json"
     },
     "403": {
-      "description": "You are not allowed to fetch all the projects",
       "$ref": "../../../components/responses/forbidden.json"
     }
   }

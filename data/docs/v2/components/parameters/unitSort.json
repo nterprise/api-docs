@@ -1,0 +1,24 @@
+{
+  "name": "sort",
+  "in": "query",
+  "description": "Sort by field",
+  "schema": {
+    "type": "string",
+    "enum": [
+      "label",
+      "-label",
+      "created",
+      "-created",
+      "updated",
+      "-updated",
+      "manufacturer",
+      "-manufacturer",
+      "part_unit_number",
+      "-part_unit_number",
+      "vendor",
+      "-vendor",
+      "customer",
+      "-customer"
+    ]
+  }
+}

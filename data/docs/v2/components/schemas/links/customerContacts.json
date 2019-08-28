@@ -1,0 +1,29 @@
+{
+  "type": "object",
+  "properties": {
+    "_links": {
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "nter:customers-contacts": {
+          "type": "object",
+          "description": "Link to the /customers{/customer_id}/contacts endpoint",
+          "readOnly": true,
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "url",
+              "readOnly": true,
+              "example": "https://api.nterprise.com/customers{/customer_id}/contacts{/contact_id}"
+            },
+            "templated": {
+              "type": "boolean",
+              "readOnly": true,
+              "example": true
+            }
+          }
+        }
+      }
+    }
+  }
+}

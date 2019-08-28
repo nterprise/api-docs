@@ -9,23 +9,21 @@
     "$ref": "../../../components/requestBodies/vendor.json"
   },
   "parameters": [
-    {"$ref": "../../../components/parameters/vendorId.json"}
+    {
+      "$ref": "../../../components/parameters/vendorId.json"
+    }
   ],
   "responses": {
     "200": {
-      "description": "Updated vendor",
       "$ref": "../../../components/responses/vendor.json"
     },
     "400": {
-      "description": "Invalid vendor passed",
       "$ref": "../../../components/responses/badRequest.json"
     },
     "403": {
-      "description": "You are not allowed to update this vendor",
       "$ref": "../../../components/responses/forbidden.json"
     },
     "409": {
-      "description": "Vendor conflicts with another vendor",
       "$ref": "../../../components/responses/conflict.json"
     }
   }
