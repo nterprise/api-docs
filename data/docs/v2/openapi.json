@@ -113,6 +113,15 @@
     },
     "/vendors/:vendor_id/units": {
       "$ref": "./paths/vendor/units.json"
+    },
+    "/work-flows": {
+      "$ref": "./paths/workflow/workflows.json"
+    },
+    "/work-flows/:workflow_id": {
+      "$ref": "./paths/workflow/workflow.json"
+    },
+    "/work-flows/:workflow_id/versions": {
+      "$ref": "./paths/workflow/versions.json"
     }
   },
   "security": [
@@ -182,6 +191,9 @@
       },
       "Vendor": {
         "$ref": "./components/schemas/vendor.json"
+      },
+      "Workflow": {
+        "$ref": "./components/schemas/workflow.json"
       }
     }
   }

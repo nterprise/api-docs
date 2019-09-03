@@ -1,9 +1,9 @@
 {
-  "operationId": "fetchAllManufacturer",
-  "summary": "Fetches A Page of manufacturer",
-  "description": "Fetch Part",
+  "operationId": "fetchVersionsForWorkflow",
+  "summary": "Fetches A page of versions for a workflow",
+  "description": "Fetch Workflow versions",
   "tags": [
-    "Manufacturer"
+    "Workflow"
   ],
   "parameters": [
     {
@@ -13,15 +13,12 @@
       "$ref": "../../../components/parameters/offset.json"
     },
     {
-      "$ref": "../../../components/parameters/standardSort.json"
-    },
-    {
-      "$ref": "../../../components/parameters/filterLabel.json"
+      "$ref": "../../../components/parameters/workflowSort.json"
     }
   ],
   "responses": {
     "200": {
-      "$ref": "../../../components/responses/manufacturerPage.json"
+      "$ref": "../../../components/responses/workflowPage.json"
     },
     "401": {
       "$ref": "../../../components/responses/unauthorized.json"

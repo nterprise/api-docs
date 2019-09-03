@@ -13,7 +13,7 @@
     },
     "unit_id": {
       "type": "string",
-      "description": "The identifier for the definition",
+      "description": "The identifier for the unit",
       "example": "ec5db56d-32e6-4e5d-9bef-1016f3e13670",
       "readOnly": true,
       "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"

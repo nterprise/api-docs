@@ -1,18 +1,18 @@
 {
-  "operationId": "deleteUnit",
-  "summary": "Deletes a unit",
-  "description": "This will soft delete the unit",
+  "operationId": "fetchWorkflowById",
+  "summary": "Fetches a workflow by Id",
+  "description": "Fetch Workflow",
   "tags": [
-    "Unit"
+    "Workflow"
   ],
   "parameters": [
     {
-      "$ref": "../../../components/parameters/unitId.json"
+      "$ref": "../../../components/parameters/workflowId.json"
     }
   ],
   "responses": {
-    "205": {
-      "description": "Unit deleted"
+    "200": {
+      "$ref": "../../../components/responses/workflow.json"
     },
     "401": {
       "$ref": "../../../components/responses/unauthorized.json"

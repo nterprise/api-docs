@@ -1,0 +1,219 @@
+{
+  "workflow_id": "edb6008f-bcea-4117-8c78-290931fae236",
+  "version": "1.0",
+  "workflow_version": 7,
+  "label": "MLTI iPad Assembly Assignment",
+  "applies_to": "unit",
+  "triggered_by": [
+    "workorder.created",
+    "workorder.updated"
+  ],
+  "starts_at": "find-available-units",
+  "context": [
+    {
+      "key": "not-enough-units",
+      "value": "false"
+    }
+  ],
+  "steps": {
+    "find-available-units": {
+      "type": "load",
+      "label": "Find available units",
+      "options": {
+        "function": "loadAvailableUnitsToContext",
+        "payload": {
+          "part_id": "$.workorder.parts.part_id",
+          "customer_id": "$.workorder.customer.customer_id"
+        }
+      },
+      "onError": {
+        "retry": 3,
+        "finally": {
+          "actions": [
+            {
+              "type": "email",
+              "to": [
+                "hugo@zones.com",
+                "chuck@zones.com"
+              ],
+              "subject": ""
+            }
+          ],
+          "goto": "assign-failed"
+        }
+      },
+      "goto": "find-units-assigned-to-recovery-project"
+    },
+    "find-units-assigned-to-recovery-project": {
+      "type": "load",
+      "label": "Find units assigned to recovery project",
+      "options": {
+        "function": "loadUnitsAssignedToProject",
+        "payload": {
+          "project_id": "recovery-project-id",
+          "part_id": "$.workorder.parts.part_id",
+          "status_category": "DONE"
+        }
+      },
+      "context": [
+        {
+          "key": "recovery.parts.available",
+          "value": "$.DONE.available",
+          "lock": true,
+          "ignore": false
+        },
+        {
+          "key": "fizz",
+          "value": "buzz",
+          "lock": true
+        }
+      ],
+      "goto": "choose-units-to-assign"
+    },
+    "choose-units-to-assign": {
+      "type": "choice",
+      "label": "Choose units to assign",
+      "choices": [
+        {
+          "variable": "$.recovery.parts.available",
+          "greater_than_equals": 1,
+          "goto": "assign-ipads-from-recovery-project"
+        },
+        {
+          "and": [
+            {
+              "variable": "$.project[$.workorder.project.project_id].parts[$.workorder.unit.part_id].available",
+              "less_than_equals": "$.workorder.parts.desired"
+            },
+            {
+              "variable": "$.customer.parts[$.workorder.unit.part_id].available",
+              "greater_than_equals": "$.workorder.parts.not_assigned"
+            }
+          ],
+          "goto": "assign-ipads-from-the-customer"
+        },
+        {
+          "variable": "$.workorder.parts.available",
+          "less_than": "$.workorder.parts.desired",
+          "goto": "notify-not-enough-units"
+        }
+      ],
+      "goto": "start-provisioning-ipads"
+    },
+    "assign-ipads-from-recovery-project": {
+      "type": "function",
+      "label": "Assign iPads from recovery project",
+      "options": {
+        "function": "assignUnitsFromProjectToProject",
+        "payload": {
+          "part_id": "$.workorder.parts.part_id",
+          "from_project": "recovery-project-id",
+          "to_project": "$.workorder.project_id",
+          "fill_to": "$.workorder.parts.desired"
+        }
+      },
+      "goto": "choose-units-to-assign"
+    },
+    "assign-ipads-from-the-customer": {
+      "type": "function",
+      "label": "Assign iPads from the customer",
+      "options": {
+        "function": "assignUnitsFromCustomerToProject",
+        "payload": {
+          "part_id": "$.workorder.parts.part_id",
+          "customer_id": "$.workorder.customer.customer_id",
+          "to_project": "$.workorder.project_id",
+          "fill_to": "$.workorder.parts.desired"
+        }
+      },
+      "goto": "choose-units-to-assign"
+    },
+    "notify-not-enough-units": {
+      "type": "pass",
+      "label": "Notify not enough units",
+      "onComplete": {
+        "actions": [
+          {
+            "type": "email"
+          }
+        ]
+      },
+      "context": [
+        {
+          "key": "not-enough-units",
+          "value": "true",
+          "lock": true
+        }
+      ],
+      "goto": "start-provisioning-ipads"
+    },
+    "start-provisioning-ipads": {
+      "type": "function",
+      "label": "Start Provisioning iPads",
+      "options": {
+        "function": "startWorkflowForEntity",
+        "payload": {
+          "entity": "$.workflow._entity",
+          "workflow_id": "a330ecf6-a53b-4339-a6db-9e2d83d7175e"
+        }
+      },
+      "goto": "choose-finish"
+    },
+    "choose-finish": {
+      "type": "choice",
+      "label": "Choose Finish",
+      "choices": [
+        {
+          "variable": "$.not-enough-units",
+          "equals": true,
+          "goto": "wait-for-units"
+        }
+      ],
+      "goto": "assign-complete"
+    },
+    "assign-complete": {
+      "type": "success",
+      "label": "Assign complete"
+    },
+    "assign-failed": {
+      "type": "fail",
+      "label": "Assign failed"
+    },
+    "wait-for-units": {
+      "type": "wait",
+      "label": "Wait for units",
+      "time": 525600,
+      "stop_at": 525600,
+      "onStart": [
+        {
+          "action": "setStatusForEntity",
+          "options": {
+            "entity": "$.workorder.workorder_id",
+            "status": "Waiting for units",
+            "status_category": "WAITING"
+          }
+        }
+      ],
+      "listen_for": [
+        {
+          "event": "unit.created",
+          "event_value": {
+            "variable": "$.part.part_id",
+            "equals": "$.workorder.parts.part_id"
+          }
+        }
+      ],
+      "onTimeout": [
+        {
+          "action": "setStatusForEntity",
+          "options": {
+            "entity": "$.workorder.workorder_id",
+            "status": "Timed out waiting for more units",
+            "status_category": "FAILED"
+          }
+        }
+      ],
+      "goto": "find-available-units"
+    }
+  }
+}

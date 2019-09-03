@@ -1,0 +1,36 @@
+{
+  "type": "object",
+  "required": [
+    "options"
+  ],
+  "properties": {
+    "type": {
+      "example": "function"
+    },
+    "options": {
+      "type": "object",
+      "required": [
+        "function",
+        "payload"
+      ],
+      "properties": {
+        "function": {
+          "type": "string",
+          "description": "Name of the function to invoke",
+          "example": "assignUnitsFromCustomerToProject"
+        },
+        "payload": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "./stepCommon.json"
+    }
+  ]
+}

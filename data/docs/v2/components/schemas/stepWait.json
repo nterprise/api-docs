@@ -1,0 +1,54 @@
+{
+  "type": "object",
+  "description": "A step which run at certain times",
+  "required": [
+    "stop_at",
+    "time"
+  ],
+  "properties": {
+    "type": {
+      "example": "wait"
+    },
+    "stop_at": {
+      "type": "number",
+      "description": "How long to wait for in seconds",
+      "example": 8600
+    },
+    "time": {
+      "type": "number",
+      "description": "Time in seconds to stop this task",
+      "example": 8600
+    },
+    "listen_for": {
+      "type": "array",
+      "description": "List of events and conditions to listen for to trigger",
+      "items": {
+        "type": "object",
+        "required": [
+          "event",
+          "event_value"
+        ],
+        "properties": {
+          "event": {
+            "type": "string",
+            "description": "Name of the event to listen for"
+          },
+          "event_value": {
+            "type": "object",
+            "description": "The event conditions that have to be met",
+            "allOf": [
+              {
+                "$ref": "./stepChoice.json"
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "./stepCommon.json"
+    }
+  ]
+}

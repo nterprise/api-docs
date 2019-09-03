@@ -1,9 +1,9 @@
 {
-  "operationId": "fetchAllUnits",
-  "summary": "Fetches A Page of units",
-  "description": "Fetch Unit",
+  "operationId": "fetchAllWorkflows",
+  "summary": "Fetches A Page of workflows",
+  "description": "Fetch Workflow",
   "tags": [
-    "Unit"
+    "Workflow"
   ],
   "parameters": [
     {
@@ -13,24 +13,15 @@
       "$ref": "../../../components/parameters/offset.json"
     },
     {
-      "$ref": "../../../components/parameters/unitSort.json"
+      "$ref": "../../../components/parameters/workflowSort.json"
     },
     {
       "$ref": "../../../components/parameters/filterLabel.json"
-    },
-    {
-      "$ref": "../../../components/parameters/filterManufacturer.json"
-    },
-    {
-      "$ref": "../../../components/parameters/filterVendor.json"
-    },
-    {
-      "$ref": "../../../components/parameters/filterCustomer.json"
     }
   ],
   "responses": {
     "200": {
-      "$ref": "../../../components/responses/unitPage.json"
+      "$ref": "../../../components/responses/workflowPage.json"
     },
     "401": {
       "$ref": "../../../components/responses/unauthorized.json"

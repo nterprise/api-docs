@@ -1,16 +1,16 @@
 {
-  "operationId": "createUnit",
-  "summary": "Creates a unit",
-  "description": "Creates a new unit",
+  "operationId": "createWorkflow",
+  "summary": "Creates a workflow",
+  "description": "Creates a new workflow",
   "tags": [
-    "Unit"
+    "Workflow"
   ],
   "requestBody": {
-    "$ref": "../../../components/requestBodies/unit.json"
+    "$ref": "../../../components/requestBodies/workflow.json"
   },
   "responses": {
     "200": {
-      "$ref": "../../../components/responses/unit.json"
+      "$ref": "../../../components/responses/workflow.json"
     },
     "400": {
       "$ref": "../../../components/responses/badRequest.json"

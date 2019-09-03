@@ -1,0 +1,8 @@
+{
+  "description": "Allows executing actions with out performing any function",
+  "allOf": [
+    {
+      "$ref": "./stepCommon.json"
+    }
+  ]
+}

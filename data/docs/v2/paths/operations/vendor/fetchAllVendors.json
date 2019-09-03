@@ -1,7 +1,7 @@
 {
   "operationId": "fetchAllVendor",
   "summary": "Fetches A Page of vendor",
-  "description": "Fetch PartDefinition",
+  "description": "Fetch Part",
   "tags": [
     "Vendor"
   ],
