@@ -1,5 +1,5 @@
 {
   "delete": {
-    "$ref": "../operations/customer/deleteCustomerContact.json"
+    "$ref": "../operations/customer/detachCustomerContact.json"
   }
 }

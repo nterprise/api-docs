@@ -1,7 +1,7 @@
 {
   "description": "A paged program response",
   "content": {
-    "application/vnd.nterprise.collection.programs.v2+json": {
+    "application/hal+json": {
       "schema": {
         "properties": {
           "_embedded": {
@@ -16,23 +16,9 @@
                       "$ref": "../schemas/program.json"
                     },
                     {
-                      "$ref": "../schemas/linkSelf.json"
+                      "$ref": "../schemas/links/self.json"
                     }
                   ]
-                }
-              }
-            }
-          },
-          "_links": {
-            "type": "object",
-            "properties": {
-              "next": {
-                "type": "object",
-                "properties": {
-                  "href": {
-                    "type": "string",
-                    "example": "https://api.nterprise.com/programs?limit=50&offset=VGhlIGZ1dGlsaXR5IG9mIHZpZXdpbmcgc2lubmVycyBpcyBwaWN0b3JpYWwu"
-                  }
                 }
               }
             }
@@ -43,7 +29,7 @@
             "$ref": "../schemas/paginationOffset.json"
           },
           {
-            "$ref": "../schemas/linkSelf.json"
+            "$ref": "../schemas/links/self.json"
           }
         ]
       }

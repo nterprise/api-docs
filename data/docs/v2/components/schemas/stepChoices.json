@@ -1,0 +1,64 @@
+{
+  "type": "object",
+  "properties": {
+    "type": {
+      "example": "choice"
+    },
+    "choices": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "variable",
+          "goto"
+        ],
+        "maxProperties": 3,
+        "minProperties": 3,
+        "properties": {
+          "and": {
+            "type": "array",
+            "description": "All choices must be satisfied",
+            "items": {
+              "$ref": "./stepChoice.json"
+            }
+          },
+          "or": {
+            "type": "array",
+            "description": "Any of these choices must be satisfied",
+            "items": {
+              "$ref": "./stepChoice.json"
+            }
+          },
+          "not": {
+            "type": "array",
+            "description": "None of these choices must be satisfied",
+            "items": {
+              "$ref": "./stepChoice.json"
+            }
+          },
+          "goto": {
+            "description": "Step to goto when condition is met",
+            "allOf": [
+              {
+                "$ref": "./stepCommon.json#/properties/goto"
+              }
+            ]
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "./stepChoice.json"
+          }
+        ]
+      }
+    },
+    "goto": {
+      "description": "Default step to goto when no choice can be made"
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "./stepCommon.json"
+    }
+  ]
+}

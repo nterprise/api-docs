@@ -1,7 +1,7 @@
 {
   "description": "Paged part response",
   "content": {
-    "application/vnd.nterprise.collection.parts.v2+json": {
+    "application/hal+json": {
       "schema": {
         "properties": {
           "_embedded": {
@@ -11,29 +11,14 @@
                 "type": "array",
                 "items": {
                   "type": "object",
-
                   "allOf": [
                     {
                       "$ref": "../schemas/part.json"
                     },
                     {
-                      "$ref": "../schemas/linkSelf.json"
+                      "$ref": "../schemas/links/self.json"
                     }
                   ]
-                }
-              }
-            }
-          },
-          "_links": {
-            "type": "object",
-            "properties": {
-              "next": {
-                "type": "object",
-                "properties": {
-                  "href": {
-                    "type": "string",
-                    "example": "https://api.nterprise.com/parts?limit=50&offset=363yHhUhhI"
-                  }
                 }
               }
             }
@@ -41,10 +26,10 @@
         },
         "allOf": [
           {
-            "$ref": "../schemas/paginationOffset.json"
+            "$ref": "../schemas/links/nextOffset.json"
           },
           {
-            "$ref": "../schemas/linkSelf.json"
+            "$ref": "../schemas/links/self.json"
           }
         ]
       }

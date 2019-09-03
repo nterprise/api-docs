@@ -1,0 +1,16 @@
+{
+  "name": "sort",
+  "in": "query",
+  "description": "Sort by field",
+  "schema": {
+    "type": "string",
+    "enum": [
+      "label",
+      "-label",
+      "created",
+      "-created",
+      "updated",
+      "-updated"
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "get": {
+    "$ref": "../operations/manufacturer/fetchManufacturerById.json"
+  },
+  "put": {
+    "$ref": "../operations/manufacturer/updateManufacturer.json"
+  },
+  "delete": {
+    "$ref": "../operations/manufacturer/deleteManufacturer.json"
+  }
+}

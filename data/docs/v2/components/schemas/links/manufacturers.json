@@ -1,0 +1,47 @@
+{
+  "type": "object",
+  "properties": {
+    "_links": {
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "nter:manufacturers": {
+          "type": "object",
+          "description": "Link to the /manufacturers endpoint",
+          "readOnly": true,
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "url",
+              "readOnly": true,
+              "example": "https://api.nterprise.com/manufacturers{/manufacturer_id}"
+            },
+            "templated": {
+              "type": "boolean",
+              "readOnly": true,
+              "example": true
+            }
+          }
+        },
+        "nter:manufacturers-contacts": {
+          "type": "object",
+          "description": "Link to the /manufacturers{/manufacturer_id}/contacts endpoint",
+          "readOnly": true,
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "url",
+              "readOnly": true,
+              "example": "https://api.nterprise.com/manufacturers{/manufacturer_id}/contacts{/contact_id}"
+            },
+            "templated": {
+              "type": "boolean",
+              "readOnly": true,
+              "example": true
+            }
+          }
+        }
+      }
+    }
+  }
+}

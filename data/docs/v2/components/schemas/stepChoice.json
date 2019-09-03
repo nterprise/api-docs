@@ -1,0 +1,40 @@
+{
+  "description": "A Step choice",
+  "type": "object",
+  "maxProperties": 2,
+  "minProperties": 2,
+  "required": [
+    "variable"
+  ],
+  "properties": {
+    "variable": {
+      "type": "string",
+      "description": "Context variable to check",
+      "example": "$.parts.available"
+    },
+    "greater_than_equals": {
+      "type": "string",
+      "description": "Value has to be greater than or equals to"
+    },
+    "less_than_equals": {
+      "type": "string",
+      "description": "Value has to be less than or equals to"
+    },
+    "greater_than": {
+      "type": "string",
+      "description": "Value has to be greater than"
+    },
+    "less_than": {
+      "type": "string",
+      "description": "Value has to be less than"
+    },
+    "equals": {
+      "type": "string",
+      "description": "Value has to equal"
+    },
+    "not_equals": {
+      "type": "string",
+      "description": "Value must not equal"
+    }
+  }
+}

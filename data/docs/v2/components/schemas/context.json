@@ -1,0 +1,26 @@
+{
+  "type": "object",
+  "required": [
+    "key",
+    "value"
+  ],
+  "properties": {
+    "key": {
+      "type": "string",
+      "description": "The context key to set"
+    },
+    "value": {
+      "type": "string",
+      "description": "Value to set"
+    },
+    "lock": {
+      "type": "boolean",
+      "description": "Prevents other steps from writing this value",
+      "example": true
+    },
+    "ignore": {
+      "type": "boolean",
+      "description": "When trying to set a locked key, do not fail"
+    }
+  }
+}

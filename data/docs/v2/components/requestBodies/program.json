@@ -1,0 +1,31 @@
+{
+  "description": "The program to create",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "description": "Program to create",
+        "required": [
+          "label"
+        ],
+        "properties": {
+          "label": {
+            "allOf": [
+              {
+                "$ref": "../../components/schemas/entityCommon.json#/properties/label"
+              },
+              {
+                "$ref": "../../components/schemas/program.json#/properties/label"
+              }
+            ]
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "../../components/schemas/dateRange.json"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "description": "The unit to create",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "required": [
+          "label",
+          "steps",
+          "workflow_version",
+          "applies_to",
+          "starts_at"
+        ],
+        "properties": {
+          "label": {
+            "allOf": [
+              {
+                "$ref": "../../components/schemas/entityCommon.json#/properties/label"
+              },
+              {
+                "$ref": "../../components/schemas/workflow.json#/properties/label"
+              }
+            ]
+          },
+
+          "workflow_version": {
+            "allOf": [
+              {
+                "$ref": "../../components/schemas/workflow.json#/properties/workflow_version"
+              }
+            ]
+          },
+
+          "applies_to": {
+            "allOf": [
+              {
+                "$ref": "../../components/schemas/workflow.json#/properties/applies_to"
+              }
+            ]
+          },
+
+          "starts_at": {
+            "allOf": [
+              {
+                "$ref": "../../components/schemas/workflow.json#/properties/starts_at"
+              }
+            ]
+          },
+
+          "context": {
+            "allOf": [
+              {
+                "$ref": "../../components/schemas/workflow.json#/properties/context"
+              }
+            ]
+          },
+
+          "steps": {
+            "allOf": [
+              {
+                "$ref": "../../components/schemas/workflow.json#/properties/steps"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

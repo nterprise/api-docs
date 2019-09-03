@@ -12,19 +12,15 @@
   ],
   "responses": {
     "200": {
-      "description": "Customers",
       "$ref": "../../../components/responses/customer.json"
     },
     "401": {
-      "description": "Unauthorized to access customer",
       "$ref": "../../../components/responses/unauthorized.json"
     },
     "403": {
-      "description": "Customer is forbidden",
       "$ref": "../../../components/responses/forbidden.json"
     },
     "404": {
-      "description": "Customer not found",
       "$ref": "../../../components/responses/notFound.json"
     }
   }

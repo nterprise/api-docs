@@ -14,7 +14,7 @@
             "example": 404
           },
           "detail": {
-            "example": "Entity not found"
+            "example": "Resource not found"
           }
         },
         "allOf": [

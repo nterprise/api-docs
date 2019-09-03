@@ -1,0 +1,151 @@
+{
+  "x-id": "#input_filter",
+  "description": "Input Filters allow custom fields to be defined for entities",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "description": "Input filter specification",
+    "properties": {
+      "label": {
+        "type": "string",
+        "description": "Human readable name",
+        "example": "Serial Number"
+      },
+      "key": {
+        "type": "string",
+        "description": "Slug used to store the property",
+        "example": "serial-number",
+        "readOnly": true,
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+      },
+      "filters": {
+        "type": "array",
+        "description": "A Collection of filters applied to the field",
+        "items": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "The type of filter to use",
+              "enum": [
+                "alpha",
+                "blackList",
+                "boolean",
+                "camelCase",
+                "date",
+                "digits",
+                "float",
+                "integer",
+                "kebabCase",
+                "lookup",
+                "lowerCase",
+                "null",
+                "replace",
+                "snakeCase",
+                "string",
+                "stringPrefix",
+                "stringSuffix",
+                "trim",
+                "upperCase",
+                "whiteList"
+              ]
+            },
+            "options": {
+              "type": "object",
+              "description": "Options for the filter",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "example": [
+          {
+            "type": "string",
+            "options": {}
+          },
+          {
+            "type": "null",
+            "options": {}
+          },
+          {
+            "type": "upperCase",
+            "options": {}
+          },
+          {
+            "type": "stringPrefix",
+            "options": {
+              "prefix": "1A:"
+            }
+          }
+        ]
+      },
+      "validators": {
+        "type": "array",
+        "description": "A set of validators to use for this field",
+        "items": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "The type of validator to use",
+              "enum": [
+                "between",
+                "blackList",
+                "email",
+                "endsWith",
+                "entityExists",
+                "greaterThan",
+                "greaterThanEquals",
+                "hostname",
+                "ip",
+                "length",
+                "lessThan",
+                "lessThanEquals",
+                "mac",
+                "notEmpty",
+                "nrid",
+                "nridExists",
+                "regex",
+                "startsWith",
+                "step",
+                "unique",
+                "uri",
+                "whiteList"
+              ]
+            },
+            "options": {
+              "type": "object",
+              "description": "Options for the validator",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          },
+          "example": [
+            {
+              "type": "notEmpty",
+              "options": {}
+            },
+            {
+              "type": "mask",
+              "options": {
+                "mask": "MAN\\-\\d{9}"
+              }
+            },
+            {
+              "type": "blacklist",
+              "options": {
+                "denied": [
+                  "MAN-123456789",
+                  "MAN-987654321"
+                ],
+                "case_sensitive": false
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

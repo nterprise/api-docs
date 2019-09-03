@@ -1,25 +1,34 @@
 {
+  "x-id": "#contact",
   "type": "object",
   "description": "Contact Information",
-  "nullable": true,
+  "required": [
+    "contact_id",
+    "label",
+    "email",
+    "name"
+  ],
   "properties": {
+    "label": {
+      "example": "Primary",
+      "description": "Label for the contact",
+      "allOf": [
+        {
+          "$ref": "./entityCommon.json#/properties/label"
+        }
+      ]
+    },
     "contact_id": {
       "type": "string",
-      "format": "uuid",
       "description": "Identifier for the contact",
       "readOnly": true,
       "example": "1c022258-afcd-4bf2-a576-ae59b7a15d73",
-      "pattern": "[0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}"
-    },
-    "label": {
-      "type": "string",
-      "description": "Label for the type of contact",
-      "example": "primary"
+      "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
     },
     "email": {
       "type": "string",
       "format": "email",
-      "description": "Primary Contact Email address",
+      "description": "Email address",
       "example": "chuck.reeves@zones.com",
       "nullable": true
     },
@@ -34,6 +43,20 @@
       "description": "Phone number",
       "example": "+1 518 867 5309",
       "nullable": true
+    },
+    "created": {
+      "allOf": [
+        {
+          "$ref": "./entityCommon.json#/properties/created"
+        }
+      ]
+    },
+    "updated": {
+      "allOf": [
+        {
+          "$ref": "./entityCommon.json#/properties/updated"
+        }
+      ]
     }
   }
 }

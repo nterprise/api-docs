@@ -1,26 +1,26 @@
 {
+  "x-id": "#manufacturer",
   "description": "A Manufacturer of parts",
+  "required": [
+    "label",
+    "manufacturer_id"
+  ],
   "properties": {
     "manufacturer_id": {
       "type": "string",
-      "format": "uuid",
       "description": "unique id",
       "example": "99ec26f2-fa31-4768-b357-268c708fcda5",
       "readOnly": true,
-      "pattern": "[0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}"
+      "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
     },
-    "name": {
-      "type": "string",
-      "description": "Name of the manufacturer",
-      "example": "Apple Inc"
-    },
-    "slug": {
-      "type": "string",
-      "format": "slug",
-      "description": "Slug for the manufacturer",
-      "example": "apple-inc",
-      "readOnly": true,
-      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    "label": {
+      "example": "Apple Inc",
+      "description": "Label for the manufacturer"
     }
-  }
+  },
+  "allOf": [
+    {
+      "$ref": "./entityCommon.json"
+    }
+  ]
 }

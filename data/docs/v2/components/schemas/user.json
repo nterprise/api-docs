@@ -3,7 +3,6 @@
   "properties": {
     "user_id": {
       "type": "string",
-      "format": "uuid",
       "description": "The identifier for the user",
       "example": "3dddba3e-6122-46a8-ae26-8c7c95bd82d7",
       "readOnly": true,

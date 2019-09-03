@@ -1,0 +1,29 @@
+{
+  "type": "object",
+  "properties": {
+    "_links": {
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "nter:units": {
+          "type": "object",
+          "description": "Link to the /units endpoint",
+          "readOnly": true,
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "url",
+              "readOnly": true,
+              "example": "https://api.nterprise.com/units{/unit_id}"
+            },
+            "templated": {
+              "type": "boolean",
+              "readOnly": true,
+              "example": true
+            }
+          }
+        }
+      }
+    }
+  }
+}

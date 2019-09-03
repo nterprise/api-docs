@@ -5,7 +5,10 @@
       "description": "Describes type of dashboard. Embedded link to ",
       "type": "string",
       "readOnly": true,
-      "enum": ["quickSight", "widget"],
+      "enum": [
+        "quickSight",
+        "widget"
+      ],
       "example": "quickSight"
     },
     "embed_url": {

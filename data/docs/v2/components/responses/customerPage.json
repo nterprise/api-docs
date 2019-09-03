@@ -1,7 +1,7 @@
 {
   "description": "Paged customer response",
   "content": {
-    "application/vnd.nterprise.collection.customers.v2+json": {
+    "application/hal+json": {
       "schema": {
         "properties": {
           "_embedded": {
@@ -12,54 +12,14 @@
                 "maxItems": 100,
                 "items": {
                   "type": "object",
-                  "properties": {
-                    "_links": {
-                      "properties": {
-                        "self": {
-                          "properties": {
-                            "href": {
-                              "example": "https://api.nterprise.com/customers/e530652e-28e8-4f64-84af-e1cf0ff7c805"
-                            }
-                          }
-                        },
-                        "nter:customers-contacts": {
-                          "type": "object",
-                          "description": "Link to the /customers endpoint",
-                          "readOnly": true,
-                          "properties": {
-                            "href": {
-                              "type": "string",
-                              "format": "url",
-                              "readOnly": true,
-                              "example": "https://api.nterprise.com/customers/e530652e-28e8-4f64-84af-e1cf0ff7c805/contacts"
-                            }
-                          }
-                        }
-                      }
-                    }
-                  },
                   "allOf": [
                     {
                       "$ref": "../schemas/customer.json"
                     },
                     {
-                      "$ref": "../schemas/linkSelf.json"
+                      "$ref": "../schemas/links/self.json"
                     }
                   ]
-                }
-              }
-            }
-          },
-          "_links": {
-            "type": "object",
-            "properties": {
-              "next": {
-                "type": "object",
-                "properties": {
-                  "href": {
-                    "type": "string",
-                    "example": "https://api.nterprise.com/customers?limit=50&offset=363yHhUhhI"
-                  }
                 }
               }
             }
@@ -67,27 +27,10 @@
         },
         "allOf": [
           {
-            "$ref": "../schemas/paginationOffset.json"
+            "$ref": "../schemas/links/nextOffset.json"
           },
           {
-            "properties": {
-              "_links": {
-                "properties": {
-                  "self": {
-                    "properties": {
-                      "href": {
-                        "example": "https://api.nterprise.com/customers"
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "allOf": [
-              {
-                "$ref": "../schemas/linkSelf.json"
-              }
-            ]
+            "$ref": "../schemas/links/self.json"
           }
         ]
       }

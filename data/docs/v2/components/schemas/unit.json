@@ -1,40 +1,38 @@
 {
+  "x-id": "#unit",
   "description": "Defines the properties for a part unit",
+  "required": [
+    "label",
+    "part",
+    "unit_id"
+  ],
   "properties": {
+    "label": {
+      "example": "10\" iPad for Hugo",
+      "description": "Name of the unit"
+    },
     "unit_id": {
       "type": "string",
-      "format": "uuid",
-      "description": "The identifier for the definition",
+      "description": "The identifier for the unit",
       "example": "ec5db56d-32e6-4e5d-9bef-1016f3e13670",
       "readOnly": true,
-      "pattern": "[0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}"
+      "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
     },
     "tenant_part_number": {
       "type": "string",
       "description": "Identifier set by the tenant",
       "example": "AX-44333"
     },
-    "label": {
-      "type": "string",
-      "description": "Custom label for the part unit (defaults to manufacturer label)",
-      "example": "Building 23 Security terminal"
-    },
-    "slug": {
-      "type": "string",
-      "format": "slug",
-      "description": "Slug for the part unit based on the label",
-      "example": "building-23-security-terminal",
-      "readOnly": true,
-      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-    },
     "manufacturer": {
+      "description": "The manufacturer that makes this unit",
       "type": "object",
-      "description": "Manufacturer of the part unit",
+      "required": [
+        "part_number"
+      ],
       "properties": {
-        "manufacturer_part_number": {
+        "part_number": {
           "type": "string",
-          "description": "Part number from the manufacturer",
-          "example": "910-004842"
+          "description": "The part number supplied by the manufacturer"
         }
       },
       "allOf": [
@@ -44,15 +42,8 @@
       ]
     },
     "vendor": {
-      "type": "object",
-      "description": "Vendor which sold the part unit",
-      "properties": {
-        "vendor_part_number": {
-          "type": "string",
-          "description": "Part number from the vendor",
-          "example": "FBA_KM-P3"
-        }
-      },
+      "x-ref": "#vendor",
+      "description": "The vendor that sold this unit",
       "allOf": [
         {
           "$ref": "./vendor.json"
@@ -60,8 +51,8 @@
       ]
     },
     "part": {
-      "type": "object",
-      "description": "The part which describes this unit",
+      "x-ref": "#unit",
+      "description": "The part associated with this unit",
       "allOf": [
         {
           "$ref": "./part.json"
@@ -69,8 +60,8 @@
       ]
     },
     "customer": {
-      "type": "object",
-      "description": "The customer which owns this part unit",
+      "x-ref": "#customer",
+      "description": "The customer who manages this unit",
       "allOf": [
         {
           "$ref": "./customer.json"
@@ -78,16 +69,15 @@
       ]
     },
     "input_filter": {
-      "type": "array",
-      "description": "Input filter use to create this part unit",
-      "items": {
-        "type": "object",
-        "allOf": [
-          {
-            "$ref": "./inputFilterSpecification.json"
-          }
-        ]
-      }
+      "$ref": "./inputFilter.json"
     }
-  }
+  },
+  "allOf": [
+    {
+      "$ref": "./entityCommon.json"
+    },
+    {
+      "$ref": "./dateRange.json"
+    }
+  ]
 }

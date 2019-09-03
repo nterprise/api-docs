@@ -1,15 +1,26 @@
 {
+  "x-id": "#part",
   "description": "Defines the properties for a part",
+  "required": [
+    "label",
+    "part_id",
+    "customer",
+    "manufacturer"
+  ],
   "properties": {
     "part_id": {
       "type": "string",
-      "format": "uuid",
       "description": "Unique identifier",
       "example": "ec5db56d-32e6-4e5d-9bef-1016f3e13670",
       "readOnly": true,
-      "pattern": "[0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}"
+      "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+    },
+    "label": {
+      "example": "10\" iPad",
+      "description": "Label for the part"
     },
     "customer": {
+      "x-ref": "#customer",
       "type": "object",
       "description": "The customer this  is for",
       "allOf": [
@@ -18,25 +29,13 @@
         }
       ]
     },
-    "label": {
-      "type": "string",
-      "description": "Label for the part assigned from the manufacturer",
-      "example": "iPod touch (32GB) - Blue"
-    },
-    "total_allocated": {
-      "type": "number",
-      "description": "Total number of units allocated for this part",
-      "example": 42,
-      "readOnly": true
-    },
-    "total_unallocated": {
-      "description": "Total number of units that are available for allocation",
-      "example": 84,
-      "readOnly": true
-    },
     "manufacturer": {
+      "x-ref": "#manufacturer",
       "type": "object",
       "description": "Manufacturer information for the part",
+      "required": [
+        "part_number"
+      ],
       "properties": {
         "part_number": {
           "type": "string",
@@ -50,16 +49,13 @@
         }
       ]
     },
-        "input_filter": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "allOf": [
-          {
-            "$ref": "./inputFilterSpecification.json"
-          }
-        ]
-      }
+    "input_filter": {
+      "$ref": "./inputFilter.json"
     }
-  }
+  },
+  "allOf": [
+    {
+      "$ref": "./entityCommon.json"
+    }
+  ]
 }

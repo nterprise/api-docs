@@ -1,0 +1,19 @@
+{
+  "description": "Finial step which is marked as completed successfully",
+  "properties": {
+    "type": {
+      "example": "success"
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "./stepCommon.json#/properties/label"
+    },
+    {
+      "$ref": "./stepCommon.json#/properties/type"
+    },
+    {
+      "$ref": "./stepCommon.json#/properties/onComplete"
+    }
+  ]
+}

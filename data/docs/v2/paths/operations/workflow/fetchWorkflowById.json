@@ -1,0 +1,27 @@
+{
+  "operationId": "fetchWorkflowById",
+  "summary": "Fetches a workflow by Id",
+  "description": "Fetch Workflow",
+  "tags": [
+    "Workflow"
+  ],
+  "parameters": [
+    {
+      "$ref": "../../../components/parameters/workflowId.json"
+    }
+  ],
+  "responses": {
+    "200": {
+      "$ref": "../../../components/responses/workflow.json"
+    },
+    "401": {
+      "$ref": "../../../components/responses/unauthorized.json"
+    },
+    "403": {
+      "$ref": "../../../components/responses/forbidden.json"
+    },
+    "404": {
+      "$ref": "../../../components/responses/notFound.json"
+    }
+  }
+}

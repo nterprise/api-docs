@@ -1,5 +1,5 @@
 {
-  "operationId": "updatePartUnit",
+  "operationId": "updateUnit",
   "summary": "Updates a unit",
   "description": "Updates a unit",
   "tags": [
@@ -9,19 +9,18 @@
     "$ref": "../../../components/requestBodies/unit.json"
   },
   "parameters": [
-    {"$ref": "../../../components/parameters/unitId.json"}
+    {
+      "$ref": "../../../components/parameters/unitId.json"
+    }
   ],
   "responses": {
     "200": {
-      "description": "Updated part unit",
       "$ref": "../../../components/responses/unit.json"
     },
     "400": {
-      "description": "Invalid part unit",
       "$ref": "../../../components/responses/badRequest.json"
     },
     "403": {
-      "description": "You are not allowed to update this part unit",
       "$ref": "../../../components/responses/forbidden.json"
     }
   }

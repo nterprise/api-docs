@@ -17,7 +17,7 @@
           "default": "api",
           "enum": [
             "api",
-            "api.dev",
+            "api.dev"
           ]
         }
       }
@@ -27,11 +27,11 @@
     "/": {
       "$ref": "./paths/entry.json"
     },
-    "/me": {
-      "$ref": "./paths/me.json"
+    "/contacts": {
+      "$ref": "./paths/contacts.json"
     },
-    "/dashboard": {
-      "$ref": "./paths/dashboard.json"
+    "/contacts/:contact_id": {
+      "$ref": "./paths/contact.json"
     },
     "/customers": {
       "$ref": "./paths/customer/customers.json"
@@ -48,23 +48,53 @@
     "/customers/:customer_id/parts": {
       "$ref": "./paths/customer/parts.json"
     },
+    "/customers/:customer_id/programs": {
+      "$ref": "./paths/customer/programs.json"
+    },
+    "/customers/:customer_id/projects": {
+      "$ref": "./paths/customer/projects.json"
+    },
+    "/customers/:customer_id/units": {
+      "$ref": "./paths/customer/units.json"
+    },
+    "/dashboard": {
+      "$ref": "./paths/dashboard.json"
+    },
+    "/manufacturers": {
+      "$ref": "./paths/manufacturer/manufacturers.json"
+    },
+    "/manufacturers/:manufacturer_id": {
+      "$ref": "./paths/manufacturer/manufacturer.json"
+    },
+    "/manufacturers/:manufacturer_id/parts": {
+      "$ref": "./paths/manufacturer/parts.json"
+    },
+    "/manufacturers/:manufacturer_id/units": {
+      "$ref": "./paths/manufacturer/units.json"
+    },
+    "/me": {
+      "$ref": "./paths/me.json"
+    },
     "/parts": {
       "$ref": "./paths/parts.json"
     },
     "/parts/:part_id": {
       "$ref": "./paths/part.json"
     },
-    "/manufacturers": {
-      "$ref": "./paths/manufacturers.json"
+    "/programs": {
+      "$ref": "./paths/program/programs.json"
     },
-    "/manufacturers/:manufacturer_id": {
-      "$ref": "./paths/manufacturer.json"
+    "/programs/:program_id": {
+      "$ref": "./paths/program/program.json"
     },
-    "/vendors": {
-      "$ref": "./paths/vendors.json"
+    "/programs/:program_id/projects": {
+      "$ref": "./paths/program/projects.json"
     },
-    "/vendors/:vendor_id": {
-      "$ref": "./paths/vendor.json"
+    "/projects": {
+      "$ref": "./paths/projects.json"
+    },
+    "/projects/:project_id": {
+      "$ref": "./paths/project.json"
     },
     "/units": {
       "$ref": "./paths/units.json"
@@ -72,17 +102,26 @@
     "/units/:unit_id": {
       "$ref": "./paths/unit.json"
     },
-    "/programs": {
-      "$ref": "./paths/programs.json"
+    "/vendors": {
+      "$ref": "./paths/vendor/vendors.json"
     },
-    "/programs/:program_id": {
-      "$ref": "./paths/program.json"
+    "/vendors/:vendor_id": {
+      "$ref": "./paths/vendor/vendor.json"
     },
-    "/projects": {
-      "$ref": "./paths/projects.json"
+    "/vendors/:vendor_id/parts": {
+      "$ref": "./paths/vendor/parts.json"
     },
-    "/projects/:project_id": {
-      "$ref": "./paths/project.json"
+    "/vendors/:vendor_id/units": {
+      "$ref": "./paths/vendor/units.json"
+    },
+    "/work-flows": {
+      "$ref": "./paths/workflow/workflows.json"
+    },
+    "/work-flows/:workflow_id": {
+      "$ref": "./paths/workflow/workflow.json"
+    },
+    "/work-flows/:workflow_id/versions": {
+      "$ref": "./paths/workflow/versions.json"
     }
   },
   "security": [
@@ -108,26 +147,35 @@
       }
     },
     "schemas": {
-      "Me": {
-        "$ref": "./components/schemas/me.json"
-      },
-      "Problem": {
-        "$ref": "./components/schemas/problem.json"
-      },
-      "User": {
-        "$ref": "./components/schemas/user.json"
+      "Contact": {
+        "$ref": "./components/schemas/contact.json"
       },
       "Customer": {
         "$ref": "./components/schemas/customer.json"
       },
-      "Contact": {
-        "$ref": "./components/schemas/contact.json"
-      },
       "Dashboard": {
         "$ref": "./components/schemas/dashboard.json"
       },
-      "Unit": {
-        "$ref": "./components/schemas/unit.json"
+      "DateRange": {
+        "$ref": "./components/schemas/dateRange.json"
+      },
+      "EntityCommon": {
+        "$ref": "./components/schemas/entityCommon.json"
+      },
+      "InputFilter": {
+        "$ref": "./components/schemas/inputFilter.json"
+      },
+      "Manufacturer": {
+        "$ref": "./components/schemas/manufacturer.json"
+      },
+      "Me": {
+        "$ref": "./components/schemas/me.json"
+      },
+      "Part": {
+        "$ref": "./components/schemas/part.json"
+      },
+      "Problem": {
+        "$ref": "./components/schemas/problem.json"
       },
       "Program": {
         "$ref": "./components/schemas/program.json"
@@ -135,14 +183,17 @@
       "Project": {
         "$ref": "./components/schemas/project.json"
       },
-      "Part": {
-        "$ref": "./components/schemas/part.json"
+      "Unit": {
+        "$ref": "./components/schemas/unit.json"
       },
-      "Manufacturer": {
-        "$ref": "./components/schemas/manufacturer.json"
+      "User": {
+        "$ref": "./components/schemas/user.json"
       },
       "Vendor": {
         "$ref": "./components/schemas/vendor.json"
+      },
+      "Workflow": {
+        "$ref": "./components/schemas/workflow.json"
       }
     }
   }

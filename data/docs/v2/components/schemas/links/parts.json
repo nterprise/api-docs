@@ -1,0 +1,29 @@
+{
+  "type": "object",
+  "properties": {
+    "_links": {
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "nter:parts": {
+          "type": "object",
+          "description": "Link to the /parts endpoint",
+          "readOnly": true,
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "url",
+              "readOnly": true,
+              "example": "https://api.nterprise.com/parts{/part_id}"
+            },
+            "templated": {
+              "type": "boolean",
+              "readOnly": true,
+              "example": true
+            }
+          }
+        }
+      }
+    }
+  }
+}

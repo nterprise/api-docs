@@ -1,61 +1,32 @@
 {
   "operationId": "fetchAllVendor",
   "summary": "Fetches A Page of vendor",
-  "description": "Fetch PartDefinition",
+  "description": "Fetch Part",
   "tags": [
     "Vendor"
   ],
   "parameters": [
-    {"$ref": "../../../components/parameters/limit.json"},
-    {"$ref": "../../../components/parameters/offset.json"},
     {
-      "schema": {
-        "enum": ["name","-name"]
-      },
-      "$ref": "../../../components/parameters/sort.json"
+      "$ref": "../../../components/parameters/limit.json"
     },
     {
-      "name": "filter",
-      "in": "query",
-      "description": "Filter results",
-      "explode": true,
-      "schema": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "Finds vendors where the name contains this value",
-            "example": "dell"
-          },
-          "slug": {
-            "type": "string",
-            "description": "Finds vendors where the slug is this value",
-            "example": "dell"
-          }
-        }
-      }
+      "$ref": "../../../components/parameters/offset.json"
+    },
+    {
+      "$ref": "../../../components/parameters/standardSort.json"
+    },
+    {
+      "$ref": "../../../components/parameters/filterLabel.json"
     }
   ],
   "responses": {
     "200": {
-      "$ref": "../../../components/responses/vendorPage.json",
-      "links": {
-        "vendor": {
-          "operationId": "fetchVendorById",
-          "description": "Load details for a vendor in the response",
-          "parameters": {
-            "vendor_id": "$response._embedded.nter:vendor[*].vendor_id"
-          }
-        }
-      }
+      "$ref": "../../../components/responses/vendorPage.json"
     },
     "401": {
-      "description": "Authorization invalid",
       "$ref": "../../../components/responses/unauthorized.json"
     },
     "403": {
-      "description": "You are not allowed to fetch all the vendors",
       "$ref": "../../../components/responses/forbidden.json"
     }
   }

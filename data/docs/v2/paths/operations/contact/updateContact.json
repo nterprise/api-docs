@@ -3,7 +3,9 @@
   "summary": "Updates a contact",
   "description": "Updates a new contact following the contact schema",
   "parameters": [
-    {"$ref": "../../../components/parameters/contactId.json"}
+    {
+      "$ref": "../../../components/parameters/contactId.json"
+    }
   ],
   "tags": [
     "Contact"
@@ -13,23 +15,18 @@
   },
   "responses": {
     "200": {
-      "description": "Updated contact",
       "$ref": "../../../components/responses/contact.json"
     },
     "400": {
-      "description": "Invalid contact passed",
       "$ref": "../../../components/responses/badRequest.json"
     },
     "401": {
-      "description": "Authorization invalid",
       "$ref": "../../../components/responses/unauthorized.json"
     },
     "403": {
-      "description": "Creating contacts is forbidden",
       "$ref": "../../../components/responses/forbidden.json"
     },
     "409": {
-      "description": "Contact conflicts with another contact",
       "$ref": "../../../components/responses/conflict.json"
     }
   }

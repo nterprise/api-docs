@@ -3,7 +3,22 @@
   "content": {
     "application/json": {
       "schema": {
-        "$ref": "../../components/schemas/vendor.json"
+        "type": "object",
+        "required": [
+          "label"
+        ],
+        "properties": {
+          "label": {
+            "allOf": [
+              {
+                "$ref": "../../components/schemas/entityCommon.json#/properties/label"
+              },
+              {
+                "$ref": "../../components/schemas/vendor.json#/properties/label"
+              }
+            ]
+          }
+        }
       }
     }
   }
