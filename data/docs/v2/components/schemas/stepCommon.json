@@ -13,6 +13,7 @@
         "load",
         "choice",
         "function",
+        "machine",
         "pass",
         "fail",
         "success",
@@ -32,7 +33,7 @@
     "context": {
       "type": "array",
       "items": {
-        "$ref": "./context.json"
+        "$ref": "./workflow.json#/properties/context"
       }
     },
     "onError": {

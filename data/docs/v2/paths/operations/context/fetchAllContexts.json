@@ -1,0 +1,33 @@
+{
+  "operationId": "fetchAllContexts",
+  "summary": "Fetches A Page of contexts",
+  "description": "Fetch Context",
+  "tags": [
+    "Context"
+  ],
+  "parameters": [
+    {
+      "$ref": "../../../components/parameters/limit.json"
+    },
+    {
+      "$ref": "../../../components/parameters/offset.json"
+    },
+    {
+      "$ref": "../../../components/parameters/contextSort.json"
+    },
+    {
+      "$ref": "../../../components/parameters/filterContextUser.json"
+    }
+  ],
+  "responses": {
+    "200": {
+      "$ref": "../../../components/responses/contextPage.json"
+    },
+    "401": {
+      "$ref": "../../../components/responses/unauthorized.json"
+    },
+    "403": {
+      "$ref": "../../../components/responses/forbidden.json"
+    }
+  }
+}

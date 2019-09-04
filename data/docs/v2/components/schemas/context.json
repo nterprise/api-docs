@@ -1,26 +1,131 @@
 {
   "type": "object",
-  "required": [
-    "key",
-    "value"
-  ],
   "properties": {
-    "key": {
+    "label": {
+      "example": "Context for workflow <work flow label>",
+      "description": "Label for the context (automatically generated)",
+      "readOnly": true,
+      "allOf": [
+        {
+          "$ref": "./entityCommon.json#/properties/label"
+        }
+      ]
+    },
+    "context_id": {
       "type": "string",
-      "description": "The context key to set"
+      "description": "Identifier for the context",
+      "readOnly": true,
+      "example": "MWMwMjIyNTgtYWZjZC00YmYyLWE1NzYtYWU1OWI3YTE1ZDczOlVOSVQ6NTMxMDI5MjQtNDUwYS00ZjFlLWI1ZDQtYTIwN2JjNTg2NTIxOjE1Njc2MDUwNTU5OTUuNDQ1NjYzNDM-",
+      "pattern": "^[A-Za-z0-9-_]+$"
     },
-    "value": {
+    "workflow": {
+      "type": "object",
+      "description": "The workflow being used for this context",
+      "readOnly": true,
+      "allOf": [
+        {
+          "$ref": "./workflow.json"
+        }
+      ]
+    },
+    "current_step": {
       "type": "string",
-      "description": "Value to set"
+      "description": "The current step to execute",
+      "readOnly": true,
+      "example": "assign-units"
     },
-    "lock": {
-      "type": "boolean",
-      "description": "Prevents other steps from writing this value",
-      "example": true
+    "last_steps": {
+      "type": "array",
+      "description": "Ordered list of the executed steps",
+      "readOnly": true,
+      "items": {
+        "type": "object",
+        "description": "Details for the step",
+        "properties": {
+          "step_name": {
+            "type": "string",
+            "description": "Name for the step",
+            "readOnly": true,
+            "example": "choose-units"
+          },
+          "started_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The date time the step started",
+            "readOnly": true
+          },
+          "ended_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The date time the step ended",
+            "readOnly": true
+          },
+          "time_to_run": {
+            "type": "string",
+            "description": "The total time it took to run the step (with milliseconds)",
+            "readOnly": true,
+            "example": "1567605055995.677"
+          },
+          "did_error": {
+            "type": "boolean",
+            "description": "Flag to test if the step errored",
+            "readOnly": true
+          },
+          "did_timeout": {
+            "type": "boolean",
+            "description": "Flag if the step timed-out",
+            "readOnly": true
+          }
+        }
+      }
     },
-    "ignore": {
+    "started_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date time the context started",
+      "readOnly": true
+    },
+    "ended_at": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true,
+      "description": "The date time the context ended",
+      "readOnly": true
+    },
+    "time_to_run": {
+      "type": "string",
+      "description": "The total time it took to run the workflow (with milliseconds)",
+      "example": "1567605055995.677",
+      "readOnly": true
+    },
+    "active": {
       "type": "boolean",
-      "description": "When trying to set a locked key, do not fail"
+      "description": "Flag set if there are still steps which need to be executed",
+      "example": true,
+      "readOnly": true
+    },
+    "waiting_for_user": {
+      "type": "boolean",
+      "description": "Flag for when the user needs to complete the step",
+      "example": false
+    },
+    "data": {
+      "type": "object",
+      "description": "Data set for the context",
+      "additionalProperties": true,
+      "readOnly": true,
+      "example": {
+        "can_foo_the_bar": true,
+        "available_units_by_part": {
+          "373b7cd6-3fde-4afe-a790-411d72e07c89": 42,
+          "8faaacaa-94d4-4f1f-a8eb-39353dbbf524": 84
+        }
+      }
     }
-  }
+  },
+  "allOf": [
+    {
+      "$ref": "./entityCommon.json"
+    }
+  ]
 }

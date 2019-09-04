@@ -1,0 +1,9 @@
+{
+  "name": "context_id",
+  "in": "path",
+  "description": "Id for the context",
+  "required": true,
+  "schema": {
+    "$ref": "../schemas/context.json#/properties/context_id"
+  }
+}

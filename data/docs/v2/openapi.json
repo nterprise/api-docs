@@ -33,6 +33,12 @@
     "/contacts/:contact_id": {
       "$ref": "./paths/contact.json"
     },
+    "/contexts": {
+      "$ref": "./paths/contexts.json"
+    },
+    "/contexts/:context_id": {
+      "$ref": "./paths/context.json"
+    },
     "/customers": {
       "$ref": "./paths/customer/customers.json"
     },
@@ -149,6 +155,9 @@
     "schemas": {
       "Contact": {
         "$ref": "./components/schemas/contact.json"
+      },
+      "Context": {
+        "$ref": "./components/schemas/context.json"
       },
       "Customer": {
         "$ref": "./components/schemas/customer.json"
