@@ -1,0 +1,8 @@
+{
+  "name": "filter[waiting_for_user]",
+  "in": "query",
+  "description": "Filter where the context is waiting for user",
+  "schema": {
+    "type": "boolean"
+  }
+}

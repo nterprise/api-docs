@@ -11,13 +11,16 @@
     },
     "stop_at": {
       "type": "number",
-      "description": "How long to wait for in seconds",
-      "example": 8600
+      "description": "Time in seconds to stop this task",
+      "maximum": 900,
+      "minimum": 1
     },
     "time": {
       "type": "number",
-      "description": "Time in seconds to stop this task",
-      "example": 8600
+      "description": "Time to wait before checking this step",
+      "example": 600,
+      "maximum": 900,
+      "minimum": 1
     },
     "listen_for": {
       "type": "array",
