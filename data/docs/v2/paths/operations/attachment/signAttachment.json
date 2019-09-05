@@ -1,0 +1,28 @@
+{
+  "operationId": "signAttachment",
+  "summary": "Gets a signed URL for uploading files",
+  "description": "In order to upload files, a signed AWS URL is needed. This operation will create that signed url",
+  "tags": [
+    "Attachment"
+  ],
+  "requestBody": {
+    "$ref": "../../../components/requestBodies/signAttachment.json"
+  },
+  "responses": {
+    "200": {
+      "$ref": "../../../components/responses/signAttachment.json"
+    },
+    "400": {
+      "$ref": "../../../components/responses/badRequest.json"
+    },
+    "401": {
+      "$ref": "../../../components/responses/unauthorized.json"
+    },
+    "403": {
+      "$ref": "../../../components/responses/forbidden.json"
+    },
+    "413": {
+      "$ref": "../../../components/responses/payloadTooLarge.json"
+    }
+  }
+}

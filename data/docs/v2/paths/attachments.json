@@ -1,0 +1,5 @@
+{
+  "post": {
+    "$ref": "./operations/attachment/signAttachment.json"
+  }
+}

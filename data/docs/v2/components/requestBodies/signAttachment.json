@@ -1,0 +1,31 @@
+{
+  "description": "The part to create",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "required": [
+          "name",
+          "type",
+          "size"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the file"
+          },
+          "type": {
+            "type": "string",
+            "description": "Mime type of the file"
+          },
+          "size": {
+            "type": "number",
+            "description": "Size of the file in bytes max 10 MB",
+            "maximum": 10485760,
+            "minimum": 1
+          }
+        }
+      }
+    }
+  }
+}
