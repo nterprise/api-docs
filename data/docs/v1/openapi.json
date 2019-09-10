@@ -4,7 +4,7 @@
     "version": "1.0.0",
     "description": "Customer API for FTM and CIMS",
     "title": "customer-accessible-api",
-    "termsOfService": "https://www.nterprise.com/tos",
+    "termsOfService": "https://docs.nterprise.com/tos.html",
     "license": {
       "name": "MIT",
       "url": "https://opensource.org/licenses/MIT"
