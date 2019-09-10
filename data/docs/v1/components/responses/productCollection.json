@@ -1,7 +1,7 @@
 {
   "description": "A paged array of products",
   "content": {
-    "application/vnd.nterprise.collection.product.v1+json": {
+    "application/hal+json": {
       "schema": {
         "properties": {
           "_embedded": {
@@ -16,13 +16,7 @@
                       "$ref": "../schemas/product.json"
                     },
                     {
-                      "$ref": "../schemas/linkNterCurie.json"
-                    },
-                    {
                       "$ref": "../schemas/linkSelf.json"
-                    },
-                    {
-                      "$ref": "../schemas/productLinks.json"
                     }
                   ]
                 }

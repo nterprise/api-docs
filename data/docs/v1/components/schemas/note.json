@@ -1,0 +1,58 @@
+{
+  "type": "object",
+  "description": "Notes for a workorder",
+  "properties": {
+    "note_id": {
+      "type": "string",
+      "description": "note Id",
+      "readOnly": true
+    },
+    "work_order_id": {
+      "type": "string",
+      "description": "work order id",
+      "readOnly": true
+    },
+    "note": {
+      "type": "string",
+      "description": "note text",
+      "readOnly": true
+    },
+    "user": {
+      "type": "string",
+      "description": "login user that posted the note",
+      "readOnly": true
+    },
+    "created_dt": {
+      "type": "string",
+      "description": "note create datetime",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "issue": {
+      "type": "boolean",
+      "description": "note flagged as an issue",
+      "readOnly": true
+    },
+    "resolved": {
+      "type": "boolean",
+      "description": "issue resolved",
+      "readOnly": true
+    },
+    "resolvedBy": {
+      "type": "string",
+      "description": "issue resolved by user",
+      "readOnly": true
+    },
+    "resolved_dt": {
+      "type": "string",
+      "description": "date the issue was resolved",
+      "readOnly": true,
+      "format": "date-time"
+    },
+    "tags": {
+      "type": "string",
+      "description": "set note tag CSV",
+      "readOnly": true
+    }
+  }
+}

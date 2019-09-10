@@ -1,0 +1,36 @@
+{
+  "description": "A paged array of inventory",
+  "content": {
+    "application/hal+json": {
+      "schema": {
+        "properties": {
+          "_embedded": {
+            "type": "object",
+            "properties": {
+              "inventory": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "allOf": [
+                    {
+                      "$ref": "../schemas/inventory.json"
+                    },
+                    {
+                      "$ref": "../schemas/linkSelf.json"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+
+        },
+        "allOf": [
+          {
+            "$ref": "../schemas/pagePagination.json"
+          }
+        ]
+      }
+    }
+  }
+}

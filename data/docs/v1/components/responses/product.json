@@ -1,14 +1,11 @@
 {
   "description": "Details about the product",
   "content": {
-    "application/vnd.nterprise.product.v1+json": {
+    "application/hal+json": {
       "schema": {
         "allOf": [
           {
             "$ref": "../schemas/product.json"
-          },
-          {
-            "$ref": "../schemas/productLinks.json"
           }
         ]
       }

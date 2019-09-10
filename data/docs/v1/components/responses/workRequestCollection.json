@@ -1,0 +1,35 @@
+{
+  "description": "A paged array of work requests",
+  "content": {
+    "application/hal+json": {
+      "schema": {
+        "properties": {
+          "_embedded": {
+            "type": "object",
+            "properties": {
+              "customers": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "allOf": [
+                    {
+                      "$ref": "../schemas/workRequest.json"
+                    },
+                    {
+                      "$ref": "../schemas/linkSelf.json"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "../schemas/pagePagination.json"
+          }
+        ]
+      }
+    }
+  }
+}

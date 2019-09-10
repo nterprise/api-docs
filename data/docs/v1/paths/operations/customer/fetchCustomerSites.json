@@ -1,0 +1,36 @@
+{
+  "operationId": "fetchCustomerSites",
+  "summary": "Fetches all sites for a customer",
+  "description": "List all sites for a customer",
+  "tags": [
+    "Customer"
+  ],
+  "parameters": [
+    {
+      "$ref": "../../../components/parameters/page.json"
+    },
+    {
+      "$ref": "../../../components/parameters/pageSize.json"
+    },
+    {
+      "$ref": "../../../components/parameters/siteSort.json"
+    },
+    {
+      "$ref": "../../../components/parameters/filterSiteGroup.json"
+    },
+    {
+      "$ref": "../../../components/parameters/filterCountry.json"
+    },
+    {
+      "$ref": "../../../components/parameters/filterState.json"
+    }
+  ],
+  "responses": {
+    "200": {
+      "$ref": "../../../components/responses/siteCollection.json"
+    },
+    "default": {
+      "$ref": "../../../components/responses/problem.json"
+    }
+  }
+}

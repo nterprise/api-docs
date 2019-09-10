@@ -8,16 +8,11 @@
     "project_id": {
       "description": "The Project Id",
       "readOnly": true,
-      "type": "number",
-      "format": "int32",
-      "minimum": 0
+      "type": "string"
     },
     "customer_id": {
       "description": "The Customer Id",
-      "readOnly": true,
-      "type": "number",
-      "format": "int32",
-      "minimum": 0
+      "readOnly": true
     },
     "siteName": {
       "description": "The name of the site",
@@ -66,14 +61,14 @@
     },
     "lng": {
       "description": "The longitude coordinates",
-      "type": "float",
+      "type": "number",
       "example": -73.7831,
       "minimum": -180,
       "maximum": 180
     },
     "lat": {
       "description": "The latitude coordinates",
-      "type": "float",
+      "type": "number",
       "example": 42.6014,
       "minimum": -180,
       "maximum": 180

@@ -1,0 +1,9 @@
+{
+  "name": "inventory_id",
+  "in": "path",
+  "required": true,
+  "description": "The id of the inventory to retrieve",
+  "schema": {
+    "type": "string"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "name": "filter[county]",
+  "in": "query",
+  "description": "Filter where the county is this value",
+  "schema": {
+    "type": "string"
+  }
+}

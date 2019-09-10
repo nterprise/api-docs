@@ -1,0 +1,9 @@
+{
+  "name": "site_id",
+  "in": "path",
+  "required": true,
+  "description": "The id of the site to retrieve",
+  "schema": {
+    "type": "string"
+  }
+}

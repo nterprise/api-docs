@@ -1,0 +1,9 @@
+{
+  "name": "kit_id",
+  "in": "path",
+  "required": true,
+  "description": "The id of the kit to retrieve",
+  "schema": {
+    "type": "string"
+  }
+}

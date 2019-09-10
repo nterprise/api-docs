@@ -1,5 +1,5 @@
 {
-  "description": "Unexpected API Problem",
+  "description": "API Problem",
   "content": {
     "application/problem+json": {
       "schema": {
