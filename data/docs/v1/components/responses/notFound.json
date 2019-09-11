@@ -1,0 +1,28 @@
+{
+  "description": "Resource not found",
+  "content": {
+    "application/problem+json": {
+      "schema": {
+        "properties": {
+          "title": {
+            "example": "Not Found"
+          },
+          "type": {
+            "example": "https://docs.nterprise.com/api/problem/NotFound"
+          },
+          "status": {
+            "example": 404
+          },
+          "detail": {
+            "example": "Resource not found"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "../schemas/problem.json"
+          }
+        ]
+      }
+    }
+  }
+}

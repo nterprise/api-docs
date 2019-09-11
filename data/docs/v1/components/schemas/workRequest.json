@@ -1,0 +1,68 @@
+{
+  "description": "A request to create a workorder",
+  "type": "object",
+  "required": [
+    "work_request_id"
+  ],
+  "properties": {
+    "work_request_id": {
+      "type": "string",
+      "description": "The Id of the template to follow"
+    },
+    "work_request_submission_id": {
+      "type": "string",
+      "description": "The Id of the submission"
+    },
+    "project_id": {
+      "$ref": "./project.json#/properties/project_id"
+    },
+    "requestor": {
+      "type": "string",
+      "description": "Work Request Submission submitter user name"
+    },
+    "insert_dt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Work Request Submission insert date/time"
+    },
+    "wrStatus": {
+      "type": "string",
+      "readOnly": true,
+      "description": "Work Request Submission status"
+    },
+    "is_approved": {
+      "type": "boolean",
+      "description": "Approved boolean",
+    },
+    "approved_by": {
+      "type": "string",
+      "description": "User that approved the Work Request Submission"
+    },
+    "approved_dt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date the Work Request Submission was approved"
+    },
+    "data_count": {
+      "type": "number",
+      "description": "count of work request submission name/value records"
+    },
+    "data": {
+      "type": "array",
+      "description": "array of Work Request Submission name/value records",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the work request property to set"
+          },
+          "value": {
+            "type": "string",
+            "description": "the value to set to the property"
+          }
+        }
+      }
+    }
+  }
+}

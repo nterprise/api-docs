@@ -4,6 +4,7 @@
     "version": "2.0.0",
     "description": "Authentication API for nterprise-api",
     "title": "authentication-api",
+    "termsOfService": "https://docs.nterprise.com/tos.html",
     "license": {
       "name": "MIT",
       "url": "https://opensource.org/licenses/MIT"

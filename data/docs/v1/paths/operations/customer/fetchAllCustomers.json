@@ -1,0 +1,24 @@
+{
+  "operationId": "fetchAllCustomers",
+  "summary": "List all customers",
+  "description": "Fetches all the account has access too",
+  "tags": [
+    "Customer"
+  ],
+  "parameters": [
+    {
+      "$ref": "../../../components/parameters/page.json"
+    },
+    {
+      "$ref": "../../../components/parameters/pageSize.json"
+    }
+  ],
+  "responses": {
+    "200": {
+      "$ref": "../../../components/responses/customerCollection.json"
+    },
+    "default": {
+      "$ref": "../../../components/responses/problem.json"
+    }
+  }
+}

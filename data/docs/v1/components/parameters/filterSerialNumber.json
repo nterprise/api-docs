@@ -1,0 +1,8 @@
+{
+  "name": "filter[serial_number]",
+  "in": "query",
+  "description": "Filter where the serial number is this value",
+  "schema": {
+    "type": "string"
+  }
+}

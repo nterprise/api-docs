@@ -1,0 +1,6 @@
+{
+  "get": {
+    "$ref": "./operations/project/fetchProjectInventoryById.json"
+  }
+}
+

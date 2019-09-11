@@ -1,0 +1,14 @@
+{
+  "description": "Details about the kit",
+  "content": {
+    "application/hal+json": {
+      "schema": {
+        "allOf": [
+          {
+            "$ref": "../schemas/kit.json"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "type": "object",
+  "description": "A collection of products or inventory",
+  "properties": {
+    "project_id": {
+      "$ref": "./project.json#/properties/project_id"
+    },
+    "kit_id": {
+      "type": "string",
+      "description": "Kit definition id",
+      "readOnly": true
+    },
+    "KitName": {
+      "type": "string",
+      "description": "Kit name",
+      "readOnly": true
+    },
+    "KitType": {
+      "type": "string",
+      "description": "Kit Type ( P or C )",
+      "enum": [
+        "P",
+        "C"
+      ],
+      "readOnly": true
+    },
+    "MainPartNo": {
+      "type": "string",
+      "description": "Kit referenced Part Number, will be empty for KitType = 'P'",
+      "readOnly": true
+    }
+  }
+}

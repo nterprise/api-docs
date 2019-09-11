@@ -1,0 +1,44 @@
+{
+  "type": "object",
+  "description": "A Listing of inventory",
+  "properties": {
+    "inventory_id": {
+      "type": "string",
+      "description": "inventory id, not required for \"Q\" type inventory",
+      "readOnly": true
+    },
+    "project_id": {
+      "type": "string",
+      "description": "project id of inventory",
+      "readOnly": true
+    },
+    "PartNo": {
+      "type": "string",
+      "description": "product referenced part number",
+      "readOnly": true
+    },
+    "InventoryType": {
+      "type": "string",
+      "description": "inventory type, \"Q\" ( quantity ) or \"S\" (serialized)",
+      "enum": [
+        "Q",
+        "S"
+      ],
+      "readOnly": true
+    },
+    "Status": {
+      "type": "string",
+      "description": "inventory status",
+      "readOnly": true
+    },
+    "Quantity": {
+      "type": "number",
+      "description": "inventory count, will be \"1\" for S type inventory",
+      "readOnly": true
+    },
+    "SerialNumber": {
+      "type": "string",
+      "description": "inventory serial number, will be empty for Q type inventory"
+    }
+  }
+}
