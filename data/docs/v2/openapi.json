@@ -28,6 +28,9 @@
     "/": {
       "$ref": "./paths/entry.json"
     },
+    "/attachments": {
+      "$ref": "./paths/attachments.json"
+    },
     "/contacts": {
       "$ref": "./paths/contacts.json"
     },
