@@ -8,16 +8,12 @@
     "project_id": {
       "description": "The Project Id",
       "readOnly": true,
-      "type": "number",
-      "format": "int32",
-      "minimum": 0
+      "type": "string"
     },
     "product_id": {
       "description": "The Product Id",
       "readOnly": true,
-      "type": "number",
-      "format": "int32",
-      "minimum": 0
+      "type": "string"
     },
     "ProductType": {
       "description": "The product type",

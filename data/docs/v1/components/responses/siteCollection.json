@@ -1,7 +1,7 @@
 {
   "description": "A paged array of sites",
   "content": {
-    "application/vnd.nterprise.collection.sites.v1+json": {
+    "application/hal+json": {
       "schema": {
         "properties": {
           "_embedded": {
@@ -16,13 +16,7 @@
                       "$ref": "../schemas/site.json"
                     },
                     {
-                      "$ref": "../schemas/linkNterCurie.json"
-                    },
-                    {
                       "$ref": "../schemas/linkSelf.json"
-                    },
-                    {
-                      "$ref": "../schemas/siteLinks.json"
                     }
                   ]
                 }

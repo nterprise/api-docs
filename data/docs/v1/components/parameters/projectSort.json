@@ -1,0 +1,12 @@
+{
+  "name": "sort",
+  "in": "query",
+  "description": "Sort by field",
+  "schema": {
+    "type": "string",
+    "enum": [
+      "pLabel",
+      "-pLabel"
+    ]
+  }
+}

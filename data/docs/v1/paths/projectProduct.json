@@ -1,0 +1,6 @@
+{
+  "get": {
+    "$ref": "./operations/project/fetchProjectProduct.json"
+  }
+}
+

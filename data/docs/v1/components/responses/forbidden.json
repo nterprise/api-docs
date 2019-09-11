@@ -1,0 +1,28 @@
+{
+  "description": "Forbidden",
+  "content": {
+    "application/problem+json": {
+      "schema": {
+        "properties": {
+          "title": {
+            "example": "Forbidden"
+          },
+          "type": {
+            "example": "https://docs.nterprise.com/api/problem/Forbidden"
+          },
+          "status": {
+            "example": 403
+          },
+          "detail": {
+            "example": "You are forbidden to access this resource"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "../schemas/problem.json"
+          }
+        ]
+      }
+    }
+  }
+}

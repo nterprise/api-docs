@@ -1,0 +1,8 @@
+{
+  "name": "filter[site_group]",
+  "in": "query",
+  "description": "Filter where the site group is this value",
+  "schema": {
+    "type": "string"
+  }
+}

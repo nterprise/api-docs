@@ -1,7 +1,7 @@
 {
   "description": "A paged array of customers",
   "content": {
-    "application/vnd.nterprise.collection.customers.v1+json": {
+    "application/hal+json": {
       "schema": {
         "properties": {
           "_embedded": {

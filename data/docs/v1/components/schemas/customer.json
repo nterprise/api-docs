@@ -8,28 +8,29 @@
     "customer_id": {
       "description": "The Customer Id",
       "readOnly": true,
-      "type": "number",
-      "format": "int32",
-      "minimum": 0
+      "type": "string"
     },
     "cName": {
       "description": "The name of the customer",
       "type": "string",
-      "example": "Zones"
+      "example": "Zones",
+      "readOnly": true
     },
     "total_projects": {
       "description": "Total Projects for the customer",
       "type": "number",
       "format": "int32",
       "readOnly": true,
-      "minimum": 0
+      "minimum": 0,
+      "example": 42
     },
     "total_sites": {
       "description": "Total Sites for the customer",
       "type": "number",
       "format": "int32",
       "readOnly": true,
-      "minimum": 0
+      "minimum": 0,
+      "example": 84
     }
   }
 }

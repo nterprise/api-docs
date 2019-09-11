@@ -1,14 +1,14 @@
 {
   "description": "Details about the project",
   "content": {
-    "application/vnd.nterprise.project.v1+json": {
+    "application/hal+json": {
       "schema": {
         "allOf": [
           {
             "$ref": "../schemas/project.json"
           },
           {
-            "$ref": "../schemas/projectLinks.json"
+            "$ref": "../schemas/linkSelf.json"
           }
         ]
       }

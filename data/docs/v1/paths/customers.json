@@ -1,6 +1,6 @@
 {
   "get": {
-    "$ref": "./operations/fetchAllCustomers.json"
+    "$ref": "./operations/customer/fetchAllCustomers.json"
   }
 }
 

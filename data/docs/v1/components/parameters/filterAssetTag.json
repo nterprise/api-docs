@@ -1,0 +1,8 @@
+{
+  "name": "filter[asset_tag]",
+  "in": "query",
+  "description": "Filter where the asset tag is this value",
+  "schema": {
+    "type": "string"
+  }
+}

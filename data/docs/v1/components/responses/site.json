@@ -1,14 +1,14 @@
 {
   "description": "Details about the site",
   "content": {
-    "application/vnd.nterprise.site.v1+json": {
+    "application/hal+json": {
       "schema": {
         "allOf": [
           {
             "$ref": "../schemas/site.json"
           },
           {
-            "$ref": "../schemas/siteLinks.json"
+            "$ref": "../schemas/linkSelf.json"
           }
         ]
       }

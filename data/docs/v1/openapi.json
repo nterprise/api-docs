@@ -4,7 +4,7 @@
     "version": "1.0.0",
     "description": "Customer API for FTM and CIMS",
     "title": "customer-accessible-api",
-    "termsOfService": "https://www.nterprise.com/tos",
+    "termsOfService": "https://docs.nterprise.com/tos.html",
     "license": {
       "name": "MIT",
       "url": "https://opensource.org/licenses/MIT"
@@ -27,20 +27,58 @@
       "$ref": "./paths/customers.json"
     },
     "/customers/{customer_id}/projects": {
-      "$ref": "./paths/projectsByCustomer.json"
+      "$ref": "./paths/customerProjects.json"
+    },
+    "/customers/{customer_id}/sites": {
+      "$ref": "./paths/customerSites.json"
+    },
+    "/projects/": {
+      "$ref": "./paths/projects.json"
     },
     "/projects/{project_id}": {
       "$ref": "./paths/project.json"
     },
-    "/projects/": {
-      "$ref": "./paths/project.json"
+    "/projects/{project_id}/inventory": {
+      "$ref": "./paths/projectAllInventory.json"
+    },
+    "/projects/{project_id}/inventory/{inventory_id}": {
+      "$ref": "./paths/projectInventory.json"
+    },
+    "/projects/{project_id}/kits": {
+      "$ref": "./paths/projectKits.json"
+    },
+    "/projects/{project_id}/kits/{kit_id}": {
+      "$ref": "./paths/projectKit.json"
+    },
+    "/projects/{project_id}/products": {
+      "$ref": "./paths/projectProducts.json"
+    },
+    "/projects/{project_id}/products/{product_id}": {
+      "$ref": "./paths/projectProduct.json"
+    },
+    "/sites/": {
+      "$ref": "./paths/sites.json"
+    },
+    "/sites/{site_id}": {
+      "$ref": "./paths/site.json"
+    },
+    "/work-requests/{work_request_id}": {
+      "$ref": "./paths/workRequests.json"
+    },
+    "/work-requests/{work_request_id}/submissions": {
+      "$ref": "./paths/workRequest.json"
     }
   },
   "components": {
     "schemas": {
       "Customer": {"$ref": "./components/schemas/customer.json"},
+      "Inventory": {"$ref": "./components/schemas/inventory.json"},
+      "Kit": {"$ref": "./components/schemas/kit.json"},
+      "Note": {"$ref": "./components/schemas/note.json"},
       "Project": {"$ref": "./components/schemas/project.json"},
-      "Problem": {"$ref": "./components/schemas/problem.json"}
+      "Problem": {"$ref": "./components/schemas/problem.json"},
+      "Site": {"$ref": "./components/schemas/site.json"},
+      "Work Request": {"$ref": "./components/schemas/workRequest.json"}
     },
     "securitySchemes": {
       "signedToken": {

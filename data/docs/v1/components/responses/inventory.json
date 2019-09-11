@@ -1,0 +1,17 @@
+{
+  "description": "Details about the project",
+  "content": {
+    "application/hal+json": {
+      "schema": {
+        "allOf": [
+          {
+            "$ref": "../schemas/inventory.json"
+          },
+          {
+            "$ref": "../schemas/linkSelf.json"
+          }
+        ]
+      }
+    }
+  }
+}

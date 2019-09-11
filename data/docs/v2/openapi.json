@@ -4,6 +4,7 @@
     "version": "2.0.0",
     "description": "API for the nterprise application",
     "title": "nterprise-api",
+    "termsOfService": "https://docs.nterprise.com/tos.html",
     "license": {
       "name": "MIT",
       "url": "https://opensource.org/licenses/MIT"
