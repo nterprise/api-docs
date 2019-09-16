@@ -1,0 +1,27 @@
+{
+  "operationId": "updateLocation",
+  "summary": "Updates a location",
+  "description": "Updates a location",
+  "tags": [
+    "Location"
+  ],
+  "requestBody": {
+    "$ref": "../../../components/requestBodies/location.json"
+  },
+  "parameters": [
+    {
+      "$ref": "../../../components/parameters/locationId.json"
+    }
+  ],
+  "responses": {
+    "200": {
+      "$ref": "../../../components/responses/location.json"
+    },
+    "400": {
+      "$ref": "../../../components/responses/badRequest.json"
+    },
+    "403": {
+      "$ref": "../../../components/responses/forbidden.json"
+    }
+  }
+}

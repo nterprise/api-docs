@@ -1,0 +1,27 @@
+{
+  "operationId": "deleteLocation",
+  "summary": "Deletes a location",
+  "description": "This will soft delete the location",
+  "tags": [
+    "Location"
+  ],
+  "parameters": [
+    {
+      "$ref": "../../../components/parameters/locationId.json"
+    }
+  ],
+  "responses": {
+    "205": {
+      "description": "Location deleted"
+    },
+    "401": {
+      "$ref": "../../../components/responses/unauthorized.json"
+    },
+    "403": {
+      "$ref": "../../../components/responses/forbidden.json"
+    },
+    "404": {
+      "$ref": "../../../components/responses/notFound.json"
+    }
+  }
+}

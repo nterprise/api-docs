@@ -1,0 +1,8 @@
+{
+  "get": {
+    "$ref": "./operations/location/fetchAllLocations.json"
+  },
+  "post": {
+    "$ref": "./operations/location/createLocation.json"
+  }
+}

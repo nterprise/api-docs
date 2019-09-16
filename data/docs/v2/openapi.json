@@ -70,6 +70,12 @@
     "/dashboard": {
       "$ref": "./paths/dashboard.json"
     },
+    "/locations": {
+      "$ref": "./paths/locations.json"
+    },
+    "/locations/{location_id}": {
+      "$ref": "./paths/location.json"
+    },
     "/manufacturers": {
       "$ref": "./paths/manufacturer/manufacturers.json"
     },

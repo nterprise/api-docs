@@ -1,0 +1,97 @@
+{
+  "x-id": "#location",
+  "description": "Defines the properties for a part unit",
+  "required": [
+    "location_type",
+    "address"
+  ],
+  "properties": {
+    "label": {
+      "example": "Zones Innovation Center"
+    },
+    "slug": {
+      "example": "zones-innovation-center"
+    },
+    "location_id": {
+      "type": "string",
+      "description": "The identifier for the location",
+      "example": "b994961b-30b4-4f33-9330-f46fd6172909",
+      "readOnly": true,
+      "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+    },
+    "location_type": {
+      "type": "string",
+      "description": "The type of location",
+      "enum": [
+        "warehouse",
+        "facility",
+        "other"
+      ],
+      "example": "other"
+    },
+    "formatted_address": {
+      "type": "string",
+      "readOnly": true,
+      "description": "Address formatted for the where region the location exists in",
+      "example": "Zones Innovation Center\n431 Broadway\nSuite C\nMenands NY, 12204\nUSA",
+    },
+    "address": {
+      "type": "object",
+      "required": [
+        "country",
+        "administrative_area",
+        "locality",
+        "postal_code",
+        "thoroughfare"
+      ],
+      "description": "xNAL address for the location ",
+      "properties": {
+        "country": {
+          "type": "string",
+          "description": "Three Letter ISO country code",
+          "example": "USA"
+        },
+        "administrative_area": {
+          "type": "string",
+          "description": "State / Province / Region",
+          "example": "NY"
+        },
+        "sub_administrative_area": {
+          "type": "string",
+          "description": "County / District",
+          "example": "Albany"
+        },
+        "locality": {
+          "type": "string",
+          "description": "City / Town",
+          "example": "Menands"
+        },
+        "postal_code": {
+          "type": "string",
+          "description": "Postal Code / Zip Code",
+          "example": "12204"
+        },
+        "thoroughfare": {
+          "type": "string",
+          "description": "Street Address",
+          "example": "431 Broadway"
+        },
+        "premise": {
+          "type": "string",
+          "description": "Apartment / Suite / Box number etc",
+          "example": "Suite c"
+        },
+        "sub_premise": {
+          "type": "string",
+          "description": "Floor # / Room # / Building label etc",
+          "example": "Zones Innovation Center"
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "./entityCommon.json"
+    }
+  ]
+}

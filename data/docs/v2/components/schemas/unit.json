@@ -1,6 +1,6 @@
 {
   "x-id": "#unit",
-  "description": "Defines the properties for a part unit",
+  "description": "Defines the properties for a unit",
   "required": [
     "label",
     "part",
