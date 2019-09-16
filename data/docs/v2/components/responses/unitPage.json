@@ -11,6 +11,30 @@
                 "type": "array",
                 "items": {
                   "type": "object",
+                  "properties": {
+                    "_links": {
+                      "properties": {
+                        "nter:current-location": {
+                          "type": "object",
+                          "properties": {
+                            "href": {
+                              "type": "string",
+                              "example": "https://api.nterprise.com/units/ec5db56d-32e6-4e5d-9bef-1016f3e13670/locations/current"
+                            }
+                          }
+                        },
+                        "nter:past-locations": {
+                          "type": "object",
+                          "properties": {
+                            "href": {
+                              "type": "string",
+                              "example": "https://api.nterprise.com/units/ec5db56d-32e6-4e5d-9bef-1016f3e13670/locations/past"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
                   "allOf": [
                     {
                       "$ref": "../schemas/unit.json"

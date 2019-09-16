@@ -1,0 +1,27 @@
+{
+  "operationId": "fetchPastUnitLocations",
+  "summary": "Fetches the past locations for a unit",
+  "description": "Fetch past locations",
+  "tags": [
+    "Unit"
+  ],
+  "parameters": [
+    {
+      "$ref": "../../../components/parameters/unitId.json"
+    }
+  ],
+  "responses": {
+    "200": {
+      "$ref": "../../../components/responses/trackedLocationPage.json"
+    },
+    "401": {
+      "$ref": "../../../components/responses/unauthorized.json"
+    },
+    "403": {
+      "$ref": "../../../components/responses/forbidden.json"
+    },
+    "404": {
+      "$ref": "../../../components/responses/notFound.json"
+    }
+  }
+}

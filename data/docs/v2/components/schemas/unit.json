@@ -68,6 +68,15 @@
         }
       ]
     },
+    "current_location": {
+      "x-reg": "#location",
+      "description": "The current location for the unit",
+      "allOf": [
+        {
+          "$ref": "./location.json"
+        }
+      ]
+    },
     "input_filter": {
       "$ref": "./inputFilter.json"
     }
@@ -75,9 +84,6 @@
   "allOf": [
     {
       "$ref": "./entityCommon.json"
-    },
-    {
-      "$ref": "./dateRange.json"
     }
   ]
 }
