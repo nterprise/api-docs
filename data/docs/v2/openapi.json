@@ -112,6 +112,9 @@
     "/projects/:project_id": {
       "$ref": "./paths/project.json"
     },
+    "/settings/statuses": {
+      "$ref": "./paths/settings/status.json"
+    },
     "/units": {
       "$ref": "./paths/unit/units.json"
     },
@@ -123,6 +126,9 @@
     },
     "/units/:unit_id/locations/past": {
       "$ref": "./paths/unit/pastLocations.json"
+    },
+    "/units/:unit_id/statuses": {
+      "$ref": "./paths/unit/statusHistory.json"
     },
     "/vendors": {
       "$ref": "./paths/vendor/vendors.json"

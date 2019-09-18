@@ -1,0 +1,10 @@
+{
+  "description": "The status to create",
+  "content": {
+    "application/json": {
+      "schema": {
+        "$ref": "../schemas/status.json"
+      }
+    }
+  }
+}

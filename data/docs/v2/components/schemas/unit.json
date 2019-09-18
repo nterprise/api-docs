@@ -51,7 +51,7 @@
       ]
     },
     "part": {
-      "x-ref": "#unit",
+      "x-ref": "#part",
       "description": "The part associated with this unit",
       "allOf": [
         {
@@ -79,6 +79,18 @@
     },
     "input_filter": {
       "$ref": "./inputFilter.json"
+    },
+    "current_status": {
+      "$ref": "./status.json"
+    },
+    "status_history": {
+      "maximum": 10,
+      "description": "The last ten statuses",
+      "allOf": [
+        {
+          "$ref": "./statusHistory.json"
+        }
+      ]
     }
   },
   "allOf": [

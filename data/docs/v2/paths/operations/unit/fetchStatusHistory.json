@@ -1,0 +1,27 @@
+{
+  "operationId": "fetchUnitStatusHistory",
+  "summary": "Fetches the status history for a unit",
+  "description": "Fetch past statuses",
+  "tags": [
+    "Unit"
+  ],
+  "parameters": [
+    {
+      "$ref": "../../../components/parameters/unitId.json"
+    }
+  ],
+  "responses": {
+    "200": {
+      "$ref": "../../../components/responses/statusHistory.json"
+    },
+    "401": {
+      "$ref": "../../../components/responses/unauthorized.json"
+    },
+    "403": {
+      "$ref": "../../../components/responses/forbidden.json"
+    },
+    "404": {
+      "$ref": "../../../components/responses/notFound.json"
+    }
+  }
+}

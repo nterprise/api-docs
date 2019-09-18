@@ -1,0 +1,27 @@
+{
+  "description": "A paged status history response",
+  "content": {
+    "application/hal+json": {
+      "schema": {
+        "properties": {
+          "_embedded": {
+            "type": "object",
+            "properties": {
+              "nter:statuses": {
+                "$ref": "../schemas/statusHistory.json"
+              }
+            }
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "../schemas/links/nextOffset.json"
+          },
+          {
+            "$ref": "../schemas/links/self.json"
+          }
+        ]
+      }
+    }
+  }
+}
