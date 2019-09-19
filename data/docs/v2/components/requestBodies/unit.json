@@ -33,6 +33,7 @@
             ],
             "properties": {
               "part_id": {
+                "readOnly": false,
                 "allOf": [
                   {
                     "$ref": "../../components/schemas/part.json#/properties/part_id"
@@ -40,6 +41,9 @@
                 ]
               }
             }
+          },
+          "current_status": {
+            "$ref": "../../components/schemas/status.json"
           }
         }
       }

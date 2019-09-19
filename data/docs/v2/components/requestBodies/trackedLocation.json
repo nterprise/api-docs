@@ -1,0 +1,32 @@
+{
+  "description": "The current location for the entity",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "required": [
+          "location_type",
+          "address"
+        ],
+        "properties": {
+          "location": {
+            "type": "object",
+            "properties": {
+              "location_id": {
+                "readOnly": false,
+                "$ref": "../../components/schemas/location.json#/properties/location_id"
+              }
+            }
+          },
+          "arrived_at": {
+            "allOf": [
+              {
+                "$ref": "../../components/schemas/trackedLocation.json#/properties/arrived_at"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

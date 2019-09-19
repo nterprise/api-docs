@@ -1,0 +1,8 @@
+{
+  "name": "filter[country]",
+  "in": "query",
+  "description": "Filter where the country contains this value",
+  "schema": {
+    "$ref": "../schemas/location.json#/properties/address/properties/country"
+  }
+}

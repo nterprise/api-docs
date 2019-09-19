@@ -6,10 +6,15 @@
       "readOnly": true,
       "properties": {
         "next": {
-          "type": "string",
-          "format": "url",
-          "readOnly": true,
-          "example": "https://api.nterprise.com/{entity}?offset=363yHhUhhI&limit=50"
+          "type": "object",
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "url",
+              "readOnly": true,
+              "example": "https://api.nterprise.com/{entity}?offset=363yHhUhhI&limit=50"
+            }
+          }
         }
       }
     }

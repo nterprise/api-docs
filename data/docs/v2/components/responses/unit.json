@@ -3,6 +3,75 @@
   "content": {
     "application/hal+json": {
       "schema": {
+        "type": "object",
+        "properties": {
+          "_embedded": {
+            "type": "object",
+            "readOnly": true,
+            "properties": {
+              "nter:current-location": {
+                "type": "array",
+                "description": "The current tracked location",
+                "maximum": 1,
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "location": {
+                      "$ref": "../schemas/location.json"
+                    },
+                    "arrived_at": {
+                      "$ref": "../schemas/trackedLocation.json#/properties/arrived_at"
+                    },
+                    "left_at": {
+                      "$ref": "../schemas/trackedLocation.json#/properties/left_at"
+                    }
+                  }
+                }
+              },
+              "nter:past-locations": {
+                "type": "array",
+                "description": "The five previous tracked locations",
+                "maximum": 5,
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "location": {
+                      "$ref": "../schemas/location.json"
+                    },
+                    "arrived_at": {
+                      "$ref": "../schemas/trackedLocation.json#/properties/arrived_at"
+                    },
+                    "left_at": {
+                      "$ref": "../schemas/trackedLocation.json#/properties/left_at"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "_links": {
+            "properties": {
+              "nter:current-location": {
+                "type": "object",
+                "properties": {
+                  "href": {
+                    "type": "string",
+                    "example": "https://api.nterprise.com/units/ec5db56d-32e6-4e5d-9bef-1016f3e13670/locations/current"
+                  }
+                }
+              },
+              "nter:past-locations": {
+                "type": "object",
+                "properties": {
+                  "href": {
+                    "type": "string",
+                    "example": "https://api.nterprise.com/units/ec5db56d-32e6-4e5d-9bef-1016f3e13670/locations/past"
+                  }
+                }
+              }
+            }
+          }
+        },
         "allOf": [
           {
             "$ref": "../schemas/unit.json"

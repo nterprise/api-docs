@@ -1,0 +1,30 @@
+{
+  "description": "Statuses response",
+  "content": {
+    "application/hal+json": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "_embedded": {
+            "type": "object",
+            "readOnly": true,
+            "properties": {
+              "nter:statuses": {
+                "maximum": 100,
+                "type": "array",
+                "items": {
+                  "$ref": "../schemas/status.json"
+                }
+              }
+            }
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "../schemas/links/self.json"
+          }
+        ]
+      }
+    }
+  }
+}

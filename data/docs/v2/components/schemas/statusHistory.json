@@ -1,0 +1,23 @@
+{
+  "x-id": "#status",
+  "description": "Defines the properties for a status history",
+  "type": "array",
+  "readOnly": true,
+  "items": {
+    "type": "object",
+    "description": "The time of transition into this status",
+    "properties": {
+      "created": {
+        "type": "string",
+        "description": "The date time this transition occurred",
+        "format": "date-time",
+        "x-comment": "Instead of using a new DB field, we will use the existing created field"
+      }
+    },
+    "allOf": [
+      {
+        "$ref": "./status.json"
+      }
+    ]
+  }
+}

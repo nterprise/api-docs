@@ -1,6 +1,6 @@
 {
   "x-id": "#unit",
-  "description": "Defines the properties for a part unit",
+  "description": "Defines the properties for a unit",
   "required": [
     "label",
     "part",
@@ -51,7 +51,7 @@
       ]
     },
     "part": {
-      "x-ref": "#unit",
+      "x-ref": "#part",
       "description": "The part associated with this unit",
       "allOf": [
         {
@@ -68,16 +68,34 @@
         }
       ]
     },
+    "current_location": {
+      "x-reg": "#location",
+      "description": "The current location for the unit",
+      "allOf": [
+        {
+          "$ref": "./location.json"
+        }
+      ]
+    },
     "input_filter": {
       "$ref": "./inputFilter.json"
+    },
+    "current_status": {
+      "$ref": "./status.json"
+    },
+    "status_history": {
+      "maximum": 10,
+      "description": "The last ten statuses",
+      "allOf": [
+        {
+          "$ref": "./statusHistory.json"
+        }
+      ]
     }
   },
   "allOf": [
     {
       "$ref": "./entityCommon.json"
-    },
-    {
-      "$ref": "./dateRange.json"
     }
   ]
 }

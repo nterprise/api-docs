@@ -1,0 +1,26 @@
+{
+  "description": "Tracked location response",
+  "content": {
+    "application/hal+json": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "location": {
+            "$ref": "../schemas/location.json"
+          },
+          "arrived_at": {
+            "$ref": "../schemas/trackedLocation.json#/properties/arrived_at"
+          },
+          "left_at": {
+            "$ref": "../schemas/trackedLocation.json#/properties/left_at"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "../schemas/links/self.json"
+          }
+        ]
+      }
+    }
+  }
+}

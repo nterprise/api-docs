@@ -1,0 +1,44 @@
+{
+  "description": "Defines properties for an entity which tracks location",
+  "required": [
+    "label",
+    "part",
+    "unit_id"
+  ],
+  "properties": {
+    "tracked_entity_id": {
+      "type": "string",
+      "description": "The identifier for the entity",
+      "example": "ec5db56d-32e6-4e5d-9bef-1016f3e13670",
+      "readOnly": true,
+      "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+    },
+    "tracked_entity_type": {
+      "type": "string",
+      "description": "The type of entity tracked",
+      "example": "UNIT",
+      "readOnly": true,
+      "enum": [
+        "UNIT"
+      ]
+    },
+    "location": {
+      "description": "The location",
+      "readOnly": true,
+      "$ref": "./location.json"
+    },
+    "arrived_at": {
+      "description": "Date the entity arrived at the location",
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "left_at": {
+      "description": "Date the entity left that location",
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true,
+      "nullable": true
+    }
+  }
+}

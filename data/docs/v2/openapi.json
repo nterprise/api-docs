@@ -70,6 +70,12 @@
     "/dashboard": {
       "$ref": "./paths/dashboard.json"
     },
+    "/locations": {
+      "$ref": "./paths/locations.json"
+    },
+    "/locations/:location_id": {
+      "$ref": "./paths/location.json"
+    },
     "/manufacturers": {
       "$ref": "./paths/manufacturer/manufacturers.json"
     },
@@ -106,11 +112,23 @@
     "/projects/:project_id": {
       "$ref": "./paths/project.json"
     },
+    "/settings/statuses": {
+      "$ref": "./paths/settings/status.json"
+    },
     "/units": {
-      "$ref": "./paths/units.json"
+      "$ref": "./paths/unit/units.json"
     },
     "/units/:unit_id": {
-      "$ref": "./paths/unit.json"
+      "$ref": "./paths/unit/unit.json"
+    },
+    "/units/:unit_id/locations/current": {
+      "$ref": "./paths/unit/currentLocation.json"
+    },
+    "/units/:unit_id/locations/past": {
+      "$ref": "./paths/unit/pastLocations.json"
+    },
+    "/units/:unit_id/statuses": {
+      "$ref": "./paths/unit/statusHistory.json"
     },
     "/vendors": {
       "$ref": "./paths/vendor/vendors.json"

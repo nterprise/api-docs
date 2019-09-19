@@ -1,0 +1,28 @@
+{
+  "x-id": "#status",
+  "description": "Defines the properties for a status",
+  "type": "object",
+  "required": [
+    "status",
+    "status_category"
+  ],
+  "properties": {
+    "status": {
+      "type": "string",
+      "description": "A Custom label for the status",
+      "example": "Reticulating Splines"
+    },
+    "category": {
+      "type": "string",
+      "description": "The classifier for the statues",
+      "example": "IN_PROGRESS",
+      "enum": [
+        "PENDING",
+        "IN_PROGRESS",
+        "VERIFYING",
+        "COMPLETE",
+        "BLOCKED"
+      ]
+    }
+  }
+}

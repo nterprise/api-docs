@@ -1,0 +1,25 @@
+{
+  "operationId": "createLocation",
+  "summary": "Creates a location",
+  "description": "Creates a new location",
+  "tags": [
+    "Location"
+  ],
+  "requestBody": {
+    "$ref": "../../../components/requestBodies/location.json"
+  },
+  "responses": {
+    "200": {
+      "$ref": "../../../components/responses/location.json"
+    },
+    "400": {
+      "$ref": "../../../components/responses/badRequest.json"
+    },
+    "401": {
+      "$ref": "../../../components/responses/unauthorized.json"
+    },
+    "403": {
+      "$ref": "../../../components/responses/forbidden.json"
+    }
+  }
+}
