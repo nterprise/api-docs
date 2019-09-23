@@ -1,0 +1,27 @@
+{
+  "operationId": "updateWorkOrder",
+  "summary": "Updates a work order",
+  "description": "Updates a work order",
+  "tags": [
+    "Work Order"
+  ],
+  "requestBody": {
+    "$ref": "../../../components/requestBodies/workOrder.json"
+  },
+  "parameters": [
+    {
+      "$ref": "../../../components/parameters/workOrderId.json"
+    }
+  ],
+  "responses": {
+    "200": {
+      "$ref": "../../../components/responses/workOrder.json"
+    },
+    "400": {
+      "$ref": "../../../components/responses/badRequest.json"
+    },
+    "403": {
+      "$ref": "../../../components/responses/forbidden.json"
+    }
+  }
+}

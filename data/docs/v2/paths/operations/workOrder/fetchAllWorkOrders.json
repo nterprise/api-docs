@@ -1,0 +1,36 @@
+{
+  "operationId": "fetchAllWorkOrders",
+  "summary": "Fetches A Page of work orders",
+  "description": "Fetch Work Order",
+  "tags": [
+    "Work Order"
+  ],
+  "parameters": [
+    {
+      "$ref": "../../../components/parameters/limit.json"
+    },
+    {
+      "$ref": "../../../components/parameters/offset.json"
+    },
+    {
+      "$ref": "../../../components/parameters/standardSort.json"
+    },
+    {
+      "$ref": "../../../components/parameters/filterLabel.json"
+    },
+    {
+      "$ref": "../../../components/parameters/filterCustomer.json"
+    }
+  ],
+  "responses": {
+    "200": {
+      "$ref": "../../../components/responses/workOrderPage.json"
+    },
+    "401": {
+      "$ref": "../../../components/responses/unauthorized.json"
+    },
+    "403": {
+      "$ref": "../../../components/responses/forbidden.json"
+    }
+  }
+}

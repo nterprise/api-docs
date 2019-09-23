@@ -1,0 +1,8 @@
+{
+  "get": {
+    "$ref": "./operations/workOrder/fetchAllWorkOrders.json"
+  },
+  "post": {
+    "$ref": "./operations/workOrder/createWorkOrder.json"
+  }
+}

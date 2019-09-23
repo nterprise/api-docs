@@ -1,0 +1,101 @@
+{
+  "x-id": "#unit",
+  "description": "Defines the properties for a unit",
+  "required": [
+    "label",
+    "part",
+    "unit_id"
+  ],
+  "properties": {
+    "label": {
+      "example": "Configure devices",
+      "description": "Description for the work order"
+    },
+    "work_order_id": {
+      "type": "string",
+      "description": "The identifier for the unit",
+      "example": "0f40ff8c-a3b5-4a30-90e5-0421c153183c",
+      "readOnly": true,
+      "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+    },
+    "type": {
+      "type": "string",
+      "description": "Type of work order",
+      "example": "device",
+      "enum": [
+        "device"
+      ]
+    },
+    "due_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "End date",
+      "example": "2020-08-07T18:10:53+00:00"
+    },
+    "current_status": {
+      "$ref": "./status.json"
+    },
+    "status_history": {
+      "maximum": 10,
+      "description": "The last ten statuses",
+      "allOf": [
+        {
+          "$ref": "./statusHistory.json"
+        }
+      ]
+    },
+    "project": {
+      "$ref": "./project.json"
+    },
+    "work_flows": {
+      "type": "array",
+      "description": "Cycles of work flows needed to complete the work order",
+      "items": {
+        "type": "object",
+        "properties": {
+          "cycles_needed": {
+            "type": "number",
+            "description": "The number of cycles needed",
+            "example": 4
+          },
+          "cycles_pending": {
+            "type": "number",
+            "description": "The number of cycles pending",
+            "example": 4
+          },
+          "cycles_in_progress": {
+            "type": "number",
+            "description": "The number of cycles in progress",
+            "example": 4
+          },
+          "cycles_verifying": {
+            "type": "number",
+            "description": "The number of cycles verifying",
+            "example": 4
+          },
+          "cycles_complete": {
+            "type": "number",
+            "description": "The number of cycles complete",
+            "example": 4
+          },
+          "cycles_blocked": {
+            "type": "number",
+            "description": "The number of cycles blocked",
+            "example": 4
+          },
+          "work_flow": {
+            "$ref": "./workflow.json"
+          }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "./entityCommon.json"
+    },
+    {
+      "$ref": "./dateRange.json"
+    }
+  ]
+}

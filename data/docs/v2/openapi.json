@@ -142,6 +142,12 @@
     "/vendors/:vendor_id/units": {
       "$ref": "./paths/vendor/units.json"
     },
+    "/work-orders": {
+      "$ref": "./paths/workOrders.json"
+    },
+    "/work-orders/:work_order_id": {
+      "$ref": "./paths/workOrder.json"
+    },
     "/work-flows": {
       "$ref": "./paths/workflow/workflows.json"
     },
@@ -222,6 +228,9 @@
       },
       "Vendor": {
         "$ref": "./components/schemas/vendor.json"
+      },
+      "Work Order": {
+        "$ref": "./components/schemas/workOrder.json"
       },
       "Workflow": {
         "$ref": "./components/schemas/workflow.json"
