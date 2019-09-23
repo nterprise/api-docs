@@ -1,0 +1,11 @@
+{
+  "get": {
+    "$ref": "./operations/workOrder/fetchWorkOrderById.json"
+  },
+  "put": {
+    "$ref": "./operations/workOrder/updateWorkOrder.json"
+  },
+  "delete": {
+    "$ref": "./operations/workOrder/deleteWorkOrder.json"
+  }
+}
