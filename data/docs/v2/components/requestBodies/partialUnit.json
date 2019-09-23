@@ -1,5 +1,5 @@
 {
-  "description": "The unit to create",
+  "description": "The part of the unit to update ",
   "content": {
     "application/json": {
       "schema": {
