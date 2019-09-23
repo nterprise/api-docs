@@ -1,8 +1,0 @@
-{
-  "get": {
-    "$ref": "../operations/unit/fetchCurrentLocation.json"
-  },
-  "post": {
-    "$ref": "../operations/unit/updateCurrentLocation.json"
-  }
-}

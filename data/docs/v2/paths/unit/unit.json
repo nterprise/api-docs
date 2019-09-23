@@ -5,6 +5,9 @@
   "put": {
     "$ref": "../operations/unit/updateUnit.json"
   },
+  "patch": {
+    "$ref": "../operations/unit/partialUpdateUnit.json"
+  },
   "delete": {
     "$ref": "../operations/unit/deleteUnit.json"
   }

@@ -1,22 +1,24 @@
 {
-  "operationId": "updateCurrentLocation",
-  "summary": "Update a units current location",
-  "description": "Update unit location",
+  "operationId": "partialUpdateUnit",
+  "summary": "Updates part of unit",
+  "description": "Update the current status or current location for a unit",
   "tags": [
     "Unit"
   ],
   "requestBody": {
-    "$ref": "../../../components/requestBodies/trackedLocation.json"
+    "$ref": "../../../components/requestBodies/partialUnit.json"
   },
+  "parameters": [
+    {
+      "$ref": "../../../components/parameters/unitId.json"
+    }
+  ],
   "responses": {
     "200": {
       "$ref": "../../../components/responses/unit.json"
     },
     "400": {
       "$ref": "../../../components/responses/badRequest.json"
-    },
-    "401": {
-      "$ref": "../../../components/responses/unauthorized.json"
     },
     "403": {
       "$ref": "../../../components/responses/forbidden.json"
