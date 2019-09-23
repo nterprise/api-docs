@@ -5,7 +5,8 @@
       "schema": {
         "type": "object",
         "required": [
-          "label"
+          "label",
+          "status_map"
         ],
         "properties": {
           "label": {
@@ -22,6 +23,13 @@
             "allOf": [
               {
                 "$ref": "../../components/schemas/customer.json#/properties/external_platform"
+              }
+            ]
+          },
+          "status_map": {
+            "allOf": [
+              {
+                "$ref": "../../components/schemas/customer.json#/properties/status_map"
               }
             ]
           }

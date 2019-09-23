@@ -4,7 +4,8 @@
   "required": [
     "label",
     "customer",
-    "program"
+    "program",
+    "status_map"
   ],
   "properties": {
     "label": {
@@ -35,6 +36,13 @@
           "$ref": "./program.json"
         }
       ]
+    },
+    "status_map": {
+      "type": "array",
+      "description": "List of allowed statuses",
+      "items": {
+        "$ref": "./status.json"
+      }
     }
   },
   "allOf": [
