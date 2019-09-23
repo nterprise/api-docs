@@ -1,0 +1,31 @@
+{
+  "description": "The unit to create",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "current_status": {
+            "$ref": "../../components/schemas/status.json"
+          },
+          "current_location": {
+            "type": "object",
+            "required": [
+              "location_id"
+            ],
+            "properties": {
+              "location_id": {
+                "readOnly": false,
+                "allOf": [
+                  {
+                    "$ref": "../../components/schemas/location.json#/properties/location_id"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
