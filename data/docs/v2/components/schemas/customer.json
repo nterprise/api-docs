@@ -3,7 +3,8 @@
   "description": "Customer",
   "required": [
     "label",
-    "customer_id"
+    "customer_id",
+    "status_map"
   ],
   "properties": {
     "customer_id": {
@@ -26,6 +27,13 @@
       },
       "example": {
         "ax_customer_id": "eff3ada3-0966-42be-a5e8-78efd3c52d39"
+      }
+    },
+    "status_map": {
+      "type": "array",
+      "description": "List of allowed statuses",
+      "items": {
+        "$ref": "./status.json"
       }
     }
   },

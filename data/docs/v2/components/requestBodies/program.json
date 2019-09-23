@@ -18,6 +18,13 @@
                 "$ref": "../../components/schemas/program.json#/properties/label"
               }
             ]
+          },
+          "status_map": {
+            "allOf": [
+              {
+                "$ref": "../../components/schemas/program.json#/properties/status_map"
+              }
+            ]
           }
         },
         "allOf": [
