@@ -1,0 +1,27 @@
+{
+  "operationId": "deleteQueue",
+  "summary": "Deletes a queue",
+  "description": "This will soft delete the queue",
+  "tags": [
+    "Queue"
+  ],
+  "parameters": [
+    {
+      "$ref": "../../../components/parameters/queueId.json"
+    }
+  ],
+  "responses": {
+    "205": {
+      "description": "Queue deleted"
+    },
+    "401": {
+      "$ref": "../../../components/responses/unauthorized.json"
+    },
+    "403": {
+      "$ref": "../../../components/responses/forbidden.json"
+    },
+    "404": {
+      "$ref": "../../../components/responses/notFound.json"
+    }
+  }
+}

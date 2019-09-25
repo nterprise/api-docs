@@ -56,7 +56,7 @@
                 "properties": {
                   "href": {
                     "type": "string",
-                    "example": "https://api.nterprise.com/units/ec5db56d-32e6-4e5d-9bef-1016f3e13670/locations/current"
+                    "example": "https://api.nterprise.com/locations/1b95ef28-47da-4804-a85c-4d8a30978cf3"
                   }
                 }
               },
@@ -65,7 +65,7 @@
                 "properties": {
                   "href": {
                     "type": "string",
-                    "example": "https://api.nterprise.com/units/ec5db56d-32e6-4e5d-9bef-1016f3e13670/locations/past"
+                    "example": "https://api.nterprise.com/units/ec5db56d-32e6-4e5d-9bef-1016f3e13670/locations"
                   }
                 }
               }

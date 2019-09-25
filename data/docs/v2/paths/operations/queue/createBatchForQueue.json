@@ -1,0 +1,30 @@
+{
+  "operationId": "createBatchForQueue",
+  "summary": "Create a batch",
+  "description": "Creates a new batch for a queue",
+  "tags": [
+    "Queue"
+  ],
+  "parameters": [
+    {
+      "$ref": "../../../components/parameters/queueId.json"
+    }
+  ],
+  "requestBody": {
+    "$ref": "../../../components/requestBodies/batch.json"
+  },
+  "responses": {
+    "200": {
+      "$ref": "../../../components/responses/batch.json"
+    },
+    "400": {
+      "$ref": "../../../components/responses/badRequest.json"
+    },
+    "401": {
+      "$ref": "../../../components/responses/unauthorized.json"
+    },
+    "403": {
+      "$ref": "../../../components/responses/forbidden.json"
+    }
+  }
+}

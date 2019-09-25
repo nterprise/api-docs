@@ -1,0 +1,30 @@
+{
+  "operationId": "fetchBatchById",
+  "summary": "Fetches a batch by Id",
+  "description": "Fetch Batch",
+  "tags": [
+    "Queue"
+  ],
+  "parameters": [
+    {
+      "$ref": "../../../components/parameters/queueId.json"
+    },
+    {
+      "$ref": "../../../components/parameters/batchId.json"
+    }
+  ],
+  "responses": {
+    "200": {
+      "$ref": "../../../components/responses/batch.json"
+    },
+    "401": {
+      "$ref": "../../../components/responses/unauthorized.json"
+    },
+    "403": {
+      "$ref": "../../../components/responses/forbidden.json"
+    },
+    "404": {
+      "$ref": "../../../components/responses/notFound.json"
+    }
+  }
+}

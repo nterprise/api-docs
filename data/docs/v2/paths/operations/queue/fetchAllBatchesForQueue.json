@@ -1,0 +1,30 @@
+{
+  "operationId": "fetchAllBatchesForQueue",
+  "summary": "Fetches A Page of batches",
+  "description": "Fetch Queue Batches",
+  "tags": [
+    "Queue"
+  ],
+  "parameters": [
+    {
+      "$ref": "../../../components/parameters/queueId.json"
+    },
+    {
+      "$ref": "../../../components/parameters/limit.json"
+    },
+    {
+      "$ref": "../../../components/parameters/offset.json"
+    }
+  ],
+  "responses": {
+    "200": {
+      "$ref": "../../../components/responses/batchPage.json"
+    },
+    "401": {
+      "$ref": "../../../components/responses/unauthorized.json"
+    },
+    "403": {
+      "$ref": "../../../components/responses/forbidden.json"
+    }
+  }
+}

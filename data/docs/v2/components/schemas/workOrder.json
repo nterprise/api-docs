@@ -52,35 +52,57 @@
       "description": "Cycles of work flows needed to complete the work order",
       "items": {
         "type": "object",
+        "required": [
+          "cycles_needed",
+          "work_flow"
+        ],
         "properties": {
           "cycles_needed": {
             "type": "number",
             "description": "The number of cycles needed",
+            "format": "int32",
             "example": 4
           },
           "cycles_pending": {
             "type": "number",
             "description": "The number of cycles pending",
+            "format": "int32",
+            "readOnly": true,
             "example": 4
           },
           "cycles_in_progress": {
             "type": "number",
             "description": "The number of cycles in progress",
+            "format": "int32",
+            "readOnly": true,
             "example": 4
           },
           "cycles_verifying": {
             "type": "number",
             "description": "The number of cycles verifying",
+            "format": "int32",
+            "readOnly": true,
             "example": 4
           },
           "cycles_complete": {
             "type": "number",
             "description": "The number of cycles complete",
+            "format": "int32",
+            "readOnly": true,
             "example": 4
           },
           "cycles_blocked": {
             "type": "number",
             "description": "The number of cycles blocked",
+            "format": "int32",
+            "readOnly": true,
+            "example": 4
+          },
+          "cycles_cancelled": {
+            "type": "number",
+            "description": "The number of cycles cancelled",
+            "format": "int32",
+            "readOnly": true,
             "example": 4
           },
           "work_flow": {

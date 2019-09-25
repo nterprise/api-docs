@@ -115,6 +115,18 @@
     "/settings/statuses": {
       "$ref": "./paths/settings/status.json"
     },
+    "/queues": {
+      "$ref": "./paths/queue/queues.json"
+    },
+    "/queues/:queue_id": {
+      "$ref": "./paths/queue/queue.json"
+    },
+    "/queues/:queue_id/batches": {
+      "$ref": "./paths/queue/batches.json"
+    },
+    "/queues/:queue_id/batches/:batch_id": {
+      "$ref": "./paths/queue/batch.json"
+    },
     "/units": {
       "$ref": "./paths/unit/units.json"
     },
@@ -126,6 +138,12 @@
     },
     "/units/:unit_id/statuses": {
       "$ref": "./paths/unit/statusHistory.json"
+    },
+    "/users": {
+      "$ref": "./paths/user/users.json"
+    },
+    "/users/:user_id": {
+      "$ref": "./paths/user/user.json"
     },
     "/vendors": {
       "$ref": "./paths/vendor/vendors.json"

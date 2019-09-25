@@ -1,0 +1,110 @@
+{
+  "x-id": "#batch",
+  "description": "Defines the properties for a work order batch",
+  "required": [
+    "label",
+    "queue"
+  ],
+  "properties": {
+    "batch_id": {
+      "type": "string",
+      "description": "The identifier for the batch",
+      "example": "59c834ad-d9cc-4e0f-a569-8f4e52c351b9",
+      "readOnly": true,
+      "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+    },
+    "queue": {
+      "description": "Queue the batch is in",
+      "allOf": [
+        {
+          "$ref": "./queue.json"
+        }
+      ]
+    },
+    "order": {
+      "type": "number",
+      "description": "Order for the queue",
+      "example": 1,
+      "format": "int32"
+    },
+    "users": {
+      "type": "array",
+      "description": "Users assigned to this batch",
+      "maximum": 100,
+      "items": {
+        "$ref": "./user.json"
+      }
+    },
+    "number_cycles": {
+      "type": "number",
+      "description": "The number of cycles for this batch",
+      "format": "int32",
+      "example": 4
+    },
+    "cycles": {
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "pending": {
+          "type": "number",
+          "description": "The number of cycles pending",
+          "format": "int32",
+          "readOnly": true,
+          "example": 4
+        },
+        "in_progress": {
+          "type": "number",
+          "description": "The number of cycles in progress",
+          "format": "int32",
+          "readOnly": true,
+          "example": 4
+        },
+        "verifying": {
+          "type": "number",
+          "description": "The number of cycles verifying",
+          "format": "int32",
+          "readOnly": true,
+          "example": 4
+        },
+        "complete": {
+          "type": "number",
+          "description": "The number of cycles complete",
+          "format": "int32",
+          "readOnly": true,
+          "example": 4
+        },
+        "blocked": {
+          "type": "number",
+          "description": "The number of cycles blocked",
+          "format": "int32",
+          "readOnly": true,
+          "example": 4
+        },
+        "cancelled": {
+          "type": "number",
+          "description": "The number of cycles cancelled",
+          "format": "int32",
+          "readOnly": true,
+          "example": 4
+        }
+      }
+    },
+    "work_order": {
+      "type": "object",
+      "description": "Work order for the batch",
+      "allOf": [
+        {
+          "$ref": "./workOrder.json"
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "./entityCommon.json#/properties/created"
+    },
+    {
+      "$ref": "./entityCommon.json#/properties/updated"
+    }
+  ]
+}
