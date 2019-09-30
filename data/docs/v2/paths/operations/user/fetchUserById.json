@@ -1,0 +1,27 @@
+{
+  "operationId": "fetchUserById",
+  "summary": "Fetches a user by Id",
+  "description": "Fetch User",
+  "tags": [
+    "User"
+  ],
+  "parameters": [
+    {
+      "$ref": "../../../components/parameters/userId.json"
+    }
+  ],
+  "responses": {
+    "200": {
+      "$ref": "../../../components/responses/user.json"
+    },
+    "401": {
+      "$ref": "../../../components/responses/unauthorized.json"
+    },
+    "403": {
+      "$ref": "../../../components/responses/forbidden.json"
+    },
+    "404": {
+      "$ref": "../../../components/responses/notFound.json"
+    }
+  }
+}

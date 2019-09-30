@@ -1,0 +1,33 @@
+{
+  "description": "The queue to create",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "required": [
+          "label",
+          "priority"
+        ],
+        "properties": {
+          "label": {
+            "allOf": [
+              {
+                "$ref": "../../components/schemas/entityCommon.json#/properties/label"
+              },
+              {
+                "$ref": "../../components/schemas/queue.json#/properties/label"
+              }
+            ]
+          },
+          "priority": {
+            "allOf": [
+              {
+                "$ref": "../../components/schemas/queue.json#/properties/priority"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

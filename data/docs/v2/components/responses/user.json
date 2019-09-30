@@ -1,0 +1,18 @@
+{
+  "description": "User response",
+  "content": {
+    "application/hal+json": {
+      "schema": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "../schemas/user.json"
+          },
+          {
+            "$ref": "../schemas/links/self.json"
+          }
+        ]
+      }
+    }
+  }
+}

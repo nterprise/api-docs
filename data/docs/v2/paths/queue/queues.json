@@ -1,0 +1,8 @@
+{
+  "get": {
+    "$ref": "../operations/queue/fetchAllQueues.json"
+  },
+  "post": {
+    "$ref": "../operations/queue/createQueue.json"
+  }
+}

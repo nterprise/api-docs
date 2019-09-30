@@ -1,5 +1,5 @@
 {
-  "description": "A paged unit response",
+  "description": "A paged queue response",
   "content": {
     "application/hal+json": {
       "schema": {
@@ -7,28 +7,19 @@
           "_embedded": {
             "type": "object",
             "properties": {
-              "nter:units": {
+              "nter:queues": {
                 "type": "array",
                 "items": {
                   "type": "object",
                   "properties": {
                     "_links": {
                       "properties": {
-                        "nter:current-location": {
+                        "nter:queue-location": {
                           "type": "object",
                           "properties": {
                             "href": {
                               "type": "string",
-                              "example": "https://api.nterprise.com/locations/ec5db56d-32e6-4e5d-9bef-1016f3e13670"
-                            }
-                          }
-                        },
-                        "nter:past-locations": {
-                          "type": "object",
-                          "properties": {
-                            "href": {
-                              "type": "string",
-                              "example": "https://api.nterprise.com/units/ec5db56d-32e6-4e5d-9bef-1016f3e13670/locations/"
+                              "example": "https://api.nterprise.com/location/ec5db56d-32e6-4e5d-9bef-1016f3e13670"
                             }
                           }
                         }
@@ -37,7 +28,7 @@
                   },
                   "allOf": [
                     {
-                      "$ref": "../schemas/unit.json"
+                      "$ref": "../schemas/queue.json"
                     },
                     {
                       "$ref": "../schemas/links/self.json"

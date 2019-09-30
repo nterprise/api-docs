@@ -1,0 +1,52 @@
+{
+  "description": "Queue response",
+  "content": {
+    "application/hal+json": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "_embedded": {
+            "type": "object",
+            "readOnly": true,
+            "properties": {
+              "nter:queue-location": {
+                "type": "array",
+                "description": "Location for the queue",
+                "maximum": 1,
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "location": {
+                      "$ref": "../schemas/location.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "_links": {
+            "properties": {
+              "nter:queue-location": {
+                "type": "object",
+                "properties": {
+                  "href": {
+                    "type": "string",
+                    "example": "https://api.nterprise.com/location/ec5db56d-32e6-4e5d-9bef-1016f3e13670"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "../schemas/queue.json"
+          },
+          {
+            "$ref": "../schemas/links/self.json"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "operationId": "updateQueue",
+  "summary": "Updates a queue",
+  "description": "Updates a queue",
+  "tags": [
+    "Queue"
+  ],
+  "requestBody": {
+    "$ref": "../../../components/requestBodies/queue.json"
+  },
+  "parameters": [
+    {
+      "$ref": "../../../components/parameters/queueId.json"
+    }
+  ],
+  "responses": {
+    "200": {
+      "$ref": "../../../components/responses/queue.json"
+    },
+    "400": {
+      "$ref": "../../../components/responses/badRequest.json"
+    },
+    "403": {
+      "$ref": "../../../components/responses/forbidden.json"
+    }
+  }
+}

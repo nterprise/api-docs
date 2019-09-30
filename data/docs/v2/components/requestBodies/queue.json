@@ -1,0 +1,50 @@
+{
+  "description": "The queue to create",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "required": [
+          "label",
+          "location",
+          "priority"
+        ],
+        "properties": {
+          "label": {
+            "allOf": [
+              {
+                "$ref": "../../components/schemas/entityCommon.json#/properties/label"
+              },
+              {
+                "$ref": "../../components/schemas/queue.json#/properties/label"
+              }
+            ]
+          },
+          "location": {
+            "type":"object",
+            "required": [
+              "location_id"
+            ],
+            "properties": {
+              "location_id": {
+                "readOnly": false,
+                "allOf": [
+                  {
+                    "$ref": "../../components/schemas/location.json#/properties/location_id"
+                  }
+                ]
+              }
+            }
+          },
+          "priority": {
+            "allOf": [
+              {
+                "$ref": "../../components/schemas/queue.json#/properties/priority"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "x-id": "#queue",
+  "description": "Defines the properties for a location queue",
+  "required": [
+    "label"
+  ],
+  "properties": {
+    "label": {
+      "example": "Fast Lane",
+      "description": "Name of the queue"
+    },
+    "queue_id": {
+      "type": "string",
+      "description": "The identifier for the queue",
+      "example": "59c834ad-d9cc-4e0f-a569-8f4e52c351b9",
+      "readOnly": true,
+      "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+    },
+    "location": {
+      "type": "object",
+      "description": "The location for the queue",
+      "allOf": [
+        {
+          "$ref": "./location.json"
+        }
+      ]
+    },
+    "priority": {
+      "type": "number",
+      "description": "Priority level for queue",
+      "example": 42,
+      "format": "int32"
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "./entityCommon.json"
+    }
+  ]
+}

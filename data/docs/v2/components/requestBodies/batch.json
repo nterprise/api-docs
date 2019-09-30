@@ -1,0 +1,67 @@
+{
+  "description": "The batch to create",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "required": [
+          "queue",
+          "number_cycles",
+          "work_order"
+        ],
+        "properties": {
+          "users": {
+            "type": "array",
+            "maximum": 100,
+            "items": {
+              "type": "object",
+              "required": [
+                "user_id"
+              ],
+              "properties": {
+                "user_id": {
+                  "readOnly": false,
+                  "allOf": [
+                    {
+                      "$ref": "../../components/schemas/user.json#/properties/user_id"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "order": {
+            "allOf": [
+              {
+                "$ref": "../../components/schemas/batch.json#/properties/order"
+              }
+            ]
+          },
+          "work_order": {
+            "type": "object",
+            "required": [
+              "work_order_id"
+            ],
+            "properties": {
+              "work_order_id": {
+                "readOnly": false,
+                "allOf": [
+                  {
+                    "$ref": "../../components/schemas/workOrder.json#/properties/work_order_id"
+                  }
+                ]
+              }
+            }
+          },
+          "number_cycles": {
+            "allOf": [
+              {
+                "$ref": "../../components/schemas/batch.json#/properties/number_cycles"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}
