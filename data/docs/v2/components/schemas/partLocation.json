@@ -1,0 +1,69 @@
+{
+  "x-id": "#part",
+  "description": "Defines the properties for a part",
+  "required": [
+    "label",
+    "part_id",
+    "customer",
+    "manufacturer"
+  ],
+  "properties": {
+    "part": {
+      "description": "The part",
+      "allOf": [
+        {
+          "$ref": "./part.json"
+        }
+      ]
+    },
+    "location": {
+      "description": "Location of the part",
+      "allOf": [
+        {
+          "$ref": "./location.json"
+        }
+      ]
+    },
+    "units_available": {
+      "type": "object",
+      "description": "Break down of units",
+      "properties": {
+        "allocated": {
+          "description": "Number of units allocated to a project",
+          "type": "number",
+          "format": "int32",
+          "minimum": 0,
+          "example": 42
+        },
+        "un_allocated": {
+          "description": "Number of units not allocated to a project",
+          "type": "number",
+          "format": "int32",
+          "minimum": 0,
+          "example": 24
+        },
+        "by_status": {
+          "type": "array",
+          "description": "Break down of units by status",
+          "items": {
+            "type": "object",
+            "properties": {
+              "qty": {
+                "description": "Number of units in this status",
+                "type": "number",
+                "format": "int32",
+                "minimum": 0,
+                "example": 6
+              }
+            },
+            "allOf": [
+              {
+                "$ref": "./status.json"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}
