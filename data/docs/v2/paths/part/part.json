@@ -1,0 +1,11 @@
+{
+  "get": {
+    "$ref": "../operations/part/fetchPartById.json"
+  },
+  "put": {
+    "$ref": "../operations/part/updatePart.json"
+  },
+  "delete": {
+    "$ref": "../operations/part/deletePart.json"
+  }
+}

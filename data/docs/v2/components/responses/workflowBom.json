@@ -1,0 +1,17 @@
+{
+  "description": "Bill of Material",
+  "content": {
+    "application/hal+json": {
+      "schema": {
+        "allOf": [
+          {
+            "$ref": "../schemas/workflowBom.json"
+          },
+          {
+            "$ref": "../schemas/links/self.json"
+          }
+        ]
+      }
+    }
+  }
+}

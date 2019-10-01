@@ -92,10 +92,13 @@
       "$ref": "./paths/me.json"
     },
     "/parts": {
-      "$ref": "./paths/parts.json"
+      "$ref": "./paths/part/parts.json"
     },
     "/parts/:part_id": {
-      "$ref": "./paths/part.json"
+      "$ref": "./paths/part/part.json"
+    },
+    "/parts/:part_id/locations": {
+      "$ref": "./paths/part/partLocations.json"
     },
     "/programs": {
       "$ref": "./paths/program/programs.json"
@@ -171,6 +174,9 @@
     },
     "/work-flows/:workflow_id/versions": {
       "$ref": "./paths/workflow/versions.json"
+    },
+    "/work-flows/:workflow_id/bill-of-materials": {
+      "$ref": "./paths/workflow/bom.json"
     }
   },
   "security": [
