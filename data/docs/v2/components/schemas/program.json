@@ -28,7 +28,7 @@
         }
       ]
     },
-    "status_map": {
+    "allowed_statuses": {
       "type": "array",
       "description": "List of allowed statuses",
       "items": {
