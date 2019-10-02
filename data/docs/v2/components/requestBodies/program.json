@@ -19,10 +19,10 @@
               }
             ]
           },
-          "status_map": {
+          "allowed_statuses": {
             "allOf": [
               {
-                "$ref": "../../components/schemas/program.json#/properties/status_map"
+                "$ref": "../../components/schemas/program.json#/properties/allowed_statuses"
               }
             ]
           }

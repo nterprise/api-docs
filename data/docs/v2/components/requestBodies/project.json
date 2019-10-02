@@ -35,10 +35,10 @@
               }
             }
           },
-          "status_map": {
+          "allowed_statuses": {
             "allOf": [
               {
-                "$ref": "../../components/schemas/project.json#/properties/status_map"
+                "$ref": "../../components/schemas/project.json#/properties/allowed_statuses"
               }
             ]
           }

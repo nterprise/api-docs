@@ -6,7 +6,7 @@
         "type": "object",
         "required": [
           "label",
-          "status_map"
+          "allowed_statuses"
         ],
         "properties": {
           "label": {
@@ -26,10 +26,10 @@
               }
             ]
           },
-          "status_map": {
+          "allowed_statuses": {
             "allOf": [
               {
-                "$ref": "../../components/schemas/customer.json#/properties/status_map"
+                "$ref": "../../components/schemas/customer.json#/properties/allowed_statuses"
               }
             ]
           }

@@ -29,7 +29,7 @@
         "ax_customer_id": "eff3ada3-0966-42be-a5e8-78efd3c52d39"
       }
     },
-    "status_map": {
+    "allowed_statuses": {
       "type": "array",
       "description": "List of allowed statuses",
       "items": {
