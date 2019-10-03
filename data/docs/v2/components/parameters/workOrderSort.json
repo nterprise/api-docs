@@ -1,0 +1,24 @@
+{
+  "name": "sort",
+  "in": "query",
+  "description": "Sort by field",
+  "schema": {
+    "type": "string",
+    "enum": [
+      "customer",
+      "-customer",
+      "project",
+      "-project",
+      "program",
+      "-program",
+      "dueDate",
+      "-dueDate",
+      "startDate",
+      "-startDate",
+      "created",
+      "-created",
+      "updated",
+      "-updated"
+    ]
+  }
+}

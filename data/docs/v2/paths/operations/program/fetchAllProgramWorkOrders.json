@@ -1,11 +1,14 @@
 {
-  "operationId": "fetchAllWorkOrders",
-  "summary": "Fetches A Page of work orders",
-  "description": "Fetch Work Order",
+  "operationId": "fetchAllProgramWorkOrders",
+  "summary": "Fetches work orders for a program",
+  "description": "Fetch program work orders",
   "tags": [
-    "Work Order"
+    "Program"
   ],
   "parameters": [
+    {
+      "$ref": "../../../components/parameters/programId.json"
+    },
     {
       "$ref": "../../../components/parameters/limit.json"
     },
@@ -17,9 +20,6 @@
     },
     {
       "$ref": "../../../components/parameters/filterLabel.json"
-    },
-    {
-      "$ref": "../../../components/parameters/filterCustomer.json"
     },
     {
       "$ref": "../../../components/parameters/filterProject.json"
@@ -37,6 +37,9 @@
     },
     "401": {
       "$ref": "../../../components/responses/unauthorized.json"
+    },
+    "404": {
+      "$ref": "../../../components/responses/notFound.json"
     },
     "403": {
       "$ref": "../../../components/responses/forbidden.json"
