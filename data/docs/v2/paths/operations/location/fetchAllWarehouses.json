@@ -1,0 +1,42 @@
+{
+  "operationId": "fetchAllWarehouses",
+  "summary": "Fetches A Page of warehouses",
+  "description": "Fetch warehouses",
+  "tags": [
+    "Location"
+  ],
+  "parameters": [
+    {
+      "$ref": "../../../components/parameters/limit.json"
+    },
+    {
+      "$ref": "../../../components/parameters/offset.json"
+    },
+    {
+      "$ref": "../../../components/parameters/locationSort.json"
+    },
+    {
+      "$ref": "../../../components/parameters/filterAdministrativeArea.json"
+    },
+    {
+      "$ref": "../../../components/parameters/filterCountry.json"
+    },
+    {
+      "$ref": "../../../components/parameters/filterPostalCode.json"
+    },
+    {
+      "$ref": "../../../components/parameters/filterThoroughfare.json"
+    }
+  ],
+  "responses": {
+    "200": {
+      "$ref": "../../../components/responses/locationPage.json"
+    },
+    "401": {
+      "$ref": "../../../components/responses/unauthorized.json"
+    },
+    "403": {
+      "$ref": "../../../components/responses/forbidden.json"
+    }
+  }
+}

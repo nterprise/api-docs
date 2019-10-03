@@ -67,14 +67,20 @@
     "/customers/:customer_id/units": {
       "$ref": "./paths/customer/units.json"
     },
+    "/customers/:customer_id/work-orders": {
+      "$ref": "./paths/customer/workOrders.json"
+    },
     "/dashboard": {
       "$ref": "./paths/dashboard.json"
     },
+    "/facilities": {
+      "$ref": "./paths/location/facilities.json"
+    },
     "/locations": {
-      "$ref": "./paths/locations.json"
+      "$ref": "./paths/location/locations.json"
     },
     "/locations/:location_id": {
-      "$ref": "./paths/location.json"
+      "$ref": "./paths/location/location.json"
     },
     "/manufacturers": {
       "$ref": "./paths/manufacturer/manufacturers.json"
@@ -109,11 +115,17 @@
     "/programs/:program_id/projects": {
       "$ref": "./paths/program/projects.json"
     },
+    "/programs/:program_id/work-orders": {
+      "$ref": "./paths/program/workOrders.json"
+    },
     "/projects": {
-      "$ref": "./paths/projects.json"
+      "$ref": "./paths/project/projects.json"
     },
     "/projects/:project_id": {
-      "$ref": "./paths/project.json"
+      "$ref": "./paths/project/project.json"
+    },
+    "/projects/:project_id/work-orders": {
+      "$ref": "./paths/project/workOrders.json"
     },
     "/settings/statuses": {
       "$ref": "./paths/settings/status.json"
@@ -159,6 +171,9 @@
     },
     "/vendors/:vendor_id/units": {
       "$ref": "./paths/vendor/units.json"
+    },
+    "/ware-houses": {
+      "$ref": "./paths/location/warehouses.json"
     },
     "/work-orders": {
       "$ref": "./paths/workOrders.json"
