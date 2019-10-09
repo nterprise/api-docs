@@ -8,8 +8,12 @@
   ],
   "properties": {
     "label": {
-      "example": "Configure devices",
-      "description": "Description for the work order"
+      "example": "Provision devices",
+      "description": "Label for the work order"
+    },
+    "description": {
+      "example": "Provision 150 devices for 123 Main St",
+      "description": "Detailed description for the work order"
     },
     "work_order_id": {
       "type": "string",
