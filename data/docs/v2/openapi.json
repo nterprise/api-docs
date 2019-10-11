@@ -82,6 +82,12 @@
     "/locations/:location_id": {
       "$ref": "./paths/location/location.json"
     },
+    "/locations/:location_id/resources": {
+      "$ref": "./paths/location/resources.json"
+    },
+    "/locations/:location_id/resources/:resource_id": {
+      "$ref": "./paths/location/resource.json"
+    },
     "/manufacturers": {
       "$ref": "./paths/manufacturer/manufacturers.json"
     },
@@ -256,6 +262,9 @@
       "Project": {
         "$ref": "./components/schemas/project.json"
       },
+      "Resource": {
+        "$ref": "./components/schemas/resource.json"
+      },
       "Unit": {
         "$ref": "./components/schemas/unit.json"
       },
@@ -265,7 +274,7 @@
       "Vendor": {
         "$ref": "./components/schemas/vendor.json"
       },
-      "Work Order": {
+      "WorkOrder": {
         "$ref": "./components/schemas/workOrder.json"
       },
       "Workflow": {
