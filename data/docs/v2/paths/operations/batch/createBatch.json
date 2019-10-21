@@ -1,14 +1,9 @@
 {
-  "operationId": "createBatchForQueue",
+  "operationId": "createBatch",
   "summary": "Create a batch",
   "description": "Creates a new batch for a queue",
   "tags": [
-    "Queue"
-  ],
-  "parameters": [
-    {
-      "$ref": "../../../components/parameters/queueId.json"
-    }
+    "Batch"
   ],
   "requestBody": {
     "$ref": "../../../components/requestBodies/batch.json"

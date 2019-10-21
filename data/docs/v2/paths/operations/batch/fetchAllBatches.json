@@ -1,14 +1,11 @@
 {
   "operationId": "fetchAllBatchesForQueue",
-  "summary": "Fetches A Page of batches for a queue",
-  "description": "Fetch Queue Batches",
+  "summary": "Fetches A Page of batches",
+  "description": "Fetch Batches",
   "tags": [
-    "Queue"
+    "Batch"
   ],
   "parameters": [
-    {
-      "$ref": "../../../components/parameters/queueId.json"
-    },
     {
       "$ref": "../../../components/parameters/limit.json"
     },
