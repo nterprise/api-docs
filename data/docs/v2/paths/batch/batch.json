@@ -1,0 +1,8 @@
+{
+  "get": {
+    "$ref": "../operations/batch/fetchBatchById.json"
+  },
+  "delete": {
+    "$ref": "../operations/batch/deleteBatch.json"
+  }
+}

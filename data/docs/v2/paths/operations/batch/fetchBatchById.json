@@ -3,12 +3,9 @@
   "summary": "Fetches a batch by Id",
   "description": "Fetch Batch",
   "tags": [
-    "Queue"
+    "Batch"
   ],
   "parameters": [
-    {
-      "$ref": "../../../components/parameters/queueId.json"
-    },
     {
       "$ref": "../../../components/parameters/batchId.json"
     }

@@ -1,8 +1,5 @@
 {
   "get": {
     "$ref": "../operations/queue/fetchAllBatchesForQueue.json"
-  },
-  "post": {
-    "$ref": "../operations/queue/createBatchForQueue.json"
   }
 }
