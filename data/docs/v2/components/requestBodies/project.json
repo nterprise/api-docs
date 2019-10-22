@@ -11,14 +11,7 @@
         ],
         "properties": {
           "label": {
-            "allOf": [
-              {
-                "$ref": "../../components/schemas/entityCommon.json#/properties/label"
-              },
-              {
-                "$ref": "../../components/schemas/project.json#/properties/label"
-              }
-            ]
+            "$ref": "../../components/schemas/project.json#/properties/label"
           },
           "program": {
             "type": "object",
@@ -27,27 +20,20 @@
             ],
             "properties": {
               "program_id": {
-                "allOf": [
-                  {
-                    "$ref": "../../components/schemas/program.json#/properties/program_id"
-                  }
-                ]
+                "$ref": "../../components/schemas/program.json#/properties/program_id"
               }
             }
           },
           "allowed_statuses": {
-            "allOf": [
-              {
-                "$ref": "../../components/schemas/project.json#/properties/allowed_statuses"
-              }
-            ]
+            "$ref": "../../components/schemas/project.json#/properties/allowed_statuses"
+          },
+          "start_date": {
+            "$ref": "../../components/schemas/dateRange.json#/properties/start_date"
+          },
+          "end_date": {
+            "$ref": "../../components/schemas/dateRange.json#/properties/end_date"
           }
-        },
-        "allOf": [
-          {
-            "$ref": "../../components/schemas/dateRange.json"
-          }
-        ]
+        }
       }
     }
   }

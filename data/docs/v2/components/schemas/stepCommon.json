@@ -44,7 +44,7 @@
       ],
       "properties": {
         "retry": {
-          "type": "number",
+          "type": "integer",
           "description": "Number of times to retry this step",
           "minimum": 0,
           "maximum": 10,

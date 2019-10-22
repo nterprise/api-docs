@@ -1,15 +1,11 @@
 {
+  "x-nter-relation": "contexts",
+  "x-nter-model": "Context",
+  "x-nter-callable": true,
   "type": "object",
   "properties": {
     "label": {
-      "example": "Context for workflow <work flow label>",
-      "description": "Label for the context (automatically generated)",
-      "readOnly": true,
-      "allOf": [
-        {
-          "$ref": "./entityCommon.json#/properties/label"
-        }
-      ]
+      "$ref": "./entityCommon.json#/properties/label"
     },
     "context_id": {
       "type": "string",
@@ -19,14 +15,7 @@
       "pattern": "^[A-Za-z0-9-_]+$"
     },
     "workflow": {
-      "type": "object",
-      "description": "The workflow being used for this context",
-      "readOnly": true,
-      "allOf": [
-        {
-          "$ref": "./workflow.json"
-        }
-      ]
+      "$ref": "./workflow.json"
     },
     "current_step": {
       "type": "string",

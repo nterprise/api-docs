@@ -12,14 +12,7 @@
         ],
         "properties": {
           "label": {
-            "allOf": [
-              {
-                "$ref": "../../components/schemas/entityCommon.json#/properties/label"
-              },
-              {
-                "$ref": "../../components/schemas/part.json#/properties/label"
-              }
-            ]
+            "$ref": "../../components/schemas/part.json#/properties/label"
           },
           "customer": {
             "type": "object",
@@ -28,11 +21,7 @@
             ],
             "properties": {
               "customer_id": {
-                "allOf": [
-                  {
-                    "$ref": "../../components/schemas/customer.json#/properties/customer_id"
-                  }
-                ]
+                "$ref": "../../components/schemas/customer.json#/properties/customer_id"
               }
             }
           },
@@ -44,18 +33,10 @@
             ],
             "properties": {
               "manufacturer_id": {
-                "allOf": [
-                  {
-                    "$ref": "../../components/schemas/manufacturer.json#/properties/manufacturer_id"
-                  }
-                ]
+                "$ref": "../../components/schemas/manufacturer.json#/properties/manufacturer_id"
               },
               "part_number": {
-                "allOf": [
-                  {
-                    "$ref": "../../components/schemas/part.json#/properties/manufacturer/properties/part_number"
-                  }
-                ]
+                "$ref": "../../components/schemas/part.json#/properties/manufacturer/properties/part_number"
               }
             }
           },

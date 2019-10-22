@@ -1,5 +1,8 @@
 {
   "x-id": "#contact",
+  "x-nter-relation": "contacts",
+  "x-nter-model": "Contact",
+  "x-nter-callable": true,
   "type": "object",
   "description": "Contact Information",
   "required": [
@@ -10,13 +13,7 @@
   ],
   "properties": {
     "label": {
-      "example": "Primary",
-      "description": "Label for the contact",
-      "allOf": [
-        {
-          "$ref": "./entityCommon.json#/properties/label"
-        }
-      ]
+      "$ref": "./entityCommon.json#/properties/label"
     },
     "contact_id": {
       "type": "string",
@@ -45,18 +42,10 @@
       "nullable": true
     },
     "created": {
-      "allOf": [
-        {
-          "$ref": "./entityCommon.json#/properties/created"
-        }
-      ]
+      "$ref": "./entityCommon.json#/properties/created"
     },
     "updated": {
-      "allOf": [
-        {
-          "$ref": "./entityCommon.json#/properties/updated"
-        }
-      ]
+      "$ref": "./entityCommon.json#/properties/updated"
     }
   }
 }

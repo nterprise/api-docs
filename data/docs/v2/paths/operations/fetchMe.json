@@ -10,7 +10,7 @@
       "$ref": "../../components/responses/me.json"
     },
     "401": {
-      "$ref": "../../components/responses/unauthorized.json"
+      "$ref": "../../components/responses/401unauthorized.json"
     }
   }
 }

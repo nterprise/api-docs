@@ -54,7 +54,7 @@ const build = (cb) => {
                 outFile = outFile.substr(outFile.lastIndexOf('/') + 1);
 
                 exec(
-                    `./node_modules/.bin/swagger-cli bundle -r ${file} > ${folders.public}api/${outFile}.json`,
+                    `./node_modules/.bin/swagger-cli bundle ${file} > ${folders.public}api/${outFile}.json`,
                     {},
                     (err, data) => {
                         if (err) {

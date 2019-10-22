@@ -1,5 +1,5 @@
 {
-  "description": "A paged program response",
+  "description": "A paged response for programs",
   "content": {
     "application/hal+json": {
       "schema": {
@@ -9,16 +9,9 @@
             "properties": {
               "nter:programs": {
                 "type": "array",
+                "maxItems": 100,
                 "items": {
-                  "type": "object",
-                  "allOf": [
-                    {
-                      "$ref": "../schemas/program.json"
-                    },
-                    {
-                      "$ref": "../schemas/links/self.json"
-                    }
-                  ]
+                  "$ref": "../schemas/halProgram.json"
                 }
               }
             }
@@ -26,10 +19,7 @@
         },
         "allOf": [
           {
-            "$ref": "../schemas/paginationOffset.json"
-          },
-          {
-            "$ref": "../schemas/links/self.json"
+            "$ref": "../schemas/halPaginationOffset.json"
           }
         ]
       }

@@ -18,19 +18,19 @@
       "$ref": "../../../components/responses/contact.json"
     },
     "400": {
-      "$ref": "../../../components/responses/badRequest.json"
+      "$ref": "../../../components/responses/400badRequest.json"
     },
     "401": {
-      "$ref": "../../../components/responses/unauthorized.json"
+      "$ref": "../../../components/responses/401unauthorized.json"
     },
     "403": {
-      "$ref": "../../../components/responses/forbidden.json"
+      "$ref": "../../../components/responses/403forbidden.json"
     },
     "404": {
-      "$ref": "../../../components/responses/notFound.json"
+      "$ref": "../../../components/responses/404notFound.json"
     },
     "409": {
-      "$ref": "../../../components/responses/conflict.json"
+      "$ref": "../../../components/responses/409conflict.json"
     }
   }
 }

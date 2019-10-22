@@ -1,5 +1,5 @@
 {
-  "description": "Paged contact response",
+  "description": "A paged response for contacts",
   "content": {
     "application/hal+json": {
       "schema": {
@@ -11,15 +11,7 @@
                 "type": "array",
                 "maxItems": 100,
                 "items": {
-                  "type": "object",
-                  "allOf": [
-                    {
-                      "$ref": "../schemas/contact.json"
-                    },
-                    {
-                      "$ref": "../schemas/links/self.json"
-                    }
-                  ]
+                  "$ref": "../schemas/halContact.json"
                 }
               }
             }
@@ -27,7 +19,7 @@
         },
         "allOf": [
           {
-            "$ref": "../schemas/links/nextOffset.json"
+            "$ref": "../schemas/halPaginationOffset.json"
           }
         ]
       }

@@ -15,13 +15,13 @@
       "$ref": "../../../components/responses/unit.json"
     },
     "401": {
-      "$ref": "../../../components/responses/unauthorized.json"
+      "$ref": "../../../components/responses/401unauthorized.json"
     },
     "403": {
-      "$ref": "../../../components/responses/forbidden.json"
+      "$ref": "../../../components/responses/403forbidden.json"
     },
     "404": {
-      "$ref": "../../../components/responses/notFound.json"
+      "$ref": "../../../components/responses/404notFound.json"
     }
   }
 }

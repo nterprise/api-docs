@@ -1,5 +1,5 @@
 {
-  "description": "A paged workflow response",
+  "description": "A paged response for work flows",
   "content": {
     "application/hal+json": {
       "schema": {
@@ -9,16 +9,9 @@
             "properties": {
               "nter:work-flows": {
                 "type": "array",
+                "maxItems": 100,
                 "items": {
-                  "type": "object",
-                  "allOf": [
-                    {
-                      "$ref": "../schemas/workflow.json"
-                    },
-                    {
-                      "$ref": "../schemas/links/self.json"
-                    }
-                  ]
+                  "$ref": "../schemas/halWorkflow.json"
                 }
               }
             }
@@ -26,10 +19,7 @@
         },
         "allOf": [
           {
-            "$ref": "../schemas/links/nextOffset.json"
-          },
-          {
-            "$ref": "../schemas/links/self.json"
+            "$ref": "../schemas/halPaginationOffset.json"
           }
         ]
       }

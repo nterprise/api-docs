@@ -1,14 +1,12 @@
 {
-  "description": "Manufacturer response",
+  "description": "A manufacturer response",
   "content": {
     "application/hal+json": {
       "schema": {
+        "type": "object",
         "allOf": [
           {
-            "$ref": "../schemas/manufacturer.json"
-          },
-          {
-            "$ref": "../schemas/links/self.json"
+            "$ref": "../schemas/halManufacturer.json"
           }
         ]
       }

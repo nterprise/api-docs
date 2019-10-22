@@ -10,25 +10,13 @@
         ],
         "properties": {
           "location_type": {
-            "allOf": [
-              {
-                "$ref": "../../components/schemas/location.json#/properties/location_type"
-              }
-            ]
+            "$ref": "../../components/schemas/location.json#/properties/location_type"
           },
           "address": {
-            "allOf": [
-              {
-                "$ref": "../../components/schemas/location.json#/properties/address"
-              }
-            ]
+            "$ref": "../../components/schemas/location.json#/properties/address"
           },
           "label": {
-            "allOf": [
-              {
-                "$ref": "../../components/schemas/entityCommon.json#/properties/label"
-              }
-            ]
+            "$ref": "../../components/schemas/entityCommon.json#/properties/label"
           }
         }
       }

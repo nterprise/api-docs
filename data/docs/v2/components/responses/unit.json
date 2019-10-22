@@ -1,83 +1,12 @@
 {
-  "description": "Unit response",
+  "description": "A unit response",
   "content": {
     "application/hal+json": {
       "schema": {
         "type": "object",
-        "properties": {
-          "_embedded": {
-            "type": "object",
-            "readOnly": true,
-            "properties": {
-              "nter:current-location": {
-                "type": "array",
-                "description": "The current tracked location",
-                "maximum": 1,
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "location": {
-                      "$ref": "../schemas/location.json"
-                    },
-                    "arrived_at": {
-                      "$ref": "../schemas/trackedLocation.json#/properties/arrived_at"
-                    },
-                    "left_at": {
-                      "$ref": "../schemas/trackedLocation.json#/properties/left_at"
-                    }
-                  }
-                }
-              },
-              "nter:past-locations": {
-                "type": "array",
-                "description": "The five previous tracked locations",
-                "maximum": 5,
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "location": {
-                      "$ref": "../schemas/location.json"
-                    },
-                    "arrived_at": {
-                      "$ref": "../schemas/trackedLocation.json#/properties/arrived_at"
-                    },
-                    "left_at": {
-                      "$ref": "../schemas/trackedLocation.json#/properties/left_at"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "_links": {
-            "properties": {
-              "nter:current-location": {
-                "type": "object",
-                "properties": {
-                  "href": {
-                    "type": "string",
-                    "example": "https://api.nterprise.com/locations/1b95ef28-47da-4804-a85c-4d8a30978cf3"
-                  }
-                }
-              },
-              "nter:past-locations": {
-                "type": "object",
-                "properties": {
-                  "href": {
-                    "type": "string",
-                    "example": "https://api.nterprise.com/units/ec5db56d-32e6-4e5d-9bef-1016f3e13670/locations"
-                  }
-                }
-              }
-            }
-          }
-        },
         "allOf": [
           {
-            "$ref": "../schemas/unit.json"
-          },
-          {
-            "$ref": "../schemas/links/self.json"
+            "$ref": "../schemas/halUnit.json"
           }
         ]
       }

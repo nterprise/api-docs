@@ -16,8 +16,7 @@
             ],
             "properties": {
               "location_id": {
-                "$ref": "../../components/schemas/location.json#/properties/location_id",
-                "readOnly": false
+                "$ref": "../../components/schemas/location.json#/properties/location_id"
               }
             }
           },

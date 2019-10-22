@@ -21,10 +21,10 @@
       "$ref": "../../../components/responses/resource.json"
     },
     "400": {
-      "$ref": "../../../components/responses/badRequest.json"
+      "$ref": "../../../components/responses/400badRequest.json"
     },
     "403": {
-      "$ref": "../../../components/responses/forbidden.json"
+      "$ref": "../../../components/responses/403forbidden.json"
     }
   }
 }

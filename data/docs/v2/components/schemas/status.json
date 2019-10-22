@@ -1,5 +1,8 @@
 {
   "x-id": "#status",
+  "x-nter-relation": "statuses",
+  "x-nter-model": "Status",
+  "x-nter-callable": true,
   "description": "Defines the properties for a status",
   "type": "object",
   "required": [
@@ -21,6 +24,7 @@
         "IN_PROGRESS",
         "VERIFYING",
         "COMPLETE",
+        "CANCELLED",
         "BLOCKED"
       ]
     }

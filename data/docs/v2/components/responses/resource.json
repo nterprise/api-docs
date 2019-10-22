@@ -1,14 +1,12 @@
 {
-  "description": "Resource response",
+  "description": "A resource response",
   "content": {
     "application/hal+json": {
       "schema": {
+        "type": "object",
         "allOf": [
           {
-            "$ref": "../schemas/resource.json"
-          },
-          {
-            "$ref": "../schemas/links/self.json"
+            "$ref": "../schemas/halResource.json"
           }
         ]
       }

@@ -1,14 +1,12 @@
 {
-  "description": "Context response",
+  "description": "A context response",
   "content": {
     "application/hal+json": {
       "schema": {
+        "type": "object",
         "allOf": [
           {
-            "$ref": "../schemas/context.json"
-          },
-          {
-            "$ref": "../schemas/links/self.json"
+            "$ref": "../schemas/halContext.json"
           }
         ]
       }

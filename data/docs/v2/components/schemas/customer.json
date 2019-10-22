@@ -1,5 +1,8 @@
 {
   "x-id": "#customer",
+  "x-nter-relation": "customers",
+  "x-nter-model": "Customer",
+  "x-nter-callable": true,
   "description": "Customer",
   "required": [
     "label",

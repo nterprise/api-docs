@@ -30,14 +30,14 @@
       "properties": {
         "allocated": {
           "description": "Number of units allocated to a project",
-          "type": "number",
+          "type": "integer",
           "format": "int32",
           "minimum": 0,
           "example": 42
         },
         "un_allocated": {
           "description": "Number of units not allocated to a project",
-          "type": "number",
+          "type": "integer",
           "format": "int32",
           "minimum": 0,
           "example": 24
@@ -50,7 +50,7 @@
             "properties": {
               "qty": {
                 "description": "Number of units in this status",
-                "type": "number",
+                "type": "integer",
                 "format": "int32",
                 "minimum": 0,
                 "example": 6

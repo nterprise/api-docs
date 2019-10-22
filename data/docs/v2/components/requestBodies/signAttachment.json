@@ -19,7 +19,8 @@
             "description": "Mime type of the file"
           },
           "size": {
-            "type": "number",
+            "type": "integer",
+            "format": "int32",
             "description": "Size of the file in bytes max 10 MB",
             "maximum": 10485760,
             "minimum": 1

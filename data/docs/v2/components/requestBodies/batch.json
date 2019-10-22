@@ -20,22 +20,13 @@
               ],
               "properties": {
                 "user_id": {
-                  "readOnly": false,
-                  "allOf": [
-                    {
-                      "$ref": "../../components/schemas/user.json#/properties/user_id"
-                    }
-                  ]
+                  "$ref": "../../components/schemas/user.json#/properties/user_id"
                 }
               }
             }
           },
           "order": {
-            "allOf": [
-              {
-                "$ref": "../../components/schemas/batch.json#/properties/order"
-              }
-            ]
+            "$ref": "../../components/schemas/batch.json#/properties/order"
           },
           "work_order": {
             "type": "object",
@@ -44,21 +35,12 @@
             ],
             "properties": {
               "work_order_id": {
-                "readOnly": false,
-                "allOf": [
-                  {
-                    "$ref": "../../components/schemas/workOrder.json#/properties/work_order_id"
-                  }
-                ]
+                "$ref": "../../components/schemas/workOrder.json#/properties/work_order_id"
               }
             }
           },
           "number_cycles": {
-            "allOf": [
-              {
-                "$ref": "../../components/schemas/batch.json#/properties/number_cycles"
-              }
-            ]
+            "$ref": "../../components/schemas/batch.json#/properties/number_cycles"
           }
         }
       }

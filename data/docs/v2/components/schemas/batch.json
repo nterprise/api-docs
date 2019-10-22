@@ -1,5 +1,8 @@
 {
   "x-id": "#batch",
+  "x-nter-relation": "batches",
+  "x-nter-model": "Batch",
+  "x-nter-callable": true,
   "description": "Defines the properties for a work order batch",
   "required": [
     "label",
@@ -14,15 +17,10 @@
       "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
     },
     "queue": {
-      "description": "Queue the batch is in",
-      "allOf": [
-        {
-          "$ref": "./queue.json"
-        }
-      ]
+      "$ref": "./queue.json"
     },
     "order": {
-      "type": "number",
+      "type": "integer",
       "description": "Order for the queue",
       "example": 1,
       "format": "int32"
@@ -36,75 +34,67 @@
       }
     },
     "number_cycles": {
-      "type": "number",
+      "type": "integer",
       "description": "The number of cycles for this batch",
       "format": "int32",
-      "example": 4
+      "example": 20
     },
     "cycles": {
       "type": "object",
       "readOnly": true,
       "properties": {
         "pending": {
-          "type": "number",
+          "type": "integer",
           "description": "The number of cycles pending",
           "format": "int32",
           "readOnly": true,
-          "example": 4
+          "example": 13
         },
         "in_progress": {
-          "type": "number",
+          "type": "integer",
           "description": "The number of cycles in progress",
           "format": "int32",
           "readOnly": true,
-          "example": 4
+          "example": 2
         },
         "verifying": {
-          "type": "number",
+          "type": "integer",
           "description": "The number of cycles verifying",
           "format": "int32",
           "readOnly": true,
-          "example": 4
+          "example": 1
         },
         "complete": {
-          "type": "number",
+          "type": "integer",
           "description": "The number of cycles complete",
           "format": "int32",
           "readOnly": true,
           "example": 4
         },
         "blocked": {
-          "type": "number",
+          "type": "integer",
           "description": "The number of cycles blocked",
           "format": "int32",
           "readOnly": true,
-          "example": 4
+          "example": 0
         },
         "cancelled": {
-          "type": "number",
+          "type": "integer",
           "description": "The number of cycles cancelled",
           "format": "int32",
           "readOnly": true,
-          "example": 4
+          "example": 0
         }
       }
     },
     "work_order": {
-      "type": "object",
-      "description": "Work order for the batch",
-      "allOf": [
-        {
-          "$ref": "./workOrder.json"
-        }
-      ]
-    }
-  },
-  "allOf": [
-    {
+      "$ref": "./workOrder.json"
+    },
+    "created": {
       "$ref": "./entityCommon.json#/properties/created"
     },
-    {
+    "updated": {
       "$ref": "./entityCommon.json#/properties/updated"
     }
-  ]
+  }
 }

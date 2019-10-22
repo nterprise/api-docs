@@ -1,5 +1,8 @@
 {
   "x-id": "#unit",
+  "x-nter-relation": "units",
+  "x-nter-model": "Unit",
+  "x-nter-callable": true,
   "description": "Defines the properties for a unit",
   "required": [
     "label",

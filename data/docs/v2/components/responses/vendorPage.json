@@ -1,5 +1,5 @@
 {
-  "description": "Paged vendor response",
+  "description": "A paged response for vendors",
   "content": {
     "application/hal+json": {
       "schema": {
@@ -9,16 +9,9 @@
             "properties": {
               "nter:vendors": {
                 "type": "array",
+                "maxItems": 100,
                 "items": {
-                  "type": "object",
-                  "allOf": [
-                    {
-                      "$ref": "../schemas/vendor.json"
-                    },
-                    {
-                      "$ref": "../schemas/links/self.json"
-                    }
-                  ]
+                  "$ref": "../schemas/halVendor.json"
                 }
               }
             }
@@ -26,10 +19,7 @@
         },
         "allOf": [
           {
-            "$ref": "../schemas/links/nextOffset.json"
-          },
-          {
-            "$ref": "../schemas/links/self.json"
+            "$ref": "../schemas/halPaginationOffset.json"
           }
         ]
       }

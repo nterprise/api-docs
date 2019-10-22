@@ -10,19 +10,19 @@
   },
   "responses": {
     "200": {
-      "$ref": "../../../components/responses/signAttachment.json"
+      "$ref": "../../../components/responses/attachment.json"
     },
     "400": {
-      "$ref": "../../../components/responses/badRequest.json"
+      "$ref": "../../../components/responses/400badRequest.json"
     },
     "401": {
-      "$ref": "../../../components/responses/unauthorized.json"
+      "$ref": "../../../components/responses/401unauthorized.json"
     },
     "403": {
-      "$ref": "../../../components/responses/forbidden.json"
+      "$ref": "../../../components/responses/403forbidden.json"
     },
     "413": {
-      "$ref": "../../../components/responses/payloadTooLarge.json"
+      "$ref": "../../../components/responses/413payloadTooLarge.json"
     }
   }
 }

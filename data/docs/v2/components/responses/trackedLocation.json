@@ -17,7 +17,7 @@
         },
         "allOf": [
           {
-            "$ref": "../schemas/links/self.json"
+            "$ref": "../schemas/linkSelf.json"
           }
         ]
       }
