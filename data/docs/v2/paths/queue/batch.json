@@ -1,8 +1,0 @@
-{
-  "get": {
-    "$ref": "../operations/queue/fetchBatchById.json"
-  },
-  "delete": {
-    "$ref": "../operations/queue/deleteBatch.json"
-  }
-}

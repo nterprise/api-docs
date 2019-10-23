@@ -31,6 +31,12 @@
     "/attachments": {
       "$ref": "./paths/attachments.json"
     },
+    "/batches": {
+      "$ref": "./paths/batch/batches.json"
+    },
+    "/batches/:batch_id": {
+      "$ref": "./paths/batch/batch.json"
+    },
     "/contacts": {
       "$ref": "./paths/contacts.json"
     },
@@ -144,9 +150,6 @@
     },
     "/queues/:queue_id/batches": {
       "$ref": "./paths/queue/batches.json"
-    },
-    "/queues/:queue_id/batches/:batch_id": {
-      "$ref": "./paths/queue/batch.json"
     },
     "/units": {
       "$ref": "./paths/unit/units.json"

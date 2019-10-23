@@ -3,12 +3,9 @@
   "summary": "Deletes a batch",
   "description": "This will delete the batch",
   "tags": [
-    "Queue"
+    "Batch"
   ],
   "parameters": [
-    {
-      "$ref": "../../../components/parameters/queueId.json"
-    },
     {
       "$ref": "../../../components/parameters/batchId.json"
     }
