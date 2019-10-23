@@ -1,5 +1,5 @@
 {
-  "x-id": "#unit",
+  "x-id": "#work-order",
   "description": "Defines the properties for a unit",
   "required": [
     "label",
@@ -12,6 +12,7 @@
       "description": "Label for the work order"
     },
     "description": {
+      "type": "string",
       "example": "Provision 150 devices for 123 Main St",
       "description": "Detailed description for the work order"
     },

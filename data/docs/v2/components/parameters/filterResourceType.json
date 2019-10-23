@@ -1,0 +1,8 @@
+{
+  "name": "filter[type]",
+  "in": "query",
+  "description": "Filter where the resource type is this value",
+  "schema": {
+    "type": "string"
+  }
+}

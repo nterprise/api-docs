@@ -1,0 +1,30 @@
+{
+  "operationId": "createResource",
+  "summary": "Creates a resource",
+  "description": "Creates a new resource",
+  "tags": [
+    "Location"
+  ],
+  "parameters": [
+    {
+      "$ref": "../../../components/parameters/locationId.json"
+    }
+  ],
+  "requestBody": {
+    "$ref": "../../../components/requestBodies/resource.json"
+  },
+  "responses": {
+    "200": {
+      "$ref": "../../../components/responses/resource.json"
+    },
+    "400": {
+      "$ref": "../../../components/responses/badRequest.json"
+    },
+    "401": {
+      "$ref": "../../../components/responses/unauthorized.json"
+    },
+    "403": {
+      "$ref": "../../../components/responses/forbidden.json"
+    }
+  }
+}
