@@ -1,14 +1,12 @@
 {
-  "description": "workflow response",
+  "description": "A workflow response",
   "content": {
     "application/hal+json": {
       "schema": {
+        "type": "object",
         "allOf": [
           {
-            "$ref": "../schemas/workflow.json"
-          },
-          {
-            "$ref": "../schemas/links/self.json"
+            "$ref": "../schemas/halWorkflow.json"
           }
         ]
       }

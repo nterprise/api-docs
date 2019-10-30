@@ -1,14 +1,12 @@
 {
-  "description": "Project response",
+  "description": "A workOrder response",
   "content": {
     "application/hal+json": {
       "schema": {
+        "type": "object",
         "allOf": [
           {
-            "$ref": "../schemas/workOrder.json"
-          },
-          {
-            "$ref": "../schemas/links/self.json"
+            "$ref": "../schemas/halWorkOrder.json"
           }
         ]
       }

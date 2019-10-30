@@ -1,4 +1,6 @@
 {
+  "x-nter-relation": "dashboards",
+  "x-nter-callable": true,
   "description": "Dashboard",
   "properties": {
     "dashboards": {

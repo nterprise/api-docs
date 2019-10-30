@@ -16,34 +16,41 @@
     "Michael Pepe"
   ],
   "license": "UNLICENSED",
+  "nyc": {
+    "check-coverage": true,
+    "per-file": true,
+    "lines": 95,
+    "statements": 95,
+    "functions": 95,
+    "branches": 50,
+    "temp-directory": "/tmp/.nyc_output",
+    "exclude": [
+      "node_modules",
+      "tests"
+    ],
+    "include": [
+      "src/**/*"
+    ],
+    "all": true,
+    "extension": [
+      ".js",
+      ".jsx"
+    ]
+  },
   "eslintConfig": {
     "env": {
       "browser": false,
-      "es6": true,
-      "node": true
+      "node": true,
+      "mocha": true,
+      "es6": true
     },
     "parserOptions": {
       "ecmaVersion": 8,
-      "sourceType": "module"
-    },
-    "settings": {
-      "propWrapperFunctions": [
-        "forbidExtraProps",
-        {
-          "property": "freeze",
-          "object": "Object"
-        },
-        {
-          "property": "myFavoriteWrapper"
-        }
-      ],
-      "linkComponents": [
-        "Hyperlink",
-        {
-          "name": "Link",
-          "linkAttribute": "to"
-        }
-      ]
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "spread": true,
+        "experimentalObjectRestSpread": true
+      }
     },
     "extends": [
       "eslint:recommended",
@@ -68,22 +75,25 @@
     }
   },
   "dependencies": {
+    "@nterprise/common-js": "^3.0.5",
     "aws-serverless-express": "^3.3.6",
     "express": "^4.17.1",
-    "lodash.template": "^4.5.0",
+    "lodash": "^4",
     "swagger": "^0.7.5",
-    "swagger-ui-express": "^4.0.7",
-    "swagger2": "^1.0.5"
+    "swagger-ui-express": "^4.1.2",
+    "swagger2": "^1.0.5",
+    "uuid": "^3.3.3",
+    "winston": "^3.2.1",
+    "yargs": "^14.2.0"
   },
   "devDependencies": {
     "git-pre-commit": "^2.1.4",
-    "glob": "^7.1.4",
+    "glob": "^7.1.5",
     "gulp": "^4.0.2",
     "gulp-cli": "^2.2.0",
     "gulp-fn": "0.0.3",
     "gulp-nodemon": "^2.4.2",
     "gulp-shell": "^0.7.1",
-    "lodash": "^4.17.15",
-    "swagger-cli": "^2.3.1"
+    "swagger-cli": "^2.3.3"
   }
 }

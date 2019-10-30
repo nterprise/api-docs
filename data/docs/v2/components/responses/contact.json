@@ -1,15 +1,12 @@
 {
-  "description": "Contact response",
+  "description": "A contact response",
   "content": {
     "application/hal+json": {
       "schema": {
         "type": "object",
         "allOf": [
           {
-            "$ref": "../schemas/contact.json"
-          },
-          {
-            "$ref": "../schemas/links/self.json"
+            "$ref": "../schemas/halContact.json"
           }
         ]
       }

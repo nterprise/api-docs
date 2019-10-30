@@ -20,7 +20,7 @@
     "expires_in": {
       "description": "How long until the embedded link expires. Calling the endpoint will generate a fresh embed url",
       "readOnly": true,
-      "type": "number",
+      "type": "integer",
       "format": "int32"
     }
   }

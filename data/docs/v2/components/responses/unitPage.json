@@ -1,5 +1,5 @@
 {
-  "description": "A paged unit response",
+  "description": "A paged response for units",
   "content": {
     "application/hal+json": {
       "schema": {
@@ -9,40 +9,9 @@
             "properties": {
               "nter:units": {
                 "type": "array",
+                "maxItems": 100,
                 "items": {
-                  "type": "object",
-                  "properties": {
-                    "_links": {
-                      "properties": {
-                        "nter:current-location": {
-                          "type": "object",
-                          "properties": {
-                            "href": {
-                              "type": "string",
-                              "example": "https://api.nterprise.com/locations/ec5db56d-32e6-4e5d-9bef-1016f3e13670"
-                            }
-                          }
-                        },
-                        "nter:past-locations": {
-                          "type": "object",
-                          "properties": {
-                            "href": {
-                              "type": "string",
-                              "example": "https://api.nterprise.com/units/ec5db56d-32e6-4e5d-9bef-1016f3e13670/locations/"
-                            }
-                          }
-                        }
-                      }
-                    }
-                  },
-                  "allOf": [
-                    {
-                      "$ref": "../schemas/unit.json"
-                    },
-                    {
-                      "$ref": "../schemas/links/self.json"
-                    }
-                  ]
+                  "$ref": "../schemas/halUnit.json"
                 }
               }
             }
@@ -50,10 +19,7 @@
         },
         "allOf": [
           {
-            "$ref": "../schemas/links/nextOffset.json"
-          },
-          {
-            "$ref": "../schemas/links/self.json"
+            "$ref": "../schemas/halPaginationOffset.json"
           }
         ]
       }

@@ -1,5 +1,8 @@
 {
   "x-id": "#project",
+  "x-nter-relation": "projects",
+  "x-nter-model": "Project",
+  "x-nter-callable": true,
   "description": "Defines the properties for a project",
   "required": [
     "label",
@@ -43,14 +46,17 @@
       "items": {
         "$ref": "./status.json"
       }
+    },
+    "start_date": {
+      "$ref": "./dateRange.json#/properties/start_date"
+    },
+    "end_date": {
+      "$ref": "./dateRange.json#/properties/end_date"
     }
   },
   "allOf": [
     {
       "$ref": "./entityCommon.json"
-    },
-    {
-      "$ref": "./dateRange.json"
     }
   ]
 }

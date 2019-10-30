@@ -1,14 +1,12 @@
 {
-  "description": "Status response",
+  "description": "A status response",
   "content": {
     "application/hal+json": {
       "schema": {
+        "type": "object",
         "allOf": [
           {
-            "$ref": "../schemas/status.json"
-          },
-          {
-            "$ref": "../schemas/links/self.json"
+            "$ref": "../schemas/halStatus.json"
           }
         ]
       }

@@ -1,0 +1,22 @@
+{
+  "type": "object",
+  "x-ui-hide": true,
+  "properties": {
+    "_links": {
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "nter:contexts": {
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "href": {
+              "type": "string",
+              "example": "https://api.nterprise.com/contexts"
+            }
+          }
+        }
+      }
+    }
+  }
+}

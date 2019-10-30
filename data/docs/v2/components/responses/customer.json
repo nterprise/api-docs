@@ -1,18 +1,12 @@
 {
-  "description": "Customer response",
+  "description": "A customer response",
   "content": {
     "application/hal+json": {
       "schema": {
         "type": "object",
         "allOf": [
           {
-            "$ref": "../schemas/customer.json"
-          },
-          {
-            "$ref": "../schemas/links/self.json"
-          },
-          {
-            "$ref": "../schemas/links/customerContacts.json"
+            "$ref": "../schemas/halCustomer.json"
           }
         ]
       }

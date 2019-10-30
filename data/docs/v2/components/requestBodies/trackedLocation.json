@@ -13,17 +13,12 @@
             "type": "object",
             "properties": {
               "location_id": {
-                "readOnly": false,
                 "$ref": "../../components/schemas/location.json#/properties/location_id"
               }
             }
           },
           "arrived_at": {
-            "allOf": [
-              {
-                "$ref": "../../components/schemas/trackedLocation.json#/properties/arrived_at"
-              }
-            ]
+            "$ref": "../../components/schemas/trackedLocation.json#/properties/arrived_at"
           }
         }
       }

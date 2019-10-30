@@ -1,0 +1,20 @@
+{
+  "type": "object",
+  "properties": {
+    "_links": {
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "next": {
+          "type": "object",
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "url"
+            }
+          }
+        }
+      }
+    }
+  }
+}

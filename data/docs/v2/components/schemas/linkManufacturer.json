@@ -1,0 +1,22 @@
+{
+  "type": "object",
+  "x-ui-hide": true,
+  "properties": {
+    "_links": {
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "nter:manufacturers": {
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "href": {
+              "type": "string",
+              "example": "https://api.nterprise.com/manufacturers/cefd98c3-c828-43f5-9176-e2e6fb5bf999"
+            }
+          }
+        }
+      }
+    }
+  }
+}

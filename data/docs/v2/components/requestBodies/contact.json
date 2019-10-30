@@ -11,35 +11,16 @@
         ],
         "properties": {
           "label": {
-            "allOf": [
-              {
-                "$ref": "../../components/schemas/entityCommon.json#/properties/label"
-              },
-              {
-                "$ref": "../../components/schemas/contact.json#/properties/label"
-              }
-            ]
+            "$ref": "../../components/schemas/contact.json#/properties/label"
           },
           "name": {
-            "allOf": [
-              {
-                "$ref": "../../components/schemas/contact.json#/properties/name"
-              }
-            ]
+            "$ref": "../../components/schemas/contact.json#/properties/name"
           },
           "email": {
-            "allOf": [
-              {
-                "$ref": "../../components/schemas/contact.json#/properties/email"
-              }
-            ]
+            "$ref": "../../components/schemas/contact.json#/properties/email"
           },
           "phone": {
-            "allOf": [
-              {
-                "$ref": "../../components/schemas/contact.json#/properties/phone"
-              }
-            ]
+            "$ref": "../../components/schemas/contact.json#/properties/phone"
           }
         }
       }

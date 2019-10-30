@@ -1,5 +1,8 @@
 {
   "x-id": "#work-order",
+  "x-nter-relation": "work-orders",
+  "x-nter-model": "WorkOrder",
+  "x-nter-callable": true,
   "description": "Defines the properties for a unit",
   "required": [
     "label",
@@ -63,48 +66,48 @@
         ],
         "properties": {
           "cycles_needed": {
-            "type": "number",
+            "type": "integer",
             "description": "The number of cycles needed",
             "format": "int32",
             "example": 4
           },
           "cycles_pending": {
-            "type": "number",
+            "type": "integer",
             "description": "The number of cycles pending",
             "format": "int32",
             "readOnly": true,
             "example": 4
           },
           "cycles_in_progress": {
-            "type": "number",
+            "type": "integer",
             "description": "The number of cycles in progress",
             "format": "int32",
             "readOnly": true,
             "example": 4
           },
           "cycles_verifying": {
-            "type": "number",
+            "type": "integer",
             "description": "The number of cycles verifying",
             "format": "int32",
             "readOnly": true,
             "example": 4
           },
           "cycles_complete": {
-            "type": "number",
+            "type": "integer",
             "description": "The number of cycles complete",
             "format": "int32",
             "readOnly": true,
             "example": 4
           },
           "cycles_blocked": {
-            "type": "number",
+            "type": "integer",
             "description": "The number of cycles blocked",
             "format": "int32",
             "readOnly": true,
             "example": 4
           },
           "cycles_cancelled": {
-            "type": "number",
+            "type": "integer",
             "description": "The number of cycles cancelled",
             "format": "int32",
             "readOnly": true,
@@ -115,14 +118,17 @@
           }
         }
       }
+    },
+    "start_date": {
+      "$ref": "./dateRange.json#/properties/start_date"
+    },
+    "end_date": {
+      "$ref": "./dateRange.json#/properties/end_date"
     }
   },
   "allOf": [
     {
       "$ref": "./entityCommon.json"
-    },
-    {
-      "$ref": "./dateRange.json"
     }
   ]
 }

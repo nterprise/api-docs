@@ -10,28 +10,13 @@
         ],
         "properties": {
           "label": {
-            "allOf": [
-              {
-                "$ref": "../../components/schemas/entityCommon.json#/properties/label"
-              },
-              {
-                "$ref": "../../components/schemas/customer.json#/properties/label"
-              }
-            ]
+            "$ref": "../../components/schemas/customer.json#/properties/label"
           },
           "external_platform": {
-            "allOf": [
-              {
-                "$ref": "../../components/schemas/customer.json#/properties/external_platform"
-              }
-            ]
+            "$ref": "../../components/schemas/customer.json#/properties/external_platform"
           },
           "allowed_statuses": {
-            "allOf": [
-              {
-                "$ref": "../../components/schemas/customer.json#/properties/allowed_statuses"
-              }
-            ]
+            "$ref": "../../components/schemas/customer.json#/properties/allowed_statuses"
           }
         }
       }

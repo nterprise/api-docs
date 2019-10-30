@@ -1,5 +1,8 @@
 {
   "x-id": "#location",
+  "x-nter-relation": "locations",
+  "x-nter-model": "Location",
+  "x-nter-callable": true,
   "description": "Defines the properties for a part unit",
   "required": [
     "location_type",
@@ -33,7 +36,7 @@
       "type": "string",
       "readOnly": true,
       "description": "Address formatted for the where region the location exists in",
-      "example": "Zones Innovation Center\n431 Broadway\nSuite C\nMenands NY, 12204\nUSA",
+      "example": "Zones Innovation Center\n431 Broadway\nSuite C\nMenands NY, 12204\nUSA"
     },
     "address": {
       "type": "object",

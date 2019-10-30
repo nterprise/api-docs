@@ -13,54 +13,22 @@
         ],
         "properties": {
           "label": {
-            "allOf": [
-              {
-                "$ref": "../../components/schemas/entityCommon.json#/properties/label"
-              },
-              {
-                "$ref": "../../components/schemas/workflow.json#/properties/label"
-              }
-            ]
+            "$ref": "../../components/schemas/workflow.json#/properties/label"
           },
-
           "workflow_version": {
-            "allOf": [
-              {
-                "$ref": "../../components/schemas/workflow.json#/properties/workflow_version"
-              }
-            ]
+            "$ref": "../../components/schemas/workflow.json#/properties/workflow_version"
           },
-
           "applies_to": {
-            "allOf": [
-              {
-                "$ref": "../../components/schemas/workflow.json#/properties/applies_to"
-              }
-            ]
+            "$ref": "../../components/schemas/workflow.json#/properties/applies_to"
           },
-
           "starts_at": {
-            "allOf": [
-              {
-                "$ref": "../../components/schemas/workflow.json#/properties/starts_at"
-              }
-            ]
+            "$ref": "../../components/schemas/workflow.json#/properties/starts_at"
           },
-
           "context": {
-            "allOf": [
-              {
-                "$ref": "../../components/schemas/workflow.json#/properties/context"
-              }
-            ]
+            "$ref": "../../components/schemas/workflow.json#/properties/context"
           },
-
           "steps": {
-            "allOf": [
-              {
-                "$ref": "../../components/schemas/workflow.json#/properties/steps"
-              }
-            ]
+            "$ref": "../../components/schemas/workflow.json#/properties/steps"
           }
         }
       }

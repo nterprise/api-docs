@@ -1,5 +1,8 @@
 {
   "x-id": "#workflow",
+  "x-nter-relation": "work-flows",
+  "x-nter-model": "WorkFlow",
+  "x-nter-callable": true,
   "type": "object",
   "description": "Workflow",
   "required": [
@@ -10,7 +13,7 @@
     "applies_to"
   ],
   "example": {
-    "$ref": "./examples/workflow.json"
+    "$ref": "../examples/workflow.json"
   },
   "properties": {
     "workflow_id": {
@@ -36,11 +39,11 @@
       "example": "1.0"
     },
     "workflow_version": {
-      "type": "number",
-      "format": "int",
+      "type": "integer",
+      "format": "int32",
       "example": 7,
       "readOnly": true,
-      "description": "Version number for the workflows (the number of times it has been changed"
+      "description": "Version number for the work flows (the number of times it has been changed"
     },
     "applies_to": {
       "type": "string",
@@ -117,11 +120,6 @@
             "$ref": "./stepFail.json"
           }
         ]
-      },
-      "example": {
-        "step-one": {
-          "type": "function"
-        }
       }
     }
   },

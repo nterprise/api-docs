@@ -1,14 +1,12 @@
 {
-  "description": "Vendor response",
+  "description": "A vendor response",
   "content": {
     "application/hal+json": {
       "schema": {
+        "type": "object",
         "allOf": [
           {
-            "$ref": "../schemas/vendor.json"
-          },
-          {
-            "$ref": "../schemas/links/self.json"
+            "$ref": "../schemas/halVendor.json"
           }
         ]
       }

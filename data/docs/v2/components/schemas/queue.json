@@ -1,5 +1,8 @@
 {
   "x-id": "#queue",
+  "x-nter-relation": "queues",
+  "x-nter-model": "Queue",
+  "x-nter-callable": true,
   "description": "Defines the properties for a location queue",
   "required": [
     "label"
@@ -26,10 +29,65 @@
       ]
     },
     "priority": {
-      "type": "number",
+      "type": "integer",
       "description": "Priority level for queue",
       "example": 42,
       "format": "int32"
+    },
+    "total_work_orders": {
+      "type": "object",
+      "description": "The number of batches assigned to the queue",
+      "readOnly": true,
+      "properties": {
+        "pending": {
+          "type": "integer",
+          "description": "The number of cycles pending",
+          "format": "int32",
+          "readOnly": true,
+          "example": 4
+        },
+        "in_progress": {
+          "type": "integer",
+          "description": "The number of cycles in progress",
+          "format": "int32",
+          "readOnly": true,
+          "example": 4
+        },
+        "verifying": {
+          "type": "integer",
+          "description": "The number of cycles verifying",
+          "format": "int32",
+          "readOnly": true,
+          "example": 4
+        },
+        "complete": {
+          "type": "integer",
+          "description": "The number of cycles complete",
+          "format": "int32",
+          "readOnly": true,
+          "example": 4
+        },
+        "blocked": {
+          "type": "integer",
+          "description": "The number of cycles blocked",
+          "format": "int32",
+          "readOnly": true,
+          "example": 4
+        },
+        "cancelled": {
+          "type": "integer",
+          "description": "The number of cycles cancelled",
+          "format": "int32",
+          "readOnly": true,
+          "example": 4
+        }
+      }
+    },
+    "total_batches": {
+      "type": "integer",
+      "description": "Number of batches assigned to the queue",
+      "example": 56,
+      "readOnly": true
     }
   },
   "allOf": [

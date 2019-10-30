@@ -9,14 +9,7 @@
         ],
         "properties": {
           "label": {
-            "allOf": [
-              {
-                "$ref": "../../components/schemas/entityCommon.json#/properties/label"
-              },
-              {
-                "$ref": "../../components/schemas/vendor.json#/properties/label"
-              }
-            ]
+            "$ref": "../../components/schemas/vendor.json#/properties/label"
           }
         }
       }

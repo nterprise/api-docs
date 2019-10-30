@@ -12,21 +12,10 @@
         ],
         "properties": {
           "label": {
-            "allOf": [
-              {
-                "$ref": "../../components/schemas/entityCommon.json#/properties/label"
-              },
-              {
-                "$ref": "../../components/schemas/unit.json#/properties/label"
-              }
-            ]
+            "$ref": "../../components/schemas/unit.json#/properties/label"
           },
           "tenant_part_number": {
-            "allOf": [
-              {
-                "$ref": "../../components/schemas/unit.json#/properties/tenant_part_number"
-              }
-            ]
+            "$ref": "../../components/schemas/unit.json#/properties/tenant_part_number"
           },
           "part": {
             "type": "object",
@@ -35,12 +24,7 @@
             ],
             "properties": {
               "part_id": {
-                "readOnly": false,
-                "allOf": [
-                  {
-                    "$ref": "../../components/schemas/part.json#/properties/part_id"
-                  }
-                ]
+                "$ref": "../../components/schemas/part.json#/properties/part_id"
               }
             }
           },
@@ -54,12 +38,7 @@
             ],
             "properties": {
               "location_id": {
-                "readOnly": false,
-                "allOf": [
-                  {
-                    "$ref": "../../components/schemas/location.json#/properties/location_id"
-                  }
-                ]
+                "$ref": "../../components/schemas/location.json#/properties/location_id"
               }
             }
           }

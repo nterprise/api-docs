@@ -23,8 +23,6 @@
       ]
     },
     "location": {
-      "description": "The location",
-      "readOnly": true,
       "$ref": "./location.json"
     },
     "arrived_at": {

@@ -1,61 +1,12 @@
 {
-  "description": "Batch response",
+  "description": "A batch response",
   "content": {
     "application/hal+json": {
       "schema": {
         "type": "object",
-        "properties": {
-          "_embedded": {
-            "type": "object",
-            "properties": {
-              "nter:queues": {
-                "type": "array",
-                "maximum": 1,
-                "items": {
-                  "$ref": "../schemas/queue.json"
-                }
-              },
-              "nter:work-orders": {
-                "type": "array",
-                "maximum": 1,
-                "items": {
-                  "$ref": "../schemas/workOrder.json"
-                }
-              }
-            }
-          },
-          "_links": {
-            "type": "object",
-            "properties": {
-              "nter:queues": {
-                "type": "object",
-                "description": "Related queue",
-                "properties": {
-                  "href": {
-                    "type": "string",
-                    "example": "https://api.nterprise.com/queues/21e7fc7d-e988-4631-b5e5-0c5e1c2217da"
-                  }
-                }
-              },
-              "nter:work-orders": {
-                "type": "object",
-                "description": "Related queue",
-                "properties": {
-                  "href": {
-                    "type": "string",
-                    "example": "https://api.nterprise.com/work-orders/09e115bf-26df-45dc-a316-aacdc3980790"
-                  }
-                }
-              }
-            }
-          }
-        },
         "allOf": [
           {
-            "$ref": "../schemas/batch.json"
-          },
-          {
-            "$ref": "../schemas/links/self.json"
+            "$ref": "../schemas/halBatch.json"
           }
         ]
       }

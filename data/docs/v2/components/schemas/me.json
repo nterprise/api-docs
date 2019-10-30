@@ -1,8 +1,0 @@
-{
-  "description": "Logged in users information",
-  "allOf": [
-    {
-      "$ref": "./user.json"
-    }
-  ]
-}

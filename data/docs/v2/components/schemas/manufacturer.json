@@ -1,5 +1,8 @@
 {
   "x-id": "#manufacturer",
+  "x-nter-relation": "manufacturers",
+  "x-nter-model": "Manufacturer",
+  "x-nter-callable": true,
   "description": "A Manufacturer of parts",
   "required": [
     "label",

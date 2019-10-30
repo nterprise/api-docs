@@ -1,14 +1,12 @@
 {
-  "description": "Program response",
+  "description": "A program response",
   "content": {
     "application/hal+json": {
       "schema": {
+        "type": "object",
         "allOf": [
           {
-            "$ref": "../schemas/program.json"
-          },
-          {
-            "$ref": "../schemas/links/self.json"
+            "$ref": "../schemas/halProgram.json"
           }
         ]
       }

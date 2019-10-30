@@ -1,5 +1,5 @@
 {
-  "operationId": "fetchAllBatchesForQueue",
+  "operationId": "fetchAllBatches",
   "summary": "Fetches A Page of batches",
   "description": "Fetch Batches",
   "tags": [
@@ -21,10 +21,10 @@
       "$ref": "../../../components/responses/batchPage.json"
     },
     "401": {
-      "$ref": "../../../components/responses/unauthorized.json"
+      "$ref": "../../../components/responses/401unauthorized.json"
     },
     "403": {
-      "$ref": "../../../components/responses/forbidden.json"
+      "$ref": "../../../components/responses/403forbidden.json"
     }
   }
 }

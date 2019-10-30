@@ -1,14 +1,12 @@
 {
-  "description": "Location response",
+  "description": "A location response",
   "content": {
     "application/hal+json": {
       "schema": {
+        "type": "object",
         "allOf": [
           {
-            "$ref": "../schemas/location.json"
-          },
-          {
-            "$ref": "../schemas/links/self.json"
+            "$ref": "../schemas/halLocation.json"
           }
         ]
       }

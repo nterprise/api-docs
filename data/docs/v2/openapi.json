@@ -196,36 +196,373 @@
     "/work-flows/:workflow_id": {
       "$ref": "./paths/workflow/workflow.json"
     },
-    "/work-flows/:workflow_id/versions": {
-      "$ref": "./paths/workflow/versions.json"
-    },
     "/work-flows/:workflow_id/bill-of-materials": {
       "$ref": "./paths/workflow/bom.json"
     }
   },
   "security": [
     {
-      "oauth2": [
+      "jwt": [
         "access"
       ]
     }
   ],
   "components": {
-    "securitySchemes": {
-      "oauth2": {
-        "type": "oauth2",
-        "flows": {
-          "authorizationCode": {
-            "authorizationUrl": "https://auth{.env}.nterprise.com/oauth/authorize",
-            "tokenUrl": "https://auth{.env}.nterprise.com/oauth/token",
-            "scopes": {
-              "access": "Access the API"
-            }
-          }
-        }
+    "parameters": {
+      "batchId": {
+        "$ref": "./components/parameters/batchId.json"
+      },
+      "contactId": {
+        "$ref": "./components/parameters/contactId.json"
+      },
+      "contactSort": {
+        "$ref": "./components/parameters/contactSort.json"
+      },
+      "contextId": {
+        "$ref": "./components/parameters/contextId.json"
+      },
+      "contextSort": {
+        "$ref": "./components/parameters/contextSort.json"
+      },
+      "customerId": {
+        "$ref": "./components/parameters/customerId.json"
+      },
+      "filterAdministrativeArea": {
+        "$ref": "./components/parameters/filterAdministrativeArea.json"
+      },
+      "filterContextUser": {
+        "$ref": "./components/parameters/filterContextUser.json"
+      },
+      "filterCountry": {
+        "$ref": "./components/parameters/filterCountry.json"
+      },
+      "filterCustomer": {
+        "$ref": "./components/parameters/filterCustomer.json"
+      },
+      "filterLabel": {
+        "$ref": "./components/parameters/filterLabel.json"
+      },
+      "filterLocation": {
+        "$ref": "./components/parameters/filterLocation.json"
+      },
+      "filterLocationType": {
+        "$ref": "./components/parameters/filterLocationType.json"
+      },
+      "filterManufacturer": {
+        "$ref": "./components/parameters/filterManufacturer.json"
+      },
+      "filterPart": {
+        "$ref": "./components/parameters/filterPart.json"
+      },
+      "filterPostalCode": {
+        "$ref": "./components/parameters/filterPostalCode.json"
+      },
+      "filterProgram": {
+        "$ref": "./components/parameters/filterProgram.json"
+      },
+      "filterProject": {
+        "$ref": "./components/parameters/filterProject.json"
+      },
+      "filterResourceType": {
+        "$ref": "./components/parameters/filterResourceType.json"
+      },
+      "filterThoroughfare": {
+        "$ref": "./components/parameters/filterThoroughfare.json"
+      },
+      "filterVendor": {
+        "$ref": "./components/parameters/filterVendor.json"
+      },
+      "limit": {
+        "$ref": "./components/parameters/limit.json"
+      },
+      "locationId": {
+        "$ref": "./components/parameters/locationId.json"
+      },
+      "locationSort": {
+        "$ref": "./components/parameters/locationSort.json"
+      },
+      "manufacturerId": {
+        "$ref": "./components/parameters/manufacturerId.json"
+      },
+      "offset": {
+        "$ref": "./components/parameters/offset.json"
+      },
+      "partId": {
+        "$ref": "./components/parameters/partId.json"
+      },
+      "partSort": {
+        "$ref": "./components/parameters/partSort.json"
+      },
+      "programId": {
+        "$ref": "./components/parameters/programId.json"
+      },
+      "programSort": {
+        "$ref": "./components/parameters/programSort.json"
+      },
+      "projectId": {
+        "$ref": "./components/parameters/projectId.json"
+      },
+      "projectSort": {
+        "$ref": "./components/parameters/projectSort.json"
+      },
+      "queueId": {
+        "$ref": "./components/parameters/queueId.json"
+      },
+      "queueSort": {
+        "$ref": "./components/parameters/queueSort.json"
+      },
+      "resourceId": {
+        "$ref": "./components/parameters/resourceId.json"
+      },
+      "standardSort": {
+        "$ref": "./components/parameters/standardSort.json"
+      },
+      "unitId": {
+        "$ref": "./components/parameters/unitId.json"
+      },
+      "unitSort": {
+        "$ref": "./components/parameters/unitSort.json"
+      },
+      "userId": {
+        "$ref": "./components/parameters/userId.json"
+      },
+      "vendorId": {
+        "$ref": "./components/parameters/vendorId.json"
+      },
+      "workOrderId": {
+        "$ref": "./components/parameters/workOrderId.json"
+      },
+      "workOrderSort": {
+        "$ref": "./components/parameters/workOrderSort.json"
+      },
+      "workflowId": {
+        "$ref": "./components/parameters/workflowId.json"
+      },
+      "workflowSort": {
+        "$ref": "./components/parameters/workflowSort.json"
+      }
+    },
+    "requestBodies": {
+      "batch": {
+        "$ref": "./components/requestBodies/batch.json"
+      },
+      "contact": {
+        "$ref": "./components/requestBodies/contact.json"
+      },
+      "customer": {
+        "$ref": "./components/requestBodies/customer.json"
+      },
+      "location": {
+        "$ref": "./components/requestBodies/location.json"
+      },
+      "manufacturer": {
+        "$ref": "./components/requestBodies/manufacturer.json"
+      },
+      "part": {
+        "$ref": "./components/requestBodies/part.json"
+      },
+      "partialUnit": {
+        "$ref": "./components/requestBodies/partialUnit.json"
+      },
+      "program": {
+        "$ref": "./components/requestBodies/program.json"
+      },
+      "project": {
+        "$ref": "./components/requestBodies/project.json"
+      },
+      "queue": {
+        "$ref": "./components/requestBodies/queue.json"
+      },
+      "resource": {
+        "$ref": "./components/requestBodies/resource.json"
+      },
+      "signAttachment": {
+        "$ref": "./components/requestBodies/signAttachment.json"
+      },
+      "status": {
+        "$ref": "./components/requestBodies/status.json"
+      },
+      "trackedLocation": {
+        "$ref": "./components/requestBodies/trackedLocation.json"
+      },
+      "unit": {
+        "$ref": "./components/requestBodies/unit.json"
+      },
+      "updateQueue": {
+        "$ref": "./components/requestBodies/updateQueue.json"
+      },
+      "vendor": {
+        "$ref": "./components/requestBodies/vendor.json"
+      },
+      "workOrder": {
+        "$ref": "./components/requestBodies/workOrder.json"
+      },
+      "workflow": {
+        "$ref": "./components/requestBodies/workflow.json"
+      }
+    },
+    "responses": {
+      "400BadRequest": {
+        "$ref": "./components/responses/400badRequest.json"
+      },
+      "401Unauthorized": {
+        "$ref": "./components/responses/401unauthorized.json"
+      },
+      "403Forbidden": {
+        "$ref": "./components/responses/403forbidden.json"
+      },
+      "404NotFound": {
+        "$ref": "./components/responses/404notFound.json"
+      },
+      "409Conflict": {
+        "$ref": "./components/responses/409conflict.json"
+      },
+      "413PayloadTooLarge": {
+        "$ref": "./components/responses/413payloadTooLarge.json"
+      },
+      "attachment": {
+        "$ref": "./components/responses/attachment.json"
+      },
+      "batch": {
+        "$ref": "./components/responses/batch.json"
+      },
+      "batchPage": {
+        "$ref": "./components/responses/batchPage.json"
+      },
+      "contact": {
+        "$ref": "./components/responses/contact.json"
+      },
+      "contactPage": {
+        "$ref": "./components/responses/contactPage.json"
+      },
+      "context": {
+        "$ref": "./components/responses/context.json"
+      },
+      "contextPage": {
+        "$ref": "./components/responses/contextPage.json"
+      },
+      "customer": {
+        "$ref": "./components/responses/customer.json"
+      },
+      "customerPage": {
+        "$ref": "./components/responses/customerPage.json"
+      },
+      "dashboard": {
+        "$ref": "./components/responses/dashboard.json"
+      },
+      "dashboardPage": {
+        "$ref": "./components/responses/dashboardPage.json"
+      },
+      "entry": {
+        "$ref": "./components/responses/entry.json"
+      },
+      "location": {
+        "$ref": "./components/responses/location.json"
+      },
+      "locationPage": {
+        "$ref": "./components/responses/locationPage.json"
+      },
+      "manufacturer": {
+        "$ref": "./components/responses/manufacturer.json"
+      },
+      "manufacturerPage": {
+        "$ref": "./components/responses/manufacturerPage.json"
+      },
+      "me": {
+        "$ref": "./components/responses/me.json"
+      },
+      "part": {
+        "$ref": "./components/responses/part.json"
+      },
+      "partLocationPage": {
+        "$ref": "./components/responses/partLocationPage.json"
+      },
+      "partPage": {
+        "$ref": "./components/responses/partPage.json"
+      },
+      "problem": {
+        "$ref": "./components/responses/problem.json"
+      },
+      "program": {
+        "$ref": "./components/responses/program.json"
+      },
+      "programPage": {
+        "$ref": "./components/responses/programPage.json"
+      },
+      "project": {
+        "$ref": "./components/responses/project.json"
+      },
+      "projectPage": {
+        "$ref": "./components/responses/projectPage.json"
+      },
+      "queue": {
+        "$ref": "./components/responses/queue.json"
+      },
+      "queuePage": {
+        "$ref": "./components/responses/queuePage.json"
+      },
+      "resource": {
+        "$ref": "./components/responses/resource.json"
+      },
+      "resourcePage": {
+        "$ref": "./components/responses/resourcePage.json"
+      },
+      "status": {
+        "$ref": "./components/responses/status.json"
+      },
+      "statusHistory": {
+        "$ref": "./components/responses/statusHistory.json"
+      },
+      "statusPage": {
+        "$ref": "./components/responses/statusPage.json"
+      },
+      "trackedLocation": {
+        "$ref": "./components/responses/trackedLocation.json"
+      },
+      "trackedLocationPage": {
+        "$ref": "./components/responses/trackedLocationPage.json"
+      },
+      "unit": {
+        "$ref": "./components/responses/unit.json"
+      },
+      "unitPage": {
+        "$ref": "./components/responses/unitPage.json"
+      },
+      "user": {
+        "$ref": "./components/responses/user.json"
+      },
+      "userPage": {
+        "$ref": "./components/responses/userPage.json"
+      },
+      "vendor": {
+        "$ref": "./components/responses/vendor.json"
+      },
+      "vendorPage": {
+        "$ref": "./components/responses/vendorPage.json"
+      },
+      "workOrder": {
+        "$ref": "./components/responses/workOrder.json"
+      },
+      "workOrderPage": {
+        "$ref": "./components/responses/workOrderPage.json"
+      },
+      "workflow": {
+        "$ref": "./components/responses/workflow.json"
+      },
+      "workflowBom": {
+        "$ref": "./components/responses/workflowBom.json"
+      },
+      "workflowPage": {
+        "$ref": "./components/responses/workflowPage.json"
       }
     },
     "schemas": {
+      "Action": {
+        "$ref": "./components/schemas/action.json"
+      },
+      "Batch": {
+        "$ref": "./components/schemas/batch.json"
+      },
       "Contact": {
         "$ref": "./components/schemas/contact.json"
       },
@@ -244,17 +581,194 @@
       "EntityCommon": {
         "$ref": "./components/schemas/entityCommon.json"
       },
+      "Entry": {
+        "$ref": "./components/schemas/entry.json"
+      },
+      "HalBatch": {
+        "$ref": "./components/schemas/halBatch.json"
+      },
+      "HalContact": {
+        "$ref": "./components/schemas/halContact.json"
+      },
+      "HalContext": {
+        "$ref": "./components/schemas/halContext.json"
+      },
+      "HalCustomer": {
+        "$ref": "./components/schemas/halCustomer.json"
+      },
+      "HalDashboard": {
+        "$ref": "./components/schemas/halDashboard.json"
+      },
+      "HalLocation": {
+        "$ref": "./components/schemas/halLocation.json"
+      },
+      "HalManufacturer": {
+        "$ref": "./components/schemas/halManufacturer.json"
+      },
+      "HalPaginationOffset": {
+        "$ref": "./components/schemas/halPaginationOffset.json"
+      },
+      "HalPart": {
+        "$ref": "./components/schemas/halPart.json"
+      },
+      "HalProgram": {
+        "$ref": "./components/schemas/halProgram.json"
+      },
+      "HalProject": {
+        "$ref": "./components/schemas/halProject.json"
+      },
+      "HalQueue": {
+        "$ref": "./components/schemas/halQueue.json"
+      },
+      "HalResource": {
+        "$ref": "./components/schemas/halResource.json"
+      },
+      "HalStatus": {
+        "$ref": "./components/schemas/halStatus.json"
+      },
+      "HalUnit": {
+        "$ref": "./components/schemas/halUnit.json"
+      },
+      "HalUser": {
+        "$ref": "./components/schemas/halUser.json"
+      },
+      "HalVendor": {
+        "$ref": "./components/schemas/halVendor.json"
+      },
+      "HalWorkOrder": {
+        "$ref": "./components/schemas/halWorkOrder.json"
+      },
+      "HalWorkflow": {
+        "$ref": "./components/schemas/halWorkflow.json"
+      },
       "InputFilter": {
         "$ref": "./components/schemas/inputFilter.json"
+      },
+      "LinkBatch": {
+        "$ref": "./components/schemas/linkBatch.json"
+      },
+      "LinkBatches": {
+        "$ref": "./components/schemas/linkBatches.json"
+      },
+      "LinkContact": {
+        "$ref": "./components/schemas/linkContact.json"
+      },
+      "LinkContacts": {
+        "$ref": "./components/schemas/linkContacts.json"
+      },
+      "LinkContext": {
+        "$ref": "./components/schemas/linkContext.json"
+      },
+      "LinkContexts": {
+        "$ref": "./components/schemas/linkContexts.json"
+      },
+      "LinkCustomer": {
+        "$ref": "./components/schemas/linkCustomer.json"
+      },
+      "LinkCustomers": {
+        "$ref": "./components/schemas/linkCustomers.json"
+      },
+      "LinkDashboard": {
+        "$ref": "./components/schemas/linkDashboard.json"
+      },
+      "LinkDashboards": {
+        "$ref": "./components/schemas/linkDashboards.json"
+      },
+      "LinkLocation": {
+        "$ref": "./components/schemas/linkLocation.json"
+      },
+      "LinkLocationResources": {
+        "$ref": "./components/schemas/linkLocationResources.json"
+      },
+      "LinkLocations": {
+        "$ref": "./components/schemas/linkLocations.json"
+      },
+      "LinkManufacturer": {
+        "$ref": "./components/schemas/linkManufacturer.json"
+      },
+      "LinkManufacturers": {
+        "$ref": "./components/schemas/linkManufacturers.json"
+      },
+      "LinkNext": {
+        "$ref": "./components/schemas/linkNext.json"
+      },
+      "LinkPart": {
+        "$ref": "./components/schemas/linkPart.json"
+      },
+      "LinkParts": {
+        "$ref": "./components/schemas/linkParts.json"
+      },
+      "LinkProgram": {
+        "$ref": "./components/schemas/linkProgram.json"
+      },
+      "LinkPrograms": {
+        "$ref": "./components/schemas/linkPrograms.json"
+      },
+      "LinkProject": {
+        "$ref": "./components/schemas/linkProject.json"
+      },
+      "LinkProjects": {
+        "$ref": "./components/schemas/linkProjects.json"
+      },
+      "LinkQueue": {
+        "$ref": "./components/schemas/linkQueue.json"
+      },
+      "LinkQueues": {
+        "$ref": "./components/schemas/linkQueues.json"
+      },
+      "LinkResource": {
+        "$ref": "./components/schemas/linkResource.json"
+      },
+      "LinkSelf": {
+        "$ref": "./components/schemas/linkSelf.json"
+      },
+      "LinkStatus": {
+        "$ref": "./components/schemas/linkStatus.json"
+      },
+      "LinkStatuses": {
+        "$ref": "./components/schemas/linkStatuses.json"
+      },
+      "LinkUnit": {
+        "$ref": "./components/schemas/linkUnit.json"
+      },
+      "LinkUnits": {
+        "$ref": "./components/schemas/linkUnits.json"
+      },
+      "LinkUser": {
+        "$ref": "./components/schemas/linkUser.json"
+      },
+      "LinkUsers": {
+        "$ref": "./components/schemas/linkUsers.json"
+      },
+      "LinkVendor": {
+        "$ref": "./components/schemas/linkVendor.json"
+      },
+      "LinkVendors": {
+        "$ref": "./components/schemas/linkVendors.json"
+      },
+      "LinkWorkFlows": {
+        "$ref": "./components/schemas/linkWorkFlows.json"
+      },
+      "LinkWorkOrder": {
+        "$ref": "./components/schemas/linkWorkOrder.json"
+      },
+      "LinkWorkOrders": {
+        "$ref": "./components/schemas/linkWorkOrders.json"
+      },
+      "LinkWorkflow": {
+        "$ref": "./components/schemas/linkWorkflow.json"
+      },
+      "Location": {
+        "$ref": "./components/schemas/location.json"
       },
       "Manufacturer": {
         "$ref": "./components/schemas/manufacturer.json"
       },
-      "Me": {
-        "$ref": "./components/schemas/me.json"
-      },
       "Part": {
         "$ref": "./components/schemas/part.json"
+      },
+      "PartLocation": {
+        "$ref": "./components/schemas/partLocation.json"
       },
       "Problem": {
         "$ref": "./components/schemas/problem.json"
@@ -265,8 +779,50 @@
       "Project": {
         "$ref": "./components/schemas/project.json"
       },
+      "Queue": {
+        "$ref": "./components/schemas/queue.json"
+      },
+      "QuickSight": {
+        "$ref": "./components/schemas/quickSight.json"
+      },
       "Resource": {
         "$ref": "./components/schemas/resource.json"
+      },
+      "Status": {
+        "$ref": "./components/schemas/status.json"
+      },
+      "StatusHistory": {
+        "$ref": "./components/schemas/statusHistory.json"
+      },
+      "StepChoice": {
+        "$ref": "./components/schemas/stepChoice.json"
+      },
+      "StepChoices": {
+        "$ref": "./components/schemas/stepChoices.json"
+      },
+      "StepCommon": {
+        "$ref": "./components/schemas/stepCommon.json"
+      },
+      "StepFail": {
+        "$ref": "./components/schemas/stepFail.json"
+      },
+      "StepFunction": {
+        "$ref": "./components/schemas/stepFunction.json"
+      },
+      "StepPass": {
+        "$ref": "./components/schemas/stepPass.json"
+      },
+      "StepSuccess": {
+        "$ref": "./components/schemas/stepSuccess.json"
+      },
+      "StepUser": {
+        "$ref": "./components/schemas/stepUser.json"
+      },
+      "StepWait": {
+        "$ref": "./components/schemas/stepWait.json"
+      },
+      "TrackedLocation": {
+        "$ref": "./components/schemas/trackedLocation.json"
       },
       "Unit": {
         "$ref": "./components/schemas/unit.json"
@@ -282,6 +838,16 @@
       },
       "Workflow": {
         "$ref": "./components/schemas/workflow.json"
+      },
+      "WorkflowBom": {
+        "$ref": "./components/schemas/workflowBom.json"
+      }
+    },
+    "securitySchemes": {
+      "jwt": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       }
     }
   }

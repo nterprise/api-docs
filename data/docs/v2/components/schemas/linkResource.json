@@ -1,0 +1,22 @@
+{
+  "type": "object",
+  "x-ui-hide": true,
+  "properties": {
+    "_links": {
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "nter:location-resources": {
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "href": {
+              "type": "string",
+              "example": "https://api.nterprise.com/location-resources/884f7446-3f74-4b8b-974e-71355786472b"
+            }
+          }
+        }
+      }
+    }
+  }
+}

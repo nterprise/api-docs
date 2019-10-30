@@ -5,13 +5,10 @@
       "schema": {
         "allOf": [
           {
-            "$ref": "../schemas/me.json"
+            "$ref": "../schemas/user.json"
           },
           {
-            "$ref": "../schemas/links/user.json"
-          },
-          {
-            "$ref": "../schemas/links/self.json"
+            "$ref": "../schemas/linkSelf.json"
           }
         ]
       }

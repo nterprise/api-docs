@@ -10,13 +10,13 @@
       "example": "wait"
     },
     "stop_at": {
-      "type": "number",
+      "type": "integer",
       "description": "Time in seconds to stop this task",
       "maximum": 900,
       "minimum": 1
     },
     "time": {
-      "type": "number",
+      "type": "integer",
       "description": "Time to wait before checking this step",
       "example": 600,
       "maximum": 900,

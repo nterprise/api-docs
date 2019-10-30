@@ -10,21 +10,10 @@
         ],
         "properties": {
           "label": {
-            "allOf": [
-              {
-                "$ref": "../../components/schemas/entityCommon.json#/properties/label"
-              },
-              {
-                "$ref": "../../components/schemas/queue.json#/properties/label"
-              }
-            ]
+            "$ref": "../../components/schemas/queue.json#/properties/label"
           },
           "priority": {
-            "allOf": [
-              {
-                "$ref": "../../components/schemas/queue.json#/properties/priority"
-              }
-            ]
+            "$ref": "../../components/schemas/queue.json#/properties/priority"
           }
         }
       }

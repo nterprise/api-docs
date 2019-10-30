@@ -24,7 +24,7 @@
                   },
                   "allOf": [
                     {
-                      "$ref": "../schemas/links/self.json"
+                      "$ref": "../schemas/linkSelf.json"
                     }
                   ]
                 }
@@ -34,10 +34,10 @@
         },
         "allOf": [
           {
-            "$ref": "../schemas/links/nextOffset.json"
+            "$ref": "../schemas/halPaginationOffset.json"
           },
           {
-            "$ref": "../schemas/links/self.json"
+            "$ref": "../schemas/linkSelf.json"
           }
         ]
       }

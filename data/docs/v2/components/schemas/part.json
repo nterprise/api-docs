@@ -1,5 +1,8 @@
 {
   "x-id": "#part",
+  "x-nter-relation": "parts",
+  "x-nter-model": "Part",
+  "x-nter-callable": true,
   "description": "Defines the properties for a part",
   "required": [
     "label",
@@ -20,14 +23,7 @@
       "description": "Label for the part"
     },
     "customer": {
-      "x-ref": "#customer",
-      "type": "object",
-      "description": "The customer this  is for",
-      "allOf": [
-        {
-          "$ref": "./customer.json"
-        }
-      ]
+      "$ref": "./customer.json"
     },
     "manufacturer": {
       "x-ref": "#manufacturer",

@@ -1,5 +1,8 @@
 {
   "description": "User Information",
+  "x-nter-relation": "users",
+  "x-nter-model": "User",
+  "x-nter-callable": true,
   "properties": {
     "user_id": {
       "type": "string",

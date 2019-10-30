@@ -1,14 +1,12 @@
 {
-  "description": "Part response",
+  "description": "A part response",
   "content": {
     "application/hal+json": {
       "schema": {
+        "type": "object",
         "allOf": [
           {
-            "$ref": "../schemas/part.json"
-          },
-          {
-            "$ref": "../schemas/links/self.json"
+            "$ref": "../schemas/halPart.json"
           }
         ]
       }

@@ -1,5 +1,5 @@
 {
-  "description": "Paged customer response",
+  "description": "A paged response for customers",
   "content": {
     "application/hal+json": {
       "schema": {
@@ -11,15 +11,7 @@
                 "type": "array",
                 "maxItems": 100,
                 "items": {
-                  "type": "object",
-                  "allOf": [
-                    {
-                      "$ref": "../schemas/customer.json"
-                    },
-                    {
-                      "$ref": "../schemas/links/self.json"
-                    }
-                  ]
+                  "$ref": "../schemas/halCustomer.json"
                 }
               }
             }
@@ -27,10 +19,7 @@
         },
         "allOf": [
           {
-            "$ref": "../schemas/links/nextOffset.json"
-          },
-          {
-            "$ref": "../schemas/links/self.json"
+            "$ref": "../schemas/halPaginationOffset.json"
           }
         ]
       }
