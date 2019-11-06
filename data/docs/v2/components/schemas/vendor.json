@@ -12,7 +12,6 @@
       "type": "string",
       "description": "unique id",
       "example": "3beea89a-3367-4beb-aa43-2aadc0873785",
-      "readOnly": true,
       "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
     },
     "label": {

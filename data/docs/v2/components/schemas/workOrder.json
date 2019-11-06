@@ -23,7 +23,6 @@
       "type": "string",
       "description": "The identifier for the unit",
       "example": "0f40ff8c-a3b5-4a30-90e5-0421c153183c",
-      "readOnly": true,
       "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
     },
     "type": {

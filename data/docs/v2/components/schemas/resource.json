@@ -13,7 +13,6 @@
       "type": "string",
       "description": "The identifier for the resource",
       "example": "3c730679-dcfa-4b5a-8f6e-b76fe80c6078",
-      "readOnly": true,
       "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
     },
     "label": {

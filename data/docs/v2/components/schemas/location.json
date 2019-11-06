@@ -19,7 +19,6 @@
       "type": "string",
       "description": "The identifier for the location",
       "example": "b994961b-30b4-4f33-9330-f46fd6172909",
-      "readOnly": true,
       "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
     },
     "location_type": {

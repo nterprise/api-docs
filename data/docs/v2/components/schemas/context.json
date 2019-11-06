@@ -10,7 +10,6 @@
     "context_id": {
       "type": "string",
       "description": "Identifier for the context",
-      "readOnly": true,
       "example": "MWMwMjIyNTgtYWZjZC00YmYyLWE1NzYtYWU1OWI3YTE1ZDczOlVOSVQ6NTMxMDI5MjQtNDUwYS00ZjFlLWI1ZDQtYTIwN2JjNTg2NTIxOjE1Njc2MDUwNTU5OTUuNDQ1NjYzNDM-",
       "pattern": "^[A-Za-z0-9-_]+$"
     },
