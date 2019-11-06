@@ -1,0 +1,8 @@
+{
+  "get": {
+    "$ref": "../operations/resource/fetchAllResources.json"
+  },
+  "post": {
+    "$ref": "../operations/resource/createResource.json"
+  }
+}

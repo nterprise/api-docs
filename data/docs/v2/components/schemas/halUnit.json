@@ -7,7 +7,7 @@
       "type": "object",
       "properties": {
         "self": {
-          "$ref": "./linkUnit.json"
+          "$ref": "./linkUnit.json#/properties/_links/properties/nter:units"
         }
       }
     }

@@ -139,6 +139,15 @@
     "/projects/:project_id/work-orders": {
       "$ref": "./paths/project/workOrders.json"
     },
+    "/resources": {
+      "$ref": "./paths/resource/resources.json"
+    },
+    "/resources/:resource_id": {
+      "$ref": "./paths/resource/resource.json"
+    },
+    "/resources/:resource_id/sub-resources": {
+      "$ref": "./paths/resource/subResources.json"
+    },
     "/settings/statuses": {
       "$ref": "./paths/settings/status.json"
     },
@@ -554,6 +563,9 @@
       },
       "workflowPage": {
         "$ref": "./components/responses/workflowPage.json"
+      },
+      "subResourcePage": {
+        "$ref": "./components/responses/subResourcePage.json"
       }
     },
     "schemas": {
@@ -626,6 +638,9 @@
       "HalStatus": {
         "$ref": "./components/schemas/halStatus.json"
       },
+      "HalSubResource": {
+        "$ref": "./components/schemas/halSubResource.json"
+      },
       "HalUnit": {
         "$ref": "./components/schemas/halUnit.json"
       },
@@ -677,9 +692,6 @@
       "LinkLocation": {
         "$ref": "./components/schemas/linkLocation.json"
       },
-      "LinkLocationResources": {
-        "$ref": "./components/schemas/linkLocationResources.json"
-      },
       "LinkLocations": {
         "$ref": "./components/schemas/linkLocations.json"
       },
@@ -719,6 +731,9 @@
       "LinkResource": {
         "$ref": "./components/schemas/linkResource.json"
       },
+      "LinkResources": {
+        "$ref": "./components/schemas/linkResources.json"
+      },
       "LinkSelf": {
         "$ref": "./components/schemas/linkSelf.json"
       },
@@ -727,6 +742,9 @@
       },
       "LinkStatuses": {
         "$ref": "./components/schemas/linkStatuses.json"
+      },
+      "LinkSubResources": {
+        "$ref": "./components/schemas/linkSubResources.json"
       },
       "LinkUnit": {
         "$ref": "./components/schemas/linkUnit.json"

@@ -1,0 +1,27 @@
+{
+  "operationId": "updateResource",
+  "summary": "Updates a resource",
+  "description": "Updates a resource",
+  "tags": [
+    "Resource"
+  ],
+  "requestBody": {
+    "$ref": "../../../components/requestBodies/resource.json"
+  },
+  "parameters": [
+    {
+      "$ref": "../../../components/parameters/resourceId.json"
+    }
+  ],
+  "responses": {
+    "200": {
+      "$ref": "../../../components/responses/resource.json"
+    },
+    "400": {
+      "$ref": "../../../components/responses/400badRequest.json"
+    },
+    "403": {
+      "$ref": "../../../components/responses/403forbidden.json"
+    }
+  }
+}

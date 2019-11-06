@@ -1,0 +1,11 @@
+{
+  "get": {
+    "$ref": "../operations/resource/fetchResourceById.json"
+  },
+  "put": {
+    "$ref": "../operations/resource/updateResource.json"
+  },
+  "delete": {
+    "$ref": "../operations/resource/deleteResource.json"
+  }
+}

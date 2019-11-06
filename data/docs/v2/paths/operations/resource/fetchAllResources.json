@@ -1,0 +1,33 @@
+{
+  "operationId": "fetchAllResources",
+  "summary": "Fetches A Page of resources",
+  "description": "Fetch resources",
+  "tags": [
+    "Resource"
+  ],
+  "parameters": [
+    {
+      "$ref": "../../../components/parameters/limit.json"
+    },
+    {
+      "$ref": "../../../components/parameters/offset.json"
+    },
+    {
+      "$ref": "../../../components/parameters/standardSort.json"
+    },
+    {
+      "$ref": "../../../components/parameters/filterResourceType.json"
+    }
+  ],
+  "responses": {
+    "200": {
+      "$ref": "../../../components/responses/resourcePage.json"
+    },
+    "401": {
+      "$ref": "../../../components/responses/401unauthorized.json"
+    },
+    "403": {
+      "$ref": "../../../components/responses/403forbidden.json"
+    }
+  }
+}

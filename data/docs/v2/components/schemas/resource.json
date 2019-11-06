@@ -1,11 +1,12 @@
 {
   "x-id": "#resource",
-  "x-nter-relation": "location-resources",
+  "x-nter-relation": "resources",
   "x-nter-model": "Resource",
   "x-nter-callable": true,
-  "description": "Defines the properties for a unit",
+  "description": "Defines the properties for a resource",
   "required": [
     "label",
+    "resource_type",
     "location"
   ],
   "properties": {
@@ -19,6 +20,12 @@
       "example": "Server room",
       "description": "Name of the resource"
     },
+    "resource_type": {
+      "type": "string",
+      "description": "Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased",
+      "example": "station",
+      "pattern": "^[a-z][0-9a-zA-Z-]+$"
+    },
     "meta": {
       "type": "object",
       "description": "Data for the resource as a key value pair",
@@ -31,6 +38,27 @@
     },
     "location": {
       "$ref": "./location.json"
+    },
+    "parent": {
+      "type": "object",
+      "description": "The parent resource if this is a child resource",
+      "properties": {
+        "resource_id": {
+          "$ref": "#/properties/resource_id"
+        },
+        "label": {
+          "$ref": "#/properties/label"
+        },
+        "resource_type": {
+          "$ref": "#/properties/resource_type"
+        },
+        "meta": {
+          "$ref": "#/properties/meta"
+        },
+        "location": {
+          "$ref": "./location.json"
+        }
+      }
     }
   },
   "allOf": [

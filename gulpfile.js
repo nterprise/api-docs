@@ -4,6 +4,7 @@ const nodemon = require('gulp-nodemon');
 const exec = require('child_process').exec;
 const path = require('path');
 const glob = require('glob');
+const fs = require('fs');
 
 const folders = {
     bin: 'bin/',
@@ -32,10 +33,10 @@ const lint = (cb) => {
                         }
 
                         resolve();
-                    }
+                    },
                 );
             }));
-        })
+        }),
     ).
         then(() => cb()).
         catch((err) => {
@@ -45,16 +46,15 @@ const lint = (cb) => {
 
 const build = (cb) => {
     const files = glob.sync(`${folders.docs}**/*/openapi.json`);
-
+    console.log('Building swagger docs');
     Promise.all(
         files.map((file) => {
             return new Promise(((resolve, reject) => {
-                console.log(file);
                 let outFile = path.dirname(file);
                 outFile = outFile.substr(outFile.lastIndexOf('/') + 1);
 
                 exec(
-                    `./node_modules/.bin/swagger-cli bundle ${file} > ${folders.public}api/${outFile}.json`,
+                    `./node_modules/.bin/swagger-cli bundle ${file} > ${folders.public}api/${outFile}.tmp.json`,
                     {},
                     (err, data) => {
                         if (err) {
@@ -68,6 +68,31 @@ const build = (cb) => {
             }));
         })
     ).
+        then(() => {
+            console.log('Adjusting HTML entities');
+            files.map((file) => {
+                return new Promise(((resolve, reject) => {
+                    let outFile = path.dirname(file);
+                    outFile = outFile.substr(outFile.lastIndexOf('/') + 1);
+
+                    exec(
+                        `sed 's/%3A/:/g' ${folders.public}api/${outFile}.tmp.json > ${folders.public}api/${outFile}.json`,
+                        {},
+                        (err, data) => {
+                            if (err) {
+                                reject(err);
+                                return;
+                            }
+
+                            fs.unlinkSync(
+                                `${folders.public}api/${outFile}.tmp.json`
+                            );
+                            resolve();
+                        },
+                    );
+                }));
+            });
+        }).
         then(() => cb()).
         catch((err) => {
             cb(err);
@@ -84,13 +109,15 @@ const serve = (done) => {
 
     stream.on('restart', () => {
         console.log('restarted!');
-        lint(() => {});
-        build(() => {});
+        lint(() => {
+        });
+        build(() => {
+        });
     }).on('crash', () => {
-        console.error('Application has crashed!\n')
-        stream.emit('restart', 10)
-    })
-}
+        console.error('Application has crashed!\n');
+        stream.emit('restart', 10);
+    });
+};
 
 exports.lint = lint;
 exports.build = build;

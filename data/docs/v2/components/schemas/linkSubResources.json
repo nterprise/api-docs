@@ -6,13 +6,13 @@
       "type": "object",
       "readOnly": true,
       "properties": {
-        "nter:location-resources": {
+        "nter:sub-resources": {
           "type": "object",
           "readOnly": true,
           "properties": {
             "href": {
               "type": "string",
-              "example": "https://api.nterprise.com/location-resources"
+              "example": "https://api.nterprise.com/resources/6a54b14a-b72e-430e-a89b-6f9005d5aa34/sub-resources"
             }
           }
         }

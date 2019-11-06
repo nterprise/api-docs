@@ -16,7 +16,7 @@ const buildResponseBody = (relation, schema) => {
       "type": "object",
       "properties": {
         "self": {
-          "$ref": "./link${_.upperFirst(schema)}.json"
+          "$ref": "./link${_.upperFirst(schema)}.json#/properties/_links/properties/nter:${relation}"
         }
       }
     }
