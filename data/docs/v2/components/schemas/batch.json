@@ -13,7 +13,6 @@
       "type": "string",
       "description": "The identifier for the batch",
       "example": "59c834ad-d9cc-4e0f-a569-8f4e52c351b9",
-      "readOnly": true,
       "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
     },
     "queue": {

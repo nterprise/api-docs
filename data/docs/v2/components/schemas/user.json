@@ -8,7 +8,6 @@
       "type": "string",
       "description": "The identifier for the user",
       "example": "3dddba3e-6122-46a8-ae26-8c7c95bd82d7",
-      "readOnly": true,
       "pattern": "[0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}"
     },
     "email": {
