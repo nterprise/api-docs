@@ -12,7 +12,7 @@
           "properties": {
             "href": {
               "type": "string",
-              "example": "https://api.nterprise.com/batches/650262d9-9642-4205-bb7e-a53e73687e37"
+              "example": "https://api.nterprise.com/batches/276be61a-f9a5-4dcd-aa2a-291e4af0fc9e"
             }
           }
         }

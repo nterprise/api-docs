@@ -7,7 +7,7 @@
       "type": "object",
       "properties": {
         "self": {
-          "$ref": "./linkDashboard.json"
+          "$ref": "./linkDashboard.json#/properties/_links/properties/nter:dashboards"
         }
       }
     }

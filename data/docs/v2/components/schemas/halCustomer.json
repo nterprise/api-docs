@@ -7,7 +7,7 @@
       "type": "object",
       "properties": {
         "self": {
-          "$ref": "./linkCustomer.json"
+          "$ref": "./linkCustomer.json#/properties/_links/properties/nter:customers"
         }
       }
     }

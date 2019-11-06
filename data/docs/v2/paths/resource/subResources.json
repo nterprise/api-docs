@@ -1,0 +1,5 @@
+{
+  "get": {
+    "$ref": "../operations/resource/fetchAllChildResources.json"
+  }
+}

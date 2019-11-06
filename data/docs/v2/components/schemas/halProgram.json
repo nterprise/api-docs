@@ -7,7 +7,7 @@
       "type": "object",
       "properties": {
         "self": {
-          "$ref": "./linkProgram.json"
+          "$ref": "./linkProgram.json#/properties/_links/properties/nter:programs"
         }
       }
     }

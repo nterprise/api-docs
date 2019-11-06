@@ -7,7 +7,7 @@
       "type": "object",
       "properties": {
         "self": {
-          "$ref": "./linkLocation.json"
+          "$ref": "./linkLocation.json#/properties/_links/properties/nter:locations"
         }
       }
     }

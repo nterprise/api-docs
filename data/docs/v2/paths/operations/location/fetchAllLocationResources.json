@@ -1,7 +1,7 @@
 {
   "operationId": "fetchAllResources",
-  "summary": "Fetches A Page of resources",
-  "description": "Fetch resources",
+  "summary": "Fetches A Page of resources for the location",
+  "description": "Fetch location resources",
   "tags": [
     "Location"
   ],

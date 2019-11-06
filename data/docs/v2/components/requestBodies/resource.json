@@ -6,6 +6,7 @@
         "type": "object",
         "required": [
           "location",
+          "resource_type",
           "label"
         ],
         "properties": {
@@ -23,8 +24,22 @@
           "label": {
             "$ref": "../../components/schemas/entityCommon.json#/properties/label"
           },
+          "resource_type": {
+            "$ref": "../../components/schemas/resource.json#/properties/resource_type"
+          },
           "meta": {
             "$ref": "../../components/schemas/resource.json#/properties/meta"
+          },
+          "parent": {
+            "type": "object",
+            "required": [
+              "resource_id"
+            ],
+            "properties": {
+              "resource_id": {
+                "$ref": "../../components/schemas/resource.json#/properties/resource_id"
+              }
+            }
           }
         }
       }

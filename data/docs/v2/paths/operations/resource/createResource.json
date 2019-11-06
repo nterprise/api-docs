@@ -3,12 +3,7 @@
   "summary": "Creates a resource",
   "description": "Creates a new resource",
   "tags": [
-    "Location"
-  ],
-  "parameters": [
-    {
-      "$ref": "../../../components/parameters/locationId.json"
-    }
+    "Resource"
   ],
   "requestBody": {
     "$ref": "../../../components/requestBodies/resource.json"

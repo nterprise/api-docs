@@ -7,7 +7,7 @@
       "type": "object",
       "properties": {
         "self": {
-          "$ref": "./linkVendor.json"
+          "$ref": "./linkVendor.json#/properties/_links/properties/nter:vendors"
         }
       }
     }

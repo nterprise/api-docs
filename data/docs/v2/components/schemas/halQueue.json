@@ -7,7 +7,7 @@
       "type": "object",
       "properties": {
         "self": {
-          "$ref": "./linkQueue.json"
+          "$ref": "./linkQueue.json#/properties/_links/properties/nter:queues"
         }
       }
     }

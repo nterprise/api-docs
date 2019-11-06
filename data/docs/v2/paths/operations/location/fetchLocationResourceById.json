@@ -1,7 +1,7 @@
 {
   "operationId": "fetchResourceById",
-  "summary": "Fetches a resource by Id",
-  "description": "Fetch Resource",
+  "summary": "Fetches a location resource by Id",
+  "description": "Fetch location Resource",
   "tags": [
     "Location"
   ],

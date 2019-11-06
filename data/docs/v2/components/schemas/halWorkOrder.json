@@ -7,7 +7,7 @@
       "type": "object",
       "properties": {
         "self": {
-          "$ref": "./linkWorkOrder.json"
+          "$ref": "./linkWorkOrder.json#/properties/_links/properties/nter:work-orders"
         }
       }
     }

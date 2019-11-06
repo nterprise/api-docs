@@ -7,7 +7,7 @@
       "type": "object",
       "properties": {
         "self": {
-          "$ref": "./linkManufacturer.json"
+          "$ref": "./linkManufacturer.json#/properties/_links/properties/nter:manufacturers"
         }
       }
     }
