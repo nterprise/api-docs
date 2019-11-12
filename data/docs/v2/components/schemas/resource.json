@@ -39,7 +39,7 @@
     "location": {
       "$ref": "./location.json"
     },
-    "parent": {
+    "resource": {
       "type": "object",
       "description": "The parent resource if this is a child resource",
       "properties": {

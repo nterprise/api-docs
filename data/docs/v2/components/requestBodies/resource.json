@@ -30,7 +30,7 @@
           "meta": {
             "$ref": "../../components/schemas/resource.json#/properties/meta"
           },
-          "parent": {
+          "resource": {
             "type": "object",
             "required": [
               "resource_id"
