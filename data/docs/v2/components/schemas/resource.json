@@ -14,16 +14,32 @@
       "type": "string",
       "description": "The identifier for the resource",
       "example": "3c730679-dcfa-4b5a-8f6e-b76fe80c6078",
+      "x-examples": [
+        "3c730679-dcfa-4b5a-8f6e-b76fe80c6078"
+      ],
       "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
     },
     "label": {
       "example": "Server room",
+      "x-examples": [
+        "Server room"
+      ],
       "description": "Name of the resource"
+    },
+    "slug": {
+      "example": "server-room",
+      "x-examples": [
+        "server-room"
+      ],
+      "description": "Auto-generated slug for the resource"
     },
     "resource_type": {
       "type": "string",
       "description": "Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased",
       "example": "station",
+      "x-examples": [
+        "station"
+      ],
       "pattern": "^[a-z][0-9a-zA-Z-]+$"
     },
     "meta": {
@@ -32,9 +48,11 @@
       "additionalProperties": {
         "type": "string"
       },
-      "example": {
-        "power": "50w"
-      }
+      "x-examples": [
+        {
+          "power": "50w"
+        }
+      ]
     },
     "location": {
       "$ref": "./location.json"
@@ -44,16 +62,16 @@
       "description": "The parent resource if this is a child resource",
       "properties": {
         "resource_id": {
-          "$ref": "#/properties/resource_id"
+          "$ref": "./resource.json#/properties/resource_id"
         },
         "label": {
-          "$ref": "#/properties/label"
+          "$ref": "./resource.json#/properties/label"
         },
         "resource_type": {
-          "$ref": "#/properties/resource_type"
+          "$ref": "./resource.json#/properties/resource_type"
         },
         "meta": {
-          "$ref": "#/properties/meta"
+          "$ref": "./resource.json#/properties/meta"
         },
         "location": {
           "$ref": "./location.json"
@@ -65,5 +83,8 @@
     {
       "$ref": "./entityCommon.json"
     }
-  ]
+  ],
+  "example": {
+    "$ref": "../examples/resource.json"
+  }
 }

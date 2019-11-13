@@ -15,17 +15,31 @@
       "type": "string",
       "description": "Unique identifier",
       "example": "ec5db56d-32e6-4e5d-9bef-1016f3e13670",
+      "x-examples": [
+        "ec5db56d-32e6-4e5d-9bef-1016f3e13670"
+      ],
       "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
     },
     "label": {
+      "type": "string",
       "example": "10\" iPad",
+      "x-examples": [
+        "10\" iPad"
+      ],
       "description": "Label for the part"
+    },
+    "slug": {
+      "type": "string",
+      "example": "10-ipad",
+      "x-examples": [
+        "10-ipad"
+      ],
+      "description": "Auto-generated slug for the part"
     },
     "customer": {
       "$ref": "./customer.json"
     },
     "manufacturer": {
-      "x-ref": "#manufacturer",
       "type": "object",
       "description": "Manufacturer information for the part",
       "required": [
@@ -35,7 +49,10 @@
         "part_number": {
           "type": "string",
           "description": "Manufacturer part number",
-          "example": "602-3075-01"
+          "example": "602-3075-01",
+          "x-examples": [
+            "602-3075-01"
+          ]
         }
       },
       "allOf": [
@@ -52,5 +69,8 @@
     {
       "$ref": "./entityCommon.json"
     }
-  ]
+  ],
+  "example": {
+    "$ref": "../examples/part.json"
+  }
 }

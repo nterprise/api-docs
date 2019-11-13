@@ -1,18 +1,24 @@
 {
-  "x-id": "#date_range",
+  "x-ui-hide": true,
   "description": "Active date range for an entity",
   "properties": {
     "start_date": {
       "type": "string",
       "format": "date-time",
       "description": "Start date",
-      "example": "2019-08-07T18:10:53+00:00"
+      "example": "2019-08-07T18:10:53+00:00",
+      "x-examples": [
+        "2019-08-07T18:10:53+00:00"
+      ]
     },
     "end_date": {
       "type": "string",
       "format": "date-time",
       "description": "End date",
-      "example": "2020-08-07T18:10:53+00:00"
+      "example": "2020-08-07T18:10:53+00:00",
+      "x-examples": [
+        "2020-08-07T18:10:53+00:00"
+      ]
     }
   }
 }

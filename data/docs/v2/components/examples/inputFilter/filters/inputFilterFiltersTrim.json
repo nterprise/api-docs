@@ -1,0 +1,7 @@
+{
+  "type": "trim",
+  "options": {
+    "start": false,
+    "end": false
+  }
+}

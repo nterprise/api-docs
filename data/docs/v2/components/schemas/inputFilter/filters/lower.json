@@ -1,0 +1,20 @@
+{
+  "description": "Make the value lowercase",
+  "type": "object",
+  "required": [
+    "type",
+    "options"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "lower"
+      ]
+    },
+    "options": {
+      "type": "object",
+      "description": "This filter has no options"
+    }
+  }
+}

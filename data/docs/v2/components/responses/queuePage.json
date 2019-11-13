@@ -11,7 +11,7 @@
                 "type": "array",
                 "maxItems": 100,
                 "items": {
-                  "$ref": "../schemas/halQueue.json"
+                  "$ref": "../schemas/hal/halQueue.json"
                 }
               }
             }
@@ -19,7 +19,7 @@
         },
         "allOf": [
           {
-            "$ref": "../schemas/halPaginationOffset.json"
+            "$ref": "../schemas/hal/halPaginationOffset.json"
           }
         ]
       }

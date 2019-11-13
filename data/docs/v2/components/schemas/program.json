@@ -1,5 +1,4 @@
 {
-  "x-id": "#program",
   "x-nter-relation": "programs",
   "x-nter-model": "Program",
   "x-nter-callable": true,
@@ -12,18 +11,32 @@
   ],
   "properties": {
     "label": {
+      "type": "string",
       "example": "GAP Store refresh",
+      "x-examples": [
+        "GAP Store refresh"
+      ],
+      "description": "Name of the program"
+    },
+    "slug": {
+      "type": "string",
+      "example": "gap-store-refresh",
+      "x-examples": [
+        "gap-store-refresh"
+      ],
       "description": "Name of the program"
     },
     "program_id": {
       "type": "string",
       "description": "Unique identifier",
       "example": "ec5db56d-32e6-4e5d-9bef-1016f3e13670",
+      "x-examples": [
+        "ec5db56d-32e6-4e5d-9bef-1016f3e13670"
+      ],
       "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
     },
     "customer": {
-      "x-ref": "#customer",
-      "description": "The customer this program is for",
+      "description": "The cstomer this program is for",
       "allOf": [
         {
           "$ref": "./customer.json"
@@ -48,5 +61,8 @@
     {
       "$ref": "./entityCommon.json"
     }
-  ]
+  ],
+  "example": {
+    "$ref": "../examples/program.json"
+  }
 }

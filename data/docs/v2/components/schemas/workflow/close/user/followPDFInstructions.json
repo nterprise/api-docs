@@ -1,0 +1,24 @@
+{
+  "type": "object",
+  "description": "How to mark follow-pdf-instructions as complete",
+  "required": [
+    "attachment_id",
+    "step"
+  ],
+  "properties": {
+    "attachment_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "UUID of the attachment. This signifies that the user has followed the instructions",
+      "example": "eb65b19f-efb4-40e7-991c-03ba1a2d7ca7",
+      "x-examples": [
+        "eb65b19f-efb4-40e7-991c-03ba1a2d7ca7"
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "../../steps/stepCloseCommon.json"
+    }
+  ]
+}

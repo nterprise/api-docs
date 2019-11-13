@@ -1,0 +1,35 @@
+{
+  "type": "object",
+  "x-hal": true,
+  "x-ui-hide": true,
+  "properties": {
+    "total_count": {
+      "type": "integer",
+      "format": "int32",
+      "readOnly": true,
+      "minimum": 0,
+      "example": 32
+    },
+    "limit": {
+      "type": "integer",
+      "format": "int32",
+      "readOnly": true,
+      "minimum": 1,
+      "maximum": 100,
+      "example": 50
+    },
+    "offset": {
+      "type": "string",
+      "readOnly": true,
+      "example": "363yHhUhhI"
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "../links/linkSelf.json"
+    },
+    {
+      "$ref": "../links/linkNext.json"
+    }
+  ]
+}

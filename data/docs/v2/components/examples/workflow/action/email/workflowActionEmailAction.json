@@ -1,0 +1,7 @@
+{
+  "type": "email",
+  "options": {
+    "to": "bob@example.com",
+    "from": "alice@example.com"
+  }
+}

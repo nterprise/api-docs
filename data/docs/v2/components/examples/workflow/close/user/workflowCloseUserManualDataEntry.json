@@ -1,0 +1,9 @@
+{
+  "fields": [
+    {
+      "value": "AX-7784899",
+      "entity_field": "input_filter[?(@.key = 'asset-tag')]"
+    }
+  ],
+  "step": "complete"
+}

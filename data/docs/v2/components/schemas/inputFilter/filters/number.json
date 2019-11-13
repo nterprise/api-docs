@@ -1,0 +1,24 @@
+{
+  "description": "Filter to transform a value into a number. Non numeric characters (including comma and decimal points) will be removed",
+  "type": "object",
+  "required": [
+    "type",
+    "options"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "number"
+      ]
+    },
+    "options": {
+      "type": "object",
+      "description": "Number filter has no options",
+      "example": {},
+      "x-examples": [
+        {}
+      ]
+    }
+  }
+}

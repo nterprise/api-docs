@@ -13,6 +13,9 @@
       "type": "string",
       "description": "The identifier for the batch",
       "example": "59c834ad-d9cc-4e0f-a569-8f4e52c351b9",
+      "x-examples": [
+        "59c834ad-d9cc-4e0f-a569-8f4e52c351b9"
+      ],
       "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
     },
     "queue": {
@@ -22,6 +25,9 @@
       "type": "integer",
       "description": "Order for the queue",
       "example": 1,
+      "x-examples": [
+        1
+      ],
       "format": "int32"
     },
     "users": {
@@ -36,7 +42,10 @@
       "type": "integer",
       "description": "The number of cycles for this batch",
       "format": "int32",
-      "example": 20
+      "example": 20,
+      "x-examples": [
+        20
+      ]
     },
     "cycles": {
       "type": "object",
@@ -47,42 +56,60 @@
           "description": "The number of cycles pending",
           "format": "int32",
           "readOnly": true,
-          "example": 13
+          "example": 13,
+          "x-examples": [
+            13
+          ]
         },
         "in_progress": {
           "type": "integer",
           "description": "The number of cycles in progress",
           "format": "int32",
           "readOnly": true,
-          "example": 2
+          "example": 2,
+          "x-examples": [
+            2
+          ]
         },
         "verifying": {
           "type": "integer",
           "description": "The number of cycles verifying",
           "format": "int32",
           "readOnly": true,
-          "example": 1
+          "example": 1,
+          "x-examples": [
+            1
+          ]
         },
         "complete": {
           "type": "integer",
           "description": "The number of cycles complete",
           "format": "int32",
           "readOnly": true,
-          "example": 4
+          "example": 4,
+          "x-examples": [
+            4
+          ]
         },
         "blocked": {
           "type": "integer",
           "description": "The number of cycles blocked",
           "format": "int32",
           "readOnly": true,
-          "example": 0
+          "example": 0,
+          "x-examples": [
+            0
+          ]
         },
         "cancelled": {
           "type": "integer",
           "description": "The number of cycles cancelled",
           "format": "int32",
           "readOnly": true,
-          "example": 0
+          "example": 0,
+          "x-examples": [
+            0
+          ]
         }
       }
     },
@@ -95,5 +122,8 @@
     "updated": {
       "$ref": "./entityCommon.json#/properties/updated"
     }
+  },
+  "example": {
+    "$ref": "../examples/batch.json"
   }
 }

@@ -1,0 +1,8 @@
+{
+  "type": "uri",
+  "options": {
+    "schemes": [
+      "http"
+    ]
+  }
+}

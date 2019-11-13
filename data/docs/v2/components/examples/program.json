@@ -1,0 +1,47 @@
+{
+  "label": "GAP Store refresh",
+  "customer": {
+    "label": "Zones Inc",
+    "customer_id": "e530652e-28e8-4f64-84af-e1cf0ff7c805",
+    "slug": "zones-inc",
+    "external_platform": {
+      "ax_customer_id": "eff3ada3-0966-42be-a5e8-78efd3c52d39"
+    },
+    "allowed_statuses": [
+      {
+        "status": "Verifying",
+        "category": "PENDING"
+      }
+    ],
+    "created": "1998-07-01T09:21:33.938Z",
+    "updated": "1975-08-06T07:54:00.623Z"
+  },
+  "program_id": "ec5db56d-32e6-4e5d-9bef-1016f3e13670",
+  "slug": "gap-store-refresh",
+  "allowed_statuses": [
+    {
+      "status": "Cancelled",
+      "category": "VERIFYING"
+    },
+    {
+      "status": "Blocked",
+      "category": "PENDING"
+    },
+    {
+      "status": "Verifying",
+      "category": "PENDING"
+    },
+    {
+      "status": "Verifying",
+      "category": "PENDING"
+    },
+    {
+      "status": "Reticulating Splines",
+      "category": "COMPLETE"
+    }
+  ],
+  "start_date": "2019-08-07T18:10:53.0Z",
+  "end_date": "2020-08-07T18:10:53.0Z",
+  "created": "1997-09-18T14:43:36.572Z",
+  "updated": "2019-04-26T16:26:14.778Z"
+}

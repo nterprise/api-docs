@@ -1,0 +1,22 @@
+{
+  "type": "object",
+  "x-ui-hide": true,
+  "properties": {
+    "_links": {
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "nter:work-orders": {
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "href": {
+              "type": "string",
+              "example": "https://api.nterprise.com/work-orders/78560f41-1cdf-4dd7-a106-dcd9a4bfa9b5"
+            }
+          }
+        }
+      }
+    }
+  }
+}

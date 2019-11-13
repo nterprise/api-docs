@@ -1,0 +1,20 @@
+{
+  "type": "object",
+  "x-hal": true,
+  "x-ui-hide": true,
+  "properties": {
+    "_links": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "$ref": "../links/linkManufacturer.json#/properties/_links/properties/nter:manufacturers"
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "../manufacturer.json"
+    }
+  ]
+}

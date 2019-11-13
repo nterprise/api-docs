@@ -2,7 +2,6 @@
   "x-id": "#part",
   "description": "Defines the properties for a part",
   "required": [
-    "label",
     "part_id",
     "customer",
     "manufacturer"
@@ -33,14 +32,20 @@
           "type": "integer",
           "format": "int32",
           "minimum": 0,
-          "example": 42
+          "example": 42,
+          "x-examples": [
+            42
+          ]
         },
         "un_allocated": {
           "description": "Number of units not allocated to a project",
           "type": "integer",
           "format": "int32",
           "minimum": 0,
-          "example": 24
+          "example": 24,
+          "x-examples": [
+            24
+          ]
         },
         "by_status": {
           "type": "array",
@@ -53,7 +58,10 @@
                 "type": "integer",
                 "format": "int32",
                 "minimum": 0,
-                "example": 6
+                "example": 6,
+                "x-examples": [
+                  6
+                ]
               }
             },
             "allOf": [
@@ -65,5 +73,8 @@
         }
       }
     }
+  },
+  "example": {
+    "$ref": "../examples/partLocation.json"
   }
 }

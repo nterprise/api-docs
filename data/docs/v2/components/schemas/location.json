@@ -10,15 +10,26 @@
   ],
   "properties": {
     "label": {
-      "example": "Zones Innovation Center"
+      "type": "string",
+      "example": "Zones Innovation Center",
+      "x-examples": [
+        "Zones Innovation Center"
+      ]
     },
     "slug": {
-      "example": "zones-innovation-center"
+      "type": "string",
+      "example": "zones-innovation-center",
+      "x-examples": [
+        "zones-innovation-center"
+      ]
     },
     "location_id": {
       "type": "string",
       "description": "The identifier for the location",
       "example": "b994961b-30b4-4f33-9330-f46fd6172909",
+      "x-examples": [
+        "b994961b-30b4-4f33-9330-f46fd6172909"
+      ],
       "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
     },
     "location_type": {
@@ -29,13 +40,19 @@
         "facility",
         "other"
       ],
-      "example": "other"
+      "example": "other",
+      "x-examples": [
+        "other"
+      ]
     },
     "formatted_address": {
       "type": "string",
       "readOnly": true,
       "description": "Address formatted for the where region the location exists in",
-      "example": "Zones Innovation Center\n431 Broadway\nSuite C\nMenands NY, 12204\nUSA"
+      "example": "Zones Innovation Center\n431 Broadway\nSuite C\nMenands NY, 12204\nUSA",
+      "x-examples": [
+        "Zones Innovation Center\n431 Broadway\nSuite C\nMenands NY, 12204\nUSA"
+      ]
     },
     "address": {
       "type": "object",
@@ -51,42 +68,66 @@
         "country": {
           "type": "string",
           "description": "Three Letter ISO country code",
-          "example": "USA"
+          "example": "USA",
+          "x-examples": [
+            "USA"
+          ]
         },
         "administrative_area": {
           "type": "string",
           "description": "State / Province / Region",
-          "example": "NY"
+          "example": "NY",
+          "x-examples": [
+            "NY"
+          ]
         },
         "sub_administrative_area": {
           "type": "string",
           "description": "County / District",
-          "example": "Albany"
+          "example": "Albany",
+          "x-examples": [
+            "Albany"
+          ]
         },
         "locality": {
           "type": "string",
           "description": "City / Town",
-          "example": "Menands"
+          "example": "Menands",
+          "x-examples": [
+            "Menands"
+          ]
         },
         "postal_code": {
           "type": "string",
           "description": "Postal Code / Zip Code",
-          "example": "12204"
+          "example": "12204",
+          "x-examples": [
+            "12204"
+          ]
         },
         "thoroughfare": {
           "type": "string",
           "description": "Street Address",
-          "example": "431 Broadway"
+          "example": "431 Broadway",
+          "x-examples": [
+            "431 Broadway"
+          ]
         },
         "premise": {
           "type": "string",
           "description": "Apartment / Suite / Box number etc",
-          "example": "Suite c"
+          "example": "Suite c",
+          "x-examples": [
+            "Suite c"
+          ]
         },
         "sub_premise": {
           "type": "string",
           "description": "Floor # / Room # / Building label etc",
-          "example": "Zones Innovation Center"
+          "example": "Zones Innovation Center",
+          "x-examples": [
+            "Zones Innovation Center"
+          ]
         }
       }
     }
@@ -95,5 +136,8 @@
     {
       "$ref": "./entityCommon.json"
     }
-  ]
+  ],
+  "example": {
+    "$ref": "../examples/location.json"
+  }
 }

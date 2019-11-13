@@ -1,5 +1,4 @@
 {
-  "x-id": "#project",
   "x-nter-relation": "projects",
   "x-nter-model": "Project",
   "x-nter-callable": true,
@@ -12,17 +11,31 @@
   ],
   "properties": {
     "label": {
+      "type": "string",
       "example": "Store 42",
+      "x-examples": [
+        "Store 42"
+      ],
       "description": "Name of the project"
+    },
+    "slug": {
+      "type": "string",
+      "example": "store-42",
+      "x-examples": [
+        "store-42"
+      ],
+      "description": "Auto-generated slug for the project"
     },
     "project_id": {
       "type": "string",
       "description": "Unique identifier",
       "example": "ec5db56d-32e6-4e5d-9bef-1016f3e13670",
+      "x-examples": [
+        "ec5db56d-32e6-4e5d-9bef-1016f3e13670"
+      ],
       "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
     },
     "customer": {
-      "x-ref": "#customer",
       "description": "The customer this project is for",
       "allOf": [
         {
@@ -57,5 +70,8 @@
     {
       "$ref": "./entityCommon.json"
     }
-  ]
+  ],
+  "example": {
+    "$ref": "../examples/project.json"
+  }
 }

@@ -1,0 +1,20 @@
+{
+  "type": "object",
+  "x-hal": true,
+  "x-ui-hide": true,
+  "properties": {
+    "_links": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "$ref": "../links/linkWorkflow.json#/properties/_links/properties/nter:work-flows"
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "../workflow.json"
+    }
+  ]
+}

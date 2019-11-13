@@ -16,13 +16,28 @@
       "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
     },
     "label": {
+      "type": "string",
       "example": "Apple Inc",
+      "x-examples": [
+        "Apple Inc"
+      ],
       "description": "Label for the manufacturer"
+    },
+    "slug": {
+      "type": "string",
+      "example": "apple-inc",
+      "x-examples": [
+        "apple-inc"
+      ],
+      "description": "Auto-generated slug for the manufacturer"
     }
   },
   "allOf": [
     {
       "$ref": "./entityCommon.json"
     }
-  ]
+  ],
+  "example": {
+    "$ref": "../examples/manufacturer.json"
+  }
 }

@@ -4,13 +4,13 @@
   "x-nter-callable": true,
   "type": "object",
   "properties": {
-    "label": {
-      "$ref": "./entityCommon.json#/properties/label"
-    },
     "context_id": {
       "type": "string",
       "description": "Identifier for the context",
       "example": "MWMwMjIyNTgtYWZjZC00YmYyLWE1NzYtYWU1OWI3YTE1ZDczOlVOSVQ6NTMxMDI5MjQtNDUwYS00ZjFlLWI1ZDQtYTIwN2JjNTg2NTIxOjE1Njc2MDUwNTU5OTUuNDQ1NjYzNDM-",
+      "x-examples": [
+        "MWMwMjIyNTgtYWZjZC00YmYyLWE1NzYtYWU1OWI3YTE1ZDczOlVOSVQ6NTMxMDI5MjQtNDUwYS00ZjFlLWI1ZDQtYTIwN2JjNTg2NTIxOjE1Njc2MDUwNTU5OTUuNDQ1NjYzNDM-"
+      ],
       "pattern": "^[A-Za-z0-9-_]+$"
     },
     "workflow": {
@@ -20,7 +20,10 @@
       "type": "string",
       "description": "The current step to execute",
       "readOnly": true,
-      "example": "assign-units"
+      "example": "assign-units",
+      "x-examples": [
+        "assign-units"
+      ]
     },
     "last_steps": {
       "type": "array",
@@ -34,7 +37,10 @@
             "type": "string",
             "description": "Name for the step",
             "readOnly": true,
-            "example": "choose-units"
+            "example": "choose-units",
+            "x-examples": [
+              "choose-units"
+            ]
           },
           "started_at": {
             "type": "string",
@@ -52,7 +58,10 @@
             "type": "string",
             "description": "The total time it took to run the step (with milliseconds)",
             "readOnly": true,
-            "example": "1567605055995.677"
+            "example": 1567605055995.677,
+            "x-examples": [
+              1567605055995.677
+            ]
           },
           "did_error": {
             "type": "boolean",
@@ -83,7 +92,10 @@
     "time_to_run": {
       "type": "string",
       "description": "The total time it took to run the workflow (with milliseconds)",
-      "example": "1567605055995.677",
+      "example": 1567605055995.677,
+      "x-examples": [
+        1567605055995.677
+      ],
       "readOnly": true
     },
     "active": {
@@ -102,18 +114,18 @@
       "description": "Data set for the context",
       "additionalProperties": true,
       "readOnly": true,
-      "example": {
-        "can_foo_the_bar": true,
-        "available_units_by_part": {
-          "373b7cd6-3fde-4afe-a790-411d72e07c89": 42,
-          "8faaacaa-94d4-4f1f-a8eb-39353dbbf524": 84
+      "x-examples": [
+        {
+          "can_foo_the_bar": true,
+          "available_units_by_part": {
+            "373b7cd6-3fde-4afe-a790-411d72e07c89": 42,
+            "8faaacaa-94d4-4f1f-a8eb-39353dbbf524": 84
+          }
         }
-      }
+      ]
     }
   },
-  "allOf": [
-    {
-      "$ref": "./entityCommon.json"
-    }
-  ]
+  "example": {
+    "$ref": "../examples/context.json"
+  }
 }

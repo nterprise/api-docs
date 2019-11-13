@@ -1,0 +1,7 @@
+{
+  "type": "contains",
+  "options": {
+    "contains": "foo",
+    "check_case": true
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "type": "mask",
+  "options": {
+    "mask": "^[a-z]$"
+  }
+}

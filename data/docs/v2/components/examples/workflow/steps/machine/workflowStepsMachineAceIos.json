@@ -1,0 +1,160 @@
+{
+  "type": "pass",
+  "label": "Find units",
+  "goto": "complete",
+  "options": {
+    "application": {
+      "application_id": "ace-ios",
+      "platforms": [
+        {
+          "platform": "linux",
+          "arch": "s390"
+        }
+      ]
+    },
+    "configuration": {
+      "pairing_cert": "dGhpcyBpcyBub3QgYSBjZXJ0IGZpbGUganVzdCBhbiBleGFtcGxl",
+      "pairing_key": "dGhpcyBpcyBub3QgYSBjZXJ0IGZpbGUganVzdCBhbiBleGFtcGxl",
+      "restore_device": true,
+      "automated_enrollment": false,
+      "mdm": {
+        "vendor": "Meraki",
+        "console_url": "http://jamf.zones.com",
+        "user": "NterpriseBob",
+        "password": "consectetur in",
+        "tenant_code": "nterprise",
+        "set_asset_tag": "$._entity.input_filter[?(@.key = 'asset-tag')]"
+      },
+      "field_mappings": [
+        {
+          "from": "imei",
+          "to": "$._entity.input_filter[?(@.key = 'serial-number')]"
+        },
+        {
+          "from": "iccid",
+          "to": "$._entity.input_filter[?(@.key = 'serial-number')]"
+        },
+        {
+          "from": "icon_layout",
+          "to": "$._entity.input_filter[?(@.key = 'serial-number')]"
+        },
+        {
+          "from": "thundersync_serial",
+          "to": "$._entity.input_filter[?(@.key = 'serial-number')]"
+        },
+        {
+          "from": "storage",
+          "to": "$._entity.input_filter[?(@.key = 'serial-number')]"
+        }
+      ],
+      "wait_for_apps": [
+        "com.apple.itunes",
+        "com.apple.itunes",
+        "com.apple.itunes"
+      ],
+      "wait_for_battery_charge": 93
+    }
+  },
+  "goto-fail": "process-fail",
+  "context": [
+    {
+      "key": "$.unit.status",
+      "value": "$.buzz",
+      "lock": false,
+      "ignore": false
+    },
+    {
+      "key": "extract_fields",
+      "value": "Pending",
+      "lock": true,
+      "ignore": true
+    },
+    {
+      "key": "$.unit.status",
+      "value": "true",
+      "lock": false,
+      "ignore": false
+    },
+    {
+      "key": "$.fizz",
+      "value": "Pending",
+      "lock": false,
+      "ignore": false
+    }
+  ],
+  "onError": {
+    "finally": {
+      "goto": "failed",
+      "actions": [
+        {
+          "type": "email",
+          "options": {
+            "to": "bob@example.com",
+            "from": "alice@example.com"
+          }
+        },
+        {
+          "type": "email",
+          "options": {
+            "to": "bob@example.com",
+            "from": "alice@example.com"
+          }
+        },
+        {
+          "type": "email",
+          "options": {
+            "to": "bob@example.com",
+            "from": "alice@example.com"
+          }
+        },
+        {
+          "type": "email",
+          "options": {
+            "to": "bob@example.com",
+            "from": "alice@example.com"
+          }
+        },
+        {
+          "type": "email",
+          "options": {
+            "to": "bob@example.com",
+            "from": "alice@example.com"
+          }
+        }
+      ]
+    },
+    "retry": 1
+  },
+  "onComplete": {
+    "actions": [
+      {
+        "type": "email",
+        "options": {
+          "to": "bob@example.com",
+          "from": "alice@example.com"
+        }
+      },
+      {
+        "type": "email",
+        "options": {
+          "to": "bob@example.com",
+          "from": "alice@example.com"
+        }
+      },
+      {
+        "type": "email",
+        "options": {
+          "to": "bob@example.com",
+          "from": "alice@example.com"
+        }
+      },
+      {
+        "type": "email",
+        "options": {
+          "to": "bob@example.com",
+          "from": "alice@example.com"
+        }
+      }
+    ]
+  }
+}

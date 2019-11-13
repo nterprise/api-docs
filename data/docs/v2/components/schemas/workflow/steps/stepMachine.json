@@ -1,0 +1,85 @@
+{
+  "type": "object",
+  "description": "Run an application extension",
+  "properties": {
+    "label": {
+      "x-examples": [
+        "Run Application"
+      ]
+    },
+    "options": {
+      "type": "object",
+      "required": [
+        "application",
+        "configuration"
+      ],
+      "properties": {
+        "application": {
+          "type": "object",
+          "required": [
+            "application_id",
+            "platforms"
+          ],
+          "properties": {
+            "application_id": {
+              "type": "string",
+              "description": "Registered application ID",
+              "example": "ace-ios",
+              "x-examples": [
+                "ace-ios"
+              ]
+            },
+            "platforms": {
+              "type": "array",
+              "description": "Allowed platforms the application can run on",
+              "items": {
+                "type": "object",
+                "required": [
+                  "platform",
+                  "arch"
+                ],
+                "properties": {
+                  "platform": {
+                    "type": "string",
+                    "description": "The platform (OS) the application can run on",
+                    "enum": [
+                      "aix",
+                      "darwin",
+                      "freebsd",
+                      "linux",
+                      "openbsd",
+                      "sunos",
+                      "win32"
+                    ]
+                  },
+                  "arch": {
+                    "type": "string",
+                    "description": "The CPU architecture needed to run the application",
+                    "enum": [
+                      "arm",
+                      "arm64",
+                      "ia32",
+                      "mips",
+                      "mipsel",
+                      "ppc",
+                      "ppc64",
+                      "s390",
+                      "s390x",
+                      "x32",
+                      "x64"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "./stepCommon.json"
+    }
+  ]
+}

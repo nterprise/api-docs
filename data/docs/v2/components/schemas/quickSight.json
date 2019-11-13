@@ -1,5 +1,7 @@
 {
+  "type": "object",
   "description": "Quick Sight dashboard",
+  "x-ui-hide": true,
   "properties": {
     "type": {
       "description": "Describes type of dashboard. Embedded link to ",
@@ -9,19 +11,29 @@
         "quickSight",
         "widget"
       ],
-      "example": "quickSight"
+      "example": "quickSight",
+      "x-examples": [
+        "quickSight"
+      ]
     },
     "embed_url": {
       "description": "The link to the embedded dashboard from quick sight",
       "type": "string",
       "readOnly": true,
-      "example": "https://us-east-1.quicksight.aws.amazon.com/embed/4fee092f51244f21994c9d7939813b11/dashboards/6888cf31-bc54-431b-9c74-ad59f4a29bc6?isauthcode=true&identityprovider=quicksight&code=SixUiZuNCcD73DfhuCHH_WdIpuhKyo6e5jerKAfA%3D%3D"
+      "example": "https://us-east-1.quicksight.aws.amazon.com/embed/4fee092f51244f21994c9d7939813b11/dashboards/6888cf31-bc54-431b-9c74-ad59f4a29bc6?isauthcode=true&identityprovider=quicksight&code=SixUiZuNCcD73DfhuCHH_WdIpuhKyo6e5jerKAfA%3D%3D",
+      "x-examples": [
+        "https://us-east-1.quicksight.aws.amazon.com/embed/4fee092f51244f21994c9d7939813b11/dashboards/6888cf31-bc54-431b-9c74-ad59f4a29bc6?isauthcode=true&identityprovider=quicksight&code=SixUiZuNCcD73DfhuCHH_WdIpuhKyo6e5jerKAfA%3D%3D"
+      ]
     },
     "expires_in": {
       "description": "How long until the embedded link expires. Calling the endpoint will generate a fresh embed url",
       "readOnly": true,
       "type": "integer",
-      "format": "int32"
+      "format": "int32",
+      "example": 3600,
+      "x-examples": [
+        3600
+      ]
     }
   }
 }

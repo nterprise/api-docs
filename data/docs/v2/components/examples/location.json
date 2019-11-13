@@ -1,0 +1,19 @@
+{
+  "location_type": "other",
+  "address": {
+    "country": "USA",
+    "administrative_area": "NY",
+    "locality": "Menands",
+    "postal_code": "12204",
+    "thoroughfare": "431 Broadway",
+    "sub_administrative_area": "Albany",
+    "premise": "Suite c",
+    "sub_premise": "Zones Innovation Center"
+  },
+  "label": "Zones Innovation Center",
+  "slug": "zones-innovation-center",
+  "location_id": "b994961b-30b4-4f33-9330-f46fd6172909",
+  "formatted_address": "Zones Innovation Center\n431 Broadway\nSuite C\nMenands NY, 12204\nUSA",
+  "created": "2018-07-03T22:45:08.206Z",
+  "updated": "1994-10-16T16:34:18.337Z"
+}

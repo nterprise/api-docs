@@ -1,0 +1,31 @@
+{
+  "type": "object",
+  "description": "Finial step which is marked as failed",
+  "properties": {
+    "label": {
+      "example": "Failed",
+      "x-examples": [
+        "Failed"
+      ],
+      "allOf": [
+        {
+          "$ref": "./stepCommon.json#/properties/label"
+        }
+      ]
+    },
+    "type": {
+      "example": "fail",
+      "x-examples": [
+        "fail"
+      ],
+      "allOf": [
+        {
+          "$ref": "./stepCommon.json#/properties/type"
+        }
+      ]
+    },
+    "onComplete": {
+      "$ref": "./stepCommon.json#/properties/onComplete"
+    }
+  }
+}

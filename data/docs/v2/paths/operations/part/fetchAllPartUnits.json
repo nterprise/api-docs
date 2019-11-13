@@ -1,0 +1,45 @@
+{
+  "operationId": "fetchAllUnits",
+  "summary": "Fetches A Page of units",
+  "description": "Fetch Unit",
+  "tags": [
+    "Unit"
+  ],
+  "parameters": [
+    {
+      "$ref": "../../../components/parameters/partId.json"
+    },
+    {
+      "$ref": "../../../components/parameters/limit.json"
+    },
+    {
+      "$ref": "../../../components/parameters/offset.json"
+    },
+    {
+      "$ref": "../../../components/parameters/unitSort.json"
+    },
+    {
+      "$ref": "../../../components/parameters/filterLabel.json"
+    },
+    {
+      "$ref": "../../../components/parameters/filterManufacturer.json"
+    },
+    {
+      "$ref": "../../../components/parameters/filterVendor.json"
+    },
+    {
+      "$ref": "../../../components/parameters/filterCustomer.json"
+    }
+  ],
+  "responses": {
+    "200": {
+      "$ref": "../../../components/responses/unitPage.json"
+    },
+    "401": {
+      "$ref": "../../../components/responses/401unauthorized.json"
+    },
+    "403": {
+      "$ref": "../../../components/responses/403forbidden.json"
+    }
+  }
+}

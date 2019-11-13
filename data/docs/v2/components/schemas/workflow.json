@@ -12,22 +12,31 @@
     "workflow_id",
     "applies_to"
   ],
-  "example": {
-    "$ref": "../examples/workflow.json"
-  },
   "properties": {
     "workflow_id": {
       "type": "string",
       "description": "Customer identifier",
       "example": "e530652e-28e8-4f64-84af-e1cf0ff7c805",
+      "x-examples": [
+        "e530652e-28e8-4f64-84af-e1cf0ff7c805"
+      ],
       "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
     },
     "label": {
+      "type": "string",
       "example": "MLTI iPad Assembly Assignment",
+      "x-examples": [
+        "MLTI iPad Assembly Assignment"
+      ],
       "description": "Label for the workflow"
     },
     "slug": {
-      "example": "mlti-ipad-assembly-assignment"
+      "type": "string",
+      "description": "Auto-generated slug for the workflow",
+      "example": "mlti-ipad-assembly-assignment",
+      "x-examples": [
+        "mlti-ipad-assembly-assignment"
+      ]
     },
     "version": {
       "type": "string",
@@ -41,6 +50,9 @@
       "type": "integer",
       "format": "int32",
       "example": 7,
+      "x-examples": [
+        7
+      ],
       "readOnly": true,
       "description": "Version number for the work flows (the number of times it has been changed"
     },
@@ -59,7 +71,11 @@
     },
     "starts_at": {
       "type": "string",
-      "description": "Starting step"
+      "description": "Starting step",
+      "example": "entry",
+      "x-examples": [
+        "entry"
+      ]
     },
     "context": {
       "type": "array",
@@ -73,11 +89,23 @@
         "properties": {
           "key": {
             "type": "string",
-            "description": "The context key to set"
+            "description": "The context key to set",
+            "example": "$.fizz",
+            "x-examples": [
+              "$.fizz",
+              "$.unit.status",
+              "extract_fields"
+            ]
           },
           "value": {
             "type": "string",
-            "description": "Value to set"
+            "description": "Value to set",
+            "example": "$.buzz",
+            "x-examples": [
+              "$.buzz",
+              "Pending",
+              true
+            ]
           },
           "lock": {
             "type": "boolean",
@@ -86,7 +114,8 @@
           },
           "ignore": {
             "type": "boolean",
-            "description": "When trying to set a locked key, do not fail"
+            "description": "When trying to set a locked key, do not fail",
+            "example": false
           }
         }
       }
@@ -94,29 +123,75 @@
     "steps": {
       "type": "object",
       "description": "Steps for the workflow",
+      "x-patternProperties": {
+        "(confirm|success|fail|manual|run-ace|follow)": {
+          "type": "object",
+          "anyOf": [
+            {
+              "$ref": "./workflow/steps/function/allocateUnitsToProject.json"
+            },
+            {
+              "$ref": "./workflow/steps/machine/aceIos.json"
+            },
+            {
+              "$ref": "./workflow/steps/user/confirmAction.json"
+            },
+            {
+              "$ref": "./workflow/steps/user/followPDFInstructions.json"
+            },
+            {
+              "$ref": "./workflow/steps/user/manualDataEntry.json"
+            },
+            {
+              "$ref": "./workflow/steps/stepChoices.json"
+            },
+            {
+              "$ref": "./workflow/steps/stepFail.json"
+            },
+            {
+              "$ref": "./workflow/steps/stepPass.json"
+            },
+            {
+              "$ref": "./workflow/steps/stepSuccess.json"
+            },
+            {
+              "$ref": "./workflow/steps/stepWait.json"
+            }
+          ]
+        }
+      },
       "additionalProperties": {
         "type": "object",
         "anyOf": [
           {
-            "$ref": "./stepFunction.json"
+            "$ref": "./workflow/steps/function/allocateUnitsToProject.json"
           },
           {
-            "$ref": "./stepChoices.json"
+            "$ref": "./workflow/steps/machine/aceIos.json"
           },
           {
-            "$ref": "./stepPass.json"
+            "$ref": "./workflow/steps/user/confirmAction.json"
           },
           {
-            "$ref": "./stepUser.json"
+            "$ref": "./workflow/steps/user/followPDFInstructions.json"
           },
           {
-            "$ref": "./stepWait.json"
+            "$ref": "./workflow/steps/user/manualDataEntry.json"
           },
           {
-            "$ref": "./stepSuccess.json"
+            "$ref": "./workflow/steps/stepChoices.json"
           },
           {
-            "$ref": "./stepFail.json"
+            "$ref": "./workflow/steps/stepFail.json"
+          },
+          {
+            "$ref": "./workflow/steps/stepPass.json"
+          },
+          {
+            "$ref": "./workflow/steps/stepSuccess.json"
+          },
+          {
+            "$ref": "./workflow/steps/stepWait.json"
           }
         ]
       }
@@ -126,5 +201,8 @@
     {
       "$ref": "./entityCommon.json"
     }
-  ]
+  ],
+  "example": {
+    "$ref": "../examples/workflow.json"
+  }
 }

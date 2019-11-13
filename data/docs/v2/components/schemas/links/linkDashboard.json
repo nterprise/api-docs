@@ -1,0 +1,22 @@
+{
+  "type": "object",
+  "x-ui-hide": true,
+  "properties": {
+    "_links": {
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "nter:dashboards": {
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "href": {
+              "type": "string",
+              "example": "https://api.nterprise.com/dashboards/2ceedddf-4fb6-48d0-9e5b-e9e6e2191fc3"
+            }
+          }
+        }
+      }
+    }
+  }
+}

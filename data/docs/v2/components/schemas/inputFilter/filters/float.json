@@ -1,0 +1,28 @@
+{
+  "description": "Filter to transform a value into a float. Non numeric characters (including comma) will be removed",
+  "type": "object",
+  "required": [
+    "type",
+    "options"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "float"
+      ]
+    },
+    "options": {
+      "type": "object",
+      "properties": {
+        "precision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 8,
+          "default": 3,
+          "description": "How many decimal places to preserve"
+        }
+      }
+    }
+  }
+}

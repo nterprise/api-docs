@@ -1,0 +1,94 @@
+{
+  "type": "function",
+  "label": "Run Application",
+  "goto": "complete",
+  "options": {
+    "application": {
+      "application_id": "ace-ios",
+      "platforms": [
+        {
+          "platform": "darwin",
+          "arch": "ia32"
+        },
+        {
+          "platform": "aix",
+          "arch": "mips"
+        },
+        {
+          "platform": "freebsd",
+          "arch": "ppc64"
+        },
+        {
+          "platform": "win32",
+          "arch": "mips"
+        },
+        {
+          "platform": "sunos",
+          "arch": "x64"
+        }
+      ]
+    },
+    "configuration": "ut labore id"
+  },
+  "goto-fail": "process-fail",
+  "context": [
+    {
+      "key": "$.fizz",
+      "value": "true",
+      "lock": true,
+      "ignore": false
+    },
+    {
+      "key": "$.unit.status",
+      "value": "Pending",
+      "lock": true,
+      "ignore": true
+    },
+    {
+      "key": "$.unit.status",
+      "value": "Pending",
+      "lock": true,
+      "ignore": false
+    }
+  ],
+  "onError": {
+    "finally": {
+      "goto": "failed",
+      "actions": [
+        {
+          "type": "email",
+          "options": {
+            "to": "bob@example.com",
+            "from": "alice@example.com"
+          }
+        },
+        {
+          "type": "email",
+          "options": {
+            "to": "bob@example.com",
+            "from": "alice@example.com"
+          }
+        },
+        {
+          "type": "email",
+          "options": {
+            "to": "bob@example.com",
+            "from": "alice@example.com"
+          }
+        }
+      ]
+    },
+    "retry": 3
+  },
+  "onComplete": {
+    "actions": [
+      {
+        "type": "email",
+        "options": {
+          "to": "bob@example.com",
+          "from": "alice@example.com"
+        }
+      }
+    ]
+  }
+}

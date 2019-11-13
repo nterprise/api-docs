@@ -1,0 +1,18 @@
+{
+  "type": "object",
+  "x-ui-hide": true,
+  "required": [
+    "step"
+  ],
+  "properties": {
+    "step": {
+      "type": "string",
+      "description": "Step to mark as complete",
+      "pattern": "^[a-z][a-z-]+[a-z]$",
+      "example": "complete",
+      "x-examples": [
+        "complete"
+      ]
+    }
+  }
+}
