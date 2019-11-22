@@ -7,7 +7,6 @@
         "properties": {
           "url": {
             "type": "string",
-            "format": "url",
             "description": "URL to post the file to",
             "readOnly": true
           },
@@ -20,7 +19,7 @@
         },
         "allOf": [
           {
-            "$ref": "../schemas/linkSelf.json"
+            "$ref": "../schemas/links/linkSelf.json"
           }
         ]
       }

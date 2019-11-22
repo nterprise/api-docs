@@ -10,20 +10,38 @@
     "unit_id"
   ],
   "properties": {
-    "label": {
-      "example": "10\" iPad for Hugo",
-      "description": "Name of the unit"
-    },
     "unit_id": {
       "type": "string",
       "description": "The identifier for the unit",
       "example": "ec5db56d-32e6-4e5d-9bef-1016f3e13670",
+      "x-examples": [
+        "ec5db56d-32e6-4e5d-9bef-1016f3e13670"
+      ],
       "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+    },
+    "label": {
+      "type": "string",
+      "example": "10\" iPad for Hugo",
+      "x-examples": [
+        "10\" iPad for Hugo"
+      ],
+      "description": "Name of the unit"
+    },
+    "slug": {
+      "type": "string",
+      "example": "10-ipad-for-hugo",
+      "x-examples": [
+        "10-ipad-for-hugo"
+      ],
+      "description": "Auto-generated slug for the unit"
     },
     "tenant_part_number": {
       "type": "string",
       "description": "Identifier set by the tenant",
-      "example": "AX-44333"
+      "example": "AX-44333",
+      "x-examples": [
+        "AX-44333"
+      ]
     },
     "manufacturer": {
       "description": "The manufacturer that makes this unit",
@@ -99,5 +117,8 @@
     {
       "$ref": "./entityCommon.json"
     }
-  ]
+  ],
+  "example": {
+    "$ref": "../examples/unit.json"
+  }
 }

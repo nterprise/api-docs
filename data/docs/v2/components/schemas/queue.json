@@ -1,5 +1,4 @@
 {
-  "x-id": "#queue",
   "x-nter-relation": "queues",
   "x-nter-model": "Queue",
   "x-nter-callable": true,
@@ -9,13 +8,28 @@
   ],
   "properties": {
     "label": {
+      "type": "string",
       "example": "Fast Lane",
+      "x-examples": [
+        "Fast Lane"
+      ],
       "description": "Name of the queue"
+    },
+    "slug": {
+      "type": "string",
+      "example": "fast-lane",
+      "x-examples": [
+        "fast-lane"
+      ],
+      "description": "Auto-generated slug for the queue"
     },
     "queue_id": {
       "type": "string",
       "description": "The identifier for the queue",
       "example": "59c834ad-d9cc-4e0f-a569-8f4e52c351b9",
+      "x-examples": [
+        "59c834ad-d9cc-4e0f-a569-8f4e52c351b9"
+      ],
       "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
     },
     "location": {
@@ -31,6 +45,9 @@
       "type": "integer",
       "description": "Priority level for queue",
       "example": 42,
+      "x-examples": [
+        42
+      ],
       "format": "int32"
     },
     "total_work_orders": {
@@ -43,42 +60,60 @@
           "description": "The number of cycles pending",
           "format": "int32",
           "readOnly": true,
-          "example": 4
+          "example": 4,
+          "x-examples": [
+            4
+          ]
         },
         "in_progress": {
           "type": "integer",
           "description": "The number of cycles in progress",
           "format": "int32",
           "readOnly": true,
-          "example": 4
+          "example": 4,
+          "x-examples": [
+            4
+          ]
         },
         "verifying": {
           "type": "integer",
           "description": "The number of cycles verifying",
           "format": "int32",
           "readOnly": true,
-          "example": 4
+          "example": 4,
+          "x-examples": [
+            4
+          ]
         },
         "complete": {
           "type": "integer",
           "description": "The number of cycles complete",
           "format": "int32",
           "readOnly": true,
-          "example": 4
+          "example": 4,
+          "x-examples": [
+            4
+          ]
         },
         "blocked": {
           "type": "integer",
           "description": "The number of cycles blocked",
           "format": "int32",
           "readOnly": true,
-          "example": 4
+          "example": 4,
+          "x-examples": [
+            4
+          ]
         },
         "cancelled": {
           "type": "integer",
           "description": "The number of cycles cancelled",
           "format": "int32",
           "readOnly": true,
-          "example": 4
+          "example": 4,
+          "x-examples": [
+            4
+          ]
         }
       }
     },
@@ -86,6 +121,9 @@
       "type": "integer",
       "description": "Number of batches assigned to the queue",
       "example": 56,
+      "x-examples": [
+        56
+      ],
       "readOnly": true
     }
   },
@@ -93,5 +131,8 @@
     {
       "$ref": "./entityCommon.json"
     }
-  ]
+  ],
+  "example": {
+    "$ref": "../examples/queue.json"
+  }
 }

@@ -16,6 +16,11 @@ exports.handler = async (argv) => {
     const full = require('./generateFullResponse').handler;
     const schemas = _.compact(_.map(files, (file) => {
         try {
+            const stats = fs.statSync(`${folders.schemas}/${file}`);
+            if (!stats.isFile()) {
+                return;
+            }
+
             const schema = loadSchema(file);
             if (!isCallable(schema)) {
                 return null;

@@ -13,6 +13,7 @@
   ],
   "properties": {
     "label": {
+      "x-faker": "name.title",
       "$ref": "./entityCommon.json#/properties/label"
     },
     "contact_id": {
@@ -20,26 +21,37 @@
       "description": "Identifier for the contact",
       "readOnly": true,
       "example": "1c022258-afcd-4bf2-a576-ae59b7a15d73",
+      "x-examples": [
+        "1c022258-afcd-4bf2-a576-ae59b7a15d73"
+      ],
       "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
     },
     "email": {
       "type": "string",
       "format": "email",
       "description": "Email address",
-      "example": "chuck.reeves@zones.com",
+      "example": "bob@zones.com",
+      "x-examples": [
+        "bob@zones.com"
+      ],
       "nullable": true
     },
     "name": {
       "type": "string",
       "description": "Contact name",
-      "example": "Chuck Reeves",
+      "example": "Bob Alice",
+      "x-examples": [
+        "Bob Alice"
+      ],
       "nullable": true
     },
     "phone": {
       "type": "string",
       "description": "Phone number",
       "example": "+1 518 867 5309",
-      "nullable": true
+      "x-examples": [
+        "+1 518 867 5309"
+      ]
     },
     "created": {
       "$ref": "./entityCommon.json#/properties/created"
@@ -47,5 +59,8 @@
     "updated": {
       "$ref": "./entityCommon.json#/properties/updated"
     }
+  },
+  "example": {
+    "$ref": "../examples/contact.json"
   }
 }

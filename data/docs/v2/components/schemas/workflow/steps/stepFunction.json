@@ -1,0 +1,41 @@
+{
+  "type": "object",
+  "x-ui-hide": true,
+  "required": [
+    "type",
+    "options"
+  ],
+  "properties": {
+    "type": {
+      "example": "function",
+      "x-examples": [
+        "function"
+      ]
+    },
+    "options": {
+      "type": "object",
+      "required": [
+        "function",
+        "payload"
+      ],
+      "properties": {
+        "function": {
+          "type": "string",
+          "description": "Name of the function to invoke",
+          "example": "assignUnitsFromCustomerToProject",
+          "x-examples": [
+            "assignUnitsFromCustomerToProject"
+          ]
+        },
+        "payload": {
+          "type": "object"
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "./stepCommon.json"
+    }
+  ]
+}

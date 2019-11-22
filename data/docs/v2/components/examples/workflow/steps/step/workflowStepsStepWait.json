@@ -1,0 +1,99 @@
+{
+  "stop_at": 153,
+  "time": 311,
+  "type": "wait",
+  "label": "Wait for cable",
+  "goto": "complete",
+  "listen_for": [
+    {
+      "event": "PGM.attached",
+      "event_value": {
+        "variable": "$.parts.available",
+        "greater_than_equals": "42"
+      }
+    },
+    {
+      "event": "PRO.detached",
+      "event_value": {
+        "variable": "$.parts.available",
+        "greater_than_equals": "42"
+      }
+    }
+  ],
+  "goto-fail": "process-fail",
+  "context": [
+    {
+      "key": "$.unit.status",
+      "value": "true",
+      "lock": false,
+      "ignore": true
+    },
+    {
+      "key": "$.fizz",
+      "value": "Pending",
+      "lock": true,
+      "ignore": true
+    }
+  ],
+  "onError": {
+    "finally": {
+      "goto": "failed",
+      "actions": [
+        {
+          "type": "email",
+          "options": {
+            "to": "bob@example.com",
+            "from": "alice@example.com"
+          }
+        },
+        {
+          "type": "email",
+          "options": {
+            "to": "bob@example.com",
+            "from": "alice@example.com"
+          }
+        },
+        {
+          "type": "email",
+          "options": {
+            "to": "bob@example.com",
+            "from": "alice@example.com"
+          }
+        }
+      ]
+    },
+    "retry": 9
+  },
+  "onComplete": {
+    "actions": [
+      {
+        "type": "email",
+        "options": {
+          "to": "bob@example.com",
+          "from": "alice@example.com"
+        }
+      },
+      {
+        "type": "email",
+        "options": {
+          "to": "bob@example.com",
+          "from": "alice@example.com"
+        }
+      },
+      {
+        "type": "email",
+        "options": {
+          "to": "bob@example.com",
+          "from": "alice@example.com"
+        }
+      },
+      {
+        "type": "email",
+        "options": {
+          "to": "bob@example.com",
+          "from": "alice@example.com"
+        }
+      }
+    ]
+  }
+}

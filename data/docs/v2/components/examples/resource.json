@@ -1,0 +1,57 @@
+{
+  "label": "Server room",
+  "resource_type": "station",
+  "location": {
+    "location_type": "other",
+    "address": {
+      "country": "USA",
+      "administrative_area": "NY",
+      "locality": "Menands",
+      "postal_code": "12204",
+      "thoroughfare": "431 Broadway",
+      "sub_administrative_area": "Albany",
+      "premise": "Suite c",
+      "sub_premise": "Zones Innovation Center"
+    },
+    "label": "Zones Innovation Center",
+    "slug": "zones-innovation-center",
+    "location_id": "b994961b-30b4-4f33-9330-f46fd6172909",
+    "formatted_address": "Zones Innovation Center\n431 Broadway\nSuite C\nMenands NY, 12204\nUSA",
+    "created": "1977-12-01T08:28:25.195Z",
+    "updated": "1969-05-31T18:44:21.449Z"
+  },
+  "resource_id": "3c730679-dcfa-4b5a-8f6e-b76fe80c6078",
+  "slug": "server-room",
+  "meta": {
+    "power": "50w"
+  },
+  "resource": {
+    "resource_id": "3c730679-dcfa-4b5a-8f6e-b76fe80c6078",
+    "label": "Server room",
+    "resource_type": "station",
+    "meta": {
+      "power": "50w"
+    },
+    "location": {
+      "location_type": "other",
+      "address": {
+        "country": "USA",
+        "administrative_area": "NY",
+        "locality": "Menands",
+        "postal_code": "12204",
+        "thoroughfare": "431 Broadway",
+        "sub_administrative_area": "Albany",
+        "premise": "Suite c",
+        "sub_premise": "Zones Innovation Center"
+      },
+      "label": "Zones Innovation Center",
+      "slug": "zones-innovation-center",
+      "location_id": "b994961b-30b4-4f33-9330-f46fd6172909",
+      "formatted_address": "Zones Innovation Center\n431 Broadway\nSuite C\nMenands NY, 12204\nUSA",
+      "created": "1976-04-08T05:52:00.82Z",
+      "updated": "1987-11-22T09:03:12.898Z"
+    }
+  },
+  "created": "1987-04-15T22:18:21.082Z",
+  "updated": "1945-05-11T21:14:17.596Z"
+}

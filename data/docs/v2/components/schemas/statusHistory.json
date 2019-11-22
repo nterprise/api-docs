@@ -1,5 +1,6 @@
 {
   "x-id": "#status",
+  "x-ui-hide": true,
   "description": "Defines the properties for a status history",
   "type": "array",
   "readOnly": true,

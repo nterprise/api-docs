@@ -1,0 +1,42 @@
+{
+  "type": "object",
+  "x-ui-hide": true,
+  "description": "A step which requires a user to complete",
+  "required": [
+    "type",
+    "options"
+  ],
+  "properties": {
+    "type": {
+      "example": "user",
+      "x-examples": [
+        "user"
+      ]
+    },
+    "options": {
+      "type": "object",
+      "required": [
+        "component",
+        "payload"
+      ],
+      "properties": {
+        "component": {
+          "type": "string",
+          "description": "Name of the function to invoke",
+          "example": "assignUnitsFromCustomerToProject",
+          "x-examples": [
+            "assignUnitsFromCustomerToProject"
+          ]
+        },
+        "payload": {
+          "type": "object"
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "./stepCommon.json"
+    }
+  ]
+}

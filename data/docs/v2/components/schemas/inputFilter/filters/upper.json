@@ -1,0 +1,20 @@
+{
+  "description": "Make the value UPPERCASE",
+  "type": "object",
+  "required": [
+    "type",
+    "options"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "upper"
+      ]
+    },
+    "options": {
+      "type": "object",
+      "description": "This filter has no options"
+    }
+  }
+}

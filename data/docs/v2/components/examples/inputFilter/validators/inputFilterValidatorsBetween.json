@@ -1,0 +1,9 @@
+{
+  "type": "greater_than",
+  "options": {
+    "min": 42,
+    "max": 42,
+    "precision": 5,
+    "include": false
+  }
+}

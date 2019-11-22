@@ -15,7 +15,7 @@ const buildResponsePage = (embedded) => {
         "type": "object",
         "allOf": [
           {
-            "$ref": "../schemas/hal${_.upperFirst(_.camelCase(embedded))}.json"
+            "$ref": "../schemas/hal/hal${_.upperFirst(_.camelCase(embedded))}.json"
           }
         ]
       }

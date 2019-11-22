@@ -10,25 +10,46 @@
     "unit_id"
   ],
   "properties": {
-    "label": {
-      "example": "Provision devices",
-      "description": "Label for the work order"
-    },
-    "description": {
-      "type": "string",
-      "example": "Provision 150 devices for 123 Main St",
-      "description": "Detailed description for the work order"
-    },
     "work_order_id": {
       "type": "string",
       "description": "The identifier for the unit",
       "example": "0f40ff8c-a3b5-4a30-90e5-0421c153183c",
+      "x-examples": [
+        "0f40ff8c-a3b5-4a30-90e5-0421c153183c"
+      ],
       "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+    },
+    "label": {
+      "type": "string",
+      "example": "Provision devices",
+      "x-examples": [
+        "Provision devices"
+      ],
+      "description": "Label for the work order"
+    },
+    "slug": {
+      "type": "string",
+      "example": "provision-devices",
+      "x-examples": [
+        "provision-devices"
+      ],
+      "description": "Auto-generated slug for the work order"
+    },
+    "description": {
+      "type": "string",
+      "example": "Provision 150 devices for 123 Main St",
+      "x-examples": [
+        "Provision 150 devices for 123 Main St"
+      ],
+      "description": "Detailed description for the work order"
     },
     "type": {
       "type": "string",
       "description": "Type of work order",
       "example": "device",
+      "x-examples": [
+        "device"
+      ],
       "enum": [
         "device"
       ]
@@ -37,7 +58,10 @@
       "type": "string",
       "format": "date-time",
       "description": "End date",
-      "example": "2020-08-07T18:10:53+00:00"
+      "example": "2020-08-07T18:10:53+00:00",
+      "x-examples": [
+        "2020-08-07T18:10:53+00:00"
+      ]
     },
     "current_status": {
       "$ref": "./status.json"
@@ -68,49 +92,70 @@
             "type": "integer",
             "description": "The number of cycles needed",
             "format": "int32",
-            "example": 4
+            "example": 4,
+            "x-examples": [
+              4
+            ]
           },
           "cycles_pending": {
             "type": "integer",
             "description": "The number of cycles pending",
             "format": "int32",
             "readOnly": true,
-            "example": 4
+            "example": 4,
+            "x-examples": [
+              4
+            ]
           },
           "cycles_in_progress": {
             "type": "integer",
             "description": "The number of cycles in progress",
             "format": "int32",
             "readOnly": true,
-            "example": 4
+            "example": 4,
+            "x-examples": [
+              4
+            ]
           },
           "cycles_verifying": {
             "type": "integer",
             "description": "The number of cycles verifying",
             "format": "int32",
             "readOnly": true,
-            "example": 4
+            "example": 4,
+            "x-examples": [
+              4
+            ]
           },
           "cycles_complete": {
             "type": "integer",
             "description": "The number of cycles complete",
             "format": "int32",
             "readOnly": true,
-            "example": 4
+            "example": 4,
+            "x-examples": [
+              4
+            ]
           },
           "cycles_blocked": {
             "type": "integer",
             "description": "The number of cycles blocked",
             "format": "int32",
             "readOnly": true,
-            "example": 4
+            "example": 4,
+            "x-examples": [
+              4
+            ]
           },
           "cycles_cancelled": {
             "type": "integer",
             "description": "The number of cycles cancelled",
             "format": "int32",
             "readOnly": true,
-            "example": 4
+            "example": 4,
+            "x-examples": [
+              4
+            ]
           },
           "work_flow": {
             "$ref": "./workflow.json"
@@ -129,5 +174,8 @@
     {
       "$ref": "./entityCommon.json"
     }
-  ]
+  ],
+  "example": {
+    "$ref": "../examples/workOrder.json"
+  }
 }

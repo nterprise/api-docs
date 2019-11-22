@@ -1,0 +1,147 @@
+{
+  "type": "choice",
+  "label": "Is device ok?",
+  "goto": "complete",
+  "choices": [
+    {
+      "goto": "complete",
+      "and": [
+        {
+          "variable": "$.parts.available",
+          "greater_than_equals": "42"
+        },
+        {
+          "variable": "$.parts.available",
+          "greater_than_equals": "42"
+        },
+        {
+          "variable": "$.parts.available",
+          "greater_than_equals": "42"
+        },
+        {
+          "variable": "$.parts.available",
+          "greater_than_equals": "42"
+        }
+      ]
+    },
+    {
+      "goto": "complete",
+      "and": [
+        {
+          "variable": "$.parts.available",
+          "greater_than_equals": "42"
+        },
+        {
+          "variable": "$.parts.available",
+          "greater_than_equals": "42"
+        }
+      ]
+    },
+    {
+      "goto": "complete",
+      "and": [
+        {
+          "variable": "$.parts.available",
+          "greater_than_equals": "42"
+        },
+        {
+          "variable": "$.parts.available",
+          "greater_than_equals": "42"
+        },
+        {
+          "variable": "$.parts.available",
+          "greater_than_equals": "42"
+        },
+        {
+          "variable": "$.parts.available",
+          "greater_than_equals": "42"
+        },
+        {
+          "variable": "$.parts.available",
+          "greater_than_equals": "42"
+        }
+      ]
+    },
+    {
+      "goto": "complete",
+      "and": [
+        {
+          "variable": "$.parts.available",
+          "greater_than_equals": "42"
+        },
+        {
+          "variable": "$.parts.available",
+          "greater_than_equals": "42"
+        }
+      ]
+    }
+  ],
+  "goto-fail": "process-fail",
+  "context": [
+    {
+      "key": "extract_fields",
+      "value": "true",
+      "lock": true,
+      "ignore": true
+    },
+    {
+      "key": "extract_fields",
+      "value": "true",
+      "lock": false,
+      "ignore": true
+    },
+    {
+      "key": "extract_fields",
+      "value": "$.buzz",
+      "lock": true,
+      "ignore": false
+    }
+  ],
+  "onError": {
+    "finally": {
+      "goto": "failed",
+      "actions": [
+        {
+          "type": "email",
+          "options": {
+            "to": "bob@example.com",
+            "from": "alice@example.com"
+          }
+        },
+        {
+          "type": "email",
+          "options": {
+            "to": "bob@example.com",
+            "from": "alice@example.com"
+          }
+        },
+        {
+          "type": "email",
+          "options": {
+            "to": "bob@example.com",
+            "from": "alice@example.com"
+          }
+        }
+      ]
+    },
+    "retry": 0
+  },
+  "onComplete": {
+    "actions": [
+      {
+        "type": "email",
+        "options": {
+          "to": "bob@example.com",
+          "from": "alice@example.com"
+        }
+      },
+      {
+        "type": "email",
+        "options": {
+          "to": "bob@example.com",
+          "from": "alice@example.com"
+        }
+      }
+    ]
+  }
+}

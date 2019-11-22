@@ -1,0 +1,12 @@
+{
+  "type": "whiteList",
+  "options": {
+    "list": [
+      "foo",
+      "bar",
+      "fizz",
+      "buzz"
+    ],
+    "check_case": true
+  }
+}

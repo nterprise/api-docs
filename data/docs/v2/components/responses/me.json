@@ -8,7 +8,7 @@
             "$ref": "../schemas/user.json"
           },
           {
-            "$ref": "../schemas/linkSelf.json"
+            "$ref": "../schemas/links/linkSelf.json"
           }
         ]
       }

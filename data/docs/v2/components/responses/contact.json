@@ -6,7 +6,7 @@
         "type": "object",
         "allOf": [
           {
-            "$ref": "../schemas/halContact.json"
+            "$ref": "../schemas/hal/halContact.json"
           }
         ]
       }

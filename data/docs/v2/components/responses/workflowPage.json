@@ -11,7 +11,7 @@
                 "type": "array",
                 "maxItems": 100,
                 "items": {
-                  "$ref": "../schemas/halWorkflow.json"
+                  "$ref": "../schemas/hal/halWorkflow.json"
                 }
               }
             }
@@ -19,7 +19,7 @@
         },
         "allOf": [
           {
-            "$ref": "../schemas/halPaginationOffset.json"
+            "$ref": "../schemas/hal/halPaginationOffset.json"
           }
         ]
       }

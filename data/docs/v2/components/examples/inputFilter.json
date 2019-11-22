@@ -1,0 +1,251 @@
+[
+  {
+    "label": "WiFi MAC address",
+    "key": "serial-number",
+    "filters": [
+      {
+        "type": "snake",
+        "options": {}
+      },
+      {
+        "type": "camel",
+        "options": {}
+      },
+      {
+        "type": "string",
+        "options": {}
+      },
+      {
+        "type": "snake",
+        "options": {}
+      },
+      {
+        "type": "trim",
+        "options": {
+          "start": true,
+          "end": false
+        }
+      }
+    ],
+    "validators": [
+      {
+        "type": "greater_than",
+        "options": {
+          "value": 42,
+          "precision": 4,
+          "include": true
+        }
+      },
+      {
+        "type": "whiteList",
+        "options": {
+          "list": [
+            "foo",
+            "bar",
+            "fizz",
+            "buzz"
+          ],
+          "check_case": true
+        }
+      }
+    ]
+  },
+  {
+    "label": "Asset tag",
+    "key": "serial-number",
+    "filters": [
+      {
+        "type": "camel",
+        "options": {}
+      },
+      {
+        "type": "lower",
+        "options": {}
+      },
+      {
+        "type": "allowed_list",
+        "options": {
+          "approved_values": [
+            "foo",
+            "bar",
+            "fizz",
+            "buzz"
+          ],
+          "check_case": true,
+          "default": "fizz"
+        }
+      },
+      {
+        "type": "date",
+        "options": {}
+      },
+      {
+        "type": "camel",
+        "options": {}
+      }
+    ],
+    "validators": [
+      {
+        "type": "hostname",
+        "options": {
+          "record_type": "DS"
+        }
+      },
+      {
+        "type": "uri",
+        "options": {
+          "schemes": [
+            "http"
+          ]
+        }
+      },
+      {
+        "type": "equals",
+        "options": {
+          "value": 42,
+          "precision": 2
+        }
+      }
+    ]
+  },
+  {
+    "label": "WiFi MAC address",
+    "key": "wifi-mac-address",
+    "filters": [
+      {
+        "type": "float",
+        "options": {
+          "precision": 2
+        }
+      }
+    ],
+    "validators": [
+      {
+        "type": "macAddress",
+        "options": {}
+      },
+      {
+        "type": "hostname",
+        "options": {
+          "record_type": "CDS"
+        }
+      }
+    ]
+  },
+  {
+    "label": "WiFi MAC address",
+    "key": "bluetooh-mac-address",
+    "filters": [
+      {
+        "type": "allowed_list",
+        "options": {
+          "approved_values": [
+            "foo",
+            "bar",
+            "fizz",
+            "buzz"
+          ],
+          "check_case": false,
+          "default": "fizz"
+        }
+      },
+      {
+        "type": "float",
+        "options": {
+          "precision": 8
+        }
+      }
+    ],
+    "validators": [
+      {
+        "type": "ipAddress",
+        "options": {
+          "versions": [
+            "IPv4"
+          ]
+        }
+      },
+      {
+        "type": "length",
+        "options": {
+          "length": "foo",
+          "operator": "greater_than_equals"
+        }
+      }
+    ]
+  },
+  {
+    "label": "Bluetooh MAC address",
+    "key": "bluetooh-mac-address",
+    "filters": [
+      {
+        "type": "allowed_list",
+        "options": {
+          "approved_values": [
+            "foo",
+            "bar",
+            "fizz",
+            "buzz"
+          ],
+          "check_case": true,
+          "default": "fizz"
+        }
+      },
+      {
+        "type": "date",
+        "options": {}
+      },
+      {
+        "type": "empty",
+        "options": {}
+      }
+    ],
+    "validators": [
+      {
+        "type": "hostname",
+        "options": {
+          "record_type": "RP"
+        }
+      },
+      {
+        "type": "email_address",
+        "options": {
+          "strict": false,
+          "lookup": false
+        }
+      },
+      {
+        "type": "greater_than",
+        "options": {
+          "value": 42,
+          "precision": 1,
+          "include": true
+        }
+      },
+      {
+        "type": "whiteList",
+        "options": {
+          "list": [
+            "foo",
+            "bar",
+            "fizz",
+            "buzz"
+          ],
+          "check_case": false
+        }
+      },
+      {
+        "type": "white_list",
+        "options": {
+          "list": [
+            "foo",
+            "bar",
+            "fizz",
+            "buzz"
+          ],
+          "check_case": false
+        }
+      }
+    ]
+  }
+]

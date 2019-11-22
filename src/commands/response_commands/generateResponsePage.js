@@ -19,7 +19,7 @@ const buildResponsePage = (relation, embedded) => {
                 "type": "array",
                 "maxItems": 100,
                 "items": {
-                  "$ref": "../schemas/hal${_.upperFirst(_.camelCase(embedded))}.json"
+                  "$ref": "../schemas/hal/hal${_.upperFirst(_.camelCase(embedded))}.json"
                 }
               }
             }
@@ -27,7 +27,7 @@ const buildResponsePage = (relation, embedded) => {
         },
         "allOf": [
           {
-            "$ref": "../schemas/halPaginationOffset.json"
+            "$ref": "../schemas/hal/halPaginationOffset.json"
           }
         ]
       }

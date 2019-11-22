@@ -1,0 +1,24 @@
+{
+  "label": "Zones Inc",
+  "customer_id": "e530652e-28e8-4f64-84af-e1cf0ff7c805",
+  "slug": "zones-inc",
+  "external_platform": {
+    "ax_customer_id": "eff3ada3-0966-42be-a5e8-78efd3c52d39"
+  },
+  "allowed_statuses": [
+    {
+      "status": "Verifying",
+      "category": "VERIFYING"
+    },
+    {
+      "status": "Verifying",
+      "category": "COMPLETE"
+    },
+    {
+      "status": "Reticulating Splines",
+      "category": "VERIFYING"
+    }
+  ],
+  "created": "1974-04-12T11:15:20.547Z",
+  "updated": "1957-06-08T08:32:31.984Z"
+}

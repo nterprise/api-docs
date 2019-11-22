@@ -118,6 +118,9 @@
     "/parts/:part_id/locations": {
       "$ref": "./paths/part/partLocations.json"
     },
+    "/parts/:part_id/units": {
+      "$ref": "./paths/part/units.json"
+    },
     "/programs": {
       "$ref": "./paths/program/programs.json"
     },
@@ -525,6 +528,9 @@
       "statusPage": {
         "$ref": "./components/responses/statusPage.json"
       },
+      "subResourcePage": {
+        "$ref": "./components/responses/subResourcePage.json"
+      },
       "trackedLocation": {
         "$ref": "./components/responses/trackedLocation.json"
       },
@@ -563,15 +569,9 @@
       },
       "workflowPage": {
         "$ref": "./components/responses/workflowPage.json"
-      },
-      "subResourcePage": {
-        "$ref": "./components/responses/subResourcePage.json"
       }
     },
     "schemas": {
-      "Action": {
-        "$ref": "./components/schemas/action.json"
-      },
       "Batch": {
         "$ref": "./components/schemas/batch.json"
       },
@@ -596,185 +596,278 @@
       "Entry": {
         "$ref": "./components/schemas/entry.json"
       },
-      "HalBatch": {
-        "$ref": "./components/schemas/halBatch.json"
+      "HalHalBatch": {
+        "$ref": "./components/schemas/hal/halBatch.json"
       },
-      "HalContact": {
-        "$ref": "./components/schemas/halContact.json"
+      "HalHalContact": {
+        "$ref": "./components/schemas/hal/halContact.json"
       },
-      "HalContext": {
-        "$ref": "./components/schemas/halContext.json"
+      "HalHalContext": {
+        "$ref": "./components/schemas/hal/halContext.json"
       },
-      "HalCustomer": {
-        "$ref": "./components/schemas/halCustomer.json"
+      "HalHalCustomer": {
+        "$ref": "./components/schemas/hal/halCustomer.json"
       },
-      "HalDashboard": {
-        "$ref": "./components/schemas/halDashboard.json"
+      "HalHalDashboard": {
+        "$ref": "./components/schemas/hal/halDashboard.json"
       },
-      "HalLocation": {
-        "$ref": "./components/schemas/halLocation.json"
+      "HalHalLocation": {
+        "$ref": "./components/schemas/hal/halLocation.json"
       },
-      "HalManufacturer": {
-        "$ref": "./components/schemas/halManufacturer.json"
+      "HalHalManufacturer": {
+        "$ref": "./components/schemas/hal/halManufacturer.json"
       },
-      "HalPaginationOffset": {
-        "$ref": "./components/schemas/halPaginationOffset.json"
+      "HalHalPaginationOffset": {
+        "$ref": "./components/schemas/hal/halPaginationOffset.json"
       },
-      "HalPart": {
-        "$ref": "./components/schemas/halPart.json"
+      "HalHalPart": {
+        "$ref": "./components/schemas/hal/halPart.json"
       },
-      "HalProgram": {
-        "$ref": "./components/schemas/halProgram.json"
+      "HalHalProgram": {
+        "$ref": "./components/schemas/hal/halProgram.json"
       },
-      "HalProject": {
-        "$ref": "./components/schemas/halProject.json"
+      "HalHalProject": {
+        "$ref": "./components/schemas/hal/halProject.json"
       },
-      "HalQueue": {
-        "$ref": "./components/schemas/halQueue.json"
+      "HalHalQueue": {
+        "$ref": "./components/schemas/hal/halQueue.json"
       },
-      "HalResource": {
-        "$ref": "./components/schemas/halResource.json"
+      "HalHalResource": {
+        "$ref": "./components/schemas/hal/halResource.json"
       },
-      "HalStatus": {
-        "$ref": "./components/schemas/halStatus.json"
+      "HalHalStatus": {
+        "$ref": "./components/schemas/hal/halStatus.json"
       },
-      "HalSubResource": {
-        "$ref": "./components/schemas/halSubResource.json"
+      "HalHalSubResource": {
+        "$ref": "./components/schemas/hal/halSubResource.json"
       },
-      "HalUnit": {
-        "$ref": "./components/schemas/halUnit.json"
+      "HalHalUnit": {
+        "$ref": "./components/schemas/hal/halUnit.json"
       },
-      "HalUser": {
-        "$ref": "./components/schemas/halUser.json"
+      "HalHalUser": {
+        "$ref": "./components/schemas/hal/halUser.json"
       },
-      "HalVendor": {
-        "$ref": "./components/schemas/halVendor.json"
+      "HalHalVendor": {
+        "$ref": "./components/schemas/hal/halVendor.json"
       },
-      "HalWorkOrder": {
-        "$ref": "./components/schemas/halWorkOrder.json"
+      "HalHalWorkOrder": {
+        "$ref": "./components/schemas/hal/halWorkOrder.json"
       },
-      "HalWorkflow": {
-        "$ref": "./components/schemas/halWorkflow.json"
+      "HalHalWorkflow": {
+        "$ref": "./components/schemas/hal/halWorkflow.json"
+      },
+      "InputFilterFiltersAllowed": {
+        "$ref": "./components/schemas/inputFilter/filters/allowed.json"
+      },
+      "InputFilterFiltersCamelCase": {
+        "$ref": "./components/schemas/inputFilter/filters/camelCase.json"
+      },
+      "InputFilterFiltersDate": {
+        "$ref": "./components/schemas/inputFilter/filters/date.json"
+      },
+      "InputFilterFiltersEmpty": {
+        "$ref": "./components/schemas/inputFilter/filters/empty.json"
+      },
+      "InputFilterFiltersFloat": {
+        "$ref": "./components/schemas/inputFilter/filters/float.json"
+      },
+      "InputFilterFiltersKebabCase": {
+        "$ref": "./components/schemas/inputFilter/filters/kebabCase.json"
+      },
+      "InputFilterFiltersLower": {
+        "$ref": "./components/schemas/inputFilter/filters/lower.json"
+      },
+      "InputFilterFiltersNumber": {
+        "$ref": "./components/schemas/inputFilter/filters/number.json"
+      },
+      "InputFilterFiltersPrefix": {
+        "$ref": "./components/schemas/inputFilter/filters/prefix.json"
+      },
+      "InputFilterFiltersSnakeCase": {
+        "$ref": "./components/schemas/inputFilter/filters/snakeCase.json"
+      },
+      "InputFilterFiltersString": {
+        "$ref": "./components/schemas/inputFilter/filters/string.json"
+      },
+      "InputFilterFiltersSuffix": {
+        "$ref": "./components/schemas/inputFilter/filters/suffix.json"
+      },
+      "InputFilterFiltersTrim": {
+        "$ref": "./components/schemas/inputFilter/filters/trim.json"
+      },
+      "InputFilterFiltersUpper": {
+        "$ref": "./components/schemas/inputFilter/filters/upper.json"
+      },
+      "InputFilterValidatorsBetween": {
+        "$ref": "./components/schemas/inputFilter/validators/between.json"
+      },
+      "InputFilterValidatorsBlackList": {
+        "$ref": "./components/schemas/inputFilter/validators/blackList.json"
+      },
+      "InputFilterValidatorsContains": {
+        "$ref": "./components/schemas/inputFilter/validators/contains.json"
+      },
+      "InputFilterValidatorsEmailAddress": {
+        "$ref": "./components/schemas/inputFilter/validators/emailAddress.json"
+      },
+      "InputFilterValidatorsEndsWith": {
+        "$ref": "./components/schemas/inputFilter/validators/endsWith.json"
+      },
+      "InputFilterValidatorsEquals": {
+        "$ref": "./components/schemas/inputFilter/validators/equals.json"
+      },
+      "InputFilterValidatorsGreaterThan": {
+        "$ref": "./components/schemas/inputFilter/validators/greaterThan.json"
+      },
+      "InputFilterValidatorsHostName": {
+        "$ref": "./components/schemas/inputFilter/validators/hostName.json"
+      },
+      "InputFilterValidatorsIpAddress": {
+        "$ref": "./components/schemas/inputFilter/validators/ipAddress.json"
+      },
+      "InputFilterValidatorsLength": {
+        "$ref": "./components/schemas/inputFilter/validators/length.json"
+      },
+      "InputFilterValidatorsLessThan": {
+        "$ref": "./components/schemas/inputFilter/validators/lessThan.json"
+      },
+      "InputFilterValidatorsMacAddress": {
+        "$ref": "./components/schemas/inputFilter/validators/macAddress.json"
+      },
+      "InputFilterValidatorsMask": {
+        "$ref": "./components/schemas/inputFilter/validators/mask.json"
+      },
+      "InputFilterValidatorsStartsWith": {
+        "$ref": "./components/schemas/inputFilter/validators/startsWith.json"
+      },
+      "InputFilterValidatorsStep": {
+        "$ref": "./components/schemas/inputFilter/validators/step.json"
+      },
+      "InputFilterValidatorsUri": {
+        "$ref": "./components/schemas/inputFilter/validators/uri.json"
+      },
+      "InputFilterValidatorsWhiteList": {
+        "$ref": "./components/schemas/inputFilter/validators/whiteList.json"
       },
       "InputFilter": {
         "$ref": "./components/schemas/inputFilter.json"
       },
-      "LinkBatch": {
-        "$ref": "./components/schemas/linkBatch.json"
+      "LinksLinkBatch": {
+        "$ref": "./components/schemas/links/linkBatch.json"
       },
-      "LinkBatches": {
-        "$ref": "./components/schemas/linkBatches.json"
+      "LinksLinkBatches": {
+        "$ref": "./components/schemas/links/linkBatches.json"
       },
-      "LinkContact": {
-        "$ref": "./components/schemas/linkContact.json"
+      "LinksLinkContact": {
+        "$ref": "./components/schemas/links/linkContact.json"
       },
-      "LinkContacts": {
-        "$ref": "./components/schemas/linkContacts.json"
+      "LinksLinkContacts": {
+        "$ref": "./components/schemas/links/linkContacts.json"
       },
-      "LinkContext": {
-        "$ref": "./components/schemas/linkContext.json"
+      "LinksLinkContext": {
+        "$ref": "./components/schemas/links/linkContext.json"
       },
-      "LinkContexts": {
-        "$ref": "./components/schemas/linkContexts.json"
+      "LinksLinkContexts": {
+        "$ref": "./components/schemas/links/linkContexts.json"
       },
-      "LinkCustomer": {
-        "$ref": "./components/schemas/linkCustomer.json"
+      "LinksLinkCustomer": {
+        "$ref": "./components/schemas/links/linkCustomer.json"
       },
-      "LinkCustomers": {
-        "$ref": "./components/schemas/linkCustomers.json"
+      "LinksLinkCustomers": {
+        "$ref": "./components/schemas/links/linkCustomers.json"
       },
-      "LinkDashboard": {
-        "$ref": "./components/schemas/linkDashboard.json"
+      "LinksLinkDashboard": {
+        "$ref": "./components/schemas/links/linkDashboard.json"
       },
-      "LinkDashboards": {
-        "$ref": "./components/schemas/linkDashboards.json"
+      "LinksLinkDashboards": {
+        "$ref": "./components/schemas/links/linkDashboards.json"
       },
-      "LinkLocation": {
-        "$ref": "./components/schemas/linkLocation.json"
+      "LinksLinkLocation": {
+        "$ref": "./components/schemas/links/linkLocation.json"
       },
-      "LinkLocations": {
-        "$ref": "./components/schemas/linkLocations.json"
+      "LinksLinkLocations": {
+        "$ref": "./components/schemas/links/linkLocations.json"
       },
-      "LinkManufacturer": {
-        "$ref": "./components/schemas/linkManufacturer.json"
+      "LinksLinkManufacturer": {
+        "$ref": "./components/schemas/links/linkManufacturer.json"
       },
-      "LinkManufacturers": {
-        "$ref": "./components/schemas/linkManufacturers.json"
+      "LinksLinkManufacturers": {
+        "$ref": "./components/schemas/links/linkManufacturers.json"
       },
-      "LinkNext": {
-        "$ref": "./components/schemas/linkNext.json"
+      "LinksLinkNext": {
+        "$ref": "./components/schemas/links/linkNext.json"
       },
-      "LinkPart": {
-        "$ref": "./components/schemas/linkPart.json"
+      "LinksLinkPart": {
+        "$ref": "./components/schemas/links/linkPart.json"
       },
-      "LinkParts": {
-        "$ref": "./components/schemas/linkParts.json"
+      "LinksLinkParts": {
+        "$ref": "./components/schemas/links/linkParts.json"
       },
-      "LinkProgram": {
-        "$ref": "./components/schemas/linkProgram.json"
+      "LinksLinkProgram": {
+        "$ref": "./components/schemas/links/linkProgram.json"
       },
-      "LinkPrograms": {
-        "$ref": "./components/schemas/linkPrograms.json"
+      "LinksLinkPrograms": {
+        "$ref": "./components/schemas/links/linkPrograms.json"
       },
-      "LinkProject": {
-        "$ref": "./components/schemas/linkProject.json"
+      "LinksLinkProject": {
+        "$ref": "./components/schemas/links/linkProject.json"
       },
-      "LinkProjects": {
-        "$ref": "./components/schemas/linkProjects.json"
+      "LinksLinkProjects": {
+        "$ref": "./components/schemas/links/linkProjects.json"
       },
-      "LinkQueue": {
-        "$ref": "./components/schemas/linkQueue.json"
+      "LinksLinkQueue": {
+        "$ref": "./components/schemas/links/linkQueue.json"
       },
-      "LinkQueues": {
-        "$ref": "./components/schemas/linkQueues.json"
+      "LinksLinkQueues": {
+        "$ref": "./components/schemas/links/linkQueues.json"
       },
-      "LinkResource": {
-        "$ref": "./components/schemas/linkResource.json"
+      "LinksLinkResource": {
+        "$ref": "./components/schemas/links/linkResource.json"
       },
-      "LinkResources": {
-        "$ref": "./components/schemas/linkResources.json"
+      "LinksLinkResources": {
+        "$ref": "./components/schemas/links/linkResources.json"
       },
-      "LinkSelf": {
-        "$ref": "./components/schemas/linkSelf.json"
+      "LinksLinkSelf": {
+        "$ref": "./components/schemas/links/linkSelf.json"
       },
-      "LinkStatus": {
-        "$ref": "./components/schemas/linkStatus.json"
+      "LinksLinkStatus": {
+        "$ref": "./components/schemas/links/linkStatus.json"
       },
-      "LinkStatuses": {
-        "$ref": "./components/schemas/linkStatuses.json"
+      "LinksLinkStatuses": {
+        "$ref": "./components/schemas/links/linkStatuses.json"
       },
-      "LinkSubResources": {
-        "$ref": "./components/schemas/linkSubResources.json"
+      "LinksLinkSubResources": {
+        "$ref": "./components/schemas/links/linkSubResources.json"
       },
-      "LinkUnit": {
-        "$ref": "./components/schemas/linkUnit.json"
+      "LinksLinkUnit": {
+        "$ref": "./components/schemas/links/linkUnit.json"
       },
-      "LinkUnits": {
-        "$ref": "./components/schemas/linkUnits.json"
+      "LinksLinkUnits": {
+        "$ref": "./components/schemas/links/linkUnits.json"
       },
-      "LinkUser": {
-        "$ref": "./components/schemas/linkUser.json"
+      "LinksLinkUser": {
+        "$ref": "./components/schemas/links/linkUser.json"
       },
-      "LinkUsers": {
-        "$ref": "./components/schemas/linkUsers.json"
+      "LinksLinkUsers": {
+        "$ref": "./components/schemas/links/linkUsers.json"
       },
-      "LinkVendor": {
-        "$ref": "./components/schemas/linkVendor.json"
+      "LinksLinkVendor": {
+        "$ref": "./components/schemas/links/linkVendor.json"
       },
-      "LinkVendors": {
-        "$ref": "./components/schemas/linkVendors.json"
+      "LinksLinkVendors": {
+        "$ref": "./components/schemas/links/linkVendors.json"
       },
-      "LinkWorkFlows": {
-        "$ref": "./components/schemas/linkWorkFlows.json"
+      "LinksLinkWorkFlows": {
+        "$ref": "./components/schemas/links/linkWorkFlows.json"
       },
-      "LinkWorkOrder": {
-        "$ref": "./components/schemas/linkWorkOrder.json"
+      "LinksLinkWorkOrder": {
+        "$ref": "./components/schemas/links/linkWorkOrder.json"
       },
-      "LinkWorkOrders": {
-        "$ref": "./components/schemas/linkWorkOrders.json"
+      "LinksLinkWorkOrders": {
+        "$ref": "./components/schemas/links/linkWorkOrders.json"
       },
-      "LinkWorkflow": {
-        "$ref": "./components/schemas/linkWorkflow.json"
+      "LinksLinkWorkflow": {
+        "$ref": "./components/schemas/links/linkWorkflow.json"
       },
       "Location": {
         "$ref": "./components/schemas/location.json"
@@ -812,33 +905,6 @@
       "StatusHistory": {
         "$ref": "./components/schemas/statusHistory.json"
       },
-      "StepChoice": {
-        "$ref": "./components/schemas/stepChoice.json"
-      },
-      "StepChoices": {
-        "$ref": "./components/schemas/stepChoices.json"
-      },
-      "StepCommon": {
-        "$ref": "./components/schemas/stepCommon.json"
-      },
-      "StepFail": {
-        "$ref": "./components/schemas/stepFail.json"
-      },
-      "StepFunction": {
-        "$ref": "./components/schemas/stepFunction.json"
-      },
-      "StepPass": {
-        "$ref": "./components/schemas/stepPass.json"
-      },
-      "StepSuccess": {
-        "$ref": "./components/schemas/stepSuccess.json"
-      },
-      "StepUser": {
-        "$ref": "./components/schemas/stepUser.json"
-      },
-      "StepWait": {
-        "$ref": "./components/schemas/stepWait.json"
-      },
       "TrackedLocation": {
         "$ref": "./components/schemas/trackedLocation.json"
       },
@@ -853,6 +919,66 @@
       },
       "WorkOrder": {
         "$ref": "./components/schemas/workOrder.json"
+      },
+      "WorkflowActionEmailAction": {
+        "$ref": "./components/schemas/workflow/action/emailAction.json"
+      },
+      "WorkflowCloseUserConfirmAction": {
+        "$ref": "./components/schemas/workflow/close/user/confirmAction.json"
+      },
+      "WorkflowCloseUserFollowPdfInstructions": {
+        "$ref": "./components/schemas/workflow/close/user/followPDFInstructions.json"
+      },
+      "WorkflowCloseUserManualDataEntry": {
+        "$ref": "./components/schemas/workflow/close/user/manualDataEntry.json"
+      },
+      "WorkflowStepsFunctionAllocateUnitsToProject": {
+        "$ref": "./components/schemas/workflow/steps/function/allocateUnitsToProject.json"
+      },
+      "WorkflowStepsMachineAceIos": {
+        "$ref": "./components/schemas/workflow/steps/machine/aceIos.json"
+      },
+      "WorkflowStepsStepChoice": {
+        "$ref": "./components/schemas/workflow/steps/stepChoice.json"
+      },
+      "WorkflowStepsStepChoices": {
+        "$ref": "./components/schemas/workflow/steps/stepChoices.json"
+      },
+      "WorkflowStepsStepCloseCommon": {
+        "$ref": "./components/schemas/workflow/steps/stepCloseCommon.json"
+      },
+      "WorkflowStepsStepCommon": {
+        "$ref": "./components/schemas/workflow/steps/stepCommon.json"
+      },
+      "WorkflowStepsStepFail": {
+        "$ref": "./components/schemas/workflow/steps/stepFail.json"
+      },
+      "WorkflowStepsStepFunction": {
+        "$ref": "./components/schemas/workflow/steps/stepFunction.json"
+      },
+      "WorkflowStepsStepMachine": {
+        "$ref": "./components/schemas/workflow/steps/stepMachine.json"
+      },
+      "WorkflowStepsStepPass": {
+        "$ref": "./components/schemas/workflow/steps/stepPass.json"
+      },
+      "WorkflowStepsStepSuccess": {
+        "$ref": "./components/schemas/workflow/steps/stepSuccess.json"
+      },
+      "WorkflowStepsStepUser": {
+        "$ref": "./components/schemas/workflow/steps/stepUser.json"
+      },
+      "WorkflowStepsStepWait": {
+        "$ref": "./components/schemas/workflow/steps/stepWait.json"
+      },
+      "WorkflowStepsUserConfirmAction": {
+        "$ref": "./components/schemas/workflow/steps/user/confirmAction.json"
+      },
+      "WorkflowStepsUserFollowPdfInstructions": {
+        "$ref": "./components/schemas/workflow/steps/user/followPDFInstructions.json"
+      },
+      "WorkflowStepsUserManualDataEntry": {
+        "$ref": "./components/schemas/workflow/steps/user/manualDataEntry.json"
       },
       "Workflow": {
         "$ref": "./components/schemas/workflow.json"

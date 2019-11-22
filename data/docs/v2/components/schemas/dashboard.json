@@ -15,5 +15,8 @@
         ]
       }
     }
+  },
+  "example": {
+    "$ref": "../examples/dashboard.json"
   }
 }

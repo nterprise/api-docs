@@ -1,5 +1,4 @@
 {
-  "x-id": "#input_filter",
   "description": "Input Filters allow custom fields to be defined for entities",
   "type": "array",
   "items": {
@@ -9,12 +8,24 @@
       "label": {
         "type": "string",
         "description": "Human readable name",
-        "example": "Serial Number"
+        "example": "Serial Number",
+        "x-examples": [
+          "Serial Number",
+          "Asset tag",
+          "WiFi MAC address",
+          "Bluetooh MAC address",
+        ]
       },
       "key": {
         "type": "string",
         "description": "Slug used to store the property",
         "example": "serial-number",
+        "x-examples": [
+          "serial-number",
+          "asset-tag",
+          "wifi-mac-address",
+          "bluetooh-mac-address"
+        ],
         "readOnly": true,
         "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
       },
@@ -22,130 +33,114 @@
         "type": "array",
         "description": "A Collection of filters applied to the field",
         "items": {
-          "type": "object",
-          "properties": {
-            "type": {
-              "type": "string",
-              "description": "The type of filter to use",
-              "enum": [
-                "alpha",
-                "blackList",
-                "boolean",
-                "camelCase",
-                "date",
-                "digits",
-                "float",
-                "integer",
-                "kebabCase",
-                "lookup",
-                "lowerCase",
-                "null",
-                "replace",
-                "snakeCase",
-                "string",
-                "stringPrefix",
-                "stringSuffix",
-                "trim",
-                "upperCase",
-                "whiteList"
-              ]
+          "anyOf": [
+            {
+              "$ref": "./inputFilter/filters/allowed.json"
             },
-            "options": {
-              "type": "object",
-              "description": "Options for the filter",
-              "additionalProperties": {
-                "type": "string"
-              }
+            {
+              "$ref": "./inputFilter/filters/camelCase.json"
+            },
+            {
+              "$ref": "./inputFilter/filters/date.json"
+            },
+            {
+              "$ref": "./inputFilter/filters/empty.json"
+            },
+            {
+              "$ref": "./inputFilter/filters/float.json"
+            },
+            {
+              "$ref": "./inputFilter/filters/kebabCase.json"
+            },
+            {
+              "$ref": "./inputFilter/filters/lower.json"
+            },
+            {
+              "$ref": "./inputFilter/filters/number.json"
+            },
+            {
+              "$ref": "./inputFilter/filters/prefix.json"
+            },
+            {
+              "$ref": "./inputFilter/filters/snakeCase.json"
+            },
+            {
+              "$ref": "./inputFilter/filters/string.json"
+            },
+            {
+              "$ref": "./inputFilter/filters/suffix.json"
+            },
+            {
+              "$ref": "./inputFilter/filters/trim.json"
+            },
+            {
+              "$ref": "./inputFilter/filters/upper.json"
             }
-          }
-        },
-        "example": [
-          {
-            "type": "string",
-            "options": {}
-          },
-          {
-            "type": "null",
-            "options": {}
-          },
-          {
-            "type": "upperCase",
-            "options": {}
-          },
-          {
-            "type": "stringPrefix",
-            "options": {
-              "prefix": "1A:"
-            }
-          }
-        ]
+          ]
+        }
       },
       "validators": {
         "type": "array",
         "description": "A set of validators to use for this field",
         "items": {
-          "type": "object",
-          "properties": {
-            "type": {
-              "type": "string",
-              "description": "The type of validator to use",
-              "enum": [
-                "between",
-                "blackList",
-                "email",
-                "endsWith",
-                "entityExists",
-                "greaterThan",
-                "greaterThanEquals",
-                "hostname",
-                "ip",
-                "length",
-                "lessThan",
-                "lessThanEquals",
-                "mac",
-                "notEmpty",
-                "nrid",
-                "nridExists",
-                "regex",
-                "startsWith",
-                "step",
-                "unique",
-                "uri",
-                "whiteList"
-              ]
-            },
-            "options": {
-              "type": "object",
-              "description": "Options for the validator",
-              "additionalProperties": {
-                "type": "string"
-              }
-            }
-          },
-          "example": [
+          "anyOf": [
             {
-              "type": "notEmpty",
-              "options": {}
+              "$ref": "./inputFilter/validators/between.json"
             },
             {
-              "type": "mask",
-              "options": {
-                "mask": "MAN\\-\\d{9}"
-              }
+              "$ref": "./inputFilter/validators/blackList.json"
             },
             {
-              "type": "blacklist",
-              "options": {
-                "denied": [
-                  "MAN-123456789",
-                  "MAN-987654321"
-                ],
-                "case_sensitive": false
-              }
+              "$ref": "./inputFilter/validators/contains.json"
+            },
+            {
+              "$ref": "./inputFilter/validators/emailAddress.json"
+            },
+            {
+              "$ref": "./inputFilter/validators/endsWith.json"
+            },
+            {
+              "$ref": "./inputFilter/validators/equals.json"
+            },
+            {
+              "$ref": "./inputFilter/validators/greaterThan.json"
+            },
+            {
+              "$ref": "./inputFilter/validators/hostName.json"
+            },
+            {
+              "$ref": "./inputFilter/validators/ipAddress.json"
+            },
+            {
+              "$ref": "./inputFilter/validators/length.json"
+            },
+            {
+              "$ref": "./inputFilter/validators/lessThan.json"
+            },
+            {
+              "$ref": "./inputFilter/validators/macAddress.json"
+            },
+            {
+              "$ref": "./inputFilter/validators/mask.json"
+            },
+            {
+              "$ref": "./inputFilter/validators/startsWith.json"
+            },
+            {
+              "$ref": "./inputFilter/validators/step.json"
+            },
+            {
+              "$ref": "./inputFilter/validators/uri.json"
+            },
+            {
+              "$ref": "./inputFilter/validators/whiteList.json"
             }
           ]
         }
       }
     }
+  },
+  "example": {
+    "$ref": "../examples/inputFilter.json"
   }
 }

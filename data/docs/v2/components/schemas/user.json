@@ -8,31 +8,49 @@
       "type": "string",
       "description": "The identifier for the user",
       "example": "3dddba3e-6122-46a8-ae26-8c7c95bd82d7",
+      "x-examples": [
+        "3dddba3e-6122-46a8-ae26-8c7c95bd82d7"
+      ],
       "pattern": "[0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}"
     },
     "email": {
       "type": "string",
       "format": "email",
       "description": "Email address",
-      "example": "chuck.reeves@zones.com"
+      "example": "alice@zones.com",
+      "x-examples": [
+        "alice@zones.com"
+      ]
     },
     "name": {
       "type": "string",
       "description": "Human readable name",
       "nullable": true,
-      "example": "Chuck Reeves"
+      "example": "Alice Bob",
+      "x-examples": [
+        "Alice Bob"
+      ]
     },
     "picture": {
       "type": "string",
       "description": "Image for the user",
       "nullable": true,
-      "example": "https://bit.ly/18gECvy"
+      "example": "https://bit.ly/18gECvy",
+      "x-examples": [
+        "https://bit.ly/18gECvy"
+      ]
     },
     "profile": {
       "type": "string",
       "description": "Link to the users profile",
       "nullable": true,
-      "example": "https://bit.ly/18gECvy"
+      "example": "https://bit.ly/18gECvy",
+      "x-examples": [
+        "https://bit.ly/18gECvy"
+      ]
     }
+  },
+  "example": {
+    "$ref": "../examples/user.json"
   }
 }

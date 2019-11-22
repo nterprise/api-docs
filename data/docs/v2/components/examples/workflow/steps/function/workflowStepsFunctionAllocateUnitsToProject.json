@@ -1,0 +1,85 @@
+{
+  "type": "function",
+  "options": {
+    "function": "confirm-action",
+    "payload": {
+      "part_id": "ebc810f8-adfa-4dac-a663-513e1a228789",
+      "qty": 4,
+      "program_id": "ebc810f8-adfa-4dac-a663-513e1a228789",
+      "allow_scarcity": true,
+      "force": false,
+      "status": "Reticulating splines"
+    }
+  },
+  "label": "Confirm the device has powered off",
+  "goto": "complete",
+  "goto-fail": "process-fail",
+  "context": [
+    {
+      "key": "$.fizz",
+      "value": "true",
+      "lock": false,
+      "ignore": false
+    },
+    {
+      "key": "$.unit.status",
+      "value": "Pending",
+      "lock": false,
+      "ignore": false
+    }
+  ],
+  "onError": {
+    "finally": {
+      "goto": "failed",
+      "actions": [
+        {
+          "type": "email",
+          "options": {
+            "to": "bob@example.com",
+            "from": "alice@example.com"
+          }
+        },
+        {
+          "type": "email",
+          "options": {
+            "to": "bob@example.com",
+            "from": "alice@example.com"
+          }
+        },
+        {
+          "type": "email",
+          "options": {
+            "to": "bob@example.com",
+            "from": "alice@example.com"
+          }
+        },
+        {
+          "type": "email",
+          "options": {
+            "to": "bob@example.com",
+            "from": "alice@example.com"
+          }
+        },
+        {
+          "type": "email",
+          "options": {
+            "to": "bob@example.com",
+            "from": "alice@example.com"
+          }
+        }
+      ]
+    },
+    "retry": 3
+  },
+  "onComplete": {
+    "actions": [
+      {
+        "type": "email",
+        "options": {
+          "to": "bob@example.com",
+          "from": "alice@example.com"
+        }
+      }
+    ]
+  }
+}

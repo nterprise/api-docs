@@ -1,4 +1,4 @@
-const {folders} = require('../../folders');
+const {folders, recurseFolder} = require('../../folders');
 const {sortObjectKeys} = require('../../sortObjectKeys');
 const {logger} = require('@nterprise/common-js');
 const _ = require('lodash');
@@ -21,23 +21,11 @@ const addSchema = (openAPI, schemaFile) => {
     );
 };
 
-const parametersFolder = (base, dir = '') => {
-    const fullPath = path.normalize(`${base}/${dir}`);
-    const files = fs.readdirSync(fullPath);
-    return files.map((file) => {
-        const stats = fs.statSync(`${fullPath}/${file}`);
-        if (stats.isDirectory()) {
-            return parametersFolder(fullPath, file);
-        }
-        return stats.isFile() ? `${dir}/${file}` : null;
-    });
-};
-
 exports.command = 'add-spec';
 exports.describe = 'Adds the parameters to the open api spec';
 
 exports.handler = async (argv) => {
-    let parameters = parametersFolder(folders.parametersPath);
+    let parameters = recurseFolder(folders.parametersPath);
     parameters = _.compact(_.uniq(_.flatten(parameters)));
     logger.debug('parameters to process', parameters);
 

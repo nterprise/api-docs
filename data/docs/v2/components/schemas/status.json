@@ -3,6 +3,7 @@
   "x-nter-relation": "statuses",
   "x-nter-model": "Status",
   "x-nter-callable": true,
+  "x-ui-hide": true,
   "description": "Defines the properties for a status",
   "type": "object",
   "required": [
@@ -13,12 +14,27 @@
     "status": {
       "type": "string",
       "description": "A Custom label for the status",
-      "example": "Reticulating Splines"
+      "x-examples": [
+        "Pending",
+        "In Progress",
+        "Verifying",
+        "Complete",
+        "Cancelled",
+        "Blocked",
+        "Reticulating Splines"
+      ]
     },
     "category": {
       "type": "string",
       "description": "The classifier for the statues",
-      "example": "IN_PROGRESS",
+      "x-examples": [
+        "PENDING",
+        "IN_PROGRESS",
+        "VERIFYING",
+        "COMPLETE",
+        "CANCELLED",
+        "BLOCKED"
+      ],
       "enum": [
         "PENDING",
         "IN_PROGRESS",

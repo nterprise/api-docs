@@ -1,0 +1,48 @@
+{
+  "description": "Validates that a value follows a step. Both start and end options do not have to sync with the step. If they do not sync then find the nearest step.",
+  "type": "object",
+  "required": [
+    "type",
+    "options"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "step"
+      ]
+    },
+    "options": {
+      "type": "object",
+      "required": [
+        "step"
+      ],
+      "properties": {
+        "step": {
+          "type": "number",
+          "description": "The step value",
+          "example": 4,
+          "x-examples": [
+            4
+          ]
+        },
+        "start": {
+          "type": "integer",
+          "description": "Start stepping at this value",
+          "example": 0,
+          "x-examples": [
+            0
+          ]
+        },
+        "end": {
+          "type": "integer",
+          "description": "End stepping at this value",
+          "example": 16,
+          "x-examples": [
+            16
+          ]
+        }
+      }
+    }
+  }
+}

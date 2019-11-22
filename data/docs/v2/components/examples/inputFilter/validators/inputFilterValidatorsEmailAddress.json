@@ -1,0 +1,7 @@
+{
+  "type": "email_address",
+  "options": {
+    "strict": false,
+    "lookup": true
+  }
+}

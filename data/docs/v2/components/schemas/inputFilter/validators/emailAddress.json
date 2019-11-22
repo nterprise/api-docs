@@ -1,0 +1,31 @@
+{
+  "description": "Validate string is a correct email address",
+  "type": "object",
+  "required": [
+    "type",
+    "options"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "email_address"
+      ]
+    },
+    "options": {
+      "type": "object",
+      "properties": {
+        "strict": {
+          "type": "boolean",
+          "description": "Enforce strict standards from ARPA. This will enforce the length of the string",
+          "default": true
+        },
+        "lookup": {
+          "type": "boolean",
+          "description": "Look up the host name and check if it has a valid MX record",
+          "default": false
+        }
+      }
+    }
+  }
+}

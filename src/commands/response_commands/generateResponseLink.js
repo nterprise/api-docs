@@ -33,17 +33,17 @@ const buildResponseLink = (relation, path, entityId = '') => {
 };
 
 exports.handler = async (argv) => {
-    logger.info('Creating response link');
+    logger.info('Creating response links');
 
+    // fetch all link
     argv._writeFile(
-        // eslint-disable-next-line max-len
-        `${folders.schemas}/link${_.upperFirst(_.camelCase(argv.relation))}.json`,
+        `${folders.links}/link${_.upperFirst(_.camelCase(argv.relation))}.json`,
         buildResponseLink(argv.relation),
     );
 
+    // fetch entity link
     argv._writeFile(
-        // eslint-disable-next-line max-len
-        `${folders.schemas}/link${_.upperFirst(_.camelCase(argv.schema))}.json`,
+        `${folders.links}/link${_.upperFirst(_.camelCase(argv.schema))}.json`,
         buildResponseLink(
             argv.relation,
             null,

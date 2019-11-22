@@ -1,0 +1,24 @@
+{
+  "description": "Filter to transform values into null. This is helpful when trying to make a value required. The following are considered empty:\n# The number 0 or 0.0\n# empty string ''\n# A boolean false\n# The word 'false'\n# ",
+  "type": "object",
+  "required": [
+    "type",
+    "options"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "empty"
+      ]
+    },
+    "options": {
+      "type": "object",
+      "description": "empty filter has no options",
+      "example": {},
+      "x-examples": [
+        {}
+      ]
+    }
+  }
+}

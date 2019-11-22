@@ -16,14 +16,14 @@ const buildResponseBody = (relation, schema) => {
       "type": "object",
       "properties": {
         "self": {
-          "$ref": "./link${_.upperFirst(schema)}.json#/properties/_links/properties/nter:${relation}"
+          "$ref": "../links/link${_.upperFirst(schema)}.json#/properties/_links/properties/nter:${relation}"
         }
       }
     }
   },
   "allOf": [
     {
-      "$ref": "./${schema}.json"
+      "$ref": "../${schema}.json"
     }
   ]
 }`;
@@ -34,7 +34,8 @@ exports.handler = async (argv) => {
     logger.info('Creating embedded response ');
 
     argv._writeFile(
-        `${folders.schemas}/hal${_.upperFirst(_.camelCase(argv.schema))}.json`,
+        // eslint-disable-next-line max-len
+        `${folders.hal}/hal${_.upperFirst(_.camelCase(argv.schema))}.json`,
         buildResponseBody(argv.relation, argv.schema),
     );
 

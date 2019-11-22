@@ -1,0 +1,20 @@
+{
+  "type": "object",
+  "x-hal": true,
+  "x-ui-hide": true,
+  "properties": {
+    "_links": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "$ref": "../links/linkStatus.json#/properties/_links/properties/nter:statuses"
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "../status.json"
+    }
+  ]
+}

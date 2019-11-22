@@ -1,0 +1,20 @@
+{
+  "description": "Make the value snake_case",
+  "type": "object",
+  "required": [
+    "type",
+    "options"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "snake"
+      ]
+    },
+    "options": {
+      "type": "object",
+      "description": "This filter has no options"
+    }
+  }
+}

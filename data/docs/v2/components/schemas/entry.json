@@ -1,6 +1,7 @@
 {
-  "description": "Main entry point",
   "type": "object",
+  "x-ui-hide": true,
+  "description": "Main entry point",
   "properties": {
     "_links": {
       "type": "object",
@@ -12,7 +13,7 @@
           "properties": {
             "href": {
               "type": "string",
-              "format": "url",
+              "format": "uri",
               "readOnly": true,
               "example": "https://auth.nterprise.com/oauth/authorize"
             }
@@ -25,7 +26,7 @@
           "properties": {
             "href": {
               "type": "string",
-              "format": "url",
+              "format": "uri",
               "readOnly": true,
               "example": "https://auth.nterprise.com/oauth/token"
             },
@@ -47,7 +48,7 @@
           "properties": {
             "href": {
               "type": "string",
-              "format": "url",
+              "format": "uri",
               "readOnly": true,
               "example": "https://auth.nterprise.com/oauth/token"
             }
@@ -60,7 +61,7 @@
           "properties": {
             "href": {
               "type": "string",
-              "format": "url",
+              "format": "uri",
               "readOnly": true,
               "example": "https://api.nterprise.com/me"
             }
@@ -73,7 +74,7 @@
           "properties": {
             "href": {
               "type": "string",
-              "format": "url",
+              "format": "uri",
               "readOnly": true,
               "example": "https://api.nterprise.com/dashboard"
             },
@@ -97,7 +98,7 @@
           "properties": {
             "href": {
               "type": "string",
-              "format": "url",
+              "format": "uri",
               "readOnly": true,
               "example": "https://api.nterprise.com/search"
             },

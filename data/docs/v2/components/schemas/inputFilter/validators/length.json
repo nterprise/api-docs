@@ -1,0 +1,44 @@
+{
+  "description": "Validate string is a certain length",
+  "type": "object",
+  "required": [
+    "type",
+    "options"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "length"
+      ]
+    },
+    "options": {
+      "type": "object",
+      "required": [
+        "length"
+      ],
+      "properties": {
+        "length": {
+          "type": "string",
+          "description": "String must contain with this value",
+          "example": "foo",
+          "x-examples": [
+            "foo"
+          ]
+        },
+        "operator": {
+          "type": "string",
+          "description": "Which type of length comparision to make",
+          "default": "equals",
+          "enum": [
+            "equals",
+            "less_than",
+            "less_than_equals",
+            "greater_than",
+            "greater_than_equals"
+          ]
+        }
+      }
+    }
+  }
+}

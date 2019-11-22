@@ -1,5 +1,5 @@
 {
-  "x-id": "#entity_common",
+  "x-ui-hide": true,
   "type": "object",
   "description": "Common Properties to all entities",
   "required": [

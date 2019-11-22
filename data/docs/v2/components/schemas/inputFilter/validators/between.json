@@ -1,0 +1,53 @@
+{
+  "description": "Validate number is between two values. By default, min and max are included",
+  "type": "object",
+  "required": [
+    "type",
+    "options"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "greater_than"
+      ]
+    },
+    "options": {
+      "type": "object",
+      "required": [
+        "min",
+        "max"
+      ],
+      "properties": {
+        "min": {
+          "type": "number",
+          "description": "Minimum value to check",
+          "example": 42,
+          "x-examples": [
+            42
+          ]
+        },
+        "max": {
+          "type": "number",
+          "description": "The maximum value to check",
+          "example": 42,
+          "x-examples": [
+            42
+          ]
+        },
+        "precision": {
+          "type": "integer",
+          "description": "When number is a float, this will set the decimal precision",
+          "minimum": 1,
+          "maximum": 8,
+          "default": 3
+        },
+        "include": {
+          "type": "boolean",
+          "description": "Include the value in the check",
+          "default": true
+        }
+      }
+    }
+  }
+}

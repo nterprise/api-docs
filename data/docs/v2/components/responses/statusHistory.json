@@ -15,10 +15,10 @@
         },
         "allOf": [
           {
-            "$ref": "../schemas/halPaginationOffset.json"
+            "$ref": "../schemas/hal/halPaginationOffset.json"
           },
           {
-            "$ref": "../schemas/linkSelf.json"
+            "$ref": "../schemas/links/linkSelf.json"
           }
         ]
       }

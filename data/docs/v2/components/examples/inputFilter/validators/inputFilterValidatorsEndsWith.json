@@ -1,0 +1,7 @@
+{
+  "type": "ends_with",
+  "options": {
+    "ends_with": "foo",
+    "check_case": true
+  }
+}

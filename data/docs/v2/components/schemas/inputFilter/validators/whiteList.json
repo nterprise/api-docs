@@ -1,0 +1,52 @@
+{
+  "description": "Validate value matches a list (white list)",
+  "type": "object",
+  "required": [
+    "type",
+    "options"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "whiteList"
+      ]
+    },
+    "options": {
+      "type": "object",
+      "required": [
+        "list"
+      ],
+      "properties": {
+        "list": {
+          "type": "array",
+          "minimum": 1,
+          "maximum": 100,
+          "description": "The list of approved values",
+          "items": {
+            "type": "string"
+          },
+          "example": [
+            "foo",
+            "bar",
+            "fizz",
+            "buzz"
+          ],
+          "x-examples": [
+            [
+              "foo",
+              "bar",
+              "fizz",
+              "buzz"
+            ]
+          ]
+        },
+        "check_case": {
+          "type": "boolean",
+          "description": "Perform a case sensitive match. By default will not match case",
+          "default": false
+        }
+      }
+    }
+  }
+}
