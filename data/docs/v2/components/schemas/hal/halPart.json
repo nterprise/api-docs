@@ -15,6 +15,9 @@
   "allOf": [
     {
       "$ref": "../part.json"
+    },
+    {
+      "$ref": "../links/linkReplacementParts.json"
     }
   ]
 }

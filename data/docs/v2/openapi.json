@@ -181,6 +181,12 @@
     "/units/:unit_id/notes": {
       "$ref": "./paths/unit/notes.json"
     },
+    "/units/:unit_id/replacements": {
+      "$ref": "./paths/part/replacements.json"
+    },
+    "/units/:unit_id/replacements/:unit_id": {
+      "$ref": "./paths/part/replacement.json"
+    },
     "/users": {
       "$ref": "./paths/user/users.json"
     },
@@ -203,10 +209,10 @@
       "$ref": "./paths/location/warehouses.json"
     },
     "/work-orders": {
-      "$ref": "./paths/workOrders.json"
+      "$ref": "./paths/workOrder/workOrders.json"
     },
     "/work-orders/:work_order_id": {
-      "$ref": "./paths/workOrder.json"
+      "$ref": "./paths/workOrder/workOrder.json"
     },
     "/work-flows": {
       "$ref": "./paths/workflow/workflows.json"
@@ -835,6 +841,9 @@
       },
       "LinksLinkQueues": {
         "$ref": "./components/schemas/links/linkQueues.json"
+      },
+      "LinksLinkReplacementParts": {
+        "$ref": "./components/schemas/links/linkReplacementParts.json"
       },
       "LinksLinkResource": {
         "$ref": "./components/schemas/links/linkResource.json"
