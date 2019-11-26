@@ -157,6 +157,9 @@
     "/settings/statuses": {
       "$ref": "./paths/settings/status.json"
     },
+    "/settings/links": {
+      "$ref": "./paths/settings/links.json"
+    },
     "/queues": {
       "$ref": "./paths/queue/queues.json"
     },
@@ -213,6 +216,9 @@
     },
     "/work-orders/:work_order_id": {
       "$ref": "./paths/workOrder/workOrder.json"
+    },
+    "/work-orders/:work_order_id/links": {
+      "$ref": "./paths/workOrder/links.json"
     },
     "/work-flows": {
       "$ref": "./paths/workflow/workflows.json"
@@ -307,6 +313,9 @@
       },
       "manufacturerId": {
         "$ref": "./components/parameters/manufacturerId.json"
+      },
+      "noteId": {
+        "$ref": "./components/parameters/noteId.json"
       },
       "offset": {
         "$ref": "./components/parameters/offset.json"
@@ -538,7 +547,7 @@
         "$ref": "./components/responses/statusHistory.json"
       },
       "statusPage": {
-        "$ref": "./components/responses/statusPage.json"
+        "$ref": "./components/responses/settingsStatus.json"
       },
       "subResourcePage": {
         "$ref": "./components/responses/subResourcePage.json"
@@ -649,9 +658,6 @@
       },
       "HalHalResource": {
         "$ref": "./components/schemas/hal/halResource.json"
-      },
-      "HalHalStatus": {
-        "$ref": "./components/schemas/hal/halStatus.json"
       },
       "HalHalSubResource": {
         "$ref": "./components/schemas/hal/halSubResource.json"
@@ -853,9 +859,6 @@
       },
       "LinksLinkSelf": {
         "$ref": "./components/schemas/links/linkSelf.json"
-      },
-      "LinksLinkStatus": {
-        "$ref": "./components/schemas/links/linkStatus.json"
       },
       "LinksLinkStatuses": {
         "$ref": "./components/schemas/links/linkStatuses.json"

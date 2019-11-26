@@ -1,0 +1,32 @@
+{
+  "type": "object",
+  "x-hal": true,
+  "x-ui-hide": true,
+  "properties": {
+    "replacement_type": {
+      "type": "string",
+      "description": "Describes how a the part can be replaced",
+      "default": "replaces",
+      "enum": [
+        "replaces",
+        "substitutes"
+      ]
+    },
+    "_links": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "$ref": "../links/linkPart.json#/properties/_links/properties/nter:parts"
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "../part.json"
+    },
+    {
+      "$ref": "../links/linkReplacementParts.json"
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "description": "Linked entities",
+  "content": {
+    "application/hal+json": {
+      "schema": {
+        "properties": {
+          "_embedded": {
+            "type": "object",
+            "properties": {
+              "nter:linked": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "relation": {
+                      "$ref": "../schemas/link.json"
+                    },
+                    "entity_type": {
+                      "type": "string",
+                      "description": "Entity type",
+                      "example": "CUS",
+                      "enum": [
+                        "CON",
+                        "CUS",
+                        "LOC",
+                        "PART",
+                        "PGM",
+                        "PRO",
+                        "RES",
+                        "UNIT",
+                        "USER",
+                        "WKF",
+                        "WOR"
+                      ]
+                    },
+                    "entity_id": {
+                      "type": "string",
+                      "description": "Id of the entity",
+                      "example": "5139dee0-84d7-4c40-9cd3-f2a3bfa9cd49",
+                      "x-examples": [
+                        "5139dee0-84d7-4c40-9cd3-f2a3bfa9cd49"
+                      ]
+                    },
+                    "entity_label": {
+                      "type": "string",
+                      "description": "Label of the entity",
+                      "example": "Manchuck Inc"
+                    },
+                    "_links": {
+                      "type": "object",
+                      "properties": {
+                        "self": {
+                          "type": "object",
+                          "properties": {
+                            "href": {
+                              "type": "string",
+                              "format": "uri",
+                              "description": "Link to the entity",
+                              "example": "https://api.nterprise.com/customers/5139dee0-84d7-4c40-9cd3-f2a3bfa9cd49"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

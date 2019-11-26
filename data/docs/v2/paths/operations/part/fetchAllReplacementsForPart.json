@@ -24,7 +24,7 @@
   ],
   "responses": {
     "200": {
-      "$ref": "../../../components/responses/partPage.json"
+      "$ref": "../../../components/responses/partReplacementPage.json"
     },
     "401": {
       "$ref": "../../../components/responses/401unauthorized.json"

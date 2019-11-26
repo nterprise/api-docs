@@ -4,7 +4,7 @@
   "goto": "complete",
   "choices": [
     {
-      "goto": "complete",
+      "goto": "confirm-shutdown",
       "and": [
         {
           "variable": "$.parts.available",

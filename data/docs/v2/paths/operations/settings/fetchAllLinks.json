@@ -1,13 +1,13 @@
 {
-  "operationId": "fetchAllStatuses",
-  "summary": "Fetches all the statuses",
-  "description": "Fetch Statuses",
+  "operationId": "fetchAllLinks",
+  "summary": "Fetches all the links",
+  "description": "Fetch Links",
   "tags": [
     "Settings"
   ],
   "responses": {
     "200": {
-      "$ref": "../../../components/responses/settingsStatus.json"
+      "$ref": "../../../components/responses/settingsLinks.json"
     },
     "401": {
       "$ref": "../../../components/responses/401unauthorized.json"

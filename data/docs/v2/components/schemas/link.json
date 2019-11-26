@@ -1,0 +1,55 @@
+{
+  "x-id": "#link",
+  "x-nter-relation": "links",
+  "x-nter-model": "Link",
+  "x-nter-callable": true,
+  "description": "Defines the properties for an entity link",
+  "required": [
+    "label",
+    "text",
+    "link_id"
+  ],
+  "properties": {
+    "label": {
+      "type": "string",
+      "description": "Label of the link",
+      "example": "Duplicate",
+      "x-examples": [
+        "Duplicate"
+      ]
+    },
+    "slug": {
+      "type": "string",
+      "readOnly": true,
+      "description": "auto-generated slug for the label",
+      "example": "duplicate",
+      "x-examples": [
+        "duplicate"
+      ]
+    },
+    "description": {
+      "type": "string",
+      "description": "Text describing the link type",
+      "example": "These two entities are related",
+      "x-examples": [
+        "These two entities are related"
+      ]
+    },
+    "outward_label": {
+      "type": "string",
+      "description": "The outward direction for the relationship",
+      "example": "Duplicate of",
+      "x-examples": [
+        "Duplicate of"
+      ]
+    },
+    "inward_label": {
+      "type": "string",
+      "description": "The inward direction for the relationship",
+      "example": "Duplicated by",
+      "x-examples": [
+        "Duplicated by"
+      ]
+    }
+  }
+}
