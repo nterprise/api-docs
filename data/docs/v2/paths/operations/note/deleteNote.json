@@ -1,18 +1,18 @@
 {
-  "operationId": "deleteManufacturer",
-  "summary": "Deletes a manufacturer",
-  "description": "This will remove the manufacturer from the system",
+  "operationId": "deleteNote",
+  "summary": "Deletes a note",
+  "description": "This will soft delete the note",
   "tags": [
-    "Manufacturer"
+    "Note"
   ],
   "parameters": [
     {
-      "$ref": "../../../components/parameters/manufacturerId.json"
+      "$ref": "../../../components/parameters/noteId.json"
     }
   ],
   "responses": {
     "205": {
-      "description": "Manufacturer deleted"
+      "description": "Note deleted"
     },
     "401": {
       "$ref": "../../../components/responses/401unauthorized.json"

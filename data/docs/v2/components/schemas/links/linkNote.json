@@ -1,0 +1,22 @@
+{
+  "type": "object",
+  "x-ui-hide": true,
+  "properties": {
+    "_links": {
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "nter:notes": {
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "href": {
+              "type": "string",
+              "example": "https://api.nterprise.com/notes/cd75c639-a2be-448f-ab4e-b38a00c34495"
+            }
+          }
+        }
+      }
+    }
+  }
+}

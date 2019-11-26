@@ -109,6 +109,9 @@
     "/me": {
       "$ref": "./paths/me.json"
     },
+    "/notes/:note_id": {
+      "$ref": "./paths/note/note.json"
+    },
     "/parts": {
       "$ref": "./paths/part/parts.json"
     },
@@ -174,6 +177,9 @@
     },
     "/units/:unit_id/statuses": {
       "$ref": "./paths/unit/statusHistory.json"
+    },
+    "/units/:unit_id/notes": {
+      "$ref": "./paths/unit/notes.json"
     },
     "/users": {
       "$ref": "./paths/user/users.json"
@@ -617,6 +623,9 @@
       "HalHalManufacturer": {
         "$ref": "./components/schemas/hal/halManufacturer.json"
       },
+      "HalHalNote": {
+        "$ref": "./components/schemas/hal/halNote.json"
+      },
       "HalHalPaginationOffset": {
         "$ref": "./components/schemas/hal/halPaginationOffset.json"
       },
@@ -797,6 +806,12 @@
       "LinksLinkNext": {
         "$ref": "./components/schemas/links/linkNext.json"
       },
+      "LinksLinkNote": {
+        "$ref": "./components/schemas/links/linkNote.json"
+      },
+      "LinksLinkNotes": {
+        "$ref": "./components/schemas/links/linkNotes.json"
+      },
       "LinksLinkPart": {
         "$ref": "./components/schemas/links/linkPart.json"
       },
@@ -874,6 +889,9 @@
       },
       "Manufacturer": {
         "$ref": "./components/schemas/manufacturer.json"
+      },
+      "Note": {
+        "$ref": "./components/schemas/note.json"
       },
       "Part": {
         "$ref": "./components/schemas/part.json"

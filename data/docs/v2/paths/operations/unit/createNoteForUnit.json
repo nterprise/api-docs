@@ -1,18 +1,18 @@
 {
-  "operationId": "updateUnit",
-  "summary": "Updates a unit",
-  "description": "Updates a unit",
+  "operationId": "createNoteForUnit",
+  "summary": "Creates a note for a unit",
+  "description": "Creates a note for a unit",
   "tags": [
     "Unit"
   ],
-  "requestBody": {
-    "$ref": "../../../components/requestBodies/unit.json"
-  },
   "parameters": [
     {
       "$ref": "../../../components/parameters/unitId.json"
     }
   ],
+  "requestBody": {
+    "$ref": "../../../components/requestBodies/note.json"
+  },
   "responses": {
     "200": {
       "$ref": "../../../components/responses/unit.json"
@@ -20,11 +20,11 @@
     "400": {
       "$ref": "../../../components/responses/400badRequest.json"
     },
+    "401": {
+      "$ref": "../../../components/responses/401unauthorized.json"
+    },
     "403": {
       "$ref": "../../../components/responses/403forbidden.json"
-    },
-    "423": {
-      "$ref": "../../../components/responses/423locked.json"
     }
   }
 }

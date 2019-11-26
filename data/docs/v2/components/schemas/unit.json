@@ -52,7 +52,11 @@
       "properties": {
         "part_number": {
           "type": "string",
-          "description": "The part number supplied by the manufacturer"
+          "description": "The part number supplied by the manufacturer",
+          "example": "AX-44333",
+          "x-examples": [
+            "AX-44333"
+          ]
         }
       },
       "allOf": [
@@ -63,7 +67,18 @@
     },
     "vendor": {
       "x-ref": "#vendor",
+      "type": "object",
       "description": "The vendor that sold this unit",
+      "properties": {
+        "part_number": {
+          "type": "string",
+          "description": "The part number supplied by the vendor",
+          "example": "AX-44333",
+          "x-examples": [
+            "AX-44333"
+          ]
+        }
+      },
       "allOf": [
         {
           "$ref": "./vendor.json"

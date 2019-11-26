@@ -41,6 +41,20 @@
                 "$ref": "../../components/schemas/location.json#/properties/location_id"
               }
             }
+          },
+          "vendor": {
+            "type": "object",
+            "required": [
+              "vendor_id"
+            ],
+            "properties": {
+              "vendor_id": {
+                "$ref": "../../components/schemas/vendor.json#/properties/vendor_id"
+              },
+              "vendor_part_number": {
+                "$ref": "../../components/schemas/unit.json#/properties/vendor/properties/part_number"
+              }
+            }
           }
         }
       }

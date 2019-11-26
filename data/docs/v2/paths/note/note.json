@@ -1,0 +1,8 @@
+{
+  "get": {
+    "$ref": "../operations/note/fetchNoteById.json"
+  },
+  "delete": {
+    "$ref": "../operations/note/deleteNote.json"
+  }
+}

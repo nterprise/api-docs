@@ -1,0 +1,15 @@
+{
+  "description": "A note response",
+  "content": {
+    "application/hal+json": {
+      "schema": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "../schemas/hal/halNote.json"
+          }
+        ]
+      }
+    }
+  }
+}

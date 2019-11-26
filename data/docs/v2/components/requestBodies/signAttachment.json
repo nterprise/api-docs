@@ -1,5 +1,5 @@
 {
-  "description": "The part to create",
+  "description": "A Link which can be used to upload a file",
   "content": {
     "application/json": {
       "schema": {

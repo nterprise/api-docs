@@ -30,7 +30,7 @@
   ],
   "responses": {
     "200": {
-      "$ref": "../../../components/responses/contactPage.json"
+      "$ref": "../../../components/responses/unitPage.json"
     },
     "401": {
       "$ref": "../../../components/responses/401unauthorized.json"

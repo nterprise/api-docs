@@ -22,6 +22,9 @@
     },
     "404": {
       "$ref": "../../../components/responses/404notFound.json"
+    },
+    "423": {
+      "$ref": "../../../components/responses/423locked.json"
     }
   }
 }
