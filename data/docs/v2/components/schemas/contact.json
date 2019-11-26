@@ -14,7 +14,11 @@
   "properties": {
     "label": {
       "x-faker": "name.title",
-      "$ref": "./entityCommon.json#/properties/label"
+      "allOf": [
+        {
+          "$ref": "./entityCommon.json#/properties/label"
+        }
+      ]
     },
     "contact_id": {
       "type": "string",

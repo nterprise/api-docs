@@ -28,6 +28,9 @@
     },
     "409": {
       "$ref": "../../../components/responses/409conflict.json"
+    },
+    "423": {
+      "$ref": "../../../components/responses/423locked.json"
     }
   }
 }

@@ -9,14 +9,6 @@ const chance = require('chance');
 const $RefParser = require('json-schema-ref-parser');
 
 exports.builder = (yargs) => yargs.
-    positional(
-        'schema',
-        {
-            type: 'string',
-            default: '__all__',
-            describe: 'Generate for schema',
-        },
-    ).
     option(
         'add',
         {
@@ -37,7 +29,7 @@ exports.builder = (yargs) => yargs.
         },
     );
 
-exports.command = 'example';
+exports.command = 'example [schema]';
 exports.describe = 'Creates examples from the schemas';
 
 exports.handler = async (argv) => {

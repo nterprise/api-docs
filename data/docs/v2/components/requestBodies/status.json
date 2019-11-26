@@ -1,5 +1,5 @@
 {
-  "description": "The status to create",
+  "description": "A status",
   "content": {
     "application/json": {
       "schema": {

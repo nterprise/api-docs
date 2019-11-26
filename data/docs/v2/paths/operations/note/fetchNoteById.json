@@ -1,18 +1,18 @@
 {
-  "operationId": "deleteUnit",
-  "summary": "Deletes a unit",
-  "description": "This will soft delete the unit",
+  "operationId": "fetchNoteById",
+  "summary": "Fetches a note by Id",
+  "description": "Fetch Note",
   "tags": [
-    "Unit"
+    "Note"
   ],
   "parameters": [
     {
-      "$ref": "../../../components/parameters/unitId.json"
+      "$ref": "../../../components/parameters/noteId.json"
     }
   ],
   "responses": {
-    "205": {
-      "description": "Unit deleted"
+    "200": {
+      "$ref": "../../../components/responses/note.json"
     },
     "401": {
       "$ref": "../../../components/responses/401unauthorized.json"
@@ -22,9 +22,6 @@
     },
     "404": {
       "$ref": "../../../components/responses/404notFound.json"
-    },
-    "423": {
-      "$ref": "../../../components/responses/423locked.json"
     }
   }
 }
