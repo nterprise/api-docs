@@ -1,0 +1,24 @@
+{
+  "operationId": "fetchWorkOrderLinks",
+  "summary": "Fetches the links for the work order",
+  "description": "Fetch Work Order",
+  "tags": [
+    "Work Order"
+  ],
+  "parameters": [
+    {
+      "$ref": "../../../components/parameters/workOrderId.json"
+    }
+  ],
+  "responses": {
+    "200": {
+      "$ref": "../../../components/responses/linkPage.json"
+    },
+    "401": {
+      "$ref": "../../../components/responses/401unauthorized.json"
+    },
+    "403": {
+      "$ref": "../../../components/responses/403forbidden.json"
+    }
+  }
+}

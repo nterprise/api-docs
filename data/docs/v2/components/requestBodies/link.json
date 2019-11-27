@@ -1,0 +1,10 @@
+{
+  "description": "An entity link to create",
+  "content": {
+    "application/json": {
+      "schema": {
+        "$ref": "../schemas/link.json"
+      }
+    }
+  }
+}

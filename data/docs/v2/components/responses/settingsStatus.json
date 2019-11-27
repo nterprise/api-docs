@@ -1,5 +1,5 @@
 {
-  "description": "A paged response for statuses",
+  "description": "All the statuses defined for the system",
   "content": {
     "application/hal+json": {
       "schema": {
@@ -7,21 +7,16 @@
           "_embedded": {
             "type": "object",
             "properties": {
-              "nter:statuses": {
+              "nter:settings-statuses": {
                 "type": "array",
                 "maxItems": 100,
                 "items": {
-                  "$ref": "../schemas/hal/halStatus.json"
+                  "$ref": "../schemas/status.json"
                 }
               }
             }
           }
-        },
-        "allOf": [
-          {
-            "$ref": "../schemas/hal/halPaginationOffset.json"
-          }
-        ]
+        }
       }
     }
   }

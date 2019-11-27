@@ -1,0 +1,33 @@
+{
+  "description": "A Replacement part",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "required": [
+          "part_id",
+          "replacement_type"
+        ],
+        "properties": {
+          "part_id": {
+            "readOnly": false,
+            "allOf": [
+              {
+                "$ref": "../../components/schemas/part.json#/properties/part_id"
+              }
+            ]
+          },
+          "replacement_type": {
+            "type": "string",
+            "description": "Describes how a the part can be replaced",
+            "default": "replaces",
+            "enum": [
+              "replaces",
+              "substitutes"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

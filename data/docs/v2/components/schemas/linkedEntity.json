@@ -1,0 +1,48 @@
+{
+  "x-id": "#link",
+  "x-nter-relation": "links",
+  "x-nter-model": "Link",
+  "x-nter-callable": true,
+  "description": "Defines the properties for an entity link",
+  "required": [
+    "relation",
+    "entity_type",
+    "entity_id"
+  ],
+  "properties": {
+    "relation": {
+      "$ref": "../schemas/link.json"
+    },
+    "entity_type": {
+      "type": "string",
+      "description": "Entity type",
+      "example": "CUS",
+      "enum": [
+        "CON",
+        "CUS",
+        "LOC",
+        "PART",
+        "PGM",
+        "PRO",
+        "RES",
+        "UNIT",
+        "USER",
+        "WKF",
+        "WOR"
+      ]
+    },
+    "entity_id": {
+      "type": "string",
+      "description": "Id of the entity",
+      "example": "5139dee0-84d7-4c40-9cd3-f2a3bfa9cd49",
+      "x-examples": [
+        "5139dee0-84d7-4c40-9cd3-f2a3bfa9cd49"
+      ]
+    },
+    "entity_label": {
+      "type": "string",
+      "description": "Label of the entity",
+      "example": "Manchuck Inc"
+    }
+  }
+}

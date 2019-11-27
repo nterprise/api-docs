@@ -3,6 +3,15 @@
   "x-hal": true,
   "x-ui-hide": true,
   "properties": {
+    "replacement_type": {
+      "type": "string",
+      "description": "Describes how a the part can be replaced",
+      "default": "replaces",
+      "enum": [
+        "replaces",
+        "substitutes"
+      ]
+    },
     "_links": {
       "type": "object",
       "properties": {

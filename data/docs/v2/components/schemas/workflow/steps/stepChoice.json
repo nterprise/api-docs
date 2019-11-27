@@ -1,6 +1,5 @@
 {
   "description": "A Step choice",
-  "x-ui-hide": true,
   "type": "object",
   "maxProperties": 2,
   "minProperties": 2,

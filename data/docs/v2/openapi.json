@@ -157,6 +157,9 @@
     "/settings/statuses": {
       "$ref": "./paths/settings/status.json"
     },
+    "/settings/links": {
+      "$ref": "./paths/settings/links.json"
+    },
     "/queues": {
       "$ref": "./paths/queue/queues.json"
     },
@@ -181,6 +184,12 @@
     "/units/:unit_id/notes": {
       "$ref": "./paths/unit/notes.json"
     },
+    "/units/:unit_id/replacements": {
+      "$ref": "./paths/part/replacements.json"
+    },
+    "/units/:unit_id/replacements/:unit_id": {
+      "$ref": "./paths/part/replacement.json"
+    },
     "/users": {
       "$ref": "./paths/user/users.json"
     },
@@ -203,10 +212,13 @@
       "$ref": "./paths/location/warehouses.json"
     },
     "/work-orders": {
-      "$ref": "./paths/workOrders.json"
+      "$ref": "./paths/workOrder/workOrders.json"
     },
     "/work-orders/:work_order_id": {
-      "$ref": "./paths/workOrder.json"
+      "$ref": "./paths/workOrder/workOrder.json"
+    },
+    "/work-orders/:work_order_id/links": {
+      "$ref": "./paths/workOrder/links.json"
     },
     "/work-flows": {
       "$ref": "./paths/workflow/workflows.json"
@@ -301,6 +313,9 @@
       },
       "manufacturerId": {
         "$ref": "./components/parameters/manufacturerId.json"
+      },
+      "noteId": {
+        "$ref": "./components/parameters/noteId.json"
       },
       "offset": {
         "$ref": "./components/parameters/offset.json"
@@ -532,7 +547,7 @@
         "$ref": "./components/responses/statusHistory.json"
       },
       "statusPage": {
-        "$ref": "./components/responses/statusPage.json"
+        "$ref": "./components/responses/settingsStatus.json"
       },
       "subResourcePage": {
         "$ref": "./components/responses/subResourcePage.json"
@@ -643,9 +658,6 @@
       },
       "HalHalResource": {
         "$ref": "./components/schemas/hal/halResource.json"
-      },
-      "HalHalStatus": {
-        "$ref": "./components/schemas/hal/halStatus.json"
       },
       "HalHalSubResource": {
         "$ref": "./components/schemas/hal/halSubResource.json"
@@ -836,6 +848,9 @@
       "LinksLinkQueues": {
         "$ref": "./components/schemas/links/linkQueues.json"
       },
+      "LinksLinkReplacementParts": {
+        "$ref": "./components/schemas/links/linkReplacementParts.json"
+      },
       "LinksLinkResource": {
         "$ref": "./components/schemas/links/linkResource.json"
       },
@@ -844,9 +859,6 @@
       },
       "LinksLinkSelf": {
         "$ref": "./components/schemas/links/linkSelf.json"
-      },
-      "LinksLinkStatus": {
-        "$ref": "./components/schemas/links/linkStatus.json"
       },
       "LinksLinkStatuses": {
         "$ref": "./components/schemas/links/linkStatuses.json"

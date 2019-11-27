@@ -1,0 +1,5 @@
+{
+  "delete": {
+    "$ref": "../operations/part/deletePartReplacement.json"
+  }
+}

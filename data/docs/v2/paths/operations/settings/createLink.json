@@ -1,0 +1,25 @@
+{
+  "operationId": "createLink",
+  "summary": "Creates a new link",
+  "description": "Creates a new link",
+  "tags": [
+    "Settings"
+  ],
+  "requestBody": {
+    "$ref": "../../../components/requestBodies/link.json"
+  },
+  "responses": {
+    "200": {
+      "$ref": "../../../components/responses/settingsLinks.json"
+    },
+    "400": {
+      "$ref": "../../../components/responses/400badRequest.json"
+    },
+    "401": {
+      "$ref": "../../../components/responses/401unauthorized.json"
+    },
+    "403": {
+      "$ref": "../../../components/responses/403forbidden.json"
+    }
+  }
+}
