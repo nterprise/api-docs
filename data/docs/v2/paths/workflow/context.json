@@ -1,0 +1,8 @@
+{
+  "get": {
+    "$ref": "../operations/workflow/fetchContextsForWorkflow.json"
+  },
+  "post": {
+    "$ref": "../operations/workflow/startWorkflow.json"
+  }
+}

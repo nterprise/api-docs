@@ -1,6 +1,6 @@
 {
-  "type": "pass",
-  "label": "Find units",
+  "type": "machine",
+  "label": "Enroll-device",
   "goto": "complete",
   "options": {
     "application": {

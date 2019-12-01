@@ -1,0 +1,24 @@
+{
+  "description": "Generic entity. Used when endpoints accept any entity",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "entity_type": {
+            "$ref": "../schemas/entityHelper.json#/properties/entity_type"
+          },
+          "entity_id": {
+            "type": "string",
+            "description": "UUID for the entity",
+            "example": "59c834ad-d9cc-4e0f-a569-8f4e52c351b9",
+            "x-examples": [
+              "59c834ad-d9cc-4e0f-a569-8f4e52c351b9"
+            ],
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          }
+        }
+      }
+    }
+  }
+}

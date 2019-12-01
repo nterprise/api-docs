@@ -1,5 +1,8 @@
 {
   "get": {
     "$ref": "./operations/context/fetchContextById.json"
+  },
+  "post": {
+    "$ref": "./operations/context/completeStep.json"
   }
 }
