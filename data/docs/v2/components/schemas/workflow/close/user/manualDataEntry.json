@@ -27,9 +27,9 @@
           "entity_field": {
             "type": "string",
             "description": "JSON Path to the field on the entity. If the path does not start with '$' then the entity on the context is assumed. Otherwise the data will be set on the context path",
-            "example": "input_filter[?(@.key = 'asset-tag')]",
+            "example": "$.input_filter[?(@.key = 'asset-tag')]",
             "x-examples": [
-              "input_filter[?(@.key = 'asset-tag')]"
+              "$.input_filter[?(@.key = 'asset-tag')]"
             ]
           }
         }

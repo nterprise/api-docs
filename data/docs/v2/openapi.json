@@ -217,9 +217,6 @@
     "/work-orders/:work_order_id": {
       "$ref": "./paths/workOrder/workOrder.json"
     },
-    "/work-orders/:work_order_id/links": {
-      "$ref": "./paths/workOrder/links.json"
-    },
     "/work-flows": {
       "$ref": "./paths/workflow/workflows.json"
     },
@@ -228,6 +225,9 @@
     },
     "/work-flows/:workflow_id/bill-of-materials": {
       "$ref": "./paths/workflow/bom.json"
+    },
+    "/work-flows/:workflow_id/contexts": {
+      "$ref": "./paths/workflow/context.json"
     }
   },
   "security": [
@@ -952,6 +952,9 @@
       },
       "WorkflowActionEmailAction": {
         "$ref": "./components/schemas/workflow/action/emailAction.json"
+      },
+      "WorkflowCloseMachineAceios": {
+        "$ref": "./components/schemas/workflow/close/machine/aceios.json"
       },
       "WorkflowCloseUserConfirmAction": {
         "$ref": "./components/schemas/workflow/close/user/confirmAction.json"

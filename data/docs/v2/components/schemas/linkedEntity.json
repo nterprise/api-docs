@@ -14,22 +14,7 @@
       "$ref": "../schemas/link.json"
     },
     "entity_type": {
-      "type": "string",
-      "description": "Entity type",
-      "example": "CUS",
-      "enum": [
-        "CON",
-        "CUS",
-        "LOC",
-        "PART",
-        "PGM",
-        "PRO",
-        "RES",
-        "UNIT",
-        "USER",
-        "WKF",
-        "WOR"
-      ]
+      "$ref": "./entityHelper.json#/properties/entity_type"
     },
     "entity_id": {
       "type": "string",

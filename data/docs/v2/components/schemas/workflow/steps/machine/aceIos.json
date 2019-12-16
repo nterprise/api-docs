@@ -2,6 +2,12 @@
   "type": "object",
   "description": "Run the ACE-IOS application to provision iOS devices or ",
   "properties": {
+    "type": {
+      "example": "machine",
+      "x-examples": [
+        "machine"
+      ]
+    },
     "label": {
       "x-examples": [
         "Run Application"
