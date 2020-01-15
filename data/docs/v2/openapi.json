@@ -49,6 +49,9 @@
     "/contexts/:context_id": {
       "$ref": "./paths/context.json"
     },
+    "/contexts/:context_id/:step-slug": {
+      "$ref": "./paths/workflow/contextStep.json"
+    },
     "/customers": {
       "$ref": "./paths/customer/customers.json"
     },
