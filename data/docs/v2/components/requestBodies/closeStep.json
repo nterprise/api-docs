@@ -5,27 +5,9 @@
       "schema": {
         "type": "object",
         "description": "Close step",
-        "required": [
-          "step",
-          "program"
-        ],
-        "properties": {
-          "step": {
-            "$ref": "../../components/schemas/workflow/steps/stepCloseCommon.json#/properties/step"
-          }
-        },
-        "anyOf": [
+        "allOf": [
           {
-            "$ref": "../../components/schemas/workflow/close/user/confirmAction.json"
-          },
-          {
-            "$ref": "../../components/schemas/workflow/close/user/followPDFInstructions.json"
-          },
-          {
-            "$ref": "../../components/schemas/workflow/close/user/manualDataEntry.json"
-          },
-          {
-            "$ref": "../../components/schemas/workflow/close/machine/aceios.json"
+            "$ref": "../../components/schemas/workflow/close/allCloseSteps.json"
           }
         ]
       }
@@ -34,27 +16,9 @@
       "schema": {
         "type": "object",
         "description": "Fail step",
-        "required": [
-          "step",
-          "program"
-        ],
-        "properties": {
-          "step": {
-            "$ref": "../../components/schemas/workflow/steps/stepCloseCommon.json#/properties/step"
-          }
-        },
-        "anyOf": [
+        "allOf": [
           {
-            "$ref": "../../components/schemas/workflow/close/user/confirmAction.json"
-          },
-          {
-            "$ref": "../../components/schemas/workflow/close/user/followPDFInstructions.json"
-          },
-          {
-            "$ref": "../../components/schemas/workflow/close/user/manualDataEntry.json"
-          },
-          {
-            "$ref": "../../components/schemas/workflow/close/machine/aceios.json"
+            "$ref": "../../components/schemas/workflow/close/allCloseSteps.json"
           }
         ]
       }

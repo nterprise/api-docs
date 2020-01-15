@@ -16,6 +16,9 @@
       ],
       "properties": {
         "component": {
+          "enum": [
+            "manual-data-entry"
+          ],
           "example": "manual-data-entry",
           "x-examples": [
             "manual-data-entry"
