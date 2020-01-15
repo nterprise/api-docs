@@ -20,6 +20,9 @@
       ],
       "properties": {
         "component": {
+          "enum": [
+            "follow-pds-instructions"
+          ],
           "example": "follow-pdf-instructions",
           "x-examples": [
             "follow-pdf-instructions"

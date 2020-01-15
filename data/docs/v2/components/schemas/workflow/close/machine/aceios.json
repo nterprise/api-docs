@@ -66,5 +66,10 @@
         }
       }
     }
-  }
+  },
+  "allOf": [
+    {
+      "$ref": "../../steps/stepCloseCommon.json"
+    }
+  ]
 }
