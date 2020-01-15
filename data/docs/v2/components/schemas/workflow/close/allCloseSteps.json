@@ -1,0 +1,29 @@
+{
+  "type": "object",
+  "description": "Close step",
+  "required": [
+    "step"
+  ],
+  "properties": {
+    "step": {
+      "$ref": "../steps/stepCloseCommon.json#/properties/step"
+    }
+  },
+  "anyOf": [
+    {
+      "$ref": "./user/confirmAction.json"
+    },
+    {
+      "$ref": "./user/followPDFInstructions.json"
+    },
+    {
+      "$ref": "./user/manualDataEntry.json"
+    },
+    {
+      "$ref": "./user/taskList.json"
+    },
+    {
+      "$ref": "./machine/aceios.json"
+    }
+  ]
+}

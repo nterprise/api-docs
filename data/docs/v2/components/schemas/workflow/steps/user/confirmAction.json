@@ -16,6 +16,9 @@
       ],
       "properties": {
         "component": {
+          "enum": [
+            "confirm-action"
+          ],
           "example": "confirm-action",
           "x-examples": [
             "confirm-action"
