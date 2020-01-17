@@ -157,6 +157,9 @@
     "/resources/:resource_id/sub-resources": {
       "$ref": "./paths/resource/subResources.json"
     },
+    "/resources/:resource_id/contexts": {
+      "$ref": "./paths/resource/contexts.json"
+    },
     "/settings/statuses": {
       "$ref": "./paths/settings/status.json"
     },
