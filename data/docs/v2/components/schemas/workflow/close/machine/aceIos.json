@@ -69,7 +69,7 @@
   },
   "allOf": [
     {
-      "$ref": "../../steps/stepCloseCommon.json"
+      "$ref": "../stepCloseCommon.json"
     }
   ]
 }

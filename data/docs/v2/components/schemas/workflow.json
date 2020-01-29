@@ -126,36 +126,9 @@
       "x-patternProperties": {
         "(confirm|success|fail|manual|run-ace|follow)": {
           "type": "object",
-          "anyOf": [
+          "allOf": [
             {
-              "$ref": "./workflow/steps/function/allocateUnitsToProject.json"
-            },
-            {
-              "$ref": "./workflow/steps/machine/aceIos.json"
-            },
-            {
-              "$ref": "./workflow/steps/user/confirmAction.json"
-            },
-            {
-              "$ref": "./workflow/steps/user/followPDFInstructions.json"
-            },
-            {
-              "$ref": "./workflow/steps/user/manualDataEntry.json"
-            },
-            {
-              "$ref": "./workflow/steps/stepChoices.json"
-            },
-            {
-              "$ref": "./workflow/steps/stepFail.json"
-            },
-            {
-              "$ref": "./workflow/steps/stepPass.json"
-            },
-            {
-              "$ref": "./workflow/steps/stepSuccess.json"
-            },
-            {
-              "$ref": "./workflow/steps/stepWait.json"
+              "$ref": "./workflow/steps/allSteps.json"
             }
           ]
         }
@@ -164,34 +137,7 @@
         "type": "object",
         "anyOf": [
           {
-            "$ref": "./workflow/steps/function/allocateUnitsToProject.json"
-          },
-          {
-            "$ref": "./workflow/steps/machine/aceIos.json"
-          },
-          {
-            "$ref": "./workflow/steps/user/confirmAction.json"
-          },
-          {
-            "$ref": "./workflow/steps/user/followPDFInstructions.json"
-          },
-          {
-            "$ref": "./workflow/steps/user/manualDataEntry.json"
-          },
-          {
-            "$ref": "./workflow/steps/stepChoices.json"
-          },
-          {
-            "$ref": "./workflow/steps/stepFail.json"
-          },
-          {
-            "$ref": "./workflow/steps/stepPass.json"
-          },
-          {
-            "$ref": "./workflow/steps/stepSuccess.json"
-          },
-          {
-            "$ref": "./workflow/steps/stepWait.json"
+            "$ref": "./workflow/steps/allSteps.json"
           }
         ]
       }

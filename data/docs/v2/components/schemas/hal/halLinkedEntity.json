@@ -7,14 +7,14 @@
       "type": "object",
       "properties": {
         "self": {
-          "$ref": "../links/linkPart.json#/properties/_links/properties/nter:parts"
+          "$ref": "../links/linkLinkedEntity.json#/properties/_links/properties/nter:links"
         }
       }
     }
   },
   "allOf": [
     {
-      "$ref": "../part.json"
+      "$ref": "../linkedEntity.json"
     }
   ]
 }

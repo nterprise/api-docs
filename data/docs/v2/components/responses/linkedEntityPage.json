@@ -11,7 +11,7 @@
                 "type": "array",
                 "maxItems": 100,
                 "items": {
-                  "$ref": "../schemas/hal/halLink.json"
+                  "$ref": "../schemas/hal/halLinkedEntity.json"
                 }
               }
             }
