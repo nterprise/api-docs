@@ -459,6 +459,9 @@
       "413PayloadTooLarge": {
         "$ref": "./components/responses/413payloadTooLarge.json"
       },
+      "423Locked": {
+        "$ref": "./components/responses/423locked.json"
+      },
       "attachment": {
         "$ref": "./components/responses/attachment.json"
       },
@@ -495,6 +498,18 @@
       "entry": {
         "$ref": "./components/responses/entry.json"
       },
+      "link": {
+        "$ref": "./components/responses/link.json"
+      },
+      "linkPage": {
+        "$ref": "./components/responses/linkPage.json"
+      },
+      "linkedEntity": {
+        "$ref": "./components/responses/linkedEntity.json"
+      },
+      "linkedEntityPage": {
+        "$ref": "./components/responses/linkedEntityPage.json"
+      },
       "location": {
         "$ref": "./components/responses/location.json"
       },
@@ -510,6 +525,12 @@
       "me": {
         "$ref": "./components/responses/me.json"
       },
+      "note": {
+        "$ref": "./components/responses/note.json"
+      },
+      "notePage": {
+        "$ref": "./components/responses/notePage.json"
+      },
       "part": {
         "$ref": "./components/responses/part.json"
       },
@@ -518,6 +539,9 @@
       },
       "partPage": {
         "$ref": "./components/responses/partPage.json"
+      },
+      "partReplacementPage": {
+        "$ref": "./components/responses/partReplacementPage.json"
       },
       "problem": {
         "$ref": "./components/responses/problem.json"
@@ -546,6 +570,12 @@
       "resourcePage": {
         "$ref": "./components/responses/resourcePage.json"
       },
+      "settingsLinks": {
+        "$ref": "./components/responses/settingsLinks.json"
+      },
+      "settingsStatus": {
+        "$ref": "./components/responses/settingsStatus.json"
+      },
       "status": {
         "$ref": "./components/responses/status.json"
       },
@@ -553,7 +583,10 @@
         "$ref": "./components/responses/statusHistory.json"
       },
       "statusPage": {
-        "$ref": "./components/responses/settingsStatus.json"
+        "$ref": "./components/responses/statusPage.json"
+      },
+      "step": {
+        "$ref": "./components/responses/step.json"
       },
       "subResourcePage": {
         "$ref": "./components/responses/subResourcePage.json"
@@ -977,8 +1010,14 @@
       "WorkflowCloseAllCloseSteps": {
         "$ref": "./components/schemas/workflow/close/allCloseSteps.json"
       },
+      "WorkflowCloseFailStep": {
+        "$ref": "./components/schemas/workflow/close/failStep.json"
+      },
       "WorkflowCloseMachineAceios": {
-        "$ref": "./components/schemas/workflow/close/machine/aceios.json"
+        "$ref": "./components/schemas/workflow/close/machine/aceIos.json"
+      },
+      "WorkflowCloseStepCloseCommon": {
+        "$ref": "./components/schemas/workflow/close/stepCloseCommon.json"
       },
       "WorkflowCloseUserConfirmAction": {
         "$ref": "./components/schemas/workflow/close/user/confirmAction.json"
@@ -1003,9 +1042,6 @@
       },
       "WorkflowStepsStepChoices": {
         "$ref": "./components/schemas/workflow/steps/stepChoices.json"
-      },
-      "WorkflowStepsStepCloseCommon": {
-        "$ref": "./components/schemas/workflow/steps/stepCloseCommon.json"
       },
       "WorkflowStepsStepCommon": {
         "$ref": "./components/schemas/workflow/steps/stepCommon.json"

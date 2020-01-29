@@ -1,12 +1,12 @@
 {
-  "description": "A status response",
+  "description": "A linkedEntity response",
   "content": {
     "application/hal+json": {
       "schema": {
         "type": "object",
         "allOf": [
           {
-            "$ref": "../schemas/hal/halStatus.json"
+            "$ref": "../schemas/hal/halLinkedEntity.json"
           }
         ]
       }

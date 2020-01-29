@@ -6,13 +6,13 @@
       "type": "object",
       "readOnly": true,
       "properties": {
-        "nter:customers": {
+        "nter:statuses": {
           "type": "object",
           "readOnly": true,
           "properties": {
             "href": {
               "type": "string",
-              "example": "https://api.nterprise.com/customers/43936481-578c-4aca-a7e4-0bbc34702752"
+              "example": "https://api.nterprise.com/statuses/b76d0f3c-a71f-4160-b0fe-634ce2057a61"
             }
           }
         }

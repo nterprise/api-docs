@@ -2,7 +2,8 @@
   "type": "object",
   "x-ui-hide": true,
   "required": [
-    "step"
+    "step",
+    "type"
   ],
   "properties": {
     "step": {
@@ -12,6 +13,19 @@
       "example": "complete",
       "x-examples": [
         "complete"
+      ]
+    },
+    "type":{
+      "type": "string",
+      "enum": [
+        "close",
+        "fail"
+      ],
+      "default": "close",
+      "description": "Type of close function for step",
+      "example": "close",
+      "x-examples": [
+        "close"
       ]
     }
   }

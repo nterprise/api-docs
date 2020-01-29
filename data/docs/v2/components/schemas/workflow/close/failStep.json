@@ -1,0 +1,20 @@
+{
+  "type": "object",
+  "description": "How to mark a step as failed",
+  "required": [
+    "type"
+  ],
+  "properties": {
+    "type": {
+      "example": "fail",
+      "x-examples": [
+        "fail"
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "./stepCloseCommon.json"
+    }
+  ]
+}

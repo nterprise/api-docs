@@ -1,5 +1,5 @@
 {
-  "description": "A paged response for links",
+  "description": "A paged response for statuses",
   "content": {
     "application/hal+json": {
       "schema": {
@@ -7,11 +7,11 @@
           "_embedded": {
             "type": "object",
             "properties": {
-              "nter:links": {
+              "nter:statuses": {
                 "type": "array",
                 "maxItems": 100,
                 "items": {
-                  "$ref": "../schemas/hal/halLink.json"
+                  "$ref": "../schemas/hal/halStatus.json"
                 }
               }
             }
