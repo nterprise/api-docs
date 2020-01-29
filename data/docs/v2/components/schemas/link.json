@@ -51,5 +51,8 @@
         "Duplicated by"
       ]
     }
+  },
+  "example": {
+    "$ref": "../examples/link.json"
   }
 }

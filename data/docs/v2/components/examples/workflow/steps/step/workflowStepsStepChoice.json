@@ -1,0 +1,4 @@
+{
+  "variable": "$.parts.available",
+  "greater_than_equals": "42"
+}

@@ -29,5 +29,8 @@
       "description": "Label of the entity",
       "example": "Manchuck Inc"
     }
+  },
+  "example": {
+    "$ref": "../examples/linkedEntity.json"
   }
 }

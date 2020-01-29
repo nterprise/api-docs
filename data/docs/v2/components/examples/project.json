@@ -9,24 +9,28 @@
     },
     "allowed_statuses": [
       {
-        "status": "Cancelled",
-        "category": "COMPLETE"
-      },
-      {
-        "status": "Verifying",
-        "category": "CANCELLED"
-      },
-      {
-        "status": "Complete",
-        "category": "BLOCKED"
+        "status": "Blocked",
+        "category": "IN_PROGRESS"
       },
       {
         "status": "In Progress",
+        "category": "PENDING"
+      },
+      {
+        "status": "Verifying",
         "category": "IN_PROGRESS"
+      },
+      {
+        "status": "Blocked",
+        "category": "VERIFYING"
+      },
+      {
+        "status": "Pending",
+        "category": "VERIFYING"
       }
     ],
-    "created": "1994-01-06T20:57:43.074Z",
-    "updated": "2004-09-29T07:37:09.316Z"
+    "created": "1982-06-25T01:30:53.962Z",
+    "updated": "1993-08-10T05:58:27.232Z"
   },
   "program": {
     "label": "GAP Store refresh",
@@ -39,56 +43,40 @@
       },
       "allowed_statuses": [
         {
-          "status": "Blocked",
-          "category": "CANCELLED"
+          "status": "Pending",
+          "category": "VERIFYING"
         }
       ],
-      "created": "1979-05-26T15:15:15.065Z",
-      "updated": "2008-09-04T02:23:46.713Z"
+      "created": "1966-07-27T18:29:26.218Z",
+      "updated": "1958-01-22T15:59:45.363Z"
     },
     "program_id": "ec5db56d-32e6-4e5d-9bef-1016f3e13670",
     "slug": "gap-store-refresh",
     "allowed_statuses": [
       {
-        "status": "Complete",
-        "category": "CANCELLED"
-      },
-      {
-        "status": "Verifying",
-        "category": "IN_PROGRESS"
-      },
-      {
-        "status": "Complete",
+        "status": "Reticulating Splines",
         "category": "PENDING"
-      },
-      {
-        "status": "Blocked",
-        "category": "PENDING"
-      },
-      {
-        "status": "Cancelled",
-        "category": "IN_PROGRESS"
       }
     ],
     "start_date": "2019-08-07T18:10:53.0Z",
     "end_date": "2020-08-07T18:10:53.0Z",
-    "created": "1983-12-15T10:51:11.851Z",
-    "updated": "1991-06-05T20:09:58.176Z"
+    "created": "1979-02-25T13:04:05.266Z",
+    "updated": "1977-07-07T17:32:40.851Z"
   },
   "slug": "store-42",
   "project_id": "ec5db56d-32e6-4e5d-9bef-1016f3e13670",
   "allowed_statuses": [
     {
-      "status": "Cancelled",
-      "category": "CANCELLED"
+      "status": "In Progress",
+      "category": "IN_PROGRESS"
     },
     {
-      "status": "Blocked",
-      "category": "CANCELLED"
+      "status": "Pending",
+      "category": "BLOCKED"
     }
   ],
   "start_date": "2019-08-07T18:10:53.0Z",
   "end_date": "2020-08-07T18:10:53.0Z",
-  "created": "1996-01-25T01:01:26.867Z",
-  "updated": "1983-03-21T15:09:20.86Z"
+  "created": "1980-10-22T20:43:13.049Z",
+  "updated": "2003-11-14T20:49:34.522Z"
 }

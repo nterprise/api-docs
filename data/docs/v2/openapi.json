@@ -620,6 +620,9 @@
       "EntityCommon": {
         "$ref": "./components/schemas/entityCommon.json"
       },
+      "EntityHelper": {
+        "$ref": "./components/schemas/entityHelper.json"
+      },
       "Entry": {
         "$ref": "./components/schemas/entry.json"
       },
@@ -653,6 +656,9 @@
       "HalHalPart": {
         "$ref": "./components/schemas/hal/halPart.json"
       },
+      "HalHalPartReplacement": {
+        "$ref": "./components/schemas/hal/halPartReplacement.json"
+      },
       "HalHalProgram": {
         "$ref": "./components/schemas/hal/halProgram.json"
       },
@@ -664,6 +670,9 @@
       },
       "HalHalResource": {
         "$ref": "./components/schemas/hal/halResource.json"
+      },
+      "HalHalStep": {
+        "$ref": "./components/schemas/hal/halStep.json"
       },
       "HalHalSubResource": {
         "$ref": "./components/schemas/hal/halSubResource.json"
@@ -778,6 +787,12 @@
       },
       "InputFilter": {
         "$ref": "./components/schemas/inputFilter.json"
+      },
+      "Link": {
+        "$ref": "./components/schemas/link.json"
+      },
+      "LinkedEntity": {
+        "$ref": "./components/schemas/linkedEntity.json"
       },
       "LinksLinkBatch": {
         "$ref": "./components/schemas/links/linkBatch.json"
@@ -959,6 +974,9 @@
       "WorkflowActionEmailAction": {
         "$ref": "./components/schemas/workflow/action/emailAction.json"
       },
+      "WorkflowCloseAllCloseSteps": {
+        "$ref": "./components/schemas/workflow/close/allCloseSteps.json"
+      },
       "WorkflowCloseMachineAceios": {
         "$ref": "./components/schemas/workflow/close/machine/aceios.json"
       },
@@ -970,6 +988,9 @@
       },
       "WorkflowCloseUserManualDataEntry": {
         "$ref": "./components/schemas/workflow/close/user/manualDataEntry.json"
+      },
+      "WorkflowCloseUserTaskList": {
+        "$ref": "./components/schemas/workflow/close/user/taskList.json"
       },
       "WorkflowStepsFunctionAllocateUnitsToProject": {
         "$ref": "./components/schemas/workflow/steps/function/allocateUnitsToProject.json"
@@ -1018,6 +1039,9 @@
       },
       "WorkflowStepsUserManualDataEntry": {
         "$ref": "./components/schemas/workflow/steps/user/manualDataEntry.json"
+      },
+      "WorkflowStepsUserTaskList": {
+        "$ref": "./components/schemas/workflow/steps/user/taskList.json"
       },
       "Workflow": {
         "$ref": "./components/schemas/workflow.json"

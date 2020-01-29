@@ -23,6 +23,13 @@
           "to": "bob@example.com",
           "from": "alice@example.com"
         }
+      },
+      {
+        "type": "email",
+        "options": {
+          "to": "bob@example.com",
+          "from": "alice@example.com"
+        }
       }
     ]
   }

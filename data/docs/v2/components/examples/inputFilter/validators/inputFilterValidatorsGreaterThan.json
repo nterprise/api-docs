@@ -2,7 +2,7 @@
   "type": "greater_than",
   "options": {
     "value": 42,
-    "precision": 4,
-    "include": true
+    "precision": 6,
+    "include": false
   }
 }

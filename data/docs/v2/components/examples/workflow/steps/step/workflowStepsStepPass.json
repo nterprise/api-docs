@@ -5,32 +5,8 @@
   "goto-fail": "process-fail",
   "context": [
     {
-      "key": "$.unit.status",
+      "key": "$.fizz",
       "value": "$.buzz",
-      "lock": true,
-      "ignore": true
-    },
-    {
-      "key": "$.fizz",
-      "value": "true",
-      "lock": true,
-      "ignore": false
-    },
-    {
-      "key": "extract_fields",
-      "value": "Pending",
-      "lock": true,
-      "ignore": true
-    },
-    {
-      "key": "extract_fields",
-      "value": "true",
-      "lock": true,
-      "ignore": false
-    },
-    {
-      "key": "$.fizz",
-      "value": "Pending",
       "lock": false,
       "ignore": false
     }
@@ -59,20 +35,27 @@
             "to": "bob@example.com",
             "from": "alice@example.com"
           }
+        },
+        {
+          "type": "email",
+          "options": {
+            "to": "bob@example.com",
+            "from": "alice@example.com"
+          }
+        },
+        {
+          "type": "email",
+          "options": {
+            "to": "bob@example.com",
+            "from": "alice@example.com"
+          }
         }
       ]
     },
-    "retry": 0
+    "retry": 1
   },
   "onComplete": {
     "actions": [
-      {
-        "type": "email",
-        "options": {
-          "to": "bob@example.com",
-          "from": "alice@example.com"
-        }
-      },
       {
         "type": "email",
         "options": {

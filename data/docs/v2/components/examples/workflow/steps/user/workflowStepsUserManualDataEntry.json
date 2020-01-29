@@ -1,19 +1,19 @@
 {
   "type": "user",
   "options": {
-    "component": "manual-data-entry",
+    "component": "assignUnitsFromCustomerToProject",
     "payload": {
       "fields": [
         {
           "input_type": "input",
           "label": "Asset Tag",
-          "required": false,
+          "required": true,
           "entity_field": "input_filter[?(@.key = 'asset-tag')]"
         },
         {
           "input_type": "input",
           "label": "Asset Tag",
-          "required": false,
+          "required": true,
           "entity_field": "input_filter[?(@.key = 'asset-tag')]"
         }
       ]
@@ -22,78 +22,4 @@
   "label": "Enter asset tag and confirm serial number",
   "goto": "complete",
   "goto-fail": "process-fail",
-  "context": [
-    {
-      "key": "$.unit.status",
-      "value": "Pending",
-      "lock": false,
-      "ignore": false
-    },
-    {
-      "key": "extract_fields",
-      "value": "$.buzz",
-      "lock": false,
-      "ignore": true
-    },
-    {
-      "key": "extract_fields",
-      "value": "true",
-      "lock": true,
-      "ignore": false
-    }
-  ],
-  "onError": {
-    "finally": {
-      "goto": "failed",
-      "actions": [
-        {
-          "type": "email",
-          "options": {
-            "to": "bob@example.com",
-            "from": "alice@example.com"
-          }
-        },
-        {
-          "type": "email",
-          "options": {
-            "to": "bob@example.com",
-            "from": "alice@example.com"
-          }
-        },
-        {
-          "type": "email",
-          "options": {
-            "to": "bob@example.com",
-            "from": "alice@example.com"
-          }
-        },
-        {
-          "type": "email",
-          "options": {
-            "to": "bob@example.com",
-            "from": "alice@example.com"
-          }
-        },
-        {
-          "type": "email",
-          "options": {
-            "to": "bob@example.com",
-            "from": "alice@example.com"
-          }
-        }
-      ]
-    },
-    "retry": 4
-  },
-  "onComplete": {
-    "actions": [
-      {
-        "type": "email",
-        "options": {
-          "to": "bob@example.com",
-          "from": "alice@example.com"
-        }
-      }
-    ]
-  }
 }

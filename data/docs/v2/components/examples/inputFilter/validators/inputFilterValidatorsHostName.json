@@ -1,6 +1,6 @@
 {
   "type": "hostname",
   "options": {
-    "record_type": "SOA"
+    "record_type": "DNSKEY"
   }
 }

@@ -10,96 +10,30 @@
     },
     "allowed_statuses": [
       {
-        "status": "Complete",
-        "category": "IN_PROGRESS"
-      },
-      {
         "status": "Verifying",
-        "category": "CANCELLED"
-      },
-      {
-        "status": "Pending",
         "category": "VERIFYING"
       },
       {
-        "status": "Cancelled",
-        "category": "BLOCKED"
-      },
-      {
-        "status": "Reticulating Splines",
-        "category": "COMPLETE"
+        "status": "Pending",
+        "category": "IN_PROGRESS"
       }
     ],
-    "created": "2013-08-10T03:42:16.333Z",
-    "updated": "1975-06-10T03:06:52.949Z"
+    "created": "2000-07-16T07:37:50.052Z",
+    "updated": "1968-03-12T10:12:08.162Z"
   },
   "manufacturer": {
     "part_number": "602-3075-01",
     "label": "Apple Inc",
-    "manufacturer_id": "acBe6F25-C77A-aFDB-1aB2-Dd5fF0F8ecEB",
+    "manufacturer_id": "C3375C3b-eEAD-aA82-21ee-d0264e2b0B9C",
     "slug": "apple-inc",
-    "created": "1960-03-06T07:56:59.463Z",
-    "updated": "2013-03-26T21:31:51.621Z"
+    "created": "1979-05-30T06:43:26.12Z",
+    "updated": "1957-07-28T18:07:50.998Z"
   },
   "slug": "10-ipad",
   "input_filter": [
     {
-      "label": "Asset tag",
-      "key": "asset-tag",
-      "filters": [
-        {
-          "type": "snake",
-          "options": {}
-        },
-        {
-          "type": "empty",
-          "options": {}
-        },
-        {
-          "type": "trim",
-          "options": {
-            "start": true,
-            "end": true
-          }
-        }
-      ],
-      "validators": [
-        {
-          "type": "email_address",
-          "options": {
-            "strict": false,
-            "lookup": true
-          }
-        },
-        {
-          "type": "mask",
-          "options": {
-            "mask": "^[a-z]$"
-          }
-        },
-        {
-          "type": "hostname",
-          "options": {
-            "record_type": "SOA"
-          }
-        },
-        {
-          "type": "whiteList",
-          "options": {
-            "list": [
-              "foo",
-              "bar",
-              "fizz",
-              "buzz"
-            ],
-            "check_case": true
-          }
-        }
-      ]
-    },
-    {
       "label": "Serial Number",
-      "key": "wifi-mac-address",
+      "key": "serial-number",
       "filters": [
         {
           "type": "suffix",
@@ -112,116 +46,67 @@
           "options": {}
         },
         {
-          "type": "number",
-          "options": {}
-        },
-        {
-          "type": "number",
-          "options": {}
-        },
-        {
-          "type": "date",
-          "options": {}
-        }
-      ],
-      "validators": [
-        {
-          "type": "macAddress",
-          "options": {}
-        },
-        {
-          "type": "greater_than",
+          "type": "prefix",
           "options": {
-            "min": 42,
-            "max": 42,
-            "precision": 7,
-            "include": false
-          }
-        }
-      ]
-    },
-    {
-      "label": "Asset tag",
-      "key": "bluetooh-mac-address",
-      "filters": [
-        {
-          "type": "date",
-          "options": {}
-        },
-        {
-          "type": "trim",
-          "options": {
-            "start": false,
-            "end": false
+            "prefix": "MAN-"
           }
         }
       ],
       "validators": [
         {
-          "type": "ipAddress",
+          "type": "startsWith",
           "options": {
-            "versions": [
-              "IPv4"
-            ]
+            "starts_with": "foo",
+            "check_case": false
           }
         },
         {
-          "type": "uri",
-          "options": {
-            "schemes": [
-              "http"
-            ]
-          }
-        },
-        {
-          "type": "macAddress",
-          "options": {}
-        },
-        {
-          "type": "lessThan",
+          "type": "equals",
           "options": {
             "value": 42,
-            "precision": 5,
-            "include": true
+            "precision": 3
           }
         }
       ]
     },
     {
       "label": "Serial Number",
-      "key": "bluetooh-mac-address",
+      "key": "wifi-mac-address",
       "filters": [
+        {
+          "type": "kebab",
+          "options": {}
+        },
+        {
+          "type": "empty",
+          "options": {}
+        },
         {
           "type": "lower",
           "options": {}
         },
         {
-          "type": "float",
+          "type": "allowed_list",
           "options": {
-            "precision": 5
+            "approved_values": [
+              "foo",
+              "bar",
+              "fizz",
+              "buzz"
+            ],
+            "check_case": true,
+            "default": "fizz"
           }
         },
         {
           "type": "string",
           "options": {}
-        },
-        {
-          "type": "snake",
-          "options": {}
-        },
-        {
-          "type": "camel",
-          "options": {}
         }
       ],
       "validators": [
         {
-          "type": "greater_than",
-          "options": {
-            "value": 42,
-            "precision": 7,
-            "include": true
-          }
+          "type": "macAddress",
+          "options": {}
         },
         {
           "type": "step",
@@ -232,10 +117,123 @@
           }
         },
         {
+          "type": "macAddress",
+          "options": {}
+        },
+        {
+          "type": "lessThan",
+          "options": {
+            "value": 42,
+            "precision": 4,
+            "include": true
+          }
+        },
+        {
+          "type": "startsWith",
+          "options": {
+            "starts_with": "foo",
+            "check_case": false
+          }
+        }
+      ]
+    },
+    {
+      "label": "Serial Number",
+      "key": "serial-number",
+      "filters": [
+        {
+          "type": "number",
+          "options": {}
+        },
+        {
+          "type": "camel",
+          "options": {}
+        },
+        {
+          "type": "string",
+          "options": {}
+        }
+      ],
+      "validators": [
+        {
+          "type": "contains",
+          "options": {
+            "contains": "foo",
+            "check_case": false
+          }
+        }
+      ]
+    },
+    {
+      "label": "Serial Number",
+      "key": "asset-tag",
+      "filters": [
+        {
+          "type": "date",
+          "options": {}
+        },
+        {
+          "type": "prefix",
+          "options": {
+            "prefix": "MAN-"
+          }
+        }
+      ],
+      "validators": [
+        {
+          "type": "greater_than",
+          "options": {
+            "value": 42,
+            "precision": 2,
+            "include": true
+          }
+        }
+      ]
+    },
+    {
+      "label": "Bluetooh MAC address",
+      "key": "wifi-mac-address",
+      "filters": [
+        {
+          "type": "upper",
+          "options": {}
+        },
+        {
+          "type": "empty",
+          "options": {}
+        },
+        {
+          "type": "prefix",
+          "options": {
+            "prefix": "MAN-"
+          }
+        }
+      ],
+      "validators": [
+        {
+          "type": "whiteList",
+          "options": {
+            "list": [
+              "foo",
+              "bar",
+              "fizz",
+              "buzz"
+            ],
+            "check_case": false
+          }
+        },
+        {
+          "type": "startsWith",
+          "options": {
+            "starts_with": "foo",
+            "check_case": false
+          }
+        },
+        {
           "type": "email_address",
           "options": {
             "strict": false,
-            "lookup": true
+            "lookup": false
           }
         },
         {
@@ -249,6 +247,6 @@
       ]
     }
   ],
-  "created": "1951-11-26T19:27:30.954Z",
-  "updated": "2011-12-20T00:37:01.995Z"
+  "created": "2011-07-22T20:51:03.735Z",
+  "updated": "1989-12-29T12:13:09.663Z"
 }

@@ -12,65 +12,43 @@
       },
       "allowed_statuses": [
         {
-          "status": "Blocked",
-          "category": "IN_PROGRESS"
+          "status": "Pending",
+          "category": "PENDING"
+        },
+        {
+          "status": "Pending",
+          "category": "PENDING"
+        },
+        {
+          "status": "Reticulating Splines",
+          "category": "VERIFYING"
         },
         {
           "status": "Verifying",
           "category": "VERIFYING"
+        },
+        {
+          "status": "Blocked",
+          "category": "IN_PROGRESS"
         }
       ],
-      "created": "1970-06-07T16:44:34.976Z",
-      "updated": "1943-05-27T05:58:50.322Z"
+      "created": "1975-05-31T11:21:24.857Z",
+      "updated": "1944-06-27T23:45:45.004Z"
     },
     "manufacturer": {
       "part_number": "602-3075-01",
       "label": "Apple Inc",
-      "manufacturer_id": "FB8A2c89-7e41-ecD7-b5E5-ED7231f16DE7",
+      "manufacturer_id": "fEd6bD0f-fBED-f1ec-c2Ec-15b15cc8b7C2",
       "slug": "apple-inc",
-      "created": "1967-10-15T05:09:07.75Z",
-      "updated": "1951-05-29T02:59:53.726Z"
+      "created": "1956-03-27T03:07:54.963Z",
+      "updated": "1986-02-21T19:25:58.145Z"
     },
     "slug": "10-ipad",
     "input_filter": [
       {
-        "label": "Asset tag",
-        "key": "asset-tag",
-        "filters": [
-          {
-            "type": "prefix",
-            "options": {
-              "prefix": "MAN-"
-            }
-          }
-        ],
-        "validators": [
-          {
-            "type": "white_list",
-            "options": {
-              "list": [
-                "foo",
-                "bar",
-                "fizz",
-                "buzz"
-              ],
-              "check_case": false
-            }
-          }
-        ]
-      },
-      {
         "label": "Bluetooh MAC address",
-        "key": "serial-number",
+        "key": "wifi-mac-address",
         "filters": [
-          {
-            "type": "date",
-            "options": {}
-          },
-          {
-            "type": "date",
-            "options": {}
-          },
           {
             "type": "snake",
             "options": {}
@@ -80,17 +58,93 @@
             "options": {
               "suffix": "MAN"
             }
+          },
+          {
+            "type": "prefix",
+            "options": {
+              "prefix": "MAN-"
+            }
           }
         ],
         "validators": [
           {
-            "type": "step",
+            "type": "macAddress",
+            "options": {}
+          },
+          {
+            "type": "length",
             "options": {
-              "step": 4,
-              "start": 0,
-              "end": 16
+              "length": "foo",
+              "operator": "less_than_equals"
             }
           },
+          {
+            "type": "length",
+            "options": {
+              "length": "foo",
+              "operator": "less_than_equals"
+            }
+          },
+          {
+            "type": "equals",
+            "options": {
+              "value": 42,
+              "precision": 7
+            }
+          }
+        ]
+      },
+      {
+        "label": "Bluetooh MAC address",
+        "key": "wifi-mac-address",
+        "filters": [
+          {
+            "type": "snake",
+            "options": {}
+          },
+          {
+            "type": "lower",
+            "options": {}
+          }
+        ],
+        "validators": [
+          {
+            "type": "uri",
+            "options": {
+              "schemes": [
+                "http"
+              ]
+            }
+          },
+          {
+            "type": "equals",
+            "options": {
+              "value": 42,
+              "precision": 8
+            }
+          },
+          {
+            "type": "length",
+            "options": {
+              "length": "foo",
+              "operator": "equals"
+            }
+          }
+        ]
+      },
+      {
+        "label": "Serial Number",
+        "key": "serial-number",
+        "filters": [
+          {
+            "type": "trim",
+            "options": {
+              "start": true,
+              "end": false
+            }
+          }
+        ],
+        "validators": [
           {
             "type": "ipAddress",
             "options": {
@@ -106,102 +160,36 @@
             }
           },
           {
-            "type": "greater_than",
-            "options": {
-              "min": 42,
-              "max": 42,
-              "precision": 6,
-              "include": true
-            }
-          },
-          {
-            "type": "white_list",
-            "options": {
-              "list": [
-                "foo",
-                "bar",
-                "fizz",
-                "buzz"
-              ],
-              "check_case": true
-            }
-          }
-        ]
-      },
-      {
-        "label": "Asset tag",
-        "key": "wifi-mac-address",
-        "filters": [
-          {
-            "type": "camel",
-            "options": {}
-          },
-          {
-            "type": "float",
-            "options": {
-              "precision": 7
-            }
-          },
-          {
-            "type": "date",
-            "options": {}
-          }
-        ],
-        "validators": [
-          {
-            "type": "startsWith",
-            "options": {
-              "starts_with": "foo",
-              "check_case": true
-            }
-          },
-          {
             "type": "contains",
             "options": {
               "contains": "foo",
               "check_case": true
             }
-          },
-          {
-            "type": "uri",
-            "options": {
-              "schemes": [
-                "http"
-              ]
-            }
-          },
-          {
-            "type": "greater_than",
-            "options": {
-              "min": 42,
-              "max": 42,
-              "precision": 6,
-              "include": true
-            }
           }
         ]
       }
     ],
-    "created": "1961-07-09T05:52:21.768Z",
-    "updated": "1980-08-25T12:05:31.814Z"
+    "created": "1977-05-17T16:48:50.666Z",
+    "updated": "2015-09-30T10:15:43.751Z"
   },
   "unit_id": "ec5db56d-32e6-4e5d-9bef-1016f3e13670",
   "slug": "10-ipad-for-hugo",
   "tenant_part_number": "AX-44333",
   "manufacturer": {
-    "part_number": "labore tempor sint incididunt",
+    "part_number": "AX-44333",
     "label": "Apple Inc",
-    "manufacturer_id": "a57Ee9e3-E8E1-f5D6-bF6B-cabaf6D86eeC",
+    "manufacturer_id": "8b31DaFB-caEE-BBdE-e911-c0fEc1d63afD",
     "slug": "apple-inc",
-    "created": "1951-07-15T23:29:46.14Z",
-    "updated": "1948-11-12T23:11:10.96Z"
+    "created": "1947-04-30T09:26:52.976Z",
+    "updated": "1961-10-28T14:18:38.879Z"
   },
   "vendor": {
     "vendor_id": "3beea89a-3367-4beb-aa43-2aadc0873785",
     "label": "Micro Center",
+    "part_number": "AX-44333",
     "slug": "micro-center",
-    "created": "1954-07-11T17:45:21.269Z",
-    "updated": "1960-12-05T20:40:19.225Z"
+    "created": "1942-03-12T05:56:54.75Z",
+    "updated": "1971-07-23T16:11:03.774Z"
   },
   "customer": {
     "label": "Zones Inc",
@@ -212,28 +200,20 @@
     },
     "allowed_statuses": [
       {
+        "status": "Blocked",
+        "category": "CANCELLED"
+      },
+      {
+        "status": "Blocked",
+        "category": "COMPLETE"
+      },
+      {
         "status": "Verifying",
-        "category": "CANCELLED"
-      },
-      {
-        "status": "In Progress",
-        "category": "BLOCKED"
-      },
-      {
-        "status": "Reticulating Splines",
-        "category": "CANCELLED"
-      },
-      {
-        "status": "Complete",
-        "category": "IN_PROGRESS"
-      },
-      {
-        "status": "Complete",
-        "category": "PENDING"
+        "category": "VERIFYING"
       }
     ],
-    "created": "1943-06-03T04:16:17.384Z",
-    "updated": "1964-05-10T19:46:25.724Z"
+    "created": "1993-06-23T01:59:50.934Z",
+    "updated": "2015-05-19T17:08:03.225Z"
   },
   "current_location": {
     "location_type": "other",
@@ -251,14 +231,22 @@
     "slug": "zones-innovation-center",
     "location_id": "b994961b-30b4-4f33-9330-f46fd6172909",
     "formatted_address": "Zones Innovation Center\n431 Broadway\nSuite C\nMenands NY, 12204\nUSA",
-    "created": "2005-12-28T08:07:32.968Z",
-    "updated": "1997-02-18T09:24:41.17Z"
+    "created": "1992-12-13T22:32:25.756Z",
+    "updated": "2001-08-16T18:28:10.093Z"
   },
   "input_filter": [
     {
-      "label": "Bluetooh MAC address",
+      "label": "Serial Number",
       "key": "bluetooh-mac-address",
       "filters": [
+        {
+          "type": "camel",
+          "options": {}
+        },
+        {
+          "type": "lower",
+          "options": {}
+        },
         {
           "type": "string",
           "options": {}
@@ -272,33 +260,88 @@
           }
         },
         {
-          "type": "ipAddress",
+          "type": "length",
           "options": {
-            "versions": [
-              "IPv4"
-            ]
+            "length": "foo",
+            "operator": "less_than_equals"
+          }
+        }
+      ]
+    },
+    {
+      "label": "Bluetooh MAC address",
+      "key": "wifi-mac-address",
+      "filters": [
+        {
+          "type": "prefix",
+          "options": {
+            "prefix": "MAN-"
           }
         },
         {
-          "type": "email_address",
+          "type": "float",
           "options": {
-            "strict": false,
-            "lookup": false
+            "precision": 1
           }
         },
         {
-          "type": "contains",
+          "type": "string",
+          "options": {}
+        }
+      ],
+      "validators": [
+        {
+          "type": "startsWith",
           "options": {
-            "contains": "foo",
+            "starts_with": "foo",
             "check_case": true
           }
+        }
+      ]
+    },
+    {
+      "label": "Asset tag",
+      "key": "bluetooh-mac-address",
+      "filters": [
+        {
+          "type": "string",
+          "options": {}
+        }
+      ],
+      "validators": [
+        {
+          "type": "greater_than",
+          "options": {
+            "value": 42,
+            "precision": 4,
+            "include": true
+          }
         },
         {
-          "type": "ipAddress",
+          "type": "greater_than",
           "options": {
-            "versions": [
-              "IPv4"
-            ]
+            "value": 42,
+            "precision": 5,
+            "include": true
+          }
+        },
+        {
+          "type": "whiteList",
+          "options": {
+            "list": [
+              "foo",
+              "bar",
+              "fizz",
+              "buzz"
+            ],
+            "check_case": false
+          }
+        },
+        {
+          "type": "startsWith",
+          "options": {
+            "starts_with": "foo",
+            "check_case": false
           }
         }
       ]
@@ -306,30 +349,20 @@
   ],
   "current_status": {
     "status": "Reticulating Splines",
-    "category": "PENDING"
+    "category": "VERIFYING"
   },
   "status_history": [
     {
-      "status": "Complete",
-      "created": "1999-05-09T07:00:55.75Z",
-      "category": "BLOCKED"
-    },
-    {
-      "status": "Reticulating Splines",
-      "created": "1963-03-23T16:37:28.128Z",
+      "status": "Blocked",
+      "created": "1949-02-15T21:54:57.475Z",
       "category": "COMPLETE"
     },
     {
-      "status": "In Progress",
-      "created": "2000-12-12T02:27:42.902Z",
-      "category": "PENDING"
-    },
-    {
-      "status": "Verifying",
-      "created": "1959-07-25T05:27:09.712Z",
+      "status": "Blocked",
+      "created": "1964-12-11T19:20:32.085Z",
       "category": "VERIFYING"
     }
   ],
-  "created": "2012-09-23T02:20:16.007Z",
-  "updated": "1995-05-11T09:46:52.628Z"
+  "created": "1987-10-22T14:16:43.209Z",
+  "updated": "1983-05-02T04:30:24.223Z"
 }

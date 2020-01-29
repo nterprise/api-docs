@@ -6,19 +6,34 @@
   "type": "device",
   "due_date": "2020-08-07T18:10:53.0Z",
   "current_status": {
-    "status": "Verifying",
+    "status": "In Progress",
     "category": "IN_PROGRESS"
   },
   "status_history": [
     {
+      "status": "Complete",
+      "created": "1964-10-09T15:53:49.939Z",
+      "category": "VERIFYING"
+    },
+    {
       "status": "Cancelled",
-      "created": "1991-09-25T04:47:23.156Z",
-      "category": "IN_PROGRESS"
+      "created": "2018-08-31T11:00:07.277Z",
+      "category": "VERIFYING"
     },
     {
       "status": "Reticulating Splines",
-      "created": "1964-09-26T20:18:40.75Z",
+      "created": "1967-12-16T14:01:58.13Z",
       "category": "COMPLETE"
+    },
+    {
+      "status": "Pending",
+      "created": "1993-01-23T19:28:14.233Z",
+      "category": "CANCELLED"
+    },
+    {
+      "status": "In Progress",
+      "created": "1995-10-14T02:50:11.898Z",
+      "category": "CANCELLED"
     }
   ],
   "project": {
@@ -32,16 +47,20 @@
       },
       "allowed_statuses": [
         {
-          "status": "Verifying",
-          "category": "CANCELLED"
+          "status": "Pending",
+          "category": "COMPLETE"
         },
         {
-          "status": "Cancelled",
-          "category": "IN_PROGRESS"
+          "status": "In Progress",
+          "category": "PENDING"
+        },
+        {
+          "status": "Blocked",
+          "category": "BLOCKED"
         }
       ],
-      "created": "1952-09-21T13:28:55.455Z",
-      "updated": "1956-09-02T04:23:41.805Z"
+      "created": "1994-12-15T11:46:58.141Z",
+      "updated": "2006-11-19T16:00:09.329Z"
     },
     "program": {
       "label": "GAP Store refresh",
@@ -54,77 +73,155 @@
         },
         "allowed_statuses": [
           {
-            "status": "Complete",
-            "category": "COMPLETE"
-          },
-          {
-            "status": "Verifying",
-            "category": "CANCELLED"
+            "status": "In Progress",
+            "category": "VERIFYING"
           }
         ],
-        "created": "2002-04-24T06:57:58.147Z",
-        "updated": "1969-05-23T16:18:15.427Z"
+        "created": "1956-04-19T14:27:52.939Z",
+        "updated": "2008-09-01T15:05:24.059Z"
       },
       "program_id": "ec5db56d-32e6-4e5d-9bef-1016f3e13670",
       "slug": "gap-store-refresh",
       "allowed_statuses": [
         {
+          "status": "Reticulating Splines",
+          "category": "CANCELLED"
+        },
+        {
+          "status": "Blocked",
+          "category": "IN_PROGRESS"
+        },
+        {
+          "status": "Verifying",
+          "category": "IN_PROGRESS"
+        },
+        {
           "status": "In Progress",
-          "category": "PENDING"
-        },
-        {
-          "status": "Complete",
           "category": "BLOCKED"
         },
         {
-          "status": "Cancelled",
-          "category": "BLOCKED"
+          "status": "In Progress",
+          "category": "COMPLETE"
         }
       ],
       "start_date": "2019-08-07T18:10:53.0Z",
       "end_date": "2020-08-07T18:10:53.0Z",
-      "created": "2015-07-10T01:07:07.307Z",
-      "updated": "2008-03-05T20:21:36.379Z"
+      "created": "1944-08-29T04:44:19.664Z",
+      "updated": "1957-10-09T19:00:31.807Z"
     },
     "slug": "store-42",
     "project_id": "ec5db56d-32e6-4e5d-9bef-1016f3e13670",
     "allowed_statuses": [
       {
-        "status": "Complete",
-        "category": "COMPLETE"
-      },
-      {
-        "status": "In Progress",
-        "category": "COMPLETE"
-      },
-      {
-        "status": "Reticulating Splines",
-        "category": "BLOCKED"
-      },
-      {
-        "status": "In Progress",
+        "status": "Pending",
         "category": "CANCELLED"
       },
       {
         "status": "Complete",
         "category": "PENDING"
+      },
+      {
+        "status": "In Progress",
+        "category": "BLOCKED"
       }
     ],
     "start_date": "2019-08-07T18:10:53.0Z",
     "end_date": "2020-08-07T18:10:53.0Z",
-    "created": "1994-02-14T06:25:28.534Z",
-    "updated": "2006-07-16T21:54:12.781Z"
+    "created": "1958-10-17T17:45:13.132Z",
+    "updated": "1962-02-09T15:02:19.031Z"
   },
   "work_flows": [
     {
       "cycles_needed": 4,
       "work_flow": {
         "steps": {
-          "success": {
-            "label": "Find units",
-            "type": "success",
+          "run-ace": {
+            "type": "user",
+            "options": {
+              "component": "manual-data-entry",
+              "payload": {
+                "fields": [
+                  {
+                    "input_type": "input",
+                    "label": "Asset Tag",
+                    "required": true,
+                    "entity_field": "input_filter[?(@.key = 'asset-tag')]"
+                  },
+                  {
+                    "input_type": "textbox",
+                    "label": "Asset Tag",
+                    "required": true,
+                    "entity_field": "input_filter[?(@.key = 'asset-tag')]"
+                  },
+                  {
+                    "input_type": "input",
+                    "label": "Asset Tag",
+                    "required": true,
+                    "entity_field": "input_filter[?(@.key = 'asset-tag')]"
+                  }
+                ]
+              }
+            },
+            "label": "Enter asset tag and confirm serial number",
+            "goto": "complete",
+            "goto-fail": "process-fail",
+            "context": [
+              {
+                "key": "$.fizz",
+                "value": "true",
+                "lock": false,
+                "ignore": true
+              },
+              {
+                "key": "$.fizz",
+                "value": "true",
+                "lock": false,
+                "ignore": true
+              },
+              {
+                "key": "extract_fields",
+                "value": "$.buzz",
+                "lock": false,
+                "ignore": true
+              },
+              {
+                "key": "$.unit.status",
+                "value": "Pending",
+                "lock": true,
+                "ignore": true
+              }
+            ],
+            "onError": {
+              "finally": {
+                "goto": "failed",
+                "actions": [
+                  {
+                    "type": "email",
+                    "options": {
+                      "to": "bob@example.com",
+                      "from": "alice@example.com"
+                    }
+                  },
+                  {
+                    "type": "email",
+                    "options": {
+                      "to": "bob@example.com",
+                      "from": "alice@example.com"
+                    }
+                  }
+                ]
+              },
+              "retry": 6
+            },
             "onComplete": {
               "actions": [
+                {
+                  "type": "email",
+                  "options": {
+                    "to": "bob@example.com",
+                    "from": "alice@example.com"
+                  }
+                },
                 {
                   "type": "email",
                   "options": {
@@ -134,126 +231,29 @@
                 }
               ]
             }
-          }
-        },
-        "starts_at": "entry",
-        "label": "MLTI iPad Assembly Assignment",
-        "workflow_id": "e530652e-28e8-4f64-84af-e1cf0ff7c805",
-        "applies_to": "unit",
-        "slug": "mlti-ipad-assembly-assignment",
-        "version": "1.0",
-        "workflow_version": 7,
-        "context": [
-          {
-            "key": "$.fizz",
-            "value": "$.buzz",
-            "lock": true,
-            "ignore": false
           },
-          {
-            "key": "$.fizz",
-            "value": "$.buzz",
-            "lock": false,
-            "ignore": false
-          },
-          {
-            "key": "$.fizz",
-            "value": "true",
-            "lock": true,
-            "ignore": false
-          },
-          {
-            "key": "$.unit.status",
-            "value": "$.buzz",
-            "lock": false,
-            "ignore": true
-          }
-        ],
-        "created": "2016-02-01T09:09:59.475Z",
-        "updated": "1942-09-15T12:14:31.46Z"
-      },
-      "cycles_pending": 4,
-      "cycles_in_progress": 4,
-      "cycles_verifying": 4,
-      "cycles_complete": 4,
-      "cycles_blocked": 4,
-      "cycles_cancelled": 4
-    },
-    {
-      "cycles_needed": 4,
-      "work_flow": {
-        "steps": {
-          "success": {
-            "type": "function",
-            "label": "Run Application",
-            "goto": "complete",
+          "occaecatcf$": {
+            "label": "Instruct user to follow steps outlined in Apple PDF",
+            "type": "user",
             "options": {
-              "application": {
-                "application_id": "ace-ios",
-                "platforms": [
-                  {
-                    "platform": "freebsd",
-                    "arch": "x64"
-                  }
-                ]
-              },
-              "configuration": {
-                "pairing_cert": "dGhpcyBpcyBub3QgYSBjZXJ0IGZpbGUganVzdCBhbiBleGFtcGxl",
-                "pairing_key": "dGhpcyBpcyBub3QgYSBjZXJ0IGZpbGUganVzdCBhbiBleGFtcGxl",
-                "restore_device": true,
-                "automated_enrollment": false,
-                "mdm": {
-                  "vendor": "Meraki",
-                  "console_url": "http://jamf.zones.com",
-                  "user": "NterpriseBob",
-                  "password": "ad dolore do culpa veniam",
-                  "tenant_code": "nterprise",
-                  "set_asset_tag": "$._entity.input_filter[?(@.key = 'asset-tag')]"
-                },
-                "field_mappings": [
-                  {
-                    "from": "icon_layout",
-                    "to": "$._entity.input_filter[?(@.key = 'serial-number')]"
-                  }
-                ],
-                "wait_for_apps": [
-                  "com.apple.itunes",
-                  "com.apple.itunes",
-                  "com.apple.itunes"
-                ],
-                "wait_for_battery_charge": 51
+              "component": "assignUnitsFromCustomerToProject",
+              "payload": {
+                "attachment_id": "eb65b19f-efb4-40e7-991c-03ba1a2d7ca7"
               }
             },
+            "goto": "complete",
             "goto-fail": "process-fail",
             "context": [
               {
                 "key": "$.unit.status",
-                "value": "$.buzz",
+                "value": "Pending",
                 "lock": true,
                 "ignore": true
               },
               {
                 "key": "$.unit.status",
                 "value": "true",
-                "lock": true,
-                "ignore": true
-              },
-              {
-                "key": "$.unit.status",
-                "value": "$.buzz",
-                "lock": true,
-                "ignore": false
-              },
-              {
-                "key": "$.unit.status",
-                "value": "Pending",
-                "lock": true,
-                "ignore": true
-              },
-              {
-                "key": "extract_fields",
-                "value": "Pending",
-                "lock": true,
+                "lock": false,
                 "ignore": false
               }
             ],
@@ -277,7 +277,357 @@
                   }
                 ]
               },
-              "retry": 9
+              "retry": 7
+            },
+            "onComplete": {
+              "actions": [
+                {
+                  "type": "email",
+                  "options": {
+                    "to": "bob@example.com",
+                    "from": "alice@example.com"
+                  }
+                },
+                {
+                  "type": "email",
+                  "options": {
+                    "to": "bob@example.com",
+                    "from": "alice@example.com"
+                  }
+                },
+                {
+                  "type": "email",
+                  "options": {
+                    "to": "bob@example.com",
+                    "from": "alice@example.com"
+                  }
+                },
+                {
+                  "type": "email",
+                  "options": {
+                    "to": "bob@example.com",
+                    "from": "alice@example.com"
+                  }
+                },
+                {
+                  "type": "email",
+                  "options": {
+                    "to": "bob@example.com",
+                    "from": "alice@example.com"
+                  }
+                }
+              ]
+            }
+          },
+          "ut_6d$": {
+            "label": "Find units",
+            "type": "fail",
+            "onComplete": {
+              "actions": [
+                {
+                  "type": "email",
+                  "options": {
+                    "to": "bob@example.com",
+                    "from": "alice@example.com"
+                  }
+                },
+                {
+                  "type": "email",
+                  "options": {
+                    "to": "bob@example.com",
+                    "from": "alice@example.com"
+                  }
+                },
+                {
+                  "type": "email",
+                  "options": {
+                    "to": "bob@example.com",
+                    "from": "alice@example.com"
+                  }
+                }
+              ]
+            }
+          },
+          "cupidatat0$": {
+            "label": "Find units",
+            "type": "success",
+            "onComplete": {
+              "actions": [
+                {
+                  "type": "email",
+                  "options": {
+                    "to": "bob@example.com",
+                    "from": "alice@example.com"
+                  }
+                },
+                {
+                  "type": "email",
+                  "options": {
+                    "to": "bob@example.com",
+                    "from": "alice@example.com"
+                  }
+                },
+                {
+                  "type": "email",
+                  "options": {
+                    "to": "bob@example.com",
+                    "from": "alice@example.com"
+                  }
+                },
+                {
+                  "type": "email",
+                  "options": {
+                    "to": "bob@example.com",
+                    "from": "alice@example.com"
+                  }
+                }
+              ]
+            }
+          },
+          "consectetur_6$": {
+            "type": "function",
+            "options": {
+              "function": "confirm-action",
+              "payload": {
+                "part_id": "ebc810f8-adfa-4dac-a663-513e1a228789",
+                "qty": 4,
+                "program_id": "ebc810f8-adfa-4dac-a663-513e1a228789",
+                "allow_scarcity": true,
+                "force": true,
+                "status": "Reticulating splines"
+              }
+            },
+            "label": "Confirm the device has powered off",
+            "goto": "complete",
+            "goto-fail": "process-fail",
+            "context": [
+              {
+                "key": "$.unit.status",
+                "value": "Pending",
+                "lock": false,
+                "ignore": true
+              },
+              {
+                "key": "$.unit.status",
+                "value": "true",
+                "lock": true,
+                "ignore": true
+              },
+              {
+                "key": "$.fizz",
+                "value": "true",
+                "lock": true,
+                "ignore": true
+              }
+            ],
+            "onError": {
+              "finally": {
+                "goto": "failed",
+                "actions": [
+                  {
+                    "type": "email",
+                    "options": {
+                      "to": "bob@example.com",
+                      "from": "alice@example.com"
+                    }
+                  },
+                  {
+                    "type": "email",
+                    "options": {
+                      "to": "bob@example.com",
+                      "from": "alice@example.com"
+                    }
+                  },
+                  {
+                    "type": "email",
+                    "options": {
+                      "to": "bob@example.com",
+                      "from": "alice@example.com"
+                    }
+                  },
+                  {
+                    "type": "email",
+                    "options": {
+                      "to": "bob@example.com",
+                      "from": "alice@example.com"
+                    }
+                  },
+                  {
+                    "type": "email",
+                    "options": {
+                      "to": "bob@example.com",
+                      "from": "alice@example.com"
+                    }
+                  }
+                ]
+              },
+              "retry": 3
+            },
+            "onComplete": {
+              "actions": [
+                {
+                  "type": "email",
+                  "options": {
+                    "to": "bob@example.com",
+                    "from": "alice@example.com"
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "starts_at": "entry",
+        "label": "MLTI iPad Assembly Assignment",
+        "workflow_id": "e530652e-28e8-4f64-84af-e1cf0ff7c805",
+        "applies_to": "contact",
+        "slug": "mlti-ipad-assembly-assignment",
+        "version": "1.0",
+        "workflow_version": 7,
+        "context": [
+          {
+            "key": "extract_fields",
+            "value": "Pending",
+            "lock": true,
+            "ignore": false
+          },
+          {
+            "key": "$.fizz",
+            "value": "Pending",
+            "lock": false,
+            "ignore": true
+          },
+          {
+            "key": "extract_fields",
+            "value": "Pending",
+            "lock": true,
+            "ignore": false
+          },
+          {
+            "key": "extract_fields",
+            "value": "$.buzz",
+            "lock": false,
+            "ignore": false
+          }
+        ],
+        "created": "1972-10-13T12:57:26.243Z",
+        "updated": "1985-09-18T00:42:12.109Z"
+      },
+      "cycles_pending": 4,
+      "cycles_in_progress": 4,
+      "cycles_verifying": 4,
+      "cycles_complete": 4,
+      "cycles_blocked": 4,
+      "cycles_cancelled": 4
+    },
+    {
+      "cycles_needed": 4,
+      "work_flow": {
+        "steps": {
+          "follow": {
+            "stop_at": 529,
+            "time": 196,
+            "type": "wait",
+            "label": "Wait for cable",
+            "goto": "complete",
+            "listen_for": [
+              {
+                "event": "RES.detached",
+                "event_value": {
+                  "variable": "$.parts.available",
+                  "greater_than_equals": "42"
+                }
+              },
+              {
+                "event": "CON.created",
+                "event_value": {
+                  "variable": "$.parts.available",
+                  "greater_than_equals": "42"
+                }
+              },
+              {
+                "event": "WKF.removed",
+                "event_value": {
+                  "variable": "$.parts.available",
+                  "greater_than_equals": "42"
+                }
+              },
+              {
+                "event": "CON.detached",
+                "event_value": {
+                  "variable": "$.parts.available",
+                  "greater_than_equals": "42"
+                }
+              },
+              {
+                "event": "CON.updated",
+                "event_value": {
+                  "variable": "$.parts.available",
+                  "greater_than_equals": "42"
+                }
+              }
+            ],
+            "goto-fail": "process-fail",
+            "context": [
+              {
+                "key": "extract_fields",
+                "value": "Pending",
+                "lock": false,
+                "ignore": true
+              },
+              {
+                "key": "extract_fields",
+                "value": "$.buzz",
+                "lock": false,
+                "ignore": true
+              },
+              {
+                "key": "$.fizz",
+                "value": "Pending",
+                "lock": true,
+                "ignore": false
+              },
+              {
+                "key": "extract_fields",
+                "value": "true",
+                "lock": false,
+                "ignore": false
+              }
+            ],
+            "onError": {
+              "finally": {
+                "goto": "failed",
+                "actions": [
+                  {
+                    "type": "email",
+                    "options": {
+                      "to": "bob@example.com",
+                      "from": "alice@example.com"
+                    }
+                  },
+                  {
+                    "type": "email",
+                    "options": {
+                      "to": "bob@example.com",
+                      "from": "alice@example.com"
+                    }
+                  },
+                  {
+                    "type": "email",
+                    "options": {
+                      "to": "bob@example.com",
+                      "from": "alice@example.com"
+                    }
+                  },
+                  {
+                    "type": "email",
+                    "options": {
+                      "to": "bob@example.com",
+                      "from": "alice@example.com"
+                    }
+                  }
+                ]
+              },
+              "retry": 7
             },
             "onComplete": {
               "actions": [
@@ -308,20 +658,32 @@
         "workflow_version": 7,
         "context": [
           {
-            "key": "$.unit.status",
+            "key": "extract_fields",
             "value": "true",
-            "lock": true,
+            "lock": false,
             "ignore": true
           },
           {
             "key": "$.fizz",
+            "value": "true",
+            "lock": false,
+            "ignore": false
+          },
+          {
+            "key": "extract_fields",
             "value": "$.buzz",
             "lock": false,
             "ignore": true
+          },
+          {
+            "key": "extract_fields",
+            "value": "true",
+            "lock": false,
+            "ignore": false
           }
         ],
-        "created": "1986-12-25T21:54:12.836Z",
-        "updated": "1940-05-01T20:48:24.004Z"
+        "created": "1953-05-17T04:20:16.723Z",
+        "updated": "2017-08-04T03:26:15.139Z"
       },
       "cycles_pending": 4,
       "cycles_in_progress": 4,
@@ -334,29 +696,41 @@
       "cycles_needed": 4,
       "work_flow": {
         "steps": {
-          "manual": {
+          "run-ace": {
             "type": "user",
             "options": {
-              "component": "confirm-action",
+              "component": "assignUnitsFromCustomerToProject",
               "payload": {
                 "message": "Device powered off?",
                 "negative_message": "Device not functioning"
               }
             },
-            "label": "Confirm the device has powered off",
+            "label": "Find units",
             "goto": "complete",
             "goto-fail": "process-fail",
             "context": [
               {
-                "key": "$.unit.status",
-                "value": "$.buzz",
-                "lock": true,
+                "key": "extract_fields",
+                "value": "Pending",
+                "lock": false,
+                "ignore": false
+              },
+              {
+                "key": "$.fizz",
+                "value": "Pending",
+                "lock": false,
                 "ignore": true
               },
               {
                 "key": "extract_fields",
                 "value": "Pending",
-                "lock": false,
+                "lock": true,
+                "ignore": false
+              },
+              {
+                "key": "extract_fields",
+                "value": "$.buzz",
+                "lock": true,
                 "ignore": false
               }
             ],
@@ -377,10 +751,257 @@
                       "to": "bob@example.com",
                       "from": "alice@example.com"
                     }
+                  },
+                  {
+                    "type": "email",
+                    "options": {
+                      "to": "bob@example.com",
+                      "from": "alice@example.com"
+                    }
+                  },
+                  {
+                    "type": "email",
+                    "options": {
+                      "to": "bob@example.com",
+                      "from": "alice@example.com"
+                    }
                   }
                 ]
               },
-              "retry": 3
+              "retry": 7
+            },
+            "onComplete": {
+              "actions": [
+                {
+                  "type": "email",
+                  "options": {
+                    "to": "bob@example.com",
+                    "from": "alice@example.com"
+                  }
+                },
+                {
+                  "type": "email",
+                  "options": {
+                    "to": "bob@example.com",
+                    "from": "alice@example.com"
+                  }
+                }
+              ]
+            }
+          },
+          "fugiat16b$": {
+            "label": "Find units",
+            "type": "success",
+            "onComplete": {
+              "actions": [
+                {
+                  "type": "email",
+                  "options": {
+                    "to": "bob@example.com",
+                    "from": "alice@example.com"
+                  }
+                },
+                {
+                  "type": "email",
+                  "options": {
+                    "to": "bob@example.com",
+                    "from": "alice@example.com"
+                  }
+                },
+                {
+                  "type": "email",
+                  "options": {
+                    "to": "bob@example.com",
+                    "from": "alice@example.com"
+                  }
+                },
+                {
+                  "type": "email",
+                  "options": {
+                    "to": "bob@example.com",
+                    "from": "alice@example.com"
+                  }
+                },
+                {
+                  "type": "email",
+                  "options": {
+                    "to": "bob@example.com",
+                    "from": "alice@example.com"
+                  }
+                }
+              ]
+            }
+          },
+          "labore_3d$": {
+            "type": "function",
+            "options": {
+              "function": "assignUnitsFromCustomerToProject",
+              "payload": {
+                "part_id": "$.workorder.parts[0]",
+                "qty": 4,
+                "program_id": "$.workorder.project.project_id",
+                "allow_scarcity": true,
+                "force": true,
+                "status": "Reticulating splines"
+              }
+            },
+            "label": "Confirm the device has powered off",
+            "goto": "complete",
+            "goto-fail": "process-fail",
+            "context": [
+              {
+                "key": "$.fizz",
+                "value": "Pending",
+                "lock": false,
+                "ignore": true
+              },
+              {
+                "key": "extract_fields",
+                "value": "$.buzz",
+                "lock": true,
+                "ignore": true
+              },
+              {
+                "key": "extract_fields",
+                "value": "true",
+                "lock": true,
+                "ignore": false
+              },
+              {
+                "key": "extract_fields",
+                "value": "$.buzz",
+                "lock": false,
+                "ignore": true
+              },
+              {
+                "key": "$.fizz",
+                "value": "Pending",
+                "lock": false,
+                "ignore": false
+              }
+            ],
+            "onError": {
+              "finally": {
+                "goto": "failed",
+                "actions": [
+                  {
+                    "type": "email",
+                    "options": {
+                      "to": "bob@example.com",
+                      "from": "alice@example.com"
+                    }
+                  }
+                ]
+              },
+              "retry": 6
+            },
+            "onComplete": {
+              "actions": [
+                {
+                  "type": "email",
+                  "options": {
+                    "to": "bob@example.com",
+                    "from": "alice@example.com"
+                  }
+                },
+                {
+                  "type": "email",
+                  "options": {
+                    "to": "bob@example.com",
+                    "from": "alice@example.com"
+                  }
+                },
+                {
+                  "type": "email",
+                  "options": {
+                    "to": "bob@example.com",
+                    "from": "alice@example.com"
+                  }
+                },
+                {
+                  "type": "email",
+                  "options": {
+                    "to": "bob@example.com",
+                    "from": "alice@example.com"
+                  }
+                },
+                {
+                  "type": "email",
+                  "options": {
+                    "to": "bob@example.com",
+                    "from": "alice@example.com"
+                  }
+                }
+              ]
+            }
+          },
+          "laboris_54": {
+            "type": "user",
+            "options": {
+              "component": "confirm-action",
+              "payload": {
+                "message": "Device powered off?",
+                "negative_message": "Device not functioning"
+              }
+            },
+            "label": "Confirm the device has powered off",
+            "goto": "complete",
+            "goto-fail": "process-fail",
+            "context": [
+              {
+                "key": "$.fizz",
+                "value": "Pending",
+                "lock": false,
+                "ignore": true
+              },
+              {
+                "key": "extract_fields",
+                "value": "true",
+                "lock": false,
+                "ignore": true
+              },
+              {
+                "key": "$.unit.status",
+                "value": "true",
+                "lock": true,
+                "ignore": true
+              }
+            ],
+            "onError": {
+              "finally": {
+                "goto": "failed",
+                "actions": [
+                  {
+                    "type": "email",
+                    "options": {
+                      "to": "bob@example.com",
+                      "from": "alice@example.com"
+                    }
+                  },
+                  {
+                    "type": "email",
+                    "options": {
+                      "to": "bob@example.com",
+                      "from": "alice@example.com"
+                    }
+                  },
+                  {
+                    "type": "email",
+                    "options": {
+                      "to": "bob@example.com",
+                      "from": "alice@example.com"
+                    }
+                  },
+                  {
+                    "type": "email",
+                    "options": {
+                      "to": "bob@example.com",
+                      "from": "alice@example.com"
+                    }
+                  }
+                ]
+              },
+              "retry": 9
             },
             "onComplete": {
               "actions": [
@@ -432,20 +1053,14 @@
         "workflow_version": 7,
         "context": [
           {
-            "key": "extract_fields",
-            "value": "$.buzz",
-            "lock": false,
-            "ignore": false
-          },
-          {
-            "key": "extract_fields",
+            "key": "$.fizz",
             "value": "true",
-            "lock": false,
+            "lock": true,
             "ignore": true
           }
         ],
-        "created": "1960-05-11T10:47:23.274Z",
-        "updated": "1997-09-11T20:00:43.699Z"
+        "created": "2008-07-17T08:47:44.946Z",
+        "updated": "1947-06-18T13:14:28.451Z"
       },
       "cycles_pending": 4,
       "cycles_in_progress": 4,
@@ -458,102 +1073,27 @@
       "cycles_needed": 4,
       "work_flow": {
         "steps": {
-          "confirm": {
-            "type": "user",
-            "label": "Run Application",
+          "fail": {
+            "type": "pass",
+            "label": "Find units",
             "goto": "complete",
-            "options": {
-              "application": {
-                "application_id": "ace-ios",
-                "platforms": [
-                  {
-                    "platform": "openbsd",
-                    "arch": "arm64"
-                  },
-                  {
-                    "platform": "sunos",
-                    "arch": "x64"
-                  },
-                  {
-                    "platform": "linux",
-                    "arch": "mips"
-                  },
-                  {
-                    "platform": "freebsd",
-                    "arch": "x32"
-                  },
-                  {
-                    "platform": "sunos",
-                    "arch": "mipsel"
-                  }
-                ]
-              },
-              "configuration": {
-                "pairing_cert": "dGhpcyBpcyBub3QgYSBjZXJ0IGZpbGUganVzdCBhbiBleGFtcGxl",
-                "pairing_key": "dGhpcyBpcyBub3QgYSBjZXJ0IGZpbGUganVzdCBhbiBleGFtcGxl",
-                "restore_device": false,
-                "automated_enrollment": false,
-                "mdm": {
-                  "vendor": "AirWatch",
-                  "console_url": "http://jamf.zones.com",
-                  "user": "NterpriseBob",
-                  "password": "deserunt Duis",
-                  "tenant_code": "nterprise",
-                  "set_asset_tag": "$._entity.input_filter[?(@.key = 'asset-tag')]"
-                },
-                "field_mappings": [
-                  {
-                    "from": "model",
-                    "to": "$._entity.input_filter[?(@.key = 'serial-number')]"
-                  },
-                  {
-                    "from": "ethernet_mac",
-                    "to": "$._entity.input_filter[?(@.key = 'serial-number')]"
-                  },
-                  {
-                    "from": "ecid",
-                    "to": "$._entity.input_filter[?(@.key = 'serial-number')]"
-                  }
-                ],
-                "wait_for_apps": [
-                  "com.apple.itunes",
-                  "com.apple.itunes",
-                  "com.apple.itunes",
-                  "com.apple.itunes",
-                  "com.apple.itunes"
-                ],
-                "wait_for_battery_charge": 45
-              }
-            },
             "goto-fail": "process-fail",
             "context": [
               {
                 "key": "extract_fields",
-                "value": "Pending",
-                "lock": true,
-                "ignore": false
-              },
-              {
-                "key": "$.fizz",
-                "value": "$.buzz",
-                "lock": true,
-                "ignore": false
-              },
-              {
-                "key": "$.fizz",
                 "value": "true",
                 "lock": false,
                 "ignore": true
               },
               {
-                "key": "extract_fields",
+                "key": "$.unit.status",
                 "value": "true",
-                "lock": true,
+                "lock": false,
                 "ignore": true
               },
               {
-                "key": "extract_fields",
-                "value": "$.buzz",
+                "key": "$.fizz",
+                "value": "true",
                 "lock": true,
                 "ignore": false
               }
@@ -569,365 +1109,6 @@
                       "from": "alice@example.com"
                     }
                   },
-                  {
-                    "type": "email",
-                    "options": {
-                      "to": "bob@example.com",
-                      "from": "alice@example.com"
-                    }
-                  },
-                  {
-                    "type": "email",
-                    "options": {
-                      "to": "bob@example.com",
-                      "from": "alice@example.com"
-                    }
-                  },
-                  {
-                    "type": "email",
-                    "options": {
-                      "to": "bob@example.com",
-                      "from": "alice@example.com"
-                    }
-                  }
-                ]
-              },
-              "retry": 1
-            },
-            "onComplete": {
-              "actions": [
-                {
-                  "type": "email",
-                  "options": {
-                    "to": "bob@example.com",
-                    "from": "alice@example.com"
-                  }
-                },
-                {
-                  "type": "email",
-                  "options": {
-                    "to": "bob@example.com",
-                    "from": "alice@example.com"
-                  }
-                },
-                {
-                  "type": "email",
-                  "options": {
-                    "to": "bob@example.com",
-                    "from": "alice@example.com"
-                  }
-                },
-                {
-                  "type": "email",
-                  "options": {
-                    "to": "bob@example.com",
-                    "from": "alice@example.com"
-                  }
-                }
-              ]
-            }
-          },
-          "aliquip_dc": {
-            "type": "choice",
-            "label": "Is device ok?",
-            "goto": "complete",
-            "choices": [
-              {
-                "goto": "complete",
-                "and": [
-                  {
-                    "variable": "$.parts.available",
-                    "greater_than_equals": "42"
-                  }
-                ]
-              },
-              {
-                "goto": "complete",
-                "and": [
-                  {
-                    "variable": "$.parts.available",
-                    "greater_than_equals": "42"
-                  },
-                  {
-                    "variable": "$.parts.available",
-                    "greater_than_equals": "42"
-                  }
-                ]
-              },
-              {
-                "goto": "complete",
-                "and": [
-                  {
-                    "variable": "$.parts.available",
-                    "greater_than_equals": "42"
-                  },
-                  {
-                    "variable": "$.parts.available",
-                    "greater_than_equals": "42"
-                  },
-                  {
-                    "variable": "$.parts.available",
-                    "greater_than_equals": "42"
-                  }
-                ]
-              },
-              {
-                "goto": "complete",
-                "and": [
-                  {
-                    "variable": "$.parts.available",
-                    "greater_than_equals": "42"
-                  },
-                  {
-                    "variable": "$.parts.available",
-                    "greater_than_equals": "42"
-                  },
-                  {
-                    "variable": "$.parts.available",
-                    "greater_than_equals": "42"
-                  },
-                  {
-                    "variable": "$.parts.available",
-                    "greater_than_equals": "42"
-                  },
-                  {
-                    "variable": "$.parts.available",
-                    "greater_than_equals": "42"
-                  }
-                ]
-              },
-              {
-                "goto": "complete",
-                "and": [
-                  {
-                    "variable": "$.parts.available",
-                    "greater_than_equals": "42"
-                  },
-                  {
-                    "variable": "$.parts.available",
-                    "greater_than_equals": "42"
-                  },
-                  {
-                    "variable": "$.parts.available",
-                    "greater_than_equals": "42"
-                  }
-                ]
-              }
-            ],
-            "goto-fail": "process-fail",
-            "context": [
-              {
-                "key": "$.fizz",
-                "value": "true",
-                "lock": false,
-                "ignore": false
-              },
-              {
-                "key": "$.fizz",
-                "value": "Pending",
-                "lock": false,
-                "ignore": false
-              }
-            ],
-            "onError": {
-              "finally": {
-                "goto": "failed",
-                "actions": [
-                  {
-                    "type": "email",
-                    "options": {
-                      "to": "bob@example.com",
-                      "from": "alice@example.com"
-                    }
-                  },
-                  {
-                    "type": "email",
-                    "options": {
-                      "to": "bob@example.com",
-                      "from": "alice@example.com"
-                    }
-                  },
-                  {
-                    "type": "email",
-                    "options": {
-                      "to": "bob@example.com",
-                      "from": "alice@example.com"
-                    }
-                  }
-                ]
-              },
-              "retry": 1
-            },
-            "onComplete": {
-              "actions": [
-                {
-                  "type": "email",
-                  "options": {
-                    "to": "bob@example.com",
-                    "from": "alice@example.com"
-                  }
-                },
-                {
-                  "type": "email",
-                  "options": {
-                    "to": "bob@example.com",
-                    "from": "alice@example.com"
-                  }
-                },
-                {
-                  "type": "email",
-                  "options": {
-                    "to": "bob@example.com",
-                    "from": "alice@example.com"
-                  }
-                },
-                {
-                  "type": "email",
-                  "options": {
-                    "to": "bob@example.com",
-                    "from": "alice@example.com"
-                  }
-                },
-                {
-                  "type": "email",
-                  "options": {
-                    "to": "bob@example.com",
-                    "from": "alice@example.com"
-                  }
-                }
-              ]
-            }
-          },
-          "minim0": {
-            "stop_at": 20,
-            "time": 523,
-            "type": "wait",
-            "label": "Wait for cable",
-            "goto": "complete",
-            "listen_for": [
-              {
-                "event": "LOC.updated",
-                "event_value": {
-                  "variable": "$.parts.available",
-                  "greater_than_equals": "42"
-                }
-              },
-              {
-                "event": "PRO.removed",
-                "event_value": {
-                  "variable": "$.parts.available",
-                  "greater_than_equals": "42"
-                }
-              },
-              {
-                "event": "WOR.removed",
-                "event_value": {
-                  "variable": "$.parts.available",
-                  "greater_than_equals": "42"
-                }
-              }
-            ],
-            "goto-fail": "process-fail",
-            "context": [
-              {
-                "key": "extract_fields",
-                "value": "Pending",
-                "lock": false,
-                "ignore": false
-              },
-              {
-                "key": "$.unit.status",
-                "value": "true",
-                "lock": false,
-                "ignore": true
-              },
-              {
-                "key": "$.unit.status",
-                "value": "$.buzz",
-                "lock": false,
-                "ignore": true
-              }
-            ],
-            "onError": {
-              "finally": {
-                "goto": "failed",
-                "actions": [
-                  {
-                    "type": "email",
-                    "options": {
-                      "to": "bob@example.com",
-                      "from": "alice@example.com"
-                    }
-                  },
-                  {
-                    "type": "email",
-                    "options": {
-                      "to": "bob@example.com",
-                      "from": "alice@example.com"
-                    }
-                  }
-                ]
-              },
-              "retry": 10
-            },
-            "onComplete": {
-              "actions": [
-                {
-                  "type": "email",
-                  "options": {
-                    "to": "bob@example.com",
-                    "from": "alice@example.com"
-                  }
-                }
-              ]
-            }
-          },
-          "veniam_3": {
-            "type": "function",
-            "options": {
-              "function": "assignUnitsFromCustomerToProject",
-              "payload": {
-                "part_id": "ebc810f8-adfa-4dac-a663-513e1a228789",
-                "qty": 4,
-                "program_id": "ebc810f8-adfa-4dac-a663-513e1a228789",
-                "allow_scarcity": true,
-                "force": true,
-                "status": "Reticulating splines"
-              }
-            },
-            "label": "Confirm the device has powered off",
-            "goto": "complete",
-            "goto-fail": "process-fail",
-            "context": [
-              {
-                "key": "extract_fields",
-                "value": "$.buzz",
-                "lock": false,
-                "ignore": true
-              },
-              {
-                "key": "$.unit.status",
-                "value": "$.buzz",
-                "lock": true,
-                "ignore": false
-              },
-              {
-                "key": "extract_fields",
-                "value": "Pending",
-                "lock": false,
-                "ignore": true
-              },
-              {
-                "key": "$.unit.status",
-                "value": "Pending",
-                "lock": true,
-                "ignore": true
-              }
-            ],
-            "onError": {
-              "finally": {
-                "goto": "failed",
-                "actions": [
                   {
                     "type": "email",
                     "options": {
@@ -968,13 +1149,6 @@
                     "to": "bob@example.com",
                     "from": "alice@example.com"
                   }
-                },
-                {
-                  "type": "email",
-                  "options": {
-                    "to": "bob@example.com",
-                    "from": "alice@example.com"
-                  }
                 }
               ]
             }
@@ -990,37 +1164,37 @@
         "context": [
           {
             "key": "$.unit.status",
-            "value": "Pending",
+            "value": "$.buzz",
             "lock": true,
             "ignore": false
           },
           {
-            "key": "extract_fields",
-            "value": "Pending",
-            "lock": false,
-            "ignore": true
-          },
-          {
-            "key": "extract_fields",
+            "key": "$.unit.status",
             "value": "$.buzz",
             "lock": false,
             "ignore": false
           },
           {
-            "key": "$.unit.status",
+            "key": "$.fizz",
             "value": "true",
+            "lock": true,
+            "ignore": true
+          },
+          {
+            "key": "extract_fields",
+            "value": "Pending",
             "lock": false,
             "ignore": false
           },
           {
-            "key": "$.fizz",
+            "key": "extract_fields",
             "value": "Pending",
             "lock": false,
             "ignore": false
           }
         ],
-        "created": "1991-07-22T09:31:56.551Z",
-        "updated": "2008-11-03T02:21:04.903Z"
+        "created": "1998-07-21T11:37:12.202Z",
+        "updated": "1956-10-04T22:26:02.347Z"
       },
       "cycles_pending": 4,
       "cycles_in_progress": 4,
@@ -1032,6 +1206,6 @@
   ],
   "start_date": "2019-08-07T18:10:53.0Z",
   "end_date": "2020-08-07T18:10:53.0Z",
-  "created": "1976-09-07T08:40:45.54Z",
-  "updated": "2002-02-16T03:22:47.457Z"
+  "created": "1978-03-10T07:36:32.719Z",
+  "updated": "2005-08-28T15:23:13.091Z"
 }

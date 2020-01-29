@@ -9,31 +9,39 @@
     },
     "allowed_statuses": [
       {
-        "status": "Verifying",
-        "category": "PENDING"
+        "status": "Reticulating Splines",
+        "category": "BLOCKED"
+      },
+      {
+        "status": "Cancelled",
+        "category": "BLOCKED"
+      },
+      {
+        "status": "Reticulating Splines",
+        "category": "IN_PROGRESS"
+      },
+      {
+        "status": "Pending",
+        "category": "BLOCKED"
       }
     ],
-    "created": "1998-07-01T09:21:33.938Z",
-    "updated": "1975-08-06T07:54:00.623Z"
+    "created": "1944-08-11T10:48:21.284Z",
+    "updated": "1976-03-26T16:06:26.941Z"
   },
   "program_id": "ec5db56d-32e6-4e5d-9bef-1016f3e13670",
   "slug": "gap-store-refresh",
   "allowed_statuses": [
     {
-      "status": "Cancelled",
+      "status": "In Progress",
+      "category": "COMPLETE"
+    },
+    {
+      "status": "Verifying",
       "category": "VERIFYING"
     },
     {
-      "status": "Blocked",
-      "category": "PENDING"
-    },
-    {
-      "status": "Verifying",
-      "category": "PENDING"
-    },
-    {
-      "status": "Verifying",
-      "category": "PENDING"
+      "status": "Complete",
+      "category": "BLOCKED"
     },
     {
       "status": "Reticulating Splines",
@@ -42,6 +50,6 @@
   ],
   "start_date": "2019-08-07T18:10:53.0Z",
   "end_date": "2020-08-07T18:10:53.0Z",
-  "created": "1997-09-18T14:43:36.572Z",
-  "updated": "2019-04-26T16:26:14.778Z"
+  "created": "1994-12-13T09:02:10.287Z",
+  "updated": "1973-10-06T04:48:59.732Z"
 }
