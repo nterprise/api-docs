@@ -2,6 +2,6 @@
   "type": "equals",
   "options": {
     "value": 42,
-    "precision": 4
+    "precision": 3
   }
 }

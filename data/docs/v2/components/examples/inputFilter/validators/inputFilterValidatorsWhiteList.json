@@ -7,6 +7,6 @@
       "fizz",
       "buzz"
     ],
-    "check_case": true
+    "check_case": false
   }
 }

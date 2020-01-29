@@ -1,8 +1,15 @@
 {
-  "label": "Find units",
+  "label": "Complete",
   "type": "success",
   "onComplete": {
     "actions": [
+      {
+        "type": "email",
+        "options": {
+          "to": "bob@example.com",
+          "from": "alice@example.com"
+        }
+      },
       {
         "type": "email",
         "options": {

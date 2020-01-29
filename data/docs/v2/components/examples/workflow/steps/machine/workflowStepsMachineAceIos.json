@@ -1,13 +1,21 @@
 {
   "type": "machine",
-  "label": "Enroll-device",
+  "label": "Run Application",
   "goto": "complete",
   "options": {
     "application": {
       "application_id": "ace-ios",
       "platforms": [
         {
-          "platform": "linux",
+          "platform": "openbsd",
+          "arch": "s390"
+        },
+        {
+          "platform": "darwin",
+          "arch": "ppc"
+        },
+        {
+          "platform": "freebsd",
           "arch": "s390"
         }
       ]
@@ -21,64 +29,68 @@
         "vendor": "Meraki",
         "console_url": "http://jamf.zones.com",
         "user": "NterpriseBob",
-        "password": "consectetur in",
+        "password": "aute",
         "tenant_code": "nterprise",
         "set_asset_tag": "$._entity.input_filter[?(@.key = 'asset-tag')]"
       },
       "field_mappings": [
         {
-          "from": "imei",
+          "from": "model",
           "to": "$._entity.input_filter[?(@.key = 'serial-number')]"
         },
         {
-          "from": "iccid",
+          "from": "bat_capacity",
           "to": "$._entity.input_filter[?(@.key = 'serial-number')]"
         },
         {
-          "from": "icon_layout",
+          "from": "imei2",
           "to": "$._entity.input_filter[?(@.key = 'serial-number')]"
         },
         {
-          "from": "thundersync_serial",
+          "from": "bat_capacity",
           "to": "$._entity.input_filter[?(@.key = 'serial-number')]"
         },
         {
-          "from": "storage",
+          "from": "missed_profiles",
           "to": "$._entity.input_filter[?(@.key = 'serial-number')]"
         }
       ],
       "wait_for_apps": [
-        "com.apple.itunes",
-        "com.apple.itunes",
         "com.apple.itunes"
       ],
-      "wait_for_battery_charge": 93
+      "wait_for_battery_charge": 14
     }
   },
   "goto-fail": "process-fail",
   "context": [
     {
       "key": "$.unit.status",
-      "value": "$.buzz",
-      "lock": false,
+      "value": "true",
+      "lock": true,
       "ignore": false
     },
     {
-      "key": "extract_fields",
+      "key": "$.unit.status",
+      "value": "true",
+      "lock": true,
+      "ignore": true
+    },
+    {
+      "key": "$.unit.status",
       "value": "Pending",
       "lock": true,
       "ignore": true
     },
     {
       "key": "$.unit.status",
-      "value": "true",
+      "value": "$.buzz",
       "lock": false,
-      "ignore": false
+      "ignore": true
     },
     {
-      "key": "$.fizz",
+      "key": "$.unit.status",
       "value": "Pending",
-      "lock": false,
+      "lock": true,
       "ignore": false
     }
   ],
@@ -99,31 +111,10 @@
             "to": "bob@example.com",
             "from": "alice@example.com"
           }
-        },
-        {
-          "type": "email",
-          "options": {
-            "to": "bob@example.com",
-            "from": "alice@example.com"
-          }
-        },
-        {
-          "type": "email",
-          "options": {
-            "to": "bob@example.com",
-            "from": "alice@example.com"
-          }
-        },
-        {
-          "type": "email",
-          "options": {
-            "to": "bob@example.com",
-            "from": "alice@example.com"
-          }
         }
       ]
     },
-    "retry": 1
+    "retry": 4
   },
   "onComplete": {
     "actions": [

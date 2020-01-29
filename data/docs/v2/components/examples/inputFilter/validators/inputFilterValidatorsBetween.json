@@ -3,7 +3,7 @@
   "options": {
     "min": 42,
     "max": 42,
-    "precision": 5,
+    "precision": 8,
     "include": false
   }
 }

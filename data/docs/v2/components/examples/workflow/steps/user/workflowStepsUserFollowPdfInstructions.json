@@ -1,91 +1,12 @@
 {
-  "label": "Find units",
+  "label": "follow",
   "type": "user",
   "options": {
-    "component": "assignUnitsFromCustomerToProject",
+    "component": "follow-pdf-instructions",
     "payload": {
-      "attachment_id": "eb65b19f-efb4-40e7-991c-03ba1a2d7ca7"
+      "attachment_id": "https://gist.github.com/manchuck/b60b4ea4ca3f45dacebdd355351c1b2b"
     }
   },
   "goto": "complete",
-  "goto-fail": "process-fail",
-  "context": [
-    {
-      "key": "extract_fields",
-      "value": "true",
-      "lock": true,
-      "ignore": false
-    },
-    {
-      "key": "$.fizz",
-      "value": "Pending",
-      "lock": false,
-      "ignore": false
-    },
-    {
-      "key": "$.fizz",
-      "value": "Pending",
-      "lock": true,
-      "ignore": false
-    },
-    {
-      "key": "$.unit.status",
-      "value": "$.buzz",
-      "lock": false,
-      "ignore": true
-    },
-    {
-      "key": "$.fizz",
-      "value": "true",
-      "lock": false,
-      "ignore": true
-    }
-  ],
-  "onError": {
-    "finally": {
-      "goto": "failed",
-      "actions": [
-        {
-          "type": "email",
-          "options": {
-            "to": "bob@example.com",
-            "from": "alice@example.com"
-          }
-        },
-        {
-          "type": "email",
-          "options": {
-            "to": "bob@example.com",
-            "from": "alice@example.com"
-          }
-        },
-        {
-          "type": "email",
-          "options": {
-            "to": "bob@example.com",
-            "from": "alice@example.com"
-          }
-        },
-        {
-          "type": "email",
-          "options": {
-            "to": "bob@example.com",
-            "from": "alice@example.com"
-          }
-        }
-      ]
-    },
-    "retry": 4
-  },
-  "onComplete": {
-    "actions": [
-      {
-        "type": "email",
-        "options": {
-          "to": "bob@example.com",
-          "from": "alice@example.com"
-        }
-      }
-    ]
-  }
+  "goto-fail": "process-fail"
 }

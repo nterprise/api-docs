@@ -1,5 +1,5 @@
 {
-  "type": "function",
+  "type": "wait",
   "label": "Run Application",
   "goto": "complete",
   "options": {
@@ -7,46 +7,40 @@
       "application_id": "ace-ios",
       "platforms": [
         {
-          "platform": "darwin",
-          "arch": "ia32"
-        },
-        {
           "platform": "aix",
-          "arch": "mips"
+          "arch": "mipsel"
         },
         {
-          "platform": "freebsd",
+          "platform": "linux",
           "arch": "ppc64"
-        },
-        {
-          "platform": "win32",
-          "arch": "mips"
         },
         {
           "platform": "sunos",
           "arch": "x64"
+        },
+        {
+          "platform": "linux",
+          "arch": "mips"
+        },
+        {
+          "platform": "openbsd",
+          "arch": "x32"
         }
       ]
     },
-    "configuration": "ut labore id"
+    "configuration": true
   },
   "goto-fail": "process-fail",
   "context": [
     {
-      "key": "$.fizz",
-      "value": "true",
-      "lock": true,
-      "ignore": false
-    },
-    {
-      "key": "$.unit.status",
+      "key": "extract_fields",
       "value": "Pending",
-      "lock": true,
+      "lock": false,
       "ignore": true
     },
     {
-      "key": "$.unit.status",
-      "value": "Pending",
+      "key": "$.fizz",
+      "value": "$.buzz",
       "lock": true,
       "ignore": false
     }
@@ -78,10 +72,17 @@
         }
       ]
     },
-    "retry": 3
+    "retry": 8
   },
   "onComplete": {
     "actions": [
+      {
+        "type": "email",
+        "options": {
+          "to": "bob@example.com",
+          "from": "alice@example.com"
+        }
+      },
       {
         "type": "email",
         "options": {

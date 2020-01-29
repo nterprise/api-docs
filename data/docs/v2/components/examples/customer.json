@@ -7,18 +7,18 @@
   },
   "allowed_statuses": [
     {
-      "status": "Verifying",
-      "category": "VERIFYING"
+      "status": "In Progress",
+      "category": "CANCELLED"
     },
     {
-      "status": "Verifying",
-      "category": "COMPLETE"
+      "status": "Pending",
+      "category": "PENDING"
     },
     {
-      "status": "Reticulating Splines",
-      "category": "VERIFYING"
+      "status": "Cancelled",
+      "category": "IN_PROGRESS"
     }
   ],
-  "created": "1974-04-12T11:15:20.547Z",
-  "updated": "1957-06-08T08:32:31.984Z"
+  "created": "1959-02-15T14:25:47.419Z",
+  "updated": "2009-04-20T14:49:58.687Z"
 }

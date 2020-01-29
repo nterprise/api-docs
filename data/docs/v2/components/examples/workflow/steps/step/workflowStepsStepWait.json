@@ -1,19 +1,33 @@
 {
-  "stop_at": 153,
-  "time": 311,
+  "stop_at": 288,
+  "time": 713,
   "type": "wait",
   "label": "Wait for cable",
   "goto": "complete",
   "listen_for": [
     {
-      "event": "PGM.attached",
+      "event": "WOR.created",
       "event_value": {
         "variable": "$.parts.available",
         "greater_than_equals": "42"
       }
     },
     {
-      "event": "PRO.detached",
+      "event": "PART.deleted",
+      "event_value": {
+        "variable": "$.parts.available",
+        "greater_than_equals": "42"
+      }
+    },
+    {
+      "event": "USER.detached",
+      "event_value": {
+        "variable": "$.parts.available",
+        "greater_than_equals": "42"
+      }
+    },
+    {
+      "event": "CUS.removed",
       "event_value": {
         "variable": "$.parts.available",
         "greater_than_equals": "42"
@@ -24,12 +38,18 @@
   "context": [
     {
       "key": "$.unit.status",
-      "value": "true",
+      "value": "$.buzz",
       "lock": false,
-      "ignore": true
+      "ignore": false
     },
     {
-      "key": "$.fizz",
+      "key": "extract_fields",
+      "value": "Pending",
+      "lock": false,
+      "ignore": false
+    },
+    {
+      "key": "extract_fields",
       "value": "Pending",
       "lock": true,
       "ignore": true
@@ -45,34 +65,13 @@
             "to": "bob@example.com",
             "from": "alice@example.com"
           }
-        },
-        {
-          "type": "email",
-          "options": {
-            "to": "bob@example.com",
-            "from": "alice@example.com"
-          }
-        },
-        {
-          "type": "email",
-          "options": {
-            "to": "bob@example.com",
-            "from": "alice@example.com"
-          }
         }
       ]
     },
-    "retry": 9
+    "retry": 3
   },
   "onComplete": {
     "actions": [
-      {
-        "type": "email",
-        "options": {
-          "to": "bob@example.com",
-          "from": "alice@example.com"
-        }
-      },
       {
         "type": "email",
         "options": {

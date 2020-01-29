@@ -11,199 +11,59 @@
       },
       "allowed_statuses": [
         {
-          "status": "Cancelled",
-          "category": "VERIFYING"
-        },
-        {
           "status": "Reticulating Splines",
-          "category": "IN_PROGRESS"
-        },
-        {
-          "status": "Cancelled",
-          "category": "IN_PROGRESS"
-        },
-        {
-          "status": "Cancelled",
           "category": "PENDING"
-        },
-        {
-          "status": "Cancelled",
-          "category": "VERIFYING"
         }
       ],
-      "created": "1988-07-10T10:16:34.861Z",
-      "updated": "1967-08-08T12:35:22.556Z"
+      "created": "1956-02-05T08:40:17.693Z",
+      "updated": "1989-07-25T16:15:19.445Z"
     },
     "manufacturer": {
       "part_number": "602-3075-01",
       "label": "Apple Inc",
-      "manufacturer_id": "1AE2Dec1-5Ddd-86fF-2caF-52ea30DDf9cF",
+      "manufacturer_id": "b0970aF9-6852-5871-9acC-DBFAEDc75DA9",
       "slug": "apple-inc",
-      "created": "1991-11-28T00:04:08.638Z",
-      "updated": "1942-06-06T22:52:51.297Z"
+      "created": "1974-06-01T02:35:35.938Z",
+      "updated": "1990-05-28T17:55:18.445Z"
     },
     "slug": "10-ipad",
     "input_filter": [
       {
-        "label": "Serial Number",
+        "label": "Bluetooh MAC address",
         "key": "bluetooh-mac-address",
         "filters": [
           {
-            "type": "camel",
-            "options": {}
-          },
-          {
-            "type": "float",
-            "options": {
-              "precision": 4
-            }
-          },
-          {
-            "type": "camel",
-            "options": {}
-          },
-          {
             "type": "upper",
             "options": {}
+          },
+          {
+            "type": "trim",
+            "options": {
+              "start": false,
+              "end": false
+            }
           }
         ],
         "validators": [
-          {
-            "type": "greater_than",
-            "options": {
-              "min": 42,
-              "max": 42,
-              "precision": 2,
-              "include": true
-            }
-          },
-          {
-            "type": "ends_with",
-            "options": {
-              "ends_with": "foo",
-              "check_case": false
-            }
-          },
-          {
-            "type": "white_list",
-            "options": {
-              "list": [
-                "foo",
-                "bar",
-                "fizz",
-                "buzz"
-              ],
-              "check_case": false
-            }
-          },
           {
             "type": "contains",
             "options": {
               "contains": "foo",
-              "check_case": true
-            }
-          }
-        ]
-      },
-      {
-        "label": "Bluetooh MAC address",
-        "key": "wifi-mac-address",
-        "filters": [
-          {
-            "type": "allowed_list",
-            "options": {
-              "approved_values": [
-                "foo",
-                "bar",
-                "fizz",
-                "buzz"
-              ],
-              "check_case": true,
-              "default": "fizz"
-            }
-          }
-        ],
-        "validators": [
-          {
-            "type": "uri",
-            "options": {
-              "schemes": [
-                "http"
-              ]
-            }
-          },
-          {
-            "type": "white_list",
-            "options": {
-              "list": [
-                "foo",
-                "bar",
-                "fizz",
-                "buzz"
-              ],
               "check_case": false
             }
           },
           {
-            "type": "hostname",
+            "type": "length",
             "options": {
-              "record_type": "OPENPGPKEY"
-            }
-          },
-          {
-            "type": "lessThan",
-            "options": {
-              "value": 42,
-              "precision": 4,
-              "include": false
-            }
-          }
-        ]
-      },
-      {
-        "label": "Asset tag",
-        "key": "asset-tag",
-        "filters": [
-          {
-            "type": "upper",
-            "options": {}
-          },
-          {
-            "type": "snake",
-            "options": {}
-          },
-          {
-            "type": "suffix",
-            "options": {
-              "suffix": "MAN"
-            }
-          },
-          {
-            "type": "string",
-            "options": {}
-          }
-        ],
-        "validators": [
-          {
-            "type": "equals",
-            "options": {
-              "value": 42,
-              "precision": 8
-            }
-          },
-          {
-            "type": "lessThan",
-            "options": {
-              "value": 42,
-              "precision": 2,
-              "include": false
+              "length": "foo",
+              "operator": "less_than_equals"
             }
           }
         ]
       }
     ],
-    "created": "1943-06-20T14:07:17.116Z",
-    "updated": "1953-12-24T16:06:41.073Z"
+    "created": "1950-11-14T07:28:02.728Z",
+    "updated": "1970-02-23T11:11:22.602Z"
   },
   "location": {
     "location_type": "other",
@@ -221,27 +81,32 @@
     "slug": "zones-innovation-center",
     "location_id": "b994961b-30b4-4f33-9330-f46fd6172909",
     "formatted_address": "Zones Innovation Center\n431 Broadway\nSuite C\nMenands NY, 12204\nUSA",
-    "created": "2018-06-30T05:55:48.333Z",
-    "updated": "1963-09-02T17:13:11.607Z"
+    "created": "1951-10-19T14:09:52.065Z",
+    "updated": "2003-10-14T11:31:47.863Z"
   },
   "units_available": {
     "allocated": 42,
     "un_allocated": 24,
     "by_status": [
       {
-        "status": "Pending",
+        "status": "Verifying",
         "qty": 6,
-        "category": "CANCELLED"
+        "category": "VERIFYING"
       },
       {
-        "status": "Complete",
-        "qty": 6,
-        "category": "PENDING"
-      },
-      {
-        "status": "Cancelled",
+        "status": "Verifying",
         "qty": 6,
         "category": "BLOCKED"
+      },
+      {
+        "status": "Pending",
+        "qty": 6,
+        "category": "IN_PROGRESS"
+      },
+      {
+        "status": "Blocked",
+        "qty": 6,
+        "category": "CANCELLED"
       }
     ]
   }

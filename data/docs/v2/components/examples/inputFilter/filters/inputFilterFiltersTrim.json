@@ -2,6 +2,6 @@
   "type": "trim",
   "options": {
     "start": false,
-    "end": false
+    "end": true
   }
 }

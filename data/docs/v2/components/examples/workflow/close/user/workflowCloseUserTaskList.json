@@ -1,0 +1,24 @@
+[
+  {
+    "step": "complete",
+    "items": [
+      {
+        "value": "ok",
+        "slug": "asset-tag-placement"
+      },
+      {
+        "value": "ok",
+        "slug": "crack-screen"
+      }
+    ]
+  },
+  {
+    "step": "complete",
+    "items": [
+      {
+        "value": "ok",
+        "slug": "ios-correct"
+      }
+    ]
+  }
+]

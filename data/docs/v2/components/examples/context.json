@@ -2,39 +2,164 @@
   "context_id": "MWMwMjIyNTgtYWZjZC00YmYyLWE1NzYtYWU1OWI3YTE1ZDczOlVOSVQ6NTMxMDI5MjQtNDUwYS00ZjFlLWI1ZDQtYTIwN2JjNTg2NTIxOjE1Njc2MDUwNTU5OTUuNDQ1NjYzNDM-",
   "workflow": {
     "steps": {
-      "confirm": {
-        "type": "user",
-        "options": {
-          "component": "confirm-action",
-          "payload": {
-            "message": "Device powered off?",
-            "negative_message": "Device not functioning"
-          }
-        },
+      "success": {
+        "type": "machine",
         "label": "Find units",
         "goto": "complete",
+        "options": {
+          "application": {
+            "application_id": "ace-ios",
+            "platforms": [
+              {
+                "platform": "darwin",
+                "arch": "s390x"
+              },
+              {
+                "platform": "darwin",
+                "arch": "x64"
+              },
+              {
+                "platform": "darwin",
+                "arch": "x64"
+              },
+              {
+                "platform": "linux",
+                "arch": "mipsel"
+              }
+            ]
+          },
+          "configuration": {
+            "pairing_cert": "dGhpcyBpcyBub3QgYSBjZXJ0IGZpbGUganVzdCBhbiBleGFtcGxl",
+            "pairing_key": "dGhpcyBpcyBub3QgYSBjZXJ0IGZpbGUganVzdCBhbiBleGFtcGxl",
+            "restore_device": false,
+            "automated_enrollment": true,
+            "mdm": {
+              "vendor": "JAMF",
+              "console_url": "http://jamf.zones.com",
+              "user": "NterpriseBob",
+              "password": "exercitation ad officia",
+              "tenant_code": "nterprise",
+              "set_asset_tag": "$._entity.input_filter[?(@.key = 'asset-tag')]"
+            },
+            "field_mappings": [
+              {
+                "from": "bt_mac",
+                "to": "$._entity.input_filter[?(@.key = 'serial-number')]"
+              },
+              {
+                "from": "ethernet_mac",
+                "to": "$._entity.input_filter[?(@.key = 'serial-number')]"
+              }
+            ],
+            "wait_for_apps": [
+              "com.apple.itunes",
+              "com.apple.itunes",
+              "com.apple.itunes"
+            ],
+            "wait_for_battery_charge": 46
+          }
+        },
         "goto-fail": "process-fail",
         "context": [
           {
             "key": "$.fizz",
-            "value": "Pending",
+            "value": "$.buzz",
             "lock": true,
             "ignore": true
           },
           {
-            "key": "extract_fields",
+            "key": "$.unit.status",
+            "value": "Pending",
+            "lock": true,
+            "ignore": true
+          }
+        ],
+        "onError": {
+          "finally": {
+            "goto": "failed",
+            "actions": [
+              {
+                "type": "email",
+                "options": {
+                  "to": "bob@example.com",
+                  "from": "alice@example.com"
+                }
+              }
+            ]
+          },
+          "retry": 2
+        },
+        "onComplete": {
+          "actions": [
+            {
+              "type": "email",
+              "options": {
+                "to": "bob@example.com",
+                "from": "alice@example.com"
+              }
+            },
+            {
+              "type": "email",
+              "options": {
+                "to": "bob@example.com",
+                "from": "alice@example.com"
+              }
+            },
+            {
+              "type": "email",
+              "options": {
+                "to": "bob@example.com",
+                "from": "alice@example.com"
+              }
+            },
+            {
+              "type": "email",
+              "options": {
+                "to": "bob@example.com",
+                "from": "alice@example.com"
+              }
+            }
+          ]
+        }
+      },
+      "Excepteurbf8$": {
+        "label": "Instruct user to follow steps outlined in Apple PDF",
+        "type": "user",
+        "options": {
+          "component": "follow-pdf-instructions",
+          "payload": {
+            "attachment_id": "eb65b19f-efb4-40e7-991c-03ba1a2d7ca7"
+          }
+        },
+        "goto": "complete",
+        "goto-fail": "process-fail",
+        "context": [
+          {
+            "key": "$.unit.status",
             "value": "true",
             "lock": true,
             "ignore": false
           },
           {
-            "key": "$.fizz",
+            "key": "extract_fields",
             "value": "Pending",
+            "lock": true,
+            "ignore": false
+          },
+          {
+            "key": "extract_fields",
+            "value": "true",
             "lock": true,
             "ignore": true
           },
           {
-            "key": "extract_fields",
+            "key": "$.unit.status",
+            "value": "$.buzz",
+            "lock": false,
+            "ignore": false
+          },
+          {
+            "key": "$.unit.status",
             "value": "$.buzz",
             "lock": false,
             "ignore": false
@@ -57,10 +182,17 @@
                   "to": "bob@example.com",
                   "from": "alice@example.com"
                 }
+              },
+              {
+                "type": "email",
+                "options": {
+                  "to": "bob@example.com",
+                  "from": "alice@example.com"
+                }
               }
             ]
           },
-          "retry": 5
+          "retry": 0
         },
         "onComplete": {
           "actions": [
@@ -71,242 +203,6 @@
                 "from": "alice@example.com"
               }
             },
-            {
-              "type": "email",
-              "options": {
-                "to": "bob@example.com",
-                "from": "alice@example.com"
-              }
-            },
-            {
-              "type": "email",
-              "options": {
-                "to": "bob@example.com",
-                "from": "alice@example.com"
-              }
-            }
-          ]
-        }
-      },
-      "consectetur84$": {
-        "type": "pass",
-        "label": "Send email to project manager",
-        "goto": "complete",
-        "goto-fail": "process-fail",
-        "context": [
-          {
-            "key": "$.unit.status",
-            "value": "true",
-            "lock": false,
-            "ignore": true
-          },
-          {
-            "key": "extract_fields",
-            "value": "true",
-            "lock": false,
-            "ignore": true
-          },
-          {
-            "key": "$.unit.status",
-            "value": "Pending",
-            "lock": false,
-            "ignore": true
-          }
-        ],
-        "onError": {
-          "finally": {
-            "goto": "failed",
-            "actions": [
-              {
-                "type": "email",
-                "options": {
-                  "to": "bob@example.com",
-                  "from": "alice@example.com"
-                }
-              },
-              {
-                "type": "email",
-                "options": {
-                  "to": "bob@example.com",
-                  "from": "alice@example.com"
-                }
-              },
-              {
-                "type": "email",
-                "options": {
-                  "to": "bob@example.com",
-                  "from": "alice@example.com"
-                }
-              },
-              {
-                "type": "email",
-                "options": {
-                  "to": "bob@example.com",
-                  "from": "alice@example.com"
-                }
-              }
-            ]
-          },
-          "retry": 1
-        },
-        "onComplete": {
-          "actions": [
-            {
-              "type": "email",
-              "options": {
-                "to": "bob@example.com",
-                "from": "alice@example.com"
-              }
-            },
-            {
-              "type": "email",
-              "options": {
-                "to": "bob@example.com",
-                "from": "alice@example.com"
-              }
-            },
-            {
-              "type": "email",
-              "options": {
-                "to": "bob@example.com",
-                "from": "alice@example.com"
-              }
-            },
-            {
-              "type": "email",
-              "options": {
-                "to": "bob@example.com",
-                "from": "alice@example.com"
-              }
-            },
-            {
-              "type": "email",
-              "options": {
-                "to": "bob@example.com",
-                "from": "alice@example.com"
-              }
-            }
-          ]
-        }
-      },
-      "dolore_6": {
-        "type": "user",
-        "label": "Run Application",
-        "goto": "complete",
-        "options": {
-          "application": {
-            "application_id": "ace-ios",
-            "platforms": [
-              {
-                "platform": "darwin",
-                "arch": "arm"
-              },
-              {
-                "platform": "freebsd",
-                "arch": "ia32"
-              },
-              {
-                "platform": "aix",
-                "arch": "x32"
-              },
-              {
-                "platform": "sunos",
-                "arch": "ia32"
-              },
-              {
-                "platform": "freebsd",
-                "arch": "x32"
-              }
-            ]
-          },
-          "configuration": {
-            "pairing_cert": "dGhpcyBpcyBub3QgYSBjZXJ0IGZpbGUganVzdCBhbiBleGFtcGxl",
-            "pairing_key": "dGhpcyBpcyBub3QgYSBjZXJ0IGZpbGUganVzdCBhbiBleGFtcGxl",
-            "restore_device": true,
-            "automated_enrollment": true,
-            "mdm": {
-              "vendor": "JAMF",
-              "console_url": "http://jamf.zones.com",
-              "user": "NterpriseBob",
-              "password": "consequat",
-              "tenant_code": "nterprise",
-              "set_asset_tag": "$._entity.input_filter[?(@.key = 'asset-tag')]"
-            },
-            "field_mappings": [
-              {
-                "from": "missed_profiles",
-                "to": "$._entity.input_filter[?(@.key = 'serial-number')]"
-              },
-              {
-                "from": "imei2",
-                "to": "$._entity.input_filter[?(@.key = 'serial-number')]"
-              },
-              {
-                "from": "bat_capacity",
-                "to": "$._entity.input_filter[?(@.key = 'serial-number')]"
-              }
-            ],
-            "wait_for_apps": [
-              "com.apple.itunes",
-              "com.apple.itunes"
-            ],
-            "wait_for_battery_charge": 63
-          }
-        },
-        "goto-fail": "process-fail",
-        "context": [
-          {
-            "key": "extract_fields",
-            "value": "Pending",
-            "lock": false,
-            "ignore": false
-          }
-        ],
-        "onError": {
-          "finally": {
-            "goto": "failed",
-            "actions": [
-              {
-                "type": "email",
-                "options": {
-                  "to": "bob@example.com",
-                  "from": "alice@example.com"
-                }
-              },
-              {
-                "type": "email",
-                "options": {
-                  "to": "bob@example.com",
-                  "from": "alice@example.com"
-                }
-              },
-              {
-                "type": "email",
-                "options": {
-                  "to": "bob@example.com",
-                  "from": "alice@example.com"
-                }
-              },
-              {
-                "type": "email",
-                "options": {
-                  "to": "bob@example.com",
-                  "from": "alice@example.com"
-                }
-              },
-              {
-                "type": "email",
-                "options": {
-                  "to": "bob@example.com",
-                  "from": "alice@example.com"
-                }
-              }
-            ]
-          },
-          "retry": 9
-        },
-        "onComplete": {
-          "actions": [
             {
               "type": "email",
               "options": {
@@ -342,81 +238,81 @@
     "starts_at": "entry",
     "label": "MLTI iPad Assembly Assignment",
     "workflow_id": "e530652e-28e8-4f64-84af-e1cf0ff7c805",
-    "applies_to": "part",
+    "applies_to": "unit",
     "slug": "mlti-ipad-assembly-assignment",
     "version": "1.0",
     "workflow_version": 7,
     "context": [
       {
         "key": "$.fizz",
-        "value": "Pending",
-        "lock": false,
-        "ignore": false
-      },
-      {
-        "key": "$.unit.status",
-        "value": "Pending",
-        "lock": false,
+        "value": "true",
+        "lock": true,
         "ignore": true
       },
       {
-        "key": "extract_fields",
-        "value": "Pending",
+        "key": "$.unit.status",
+        "value": "$.buzz",
         "lock": true,
-        "ignore": false
+        "ignore": true
+      },
+      {
+        "key": "$.fizz",
+        "value": "$.buzz",
+        "lock": false,
+        "ignore": true
       }
     ],
-    "created": "1982-05-10T19:03:58.886Z",
-    "updated": "1965-10-28T04:31:12.218Z"
+    "created": "1998-12-19T16:30:55.98Z",
+    "updated": "1973-03-07T17:32:20.872Z"
   },
   "current_step": "assign-units",
   "last_steps": [
     {
       "step_name": "choose-units",
-      "started_at": "1944-01-16T03:19:34.013Z",
-      "ended_at": "1966-03-14T21:36:33.591Z",
+      "started_at": "2005-08-11T01:47:24.675Z",
+      "ended_at": "1992-11-03T21:27:34.747Z",
       "time_to_run": "1567605055995.677",
       "did_error": true,
+      "did_timeout": false
+    },
+    {
+      "step_name": "choose-units",
+      "started_at": "2006-06-24T06:03:41.05Z",
+      "ended_at": "2014-02-27T07:44:47.323Z",
+      "time_to_run": "1567605055995.677",
+      "did_error": true,
+      "did_timeout": false
+    },
+    {
+      "step_name": "choose-units",
+      "started_at": "1979-06-30T09:17:38.272Z",
+      "ended_at": "1949-08-08T13:57:05.339Z",
+      "time_to_run": "1567605055995.677",
+      "did_error": false,
       "did_timeout": true
     },
     {
       "step_name": "choose-units",
-      "started_at": "2006-10-19T22:44:40.968Z",
-      "ended_at": "1972-10-08T11:50:37.206Z",
+      "started_at": "1989-01-07T22:04:21.446Z",
+      "ended_at": "2000-07-11T07:49:16.421Z",
       "time_to_run": "1567605055995.677",
       "did_error": true,
       "did_timeout": false
     },
     {
       "step_name": "choose-units",
-      "started_at": "1952-05-26T15:26:17.519Z",
-      "ended_at": "1965-02-15T11:57:37.79Z",
-      "time_to_run": "1567605055995.677",
-      "did_error": true,
-      "did_timeout": false
-    },
-    {
-      "step_name": "choose-units",
-      "started_at": "1988-06-25T03:52:03.755Z",
-      "ended_at": "1975-02-25T23:39:22.665Z",
+      "started_at": "1961-12-30T10:27:38.5Z",
+      "ended_at": "1994-12-11T21:13:02.047Z",
       "time_to_run": "1567605055995.677",
       "did_error": false,
-      "did_timeout": false
-    },
-    {
-      "step_name": "choose-units",
-      "started_at": "1983-07-27T00:15:26.854Z",
-      "ended_at": "1966-12-02T10:37:40.114Z",
-      "time_to_run": "1567605055995.677",
-      "did_error": true,
       "did_timeout": true
     }
   ],
-  "started_at": "1942-10-15T21:05:46.408Z",
-  "ended_at": "2010-02-27T09:11:08.484Z",
+  "started_at": "1985-10-13T03:02:10.242Z",
+  "ended_at": "1945-05-20T15:22:28.985Z",
   "time_to_run": "1567605055995.677",
-  "active": false,
-  "waiting_for_user": true,
+  "active": true,
+  "waiting_for_user": false,
   "data": {
     "can_foo_the_bar": true,
     "available_units_by_part": {
