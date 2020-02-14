@@ -40,6 +40,9 @@
               }
             }
           },
+          "serial_prefix": {
+            "$ref": "../../components/schemas/part.json#/properties/serial_prefix"
+          },
           "input_filter": {
             "type": "array",
             "items": {

@@ -61,6 +61,14 @@
         }
       ]
     },
+    "serial_prefix": {
+      "type": "string",
+      "example": "S",
+      "x-examples": [
+        "S"
+      ],
+      "description": "A serial number prefix for the part"
+    },
     "input_filter": {
       "$ref": "./inputFilter.json"
     }

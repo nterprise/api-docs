@@ -14,6 +14,9 @@
           "label": {
             "$ref": "../../components/schemas/unit.json#/properties/label"
           },
+          "raw_serial_number": {
+            "$ref": "../../components/schemas/unit.json#/properties/raw_serial_number"
+          },
           "tenant_part_number": {
             "$ref": "../../components/schemas/unit.json#/properties/tenant_part_number"
           },

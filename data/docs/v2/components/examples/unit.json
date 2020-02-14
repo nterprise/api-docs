@@ -44,6 +44,7 @@
       "updated": "1986-02-21T19:25:58.145Z"
     },
     "slug": "10-ipad",
+    "serial_prefix": "S",
     "input_filter": [
       {
         "label": "Bluetooh MAC address",
@@ -174,6 +175,8 @@
   },
   "unit_id": "ec5db56d-32e6-4e5d-9bef-1016f3e13670",
   "slug": "10-ipad-for-hugo",
+  "serial_number": "4EAVPS67GNL8",
+  "raw_serial_number": "S4EAVPS67GNL8",
   "tenant_part_number": "AX-44333",
   "manufacturer": {
     "part_number": "AX-44333",
