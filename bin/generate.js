@@ -32,7 +32,7 @@ yargs.
     option(
         'overwrite',
         {
-            alias: 'v',
+            alias: 'o',
             describe: 'Overwrite if file present',
             global: true,
             default: false,
