@@ -1,0 +1,37 @@
+{
+  "openapi": "3.0.0",
+  "x-api": "niagara",
+  "x-parent": "Niagara API",
+  "info": {
+    "version": "2.0.0",
+    "description": "API for the nterprise application",
+    "title": "Locations"
+  },
+  "paths": {
+    "/facilities": {
+      "$ref": "./paths/location/facilities.json"
+    },
+    "/locations": {
+      "$ref": "./paths/location/locations.json"
+    },
+    "/locations/:location_id": {
+      "$ref": "./paths/location/location.json"
+    },
+    "/locations/:location_id/resources": {
+      "$ref": "./paths/location/resources.json"
+    },
+    "/locations/:location_id/resources/:resource_id": {
+      "$ref": "./paths/location/resource.json"
+    },
+    "/ware-houses": {
+      "$ref": "./paths/location/warehouses.json"
+    }
+  },
+  "components": {
+    "schemas": {
+      "Location": {
+        "$ref": "./components/schemas/location.json"
+      }
+    }
+  }
+}

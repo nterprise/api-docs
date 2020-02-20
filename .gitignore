@@ -69,3 +69,5 @@ typings/
 
 # Serverless directories
 .serverless
+.bundle
+vendor

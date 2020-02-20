@@ -7,9 +7,12 @@ const path = require('path');
 
 const addSchema = (openAPI, schemaFile) => {
     // eslint-disable-next-line max-len
-    const schemaName =_.upperFirst(_.camelCase(schemaFile.replace('.json', '')));
+    const schemaName = _.upperFirst(
+        _.camelCase(schemaFile.replace('.json', '')));
     // eslint-disable-next-line max-len
-    const refFile = path.normalize(`${folders.componentsPath.replace(folders.v2Path, '')}/schemas/${schemaFile}`);
+    const refFile = path.normalize(
+        `${folders.componentsPath.replace(folders.v2Path,
+            '')}/schemas/${schemaFile}`);
 
     _.set(
         openAPI,

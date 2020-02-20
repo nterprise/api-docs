@@ -1,0 +1,94 @@
+{
+  "label": "Store 42",
+  "customer": {
+    "label": "Zones Inc",
+    "customer_id": "e530652e-28e8-4f64-84af-e1cf0ff7c805",
+    "slug": "zones-inc",
+    "external_platform": {
+      "ax_customer_id": "eff3ada3-0966-42be-a5e8-78efd3c52d39"
+    },
+    "allowed_statuses": [
+      {
+        "status": "Cancelled",
+        "category": "BLOCKED"
+      },
+      {
+        "status": "Blocked",
+        "category": "IN_PROGRESS"
+      },
+      {
+        "status": "In Progress",
+        "category": "BLOCKED"
+      },
+      {
+        "status": "Pending",
+        "category": "IN_PROGRESS"
+      },
+      {
+        "status": "Cancelled",
+        "category": "PENDING"
+      }
+    ],
+    "created": "1964-10-25T11:53:33.874Z",
+    "updated": "1967-05-02T04:57:03.849Z"
+  },
+  "program": {
+    "label": "GAP Store refresh",
+    "customer": {
+      "label": "Zones Inc",
+      "customer_id": "e530652e-28e8-4f64-84af-e1cf0ff7c805",
+      "slug": "zones-inc",
+      "external_platform": {
+        "ax_customer_id": "eff3ada3-0966-42be-a5e8-78efd3c52d39"
+      },
+      "allowed_statuses": [
+        {
+          "status": "Pending",
+          "category": "IN_PROGRESS"
+        }
+      ],
+      "created": "1951-05-06T15:05:25.354Z",
+      "updated": "1999-06-26T00:52:18.397Z"
+    },
+    "program_id": "ec5db56d-32e6-4e5d-9bef-1016f3e13670",
+    "slug": "gap-store-refresh",
+    "allowed_statuses": [
+      {
+        "status": "Complete",
+        "category": "PENDING"
+      },
+      {
+        "status": "Cancelled",
+        "category": "COMPLETE"
+      },
+      {
+        "status": "Blocked",
+        "category": "PENDING"
+      }
+    ],
+    "start_date": "2019-08-07T18:10:53.0Z",
+    "end_date": "2020-08-07T18:10:53.0Z",
+    "created": "1987-08-14T20:40:24.45Z",
+    "updated": "1959-10-27T04:46:00.439Z"
+  },
+  "slug": "store-42",
+  "project_id": "ec5db56d-32e6-4e5d-9bef-1016f3e13670",
+  "allowed_statuses": [
+    {
+      "status": "Blocked",
+      "category": "CANCELLED"
+    },
+    {
+      "status": "Blocked",
+      "category": "VERIFYING"
+    },
+    {
+      "status": "Verifying",
+      "category": "BLOCKED"
+    }
+  ],
+  "start_date": "2019-08-07T18:10:53.0Z",
+  "end_date": "2020-08-07T18:10:53.0Z",
+  "created": "1945-03-13T02:13:07.403Z",
+  "updated": "1972-09-28T18:30:22.6Z"
+}

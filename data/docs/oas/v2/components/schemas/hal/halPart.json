@@ -1,0 +1,23 @@
+{
+  "type": "object",
+  "x-hal": true,
+  "x-ui-hide": true,
+  "properties": {
+    "_links": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "$ref": "../links/linkPart.json#/properties/_links/properties/nter:parts"
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "../part.json"
+    }
+  ],
+  "example": {
+    "$ref": "../../examples/hal/halPart.json"
+  }
+}

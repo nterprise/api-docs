@@ -1,0 +1,25 @@
+{
+  "openapi": "3.0.0",
+  "x-api": "niagara",
+  "x-parent": "Niagara API",
+  "info": {
+    "version": "2.0.0",
+    "description": "API for the nterprise application",
+    "title": "Batches"
+  },
+  "paths": {
+    "/batches": {
+      "$ref": "./paths/batch/batches.json"
+    },
+    "/batches/:batch_id": {
+      "$ref": "./paths/batch/batch.json"
+    }
+  },
+  "components": {
+    "schemas": {
+      "Batch": {
+        "$ref": "./components/schemas/batch.json"
+      }
+    }
+  }
+}

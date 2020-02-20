@@ -21,7 +21,7 @@ module.exports = (argv) => {
     if (!relation) {
         logger.error(
             // eslint-disable-next-line max-len
-            'Cannot generate a response without knowing the relation for this schema'
+            'Cannot generate a response without knowing the relation for this schema',
         );
         return;
     }

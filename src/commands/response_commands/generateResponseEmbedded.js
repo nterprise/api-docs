@@ -10,13 +10,13 @@ const buildResponseBody = (relation, schema) => {
     return `{
   "type": "object",
   "x-hal": true,
-  "x-ui-hide": true,
   "properties": {
     "_links": {
       "type": "object",
       "properties": {
         "self": {
-          "$ref": "../links/link${_.upperFirst(schema)}.json#/properties/_links/properties/nter:${relation}"
+          "$ref": "../links/link${_.upperFirst(
+        schema)}.json#/properties/_links/properties/nter:${relation}"
         }
       }
     }

@@ -16,9 +16,10 @@ exports.builder = (yargs) => {
                 default: false,
                 global: true,
                 boolean: true,
-            }
+            },
         ).
         commandDir('./parameter_commands');
 };
 
-exports.handler = (argv) => {};
+exports.handler = (argv) => {
+};

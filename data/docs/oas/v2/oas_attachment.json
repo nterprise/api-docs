@@ -1,0 +1,15 @@
+{
+  "openapi": "3.0.0",
+  "x-api": "niagara",
+  "x-parent": "Niagara API",
+  "info": {
+    "version": "2.0.0",
+    "description": "API for the nterprise application",
+    "title": "Attachments"
+  },
+  "paths": {
+    "/attachments": {
+      "$ref": "./paths/attachments.json"
+    }
+  }
+}

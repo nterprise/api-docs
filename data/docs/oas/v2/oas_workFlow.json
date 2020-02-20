@@ -1,0 +1,31 @@
+{
+  "openapi": "3.0.0",
+  "x-api": "niagara",
+  "x-parent": "Niagara API",
+  "info": {
+    "version": "2.0.0",
+    "description": "API for the nterprise application",
+    "title": "Work Flows"
+  },
+  "paths": {
+    "/work-flows": {
+      "$ref": "./paths/workflow/workflows.json"
+    },
+    "/work-flows/:workflow_id": {
+      "$ref": "./paths/workflow/workflow.json"
+    },
+    "/work-flows/:workflow_id/bill-of-materials": {
+      "$ref": "./paths/workflow/bom.json"
+    },
+    "/work-flows/:workflow_id/contexts": {
+      "$ref": "./paths/workflow/context.json"
+    }
+  },
+  "components": {
+    "schemas": {
+      "Workflow": {
+        "$ref": "./components/schemas/workflow.json"
+      }
+    }
+  }
+}

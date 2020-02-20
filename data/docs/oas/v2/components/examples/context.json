@@ -1,0 +1,95 @@
+{
+  "context_id": "MWMwMjIyNTgtYWZjZC00YmYyLWE1NzYtYWU1OWI3YTE1ZDczOlVOSVQ6NTMxMDI5MjQtNDUwYS00ZjFlLWI1ZDQtYTIwN2JjNTg2NTIxOjE1Njc2MDUwNTU5OTUuNDQ1NjYzNDM-",
+  "workflow": {
+    "steps": {
+      "run-ace": {
+        "step": "complete",
+        "label": "Complete",
+        "type": "success",
+        "onComplete": {
+          "actions": [
+            {
+              "type": "email",
+              "options": {
+                "to": "bob@example.com",
+                "from": "alice@example.com"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "starts_at": "entry",
+    "label": "MLTI iPad Assembly Assignment",
+    "workflow_id": "e530652e-28e8-4f64-84af-e1cf0ff7c805",
+    "applies_to": "contact",
+    "slug": "mlti-ipad-assembly-assignment",
+    "version": "1.0",
+    "workflow_version": 7,
+    "context": [
+      {
+        "key": "extract_fields",
+        "value": "true",
+        "lock": false,
+        "ignore": false
+      }
+    ],
+    "created": "1980-10-24T16:13:53.108Z",
+    "updated": "2004-05-16T12:58:40.748Z"
+  },
+  "current_step": "assign-units",
+  "last_steps": [
+    {
+      "step_name": "choose-units",
+      "started_at": "2004-03-26T20:11:11.319Z",
+      "ended_at": "1947-05-20T10:51:37.27Z",
+      "time_to_run": "1567605055995.677",
+      "did_error": true,
+      "did_timeout": false
+    },
+    {
+      "step_name": "choose-units",
+      "started_at": "1996-05-02T21:53:24.816Z",
+      "ended_at": "1957-05-12T04:23:30.642Z",
+      "time_to_run": "1567605055995.677",
+      "did_error": true,
+      "did_timeout": false
+    },
+    {
+      "step_name": "choose-units",
+      "started_at": "1972-09-07T03:05:38.229Z",
+      "ended_at": "1976-02-21T06:04:22.606Z",
+      "time_to_run": "1567605055995.677",
+      "did_error": true,
+      "did_timeout": false
+    },
+    {
+      "step_name": "choose-units",
+      "started_at": "1944-11-06T12:27:38.328Z",
+      "ended_at": "1973-07-18T17:26:33.254Z",
+      "time_to_run": "1567605055995.677",
+      "did_error": true,
+      "did_timeout": false
+    },
+    {
+      "step_name": "choose-units",
+      "started_at": "1990-02-05T22:18:57.355Z",
+      "ended_at": "2007-06-07T06:03:28.691Z",
+      "time_to_run": "1567605055995.677",
+      "did_error": false,
+      "did_timeout": true
+    }
+  ],
+  "started_at": "1983-12-17T14:12:56.411Z",
+  "ended_at": "1946-09-13T16:51:37.652Z",
+  "time_to_run": "1567605055995.677",
+  "active": true,
+  "waiting_for_user": false,
+  "data": {
+    "can_foo_the_bar": true,
+    "available_units_by_part": {
+      "373b7cd6-3fde-4afe-a790-411d72e07c89": 42,
+      "8faaacaa-94d4-4f1f-a8eb-39353dbbf524": 84
+    }
+  }
+}

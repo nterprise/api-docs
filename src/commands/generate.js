@@ -10,4 +10,5 @@ exports.builder = (yargs) => {
         commandDir('./generate_commands');
 };
 
-exports.handler = (argv) => {};
+exports.handler = (argv) => {
+};

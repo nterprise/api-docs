@@ -16,7 +16,7 @@ exports.builder = (yargs) => {
                 default: false,
                 global: true,
                 boolean: true,
-            }
+            },
         ).
         option(
             'clear',
@@ -27,7 +27,7 @@ exports.builder = (yargs) => {
                 default: false,
                 global: true,
                 boolean: true,
-            }
+            },
         ).
         option(
             'update-spec',
@@ -38,7 +38,7 @@ exports.builder = (yargs) => {
                 default: false,
                 global: true,
                 boolean: true,
-            }
+            },
         ).
         positional(
             'schema',
@@ -54,4 +54,5 @@ exports.builder = (yargs) => {
         commandDir('./response_commands');
 };
 
-exports.handler = (argv) => {};
+exports.handler = (argv) => {
+};

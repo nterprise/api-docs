@@ -1,0 +1,53 @@
+{
+  "openapi": "3.0.0",
+  "x-api": "auth",
+  "info": {
+    "version": "2.0.0",
+    "description": "Authentication API for nterprise-api",
+    "title": "authentication-api",
+    "termsOfService": "https://docs.nterprise.com/tos.html",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://{environment}.nterprise.com",
+      "variables": {
+        "environment": {
+          "default": "auth",
+          "enum": [
+            "auth",
+            "auth.dev",
+            "auth.staging"
+          ]
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/elevio/sign-in": {
+      "$ref": "./paths/elevioSignin.json"
+    },
+    "/elevio/verify": {
+      "$ref": "./paths/elevioVerify.json"
+    },
+    "/oauth/authorize": {
+      "$ref": "./paths/authorize.json"
+    },
+    "/oauth/token": {
+      "$ref": "./paths/token.json"
+    }
+  },
+  "components": {
+    "schemas": {
+      "Problem": {
+        "$ref": "./components/schemas/error.json"
+      },
+      "Token": {
+        "$ref": "./components/schemas/token.json"
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "description": "A __all__ response",
+  "content": {
+    "application/hal+json": {
+      "schema": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "../schemas/hal/halAll.json"
+          }
+        ]
+      }
+    }
+  }
+}

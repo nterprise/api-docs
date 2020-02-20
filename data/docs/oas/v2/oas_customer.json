@@ -1,0 +1,53 @@
+{
+  "openapi": "3.0.0",
+  "x-api": "niagara",
+  "x-parent": "Niagara API",
+  "info": {
+    "version": "2.0.0",
+    "description": "API for the nterprise application",
+    "title": "Customers"
+  },
+  "paths": {
+    "/customers": {
+      "$ref": "./paths/customer/customers.json"
+    },
+    "/customers/:customer_id": {
+      "$ref": "./paths/customer/customer.json"
+    },
+    "/customers/:customer_id/contacts": {
+      "$ref": "./paths/customer/contacts.json"
+    },
+    "/customers/:customer_id/contacts/:contact_id": {
+      "$ref": "./paths/customer/contact.json"
+    },
+    "/customers/:customer_id/parts": {
+      "$ref": "./paths/customer/parts.json"
+    },
+    "/customers/:customer_id/programs": {
+      "$ref": "./paths/customer/programs.json"
+    },
+    "/customers/:customer_id/projects": {
+      "$ref": "./paths/customer/projects.json"
+    },
+    "/customers/:customer_id/units": {
+      "$ref": "./paths/customer/units.json"
+    },
+    "/customers/:customer_id/work-orders": {
+      "$ref": "./paths/customer/workOrders.json"
+    }
+  },
+  "security": [
+    {
+      "jwt": [
+        "Bearer"
+      ]
+    }
+  ],
+  "components": {
+    "schemas": {
+      "Customer": {
+        "$ref": "./components/schemas/customer.json"
+      }
+    }
+  }
+}

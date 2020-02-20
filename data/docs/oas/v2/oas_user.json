@@ -1,0 +1,25 @@
+{
+  "openapi": "3.0.0",
+  "x-api": "niagara",
+  "x-parent": "Niagara API",
+  "info": {
+    "version": "2.0.0",
+    "description": "API for the nterprise application",
+    "title": "Users"
+  },
+  "paths": {
+    "/users": {
+      "$ref": "./paths/user/users.json"
+    },
+    "/users/:user_id": {
+      "$ref": "./paths/user/user.json"
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "$ref": "./components/schemas/user.json"
+      }
+    }
+  }
+}

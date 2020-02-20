@@ -1,0 +1,57 @@
+{
+  "type": "object",
+  "x-hal": true,
+  "x-ui-hide": true,
+  "properties": {
+    "resource_id": {
+      "$ref": "../resource.json#/properties/resource_id"
+    },
+    "label": {
+      "$ref": "../resource.json#/properties/label"
+    },
+    "resource_type": {
+      "$ref": "../resource.json#/properties/resource_type"
+    },
+    "meta": {
+      "$ref": "../resource.json#/properties/meta"
+    },
+    "location": {
+      "$ref": "../location.json"
+    },
+    "parent": {
+      "type": "object",
+      "description": "The parent resource if this is a child resource",
+      "properties": {
+        "resource_id": {
+          "$ref": "../resource.json#/properties/resource_id"
+        },
+        "label": {
+          "$ref": "../resource.json#/properties/label"
+        },
+        "resource_type": {
+          "$ref": "../resource.json#/properties/resource_type"
+        },
+        "meta": {
+          "$ref": "../resource.json#/properties/meta"
+        },
+        "location": {
+          "$ref": "../location.json"
+        }
+      }
+    },
+    "_links": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "$ref": "../links/linkResource.json#/properties/_links/properties/nter:resources"
+        },
+        "nter:parent-resource": {
+          "$ref": "../links/linkResource.json#/properties/_links/properties/nter:resources"
+        }
+      }
+    }
+  },
+  "example": {
+    "$ref": "../../examples/hal/halSubResource.json"
+  }
+}

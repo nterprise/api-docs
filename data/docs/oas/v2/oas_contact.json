@@ -1,0 +1,25 @@
+{
+  "openapi": "3.0.0",
+  "x-api": "niagara",
+  "x-parent": "Niagara API",
+  "info": {
+    "version": "2.0.0",
+    "description": "API for the nterprise application",
+    "title": "Contacts"
+  },
+  "paths": {
+    "/contacts": {
+      "$ref": "./paths/contacts.json"
+    },
+    "/contacts/:contact_id": {
+      "$ref": "./paths/contact.json"
+    }
+  },
+  "components": {
+    "schemas": {
+      "Contact": {
+        "$ref": "./components/schemas/contact.json"
+      }
+    }
+  }
+}

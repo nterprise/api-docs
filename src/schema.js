@@ -6,7 +6,7 @@ const fs = require('fs');
 module.exports.isCallable = (schemaDef) => _.get(
     schemaDef,
     'x-nter-callable',
-    false
+    false,
 );
 
 module.exports.loadSchema = (schema) => {
@@ -18,4 +18,4 @@ module.exports.loadSchema = (schema) => {
     }
 
     return require(`${folders.schemas}/${schemaFile}`);
-}
+};

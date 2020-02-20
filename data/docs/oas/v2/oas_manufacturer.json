@@ -1,0 +1,31 @@
+{
+  "openapi": "3.0.0",
+  "x-api": "niagara",
+  "x-parent": "Niagara API",
+  "info": {
+    "version": "2.0.0",
+    "description": "API for the nterprise application",
+    "title": "Manufacturers"
+  },
+  "paths": {
+    "/manufacturers": {
+      "$ref": "./paths/manufacturer/manufacturers.json"
+    },
+    "/manufacturers/:manufacturer_id": {
+      "$ref": "./paths/manufacturer/manufacturer.json"
+    },
+    "/manufacturers/:manufacturer_id/parts": {
+      "$ref": "./paths/manufacturer/parts.json"
+    },
+    "/manufacturers/:manufacturer_id/units": {
+      "$ref": "./paths/manufacturer/units.json"
+    }
+  },
+  "components": {
+    "schemas": {
+      "Manufacturer": {
+        "$ref": "./components/schemas/manufacturer.json"
+      }
+    }
+  }
+}

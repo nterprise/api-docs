@@ -10,7 +10,6 @@ const buildResponseLink = (relation, path, entityId = '') => {
     path = path || relation;
     return `{
   "type": "object",
-  "x-ui-hide": true,
   "properties": {
     "_links": {
       "type": "object",
@@ -47,7 +46,7 @@ exports.handler = async (argv) => {
         buildResponseLink(
             argv.relation,
             null,
-            `/${uuid.v4()}`
+            `/${uuid.v4()}`,
         ),
     );
 

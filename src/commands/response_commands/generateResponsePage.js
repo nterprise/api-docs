@@ -19,7 +19,8 @@ const buildResponsePage = (relation, embedded) => {
                 "type": "array",
                 "maxItems": 100,
                 "items": {
-                  "$ref": "../schemas/hal/hal${_.upperFirst(_.camelCase(embedded))}.json"
+                  "$ref": "../schemas/hal/hal${_.upperFirst(
+        _.camelCase(embedded))}.json"
                 }
               }
             }

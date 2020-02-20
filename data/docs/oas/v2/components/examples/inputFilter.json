@@ -1,0 +1,85 @@
+[
+  {
+    "label": "Serial Number",
+    "key": "bluetooh-mac-address",
+    "filters": [
+      {
+        "type": "empty",
+        "options": {}
+      },
+      {
+        "type": "camel",
+        "options": {}
+      },
+      {
+        "type": "camel",
+        "options": {}
+      },
+      {
+        "type": "trim",
+        "options": {
+          "start": false,
+          "end": false
+        }
+      },
+      {
+        "type": "suffix",
+        "options": {
+          "suffix": "MAN"
+        }
+      }
+    ],
+    "validators": [
+      {
+        "type": "uri",
+        "options": {
+          "schemes": [
+            "http"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "label": "Asset tag",
+    "key": "wifi-mac-address",
+    "filters": [
+      {
+        "type": "trim",
+        "options": {
+          "start": true,
+          "end": false
+        }
+      },
+      {
+        "type": "prefix",
+        "options": {
+          "prefix": "MAN-"
+        }
+      }
+    ],
+    "validators": [
+      {
+        "type": "lessThan",
+        "options": {
+          "value": 42,
+          "precision": 4,
+          "include": true
+        }
+      },
+      {
+        "type": "hostname",
+        "options": {
+          "record_type": "HIP"
+        }
+      },
+      {
+        "type": "ends_with",
+        "options": {
+          "ends_with": "foo",
+          "check_case": false
+        }
+      }
+    ]
+  }
+]

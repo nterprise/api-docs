@@ -1,0 +1,36 @@
+{
+  "label": "Fast Lane",
+  "slug": "fast-lane",
+  "queue_id": "59c834ad-d9cc-4e0f-a569-8f4e52c351b9",
+  "location": {
+    "location_type": "other",
+    "address": {
+      "country": "USA",
+      "administrative_area": "NY",
+      "locality": "Menands",
+      "postal_code": "12204",
+      "thoroughfare": "431 Broadway",
+      "sub_administrative_area": "Albany",
+      "premise": "Suite c",
+      "sub_premise": "Zones Innovation Center"
+    },
+    "label": "Zones Innovation Center",
+    "slug": "zones-innovation-center",
+    "location_id": "b994961b-30b4-4f33-9330-f46fd6172909",
+    "formatted_address": "Zones Innovation Center\n431 Broadway\nSuite C\nMenands NY, 12204\nUSA",
+    "created": "1941-03-07T11:32:04.61Z",
+    "updated": "1968-09-20T02:34:41.51Z"
+  },
+  "priority": 42,
+  "total_work_orders": {
+    "pending": 4,
+    "in_progress": 4,
+    "verifying": 4,
+    "complete": 4,
+    "blocked": 4,
+    "cancelled": 4
+  },
+  "total_batches": 56,
+  "created": "1982-10-09T10:47:50.127Z",
+  "updated": "1974-04-13T17:50:50.06Z"
+}

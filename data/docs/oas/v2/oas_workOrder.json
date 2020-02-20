@@ -1,0 +1,25 @@
+{
+  "openapi": "3.0.0",
+  "x-api": "niagara",
+  "x-parent": "Niagara API",
+  "info": {
+    "version": "2.0.0",
+    "description": "API for the nterprise application",
+    "title": "Work Orders"
+  },
+  "paths": {
+    "/work-orders": {
+      "$ref": "./paths/workOrder/workOrders.json"
+    },
+    "/work-orders/:work_order_id": {
+      "$ref": "./paths/workOrder/workOrder.json"
+    }
+  },
+  "components": {
+    "schemas": {
+      "WorkOrder": {
+        "$ref": "./components/schemas/workOrder.json"
+      }
+    }
+  }
+}

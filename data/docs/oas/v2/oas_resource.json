@@ -1,0 +1,31 @@
+{
+  "openapi": "3.0.0",
+  "x-api": "niagara",
+  "x-parent": "Niagara API",
+  "info": {
+    "version": "2.0.0",
+    "description": "API for the nterprise application",
+    "title": "Resources"
+  },
+  "paths": {
+    "/resources": {
+      "$ref": "./paths/resource/resources.json"
+    },
+    "/resources/:resource_id": {
+      "$ref": "./paths/resource/resource.json"
+    },
+    "/resources/:resource_id/sub-resources": {
+      "$ref": "./paths/resource/subResources.json"
+    },
+    "/resources/:resource_id/contexts": {
+      "$ref": "./paths/resource/contexts.json"
+    }
+  },
+  "components": {
+    "schemas": {
+      "Resource": {
+        "$ref": "./components/schemas/resource.json"
+      }
+    }
+  }
+}

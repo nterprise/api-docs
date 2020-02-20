@@ -1,0 +1,30 @@
+{
+  "type": "object",
+  "x-hal": true,
+  "x-ui-hide": true,
+  "properties": {
+    "_links": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "href": {
+              "type": "string",
+              "example": "https://api.nterprise.com/contexts/5999016c-584c-451a-b007-1ae6bc75bfa6/find-units"
+            }
+          }
+        }
+      }
+    }
+  },
+  "anyOf": [
+    {
+      "$ref": "../workflow/steps/user/manualDataEntry.json"
+    }
+  ],
+  "example": {
+    "$ref": "../../examples/hal/halStep.json"
+  }
+}
