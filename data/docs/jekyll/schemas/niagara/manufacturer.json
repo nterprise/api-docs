@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/manufacturer.json",
+  "type": "object",
+  "description": "A Manufacturer of parts",
+  "additionalProperties": false,
+  "required": [
+    "label",
+    "manufacturer_id"
+  ],
+  "properties": {
+    "manufacturer_id": {
+      "type": "string",
+      "description": "unique id",
+      "pattern": "^[0-9a-zA-Z-_]$"
+    },
+    "label": {
+      "type": "string",
+      "description": "Label for the manufacturer"
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json"
+    }
+  ]
+}

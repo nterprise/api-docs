@@ -1,8 +1,10 @@
 {
-  "x-nter-relation": "contexts",
-  "x-nter-model": "Context",
-  "x-nter-callable": true,
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/context.json",
   "type": "object",
+  "description": "Context for an active workflow",
+  "additionalProperties": false,
+  "x-niagara-model": "Context",
   "properties": {
     "context_id": {
       "type": "string",
@@ -14,6 +16,7 @@
       "pattern": "^[A-Za-z0-9-_]+$"
     },
     "workflow": {
+      "x-niagara-ref": "./workflow.json#/properties/work_flow_id",
       "$ref": "./workflow.json"
     },
     "current_step": {

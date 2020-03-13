@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/blackList.json",
+  "type": "object",
+  "description": "Validate value does not match a list (black list)",
+  "required": [
+    "type",
+    "options"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "white_list"
+      ]
+    },
+    "options": {
+      "type": "object",
+      "required": [
+        "list"
+      ],
+      "properties": {
+        "list": {
+          "type": "array",
+          "minimum": 1,
+          "maximum": 100,
+          "description": "The list of approved values",
+          "items": {
+            "type": "string"
+          }
+        },
+        "check_case": {
+          "type": "boolean",
+          "description": "Perform a case sensitive match. By default will not match case",
+          "default": false
+        }
+      }
+    }
+  }
+}

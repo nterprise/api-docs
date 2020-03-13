@@ -1,0 +1,84 @@
+{
+  "type": "object",
+  "x-ui-hide": true,
+  "required": [
+    "type",
+    "label",
+    "goto"
+  ],
+  "properties": {
+    "goto": {
+      "type": "string",
+      "description": "Step to move to",
+      "pattern": "^[a-z][a-z-]+[a-z]$",
+      "example": "complete",
+      "x-examples": [
+        "complete"
+      ]
+    },
+    "goto-fail": {
+      "type": "string",
+      "description": "Step to transition too if this step cannot be completed",
+      "pattern": "^[a-z][a-z-]+[a-z]$",
+      "example": "process-fail",
+      "x-examples": [
+        "process-fail"
+      ]
+    },
+    "context": {
+      "type": "array",
+      "description": "Values to set on the context",
+      "items": {
+        "type": "object",
+        "required": [
+          "key",
+          "value"
+        ],
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "The context key to set",
+            "example": "$.fizz",
+            "x-examples": [
+              "$.fizz",
+              "$.unit.status",
+              "extract_fields"
+            ]
+          },
+          "value": {
+            "type": "string",
+            "description": "Value to set",
+            "example": "$.buzz",
+            "x-examples": [
+              "$.buzz",
+              "Pending",
+              true
+            ]
+          },
+          "lock": {
+            "type": "boolean",
+            "description": "Prevents other steps from writing this value",
+            "example": true
+          },
+          "ignore": {
+            "type": "boolean",
+            "description": "When trying to set a locked key, do not fail",
+            "example": false
+          }
+        }
+      }
+    },
+    "onStart": {
+      "x-niagara-raw-ref": "./stepActions.json",
+      "$ref": "./stepActions.json"
+    },
+    "onError": {
+      "x-niagara-raw-ref": "./stepError.json",
+      "$ref": "./stepError.json"
+    },
+    "onTimeout": {
+      "x-niagara-raw-ref": "./stepError.json",
+      "$ref": "./stepError.json"
+    }
+  }
+}

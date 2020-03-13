@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/followPDFInstructions.json",
+  "type": "object",
+  "description": "Display a link or modal to a user which contains instructions from a PDF",
+  "required": [
+    "label",
+    "payload"
+  ],
+  "properties": {
+    "label": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepCommon.json#/properties/label"
+    },
+    "options": {
+      "type": "object",
+      "required": [
+        "component",
+        "payload"
+      ],
+      "properties": {
+        "component": {
+          "enum": [
+            "follow-pds-instructions"
+          ]
+        },
+        "payload": {
+          "type": "object",
+          "required": [
+            "attachment_id"
+          ],
+          "properties": {
+            "attachment_id": {
+              "type": "string",
+              "description": "UUID for the attachment",
+              "format": "uuid"
+            }
+          }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepUser.json"
+    }
+  ]
+}

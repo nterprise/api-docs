@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/vendor.json",
+  "type": "object",
+  "description": "A Vendor which sells parts",
+  "additionalProperties": false,
+  "required": [
+    "label"
+  ],
+  "properties": {
+    "vendor_id": {
+      "type": "string",
+      "description": "unique id",
+      "pattern": "^[0-9a-zA-Z-_]+$"
+    },
+    "label": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/label"
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json"
+    }
+  ]
+}

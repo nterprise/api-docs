@@ -1,0 +1,47 @@
+{
+  "description": "A Step choice",
+  "type": "object",
+  "maxProperties": 2,
+  "minProperties": 2,
+  "required": [
+    "decision"
+  ],
+  "x-niagara-model": "WorkFlowStepChoice",
+  "properties": {
+    "decision": {
+      "type": "array",
+      "description": "Context variable to check",
+      "items": {
+        "type": "object",
+        "properties": {
+          "variable": {
+            "type": "string",
+            "description": "Variable or value"
+          },
+          "operator": {
+            "type": "string",
+            "description": "Operator to perform",
+            "enum": [
+              "greater_than_equals",
+              "less_than_equals",
+              "less_than_equals",
+              "greater_than",
+              "less_than",
+              "equals",
+              "not_equals"
+            ]
+          },
+          "operand": {
+            "type": "string",
+            "description": "operand to compare with"
+          }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "./stepNext.json"
+    }
+  ]
+}

@@ -1,9 +1,17 @@
 {
-  "description": "Input Filters allow custom fields to be defined for entities",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter.json",
   "type": "array",
+  "description": "Input Filters allow custom fields to be defined for entities",
   "items": {
     "type": "object",
     "description": "Input filter specification",
+    "require": [
+      "label",
+      "key",
+      "filter",
+      "validators"
+    ],
     "properties": {
       "label": {
         "type": "string",
@@ -13,7 +21,7 @@
           "Serial Number",
           "Asset tag",
           "WiFi MAC address",
-          "Bluetooh MAC address",
+          "Bluetooh MAC address"
         ]
       },
       "key": {
@@ -32,6 +40,7 @@
       "filters": {
         "type": "array",
         "description": "A Collection of filters applied to the field",
+        "maxItems": 100,
         "items": {
           "anyOf": [
             {
@@ -82,6 +91,7 @@
       "validators": {
         "type": "array",
         "description": "A set of validators to use for this field",
+        "maxItems": 100,
         "items": {
           "anyOf": [
             {

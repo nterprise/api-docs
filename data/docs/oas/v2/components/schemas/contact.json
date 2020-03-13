@@ -1,25 +1,14 @@
 {
-  "x-id": "#contact",
-  "x-nter-relation": "contacts",
-  "x-nter-model": "Contact",
-  "x-nter-callable": true,
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/contact.json",
   "type": "object",
   "description": "Contact Information",
+  "additionalProperties": false,
   "required": [
-    "contact_id",
-    "label",
-    "email",
-    "name"
+    "label"
   ],
+  "x-niagara-model": "Contact",
   "properties": {
-    "label": {
-      "x-faker": "name.title",
-      "allOf": [
-        {
-          "$ref": "./entityCommon.json#/properties/label"
-        }
-      ]
-    },
     "contact_id": {
       "type": "string",
       "description": "Identifier for the contact",
@@ -28,7 +17,10 @@
       "x-examples": [
         "1c022258-afcd-4bf2-a576-ae59b7a15d73"
       ],
-      "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+      "pattern": "^[0-9a-zA-Z-_]+$"
+    },
+    "label": {
+      "$ref": "./entityCommon.json#/properties/label"
     },
     "email": {
       "type": "string",
@@ -37,8 +29,7 @@
       "example": "bob@zones.com",
       "x-examples": [
         "bob@zones.com"
-      ],
-      "nullable": true
+      ]
     },
     "name": {
       "type": "string",
@@ -46,8 +37,7 @@
       "example": "Bob Alice",
       "x-examples": [
         "Bob Alice"
-      ],
-      "nullable": true
+      ]
     },
     "phone": {
       "type": "string",
@@ -56,15 +46,15 @@
       "x-examples": [
         "+1 518 867 5309"
       ]
-    },
-    "created": {
-      "$ref": "./entityCommon.json#/properties/created"
-    },
-    "updated": {
-      "$ref": "./entityCommon.json#/properties/updated"
     }
   },
   "example": {
     "$ref": "../examples/contact.json"
-  }
+  },
+  "allOf": [
+    {
+      "x-niagara-raw-ref": "#/properties/entityCommon",
+      "$ref": "./entityCommon.json"
+    }
+  ]
 }

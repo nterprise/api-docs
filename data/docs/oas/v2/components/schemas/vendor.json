@@ -1,12 +1,13 @@
 {
-  "x-id": "#vendor",
-  "x-nter-relation": "vendors",
-  "x-nter-model": "Vendor",
-  "x-nter-callable": true,
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/vendor.json",
+  "type": "object",
   "description": "A Vendor which sells parts",
+  "additionalProperties": false,
   "required": [
-    "vendor_id"
+    "label"
   ],
+  "x-niagara-model": "Vendor",
   "properties": {
     "vendor_id": {
       "type": "string",
@@ -18,24 +19,12 @@
       "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
     },
     "label": {
-      "type": "object",
-      "example": "Micro Center",
-      "x-examples": [
-        "Micro Center"
-      ],
-      "description": "Label for the vendor"
-    },
-    "slug": {
-      "type": "object",
-      "example": "micro-center",
-      "x-examples": [
-        "micro-center"
-      ],
-      "description": "Auto-generated slug for the vendor"
+      "$ref": "./entityCommon.json#/properties/label"
     }
   },
   "allOf": [
     {
+      "x-niagara-raw-ref": "#/properties/entityCommon",
       "$ref": "./entityCommon.json"
     }
   ],

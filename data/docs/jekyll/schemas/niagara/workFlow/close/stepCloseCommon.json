@@ -1,0 +1,34 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/close/stepCloseCommon.json",
+  "type": "object",
+  "x-ui-hide": true,
+  "required": [
+    "step",
+    "type"
+  ],
+  "properties": {
+    "step": {
+      "type": "string",
+      "description": "Step to mark as complete",
+      "pattern": "^[a-z][a-z-]+[a-z]$",
+      "example": "complete",
+      "x-examples": [
+        "complete"
+      ]
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "close",
+        "fail"
+      ],
+      "default": "close",
+      "description": "Type of close function for step",
+      "example": "close",
+      "x-examples": [
+        "close"
+      ]
+    }
+  }
+}

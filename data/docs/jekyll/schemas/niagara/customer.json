@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/customer.json",
+  "type": "object",
+  "description": "Customer",
+  "additionalProperties": false,
+  "required": [
+    "label",
+    "allowed_statuses"
+  ],
+  "properties": {
+    "customer_id": {
+      "type": "string",
+      "description": "Customer identifier",
+      "readOnly": true,
+      "pattern": "^[0-9a-zA-Z-_]+$"
+    },
+    "label": {
+      "$ref": "./entityCommon.json#/properties/label"
+    },
+    "external_platform": {
+      "type": "object",
+      "description": "External Identifiers for the customer",
+      "deprecated": true,
+      "patternProperties": {
+        "^[A-Za-z][A-Za-z0-9_]*$": {
+          "type": "string"
+        }
+      }
+    },
+    "allowed_statuses": {
+      "type": "array",
+      "description": "List of allowed statuses",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "./status.json"
+      }
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/project.json",
+  "type": "object",
+  "description": "Defines the properties for a project",
+  "additionalProperties": false,
+  "required": [
+    "label",
+    "customer",
+    "program",
+    "status_map"
+  ],
+  "properties": {
+    "project_id": {
+      "type": "string",
+      "description": "Unique identifier",
+      "pattern": "^[0-9a-zA-Z-_]+$"
+    },
+    "label": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/label"
+    },
+    "customer": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/customer.json"
+    },
+    "program": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/program.json"
+    },
+    "allowed_statuses": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/customer.json#/properties/allowed_statuses"
+    },
+    "start_date": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/dateRange.json#/properties/start_date"
+    },
+    "end_date": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/dateRange.json#/properties/end_date"
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json"
+    }
+  ]
+}

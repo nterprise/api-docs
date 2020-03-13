@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/batch.json",
+  "type": "object",
+  "description": "Defines the properties for a work order batch",
+  "additionalProperties": false,
+  "required": [
+    "queue"
+  ],
+  "properties": {
+    "batch_id": {
+      "type": "string",
+      "description": "The identifier for the batch",
+      "readOnly": true,
+      "pattern": "^[0-9a-zA-Z-_]+$"
+    },
+    "queue": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/queue.json"
+    },
+    "priority": {
+      "type": "integer",
+      "description": "Priority order for the batch",
+      "minimum": 0
+    },
+    "number_cycles": {
+      "type": "integer",
+      "description": "The number of cycles for this batch",
+      "minimum": 1
+    },
+    "cycles": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/cycle.json"
+    },
+    "work_order": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workOrder.json"
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json"
+    }
+  ]
+}

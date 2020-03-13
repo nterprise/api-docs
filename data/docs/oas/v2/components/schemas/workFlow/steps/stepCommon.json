@@ -1,0 +1,56 @@
+{
+  "type": "object",
+  "required": [
+    "type",
+    "label",
+    "goto"
+  ],
+  "x-niagara-model": "WorkFlowStepCommon",
+  "x-ui-hide": true,
+  "properties": {
+    "type": {
+      "type": "string",
+      "description": "Type of workflow step",
+      "enum": [
+        "load",
+        "choice",
+        "function",
+        "machine",
+        "pass",
+        "fail",
+        "success",
+        "user",
+        "wait"
+      ]
+    },
+    "label": {
+      "type": "string",
+      "description": "Label for the step",
+      "example": "Find units",
+      "x-examples": [
+        "Find units"
+      ]
+    },
+    "goto": {
+      "type": "string",
+      "description": "Step to move to",
+      "pattern": "^[a-z][a-z-]+[a-z]$",
+      "example": "complete",
+      "x-examples": [
+        "complete"
+      ]
+    },
+    "goto-fail": {
+      "type": "string",
+      "description": "Step to transition too if this step cannot be completed",
+      "pattern": "^[a-z][a-z-]+[a-z]$",
+      "example": "process-fail",
+      "x-examples": [
+        "process-fail"
+      ]
+    },
+    "onComplete": {
+      "$ref": "./stepActions.json"
+    }
+  }
+}

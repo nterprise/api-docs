@@ -1,8 +1,0 @@
-{
-  "get": {
-    "$ref": "../operations/part/fetchAllReplacementsForPart.json"
-  },
-  "post": {
-    "$ref": "../operations/part/createReplacementForPart.json"
-  }
-}

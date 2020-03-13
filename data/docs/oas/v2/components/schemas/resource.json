@@ -1,14 +1,15 @@
 {
-  "x-id": "#resource",
-  "x-nter-relation": "resources",
-  "x-nter-model": "Resource",
-  "x-nter-callable": true,
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/resource.json",
+  "type": "object",
   "description": "Defines the properties for a resource",
+  "additionalProperties": false,
   "required": [
     "label",
     "resource_type",
     "location"
   ],
+  "x-niagara-model": "Resource",
   "properties": {
     "resource_id": {
       "type": "string",
@@ -20,33 +21,25 @@
       "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
     },
     "label": {
-      "example": "Server room",
-      "x-examples": [
-        "Server room"
-      ],
-      "description": "Name of the resource"
-    },
-    "slug": {
-      "example": "server-room",
-      "x-examples": [
-        "server-room"
-      ],
-      "description": "Auto-generated slug for the resource"
+      "$ref": "./entityCommon.json#/properties/label"
     },
     "resource_type": {
       "type": "string",
       "description": "Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased",
+      "pattern": "^[a-z][0-9a-zA-Z-]+$",
       "example": "station",
       "x-examples": [
         "station"
-      ],
-      "pattern": "^[a-z][0-9a-zA-Z-]+$"
+      ]
     },
     "meta": {
       "type": "object",
       "description": "Data for the resource as a key value pair",
       "additionalProperties": {
         "type": "string"
+      },
+      "propertyNames": {
+        "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
       },
       "x-examples": [
         {
@@ -81,6 +74,7 @@
   },
   "allOf": [
     {
+      "x-niagara-raw-ref": "#/properties/entityCommon",
       "$ref": "./entityCommon.json"
     }
   ],

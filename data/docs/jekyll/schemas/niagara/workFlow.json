@@ -1,0 +1,67 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/workFlow.json",
+  "type": "object",
+  "description": "Workflow",
+  "additionalProperties": false,
+  "required": [
+    "label",
+    "steps",
+    "starts_at",
+    "applies_to",
+    "schema_version"
+  ],
+  "properties": {
+    "workflow_id": {
+      "type": "string",
+      "pattern": "^[0-9a-zA-Z-_]+$"
+    },
+    "label": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/label"
+    },
+    "schema_version": {
+      "type": "string",
+      "description": "Version of the workflow schema used",
+      "enum": [
+        "1.0"
+      ]
+    },
+    "workflow_version": {
+      "type": "integer",
+      "description": "Version number for the work flows (the number of times it has been changed",
+      "readOnly": true
+    },
+    "applies_to": {
+      "type": "string",
+      "description": "The entity type this work flow applies too",
+      "enum": [
+        "unit",
+        "part",
+        "program",
+        "project",
+        "customer",
+        "contact"
+      ]
+    },
+    "starts_at": {
+      "type": "string",
+      "description": "Starting step"
+    },
+    "steps": {
+      "type": "object",
+      "description": "Steps for the workflow",
+      "uniqueItems": true,
+      "additionalProperties": true,
+      "patternProperties": {
+        "^[A-Za-z][A-Za-z0-9_]*$": {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/allSteps.json#/properties/step"
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json"
+    }
+  ]
+}

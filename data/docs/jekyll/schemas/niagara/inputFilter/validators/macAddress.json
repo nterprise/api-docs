@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/macAddress.json",
+  "type": "object",
+  "description": "Validate string matches an MAC address format",
+  "required": [
+    "type",
+    "options"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "macAddress"
+      ]
+    },
+    "options": {
+      "type": "object",
+      "description": "This validator has no options"
+    }
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/workFlow.json",
+  "type": "object",
+  "description": "Workflow",
+  "additionalProperties": false,
+  "required": [
+    "label",
+    "steps",
+    "starts_at",
+    "applies_to",
+    "schema_version"
+  ],
+  "x-niagara-model": "WorkFlow",
+  "properties": {
+    "workflow_id": {
+      "type": "string",
+      "description": "Customer identifier",
+      "example": "e530652e-28e8-4f64-84af-e1cf0ff7c805",
+      "x-examples": [
+        "e530652e-28e8-4f64-84af-e1cf0ff7c805"
+      ],
+      "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+    },
+    "label": {
+      "$ref": "./entityCommon.json#/properties/label"
+    },
+    "schema_version": {
+      "type": "string",
+      "description": "Version of the workflow schema used",
+      "enum": [
+        "1.0"
+      ],
+      "example": "1.0"
+    },
+    "workflow_version": {
+      "type": "integer",
+      "description": "Version number for the work flows (the number of times it has been changed",
+      "format": "int32",
+      "example": 7,
+      "x-examples": [
+        7
+      ],
+      "readOnly": true
+    },
+    "applies_to": {
+      "type": "string",
+      "description": "The entity type this work flow applies too",
+      "enum": [
+        "unit",
+        "part",
+        "program",
+        "project",
+        "customer",
+        "contact"
+      ],
+      "example": "unit"
+    },
+    "starts_at": {
+      "type": "string",
+      "description": "Starting step",
+      "example": "entry",
+      "x-examples": [
+        "entry"
+      ]
+    },
+    "steps": {
+      "type": "object",
+      "description": "Steps for the workflow",
+      "additionalProperties": true,
+      "patternProperties": {
+        "^[A-Za-z][A-Za-z0-9_]*$": {
+          "$ref": "./workflow/steps/allSteps.json#/properties/step"
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "x-niagara-raw-ref": "#/properties/entityCommon",
+      "$ref": "./entityCommon.json"
+    }
+  ],
+  "example": {
+    "$ref": "../examples/workflow.json"
+  }
+}

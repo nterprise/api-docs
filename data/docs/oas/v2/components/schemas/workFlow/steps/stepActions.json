@@ -1,0 +1,22 @@
+{
+  "type": "object",
+  "required": [
+    "retry",
+    "finally"
+  ],
+  "x-niagara-model": "WorkFlowStepAction",
+  "properties": {
+    "actions": {
+      "type": "array",
+      "description": "Actions to take on failure",
+      "maxItems": 10,
+      "items": {
+        "anyOf": [
+          {
+            "$ref": "../action/emailAction.json"
+          }
+        ]
+      }
+    }
+  }
+}

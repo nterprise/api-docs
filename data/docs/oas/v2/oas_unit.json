@@ -13,21 +13,6 @@
     },
     "/units/:unit_id": {
       "$ref": "./paths/unit/unit.json"
-    },
-    "/units/:unit_id/locations": {
-      "$ref": "./paths/unit/pastLocations.json"
-    },
-    "/units/:unit_id/statuses": {
-      "$ref": "./paths/unit/statusHistory.json"
-    },
-    "/units/:unit_id/notes": {
-      "$ref": "./paths/unit/notes.json"
-    },
-    "/units/:unit_id/replacements": {
-      "$ref": "./paths/part/replacements.json"
-    },
-    "/units/:unit_id/replacements/:unit_id": {
-      "$ref": "./paths/part/replacement.json"
     }
   },
   "components": {

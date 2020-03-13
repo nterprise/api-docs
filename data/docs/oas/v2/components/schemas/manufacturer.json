@@ -1,19 +1,20 @@
 {
-  "x-id": "#manufacturer",
-  "x-nter-relation": "manufacturers",
-  "x-nter-model": "Manufacturer",
-  "x-nter-callable": true,
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/manufacturer.json",
+  "type": "object",
   "description": "A Manufacturer of parts",
+  "additionalProperties": false,
   "required": [
     "label",
     "manufacturer_id"
   ],
+  "x-niagara-model": "Manufacturer",
   "properties": {
     "manufacturer_id": {
       "type": "string",
       "description": "unique id",
       "example": "99ec26f2-fa31-4768-b357-268c708fcda5",
-      "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+      "pattern": "^[0-9a-zA-Z-_]$"
     },
     "label": {
       "type": "string",
@@ -26,6 +27,7 @@
     "slug": {
       "type": "string",
       "example": "apple-inc",
+      "readOnly": true,
       "x-examples": [
         "apple-inc"
       ],
@@ -34,6 +36,7 @@
   },
   "allOf": [
     {
+      "x-niagara-raw-ref": "#/properties/entityCommon",
       "$ref": "./entityCommon.json"
     }
   ],

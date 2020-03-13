@@ -1,14 +1,15 @@
 {
-  "x-id": "#unit",
-  "x-nter-relation": "units",
-  "x-nter-model": "Unit",
-  "x-nter-callable": true,
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/unit.json",
+  "type": "object",
   "description": "Defines the properties for a unit",
+  "additionalProperties": false,
   "required": [
     "label",
     "part",
     "unit_id"
   ],
+  "x-niagara-model": "Unit",
   "properties": {
     "unit_id": {
       "type": "string",
@@ -20,36 +21,24 @@
       "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
     },
     "label": {
-      "type": "string",
-      "example": "10\" iPad for Hugo",
-      "x-examples": [
-        "10\" iPad for Hugo"
-      ],
-      "description": "Name of the unit"
-    },
-    "slug": {
-      "type": "string",
-      "example": "10-ipad-for-hugo",
-      "x-examples": [
-        "10-ipad-for-hugo"
-      ],
-      "description": "Auto-generated slug for the unit"
+      "$ref": "./entityCommon.json#/properties/label"
     },
     "serial_number": {
       "type": "string",
+      "description": "Serial number of the unit with prefix stripped",
+      "readOnly": true,
       "example": "4EAVPS67GNL8",
       "x-examples": [
         "4EAVPS67GNL8"
-      ],
-      "description": "Serial number of the unit with prefix stripped"
+      ]
     },
     "raw_serial_number": {
       "type": "string",
+      "description": "Serial number of the unit",
       "example": "S4EAVPS67GNL8",
       "x-examples": [
         "S4EAVPS67GNL8"
-      ],
-      "description": "Serial number of the unit"
+      ]
     },
     "tenant_part_number": {
       "type": "string",
@@ -62,9 +51,6 @@
     "manufacturer": {
       "description": "The manufacturer that makes this unit",
       "type": "object",
-      "required": [
-        "part_number"
-      ],
       "properties": {
         "part_number": {
           "type": "string",
@@ -82,7 +68,6 @@
       ]
     },
     "vendor": {
-      "x-ref": "#vendor",
       "type": "object",
       "description": "The vendor that sold this unit",
       "properties": {
@@ -102,50 +87,30 @@
       ]
     },
     "part": {
-      "x-ref": "#part",
-      "description": "The part associated with this unit",
-      "allOf": [
-        {
-          "$ref": "./part.json"
-        }
-      ]
+      "$ref": "./part.json"
     },
     "customer": {
-      "x-ref": "#customer",
-      "description": "The customer who manages this unit",
-      "allOf": [
-        {
-          "$ref": "./customer.json"
-        }
-      ]
+      "deprecated": true,
+      "$ref": "./customer.json"
     },
     "current_location": {
-      "x-reg": "#location",
-      "description": "The current location for the unit",
-      "allOf": [
-        {
-          "$ref": "./location.json"
-        }
-      ]
+      "deprecated": true,
+      "$ref": "./location.json"
+
+    },
+    "location": {
+      "$ref": "./location.json"
     },
     "input_filter": {
       "$ref": "./inputFilter.json"
     },
     "current_status": {
       "$ref": "./status.json"
-    },
-    "status_history": {
-      "maximum": 10,
-      "description": "The last ten statuses",
-      "allOf": [
-        {
-          "$ref": "./statusHistory.json"
-        }
-      ]
     }
   },
   "allOf": [
     {
+      "x-niagara-raw-ref": "#/properties/entityCommon",
       "$ref": "./entityCommon.json"
     }
   ],

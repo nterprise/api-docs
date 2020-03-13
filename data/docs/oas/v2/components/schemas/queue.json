@@ -1,28 +1,15 @@
 {
-  "x-nter-relation": "queues",
-  "x-nter-model": "Queue",
-  "x-nter-callable": true,
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/queue.json",
+  "type": "object",
   "description": "Defines the properties for a location queue",
+  "additionalProperties": false,
   "required": [
-    "label"
+    "label",
+    "location"
   ],
+  "x-niagara-model": "Queue",
   "properties": {
-    "label": {
-      "type": "string",
-      "example": "Fast Lane",
-      "x-examples": [
-        "Fast Lane"
-      ],
-      "description": "Name of the queue"
-    },
-    "slug": {
-      "type": "string",
-      "example": "fast-lane",
-      "x-examples": [
-        "fast-lane"
-      ],
-      "description": "Auto-generated slug for the queue"
-    },
     "queue_id": {
       "type": "string",
       "description": "The identifier for the queue",
@@ -32,103 +19,37 @@
       ],
       "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
     },
+    "label": {
+      "$ref": "./entityCommon.json#/properties/label"
+    },
     "location": {
-      "type": "object",
-      "description": "The location for the queue",
-      "allOf": [
-        {
-          "$ref": "./location.json"
-        }
-      ]
+      "$ref": "./location.json"
     },
     "priority": {
       "type": "integer",
       "description": "Priority level for queue",
+      "format": "int32",
       "example": 42,
       "x-examples": [
         42
-      ],
-      "format": "int32"
+      ]
     },
     "total_work_orders": {
-      "type": "object",
-      "description": "The number of batches assigned to the queue",
-      "readOnly": true,
-      "properties": {
-        "pending": {
-          "type": "integer",
-          "description": "The number of cycles pending",
-          "format": "int32",
-          "readOnly": true,
-          "example": 4,
-          "x-examples": [
-            4
-          ]
-        },
-        "in_progress": {
-          "type": "integer",
-          "description": "The number of cycles in progress",
-          "format": "int32",
-          "readOnly": true,
-          "example": 4,
-          "x-examples": [
-            4
-          ]
-        },
-        "verifying": {
-          "type": "integer",
-          "description": "The number of cycles verifying",
-          "format": "int32",
-          "readOnly": true,
-          "example": 4,
-          "x-examples": [
-            4
-          ]
-        },
-        "complete": {
-          "type": "integer",
-          "description": "The number of cycles complete",
-          "format": "int32",
-          "readOnly": true,
-          "example": 4,
-          "x-examples": [
-            4
-          ]
-        },
-        "blocked": {
-          "type": "integer",
-          "description": "The number of cycles blocked",
-          "format": "int32",
-          "readOnly": true,
-          "example": 4,
-          "x-examples": [
-            4
-          ]
-        },
-        "cancelled": {
-          "type": "integer",
-          "description": "The number of cycles cancelled",
-          "format": "int32",
-          "readOnly": true,
-          "example": 4,
-          "x-examples": [
-            4
-          ]
-        }
-      }
+      "$ref": "./cycle.json"
     },
     "total_batches": {
       "type": "integer",
       "description": "Number of batches assigned to the queue",
+      "readOnly": true,
       "example": 56,
       "x-examples": [
         56
-      ],
-      "readOnly": true
+      ]
     }
   },
   "allOf": [
     {
+      "x-niagara-raw-ref": "#/properties/entityCommon",
       "$ref": "./entityCommon.json"
     }
   ],

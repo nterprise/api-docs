@@ -1,31 +1,17 @@
 {
-  "x-nter-relation": "programs",
-  "x-nter-model": "Program",
-  "x-nter-callable": true,
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/program.json",
+  "type": "object",
   "description": "Defines the properties for a program",
+  "additionalProperties": false,
   "required": [
     "label",
     "customer",
     "program_id",
-    "status_map"
+    "allowed_statuses"
   ],
+  "x-niagara-model": "Program",
   "properties": {
-    "label": {
-      "type": "string",
-      "example": "GAP Store refresh",
-      "x-examples": [
-        "GAP Store refresh"
-      ],
-      "description": "Name of the program"
-    },
-    "slug": {
-      "type": "string",
-      "example": "gap-store-refresh",
-      "x-examples": [
-        "gap-store-refresh"
-      ],
-      "description": "Name of the program"
-    },
     "program_id": {
       "type": "string",
       "description": "Unique identifier",
@@ -35,32 +21,25 @@
       ],
       "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
     },
+    "label": {
+      "$ref": "./entityCommon.json#/properties/label"
+    },
     "customer": {
-      "description": "The cstomer this program is for",
-      "allOf": [
-        {
-          "$ref": "./customer.json"
-        }
-      ]
+      "$ref": "./customer.json"
     },
     "allowed_statuses": {
-      "type": "array",
-      "description": "List of allowed statuses",
-      "items": {
-        "$ref": "./status.json"
-      }
-    },
-    "start_date": {
-      "$ref": "./dateRange.json#/properties/start_date"
-    },
-    "end_date": {
-      "$ref": "./dateRange.json#/properties/end_date"
+      "$ref": "./customer.json#/properties/allowed_statuses"
     }
   },
   "allOf": [
     {
+      "x-niagara-raw-ref": "#/properties/entityCommon",
       "$ref": "./entityCommon.json"
+    },
+    {
+      "$ref": "./dateRange.json"
     }
+
   ],
   "example": {
     "$ref": "../examples/program.json"

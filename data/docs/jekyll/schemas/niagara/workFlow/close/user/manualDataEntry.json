@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/close/user/manualDataEntry.json",
+  "type": "object",
+  "description": "Close ",
+  "required": [
+    "fields",
+    "step"
+  ],
+  "properties": {
+    "fields": {
+      "type": "array",
+      "description": "Configuration for each field",
+      "items": {
+        "type": "object",
+        "required": [
+          "value",
+          "label"
+        ],
+        "properties": {
+          "value": {
+            "type": "string",
+            "description": "Value to set on 'entity_path'. Note: this MUST always be passed as a string. The input filter is responsible for transforming the value to the correct data type"
+          },
+          "entity_field": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/manualDataEntry.json#/properties/options/properties/payload/properties/fields/items/properties/entity_field"
+          }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/close/stepCloseCommon.json"
+    }
+  ]
+}

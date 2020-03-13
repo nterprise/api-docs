@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/suffix.json",
+  "description": "Add a suffix to the start of a string. If the string already start with the suffix, it will not append.",
+  "type": "object",
+  "required": [
+    "type",
+    "options"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "suffix"
+      ]
+    },
+    "options": {
+      "type": "object",
+      "required": [
+        "suffix"
+      ],
+      "properties": {
+        "suffix": {
+          "type": "string",
+          "description": "The suffix to add"
+        }
+      }
+    }
+  }
+}

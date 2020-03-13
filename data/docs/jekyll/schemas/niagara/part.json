@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/part.json",
+  "type": "object",
+  "description": "Defines the properties for a part",
+  "additionalProperties": false,
+  "required": [
+    "label",
+    "part_id",
+    "customer",
+    "manufacturer"
+  ],
+  "properties": {
+    "part_id": {
+      "type": "string",
+      "description": "Unique identifier",
+      "pattern": "^[0-9a-zA-Z-_]+$"
+    },
+    "label": {
+      "type": "string",
+      "description": "Label for the part"
+    },
+    "customer": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/customer.json"
+    },
+    "manufacturer": {
+      "type": "object",
+      "description": "Manufacturer information for the part",
+      "required": [
+        "part_number"
+      ],
+      "properties": {
+        "part_number": {
+          "type": "string",
+          "description": "Manufacturer part number"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/manufacturer.json"
+        }
+      ]
+    },
+    "serial_prefix": {
+      "type": "string",
+      "description": "A serial number prefix for the part"
+    },
+    "input_filter": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter.json"
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json"
+    }
+  ]
+}

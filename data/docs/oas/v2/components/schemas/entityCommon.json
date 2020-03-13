@@ -1,10 +1,13 @@
 {
-  "x-ui-hide": true,
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/entityCommon.json",
   "type": "object",
   "description": "Common Properties to all entities",
   "required": [
     "label"
   ],
+  "x-niagara-model": "entityCommon",
+  "x-ui-hide": true,
   "properties": {
     "label": {
       "type": "string",

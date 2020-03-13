@@ -1,0 +1,88 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/unit.json",
+  "type": "object",
+  "description": "Defines the properties for a unit",
+  "additionalProperties": false,
+  "required": [
+    "label",
+    "part",
+    "unit_id"
+  ],
+  "properties": {
+    "unit_id": {
+      "type": "string",
+      "pattern": "^[0-9a-zA-Z-_]+$"
+    },
+    "label": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/label"
+    },
+    "serial_number": {
+      "type": "string",
+      "description": "Serial number of the unit with prefix stripped",
+      "readOnly": true
+    },
+    "raw_serial_number": {
+      "type": "string",
+      "description": "Serial number of the unit"
+    },
+    "tenant_part_number": {
+      "type": "string",
+      "description": "Identifier set by the tenant"
+    },
+    "manufacturer": {
+      "description": "The manufacturer that makes this unit",
+      "type": "object",
+      "properties": {
+        "part_number": {
+          "type": "string",
+          "description": "The part number supplied by the manufacturer"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/manufacturer.json"
+        }
+      ]
+    },
+    "vendor": {
+      "type": "object",
+      "description": "The vendor that sold this unit",
+      "properties": {
+        "part_number": {
+          "type": "string",
+          "description": "The part number supplied by the vendor"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/vendor.json"
+        }
+      ]
+    },
+    "part": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/part.json"
+    },
+    "customer": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/customer.json"
+    },
+    "current_location": {
+      "deprecated": true,
+      "$ref": "https://docs.nterprise.com/schemas/niagara/location.json"
+    },
+    "location": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/location.json"
+    },
+    "input_filter": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter.json"
+    },
+    "current_status": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/status.json"
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json"
+    }
+  ]
+}

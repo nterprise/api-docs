@@ -1,6 +1,7 @@
 {
-  "x-nter-relation": "dashboards",
-  "x-nter-callable": true,
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/dashboard.json",
+  "type": "object",
   "description": "Dashboard",
   "properties": {
     "dashboards": {

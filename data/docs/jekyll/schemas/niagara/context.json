@@ -1,0 +1,98 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/context.json",
+  "type": "object",
+  "description": "Context for an active workflow",
+  "additionalProperties": false,
+  "properties": {
+    "context_id": {
+      "type": "string",
+      "description": "Identifier for the context",
+      "pattern": "^[A-Za-z0-9-_]+$"
+    },
+    "workflow": {
+      "$ref": "./workFlow.json"
+    },
+    "current_step": {
+      "type": "string",
+      "description": "The current step to execute",
+      "readOnly": true
+    },
+    "last_steps": {
+      "type": "array",
+      "description": "Ordered list of the executed steps",
+      "readOnly": true,
+      "items": {
+        "type": "object",
+        "description": "Details for the step",
+        "properties": {
+          "step_name": {
+            "type": "string",
+            "description": "Name for the step",
+            "readOnly": true
+          },
+          "started_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The date time the step started",
+            "readOnly": true
+          },
+          "ended_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The date time the step ended",
+            "readOnly": true
+          },
+          "time_to_run": {
+            "type": "string",
+            "description": "The total time it took to run the step (with milliseconds)",
+            "readOnly": true
+          },
+          "did_error": {
+            "type": "boolean",
+            "description": "Flag to test if the step errored",
+            "readOnly": true
+          },
+          "did_timeout": {
+            "type": "boolean",
+            "description": "Flag if the step timed-out",
+            "readOnly": true
+          }
+        }
+      }
+    },
+    "started_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date time the context started",
+      "readOnly": true
+    },
+    "ended_at": {
+      "type": "string",
+      "format": "date-time",
+      "nullable": true,
+      "description": "The date time the context ended",
+      "readOnly": true
+    },
+    "time_to_run": {
+      "type": "string",
+      "description": "The total time it took to run the workflow (with milliseconds)",
+      "readOnly": true
+    },
+    "active": {
+      "type": "boolean",
+      "description": "Flag set if there are still steps which need to be executed",
+      "readOnly": true
+    },
+    "waiting_for_user": {
+      "type": "boolean",
+      "description": "Flag for when the user needs to complete the step"
+    },
+    "data": {
+      "type": "object",
+      "description": "Data set for the context",
+      "additionalProperties": true,
+      "readOnly": true
+    }
+  }
+}

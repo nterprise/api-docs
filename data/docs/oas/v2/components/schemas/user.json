@@ -1,8 +1,10 @@
 {
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/user.json",
+  "type": "object",
   "description": "User Information",
-  "x-nter-relation": "users",
-  "x-nter-model": "User",
-  "x-nter-callable": true,
+  "additionalProperties": false,
+  "x-niagara-model": "User",
   "properties": {
     "user_id": {
       "type": "string",
@@ -25,7 +27,6 @@
     "name": {
       "type": "string",
       "description": "Human readable name",
-      "nullable": true,
       "example": "Alice Bob",
       "x-examples": [
         "Alice Bob"
@@ -34,7 +35,6 @@
     "picture": {
       "type": "string",
       "description": "Image for the user",
-      "nullable": true,
       "example": "https://bit.ly/18gECvy",
       "x-examples": [
         "https://bit.ly/18gECvy"
@@ -43,7 +43,6 @@
     "profile": {
       "type": "string",
       "description": "Link to the users profile",
-      "nullable": true,
       "example": "https://bit.ly/18gECvy",
       "x-examples": [
         "https://bit.ly/18gECvy"

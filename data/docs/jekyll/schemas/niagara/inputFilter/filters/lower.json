@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/lower.json",
+  "type": "object",
+  "description": "Make the value lowercase",
+  "required": [
+    "type",
+    "options"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "lower"
+      ]
+    },
+    "options": {
+      "type": "object",
+      "description": "This filter has no options"
+    }
+  }
+}

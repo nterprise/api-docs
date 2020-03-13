@@ -1,0 +1,69 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/cycle.json",
+  "type": "object",
+  "readOnly": true,
+  "additionalProperties": false,
+  "properties": {
+    "pending": {
+      "type": "integer",
+      "description": "The number of cycles pending",
+      "format": "int32",
+      "readOnly": true,
+      "example": 13,
+      "x-examples": [
+        13
+      ]
+    },
+    "in_progress": {
+      "type": "integer",
+      "description": "The number of cycles in progress",
+      "format": "int32",
+      "readOnly": true,
+      "example": 2,
+      "x-examples": [
+        2
+      ]
+    },
+    "verifying": {
+      "type": "integer",
+      "description": "The number of cycles verifying",
+      "format": "int32",
+      "readOnly": true,
+      "example": 1,
+      "x-examples": [
+        1
+      ]
+    },
+    "complete": {
+      "type": "integer",
+      "description": "The number of cycles complete",
+      "format": "int32",
+      "readOnly": true,
+      "example": 4,
+      "x-examples": [
+        4
+      ]
+    },
+    "blocked": {
+      "type": "integer",
+      "description": "The number of cycles blocked",
+      "format": "int32",
+      "readOnly": true,
+      "example": 0,
+      "x-examples": [
+        0
+      ]
+    },
+    "cancelled": {
+      "type": "integer",
+      "description": "The number of cycles cancelled",
+      "format": "int32",
+      "readOnly": true,
+      "example": 0,
+      "x-examples": [
+        0
+      ]
+    }
+  }
+}

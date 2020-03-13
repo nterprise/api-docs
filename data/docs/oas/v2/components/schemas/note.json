@@ -1,14 +1,15 @@
 {
-  "x-id": "#note",
-  "x-nter-relation": "notes",
-  "x-nter-model": "Note",
-  "x-nter-callable": true,
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/note.json",
+  "type": "object",
   "description": "Defines the properties for a note",
+  "additionalProperties": false,
   "required": [
     "label",
     "text",
     "note_id"
   ],
+  "x-niagara-model": "Note",
   "properties": {
     "note_id": {
       "type": "string",
@@ -49,6 +50,7 @@
   },
   "allOf": [
     {
+      "x-niagara-raw-ref": "#/properties/entityCommon",
       "$ref": "./entityCommon.json"
     }
   ],

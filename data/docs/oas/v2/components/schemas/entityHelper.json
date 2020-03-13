@@ -1,5 +1,6 @@
 {
-  "x-ui-hide": true,
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/entityHelper.json",
   "type": "object",
   "description": "Common Properties to all entities",
   "required": [

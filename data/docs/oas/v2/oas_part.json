@@ -14,9 +14,6 @@
     "/parts/:part_id": {
       "$ref": "./paths/part/part.json"
     },
-    "/parts/:part_id/locations": {
-      "$ref": "./paths/part/partLocations.json"
-    },
     "/parts/:part_id/units": {
       "$ref": "./paths/part/units.json"
     }

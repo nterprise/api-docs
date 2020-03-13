@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/lessThan.json",
+  "type": "object",
+  "description": "Validate number is less than a value. By default, this will check if value is less than or equals to",
+  "required": [
+    "type",
+    "options"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "lessThan"
+      ]
+    },
+    "options": {
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "number",
+          "description": "The value to compare against"
+        },
+        "precision": {
+          "type": "integer",
+          "description": "When number is a float, this will set the decimal precision",
+          "minimum": 1,
+          "maximum": 8,
+          "default": 3
+        },
+        "include": {
+          "type": "boolean",
+          "description": "Include the value in the check",
+          "default": true
+        }
+      }
+    }
+  }
+}

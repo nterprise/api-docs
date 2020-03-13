@@ -1,14 +1,16 @@
 {
-  "x-id": "#work-order",
-  "x-nter-relation": "work-orders",
-  "x-nter-model": "WorkOrder",
-  "x-nter-callable": true,
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/workOrder.json",
+  "type": "object",
   "description": "Defines the properties for a unit",
+  "additionalProperties": false,
   "required": [
     "label",
     "part",
-    "unit_id"
+    "unit_id",
+    "work_order_type"
   ],
+  "x-niagara-model": "WorkOrder",
   "properties": {
     "work_order_id": {
       "type": "string",
@@ -20,30 +22,17 @@
       "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
     },
     "label": {
-      "type": "string",
-      "example": "Provision devices",
-      "x-examples": [
-        "Provision devices"
-      ],
-      "description": "Label for the work order"
-    },
-    "slug": {
-      "type": "string",
-      "example": "provision-devices",
-      "x-examples": [
-        "provision-devices"
-      ],
-      "description": "Auto-generated slug for the work order"
+      "$ref": "./entityCommon.json#/properties/label"
     },
     "description": {
       "type": "string",
+      "description": "Detailed description for the work order",
       "example": "Provision 150 devices for 123 Main St",
       "x-examples": [
         "Provision 150 devices for 123 Main St"
-      ],
-      "description": "Detailed description for the work order"
+      ]
     },
-    "type": {
+    "work_order_type": {
       "type": "string",
       "description": "Type of work order",
       "example": "device",
@@ -58,22 +47,13 @@
       "type": "string",
       "format": "date-time",
       "description": "End date",
-      "example": "2020-08-07T18:10:53+00:00",
+      "example": "2020-08-07T18:10:53.000Z",
       "x-examples": [
-        "2020-08-07T18:10:53+00:00"
+        "2020-08-07T18:10:53.000Z"
       ]
     },
     "current_status": {
       "$ref": "./status.json"
-    },
-    "status_history": {
-      "maximum": 10,
-      "description": "The last ten statuses",
-      "allOf": [
-        {
-          "$ref": "./statusHistory.json"
-        }
-      ]
     },
     "project": {
       "$ref": "./project.json"
@@ -97,82 +77,20 @@
               4
             ]
           },
-          "cycles_pending": {
-            "type": "integer",
-            "description": "The number of cycles pending",
-            "format": "int32",
-            "readOnly": true,
-            "example": 4,
-            "x-examples": [
-              4
-            ]
-          },
-          "cycles_in_progress": {
-            "type": "integer",
-            "description": "The number of cycles in progress",
-            "format": "int32",
-            "readOnly": true,
-            "example": 4,
-            "x-examples": [
-              4
-            ]
-          },
-          "cycles_verifying": {
-            "type": "integer",
-            "description": "The number of cycles verifying",
-            "format": "int32",
-            "readOnly": true,
-            "example": 4,
-            "x-examples": [
-              4
-            ]
-          },
-          "cycles_complete": {
-            "type": "integer",
-            "description": "The number of cycles complete",
-            "format": "int32",
-            "readOnly": true,
-            "example": 4,
-            "x-examples": [
-              4
-            ]
-          },
-          "cycles_blocked": {
-            "type": "integer",
-            "description": "The number of cycles blocked",
-            "format": "int32",
-            "readOnly": true,
-            "example": 4,
-            "x-examples": [
-              4
-            ]
-          },
-          "cycles_cancelled": {
-            "type": "integer",
-            "description": "The number of cycles cancelled",
-            "format": "int32",
-            "readOnly": true,
-            "example": 4,
-            "x-examples": [
-              4
-            ]
-          },
           "work_flow": {
             "$ref": "./workflow.json"
           }
         }
       }
-    },
-    "start_date": {
-      "$ref": "./dateRange.json#/properties/start_date"
-    },
-    "end_date": {
-      "$ref": "./dateRange.json#/properties/end_date"
     }
   },
   "allOf": [
     {
+      "x-niagara-raw-ref": "#/properties/entityCommon",
       "$ref": "./entityCommon.json"
+    },
+    {
+      "$ref": "./dateRange.json"
     }
   ],
   "example": {

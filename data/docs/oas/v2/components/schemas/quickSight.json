@@ -1,4 +1,6 @@
 {
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/location.json",
   "type": "object",
   "description": "Quick Sight dashboard",
   "x-ui-hide": true,

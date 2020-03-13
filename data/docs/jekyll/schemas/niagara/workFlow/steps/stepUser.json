@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepUser.json",
+  "type": "object",
+  "description": "A step which requires a user to complete",
+  "required": [
+    "type",
+    "options"
+  ],
+  "properties": {
+    "type": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepCommon.json#/properties/type"
+    },
+    "options": {
+      "type": "object",
+      "required": [
+        "component",
+        "payload"
+      ],
+      "properties": {
+        "component": {
+          "type": "string",
+          "description": "Name of the function to invoke"
+        },
+        "payload": {
+          "type": "object"
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepCommon.json"
+    }
+  ]
+}

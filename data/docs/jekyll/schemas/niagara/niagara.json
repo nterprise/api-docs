@@ -1,0 +1,68 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/niagara.json",
+  "type": "object",
+  "description": "A reference for all niagara entities",
+  "properties": {
+    "closeSteps": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/close/allCloseSteps.json"
+    },
+    "batch": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/batch.json"
+    },
+    "contact": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/contact.json"
+    },
+    "context": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/context.json"
+    },
+    "customer": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/customer.json"
+    },
+    "inputFilter": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter.json"
+    },
+    "location": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/location.json"
+    },
+    "manufacturer": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/manufacturer.json"
+    },
+    "note": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/note.json"
+    },
+    "part": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/part.json"
+    },
+    "program": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/program.json"
+    },
+    "project": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/project.json"
+    },
+    "queue": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/queue.json"
+    },
+    "resource": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/resource.json"
+    },
+    "status": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/status.json"
+    },
+    "unit": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/unit.json"
+    },
+    "user": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/user.json"
+    },
+    "vendor": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/vendor.json"
+    },
+    "workFlow": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow.json"
+    },
+    "workOrder": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workOrder.json"
+    }
+  }
+}
