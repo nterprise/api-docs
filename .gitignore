@@ -71,3 +71,6 @@ typings/
 .serverless
 .bundle
 vendor
+
+# SASS Cache
+.sass-cache
