@@ -1,8 +1,14 @@
 ---
-layout: default
-title: Terms of Service
-nav_order: 999999
+layout: blank
 ---
+<style type="text/css">
+.page-content > p:first-of-type {
+  display: none;
+}
+.page-content > hr:first-of-type {
+  display: none;
+}
+</style>
 # nterprise Software As A Service agreement
 
 **IMPORTANT-READ THIS NTERPRISE SOFTWARE AS A SERVICE AGREEMENT (THE "AGREEMENT") CAREFULLY BEFORE CONTINUING. BY (1) 
