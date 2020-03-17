@@ -6,19 +6,37 @@
   "additionalProperties": false,
   "required": [
     "label",
-    "part_id",
+    "entity_id",
+    "entity_type",
+    "created",
+    "updated",
     "customer",
     "manufacturer"
   ],
   "properties": {
     "part_id": {
-      "type": "string",
       "description": "Unique identifier",
-      "pattern": "^[0-9a-zA-Z-_]+$"
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_id"
+    },
+    "entity_id": {
+      "x-no-api-doc": true,
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_id"
+    },
+    "entity_type": {
+      "x-no-api-doc": true,
+      "const": "PART"
     },
     "label": {
-      "type": "string",
-      "description": "Label for the part"
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/label"
+    },
+    "slug": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/slug"
+    },
+    "created": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/created"
+    },
+    "updated": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/updated"
     },
     "customer": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/customer.json"
@@ -48,10 +66,5 @@
     "input_filter": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter.json"
     }
-  },
-  "allOf": [
-    {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json"
-    }
-  ]
+  }
 }

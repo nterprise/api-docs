@@ -5,14 +5,37 @@
   "description": "Defines the properties for a work order batch",
   "additionalProperties": false,
   "required": [
-    "queue"
+    "batch_id",
+    "queue",
+    "entity_id",
+    "entity_type",
+    "created",
+    "updated"
   ],
   "properties": {
     "batch_id": {
-      "type": "string",
       "description": "The identifier for the batch",
-      "readOnly": true,
-      "pattern": "^[0-9a-zA-Z-_]+$"
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_id"
+    },
+    "entity_id": {
+      "x-no-api-doc": true,
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_id"
+    },
+    "entity_type": {
+      "x-no-api-doc": true,
+      "const": "BAT"
+    },
+    "label": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/label"
+    },
+    "slug": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/slug"
+    },
+    "created": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/created"
+    },
+    "updated": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/updated"
     },
     "queue": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/queue.json"
@@ -33,10 +56,5 @@
     "work_order": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/workOrder.json"
     }
-  },
-  "allOf": [
-    {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json"
-    }
-  ]
+  }
 }

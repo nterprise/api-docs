@@ -5,17 +5,36 @@
   "description": "Contact Information",
   "additionalProperties": false,
   "required": [
-    "label"
+    "label",
+    "entity_id",
+    "entity_type",
+    "created",
+    "updated"
   ],
   "properties": {
     "contact_id": {
-      "type": "string",
       "description": "Identifier for the contact",
-      "readOnly": true,
-      "pattern": "^[0-9a-zA-Z-_]+$"
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_id"
+    },
+    "entity_id": {
+      "x-no-api-doc": true,
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_id"
+    },
+    "entity_type": {
+      "x-no-api-doc": true,
+      "const": "CON"
     },
     "label": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/label"
+    },
+    "slug": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/slug"
+    },
+    "created": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/created"
+    },
+    "updated": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/updated"
     },
     "email": {
       "type": "string",

@@ -6,22 +6,35 @@
   "additionalProperties": false,
   "required": [
     "label",
-    "manufacturer_id"
+    "entity_id",
+    "entity_type",
+    "created",
+    "updated"
   ],
   "properties": {
     "manufacturer_id": {
-      "type": "string",
-      "description": "unique id",
-      "pattern": "^[0-9a-zA-Z-_]$"
+      "description": "Manufacturer identifier",
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_id"
+    },
+    "entity_id": {
+      "x-no-api-doc": true,
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_id"
+    },
+    "entity_type": {
+      "x-no-api-doc": true,
+      "const": "MFR"
     },
     "label": {
-      "type": "string",
-      "description": "Label for the manufacturer"
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/label"
+    },
+    "slug": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/slug"
+    },
+    "created": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/created"
+    },
+    "updated": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/updated"
     }
-  },
-  "allOf": [
-    {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json"
-    }
-  ]
+  }
 }

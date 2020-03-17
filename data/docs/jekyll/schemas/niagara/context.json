@@ -4,11 +4,38 @@
   "type": "object",
   "description": "Context for an active workflow",
   "additionalProperties": false,
+  "required": [
+    "entity_id",
+    "entity_type",
+    "created",
+    "updated",
+    "workflow",
+    "entity"
+  ],
   "properties": {
     "context_id": {
-      "type": "string",
       "description": "Identifier for the context",
-      "pattern": "^[A-Za-z0-9-_]+$"
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_id"
+    },
+    "entity_id": {
+      "x-no-api-doc": true,
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_id"
+    },
+    "entity_type": {
+      "x-no-api-doc": true,
+      "const": "CTX"
+    },
+    "label": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/label"
+    },
+    "slug": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/slug"
+    },
+    "created": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/created"
+    },
+    "updated": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/updated"
     },
     "workflow": {
       "$ref": "./workFlow.json"
@@ -75,7 +102,7 @@
       "readOnly": true
     },
     "time_to_run": {
-      "type": "string",
+      "type": "number",
       "description": "The total time it took to run the workflow (with milliseconds)",
       "readOnly": true
     },
@@ -98,7 +125,7 @@
       "type": "object",
       "additionalProperties": false,
       "readOnly": true,
-      "oneOf": [
+      "anyOf": [
         {
           "$ref": "https://docs.nterprise.com/schemas/niagara/contact.json"
         },

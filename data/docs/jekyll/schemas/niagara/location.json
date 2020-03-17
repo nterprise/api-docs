@@ -6,17 +6,37 @@
   "additionalProperties": false,
   "required": [
     "label",
+    "entity_id",
+    "entity_type",
+    "created",
+    "updated",
     "location_type",
     "address"
   ],
   "properties": {
     "location_id": {
-      "type": "string",
       "description": "The identifier for the location",
-      "pattern": "^[0-9a-zA-Z-_]+$"
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_id"
+    },
+    "entity_id": {
+      "x-no-api-doc": true,
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_id"
+    },
+    "entity_type": {
+      "x-no-api-doc": true,
+      "const": "LOC"
     },
     "label": {
-      "type": "string"
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/label"
+    },
+    "slug": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/slug"
+    },
+    "created": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/created"
+    },
+    "updated": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/updated"
     },
     "location_type": {
       "type": "string",
@@ -328,10 +348,5 @@
         }
       }
     }
-  },
-  "allOf": [
-    {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json"
-    }
-  ]
+  }
 }
