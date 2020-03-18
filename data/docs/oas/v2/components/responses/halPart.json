@@ -1,0 +1,10 @@
+{
+  "description": "A Part HAL response",
+  "content": {
+    "application/hal+json": {
+      "schema": {
+        "$ref": "../schemas/halPart.json"
+      }
+    }
+  }
+}

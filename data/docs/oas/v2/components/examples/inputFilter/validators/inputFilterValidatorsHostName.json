@@ -1,6 +1,0 @@
-{
-  "type": "hostname",
-  "options": {
-    "record_type": "DNSKEY"
-  }
-}

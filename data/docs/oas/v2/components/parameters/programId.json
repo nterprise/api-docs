@@ -4,6 +4,6 @@
   "description": "Id for the program",
   "required": true,
   "schema": {
-    "$ref": "../schemas/program.json#/properties/program_id"
+    "$ref": "https://docs.nterprise.com/schemas/niagara/program.json#/properties/program_id"
   }
 }

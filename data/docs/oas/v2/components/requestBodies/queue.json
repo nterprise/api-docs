@@ -11,7 +11,7 @@
         ],
         "properties": {
           "label": {
-            "$ref": "../../components/schemas/queue.json#/properties/label"
+            "$ref": "https://docs.nterprise.com/schemas/niagara/queue.json#/properties/label"
           },
           "location": {
             "type": "object",
@@ -20,12 +20,12 @@
             ],
             "properties": {
               "location_id": {
-                "$ref": "../../components/schemas/location.json#/properties/location_id"
+                "$ref": "https://docs.nterprise.com/schemas/niagara/location.json#/properties/location_id"
               }
             }
           },
           "priority": {
-            "$ref": "../../components/schemas/queue.json#/properties/priority"
+            "$ref": "https://docs.nterprise.com/schemas/niagara/queue.json#/properties/priority"
           }
         }
       }

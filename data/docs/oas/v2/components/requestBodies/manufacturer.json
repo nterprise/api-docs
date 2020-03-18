@@ -9,7 +9,7 @@
         ],
         "properties": {
           "label": {
-            "$ref": "../../components/schemas/manufacturer.json#/properties/label"
+            "$ref": "https://docs.nterprise.com/schemas/niagara/manufacturer.json#/properties/label"
           }
         }
       }

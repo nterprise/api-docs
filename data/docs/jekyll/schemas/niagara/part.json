@@ -47,17 +47,13 @@
       "required": [
         "part_number"
       ],
+      "$ref": "https://docs.nterprise.com/schemas/niagara/manufacturer.json",
       "properties": {
         "part_number": {
           "type": "string",
           "description": "Manufacturer part number"
         }
-      },
-      "allOf": [
-        {
-          "$ref": "https://docs.nterprise.com/schemas/niagara/manufacturer.json"
-        }
-      ]
+      }
     },
     "serial_prefix": {
       "type": "string",

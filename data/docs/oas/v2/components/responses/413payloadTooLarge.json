@@ -5,23 +5,18 @@
       "schema": {
         "properties": {
           "title": {
-            "example": "Payload too Large"
+            "const": "Payload too Large"
           },
           "type": {
-            "example": "https://docs.nterprise.com/api/problem/PayloadTooLarge"
+            "const": "https://docs.nterprise.com/api/problem/PayloadTooLarge"
           },
           "status": {
-            "example": 413
+            "const": 413
           },
           "detail": {
-            "example": "The resource you are trying to upload is too large"
+            "const": "The resource you are trying to upload is too large"
           }
-        },
-        "allOf": [
-          {
-            "$ref": "../schemas/problem.json"
-          }
-        ]
+        }
       }
     }
   }

@@ -1,0 +1,40 @@
+{
+  "type": "object",
+  "properties": {
+    "_links": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "$ref": "./link.json",
+          "example": {
+            "href": "https://api.nterprise.com/contacts/QVBrO2wm13iEyl"
+          }
+        }
+      }
+    },
+    "contact_id": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/contact.json#/properties/contact_id"
+    },
+    "label": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/contact.json#/properties/label"
+    },
+    "slug": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/contact.json#/properties/slug"
+    },
+    "created": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/contact.json#/properties/created"
+    },
+    "updated": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/contact.json#/properties/updated"
+    },
+    "name": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/contact.json#/properties/name"
+    },
+    "email": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/contact.json#/properties/email"
+    },
+    "phone": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/contact.json#/properties/phone"
+    }
+  }
+}

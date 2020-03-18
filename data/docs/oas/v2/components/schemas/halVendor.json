@@ -1,0 +1,31 @@
+{
+  "type": "object",
+  "properties": {
+    "_links": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "$ref": "./link.json",
+          "example": {
+            "href": "https://api.nterprise.com/vendors/kk9z7zwvQYH5GKx"
+          }
+        }
+      }
+    },
+    "vendor_id": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/vendor.json#/properties/vendor_id"
+    },
+    "label": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/vendor.json#/properties/label"
+    },
+    "slug": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/vendor.json#/properties/slug"
+    },
+    "created": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/vendor.json#/properties/created"
+    },
+    "updated": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/vendor.json#/properties/updated"
+    }
+  }
+}

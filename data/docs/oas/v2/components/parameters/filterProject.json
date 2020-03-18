@@ -1,8 +1,0 @@
-{
-  "name": "filter[project_id]",
-  "in": "query",
-  "description": "Filter where the project id is this value",
-  "schema": {
-    "type": "string"
-  }
-}

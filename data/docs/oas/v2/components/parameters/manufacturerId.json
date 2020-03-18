@@ -4,6 +4,6 @@
   "description": "Id of the manufacturer",
   "required": true,
   "schema": {
-    "$ref": "../schemas/manufacturer.json#/properties/manufacturer_id"
+    "$ref": "https://docs.nterprise.com/schemas/niagara/manufacture.json#/properties/manufacture_id"
   }
 }

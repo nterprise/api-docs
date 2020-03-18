@@ -10,6 +10,26 @@
       "description": "The identifier for the user",
       "pattern": "^[0-9a-zA-Z-_]+$"
     },
+    "entity_id": {
+      "x-no-api-doc": true,
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_id"
+    },
+    "entity_type": {
+      "x-no-api-doc": true,
+      "const": "UNIT"
+    },
+    "label": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/label"
+    },
+    "slug": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/slug"
+    },
+    "created": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/created"
+    },
+    "updated": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/updated"
+    },
     "email": {
       "type": "string",
       "format": "email",

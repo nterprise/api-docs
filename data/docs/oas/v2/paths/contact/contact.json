@@ -1,0 +1,95 @@
+{
+  "get": {
+    "operationId": "fetchContactById",
+    "summary": "Fetches a contact by the contact Id",
+    "description": "Fetch Contact",
+    "tags": [
+      "Contact"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/contactId.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halContact.json"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      },
+      "404": {
+        "$ref": "../../components/responses/404notFound.json"
+      }
+    }
+  },
+  "put": {
+    "operationId": "updateContact",
+    "summary": "Updates a contact",
+    "description": "Updates a new contact following the contact schema",
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/contactId.json"
+      }
+    ],
+    "tags": [
+      "Contact"
+    ],
+    "requestBody": {
+      "$ref": "../../components/requestBodies/contact.json"
+    },
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halContact.json"
+      },
+      "400": {
+        "$ref": "../../components/responses/400badRequest.json"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      },
+      "409": {
+        "$ref": "../../components/responses/409conflict.json"
+      },
+      "423": {
+        "$ref": "../../components/responses/423locked.json"
+      }
+    }
+  },
+  "delete": {
+    "operationId": "deleteContact",
+    "summary": "Deletes a contact",
+    "description": "This will remove the contact from the system",
+    "tags": [
+      "Contact"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/contactId.json"
+      }
+    ],
+    "responses": {
+      "205": {
+        "description": "Contact deleted"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      },
+      "404": {
+        "$ref": "../../components/responses/404notFound.json"
+      },
+      "423": {
+        "$ref": "../../components/responses/423locked.json"
+      }
+    }
+  }
+}

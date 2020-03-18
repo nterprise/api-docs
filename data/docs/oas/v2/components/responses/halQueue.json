@@ -1,0 +1,10 @@
+{
+  "description": "A queue response",
+  "content": {
+    "application/hal+json": {
+      "schema": {
+        "$ref": "../schemas/halQueue.json"
+      }
+    }
+  }
+}

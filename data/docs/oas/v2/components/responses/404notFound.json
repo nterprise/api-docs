@@ -5,23 +5,18 @@
       "schema": {
         "properties": {
           "title": {
-            "example": "Not Found"
+            "const": "Not Found"
           },
           "type": {
-            "example": "https://docs.nterprise.com/api/problem/NotFound"
+            "const": "https://docs.nterprise.com/api/problem/NotFound"
           },
           "status": {
-            "example": 404
+            "const": 404
           },
           "detail": {
-            "example": "Resource not found"
+            "const": "Resource not found"
           }
-        },
-        "allOf": [
-          {
-            "$ref": "../schemas/problem.json"
-          }
-        ]
+        }
       }
     }
   }

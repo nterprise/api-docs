@@ -1,0 +1,10 @@
+{
+  "description": "A location response",
+  "content": {
+    "application/hal+json": {
+      "schema": {
+        "$ref": "../schemas/halLocation.json"
+      }
+    }
+  }
+}

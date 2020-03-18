@@ -1,8 +1,59 @@
 {
   "get": {
-    "$ref": "../operations/note/fetchNoteById.json"
+    "operationId": "fetchNoteById",
+    "summary": "Fetches a note by Id",
+    "description": "Fetch Note",
+    "tags": [
+      "Note"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/noteId.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halNote.json"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      },
+      "404": {
+        "$ref": "../../components/responses/404notFound.json"
+      }
+    }
   },
   "delete": {
-    "$ref": "../operations/note/deleteNote.json"
+    "operationId": "deleteNote",
+    "summary": "Deletes a note",
+    "description": "This will soft delete the note",
+    "tags": [
+      "Note"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/noteId.json"
+      }
+    ],
+    "responses": {
+      "205": {
+        "description": "Note deleted"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      },
+      "404": {
+        "$ref": "../../components/responses/404notFound.json"
+      },
+      "423": {
+        "$ref": "../../components/responses/423locked.json"
+      }
+    }
   }
 }

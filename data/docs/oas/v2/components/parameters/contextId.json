@@ -4,6 +4,6 @@
   "description": "Id for the context",
   "required": true,
   "schema": {
-    "$ref": "../schemas/context.json#/properties/context_id"
+    "$ref": "https://docs.nterprise.com/schemas/niagara/context.json#/properties/context_id"
   }
 }

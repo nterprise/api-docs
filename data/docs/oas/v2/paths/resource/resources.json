@@ -1,8 +1,54 @@
 {
   "get": {
-    "$ref": "../operations/resource/fetchAllResources.json"
+    "operationId": "fetchAllResources",
+    "summary": "Fetches A Page of resources",
+    "description": "Fetch resources",
+    "tags": [
+      "Resource"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/limit.json"
+      },
+      {
+        "$ref": "../../components/parameters/offset.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halResourcePage.json"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      }
+    }
   },
   "post": {
-    "$ref": "../operations/resource/createResource.json"
+    "operationId": "createResource",
+    "summary": "Creates a resource",
+    "description": "Creates a new resource",
+    "tags": [
+      "Resource"
+    ],
+    "requestBody": {
+      "$ref": "../../components/requestBodies/resource.json"
+    },
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halResource.json"
+      },
+      "400": {
+        "$ref": "../../components/responses/400badRequest.json"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      }
+    }
   }
 }

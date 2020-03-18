@@ -1,0 +1,52 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/batch.json",
+  "type": "object",
+  "description": "Defines the properties for a saved file",
+  "additionalProperties": false,
+  "required": [
+    "entity_id",
+    "entity_type",
+    "created",
+    "updated",
+    "content_length",
+    "content_type"
+  ],
+  "properties": {
+    "file_id": {
+      "description": "The identifier for the batch",
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_id"
+    },
+    "entity_id": {
+      "x-no-api-doc": true,
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_id"
+    },
+    "entity_type": {
+      "x-no-api-doc": true,
+      "const": "FILE"
+    },
+    "label": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/label"
+    },
+    "slug": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/slug"
+    },
+    "created": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/created"
+    },
+    "updated": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/updated"
+    },
+    "content_type": {
+      "type": "string",
+      "description": "MIME type of file",
+      "enum": [
+        "application/pdf"
+      ]
+    },
+    "content_length": {
+      "type": "number",
+      "description": "Length of file in bytes"
+    }
+  }
+}

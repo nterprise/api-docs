@@ -19,11 +19,12 @@
         ],
         "properties": {
           "value": {
-            "type": "string",
+            "type": ["string", "null"],
             "enum": [
               "ok",
               "na",
-              "bad"
+              "bad",
+              null
             ],
             "description": "Selects which item the user has selected"
           },

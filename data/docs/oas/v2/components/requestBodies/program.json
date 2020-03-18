@@ -10,16 +10,27 @@
         ],
         "properties": {
           "label": {
-            "$ref": "../../components/schemas/program.json#/properties/label"
+            "$ref": "https://docs.nterprise.com/schemas/niagara/program.json#/properties/label"
+          },
+          "customer": {
+            "type": "object",
+            "required": [
+              "customer_id"
+            ],
+            "properties": {
+              "customer_id": {
+                "$ref": "https://docs.nterprise.com/schemas/niagara/customer.json#/properties/customer_id"
+              }
+            }
           },
           "allowed_statuses": {
-            "$ref": "../../components/schemas/program.json#/properties/allowed_statuses"
+            "$ref": "https://docs.nterprise.com/schemas/niagara/program.json#/properties/allowed_statuses"
           },
           "start_date": {
-            "$ref": "../../components/schemas/dateRange.json#/properties/start_date"
+            "$ref": "https://docs.nterprise.com/schemas/niagara/program.json#/properties/start_date"
           },
           "end_date": {
-            "$ref": "../../components/schemas/dateRange.json#/properties/end_date"
+            "$ref": "https://docs.nterprise.com/schemas/niagara/program.json#/properties/end_date"
           }
         }
       }

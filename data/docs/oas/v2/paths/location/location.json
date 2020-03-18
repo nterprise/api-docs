@@ -1,11 +1,92 @@
 {
   "get": {
-    "$ref": "../operations/location/fetchLocationById.json"
+    "operationId": "fetchLocationById",
+    "summary": "Fetches a location by Id",
+    "description": "Fetch Location",
+    "tags": [
+      "Location"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/locationId.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halLocation.json"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      },
+      "404": {
+        "$ref": "../../components/responses/404notFound.json"
+      }
+    }
+
   },
   "put": {
-    "$ref": "../operations/location/updateLocation.json"
+    "operationId": "updateLocation",
+    "summary": "Updates a location",
+    "description": "Updates a location",
+    "tags": [
+      "Location"
+    ],
+    "requestBody": {
+      "$ref": "../../components/requestBodies/location.json"
+    },
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/locationId.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halLocation.json"
+      },
+      "400": {
+        "$ref": "../../components/responses/400badRequest.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      },
+      "423": {
+        "$ref": "../../components/responses/423locked.json"
+      }
+    }
+
   },
   "delete": {
-    "$ref": "../operations/location/deleteLocation.json"
+    "operationId": "deleteLocation",
+    "summary": "Deletes a location",
+    "description": "This will soft delete the location",
+    "tags": [
+      "Location"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/locationId.json"
+      }
+    ],
+    "responses": {
+      "205": {
+        "description": "Location deleted"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      },
+      "404": {
+        "$ref": "../../components/responses/404notFound.json"
+      },
+      "423": {
+        "$ref": "../../components/responses/423locked.json"
+      }
+    }
+
   }
 }

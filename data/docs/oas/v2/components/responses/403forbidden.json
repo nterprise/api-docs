@@ -5,23 +5,18 @@
       "schema": {
         "properties": {
           "title": {
-            "example": "Forbidden"
+            "const": "Forbidden"
           },
           "type": {
-            "example": "https://docs.nterprise.com/api/problem/Forbidden"
+            "const": "https://docs.nterprise.com/api/problem/Forbidden"
           },
           "status": {
-            "example": 403
+            "const": 403
           },
           "detail": {
-            "example": "You are forbidden to access this resource"
+            "const": "You are forbidden to access this resource"
           }
-        },
-        "allOf": [
-          {
-            "$ref": "../schemas/problem.json"
-          }
-        ]
+        }
       }
     }
   }

@@ -1,8 +1,62 @@
 {
   "get": {
-    "$ref": "../operations/workflow/fetchContextsForWorkflow.json"
+    "operationId": "fetchContextsForWorkflow",
+    "summary": "Fetches A Page of active contexts for a workflow",
+    "description": "Fetch Workflow Contexts",
+    "tags": [
+      "Workflow"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/workflowId.json"
+      },
+      {
+        "$ref": "../../components/parameters/limit.json"
+      },
+      {
+        "$ref": "../../components/parameters/offset.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halContextPage.json"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      }
+    }
   },
   "post": {
-    "$ref": "../operations/workflow/startWorkflow.json"
+    "operationId": "startWorkflow",
+    "summary": "Start workflow",
+    "description": "Starts a workflow on an entity",
+    "tags": [
+      "Workflow"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/workflowId.json"
+      }
+    ],
+    "requestBody": {
+      "$ref": "../../components/requestBodies/entity.json"
+    },
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halContext.json"
+      },
+      "400": {
+        "$ref": "../../components/responses/400badRequest.json"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      }
+    }
   }
 }

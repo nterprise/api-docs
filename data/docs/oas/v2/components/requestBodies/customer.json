@@ -1,5 +1,5 @@
 {
-  "description": "The customer to create",
+  "description": "A Customer request body",
   "content": {
     "application/json": {
       "schema": {
@@ -10,13 +10,13 @@
         ],
         "properties": {
           "label": {
-            "$ref": "../../components/schemas/customer.json#/properties/label"
+            "$ref": "https://docs.nterprise.com/schemas/niagara/customer.json#/properties/label"
           },
           "external_platform": {
-            "$ref": "../../components/schemas/customer.json#/properties/external_platform"
+            "$ref": "https://docs.nterprise.com/schemas/niagara/customer.json#/properties/external_platform"
           },
           "allowed_statuses": {
-            "$ref": "../../components/schemas/customer.json#/properties/allowed_statuses"
+            "$ref": "https://docs.nterprise.com/schemas/niagara/customer.json#/properties/allowed_statuses"
           }
         }
       }

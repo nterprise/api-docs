@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "3.0.3",
   "x-api": "niagara",
   "x-parent": "Niagara API",
   "info": {
@@ -21,7 +21,7 @@
   "components": {
     "schemas": {
       "Queue": {
-        "$ref": "./components/schemas/queue.json"
+        "$ref": "https://docs.nterprise.com/schemas/niagara/queue.json"
       }
     }
   }

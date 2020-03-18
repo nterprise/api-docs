@@ -4,6 +4,6 @@
   "description": "Id of the user",
   "required": true,
   "schema": {
-    "$ref": "../schemas/user.json#/properties/user_id"
+    "$ref": "https://docs.nterprise.com/schemas/niagara/user.json#/properties/user_id"
   }
 }

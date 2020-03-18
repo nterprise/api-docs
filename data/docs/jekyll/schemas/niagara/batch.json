@@ -5,7 +5,6 @@
   "description": "Defines the properties for a work order batch",
   "additionalProperties": false,
   "required": [
-    "batch_id",
     "queue",
     "entity_id",
     "entity_type",

@@ -1,8 +1,0 @@
-{
-  "type": "greater_than",
-  "options": {
-    "value": 42,
-    "precision": 6,
-    "include": false
-  }
-}

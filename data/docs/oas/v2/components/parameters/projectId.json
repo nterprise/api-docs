@@ -4,6 +4,6 @@
   "description": "Id for the project",
   "required": true,
   "schema": {
-    "$ref": "../schemas/project.json#/properties/project_id"
+    "$ref": "https://docs.nterprise.com/schemas/niagara/project.json#/properties/project_id"
   }
 }

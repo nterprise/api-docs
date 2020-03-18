@@ -1,11 +1,89 @@
 {
   "get": {
-    "$ref": "../operations/workOrder/fetchWorkOrderById.json"
+    "operationId": "fetchWorkOrderById",
+    "summary": "Fetches a work order by Id",
+    "description": "Fetch Work order",
+    "tags": [
+      "Work Order"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/workOrderId.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halWorkOrder.json"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      },
+      "404": {
+        "$ref": "../../components/responses/404notFound.json"
+      }
+    }
   },
   "put": {
-    "$ref": "../operations/workOrder/updateWorkOrder.json"
+    "operationId": "updateWorkOrder",
+    "summary": "Updates a work order",
+    "description": "Updates a work order",
+    "tags": [
+      "Work Order"
+    ],
+    "requestBody": {
+      "$ref": "../../components/requestBodies/workOrder.json"
+    },
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/workOrderId.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halWorkOrder.json"
+      },
+      "400": {
+        "$ref": "../../components/responses/400badRequest.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      },
+      "423": {
+        "$ref": "../../components/responses/423locked.json"
+      }
+    }
   },
   "delete": {
-    "$ref": "../operations/workOrder/deleteWorkOrder.json"
+    "operationId": "deleteWorkOrder",
+    "summary": "Deletes a work order",
+    "description": "This will soft delete the work order",
+    "tags": [
+      "Work Order"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/workOrderId.json"
+      }
+    ],
+    "responses": {
+      "205": {
+        "description": "WorkOrder deleted"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      },
+      "404": {
+        "$ref": "../../components/responses/404notFound.json"
+      },
+      "423": {
+        "$ref": "../../components/responses/423locked.json"
+      }
+    }
   }
 }

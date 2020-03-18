@@ -1,8 +1,46 @@
 {
   "get": {
-    "$ref": "../operations/settings/fetchAllStatuses.json"
+    "operationId": "fetchAllStatuses",
+    "summary": "Fetches all the statuses",
+    "description": "Fetch Statuses",
+    "tags": [
+      "Settings"
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/settingsStatus.json"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      }
+    }
   },
   "post": {
-    "$ref": "../operations/settings/createStatus.json"
+    "operationId": "createStatus",
+    "summary": "Creates a new status",
+    "description": "Creates a new status",
+    "tags": [
+      "Settings"
+    ],
+    "requestBody": {
+      "$ref": "../../components/requestBodies/status.json"
+    },
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/status.json"
+      },
+      "400": {
+        "$ref": "../../components/responses/400badRequest.json"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      }
+    }
   }
 }

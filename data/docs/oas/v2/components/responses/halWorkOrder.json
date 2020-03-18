@@ -1,0 +1,10 @@
+{
+  "description": "A work order response",
+  "content": {
+    "application/hal+json": {
+      "schema": {
+        "$ref": "../schemas/halWorkOrder.json"
+      }
+    }
+  }
+}

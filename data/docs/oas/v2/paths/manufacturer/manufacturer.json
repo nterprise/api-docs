@@ -1,11 +1,92 @@
 {
   "get": {
-    "$ref": "../operations/manufacturer/fetchManufacturerById.json"
+    "operationId": "fetchManufacturerById",
+    "summary": "Fetches a manufacturer by Id",
+    "description": "Fetch Manufacturer",
+    "tags": [
+      "Manufacturer"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/manufacturerId.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halManufacturer.json"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      },
+      "404": {
+        "$ref": "../../components/responses/404notFound.json"
+      }
+    }
   },
   "put": {
-    "$ref": "../operations/manufacturer/updateManufacturer.json"
+    "operationId": "updateManufacturer",
+    "summary": "Updates a manufacturer",
+    "description": "Updates a manufacturer",
+    "tags": [
+      "Manufacturer"
+    ],
+    "requestBody": {
+      "$ref": "../../components/requestBodies/manufacturer.json"
+    },
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/manufacturerId.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halManufacturer.json"
+      },
+      "400": {
+        "$ref": "../../components/responses/400badRequest.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      },
+      "409": {
+        "$ref": "../../components/responses/409conflict.json"
+      },
+      "423": {
+        "$ref": "../../components/responses/423locked.json"
+      }
+    }
   },
   "delete": {
-    "$ref": "../operations/manufacturer/deleteManufacturer.json"
+    "operationId": "deleteManufacturer",
+    "summary": "Deletes a manufacturer",
+    "description": "This will remove the manufacturer from the system",
+    "tags": [
+      "Manufacturer"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/manufacturerId.json"
+      }
+    ],
+    "responses": {
+      "205": {
+        "description": "Manufacturer deleted"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      },
+      "404": {
+        "$ref": "../../components/responses/404notFound.json"
+      },
+      "423": {
+        "$ref": "../../components/responses/423locked.json"
+      }
+    }
   }
 }

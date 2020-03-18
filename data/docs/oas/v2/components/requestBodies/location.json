@@ -5,18 +5,19 @@
       "schema": {
         "type": "object",
         "required": [
+          "label",
           "location_type",
           "address"
         ],
         "properties": {
+          "label": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/location.json#/properties/location_id"
+          },
           "location_type": {
-            "$ref": "../../components/schemas/location.json#/properties/location_type"
+            "$ref": "https://docs.nterprise.com/schemas/niagara/location.json#/properties/location_type"
           },
           "address": {
-            "$ref": "../../components/schemas/location.json#/properties/address"
-          },
-          "label": {
-            "$ref": "../../components/schemas/entityCommon.json#/properties/label"
+            "$ref": "https://docs.nterprise.com/schemas/niagara/location.json#/properties/address"
           }
         }
       }

@@ -1,8 +1,0 @@
-{
-  "name": "filter[manufacturer_id]",
-  "in": "query",
-  "description": "Filter where the manufacturer id is this valuer",
-  "schema": {
-    "type": "string"
-  }
-}

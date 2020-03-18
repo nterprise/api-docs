@@ -5,12 +5,18 @@
   "description": "Active date range for an entity",
   "properties": {
     "start_date": {
-      "type": "string",
+      "type": [
+        "string",
+        "null"
+      ],
       "format": "date-time",
       "description": "Start date"
     },
     "end_date": {
-      "type": "string",
+      "type": [
+        "string",
+        "null"
+      ],
       "format": "date-time",
       "description": "End date"
     }

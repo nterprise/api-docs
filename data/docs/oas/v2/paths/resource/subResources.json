@@ -1,5 +1,32 @@
 {
   "get": {
-    "$ref": "../operations/resource/fetchAllChildResources.json"
+    "operationId": "fetchAllChildResources",
+    "summary": "Fetches A Page of child resources",
+    "description": "Fetch child resources",
+    "tags": [
+      "Resource"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/resourceId.json"
+      },
+      {
+        "$ref": "../../components/parameters/limit.json"
+      },
+      {
+        "$ref": "../../components/parameters/offset.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halResourcePage.json"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      }
+    }
   }
 }

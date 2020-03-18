@@ -1,7 +1,0 @@
-{
-  "type": "startsWith",
-  "options": {
-    "starts_with": "foo",
-    "check_case": false
-  }
-}

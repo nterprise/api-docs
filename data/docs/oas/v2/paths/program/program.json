@@ -1,11 +1,89 @@
 {
   "get": {
-    "$ref": "../operations/program/fetchProgramById.json"
+    "operationId": "fetchProgramById",
+    "summary": "Fetches a program by Id",
+    "description": "Fetch Program",
+    "tags": [
+      "Program"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/programId.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halProgram.json"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      },
+      "404": {
+        "$ref": "../../components/responses/404notFound.json"
+      }
+    }
   },
   "put": {
-    "$ref": "../operations/program/updateProgram.json"
+    "operationId": "updateProgram",
+    "summary": "Updates a program",
+    "description": "Updates a program",
+    "tags": [
+      "Program"
+    ],
+    "requestBody": {
+      "$ref": "../../components/requestBodies/program.json"
+    },
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/programId.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halProgram.json"
+      },
+      "400": {
+        "$ref": "../../components/responses/400badRequest.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      },
+      "423": {
+        "$ref": "../../components/responses/423locked.json"
+      }
+    }
   },
   "delete": {
-    "$ref": "../operations/program/deleteProgram.json"
+    "operationId": "deleteProgram",
+    "summary": "Deletes a program",
+    "description": "This will soft delete the program",
+    "tags": [
+      "Program"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/programId.json"
+      }
+    ],
+    "responses": {
+      "205": {
+        "description": "Program deleted"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      },
+      "404": {
+        "$ref": "../../components/responses/404notFound.json"
+      },
+      "423": {
+        "$ref": "../../components/responses/423locked.json"
+      }
+    }
   }
 }

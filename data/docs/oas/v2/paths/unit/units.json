@@ -1,8 +1,54 @@
 {
   "get": {
-    "$ref": "../operations/unit/fetchAllUnits.json"
+    "operationId": "fetchAllUnits",
+    "summary": "Fetches A Page of units",
+    "description": "Fetch Unit",
+    "tags": [
+      "Unit"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/limit.json"
+      },
+      {
+        "$ref": "../../components/parameters/offset.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halUnitPage.json"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      }
+    }
   },
   "post": {
-    "$ref": "../operations/unit/createUnit.json"
+    "operationId": "createUnit",
+    "summary": "Creates a unit",
+    "description": "Creates a new unit",
+    "tags": [
+      "Unit"
+    ],
+    "requestBody": {
+      "$ref": "../../components/requestBodies/unit.json"
+    },
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halUnit.json"
+      },
+      "400": {
+        "$ref": "../../components/responses/400badRequest.json"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      }
+    }
   }
 }

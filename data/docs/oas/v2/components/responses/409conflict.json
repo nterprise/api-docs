@@ -5,23 +5,18 @@
       "schema": {
         "properties": {
           "title": {
-            "example": "Conflict"
+            "const": "Conflict"
           },
           "type": {
-            "example": "https://docs.nterprise.com/api/problem/Conflict"
+            "const": "https://docs.nterprise.com/api/problem/Conflict"
           },
           "status": {
-            "example": 409
+            "const": 409
           },
           "detail": {
-            "example": "This request contains a conflict to another resource"
+            "const": "This request contains a conflict to another resource"
           }
-        },
-        "allOf": [
-          {
-            "$ref": "../schemas/problem.json"
-          }
-        ]
+        }
       }
     }
   }

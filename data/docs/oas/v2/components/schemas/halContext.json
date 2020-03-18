@@ -1,0 +1,59 @@
+{
+  "type": "object",
+  "properties": {
+    "_links": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "$ref": "./link.json",
+          "example": {"href":"https://api.nterprise.com/contexts/kk9z7zwvQYH5GKx"}
+        }
+      }
+    },
+    "context_id": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/context.json#/properties/context_id"
+    },
+    "label": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/context.json#/properties/label"
+    },
+    "slug": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/context.json#/properties/slug"
+    },
+    "created": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/context.json#/properties/created"
+    },
+    "updated": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/context.json#/properties/updated"
+    },
+    "workflow": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/context.json#/properties/workflow"
+    },
+    "current_step": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/context.json#/properties/current_step"
+    },
+    "last_steps": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/context.json#/properties/last_steps"
+    },
+    "started_at": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/context.json#/properties/started_at"
+    },
+    "ended_at": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/context.json#/properties/ended_at"
+    },
+    "time_to_run": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/context.json#/properties/time_to_run"
+    },
+    "active": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/context.json#/properties/active"
+    },
+    "waiting_for_user": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/context.json#/properties/waiting_for_user"
+    },
+    "data": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/context.json#/properties/data"
+    },
+    "entity": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/context.json#/properties/entity"
+    }
+  }
+}

@@ -36,7 +36,6 @@
                 "type": "object",
                 "required": [
                   "label",
-                  "help",
                   "evaluated",
                   "na_option"
                 ],

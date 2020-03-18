@@ -4,6 +4,6 @@
   "description": "Id for the resource",
   "required": true,
   "schema": {
-    "$ref": "../schemas/resource.json#/properties/resource_id"
+    "$ref": "https://docs.nterprise.com/schemas/niagara/resource.json#/properties/resource_id"
   }
 }

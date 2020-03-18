@@ -13,22 +13,19 @@
         ],
         "properties": {
           "label": {
-            "$ref": "../../components/schemas/workflow.json#/properties/label"
+            "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow.json#/properties/workflow_id"
           },
-          "workflow_version": {
-            "$ref": "../../components/schemas/workflow.json#/properties/workflow_version"
+          "schema_version": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow.json#/properties/schema_version"
           },
           "applies_to": {
-            "$ref": "../../components/schemas/workflow.json#/properties/applies_to"
+            "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow.json#/properties/applies_to"
           },
           "starts_at": {
-            "$ref": "../../components/schemas/workflow.json#/properties/starts_at"
-          },
-          "context": {
-            "$ref": "../../components/schemas/workflow.json#/properties/context"
+            "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow.json#/properties/starts_at"
           },
           "steps": {
-            "$ref": "../../components/schemas/workflow.json#/properties/steps"
+            "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow.json#/properties/steps"
           }
         }
       }

@@ -1,14 +1,116 @@
 {
   "get": {
-    "$ref": "../operations/unit/fetchUnitById.json"
+    "operationId": "fetchUnitById",
+    "summary": "Fetches a unit by Id",
+    "description": "Fetch Unit",
+    "tags": [
+      "Unit"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/unitId.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halUnit.json"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      },
+      "404": {
+        "$ref": "../../components/responses/404notFound.json"
+      }
+    }
   },
   "put": {
-    "$ref": "../operations/unit/updateUnit.json"
+    "operationId": "updateUnit",
+    "summary": "Updates a unit",
+    "description": "Updates a unit",
+    "tags": [
+      "Unit"
+    ],
+    "requestBody": {
+      "$ref": "../../components/requestBodies/unit.json"
+    },
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/unitId.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halUnit.json"
+      },
+      "400": {
+        "$ref": "../../components/responses/400badRequest.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      },
+      "423": {
+        "$ref": "../../components/responses/423locked.json"
+      }
+    }
   },
   "patch": {
-    "$ref": "../operations/unit/partialUpdateUnit.json"
+    "operationId": "partialUpdateUnit",
+    "summary": "Updates part of unit",
+    "description": "Update the current status or current location for a unit",
+    "tags": [
+      "Unit"
+    ],
+    "requestBody": {
+      "$ref": "../../components/requestBodies/unit.json"
+    },
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/unitId.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halUnit.json"
+      },
+      "400": {
+        "$ref": "../../components/responses/400badRequest.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      }
+    }
   },
   "delete": {
-    "$ref": "../operations/unit/deleteUnit.json"
+    "operationId": "deleteUnit",
+    "summary": "Deletes a unit",
+    "description": "This will soft delete the unit",
+    "tags": [
+      "Unit"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/unitId.json"
+      }
+    ],
+    "responses": {
+      "205": {
+        "description": "Unit deleted"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      },
+      "404": {
+        "$ref": "../../components/responses/404notFound.json"
+      },
+      "423": {
+        "$ref": "../../components/responses/423locked.json"
+      }
+    }
   }
 }

@@ -4,6 +4,6 @@
   "description": "Id for the workflow",
   "required": true,
   "schema": {
-    "$ref": "../schemas/workflow.json#/properties/workflow_id"
+    "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow.json#/properties/work_flow_id"
   }
 }

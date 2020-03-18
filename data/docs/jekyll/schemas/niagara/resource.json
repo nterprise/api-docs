@@ -22,6 +22,15 @@
     "label": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/label"
     },
+    "slug": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/slug"
+    },
+    "created": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/created"
+    },
+    "updated": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/updated"
+    },
     "resource_type": {
       "type": "string",
       "description": "Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased",

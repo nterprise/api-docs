@@ -12,13 +12,13 @@
         ],
         "properties": {
           "label": {
-            "$ref": "../../components/schemas/unit.json#/properties/label"
+            "$ref": "https://docs.nterprise.com/schemas/niagara/unit.json#/properties/label"
           },
           "raw_serial_number": {
-            "$ref": "../../components/schemas/unit.json#/properties/raw_serial_number"
+            "$ref": "https://docs.nterprise.com/schemas/niagara/unit.json#/properties/serial_number"
           },
           "tenant_part_number": {
-            "$ref": "../../components/schemas/unit.json#/properties/tenant_part_number"
+            "$ref": "https://docs.nterprise.com/schemas/niagara/unit.json#/properties/tenant_part_number"
           },
           "part": {
             "type": "object",
@@ -27,12 +27,12 @@
             ],
             "properties": {
               "part_id": {
-                "$ref": "../../components/schemas/part.json#/properties/part_id"
+                "$ref": "https://docs.nterprise.com/schemas/niagara/part.json#/properties/part_id"
               }
             }
           },
           "current_status": {
-            "$ref": "../../components/schemas/status.json"
+            "$ref": "https://docs.nterprise.com/schemas/niagara/unit.json#/properties/current_status"
           },
           "current_location": {
             "type": "object",
@@ -41,7 +41,7 @@
             ],
             "properties": {
               "location_id": {
-                "$ref": "../../components/schemas/location.json#/properties/location_id"
+                "$ref": "https://docs.nterprise.com/schemas/niagara/unit.json#/properties/current_location"
               }
             }
           },
@@ -52,10 +52,10 @@
             ],
             "properties": {
               "vendor_id": {
-                "$ref": "../../components/schemas/vendor.json#/properties/vendor_id"
+                "$ref": "https://docs.nterprise.com/schemas/niagara/vendor.json#/properties/vendor_id"
               },
-              "vendor_part_number": {
-                "$ref": "../../components/schemas/unit.json#/properties/vendor/properties/part_number"
+              "part_number": {
+                "$ref": "https://docs.nterprise.com/schemas/niagara/unit.json#/properties/vendor/properties/part_number"
               }
             }
           }

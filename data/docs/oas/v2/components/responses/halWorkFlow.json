@@ -1,0 +1,10 @@
+{
+  "description": "A work flow response",
+  "content": {
+    "application/hal+json": {
+      "schema": {
+        "$ref": "../schemas/halWorkFlow.json"
+      }
+    }
+  }
+}

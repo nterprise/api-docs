@@ -1,0 +1,40 @@
+{
+  "description": "A paged response for contexts",
+  "content": {
+    "application/hal+json": {
+      "schema": {
+        "properties": {
+          "_embedded": {
+            "type": "object",
+            "properties": {
+              "nter:contexts": {
+                "type": "array",
+                "maxItems": 100,
+                "items": {
+                  "$ref": "../schemas/halContext.json"
+                }
+              }
+            }
+          }
+        },
+        "_links": {
+          "type": "object",
+          "properties": {
+            "self": {
+              "example": {
+                "href": "https://api.nterprise.com/contexts"
+              },
+              "$ref": "../schemas/link.json"
+            },
+            "next": {
+              "example": {
+                "href": "https://api.nterprise.com/contexts?offset=QVBrO2wm13iEyl&limit=100"
+              },
+              "$ref": "../schemas/link.json"
+            }
+          }
+        }
+      }
+    }
+  }
+}

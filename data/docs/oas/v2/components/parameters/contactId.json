@@ -4,6 +4,6 @@
   "description": "Id of the contact",
   "required": true,
   "schema": {
-    "$ref": "../schemas/contact.json#/properties/contact_id"
+    "$ref": "https://docs.nterprise.com/schemas/niagara/contact.json#/properties/contact_id"
   }
 }

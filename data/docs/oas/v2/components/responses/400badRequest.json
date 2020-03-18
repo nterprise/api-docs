@@ -6,23 +6,18 @@
         "type": "object",
         "properties": {
           "title": {
-            "example": "Bad Request"
+            "const": "Bad Request"
           },
           "type": {
-            "example": "https://docs.nterprise.com/api/problem/BadRequest"
+            "const": "https://docs.nterprise.com/api/problem/BadRequest"
           },
           "status": {
-            "example": 400
+            "const": 400
           },
           "detail": {
-            "example": "Invalid request"
+            "const": "Invalid request"
           }
-        },
-        "allOf": [
-          {
-            "$ref": "../schemas/problem.json"
-          }
-        ]
+        }
       }
     }
   }

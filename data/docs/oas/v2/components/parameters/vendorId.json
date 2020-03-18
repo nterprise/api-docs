@@ -4,6 +4,6 @@
   "description": "Id of the vendor",
   "required": true,
   "schema": {
-    "$ref": "../schemas/vendor.json#/properties/vendor_id"
+    "$ref": "https://docs.nterprise.com/schemas/niagara/vendor.json#/properties/vendor_id"
   }
 }

@@ -1,0 +1,40 @@
+{
+  "description": "A paged response for users",
+  "content": {
+    "application/hal+json": {
+      "schema": {
+        "properties": {
+          "_embedded": {
+            "type": "object",
+            "properties": {
+              "nter:users": {
+                "type": "array",
+                "maxItems": 100,
+                "items": {
+                  "$ref": "../schemas/halUser.json"
+                }
+              }
+            }
+          }
+        },
+        "_links": {
+          "type": "object",
+          "properties": {
+            "self": {
+              "example": {
+                "href": "https://api.nterprise.com/users"
+              },
+              "$ref": "../schemas/link.json"
+            },
+            "next": {
+              "example": {
+                "href": "https://api.nterprise.com/users?offset=QVBrO2wm13iEyl&limit=100"
+              },
+              "$ref": "../schemas/link.json"
+            }
+          }
+        }
+      }
+    }
+  }
+}

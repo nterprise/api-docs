@@ -10,10 +10,10 @@
         ],
         "properties": {
           "label": {
-            "$ref": "../../components/schemas/note.json#/properties/label"
+            "$ref": "https://docs.nterprise.com/schemas/niagara/note.json#/properties/label"
           },
           "text": {
-            "$ref": "../../components/schemas/note.json#/properties/text"
+            "$ref": "https://docs.nterprise.com/schemas/niagara/note.json#/properties/label"
           }
         }
       }

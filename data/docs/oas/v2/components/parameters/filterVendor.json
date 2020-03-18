@@ -1,8 +1,0 @@
-{
-  "name": "filter[vendor_id]",
-  "in": "query",
-  "description": "Filter where the vendor id is this value",
-  "schema": {
-    "type": "string"
-  }
-}

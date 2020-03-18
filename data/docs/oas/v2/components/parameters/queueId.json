@@ -4,6 +4,6 @@
   "description": "Id for the queue",
   "required": true,
   "schema": {
-    "$ref": "../schemas/queue.json#/properties/queue_id"
+    "$ref": "https://docs.nterprise.com/schemas/niagara/queue.json#/properties/queue_id"
   }
 }

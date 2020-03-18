@@ -1,5 +1,35 @@
 {
   "get": {
-    "$ref": "../operations/vendor/fetchAllVendorParts.json"
+    "operationId": "fetchAllVendorParts",
+    "summary": "Fetches A Page of parts for the vendor",
+    "description": "Fetch vendor parts",
+    "tags": [
+      "Vendor"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/vendorId.json"
+      },
+      {
+        "$ref": "../../components/parameters/limit.json"
+      },
+      {
+        "$ref": "../../components/parameters/offset.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halPartPage.json"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "404": {
+        "$ref": "../../components/responses/404notFound.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      }
+    }
   }
 }

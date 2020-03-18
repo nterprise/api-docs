@@ -5,23 +5,18 @@
       "schema": {
         "properties": {
           "title": {
-            "example": "Unauthorized"
+            "const": "Unauthorized"
           },
           "type": {
-            "example": "https://docs.nterprise.com/api/problem/Unauthorized"
+            "const": "https://docs.nterprise.com/api/problem/Unauthorized"
           },
           "status": {
-            "example": 401
+            "const": 401
           },
           "detail": {
-            "example": "You are not authorized to access this resource"
+            "const": "You are not authorized to access this resource"
           }
-        },
-        "allOf": [
-          {
-            "$ref": "../schemas/problem.json"
-          }
-        ]
+        }
       }
     }
   }

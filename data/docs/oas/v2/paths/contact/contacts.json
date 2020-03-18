@@ -1,0 +1,57 @@
+{
+  "get": {
+    "operationId": "fetchAllContacts",
+    "summary": "Fetches A Page of contacts",
+    "description": "Fetch Contact",
+    "tags": [
+      "Contact"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/limit.json"
+      },
+      {
+        "$ref": "../../components/parameters/offset.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halContactPage.json"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      }
+    }
+  },
+  "post": {
+    "operationId": "createContact",
+    "summary": "Creates a contact",
+    "description": "Creates a new contact following the contact schema",
+    "tags": [
+      "Contact"
+    ],
+    "requestBody": {
+      "$ref": "../../components/requestBodies/contact.json"
+    },
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halContact.json"
+      },
+      "400": {
+        "$ref": "../../components/responses/400badRequest.json"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      },
+      "409": {
+        "$ref": "../../components/responses/409conflict.json"
+      }
+    }
+  }
+}

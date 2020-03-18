@@ -1,8 +1,63 @@
 {
   "get": {
-    "$ref": "../operations/customer/fetchAllCustomers.json"
+    "operationId": "fetchAllCustomers",
+    "summary": "Fetches A Page of customers",
+    "description": "Fetch Customer",
+    "tags": [
+      "Customer"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/limit.json"
+      },
+      {
+        "$ref": "../../components/parameters/offset.json"
+      },
+      {
+        "$ref": "../../components/parameters/standardSort.json"
+      },
+      {
+        "$ref": "../../components/parameters/filterLabel.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halCustomer.json"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      }
+    }
   },
   "post": {
-    "$ref": "../operations/customer/createCustomer.json"
+    "operationId": "createCustomer",
+    "summary": "Creates a customer",
+    "description": "Creates a new customer following the customer schema",
+    "tags": [
+      "Customer"
+    ],
+    "requestBody": {
+      "$ref": "../../components/requestBodies/customer.json"
+    },
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halCustomer.json"
+      },
+      "400": {
+        "$ref": "../../components/responses/400badRequest.json"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      },
+      "409": {
+        "$ref": "../../components/responses/409conflict.json"
+      }
+    }
   }
 }

@@ -11,16 +11,16 @@
         ],
         "properties": {
           "label": {
-            "$ref": "../../components/schemas/contact.json#/properties/label"
+            "$ref": "https://docs.nterprise.com/schemas/niagara/contact.json#/properties/label"
           },
           "name": {
-            "$ref": "../../components/schemas/contact.json#/properties/name"
+            "$ref": "https://docs.nterprise.com/schemas/niagara/contact.json#/properties/name"
           },
           "email": {
-            "$ref": "../../components/schemas/contact.json#/properties/email"
+            "$ref": "https://docs.nterprise.com/schemas/niagara/contact.json#/properties/email"
           },
           "phone": {
-            "$ref": "../../components/schemas/contact.json#/properties/phone"
+            "$ref": "https://docs.nterprise.com/schemas/niagara/contact.json#/properties/phone"
           }
         }
       }

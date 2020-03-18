@@ -1,8 +1,57 @@
 {
   "get": {
-    "$ref": "../operations/part/fetchAllParts.json"
+    "operationId": "fetchAllParts",
+    "summary": "Fetches A Page of parts",
+    "description": "Fetch Part",
+    "tags": [
+      "Part"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/limit.json"
+      },
+      {
+        "$ref": "../../components/parameters/offset.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halPartPage.json"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      }
+    }
   },
   "post": {
-    "$ref": "../operations/part/createPart.json"
+    "operationId": "createPart",
+    "summary": "Creates a part ",
+    "description": "Creates a new part  following the part  schema",
+    "tags": [
+      "Part"
+    ],
+    "requestBody": {
+      "$ref": "../../components/requestBodies/part.json"
+    },
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halPart.json"
+      },
+      "400": {
+        "$ref": "../../components/responses/400badRequest.json"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      },
+      "409": {
+        "$ref": "../../components/responses/409conflict.json"
+      }
+    }
   }
 }

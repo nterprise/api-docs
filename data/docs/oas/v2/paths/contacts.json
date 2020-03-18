@@ -1,8 +1,0 @@
-{
-  "get": {
-    "$ref": "./operations/contact/fetchAllContacts.json"
-  },
-  "post": {
-    "$ref": "./operations/contact/createContact.json"
-  }
-}

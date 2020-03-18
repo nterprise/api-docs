@@ -1,8 +1,54 @@
 {
   "get": {
-    "$ref": "../operations/workflow/fetchAllWorkflows.json"
+    "operationId": "fetchAllWorkflows",
+    "summary": "Fetches A Page of workflows",
+    "description": "Fetch Workflow",
+    "tags": [
+      "Workflow"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/limit.json"
+      },
+      {
+        "$ref": "../../components/parameters/offset.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halWorkflowPage.json"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      }
+    }
   },
   "post": {
-    "$ref": "../operations/workflow/createWorkflow.json"
+    "operationId": "createWorkflow",
+    "summary": "Creates a workflow",
+    "description": "Creates a new workflow",
+    "tags": [
+      "Workflow"
+    ],
+    "requestBody": {
+      "$ref": "../../components/requestBodies/workflow.json"
+    },
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halWorkflow.json"
+      },
+      "400": {
+        "$ref": "../../components/responses/400badRequest.json"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      }
+    }
   }
 }

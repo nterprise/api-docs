@@ -16,9 +16,8 @@
     "schema_version"
   ],
   "properties": {
-    "workflow_id": {
-      "type": "string",
-      "pattern": "^[0-9a-zA-Z-_]+$"
+    "work_flow_id": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_id"
     },
     "entity_id": {
       "x-no-api-doc": true,

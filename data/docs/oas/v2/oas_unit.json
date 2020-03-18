@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "3.0.3",
   "x-api": "niagara",
   "x-parent": "Niagara API",
   "info": {
@@ -18,7 +18,7 @@
   "components": {
     "schemas": {
       "Unit": {
-        "$ref": "./components/schemas/unit.json"
+        "$ref": "https://docs.nterprise.com/schemas/niagara/unit.json"
       }
     }
   }

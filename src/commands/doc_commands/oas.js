@@ -73,6 +73,7 @@ exports.handler = async (argv) => {
         },
         [],
     );
+
     logger.debug('Files to process', files);
     if (files.length < 1) {
         logger.error('No files to process');
@@ -86,16 +87,18 @@ exports.handler = async (argv) => {
             logger.debug(`setting CWD to ${path.dirname(file)}`);
             process.chdir(path.dirname(file));
             logger.debug('Dereferencing file');
-            const schema = await RefParser.dereference(require(file));
+            const oas = await RefParser.dereference(require(file));
             logger.debug('Running widdershins on schema');
 
             const newFile = path.join(
                 folders.jekyllPath,
-                _.get(schema, 'x-api'),
+                'api',
+                _.get(oas, 'x-api'),
                 path.basename(file).replace('.json', '.md'),
             );
+
             logger.debug(`Saving markdown to ${newFile}`);
-            converter.convert(schema, widdershinsOptions, (err, str) => {
+            converter.convert(oas, widdershinsOptions, (err, str) => {
                 if (err) {
                     logger.error('Failed to convert file', err);
                     return;
@@ -103,7 +106,7 @@ exports.handler = async (argv) => {
                 const parts = [
                     '---',
                     'layout: page',
-                    `parent: ${_.get(schema, 'x-parent')}`,
+                    `parent: ${_.get(oas, 'x-parent')}`,
                     `nav_order: ${index}`,
                     ...str.split('\n').slice(1),
                 ];

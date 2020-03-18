@@ -1,11 +1,92 @@
 {
   "get": {
-    "$ref": "../operations/part/fetchPartById.json"
+    "operationId": "fetchPartById",
+    "summary": "Fetches a part  by Id",
+    "description": "Fetch Part ",
+    "tags": [
+      "Part"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/partId.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halPart.json"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      },
+      "404": {
+        "$ref": "../../components/responses/404notFound.json"
+      }
+    }
   },
   "put": {
-    "$ref": "../operations/part/updatePart.json"
+    "operationId": "updatePart",
+    "summary": "Updates a part ",
+    "description": "Updates a part ",
+    "tags": [
+      "Part"
+    ],
+    "requestBody": {
+      "$ref": "../../components/requestBodies/part.json"
+    },
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/partId.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halPart.json"
+      },
+      "400": {
+        "$ref": "../../components/responses/400badRequest.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      },
+      "409": {
+        "$ref": "../../components/responses/409conflict.json"
+      },
+      "423": {
+        "$ref": "../../components/responses/423locked.json"
+      }
+    }
   },
   "delete": {
-    "$ref": "../operations/part/deletePart.json"
+    "operationId": "deletePart",
+    "summary": "Deletes a part ",
+    "description": "This will remove the part  from the system",
+    "tags": [
+      "Part"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/partId.json"
+      }
+    ],
+    "responses": {
+      "205": {
+        "description": "Part  deleted"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      },
+      "404": {
+        "$ref": "../../components/responses/404notFound.json"
+      },
+      "423": {
+        "$ref": "../../components/responses/423locked.json"
+      }
+    }
   }
 }

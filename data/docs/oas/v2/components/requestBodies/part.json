@@ -12,7 +12,7 @@
         ],
         "properties": {
           "label": {
-            "$ref": "../../components/schemas/part.json#/properties/label"
+            "$ref": "https://docs.nterprise.com/schemas/niagara/part.json#/properties/label"
           },
           "customer": {
             "type": "object",
@@ -21,7 +21,7 @@
             ],
             "properties": {
               "customer_id": {
-                "$ref": "../../components/schemas/customer.json#/properties/customer_id"
+                "$ref": "https://docs.nterprise.com/schemas/niagara/customer.json#/properties/customer_id"
               }
             }
           },
@@ -33,21 +33,18 @@
             ],
             "properties": {
               "manufacturer_id": {
-                "$ref": "../../components/schemas/manufacturer.json#/properties/manufacturer_id"
+                "$ref": "https://docs.nterprise.com/schemas/niagara/manufacturer.json#/properties/manufacturer_id"
               },
               "part_number": {
-                "$ref": "../../components/schemas/part.json#/properties/manufacturer/properties/part_number"
+                "$ref": "https://docs.nterprise.com/schemas/niagara/manufacturer.json#/properties/part_number"
               }
             }
           },
           "serial_prefix": {
-            "$ref": "../../components/schemas/part.json#/properties/serial_prefix"
+            "$ref": "https://docs.nterprise.com/schemas/niagara/part.json#/properties/serial_prefix"
           },
           "input_filter": {
-            "type": "array",
-            "items": {
-              "$ref": "../../components/schemas/inputFilter.json"
-            }
+            "$ref": "https://docs.nterprise.com/schemas/niagara/part.json#/properties/input_filter"
           }
         }
       }

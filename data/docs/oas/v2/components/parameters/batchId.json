@@ -4,6 +4,6 @@
   "description": "Id of the batch",
   "required": true,
   "schema": {
-    "$ref": "../schemas/batch.json#/properties/batch_id"
+    "$ref": "https://docs.nterprise.com/schemas/niagara/batch.json#/properties/batch_id"
   }
 }

@@ -1,0 +1,55 @@
+{
+  "type": "object",
+  "properties": {
+    "_links": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "$ref": "./link.json",
+          "example": {
+            "href": "https://api.nterprise.com/work_orders/kk9z7zwvQYH5GKx"
+          }
+        }
+      }
+    },
+    "work_order_id": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workOrder.json#/properties/work_order_id"
+    },
+    "label": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workOrder.json#/properties/label"
+    },
+    "slug": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workOrder.json#/properties/slug"
+    },
+    "created": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workOrder.json#/properties/created"
+    },
+    "updated": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workOrder.json#/properties/updated"
+    },
+    "start_date": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workOrder.json#/properties/updated"
+    },
+    "end_date": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workOrder.json#/properties/updated"
+    },
+    "description": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workOrder.json#/properties/description"
+    },
+    "work_order_type": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workOrder.json#/properties/work_order_type"
+    },
+    "due_date": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workOrder.json#/properties/due_date"
+    },
+    "current_status": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workOrder.json#/properties/current_status"
+    },
+    "project": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workOrder.json#/properties/project"
+    },
+    "work_flows":{
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workOrder.json#/properties/work_flows"
+    }
+  }
+}

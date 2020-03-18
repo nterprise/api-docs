@@ -1,0 +1,10 @@
+{
+  "description": "A vendor response",
+  "content": {
+    "application/hal+json": {
+      "schema": {
+        "$ref": "../schemas/halVendor.json"
+      }
+    }
+  }
+}

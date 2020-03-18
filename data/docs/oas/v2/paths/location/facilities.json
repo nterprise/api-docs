@@ -1,5 +1,29 @@
 {
   "get": {
-    "$ref": "../operations/location/fetchAllFacilities.json"
+    "operationId": "fetchAllFacilities",
+    "summary": "Fetches A Page of facilities",
+    "description": "Fetch facilities",
+    "tags": [
+      "Location"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/limit.json"
+      },
+      {
+        "$ref": "../../components/parameters/offset.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halLocationPage.json"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      }
+    }
   }
 }

@@ -1,8 +1,0 @@
-{
-  "name": "filter[type]",
-  "in": "query",
-  "description": "Filter where the location type is this value",
-  "schema": {
-    "$ref": "../schemas/location.json#/properties/location_type"
-  }
-}

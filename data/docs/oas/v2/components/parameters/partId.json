@@ -4,6 +4,6 @@
   "description": "Id for the part",
   "required": true,
   "schema": {
-    "$ref": "../schemas/part.json#/properties/part_id"
+    "$ref": "https://docs.nterprise.com/schemas/niagara/part.json#/properties/part_id"
   }
 }

@@ -2,11 +2,6 @@
   "name": "api-docs",
   "version": "1.0.0",
   "description": "Swagger documentation",
-  "scripts": {
-    "start": "gulp serve",
-    "lint": "gulp lint",
-    "precommit": "gulp"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nfrastructuredev/api-docs.git"
@@ -77,32 +72,22 @@
   },
   "dependencies": {
     "@nterprise/common-js": "^4.0.0",
-    "aws-serverless-express": "^3.3.6",
     "chance": "^1.1.4",
     "express": "^4.17.1",
     "faker": "^4.1.0",
-    "json-ref-parser": "^1.0.0",
     "json-schema-faker": "^0.5.0-rc23",
-    "jsonpath": "^1.0.2",
     "lodash": "^4",
-    "request": "^2.88.2",
-    "uuid": "^7.0.1",
     "winston": "^3.2.1",
-    "yargs": "^15.1.0"
+    "yargs": "^15.3.1"
   },
   "devDependencies": {
     "eslint": "^6.8.0",
     "eslint-config-google": "^0.14.0",
-    "git-pre-commit": "^2.1.4",
     "glob": "^7.1.6",
     "glob-fs": "^0.1.7",
     "gulp": "^4.0.2",
     "gulp-cli": "^2.2.0",
-    "gulp-fn": "0.0.3",
-    "gulp-nodemon": "^2.4.2",
-    "gulp-shell": "^0.8.0",
-    "json-schema-ref-parser": "^7.1.4",
-    "swagger-cli": "^3.0.1",
+    "json-schema-ref-parser": "^8.0.0",
     "widdershins": "^3.6.7"
   }
 }

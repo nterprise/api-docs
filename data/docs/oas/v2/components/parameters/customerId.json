@@ -4,6 +4,6 @@
   "description": "Id of the customer",
   "required": true,
   "schema": {
-    "$ref": "../schemas/customer.json#/properties/customer_id"
+    "$ref": "https://docs.nterprise.com/schemas/niagara/customer.json#/properties/customer_id"
   }
 }
