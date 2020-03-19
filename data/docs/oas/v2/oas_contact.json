@@ -9,10 +9,10 @@
   },
   "paths": {
     "/contacts": {
-      "$ref": "./paths/contacts.json"
+      "$ref": "./paths/contact/contacts.json"
     },
-    "/contacts/:contact_id": {
-      "$ref": "./paths/contact.json"
+    "/contacts/{contact_id}": {
+      "$ref": "./paths/contact/contact.json"
     }
   },
   "components": {

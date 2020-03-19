@@ -1,0 +1,46 @@
+{
+  "type": "object",
+  "properties": {
+    "_links": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "$ref": "./link.json",
+          "example": {
+            "href": "https://api.nterprise.com/dashboards"
+          }
+        }
+      }
+    },
+    "dashboards": {
+      "description": "A List of all dashboards configured",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "Quick Sight dashboard",
+        "x-ui-hide": true,
+        "properties": {
+          "type": {
+            "description": "Describes type of dashboard. Embedded link to",
+            "type": "string",
+            "readOnly": true,
+            "enum": [
+              "quickSight"
+            ]
+          },
+          "embed_url": {
+            "description": "The link to the embedded dashboard from quick sight",
+            "type": "string",
+            "format": "url",
+            "readOnly": true
+          },
+          "expires_in": {
+            "description": "How long until the embedded link expires. Calling the endpoint will generate a fresh embed url",
+            "readOnly": true,
+            "type": "integer"
+          }
+        }
+      }
+    }
+  }
+}

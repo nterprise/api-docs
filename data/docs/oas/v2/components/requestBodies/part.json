@@ -8,7 +8,8 @@
           "label",
           "customer",
           "manufacturer",
-          "input_filter"
+          "input_filter",
+          "serial_prefix"
         ],
         "properties": {
           "label": {
@@ -36,7 +37,7 @@
                 "$ref": "https://docs.nterprise.com/schemas/niagara/manufacturer.json#/properties/manufacturer_id"
               },
               "part_number": {
-                "$ref": "https://docs.nterprise.com/schemas/niagara/manufacturer.json#/properties/part_number"
+                "$ref": "https://docs.nterprise.com/schemas/niagara/part.json#/properties/manufacturer/properties/part_number"
               }
             }
           },

@@ -11,7 +11,7 @@
     "/batches": {
       "$ref": "./paths/batch/batches.json"
     },
-    "/batches/:batch_id": {
+    "/batches/{batch_id}": {
       "$ref": "./paths/batch/batch.json"
     }
   },

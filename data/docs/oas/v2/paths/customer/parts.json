@@ -15,15 +15,6 @@
       },
       {
         "$ref": "../../components/parameters/offset.json"
-      },
-      {
-        "$ref": "../../components/parameters/partSort.json"
-      },
-      {
-        "$ref": "../../components/parameters/filterLabel.json"
-      },
-      {
-        "$ref": "../../components/parameters/filterManufacturer.json"
       }
     ],
     "responses": {

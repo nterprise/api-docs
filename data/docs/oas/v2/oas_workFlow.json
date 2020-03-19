@@ -11,13 +11,10 @@
     "/work-flows": {
       "$ref": "./paths/workflow/workflows.json"
     },
-    "/work-flows/:workflow_id": {
+    "/work-flows/{workflow_id}": {
       "$ref": "./paths/workflow/workflow.json"
     },
-    "/work-flows/:workflow_id/bill-of-materials": {
-      "$ref": "./paths/workflow/bom.json"
-    },
-    "/work-flows/:workflow_id/contexts": {
+    "/work-flows/{workflow_id}/contexts": {
       "$ref": "./paths/workflow/context.json"
     }
   },

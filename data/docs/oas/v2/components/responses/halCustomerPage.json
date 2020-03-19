@@ -3,6 +3,7 @@
   "content": {
     "application/hal+json": {
       "schema": {
+        "type": "object",
         "properties": {
           "_embedded": {
             "type": "object",
@@ -15,22 +16,22 @@
                 }
               }
             }
-          }
-        },
-        "_links": {
-          "type": "object",
-          "properties": {
-            "self": {
-              "example": {
-                "href": "https://api.nterprise.com/customers"
+          },
+          "_links": {
+            "type": "object",
+            "properties": {
+              "self": {
+                "example": {
+                  "href": "https://api.nterprise.com/customers"
+                },
+                "$ref": "../schemas/link.json"
               },
-              "$ref": "../schemas/link.json"
-            },
-            "next": {
-              "example": {
-                "href": "https://api.nterprise.com/customers?offset=QVBrO2wm13iEyl&limit=100"
-              },
-              "$ref": "../schemas/link.json"
+              "next": {
+                "example": {
+                  "href": "https://api.nterprise.com/customers?offset=QVBrO2wm13iEyl&limit=100"
+                },
+                "$ref": "../schemas/link.json"
+              }
             }
           }
         }

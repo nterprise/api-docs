@@ -6,10 +6,10 @@
   "items": {
     "type": "object",
     "description": "Input filter specification",
-    "require": [
+    "required": [
       "label",
       "key",
-      "filter",
+      "filters",
       "validators"
     ],
     "properties": {

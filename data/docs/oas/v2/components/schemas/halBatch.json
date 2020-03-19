@@ -31,7 +31,7 @@
       "$ref": "https://docs.nterprise.com/schemas/niagara/batch.json#/properties/queue"
     },
     "priority": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/batch.json#/properties/prority"
+      "$ref": "https://docs.nterprise.com/schemas/niagara/batch.json#/properties/priority"
     },
     "number_cycles": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/batch.json#/properties/number_cycles"

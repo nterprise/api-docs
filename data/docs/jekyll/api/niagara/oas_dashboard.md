@@ -40,112 +40,55 @@ Fetches the dashboard
   "allOf": [
     {
       "type": "object",
-      "x-hal": true,
-      "x-ui-hide": true,
       "properties": {
         "_links": {
           "type": "object",
           "properties": {
             "self": {
+              "example": {
+                "href": "https://api.nterprise.com/dashboards"
+              },
               "type": "object",
-              "readOnly": true,
               "properties": {
                 "href": {
                   "type": "string",
-                  "example": "https://api.nterprise.com/dashboards/9db57709-aad0-4e53-8eda-c92f690a8978"
+                  "format": "uri"
                 }
               }
             }
           }
-        }
-      },
-      "allOf": [
-        {
-          "x-nter-relation": "dashboards",
-          "x-nter-callable": true,
-          "description": "Dashboard",
-          "properties": {
-            "dashboards": {
-              "description": "A List of all dashboards configured",
-              "type": "array",
-              "items": {
-                "type": "object",
-                "anyOf": [
-                  {
-                    "type": "object",
-                    "description": "Quick Sight dashboard",
-                    "x-ui-hide": true,
-                    "properties": {
-                      "type": {
-                        "description": "Describes type of dashboard. Embedded link to ",
-                        "type": "string",
-                        "readOnly": true,
-                        "enum": [
-                          "quickSight",
-                          "widget"
-                        ],
-                        "example": "quickSight",
-                        "x-examples": [
-                          "quickSight"
-                        ]
-                      },
-                      "embed_url": {
-                        "description": "The link to the embedded dashboard from quick sight",
-                        "type": "string",
-                        "readOnly": true,
-                        "example": "https://us-east-1.quicksight.aws.amazon.com/embed/4fee092f51244f21994c9d7939813b11/dashboards/6888cf31-bc54-431b-9c74-ad59f4a29bc6?isauthcode=true&identityprovider=quicksight&code=SixUiZuNCcD73DfhuCHH_WdIpuhKyo6e5jerKAfA%3D%3D",
-                        "x-examples": [
-                          "https://us-east-1.quicksight.aws.amazon.com/embed/4fee092f51244f21994c9d7939813b11/dashboards/6888cf31-bc54-431b-9c74-ad59f4a29bc6?isauthcode=true&identityprovider=quicksight&code=SixUiZuNCcD73DfhuCHH_WdIpuhKyo6e5jerKAfA%3D%3D"
-                        ]
-                      },
-                      "expires_in": {
-                        "description": "How long until the embedded link expires. Calling the endpoint will generate a fresh embed url",
-                        "readOnly": true,
-                        "type": "integer",
-                        "format": "int32",
-                        "example": 3600,
-                        "x-examples": [
-                          3600
-                        ]
-                      }
-                    }
-                  }
+        },
+        "dashboards": {
+          "description": "A List of all dashboards configured",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "description": "Quick Sight dashboard",
+            "x-ui-hide": true,
+            "properties": {
+              "type": {
+                "description": "Describes type of dashboard. Embedded link to",
+                "type": "string",
+                "readOnly": true,
+                "enum": [
+                  "quickSight"
                 ]
+              },
+              "embed_url": {
+                "description": "The link to the embedded dashboard from quick sight",
+                "type": "string",
+                "format": "url",
+                "readOnly": true
+              },
+              "expires_in": {
+                "description": "How long until the embedded link expires. Calling the endpoint will generate a fresh embed url",
+                "readOnly": true,
+                "type": "integer"
               }
             }
-          },
-          "example": {
-            "dashboards": [
-              {
-                "type": "quickSight",
-                "embed_url": "https://us-east-1.quicksight.aws.amazon.com/embed/4fee092f51244f21994c9d7939813b11/dashboards/6888cf31-bc54-431b-9c74-ad59f4a29bc6?isauthcode=true&identityprovider=quicksight&code=SixUiZuNCcD73DfhuCHH_WdIpuhKyo6e5jerKAfA%3D%3D",
-                "expires_in": 3600
-              },
-              {
-                "type": "quickSight",
-                "embed_url": "https://us-east-1.quicksight.aws.amazon.com/embed/4fee092f51244f21994c9d7939813b11/dashboards/6888cf31-bc54-431b-9c74-ad59f4a29bc6?isauthcode=true&identityprovider=quicksight&code=SixUiZuNCcD73DfhuCHH_WdIpuhKyo6e5jerKAfA%3D%3D",
-                "expires_in": 3600
-              },
-              {
-                "type": "quickSight",
-                "embed_url": "https://us-east-1.quicksight.aws.amazon.com/embed/4fee092f51244f21994c9d7939813b11/dashboards/6888cf31-bc54-431b-9c74-ad59f4a29bc6?isauthcode=true&identityprovider=quicksight&code=SixUiZuNCcD73DfhuCHH_WdIpuhKyo6e5jerKAfA%3D%3D",
-                "expires_in": 3600
-              },
-              {
-                "type": "quickSight",
-                "embed_url": "https://us-east-1.quicksight.aws.amazon.com/embed/4fee092f51244f21994c9d7939813b11/dashboards/6888cf31-bc54-431b-9c74-ad59f4a29bc6?isauthcode=true&identityprovider=quicksight&code=SixUiZuNCcD73DfhuCHH_WdIpuhKyo6e5jerKAfA%3D%3D",
-                "expires_in": 3600
-              },
-              {
-                "type": "quickSight",
-                "embed_url": "https://us-east-1.quicksight.aws.amazon.com/embed/4fee092f51244f21994c9d7939813b11/dashboards/6888cf31-bc54-431b-9c74-ad59f4a29bc6?isauthcode=true&identityprovider=quicksight&code=SixUiZuNCcD73DfhuCHH_WdIpuhKyo6e5jerKAfA%3D%3D",
-                "expires_in": 3600
-              }
-            ]
           }
         }
-      ],
-      "example": "undefined"
+      }
     }
   ]
 }
@@ -165,17 +108,36 @@ Status Code **200**
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |» _links|object|false|none|none|
-|»» self|object|false|read-only|none|
-|»»» href|string|false|none|none|
+|»» self|object|false|none|none|
+|»»» href|string(uri)|false|none|none|
+|»» dashboards|[object]|false|none|A List of all dashboards configured|
+|»»» type|string|false|read-only|Describes type of dashboard. Embedded link to|
+|»»» embed_url|string(url)|false|read-only|The link to the embedded dashboard from quick sight|
+|»»» expires_in|integer|false|read-only|How long until the embedded link expires. Calling the endpoint will generate a fresh embed url|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|type|quickSight|
 
 Status Code **401**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Unauthorized|
+|type|https://docs.nterprise.com/api/problem/Unauthorized|
+|status|401|
+|detail|You are not authorized to access this resource|
 
 <aside class="success">
 This operation does not require authentication
@@ -188,103 +150,62 @@ This operation does not require authentication
 <a id="schemadashboard"></a>
 
 ```yaml
-dashboards:
-  - type: quickSight
-    embed_url: >-
-      https://us-east-1.quicksight.aws.amazon.com/embed/4fee092f51244f21994c9d7939813b11/dashboards/6888cf31-bc54-431b-9c74-ad59f4a29bc6?isauthcode=true&identityprovider=quicksight&code=SixUiZuNCcD73DfhuCHH_WdIpuhKyo6e5jerKAfA%3D%3D
-    expires_in: 3600
-  - type: quickSight
-    embed_url: >-
-      https://us-east-1.quicksight.aws.amazon.com/embed/4fee092f51244f21994c9d7939813b11/dashboards/6888cf31-bc54-431b-9c74-ad59f4a29bc6?isauthcode=true&identityprovider=quicksight&code=SixUiZuNCcD73DfhuCHH_WdIpuhKyo6e5jerKAfA%3D%3D
-    expires_in: 3600
-  - type: quickSight
-    embed_url: >-
-      https://us-east-1.quicksight.aws.amazon.com/embed/4fee092f51244f21994c9d7939813b11/dashboards/6888cf31-bc54-431b-9c74-ad59f4a29bc6?isauthcode=true&identityprovider=quicksight&code=SixUiZuNCcD73DfhuCHH_WdIpuhKyo6e5jerKAfA%3D%3D
-    expires_in: 3600
-  - type: quickSight
-    embed_url: >-
-      https://us-east-1.quicksight.aws.amazon.com/embed/4fee092f51244f21994c9d7939813b11/dashboards/6888cf31-bc54-431b-9c74-ad59f4a29bc6?isauthcode=true&identityprovider=quicksight&code=SixUiZuNCcD73DfhuCHH_WdIpuhKyo6e5jerKAfA%3D%3D
-    expires_in: 3600
-  - type: quickSight
-    embed_url: >-
-      https://us-east-1.quicksight.aws.amazon.com/embed/4fee092f51244f21994c9d7939813b11/dashboards/6888cf31-bc54-431b-9c74-ad59f4a29bc6?isauthcode=true&identityprovider=quicksight&code=SixUiZuNCcD73DfhuCHH_WdIpuhKyo6e5jerKAfA%3D%3D
-    expires_in: 3600
-
-```
-
-*Dashboard*
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|dashboards|[anyOf]|false|none|A List of all dashboards configured|
-|» type|string|false|read-only|Describes type of dashboard. Embedded link to|
-|» embed_url|string|false|read-only|The link to the embedded dashboard from quick sight|
-|» expires_in|integer(int32)|false|read-only|How long until the embedded link expires. Calling the endpoint will generate a fresh embed url|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|type|quickSight|
-|type|widget|
-
-<h2 id="tocSquicksight">QuickSight</h2>
-
-<a id="schemaquicksight"></a>
-
-```yaml
 type: object
-description: Quick Sight dashboard
-x-ui-hide: true
 properties:
-  type:
-    description: 'Describes type of dashboard. Embedded link to '
-    type: string
-    readOnly: true
-    enum:
-      - quickSight
-      - widget
-    example: quickSight
-    x-examples:
-      - quickSight
-  embed_url:
-    description: The link to the embedded dashboard from quick sight
-    type: string
-    readOnly: true
-    example: >-
-      https://us-east-1.quicksight.aws.amazon.com/embed/4fee092f51244f21994c9d7939813b11/dashboards/6888cf31-bc54-431b-9c74-ad59f4a29bc6?isauthcode=true&identityprovider=quicksight&code=SixUiZuNCcD73DfhuCHH_WdIpuhKyo6e5jerKAfA%3D%3D
-    x-examples:
-      - >-
-        https://us-east-1.quicksight.aws.amazon.com/embed/4fee092f51244f21994c9d7939813b11/dashboards/6888cf31-bc54-431b-9c74-ad59f4a29bc6?isauthcode=true&identityprovider=quicksight&code=SixUiZuNCcD73DfhuCHH_WdIpuhKyo6e5jerKAfA%3D%3D
-  expires_in:
-    description: >-
-      How long until the embedded link expires. Calling the endpoint will
-      generate a fresh embed url
-    readOnly: true
-    type: integer
-    format: int32
-    example: 3600
-    x-examples:
-      - 3600
+  _links:
+    type: object
+    properties:
+      self:
+        example:
+          href: 'https://api.nterprise.com/dashboards'
+        type: object
+        properties:
+          href:
+            type: string
+            format: uri
+  dashboards:
+    description: A List of all dashboards configured
+    type: array
+    items:
+      type: object
+      description: Quick Sight dashboard
+      x-ui-hide: true
+      properties:
+        type:
+          description: Describes type of dashboard. Embedded link to
+          type: string
+          readOnly: true
+          enum:
+            - quickSight
+        embed_url:
+          description: The link to the embedded dashboard from quick sight
+          type: string
+          format: url
+          readOnly: true
+        expires_in:
+          description: >-
+            How long until the embedded link expires. Calling the endpoint will
+            generate a fresh embed url
+          readOnly: true
+          type: integer
 
 ```
-
-*Quick Sight dashboard*
 
 ### Properties
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|type|string|false|read-only|Describes type of dashboard. Embedded link to|
-|embed_url|string|false|read-only|The link to the embedded dashboard from quick sight|
-|expires_in|integer(int32)|false|read-only|How long until the embedded link expires. Calling the endpoint will generate a fresh embed url|
+|_links|object|false|none|none|
+|» self|object|false|none|none|
+|»» href|string(uri)|false|none|none|
+|» dashboards|[object]|false|none|A List of all dashboards configured|
+|»» type|string|false|read-only|Describes type of dashboard. Embedded link to|
+|»» embed_url|string(url)|false|read-only|The link to the embedded dashboard from quick sight|
+|»» expires_in|integer|false|read-only|How long until the embedded link expires. Calling the endpoint will generate a fresh embed url|
 
 #### Enumerated Values
 
 |Property|Value|
 |---|---|
 |type|quickSight|
-|type|widget|
 

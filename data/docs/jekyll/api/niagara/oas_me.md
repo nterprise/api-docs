@@ -36,76 +36,18 @@ Fetches the current user information along with resources they can access
 
 ```json
 {
+  "type": "object",
   "allOf": [
     {
-      "description": "User Information",
-      "x-nter-relation": "users",
-      "x-nter-model": "User",
-      "x-nter-callable": true,
-      "properties": {
-        "user_id": {
-          "type": "string",
-          "description": "The identifier for the user",
-          "example": "3dddba3e-6122-46a8-ae26-8c7c95bd82d7",
-          "x-examples": [
-            "3dddba3e-6122-46a8-ae26-8c7c95bd82d7"
-          ],
-          "pattern": "[0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}"
-        },
-        "email": {
-          "type": "string",
-          "format": "email",
-          "description": "Email address",
-          "example": "alice@zones.com",
-          "x-examples": [
-            "alice@zones.com"
-          ]
-        },
-        "name": {
-          "type": "string",
-          "description": "Human readable name",
-          "nullable": true,
-          "example": "Alice Bob",
-          "x-examples": [
-            "Alice Bob"
-          ]
-        },
-        "picture": {
-          "type": "string",
-          "description": "Image for the user",
-          "nullable": true,
-          "example": "https://bit.ly/18gECvy",
-          "x-examples": [
-            "https://bit.ly/18gECvy"
-          ]
-        },
-        "profile": {
-          "type": "string",
-          "description": "Link to the users profile",
-          "nullable": true,
-          "example": "https://bit.ly/18gECvy",
-          "x-examples": [
-            "https://bit.ly/18gECvy"
-          ]
-        }
-      },
-      "example": {
-        "user_id": "3dddba3e-6122-46a8-ae26-8c7c95bd82d7",
-        "email": "alice@zones.com",
-        "name": "Alice Bob",
-        "picture": "https://bit.ly/18gECvy",
-        "profile": "https://bit.ly/18gECvy"
-      }
-    },
-    {
       "type": "object",
-      "x-ui-hide": true,
       "properties": {
         "_links": {
           "type": "object",
-          "readOnly": true,
           "properties": {
             "self": {
+              "example": {
+                "href": "https://api.nterprise.com/users/QEvVrVMMwVcJ6om"
+              },
               "type": "object",
               "properties": {
                 "href": {
@@ -115,6 +57,51 @@ Fetches the current user information along with resources they can access
               }
             }
           }
+        },
+        "user_id": {
+          "type": "string",
+          "description": "The identifier for the user",
+          "pattern": "^[0-9a-zA-Z-_]+$"
+        },
+        "label": {
+          "type": "string",
+          "description": "Label for the entity"
+        },
+        "slug": {
+          "type": "string",
+          "description": "Slug for the entity (Auto-generated from the label)",
+          "readOnly": true,
+          "deprecated": true,
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "created": {
+          "description": "Date the entity was created",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "updated": {
+          "description": "Last date the entity was updated",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Email address"
+        },
+        "name": {
+          "type": "string",
+          "description": "Human readable name"
+        },
+        "picture": {
+          "type": "string",
+          "description": "Image for the user"
+        },
+        "profile": {
+          "type": "string",
+          "description": "Link to the users profile"
         }
       }
     }
@@ -131,17 +118,42 @@ Fetches the current user information along with resources they can access
 
 <h3 id="fetchme-responseschema">Response Schema</h3>
 
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» _links|object|false|none|none|
+|»» self|object|false|none|none|
+|»»» href|string(uri)|false|none|none|
+|»» user_id|string|false|none|The identifier for the user|
+|»» label|string|false|none|Label for the entity|
+|»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»» created|string(date-time)|false|read-only|Date the entity was created|
+|»» updated|string(date-time)|false|read-only|Last date the entity was updated|
+|»» email|string(email)|false|none|Email address|
+|»» name|string|false|none|Human readable name|
+|»» picture|string|false|none|Image for the user|
+|»» profile|string|false|none|Link to the users profile|
+
 Status Code **401**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-None ( Scopes: access )
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Unauthorized|
+|type|https://docs.nterprise.com/api/problem/Unauthorized|
+|status|401|
+|detail|You are not authorized to access this resource|
+
+<aside class="success">
+This operation does not require authentication
 </aside>
 

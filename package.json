@@ -73,7 +73,6 @@
   "dependencies": {
     "@nterprise/common-js": "^4.0.0",
     "chance": "^1.1.4",
-    "express": "^4.17.1",
     "faker": "^4.1.0",
     "json-schema-faker": "^0.5.0-rc23",
     "lodash": "^4",

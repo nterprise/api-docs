@@ -11,13 +11,13 @@
     "/resources": {
       "$ref": "./paths/resource/resources.json"
     },
-    "/resources/:resource_id": {
+    "/resources/{resource_id}": {
       "$ref": "./paths/resource/resource.json"
     },
-    "/resources/:resource_id/sub-resources": {
+    "/resources/{resource_id}/sub-resources": {
       "$ref": "./paths/resource/subResources.json"
     },
-    "/resources/:resource_id/contexts": {
+    "/resources/{resource_id}/contexts": {
       "$ref": "./paths/resource/contexts.json"
     }
   },

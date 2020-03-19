@@ -14,13 +14,13 @@
     "/locations": {
       "$ref": "./paths/location/locations.json"
     },
-    "/locations/:location_id": {
+    "/locations/{location_id}": {
       "$ref": "./paths/location/location.json"
     },
-    "/locations/:location_id/resources": {
+    "/locations/{location_id}/resources": {
       "$ref": "./paths/location/resources.json"
     },
-    "/locations/:location_id/resources/:resource_id": {
+    "/locations/{location_id}/resources/{resource_id}": {
       "$ref": "./paths/location/resource.json"
     },
     "/ware-houses": {

@@ -43,6 +43,7 @@ Fetch Users
 
 ```json
 {
+  "type": "object",
   "properties": {
     "_embedded": {
       "type": "object",
@@ -52,167 +53,104 @@ Fetch Users
           "maxItems": 100,
           "items": {
             "type": "object",
-            "x-hal": true,
-            "x-ui-hide": true,
             "properties": {
               "_links": {
                 "type": "object",
                 "properties": {
                   "self": {
+                    "example": {
+                      "href": "https://api.nterprise.com/users/QEvVrVMMwVcJ6om"
+                    },
                     "type": "object",
-                    "readOnly": true,
                     "properties": {
                       "href": {
                         "type": "string",
-                        "example": "https://api.nterprise.com/users/6234b5d3-9cb4-4385-b7c1-5b355c39e3d6"
+                        "format": "uri"
                       }
                     }
                   }
                 }
+              },
+              "user_id": {
+                "type": "string",
+                "description": "The identifier for the user",
+                "pattern": "^[0-9a-zA-Z-_]+$"
+              },
+              "label": {
+                "type": "string",
+                "description": "Label for the entity"
+              },
+              "slug": {
+                "type": "string",
+                "description": "Slug for the entity (Auto-generated from the label)",
+                "readOnly": true,
+                "deprecated": true,
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+              },
+              "created": {
+                "description": "Date the entity was created",
+                "type": "string",
+                "format": "date-time",
+                "readOnly": true
+              },
+              "updated": {
+                "description": "Last date the entity was updated",
+                "type": "string",
+                "format": "date-time",
+                "readOnly": true
+              },
+              "email": {
+                "type": "string",
+                "format": "email",
+                "description": "Email address"
+              },
+              "name": {
+                "type": "string",
+                "description": "Human readable name"
+              },
+              "picture": {
+                "type": "string",
+                "description": "Image for the user"
+              },
+              "profile": {
+                "type": "string",
+                "description": "Link to the users profile"
               }
-            },
-            "allOf": [
-              {
-                "description": "User Information",
-                "x-nter-relation": "users",
-                "x-nter-model": "User",
-                "x-nter-callable": true,
-                "properties": {
-                  "user_id": {
-                    "type": "string",
-                    "description": "The identifier for the user",
-                    "example": "3dddba3e-6122-46a8-ae26-8c7c95bd82d7",
-                    "x-examples": [
-                      "3dddba3e-6122-46a8-ae26-8c7c95bd82d7"
-                    ],
-                    "pattern": "[0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}"
-                  },
-                  "email": {
-                    "type": "string",
-                    "format": "email",
-                    "description": "Email address",
-                    "example": "alice@zones.com",
-                    "x-examples": [
-                      "alice@zones.com"
-                    ]
-                  },
-                  "name": {
-                    "type": "string",
-                    "description": "Human readable name",
-                    "nullable": true,
-                    "example": "Alice Bob",
-                    "x-examples": [
-                      "Alice Bob"
-                    ]
-                  },
-                  "picture": {
-                    "type": "string",
-                    "description": "Image for the user",
-                    "nullable": true,
-                    "example": "https://bit.ly/18gECvy",
-                    "x-examples": [
-                      "https://bit.ly/18gECvy"
-                    ]
-                  },
-                  "profile": {
-                    "type": "string",
-                    "description": "Link to the users profile",
-                    "nullable": true,
-                    "example": "https://bit.ly/18gECvy",
-                    "x-examples": [
-                      "https://bit.ly/18gECvy"
-                    ]
-                  }
-                },
-                "example": {
-                  "user_id": "3dddba3e-6122-46a8-ae26-8c7c95bd82d7",
-                  "email": "alice@zones.com",
-                  "name": "Alice Bob",
-                  "picture": "https://bit.ly/18gECvy",
-                  "profile": "https://bit.ly/18gECvy"
-                }
-              }
-            ],
-            "example": "undefined"
+            }
+          }
+        }
+      }
+    },
+    "_links": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "example": {
+            "href": "https://api.nterprise.com/users"
+          },
+          "type": "object",
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        },
+        "next": {
+          "example": {
+            "href": "https://api.nterprise.com/users?offset=QVBrO2wm13iEyl&limit=100"
+          },
+          "type": "object",
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "uri"
+            }
           }
         }
       }
     }
-  },
-  "allOf": [
-    {
-      "type": "object",
-      "x-hal": true,
-      "x-ui-hide": true,
-      "properties": {
-        "total_count": {
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true,
-          "minimum": 0,
-          "example": 32
-        },
-        "limit": {
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true,
-          "minimum": 1,
-          "maximum": 100,
-          "example": 50
-        },
-        "offset": {
-          "type": "string",
-          "readOnly": true,
-          "example": "363yHhUhhI"
-        }
-      },
-      "allOf": [
-        {
-          "type": "object",
-          "x-ui-hide": true,
-          "properties": {
-            "_links": {
-              "type": "object",
-              "readOnly": true,
-              "properties": {
-                "self": {
-                  "type": "object",
-                  "properties": {
-                    "href": {
-                      "type": "string",
-                      "format": "uri"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        {
-          "type": "object",
-          "x-ui-hide": true,
-          "properties": {
-            "_links": {
-              "type": "object",
-              "readOnly": true,
-              "properties": {
-                "next": {
-                  "type": "object",
-                  "properties": {
-                    "href": {
-                      "type": "string",
-                      "format": "uri"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      ],
-      "example": "undefined"
-    }
-  ]
+  }
 }
 ```
 
@@ -231,28 +169,60 @@ Status Code **200**
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |» _embedded|object|false|none|none|
-|»» nter:users|[allOf]|false|none|none|
+|»» nter:users|[object]|false|none|none|
 |»»» _links|object|false|none|none|
-|»»»» self|object|false|read-only|none|
-|»»»»» href|string|false|none|none|
+|»»»» self|object|false|none|none|
+|»»»»» href|string(uri)|false|none|none|
+|»»»» user_id|string|false|none|The identifier for the user|
+|»»»» label|string|false|none|Label for the entity|
+|»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»» created|string(date-time)|false|read-only|Date the entity was created|
+|»»»» updated|string(date-time)|false|read-only|Last date the entity was updated|
+|»»»» email|string(email)|false|none|Email address|
+|»»»» name|string|false|none|Human readable name|
+|»»»» picture|string|false|none|Image for the user|
+|»»»» profile|string|false|none|Link to the users profile|
+|»»» _links|object|false|none|none|
+|»»»» self|object|false|none|none|
+|»»»»» href|string(uri)|false|none|none|
+|»»»» next|object|false|none|none|
+|»»»»» href|string(uri)|false|none|none|
 
 Status Code **401**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Unauthorized|
+|type|https://docs.nterprise.com/api/problem/Unauthorized|
+|status|401|
+|detail|You are not authorized to access this resource|
 
 Status Code **403**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Forbidden|
+|type|https://docs.nterprise.com/api/problem/Forbidden|
+|status|403|
+|detail|You are forbidden to access this resource|
 
 <aside class="success">
 This operation does not require authentication
@@ -262,7 +232,7 @@ This operation does not require authentication
 
 <a id="opIdfetchUserById"></a>
 
-`GET /users/:user_id`
+`GET /users/{user_id}`
 
 *Fetches a user by Id*
 
@@ -281,93 +251,70 @@ Fetch User
 ```json
 {
   "type": "object",
-  "allOf": [
-    {
+  "properties": {
+    "_links": {
       "type": "object",
-      "x-hal": true,
-      "x-ui-hide": true,
       "properties": {
-        "_links": {
+        "self": {
+          "example": {
+            "href": "https://api.nterprise.com/users/QEvVrVMMwVcJ6om"
+          },
           "type": "object",
           "properties": {
-            "self": {
-              "type": "object",
-              "readOnly": true,
-              "properties": {
-                "href": {
-                  "type": "string",
-                  "example": "https://api.nterprise.com/users/6234b5d3-9cb4-4385-b7c1-5b355c39e3d6"
-                }
-              }
+            "href": {
+              "type": "string",
+              "format": "uri"
             }
           }
         }
-      },
-      "allOf": [
-        {
-          "description": "User Information",
-          "x-nter-relation": "users",
-          "x-nter-model": "User",
-          "x-nter-callable": true,
-          "properties": {
-            "user_id": {
-              "type": "string",
-              "description": "The identifier for the user",
-              "example": "3dddba3e-6122-46a8-ae26-8c7c95bd82d7",
-              "x-examples": [
-                "3dddba3e-6122-46a8-ae26-8c7c95bd82d7"
-              ],
-              "pattern": "[0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}"
-            },
-            "email": {
-              "type": "string",
-              "format": "email",
-              "description": "Email address",
-              "example": "alice@zones.com",
-              "x-examples": [
-                "alice@zones.com"
-              ]
-            },
-            "name": {
-              "type": "string",
-              "description": "Human readable name",
-              "nullable": true,
-              "example": "Alice Bob",
-              "x-examples": [
-                "Alice Bob"
-              ]
-            },
-            "picture": {
-              "type": "string",
-              "description": "Image for the user",
-              "nullable": true,
-              "example": "https://bit.ly/18gECvy",
-              "x-examples": [
-                "https://bit.ly/18gECvy"
-              ]
-            },
-            "profile": {
-              "type": "string",
-              "description": "Link to the users profile",
-              "nullable": true,
-              "example": "https://bit.ly/18gECvy",
-              "x-examples": [
-                "https://bit.ly/18gECvy"
-              ]
-            }
-          },
-          "example": {
-            "user_id": "3dddba3e-6122-46a8-ae26-8c7c95bd82d7",
-            "email": "alice@zones.com",
-            "name": "Alice Bob",
-            "picture": "https://bit.ly/18gECvy",
-            "profile": "https://bit.ly/18gECvy"
-          }
-        }
-      ],
-      "example": "undefined"
+      }
+    },
+    "user_id": {
+      "type": "string",
+      "description": "The identifier for the user",
+      "pattern": "^[0-9a-zA-Z-_]+$"
+    },
+    "label": {
+      "type": "string",
+      "description": "Label for the entity"
+    },
+    "slug": {
+      "type": "string",
+      "description": "Slug for the entity (Auto-generated from the label)",
+      "readOnly": true,
+      "deprecated": true,
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "created": {
+      "description": "Date the entity was created",
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "updated": {
+      "description": "Last date the entity was updated",
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "description": "Email address"
+    },
+    "name": {
+      "type": "string",
+      "description": "Human readable name"
+    },
+    "picture": {
+      "type": "string",
+      "description": "Image for the user"
+    },
+    "profile": {
+      "type": "string",
+      "description": "Link to the users profile"
     }
-  ]
+  }
 }
 ```
 
@@ -387,35 +334,71 @@ Status Code **200**
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |» _links|object|false|none|none|
-|»» self|object|false|read-only|none|
-|»»» href|string|false|none|none|
+|»» self|object|false|none|none|
+|»»» href|string(uri)|false|none|none|
+|»» user_id|string|false|none|The identifier for the user|
+|»» label|string|false|none|Label for the entity|
+|»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»» created|string(date-time)|false|read-only|Date the entity was created|
+|»» updated|string(date-time)|false|read-only|Last date the entity was updated|
+|»» email|string(email)|false|none|Email address|
+|»» name|string|false|none|Human readable name|
+|»» picture|string|false|none|Image for the user|
+|»» profile|string|false|none|Link to the users profile|
 
 Status Code **401**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Unauthorized|
+|type|https://docs.nterprise.com/api/problem/Unauthorized|
+|status|401|
+|detail|You are not authorized to access this resource|
 
 Status Code **403**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Forbidden|
+|type|https://docs.nterprise.com/api/problem/Forbidden|
+|status|403|
+|detail|You are forbidden to access this resource|
 
 Status Code **404**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Not Found|
+|type|https://docs.nterprise.com/api/problem/NotFound|
+|status|404|
+|detail|Resource not found|
 
 <aside class="success">
 This operation does not require authentication
@@ -428,11 +411,56 @@ This operation does not require authentication
 <a id="schemauser"></a>
 
 ```yaml
-user_id: 3dddba3e-6122-46a8-ae26-8c7c95bd82d7
-email: alice@zones.com
-name: Alice Bob
-picture: 'https://bit.ly/18gECvy'
-profile: 'https://bit.ly/18gECvy'
+type: object
+description: User Information
+additionalProperties: false
+properties:
+  user_id:
+    type: string
+    description: The identifier for the user
+    pattern: '^[0-9a-zA-Z-_]+$'
+  entity_id:
+    x-no-api-doc: true
+    type: string
+    description: Customer identifier
+    readOnly: true
+    pattern: '^[0-9a-zA-Z-_]+$'
+  entity_type:
+    x-no-api-doc: true
+    enum:
+      - UNIT
+  label:
+    type: string
+    description: Label for the entity
+  slug:
+    type: string
+    description: Slug for the entity (Auto-generated from the label)
+    readOnly: true
+    deprecated: true
+    pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+  created:
+    description: Date the entity was created
+    type: string
+    format: date-time
+    readOnly: true
+  updated:
+    description: Last date the entity was updated
+    type: string
+    format: date-time
+    readOnly: true
+  email:
+    type: string
+    format: email
+    description: Email address
+  name:
+    type: string
+    description: Human readable name
+  picture:
+    type: string
+    description: Image for the user
+  profile:
+    type: string
+    description: Link to the users profile
 
 ```
 
@@ -443,8 +471,20 @@ profile: 'https://bit.ly/18gECvy'
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |user_id|string|false|none|The identifier for the user|
+|entity_id|string|false|read-only|Customer identifier|
+|entity_type|string|false|none|none|
+|label|string|false|none|Label for the entity|
+|slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|created|string(date-time)|false|read-only|Date the entity was created|
+|updated|string(date-time)|false|read-only|Last date the entity was updated|
 |email|string(email)|false|none|Email address|
-|name|string\|null|false|none|Human readable name|
-|picture|string\|null|false|none|Image for the user|
-|profile|string\|null|false|none|Link to the users profile|
+|name|string|false|none|Human readable name|
+|picture|string|false|none|Image for the user|
+|profile|string|false|none|Link to the users profile|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|entity_type|UNIT|
 

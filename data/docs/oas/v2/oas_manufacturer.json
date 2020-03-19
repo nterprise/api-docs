@@ -11,13 +11,13 @@
     "/manufacturers": {
       "$ref": "./paths/manufacturer/manufacturers.json"
     },
-    "/manufacturers/:manufacturer_id": {
+    "/manufacturers/{manufacturer_id}": {
       "$ref": "./paths/manufacturer/manufacturer.json"
     },
-    "/manufacturers/:manufacturer_id/parts": {
+    "/manufacturers/{manufacturer_id}/parts": {
       "$ref": "./paths/manufacturer/parts.json"
     },
-    "/manufacturers/:manufacturer_id/units": {
+    "/manufacturers/{manufacturer_id}/units": {
       "$ref": "./paths/manufacturer/units.json"
     }
   },

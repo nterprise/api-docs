@@ -8,7 +8,7 @@
     "title": "Notes"
   },
   "paths": {
-    "/notes/:note_id": {
+    "/notes/{note_id}": {
       "$ref": "./paths/note/note.json"
     }
   },

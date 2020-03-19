@@ -9,7 +9,7 @@
   },
   "paths": {
     "/attachments": {
-      "$ref": "./paths/attachments.json"
+      "$ref": "./paths/attachment/attachments.json"
     }
   }
 }

@@ -5,34 +5,19 @@
       "type": "object",
       "properties": {
         "self": {
-          "$ref": "./link.json",
-          "example": {
-            "href": "https://api.nterprise.com/customers/kk9z7zwvQYH5GKx"
-          }
+          "$ref": "./link.json"
         },
         "nter:customer-programs": {
-          "$ref": "./link.json",
-          "example": {
-            "href": "https://api.nterprise.com/customers/kk9z7zwvQYH5GKx/programs"
-          }
+          "$ref": "./link.json"
         },
         "nter:customer-projects": {
-          "$ref": "./link.json",
-          "example": {
-            "href": "https://api.nterprise.com/customers/kk9z7zwvQYH5GKx/projects"
-          }
+          "$ref": "./link.json"
         },
         "nter:customer-units": {
-          "$ref": "./link.json",
-          "example": {
-            "href": "https://api.nterprise.com/customers/kk9z7zwvQYH5GKx/units"
-          }
+          "$ref": "./link.json"
         },
         "nter:customer-work-orders": {
-          "$ref": "./link.json",
-          "example": {
-            "href": "https://api.nterprise.com/customers/kk9z7zwvQYH5GKx/work-orders"
-          }
+          "$ref": "./link.json"
         }
       }
     },

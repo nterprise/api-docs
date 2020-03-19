@@ -16,7 +16,19 @@ headingLevel: 2
 
 > Scroll down for example requests and responses.
 
-API for the nterprise application
+File attachments can be attached to other `entities` and providing simple document storage functionality.
+
+## File Restrictions
+
+The maximum file size allowed is 10MB.
+
+### Restricted file types
+
+- Adobe PDF
+
+## Security Restrictions
+
+Files are considered a top-level `entity.` `Users` must be granted the `create` permission on the File entity to be able to upload files. Files cannot be updated. Grant the `create` or `update` permissions to the user for the linked `entity` for the relationship operation to be approved.
 
 <h1 id="attachments-attachment">Attachment</h1>
 
@@ -78,39 +90,27 @@ In order to upload files, a signed AWS URL is needed. This operation will create
   "properties": {
     "url": {
       "type": "string",
-      "description": "URL to post the file to",
-      "readOnly": true
+      "description": "URL to post the file to"
     },
     "expires_in": {
       "type": "integer",
-      "format": "int64",
-      "description": "The number of seconds the upload URL is valid for",
-      "example": 900
-    }
-  },
-  "allOf": [
-    {
+      "description": "The number of seconds the upload URL is valid for"
+    },
+    "_links": {
       "type": "object",
-      "x-ui-hide": true,
       "properties": {
-        "_links": {
+        "self": {
           "type": "object",
-          "readOnly": true,
           "properties": {
-            "self": {
-              "type": "object",
-              "properties": {
-                "href": {
-                  "type": "string",
-                  "format": "uri"
-                }
-              }
+            "href": {
+              "type": "string",
+              "format": "uri"
             }
           }
         }
       }
     }
-  ]
+  }
 }
 ```
 
@@ -130,44 +130,83 @@ Status Code **200**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» url|string|false|read-only|URL to post the file to|
-|» expires_in|integer(int64)|false|none|The number of seconds the upload URL is valid for|
+|» url|string|false|none|URL to post the file to|
+|» expires_in|integer|false|none|The number of seconds the upload URL is valid for|
+|» _links|object|false|none|none|
+|»» self|object|false|none|none|
+|»»» href|string(uri)|false|none|none|
 
 Status Code **400**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Bad Request|
+|type|https://docs.nterprise.com/api/problem/BadRequest|
+|status|400|
+|detail|Invalid request|
 
 Status Code **401**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Unauthorized|
+|type|https://docs.nterprise.com/api/problem/Unauthorized|
+|status|401|
+|detail|You are not authorized to access this resource|
 
 Status Code **403**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Forbidden|
+|type|https://docs.nterprise.com/api/problem/Forbidden|
+|status|403|
+|detail|You are forbidden to access this resource|
 
 Status Code **413**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Payload too Large|
+|type|https://docs.nterprise.com/api/problem/PayloadTooLarge|
+|status|413|
+|detail|The resource you are trying to upload is too large|
 
 <aside class="success">
 This operation does not require authentication

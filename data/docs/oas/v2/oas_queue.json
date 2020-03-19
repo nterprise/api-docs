@@ -11,10 +11,10 @@
     "/queues": {
       "$ref": "./paths/queue/queues.json"
     },
-    "/queues/:queue_id": {
+    "/queues/{queue_id}": {
       "$ref": "./paths/queue/queue.json"
     },
-    "/queues/:queue_id/batches": {
+    "/queues/{queue_id}/batches": {
       "$ref": "./paths/queue/batches.json"
     }
   },

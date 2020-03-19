@@ -9,16 +9,13 @@
   },
   "paths": {
     "/dashboard": {
-      "$ref": "./paths/dashboard.json"
+      "$ref": "./paths/dashboard/dashboard.json"
     }
   },
   "components": {
     "schemas": {
       "Dashboard": {
-        "$ref": "./components/schemas/dashboard.json"
-      },
-      "QuickSight": {
-        "$ref": "./components/schemas/quickSight.json"
+        "$ref": "./components/schemas/halDashboard.json"
       }
     }
   }

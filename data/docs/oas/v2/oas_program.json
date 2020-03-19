@@ -11,13 +11,13 @@
     "/programs": {
       "$ref": "./paths/program/programs.json"
     },
-    "/programs/:program_id": {
+    "/programs/{program_id}": {
       "$ref": "./paths/program/program.json"
     },
-    "/programs/:program_id/projects": {
+    "/programs/{program_id}/projects": {
       "$ref": "./paths/program/projects.json"
     },
-    "/programs/:program_id/work-orders": {
+    "/programs/{program_id}/work-orders": {
       "$ref": "./paths/program/workOrders.json"
     }
   },

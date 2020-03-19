@@ -1,7 +1,7 @@
 ---
 layout: page
 parent: Niagara API
-nav_order: 0
+nav_order: 3
 title: Customers
 language_tabs: ''
 toc_footers: []
@@ -36,19 +36,6 @@ Fetch Customer
 |---|---|---|---|---|
 |limit|query|integer(int32)|false|How many items to return at one time (max 100)|
 |offset|query|string|false|Continue from last offset|
-|sort|query|string|false|Sort by field|
-|filter[label]|query|string|false|Filter where the label contains this value|
-
-#### Enumerated Values
-
-|Parameter|Value|
-|---|---|
-|sort|label|
-|sort|-label|
-|sort|created|
-|sort|-created|
-|sort|updated|
-|sort|-updated|
 
 > Example responses
 
@@ -62,8 +49,6 @@ Fetch Customer
       "type": "object",
       "properties": {
         "self": {
-          "example": "https://api.nterprise.com/customers/kk9z7zwvQYH5GKx",
-          "$schema": "http://json-schema.org/draft-07/schema#",
           "type": "object",
           "properties": {
             "href": {
@@ -73,8 +58,6 @@ Fetch Customer
           }
         },
         "nter:customer-programs": {
-          "example": "https://api.nterprise.com/customers/kk9z7zwvQYH5GKx/programs",
-          "$schema": "http://json-schema.org/draft-07/schema#",
           "type": "object",
           "properties": {
             "href": {
@@ -84,8 +67,6 @@ Fetch Customer
           }
         },
         "nter:customer-projects": {
-          "example": "https://api.nterprise.com/customers/kk9z7zwvQYH5GKx/projects",
-          "$schema": "http://json-schema.org/draft-07/schema#",
           "type": "object",
           "properties": {
             "href": {
@@ -95,8 +76,6 @@ Fetch Customer
           }
         },
         "nter:customer-units": {
-          "example": "https://api.nterprise.com/customers/kk9z7zwvQYH5GKx/units",
-          "$schema": "http://json-schema.org/draft-07/schema#",
           "type": "object",
           "properties": {
             "href": {
@@ -106,8 +85,6 @@ Fetch Customer
           }
         },
         "nter:customer-work-orders": {
-          "example": "https://api.nterprise.com/customers/kk9z7zwvQYH5GKx/work-orders",
-          "$schema": "http://json-schema.org/draft-07/schema#",
           "type": "object",
           "properties": {
             "href": {
@@ -120,7 +97,6 @@ Fetch Customer
     },
     "customer_id": {
       "description": "Customer identifier",
-      "x-no-api-doc": true,
       "type": "string",
       "readOnly": true,
       "pattern": "^[0-9a-zA-Z-_]+$"
@@ -152,7 +128,7 @@ Fetch Customer
       "type": "object",
       "description": "External Identifiers for the customer",
       "deprecated": true,
-      "patternProperties": {
+      "x-patternProperties": {
         "^[A-Za-z][A-Za-z0-9_]*$": {
           "type": "string"
         }
@@ -163,8 +139,6 @@ Fetch Customer
       "description": "List of allowed statuses",
       "uniqueItems": true,
       "items": {
-        "$schema": "http://json-schema.org/draft-07/schema#",
-        "$id": "https://docs.nterprise.com/schemas/niagara/status.json",
         "type": "object",
         "description": "Defines the properties for a status",
         "additionalProperties": false,
@@ -236,7 +210,6 @@ Status Code **200**
 |»» created|string(date-time)|false|read-only|Date the entity was created|
 |»» updated|string(date-time)|false|read-only|Last date the entity was updated|
 |»» external_platform|object|false|none|External Identifiers for the customer|
-|»»» ^[A-Za-z][A-Za-z0-9_]*$|string|false|none|none|
 |»» allowed_statuses|[object]|false|none|List of allowed statuses|
 |»»» status|string|true|none|A Custom label for the status|
 |»»» category|string|true|none|The classifier for the statues|
@@ -258,19 +231,37 @@ Status Code **401**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Unauthorized|
+|type|https://docs.nterprise.com/api/problem/Unauthorized|
+|status|401|
+|detail|You are not authorized to access this resource|
 
 Status Code **403**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Forbidden|
+|type|https://docs.nterprise.com/api/problem/Forbidden|
+|status|403|
+|detail|You are forbidden to access this resource|
 
 <aside class="success">
 This operation does not require authentication
@@ -304,7 +295,7 @@ Creates a new customer following the customer schema
       "type": "object",
       "description": "External Identifiers for the customer",
       "deprecated": true,
-      "patternProperties": {
+      "x-patternProperties": {
         "^[A-Za-z][A-Za-z0-9_]*$": {
           "type": "string"
         }
@@ -315,8 +306,6 @@ Creates a new customer following the customer schema
       "description": "List of allowed statuses",
       "uniqueItems": true,
       "items": {
-        "$schema": "http://json-schema.org/draft-07/schema#",
-        "$id": "https://docs.nterprise.com/schemas/niagara/status.json",
         "type": "object",
         "description": "Defines the properties for a status",
         "additionalProperties": false,
@@ -355,7 +344,6 @@ Creates a new customer following the customer schema
 |---|---|---|---|---|
 |label|body|string|true|Label for the entity|
 |external_platform|body|object|false|External Identifiers for the customer|
-|» ^[A-Za-z][A-Za-z0-9_]*$|body|string|false|none|
 |allowed_statuses|body|[object]|true|List of allowed statuses|
 |» status|body|string|true|A Custom label for the status|
 |» category|body|string|true|The classifier for the statues|
@@ -383,8 +371,6 @@ Creates a new customer following the customer schema
       "type": "object",
       "properties": {
         "self": {
-          "example": "https://api.nterprise.com/customers/kk9z7zwvQYH5GKx",
-          "$schema": "http://json-schema.org/draft-07/schema#",
           "type": "object",
           "properties": {
             "href": {
@@ -394,8 +380,6 @@ Creates a new customer following the customer schema
           }
         },
         "nter:customer-programs": {
-          "example": "https://api.nterprise.com/customers/kk9z7zwvQYH5GKx/programs",
-          "$schema": "http://json-schema.org/draft-07/schema#",
           "type": "object",
           "properties": {
             "href": {
@@ -405,8 +389,6 @@ Creates a new customer following the customer schema
           }
         },
         "nter:customer-projects": {
-          "example": "https://api.nterprise.com/customers/kk9z7zwvQYH5GKx/projects",
-          "$schema": "http://json-schema.org/draft-07/schema#",
           "type": "object",
           "properties": {
             "href": {
@@ -416,8 +398,6 @@ Creates a new customer following the customer schema
           }
         },
         "nter:customer-units": {
-          "example": "https://api.nterprise.com/customers/kk9z7zwvQYH5GKx/units",
-          "$schema": "http://json-schema.org/draft-07/schema#",
           "type": "object",
           "properties": {
             "href": {
@@ -427,8 +407,6 @@ Creates a new customer following the customer schema
           }
         },
         "nter:customer-work-orders": {
-          "example": "https://api.nterprise.com/customers/kk9z7zwvQYH5GKx/work-orders",
-          "$schema": "http://json-schema.org/draft-07/schema#",
           "type": "object",
           "properties": {
             "href": {
@@ -441,7 +419,6 @@ Creates a new customer following the customer schema
     },
     "customer_id": {
       "description": "Customer identifier",
-      "x-no-api-doc": true,
       "type": "string",
       "readOnly": true,
       "pattern": "^[0-9a-zA-Z-_]+$"
@@ -473,7 +450,7 @@ Creates a new customer following the customer schema
       "type": "object",
       "description": "External Identifiers for the customer",
       "deprecated": true,
-      "patternProperties": {
+      "x-patternProperties": {
         "^[A-Za-z][A-Za-z0-9_]*$": {
           "type": "string"
         }
@@ -484,8 +461,6 @@ Creates a new customer following the customer schema
       "description": "List of allowed statuses",
       "uniqueItems": true,
       "items": {
-        "$schema": "http://json-schema.org/draft-07/schema#",
-        "$id": "https://docs.nterprise.com/schemas/niagara/status.json",
         "type": "object",
         "description": "Defines the properties for a status",
         "additionalProperties": false,
@@ -559,7 +534,6 @@ Status Code **200**
 |»» created|string(date-time)|false|read-only|Date the entity was created|
 |»» updated|string(date-time)|false|read-only|Last date the entity was updated|
 |»» external_platform|object|false|none|External Identifiers for the customer|
-|»»» ^[A-Za-z][A-Za-z0-9_]*$|string|false|none|none|
 |»» allowed_statuses|[object]|false|none|List of allowed statuses|
 |»»» status|string|true|none|A Custom label for the status|
 |»»» category|string|true|none|The classifier for the statues|
@@ -581,37 +555,73 @@ Status Code **400**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Bad Request|
+|type|https://docs.nterprise.com/api/problem/BadRequest|
+|status|400|
+|detail|Invalid request|
 
 Status Code **401**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Unauthorized|
+|type|https://docs.nterprise.com/api/problem/Unauthorized|
+|status|401|
+|detail|You are not authorized to access this resource|
 
 Status Code **403**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Forbidden|
+|type|https://docs.nterprise.com/api/problem/Forbidden|
+|status|403|
+|detail|You are forbidden to access this resource|
 
 Status Code **409**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Conflict|
+|type|https://docs.nterprise.com/api/problem/Conflict|
+|status|409|
+|detail|This request contains a conflict to another resource|
 
 <aside class="success">
 This operation does not require authentication
@@ -621,7 +631,7 @@ This operation does not require authentication
 
 <a id="opIdfetchCustomerById"></a>
 
-`GET /customers/:customer_id`
+`GET /customers/{customer_id}`
 
 *Fetches a customer by the customer Id*
 
@@ -645,8 +655,6 @@ Fetch Customer
       "type": "object",
       "properties": {
         "self": {
-          "example": "https://api.nterprise.com/customers/kk9z7zwvQYH5GKx",
-          "$schema": "http://json-schema.org/draft-07/schema#",
           "type": "object",
           "properties": {
             "href": {
@@ -656,8 +664,6 @@ Fetch Customer
           }
         },
         "nter:customer-programs": {
-          "example": "https://api.nterprise.com/customers/kk9z7zwvQYH5GKx/programs",
-          "$schema": "http://json-schema.org/draft-07/schema#",
           "type": "object",
           "properties": {
             "href": {
@@ -667,8 +673,6 @@ Fetch Customer
           }
         },
         "nter:customer-projects": {
-          "example": "https://api.nterprise.com/customers/kk9z7zwvQYH5GKx/projects",
-          "$schema": "http://json-schema.org/draft-07/schema#",
           "type": "object",
           "properties": {
             "href": {
@@ -678,8 +682,6 @@ Fetch Customer
           }
         },
         "nter:customer-units": {
-          "example": "https://api.nterprise.com/customers/kk9z7zwvQYH5GKx/units",
-          "$schema": "http://json-schema.org/draft-07/schema#",
           "type": "object",
           "properties": {
             "href": {
@@ -689,8 +691,6 @@ Fetch Customer
           }
         },
         "nter:customer-work-orders": {
-          "example": "https://api.nterprise.com/customers/kk9z7zwvQYH5GKx/work-orders",
-          "$schema": "http://json-schema.org/draft-07/schema#",
           "type": "object",
           "properties": {
             "href": {
@@ -703,7 +703,6 @@ Fetch Customer
     },
     "customer_id": {
       "description": "Customer identifier",
-      "x-no-api-doc": true,
       "type": "string",
       "readOnly": true,
       "pattern": "^[0-9a-zA-Z-_]+$"
@@ -735,7 +734,7 @@ Fetch Customer
       "type": "object",
       "description": "External Identifiers for the customer",
       "deprecated": true,
-      "patternProperties": {
+      "x-patternProperties": {
         "^[A-Za-z][A-Za-z0-9_]*$": {
           "type": "string"
         }
@@ -746,8 +745,6 @@ Fetch Customer
       "description": "List of allowed statuses",
       "uniqueItems": true,
       "items": {
-        "$schema": "http://json-schema.org/draft-07/schema#",
-        "$id": "https://docs.nterprise.com/schemas/niagara/status.json",
         "type": "object",
         "description": "Defines the properties for a status",
         "additionalProperties": false,
@@ -820,7 +817,6 @@ Status Code **200**
 |»» created|string(date-time)|false|read-only|Date the entity was created|
 |»» updated|string(date-time)|false|read-only|Last date the entity was updated|
 |»» external_platform|object|false|none|External Identifiers for the customer|
-|»»» ^[A-Za-z][A-Za-z0-9_]*$|string|false|none|none|
 |»» allowed_statuses|[object]|false|none|List of allowed statuses|
 |»»» status|string|true|none|A Custom label for the status|
 |»»» category|string|true|none|The classifier for the statues|
@@ -842,28 +838,55 @@ Status Code **401**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Unauthorized|
+|type|https://docs.nterprise.com/api/problem/Unauthorized|
+|status|401|
+|detail|You are not authorized to access this resource|
 
 Status Code **403**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Forbidden|
+|type|https://docs.nterprise.com/api/problem/Forbidden|
+|status|403|
+|detail|You are forbidden to access this resource|
 
 Status Code **404**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Not Found|
+|type|https://docs.nterprise.com/api/problem/NotFound|
+|status|404|
+|detail|Resource not found|
 
 <aside class="success">
 This operation does not require authentication
@@ -873,7 +896,7 @@ This operation does not require authentication
 
 <a id="opIdupdateCustomer"></a>
 
-`PUT /customers/:customer_id`
+`PUT /customers/{customer_id}`
 
 *Updates a customer*
 
@@ -897,7 +920,7 @@ Updates a new customer following the customer schema
       "type": "object",
       "description": "External Identifiers for the customer",
       "deprecated": true,
-      "patternProperties": {
+      "x-patternProperties": {
         "^[A-Za-z][A-Za-z0-9_]*$": {
           "type": "string"
         }
@@ -908,8 +931,6 @@ Updates a new customer following the customer schema
       "description": "List of allowed statuses",
       "uniqueItems": true,
       "items": {
-        "$schema": "http://json-schema.org/draft-07/schema#",
-        "$id": "https://docs.nterprise.com/schemas/niagara/status.json",
         "type": "object",
         "description": "Defines the properties for a status",
         "additionalProperties": false,
@@ -949,7 +970,6 @@ Updates a new customer following the customer schema
 |customer_id|path|string|true|Id of the customer|
 |label|body|string|true|Label for the entity|
 |external_platform|body|object|false|External Identifiers for the customer|
-|» ^[A-Za-z][A-Za-z0-9_]*$|body|string|false|none|
 |allowed_statuses|body|[object]|true|List of allowed statuses|
 |» status|body|string|true|A Custom label for the status|
 |» category|body|string|true|The classifier for the statues|
@@ -977,8 +997,6 @@ Updates a new customer following the customer schema
       "type": "object",
       "properties": {
         "self": {
-          "example": "https://api.nterprise.com/customers/kk9z7zwvQYH5GKx",
-          "$schema": "http://json-schema.org/draft-07/schema#",
           "type": "object",
           "properties": {
             "href": {
@@ -988,8 +1006,6 @@ Updates a new customer following the customer schema
           }
         },
         "nter:customer-programs": {
-          "example": "https://api.nterprise.com/customers/kk9z7zwvQYH5GKx/programs",
-          "$schema": "http://json-schema.org/draft-07/schema#",
           "type": "object",
           "properties": {
             "href": {
@@ -999,8 +1015,6 @@ Updates a new customer following the customer schema
           }
         },
         "nter:customer-projects": {
-          "example": "https://api.nterprise.com/customers/kk9z7zwvQYH5GKx/projects",
-          "$schema": "http://json-schema.org/draft-07/schema#",
           "type": "object",
           "properties": {
             "href": {
@@ -1010,8 +1024,6 @@ Updates a new customer following the customer schema
           }
         },
         "nter:customer-units": {
-          "example": "https://api.nterprise.com/customers/kk9z7zwvQYH5GKx/units",
-          "$schema": "http://json-schema.org/draft-07/schema#",
           "type": "object",
           "properties": {
             "href": {
@@ -1021,8 +1033,6 @@ Updates a new customer following the customer schema
           }
         },
         "nter:customer-work-orders": {
-          "example": "https://api.nterprise.com/customers/kk9z7zwvQYH5GKx/work-orders",
-          "$schema": "http://json-schema.org/draft-07/schema#",
           "type": "object",
           "properties": {
             "href": {
@@ -1035,7 +1045,6 @@ Updates a new customer following the customer schema
     },
     "customer_id": {
       "description": "Customer identifier",
-      "x-no-api-doc": true,
       "type": "string",
       "readOnly": true,
       "pattern": "^[0-9a-zA-Z-_]+$"
@@ -1067,7 +1076,7 @@ Updates a new customer following the customer schema
       "type": "object",
       "description": "External Identifiers for the customer",
       "deprecated": true,
-      "patternProperties": {
+      "x-patternProperties": {
         "^[A-Za-z][A-Za-z0-9_]*$": {
           "type": "string"
         }
@@ -1078,8 +1087,6 @@ Updates a new customer following the customer schema
       "description": "List of allowed statuses",
       "uniqueItems": true,
       "items": {
-        "$schema": "http://json-schema.org/draft-07/schema#",
-        "$id": "https://docs.nterprise.com/schemas/niagara/status.json",
         "type": "object",
         "description": "Defines the properties for a status",
         "additionalProperties": false,
@@ -1154,7 +1161,6 @@ Status Code **200**
 |»» created|string(date-time)|false|read-only|Date the entity was created|
 |»» updated|string(date-time)|false|read-only|Last date the entity was updated|
 |»» external_platform|object|false|none|External Identifiers for the customer|
-|»»» ^[A-Za-z][A-Za-z0-9_]*$|string|false|none|none|
 |»» allowed_statuses|[object]|false|none|List of allowed statuses|
 |»»» status|string|true|none|A Custom label for the status|
 |»»» category|string|true|none|The classifier for the statues|
@@ -1176,46 +1182,91 @@ Status Code **400**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Bad Request|
+|type|https://docs.nterprise.com/api/problem/BadRequest|
+|status|400|
+|detail|Invalid request|
 
 Status Code **401**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Unauthorized|
+|type|https://docs.nterprise.com/api/problem/Unauthorized|
+|status|401|
+|detail|You are not authorized to access this resource|
 
 Status Code **403**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Forbidden|
+|type|https://docs.nterprise.com/api/problem/Forbidden|
+|status|403|
+|detail|You are forbidden to access this resource|
 
 Status Code **409**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Conflict|
+|type|https://docs.nterprise.com/api/problem/Conflict|
+|status|409|
+|detail|This request contains a conflict to another resource|
 
 Status Code **423**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Locked|
+|type|https://docs.nterprise.com/api/problem/Locked|
+|status|423|
+|detail|The current resource is locked and cannot be modified|
 
 <aside class="success">
 This operation does not require authentication
@@ -1225,7 +1276,7 @@ This operation does not require authentication
 
 <a id="opIddeleteCustomer"></a>
 
-`DELETE /customers/:customer_id`
+`DELETE /customers/{customer_id}`
 
 *Deletes a customer*
 
@@ -1245,16 +1296,24 @@ This will remove the customer from the system
 {
   "properties": {
     "title": {
-      "const": "Unauthorized"
+      "enum": [
+        "Unauthorized"
+      ]
     },
     "type": {
-      "const": "https://docs.nterprise.com/api/problem/Unauthorized"
+      "enum": [
+        "https://docs.nterprise.com/api/problem/Unauthorized"
+      ]
     },
     "status": {
-      "const": 401
+      "enum": [
+        401
+      ]
     },
     "detail": {
-      "const": "You are not authorized to access this resource"
+      "enum": [
+        "You are not authorized to access this resource"
+      ]
     }
   }
 }
@@ -1276,37 +1335,73 @@ Status Code **401**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Unauthorized|
+|type|https://docs.nterprise.com/api/problem/Unauthorized|
+|status|401|
+|detail|You are not authorized to access this resource|
 
 Status Code **403**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Forbidden|
+|type|https://docs.nterprise.com/api/problem/Forbidden|
+|status|403|
+|detail|You are forbidden to access this resource|
 
 Status Code **404**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Not Found|
+|type|https://docs.nterprise.com/api/problem/NotFound|
+|status|404|
+|detail|Resource not found|
 
 Status Code **423**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Locked|
+|type|https://docs.nterprise.com/api/problem/Locked|
+|status|423|
+|detail|The current resource is locked and cannot be modified|
 
 <aside class="success">
 This operation does not require authentication
@@ -1316,7 +1411,7 @@ This operation does not require authentication
 
 <a id="opIdfetchAllCustomerContacts"></a>
 
-`GET /customers/:customer_id/contacts`
+`GET /customers/{customer_id}/contacts`
 
 *Fetches A Page of contacts for the customer*
 
@@ -1329,23 +1424,6 @@ Fetch customer contacts
 |customer_id|path|string|true|Id of the customer|
 |limit|query|integer(int32)|false|How many items to return at one time (max 100)|
 |offset|query|string|false|Continue from last offset|
-|sort|query|string|false|Sort by field|
-|filter[label]|query|string|false|Filter where the label contains this value|
-
-#### Enumerated Values
-
-|Parameter|Value|
-|---|---|
-|sort|label|
-|sort|-label|
-|sort|created|
-|sort|-created|
-|sort|updated|
-|sort|-updated|
-|sort|phone|
-|sort|-phone|
-|sort|email|
-|sort|-email|
 
 > Example responses
 
@@ -1353,6 +1431,7 @@ Fetch customer contacts
 
 ```json
 {
+  "type": "object",
   "properties": {
     "_embedded": {
       "type": "object",
@@ -1368,9 +1447,8 @@ Fetch customer contacts
                 "properties": {
                   "self": {
                     "example": {
-                      "herf": "https://api.nterprise.com/contacts/QVBrO2wm13iEyl"
+                      "href": "https://api.nterprise.com/contacts/QVBrO2wm13iEyl"
                     },
-                    "$schema": "http://json-schema.org/draft-07/schema#",
                     "type": "object",
                     "properties": {
                       "href": {
@@ -1382,9 +1460,8 @@ Fetch customer contacts
                 }
               },
               "contact_id": {
-                "x-no-api-doc": true,
+                "description": "Identifier for the contact",
                 "type": "string",
-                "description": "Customer identifier",
                 "readOnly": true,
                 "pattern": "^[0-9a-zA-Z-_]+$"
               },
@@ -1428,34 +1505,32 @@ Fetch customer contacts
           }
         }
       }
-    }
-  },
-  "_links": {
-    "type": "object",
-    "properties": {
-      "self": {
-        "example": {
-          "href": "https://api.nterprise.com/contacts"
-        },
-        "$schema": "http://json-schema.org/draft-07/schema#",
-        "type": "object",
-        "properties": {
-          "href": {
-            "type": "string",
-            "format": "uri"
+    },
+    "_links": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "example": {
+            "href": "https://api.nterprise.com/contacts"
+          },
+          "type": "object",
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "uri"
+            }
           }
-        }
-      },
-      "next": {
-        "example": {
-          "href": "https://api.nterprise.com/contacts?offset=QVBrO2wm13iEyl&limit=100"
         },
-        "$schema": "http://json-schema.org/draft-07/schema#",
-        "type": "object",
-        "properties": {
-          "href": {
-            "type": "string",
-            "format": "uri"
+        "next": {
+          "example": {
+            "href": "https://api.nterprise.com/contacts?offset=QVBrO2wm13iEyl&limit=100"
+          },
+          "type": "object",
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "uri"
+            }
           }
         }
       }
@@ -1484,7 +1559,7 @@ Status Code **200**
 |»»» _links|object|false|none|none|
 |»»»» self|object|false|none|none|
 |»»»»» href|string(uri)|false|none|none|
-|»»»» contact_id|string|false|read-only|Customer identifier|
+|»»»» contact_id|string|false|read-only|Identifier for the contact|
 |»»»» label|string|false|none|Label for the entity|
 |»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
 |»»»» created|string(date-time)|false|read-only|Date the entity was created|
@@ -1492,33 +1567,65 @@ Status Code **200**
 |»»»» name|string|false|none|Contact name|
 |»»»» email|string(email)|false|none|Email address|
 |»»»» phone|string|false|none|Phone number|
+|»»» _links|object|false|none|none|
+|»»»» self|object|false|none|none|
+|»»»»» href|string(uri)|false|none|none|
+|»»»» next|object|false|none|none|
+|»»»»» href|string(uri)|false|none|none|
 
 Status Code **401**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Unauthorized|
+|type|https://docs.nterprise.com/api/problem/Unauthorized|
+|status|401|
+|detail|You are not authorized to access this resource|
 
 Status Code **403**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Forbidden|
+|type|https://docs.nterprise.com/api/problem/Forbidden|
+|status|403|
+|detail|You are forbidden to access this resource|
 
 Status Code **404**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Not Found|
+|type|https://docs.nterprise.com/api/problem/NotFound|
+|status|404|
+|detail|Resource not found|
 
 <aside class="success">
 This operation does not require authentication
@@ -1528,7 +1635,7 @@ This operation does not require authentication
 
 <a id="opIdattachCustomerContact"></a>
 
-`POST /customers/:customer_id/contacts`
+`POST /customers/{customer_id}/contacts`
 
 *Creates a contact for a customer*
 
@@ -1589,9 +1696,8 @@ Creates a new contact for the customer
       "properties": {
         "self": {
           "example": {
-            "herf": "https://api.nterprise.com/contacts/QVBrO2wm13iEyl"
+            "href": "https://api.nterprise.com/contacts/QVBrO2wm13iEyl"
           },
-          "$schema": "http://json-schema.org/draft-07/schema#",
           "type": "object",
           "properties": {
             "href": {
@@ -1603,9 +1709,8 @@ Creates a new contact for the customer
       }
     },
     "contact_id": {
-      "x-no-api-doc": true,
+      "description": "Identifier for the contact",
       "type": "string",
-      "description": "Customer identifier",
       "readOnly": true,
       "pattern": "^[0-9a-zA-Z-_]+$"
     },
@@ -1669,7 +1774,7 @@ Status Code **200**
 |» _links|object|false|none|none|
 |»» self|object|false|none|none|
 |»»» href|string(uri)|false|none|none|
-|»» contact_id|string|false|read-only|Customer identifier|
+|»» contact_id|string|false|read-only|Identifier for the contact|
 |»» label|string|false|none|Label for the entity|
 |»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
 |»» created|string(date-time)|false|read-only|Date the entity was created|
@@ -1682,128 +1787,91 @@ Status Code **400**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Bad Request|
+|type|https://docs.nterprise.com/api/problem/BadRequest|
+|status|400|
+|detail|Invalid request|
 
 Status Code **401**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Unauthorized|
+|type|https://docs.nterprise.com/api/problem/Unauthorized|
+|status|401|
+|detail|You are not authorized to access this resource|
 
 Status Code **403**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Forbidden|
+|type|https://docs.nterprise.com/api/problem/Forbidden|
+|status|403|
+|detail|You are forbidden to access this resource|
 
 Status Code **404**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Not Found|
+|type|https://docs.nterprise.com/api/problem/NotFound|
+|status|404|
+|detail|Resource not found|
 
 Status Code **409**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
 
-<aside class="success">
-This operation does not require authentication
-</aside>
+#### Enumerated Values
 
-## detachCustomerContact
-
-<a id="opIddetachCustomerContact"></a>
-
-`DELETE /customers/:customer_id/contacts/:contact_id`
-
-*Detaches a contact for a customer*
-
-The contact will still exist just no longer attached to this customer
-
-<h3 id="detachcustomercontact-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|customer_id|path|string|true|Id of the customer|
-|contact_id|path|string|true|Id of the contact|
-
-> Example responses
-
-> 401 Response
-
-```json
-{
-  "properties": {
-    "title": {
-      "const": "Unauthorized"
-    },
-    "type": {
-      "const": "https://docs.nterprise.com/api/problem/Unauthorized"
-    },
-    "status": {
-      "const": 401
-    },
-    "detail": {
-      "const": "You are not authorized to access this resource"
-    }
-  }
-}
-```
-
-<h3 id="detachcustomercontact-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|205|[Reset Content](https://tools.ietf.org/html/rfc7231#section-6.3.6)|Contact detached|None|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|Inline|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Resource not found|Inline|
-
-<h3 id="detachcustomercontact-responseschema">Response Schema</h3>
-
-Status Code **401**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
-
-Status Code **403**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
-
-Status Code **404**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|Property|Value|
+|---|---|
+|title|Conflict|
+|type|https://docs.nterprise.com/api/problem/Conflict|
+|status|409|
+|detail|This request contains a conflict to another resource|
 
 <aside class="success">
 This operation does not require authentication
@@ -1813,7 +1881,7 @@ This operation does not require authentication
 
 <a id="opIdfetchAllCustomerParts"></a>
 
-`GET /customers/:customer_id/parts`
+`GET /customers/{customer_id}/parts`
 
 *Fetches A Page of parts for the customer*
 
@@ -1826,26 +1894,6 @@ Fetch customer parts
 |customer_id|path|string|true|Id of the customer|
 |limit|query|integer(int32)|false|How many items to return at one time (max 100)|
 |offset|query|string|false|Continue from last offset|
-|sort|query|string|false|Sort by field|
-|filter[label]|query|string|false|Filter where the label contains this value|
-|filter[manufacturer_id]|query|string|false|Filter where the manufacturer id is this valuer|
-
-#### Enumerated Values
-
-|Parameter|Value|
-|---|---|
-|sort|label|
-|sort|-label|
-|sort|created|
-|sort|-created|
-|sort|updated|
-|sort|-updated|
-|sort|manufacturer|
-|sort|-manufacturer|
-|sort|part_number|
-|sort|-part_number|
-|sort|customer|
-|sort|-customer|
 
 > Example responses
 
@@ -1853,6 +1901,7 @@ Fetch customer parts
 
 ```json
 {
+  "type": "object",
   "properties": {
     "_embedded": {
       "type": "object",
@@ -1867,8 +1916,9 @@ Fetch customer parts
                 "type": "object",
                 "properties": {
                   "self": {
-                    "example": "https://api.nterprise.com/parts/23Y1rNJ6zyiRzqN",
-                    "$schema": "http://json-schema.org/draft-07/schema#",
+                    "example": {
+                      "href": "https://api.nterprise.com/parts/23Y1rNJ6zyiRzqN"
+                    },
                     "type": "object",
                     "properties": {
                       "href": {
@@ -1880,8 +1930,7 @@ Fetch customer parts
                 }
               },
               "part_id": {
-                "description": "Part identifier",
-                "x-no-api-doc": true,
+                "description": "Unique identifier",
                 "type": "string",
                 "readOnly": true,
                 "pattern": "^[0-9a-zA-Z-_]+$"
@@ -1910,8 +1959,6 @@ Fetch customer parts
                 "readOnly": true
               },
               "customer": {
-                "$schema": "http://json-schema.org/draft-07/schema#",
-                "$id": "https://docs.nterprise.com/schemas/niagara/customer.json",
                 "type": "object",
                 "description": "Customer",
                 "additionalProperties": false,
@@ -1939,7 +1986,9 @@ Fetch customer parts
                   },
                   "entity_type": {
                     "x-no-api-doc": true,
-                    "const": "CUS"
+                    "enum": [
+                      "CUS"
+                    ]
                   },
                   "label": {
                     "type": "string",
@@ -1968,7 +2017,7 @@ Fetch customer parts
                     "type": "object",
                     "description": "External Identifiers for the customer",
                     "deprecated": true,
-                    "patternProperties": {
+                    "x-patternProperties": {
                       "^[A-Za-z][A-Za-z0-9_]*$": {
                         "type": "string"
                       }
@@ -1979,8 +2028,6 @@ Fetch customer parts
                     "description": "List of allowed statuses",
                     "uniqueItems": true,
                     "items": {
-                      "$schema": "http://json-schema.org/draft-07/schema#",
-                      "$id": "https://docs.nterprise.com/schemas/niagara/status.json",
                       "type": "object",
                       "description": "Defines the properties for a status",
                       "additionalProperties": false,
@@ -2031,81 +2078,22 @@ Fetch customer parts
                     "description": "Manufacturer part number"
                   }
                 },
-                "allOf": [
-                  {
-                    "$schema": "http://json-schema.org/draft-07/schema#",
-                    "$id": "https://docs.nterprise.com/schemas/niagara/manufacturer.json",
-                    "type": "object",
-                    "description": "A Manufacturer of parts",
-                    "additionalProperties": false,
-                    "required": [
-                      "label",
-                      "entity_id",
-                      "entity_type",
-                      "created",
-                      "updated"
-                    ],
-                    "properties": {
-                      "manufacturer_id": {
-                        "description": "Manufacturer identifier",
-                        "type": "string",
-                        "readOnly": true,
-                        "pattern": "^[0-9a-zA-Z-_]+$"
-                      },
-                      "entity_id": {
-                        "x-no-api-doc": true,
-                        "type": "string",
-                        "description": "Customer identifier",
-                        "readOnly": true,
-                        "pattern": "^[0-9a-zA-Z-_]+$"
-                      },
-                      "entity_type": {
-                        "x-no-api-doc": true,
-                        "const": "MFR"
-                      },
-                      "label": {
-                        "type": "string",
-                        "description": "Label for the entity"
-                      },
-                      "slug": {
-                        "type": "string",
-                        "description": "Slug for the entity (Auto-generated from the label)",
-                        "readOnly": true,
-                        "deprecated": true,
-                        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-                      },
-                      "created": {
-                        "description": "Date the entity was created",
-                        "type": "string",
-                        "format": "date-time",
-                        "readOnly": true
-                      },
-                      "updated": {
-                        "description": "Last date the entity was updated",
-                        "type": "string",
-                        "format": "date-time",
-                        "readOnly": true
-                      }
-                    }
-                  }
-                ]
+                "additionalProperties": false
               },
               "serial_prefix": {
                 "type": "string",
                 "description": "A serial number prefix for the part"
               },
               "input_filter": {
-                "$schema": "http://json-schema.org/draft-07/schema#",
-                "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter.json",
                 "type": "array",
                 "description": "Input Filters allow custom fields to be defined for entities",
                 "items": {
                   "type": "object",
                   "description": "Input filter specification",
-                  "require": [
+                  "required": [
                     "label",
                     "key",
-                    "filter",
+                    "filters",
                     "validators"
                   ],
                   "properties": {
@@ -2126,8 +2114,6 @@ Fetch customer parts
                       "items": {
                         "anyOf": [
                           {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/allowed.json",
                             "type": "object",
                             "description": "This filter will set the value based on a list of approved values. If the value is not in the list, it will then be set to empty unless the default option is set",
                             "required": [
@@ -2171,8 +2157,6 @@ Fetch customer parts
                             }
                           },
                           {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/camelCase.json",
                             "type": "object",
                             "description": "Make the value camelCase",
                             "required": [
@@ -2193,8 +2177,6 @@ Fetch customer parts
                             }
                           },
                           {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/date.json",
                             "type": "object",
                             "description": "Filter to transform a value into a date",
                             "required": [
@@ -2215,8 +2197,6 @@ Fetch customer parts
                             }
                           },
                           {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/empty.json",
                             "type": "object",
                             "description": "Filter to transform values into null. This is helpful when trying to make a value required. The following are considered empty:\n# The number 0 or 0.0\n# empty string ''\n# A boolean false\n# The word 'false'\n# ",
                             "required": [
@@ -2237,8 +2217,6 @@ Fetch customer parts
                             }
                           },
                           {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/float.json",
                             "type": "object",
                             "description": "Filter to transform a value into a float. Non numeric characters (including comma) will be removed",
                             "required": [
@@ -2267,8 +2245,6 @@ Fetch customer parts
                             }
                           },
                           {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/kebabCase.json",
                             "type": "object",
                             "description": "Make the value kebab-case",
                             "required": [
@@ -2289,8 +2265,6 @@ Fetch customer parts
                             }
                           },
                           {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/lower.json",
                             "type": "object",
                             "description": "Make the value lowercase",
                             "required": [
@@ -2311,8 +2285,6 @@ Fetch customer parts
                             }
                           },
                           {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/number.json",
                             "type": "object",
                             "description": "Filter to transform a value into a number. Non numeric characters (including comma and decimal points) will be removed",
                             "required": [
@@ -2333,8 +2305,6 @@ Fetch customer parts
                             }
                           },
                           {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/prefix.json",
                             "type": "object",
                             "description": "Add a prefix to the start of a string. If the string already start with the prefix, it will not prepend.",
                             "required": [
@@ -2363,8 +2333,6 @@ Fetch customer parts
                             }
                           },
                           {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/snakeCase.json",
                             "type": "object",
                             "description": "Make the value snake_case",
                             "required": [
@@ -2385,8 +2353,6 @@ Fetch customer parts
                             }
                           },
                           {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/string.json",
                             "type": "object",
                             "description": "Filter to transform a value into a string",
                             "required": [
@@ -2407,8 +2373,6 @@ Fetch customer parts
                             }
                           },
                           {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/suffix.json",
                             "description": "Add a suffix to the start of a string. If the string already start with the suffix, it will not append.",
                             "type": "object",
                             "required": [
@@ -2437,8 +2401,6 @@ Fetch customer parts
                             }
                           },
                           {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/trim.json",
                             "type": "object",
                             "description": "Filter to trim whitespace from a value",
                             "required": [
@@ -2471,8 +2433,6 @@ Fetch customer parts
                             }
                           },
                           {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/upper.json",
                             "type": "object",
                             "description": "Make the value UPPERCASE",
                             "required": [
@@ -2502,8 +2462,6 @@ Fetch customer parts
                       "items": {
                         "anyOf": [
                           {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/between.json",
                             "type": "object",
                             "description": "Validate number is between two values. By default, min and max are included",
                             "required": [
@@ -2549,8 +2507,6 @@ Fetch customer parts
                             }
                           },
                           {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/blackList.json",
                             "type": "object",
                             "description": "Validate value does not match a list (black list)",
                             "required": [
@@ -2589,8 +2545,6 @@ Fetch customer parts
                             }
                           },
                           {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/contains.json",
                             "type": "object",
                             "description": "Validate string contains a value",
                             "required": [
@@ -2624,8 +2578,6 @@ Fetch customer parts
                             }
                           },
                           {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/emailAddress.json",
                             "type": "object",
                             "description": "Validate string is a correct email address",
                             "required": [
@@ -2657,8 +2609,6 @@ Fetch customer parts
                             }
                           },
                           {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/endsWith.json",
                             "type": "object",
                             "description": "Validate string ends with a value",
                             "required": [
@@ -2692,8 +2642,6 @@ Fetch customer parts
                             }
                           },
                           {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/equals.json",
                             "type": "object",
                             "description": "Validate number equals a value",
                             "required": [
@@ -2729,8 +2677,6 @@ Fetch customer parts
                             }
                           },
                           {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/greaterThan.json",
                             "type": "object",
                             "description": "Validate number is greater than a value. By default, this will check if value is greater than or equals to",
                             "required": [
@@ -2771,8 +2717,6 @@ Fetch customer parts
                             }
                           },
                           {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/hostname.json",
                             "type": "object",
                             "description": "Validate string has a correct DNS records",
                             "required": [
@@ -2842,8 +2786,6 @@ Fetch customer parts
                             }
                           },
                           {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/ipAddress.json",
                             "type": "object",
                             "description": "Validate string matches an IP address format. Defaults to matching IPv4",
                             "required": [
@@ -2876,8 +2818,6 @@ Fetch customer parts
                             }
                           },
                           {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/length.json",
                             "type": "object",
                             "description": "Validate string is a certain length",
                             "required": [
@@ -2918,8 +2858,6 @@ Fetch customer parts
                             }
                           },
                           {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/lessThan.json",
                             "type": "object",
                             "description": "Validate number is less than a value. By default, this will check if value is less than or equals to",
                             "required": [
@@ -2960,8 +2898,6 @@ Fetch customer parts
                             }
                           },
                           {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/macAddress.json",
                             "type": "object",
                             "description": "Validate string matches an MAC address format",
                             "required": [
@@ -2982,8 +2918,6 @@ Fetch customer parts
                             }
                           },
                           {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/mask.json",
                             "type": "object",
                             "description": "Validate string matches a regular expression",
                             "required": [
@@ -3012,8 +2946,6 @@ Fetch customer parts
                             }
                           },
                           {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/startsWith.json",
                             "type": "object",
                             "description": "Validate string starts with a value",
                             "required": [
@@ -3047,8 +2979,6 @@ Fetch customer parts
                             }
                           },
                           {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/step.json",
                             "type": "object",
                             "description": "Validates that a value follows a step. Both start and end options do not have to sync with the step. If they do not sync then find the nearest step.",
                             "required": [
@@ -3085,8 +3015,6 @@ Fetch customer parts
                             }
                           },
                           {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/uri.json",
                             "type": "object",
                             "description": "Validate string matches an URI",
                             "required": [
@@ -3129,8 +3057,6 @@ Fetch customer parts
                             }
                           },
                           {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/whiteList.json",
                             "type": "object",
                             "description": "Validate value matches a list (white list)",
                             "required": [
@@ -3178,34 +3104,32 @@ Fetch customer parts
           }
         }
       }
-    }
-  },
-  "_links": {
-    "type": "object",
-    "properties": {
-      "self": {
-        "example": {
-          "href": "https://api.nterprise.com/parts"
-        },
-        "$schema": "http://json-schema.org/draft-07/schema#",
-        "type": "object",
-        "properties": {
-          "href": {
-            "type": "string",
-            "format": "uri"
+    },
+    "_links": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "example": {
+            "href": "https://api.nterprise.com/parts"
+          },
+          "type": "object",
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "uri"
+            }
           }
-        }
-      },
-      "next": {
-        "example": {
-          "href": "https://api.nterprise.com/parts?offset=QVBrO2wm13iEyl&limit=100"
         },
-        "$schema": "http://json-schema.org/draft-07/schema#",
-        "type": "object",
-        "properties": {
-          "href": {
-            "type": "string",
-            "format": "uri"
+        "next": {
+          "example": {
+            "href": "https://api.nterprise.com/parts?offset=QVBrO2wm13iEyl&limit=100"
+          },
+          "type": "object",
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "uri"
+            }
           }
         }
       }
@@ -3234,7 +3158,7 @@ Status Code **200**
 |»»» _links|object|false|none|none|
 |»»»» self|object|false|none|none|
 |»»»»» href|string(uri)|false|none|none|
-|»»»» part_id|string|false|read-only|Part identifier|
+|»»»» part_id|string|false|read-only|Unique identifier|
 |»»»» label|string|false|none|Label for the entity|
 |»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
 |»»»» created|string(date-time)|false|read-only|Date the entity was created|
@@ -3242,13 +3166,12 @@ Status Code **200**
 |»»»» customer|object|false|none|Customer|
 |»»»»» customer_id|string|false|read-only|Customer identifier|
 |»»»»» entity_id|string|true|read-only|Customer identifier|
-|»»»»» entity_type|any|true|none|none|
+|»»»»» entity_type|string|true|none|none|
 |»»»»» label|string|true|none|Label for the entity|
 |»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
 |»»»»» created|string(date-time)|true|read-only|Date the entity was created|
 |»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
 |»»»»» external_platform|object|false|none|External Identifiers for the customer|
-|»»»»»» ^[A-Za-z][A-Za-z0-9_]*$|string|false|none|none|
 |»»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
 |»»»»»» status|string|true|none|A Custom label for the status|
 |»»»»»» category|string|true|none|The classifier for the statues|
@@ -3258,9 +3181,9 @@ Status Code **200**
 |»»»»» part_number|string|true|none|Manufacturer part number|
 |»»»» serial_prefix|string|false|none|A serial number prefix for the part|
 |»»»» input_filter|[object]|false|none|Input Filters allow custom fields to be defined for entities|
-|»»»»» label|string|false|none|Human readable name|
-|»»»»» key|string|false|read-only|Slug used to store the property|
-|»»»»» filters|[anyOf]|false|none|A Collection of filters applied to the field|
+|»»»»» label|string|true|none|Human readable name|
+|»»»»» key|string|true|read-only|Slug used to store the property|
+|»»»»» filters|[anyOf]|true|none|A Collection of filters applied to the field|
 
 *anyOf*
 
@@ -3386,7 +3309,7 @@ Status Code **200**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»» validators|[anyOf]|false|none|A set of validators to use for this field|
+|»»»»»»»»»»» validators|[anyOf]|true|none|A set of validators to use for this field|
 
 *anyOf*
 
@@ -3557,10 +3480,21 @@ Status Code **200**
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»» list|[string]|true|none|The list of approved values|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
 
+*continued*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»» _links|object|false|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» self|object|false|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» href|string(uri)|false|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» next|object|false|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» href|string(uri)|false|none|none|
+
 #### Enumerated Values
 
 |Property|Value|
 |---|---|
+|entity_type|CUS|
 |category|PENDING|
 |category|IN_PROGRESS|
 |category|VERIFYING|
@@ -3649,28 +3583,453 @@ Status Code **401**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Unauthorized|
+|type|https://docs.nterprise.com/api/problem/Unauthorized|
+|status|401|
+|detail|You are not authorized to access this resource|
 
 Status Code **403**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Forbidden|
+|type|https://docs.nterprise.com/api/problem/Forbidden|
+|status|403|
+|detail|You are forbidden to access this resource|
 
 Status Code **404**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Not Found|
+|type|https://docs.nterprise.com/api/problem/NotFound|
+|status|404|
+|detail|Resource not found|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## fetchAllCustomerPrograms
+
+<a id="opIdfetchAllCustomerPrograms"></a>
+
+`GET /customers/{customer_id}/programs`
+
+*Fetches A Page of programs for the customer*
+
+Fetch customer programs
+
+<h3 id="fetchallcustomerprograms-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|customer_id|path|string|true|Id of the customer|
+|limit|query|integer(int32)|false|How many items to return at one time (max 100)|
+|offset|query|string|false|Continue from last offset|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "type": "object",
+  "properties": {
+    "_embedded": {
+      "type": "object",
+      "properties": {
+        "nter:programs": {
+          "type": "array",
+          "maxItems": 100,
+          "items": {
+            "type": "object",
+            "properties": {
+              "_links": {
+                "type": "object",
+                "properties": {
+                  "self": {
+                    "example": {
+                      "href": "https://api.nterprise.com/programs/ZRPrErZZJrIO6mB"
+                    },
+                    "type": "object",
+                    "properties": {
+                      "href": {
+                        "type": "string",
+                        "format": "uri"
+                      }
+                    }
+                  }
+                }
+              },
+              "program_id": {
+                "description": "Unique identifier",
+                "type": "string",
+                "readOnly": true,
+                "pattern": "^[0-9a-zA-Z-_]+$"
+              },
+              "label": {
+                "type": "string",
+                "description": "Label for the entity"
+              },
+              "slug": {
+                "type": "string",
+                "description": "Slug for the entity (Auto-generated from the label)",
+                "readOnly": true,
+                "deprecated": true,
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+              },
+              "created": {
+                "description": "Date the entity was created",
+                "type": "string",
+                "format": "date-time",
+                "readOnly": true
+              },
+              "updated": {
+                "description": "Last date the entity was updated",
+                "type": "string",
+                "format": "date-time",
+                "readOnly": true
+              },
+              "start_date": {
+                "type": "string",
+                "nullable": true,
+                "format": "date-time",
+                "description": "Start date"
+              },
+              "end_date": {
+                "type": "string",
+                "nullable": true,
+                "format": "date-time",
+                "description": "End date"
+              },
+              "customer": {
+                "type": "object",
+                "description": "Customer",
+                "additionalProperties": false,
+                "required": [
+                  "label",
+                  "entity_id",
+                  "entity_type",
+                  "created",
+                  "updated",
+                  "allowed_statuses"
+                ],
+                "properties": {
+                  "customer_id": {
+                    "description": "Customer identifier",
+                    "type": "string",
+                    "readOnly": true,
+                    "pattern": "^[0-9a-zA-Z-_]+$"
+                  },
+                  "entity_id": {
+                    "x-no-api-doc": true,
+                    "type": "string",
+                    "description": "Customer identifier",
+                    "readOnly": true,
+                    "pattern": "^[0-9a-zA-Z-_]+$"
+                  },
+                  "entity_type": {
+                    "x-no-api-doc": true,
+                    "enum": [
+                      "CUS"
+                    ]
+                  },
+                  "label": {
+                    "type": "string",
+                    "description": "Label for the entity"
+                  },
+                  "slug": {
+                    "type": "string",
+                    "description": "Slug for the entity (Auto-generated from the label)",
+                    "readOnly": true,
+                    "deprecated": true,
+                    "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                  },
+                  "created": {
+                    "description": "Date the entity was created",
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true
+                  },
+                  "updated": {
+                    "description": "Last date the entity was updated",
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true
+                  },
+                  "external_platform": {
+                    "type": "object",
+                    "description": "External Identifiers for the customer",
+                    "deprecated": true,
+                    "x-patternProperties": {
+                      "^[A-Za-z][A-Za-z0-9_]*$": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "allowed_statuses": {
+                    "type": "array",
+                    "description": "List of allowed statuses",
+                    "uniqueItems": true,
+                    "items": {
+                      "type": "object",
+                      "description": "Defines the properties for a status",
+                      "additionalProperties": false,
+                      "required": [
+                        "status",
+                        "category"
+                      ],
+                      "properties": {
+                        "status": {
+                          "type": "string",
+                          "description": "A Custom label for the status",
+                          "pattern": "^[A-Za-z][0-9a-zA-Z-_ ]+$"
+                        },
+                        "category": {
+                          "type": "string",
+                          "description": "The classifier for the statues",
+                          "enum": [
+                            "PENDING",
+                            "IN_PROGRESS",
+                            "VERIFYING",
+                            "COMPLETE",
+                            "CANCELLED",
+                            "BLOCKED"
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  "total_programs": {
+                    "type": "number",
+                    "description": "Total programs under the customer"
+                  },
+                  "total_projects": {
+                    "type": "number",
+                    "description": "Total projects under the customer"
+                  }
+                }
+              },
+              "allowed_statuses": {
+                "type": "array",
+                "description": "List of allowed statuses",
+                "uniqueItems": true,
+                "items": {
+                  "type": "object",
+                  "description": "Defines the properties for a status",
+                  "additionalProperties": false,
+                  "required": [
+                    "status",
+                    "category"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "description": "A Custom label for the status",
+                      "pattern": "^[A-Za-z][0-9a-zA-Z-_ ]+$"
+                    },
+                    "category": {
+                      "type": "string",
+                      "description": "The classifier for the statues",
+                      "enum": [
+                        "PENDING",
+                        "IN_PROGRESS",
+                        "VERIFYING",
+                        "COMPLETE",
+                        "CANCELLED",
+                        "BLOCKED"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "_links": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "example": {
+            "href": "https://api.nterprise.com/programs"
+          },
+          "type": "object",
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        },
+        "next": {
+          "example": {
+            "href": "https://api.nterprise.com/programs?offset=QVBrO2wm13iEyl&limit=100"
+          },
+          "type": "object",
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+<h3 id="fetchallcustomerprograms-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|A paged response for programs|Inline|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|Inline|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Resource not found|Inline|
+
+<h3 id="fetchallcustomerprograms-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» _embedded|object|false|none|none|
+|»» nter:programs|[object]|false|none|none|
+|»»» _links|object|false|none|none|
+|»»»» self|object|false|none|none|
+|»»»»» href|string(uri)|false|none|none|
+|»»»» program_id|string|false|read-only|Unique identifier|
+|»»»» label|string|false|none|Label for the entity|
+|»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»» created|string(date-time)|false|read-only|Date the entity was created|
+|»»»» updated|string(date-time)|false|read-only|Last date the entity was updated|
+|»»»» start_date|string(date-time)\|null|false|none|Start date|
+|»»»» end_date|string(date-time)\|null|false|none|End date|
+|»»»» customer|object|false|none|Customer|
+|»»»»» customer_id|string|false|read-only|Customer identifier|
+|»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»» entity_type|string|true|none|none|
+|»»»»» label|string|true|none|Label for the entity|
+|»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»»»» external_platform|object|false|none|External Identifiers for the customer|
+|»»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
+|»»»»»» status|string|true|none|A Custom label for the status|
+|»»»»»» category|string|true|none|The classifier for the statues|
+|»»»»» total_programs|number|false|none|Total programs under the customer|
+|»»»»» total_projects|number|false|none|Total projects under the customer|
+|»»»» allowed_statuses|[object]|false|none|List of allowed statuses|
+|»»»»» status|string|true|none|A Custom label for the status|
+|»»»»» category|string|true|none|The classifier for the statues|
+|»»»» _links|object|false|none|none|
+|»»»»» self|object|false|none|none|
+|»»»»»» href|string(uri)|false|none|none|
+|»»»»» next|object|false|none|none|
+|»»»»»» href|string(uri)|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|entity_type|CUS|
+|category|PENDING|
+|category|IN_PROGRESS|
+|category|VERIFYING|
+|category|COMPLETE|
+|category|CANCELLED|
+|category|BLOCKED|
+|category|PENDING|
+|category|IN_PROGRESS|
+|category|VERIFYING|
+|category|COMPLETE|
+|category|CANCELLED|
+|category|BLOCKED|
+
+Status Code **401**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Unauthorized|
+|type|https://docs.nterprise.com/api/problem/Unauthorized|
+|status|401|
+|detail|You are not authorized to access this resource|
+
+Status Code **403**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Forbidden|
+|type|https://docs.nterprise.com/api/problem/Forbidden|
+|status|403|
+|detail|You are forbidden to access this resource|
+
+Status Code **404**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Not Found|
+|type|https://docs.nterprise.com/api/problem/NotFound|
+|status|404|
+|detail|Resource not found|
 
 <aside class="success">
 This operation does not require authentication
@@ -3683,8 +4042,6 @@ This operation does not require authentication
 <a id="schemacustomer"></a>
 
 ```yaml
-$schema: 'http://json-schema.org/draft-07/schema#'
-$id: 'https://docs.nterprise.com/schemas/niagara/customer.json'
 type: object
 description: Customer
 additionalProperties: false
@@ -3709,7 +4066,8 @@ properties:
     pattern: '^[0-9a-zA-Z-_]+$'
   entity_type:
     x-no-api-doc: true
-    const: CUS
+    enum:
+      - CUS
   label:
     type: string
     description: Label for the entity
@@ -3733,7 +4091,7 @@ properties:
     type: object
     description: External Identifiers for the customer
     deprecated: true
-    patternProperties:
+    x-patternProperties:
       '^[A-Za-z][A-Za-z0-9_]*$':
         type: string
   allowed_statuses:
@@ -3741,8 +4099,6 @@ properties:
     description: List of allowed statuses
     uniqueItems: true
     items:
-      $schema: 'http://json-schema.org/draft-07/schema#'
-      $id: 'https://docs.nterprise.com/schemas/niagara/status.json'
       type: object
       description: Defines the properties for a status
       additionalProperties: false
@@ -3781,13 +4137,12 @@ properties:
 |---|---|---|---|---|
 |customer_id|string|false|read-only|Customer identifier|
 |entity_id|string|true|read-only|Customer identifier|
-|entity_type|any|true|none|none|
+|entity_type|string|true|none|none|
 |label|string|true|none|Label for the entity|
 |slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
 |created|string(date-time)|true|read-only|Date the entity was created|
 |updated|string(date-time)|true|read-only|Last date the entity was updated|
 |external_platform|object|false|none|External Identifiers for the customer|
-|» ^[A-Za-z][A-Za-z0-9_]*$|string|false|none|none|
 |allowed_statuses|[object]|true|none|List of allowed statuses|
 |» status|string|true|none|A Custom label for the status|
 |» category|string|true|none|The classifier for the statues|
@@ -3798,6 +4153,7 @@ properties:
 
 |Property|Value|
 |---|---|
+|entity_type|CUS|
 |category|PENDING|
 |category|IN_PROGRESS|
 |category|VERIFYING|

@@ -3,12 +3,10 @@
   "content": {
     "application/hal+json": {
       "schema": {
+        "type": "object",
         "allOf": [
           {
-            "$ref": "../schemas/user.json"
-          },
-          {
-            "$ref": "../schemas/links/linkSelf.json"
+            "$ref": "../schemas/halUser.json"
           }
         ]
       }

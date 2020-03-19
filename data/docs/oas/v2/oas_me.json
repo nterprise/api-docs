@@ -9,14 +9,7 @@
   },
   "paths": {
     "/me": {
-      "$ref": "./paths/me.json"
+      "$ref": "./paths/me/me.json"
     }
-  },
-  "security": [
-    {
-      "jwt": [
-        "access"
-      ]
-    }
-  ]
+  }
 }

@@ -16,7 +16,11 @@ headingLevel: 2
 
 > Scroll down for example requests and responses.
 
-API for the nterprise application
+Contacts contain email and phone number information for a non-user entity which allows sending notification information without the need to create a user login
+
+## Security Restrictions
+
+Contacts are considered a top-level `entity.` `Users` must be granted the `create` permission on the Contact entity to be able to create contacts. Grant the `create` or `update` permissions to the user for the linked `entity` for the relationship operation to be approved.
 
 <h1 id="contacts-contact">Contact</h1>
 
@@ -36,23 +40,6 @@ Fetch Contact
 |---|---|---|---|---|
 |limit|query|integer(int32)|false|How many items to return at one time (max 100)|
 |offset|query|string|false|Continue from last offset|
-|sort|query|string|false|Sort by field|
-|filter[label]|query|string|false|Filter where the label contains this value|
-
-#### Enumerated Values
-
-|Parameter|Value|
-|---|---|
-|sort|label|
-|sort|-label|
-|sort|created|
-|sort|-created|
-|sort|updated|
-|sort|-updated|
-|sort|phone|
-|sort|-phone|
-|sort|email|
-|sort|-email|
 
 > Example responses
 
@@ -60,6 +47,7 @@ Fetch Contact
 
 ```json
 {
+  "type": "object",
   "properties": {
     "_embedded": {
       "type": "object",
@@ -69,191 +57,101 @@ Fetch Contact
           "maxItems": 100,
           "items": {
             "type": "object",
-            "x-hal": true,
-            "x-ui-hide": true,
             "properties": {
               "_links": {
                 "type": "object",
                 "properties": {
                   "self": {
+                    "example": {
+                      "href": "https://api.nterprise.com/contacts/QVBrO2wm13iEyl"
+                    },
                     "type": "object",
-                    "readOnly": true,
                     "properties": {
                       "href": {
                         "type": "string",
-                        "example": "https://api.nterprise.com/contacts/3bd1a313-5bf8-468f-85ff-59d2214c8158"
+                        "format": "uri"
                       }
                     }
                   }
                 }
+              },
+              "contact_id": {
+                "description": "Identifier for the contact",
+                "type": "string",
+                "readOnly": true,
+                "pattern": "^[0-9a-zA-Z-_]+$"
+              },
+              "label": {
+                "type": "string",
+                "description": "Label for the entity"
+              },
+              "slug": {
+                "type": "string",
+                "description": "Slug for the entity (Auto-generated from the label)",
+                "readOnly": true,
+                "deprecated": true,
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+              },
+              "created": {
+                "description": "Date the entity was created",
+                "type": "string",
+                "format": "date-time",
+                "readOnly": true
+              },
+              "updated": {
+                "description": "Last date the entity was updated",
+                "type": "string",
+                "format": "date-time",
+                "readOnly": true
+              },
+              "name": {
+                "type": "string",
+                "description": "Contact name"
+              },
+              "email": {
+                "type": "string",
+                "format": "email",
+                "description": "Email address"
+              },
+              "phone": {
+                "type": "string",
+                "description": "Phone number"
               }
-            },
-            "allOf": [
-              {
-                "x-id": "#contact",
-                "x-nter-relation": "contacts",
-                "x-nter-model": "Contact",
-                "x-nter-callable": true,
-                "type": "object",
-                "description": "Contact Information",
-                "required": [
-                  "contact_id",
-                  "label",
-                  "email",
-                  "name"
-                ],
-                "properties": {
-                  "label": {
-                    "x-faker": "name.title",
-                    "allOf": [
-                      {
-                        "type": "string",
-                        "description": "Label for the entity",
-                        "example": "primary"
-                      }
-                    ]
-                  },
-                  "contact_id": {
-                    "type": "string",
-                    "description": "Identifier for the contact",
-                    "readOnly": true,
-                    "example": "1c022258-afcd-4bf2-a576-ae59b7a15d73",
-                    "x-examples": [
-                      "1c022258-afcd-4bf2-a576-ae59b7a15d73"
-                    ],
-                    "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-                  },
-                  "email": {
-                    "type": "string",
-                    "format": "email",
-                    "description": "Email address",
-                    "example": "bob@zones.com",
-                    "x-examples": [
-                      "bob@zones.com"
-                    ],
-                    "nullable": true
-                  },
-                  "name": {
-                    "type": "string",
-                    "description": "Contact name",
-                    "example": "Bob Alice",
-                    "x-examples": [
-                      "Bob Alice"
-                    ],
-                    "nullable": true
-                  },
-                  "phone": {
-                    "type": "string",
-                    "description": "Phone number",
-                    "example": "+1 518 867 5309",
-                    "x-examples": [
-                      "+1 518 867 5309"
-                    ]
-                  },
-                  "created": {
-                    "description": "Date the entity was created",
-                    "type": "string",
-                    "format": "date-time",
-                    "readOnly": true
-                  },
-                  "updated": {
-                    "description": "Last date the entity was updated",
-                    "type": "string",
-                    "format": "date-time",
-                    "readOnly": true
-                  }
-                },
-                "example": {
-                  "contact_id": "1c022258-afcd-4bf2-a576-ae59b7a15d73",
-                  "label": "Customer Division Representative",
-                  "email": "bob@zones.com",
-                  "name": "Bob Alice",
-                  "phone": "+1 518 867 5309",
-                  "created": "2000-01-03T02:33:07.848Z",
-                  "updated": "1961-09-02T06:16:27.807Z"
-                }
-              }
-            ],
-            "example": "undefined"
+            }
+          }
+        }
+      }
+    },
+    "_links": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "example": {
+            "href": "https://api.nterprise.com/contacts"
+          },
+          "type": "object",
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        },
+        "next": {
+          "example": {
+            "href": "https://api.nterprise.com/contacts?offset=QVBrO2wm13iEyl&limit=100"
+          },
+          "type": "object",
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "uri"
+            }
           }
         }
       }
     }
-  },
-  "allOf": [
-    {
-      "type": "object",
-      "x-hal": true,
-      "x-ui-hide": true,
-      "properties": {
-        "total_count": {
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true,
-          "minimum": 0,
-          "example": 32
-        },
-        "limit": {
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true,
-          "minimum": 1,
-          "maximum": 100,
-          "example": 50
-        },
-        "offset": {
-          "type": "string",
-          "readOnly": true,
-          "example": "363yHhUhhI"
-        }
-      },
-      "allOf": [
-        {
-          "type": "object",
-          "x-ui-hide": true,
-          "properties": {
-            "_links": {
-              "type": "object",
-              "readOnly": true,
-              "properties": {
-                "self": {
-                  "type": "object",
-                  "properties": {
-                    "href": {
-                      "type": "string",
-                      "format": "uri"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        {
-          "type": "object",
-          "x-ui-hide": true,
-          "properties": {
-            "_links": {
-              "type": "object",
-              "readOnly": true,
-              "properties": {
-                "next": {
-                  "type": "object",
-                  "properties": {
-                    "href": {
-                      "type": "string",
-                      "format": "uri"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      ],
-      "example": "undefined"
-    }
-  ]
+  }
 }
 ```
 
@@ -272,28 +170,59 @@ Status Code **200**
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |» _embedded|object|false|none|none|
-|»» nter:contacts|[allOf]|false|none|none|
+|»» nter:contacts|[object]|false|none|none|
 |»»» _links|object|false|none|none|
-|»»»» self|object|false|read-only|none|
-|»»»»» href|string|false|none|none|
+|»»»» self|object|false|none|none|
+|»»»»» href|string(uri)|false|none|none|
+|»»»» contact_id|string|false|read-only|Identifier for the contact|
+|»»»» label|string|false|none|Label for the entity|
+|»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»» created|string(date-time)|false|read-only|Date the entity was created|
+|»»»» updated|string(date-time)|false|read-only|Last date the entity was updated|
+|»»»» name|string|false|none|Contact name|
+|»»»» email|string(email)|false|none|Email address|
+|»»»» phone|string|false|none|Phone number|
+|»»» _links|object|false|none|none|
+|»»»» self|object|false|none|none|
+|»»»»» href|string(uri)|false|none|none|
+|»»»» next|object|false|none|none|
+|»»»»» href|string(uri)|false|none|none|
 
 Status Code **401**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Unauthorized|
+|type|https://docs.nterprise.com/api/problem/Unauthorized|
+|status|401|
+|detail|You are not authorized to access this resource|
 
 Status Code **403**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Forbidden|
+|type|https://docs.nterprise.com/api/problem/Forbidden|
+|status|403|
+|detail|You are forbidden to access this resource|
 
 <aside class="success">
 This operation does not require authentication
@@ -321,41 +250,21 @@ Creates a new contact following the contact schema
   ],
   "properties": {
     "label": {
-      "x-faker": "name.title",
-      "allOf": [
-        {
-          "type": "string",
-          "description": "Label for the entity",
-          "example": "primary"
-        }
-      ]
+      "type": "string",
+      "description": "Label for the entity"
     },
     "name": {
       "type": "string",
-      "description": "Contact name",
-      "example": "Bob Alice",
-      "x-examples": [
-        "Bob Alice"
-      ],
-      "nullable": true
+      "description": "Contact name"
     },
     "email": {
       "type": "string",
       "format": "email",
-      "description": "Email address",
-      "example": "bob@zones.com",
-      "x-examples": [
-        "bob@zones.com"
-      ],
-      "nullable": true
+      "description": "Email address"
     },
     "phone": {
       "type": "string",
-      "description": "Phone number",
-      "example": "+1 518 867 5309",
-      "x-examples": [
-        "+1 518 867 5309"
-      ]
+      "description": "Phone number"
     }
   }
 }
@@ -366,8 +275,8 @@ Creates a new contact following the contact schema
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |label|body|string|true|Label for the entity|
-|name|body|string\|null|true|Contact name|
-|email|body|string(email)\|null|true|Email address|
+|name|body|string|true|Contact name|
+|email|body|string(email)|true|Email address|
 |phone|body|string|false|Phone number|
 
 > Example responses
@@ -377,117 +286,67 @@ Creates a new contact following the contact schema
 ```json
 {
   "type": "object",
-  "allOf": [
-    {
+  "properties": {
+    "_links": {
       "type": "object",
-      "x-hal": true,
-      "x-ui-hide": true,
       "properties": {
-        "_links": {
-          "type": "object",
-          "properties": {
-            "self": {
-              "type": "object",
-              "readOnly": true,
-              "properties": {
-                "href": {
-                  "type": "string",
-                  "example": "https://api.nterprise.com/contacts/3bd1a313-5bf8-468f-85ff-59d2214c8158"
-                }
-              }
-            }
-          }
-        }
-      },
-      "allOf": [
-        {
-          "x-id": "#contact",
-          "x-nter-relation": "contacts",
-          "x-nter-model": "Contact",
-          "x-nter-callable": true,
-          "type": "object",
-          "description": "Contact Information",
-          "required": [
-            "contact_id",
-            "label",
-            "email",
-            "name"
-          ],
-          "properties": {
-            "label": {
-              "x-faker": "name.title",
-              "allOf": [
-                {
-                  "type": "string",
-                  "description": "Label for the entity",
-                  "example": "primary"
-                }
-              ]
-            },
-            "contact_id": {
-              "type": "string",
-              "description": "Identifier for the contact",
-              "readOnly": true,
-              "example": "1c022258-afcd-4bf2-a576-ae59b7a15d73",
-              "x-examples": [
-                "1c022258-afcd-4bf2-a576-ae59b7a15d73"
-              ],
-              "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-            },
-            "email": {
-              "type": "string",
-              "format": "email",
-              "description": "Email address",
-              "example": "bob@zones.com",
-              "x-examples": [
-                "bob@zones.com"
-              ],
-              "nullable": true
-            },
-            "name": {
-              "type": "string",
-              "description": "Contact name",
-              "example": "Bob Alice",
-              "x-examples": [
-                "Bob Alice"
-              ],
-              "nullable": true
-            },
-            "phone": {
-              "type": "string",
-              "description": "Phone number",
-              "example": "+1 518 867 5309",
-              "x-examples": [
-                "+1 518 867 5309"
-              ]
-            },
-            "created": {
-              "description": "Date the entity was created",
-              "type": "string",
-              "format": "date-time",
-              "readOnly": true
-            },
-            "updated": {
-              "description": "Last date the entity was updated",
-              "type": "string",
-              "format": "date-time",
-              "readOnly": true
-            }
-          },
+        "self": {
           "example": {
-            "contact_id": "1c022258-afcd-4bf2-a576-ae59b7a15d73",
-            "label": "Customer Division Representative",
-            "email": "bob@zones.com",
-            "name": "Bob Alice",
-            "phone": "+1 518 867 5309",
-            "created": "2000-01-03T02:33:07.848Z",
-            "updated": "1961-09-02T06:16:27.807Z"
+            "href": "https://api.nterprise.com/contacts/QVBrO2wm13iEyl"
+          },
+          "type": "object",
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "uri"
+            }
           }
         }
-      ],
-      "example": "undefined"
+      }
+    },
+    "contact_id": {
+      "description": "Identifier for the contact",
+      "type": "string",
+      "readOnly": true,
+      "pattern": "^[0-9a-zA-Z-_]+$"
+    },
+    "label": {
+      "type": "string",
+      "description": "Label for the entity"
+    },
+    "slug": {
+      "type": "string",
+      "description": "Slug for the entity (Auto-generated from the label)",
+      "readOnly": true,
+      "deprecated": true,
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "created": {
+      "description": "Date the entity was created",
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "updated": {
+      "description": "Last date the entity was updated",
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "name": {
+      "type": "string",
+      "description": "Contact name"
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "description": "Email address"
+    },
+    "phone": {
+      "type": "string",
+      "description": "Phone number"
     }
-  ]
+  }
 }
 ```
 
@@ -508,44 +367,88 @@ Status Code **200**
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |» _links|object|false|none|none|
-|»» self|object|false|read-only|none|
-|»»» href|string|false|none|none|
+|»» self|object|false|none|none|
+|»»» href|string(uri)|false|none|none|
+|»» contact_id|string|false|read-only|Identifier for the contact|
+|»» label|string|false|none|Label for the entity|
+|»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»» created|string(date-time)|false|read-only|Date the entity was created|
+|»» updated|string(date-time)|false|read-only|Last date the entity was updated|
+|»» name|string|false|none|Contact name|
+|»» email|string(email)|false|none|Email address|
+|»» phone|string|false|none|Phone number|
 
 Status Code **400**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Bad Request|
+|type|https://docs.nterprise.com/api/problem/BadRequest|
+|status|400|
+|detail|Invalid request|
 
 Status Code **401**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Unauthorized|
+|type|https://docs.nterprise.com/api/problem/Unauthorized|
+|status|401|
+|detail|You are not authorized to access this resource|
 
 Status Code **403**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Forbidden|
+|type|https://docs.nterprise.com/api/problem/Forbidden|
+|status|403|
+|detail|You are forbidden to access this resource|
 
 Status Code **409**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Conflict|
+|type|https://docs.nterprise.com/api/problem/Conflict|
+|status|409|
+|detail|This request contains a conflict to another resource|
 
 <aside class="success">
 This operation does not require authentication
@@ -555,7 +458,7 @@ This operation does not require authentication
 
 <a id="opIdfetchContactById"></a>
 
-`GET /contacts/:contact_id`
+`GET /contacts/{contact_id}`
 
 *Fetches a contact by the contact Id*
 
@@ -574,117 +477,67 @@ Fetch Contact
 ```json
 {
   "type": "object",
-  "allOf": [
-    {
+  "properties": {
+    "_links": {
       "type": "object",
-      "x-hal": true,
-      "x-ui-hide": true,
       "properties": {
-        "_links": {
-          "type": "object",
-          "properties": {
-            "self": {
-              "type": "object",
-              "readOnly": true,
-              "properties": {
-                "href": {
-                  "type": "string",
-                  "example": "https://api.nterprise.com/contacts/3bd1a313-5bf8-468f-85ff-59d2214c8158"
-                }
-              }
-            }
-          }
-        }
-      },
-      "allOf": [
-        {
-          "x-id": "#contact",
-          "x-nter-relation": "contacts",
-          "x-nter-model": "Contact",
-          "x-nter-callable": true,
-          "type": "object",
-          "description": "Contact Information",
-          "required": [
-            "contact_id",
-            "label",
-            "email",
-            "name"
-          ],
-          "properties": {
-            "label": {
-              "x-faker": "name.title",
-              "allOf": [
-                {
-                  "type": "string",
-                  "description": "Label for the entity",
-                  "example": "primary"
-                }
-              ]
-            },
-            "contact_id": {
-              "type": "string",
-              "description": "Identifier for the contact",
-              "readOnly": true,
-              "example": "1c022258-afcd-4bf2-a576-ae59b7a15d73",
-              "x-examples": [
-                "1c022258-afcd-4bf2-a576-ae59b7a15d73"
-              ],
-              "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-            },
-            "email": {
-              "type": "string",
-              "format": "email",
-              "description": "Email address",
-              "example": "bob@zones.com",
-              "x-examples": [
-                "bob@zones.com"
-              ],
-              "nullable": true
-            },
-            "name": {
-              "type": "string",
-              "description": "Contact name",
-              "example": "Bob Alice",
-              "x-examples": [
-                "Bob Alice"
-              ],
-              "nullable": true
-            },
-            "phone": {
-              "type": "string",
-              "description": "Phone number",
-              "example": "+1 518 867 5309",
-              "x-examples": [
-                "+1 518 867 5309"
-              ]
-            },
-            "created": {
-              "description": "Date the entity was created",
-              "type": "string",
-              "format": "date-time",
-              "readOnly": true
-            },
-            "updated": {
-              "description": "Last date the entity was updated",
-              "type": "string",
-              "format": "date-time",
-              "readOnly": true
-            }
-          },
+        "self": {
           "example": {
-            "contact_id": "1c022258-afcd-4bf2-a576-ae59b7a15d73",
-            "label": "Customer Division Representative",
-            "email": "bob@zones.com",
-            "name": "Bob Alice",
-            "phone": "+1 518 867 5309",
-            "created": "2000-01-03T02:33:07.848Z",
-            "updated": "1961-09-02T06:16:27.807Z"
+            "href": "https://api.nterprise.com/contacts/QVBrO2wm13iEyl"
+          },
+          "type": "object",
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "uri"
+            }
           }
         }
-      ],
-      "example": "undefined"
+      }
+    },
+    "contact_id": {
+      "description": "Identifier for the contact",
+      "type": "string",
+      "readOnly": true,
+      "pattern": "^[0-9a-zA-Z-_]+$"
+    },
+    "label": {
+      "type": "string",
+      "description": "Label for the entity"
+    },
+    "slug": {
+      "type": "string",
+      "description": "Slug for the entity (Auto-generated from the label)",
+      "readOnly": true,
+      "deprecated": true,
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "created": {
+      "description": "Date the entity was created",
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "updated": {
+      "description": "Last date the entity was updated",
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "name": {
+      "type": "string",
+      "description": "Contact name"
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "description": "Email address"
+    },
+    "phone": {
+      "type": "string",
+      "description": "Phone number"
     }
-  ]
+  }
 }
 ```
 
@@ -704,35 +557,70 @@ Status Code **200**
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |» _links|object|false|none|none|
-|»» self|object|false|read-only|none|
-|»»» href|string|false|none|none|
+|»» self|object|false|none|none|
+|»»» href|string(uri)|false|none|none|
+|»» contact_id|string|false|read-only|Identifier for the contact|
+|»» label|string|false|none|Label for the entity|
+|»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»» created|string(date-time)|false|read-only|Date the entity was created|
+|»» updated|string(date-time)|false|read-only|Last date the entity was updated|
+|»» name|string|false|none|Contact name|
+|»» email|string(email)|false|none|Email address|
+|»» phone|string|false|none|Phone number|
 
 Status Code **401**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Unauthorized|
+|type|https://docs.nterprise.com/api/problem/Unauthorized|
+|status|401|
+|detail|You are not authorized to access this resource|
 
 Status Code **403**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Forbidden|
+|type|https://docs.nterprise.com/api/problem/Forbidden|
+|status|403|
+|detail|You are forbidden to access this resource|
 
 Status Code **404**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Not Found|
+|type|https://docs.nterprise.com/api/problem/NotFound|
+|status|404|
+|detail|Resource not found|
 
 <aside class="success">
 This operation does not require authentication
@@ -742,7 +630,7 @@ This operation does not require authentication
 
 <a id="opIdupdateContact"></a>
 
-`PUT /contacts/:contact_id`
+`PUT /contacts/{contact_id}`
 
 *Updates a contact*
 
@@ -760,41 +648,21 @@ Updates a new contact following the contact schema
   ],
   "properties": {
     "label": {
-      "x-faker": "name.title",
-      "allOf": [
-        {
-          "type": "string",
-          "description": "Label for the entity",
-          "example": "primary"
-        }
-      ]
+      "type": "string",
+      "description": "Label for the entity"
     },
     "name": {
       "type": "string",
-      "description": "Contact name",
-      "example": "Bob Alice",
-      "x-examples": [
-        "Bob Alice"
-      ],
-      "nullable": true
+      "description": "Contact name"
     },
     "email": {
       "type": "string",
       "format": "email",
-      "description": "Email address",
-      "example": "bob@zones.com",
-      "x-examples": [
-        "bob@zones.com"
-      ],
-      "nullable": true
+      "description": "Email address"
     },
     "phone": {
       "type": "string",
-      "description": "Phone number",
-      "example": "+1 518 867 5309",
-      "x-examples": [
-        "+1 518 867 5309"
-      ]
+      "description": "Phone number"
     }
   }
 }
@@ -806,8 +674,8 @@ Updates a new contact following the contact schema
 |---|---|---|---|---|
 |contact_id|path|string|true|Id of the contact|
 |label|body|string|true|Label for the entity|
-|name|body|string\|null|true|Contact name|
-|email|body|string(email)\|null|true|Email address|
+|name|body|string|true|Contact name|
+|email|body|string(email)|true|Email address|
 |phone|body|string|false|Phone number|
 
 > Example responses
@@ -817,117 +685,67 @@ Updates a new contact following the contact schema
 ```json
 {
   "type": "object",
-  "allOf": [
-    {
+  "properties": {
+    "_links": {
       "type": "object",
-      "x-hal": true,
-      "x-ui-hide": true,
       "properties": {
-        "_links": {
-          "type": "object",
-          "properties": {
-            "self": {
-              "type": "object",
-              "readOnly": true,
-              "properties": {
-                "href": {
-                  "type": "string",
-                  "example": "https://api.nterprise.com/contacts/3bd1a313-5bf8-468f-85ff-59d2214c8158"
-                }
-              }
-            }
-          }
-        }
-      },
-      "allOf": [
-        {
-          "x-id": "#contact",
-          "x-nter-relation": "contacts",
-          "x-nter-model": "Contact",
-          "x-nter-callable": true,
-          "type": "object",
-          "description": "Contact Information",
-          "required": [
-            "contact_id",
-            "label",
-            "email",
-            "name"
-          ],
-          "properties": {
-            "label": {
-              "x-faker": "name.title",
-              "allOf": [
-                {
-                  "type": "string",
-                  "description": "Label for the entity",
-                  "example": "primary"
-                }
-              ]
-            },
-            "contact_id": {
-              "type": "string",
-              "description": "Identifier for the contact",
-              "readOnly": true,
-              "example": "1c022258-afcd-4bf2-a576-ae59b7a15d73",
-              "x-examples": [
-                "1c022258-afcd-4bf2-a576-ae59b7a15d73"
-              ],
-              "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-            },
-            "email": {
-              "type": "string",
-              "format": "email",
-              "description": "Email address",
-              "example": "bob@zones.com",
-              "x-examples": [
-                "bob@zones.com"
-              ],
-              "nullable": true
-            },
-            "name": {
-              "type": "string",
-              "description": "Contact name",
-              "example": "Bob Alice",
-              "x-examples": [
-                "Bob Alice"
-              ],
-              "nullable": true
-            },
-            "phone": {
-              "type": "string",
-              "description": "Phone number",
-              "example": "+1 518 867 5309",
-              "x-examples": [
-                "+1 518 867 5309"
-              ]
-            },
-            "created": {
-              "description": "Date the entity was created",
-              "type": "string",
-              "format": "date-time",
-              "readOnly": true
-            },
-            "updated": {
-              "description": "Last date the entity was updated",
-              "type": "string",
-              "format": "date-time",
-              "readOnly": true
-            }
-          },
+        "self": {
           "example": {
-            "contact_id": "1c022258-afcd-4bf2-a576-ae59b7a15d73",
-            "label": "Customer Division Representative",
-            "email": "bob@zones.com",
-            "name": "Bob Alice",
-            "phone": "+1 518 867 5309",
-            "created": "2000-01-03T02:33:07.848Z",
-            "updated": "1961-09-02T06:16:27.807Z"
+            "href": "https://api.nterprise.com/contacts/QVBrO2wm13iEyl"
+          },
+          "type": "object",
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "uri"
+            }
           }
         }
-      ],
-      "example": "undefined"
+      }
+    },
+    "contact_id": {
+      "description": "Identifier for the contact",
+      "type": "string",
+      "readOnly": true,
+      "pattern": "^[0-9a-zA-Z-_]+$"
+    },
+    "label": {
+      "type": "string",
+      "description": "Label for the entity"
+    },
+    "slug": {
+      "type": "string",
+      "description": "Slug for the entity (Auto-generated from the label)",
+      "readOnly": true,
+      "deprecated": true,
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "created": {
+      "description": "Date the entity was created",
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "updated": {
+      "description": "Last date the entity was updated",
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "name": {
+      "type": "string",
+      "description": "Contact name"
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "description": "Email address"
+    },
+    "phone": {
+      "type": "string",
+      "description": "Phone number"
     }
-  ]
+  }
 }
 ```
 
@@ -949,53 +767,106 @@ Status Code **200**
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |» _links|object|false|none|none|
-|»» self|object|false|read-only|none|
-|»»» href|string|false|none|none|
+|»» self|object|false|none|none|
+|»»» href|string(uri)|false|none|none|
+|»» contact_id|string|false|read-only|Identifier for the contact|
+|»» label|string|false|none|Label for the entity|
+|»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»» created|string(date-time)|false|read-only|Date the entity was created|
+|»» updated|string(date-time)|false|read-only|Last date the entity was updated|
+|»» name|string|false|none|Contact name|
+|»» email|string(email)|false|none|Email address|
+|»» phone|string|false|none|Phone number|
 
 Status Code **400**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Bad Request|
+|type|https://docs.nterprise.com/api/problem/BadRequest|
+|status|400|
+|detail|Invalid request|
 
 Status Code **401**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Unauthorized|
+|type|https://docs.nterprise.com/api/problem/Unauthorized|
+|status|401|
+|detail|You are not authorized to access this resource|
 
 Status Code **403**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Forbidden|
+|type|https://docs.nterprise.com/api/problem/Forbidden|
+|status|403|
+|detail|You are forbidden to access this resource|
 
 Status Code **409**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Conflict|
+|type|https://docs.nterprise.com/api/problem/Conflict|
+|status|409|
+|detail|This request contains a conflict to another resource|
 
 Status Code **423**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Locked|
+|type|https://docs.nterprise.com/api/problem/Locked|
+|status|423|
+|detail|The current resource is locked and cannot be modified|
 
 <aside class="success">
 This operation does not require authentication
@@ -1005,7 +876,7 @@ This operation does not require authentication
 
 <a id="opIddeleteContact"></a>
 
-`DELETE /contacts/:contact_id`
+`DELETE /contacts/{contact_id}`
 
 *Deletes a contact*
 
@@ -1025,52 +896,26 @@ This will remove the contact from the system
 {
   "properties": {
     "title": {
-      "example": "Unauthorized"
+      "enum": [
+        "Unauthorized"
+      ]
     },
     "type": {
-      "example": "https://docs.nterprise.com/api/problem/Unauthorized"
+      "enum": [
+        "https://docs.nterprise.com/api/problem/Unauthorized"
+      ]
     },
     "status": {
-      "example": 401
+      "enum": [
+        401
+      ]
     },
     "detail": {
-      "example": "You are not authorized to access this resource"
+      "enum": [
+        "You are not authorized to access this resource"
+      ]
     }
-  },
-  "allOf": [
-    {
-      "type": "object",
-      "x-ui-hide": true,
-      "description": "API Error",
-      "properties": {
-        "type": {
-          "type": "string",
-          "format": "uri",
-          "description": "An absolute URI that identifies the problem type",
-          "default": "about:blank",
-          "example": "https://docs.nterprise.com/problem/InternalServerError"
-        },
-        "title": {
-          "type": "string",
-          "example": "Internal Server Error",
-          "description": "A short, summary of the problem type"
-        },
-        "status": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The HTTP status code generated by the origin server for this occurrence of the problem",
-          "minimum": 100,
-          "maximum": 600,
-          "example": 500
-        },
-        "detail": {
-          "type": "string",
-          "description": "A human readable explanation specific to this occurrence of the problem",
-          "example": "Failed to reticulate splines"
-        }
-      }
-    }
-  ]
+  }
 }
 ```
 
@@ -1090,37 +935,73 @@ Status Code **401**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Unauthorized|
+|type|https://docs.nterprise.com/api/problem/Unauthorized|
+|status|401|
+|detail|You are not authorized to access this resource|
 
 Status Code **403**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Forbidden|
+|type|https://docs.nterprise.com/api/problem/Forbidden|
+|status|403|
+|detail|You are forbidden to access this resource|
 
 Status Code **404**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Not Found|
+|type|https://docs.nterprise.com/api/problem/NotFound|
+|status|404|
+|detail|Resource not found|
 
 Status Code **423**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Locked|
+|type|https://docs.nterprise.com/api/problem/Locked|
+|status|423|
+|detail|The current resource is locked and cannot be modified|
 
 <aside class="success">
 This operation does not require authentication
@@ -1133,13 +1014,90 @@ This operation does not require authentication
 <a id="schemacontact"></a>
 
 ```yaml
-contact_id: 1c022258-afcd-4bf2-a576-ae59b7a15d73
-label: Customer Division Representative
-email: bob@zones.com
-name: Bob Alice
-phone: +1 518 867 5309
-created: '2000-01-03T02:33:07.848Z'
-updated: '1961-09-02T06:16:27.807Z'
+type: object
+description: Contact Information
+additionalProperties: false
+required:
+  - label
+  - entity_id
+  - entity_type
+  - created
+  - updated
+properties:
+  contact_id:
+    description: Identifier for the contact
+    type: string
+    readOnly: true
+    pattern: '^[0-9a-zA-Z-_]+$'
+  entity_id:
+    x-no-api-doc: true
+    type: string
+    description: Customer identifier
+    readOnly: true
+    pattern: '^[0-9a-zA-Z-_]+$'
+  entity_type:
+    x-no-api-doc: true
+    enum:
+      - CON
+  label:
+    type: string
+    description: Label for the entity
+  slug:
+    type: string
+    description: Slug for the entity (Auto-generated from the label)
+    readOnly: true
+    deprecated: true
+    pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+  created:
+    description: Date the entity was created
+    type: string
+    format: date-time
+    readOnly: true
+  updated:
+    description: Last date the entity was updated
+    type: string
+    format: date-time
+    readOnly: true
+  email:
+    type: string
+    format: email
+    description: Email address
+  name:
+    type: string
+    description: Contact name
+  phone:
+    type: string
+    description: Phone number
+allOf:
+  - type: object
+    description: Common Properties to all entities
+    required:
+      - label
+    properties:
+      entity_id:
+        type: string
+        description: Customer identifier
+        readOnly: true
+        pattern: '^[0-9a-zA-Z-_]+$'
+      label:
+        type: string
+        description: Label for the entity
+      slug:
+        type: string
+        description: Slug for the entity (Auto-generated from the label)
+        readOnly: true
+        deprecated: true
+        pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+      created:
+        description: Date the entity was created
+        type: string
+        format: date-time
+        readOnly: true
+      updated:
+        description: Last date the entity was updated
+        type: string
+        format: date-time
+        readOnly: true
 
 ```
 
@@ -1149,11 +1107,20 @@ updated: '1961-09-02T06:16:27.807Z'
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
+|contact_id|string|false|read-only|Identifier for the contact|
+|entity_id|string|true|read-only|Customer identifier|
+|entity_type|string|true|none|none|
 |label|string|true|none|Label for the entity|
-|contact_id|string|true|read-only|Identifier for the contact|
-|email|string(email)\|null|true|none|Email address|
-|name|string\|null|true|none|Contact name|
+|slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|created|string(date-time)|true|read-only|Date the entity was created|
+|updated|string(date-time)|true|read-only|Last date the entity was updated|
+|email|string(email)|false|none|Email address|
+|name|string|false|none|Contact name|
 |phone|string|false|none|Phone number|
-|created|string(date-time)|false|read-only|Date the entity was created|
-|updated|string(date-time)|false|read-only|Last date the entity was updated|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|entity_type|CON|
 

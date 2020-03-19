@@ -15,7 +15,7 @@
   "components": {
     "schemas": {
       "Status": {
-        "$ref": "./components/schemas/status.json"
+        "$ref": "https://docs.nterprise.com/schemas/niagara/status.json"
       }
     }
   }

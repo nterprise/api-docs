@@ -11,13 +11,13 @@
     "/vendors": {
       "$ref": "./paths/vendor/vendors.json"
     },
-    "/vendors/:vendor_id": {
+    "/vendors/{vendor_id}": {
       "$ref": "./paths/vendor/vendor.json"
     },
-    "/vendors/:vendor_id/parts": {
+    "/vendors/{vendor_id}/parts": {
       "$ref": "./paths/vendor/parts.json"
     },
-    "/vendors/:vendor_id/units": {
+    "/vendors/{vendor_id}/units": {
       "$ref": "./paths/vendor/units.json"
     }
   },

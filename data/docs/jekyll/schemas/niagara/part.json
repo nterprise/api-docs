@@ -11,7 +11,8 @@
     "created",
     "updated",
     "customer",
-    "manufacturer"
+    "manufacturer",
+    "serial_prefix"
   ],
   "properties": {
     "part_id": {
@@ -50,8 +51,8 @@
       "$ref": "https://docs.nterprise.com/schemas/niagara/manufacturer.json",
       "properties": {
         "part_number": {
-          "type": "string",
-          "description": "Manufacturer part number"
+          "type": ["string", "null"],
+          "description": "Part number the manufacturer uses. If this is not set, then the part number is used"
         }
       }
     },

@@ -11,10 +11,10 @@
     "/projects": {
       "$ref": "./paths/project/projects.json"
     },
-    "/projects/:project_id": {
+    "/projects/project_id": {
       "$ref": "./paths/project/project.json"
     },
-    "/projects/:project_id/work-orders": {
+    "/projects/{project_id}/work-orders": {
       "$ref": "./paths/project/workOrders.json"
     }
   },

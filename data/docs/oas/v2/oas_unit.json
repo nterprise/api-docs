@@ -11,7 +11,7 @@
     "/units": {
       "$ref": "./paths/unit/units.json"
     },
-    "/units/:unit_id": {
+    "/units/{unit_id}": {
       "$ref": "./paths/unit/unit.json"
     }
   },

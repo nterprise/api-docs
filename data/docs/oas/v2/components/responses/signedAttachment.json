@@ -1,0 +1,28 @@
+{
+  "description": "A attachment response",
+  "content": {
+    "application/hal+json": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "description": "URL to post the file to"
+          },
+          "expires_in": {
+            "type": "integer",
+            "description": "The number of seconds the upload URL is valid for"
+          },
+          "_links": {
+            "type": "object",
+            "properties": {
+              "self": {
+                "$ref": "../schemas/link.json"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

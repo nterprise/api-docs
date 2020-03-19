@@ -3,6 +3,7 @@
   "content": {
     "application/hal+json": {
       "schema": {
+        "type": "object",
         "properties": {
           "_embedded": {
             "type": "object",
@@ -11,7 +12,7 @@
                 "type": "array",
                 "maxItems": 100,
                 "items": {
-                  "$ref": "../schemas/status.json"
+                  "$ref": "https://docs.nterprise.com/schemas/niagara/status.json"
                 }
               }
             }

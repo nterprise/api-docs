@@ -36,6 +36,7 @@ Fetch Statuses
 
 ```json
 {
+  "type": "object",
   "properties": {
     "_embedded": {
       "type": "object",
@@ -44,42 +45,22 @@ Fetch Statuses
           "type": "array",
           "maxItems": 100,
           "items": {
-            "x-id": "#status",
-            "x-nter-relation": "statuses",
-            "x-nter-model": "Status",
-            "x-nter-callable": true,
-            "x-ui-hide": true,
-            "description": "Defines the properties for a status",
             "type": "object",
+            "description": "Defines the properties for a status",
+            "additionalProperties": false,
             "required": [
               "status",
-              "status_category"
+              "category"
             ],
             "properties": {
               "status": {
                 "type": "string",
                 "description": "A Custom label for the status",
-                "x-examples": [
-                  "Pending",
-                  "In Progress",
-                  "Verifying",
-                  "Complete",
-                  "Cancelled",
-                  "Blocked",
-                  "Reticulating Splines"
-                ]
+                "pattern": "^[A-Za-z][0-9a-zA-Z-_ ]+$"
               },
               "category": {
                 "type": "string",
                 "description": "The classifier for the statues",
-                "x-examples": [
-                  "PENDING",
-                  "IN_PROGRESS",
-                  "VERIFYING",
-                  "COMPLETE",
-                  "CANCELLED",
-                  "BLOCKED"
-                ],
                 "enum": [
                   "PENDING",
                   "IN_PROGRESS",
@@ -115,7 +96,7 @@ Status Code **200**
 |» _embedded|object|false|none|none|
 |»» nter:settings-statuses|[object]|false|none|none|
 |»»» status|string|true|none|A Custom label for the status|
-|»»» category|string|false|none|The classifier for the statues|
+|»»» category|string|true|none|The classifier for the statues|
 
 #### Enumerated Values
 
@@ -132,19 +113,37 @@ Status Code **401**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Unauthorized|
+|type|https://docs.nterprise.com/api/problem/Unauthorized|
+|status|401|
+|detail|You are not authorized to access this resource|
 
 Status Code **403**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Forbidden|
+|type|https://docs.nterprise.com/api/problem/Forbidden|
+|status|403|
+|detail|You are forbidden to access this resource|
 
 <aside class="success">
 This operation does not require authentication
@@ -164,42 +163,22 @@ Creates a new status
 
 ```json
 {
-  "x-id": "#status",
-  "x-nter-relation": "statuses",
-  "x-nter-model": "Status",
-  "x-nter-callable": true,
-  "x-ui-hide": true,
-  "description": "Defines the properties for a status",
   "type": "object",
+  "description": "Defines the properties for a status",
+  "additionalProperties": false,
   "required": [
     "status",
-    "status_category"
+    "category"
   ],
   "properties": {
     "status": {
       "type": "string",
       "description": "A Custom label for the status",
-      "x-examples": [
-        "Pending",
-        "In Progress",
-        "Verifying",
-        "Complete",
-        "Cancelled",
-        "Blocked",
-        "Reticulating Splines"
-      ]
+      "pattern": "^[A-Za-z][0-9a-zA-Z-_ ]+$"
     },
     "category": {
       "type": "string",
       "description": "The classifier for the statues",
-      "x-examples": [
-        "PENDING",
-        "IN_PROGRESS",
-        "VERIFYING",
-        "COMPLETE",
-        "CANCELLED",
-        "BLOCKED"
-      ],
       "enum": [
         "PENDING",
         "IN_PROGRESS",
@@ -218,7 +197,7 @@ Creates a new status
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |status|body|string|true|A Custom label for the status|
-|category|body|string|false|The classifier for the statues|
+|category|body|string|true|The classifier for the statues|
 
 #### Enumerated Values
 
@@ -241,75 +220,31 @@ Creates a new status
   "allOf": [
     {
       "type": "object",
-      "x-hal": true,
-      "x-ui-hide": true,
+      "description": "Defines the properties for a status",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "category"
+      ],
       "properties": {
-        "_links": {
-          "type": "object",
-          "properties": {
-            "self": {
-              "type": "object",
-              "readOnly": true,
-              "properties": {
-                "href": {
-                  "type": "string",
-                  "example": "https://api.nterprise.com/statuses/b76d0f3c-a71f-4160-b0fe-634ce2057a61"
-                }
-              }
-            }
-          }
+        "status": {
+          "type": "string",
+          "description": "A Custom label for the status",
+          "pattern": "^[A-Za-z][0-9a-zA-Z-_ ]+$"
+        },
+        "category": {
+          "type": "string",
+          "description": "The classifier for the statues",
+          "enum": [
+            "PENDING",
+            "IN_PROGRESS",
+            "VERIFYING",
+            "COMPLETE",
+            "CANCELLED",
+            "BLOCKED"
+          ]
         }
-      },
-      "allOf": [
-        {
-          "x-id": "#status",
-          "x-nter-relation": "statuses",
-          "x-nter-model": "Status",
-          "x-nter-callable": true,
-          "x-ui-hide": true,
-          "description": "Defines the properties for a status",
-          "type": "object",
-          "required": [
-            "status",
-            "status_category"
-          ],
-          "properties": {
-            "status": {
-              "type": "string",
-              "description": "A Custom label for the status",
-              "x-examples": [
-                "Pending",
-                "In Progress",
-                "Verifying",
-                "Complete",
-                "Cancelled",
-                "Blocked",
-                "Reticulating Splines"
-              ]
-            },
-            "category": {
-              "type": "string",
-              "description": "The classifier for the statues",
-              "x-examples": [
-                "PENDING",
-                "IN_PROGRESS",
-                "VERIFYING",
-                "COMPLETE",
-                "CANCELLED",
-                "BLOCKED"
-              ],
-              "enum": [
-                "PENDING",
-                "IN_PROGRESS",
-                "VERIFYING",
-                "COMPLETE",
-                "CANCELLED",
-                "BLOCKED"
-              ]
-            }
-          }
-        }
-      ]
+      }
     }
   ]
 }
@@ -330,36 +265,73 @@ Status Code **200**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» _links|object|false|none|none|
-|»» self|object|false|read-only|none|
-|»»» href|string|false|none|none|
+|» status|string|true|none|A Custom label for the status|
+|» category|string|true|none|The classifier for the statues|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|category|PENDING|
+|category|IN_PROGRESS|
+|category|VERIFYING|
+|category|COMPLETE|
+|category|CANCELLED|
+|category|BLOCKED|
 
 Status Code **400**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Bad Request|
+|type|https://docs.nterprise.com/api/problem/BadRequest|
+|status|400|
+|detail|Invalid request|
 
 Status Code **401**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Unauthorized|
+|type|https://docs.nterprise.com/api/problem/Unauthorized|
+|status|401|
+|detail|You are not authorized to access this resource|
 
 Status Code **403**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Forbidden|
+|type|https://docs.nterprise.com/api/problem/Forbidden|
+|status|403|
+|detail|You are forbidden to access this resource|
 
 <aside class="success">
 This operation does not require authentication
@@ -372,38 +344,20 @@ This operation does not require authentication
 <a id="schemastatus"></a>
 
 ```yaml
-x-id: '#status'
-x-nter-relation: statuses
-x-nter-model: Status
-x-nter-callable: true
-x-ui-hide: true
-description: Defines the properties for a status
 type: object
+description: Defines the properties for a status
+additionalProperties: false
 required:
   - status
-  - status_category
+  - category
 properties:
   status:
     type: string
     description: A Custom label for the status
-    x-examples:
-      - Pending
-      - In Progress
-      - Verifying
-      - Complete
-      - Cancelled
-      - Blocked
-      - Reticulating Splines
+    pattern: '^[A-Za-z][0-9a-zA-Z-_ ]+$'
   category:
     type: string
     description: The classifier for the statues
-    x-examples:
-      - PENDING
-      - IN_PROGRESS
-      - VERIFYING
-      - COMPLETE
-      - CANCELLED
-      - BLOCKED
     enum:
       - PENDING
       - IN_PROGRESS
@@ -421,7 +375,7 @@ properties:
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |status|string|true|none|A Custom label for the status|
-|category|string|false|none|The classifier for the statues|
+|category|string|true|none|The classifier for the statues|
 
 #### Enumerated Values
 

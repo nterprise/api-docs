@@ -11,7 +11,7 @@
     "/work-orders": {
       "$ref": "./paths/workOrder/workOrders.json"
     },
-    "/work-orders/:work_order_id": {
+    "/work-orders/{work_order_id}": {
       "$ref": "./paths/workOrder/workOrder.json"
     }
   },

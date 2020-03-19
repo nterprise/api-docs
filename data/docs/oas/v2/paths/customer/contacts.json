@@ -15,12 +15,6 @@
       },
       {
         "$ref": "../../components/parameters/offset.json"
-      },
-      {
-        "$ref": "../../components/parameters/contactSort.json"
-      },
-      {
-        "$ref": "../../components/parameters/filterLabel.json"
       }
     ],
     "responses": {

@@ -43,7 +43,7 @@
     ],
     "responses": {
       "200": {
-        "$ref": "../../components/responses/resource.json"
+        "$ref": "../../components/responses/halResource.json"
       },
       "400": {
         "$ref": "../../components/responses/400badRequest.json"

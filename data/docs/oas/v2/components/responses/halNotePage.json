@@ -1,5 +1,5 @@
 {
-  "description": "A paged response for work-flows",
+  "description": "A paged response for notes",
   "content": {
     "application/hal+json": {
       "schema": {
@@ -8,11 +8,11 @@
           "_embedded": {
             "type": "object",
             "properties": {
-              "nter:work-flows": {
+              "nter:notes": {
                 "type": "array",
                 "maxItems": 100,
                 "items": {
-                  "$ref": "../schemas/halWorkFlow.json"
+                  "$ref": "../schemas/halNote.json"
                 }
               }
             }
@@ -22,13 +22,13 @@
             "properties": {
               "self": {
                 "example": {
-                  "href": "https://api.nterprise.com/work-flows"
+                  "href": "https://api.nterprise.com/notes"
                 },
                 "$ref": "../schemas/link.json"
               },
               "next": {
                 "example": {
-                  "href": "https://api.nterprise.com/work-flows?offset=QVBrO2wm13iEyl&limit=100"
+                  "href": "https://api.nterprise.com/notes?offset=QVBrO2wm13iEyl&limit=100"
                 },
                 "$ref": "../schemas/link.json"
               }

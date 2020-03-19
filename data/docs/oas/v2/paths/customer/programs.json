@@ -15,17 +15,11 @@
       },
       {
         "$ref": "../../components/parameters/offset.json"
-      },
-      {
-        "$ref": "../../components/parameters/programSort.json"
-      },
-      {
-        "$ref": "../../components/parameters/filterLabel.json"
       }
     ],
     "responses": {
       "200": {
-        "$ref": "../../components/responses/programPage.json"
+        "$ref": "../../components/responses/halProgramPage.json"
       },
       "401": {
         "$ref": "../../components/responses/401unauthorized.json"

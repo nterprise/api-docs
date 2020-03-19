@@ -1,12 +1,12 @@
 {
   "description": "A status response",
   "content": {
-    "application/hal+json": {
+    "application/json": {
       "schema": {
         "type": "object",
         "allOf": [
           {
-            "$ref": "../schemas/hal/halStatus.json"
+            "$ref": "https://docs.nterprise.com/schemas/niagara/status.json"
           }
         ]
       }

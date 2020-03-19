@@ -36,22 +36,6 @@ Fetch facilities
 |---|---|---|---|---|
 |limit|query|integer(int32)|false|How many items to return at one time (max 100)|
 |offset|query|string|false|Continue from last offset|
-|sort|query|string|false|Sort by field|
-|filter[administrative_area]|query|string|false|Filter where the administrative area (state or province) contains this value|
-|filter[country]|query|string|false|Filter where the country contains this value|
-|filter[postal_code]|query|string|false|Filter where the postal code contains this value|
-|filter[thoroughfare]|query|string|false|Filter where the thoroughfare contains this value|
-
-#### Enumerated Values
-
-|Parameter|Value|
-|---|---|
-|sort|country|
-|sort|-country|
-|sort|created|
-|sort|-created|
-|sort|updated|
-|sort|-updated|
 
 > Example responses
 
@@ -59,6 +43,7 @@ Fetch facilities
 
 ```json
 {
+  "type": "object",
   "properties": {
     "_embedded": {
       "type": "object",
@@ -68,296 +53,398 @@ Fetch facilities
           "maxItems": 100,
           "items": {
             "type": "object",
-            "x-hal": true,
-            "x-ui-hide": true,
             "properties": {
               "_links": {
                 "type": "object",
                 "properties": {
                   "self": {
+                    "example": {
+                      "href": "https://api.nterprise.com/locations/23Y1rNJ6zyiRzqN"
+                    },
                     "type": "object",
-                    "readOnly": true,
                     "properties": {
                       "href": {
                         "type": "string",
-                        "example": "https://api.nterprise.com/locations/1e39c8d4-b2a4-45c2-93ac-de3130a6b75f"
+                        "format": "uri"
                       }
                     }
                   }
                 }
-              }
-            },
-            "allOf": [
-              {
-                "x-id": "#location",
-                "x-nter-relation": "locations",
-                "x-nter-model": "Location",
-                "x-nter-callable": true,
-                "description": "Defines the properties for a part unit",
+              },
+              "location_id": {
+                "description": "The identifier for the location",
+                "type": "string",
+                "readOnly": true,
+                "pattern": "^[0-9a-zA-Z-_]+$"
+              },
+              "label": {
+                "type": "string",
+                "description": "Label for the entity"
+              },
+              "slug": {
+                "type": "string",
+                "description": "Slug for the entity (Auto-generated from the label)",
+                "readOnly": true,
+                "deprecated": true,
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+              },
+              "created": {
+                "description": "Date the entity was created",
+                "type": "string",
+                "format": "date-time",
+                "readOnly": true
+              },
+              "updated": {
+                "description": "Last date the entity was updated",
+                "type": "string",
+                "format": "date-time",
+                "readOnly": true
+              },
+              "location_type": {
+                "type": "string",
+                "description": "The type of location",
+                "enum": [
+                  "warehouse",
+                  "facility",
+                  "other"
+                ]
+              },
+              "formatted_address": {
+                "type": "string",
+                "readOnly": true,
+                "description": "Address formatted for the where region the location exists in"
+              },
+              "address": {
+                "type": "object",
                 "required": [
-                  "location_type",
-                  "address"
+                  "country",
+                  "administrative_area",
+                  "locality",
+                  "postal_code",
+                  "thoroughfare"
                 ],
+                "description": "xNAL address for the location ",
                 "properties": {
-                  "label": {
+                  "country": {
                     "type": "string",
-                    "example": "Zones Innovation Center",
-                    "x-examples": [
-                      "Zones Innovation Center"
-                    ]
-                  },
-                  "slug": {
-                    "type": "string",
-                    "example": "zones-innovation-center",
-                    "x-examples": [
-                      "zones-innovation-center"
-                    ]
-                  },
-                  "location_id": {
-                    "type": "string",
-                    "description": "The identifier for the location",
-                    "example": "b994961b-30b4-4f33-9330-f46fd6172909",
-                    "x-examples": [
-                      "b994961b-30b4-4f33-9330-f46fd6172909"
-                    ],
-                    "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-                  },
-                  "location_type": {
-                    "type": "string",
-                    "description": "The type of location",
+                    "description": "Three Letter ISO country code",
                     "enum": [
-                      "warehouse",
-                      "facility",
-                      "other"
-                    ],
-                    "example": "other",
-                    "x-examples": [
-                      "other"
+                      "ABW",
+                      "AFG",
+                      "AGO",
+                      "AIA",
+                      "ALA",
+                      "ALB",
+                      "AND",
+                      "ARE",
+                      "ARG",
+                      "ARM",
+                      "ASM",
+                      "ATA",
+                      "ATF",
+                      "ATG",
+                      "AUS",
+                      "AUT",
+                      "AZE",
+                      "BDI",
+                      "BEL",
+                      "BEN",
+                      "BES",
+                      "BFA",
+                      "BGD",
+                      "BGR",
+                      "BHR",
+                      "BHS",
+                      "BIH",
+                      "BLM",
+                      "BLR",
+                      "BLZ",
+                      "BMU",
+                      "BOL",
+                      "BRA",
+                      "BRB",
+                      "BRN",
+                      "BTN",
+                      "BVT",
+                      "BWA",
+                      "CAF",
+                      "CAN",
+                      "CCK",
+                      "CHE",
+                      "CHL",
+                      "CHN",
+                      "CIV",
+                      "CMR",
+                      "COD",
+                      "COG",
+                      "COK",
+                      "COL",
+                      "COM",
+                      "CPV",
+                      "CRI",
+                      "CUB",
+                      "CUW",
+                      "CXR",
+                      "CYM",
+                      "CYP",
+                      "CZE",
+                      "DEU",
+                      "DJI",
+                      "DMA",
+                      "DNK",
+                      "DOM",
+                      "DZA",
+                      "ECU",
+                      "EGY",
+                      "ERI",
+                      "ESH",
+                      "ESP",
+                      "EST",
+                      "ETH",
+                      "FIN",
+                      "FJI",
+                      "FLK",
+                      "FRA",
+                      "FRO",
+                      "FSM",
+                      "GAB",
+                      "GBR",
+                      "GEO",
+                      "GGY",
+                      "GHA",
+                      "GIB",
+                      "GIN",
+                      "GLP",
+                      "GMB",
+                      "GNB",
+                      "GNQ",
+                      "GRC",
+                      "GRD",
+                      "GRL",
+                      "GTM",
+                      "GUF",
+                      "GUM",
+                      "GUY",
+                      "HKG",
+                      "HMD",
+                      "HND",
+                      "HRV",
+                      "HTI",
+                      "HUN",
+                      "IDN",
+                      "IMN",
+                      "IND",
+                      "IOT",
+                      "IRL",
+                      "IRN",
+                      "IRQ",
+                      "ISL",
+                      "ISR",
+                      "ITA",
+                      "JAM",
+                      "JEY",
+                      "JOR",
+                      "JPN",
+                      "KAZ",
+                      "KEN",
+                      "KGZ",
+                      "KHM",
+                      "KIR",
+                      "KNA",
+                      "KOR",
+                      "KWT",
+                      "LAO",
+                      "LBN",
+                      "LBR",
+                      "LBY",
+                      "LCA",
+                      "LIE",
+                      "LKA",
+                      "LSO",
+                      "LTU",
+                      "LUX",
+                      "LVA",
+                      "MAC",
+                      "MAF",
+                      "MAR",
+                      "MCO",
+                      "MDA",
+                      "MDG",
+                      "MDV",
+                      "MEX",
+                      "MHL",
+                      "MKD",
+                      "MLI",
+                      "MLT",
+                      "MMR",
+                      "MNE",
+                      "MNG",
+                      "MNP",
+                      "MOZ",
+                      "MRT",
+                      "MSR",
+                      "MTQ",
+                      "MUS",
+                      "MWI",
+                      "MYS",
+                      "MYT",
+                      "NAM",
+                      "NCL",
+                      "NER",
+                      "NFK",
+                      "NGA",
+                      "NIC",
+                      "NIU",
+                      "NLD",
+                      "NOR",
+                      "NPL",
+                      "NRU",
+                      "NZL",
+                      "OMN",
+                      "PAK",
+                      "PAN",
+                      "PCN",
+                      "PER",
+                      "PHL",
+                      "PLW",
+                      "PNG",
+                      "POL",
+                      "PRI",
+                      "PRK",
+                      "PRT",
+                      "PRY",
+                      "PSE",
+                      "PYF",
+                      "QAT",
+                      "REU",
+                      "ROU",
+                      "RUS",
+                      "RWA",
+                      "SAU",
+                      "SDN",
+                      "SEN",
+                      "SGP",
+                      "SGS",
+                      "SHN",
+                      "SJM",
+                      "SLB",
+                      "SLE",
+                      "SLV",
+                      "SMR",
+                      "SOM",
+                      "SPM",
+                      "SRB",
+                      "SSD",
+                      "STP",
+                      "SUR",
+                      "SVK",
+                      "SVN",
+                      "SWE",
+                      "SWZ",
+                      "SXM",
+                      "SYC",
+                      "SYR",
+                      "TCA",
+                      "TCD",
+                      "TGO",
+                      "THA",
+                      "TJK",
+                      "TKL",
+                      "TKM",
+                      "TLS",
+                      "TON",
+                      "TTO",
+                      "TUN",
+                      "TUR",
+                      "TUV",
+                      "TWN",
+                      "TZA",
+                      "UGA",
+                      "UKR",
+                      "UMI",
+                      "URY",
+                      "USA",
+                      "UZB",
+                      "VAT",
+                      "VCT",
+                      "VEN",
+                      "VGB",
+                      "VIR",
+                      "VNM",
+                      "VUT",
+                      "WLF",
+                      "WSM",
+                      "YEM",
+                      "ZAF",
+                      "ZMB",
+                      "ZWE"
                     ]
                   },
-                  "formatted_address": {
+                  "administrative_area": {
                     "type": "string",
-                    "readOnly": true,
-                    "description": "Address formatted for the where region the location exists in",
-                    "example": "Zones Innovation Center\n431 Broadway\nSuite C\nMenands NY, 12204\nUSA",
-                    "x-examples": [
-                      "Zones Innovation Center\n431 Broadway\nSuite C\nMenands NY, 12204\nUSA"
-                    ]
+                    "description": "State / Province / Region"
                   },
-                  "address": {
-                    "type": "object",
-                    "required": [
-                      "country",
-                      "administrative_area",
-                      "locality",
-                      "postal_code",
-                      "thoroughfare"
-                    ],
-                    "description": "xNAL address for the location ",
-                    "properties": {
-                      "country": {
-                        "type": "string",
-                        "description": "Three Letter ISO country code",
-                        "example": "USA",
-                        "x-examples": [
-                          "USA"
-                        ]
-                      },
-                      "administrative_area": {
-                        "type": "string",
-                        "description": "State / Province / Region",
-                        "example": "NY",
-                        "x-examples": [
-                          "NY"
-                        ]
-                      },
-                      "sub_administrative_area": {
-                        "type": "string",
-                        "description": "County / District",
-                        "example": "Albany",
-                        "x-examples": [
-                          "Albany"
-                        ]
-                      },
-                      "locality": {
-                        "type": "string",
-                        "description": "City / Town",
-                        "example": "Menands",
-                        "x-examples": [
-                          "Menands"
-                        ]
-                      },
-                      "postal_code": {
-                        "type": "string",
-                        "description": "Postal Code / Zip Code",
-                        "example": "12204",
-                        "x-examples": [
-                          "12204"
-                        ]
-                      },
-                      "thoroughfare": {
-                        "type": "string",
-                        "description": "Street Address",
-                        "example": "431 Broadway",
-                        "x-examples": [
-                          "431 Broadway"
-                        ]
-                      },
-                      "premise": {
-                        "type": "string",
-                        "description": "Apartment / Suite / Box number etc",
-                        "example": "Suite c",
-                        "x-examples": [
-                          "Suite c"
-                        ]
-                      },
-                      "sub_premise": {
-                        "type": "string",
-                        "description": "Floor # / Room # / Building label etc",
-                        "example": "Zones Innovation Center",
-                        "x-examples": [
-                          "Zones Innovation Center"
-                        ]
-                      }
-                    }
-                  }
-                },
-                "allOf": [
-                  {
-                    "x-ui-hide": true,
-                    "type": "object",
-                    "description": "Common Properties to all entities",
-                    "required": [
-                      "label"
-                    ],
-                    "properties": {
-                      "label": {
-                        "type": "string",
-                        "description": "Label for the entity",
-                        "example": "primary"
-                      },
-                      "slug": {
-                        "type": "string",
-                        "description": "Slug for the entity (Auto-generated from the label)",
-                        "readOnly": true,
-                        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-                      },
-                      "created": {
-                        "description": "Date the entity was created",
-                        "type": "string",
-                        "format": "date-time",
-                        "readOnly": true
-                      },
-                      "updated": {
-                        "description": "Last date the entity was updated",
-                        "type": "string",
-                        "format": "date-time",
-                        "readOnly": true
-                      }
-                    }
-                  }
-                ],
-                "example": {
-                  "location_type": "other",
-                  "address": {
-                    "country": "USA",
-                    "administrative_area": "NY",
-                    "locality": "Menands",
-                    "postal_code": "12204",
-                    "thoroughfare": "431 Broadway",
-                    "sub_administrative_area": "Albany",
-                    "premise": "Suite c",
-                    "sub_premise": "Zones Innovation Center"
+                  "sub_administrative_area": {
+                    "type": "string",
+                    "description": "County / District"
                   },
-                  "label": "Zones Innovation Center",
-                  "slug": "zones-innovation-center",
-                  "location_id": "b994961b-30b4-4f33-9330-f46fd6172909",
-                  "formatted_address": "Zones Innovation Center\n431 Broadway\nSuite C\nMenands NY, 12204\nUSA",
-                  "created": "2011-12-22T07:39:56.809Z",
-                  "updated": "1958-10-08T23:35:29.923Z"
+                  "locality": {
+                    "type": "string",
+                    "description": "City / Town"
+                  },
+                  "postal_code": {
+                    "type": "string",
+                    "description": "Postal Code / Zip Code"
+                  },
+                  "thoroughfare": {
+                    "type": "string",
+                    "description": "Street Address"
+                  },
+                  "premise": {
+                    "type": "string",
+                    "description": "Apartment / Suite / Box number etc"
+                  },
+                  "sub_premise": {
+                    "type": "string",
+                    "description": "Floor # / Room # / Building label etc"
+                  }
                 }
               }
-            ],
-            "example": "undefined"
+            }
+          }
+        }
+      }
+    },
+    "_links": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "example": {
+            "href": "https://api.nterprise.com/locations"
+          },
+          "type": "object",
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        },
+        "next": {
+          "example": {
+            "href": "https://api.nterprise.com/locations?offset=QVBrO2wm13iEyl&limit=100"
+          },
+          "type": "object",
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "uri"
+            }
           }
         }
       }
     }
-  },
-  "allOf": [
-    {
-      "type": "object",
-      "x-hal": true,
-      "x-ui-hide": true,
-      "properties": {
-        "total_count": {
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true,
-          "minimum": 0,
-          "example": 32
-        },
-        "limit": {
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true,
-          "minimum": 1,
-          "maximum": 100,
-          "example": 50
-        },
-        "offset": {
-          "type": "string",
-          "readOnly": true,
-          "example": "363yHhUhhI"
-        }
-      },
-      "allOf": [
-        {
-          "type": "object",
-          "x-ui-hide": true,
-          "properties": {
-            "_links": {
-              "type": "object",
-              "readOnly": true,
-              "properties": {
-                "self": {
-                  "type": "object",
-                  "properties": {
-                    "href": {
-                      "type": "string",
-                      "format": "uri"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        {
-          "type": "object",
-          "x-ui-hide": true,
-          "properties": {
-            "_links": {
-              "type": "object",
-              "readOnly": true,
-              "properties": {
-                "next": {
-                  "type": "object",
-                  "properties": {
-                    "href": {
-                      "type": "string",
-                      "format": "uri"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      ],
-      "example": "undefined"
-    }
-  ]
+  }
 }
 ```
 
@@ -376,28 +463,324 @@ Status Code **200**
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |» _embedded|object|false|none|none|
-|»» nter:locations|[allOf]|false|none|none|
+|»» nter:locations|[object]|false|none|none|
 |»»» _links|object|false|none|none|
-|»»»» self|object|false|read-only|none|
-|»»»»» href|string|false|none|none|
+|»»»» self|object|false|none|none|
+|»»»»» href|string(uri)|false|none|none|
+|»»»» location_id|string|false|read-only|The identifier for the location|
+|»»»» label|string|false|none|Label for the entity|
+|»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»» created|string(date-time)|false|read-only|Date the entity was created|
+|»»»» updated|string(date-time)|false|read-only|Last date the entity was updated|
+|»»»» location_type|string|false|none|The type of location|
+|»»»» formatted_address|string|false|read-only|Address formatted for the where region the location exists in|
+|»»»» address|object|false|none|xNAL address for the location|
+|»»»»» country|string|true|none|Three Letter ISO country code|
+|»»»»» administrative_area|string|true|none|State / Province / Region|
+|»»»»» sub_administrative_area|string|false|none|County / District|
+|»»»»» locality|string|true|none|City / Town|
+|»»»»» postal_code|string|true|none|Postal Code / Zip Code|
+|»»»»» thoroughfare|string|true|none|Street Address|
+|»»»»» premise|string|false|none|Apartment / Suite / Box number etc|
+|»»»»» sub_premise|string|false|none|Floor # / Room # / Building label etc|
+|»»»» _links|object|false|none|none|
+|»»»»» self|object|false|none|none|
+|»»»»»» href|string(uri)|false|none|none|
+|»»»»» next|object|false|none|none|
+|»»»»»» href|string(uri)|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|location_type|warehouse|
+|location_type|facility|
+|location_type|other|
+|country|ABW|
+|country|AFG|
+|country|AGO|
+|country|AIA|
+|country|ALA|
+|country|ALB|
+|country|AND|
+|country|ARE|
+|country|ARG|
+|country|ARM|
+|country|ASM|
+|country|ATA|
+|country|ATF|
+|country|ATG|
+|country|AUS|
+|country|AUT|
+|country|AZE|
+|country|BDI|
+|country|BEL|
+|country|BEN|
+|country|BES|
+|country|BFA|
+|country|BGD|
+|country|BGR|
+|country|BHR|
+|country|BHS|
+|country|BIH|
+|country|BLM|
+|country|BLR|
+|country|BLZ|
+|country|BMU|
+|country|BOL|
+|country|BRA|
+|country|BRB|
+|country|BRN|
+|country|BTN|
+|country|BVT|
+|country|BWA|
+|country|CAF|
+|country|CAN|
+|country|CCK|
+|country|CHE|
+|country|CHL|
+|country|CHN|
+|country|CIV|
+|country|CMR|
+|country|COD|
+|country|COG|
+|country|COK|
+|country|COL|
+|country|COM|
+|country|CPV|
+|country|CRI|
+|country|CUB|
+|country|CUW|
+|country|CXR|
+|country|CYM|
+|country|CYP|
+|country|CZE|
+|country|DEU|
+|country|DJI|
+|country|DMA|
+|country|DNK|
+|country|DOM|
+|country|DZA|
+|country|ECU|
+|country|EGY|
+|country|ERI|
+|country|ESH|
+|country|ESP|
+|country|EST|
+|country|ETH|
+|country|FIN|
+|country|FJI|
+|country|FLK|
+|country|FRA|
+|country|FRO|
+|country|FSM|
+|country|GAB|
+|country|GBR|
+|country|GEO|
+|country|GGY|
+|country|GHA|
+|country|GIB|
+|country|GIN|
+|country|GLP|
+|country|GMB|
+|country|GNB|
+|country|GNQ|
+|country|GRC|
+|country|GRD|
+|country|GRL|
+|country|GTM|
+|country|GUF|
+|country|GUM|
+|country|GUY|
+|country|HKG|
+|country|HMD|
+|country|HND|
+|country|HRV|
+|country|HTI|
+|country|HUN|
+|country|IDN|
+|country|IMN|
+|country|IND|
+|country|IOT|
+|country|IRL|
+|country|IRN|
+|country|IRQ|
+|country|ISL|
+|country|ISR|
+|country|ITA|
+|country|JAM|
+|country|JEY|
+|country|JOR|
+|country|JPN|
+|country|KAZ|
+|country|KEN|
+|country|KGZ|
+|country|KHM|
+|country|KIR|
+|country|KNA|
+|country|KOR|
+|country|KWT|
+|country|LAO|
+|country|LBN|
+|country|LBR|
+|country|LBY|
+|country|LCA|
+|country|LIE|
+|country|LKA|
+|country|LSO|
+|country|LTU|
+|country|LUX|
+|country|LVA|
+|country|MAC|
+|country|MAF|
+|country|MAR|
+|country|MCO|
+|country|MDA|
+|country|MDG|
+|country|MDV|
+|country|MEX|
+|country|MHL|
+|country|MKD|
+|country|MLI|
+|country|MLT|
+|country|MMR|
+|country|MNE|
+|country|MNG|
+|country|MNP|
+|country|MOZ|
+|country|MRT|
+|country|MSR|
+|country|MTQ|
+|country|MUS|
+|country|MWI|
+|country|MYS|
+|country|MYT|
+|country|NAM|
+|country|NCL|
+|country|NER|
+|country|NFK|
+|country|NGA|
+|country|NIC|
+|country|NIU|
+|country|NLD|
+|country|NOR|
+|country|NPL|
+|country|NRU|
+|country|NZL|
+|country|OMN|
+|country|PAK|
+|country|PAN|
+|country|PCN|
+|country|PER|
+|country|PHL|
+|country|PLW|
+|country|PNG|
+|country|POL|
+|country|PRI|
+|country|PRK|
+|country|PRT|
+|country|PRY|
+|country|PSE|
+|country|PYF|
+|country|QAT|
+|country|REU|
+|country|ROU|
+|country|RUS|
+|country|RWA|
+|country|SAU|
+|country|SDN|
+|country|SEN|
+|country|SGP|
+|country|SGS|
+|country|SHN|
+|country|SJM|
+|country|SLB|
+|country|SLE|
+|country|SLV|
+|country|SMR|
+|country|SOM|
+|country|SPM|
+|country|SRB|
+|country|SSD|
+|country|STP|
+|country|SUR|
+|country|SVK|
+|country|SVN|
+|country|SWE|
+|country|SWZ|
+|country|SXM|
+|country|SYC|
+|country|SYR|
+|country|TCA|
+|country|TCD|
+|country|TGO|
+|country|THA|
+|country|TJK|
+|country|TKL|
+|country|TKM|
+|country|TLS|
+|country|TON|
+|country|TTO|
+|country|TUN|
+|country|TUR|
+|country|TUV|
+|country|TWN|
+|country|TZA|
+|country|UGA|
+|country|UKR|
+|country|UMI|
+|country|URY|
+|country|USA|
+|country|UZB|
+|country|VAT|
+|country|VCT|
+|country|VEN|
+|country|VGB|
+|country|VIR|
+|country|VNM|
+|country|VUT|
+|country|WLF|
+|country|WSM|
+|country|YEM|
+|country|ZAF|
+|country|ZMB|
+|country|ZWE|
 
 Status Code **401**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Unauthorized|
+|type|https://docs.nterprise.com/api/problem/Unauthorized|
+|status|401|
+|detail|You are not authorized to access this resource|
 
 Status Code **403**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Forbidden|
+|type|https://docs.nterprise.com/api/problem/Forbidden|
+|status|403|
+|detail|You are forbidden to access this resource|
 
 <aside class="success">
 This operation does not require authentication
@@ -419,26 +802,6 @@ Fetch Location
 |---|---|---|---|---|
 |limit|query|integer(int32)|false|How many items to return at one time (max 100)|
 |offset|query|string|false|Continue from last offset|
-|sort|query|string|false|Sort by field|
-|filter[type]|query|string|false|Filter where the location type is this value|
-|filter[administrative_area]|query|string|false|Filter where the administrative area (state or province) contains this value|
-|filter[country]|query|string|false|Filter where the country contains this value|
-|filter[postal_code]|query|string|false|Filter where the postal code contains this value|
-|filter[thoroughfare]|query|string|false|Filter where the thoroughfare contains this value|
-
-#### Enumerated Values
-
-|Parameter|Value|
-|---|---|
-|sort|country|
-|sort|-country|
-|sort|created|
-|sort|-created|
-|sort|updated|
-|sort|-updated|
-|filter[type]|warehouse|
-|filter[type]|facility|
-|filter[type]|other|
 
 > Example responses
 
@@ -446,6 +809,7 @@ Fetch Location
 
 ```json
 {
+  "type": "object",
   "properties": {
     "_embedded": {
       "type": "object",
@@ -455,296 +819,398 @@ Fetch Location
           "maxItems": 100,
           "items": {
             "type": "object",
-            "x-hal": true,
-            "x-ui-hide": true,
             "properties": {
               "_links": {
                 "type": "object",
                 "properties": {
                   "self": {
+                    "example": {
+                      "href": "https://api.nterprise.com/locations/23Y1rNJ6zyiRzqN"
+                    },
                     "type": "object",
-                    "readOnly": true,
                     "properties": {
                       "href": {
                         "type": "string",
-                        "example": "https://api.nterprise.com/locations/1e39c8d4-b2a4-45c2-93ac-de3130a6b75f"
+                        "format": "uri"
                       }
                     }
                   }
                 }
-              }
-            },
-            "allOf": [
-              {
-                "x-id": "#location",
-                "x-nter-relation": "locations",
-                "x-nter-model": "Location",
-                "x-nter-callable": true,
-                "description": "Defines the properties for a part unit",
+              },
+              "location_id": {
+                "description": "The identifier for the location",
+                "type": "string",
+                "readOnly": true,
+                "pattern": "^[0-9a-zA-Z-_]+$"
+              },
+              "label": {
+                "type": "string",
+                "description": "Label for the entity"
+              },
+              "slug": {
+                "type": "string",
+                "description": "Slug for the entity (Auto-generated from the label)",
+                "readOnly": true,
+                "deprecated": true,
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+              },
+              "created": {
+                "description": "Date the entity was created",
+                "type": "string",
+                "format": "date-time",
+                "readOnly": true
+              },
+              "updated": {
+                "description": "Last date the entity was updated",
+                "type": "string",
+                "format": "date-time",
+                "readOnly": true
+              },
+              "location_type": {
+                "type": "string",
+                "description": "The type of location",
+                "enum": [
+                  "warehouse",
+                  "facility",
+                  "other"
+                ]
+              },
+              "formatted_address": {
+                "type": "string",
+                "readOnly": true,
+                "description": "Address formatted for the where region the location exists in"
+              },
+              "address": {
+                "type": "object",
                 "required": [
-                  "location_type",
-                  "address"
+                  "country",
+                  "administrative_area",
+                  "locality",
+                  "postal_code",
+                  "thoroughfare"
                 ],
+                "description": "xNAL address for the location ",
                 "properties": {
-                  "label": {
+                  "country": {
                     "type": "string",
-                    "example": "Zones Innovation Center",
-                    "x-examples": [
-                      "Zones Innovation Center"
-                    ]
-                  },
-                  "slug": {
-                    "type": "string",
-                    "example": "zones-innovation-center",
-                    "x-examples": [
-                      "zones-innovation-center"
-                    ]
-                  },
-                  "location_id": {
-                    "type": "string",
-                    "description": "The identifier for the location",
-                    "example": "b994961b-30b4-4f33-9330-f46fd6172909",
-                    "x-examples": [
-                      "b994961b-30b4-4f33-9330-f46fd6172909"
-                    ],
-                    "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-                  },
-                  "location_type": {
-                    "type": "string",
-                    "description": "The type of location",
+                    "description": "Three Letter ISO country code",
                     "enum": [
-                      "warehouse",
-                      "facility",
-                      "other"
-                    ],
-                    "example": "other",
-                    "x-examples": [
-                      "other"
+                      "ABW",
+                      "AFG",
+                      "AGO",
+                      "AIA",
+                      "ALA",
+                      "ALB",
+                      "AND",
+                      "ARE",
+                      "ARG",
+                      "ARM",
+                      "ASM",
+                      "ATA",
+                      "ATF",
+                      "ATG",
+                      "AUS",
+                      "AUT",
+                      "AZE",
+                      "BDI",
+                      "BEL",
+                      "BEN",
+                      "BES",
+                      "BFA",
+                      "BGD",
+                      "BGR",
+                      "BHR",
+                      "BHS",
+                      "BIH",
+                      "BLM",
+                      "BLR",
+                      "BLZ",
+                      "BMU",
+                      "BOL",
+                      "BRA",
+                      "BRB",
+                      "BRN",
+                      "BTN",
+                      "BVT",
+                      "BWA",
+                      "CAF",
+                      "CAN",
+                      "CCK",
+                      "CHE",
+                      "CHL",
+                      "CHN",
+                      "CIV",
+                      "CMR",
+                      "COD",
+                      "COG",
+                      "COK",
+                      "COL",
+                      "COM",
+                      "CPV",
+                      "CRI",
+                      "CUB",
+                      "CUW",
+                      "CXR",
+                      "CYM",
+                      "CYP",
+                      "CZE",
+                      "DEU",
+                      "DJI",
+                      "DMA",
+                      "DNK",
+                      "DOM",
+                      "DZA",
+                      "ECU",
+                      "EGY",
+                      "ERI",
+                      "ESH",
+                      "ESP",
+                      "EST",
+                      "ETH",
+                      "FIN",
+                      "FJI",
+                      "FLK",
+                      "FRA",
+                      "FRO",
+                      "FSM",
+                      "GAB",
+                      "GBR",
+                      "GEO",
+                      "GGY",
+                      "GHA",
+                      "GIB",
+                      "GIN",
+                      "GLP",
+                      "GMB",
+                      "GNB",
+                      "GNQ",
+                      "GRC",
+                      "GRD",
+                      "GRL",
+                      "GTM",
+                      "GUF",
+                      "GUM",
+                      "GUY",
+                      "HKG",
+                      "HMD",
+                      "HND",
+                      "HRV",
+                      "HTI",
+                      "HUN",
+                      "IDN",
+                      "IMN",
+                      "IND",
+                      "IOT",
+                      "IRL",
+                      "IRN",
+                      "IRQ",
+                      "ISL",
+                      "ISR",
+                      "ITA",
+                      "JAM",
+                      "JEY",
+                      "JOR",
+                      "JPN",
+                      "KAZ",
+                      "KEN",
+                      "KGZ",
+                      "KHM",
+                      "KIR",
+                      "KNA",
+                      "KOR",
+                      "KWT",
+                      "LAO",
+                      "LBN",
+                      "LBR",
+                      "LBY",
+                      "LCA",
+                      "LIE",
+                      "LKA",
+                      "LSO",
+                      "LTU",
+                      "LUX",
+                      "LVA",
+                      "MAC",
+                      "MAF",
+                      "MAR",
+                      "MCO",
+                      "MDA",
+                      "MDG",
+                      "MDV",
+                      "MEX",
+                      "MHL",
+                      "MKD",
+                      "MLI",
+                      "MLT",
+                      "MMR",
+                      "MNE",
+                      "MNG",
+                      "MNP",
+                      "MOZ",
+                      "MRT",
+                      "MSR",
+                      "MTQ",
+                      "MUS",
+                      "MWI",
+                      "MYS",
+                      "MYT",
+                      "NAM",
+                      "NCL",
+                      "NER",
+                      "NFK",
+                      "NGA",
+                      "NIC",
+                      "NIU",
+                      "NLD",
+                      "NOR",
+                      "NPL",
+                      "NRU",
+                      "NZL",
+                      "OMN",
+                      "PAK",
+                      "PAN",
+                      "PCN",
+                      "PER",
+                      "PHL",
+                      "PLW",
+                      "PNG",
+                      "POL",
+                      "PRI",
+                      "PRK",
+                      "PRT",
+                      "PRY",
+                      "PSE",
+                      "PYF",
+                      "QAT",
+                      "REU",
+                      "ROU",
+                      "RUS",
+                      "RWA",
+                      "SAU",
+                      "SDN",
+                      "SEN",
+                      "SGP",
+                      "SGS",
+                      "SHN",
+                      "SJM",
+                      "SLB",
+                      "SLE",
+                      "SLV",
+                      "SMR",
+                      "SOM",
+                      "SPM",
+                      "SRB",
+                      "SSD",
+                      "STP",
+                      "SUR",
+                      "SVK",
+                      "SVN",
+                      "SWE",
+                      "SWZ",
+                      "SXM",
+                      "SYC",
+                      "SYR",
+                      "TCA",
+                      "TCD",
+                      "TGO",
+                      "THA",
+                      "TJK",
+                      "TKL",
+                      "TKM",
+                      "TLS",
+                      "TON",
+                      "TTO",
+                      "TUN",
+                      "TUR",
+                      "TUV",
+                      "TWN",
+                      "TZA",
+                      "UGA",
+                      "UKR",
+                      "UMI",
+                      "URY",
+                      "USA",
+                      "UZB",
+                      "VAT",
+                      "VCT",
+                      "VEN",
+                      "VGB",
+                      "VIR",
+                      "VNM",
+                      "VUT",
+                      "WLF",
+                      "WSM",
+                      "YEM",
+                      "ZAF",
+                      "ZMB",
+                      "ZWE"
                     ]
                   },
-                  "formatted_address": {
+                  "administrative_area": {
                     "type": "string",
-                    "readOnly": true,
-                    "description": "Address formatted for the where region the location exists in",
-                    "example": "Zones Innovation Center\n431 Broadway\nSuite C\nMenands NY, 12204\nUSA",
-                    "x-examples": [
-                      "Zones Innovation Center\n431 Broadway\nSuite C\nMenands NY, 12204\nUSA"
-                    ]
+                    "description": "State / Province / Region"
                   },
-                  "address": {
-                    "type": "object",
-                    "required": [
-                      "country",
-                      "administrative_area",
-                      "locality",
-                      "postal_code",
-                      "thoroughfare"
-                    ],
-                    "description": "xNAL address for the location ",
-                    "properties": {
-                      "country": {
-                        "type": "string",
-                        "description": "Three Letter ISO country code",
-                        "example": "USA",
-                        "x-examples": [
-                          "USA"
-                        ]
-                      },
-                      "administrative_area": {
-                        "type": "string",
-                        "description": "State / Province / Region",
-                        "example": "NY",
-                        "x-examples": [
-                          "NY"
-                        ]
-                      },
-                      "sub_administrative_area": {
-                        "type": "string",
-                        "description": "County / District",
-                        "example": "Albany",
-                        "x-examples": [
-                          "Albany"
-                        ]
-                      },
-                      "locality": {
-                        "type": "string",
-                        "description": "City / Town",
-                        "example": "Menands",
-                        "x-examples": [
-                          "Menands"
-                        ]
-                      },
-                      "postal_code": {
-                        "type": "string",
-                        "description": "Postal Code / Zip Code",
-                        "example": "12204",
-                        "x-examples": [
-                          "12204"
-                        ]
-                      },
-                      "thoroughfare": {
-                        "type": "string",
-                        "description": "Street Address",
-                        "example": "431 Broadway",
-                        "x-examples": [
-                          "431 Broadway"
-                        ]
-                      },
-                      "premise": {
-                        "type": "string",
-                        "description": "Apartment / Suite / Box number etc",
-                        "example": "Suite c",
-                        "x-examples": [
-                          "Suite c"
-                        ]
-                      },
-                      "sub_premise": {
-                        "type": "string",
-                        "description": "Floor # / Room # / Building label etc",
-                        "example": "Zones Innovation Center",
-                        "x-examples": [
-                          "Zones Innovation Center"
-                        ]
-                      }
-                    }
-                  }
-                },
-                "allOf": [
-                  {
-                    "x-ui-hide": true,
-                    "type": "object",
-                    "description": "Common Properties to all entities",
-                    "required": [
-                      "label"
-                    ],
-                    "properties": {
-                      "label": {
-                        "type": "string",
-                        "description": "Label for the entity",
-                        "example": "primary"
-                      },
-                      "slug": {
-                        "type": "string",
-                        "description": "Slug for the entity (Auto-generated from the label)",
-                        "readOnly": true,
-                        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-                      },
-                      "created": {
-                        "description": "Date the entity was created",
-                        "type": "string",
-                        "format": "date-time",
-                        "readOnly": true
-                      },
-                      "updated": {
-                        "description": "Last date the entity was updated",
-                        "type": "string",
-                        "format": "date-time",
-                        "readOnly": true
-                      }
-                    }
-                  }
-                ],
-                "example": {
-                  "location_type": "other",
-                  "address": {
-                    "country": "USA",
-                    "administrative_area": "NY",
-                    "locality": "Menands",
-                    "postal_code": "12204",
-                    "thoroughfare": "431 Broadway",
-                    "sub_administrative_area": "Albany",
-                    "premise": "Suite c",
-                    "sub_premise": "Zones Innovation Center"
+                  "sub_administrative_area": {
+                    "type": "string",
+                    "description": "County / District"
                   },
-                  "label": "Zones Innovation Center",
-                  "slug": "zones-innovation-center",
-                  "location_id": "b994961b-30b4-4f33-9330-f46fd6172909",
-                  "formatted_address": "Zones Innovation Center\n431 Broadway\nSuite C\nMenands NY, 12204\nUSA",
-                  "created": "2011-12-22T07:39:56.809Z",
-                  "updated": "1958-10-08T23:35:29.923Z"
+                  "locality": {
+                    "type": "string",
+                    "description": "City / Town"
+                  },
+                  "postal_code": {
+                    "type": "string",
+                    "description": "Postal Code / Zip Code"
+                  },
+                  "thoroughfare": {
+                    "type": "string",
+                    "description": "Street Address"
+                  },
+                  "premise": {
+                    "type": "string",
+                    "description": "Apartment / Suite / Box number etc"
+                  },
+                  "sub_premise": {
+                    "type": "string",
+                    "description": "Floor # / Room # / Building label etc"
+                  }
                 }
               }
-            ],
-            "example": "undefined"
+            }
+          }
+        }
+      }
+    },
+    "_links": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "example": {
+            "href": "https://api.nterprise.com/locations"
+          },
+          "type": "object",
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        },
+        "next": {
+          "example": {
+            "href": "https://api.nterprise.com/locations?offset=QVBrO2wm13iEyl&limit=100"
+          },
+          "type": "object",
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "uri"
+            }
           }
         }
       }
     }
-  },
-  "allOf": [
-    {
-      "type": "object",
-      "x-hal": true,
-      "x-ui-hide": true,
-      "properties": {
-        "total_count": {
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true,
-          "minimum": 0,
-          "example": 32
-        },
-        "limit": {
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true,
-          "minimum": 1,
-          "maximum": 100,
-          "example": 50
-        },
-        "offset": {
-          "type": "string",
-          "readOnly": true,
-          "example": "363yHhUhhI"
-        }
-      },
-      "allOf": [
-        {
-          "type": "object",
-          "x-ui-hide": true,
-          "properties": {
-            "_links": {
-              "type": "object",
-              "readOnly": true,
-              "properties": {
-                "self": {
-                  "type": "object",
-                  "properties": {
-                    "href": {
-                      "type": "string",
-                      "format": "uri"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        {
-          "type": "object",
-          "x-ui-hide": true,
-          "properties": {
-            "_links": {
-              "type": "object",
-              "readOnly": true,
-              "properties": {
-                "next": {
-                  "type": "object",
-                  "properties": {
-                    "href": {
-                      "type": "string",
-                      "format": "uri"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      ],
-      "example": "undefined"
-    }
-  ]
+  }
 }
 ```
 
@@ -763,28 +1229,324 @@ Status Code **200**
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |» _embedded|object|false|none|none|
-|»» nter:locations|[allOf]|false|none|none|
+|»» nter:locations|[object]|false|none|none|
 |»»» _links|object|false|none|none|
-|»»»» self|object|false|read-only|none|
-|»»»»» href|string|false|none|none|
+|»»»» self|object|false|none|none|
+|»»»»» href|string(uri)|false|none|none|
+|»»»» location_id|string|false|read-only|The identifier for the location|
+|»»»» label|string|false|none|Label for the entity|
+|»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»» created|string(date-time)|false|read-only|Date the entity was created|
+|»»»» updated|string(date-time)|false|read-only|Last date the entity was updated|
+|»»»» location_type|string|false|none|The type of location|
+|»»»» formatted_address|string|false|read-only|Address formatted for the where region the location exists in|
+|»»»» address|object|false|none|xNAL address for the location|
+|»»»»» country|string|true|none|Three Letter ISO country code|
+|»»»»» administrative_area|string|true|none|State / Province / Region|
+|»»»»» sub_administrative_area|string|false|none|County / District|
+|»»»»» locality|string|true|none|City / Town|
+|»»»»» postal_code|string|true|none|Postal Code / Zip Code|
+|»»»»» thoroughfare|string|true|none|Street Address|
+|»»»»» premise|string|false|none|Apartment / Suite / Box number etc|
+|»»»»» sub_premise|string|false|none|Floor # / Room # / Building label etc|
+|»»»» _links|object|false|none|none|
+|»»»»» self|object|false|none|none|
+|»»»»»» href|string(uri)|false|none|none|
+|»»»»» next|object|false|none|none|
+|»»»»»» href|string(uri)|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|location_type|warehouse|
+|location_type|facility|
+|location_type|other|
+|country|ABW|
+|country|AFG|
+|country|AGO|
+|country|AIA|
+|country|ALA|
+|country|ALB|
+|country|AND|
+|country|ARE|
+|country|ARG|
+|country|ARM|
+|country|ASM|
+|country|ATA|
+|country|ATF|
+|country|ATG|
+|country|AUS|
+|country|AUT|
+|country|AZE|
+|country|BDI|
+|country|BEL|
+|country|BEN|
+|country|BES|
+|country|BFA|
+|country|BGD|
+|country|BGR|
+|country|BHR|
+|country|BHS|
+|country|BIH|
+|country|BLM|
+|country|BLR|
+|country|BLZ|
+|country|BMU|
+|country|BOL|
+|country|BRA|
+|country|BRB|
+|country|BRN|
+|country|BTN|
+|country|BVT|
+|country|BWA|
+|country|CAF|
+|country|CAN|
+|country|CCK|
+|country|CHE|
+|country|CHL|
+|country|CHN|
+|country|CIV|
+|country|CMR|
+|country|COD|
+|country|COG|
+|country|COK|
+|country|COL|
+|country|COM|
+|country|CPV|
+|country|CRI|
+|country|CUB|
+|country|CUW|
+|country|CXR|
+|country|CYM|
+|country|CYP|
+|country|CZE|
+|country|DEU|
+|country|DJI|
+|country|DMA|
+|country|DNK|
+|country|DOM|
+|country|DZA|
+|country|ECU|
+|country|EGY|
+|country|ERI|
+|country|ESH|
+|country|ESP|
+|country|EST|
+|country|ETH|
+|country|FIN|
+|country|FJI|
+|country|FLK|
+|country|FRA|
+|country|FRO|
+|country|FSM|
+|country|GAB|
+|country|GBR|
+|country|GEO|
+|country|GGY|
+|country|GHA|
+|country|GIB|
+|country|GIN|
+|country|GLP|
+|country|GMB|
+|country|GNB|
+|country|GNQ|
+|country|GRC|
+|country|GRD|
+|country|GRL|
+|country|GTM|
+|country|GUF|
+|country|GUM|
+|country|GUY|
+|country|HKG|
+|country|HMD|
+|country|HND|
+|country|HRV|
+|country|HTI|
+|country|HUN|
+|country|IDN|
+|country|IMN|
+|country|IND|
+|country|IOT|
+|country|IRL|
+|country|IRN|
+|country|IRQ|
+|country|ISL|
+|country|ISR|
+|country|ITA|
+|country|JAM|
+|country|JEY|
+|country|JOR|
+|country|JPN|
+|country|KAZ|
+|country|KEN|
+|country|KGZ|
+|country|KHM|
+|country|KIR|
+|country|KNA|
+|country|KOR|
+|country|KWT|
+|country|LAO|
+|country|LBN|
+|country|LBR|
+|country|LBY|
+|country|LCA|
+|country|LIE|
+|country|LKA|
+|country|LSO|
+|country|LTU|
+|country|LUX|
+|country|LVA|
+|country|MAC|
+|country|MAF|
+|country|MAR|
+|country|MCO|
+|country|MDA|
+|country|MDG|
+|country|MDV|
+|country|MEX|
+|country|MHL|
+|country|MKD|
+|country|MLI|
+|country|MLT|
+|country|MMR|
+|country|MNE|
+|country|MNG|
+|country|MNP|
+|country|MOZ|
+|country|MRT|
+|country|MSR|
+|country|MTQ|
+|country|MUS|
+|country|MWI|
+|country|MYS|
+|country|MYT|
+|country|NAM|
+|country|NCL|
+|country|NER|
+|country|NFK|
+|country|NGA|
+|country|NIC|
+|country|NIU|
+|country|NLD|
+|country|NOR|
+|country|NPL|
+|country|NRU|
+|country|NZL|
+|country|OMN|
+|country|PAK|
+|country|PAN|
+|country|PCN|
+|country|PER|
+|country|PHL|
+|country|PLW|
+|country|PNG|
+|country|POL|
+|country|PRI|
+|country|PRK|
+|country|PRT|
+|country|PRY|
+|country|PSE|
+|country|PYF|
+|country|QAT|
+|country|REU|
+|country|ROU|
+|country|RUS|
+|country|RWA|
+|country|SAU|
+|country|SDN|
+|country|SEN|
+|country|SGP|
+|country|SGS|
+|country|SHN|
+|country|SJM|
+|country|SLB|
+|country|SLE|
+|country|SLV|
+|country|SMR|
+|country|SOM|
+|country|SPM|
+|country|SRB|
+|country|SSD|
+|country|STP|
+|country|SUR|
+|country|SVK|
+|country|SVN|
+|country|SWE|
+|country|SWZ|
+|country|SXM|
+|country|SYC|
+|country|SYR|
+|country|TCA|
+|country|TCD|
+|country|TGO|
+|country|THA|
+|country|TJK|
+|country|TKL|
+|country|TKM|
+|country|TLS|
+|country|TON|
+|country|TTO|
+|country|TUN|
+|country|TUR|
+|country|TUV|
+|country|TWN|
+|country|TZA|
+|country|UGA|
+|country|UKR|
+|country|UMI|
+|country|URY|
+|country|USA|
+|country|UZB|
+|country|VAT|
+|country|VCT|
+|country|VEN|
+|country|VGB|
+|country|VIR|
+|country|VNM|
+|country|VUT|
+|country|WLF|
+|country|WSM|
+|country|YEM|
+|country|ZAF|
+|country|ZMB|
+|country|ZWE|
 
 Status Code **401**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Unauthorized|
+|type|https://docs.nterprise.com/api/problem/Unauthorized|
+|status|401|
+|detail|You are not authorized to access this resource|
 
 Status Code **403**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Forbidden|
+|type|https://docs.nterprise.com/api/problem/Forbidden|
+|status|403|
+|detail|You are forbidden to access this resource|
 
 <aside class="success">
 This operation does not require authentication
@@ -806,20 +1568,23 @@ Creates a new location
 {
   "type": "object",
   "required": [
+    "label",
     "location_type",
     "address"
   ],
   "properties": {
+    "label": {
+      "description": "The identifier for the location",
+      "type": "string",
+      "readOnly": true,
+      "pattern": "^[0-9a-zA-Z-_]+$"
+    },
     "location_type": {
       "type": "string",
       "description": "The type of location",
       "enum": [
         "warehouse",
         "facility",
-        "other"
-      ],
-      "example": "other",
-      "x-examples": [
         "other"
       ]
     },
@@ -837,73 +1602,287 @@ Creates a new location
         "country": {
           "type": "string",
           "description": "Three Letter ISO country code",
-          "example": "USA",
-          "x-examples": [
-            "USA"
+          "enum": [
+            "ABW",
+            "AFG",
+            "AGO",
+            "AIA",
+            "ALA",
+            "ALB",
+            "AND",
+            "ARE",
+            "ARG",
+            "ARM",
+            "ASM",
+            "ATA",
+            "ATF",
+            "ATG",
+            "AUS",
+            "AUT",
+            "AZE",
+            "BDI",
+            "BEL",
+            "BEN",
+            "BES",
+            "BFA",
+            "BGD",
+            "BGR",
+            "BHR",
+            "BHS",
+            "BIH",
+            "BLM",
+            "BLR",
+            "BLZ",
+            "BMU",
+            "BOL",
+            "BRA",
+            "BRB",
+            "BRN",
+            "BTN",
+            "BVT",
+            "BWA",
+            "CAF",
+            "CAN",
+            "CCK",
+            "CHE",
+            "CHL",
+            "CHN",
+            "CIV",
+            "CMR",
+            "COD",
+            "COG",
+            "COK",
+            "COL",
+            "COM",
+            "CPV",
+            "CRI",
+            "CUB",
+            "CUW",
+            "CXR",
+            "CYM",
+            "CYP",
+            "CZE",
+            "DEU",
+            "DJI",
+            "DMA",
+            "DNK",
+            "DOM",
+            "DZA",
+            "ECU",
+            "EGY",
+            "ERI",
+            "ESH",
+            "ESP",
+            "EST",
+            "ETH",
+            "FIN",
+            "FJI",
+            "FLK",
+            "FRA",
+            "FRO",
+            "FSM",
+            "GAB",
+            "GBR",
+            "GEO",
+            "GGY",
+            "GHA",
+            "GIB",
+            "GIN",
+            "GLP",
+            "GMB",
+            "GNB",
+            "GNQ",
+            "GRC",
+            "GRD",
+            "GRL",
+            "GTM",
+            "GUF",
+            "GUM",
+            "GUY",
+            "HKG",
+            "HMD",
+            "HND",
+            "HRV",
+            "HTI",
+            "HUN",
+            "IDN",
+            "IMN",
+            "IND",
+            "IOT",
+            "IRL",
+            "IRN",
+            "IRQ",
+            "ISL",
+            "ISR",
+            "ITA",
+            "JAM",
+            "JEY",
+            "JOR",
+            "JPN",
+            "KAZ",
+            "KEN",
+            "KGZ",
+            "KHM",
+            "KIR",
+            "KNA",
+            "KOR",
+            "KWT",
+            "LAO",
+            "LBN",
+            "LBR",
+            "LBY",
+            "LCA",
+            "LIE",
+            "LKA",
+            "LSO",
+            "LTU",
+            "LUX",
+            "LVA",
+            "MAC",
+            "MAF",
+            "MAR",
+            "MCO",
+            "MDA",
+            "MDG",
+            "MDV",
+            "MEX",
+            "MHL",
+            "MKD",
+            "MLI",
+            "MLT",
+            "MMR",
+            "MNE",
+            "MNG",
+            "MNP",
+            "MOZ",
+            "MRT",
+            "MSR",
+            "MTQ",
+            "MUS",
+            "MWI",
+            "MYS",
+            "MYT",
+            "NAM",
+            "NCL",
+            "NER",
+            "NFK",
+            "NGA",
+            "NIC",
+            "NIU",
+            "NLD",
+            "NOR",
+            "NPL",
+            "NRU",
+            "NZL",
+            "OMN",
+            "PAK",
+            "PAN",
+            "PCN",
+            "PER",
+            "PHL",
+            "PLW",
+            "PNG",
+            "POL",
+            "PRI",
+            "PRK",
+            "PRT",
+            "PRY",
+            "PSE",
+            "PYF",
+            "QAT",
+            "REU",
+            "ROU",
+            "RUS",
+            "RWA",
+            "SAU",
+            "SDN",
+            "SEN",
+            "SGP",
+            "SGS",
+            "SHN",
+            "SJM",
+            "SLB",
+            "SLE",
+            "SLV",
+            "SMR",
+            "SOM",
+            "SPM",
+            "SRB",
+            "SSD",
+            "STP",
+            "SUR",
+            "SVK",
+            "SVN",
+            "SWE",
+            "SWZ",
+            "SXM",
+            "SYC",
+            "SYR",
+            "TCA",
+            "TCD",
+            "TGO",
+            "THA",
+            "TJK",
+            "TKL",
+            "TKM",
+            "TLS",
+            "TON",
+            "TTO",
+            "TUN",
+            "TUR",
+            "TUV",
+            "TWN",
+            "TZA",
+            "UGA",
+            "UKR",
+            "UMI",
+            "URY",
+            "USA",
+            "UZB",
+            "VAT",
+            "VCT",
+            "VEN",
+            "VGB",
+            "VIR",
+            "VNM",
+            "VUT",
+            "WLF",
+            "WSM",
+            "YEM",
+            "ZAF",
+            "ZMB",
+            "ZWE"
           ]
         },
         "administrative_area": {
           "type": "string",
-          "description": "State / Province / Region",
-          "example": "NY",
-          "x-examples": [
-            "NY"
-          ]
+          "description": "State / Province / Region"
         },
         "sub_administrative_area": {
           "type": "string",
-          "description": "County / District",
-          "example": "Albany",
-          "x-examples": [
-            "Albany"
-          ]
+          "description": "County / District"
         },
         "locality": {
           "type": "string",
-          "description": "City / Town",
-          "example": "Menands",
-          "x-examples": [
-            "Menands"
-          ]
+          "description": "City / Town"
         },
         "postal_code": {
           "type": "string",
-          "description": "Postal Code / Zip Code",
-          "example": "12204",
-          "x-examples": [
-            "12204"
-          ]
+          "description": "Postal Code / Zip Code"
         },
         "thoroughfare": {
           "type": "string",
-          "description": "Street Address",
-          "example": "431 Broadway",
-          "x-examples": [
-            "431 Broadway"
-          ]
+          "description": "Street Address"
         },
         "premise": {
           "type": "string",
-          "description": "Apartment / Suite / Box number etc",
-          "example": "Suite c",
-          "x-examples": [
-            "Suite c"
-          ]
+          "description": "Apartment / Suite / Box number etc"
         },
         "sub_premise": {
           "type": "string",
-          "description": "Floor # / Room # / Building label etc",
-          "example": "Zones Innovation Center",
-          "x-examples": [
-            "Zones Innovation Center"
-          ]
+          "description": "Floor # / Room # / Building label etc"
         }
       }
-    },
-    "label": {
-      "type": "string",
-      "description": "Label for the entity",
-      "example": "primary"
     }
   }
 }
@@ -913,6 +1892,7 @@ Creates a new location
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
+|label|body|string|true|The identifier for the location|
 |location_type|body|string|true|The type of location|
 |address|body|object|true|xNAL address for the location|
 |» country|body|string|true|Three Letter ISO country code|
@@ -923,7 +1903,6 @@ Creates a new location
 |» thoroughfare|body|string|true|Street Address|
 |» premise|body|string|false|Apartment / Suite / Box number etc|
 |» sub_premise|body|string|false|Floor # / Room # / Building label etc|
-|label|body|string|false|Label for the entity|
 
 #### Enumerated Values
 
@@ -932,6 +1911,255 @@ Creates a new location
 |location_type|warehouse|
 |location_type|facility|
 |location_type|other|
+|» country|ABW|
+|» country|AFG|
+|» country|AGO|
+|» country|AIA|
+|» country|ALA|
+|» country|ALB|
+|» country|AND|
+|» country|ARE|
+|» country|ARG|
+|» country|ARM|
+|» country|ASM|
+|» country|ATA|
+|» country|ATF|
+|» country|ATG|
+|» country|AUS|
+|» country|AUT|
+|» country|AZE|
+|» country|BDI|
+|» country|BEL|
+|» country|BEN|
+|» country|BES|
+|» country|BFA|
+|» country|BGD|
+|» country|BGR|
+|» country|BHR|
+|» country|BHS|
+|» country|BIH|
+|» country|BLM|
+|» country|BLR|
+|» country|BLZ|
+|» country|BMU|
+|» country|BOL|
+|» country|BRA|
+|» country|BRB|
+|» country|BRN|
+|» country|BTN|
+|» country|BVT|
+|» country|BWA|
+|» country|CAF|
+|» country|CAN|
+|» country|CCK|
+|» country|CHE|
+|» country|CHL|
+|» country|CHN|
+|» country|CIV|
+|» country|CMR|
+|» country|COD|
+|» country|COG|
+|» country|COK|
+|» country|COL|
+|» country|COM|
+|» country|CPV|
+|» country|CRI|
+|» country|CUB|
+|» country|CUW|
+|» country|CXR|
+|» country|CYM|
+|» country|CYP|
+|» country|CZE|
+|» country|DEU|
+|» country|DJI|
+|» country|DMA|
+|» country|DNK|
+|» country|DOM|
+|» country|DZA|
+|» country|ECU|
+|» country|EGY|
+|» country|ERI|
+|» country|ESH|
+|» country|ESP|
+|» country|EST|
+|» country|ETH|
+|» country|FIN|
+|» country|FJI|
+|» country|FLK|
+|» country|FRA|
+|» country|FRO|
+|» country|FSM|
+|» country|GAB|
+|» country|GBR|
+|» country|GEO|
+|» country|GGY|
+|» country|GHA|
+|» country|GIB|
+|» country|GIN|
+|» country|GLP|
+|» country|GMB|
+|» country|GNB|
+|» country|GNQ|
+|» country|GRC|
+|» country|GRD|
+|» country|GRL|
+|» country|GTM|
+|» country|GUF|
+|» country|GUM|
+|» country|GUY|
+|» country|HKG|
+|» country|HMD|
+|» country|HND|
+|» country|HRV|
+|» country|HTI|
+|» country|HUN|
+|» country|IDN|
+|» country|IMN|
+|» country|IND|
+|» country|IOT|
+|» country|IRL|
+|» country|IRN|
+|» country|IRQ|
+|» country|ISL|
+|» country|ISR|
+|» country|ITA|
+|» country|JAM|
+|» country|JEY|
+|» country|JOR|
+|» country|JPN|
+|» country|KAZ|
+|» country|KEN|
+|» country|KGZ|
+|» country|KHM|
+|» country|KIR|
+|» country|KNA|
+|» country|KOR|
+|» country|KWT|
+|» country|LAO|
+|» country|LBN|
+|» country|LBR|
+|» country|LBY|
+|» country|LCA|
+|» country|LIE|
+|» country|LKA|
+|» country|LSO|
+|» country|LTU|
+|» country|LUX|
+|» country|LVA|
+|» country|MAC|
+|» country|MAF|
+|» country|MAR|
+|» country|MCO|
+|» country|MDA|
+|» country|MDG|
+|» country|MDV|
+|» country|MEX|
+|» country|MHL|
+|» country|MKD|
+|» country|MLI|
+|» country|MLT|
+|» country|MMR|
+|» country|MNE|
+|» country|MNG|
+|» country|MNP|
+|» country|MOZ|
+|» country|MRT|
+|» country|MSR|
+|» country|MTQ|
+|» country|MUS|
+|» country|MWI|
+|» country|MYS|
+|» country|MYT|
+|» country|NAM|
+|» country|NCL|
+|» country|NER|
+|» country|NFK|
+|» country|NGA|
+|» country|NIC|
+|» country|NIU|
+|» country|NLD|
+|» country|NOR|
+|» country|NPL|
+|» country|NRU|
+|» country|NZL|
+|» country|OMN|
+|» country|PAK|
+|» country|PAN|
+|» country|PCN|
+|» country|PER|
+|» country|PHL|
+|» country|PLW|
+|» country|PNG|
+|» country|POL|
+|» country|PRI|
+|» country|PRK|
+|» country|PRT|
+|» country|PRY|
+|» country|PSE|
+|» country|PYF|
+|» country|QAT|
+|» country|REU|
+|» country|ROU|
+|» country|RUS|
+|» country|RWA|
+|» country|SAU|
+|» country|SDN|
+|» country|SEN|
+|» country|SGP|
+|» country|SGS|
+|» country|SHN|
+|» country|SJM|
+|» country|SLB|
+|» country|SLE|
+|» country|SLV|
+|» country|SMR|
+|» country|SOM|
+|» country|SPM|
+|» country|SRB|
+|» country|SSD|
+|» country|STP|
+|» country|SUR|
+|» country|SVK|
+|» country|SVN|
+|» country|SWE|
+|» country|SWZ|
+|» country|SXM|
+|» country|SYC|
+|» country|SYR|
+|» country|TCA|
+|» country|TCD|
+|» country|TGO|
+|» country|THA|
+|» country|TJK|
+|» country|TKL|
+|» country|TKM|
+|» country|TLS|
+|» country|TON|
+|» country|TTO|
+|» country|TUN|
+|» country|TUR|
+|» country|TUV|
+|» country|TWN|
+|» country|TZA|
+|» country|UGA|
+|» country|UKR|
+|» country|UMI|
+|» country|URY|
+|» country|USA|
+|» country|UZB|
+|» country|VAT|
+|» country|VCT|
+|» country|VEN|
+|» country|VGB|
+|» country|VIR|
+|» country|VNM|
+|» country|VUT|
+|» country|WLF|
+|» country|WSM|
+|» country|YEM|
+|» country|ZAF|
+|» country|ZMB|
+|» country|ZWE|
 
 > Example responses
 
@@ -940,222 +2168,364 @@ Creates a new location
 ```json
 {
   "type": "object",
-  "allOf": [
-    {
+  "properties": {
+    "_links": {
       "type": "object",
-      "x-hal": true,
-      "x-ui-hide": true,
       "properties": {
-        "_links": {
+        "self": {
+          "example": {
+            "href": "https://api.nterprise.com/locations/23Y1rNJ6zyiRzqN"
+          },
           "type": "object",
           "properties": {
-            "self": {
-              "type": "object",
-              "readOnly": true,
-              "properties": {
-                "href": {
-                  "type": "string",
-                  "example": "https://api.nterprise.com/locations/1e39c8d4-b2a4-45c2-93ac-de3130a6b75f"
-                }
-              }
+            "href": {
+              "type": "string",
+              "format": "uri"
             }
           }
         }
-      },
-      "allOf": [
-        {
-          "x-id": "#location",
-          "x-nter-relation": "locations",
-          "x-nter-model": "Location",
-          "x-nter-callable": true,
-          "description": "Defines the properties for a part unit",
-          "required": [
-            "location_type",
-            "address"
-          ],
-          "properties": {
-            "label": {
-              "type": "string",
-              "example": "Zones Innovation Center",
-              "x-examples": [
-                "Zones Innovation Center"
-              ]
-            },
-            "slug": {
-              "type": "string",
-              "example": "zones-innovation-center",
-              "x-examples": [
-                "zones-innovation-center"
-              ]
-            },
-            "location_id": {
-              "type": "string",
-              "description": "The identifier for the location",
-              "example": "b994961b-30b4-4f33-9330-f46fd6172909",
-              "x-examples": [
-                "b994961b-30b4-4f33-9330-f46fd6172909"
-              ],
-              "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-            },
-            "location_type": {
-              "type": "string",
-              "description": "The type of location",
-              "enum": [
-                "warehouse",
-                "facility",
-                "other"
-              ],
-              "example": "other",
-              "x-examples": [
-                "other"
-              ]
-            },
-            "formatted_address": {
-              "type": "string",
-              "readOnly": true,
-              "description": "Address formatted for the where region the location exists in",
-              "example": "Zones Innovation Center\n431 Broadway\nSuite C\nMenands NY, 12204\nUSA",
-              "x-examples": [
-                "Zones Innovation Center\n431 Broadway\nSuite C\nMenands NY, 12204\nUSA"
-              ]
-            },
-            "address": {
-              "type": "object",
-              "required": [
-                "country",
-                "administrative_area",
-                "locality",
-                "postal_code",
-                "thoroughfare"
-              ],
-              "description": "xNAL address for the location ",
-              "properties": {
-                "country": {
-                  "type": "string",
-                  "description": "Three Letter ISO country code",
-                  "example": "USA",
-                  "x-examples": [
-                    "USA"
-                  ]
-                },
-                "administrative_area": {
-                  "type": "string",
-                  "description": "State / Province / Region",
-                  "example": "NY",
-                  "x-examples": [
-                    "NY"
-                  ]
-                },
-                "sub_administrative_area": {
-                  "type": "string",
-                  "description": "County / District",
-                  "example": "Albany",
-                  "x-examples": [
-                    "Albany"
-                  ]
-                },
-                "locality": {
-                  "type": "string",
-                  "description": "City / Town",
-                  "example": "Menands",
-                  "x-examples": [
-                    "Menands"
-                  ]
-                },
-                "postal_code": {
-                  "type": "string",
-                  "description": "Postal Code / Zip Code",
-                  "example": "12204",
-                  "x-examples": [
-                    "12204"
-                  ]
-                },
-                "thoroughfare": {
-                  "type": "string",
-                  "description": "Street Address",
-                  "example": "431 Broadway",
-                  "x-examples": [
-                    "431 Broadway"
-                  ]
-                },
-                "premise": {
-                  "type": "string",
-                  "description": "Apartment / Suite / Box number etc",
-                  "example": "Suite c",
-                  "x-examples": [
-                    "Suite c"
-                  ]
-                },
-                "sub_premise": {
-                  "type": "string",
-                  "description": "Floor # / Room # / Building label etc",
-                  "example": "Zones Innovation Center",
-                  "x-examples": [
-                    "Zones Innovation Center"
-                  ]
-                }
-              }
-            }
-          },
-          "allOf": [
-            {
-              "x-ui-hide": true,
-              "type": "object",
-              "description": "Common Properties to all entities",
-              "required": [
-                "label"
-              ],
-              "properties": {
-                "label": {
-                  "type": "string",
-                  "description": "Label for the entity",
-                  "example": "primary"
-                },
-                "slug": {
-                  "type": "string",
-                  "description": "Slug for the entity (Auto-generated from the label)",
-                  "readOnly": true,
-                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-                },
-                "created": {
-                  "description": "Date the entity was created",
-                  "type": "string",
-                  "format": "date-time",
-                  "readOnly": true
-                },
-                "updated": {
-                  "description": "Last date the entity was updated",
-                  "type": "string",
-                  "format": "date-time",
-                  "readOnly": true
-                }
-              }
-            }
-          ],
-          "example": {
-            "location_type": "other",
-            "address": {
-              "country": "USA",
-              "administrative_area": "NY",
-              "locality": "Menands",
-              "postal_code": "12204",
-              "thoroughfare": "431 Broadway",
-              "sub_administrative_area": "Albany",
-              "premise": "Suite c",
-              "sub_premise": "Zones Innovation Center"
-            },
-            "label": "Zones Innovation Center",
-            "slug": "zones-innovation-center",
-            "location_id": "b994961b-30b4-4f33-9330-f46fd6172909",
-            "formatted_address": "Zones Innovation Center\n431 Broadway\nSuite C\nMenands NY, 12204\nUSA",
-            "created": "2011-12-22T07:39:56.809Z",
-            "updated": "1958-10-08T23:35:29.923Z"
-          }
-        }
+      }
+    },
+    "location_id": {
+      "description": "The identifier for the location",
+      "type": "string",
+      "readOnly": true,
+      "pattern": "^[0-9a-zA-Z-_]+$"
+    },
+    "label": {
+      "type": "string",
+      "description": "Label for the entity"
+    },
+    "slug": {
+      "type": "string",
+      "description": "Slug for the entity (Auto-generated from the label)",
+      "readOnly": true,
+      "deprecated": true,
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "created": {
+      "description": "Date the entity was created",
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "updated": {
+      "description": "Last date the entity was updated",
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "location_type": {
+      "type": "string",
+      "description": "The type of location",
+      "enum": [
+        "warehouse",
+        "facility",
+        "other"
+      ]
+    },
+    "formatted_address": {
+      "type": "string",
+      "readOnly": true,
+      "description": "Address formatted for the where region the location exists in"
+    },
+    "address": {
+      "type": "object",
+      "required": [
+        "country",
+        "administrative_area",
+        "locality",
+        "postal_code",
+        "thoroughfare"
       ],
-      "example": "undefined"
+      "description": "xNAL address for the location ",
+      "properties": {
+        "country": {
+          "type": "string",
+          "description": "Three Letter ISO country code",
+          "enum": [
+            "ABW",
+            "AFG",
+            "AGO",
+            "AIA",
+            "ALA",
+            "ALB",
+            "AND",
+            "ARE",
+            "ARG",
+            "ARM",
+            "ASM",
+            "ATA",
+            "ATF",
+            "ATG",
+            "AUS",
+            "AUT",
+            "AZE",
+            "BDI",
+            "BEL",
+            "BEN",
+            "BES",
+            "BFA",
+            "BGD",
+            "BGR",
+            "BHR",
+            "BHS",
+            "BIH",
+            "BLM",
+            "BLR",
+            "BLZ",
+            "BMU",
+            "BOL",
+            "BRA",
+            "BRB",
+            "BRN",
+            "BTN",
+            "BVT",
+            "BWA",
+            "CAF",
+            "CAN",
+            "CCK",
+            "CHE",
+            "CHL",
+            "CHN",
+            "CIV",
+            "CMR",
+            "COD",
+            "COG",
+            "COK",
+            "COL",
+            "COM",
+            "CPV",
+            "CRI",
+            "CUB",
+            "CUW",
+            "CXR",
+            "CYM",
+            "CYP",
+            "CZE",
+            "DEU",
+            "DJI",
+            "DMA",
+            "DNK",
+            "DOM",
+            "DZA",
+            "ECU",
+            "EGY",
+            "ERI",
+            "ESH",
+            "ESP",
+            "EST",
+            "ETH",
+            "FIN",
+            "FJI",
+            "FLK",
+            "FRA",
+            "FRO",
+            "FSM",
+            "GAB",
+            "GBR",
+            "GEO",
+            "GGY",
+            "GHA",
+            "GIB",
+            "GIN",
+            "GLP",
+            "GMB",
+            "GNB",
+            "GNQ",
+            "GRC",
+            "GRD",
+            "GRL",
+            "GTM",
+            "GUF",
+            "GUM",
+            "GUY",
+            "HKG",
+            "HMD",
+            "HND",
+            "HRV",
+            "HTI",
+            "HUN",
+            "IDN",
+            "IMN",
+            "IND",
+            "IOT",
+            "IRL",
+            "IRN",
+            "IRQ",
+            "ISL",
+            "ISR",
+            "ITA",
+            "JAM",
+            "JEY",
+            "JOR",
+            "JPN",
+            "KAZ",
+            "KEN",
+            "KGZ",
+            "KHM",
+            "KIR",
+            "KNA",
+            "KOR",
+            "KWT",
+            "LAO",
+            "LBN",
+            "LBR",
+            "LBY",
+            "LCA",
+            "LIE",
+            "LKA",
+            "LSO",
+            "LTU",
+            "LUX",
+            "LVA",
+            "MAC",
+            "MAF",
+            "MAR",
+            "MCO",
+            "MDA",
+            "MDG",
+            "MDV",
+            "MEX",
+            "MHL",
+            "MKD",
+            "MLI",
+            "MLT",
+            "MMR",
+            "MNE",
+            "MNG",
+            "MNP",
+            "MOZ",
+            "MRT",
+            "MSR",
+            "MTQ",
+            "MUS",
+            "MWI",
+            "MYS",
+            "MYT",
+            "NAM",
+            "NCL",
+            "NER",
+            "NFK",
+            "NGA",
+            "NIC",
+            "NIU",
+            "NLD",
+            "NOR",
+            "NPL",
+            "NRU",
+            "NZL",
+            "OMN",
+            "PAK",
+            "PAN",
+            "PCN",
+            "PER",
+            "PHL",
+            "PLW",
+            "PNG",
+            "POL",
+            "PRI",
+            "PRK",
+            "PRT",
+            "PRY",
+            "PSE",
+            "PYF",
+            "QAT",
+            "REU",
+            "ROU",
+            "RUS",
+            "RWA",
+            "SAU",
+            "SDN",
+            "SEN",
+            "SGP",
+            "SGS",
+            "SHN",
+            "SJM",
+            "SLB",
+            "SLE",
+            "SLV",
+            "SMR",
+            "SOM",
+            "SPM",
+            "SRB",
+            "SSD",
+            "STP",
+            "SUR",
+            "SVK",
+            "SVN",
+            "SWE",
+            "SWZ",
+            "SXM",
+            "SYC",
+            "SYR",
+            "TCA",
+            "TCD",
+            "TGO",
+            "THA",
+            "TJK",
+            "TKL",
+            "TKM",
+            "TLS",
+            "TON",
+            "TTO",
+            "TUN",
+            "TUR",
+            "TUV",
+            "TWN",
+            "TZA",
+            "UGA",
+            "UKR",
+            "UMI",
+            "URY",
+            "USA",
+            "UZB",
+            "VAT",
+            "VCT",
+            "VEN",
+            "VGB",
+            "VIR",
+            "VNM",
+            "VUT",
+            "WLF",
+            "WSM",
+            "YEM",
+            "ZAF",
+            "ZMB",
+            "ZWE"
+          ]
+        },
+        "administrative_area": {
+          "type": "string",
+          "description": "State / Province / Region"
+        },
+        "sub_administrative_area": {
+          "type": "string",
+          "description": "County / District"
+        },
+        "locality": {
+          "type": "string",
+          "description": "City / Town"
+        },
+        "postal_code": {
+          "type": "string",
+          "description": "Postal Code / Zip Code"
+        },
+        "thoroughfare": {
+          "type": "string",
+          "description": "Street Address"
+        },
+        "premise": {
+          "type": "string",
+          "description": "Apartment / Suite / Box number etc"
+        },
+        "sub_premise": {
+          "type": "string",
+          "description": "Floor # / Room # / Building label etc"
+        }
+      }
     }
-  ]
+  }
 }
 ```
 
@@ -1175,35 +2545,335 @@ Status Code **200**
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |» _links|object|false|none|none|
-|»» self|object|false|read-only|none|
-|»»» href|string|false|none|none|
+|»» self|object|false|none|none|
+|»»» href|string(uri)|false|none|none|
+|»» location_id|string|false|read-only|The identifier for the location|
+|»» label|string|false|none|Label for the entity|
+|»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»» created|string(date-time)|false|read-only|Date the entity was created|
+|»» updated|string(date-time)|false|read-only|Last date the entity was updated|
+|»» location_type|string|false|none|The type of location|
+|»» formatted_address|string|false|read-only|Address formatted for the where region the location exists in|
+|»» address|object|false|none|xNAL address for the location|
+|»»» country|string|true|none|Three Letter ISO country code|
+|»»» administrative_area|string|true|none|State / Province / Region|
+|»»» sub_administrative_area|string|false|none|County / District|
+|»»» locality|string|true|none|City / Town|
+|»»» postal_code|string|true|none|Postal Code / Zip Code|
+|»»» thoroughfare|string|true|none|Street Address|
+|»»» premise|string|false|none|Apartment / Suite / Box number etc|
+|»»» sub_premise|string|false|none|Floor # / Room # / Building label etc|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|location_type|warehouse|
+|location_type|facility|
+|location_type|other|
+|country|ABW|
+|country|AFG|
+|country|AGO|
+|country|AIA|
+|country|ALA|
+|country|ALB|
+|country|AND|
+|country|ARE|
+|country|ARG|
+|country|ARM|
+|country|ASM|
+|country|ATA|
+|country|ATF|
+|country|ATG|
+|country|AUS|
+|country|AUT|
+|country|AZE|
+|country|BDI|
+|country|BEL|
+|country|BEN|
+|country|BES|
+|country|BFA|
+|country|BGD|
+|country|BGR|
+|country|BHR|
+|country|BHS|
+|country|BIH|
+|country|BLM|
+|country|BLR|
+|country|BLZ|
+|country|BMU|
+|country|BOL|
+|country|BRA|
+|country|BRB|
+|country|BRN|
+|country|BTN|
+|country|BVT|
+|country|BWA|
+|country|CAF|
+|country|CAN|
+|country|CCK|
+|country|CHE|
+|country|CHL|
+|country|CHN|
+|country|CIV|
+|country|CMR|
+|country|COD|
+|country|COG|
+|country|COK|
+|country|COL|
+|country|COM|
+|country|CPV|
+|country|CRI|
+|country|CUB|
+|country|CUW|
+|country|CXR|
+|country|CYM|
+|country|CYP|
+|country|CZE|
+|country|DEU|
+|country|DJI|
+|country|DMA|
+|country|DNK|
+|country|DOM|
+|country|DZA|
+|country|ECU|
+|country|EGY|
+|country|ERI|
+|country|ESH|
+|country|ESP|
+|country|EST|
+|country|ETH|
+|country|FIN|
+|country|FJI|
+|country|FLK|
+|country|FRA|
+|country|FRO|
+|country|FSM|
+|country|GAB|
+|country|GBR|
+|country|GEO|
+|country|GGY|
+|country|GHA|
+|country|GIB|
+|country|GIN|
+|country|GLP|
+|country|GMB|
+|country|GNB|
+|country|GNQ|
+|country|GRC|
+|country|GRD|
+|country|GRL|
+|country|GTM|
+|country|GUF|
+|country|GUM|
+|country|GUY|
+|country|HKG|
+|country|HMD|
+|country|HND|
+|country|HRV|
+|country|HTI|
+|country|HUN|
+|country|IDN|
+|country|IMN|
+|country|IND|
+|country|IOT|
+|country|IRL|
+|country|IRN|
+|country|IRQ|
+|country|ISL|
+|country|ISR|
+|country|ITA|
+|country|JAM|
+|country|JEY|
+|country|JOR|
+|country|JPN|
+|country|KAZ|
+|country|KEN|
+|country|KGZ|
+|country|KHM|
+|country|KIR|
+|country|KNA|
+|country|KOR|
+|country|KWT|
+|country|LAO|
+|country|LBN|
+|country|LBR|
+|country|LBY|
+|country|LCA|
+|country|LIE|
+|country|LKA|
+|country|LSO|
+|country|LTU|
+|country|LUX|
+|country|LVA|
+|country|MAC|
+|country|MAF|
+|country|MAR|
+|country|MCO|
+|country|MDA|
+|country|MDG|
+|country|MDV|
+|country|MEX|
+|country|MHL|
+|country|MKD|
+|country|MLI|
+|country|MLT|
+|country|MMR|
+|country|MNE|
+|country|MNG|
+|country|MNP|
+|country|MOZ|
+|country|MRT|
+|country|MSR|
+|country|MTQ|
+|country|MUS|
+|country|MWI|
+|country|MYS|
+|country|MYT|
+|country|NAM|
+|country|NCL|
+|country|NER|
+|country|NFK|
+|country|NGA|
+|country|NIC|
+|country|NIU|
+|country|NLD|
+|country|NOR|
+|country|NPL|
+|country|NRU|
+|country|NZL|
+|country|OMN|
+|country|PAK|
+|country|PAN|
+|country|PCN|
+|country|PER|
+|country|PHL|
+|country|PLW|
+|country|PNG|
+|country|POL|
+|country|PRI|
+|country|PRK|
+|country|PRT|
+|country|PRY|
+|country|PSE|
+|country|PYF|
+|country|QAT|
+|country|REU|
+|country|ROU|
+|country|RUS|
+|country|RWA|
+|country|SAU|
+|country|SDN|
+|country|SEN|
+|country|SGP|
+|country|SGS|
+|country|SHN|
+|country|SJM|
+|country|SLB|
+|country|SLE|
+|country|SLV|
+|country|SMR|
+|country|SOM|
+|country|SPM|
+|country|SRB|
+|country|SSD|
+|country|STP|
+|country|SUR|
+|country|SVK|
+|country|SVN|
+|country|SWE|
+|country|SWZ|
+|country|SXM|
+|country|SYC|
+|country|SYR|
+|country|TCA|
+|country|TCD|
+|country|TGO|
+|country|THA|
+|country|TJK|
+|country|TKL|
+|country|TKM|
+|country|TLS|
+|country|TON|
+|country|TTO|
+|country|TUN|
+|country|TUR|
+|country|TUV|
+|country|TWN|
+|country|TZA|
+|country|UGA|
+|country|UKR|
+|country|UMI|
+|country|URY|
+|country|USA|
+|country|UZB|
+|country|VAT|
+|country|VCT|
+|country|VEN|
+|country|VGB|
+|country|VIR|
+|country|VNM|
+|country|VUT|
+|country|WLF|
+|country|WSM|
+|country|YEM|
+|country|ZAF|
+|country|ZMB|
+|country|ZWE|
 
 Status Code **400**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Bad Request|
+|type|https://docs.nterprise.com/api/problem/BadRequest|
+|status|400|
+|detail|Invalid request|
 
 Status Code **401**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Unauthorized|
+|type|https://docs.nterprise.com/api/problem/Unauthorized|
+|status|401|
+|detail|You are not authorized to access this resource|
 
 Status Code **403**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Forbidden|
+|type|https://docs.nterprise.com/api/problem/Forbidden|
+|status|403|
+|detail|You are forbidden to access this resource|
 
 <aside class="success">
 This operation does not require authentication
@@ -1213,7 +2883,7 @@ This operation does not require authentication
 
 <a id="opIdfetchLocationById"></a>
 
-`GET /locations/:location_id`
+`GET /locations/{location_id}`
 
 *Fetches a location by Id*
 
@@ -1232,222 +2902,364 @@ Fetch Location
 ```json
 {
   "type": "object",
-  "allOf": [
-    {
+  "properties": {
+    "_links": {
       "type": "object",
-      "x-hal": true,
-      "x-ui-hide": true,
       "properties": {
-        "_links": {
+        "self": {
+          "example": {
+            "href": "https://api.nterprise.com/locations/23Y1rNJ6zyiRzqN"
+          },
           "type": "object",
           "properties": {
-            "self": {
-              "type": "object",
-              "readOnly": true,
-              "properties": {
-                "href": {
-                  "type": "string",
-                  "example": "https://api.nterprise.com/locations/1e39c8d4-b2a4-45c2-93ac-de3130a6b75f"
-                }
-              }
+            "href": {
+              "type": "string",
+              "format": "uri"
             }
           }
         }
-      },
-      "allOf": [
-        {
-          "x-id": "#location",
-          "x-nter-relation": "locations",
-          "x-nter-model": "Location",
-          "x-nter-callable": true,
-          "description": "Defines the properties for a part unit",
-          "required": [
-            "location_type",
-            "address"
-          ],
-          "properties": {
-            "label": {
-              "type": "string",
-              "example": "Zones Innovation Center",
-              "x-examples": [
-                "Zones Innovation Center"
-              ]
-            },
-            "slug": {
-              "type": "string",
-              "example": "zones-innovation-center",
-              "x-examples": [
-                "zones-innovation-center"
-              ]
-            },
-            "location_id": {
-              "type": "string",
-              "description": "The identifier for the location",
-              "example": "b994961b-30b4-4f33-9330-f46fd6172909",
-              "x-examples": [
-                "b994961b-30b4-4f33-9330-f46fd6172909"
-              ],
-              "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-            },
-            "location_type": {
-              "type": "string",
-              "description": "The type of location",
-              "enum": [
-                "warehouse",
-                "facility",
-                "other"
-              ],
-              "example": "other",
-              "x-examples": [
-                "other"
-              ]
-            },
-            "formatted_address": {
-              "type": "string",
-              "readOnly": true,
-              "description": "Address formatted for the where region the location exists in",
-              "example": "Zones Innovation Center\n431 Broadway\nSuite C\nMenands NY, 12204\nUSA",
-              "x-examples": [
-                "Zones Innovation Center\n431 Broadway\nSuite C\nMenands NY, 12204\nUSA"
-              ]
-            },
-            "address": {
-              "type": "object",
-              "required": [
-                "country",
-                "administrative_area",
-                "locality",
-                "postal_code",
-                "thoroughfare"
-              ],
-              "description": "xNAL address for the location ",
-              "properties": {
-                "country": {
-                  "type": "string",
-                  "description": "Three Letter ISO country code",
-                  "example": "USA",
-                  "x-examples": [
-                    "USA"
-                  ]
-                },
-                "administrative_area": {
-                  "type": "string",
-                  "description": "State / Province / Region",
-                  "example": "NY",
-                  "x-examples": [
-                    "NY"
-                  ]
-                },
-                "sub_administrative_area": {
-                  "type": "string",
-                  "description": "County / District",
-                  "example": "Albany",
-                  "x-examples": [
-                    "Albany"
-                  ]
-                },
-                "locality": {
-                  "type": "string",
-                  "description": "City / Town",
-                  "example": "Menands",
-                  "x-examples": [
-                    "Menands"
-                  ]
-                },
-                "postal_code": {
-                  "type": "string",
-                  "description": "Postal Code / Zip Code",
-                  "example": "12204",
-                  "x-examples": [
-                    "12204"
-                  ]
-                },
-                "thoroughfare": {
-                  "type": "string",
-                  "description": "Street Address",
-                  "example": "431 Broadway",
-                  "x-examples": [
-                    "431 Broadway"
-                  ]
-                },
-                "premise": {
-                  "type": "string",
-                  "description": "Apartment / Suite / Box number etc",
-                  "example": "Suite c",
-                  "x-examples": [
-                    "Suite c"
-                  ]
-                },
-                "sub_premise": {
-                  "type": "string",
-                  "description": "Floor # / Room # / Building label etc",
-                  "example": "Zones Innovation Center",
-                  "x-examples": [
-                    "Zones Innovation Center"
-                  ]
-                }
-              }
-            }
-          },
-          "allOf": [
-            {
-              "x-ui-hide": true,
-              "type": "object",
-              "description": "Common Properties to all entities",
-              "required": [
-                "label"
-              ],
-              "properties": {
-                "label": {
-                  "type": "string",
-                  "description": "Label for the entity",
-                  "example": "primary"
-                },
-                "slug": {
-                  "type": "string",
-                  "description": "Slug for the entity (Auto-generated from the label)",
-                  "readOnly": true,
-                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-                },
-                "created": {
-                  "description": "Date the entity was created",
-                  "type": "string",
-                  "format": "date-time",
-                  "readOnly": true
-                },
-                "updated": {
-                  "description": "Last date the entity was updated",
-                  "type": "string",
-                  "format": "date-time",
-                  "readOnly": true
-                }
-              }
-            }
-          ],
-          "example": {
-            "location_type": "other",
-            "address": {
-              "country": "USA",
-              "administrative_area": "NY",
-              "locality": "Menands",
-              "postal_code": "12204",
-              "thoroughfare": "431 Broadway",
-              "sub_administrative_area": "Albany",
-              "premise": "Suite c",
-              "sub_premise": "Zones Innovation Center"
-            },
-            "label": "Zones Innovation Center",
-            "slug": "zones-innovation-center",
-            "location_id": "b994961b-30b4-4f33-9330-f46fd6172909",
-            "formatted_address": "Zones Innovation Center\n431 Broadway\nSuite C\nMenands NY, 12204\nUSA",
-            "created": "2011-12-22T07:39:56.809Z",
-            "updated": "1958-10-08T23:35:29.923Z"
-          }
-        }
+      }
+    },
+    "location_id": {
+      "description": "The identifier for the location",
+      "type": "string",
+      "readOnly": true,
+      "pattern": "^[0-9a-zA-Z-_]+$"
+    },
+    "label": {
+      "type": "string",
+      "description": "Label for the entity"
+    },
+    "slug": {
+      "type": "string",
+      "description": "Slug for the entity (Auto-generated from the label)",
+      "readOnly": true,
+      "deprecated": true,
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "created": {
+      "description": "Date the entity was created",
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "updated": {
+      "description": "Last date the entity was updated",
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "location_type": {
+      "type": "string",
+      "description": "The type of location",
+      "enum": [
+        "warehouse",
+        "facility",
+        "other"
+      ]
+    },
+    "formatted_address": {
+      "type": "string",
+      "readOnly": true,
+      "description": "Address formatted for the where region the location exists in"
+    },
+    "address": {
+      "type": "object",
+      "required": [
+        "country",
+        "administrative_area",
+        "locality",
+        "postal_code",
+        "thoroughfare"
       ],
-      "example": "undefined"
+      "description": "xNAL address for the location ",
+      "properties": {
+        "country": {
+          "type": "string",
+          "description": "Three Letter ISO country code",
+          "enum": [
+            "ABW",
+            "AFG",
+            "AGO",
+            "AIA",
+            "ALA",
+            "ALB",
+            "AND",
+            "ARE",
+            "ARG",
+            "ARM",
+            "ASM",
+            "ATA",
+            "ATF",
+            "ATG",
+            "AUS",
+            "AUT",
+            "AZE",
+            "BDI",
+            "BEL",
+            "BEN",
+            "BES",
+            "BFA",
+            "BGD",
+            "BGR",
+            "BHR",
+            "BHS",
+            "BIH",
+            "BLM",
+            "BLR",
+            "BLZ",
+            "BMU",
+            "BOL",
+            "BRA",
+            "BRB",
+            "BRN",
+            "BTN",
+            "BVT",
+            "BWA",
+            "CAF",
+            "CAN",
+            "CCK",
+            "CHE",
+            "CHL",
+            "CHN",
+            "CIV",
+            "CMR",
+            "COD",
+            "COG",
+            "COK",
+            "COL",
+            "COM",
+            "CPV",
+            "CRI",
+            "CUB",
+            "CUW",
+            "CXR",
+            "CYM",
+            "CYP",
+            "CZE",
+            "DEU",
+            "DJI",
+            "DMA",
+            "DNK",
+            "DOM",
+            "DZA",
+            "ECU",
+            "EGY",
+            "ERI",
+            "ESH",
+            "ESP",
+            "EST",
+            "ETH",
+            "FIN",
+            "FJI",
+            "FLK",
+            "FRA",
+            "FRO",
+            "FSM",
+            "GAB",
+            "GBR",
+            "GEO",
+            "GGY",
+            "GHA",
+            "GIB",
+            "GIN",
+            "GLP",
+            "GMB",
+            "GNB",
+            "GNQ",
+            "GRC",
+            "GRD",
+            "GRL",
+            "GTM",
+            "GUF",
+            "GUM",
+            "GUY",
+            "HKG",
+            "HMD",
+            "HND",
+            "HRV",
+            "HTI",
+            "HUN",
+            "IDN",
+            "IMN",
+            "IND",
+            "IOT",
+            "IRL",
+            "IRN",
+            "IRQ",
+            "ISL",
+            "ISR",
+            "ITA",
+            "JAM",
+            "JEY",
+            "JOR",
+            "JPN",
+            "KAZ",
+            "KEN",
+            "KGZ",
+            "KHM",
+            "KIR",
+            "KNA",
+            "KOR",
+            "KWT",
+            "LAO",
+            "LBN",
+            "LBR",
+            "LBY",
+            "LCA",
+            "LIE",
+            "LKA",
+            "LSO",
+            "LTU",
+            "LUX",
+            "LVA",
+            "MAC",
+            "MAF",
+            "MAR",
+            "MCO",
+            "MDA",
+            "MDG",
+            "MDV",
+            "MEX",
+            "MHL",
+            "MKD",
+            "MLI",
+            "MLT",
+            "MMR",
+            "MNE",
+            "MNG",
+            "MNP",
+            "MOZ",
+            "MRT",
+            "MSR",
+            "MTQ",
+            "MUS",
+            "MWI",
+            "MYS",
+            "MYT",
+            "NAM",
+            "NCL",
+            "NER",
+            "NFK",
+            "NGA",
+            "NIC",
+            "NIU",
+            "NLD",
+            "NOR",
+            "NPL",
+            "NRU",
+            "NZL",
+            "OMN",
+            "PAK",
+            "PAN",
+            "PCN",
+            "PER",
+            "PHL",
+            "PLW",
+            "PNG",
+            "POL",
+            "PRI",
+            "PRK",
+            "PRT",
+            "PRY",
+            "PSE",
+            "PYF",
+            "QAT",
+            "REU",
+            "ROU",
+            "RUS",
+            "RWA",
+            "SAU",
+            "SDN",
+            "SEN",
+            "SGP",
+            "SGS",
+            "SHN",
+            "SJM",
+            "SLB",
+            "SLE",
+            "SLV",
+            "SMR",
+            "SOM",
+            "SPM",
+            "SRB",
+            "SSD",
+            "STP",
+            "SUR",
+            "SVK",
+            "SVN",
+            "SWE",
+            "SWZ",
+            "SXM",
+            "SYC",
+            "SYR",
+            "TCA",
+            "TCD",
+            "TGO",
+            "THA",
+            "TJK",
+            "TKL",
+            "TKM",
+            "TLS",
+            "TON",
+            "TTO",
+            "TUN",
+            "TUR",
+            "TUV",
+            "TWN",
+            "TZA",
+            "UGA",
+            "UKR",
+            "UMI",
+            "URY",
+            "USA",
+            "UZB",
+            "VAT",
+            "VCT",
+            "VEN",
+            "VGB",
+            "VIR",
+            "VNM",
+            "VUT",
+            "WLF",
+            "WSM",
+            "YEM",
+            "ZAF",
+            "ZMB",
+            "ZWE"
+          ]
+        },
+        "administrative_area": {
+          "type": "string",
+          "description": "State / Province / Region"
+        },
+        "sub_administrative_area": {
+          "type": "string",
+          "description": "County / District"
+        },
+        "locality": {
+          "type": "string",
+          "description": "City / Town"
+        },
+        "postal_code": {
+          "type": "string",
+          "description": "Postal Code / Zip Code"
+        },
+        "thoroughfare": {
+          "type": "string",
+          "description": "Street Address"
+        },
+        "premise": {
+          "type": "string",
+          "description": "Apartment / Suite / Box number etc"
+        },
+        "sub_premise": {
+          "type": "string",
+          "description": "Floor # / Room # / Building label etc"
+        }
+      }
     }
-  ]
+  }
 }
 ```
 
@@ -1467,35 +3279,335 @@ Status Code **200**
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |» _links|object|false|none|none|
-|»» self|object|false|read-only|none|
-|»»» href|string|false|none|none|
+|»» self|object|false|none|none|
+|»»» href|string(uri)|false|none|none|
+|»» location_id|string|false|read-only|The identifier for the location|
+|»» label|string|false|none|Label for the entity|
+|»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»» created|string(date-time)|false|read-only|Date the entity was created|
+|»» updated|string(date-time)|false|read-only|Last date the entity was updated|
+|»» location_type|string|false|none|The type of location|
+|»» formatted_address|string|false|read-only|Address formatted for the where region the location exists in|
+|»» address|object|false|none|xNAL address for the location|
+|»»» country|string|true|none|Three Letter ISO country code|
+|»»» administrative_area|string|true|none|State / Province / Region|
+|»»» sub_administrative_area|string|false|none|County / District|
+|»»» locality|string|true|none|City / Town|
+|»»» postal_code|string|true|none|Postal Code / Zip Code|
+|»»» thoroughfare|string|true|none|Street Address|
+|»»» premise|string|false|none|Apartment / Suite / Box number etc|
+|»»» sub_premise|string|false|none|Floor # / Room # / Building label etc|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|location_type|warehouse|
+|location_type|facility|
+|location_type|other|
+|country|ABW|
+|country|AFG|
+|country|AGO|
+|country|AIA|
+|country|ALA|
+|country|ALB|
+|country|AND|
+|country|ARE|
+|country|ARG|
+|country|ARM|
+|country|ASM|
+|country|ATA|
+|country|ATF|
+|country|ATG|
+|country|AUS|
+|country|AUT|
+|country|AZE|
+|country|BDI|
+|country|BEL|
+|country|BEN|
+|country|BES|
+|country|BFA|
+|country|BGD|
+|country|BGR|
+|country|BHR|
+|country|BHS|
+|country|BIH|
+|country|BLM|
+|country|BLR|
+|country|BLZ|
+|country|BMU|
+|country|BOL|
+|country|BRA|
+|country|BRB|
+|country|BRN|
+|country|BTN|
+|country|BVT|
+|country|BWA|
+|country|CAF|
+|country|CAN|
+|country|CCK|
+|country|CHE|
+|country|CHL|
+|country|CHN|
+|country|CIV|
+|country|CMR|
+|country|COD|
+|country|COG|
+|country|COK|
+|country|COL|
+|country|COM|
+|country|CPV|
+|country|CRI|
+|country|CUB|
+|country|CUW|
+|country|CXR|
+|country|CYM|
+|country|CYP|
+|country|CZE|
+|country|DEU|
+|country|DJI|
+|country|DMA|
+|country|DNK|
+|country|DOM|
+|country|DZA|
+|country|ECU|
+|country|EGY|
+|country|ERI|
+|country|ESH|
+|country|ESP|
+|country|EST|
+|country|ETH|
+|country|FIN|
+|country|FJI|
+|country|FLK|
+|country|FRA|
+|country|FRO|
+|country|FSM|
+|country|GAB|
+|country|GBR|
+|country|GEO|
+|country|GGY|
+|country|GHA|
+|country|GIB|
+|country|GIN|
+|country|GLP|
+|country|GMB|
+|country|GNB|
+|country|GNQ|
+|country|GRC|
+|country|GRD|
+|country|GRL|
+|country|GTM|
+|country|GUF|
+|country|GUM|
+|country|GUY|
+|country|HKG|
+|country|HMD|
+|country|HND|
+|country|HRV|
+|country|HTI|
+|country|HUN|
+|country|IDN|
+|country|IMN|
+|country|IND|
+|country|IOT|
+|country|IRL|
+|country|IRN|
+|country|IRQ|
+|country|ISL|
+|country|ISR|
+|country|ITA|
+|country|JAM|
+|country|JEY|
+|country|JOR|
+|country|JPN|
+|country|KAZ|
+|country|KEN|
+|country|KGZ|
+|country|KHM|
+|country|KIR|
+|country|KNA|
+|country|KOR|
+|country|KWT|
+|country|LAO|
+|country|LBN|
+|country|LBR|
+|country|LBY|
+|country|LCA|
+|country|LIE|
+|country|LKA|
+|country|LSO|
+|country|LTU|
+|country|LUX|
+|country|LVA|
+|country|MAC|
+|country|MAF|
+|country|MAR|
+|country|MCO|
+|country|MDA|
+|country|MDG|
+|country|MDV|
+|country|MEX|
+|country|MHL|
+|country|MKD|
+|country|MLI|
+|country|MLT|
+|country|MMR|
+|country|MNE|
+|country|MNG|
+|country|MNP|
+|country|MOZ|
+|country|MRT|
+|country|MSR|
+|country|MTQ|
+|country|MUS|
+|country|MWI|
+|country|MYS|
+|country|MYT|
+|country|NAM|
+|country|NCL|
+|country|NER|
+|country|NFK|
+|country|NGA|
+|country|NIC|
+|country|NIU|
+|country|NLD|
+|country|NOR|
+|country|NPL|
+|country|NRU|
+|country|NZL|
+|country|OMN|
+|country|PAK|
+|country|PAN|
+|country|PCN|
+|country|PER|
+|country|PHL|
+|country|PLW|
+|country|PNG|
+|country|POL|
+|country|PRI|
+|country|PRK|
+|country|PRT|
+|country|PRY|
+|country|PSE|
+|country|PYF|
+|country|QAT|
+|country|REU|
+|country|ROU|
+|country|RUS|
+|country|RWA|
+|country|SAU|
+|country|SDN|
+|country|SEN|
+|country|SGP|
+|country|SGS|
+|country|SHN|
+|country|SJM|
+|country|SLB|
+|country|SLE|
+|country|SLV|
+|country|SMR|
+|country|SOM|
+|country|SPM|
+|country|SRB|
+|country|SSD|
+|country|STP|
+|country|SUR|
+|country|SVK|
+|country|SVN|
+|country|SWE|
+|country|SWZ|
+|country|SXM|
+|country|SYC|
+|country|SYR|
+|country|TCA|
+|country|TCD|
+|country|TGO|
+|country|THA|
+|country|TJK|
+|country|TKL|
+|country|TKM|
+|country|TLS|
+|country|TON|
+|country|TTO|
+|country|TUN|
+|country|TUR|
+|country|TUV|
+|country|TWN|
+|country|TZA|
+|country|UGA|
+|country|UKR|
+|country|UMI|
+|country|URY|
+|country|USA|
+|country|UZB|
+|country|VAT|
+|country|VCT|
+|country|VEN|
+|country|VGB|
+|country|VIR|
+|country|VNM|
+|country|VUT|
+|country|WLF|
+|country|WSM|
+|country|YEM|
+|country|ZAF|
+|country|ZMB|
+|country|ZWE|
 
 Status Code **401**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Unauthorized|
+|type|https://docs.nterprise.com/api/problem/Unauthorized|
+|status|401|
+|detail|You are not authorized to access this resource|
 
 Status Code **403**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Forbidden|
+|type|https://docs.nterprise.com/api/problem/Forbidden|
+|status|403|
+|detail|You are forbidden to access this resource|
 
 Status Code **404**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Not Found|
+|type|https://docs.nterprise.com/api/problem/NotFound|
+|status|404|
+|detail|Resource not found|
 
 <aside class="success">
 This operation does not require authentication
@@ -1505,7 +3617,7 @@ This operation does not require authentication
 
 <a id="opIdupdateLocation"></a>
 
-`PUT /locations/:location_id`
+`PUT /locations/{location_id}`
 
 *Updates a location*
 
@@ -1517,20 +3629,23 @@ Updates a location
 {
   "type": "object",
   "required": [
+    "label",
     "location_type",
     "address"
   ],
   "properties": {
+    "label": {
+      "description": "The identifier for the location",
+      "type": "string",
+      "readOnly": true,
+      "pattern": "^[0-9a-zA-Z-_]+$"
+    },
     "location_type": {
       "type": "string",
       "description": "The type of location",
       "enum": [
         "warehouse",
         "facility",
-        "other"
-      ],
-      "example": "other",
-      "x-examples": [
         "other"
       ]
     },
@@ -1548,73 +3663,287 @@ Updates a location
         "country": {
           "type": "string",
           "description": "Three Letter ISO country code",
-          "example": "USA",
-          "x-examples": [
-            "USA"
+          "enum": [
+            "ABW",
+            "AFG",
+            "AGO",
+            "AIA",
+            "ALA",
+            "ALB",
+            "AND",
+            "ARE",
+            "ARG",
+            "ARM",
+            "ASM",
+            "ATA",
+            "ATF",
+            "ATG",
+            "AUS",
+            "AUT",
+            "AZE",
+            "BDI",
+            "BEL",
+            "BEN",
+            "BES",
+            "BFA",
+            "BGD",
+            "BGR",
+            "BHR",
+            "BHS",
+            "BIH",
+            "BLM",
+            "BLR",
+            "BLZ",
+            "BMU",
+            "BOL",
+            "BRA",
+            "BRB",
+            "BRN",
+            "BTN",
+            "BVT",
+            "BWA",
+            "CAF",
+            "CAN",
+            "CCK",
+            "CHE",
+            "CHL",
+            "CHN",
+            "CIV",
+            "CMR",
+            "COD",
+            "COG",
+            "COK",
+            "COL",
+            "COM",
+            "CPV",
+            "CRI",
+            "CUB",
+            "CUW",
+            "CXR",
+            "CYM",
+            "CYP",
+            "CZE",
+            "DEU",
+            "DJI",
+            "DMA",
+            "DNK",
+            "DOM",
+            "DZA",
+            "ECU",
+            "EGY",
+            "ERI",
+            "ESH",
+            "ESP",
+            "EST",
+            "ETH",
+            "FIN",
+            "FJI",
+            "FLK",
+            "FRA",
+            "FRO",
+            "FSM",
+            "GAB",
+            "GBR",
+            "GEO",
+            "GGY",
+            "GHA",
+            "GIB",
+            "GIN",
+            "GLP",
+            "GMB",
+            "GNB",
+            "GNQ",
+            "GRC",
+            "GRD",
+            "GRL",
+            "GTM",
+            "GUF",
+            "GUM",
+            "GUY",
+            "HKG",
+            "HMD",
+            "HND",
+            "HRV",
+            "HTI",
+            "HUN",
+            "IDN",
+            "IMN",
+            "IND",
+            "IOT",
+            "IRL",
+            "IRN",
+            "IRQ",
+            "ISL",
+            "ISR",
+            "ITA",
+            "JAM",
+            "JEY",
+            "JOR",
+            "JPN",
+            "KAZ",
+            "KEN",
+            "KGZ",
+            "KHM",
+            "KIR",
+            "KNA",
+            "KOR",
+            "KWT",
+            "LAO",
+            "LBN",
+            "LBR",
+            "LBY",
+            "LCA",
+            "LIE",
+            "LKA",
+            "LSO",
+            "LTU",
+            "LUX",
+            "LVA",
+            "MAC",
+            "MAF",
+            "MAR",
+            "MCO",
+            "MDA",
+            "MDG",
+            "MDV",
+            "MEX",
+            "MHL",
+            "MKD",
+            "MLI",
+            "MLT",
+            "MMR",
+            "MNE",
+            "MNG",
+            "MNP",
+            "MOZ",
+            "MRT",
+            "MSR",
+            "MTQ",
+            "MUS",
+            "MWI",
+            "MYS",
+            "MYT",
+            "NAM",
+            "NCL",
+            "NER",
+            "NFK",
+            "NGA",
+            "NIC",
+            "NIU",
+            "NLD",
+            "NOR",
+            "NPL",
+            "NRU",
+            "NZL",
+            "OMN",
+            "PAK",
+            "PAN",
+            "PCN",
+            "PER",
+            "PHL",
+            "PLW",
+            "PNG",
+            "POL",
+            "PRI",
+            "PRK",
+            "PRT",
+            "PRY",
+            "PSE",
+            "PYF",
+            "QAT",
+            "REU",
+            "ROU",
+            "RUS",
+            "RWA",
+            "SAU",
+            "SDN",
+            "SEN",
+            "SGP",
+            "SGS",
+            "SHN",
+            "SJM",
+            "SLB",
+            "SLE",
+            "SLV",
+            "SMR",
+            "SOM",
+            "SPM",
+            "SRB",
+            "SSD",
+            "STP",
+            "SUR",
+            "SVK",
+            "SVN",
+            "SWE",
+            "SWZ",
+            "SXM",
+            "SYC",
+            "SYR",
+            "TCA",
+            "TCD",
+            "TGO",
+            "THA",
+            "TJK",
+            "TKL",
+            "TKM",
+            "TLS",
+            "TON",
+            "TTO",
+            "TUN",
+            "TUR",
+            "TUV",
+            "TWN",
+            "TZA",
+            "UGA",
+            "UKR",
+            "UMI",
+            "URY",
+            "USA",
+            "UZB",
+            "VAT",
+            "VCT",
+            "VEN",
+            "VGB",
+            "VIR",
+            "VNM",
+            "VUT",
+            "WLF",
+            "WSM",
+            "YEM",
+            "ZAF",
+            "ZMB",
+            "ZWE"
           ]
         },
         "administrative_area": {
           "type": "string",
-          "description": "State / Province / Region",
-          "example": "NY",
-          "x-examples": [
-            "NY"
-          ]
+          "description": "State / Province / Region"
         },
         "sub_administrative_area": {
           "type": "string",
-          "description": "County / District",
-          "example": "Albany",
-          "x-examples": [
-            "Albany"
-          ]
+          "description": "County / District"
         },
         "locality": {
           "type": "string",
-          "description": "City / Town",
-          "example": "Menands",
-          "x-examples": [
-            "Menands"
-          ]
+          "description": "City / Town"
         },
         "postal_code": {
           "type": "string",
-          "description": "Postal Code / Zip Code",
-          "example": "12204",
-          "x-examples": [
-            "12204"
-          ]
+          "description": "Postal Code / Zip Code"
         },
         "thoroughfare": {
           "type": "string",
-          "description": "Street Address",
-          "example": "431 Broadway",
-          "x-examples": [
-            "431 Broadway"
-          ]
+          "description": "Street Address"
         },
         "premise": {
           "type": "string",
-          "description": "Apartment / Suite / Box number etc",
-          "example": "Suite c",
-          "x-examples": [
-            "Suite c"
-          ]
+          "description": "Apartment / Suite / Box number etc"
         },
         "sub_premise": {
           "type": "string",
-          "description": "Floor # / Room # / Building label etc",
-          "example": "Zones Innovation Center",
-          "x-examples": [
-            "Zones Innovation Center"
-          ]
+          "description": "Floor # / Room # / Building label etc"
         }
       }
-    },
-    "label": {
-      "type": "string",
-      "description": "Label for the entity",
-      "example": "primary"
     }
   }
 }
@@ -1625,6 +3954,7 @@ Updates a location
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |location_id|path|string|true|Id for the location|
+|label|body|string|true|The identifier for the location|
 |location_type|body|string|true|The type of location|
 |address|body|object|true|xNAL address for the location|
 |» country|body|string|true|Three Letter ISO country code|
@@ -1635,7 +3965,6 @@ Updates a location
 |» thoroughfare|body|string|true|Street Address|
 |» premise|body|string|false|Apartment / Suite / Box number etc|
 |» sub_premise|body|string|false|Floor # / Room # / Building label etc|
-|label|body|string|false|Label for the entity|
 
 #### Enumerated Values
 
@@ -1644,6 +3973,255 @@ Updates a location
 |location_type|warehouse|
 |location_type|facility|
 |location_type|other|
+|» country|ABW|
+|» country|AFG|
+|» country|AGO|
+|» country|AIA|
+|» country|ALA|
+|» country|ALB|
+|» country|AND|
+|» country|ARE|
+|» country|ARG|
+|» country|ARM|
+|» country|ASM|
+|» country|ATA|
+|» country|ATF|
+|» country|ATG|
+|» country|AUS|
+|» country|AUT|
+|» country|AZE|
+|» country|BDI|
+|» country|BEL|
+|» country|BEN|
+|» country|BES|
+|» country|BFA|
+|» country|BGD|
+|» country|BGR|
+|» country|BHR|
+|» country|BHS|
+|» country|BIH|
+|» country|BLM|
+|» country|BLR|
+|» country|BLZ|
+|» country|BMU|
+|» country|BOL|
+|» country|BRA|
+|» country|BRB|
+|» country|BRN|
+|» country|BTN|
+|» country|BVT|
+|» country|BWA|
+|» country|CAF|
+|» country|CAN|
+|» country|CCK|
+|» country|CHE|
+|» country|CHL|
+|» country|CHN|
+|» country|CIV|
+|» country|CMR|
+|» country|COD|
+|» country|COG|
+|» country|COK|
+|» country|COL|
+|» country|COM|
+|» country|CPV|
+|» country|CRI|
+|» country|CUB|
+|» country|CUW|
+|» country|CXR|
+|» country|CYM|
+|» country|CYP|
+|» country|CZE|
+|» country|DEU|
+|» country|DJI|
+|» country|DMA|
+|» country|DNK|
+|» country|DOM|
+|» country|DZA|
+|» country|ECU|
+|» country|EGY|
+|» country|ERI|
+|» country|ESH|
+|» country|ESP|
+|» country|EST|
+|» country|ETH|
+|» country|FIN|
+|» country|FJI|
+|» country|FLK|
+|» country|FRA|
+|» country|FRO|
+|» country|FSM|
+|» country|GAB|
+|» country|GBR|
+|» country|GEO|
+|» country|GGY|
+|» country|GHA|
+|» country|GIB|
+|» country|GIN|
+|» country|GLP|
+|» country|GMB|
+|» country|GNB|
+|» country|GNQ|
+|» country|GRC|
+|» country|GRD|
+|» country|GRL|
+|» country|GTM|
+|» country|GUF|
+|» country|GUM|
+|» country|GUY|
+|» country|HKG|
+|» country|HMD|
+|» country|HND|
+|» country|HRV|
+|» country|HTI|
+|» country|HUN|
+|» country|IDN|
+|» country|IMN|
+|» country|IND|
+|» country|IOT|
+|» country|IRL|
+|» country|IRN|
+|» country|IRQ|
+|» country|ISL|
+|» country|ISR|
+|» country|ITA|
+|» country|JAM|
+|» country|JEY|
+|» country|JOR|
+|» country|JPN|
+|» country|KAZ|
+|» country|KEN|
+|» country|KGZ|
+|» country|KHM|
+|» country|KIR|
+|» country|KNA|
+|» country|KOR|
+|» country|KWT|
+|» country|LAO|
+|» country|LBN|
+|» country|LBR|
+|» country|LBY|
+|» country|LCA|
+|» country|LIE|
+|» country|LKA|
+|» country|LSO|
+|» country|LTU|
+|» country|LUX|
+|» country|LVA|
+|» country|MAC|
+|» country|MAF|
+|» country|MAR|
+|» country|MCO|
+|» country|MDA|
+|» country|MDG|
+|» country|MDV|
+|» country|MEX|
+|» country|MHL|
+|» country|MKD|
+|» country|MLI|
+|» country|MLT|
+|» country|MMR|
+|» country|MNE|
+|» country|MNG|
+|» country|MNP|
+|» country|MOZ|
+|» country|MRT|
+|» country|MSR|
+|» country|MTQ|
+|» country|MUS|
+|» country|MWI|
+|» country|MYS|
+|» country|MYT|
+|» country|NAM|
+|» country|NCL|
+|» country|NER|
+|» country|NFK|
+|» country|NGA|
+|» country|NIC|
+|» country|NIU|
+|» country|NLD|
+|» country|NOR|
+|» country|NPL|
+|» country|NRU|
+|» country|NZL|
+|» country|OMN|
+|» country|PAK|
+|» country|PAN|
+|» country|PCN|
+|» country|PER|
+|» country|PHL|
+|» country|PLW|
+|» country|PNG|
+|» country|POL|
+|» country|PRI|
+|» country|PRK|
+|» country|PRT|
+|» country|PRY|
+|» country|PSE|
+|» country|PYF|
+|» country|QAT|
+|» country|REU|
+|» country|ROU|
+|» country|RUS|
+|» country|RWA|
+|» country|SAU|
+|» country|SDN|
+|» country|SEN|
+|» country|SGP|
+|» country|SGS|
+|» country|SHN|
+|» country|SJM|
+|» country|SLB|
+|» country|SLE|
+|» country|SLV|
+|» country|SMR|
+|» country|SOM|
+|» country|SPM|
+|» country|SRB|
+|» country|SSD|
+|» country|STP|
+|» country|SUR|
+|» country|SVK|
+|» country|SVN|
+|» country|SWE|
+|» country|SWZ|
+|» country|SXM|
+|» country|SYC|
+|» country|SYR|
+|» country|TCA|
+|» country|TCD|
+|» country|TGO|
+|» country|THA|
+|» country|TJK|
+|» country|TKL|
+|» country|TKM|
+|» country|TLS|
+|» country|TON|
+|» country|TTO|
+|» country|TUN|
+|» country|TUR|
+|» country|TUV|
+|» country|TWN|
+|» country|TZA|
+|» country|UGA|
+|» country|UKR|
+|» country|UMI|
+|» country|URY|
+|» country|USA|
+|» country|UZB|
+|» country|VAT|
+|» country|VCT|
+|» country|VEN|
+|» country|VGB|
+|» country|VIR|
+|» country|VNM|
+|» country|VUT|
+|» country|WLF|
+|» country|WSM|
+|» country|YEM|
+|» country|ZAF|
+|» country|ZMB|
+|» country|ZWE|
 
 > Example responses
 
@@ -1652,222 +4230,364 @@ Updates a location
 ```json
 {
   "type": "object",
-  "allOf": [
-    {
+  "properties": {
+    "_links": {
       "type": "object",
-      "x-hal": true,
-      "x-ui-hide": true,
       "properties": {
-        "_links": {
+        "self": {
+          "example": {
+            "href": "https://api.nterprise.com/locations/23Y1rNJ6zyiRzqN"
+          },
           "type": "object",
           "properties": {
-            "self": {
-              "type": "object",
-              "readOnly": true,
-              "properties": {
-                "href": {
-                  "type": "string",
-                  "example": "https://api.nterprise.com/locations/1e39c8d4-b2a4-45c2-93ac-de3130a6b75f"
-                }
-              }
+            "href": {
+              "type": "string",
+              "format": "uri"
             }
           }
         }
-      },
-      "allOf": [
-        {
-          "x-id": "#location",
-          "x-nter-relation": "locations",
-          "x-nter-model": "Location",
-          "x-nter-callable": true,
-          "description": "Defines the properties for a part unit",
-          "required": [
-            "location_type",
-            "address"
-          ],
-          "properties": {
-            "label": {
-              "type": "string",
-              "example": "Zones Innovation Center",
-              "x-examples": [
-                "Zones Innovation Center"
-              ]
-            },
-            "slug": {
-              "type": "string",
-              "example": "zones-innovation-center",
-              "x-examples": [
-                "zones-innovation-center"
-              ]
-            },
-            "location_id": {
-              "type": "string",
-              "description": "The identifier for the location",
-              "example": "b994961b-30b4-4f33-9330-f46fd6172909",
-              "x-examples": [
-                "b994961b-30b4-4f33-9330-f46fd6172909"
-              ],
-              "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-            },
-            "location_type": {
-              "type": "string",
-              "description": "The type of location",
-              "enum": [
-                "warehouse",
-                "facility",
-                "other"
-              ],
-              "example": "other",
-              "x-examples": [
-                "other"
-              ]
-            },
-            "formatted_address": {
-              "type": "string",
-              "readOnly": true,
-              "description": "Address formatted for the where region the location exists in",
-              "example": "Zones Innovation Center\n431 Broadway\nSuite C\nMenands NY, 12204\nUSA",
-              "x-examples": [
-                "Zones Innovation Center\n431 Broadway\nSuite C\nMenands NY, 12204\nUSA"
-              ]
-            },
-            "address": {
-              "type": "object",
-              "required": [
-                "country",
-                "administrative_area",
-                "locality",
-                "postal_code",
-                "thoroughfare"
-              ],
-              "description": "xNAL address for the location ",
-              "properties": {
-                "country": {
-                  "type": "string",
-                  "description": "Three Letter ISO country code",
-                  "example": "USA",
-                  "x-examples": [
-                    "USA"
-                  ]
-                },
-                "administrative_area": {
-                  "type": "string",
-                  "description": "State / Province / Region",
-                  "example": "NY",
-                  "x-examples": [
-                    "NY"
-                  ]
-                },
-                "sub_administrative_area": {
-                  "type": "string",
-                  "description": "County / District",
-                  "example": "Albany",
-                  "x-examples": [
-                    "Albany"
-                  ]
-                },
-                "locality": {
-                  "type": "string",
-                  "description": "City / Town",
-                  "example": "Menands",
-                  "x-examples": [
-                    "Menands"
-                  ]
-                },
-                "postal_code": {
-                  "type": "string",
-                  "description": "Postal Code / Zip Code",
-                  "example": "12204",
-                  "x-examples": [
-                    "12204"
-                  ]
-                },
-                "thoroughfare": {
-                  "type": "string",
-                  "description": "Street Address",
-                  "example": "431 Broadway",
-                  "x-examples": [
-                    "431 Broadway"
-                  ]
-                },
-                "premise": {
-                  "type": "string",
-                  "description": "Apartment / Suite / Box number etc",
-                  "example": "Suite c",
-                  "x-examples": [
-                    "Suite c"
-                  ]
-                },
-                "sub_premise": {
-                  "type": "string",
-                  "description": "Floor # / Room # / Building label etc",
-                  "example": "Zones Innovation Center",
-                  "x-examples": [
-                    "Zones Innovation Center"
-                  ]
-                }
-              }
-            }
-          },
-          "allOf": [
-            {
-              "x-ui-hide": true,
-              "type": "object",
-              "description": "Common Properties to all entities",
-              "required": [
-                "label"
-              ],
-              "properties": {
-                "label": {
-                  "type": "string",
-                  "description": "Label for the entity",
-                  "example": "primary"
-                },
-                "slug": {
-                  "type": "string",
-                  "description": "Slug for the entity (Auto-generated from the label)",
-                  "readOnly": true,
-                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-                },
-                "created": {
-                  "description": "Date the entity was created",
-                  "type": "string",
-                  "format": "date-time",
-                  "readOnly": true
-                },
-                "updated": {
-                  "description": "Last date the entity was updated",
-                  "type": "string",
-                  "format": "date-time",
-                  "readOnly": true
-                }
-              }
-            }
-          ],
-          "example": {
-            "location_type": "other",
-            "address": {
-              "country": "USA",
-              "administrative_area": "NY",
-              "locality": "Menands",
-              "postal_code": "12204",
-              "thoroughfare": "431 Broadway",
-              "sub_administrative_area": "Albany",
-              "premise": "Suite c",
-              "sub_premise": "Zones Innovation Center"
-            },
-            "label": "Zones Innovation Center",
-            "slug": "zones-innovation-center",
-            "location_id": "b994961b-30b4-4f33-9330-f46fd6172909",
-            "formatted_address": "Zones Innovation Center\n431 Broadway\nSuite C\nMenands NY, 12204\nUSA",
-            "created": "2011-12-22T07:39:56.809Z",
-            "updated": "1958-10-08T23:35:29.923Z"
-          }
-        }
+      }
+    },
+    "location_id": {
+      "description": "The identifier for the location",
+      "type": "string",
+      "readOnly": true,
+      "pattern": "^[0-9a-zA-Z-_]+$"
+    },
+    "label": {
+      "type": "string",
+      "description": "Label for the entity"
+    },
+    "slug": {
+      "type": "string",
+      "description": "Slug for the entity (Auto-generated from the label)",
+      "readOnly": true,
+      "deprecated": true,
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "created": {
+      "description": "Date the entity was created",
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "updated": {
+      "description": "Last date the entity was updated",
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "location_type": {
+      "type": "string",
+      "description": "The type of location",
+      "enum": [
+        "warehouse",
+        "facility",
+        "other"
+      ]
+    },
+    "formatted_address": {
+      "type": "string",
+      "readOnly": true,
+      "description": "Address formatted for the where region the location exists in"
+    },
+    "address": {
+      "type": "object",
+      "required": [
+        "country",
+        "administrative_area",
+        "locality",
+        "postal_code",
+        "thoroughfare"
       ],
-      "example": "undefined"
+      "description": "xNAL address for the location ",
+      "properties": {
+        "country": {
+          "type": "string",
+          "description": "Three Letter ISO country code",
+          "enum": [
+            "ABW",
+            "AFG",
+            "AGO",
+            "AIA",
+            "ALA",
+            "ALB",
+            "AND",
+            "ARE",
+            "ARG",
+            "ARM",
+            "ASM",
+            "ATA",
+            "ATF",
+            "ATG",
+            "AUS",
+            "AUT",
+            "AZE",
+            "BDI",
+            "BEL",
+            "BEN",
+            "BES",
+            "BFA",
+            "BGD",
+            "BGR",
+            "BHR",
+            "BHS",
+            "BIH",
+            "BLM",
+            "BLR",
+            "BLZ",
+            "BMU",
+            "BOL",
+            "BRA",
+            "BRB",
+            "BRN",
+            "BTN",
+            "BVT",
+            "BWA",
+            "CAF",
+            "CAN",
+            "CCK",
+            "CHE",
+            "CHL",
+            "CHN",
+            "CIV",
+            "CMR",
+            "COD",
+            "COG",
+            "COK",
+            "COL",
+            "COM",
+            "CPV",
+            "CRI",
+            "CUB",
+            "CUW",
+            "CXR",
+            "CYM",
+            "CYP",
+            "CZE",
+            "DEU",
+            "DJI",
+            "DMA",
+            "DNK",
+            "DOM",
+            "DZA",
+            "ECU",
+            "EGY",
+            "ERI",
+            "ESH",
+            "ESP",
+            "EST",
+            "ETH",
+            "FIN",
+            "FJI",
+            "FLK",
+            "FRA",
+            "FRO",
+            "FSM",
+            "GAB",
+            "GBR",
+            "GEO",
+            "GGY",
+            "GHA",
+            "GIB",
+            "GIN",
+            "GLP",
+            "GMB",
+            "GNB",
+            "GNQ",
+            "GRC",
+            "GRD",
+            "GRL",
+            "GTM",
+            "GUF",
+            "GUM",
+            "GUY",
+            "HKG",
+            "HMD",
+            "HND",
+            "HRV",
+            "HTI",
+            "HUN",
+            "IDN",
+            "IMN",
+            "IND",
+            "IOT",
+            "IRL",
+            "IRN",
+            "IRQ",
+            "ISL",
+            "ISR",
+            "ITA",
+            "JAM",
+            "JEY",
+            "JOR",
+            "JPN",
+            "KAZ",
+            "KEN",
+            "KGZ",
+            "KHM",
+            "KIR",
+            "KNA",
+            "KOR",
+            "KWT",
+            "LAO",
+            "LBN",
+            "LBR",
+            "LBY",
+            "LCA",
+            "LIE",
+            "LKA",
+            "LSO",
+            "LTU",
+            "LUX",
+            "LVA",
+            "MAC",
+            "MAF",
+            "MAR",
+            "MCO",
+            "MDA",
+            "MDG",
+            "MDV",
+            "MEX",
+            "MHL",
+            "MKD",
+            "MLI",
+            "MLT",
+            "MMR",
+            "MNE",
+            "MNG",
+            "MNP",
+            "MOZ",
+            "MRT",
+            "MSR",
+            "MTQ",
+            "MUS",
+            "MWI",
+            "MYS",
+            "MYT",
+            "NAM",
+            "NCL",
+            "NER",
+            "NFK",
+            "NGA",
+            "NIC",
+            "NIU",
+            "NLD",
+            "NOR",
+            "NPL",
+            "NRU",
+            "NZL",
+            "OMN",
+            "PAK",
+            "PAN",
+            "PCN",
+            "PER",
+            "PHL",
+            "PLW",
+            "PNG",
+            "POL",
+            "PRI",
+            "PRK",
+            "PRT",
+            "PRY",
+            "PSE",
+            "PYF",
+            "QAT",
+            "REU",
+            "ROU",
+            "RUS",
+            "RWA",
+            "SAU",
+            "SDN",
+            "SEN",
+            "SGP",
+            "SGS",
+            "SHN",
+            "SJM",
+            "SLB",
+            "SLE",
+            "SLV",
+            "SMR",
+            "SOM",
+            "SPM",
+            "SRB",
+            "SSD",
+            "STP",
+            "SUR",
+            "SVK",
+            "SVN",
+            "SWE",
+            "SWZ",
+            "SXM",
+            "SYC",
+            "SYR",
+            "TCA",
+            "TCD",
+            "TGO",
+            "THA",
+            "TJK",
+            "TKL",
+            "TKM",
+            "TLS",
+            "TON",
+            "TTO",
+            "TUN",
+            "TUR",
+            "TUV",
+            "TWN",
+            "TZA",
+            "UGA",
+            "UKR",
+            "UMI",
+            "URY",
+            "USA",
+            "UZB",
+            "VAT",
+            "VCT",
+            "VEN",
+            "VGB",
+            "VIR",
+            "VNM",
+            "VUT",
+            "WLF",
+            "WSM",
+            "YEM",
+            "ZAF",
+            "ZMB",
+            "ZWE"
+          ]
+        },
+        "administrative_area": {
+          "type": "string",
+          "description": "State / Province / Region"
+        },
+        "sub_administrative_area": {
+          "type": "string",
+          "description": "County / District"
+        },
+        "locality": {
+          "type": "string",
+          "description": "City / Town"
+        },
+        "postal_code": {
+          "type": "string",
+          "description": "Postal Code / Zip Code"
+        },
+        "thoroughfare": {
+          "type": "string",
+          "description": "Street Address"
+        },
+        "premise": {
+          "type": "string",
+          "description": "Apartment / Suite / Box number etc"
+        },
+        "sub_premise": {
+          "type": "string",
+          "description": "Floor # / Room # / Building label etc"
+        }
+      }
     }
-  ]
+  }
 }
 ```
 
@@ -1887,35 +4607,335 @@ Status Code **200**
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |» _links|object|false|none|none|
-|»» self|object|false|read-only|none|
-|»»» href|string|false|none|none|
+|»» self|object|false|none|none|
+|»»» href|string(uri)|false|none|none|
+|»» location_id|string|false|read-only|The identifier for the location|
+|»» label|string|false|none|Label for the entity|
+|»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»» created|string(date-time)|false|read-only|Date the entity was created|
+|»» updated|string(date-time)|false|read-only|Last date the entity was updated|
+|»» location_type|string|false|none|The type of location|
+|»» formatted_address|string|false|read-only|Address formatted for the where region the location exists in|
+|»» address|object|false|none|xNAL address for the location|
+|»»» country|string|true|none|Three Letter ISO country code|
+|»»» administrative_area|string|true|none|State / Province / Region|
+|»»» sub_administrative_area|string|false|none|County / District|
+|»»» locality|string|true|none|City / Town|
+|»»» postal_code|string|true|none|Postal Code / Zip Code|
+|»»» thoroughfare|string|true|none|Street Address|
+|»»» premise|string|false|none|Apartment / Suite / Box number etc|
+|»»» sub_premise|string|false|none|Floor # / Room # / Building label etc|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|location_type|warehouse|
+|location_type|facility|
+|location_type|other|
+|country|ABW|
+|country|AFG|
+|country|AGO|
+|country|AIA|
+|country|ALA|
+|country|ALB|
+|country|AND|
+|country|ARE|
+|country|ARG|
+|country|ARM|
+|country|ASM|
+|country|ATA|
+|country|ATF|
+|country|ATG|
+|country|AUS|
+|country|AUT|
+|country|AZE|
+|country|BDI|
+|country|BEL|
+|country|BEN|
+|country|BES|
+|country|BFA|
+|country|BGD|
+|country|BGR|
+|country|BHR|
+|country|BHS|
+|country|BIH|
+|country|BLM|
+|country|BLR|
+|country|BLZ|
+|country|BMU|
+|country|BOL|
+|country|BRA|
+|country|BRB|
+|country|BRN|
+|country|BTN|
+|country|BVT|
+|country|BWA|
+|country|CAF|
+|country|CAN|
+|country|CCK|
+|country|CHE|
+|country|CHL|
+|country|CHN|
+|country|CIV|
+|country|CMR|
+|country|COD|
+|country|COG|
+|country|COK|
+|country|COL|
+|country|COM|
+|country|CPV|
+|country|CRI|
+|country|CUB|
+|country|CUW|
+|country|CXR|
+|country|CYM|
+|country|CYP|
+|country|CZE|
+|country|DEU|
+|country|DJI|
+|country|DMA|
+|country|DNK|
+|country|DOM|
+|country|DZA|
+|country|ECU|
+|country|EGY|
+|country|ERI|
+|country|ESH|
+|country|ESP|
+|country|EST|
+|country|ETH|
+|country|FIN|
+|country|FJI|
+|country|FLK|
+|country|FRA|
+|country|FRO|
+|country|FSM|
+|country|GAB|
+|country|GBR|
+|country|GEO|
+|country|GGY|
+|country|GHA|
+|country|GIB|
+|country|GIN|
+|country|GLP|
+|country|GMB|
+|country|GNB|
+|country|GNQ|
+|country|GRC|
+|country|GRD|
+|country|GRL|
+|country|GTM|
+|country|GUF|
+|country|GUM|
+|country|GUY|
+|country|HKG|
+|country|HMD|
+|country|HND|
+|country|HRV|
+|country|HTI|
+|country|HUN|
+|country|IDN|
+|country|IMN|
+|country|IND|
+|country|IOT|
+|country|IRL|
+|country|IRN|
+|country|IRQ|
+|country|ISL|
+|country|ISR|
+|country|ITA|
+|country|JAM|
+|country|JEY|
+|country|JOR|
+|country|JPN|
+|country|KAZ|
+|country|KEN|
+|country|KGZ|
+|country|KHM|
+|country|KIR|
+|country|KNA|
+|country|KOR|
+|country|KWT|
+|country|LAO|
+|country|LBN|
+|country|LBR|
+|country|LBY|
+|country|LCA|
+|country|LIE|
+|country|LKA|
+|country|LSO|
+|country|LTU|
+|country|LUX|
+|country|LVA|
+|country|MAC|
+|country|MAF|
+|country|MAR|
+|country|MCO|
+|country|MDA|
+|country|MDG|
+|country|MDV|
+|country|MEX|
+|country|MHL|
+|country|MKD|
+|country|MLI|
+|country|MLT|
+|country|MMR|
+|country|MNE|
+|country|MNG|
+|country|MNP|
+|country|MOZ|
+|country|MRT|
+|country|MSR|
+|country|MTQ|
+|country|MUS|
+|country|MWI|
+|country|MYS|
+|country|MYT|
+|country|NAM|
+|country|NCL|
+|country|NER|
+|country|NFK|
+|country|NGA|
+|country|NIC|
+|country|NIU|
+|country|NLD|
+|country|NOR|
+|country|NPL|
+|country|NRU|
+|country|NZL|
+|country|OMN|
+|country|PAK|
+|country|PAN|
+|country|PCN|
+|country|PER|
+|country|PHL|
+|country|PLW|
+|country|PNG|
+|country|POL|
+|country|PRI|
+|country|PRK|
+|country|PRT|
+|country|PRY|
+|country|PSE|
+|country|PYF|
+|country|QAT|
+|country|REU|
+|country|ROU|
+|country|RUS|
+|country|RWA|
+|country|SAU|
+|country|SDN|
+|country|SEN|
+|country|SGP|
+|country|SGS|
+|country|SHN|
+|country|SJM|
+|country|SLB|
+|country|SLE|
+|country|SLV|
+|country|SMR|
+|country|SOM|
+|country|SPM|
+|country|SRB|
+|country|SSD|
+|country|STP|
+|country|SUR|
+|country|SVK|
+|country|SVN|
+|country|SWE|
+|country|SWZ|
+|country|SXM|
+|country|SYC|
+|country|SYR|
+|country|TCA|
+|country|TCD|
+|country|TGO|
+|country|THA|
+|country|TJK|
+|country|TKL|
+|country|TKM|
+|country|TLS|
+|country|TON|
+|country|TTO|
+|country|TUN|
+|country|TUR|
+|country|TUV|
+|country|TWN|
+|country|TZA|
+|country|UGA|
+|country|UKR|
+|country|UMI|
+|country|URY|
+|country|USA|
+|country|UZB|
+|country|VAT|
+|country|VCT|
+|country|VEN|
+|country|VGB|
+|country|VIR|
+|country|VNM|
+|country|VUT|
+|country|WLF|
+|country|WSM|
+|country|YEM|
+|country|ZAF|
+|country|ZMB|
+|country|ZWE|
 
 Status Code **400**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Bad Request|
+|type|https://docs.nterprise.com/api/problem/BadRequest|
+|status|400|
+|detail|Invalid request|
 
 Status Code **403**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Forbidden|
+|type|https://docs.nterprise.com/api/problem/Forbidden|
+|status|403|
+|detail|You are forbidden to access this resource|
 
 Status Code **423**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Locked|
+|type|https://docs.nterprise.com/api/problem/Locked|
+|status|423|
+|detail|The current resource is locked and cannot be modified|
 
 <aside class="success">
 This operation does not require authentication
@@ -1925,7 +4945,7 @@ This operation does not require authentication
 
 <a id="opIddeleteLocation"></a>
 
-`DELETE /locations/:location_id`
+`DELETE /locations/{location_id}`
 
 *Deletes a location*
 
@@ -1945,52 +4965,26 @@ This will soft delete the location
 {
   "properties": {
     "title": {
-      "example": "Unauthorized"
+      "enum": [
+        "Unauthorized"
+      ]
     },
     "type": {
-      "example": "https://docs.nterprise.com/api/problem/Unauthorized"
+      "enum": [
+        "https://docs.nterprise.com/api/problem/Unauthorized"
+      ]
     },
     "status": {
-      "example": 401
+      "enum": [
+        401
+      ]
     },
     "detail": {
-      "example": "You are not authorized to access this resource"
+      "enum": [
+        "You are not authorized to access this resource"
+      ]
     }
-  },
-  "allOf": [
-    {
-      "type": "object",
-      "x-ui-hide": true,
-      "description": "API Error",
-      "properties": {
-        "type": {
-          "type": "string",
-          "format": "uri",
-          "description": "An absolute URI that identifies the problem type",
-          "default": "about:blank",
-          "example": "https://docs.nterprise.com/problem/InternalServerError"
-        },
-        "title": {
-          "type": "string",
-          "example": "Internal Server Error",
-          "description": "A short, summary of the problem type"
-        },
-        "status": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The HTTP status code generated by the origin server for this occurrence of the problem",
-          "minimum": 100,
-          "maximum": 600,
-          "example": 500
-        },
-        "detail": {
-          "type": "string",
-          "description": "A human readable explanation specific to this occurrence of the problem",
-          "example": "Failed to reticulate splines"
-        }
-      }
-    }
-  ]
+  }
 }
 ```
 
@@ -2010,37 +5004,73 @@ Status Code **401**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Unauthorized|
+|type|https://docs.nterprise.com/api/problem/Unauthorized|
+|status|401|
+|detail|You are not authorized to access this resource|
 
 Status Code **403**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Forbidden|
+|type|https://docs.nterprise.com/api/problem/Forbidden|
+|status|403|
+|detail|You are forbidden to access this resource|
 
 Status Code **404**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Not Found|
+|type|https://docs.nterprise.com/api/problem/NotFound|
+|status|404|
+|detail|Resource not found|
 
 Status Code **423**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Locked|
+|type|https://docs.nterprise.com/api/problem/Locked|
+|status|423|
+|detail|The current resource is locked and cannot be modified|
 
 <aside class="success">
 This operation does not require authentication
@@ -2050,7 +5080,7 @@ This operation does not require authentication
 
 <a id="opIdfetchAllResources"></a>
 
-`GET /locations/:location_id/resources`
+`GET /locations/{location_id}/resources`
 
 *Fetches A Page of resources for the location*
 
@@ -2063,19 +5093,6 @@ Fetch location resources
 |location_id|path|string|true|Id for the location|
 |limit|query|integer(int32)|false|How many items to return at one time (max 100)|
 |offset|query|string|false|Continue from last offset|
-|sort|query|string|false|Sort by field|
-|filter[resource_type]|query|string|false|Filter where the resource type is this value|
-
-#### Enumerated Values
-
-|Parameter|Value|
-|---|---|
-|sort|label|
-|sort|-label|
-|sort|created|
-|sort|-created|
-|sort|updated|
-|sort|-updated|
 
 > Example responses
 
@@ -2083,6 +5100,7 @@ Fetch location resources
 
 ```json
 {
+  "type": "object",
   "properties": {
     "_embedded": {
       "type": "object",
@@ -2092,68 +5110,483 @@ Fetch location resources
           "maxItems": 100,
           "items": {
             "type": "object",
-            "x-hal": true,
-            "x-ui-hide": true,
             "properties": {
               "_links": {
                 "type": "object",
                 "properties": {
                   "self": {
+                    "example": {
+                      "href": "https://api.nterprise.com/resources/QEvVrVMMwVcJ6om"
+                    },
                     "type": "object",
-                    "readOnly": true,
                     "properties": {
                       "href": {
                         "type": "string",
-                        "example": "https://api.nterprise.com/resources/b3179fc4-ae45-4ceb-bc62-6deacc921d06"
+                        "format": "uri"
                       }
                     }
                   }
                 }
-              }
-            },
-            "allOf": [
-              {
-                "x-id": "#resource",
-                "x-nter-relation": "resources",
-                "x-nter-model": "Resource",
-                "x-nter-callable": true,
-                "description": "Defines the properties for a resource",
+              },
+              "resource_id": {
+                "type": "string",
+                "description": "The identifier for the resource",
+                "pattern": "^[0-9a-zA-Z-_]+$"
+              },
+              "label": {
+                "type": "string",
+                "description": "Label for the entity"
+              },
+              "slug": {
+                "type": "string",
+                "description": "Slug for the entity (Auto-generated from the label)",
+                "readOnly": true,
+                "deprecated": true,
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+              },
+              "created": {
+                "description": "Date the entity was created",
+                "type": "string",
+                "format": "date-time",
+                "readOnly": true
+              },
+              "updated": {
+                "description": "Last date the entity was updated",
+                "type": "string",
+                "format": "date-time",
+                "readOnly": true
+              },
+              "resource_type": {
+                "type": "string",
+                "description": "Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased",
+                "pattern": "^[a-z][0-9a-zA-Z-]+$"
+              },
+              "meta": {
+                "type": "object",
+                "description": "Data for the resource as a key value pair",
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "propertyNames": {
+                  "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+                }
+              },
+              "location": {
+                "type": "object",
+                "description": "Defines the properties for a part unit",
+                "additionalProperties": false,
                 "required": [
                   "label",
-                  "resource_type",
-                  "location"
+                  "entity_id",
+                  "entity_type",
+                  "created",
+                  "updated",
+                  "location_type",
+                  "address"
                 ],
+                "properties": {
+                  "location_id": {
+                    "description": "The identifier for the location",
+                    "type": "string",
+                    "readOnly": true,
+                    "pattern": "^[0-9a-zA-Z-_]+$"
+                  },
+                  "entity_id": {
+                    "x-no-api-doc": true,
+                    "type": "string",
+                    "description": "Customer identifier",
+                    "readOnly": true,
+                    "pattern": "^[0-9a-zA-Z-_]+$"
+                  },
+                  "entity_type": {
+                    "x-no-api-doc": true,
+                    "enum": [
+                      "LOC"
+                    ]
+                  },
+                  "label": {
+                    "type": "string",
+                    "description": "Label for the entity"
+                  },
+                  "slug": {
+                    "type": "string",
+                    "description": "Slug for the entity (Auto-generated from the label)",
+                    "readOnly": true,
+                    "deprecated": true,
+                    "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                  },
+                  "created": {
+                    "description": "Date the entity was created",
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true
+                  },
+                  "updated": {
+                    "description": "Last date the entity was updated",
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true
+                  },
+                  "location_type": {
+                    "type": "string",
+                    "description": "The type of location",
+                    "enum": [
+                      "warehouse",
+                      "facility",
+                      "other"
+                    ]
+                  },
+                  "formatted_address": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "Address formatted for the where region the location exists in"
+                  },
+                  "address": {
+                    "type": "object",
+                    "required": [
+                      "country",
+                      "administrative_area",
+                      "locality",
+                      "postal_code",
+                      "thoroughfare"
+                    ],
+                    "description": "xNAL address for the location ",
+                    "properties": {
+                      "country": {
+                        "type": "string",
+                        "description": "Three Letter ISO country code",
+                        "enum": [
+                          "ABW",
+                          "AFG",
+                          "AGO",
+                          "AIA",
+                          "ALA",
+                          "ALB",
+                          "AND",
+                          "ARE",
+                          "ARG",
+                          "ARM",
+                          "ASM",
+                          "ATA",
+                          "ATF",
+                          "ATG",
+                          "AUS",
+                          "AUT",
+                          "AZE",
+                          "BDI",
+                          "BEL",
+                          "BEN",
+                          "BES",
+                          "BFA",
+                          "BGD",
+                          "BGR",
+                          "BHR",
+                          "BHS",
+                          "BIH",
+                          "BLM",
+                          "BLR",
+                          "BLZ",
+                          "BMU",
+                          "BOL",
+                          "BRA",
+                          "BRB",
+                          "BRN",
+                          "BTN",
+                          "BVT",
+                          "BWA",
+                          "CAF",
+                          "CAN",
+                          "CCK",
+                          "CHE",
+                          "CHL",
+                          "CHN",
+                          "CIV",
+                          "CMR",
+                          "COD",
+                          "COG",
+                          "COK",
+                          "COL",
+                          "COM",
+                          "CPV",
+                          "CRI",
+                          "CUB",
+                          "CUW",
+                          "CXR",
+                          "CYM",
+                          "CYP",
+                          "CZE",
+                          "DEU",
+                          "DJI",
+                          "DMA",
+                          "DNK",
+                          "DOM",
+                          "DZA",
+                          "ECU",
+                          "EGY",
+                          "ERI",
+                          "ESH",
+                          "ESP",
+                          "EST",
+                          "ETH",
+                          "FIN",
+                          "FJI",
+                          "FLK",
+                          "FRA",
+                          "FRO",
+                          "FSM",
+                          "GAB",
+                          "GBR",
+                          "GEO",
+                          "GGY",
+                          "GHA",
+                          "GIB",
+                          "GIN",
+                          "GLP",
+                          "GMB",
+                          "GNB",
+                          "GNQ",
+                          "GRC",
+                          "GRD",
+                          "GRL",
+                          "GTM",
+                          "GUF",
+                          "GUM",
+                          "GUY",
+                          "HKG",
+                          "HMD",
+                          "HND",
+                          "HRV",
+                          "HTI",
+                          "HUN",
+                          "IDN",
+                          "IMN",
+                          "IND",
+                          "IOT",
+                          "IRL",
+                          "IRN",
+                          "IRQ",
+                          "ISL",
+                          "ISR",
+                          "ITA",
+                          "JAM",
+                          "JEY",
+                          "JOR",
+                          "JPN",
+                          "KAZ",
+                          "KEN",
+                          "KGZ",
+                          "KHM",
+                          "KIR",
+                          "KNA",
+                          "KOR",
+                          "KWT",
+                          "LAO",
+                          "LBN",
+                          "LBR",
+                          "LBY",
+                          "LCA",
+                          "LIE",
+                          "LKA",
+                          "LSO",
+                          "LTU",
+                          "LUX",
+                          "LVA",
+                          "MAC",
+                          "MAF",
+                          "MAR",
+                          "MCO",
+                          "MDA",
+                          "MDG",
+                          "MDV",
+                          "MEX",
+                          "MHL",
+                          "MKD",
+                          "MLI",
+                          "MLT",
+                          "MMR",
+                          "MNE",
+                          "MNG",
+                          "MNP",
+                          "MOZ",
+                          "MRT",
+                          "MSR",
+                          "MTQ",
+                          "MUS",
+                          "MWI",
+                          "MYS",
+                          "MYT",
+                          "NAM",
+                          "NCL",
+                          "NER",
+                          "NFK",
+                          "NGA",
+                          "NIC",
+                          "NIU",
+                          "NLD",
+                          "NOR",
+                          "NPL",
+                          "NRU",
+                          "NZL",
+                          "OMN",
+                          "PAK",
+                          "PAN",
+                          "PCN",
+                          "PER",
+                          "PHL",
+                          "PLW",
+                          "PNG",
+                          "POL",
+                          "PRI",
+                          "PRK",
+                          "PRT",
+                          "PRY",
+                          "PSE",
+                          "PYF",
+                          "QAT",
+                          "REU",
+                          "ROU",
+                          "RUS",
+                          "RWA",
+                          "SAU",
+                          "SDN",
+                          "SEN",
+                          "SGP",
+                          "SGS",
+                          "SHN",
+                          "SJM",
+                          "SLB",
+                          "SLE",
+                          "SLV",
+                          "SMR",
+                          "SOM",
+                          "SPM",
+                          "SRB",
+                          "SSD",
+                          "STP",
+                          "SUR",
+                          "SVK",
+                          "SVN",
+                          "SWE",
+                          "SWZ",
+                          "SXM",
+                          "SYC",
+                          "SYR",
+                          "TCA",
+                          "TCD",
+                          "TGO",
+                          "THA",
+                          "TJK",
+                          "TKL",
+                          "TKM",
+                          "TLS",
+                          "TON",
+                          "TTO",
+                          "TUN",
+                          "TUR",
+                          "TUV",
+                          "TWN",
+                          "TZA",
+                          "UGA",
+                          "UKR",
+                          "UMI",
+                          "URY",
+                          "USA",
+                          "UZB",
+                          "VAT",
+                          "VCT",
+                          "VEN",
+                          "VGB",
+                          "VIR",
+                          "VNM",
+                          "VUT",
+                          "WLF",
+                          "WSM",
+                          "YEM",
+                          "ZAF",
+                          "ZMB",
+                          "ZWE"
+                        ]
+                      },
+                      "administrative_area": {
+                        "type": "string",
+                        "description": "State / Province / Region"
+                      },
+                      "sub_administrative_area": {
+                        "type": "string",
+                        "description": "County / District"
+                      },
+                      "locality": {
+                        "type": "string",
+                        "description": "City / Town"
+                      },
+                      "postal_code": {
+                        "type": "string",
+                        "description": "Postal Code / Zip Code"
+                      },
+                      "thoroughfare": {
+                        "type": "string",
+                        "description": "Street Address"
+                      },
+                      "premise": {
+                        "type": "string",
+                        "description": "Apartment / Suite / Box number etc"
+                      },
+                      "sub_premise": {
+                        "type": "string",
+                        "description": "Floor # / Room # / Building label etc"
+                      }
+                    }
+                  }
+                }
+              },
+              "resource": {
+                "type": "object",
+                "description": "The parent resource if this is a child resource",
                 "properties": {
                   "resource_id": {
                     "type": "string",
                     "description": "The identifier for the resource",
-                    "example": "3c730679-dcfa-4b5a-8f6e-b76fe80c6078",
-                    "x-examples": [
-                      "3c730679-dcfa-4b5a-8f6e-b76fe80c6078"
-                    ],
-                    "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+                    "pattern": "^[0-9a-zA-Z-_]+$"
+                  },
+                  "entity_id": {
+                    "x-no-api-doc": true,
+                    "type": "string",
+                    "description": "Customer identifier",
+                    "readOnly": true,
+                    "pattern": "^[0-9a-zA-Z-_]+$"
+                  },
+                  "entity_type": {
+                    "x-no-api-doc": true,
+                    "enum": [
+                      "RES"
+                    ]
                   },
                   "label": {
-                    "example": "Server room",
-                    "x-examples": [
-                      "Server room"
-                    ],
-                    "description": "Name of the resource"
+                    "type": "string",
+                    "description": "Label for the entity"
                   },
                   "slug": {
-                    "example": "server-room",
-                    "x-examples": [
-                      "server-room"
-                    ],
-                    "description": "Auto-generated slug for the resource"
+                    "type": "string",
+                    "description": "Slug for the entity (Auto-generated from the label)",
+                    "readOnly": true,
+                    "deprecated": true,
+                    "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                  },
+                  "created": {
+                    "description": "Date the entity was created",
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true
+                  },
+                  "updated": {
+                    "description": "Last date the entity was updated",
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true
                   },
                   "resource_type": {
                     "type": "string",
                     "description": "Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased",
-                    "example": "station",
-                    "x-examples": [
-                      "station"
-                    ],
                     "pattern": "^[a-z][0-9a-zA-Z-]+$"
                   },
                   "meta": {
@@ -2162,45 +5595,65 @@ Fetch location resources
                     "additionalProperties": {
                       "type": "string"
                     },
-                    "x-examples": [
-                      {
-                        "power": "50w"
-                      }
-                    ]
+                    "propertyNames": {
+                      "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+                    }
                   },
                   "location": {
-                    "x-id": "#location",
-                    "x-nter-relation": "locations",
-                    "x-nter-model": "Location",
-                    "x-nter-callable": true,
+                    "type": "object",
                     "description": "Defines the properties for a part unit",
+                    "additionalProperties": false,
                     "required": [
+                      "label",
+                      "entity_id",
+                      "entity_type",
+                      "created",
+                      "updated",
                       "location_type",
                       "address"
                     ],
                     "properties": {
+                      "location_id": {
+                        "description": "The identifier for the location",
+                        "type": "string",
+                        "readOnly": true,
+                        "pattern": "^[0-9a-zA-Z-_]+$"
+                      },
+                      "entity_id": {
+                        "x-no-api-doc": true,
+                        "type": "string",
+                        "description": "Customer identifier",
+                        "readOnly": true,
+                        "pattern": "^[0-9a-zA-Z-_]+$"
+                      },
+                      "entity_type": {
+                        "x-no-api-doc": true,
+                        "enum": [
+                          "LOC"
+                        ]
+                      },
                       "label": {
                         "type": "string",
-                        "example": "Zones Innovation Center",
-                        "x-examples": [
-                          "Zones Innovation Center"
-                        ]
+                        "description": "Label for the entity"
                       },
                       "slug": {
                         "type": "string",
-                        "example": "zones-innovation-center",
-                        "x-examples": [
-                          "zones-innovation-center"
-                        ]
+                        "description": "Slug for the entity (Auto-generated from the label)",
+                        "readOnly": true,
+                        "deprecated": true,
+                        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
                       },
-                      "location_id": {
+                      "created": {
+                        "description": "Date the entity was created",
                         "type": "string",
-                        "description": "The identifier for the location",
-                        "example": "b994961b-30b4-4f33-9330-f46fd6172909",
-                        "x-examples": [
-                          "b994961b-30b4-4f33-9330-f46fd6172909"
-                        ],
-                        "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+                        "format": "date-time",
+                        "readOnly": true
+                      },
+                      "updated": {
+                        "description": "Last date the entity was updated",
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true
                       },
                       "location_type": {
                         "type": "string",
@@ -2209,20 +5662,12 @@ Fetch location resources
                           "warehouse",
                           "facility",
                           "other"
-                        ],
-                        "example": "other",
-                        "x-examples": [
-                          "other"
                         ]
                       },
                       "formatted_address": {
                         "type": "string",
                         "readOnly": true,
-                        "description": "Address formatted for the where region the location exists in",
-                        "example": "Zones Innovation Center\n431 Broadway\nSuite C\nMenands NY, 12204\nUSA",
-                        "x-examples": [
-                          "Zones Innovation Center\n431 Broadway\nSuite C\nMenands NY, 12204\nUSA"
-                        ]
+                        "description": "Address formatted for the where region the location exists in"
                       },
                       "address": {
                         "type": "object",
@@ -2238,532 +5683,327 @@ Fetch location resources
                           "country": {
                             "type": "string",
                             "description": "Three Letter ISO country code",
-                            "example": "USA",
-                            "x-examples": [
-                              "USA"
+                            "enum": [
+                              "ABW",
+                              "AFG",
+                              "AGO",
+                              "AIA",
+                              "ALA",
+                              "ALB",
+                              "AND",
+                              "ARE",
+                              "ARG",
+                              "ARM",
+                              "ASM",
+                              "ATA",
+                              "ATF",
+                              "ATG",
+                              "AUS",
+                              "AUT",
+                              "AZE",
+                              "BDI",
+                              "BEL",
+                              "BEN",
+                              "BES",
+                              "BFA",
+                              "BGD",
+                              "BGR",
+                              "BHR",
+                              "BHS",
+                              "BIH",
+                              "BLM",
+                              "BLR",
+                              "BLZ",
+                              "BMU",
+                              "BOL",
+                              "BRA",
+                              "BRB",
+                              "BRN",
+                              "BTN",
+                              "BVT",
+                              "BWA",
+                              "CAF",
+                              "CAN",
+                              "CCK",
+                              "CHE",
+                              "CHL",
+                              "CHN",
+                              "CIV",
+                              "CMR",
+                              "COD",
+                              "COG",
+                              "COK",
+                              "COL",
+                              "COM",
+                              "CPV",
+                              "CRI",
+                              "CUB",
+                              "CUW",
+                              "CXR",
+                              "CYM",
+                              "CYP",
+                              "CZE",
+                              "DEU",
+                              "DJI",
+                              "DMA",
+                              "DNK",
+                              "DOM",
+                              "DZA",
+                              "ECU",
+                              "EGY",
+                              "ERI",
+                              "ESH",
+                              "ESP",
+                              "EST",
+                              "ETH",
+                              "FIN",
+                              "FJI",
+                              "FLK",
+                              "FRA",
+                              "FRO",
+                              "FSM",
+                              "GAB",
+                              "GBR",
+                              "GEO",
+                              "GGY",
+                              "GHA",
+                              "GIB",
+                              "GIN",
+                              "GLP",
+                              "GMB",
+                              "GNB",
+                              "GNQ",
+                              "GRC",
+                              "GRD",
+                              "GRL",
+                              "GTM",
+                              "GUF",
+                              "GUM",
+                              "GUY",
+                              "HKG",
+                              "HMD",
+                              "HND",
+                              "HRV",
+                              "HTI",
+                              "HUN",
+                              "IDN",
+                              "IMN",
+                              "IND",
+                              "IOT",
+                              "IRL",
+                              "IRN",
+                              "IRQ",
+                              "ISL",
+                              "ISR",
+                              "ITA",
+                              "JAM",
+                              "JEY",
+                              "JOR",
+                              "JPN",
+                              "KAZ",
+                              "KEN",
+                              "KGZ",
+                              "KHM",
+                              "KIR",
+                              "KNA",
+                              "KOR",
+                              "KWT",
+                              "LAO",
+                              "LBN",
+                              "LBR",
+                              "LBY",
+                              "LCA",
+                              "LIE",
+                              "LKA",
+                              "LSO",
+                              "LTU",
+                              "LUX",
+                              "LVA",
+                              "MAC",
+                              "MAF",
+                              "MAR",
+                              "MCO",
+                              "MDA",
+                              "MDG",
+                              "MDV",
+                              "MEX",
+                              "MHL",
+                              "MKD",
+                              "MLI",
+                              "MLT",
+                              "MMR",
+                              "MNE",
+                              "MNG",
+                              "MNP",
+                              "MOZ",
+                              "MRT",
+                              "MSR",
+                              "MTQ",
+                              "MUS",
+                              "MWI",
+                              "MYS",
+                              "MYT",
+                              "NAM",
+                              "NCL",
+                              "NER",
+                              "NFK",
+                              "NGA",
+                              "NIC",
+                              "NIU",
+                              "NLD",
+                              "NOR",
+                              "NPL",
+                              "NRU",
+                              "NZL",
+                              "OMN",
+                              "PAK",
+                              "PAN",
+                              "PCN",
+                              "PER",
+                              "PHL",
+                              "PLW",
+                              "PNG",
+                              "POL",
+                              "PRI",
+                              "PRK",
+                              "PRT",
+                              "PRY",
+                              "PSE",
+                              "PYF",
+                              "QAT",
+                              "REU",
+                              "ROU",
+                              "RUS",
+                              "RWA",
+                              "SAU",
+                              "SDN",
+                              "SEN",
+                              "SGP",
+                              "SGS",
+                              "SHN",
+                              "SJM",
+                              "SLB",
+                              "SLE",
+                              "SLV",
+                              "SMR",
+                              "SOM",
+                              "SPM",
+                              "SRB",
+                              "SSD",
+                              "STP",
+                              "SUR",
+                              "SVK",
+                              "SVN",
+                              "SWE",
+                              "SWZ",
+                              "SXM",
+                              "SYC",
+                              "SYR",
+                              "TCA",
+                              "TCD",
+                              "TGO",
+                              "THA",
+                              "TJK",
+                              "TKL",
+                              "TKM",
+                              "TLS",
+                              "TON",
+                              "TTO",
+                              "TUN",
+                              "TUR",
+                              "TUV",
+                              "TWN",
+                              "TZA",
+                              "UGA",
+                              "UKR",
+                              "UMI",
+                              "URY",
+                              "USA",
+                              "UZB",
+                              "VAT",
+                              "VCT",
+                              "VEN",
+                              "VGB",
+                              "VIR",
+                              "VNM",
+                              "VUT",
+                              "WLF",
+                              "WSM",
+                              "YEM",
+                              "ZAF",
+                              "ZMB",
+                              "ZWE"
                             ]
                           },
                           "administrative_area": {
                             "type": "string",
-                            "description": "State / Province / Region",
-                            "example": "NY",
-                            "x-examples": [
-                              "NY"
-                            ]
+                            "description": "State / Province / Region"
                           },
                           "sub_administrative_area": {
                             "type": "string",
-                            "description": "County / District",
-                            "example": "Albany",
-                            "x-examples": [
-                              "Albany"
-                            ]
+                            "description": "County / District"
                           },
                           "locality": {
                             "type": "string",
-                            "description": "City / Town",
-                            "example": "Menands",
-                            "x-examples": [
-                              "Menands"
-                            ]
+                            "description": "City / Town"
                           },
                           "postal_code": {
                             "type": "string",
-                            "description": "Postal Code / Zip Code",
-                            "example": "12204",
-                            "x-examples": [
-                              "12204"
-                            ]
+                            "description": "Postal Code / Zip Code"
                           },
                           "thoroughfare": {
                             "type": "string",
-                            "description": "Street Address",
-                            "example": "431 Broadway",
-                            "x-examples": [
-                              "431 Broadway"
-                            ]
+                            "description": "Street Address"
                           },
                           "premise": {
                             "type": "string",
-                            "description": "Apartment / Suite / Box number etc",
-                            "example": "Suite c",
-                            "x-examples": [
-                              "Suite c"
-                            ]
+                            "description": "Apartment / Suite / Box number etc"
                           },
                           "sub_premise": {
                             "type": "string",
-                            "description": "Floor # / Room # / Building label etc",
-                            "example": "Zones Innovation Center",
-                            "x-examples": [
-                              "Zones Innovation Center"
-                            ]
+                            "description": "Floor # / Room # / Building label etc"
                           }
-                        }
-                      }
-                    },
-                    "allOf": [
-                      {
-                        "x-ui-hide": true,
-                        "type": "object",
-                        "description": "Common Properties to all entities",
-                        "required": [
-                          "label"
-                        ],
-                        "properties": {
-                          "label": {
-                            "type": "string",
-                            "description": "Label for the entity",
-                            "example": "primary"
-                          },
-                          "slug": {
-                            "type": "string",
-                            "description": "Slug for the entity (Auto-generated from the label)",
-                            "readOnly": true,
-                            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-                          },
-                          "created": {
-                            "description": "Date the entity was created",
-                            "type": "string",
-                            "format": "date-time",
-                            "readOnly": true
-                          },
-                          "updated": {
-                            "description": "Last date the entity was updated",
-                            "type": "string",
-                            "format": "date-time",
-                            "readOnly": true
-                          }
-                        }
-                      }
-                    ],
-                    "example": {
-                      "location_type": "other",
-                      "address": {
-                        "country": "USA",
-                        "administrative_area": "NY",
-                        "locality": "Menands",
-                        "postal_code": "12204",
-                        "thoroughfare": "431 Broadway",
-                        "sub_administrative_area": "Albany",
-                        "premise": "Suite c",
-                        "sub_premise": "Zones Innovation Center"
-                      },
-                      "label": "Zones Innovation Center",
-                      "slug": "zones-innovation-center",
-                      "location_id": "b994961b-30b4-4f33-9330-f46fd6172909",
-                      "formatted_address": "Zones Innovation Center\n431 Broadway\nSuite C\nMenands NY, 12204\nUSA",
-                      "created": "2011-12-22T07:39:56.809Z",
-                      "updated": "1958-10-08T23:35:29.923Z"
-                    }
-                  },
-                  "resource": {
-                    "type": "object",
-                    "description": "The parent resource if this is a child resource",
-                    "properties": {
-                      "resource_id": {
-                        "type": "string",
-                        "description": "The identifier for the resource",
-                        "example": "3c730679-dcfa-4b5a-8f6e-b76fe80c6078",
-                        "x-examples": [
-                          "3c730679-dcfa-4b5a-8f6e-b76fe80c6078"
-                        ],
-                        "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-                      },
-                      "label": {
-                        "example": "Server room",
-                        "x-examples": [
-                          "Server room"
-                        ],
-                        "description": "Name of the resource"
-                      },
-                      "resource_type": {
-                        "type": "string",
-                        "description": "Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased",
-                        "example": "station",
-                        "x-examples": [
-                          "station"
-                        ],
-                        "pattern": "^[a-z][0-9a-zA-Z-]+$"
-                      },
-                      "meta": {
-                        "type": "object",
-                        "description": "Data for the resource as a key value pair",
-                        "additionalProperties": {
-                          "type": "string"
-                        },
-                        "x-examples": [
-                          {
-                            "power": "50w"
-                          }
-                        ]
-                      },
-                      "location": {
-                        "x-id": "#location",
-                        "x-nter-relation": "locations",
-                        "x-nter-model": "Location",
-                        "x-nter-callable": true,
-                        "description": "Defines the properties for a part unit",
-                        "required": [
-                          "location_type",
-                          "address"
-                        ],
-                        "properties": {
-                          "label": {
-                            "type": "string",
-                            "example": "Zones Innovation Center",
-                            "x-examples": [
-                              "Zones Innovation Center"
-                            ]
-                          },
-                          "slug": {
-                            "type": "string",
-                            "example": "zones-innovation-center",
-                            "x-examples": [
-                              "zones-innovation-center"
-                            ]
-                          },
-                          "location_id": {
-                            "type": "string",
-                            "description": "The identifier for the location",
-                            "example": "b994961b-30b4-4f33-9330-f46fd6172909",
-                            "x-examples": [
-                              "b994961b-30b4-4f33-9330-f46fd6172909"
-                            ],
-                            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-                          },
-                          "location_type": {
-                            "type": "string",
-                            "description": "The type of location",
-                            "enum": [
-                              "warehouse",
-                              "facility",
-                              "other"
-                            ],
-                            "example": "other",
-                            "x-examples": [
-                              "other"
-                            ]
-                          },
-                          "formatted_address": {
-                            "type": "string",
-                            "readOnly": true,
-                            "description": "Address formatted for the where region the location exists in",
-                            "example": "Zones Innovation Center\n431 Broadway\nSuite C\nMenands NY, 12204\nUSA",
-                            "x-examples": [
-                              "Zones Innovation Center\n431 Broadway\nSuite C\nMenands NY, 12204\nUSA"
-                            ]
-                          },
-                          "address": {
-                            "type": "object",
-                            "required": [
-                              "country",
-                              "administrative_area",
-                              "locality",
-                              "postal_code",
-                              "thoroughfare"
-                            ],
-                            "description": "xNAL address for the location ",
-                            "properties": {
-                              "country": {
-                                "type": "string",
-                                "description": "Three Letter ISO country code",
-                                "example": "USA",
-                                "x-examples": [
-                                  "USA"
-                                ]
-                              },
-                              "administrative_area": {
-                                "type": "string",
-                                "description": "State / Province / Region",
-                                "example": "NY",
-                                "x-examples": [
-                                  "NY"
-                                ]
-                              },
-                              "sub_administrative_area": {
-                                "type": "string",
-                                "description": "County / District",
-                                "example": "Albany",
-                                "x-examples": [
-                                  "Albany"
-                                ]
-                              },
-                              "locality": {
-                                "type": "string",
-                                "description": "City / Town",
-                                "example": "Menands",
-                                "x-examples": [
-                                  "Menands"
-                                ]
-                              },
-                              "postal_code": {
-                                "type": "string",
-                                "description": "Postal Code / Zip Code",
-                                "example": "12204",
-                                "x-examples": [
-                                  "12204"
-                                ]
-                              },
-                              "thoroughfare": {
-                                "type": "string",
-                                "description": "Street Address",
-                                "example": "431 Broadway",
-                                "x-examples": [
-                                  "431 Broadway"
-                                ]
-                              },
-                              "premise": {
-                                "type": "string",
-                                "description": "Apartment / Suite / Box number etc",
-                                "example": "Suite c",
-                                "x-examples": [
-                                  "Suite c"
-                                ]
-                              },
-                              "sub_premise": {
-                                "type": "string",
-                                "description": "Floor # / Room # / Building label etc",
-                                "example": "Zones Innovation Center",
-                                "x-examples": [
-                                  "Zones Innovation Center"
-                                ]
-                              }
-                            }
-                          }
-                        },
-                        "allOf": [
-                          {
-                            "x-ui-hide": true,
-                            "type": "object",
-                            "description": "Common Properties to all entities",
-                            "required": [
-                              "label"
-                            ],
-                            "properties": {
-                              "label": {
-                                "type": "string",
-                                "description": "Label for the entity",
-                                "example": "primary"
-                              },
-                              "slug": {
-                                "type": "string",
-                                "description": "Slug for the entity (Auto-generated from the label)",
-                                "readOnly": true,
-                                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-                              },
-                              "created": {
-                                "description": "Date the entity was created",
-                                "type": "string",
-                                "format": "date-time",
-                                "readOnly": true
-                              },
-                              "updated": {
-                                "description": "Last date the entity was updated",
-                                "type": "string",
-                                "format": "date-time",
-                                "readOnly": true
-                              }
-                            }
-                          }
-                        ],
-                        "example": {
-                          "location_type": "other",
-                          "address": {
-                            "country": "USA",
-                            "administrative_area": "NY",
-                            "locality": "Menands",
-                            "postal_code": "12204",
-                            "thoroughfare": "431 Broadway",
-                            "sub_administrative_area": "Albany",
-                            "premise": "Suite c",
-                            "sub_premise": "Zones Innovation Center"
-                          },
-                          "label": "Zones Innovation Center",
-                          "slug": "zones-innovation-center",
-                          "location_id": "b994961b-30b4-4f33-9330-f46fd6172909",
-                          "formatted_address": "Zones Innovation Center\n431 Broadway\nSuite C\nMenands NY, 12204\nUSA",
-                          "created": "2011-12-22T07:39:56.809Z",
-                          "updated": "1958-10-08T23:35:29.923Z"
                         }
                       }
                     }
                   }
-                },
-                "allOf": [
-                  {
-                    "x-ui-hide": true,
-                    "type": "object",
-                    "description": "Common Properties to all entities",
-                    "required": [
-                      "label"
-                    ],
-                    "properties": {
-                      "label": {
-                        "type": "string",
-                        "description": "Label for the entity",
-                        "example": "primary"
-                      },
-                      "slug": {
-                        "type": "string",
-                        "description": "Slug for the entity (Auto-generated from the label)",
-                        "readOnly": true,
-                        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-                      },
-                      "created": {
-                        "description": "Date the entity was created",
-                        "type": "string",
-                        "format": "date-time",
-                        "readOnly": true
-                      },
-                      "updated": {
-                        "description": "Last date the entity was updated",
-                        "type": "string",
-                        "format": "date-time",
-                        "readOnly": true
-                      }
-                    }
-                  }
-                ],
-                "example": {
-                  "label": "Server room",
-                  "resource_type": "station",
-                  "location": {
-                    "location_type": "other",
-                    "address": {
-                      "country": "USA",
-                      "administrative_area": "NY",
-                      "locality": "Menands",
-                      "postal_code": "12204",
-                      "thoroughfare": "431 Broadway",
-                      "sub_administrative_area": "Albany",
-                      "premise": "Suite c",
-                      "sub_premise": "Zones Innovation Center"
-                    },
-                    "label": "Zones Innovation Center",
-                    "slug": "zones-innovation-center",
-                    "location_id": "b994961b-30b4-4f33-9330-f46fd6172909",
-                    "formatted_address": "Zones Innovation Center\n431 Broadway\nSuite C\nMenands NY, 12204\nUSA",
-                    "created": "1985-09-01T23:19:08.81Z",
-                    "updated": "2000-06-12T15:29:47.719Z"
-                  },
-                  "resource_id": "3c730679-dcfa-4b5a-8f6e-b76fe80c6078",
-                  "slug": "server-room",
-                  "meta": {
-                    "power": "50w"
-                  },
-                  "resource": {
-                    "resource_id": "3c730679-dcfa-4b5a-8f6e-b76fe80c6078",
-                    "label": "Server room",
-                    "resource_type": "station",
-                    "meta": {
-                      "power": "50w"
-                    },
-                    "location": {
-                      "location_type": "other",
-                      "address": {
-                        "country": "USA",
-                        "administrative_area": "NY",
-                        "locality": "Menands",
-                        "postal_code": "12204",
-                        "thoroughfare": "431 Broadway",
-                        "sub_administrative_area": "Albany",
-                        "premise": "Suite c",
-                        "sub_premise": "Zones Innovation Center"
-                      },
-                      "label": "Zones Innovation Center",
-                      "slug": "zones-innovation-center",
-                      "location_id": "b994961b-30b4-4f33-9330-f46fd6172909",
-                      "formatted_address": "Zones Innovation Center\n431 Broadway\nSuite C\nMenands NY, 12204\nUSA",
-                      "created": "1988-03-07T06:57:57.579Z",
-                      "updated": "2004-01-03T20:29:06.105Z"
-                    }
-                  },
-                  "created": "1965-07-23T14:14:37.122Z",
-                  "updated": "2004-08-08T22:03:34.923Z"
                 }
               }
-            ],
-            "example": "undefined"
+            }
+          }
+        }
+      }
+    },
+    "_links": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "example": {
+            "href": "https://api.nterprise.com/resources"
+          },
+          "type": "object",
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        },
+        "next": {
+          "example": {
+            "href": "https://api.nterprise.com/resources?offset=QVBrO2wm13iEyl&limit=100"
+          },
+          "type": "object",
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "uri"
+            }
           }
         }
       }
     }
-  },
-  "allOf": [
-    {
-      "type": "object",
-      "x-hal": true,
-      "x-ui-hide": true,
-      "properties": {
-        "total_count": {
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true,
-          "minimum": 0,
-          "example": 32
-        },
-        "limit": {
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true,
-          "minimum": 1,
-          "maximum": 100,
-          "example": 50
-        },
-        "offset": {
-          "type": "string",
-          "readOnly": true,
-          "example": "363yHhUhhI"
-        }
-      },
-      "allOf": [
-        {
-          "type": "object",
-          "x-ui-hide": true,
-          "properties": {
-            "_links": {
-              "type": "object",
-              "readOnly": true,
-              "properties": {
-                "self": {
-                  "type": "object",
-                  "properties": {
-                    "href": {
-                      "type": "string",
-                      "format": "uri"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        {
-          "type": "object",
-          "x-ui-hide": true,
-          "properties": {
-            "_links": {
-              "type": "object",
-              "readOnly": true,
-              "properties": {
-                "next": {
-                  "type": "object",
-                  "properties": {
-                    "href": {
-                      "type": "string",
-                      "format": "uri"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      ],
-      "example": "undefined"
-    }
-  ]
+  }
 }
 ```
 
@@ -2782,28 +6022,620 @@ Status Code **200**
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |» _embedded|object|false|none|none|
-|»» nter:resources|[allOf]|false|none|none|
+|»» nter:resources|[object]|false|none|none|
 |»»» _links|object|false|none|none|
-|»»»» self|object|false|read-only|none|
-|»»»»» href|string|false|none|none|
+|»»»» self|object|false|none|none|
+|»»»»» href|string(uri)|false|none|none|
+|»»»» resource_id|string|false|none|The identifier for the resource|
+|»»»» label|string|false|none|Label for the entity|
+|»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»» created|string(date-time)|false|read-only|Date the entity was created|
+|»»»» updated|string(date-time)|false|read-only|Last date the entity was updated|
+|»»»» resource_type|string|false|none|Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased|
+|»»»» meta|object|false|none|Data for the resource as a key value pair|
+|»»»»» **additionalProperties**|string|false|none|none|
+|»»»» location|object|false|none|Defines the properties for a part unit|
+|»»»»» location_id|string|false|read-only|The identifier for the location|
+|»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»» entity_type|string|true|none|none|
+|»»»»» label|string|true|none|Label for the entity|
+|»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»»»» location_type|string|true|none|The type of location|
+|»»»»» formatted_address|string|false|read-only|Address formatted for the where region the location exists in|
+|»»»»» address|object|true|none|xNAL address for the location|
+|»»»»»» country|string|true|none|Three Letter ISO country code|
+|»»»»»» administrative_area|string|true|none|State / Province / Region|
+|»»»»»» sub_administrative_area|string|false|none|County / District|
+|»»»»»» locality|string|true|none|City / Town|
+|»»»»»» postal_code|string|true|none|Postal Code / Zip Code|
+|»»»»»» thoroughfare|string|true|none|Street Address|
+|»»»»»» premise|string|false|none|Apartment / Suite / Box number etc|
+|»»»»»» sub_premise|string|false|none|Floor # / Room # / Building label etc|
+|»»»»» resource|object|false|none|The parent resource if this is a child resource|
+|»»»»»» resource_id|string|false|none|The identifier for the resource|
+|»»»»»» entity_id|string|false|read-only|Customer identifier|
+|»»»»»» entity_type|string|false|none|none|
+|»»»»»» label|string|false|none|Label for the entity|
+|»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»»» created|string(date-time)|false|read-only|Date the entity was created|
+|»»»»»» updated|string(date-time)|false|read-only|Last date the entity was updated|
+|»»»»»» resource_type|string|false|none|Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased|
+|»»»»»» meta|object|false|none|Data for the resource as a key value pair|
+|»»»»»»» **additionalProperties**|string|false|none|none|
+|»»»»»» location|object|false|none|Defines the properties for a part unit|
+|»»»»»»» location_id|string|false|read-only|The identifier for the location|
+|»»»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»»»» entity_type|string|true|none|none|
+|»»»»»»» label|string|true|none|Label for the entity|
+|»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»»»»»» location_type|string|true|none|The type of location|
+|»»»»»»» formatted_address|string|false|read-only|Address formatted for the where region the location exists in|
+|»»»»»»» address|object|true|none|xNAL address for the location|
+|»»»»»»»» country|string|true|none|Three Letter ISO country code|
+|»»»»»»»» administrative_area|string|true|none|State / Province / Region|
+|»»»»»»»» sub_administrative_area|string|false|none|County / District|
+|»»»»»»»» locality|string|true|none|City / Town|
+|»»»»»»»» postal_code|string|true|none|Postal Code / Zip Code|
+|»»»»»»»» thoroughfare|string|true|none|Street Address|
+|»»»»»»»» premise|string|false|none|Apartment / Suite / Box number etc|
+|»»»»»»»» sub_premise|string|false|none|Floor # / Room # / Building label etc|
+|»»»»»»» _links|object|false|none|none|
+|»»»»»»»» self|object|false|none|none|
+|»»»»»»»»» href|string(uri)|false|none|none|
+|»»»»»»»» next|object|false|none|none|
+|»»»»»»»»» href|string(uri)|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|entity_type|LOC|
+|location_type|warehouse|
+|location_type|facility|
+|location_type|other|
+|country|ABW|
+|country|AFG|
+|country|AGO|
+|country|AIA|
+|country|ALA|
+|country|ALB|
+|country|AND|
+|country|ARE|
+|country|ARG|
+|country|ARM|
+|country|ASM|
+|country|ATA|
+|country|ATF|
+|country|ATG|
+|country|AUS|
+|country|AUT|
+|country|AZE|
+|country|BDI|
+|country|BEL|
+|country|BEN|
+|country|BES|
+|country|BFA|
+|country|BGD|
+|country|BGR|
+|country|BHR|
+|country|BHS|
+|country|BIH|
+|country|BLM|
+|country|BLR|
+|country|BLZ|
+|country|BMU|
+|country|BOL|
+|country|BRA|
+|country|BRB|
+|country|BRN|
+|country|BTN|
+|country|BVT|
+|country|BWA|
+|country|CAF|
+|country|CAN|
+|country|CCK|
+|country|CHE|
+|country|CHL|
+|country|CHN|
+|country|CIV|
+|country|CMR|
+|country|COD|
+|country|COG|
+|country|COK|
+|country|COL|
+|country|COM|
+|country|CPV|
+|country|CRI|
+|country|CUB|
+|country|CUW|
+|country|CXR|
+|country|CYM|
+|country|CYP|
+|country|CZE|
+|country|DEU|
+|country|DJI|
+|country|DMA|
+|country|DNK|
+|country|DOM|
+|country|DZA|
+|country|ECU|
+|country|EGY|
+|country|ERI|
+|country|ESH|
+|country|ESP|
+|country|EST|
+|country|ETH|
+|country|FIN|
+|country|FJI|
+|country|FLK|
+|country|FRA|
+|country|FRO|
+|country|FSM|
+|country|GAB|
+|country|GBR|
+|country|GEO|
+|country|GGY|
+|country|GHA|
+|country|GIB|
+|country|GIN|
+|country|GLP|
+|country|GMB|
+|country|GNB|
+|country|GNQ|
+|country|GRC|
+|country|GRD|
+|country|GRL|
+|country|GTM|
+|country|GUF|
+|country|GUM|
+|country|GUY|
+|country|HKG|
+|country|HMD|
+|country|HND|
+|country|HRV|
+|country|HTI|
+|country|HUN|
+|country|IDN|
+|country|IMN|
+|country|IND|
+|country|IOT|
+|country|IRL|
+|country|IRN|
+|country|IRQ|
+|country|ISL|
+|country|ISR|
+|country|ITA|
+|country|JAM|
+|country|JEY|
+|country|JOR|
+|country|JPN|
+|country|KAZ|
+|country|KEN|
+|country|KGZ|
+|country|KHM|
+|country|KIR|
+|country|KNA|
+|country|KOR|
+|country|KWT|
+|country|LAO|
+|country|LBN|
+|country|LBR|
+|country|LBY|
+|country|LCA|
+|country|LIE|
+|country|LKA|
+|country|LSO|
+|country|LTU|
+|country|LUX|
+|country|LVA|
+|country|MAC|
+|country|MAF|
+|country|MAR|
+|country|MCO|
+|country|MDA|
+|country|MDG|
+|country|MDV|
+|country|MEX|
+|country|MHL|
+|country|MKD|
+|country|MLI|
+|country|MLT|
+|country|MMR|
+|country|MNE|
+|country|MNG|
+|country|MNP|
+|country|MOZ|
+|country|MRT|
+|country|MSR|
+|country|MTQ|
+|country|MUS|
+|country|MWI|
+|country|MYS|
+|country|MYT|
+|country|NAM|
+|country|NCL|
+|country|NER|
+|country|NFK|
+|country|NGA|
+|country|NIC|
+|country|NIU|
+|country|NLD|
+|country|NOR|
+|country|NPL|
+|country|NRU|
+|country|NZL|
+|country|OMN|
+|country|PAK|
+|country|PAN|
+|country|PCN|
+|country|PER|
+|country|PHL|
+|country|PLW|
+|country|PNG|
+|country|POL|
+|country|PRI|
+|country|PRK|
+|country|PRT|
+|country|PRY|
+|country|PSE|
+|country|PYF|
+|country|QAT|
+|country|REU|
+|country|ROU|
+|country|RUS|
+|country|RWA|
+|country|SAU|
+|country|SDN|
+|country|SEN|
+|country|SGP|
+|country|SGS|
+|country|SHN|
+|country|SJM|
+|country|SLB|
+|country|SLE|
+|country|SLV|
+|country|SMR|
+|country|SOM|
+|country|SPM|
+|country|SRB|
+|country|SSD|
+|country|STP|
+|country|SUR|
+|country|SVK|
+|country|SVN|
+|country|SWE|
+|country|SWZ|
+|country|SXM|
+|country|SYC|
+|country|SYR|
+|country|TCA|
+|country|TCD|
+|country|TGO|
+|country|THA|
+|country|TJK|
+|country|TKL|
+|country|TKM|
+|country|TLS|
+|country|TON|
+|country|TTO|
+|country|TUN|
+|country|TUR|
+|country|TUV|
+|country|TWN|
+|country|TZA|
+|country|UGA|
+|country|UKR|
+|country|UMI|
+|country|URY|
+|country|USA|
+|country|UZB|
+|country|VAT|
+|country|VCT|
+|country|VEN|
+|country|VGB|
+|country|VIR|
+|country|VNM|
+|country|VUT|
+|country|WLF|
+|country|WSM|
+|country|YEM|
+|country|ZAF|
+|country|ZMB|
+|country|ZWE|
+|entity_type|RES|
+|entity_type|LOC|
+|location_type|warehouse|
+|location_type|facility|
+|location_type|other|
+|country|ABW|
+|country|AFG|
+|country|AGO|
+|country|AIA|
+|country|ALA|
+|country|ALB|
+|country|AND|
+|country|ARE|
+|country|ARG|
+|country|ARM|
+|country|ASM|
+|country|ATA|
+|country|ATF|
+|country|ATG|
+|country|AUS|
+|country|AUT|
+|country|AZE|
+|country|BDI|
+|country|BEL|
+|country|BEN|
+|country|BES|
+|country|BFA|
+|country|BGD|
+|country|BGR|
+|country|BHR|
+|country|BHS|
+|country|BIH|
+|country|BLM|
+|country|BLR|
+|country|BLZ|
+|country|BMU|
+|country|BOL|
+|country|BRA|
+|country|BRB|
+|country|BRN|
+|country|BTN|
+|country|BVT|
+|country|BWA|
+|country|CAF|
+|country|CAN|
+|country|CCK|
+|country|CHE|
+|country|CHL|
+|country|CHN|
+|country|CIV|
+|country|CMR|
+|country|COD|
+|country|COG|
+|country|COK|
+|country|COL|
+|country|COM|
+|country|CPV|
+|country|CRI|
+|country|CUB|
+|country|CUW|
+|country|CXR|
+|country|CYM|
+|country|CYP|
+|country|CZE|
+|country|DEU|
+|country|DJI|
+|country|DMA|
+|country|DNK|
+|country|DOM|
+|country|DZA|
+|country|ECU|
+|country|EGY|
+|country|ERI|
+|country|ESH|
+|country|ESP|
+|country|EST|
+|country|ETH|
+|country|FIN|
+|country|FJI|
+|country|FLK|
+|country|FRA|
+|country|FRO|
+|country|FSM|
+|country|GAB|
+|country|GBR|
+|country|GEO|
+|country|GGY|
+|country|GHA|
+|country|GIB|
+|country|GIN|
+|country|GLP|
+|country|GMB|
+|country|GNB|
+|country|GNQ|
+|country|GRC|
+|country|GRD|
+|country|GRL|
+|country|GTM|
+|country|GUF|
+|country|GUM|
+|country|GUY|
+|country|HKG|
+|country|HMD|
+|country|HND|
+|country|HRV|
+|country|HTI|
+|country|HUN|
+|country|IDN|
+|country|IMN|
+|country|IND|
+|country|IOT|
+|country|IRL|
+|country|IRN|
+|country|IRQ|
+|country|ISL|
+|country|ISR|
+|country|ITA|
+|country|JAM|
+|country|JEY|
+|country|JOR|
+|country|JPN|
+|country|KAZ|
+|country|KEN|
+|country|KGZ|
+|country|KHM|
+|country|KIR|
+|country|KNA|
+|country|KOR|
+|country|KWT|
+|country|LAO|
+|country|LBN|
+|country|LBR|
+|country|LBY|
+|country|LCA|
+|country|LIE|
+|country|LKA|
+|country|LSO|
+|country|LTU|
+|country|LUX|
+|country|LVA|
+|country|MAC|
+|country|MAF|
+|country|MAR|
+|country|MCO|
+|country|MDA|
+|country|MDG|
+|country|MDV|
+|country|MEX|
+|country|MHL|
+|country|MKD|
+|country|MLI|
+|country|MLT|
+|country|MMR|
+|country|MNE|
+|country|MNG|
+|country|MNP|
+|country|MOZ|
+|country|MRT|
+|country|MSR|
+|country|MTQ|
+|country|MUS|
+|country|MWI|
+|country|MYS|
+|country|MYT|
+|country|NAM|
+|country|NCL|
+|country|NER|
+|country|NFK|
+|country|NGA|
+|country|NIC|
+|country|NIU|
+|country|NLD|
+|country|NOR|
+|country|NPL|
+|country|NRU|
+|country|NZL|
+|country|OMN|
+|country|PAK|
+|country|PAN|
+|country|PCN|
+|country|PER|
+|country|PHL|
+|country|PLW|
+|country|PNG|
+|country|POL|
+|country|PRI|
+|country|PRK|
+|country|PRT|
+|country|PRY|
+|country|PSE|
+|country|PYF|
+|country|QAT|
+|country|REU|
+|country|ROU|
+|country|RUS|
+|country|RWA|
+|country|SAU|
+|country|SDN|
+|country|SEN|
+|country|SGP|
+|country|SGS|
+|country|SHN|
+|country|SJM|
+|country|SLB|
+|country|SLE|
+|country|SLV|
+|country|SMR|
+|country|SOM|
+|country|SPM|
+|country|SRB|
+|country|SSD|
+|country|STP|
+|country|SUR|
+|country|SVK|
+|country|SVN|
+|country|SWE|
+|country|SWZ|
+|country|SXM|
+|country|SYC|
+|country|SYR|
+|country|TCA|
+|country|TCD|
+|country|TGO|
+|country|THA|
+|country|TJK|
+|country|TKL|
+|country|TKM|
+|country|TLS|
+|country|TON|
+|country|TTO|
+|country|TUN|
+|country|TUR|
+|country|TUV|
+|country|TWN|
+|country|TZA|
+|country|UGA|
+|country|UKR|
+|country|UMI|
+|country|URY|
+|country|USA|
+|country|UZB|
+|country|VAT|
+|country|VCT|
+|country|VEN|
+|country|VGB|
+|country|VIR|
+|country|VNM|
+|country|VUT|
+|country|WLF|
+|country|WSM|
+|country|YEM|
+|country|ZAF|
+|country|ZMB|
+|country|ZWE|
 
 Status Code **401**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Unauthorized|
+|type|https://docs.nterprise.com/api/problem/Unauthorized|
+|status|401|
+|detail|You are not authorized to access this resource|
 
 Status Code **403**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Forbidden|
+|type|https://docs.nterprise.com/api/problem/Forbidden|
+|status|403|
+|detail|You are forbidden to access this resource|
 
 <aside class="success">
 This operation does not require authentication
@@ -2813,7 +6645,7 @@ This operation does not require authentication
 
 <a id="opIdfetchResourceById"></a>
 
-`GET /locations/:location_id/resources/:resource_id`
+`GET /locations/{location_id}/resources/{resource_id}`
 
 *Fetches a location resource by Id*
 
@@ -2833,604 +6665,866 @@ Fetch location Resource
 ```json
 {
   "type": "object",
-  "allOf": [
-    {
+  "properties": {
+    "_links": {
       "type": "object",
-      "x-hal": true,
-      "x-ui-hide": true,
       "properties": {
-        "_links": {
+        "self": {
+          "example": {
+            "href": "https://api.nterprise.com/resources/QEvVrVMMwVcJ6om"
+          },
           "type": "object",
           "properties": {
-            "self": {
-              "type": "object",
-              "readOnly": true,
-              "properties": {
-                "href": {
-                  "type": "string",
-                  "example": "https://api.nterprise.com/resources/b3179fc4-ae45-4ceb-bc62-6deacc921d06"
-                }
-              }
+            "href": {
+              "type": "string",
+              "format": "uri"
             }
           }
         }
+      }
+    },
+    "resource_id": {
+      "type": "string",
+      "description": "The identifier for the resource",
+      "pattern": "^[0-9a-zA-Z-_]+$"
+    },
+    "label": {
+      "type": "string",
+      "description": "Label for the entity"
+    },
+    "slug": {
+      "type": "string",
+      "description": "Slug for the entity (Auto-generated from the label)",
+      "readOnly": true,
+      "deprecated": true,
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "created": {
+      "description": "Date the entity was created",
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "updated": {
+      "description": "Last date the entity was updated",
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "resource_type": {
+      "type": "string",
+      "description": "Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased",
+      "pattern": "^[a-z][0-9a-zA-Z-]+$"
+    },
+    "meta": {
+      "type": "object",
+      "description": "Data for the resource as a key value pair",
+      "additionalProperties": {
+        "type": "string"
       },
-      "allOf": [
-        {
-          "x-id": "#resource",
-          "x-nter-relation": "resources",
-          "x-nter-model": "Resource",
-          "x-nter-callable": true,
-          "description": "Defines the properties for a resource",
+      "propertyNames": {
+        "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+      }
+    },
+    "location": {
+      "type": "object",
+      "description": "Defines the properties for a part unit",
+      "additionalProperties": false,
+      "required": [
+        "label",
+        "entity_id",
+        "entity_type",
+        "created",
+        "updated",
+        "location_type",
+        "address"
+      ],
+      "properties": {
+        "location_id": {
+          "description": "The identifier for the location",
+          "type": "string",
+          "readOnly": true,
+          "pattern": "^[0-9a-zA-Z-_]+$"
+        },
+        "entity_id": {
+          "x-no-api-doc": true,
+          "type": "string",
+          "description": "Customer identifier",
+          "readOnly": true,
+          "pattern": "^[0-9a-zA-Z-_]+$"
+        },
+        "entity_type": {
+          "x-no-api-doc": true,
+          "enum": [
+            "LOC"
+          ]
+        },
+        "label": {
+          "type": "string",
+          "description": "Label for the entity"
+        },
+        "slug": {
+          "type": "string",
+          "description": "Slug for the entity (Auto-generated from the label)",
+          "readOnly": true,
+          "deprecated": true,
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "created": {
+          "description": "Date the entity was created",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "updated": {
+          "description": "Last date the entity was updated",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "location_type": {
+          "type": "string",
+          "description": "The type of location",
+          "enum": [
+            "warehouse",
+            "facility",
+            "other"
+          ]
+        },
+        "formatted_address": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Address formatted for the where region the location exists in"
+        },
+        "address": {
+          "type": "object",
           "required": [
-            "label",
-            "resource_type",
-            "location"
+            "country",
+            "administrative_area",
+            "locality",
+            "postal_code",
+            "thoroughfare"
           ],
+          "description": "xNAL address for the location ",
           "properties": {
-            "resource_id": {
+            "country": {
               "type": "string",
-              "description": "The identifier for the resource",
-              "example": "3c730679-dcfa-4b5a-8f6e-b76fe80c6078",
-              "x-examples": [
-                "3c730679-dcfa-4b5a-8f6e-b76fe80c6078"
-              ],
-              "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-            },
-            "label": {
-              "example": "Server room",
-              "x-examples": [
-                "Server room"
-              ],
-              "description": "Name of the resource"
-            },
-            "slug": {
-              "example": "server-room",
-              "x-examples": [
-                "server-room"
-              ],
-              "description": "Auto-generated slug for the resource"
-            },
-            "resource_type": {
-              "type": "string",
-              "description": "Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased",
-              "example": "station",
-              "x-examples": [
-                "station"
-              ],
-              "pattern": "^[a-z][0-9a-zA-Z-]+$"
-            },
-            "meta": {
-              "type": "object",
-              "description": "Data for the resource as a key value pair",
-              "additionalProperties": {
-                "type": "string"
-              },
-              "x-examples": [
-                {
-                  "power": "50w"
-                }
+              "description": "Three Letter ISO country code",
+              "enum": [
+                "ABW",
+                "AFG",
+                "AGO",
+                "AIA",
+                "ALA",
+                "ALB",
+                "AND",
+                "ARE",
+                "ARG",
+                "ARM",
+                "ASM",
+                "ATA",
+                "ATF",
+                "ATG",
+                "AUS",
+                "AUT",
+                "AZE",
+                "BDI",
+                "BEL",
+                "BEN",
+                "BES",
+                "BFA",
+                "BGD",
+                "BGR",
+                "BHR",
+                "BHS",
+                "BIH",
+                "BLM",
+                "BLR",
+                "BLZ",
+                "BMU",
+                "BOL",
+                "BRA",
+                "BRB",
+                "BRN",
+                "BTN",
+                "BVT",
+                "BWA",
+                "CAF",
+                "CAN",
+                "CCK",
+                "CHE",
+                "CHL",
+                "CHN",
+                "CIV",
+                "CMR",
+                "COD",
+                "COG",
+                "COK",
+                "COL",
+                "COM",
+                "CPV",
+                "CRI",
+                "CUB",
+                "CUW",
+                "CXR",
+                "CYM",
+                "CYP",
+                "CZE",
+                "DEU",
+                "DJI",
+                "DMA",
+                "DNK",
+                "DOM",
+                "DZA",
+                "ECU",
+                "EGY",
+                "ERI",
+                "ESH",
+                "ESP",
+                "EST",
+                "ETH",
+                "FIN",
+                "FJI",
+                "FLK",
+                "FRA",
+                "FRO",
+                "FSM",
+                "GAB",
+                "GBR",
+                "GEO",
+                "GGY",
+                "GHA",
+                "GIB",
+                "GIN",
+                "GLP",
+                "GMB",
+                "GNB",
+                "GNQ",
+                "GRC",
+                "GRD",
+                "GRL",
+                "GTM",
+                "GUF",
+                "GUM",
+                "GUY",
+                "HKG",
+                "HMD",
+                "HND",
+                "HRV",
+                "HTI",
+                "HUN",
+                "IDN",
+                "IMN",
+                "IND",
+                "IOT",
+                "IRL",
+                "IRN",
+                "IRQ",
+                "ISL",
+                "ISR",
+                "ITA",
+                "JAM",
+                "JEY",
+                "JOR",
+                "JPN",
+                "KAZ",
+                "KEN",
+                "KGZ",
+                "KHM",
+                "KIR",
+                "KNA",
+                "KOR",
+                "KWT",
+                "LAO",
+                "LBN",
+                "LBR",
+                "LBY",
+                "LCA",
+                "LIE",
+                "LKA",
+                "LSO",
+                "LTU",
+                "LUX",
+                "LVA",
+                "MAC",
+                "MAF",
+                "MAR",
+                "MCO",
+                "MDA",
+                "MDG",
+                "MDV",
+                "MEX",
+                "MHL",
+                "MKD",
+                "MLI",
+                "MLT",
+                "MMR",
+                "MNE",
+                "MNG",
+                "MNP",
+                "MOZ",
+                "MRT",
+                "MSR",
+                "MTQ",
+                "MUS",
+                "MWI",
+                "MYS",
+                "MYT",
+                "NAM",
+                "NCL",
+                "NER",
+                "NFK",
+                "NGA",
+                "NIC",
+                "NIU",
+                "NLD",
+                "NOR",
+                "NPL",
+                "NRU",
+                "NZL",
+                "OMN",
+                "PAK",
+                "PAN",
+                "PCN",
+                "PER",
+                "PHL",
+                "PLW",
+                "PNG",
+                "POL",
+                "PRI",
+                "PRK",
+                "PRT",
+                "PRY",
+                "PSE",
+                "PYF",
+                "QAT",
+                "REU",
+                "ROU",
+                "RUS",
+                "RWA",
+                "SAU",
+                "SDN",
+                "SEN",
+                "SGP",
+                "SGS",
+                "SHN",
+                "SJM",
+                "SLB",
+                "SLE",
+                "SLV",
+                "SMR",
+                "SOM",
+                "SPM",
+                "SRB",
+                "SSD",
+                "STP",
+                "SUR",
+                "SVK",
+                "SVN",
+                "SWE",
+                "SWZ",
+                "SXM",
+                "SYC",
+                "SYR",
+                "TCA",
+                "TCD",
+                "TGO",
+                "THA",
+                "TJK",
+                "TKL",
+                "TKM",
+                "TLS",
+                "TON",
+                "TTO",
+                "TUN",
+                "TUR",
+                "TUV",
+                "TWN",
+                "TZA",
+                "UGA",
+                "UKR",
+                "UMI",
+                "URY",
+                "USA",
+                "UZB",
+                "VAT",
+                "VCT",
+                "VEN",
+                "VGB",
+                "VIR",
+                "VNM",
+                "VUT",
+                "WLF",
+                "WSM",
+                "YEM",
+                "ZAF",
+                "ZMB",
+                "ZWE"
               ]
             },
-            "location": {
-              "x-id": "#location",
-              "x-nter-relation": "locations",
-              "x-nter-model": "Location",
-              "x-nter-callable": true,
-              "description": "Defines the properties for a part unit",
-              "required": [
-                "location_type",
-                "address"
-              ],
-              "properties": {
-                "label": {
-                  "type": "string",
-                  "example": "Zones Innovation Center",
-                  "x-examples": [
-                    "Zones Innovation Center"
-                  ]
-                },
-                "slug": {
-                  "type": "string",
-                  "example": "zones-innovation-center",
-                  "x-examples": [
-                    "zones-innovation-center"
-                  ]
-                },
-                "location_id": {
-                  "type": "string",
-                  "description": "The identifier for the location",
-                  "example": "b994961b-30b4-4f33-9330-f46fd6172909",
-                  "x-examples": [
-                    "b994961b-30b4-4f33-9330-f46fd6172909"
-                  ],
-                  "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-                },
-                "location_type": {
-                  "type": "string",
-                  "description": "The type of location",
-                  "enum": [
-                    "warehouse",
-                    "facility",
-                    "other"
-                  ],
-                  "example": "other",
-                  "x-examples": [
-                    "other"
-                  ]
-                },
-                "formatted_address": {
-                  "type": "string",
-                  "readOnly": true,
-                  "description": "Address formatted for the where region the location exists in",
-                  "example": "Zones Innovation Center\n431 Broadway\nSuite C\nMenands NY, 12204\nUSA",
-                  "x-examples": [
-                    "Zones Innovation Center\n431 Broadway\nSuite C\nMenands NY, 12204\nUSA"
-                  ]
-                },
-                "address": {
-                  "type": "object",
-                  "required": [
-                    "country",
-                    "administrative_area",
-                    "locality",
-                    "postal_code",
-                    "thoroughfare"
-                  ],
-                  "description": "xNAL address for the location ",
-                  "properties": {
-                    "country": {
-                      "type": "string",
-                      "description": "Three Letter ISO country code",
-                      "example": "USA",
-                      "x-examples": [
-                        "USA"
-                      ]
-                    },
-                    "administrative_area": {
-                      "type": "string",
-                      "description": "State / Province / Region",
-                      "example": "NY",
-                      "x-examples": [
-                        "NY"
-                      ]
-                    },
-                    "sub_administrative_area": {
-                      "type": "string",
-                      "description": "County / District",
-                      "example": "Albany",
-                      "x-examples": [
-                        "Albany"
-                      ]
-                    },
-                    "locality": {
-                      "type": "string",
-                      "description": "City / Town",
-                      "example": "Menands",
-                      "x-examples": [
-                        "Menands"
-                      ]
-                    },
-                    "postal_code": {
-                      "type": "string",
-                      "description": "Postal Code / Zip Code",
-                      "example": "12204",
-                      "x-examples": [
-                        "12204"
-                      ]
-                    },
-                    "thoroughfare": {
-                      "type": "string",
-                      "description": "Street Address",
-                      "example": "431 Broadway",
-                      "x-examples": [
-                        "431 Broadway"
-                      ]
-                    },
-                    "premise": {
-                      "type": "string",
-                      "description": "Apartment / Suite / Box number etc",
-                      "example": "Suite c",
-                      "x-examples": [
-                        "Suite c"
-                      ]
-                    },
-                    "sub_premise": {
-                      "type": "string",
-                      "description": "Floor # / Room # / Building label etc",
-                      "example": "Zones Innovation Center",
-                      "x-examples": [
-                        "Zones Innovation Center"
-                      ]
-                    }
-                  }
-                }
-              },
-              "allOf": [
-                {
-                  "x-ui-hide": true,
-                  "type": "object",
-                  "description": "Common Properties to all entities",
-                  "required": [
-                    "label"
-                  ],
-                  "properties": {
-                    "label": {
-                      "type": "string",
-                      "description": "Label for the entity",
-                      "example": "primary"
-                    },
-                    "slug": {
-                      "type": "string",
-                      "description": "Slug for the entity (Auto-generated from the label)",
-                      "readOnly": true,
-                      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-                    },
-                    "created": {
-                      "description": "Date the entity was created",
-                      "type": "string",
-                      "format": "date-time",
-                      "readOnly": true
-                    },
-                    "updated": {
-                      "description": "Last date the entity was updated",
-                      "type": "string",
-                      "format": "date-time",
-                      "readOnly": true
-                    }
-                  }
-                }
-              ],
-              "example": {
-                "location_type": "other",
-                "address": {
-                  "country": "USA",
-                  "administrative_area": "NY",
-                  "locality": "Menands",
-                  "postal_code": "12204",
-                  "thoroughfare": "431 Broadway",
-                  "sub_administrative_area": "Albany",
-                  "premise": "Suite c",
-                  "sub_premise": "Zones Innovation Center"
-                },
-                "label": "Zones Innovation Center",
-                "slug": "zones-innovation-center",
-                "location_id": "b994961b-30b4-4f33-9330-f46fd6172909",
-                "formatted_address": "Zones Innovation Center\n431 Broadway\nSuite C\nMenands NY, 12204\nUSA",
-                "created": "2011-12-22T07:39:56.809Z",
-                "updated": "1958-10-08T23:35:29.923Z"
-              }
+            "administrative_area": {
+              "type": "string",
+              "description": "State / Province / Region"
             },
-            "resource": {
-              "type": "object",
-              "description": "The parent resource if this is a child resource",
-              "properties": {
-                "resource_id": {
-                  "type": "string",
-                  "description": "The identifier for the resource",
-                  "example": "3c730679-dcfa-4b5a-8f6e-b76fe80c6078",
-                  "x-examples": [
-                    "3c730679-dcfa-4b5a-8f6e-b76fe80c6078"
-                  ],
-                  "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-                },
-                "label": {
-                  "example": "Server room",
-                  "x-examples": [
-                    "Server room"
-                  ],
-                  "description": "Name of the resource"
-                },
-                "resource_type": {
-                  "type": "string",
-                  "description": "Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased",
-                  "example": "station",
-                  "x-examples": [
-                    "station"
-                  ],
-                  "pattern": "^[a-z][0-9a-zA-Z-]+$"
-                },
-                "meta": {
-                  "type": "object",
-                  "description": "Data for the resource as a key value pair",
-                  "additionalProperties": {
-                    "type": "string"
-                  },
-                  "x-examples": [
-                    {
-                      "power": "50w"
-                    }
-                  ]
-                },
-                "location": {
-                  "x-id": "#location",
-                  "x-nter-relation": "locations",
-                  "x-nter-model": "Location",
-                  "x-nter-callable": true,
-                  "description": "Defines the properties for a part unit",
-                  "required": [
-                    "location_type",
-                    "address"
-                  ],
-                  "properties": {
-                    "label": {
-                      "type": "string",
-                      "example": "Zones Innovation Center",
-                      "x-examples": [
-                        "Zones Innovation Center"
-                      ]
-                    },
-                    "slug": {
-                      "type": "string",
-                      "example": "zones-innovation-center",
-                      "x-examples": [
-                        "zones-innovation-center"
-                      ]
-                    },
-                    "location_id": {
-                      "type": "string",
-                      "description": "The identifier for the location",
-                      "example": "b994961b-30b4-4f33-9330-f46fd6172909",
-                      "x-examples": [
-                        "b994961b-30b4-4f33-9330-f46fd6172909"
-                      ],
-                      "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-                    },
-                    "location_type": {
-                      "type": "string",
-                      "description": "The type of location",
-                      "enum": [
-                        "warehouse",
-                        "facility",
-                        "other"
-                      ],
-                      "example": "other",
-                      "x-examples": [
-                        "other"
-                      ]
-                    },
-                    "formatted_address": {
-                      "type": "string",
-                      "readOnly": true,
-                      "description": "Address formatted for the where region the location exists in",
-                      "example": "Zones Innovation Center\n431 Broadway\nSuite C\nMenands NY, 12204\nUSA",
-                      "x-examples": [
-                        "Zones Innovation Center\n431 Broadway\nSuite C\nMenands NY, 12204\nUSA"
-                      ]
-                    },
-                    "address": {
-                      "type": "object",
-                      "required": [
-                        "country",
-                        "administrative_area",
-                        "locality",
-                        "postal_code",
-                        "thoroughfare"
-                      ],
-                      "description": "xNAL address for the location ",
-                      "properties": {
-                        "country": {
-                          "type": "string",
-                          "description": "Three Letter ISO country code",
-                          "example": "USA",
-                          "x-examples": [
-                            "USA"
-                          ]
-                        },
-                        "administrative_area": {
-                          "type": "string",
-                          "description": "State / Province / Region",
-                          "example": "NY",
-                          "x-examples": [
-                            "NY"
-                          ]
-                        },
-                        "sub_administrative_area": {
-                          "type": "string",
-                          "description": "County / District",
-                          "example": "Albany",
-                          "x-examples": [
-                            "Albany"
-                          ]
-                        },
-                        "locality": {
-                          "type": "string",
-                          "description": "City / Town",
-                          "example": "Menands",
-                          "x-examples": [
-                            "Menands"
-                          ]
-                        },
-                        "postal_code": {
-                          "type": "string",
-                          "description": "Postal Code / Zip Code",
-                          "example": "12204",
-                          "x-examples": [
-                            "12204"
-                          ]
-                        },
-                        "thoroughfare": {
-                          "type": "string",
-                          "description": "Street Address",
-                          "example": "431 Broadway",
-                          "x-examples": [
-                            "431 Broadway"
-                          ]
-                        },
-                        "premise": {
-                          "type": "string",
-                          "description": "Apartment / Suite / Box number etc",
-                          "example": "Suite c",
-                          "x-examples": [
-                            "Suite c"
-                          ]
-                        },
-                        "sub_premise": {
-                          "type": "string",
-                          "description": "Floor # / Room # / Building label etc",
-                          "example": "Zones Innovation Center",
-                          "x-examples": [
-                            "Zones Innovation Center"
-                          ]
-                        }
-                      }
-                    }
-                  },
-                  "allOf": [
-                    {
-                      "x-ui-hide": true,
-                      "type": "object",
-                      "description": "Common Properties to all entities",
-                      "required": [
-                        "label"
-                      ],
-                      "properties": {
-                        "label": {
-                          "type": "string",
-                          "description": "Label for the entity",
-                          "example": "primary"
-                        },
-                        "slug": {
-                          "type": "string",
-                          "description": "Slug for the entity (Auto-generated from the label)",
-                          "readOnly": true,
-                          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-                        },
-                        "created": {
-                          "description": "Date the entity was created",
-                          "type": "string",
-                          "format": "date-time",
-                          "readOnly": true
-                        },
-                        "updated": {
-                          "description": "Last date the entity was updated",
-                          "type": "string",
-                          "format": "date-time",
-                          "readOnly": true
-                        }
-                      }
-                    }
-                  ],
-                  "example": {
-                    "location_type": "other",
-                    "address": {
-                      "country": "USA",
-                      "administrative_area": "NY",
-                      "locality": "Menands",
-                      "postal_code": "12204",
-                      "thoroughfare": "431 Broadway",
-                      "sub_administrative_area": "Albany",
-                      "premise": "Suite c",
-                      "sub_premise": "Zones Innovation Center"
-                    },
-                    "label": "Zones Innovation Center",
-                    "slug": "zones-innovation-center",
-                    "location_id": "b994961b-30b4-4f33-9330-f46fd6172909",
-                    "formatted_address": "Zones Innovation Center\n431 Broadway\nSuite C\nMenands NY, 12204\nUSA",
-                    "created": "2011-12-22T07:39:56.809Z",
-                    "updated": "1958-10-08T23:35:29.923Z"
-                  }
-                }
-              }
+            "sub_administrative_area": {
+              "type": "string",
+              "description": "County / District"
+            },
+            "locality": {
+              "type": "string",
+              "description": "City / Town"
+            },
+            "postal_code": {
+              "type": "string",
+              "description": "Postal Code / Zip Code"
+            },
+            "thoroughfare": {
+              "type": "string",
+              "description": "Street Address"
+            },
+            "premise": {
+              "type": "string",
+              "description": "Apartment / Suite / Box number etc"
+            },
+            "sub_premise": {
+              "type": "string",
+              "description": "Floor # / Room # / Building label etc"
             }
-          },
-          "allOf": [
-            {
-              "x-ui-hide": true,
-              "type": "object",
-              "description": "Common Properties to all entities",
-              "required": [
-                "label"
-              ],
-              "properties": {
-                "label": {
-                  "type": "string",
-                  "description": "Label for the entity",
-                  "example": "primary"
-                },
-                "slug": {
-                  "type": "string",
-                  "description": "Slug for the entity (Auto-generated from the label)",
-                  "readOnly": true,
-                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-                },
-                "created": {
-                  "description": "Date the entity was created",
-                  "type": "string",
-                  "format": "date-time",
-                  "readOnly": true
-                },
-                "updated": {
-                  "description": "Last date the entity was updated",
-                  "type": "string",
-                  "format": "date-time",
-                  "readOnly": true
-                }
-              }
-            }
-          ],
-          "example": {
-            "label": "Server room",
-            "resource_type": "station",
-            "location": {
-              "location_type": "other",
-              "address": {
-                "country": "USA",
-                "administrative_area": "NY",
-                "locality": "Menands",
-                "postal_code": "12204",
-                "thoroughfare": "431 Broadway",
-                "sub_administrative_area": "Albany",
-                "premise": "Suite c",
-                "sub_premise": "Zones Innovation Center"
-              },
-              "label": "Zones Innovation Center",
-              "slug": "zones-innovation-center",
-              "location_id": "b994961b-30b4-4f33-9330-f46fd6172909",
-              "formatted_address": "Zones Innovation Center\n431 Broadway\nSuite C\nMenands NY, 12204\nUSA",
-              "created": "1985-09-01T23:19:08.81Z",
-              "updated": "2000-06-12T15:29:47.719Z"
-            },
-            "resource_id": "3c730679-dcfa-4b5a-8f6e-b76fe80c6078",
-            "slug": "server-room",
-            "meta": {
-              "power": "50w"
-            },
-            "resource": {
-              "resource_id": "3c730679-dcfa-4b5a-8f6e-b76fe80c6078",
-              "label": "Server room",
-              "resource_type": "station",
-              "meta": {
-                "power": "50w"
-              },
-              "location": {
-                "location_type": "other",
-                "address": {
-                  "country": "USA",
-                  "administrative_area": "NY",
-                  "locality": "Menands",
-                  "postal_code": "12204",
-                  "thoroughfare": "431 Broadway",
-                  "sub_administrative_area": "Albany",
-                  "premise": "Suite c",
-                  "sub_premise": "Zones Innovation Center"
-                },
-                "label": "Zones Innovation Center",
-                "slug": "zones-innovation-center",
-                "location_id": "b994961b-30b4-4f33-9330-f46fd6172909",
-                "formatted_address": "Zones Innovation Center\n431 Broadway\nSuite C\nMenands NY, 12204\nUSA",
-                "created": "1988-03-07T06:57:57.579Z",
-                "updated": "2004-01-03T20:29:06.105Z"
-              }
-            },
-            "created": "1965-07-23T14:14:37.122Z",
-            "updated": "2004-08-08T22:03:34.923Z"
           }
         }
-      ],
-      "example": "undefined"
+      }
+    },
+    "resource": {
+      "type": "object",
+      "description": "The parent resource if this is a child resource",
+      "properties": {
+        "resource_id": {
+          "type": "string",
+          "description": "The identifier for the resource",
+          "pattern": "^[0-9a-zA-Z-_]+$"
+        },
+        "entity_id": {
+          "x-no-api-doc": true,
+          "type": "string",
+          "description": "Customer identifier",
+          "readOnly": true,
+          "pattern": "^[0-9a-zA-Z-_]+$"
+        },
+        "entity_type": {
+          "x-no-api-doc": true,
+          "enum": [
+            "RES"
+          ]
+        },
+        "label": {
+          "type": "string",
+          "description": "Label for the entity"
+        },
+        "slug": {
+          "type": "string",
+          "description": "Slug for the entity (Auto-generated from the label)",
+          "readOnly": true,
+          "deprecated": true,
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "created": {
+          "description": "Date the entity was created",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "updated": {
+          "description": "Last date the entity was updated",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "resource_type": {
+          "type": "string",
+          "description": "Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased",
+          "pattern": "^[a-z][0-9a-zA-Z-]+$"
+        },
+        "meta": {
+          "type": "object",
+          "description": "Data for the resource as a key value pair",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "propertyNames": {
+            "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+          }
+        },
+        "location": {
+          "type": "object",
+          "description": "Defines the properties for a part unit",
+          "additionalProperties": false,
+          "required": [
+            "label",
+            "entity_id",
+            "entity_type",
+            "created",
+            "updated",
+            "location_type",
+            "address"
+          ],
+          "properties": {
+            "location_id": {
+              "description": "The identifier for the location",
+              "type": "string",
+              "readOnly": true,
+              "pattern": "^[0-9a-zA-Z-_]+$"
+            },
+            "entity_id": {
+              "x-no-api-doc": true,
+              "type": "string",
+              "description": "Customer identifier",
+              "readOnly": true,
+              "pattern": "^[0-9a-zA-Z-_]+$"
+            },
+            "entity_type": {
+              "x-no-api-doc": true,
+              "enum": [
+                "LOC"
+              ]
+            },
+            "label": {
+              "type": "string",
+              "description": "Label for the entity"
+            },
+            "slug": {
+              "type": "string",
+              "description": "Slug for the entity (Auto-generated from the label)",
+              "readOnly": true,
+              "deprecated": true,
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+            },
+            "created": {
+              "description": "Date the entity was created",
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true
+            },
+            "updated": {
+              "description": "Last date the entity was updated",
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true
+            },
+            "location_type": {
+              "type": "string",
+              "description": "The type of location",
+              "enum": [
+                "warehouse",
+                "facility",
+                "other"
+              ]
+            },
+            "formatted_address": {
+              "type": "string",
+              "readOnly": true,
+              "description": "Address formatted for the where region the location exists in"
+            },
+            "address": {
+              "type": "object",
+              "required": [
+                "country",
+                "administrative_area",
+                "locality",
+                "postal_code",
+                "thoroughfare"
+              ],
+              "description": "xNAL address for the location ",
+              "properties": {
+                "country": {
+                  "type": "string",
+                  "description": "Three Letter ISO country code",
+                  "enum": [
+                    "ABW",
+                    "AFG",
+                    "AGO",
+                    "AIA",
+                    "ALA",
+                    "ALB",
+                    "AND",
+                    "ARE",
+                    "ARG",
+                    "ARM",
+                    "ASM",
+                    "ATA",
+                    "ATF",
+                    "ATG",
+                    "AUS",
+                    "AUT",
+                    "AZE",
+                    "BDI",
+                    "BEL",
+                    "BEN",
+                    "BES",
+                    "BFA",
+                    "BGD",
+                    "BGR",
+                    "BHR",
+                    "BHS",
+                    "BIH",
+                    "BLM",
+                    "BLR",
+                    "BLZ",
+                    "BMU",
+                    "BOL",
+                    "BRA",
+                    "BRB",
+                    "BRN",
+                    "BTN",
+                    "BVT",
+                    "BWA",
+                    "CAF",
+                    "CAN",
+                    "CCK",
+                    "CHE",
+                    "CHL",
+                    "CHN",
+                    "CIV",
+                    "CMR",
+                    "COD",
+                    "COG",
+                    "COK",
+                    "COL",
+                    "COM",
+                    "CPV",
+                    "CRI",
+                    "CUB",
+                    "CUW",
+                    "CXR",
+                    "CYM",
+                    "CYP",
+                    "CZE",
+                    "DEU",
+                    "DJI",
+                    "DMA",
+                    "DNK",
+                    "DOM",
+                    "DZA",
+                    "ECU",
+                    "EGY",
+                    "ERI",
+                    "ESH",
+                    "ESP",
+                    "EST",
+                    "ETH",
+                    "FIN",
+                    "FJI",
+                    "FLK",
+                    "FRA",
+                    "FRO",
+                    "FSM",
+                    "GAB",
+                    "GBR",
+                    "GEO",
+                    "GGY",
+                    "GHA",
+                    "GIB",
+                    "GIN",
+                    "GLP",
+                    "GMB",
+                    "GNB",
+                    "GNQ",
+                    "GRC",
+                    "GRD",
+                    "GRL",
+                    "GTM",
+                    "GUF",
+                    "GUM",
+                    "GUY",
+                    "HKG",
+                    "HMD",
+                    "HND",
+                    "HRV",
+                    "HTI",
+                    "HUN",
+                    "IDN",
+                    "IMN",
+                    "IND",
+                    "IOT",
+                    "IRL",
+                    "IRN",
+                    "IRQ",
+                    "ISL",
+                    "ISR",
+                    "ITA",
+                    "JAM",
+                    "JEY",
+                    "JOR",
+                    "JPN",
+                    "KAZ",
+                    "KEN",
+                    "KGZ",
+                    "KHM",
+                    "KIR",
+                    "KNA",
+                    "KOR",
+                    "KWT",
+                    "LAO",
+                    "LBN",
+                    "LBR",
+                    "LBY",
+                    "LCA",
+                    "LIE",
+                    "LKA",
+                    "LSO",
+                    "LTU",
+                    "LUX",
+                    "LVA",
+                    "MAC",
+                    "MAF",
+                    "MAR",
+                    "MCO",
+                    "MDA",
+                    "MDG",
+                    "MDV",
+                    "MEX",
+                    "MHL",
+                    "MKD",
+                    "MLI",
+                    "MLT",
+                    "MMR",
+                    "MNE",
+                    "MNG",
+                    "MNP",
+                    "MOZ",
+                    "MRT",
+                    "MSR",
+                    "MTQ",
+                    "MUS",
+                    "MWI",
+                    "MYS",
+                    "MYT",
+                    "NAM",
+                    "NCL",
+                    "NER",
+                    "NFK",
+                    "NGA",
+                    "NIC",
+                    "NIU",
+                    "NLD",
+                    "NOR",
+                    "NPL",
+                    "NRU",
+                    "NZL",
+                    "OMN",
+                    "PAK",
+                    "PAN",
+                    "PCN",
+                    "PER",
+                    "PHL",
+                    "PLW",
+                    "PNG",
+                    "POL",
+                    "PRI",
+                    "PRK",
+                    "PRT",
+                    "PRY",
+                    "PSE",
+                    "PYF",
+                    "QAT",
+                    "REU",
+                    "ROU",
+                    "RUS",
+                    "RWA",
+                    "SAU",
+                    "SDN",
+                    "SEN",
+                    "SGP",
+                    "SGS",
+                    "SHN",
+                    "SJM",
+                    "SLB",
+                    "SLE",
+                    "SLV",
+                    "SMR",
+                    "SOM",
+                    "SPM",
+                    "SRB",
+                    "SSD",
+                    "STP",
+                    "SUR",
+                    "SVK",
+                    "SVN",
+                    "SWE",
+                    "SWZ",
+                    "SXM",
+                    "SYC",
+                    "SYR",
+                    "TCA",
+                    "TCD",
+                    "TGO",
+                    "THA",
+                    "TJK",
+                    "TKL",
+                    "TKM",
+                    "TLS",
+                    "TON",
+                    "TTO",
+                    "TUN",
+                    "TUR",
+                    "TUV",
+                    "TWN",
+                    "TZA",
+                    "UGA",
+                    "UKR",
+                    "UMI",
+                    "URY",
+                    "USA",
+                    "UZB",
+                    "VAT",
+                    "VCT",
+                    "VEN",
+                    "VGB",
+                    "VIR",
+                    "VNM",
+                    "VUT",
+                    "WLF",
+                    "WSM",
+                    "YEM",
+                    "ZAF",
+                    "ZMB",
+                    "ZWE"
+                  ]
+                },
+                "administrative_area": {
+                  "type": "string",
+                  "description": "State / Province / Region"
+                },
+                "sub_administrative_area": {
+                  "type": "string",
+                  "description": "County / District"
+                },
+                "locality": {
+                  "type": "string",
+                  "description": "City / Town"
+                },
+                "postal_code": {
+                  "type": "string",
+                  "description": "Postal Code / Zip Code"
+                },
+                "thoroughfare": {
+                  "type": "string",
+                  "description": "Street Address"
+                },
+                "premise": {
+                  "type": "string",
+                  "description": "Apartment / Suite / Box number etc"
+                },
+                "sub_premise": {
+                  "type": "string",
+                  "description": "Floor # / Room # / Building label etc"
+                }
+              }
+            }
+          }
+        }
+      }
     }
-  ]
+  }
 }
 ```
 
@@ -3450,35 +7544,631 @@ Status Code **200**
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |» _links|object|false|none|none|
-|»» self|object|false|read-only|none|
-|»»» href|string|false|none|none|
+|»» self|object|false|none|none|
+|»»» href|string(uri)|false|none|none|
+|»» resource_id|string|false|none|The identifier for the resource|
+|»» label|string|false|none|Label for the entity|
+|»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»» created|string(date-time)|false|read-only|Date the entity was created|
+|»» updated|string(date-time)|false|read-only|Last date the entity was updated|
+|»» resource_type|string|false|none|Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased|
+|»» meta|object|false|none|Data for the resource as a key value pair|
+|»»» **additionalProperties**|string|false|none|none|
+|»» location|object|false|none|Defines the properties for a part unit|
+|»»» location_id|string|false|read-only|The identifier for the location|
+|»»» entity_id|string|true|read-only|Customer identifier|
+|»»» entity_type|string|true|none|none|
+|»»» label|string|true|none|Label for the entity|
+|»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»» location_type|string|true|none|The type of location|
+|»»» formatted_address|string|false|read-only|Address formatted for the where region the location exists in|
+|»»» address|object|true|none|xNAL address for the location|
+|»»»» country|string|true|none|Three Letter ISO country code|
+|»»»» administrative_area|string|true|none|State / Province / Region|
+|»»»» sub_administrative_area|string|false|none|County / District|
+|»»»» locality|string|true|none|City / Town|
+|»»»» postal_code|string|true|none|Postal Code / Zip Code|
+|»»»» thoroughfare|string|true|none|Street Address|
+|»»»» premise|string|false|none|Apartment / Suite / Box number etc|
+|»»»» sub_premise|string|false|none|Floor # / Room # / Building label etc|
+|»»» resource|object|false|none|The parent resource if this is a child resource|
+|»»»» resource_id|string|false|none|The identifier for the resource|
+|»»»» entity_id|string|false|read-only|Customer identifier|
+|»»»» entity_type|string|false|none|none|
+|»»»» label|string|false|none|Label for the entity|
+|»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»» created|string(date-time)|false|read-only|Date the entity was created|
+|»»»» updated|string(date-time)|false|read-only|Last date the entity was updated|
+|»»»» resource_type|string|false|none|Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased|
+|»»»» meta|object|false|none|Data for the resource as a key value pair|
+|»»»»» **additionalProperties**|string|false|none|none|
+|»»»» location|object|false|none|Defines the properties for a part unit|
+|»»»»» location_id|string|false|read-only|The identifier for the location|
+|»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»» entity_type|string|true|none|none|
+|»»»»» label|string|true|none|Label for the entity|
+|»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»»»» location_type|string|true|none|The type of location|
+|»»»»» formatted_address|string|false|read-only|Address formatted for the where region the location exists in|
+|»»»»» address|object|true|none|xNAL address for the location|
+|»»»»»» country|string|true|none|Three Letter ISO country code|
+|»»»»»» administrative_area|string|true|none|State / Province / Region|
+|»»»»»» sub_administrative_area|string|false|none|County / District|
+|»»»»»» locality|string|true|none|City / Town|
+|»»»»»» postal_code|string|true|none|Postal Code / Zip Code|
+|»»»»»» thoroughfare|string|true|none|Street Address|
+|»»»»»» premise|string|false|none|Apartment / Suite / Box number etc|
+|»»»»»» sub_premise|string|false|none|Floor # / Room # / Building label etc|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|entity_type|LOC|
+|location_type|warehouse|
+|location_type|facility|
+|location_type|other|
+|country|ABW|
+|country|AFG|
+|country|AGO|
+|country|AIA|
+|country|ALA|
+|country|ALB|
+|country|AND|
+|country|ARE|
+|country|ARG|
+|country|ARM|
+|country|ASM|
+|country|ATA|
+|country|ATF|
+|country|ATG|
+|country|AUS|
+|country|AUT|
+|country|AZE|
+|country|BDI|
+|country|BEL|
+|country|BEN|
+|country|BES|
+|country|BFA|
+|country|BGD|
+|country|BGR|
+|country|BHR|
+|country|BHS|
+|country|BIH|
+|country|BLM|
+|country|BLR|
+|country|BLZ|
+|country|BMU|
+|country|BOL|
+|country|BRA|
+|country|BRB|
+|country|BRN|
+|country|BTN|
+|country|BVT|
+|country|BWA|
+|country|CAF|
+|country|CAN|
+|country|CCK|
+|country|CHE|
+|country|CHL|
+|country|CHN|
+|country|CIV|
+|country|CMR|
+|country|COD|
+|country|COG|
+|country|COK|
+|country|COL|
+|country|COM|
+|country|CPV|
+|country|CRI|
+|country|CUB|
+|country|CUW|
+|country|CXR|
+|country|CYM|
+|country|CYP|
+|country|CZE|
+|country|DEU|
+|country|DJI|
+|country|DMA|
+|country|DNK|
+|country|DOM|
+|country|DZA|
+|country|ECU|
+|country|EGY|
+|country|ERI|
+|country|ESH|
+|country|ESP|
+|country|EST|
+|country|ETH|
+|country|FIN|
+|country|FJI|
+|country|FLK|
+|country|FRA|
+|country|FRO|
+|country|FSM|
+|country|GAB|
+|country|GBR|
+|country|GEO|
+|country|GGY|
+|country|GHA|
+|country|GIB|
+|country|GIN|
+|country|GLP|
+|country|GMB|
+|country|GNB|
+|country|GNQ|
+|country|GRC|
+|country|GRD|
+|country|GRL|
+|country|GTM|
+|country|GUF|
+|country|GUM|
+|country|GUY|
+|country|HKG|
+|country|HMD|
+|country|HND|
+|country|HRV|
+|country|HTI|
+|country|HUN|
+|country|IDN|
+|country|IMN|
+|country|IND|
+|country|IOT|
+|country|IRL|
+|country|IRN|
+|country|IRQ|
+|country|ISL|
+|country|ISR|
+|country|ITA|
+|country|JAM|
+|country|JEY|
+|country|JOR|
+|country|JPN|
+|country|KAZ|
+|country|KEN|
+|country|KGZ|
+|country|KHM|
+|country|KIR|
+|country|KNA|
+|country|KOR|
+|country|KWT|
+|country|LAO|
+|country|LBN|
+|country|LBR|
+|country|LBY|
+|country|LCA|
+|country|LIE|
+|country|LKA|
+|country|LSO|
+|country|LTU|
+|country|LUX|
+|country|LVA|
+|country|MAC|
+|country|MAF|
+|country|MAR|
+|country|MCO|
+|country|MDA|
+|country|MDG|
+|country|MDV|
+|country|MEX|
+|country|MHL|
+|country|MKD|
+|country|MLI|
+|country|MLT|
+|country|MMR|
+|country|MNE|
+|country|MNG|
+|country|MNP|
+|country|MOZ|
+|country|MRT|
+|country|MSR|
+|country|MTQ|
+|country|MUS|
+|country|MWI|
+|country|MYS|
+|country|MYT|
+|country|NAM|
+|country|NCL|
+|country|NER|
+|country|NFK|
+|country|NGA|
+|country|NIC|
+|country|NIU|
+|country|NLD|
+|country|NOR|
+|country|NPL|
+|country|NRU|
+|country|NZL|
+|country|OMN|
+|country|PAK|
+|country|PAN|
+|country|PCN|
+|country|PER|
+|country|PHL|
+|country|PLW|
+|country|PNG|
+|country|POL|
+|country|PRI|
+|country|PRK|
+|country|PRT|
+|country|PRY|
+|country|PSE|
+|country|PYF|
+|country|QAT|
+|country|REU|
+|country|ROU|
+|country|RUS|
+|country|RWA|
+|country|SAU|
+|country|SDN|
+|country|SEN|
+|country|SGP|
+|country|SGS|
+|country|SHN|
+|country|SJM|
+|country|SLB|
+|country|SLE|
+|country|SLV|
+|country|SMR|
+|country|SOM|
+|country|SPM|
+|country|SRB|
+|country|SSD|
+|country|STP|
+|country|SUR|
+|country|SVK|
+|country|SVN|
+|country|SWE|
+|country|SWZ|
+|country|SXM|
+|country|SYC|
+|country|SYR|
+|country|TCA|
+|country|TCD|
+|country|TGO|
+|country|THA|
+|country|TJK|
+|country|TKL|
+|country|TKM|
+|country|TLS|
+|country|TON|
+|country|TTO|
+|country|TUN|
+|country|TUR|
+|country|TUV|
+|country|TWN|
+|country|TZA|
+|country|UGA|
+|country|UKR|
+|country|UMI|
+|country|URY|
+|country|USA|
+|country|UZB|
+|country|VAT|
+|country|VCT|
+|country|VEN|
+|country|VGB|
+|country|VIR|
+|country|VNM|
+|country|VUT|
+|country|WLF|
+|country|WSM|
+|country|YEM|
+|country|ZAF|
+|country|ZMB|
+|country|ZWE|
+|entity_type|RES|
+|entity_type|LOC|
+|location_type|warehouse|
+|location_type|facility|
+|location_type|other|
+|country|ABW|
+|country|AFG|
+|country|AGO|
+|country|AIA|
+|country|ALA|
+|country|ALB|
+|country|AND|
+|country|ARE|
+|country|ARG|
+|country|ARM|
+|country|ASM|
+|country|ATA|
+|country|ATF|
+|country|ATG|
+|country|AUS|
+|country|AUT|
+|country|AZE|
+|country|BDI|
+|country|BEL|
+|country|BEN|
+|country|BES|
+|country|BFA|
+|country|BGD|
+|country|BGR|
+|country|BHR|
+|country|BHS|
+|country|BIH|
+|country|BLM|
+|country|BLR|
+|country|BLZ|
+|country|BMU|
+|country|BOL|
+|country|BRA|
+|country|BRB|
+|country|BRN|
+|country|BTN|
+|country|BVT|
+|country|BWA|
+|country|CAF|
+|country|CAN|
+|country|CCK|
+|country|CHE|
+|country|CHL|
+|country|CHN|
+|country|CIV|
+|country|CMR|
+|country|COD|
+|country|COG|
+|country|COK|
+|country|COL|
+|country|COM|
+|country|CPV|
+|country|CRI|
+|country|CUB|
+|country|CUW|
+|country|CXR|
+|country|CYM|
+|country|CYP|
+|country|CZE|
+|country|DEU|
+|country|DJI|
+|country|DMA|
+|country|DNK|
+|country|DOM|
+|country|DZA|
+|country|ECU|
+|country|EGY|
+|country|ERI|
+|country|ESH|
+|country|ESP|
+|country|EST|
+|country|ETH|
+|country|FIN|
+|country|FJI|
+|country|FLK|
+|country|FRA|
+|country|FRO|
+|country|FSM|
+|country|GAB|
+|country|GBR|
+|country|GEO|
+|country|GGY|
+|country|GHA|
+|country|GIB|
+|country|GIN|
+|country|GLP|
+|country|GMB|
+|country|GNB|
+|country|GNQ|
+|country|GRC|
+|country|GRD|
+|country|GRL|
+|country|GTM|
+|country|GUF|
+|country|GUM|
+|country|GUY|
+|country|HKG|
+|country|HMD|
+|country|HND|
+|country|HRV|
+|country|HTI|
+|country|HUN|
+|country|IDN|
+|country|IMN|
+|country|IND|
+|country|IOT|
+|country|IRL|
+|country|IRN|
+|country|IRQ|
+|country|ISL|
+|country|ISR|
+|country|ITA|
+|country|JAM|
+|country|JEY|
+|country|JOR|
+|country|JPN|
+|country|KAZ|
+|country|KEN|
+|country|KGZ|
+|country|KHM|
+|country|KIR|
+|country|KNA|
+|country|KOR|
+|country|KWT|
+|country|LAO|
+|country|LBN|
+|country|LBR|
+|country|LBY|
+|country|LCA|
+|country|LIE|
+|country|LKA|
+|country|LSO|
+|country|LTU|
+|country|LUX|
+|country|LVA|
+|country|MAC|
+|country|MAF|
+|country|MAR|
+|country|MCO|
+|country|MDA|
+|country|MDG|
+|country|MDV|
+|country|MEX|
+|country|MHL|
+|country|MKD|
+|country|MLI|
+|country|MLT|
+|country|MMR|
+|country|MNE|
+|country|MNG|
+|country|MNP|
+|country|MOZ|
+|country|MRT|
+|country|MSR|
+|country|MTQ|
+|country|MUS|
+|country|MWI|
+|country|MYS|
+|country|MYT|
+|country|NAM|
+|country|NCL|
+|country|NER|
+|country|NFK|
+|country|NGA|
+|country|NIC|
+|country|NIU|
+|country|NLD|
+|country|NOR|
+|country|NPL|
+|country|NRU|
+|country|NZL|
+|country|OMN|
+|country|PAK|
+|country|PAN|
+|country|PCN|
+|country|PER|
+|country|PHL|
+|country|PLW|
+|country|PNG|
+|country|POL|
+|country|PRI|
+|country|PRK|
+|country|PRT|
+|country|PRY|
+|country|PSE|
+|country|PYF|
+|country|QAT|
+|country|REU|
+|country|ROU|
+|country|RUS|
+|country|RWA|
+|country|SAU|
+|country|SDN|
+|country|SEN|
+|country|SGP|
+|country|SGS|
+|country|SHN|
+|country|SJM|
+|country|SLB|
+|country|SLE|
+|country|SLV|
+|country|SMR|
+|country|SOM|
+|country|SPM|
+|country|SRB|
+|country|SSD|
+|country|STP|
+|country|SUR|
+|country|SVK|
+|country|SVN|
+|country|SWE|
+|country|SWZ|
+|country|SXM|
+|country|SYC|
+|country|SYR|
+|country|TCA|
+|country|TCD|
+|country|TGO|
+|country|THA|
+|country|TJK|
+|country|TKL|
+|country|TKM|
+|country|TLS|
+|country|TON|
+|country|TTO|
+|country|TUN|
+|country|TUR|
+|country|TUV|
+|country|TWN|
+|country|TZA|
+|country|UGA|
+|country|UKR|
+|country|UMI|
+|country|URY|
+|country|USA|
+|country|UZB|
+|country|VAT|
+|country|VCT|
+|country|VEN|
+|country|VGB|
+|country|VIR|
+|country|VNM|
+|country|VUT|
+|country|WLF|
+|country|WSM|
+|country|YEM|
+|country|ZAF|
+|country|ZMB|
+|country|ZWE|
 
 Status Code **401**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Unauthorized|
+|type|https://docs.nterprise.com/api/problem/Unauthorized|
+|status|401|
+|detail|You are not authorized to access this resource|
 
 Status Code **403**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Forbidden|
+|type|https://docs.nterprise.com/api/problem/Forbidden|
+|status|403|
+|detail|You are forbidden to access this resource|
 
 Status Code **404**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Not Found|
+|type|https://docs.nterprise.com/api/problem/NotFound|
+|status|404|
+|detail|Resource not found|
 
 <aside class="success">
 This operation does not require authentication
@@ -3500,22 +8190,6 @@ Fetch warehouses
 |---|---|---|---|---|
 |limit|query|integer(int32)|false|How many items to return at one time (max 100)|
 |offset|query|string|false|Continue from last offset|
-|sort|query|string|false|Sort by field|
-|filter[administrative_area]|query|string|false|Filter where the administrative area (state or province) contains this value|
-|filter[country]|query|string|false|Filter where the country contains this value|
-|filter[postal_code]|query|string|false|Filter where the postal code contains this value|
-|filter[thoroughfare]|query|string|false|Filter where the thoroughfare contains this value|
-
-#### Enumerated Values
-
-|Parameter|Value|
-|---|---|
-|sort|country|
-|sort|-country|
-|sort|created|
-|sort|-created|
-|sort|updated|
-|sort|-updated|
 
 > Example responses
 
@@ -3523,6 +8197,7 @@ Fetch warehouses
 
 ```json
 {
+  "type": "object",
   "properties": {
     "_embedded": {
       "type": "object",
@@ -3532,296 +8207,398 @@ Fetch warehouses
           "maxItems": 100,
           "items": {
             "type": "object",
-            "x-hal": true,
-            "x-ui-hide": true,
             "properties": {
               "_links": {
                 "type": "object",
                 "properties": {
                   "self": {
+                    "example": {
+                      "href": "https://api.nterprise.com/locations/23Y1rNJ6zyiRzqN"
+                    },
                     "type": "object",
-                    "readOnly": true,
                     "properties": {
                       "href": {
                         "type": "string",
-                        "example": "https://api.nterprise.com/locations/1e39c8d4-b2a4-45c2-93ac-de3130a6b75f"
+                        "format": "uri"
                       }
                     }
                   }
                 }
-              }
-            },
-            "allOf": [
-              {
-                "x-id": "#location",
-                "x-nter-relation": "locations",
-                "x-nter-model": "Location",
-                "x-nter-callable": true,
-                "description": "Defines the properties for a part unit",
+              },
+              "location_id": {
+                "description": "The identifier for the location",
+                "type": "string",
+                "readOnly": true,
+                "pattern": "^[0-9a-zA-Z-_]+$"
+              },
+              "label": {
+                "type": "string",
+                "description": "Label for the entity"
+              },
+              "slug": {
+                "type": "string",
+                "description": "Slug for the entity (Auto-generated from the label)",
+                "readOnly": true,
+                "deprecated": true,
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+              },
+              "created": {
+                "description": "Date the entity was created",
+                "type": "string",
+                "format": "date-time",
+                "readOnly": true
+              },
+              "updated": {
+                "description": "Last date the entity was updated",
+                "type": "string",
+                "format": "date-time",
+                "readOnly": true
+              },
+              "location_type": {
+                "type": "string",
+                "description": "The type of location",
+                "enum": [
+                  "warehouse",
+                  "facility",
+                  "other"
+                ]
+              },
+              "formatted_address": {
+                "type": "string",
+                "readOnly": true,
+                "description": "Address formatted for the where region the location exists in"
+              },
+              "address": {
+                "type": "object",
                 "required": [
-                  "location_type",
-                  "address"
+                  "country",
+                  "administrative_area",
+                  "locality",
+                  "postal_code",
+                  "thoroughfare"
                 ],
+                "description": "xNAL address for the location ",
                 "properties": {
-                  "label": {
+                  "country": {
                     "type": "string",
-                    "example": "Zones Innovation Center",
-                    "x-examples": [
-                      "Zones Innovation Center"
-                    ]
-                  },
-                  "slug": {
-                    "type": "string",
-                    "example": "zones-innovation-center",
-                    "x-examples": [
-                      "zones-innovation-center"
-                    ]
-                  },
-                  "location_id": {
-                    "type": "string",
-                    "description": "The identifier for the location",
-                    "example": "b994961b-30b4-4f33-9330-f46fd6172909",
-                    "x-examples": [
-                      "b994961b-30b4-4f33-9330-f46fd6172909"
-                    ],
-                    "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-                  },
-                  "location_type": {
-                    "type": "string",
-                    "description": "The type of location",
+                    "description": "Three Letter ISO country code",
                     "enum": [
-                      "warehouse",
-                      "facility",
-                      "other"
-                    ],
-                    "example": "other",
-                    "x-examples": [
-                      "other"
+                      "ABW",
+                      "AFG",
+                      "AGO",
+                      "AIA",
+                      "ALA",
+                      "ALB",
+                      "AND",
+                      "ARE",
+                      "ARG",
+                      "ARM",
+                      "ASM",
+                      "ATA",
+                      "ATF",
+                      "ATG",
+                      "AUS",
+                      "AUT",
+                      "AZE",
+                      "BDI",
+                      "BEL",
+                      "BEN",
+                      "BES",
+                      "BFA",
+                      "BGD",
+                      "BGR",
+                      "BHR",
+                      "BHS",
+                      "BIH",
+                      "BLM",
+                      "BLR",
+                      "BLZ",
+                      "BMU",
+                      "BOL",
+                      "BRA",
+                      "BRB",
+                      "BRN",
+                      "BTN",
+                      "BVT",
+                      "BWA",
+                      "CAF",
+                      "CAN",
+                      "CCK",
+                      "CHE",
+                      "CHL",
+                      "CHN",
+                      "CIV",
+                      "CMR",
+                      "COD",
+                      "COG",
+                      "COK",
+                      "COL",
+                      "COM",
+                      "CPV",
+                      "CRI",
+                      "CUB",
+                      "CUW",
+                      "CXR",
+                      "CYM",
+                      "CYP",
+                      "CZE",
+                      "DEU",
+                      "DJI",
+                      "DMA",
+                      "DNK",
+                      "DOM",
+                      "DZA",
+                      "ECU",
+                      "EGY",
+                      "ERI",
+                      "ESH",
+                      "ESP",
+                      "EST",
+                      "ETH",
+                      "FIN",
+                      "FJI",
+                      "FLK",
+                      "FRA",
+                      "FRO",
+                      "FSM",
+                      "GAB",
+                      "GBR",
+                      "GEO",
+                      "GGY",
+                      "GHA",
+                      "GIB",
+                      "GIN",
+                      "GLP",
+                      "GMB",
+                      "GNB",
+                      "GNQ",
+                      "GRC",
+                      "GRD",
+                      "GRL",
+                      "GTM",
+                      "GUF",
+                      "GUM",
+                      "GUY",
+                      "HKG",
+                      "HMD",
+                      "HND",
+                      "HRV",
+                      "HTI",
+                      "HUN",
+                      "IDN",
+                      "IMN",
+                      "IND",
+                      "IOT",
+                      "IRL",
+                      "IRN",
+                      "IRQ",
+                      "ISL",
+                      "ISR",
+                      "ITA",
+                      "JAM",
+                      "JEY",
+                      "JOR",
+                      "JPN",
+                      "KAZ",
+                      "KEN",
+                      "KGZ",
+                      "KHM",
+                      "KIR",
+                      "KNA",
+                      "KOR",
+                      "KWT",
+                      "LAO",
+                      "LBN",
+                      "LBR",
+                      "LBY",
+                      "LCA",
+                      "LIE",
+                      "LKA",
+                      "LSO",
+                      "LTU",
+                      "LUX",
+                      "LVA",
+                      "MAC",
+                      "MAF",
+                      "MAR",
+                      "MCO",
+                      "MDA",
+                      "MDG",
+                      "MDV",
+                      "MEX",
+                      "MHL",
+                      "MKD",
+                      "MLI",
+                      "MLT",
+                      "MMR",
+                      "MNE",
+                      "MNG",
+                      "MNP",
+                      "MOZ",
+                      "MRT",
+                      "MSR",
+                      "MTQ",
+                      "MUS",
+                      "MWI",
+                      "MYS",
+                      "MYT",
+                      "NAM",
+                      "NCL",
+                      "NER",
+                      "NFK",
+                      "NGA",
+                      "NIC",
+                      "NIU",
+                      "NLD",
+                      "NOR",
+                      "NPL",
+                      "NRU",
+                      "NZL",
+                      "OMN",
+                      "PAK",
+                      "PAN",
+                      "PCN",
+                      "PER",
+                      "PHL",
+                      "PLW",
+                      "PNG",
+                      "POL",
+                      "PRI",
+                      "PRK",
+                      "PRT",
+                      "PRY",
+                      "PSE",
+                      "PYF",
+                      "QAT",
+                      "REU",
+                      "ROU",
+                      "RUS",
+                      "RWA",
+                      "SAU",
+                      "SDN",
+                      "SEN",
+                      "SGP",
+                      "SGS",
+                      "SHN",
+                      "SJM",
+                      "SLB",
+                      "SLE",
+                      "SLV",
+                      "SMR",
+                      "SOM",
+                      "SPM",
+                      "SRB",
+                      "SSD",
+                      "STP",
+                      "SUR",
+                      "SVK",
+                      "SVN",
+                      "SWE",
+                      "SWZ",
+                      "SXM",
+                      "SYC",
+                      "SYR",
+                      "TCA",
+                      "TCD",
+                      "TGO",
+                      "THA",
+                      "TJK",
+                      "TKL",
+                      "TKM",
+                      "TLS",
+                      "TON",
+                      "TTO",
+                      "TUN",
+                      "TUR",
+                      "TUV",
+                      "TWN",
+                      "TZA",
+                      "UGA",
+                      "UKR",
+                      "UMI",
+                      "URY",
+                      "USA",
+                      "UZB",
+                      "VAT",
+                      "VCT",
+                      "VEN",
+                      "VGB",
+                      "VIR",
+                      "VNM",
+                      "VUT",
+                      "WLF",
+                      "WSM",
+                      "YEM",
+                      "ZAF",
+                      "ZMB",
+                      "ZWE"
                     ]
                   },
-                  "formatted_address": {
+                  "administrative_area": {
                     "type": "string",
-                    "readOnly": true,
-                    "description": "Address formatted for the where region the location exists in",
-                    "example": "Zones Innovation Center\n431 Broadway\nSuite C\nMenands NY, 12204\nUSA",
-                    "x-examples": [
-                      "Zones Innovation Center\n431 Broadway\nSuite C\nMenands NY, 12204\nUSA"
-                    ]
+                    "description": "State / Province / Region"
                   },
-                  "address": {
-                    "type": "object",
-                    "required": [
-                      "country",
-                      "administrative_area",
-                      "locality",
-                      "postal_code",
-                      "thoroughfare"
-                    ],
-                    "description": "xNAL address for the location ",
-                    "properties": {
-                      "country": {
-                        "type": "string",
-                        "description": "Three Letter ISO country code",
-                        "example": "USA",
-                        "x-examples": [
-                          "USA"
-                        ]
-                      },
-                      "administrative_area": {
-                        "type": "string",
-                        "description": "State / Province / Region",
-                        "example": "NY",
-                        "x-examples": [
-                          "NY"
-                        ]
-                      },
-                      "sub_administrative_area": {
-                        "type": "string",
-                        "description": "County / District",
-                        "example": "Albany",
-                        "x-examples": [
-                          "Albany"
-                        ]
-                      },
-                      "locality": {
-                        "type": "string",
-                        "description": "City / Town",
-                        "example": "Menands",
-                        "x-examples": [
-                          "Menands"
-                        ]
-                      },
-                      "postal_code": {
-                        "type": "string",
-                        "description": "Postal Code / Zip Code",
-                        "example": "12204",
-                        "x-examples": [
-                          "12204"
-                        ]
-                      },
-                      "thoroughfare": {
-                        "type": "string",
-                        "description": "Street Address",
-                        "example": "431 Broadway",
-                        "x-examples": [
-                          "431 Broadway"
-                        ]
-                      },
-                      "premise": {
-                        "type": "string",
-                        "description": "Apartment / Suite / Box number etc",
-                        "example": "Suite c",
-                        "x-examples": [
-                          "Suite c"
-                        ]
-                      },
-                      "sub_premise": {
-                        "type": "string",
-                        "description": "Floor # / Room # / Building label etc",
-                        "example": "Zones Innovation Center",
-                        "x-examples": [
-                          "Zones Innovation Center"
-                        ]
-                      }
-                    }
-                  }
-                },
-                "allOf": [
-                  {
-                    "x-ui-hide": true,
-                    "type": "object",
-                    "description": "Common Properties to all entities",
-                    "required": [
-                      "label"
-                    ],
-                    "properties": {
-                      "label": {
-                        "type": "string",
-                        "description": "Label for the entity",
-                        "example": "primary"
-                      },
-                      "slug": {
-                        "type": "string",
-                        "description": "Slug for the entity (Auto-generated from the label)",
-                        "readOnly": true,
-                        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-                      },
-                      "created": {
-                        "description": "Date the entity was created",
-                        "type": "string",
-                        "format": "date-time",
-                        "readOnly": true
-                      },
-                      "updated": {
-                        "description": "Last date the entity was updated",
-                        "type": "string",
-                        "format": "date-time",
-                        "readOnly": true
-                      }
-                    }
-                  }
-                ],
-                "example": {
-                  "location_type": "other",
-                  "address": {
-                    "country": "USA",
-                    "administrative_area": "NY",
-                    "locality": "Menands",
-                    "postal_code": "12204",
-                    "thoroughfare": "431 Broadway",
-                    "sub_administrative_area": "Albany",
-                    "premise": "Suite c",
-                    "sub_premise": "Zones Innovation Center"
+                  "sub_administrative_area": {
+                    "type": "string",
+                    "description": "County / District"
                   },
-                  "label": "Zones Innovation Center",
-                  "slug": "zones-innovation-center",
-                  "location_id": "b994961b-30b4-4f33-9330-f46fd6172909",
-                  "formatted_address": "Zones Innovation Center\n431 Broadway\nSuite C\nMenands NY, 12204\nUSA",
-                  "created": "2011-12-22T07:39:56.809Z",
-                  "updated": "1958-10-08T23:35:29.923Z"
+                  "locality": {
+                    "type": "string",
+                    "description": "City / Town"
+                  },
+                  "postal_code": {
+                    "type": "string",
+                    "description": "Postal Code / Zip Code"
+                  },
+                  "thoroughfare": {
+                    "type": "string",
+                    "description": "Street Address"
+                  },
+                  "premise": {
+                    "type": "string",
+                    "description": "Apartment / Suite / Box number etc"
+                  },
+                  "sub_premise": {
+                    "type": "string",
+                    "description": "Floor # / Room # / Building label etc"
+                  }
                 }
               }
-            ],
-            "example": "undefined"
+            }
+          }
+        }
+      }
+    },
+    "_links": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "example": {
+            "href": "https://api.nterprise.com/locations"
+          },
+          "type": "object",
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        },
+        "next": {
+          "example": {
+            "href": "https://api.nterprise.com/locations?offset=QVBrO2wm13iEyl&limit=100"
+          },
+          "type": "object",
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "uri"
+            }
           }
         }
       }
     }
-  },
-  "allOf": [
-    {
-      "type": "object",
-      "x-hal": true,
-      "x-ui-hide": true,
-      "properties": {
-        "total_count": {
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true,
-          "minimum": 0,
-          "example": 32
-        },
-        "limit": {
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true,
-          "minimum": 1,
-          "maximum": 100,
-          "example": 50
-        },
-        "offset": {
-          "type": "string",
-          "readOnly": true,
-          "example": "363yHhUhhI"
-        }
-      },
-      "allOf": [
-        {
-          "type": "object",
-          "x-ui-hide": true,
-          "properties": {
-            "_links": {
-              "type": "object",
-              "readOnly": true,
-              "properties": {
-                "self": {
-                  "type": "object",
-                  "properties": {
-                    "href": {
-                      "type": "string",
-                      "format": "uri"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        {
-          "type": "object",
-          "x-ui-hide": true,
-          "properties": {
-            "_links": {
-              "type": "object",
-              "readOnly": true,
-              "properties": {
-                "next": {
-                  "type": "object",
-                  "properties": {
-                    "href": {
-                      "type": "string",
-                      "format": "uri"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      ],
-      "example": "undefined"
-    }
-  ]
+  }
 }
 ```
 
@@ -3840,28 +8617,324 @@ Status Code **200**
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |» _embedded|object|false|none|none|
-|»» nter:locations|[allOf]|false|none|none|
+|»» nter:locations|[object]|false|none|none|
 |»»» _links|object|false|none|none|
-|»»»» self|object|false|read-only|none|
-|»»»»» href|string|false|none|none|
+|»»»» self|object|false|none|none|
+|»»»»» href|string(uri)|false|none|none|
+|»»»» location_id|string|false|read-only|The identifier for the location|
+|»»»» label|string|false|none|Label for the entity|
+|»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»» created|string(date-time)|false|read-only|Date the entity was created|
+|»»»» updated|string(date-time)|false|read-only|Last date the entity was updated|
+|»»»» location_type|string|false|none|The type of location|
+|»»»» formatted_address|string|false|read-only|Address formatted for the where region the location exists in|
+|»»»» address|object|false|none|xNAL address for the location|
+|»»»»» country|string|true|none|Three Letter ISO country code|
+|»»»»» administrative_area|string|true|none|State / Province / Region|
+|»»»»» sub_administrative_area|string|false|none|County / District|
+|»»»»» locality|string|true|none|City / Town|
+|»»»»» postal_code|string|true|none|Postal Code / Zip Code|
+|»»»»» thoroughfare|string|true|none|Street Address|
+|»»»»» premise|string|false|none|Apartment / Suite / Box number etc|
+|»»»»» sub_premise|string|false|none|Floor # / Room # / Building label etc|
+|»»»» _links|object|false|none|none|
+|»»»»» self|object|false|none|none|
+|»»»»»» href|string(uri)|false|none|none|
+|»»»»» next|object|false|none|none|
+|»»»»»» href|string(uri)|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|location_type|warehouse|
+|location_type|facility|
+|location_type|other|
+|country|ABW|
+|country|AFG|
+|country|AGO|
+|country|AIA|
+|country|ALA|
+|country|ALB|
+|country|AND|
+|country|ARE|
+|country|ARG|
+|country|ARM|
+|country|ASM|
+|country|ATA|
+|country|ATF|
+|country|ATG|
+|country|AUS|
+|country|AUT|
+|country|AZE|
+|country|BDI|
+|country|BEL|
+|country|BEN|
+|country|BES|
+|country|BFA|
+|country|BGD|
+|country|BGR|
+|country|BHR|
+|country|BHS|
+|country|BIH|
+|country|BLM|
+|country|BLR|
+|country|BLZ|
+|country|BMU|
+|country|BOL|
+|country|BRA|
+|country|BRB|
+|country|BRN|
+|country|BTN|
+|country|BVT|
+|country|BWA|
+|country|CAF|
+|country|CAN|
+|country|CCK|
+|country|CHE|
+|country|CHL|
+|country|CHN|
+|country|CIV|
+|country|CMR|
+|country|COD|
+|country|COG|
+|country|COK|
+|country|COL|
+|country|COM|
+|country|CPV|
+|country|CRI|
+|country|CUB|
+|country|CUW|
+|country|CXR|
+|country|CYM|
+|country|CYP|
+|country|CZE|
+|country|DEU|
+|country|DJI|
+|country|DMA|
+|country|DNK|
+|country|DOM|
+|country|DZA|
+|country|ECU|
+|country|EGY|
+|country|ERI|
+|country|ESH|
+|country|ESP|
+|country|EST|
+|country|ETH|
+|country|FIN|
+|country|FJI|
+|country|FLK|
+|country|FRA|
+|country|FRO|
+|country|FSM|
+|country|GAB|
+|country|GBR|
+|country|GEO|
+|country|GGY|
+|country|GHA|
+|country|GIB|
+|country|GIN|
+|country|GLP|
+|country|GMB|
+|country|GNB|
+|country|GNQ|
+|country|GRC|
+|country|GRD|
+|country|GRL|
+|country|GTM|
+|country|GUF|
+|country|GUM|
+|country|GUY|
+|country|HKG|
+|country|HMD|
+|country|HND|
+|country|HRV|
+|country|HTI|
+|country|HUN|
+|country|IDN|
+|country|IMN|
+|country|IND|
+|country|IOT|
+|country|IRL|
+|country|IRN|
+|country|IRQ|
+|country|ISL|
+|country|ISR|
+|country|ITA|
+|country|JAM|
+|country|JEY|
+|country|JOR|
+|country|JPN|
+|country|KAZ|
+|country|KEN|
+|country|KGZ|
+|country|KHM|
+|country|KIR|
+|country|KNA|
+|country|KOR|
+|country|KWT|
+|country|LAO|
+|country|LBN|
+|country|LBR|
+|country|LBY|
+|country|LCA|
+|country|LIE|
+|country|LKA|
+|country|LSO|
+|country|LTU|
+|country|LUX|
+|country|LVA|
+|country|MAC|
+|country|MAF|
+|country|MAR|
+|country|MCO|
+|country|MDA|
+|country|MDG|
+|country|MDV|
+|country|MEX|
+|country|MHL|
+|country|MKD|
+|country|MLI|
+|country|MLT|
+|country|MMR|
+|country|MNE|
+|country|MNG|
+|country|MNP|
+|country|MOZ|
+|country|MRT|
+|country|MSR|
+|country|MTQ|
+|country|MUS|
+|country|MWI|
+|country|MYS|
+|country|MYT|
+|country|NAM|
+|country|NCL|
+|country|NER|
+|country|NFK|
+|country|NGA|
+|country|NIC|
+|country|NIU|
+|country|NLD|
+|country|NOR|
+|country|NPL|
+|country|NRU|
+|country|NZL|
+|country|OMN|
+|country|PAK|
+|country|PAN|
+|country|PCN|
+|country|PER|
+|country|PHL|
+|country|PLW|
+|country|PNG|
+|country|POL|
+|country|PRI|
+|country|PRK|
+|country|PRT|
+|country|PRY|
+|country|PSE|
+|country|PYF|
+|country|QAT|
+|country|REU|
+|country|ROU|
+|country|RUS|
+|country|RWA|
+|country|SAU|
+|country|SDN|
+|country|SEN|
+|country|SGP|
+|country|SGS|
+|country|SHN|
+|country|SJM|
+|country|SLB|
+|country|SLE|
+|country|SLV|
+|country|SMR|
+|country|SOM|
+|country|SPM|
+|country|SRB|
+|country|SSD|
+|country|STP|
+|country|SUR|
+|country|SVK|
+|country|SVN|
+|country|SWE|
+|country|SWZ|
+|country|SXM|
+|country|SYC|
+|country|SYR|
+|country|TCA|
+|country|TCD|
+|country|TGO|
+|country|THA|
+|country|TJK|
+|country|TKL|
+|country|TKM|
+|country|TLS|
+|country|TON|
+|country|TTO|
+|country|TUN|
+|country|TUR|
+|country|TUV|
+|country|TWN|
+|country|TZA|
+|country|UGA|
+|country|UKR|
+|country|UMI|
+|country|URY|
+|country|USA|
+|country|UZB|
+|country|VAT|
+|country|VCT|
+|country|VEN|
+|country|VGB|
+|country|VIR|
+|country|VNM|
+|country|VUT|
+|country|WLF|
+|country|WSM|
+|country|YEM|
+|country|ZAF|
+|country|ZMB|
+|country|ZWE|
 
 Status Code **401**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Unauthorized|
+|type|https://docs.nterprise.com/api/problem/Unauthorized|
+|status|401|
+|detail|You are not authorized to access this resource|
 
 Status Code **403**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|any|false|none|none|
-|» type|any|false|none|none|
-|» status|any|false|none|none|
-|» detail|any|false|none|none|
+|» title|string|false|none|none|
+|» type|string|false|none|none|
+|» status|number|false|none|none|
+|» detail|string|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|title|Forbidden|
+|type|https://docs.nterprise.com/api/problem/Forbidden|
+|status|403|
+|detail|You are forbidden to access this resource|
 
 <aside class="success">
 This operation does not require authentication
@@ -3874,27 +8947,347 @@ This operation does not require authentication
 <a id="schemalocation"></a>
 
 ```yaml
-location_type: other
-address:
-  country: USA
-  administrative_area: NY
-  locality: Menands
-  postal_code: '12204'
-  thoroughfare: 431 Broadway
-  sub_administrative_area: Albany
-  premise: Suite c
-  sub_premise: Zones Innovation Center
-label: Zones Innovation Center
-slug: zones-innovation-center
-location_id: b994961b-30b4-4f33-9330-f46fd6172909
-formatted_address: |-
-  Zones Innovation Center
-  431 Broadway
-  Suite C
-  Menands NY, 12204
-  USA
-created: '2011-12-22T07:39:56.809Z'
-updated: '1958-10-08T23:35:29.923Z'
+type: object
+description: Defines the properties for a part unit
+additionalProperties: false
+required:
+  - label
+  - entity_id
+  - entity_type
+  - created
+  - updated
+  - location_type
+  - address
+properties:
+  location_id:
+    description: The identifier for the location
+    type: string
+    readOnly: true
+    pattern: '^[0-9a-zA-Z-_]+$'
+  entity_id:
+    x-no-api-doc: true
+    type: string
+    description: Customer identifier
+    readOnly: true
+    pattern: '^[0-9a-zA-Z-_]+$'
+  entity_type:
+    x-no-api-doc: true
+    enum:
+      - LOC
+  label:
+    type: string
+    description: Label for the entity
+  slug:
+    type: string
+    description: Slug for the entity (Auto-generated from the label)
+    readOnly: true
+    deprecated: true
+    pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+  created:
+    description: Date the entity was created
+    type: string
+    format: date-time
+    readOnly: true
+  updated:
+    description: Last date the entity was updated
+    type: string
+    format: date-time
+    readOnly: true
+  location_type:
+    type: string
+    description: The type of location
+    enum:
+      - warehouse
+      - facility
+      - other
+  formatted_address:
+    type: string
+    readOnly: true
+    description: Address formatted for the where region the location exists in
+  address:
+    type: object
+    required:
+      - country
+      - administrative_area
+      - locality
+      - postal_code
+      - thoroughfare
+    description: 'xNAL address for the location '
+    properties:
+      country:
+        type: string
+        description: Three Letter ISO country code
+        enum:
+          - ABW
+          - AFG
+          - AGO
+          - AIA
+          - ALA
+          - ALB
+          - AND
+          - ARE
+          - ARG
+          - ARM
+          - ASM
+          - ATA
+          - ATF
+          - ATG
+          - AUS
+          - AUT
+          - AZE
+          - BDI
+          - BEL
+          - BEN
+          - BES
+          - BFA
+          - BGD
+          - BGR
+          - BHR
+          - BHS
+          - BIH
+          - BLM
+          - BLR
+          - BLZ
+          - BMU
+          - BOL
+          - BRA
+          - BRB
+          - BRN
+          - BTN
+          - BVT
+          - BWA
+          - CAF
+          - CAN
+          - CCK
+          - CHE
+          - CHL
+          - CHN
+          - CIV
+          - CMR
+          - COD
+          - COG
+          - COK
+          - COL
+          - COM
+          - CPV
+          - CRI
+          - CUB
+          - CUW
+          - CXR
+          - CYM
+          - CYP
+          - CZE
+          - DEU
+          - DJI
+          - DMA
+          - DNK
+          - DOM
+          - DZA
+          - ECU
+          - EGY
+          - ERI
+          - ESH
+          - ESP
+          - EST
+          - ETH
+          - FIN
+          - FJI
+          - FLK
+          - FRA
+          - FRO
+          - FSM
+          - GAB
+          - GBR
+          - GEO
+          - GGY
+          - GHA
+          - GIB
+          - GIN
+          - GLP
+          - GMB
+          - GNB
+          - GNQ
+          - GRC
+          - GRD
+          - GRL
+          - GTM
+          - GUF
+          - GUM
+          - GUY
+          - HKG
+          - HMD
+          - HND
+          - HRV
+          - HTI
+          - HUN
+          - IDN
+          - IMN
+          - IND
+          - IOT
+          - IRL
+          - IRN
+          - IRQ
+          - ISL
+          - ISR
+          - ITA
+          - JAM
+          - JEY
+          - JOR
+          - JPN
+          - KAZ
+          - KEN
+          - KGZ
+          - KHM
+          - KIR
+          - KNA
+          - KOR
+          - KWT
+          - LAO
+          - LBN
+          - LBR
+          - LBY
+          - LCA
+          - LIE
+          - LKA
+          - LSO
+          - LTU
+          - LUX
+          - LVA
+          - MAC
+          - MAF
+          - MAR
+          - MCO
+          - MDA
+          - MDG
+          - MDV
+          - MEX
+          - MHL
+          - MKD
+          - MLI
+          - MLT
+          - MMR
+          - MNE
+          - MNG
+          - MNP
+          - MOZ
+          - MRT
+          - MSR
+          - MTQ
+          - MUS
+          - MWI
+          - MYS
+          - MYT
+          - NAM
+          - NCL
+          - NER
+          - NFK
+          - NGA
+          - NIC
+          - NIU
+          - NLD
+          - NOR
+          - NPL
+          - NRU
+          - NZL
+          - OMN
+          - PAK
+          - PAN
+          - PCN
+          - PER
+          - PHL
+          - PLW
+          - PNG
+          - POL
+          - PRI
+          - PRK
+          - PRT
+          - PRY
+          - PSE
+          - PYF
+          - QAT
+          - REU
+          - ROU
+          - RUS
+          - RWA
+          - SAU
+          - SDN
+          - SEN
+          - SGP
+          - SGS
+          - SHN
+          - SJM
+          - SLB
+          - SLE
+          - SLV
+          - SMR
+          - SOM
+          - SPM
+          - SRB
+          - SSD
+          - STP
+          - SUR
+          - SVK
+          - SVN
+          - SWE
+          - SWZ
+          - SXM
+          - SYC
+          - SYR
+          - TCA
+          - TCD
+          - TGO
+          - THA
+          - TJK
+          - TKL
+          - TKM
+          - TLS
+          - TON
+          - TTO
+          - TUN
+          - TUR
+          - TUV
+          - TWN
+          - TZA
+          - UGA
+          - UKR
+          - UMI
+          - URY
+          - USA
+          - UZB
+          - VAT
+          - VCT
+          - VEN
+          - VGB
+          - VIR
+          - VNM
+          - VUT
+          - WLF
+          - WSM
+          - YEM
+          - ZAF
+          - ZMB
+          - ZWE
+      administrative_area:
+        type: string
+        description: State / Province / Region
+      sub_administrative_area:
+        type: string
+        description: County / District
+      locality:
+        type: string
+        description: City / Town
+      postal_code:
+        type: string
+        description: Postal Code / Zip Code
+      thoroughfare:
+        type: string
+        description: Street Address
+      premise:
+        type: string
+        description: Apartment / Suite / Box number etc
+      sub_premise:
+        type: string
+        description: 'Floor # / Room # / Building label etc'
 
 ```
 
@@ -3904,9 +9297,13 @@ updated: '1958-10-08T23:35:29.923Z'
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|label|string|false|none|none|
-|slug|string|false|none|none|
-|location_id|string|false|none|The identifier for the location|
+|location_id|string|false|read-only|The identifier for the location|
+|entity_id|string|true|read-only|Customer identifier|
+|entity_type|string|true|none|none|
+|label|string|true|none|Label for the entity|
+|slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|created|string(date-time)|true|read-only|Date the entity was created|
+|updated|string(date-time)|true|read-only|Last date the entity was updated|
 |location_type|string|true|none|The type of location|
 |formatted_address|string|false|read-only|Address formatted for the where region the location exists in|
 |address|object|true|none|xNAL address for the location|
@@ -3923,7 +9320,257 @@ updated: '1958-10-08T23:35:29.923Z'
 
 |Property|Value|
 |---|---|
+|entity_type|LOC|
 |location_type|warehouse|
 |location_type|facility|
 |location_type|other|
+|country|ABW|
+|country|AFG|
+|country|AGO|
+|country|AIA|
+|country|ALA|
+|country|ALB|
+|country|AND|
+|country|ARE|
+|country|ARG|
+|country|ARM|
+|country|ASM|
+|country|ATA|
+|country|ATF|
+|country|ATG|
+|country|AUS|
+|country|AUT|
+|country|AZE|
+|country|BDI|
+|country|BEL|
+|country|BEN|
+|country|BES|
+|country|BFA|
+|country|BGD|
+|country|BGR|
+|country|BHR|
+|country|BHS|
+|country|BIH|
+|country|BLM|
+|country|BLR|
+|country|BLZ|
+|country|BMU|
+|country|BOL|
+|country|BRA|
+|country|BRB|
+|country|BRN|
+|country|BTN|
+|country|BVT|
+|country|BWA|
+|country|CAF|
+|country|CAN|
+|country|CCK|
+|country|CHE|
+|country|CHL|
+|country|CHN|
+|country|CIV|
+|country|CMR|
+|country|COD|
+|country|COG|
+|country|COK|
+|country|COL|
+|country|COM|
+|country|CPV|
+|country|CRI|
+|country|CUB|
+|country|CUW|
+|country|CXR|
+|country|CYM|
+|country|CYP|
+|country|CZE|
+|country|DEU|
+|country|DJI|
+|country|DMA|
+|country|DNK|
+|country|DOM|
+|country|DZA|
+|country|ECU|
+|country|EGY|
+|country|ERI|
+|country|ESH|
+|country|ESP|
+|country|EST|
+|country|ETH|
+|country|FIN|
+|country|FJI|
+|country|FLK|
+|country|FRA|
+|country|FRO|
+|country|FSM|
+|country|GAB|
+|country|GBR|
+|country|GEO|
+|country|GGY|
+|country|GHA|
+|country|GIB|
+|country|GIN|
+|country|GLP|
+|country|GMB|
+|country|GNB|
+|country|GNQ|
+|country|GRC|
+|country|GRD|
+|country|GRL|
+|country|GTM|
+|country|GUF|
+|country|GUM|
+|country|GUY|
+|country|HKG|
+|country|HMD|
+|country|HND|
+|country|HRV|
+|country|HTI|
+|country|HUN|
+|country|IDN|
+|country|IMN|
+|country|IND|
+|country|IOT|
+|country|IRL|
+|country|IRN|
+|country|IRQ|
+|country|ISL|
+|country|ISR|
+|country|ITA|
+|country|JAM|
+|country|JEY|
+|country|JOR|
+|country|JPN|
+|country|KAZ|
+|country|KEN|
+|country|KGZ|
+|country|KHM|
+|country|KIR|
+|country|KNA|
+|country|KOR|
+|country|KWT|
+|country|LAO|
+|country|LBN|
+|country|LBR|
+|country|LBY|
+|country|LCA|
+|country|LIE|
+|country|LKA|
+|country|LSO|
+|country|LTU|
+|country|LUX|
+|country|LVA|
+|country|MAC|
+|country|MAF|
+|country|MAR|
+|country|MCO|
+|country|MDA|
+|country|MDG|
+|country|MDV|
+|country|MEX|
+|country|MHL|
+|country|MKD|
+|country|MLI|
+|country|MLT|
+|country|MMR|
+|country|MNE|
+|country|MNG|
+|country|MNP|
+|country|MOZ|
+|country|MRT|
+|country|MSR|
+|country|MTQ|
+|country|MUS|
+|country|MWI|
+|country|MYS|
+|country|MYT|
+|country|NAM|
+|country|NCL|
+|country|NER|
+|country|NFK|
+|country|NGA|
+|country|NIC|
+|country|NIU|
+|country|NLD|
+|country|NOR|
+|country|NPL|
+|country|NRU|
+|country|NZL|
+|country|OMN|
+|country|PAK|
+|country|PAN|
+|country|PCN|
+|country|PER|
+|country|PHL|
+|country|PLW|
+|country|PNG|
+|country|POL|
+|country|PRI|
+|country|PRK|
+|country|PRT|
+|country|PRY|
+|country|PSE|
+|country|PYF|
+|country|QAT|
+|country|REU|
+|country|ROU|
+|country|RUS|
+|country|RWA|
+|country|SAU|
+|country|SDN|
+|country|SEN|
+|country|SGP|
+|country|SGS|
+|country|SHN|
+|country|SJM|
+|country|SLB|
+|country|SLE|
+|country|SLV|
+|country|SMR|
+|country|SOM|
+|country|SPM|
+|country|SRB|
+|country|SSD|
+|country|STP|
+|country|SUR|
+|country|SVK|
+|country|SVN|
+|country|SWE|
+|country|SWZ|
+|country|SXM|
+|country|SYC|
+|country|SYR|
+|country|TCA|
+|country|TCD|
+|country|TGO|
+|country|THA|
+|country|TJK|
+|country|TKL|
+|country|TKM|
+|country|TLS|
+|country|TON|
+|country|TTO|
+|country|TUN|
+|country|TUR|
+|country|TUV|
+|country|TWN|
+|country|TZA|
+|country|UGA|
+|country|UKR|
+|country|UMI|
+|country|URY|
+|country|USA|
+|country|UZB|
+|country|VAT|
+|country|VCT|
+|country|VEN|
+|country|VGB|
+|country|VIR|
+|country|VNM|
+|country|VUT|
+|country|WLF|
+|country|WSM|
+|country|YEM|
+|country|ZAF|
+|country|ZMB|
+|country|ZWE|
 
