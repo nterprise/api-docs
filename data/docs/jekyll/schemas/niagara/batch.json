@@ -9,7 +9,10 @@
     "entity_id",
     "entity_type",
     "created",
-    "updated"
+    "updated",
+    "number_cycles",
+    "cycles",
+    "work_order"
   ],
   "properties": {
     "batch_id": {
@@ -39,9 +42,9 @@
     "queue": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/queue.json"
     },
-    "priority": {
+    "order": {
       "type": "integer",
-      "description": "Priority order for the batch",
+      "description": "Order to process the batch",
       "minimum": 0
     },
     "number_cycles": {

@@ -97,6 +97,15 @@ const jsonSchemaToOas = (spec) => _.reduce(
 );
 
 exports.builder = (yargs) => yargs.
+    option(
+        'merge',
+        {
+            describe: 'Merge all OAS files',
+            default: false,
+            global: true,
+            boolean: true,
+        },
+    ).
     defaults('overwrite', true);
 
 exports.command = 'oas [file]';
@@ -123,7 +132,7 @@ exports.handler = async (argv) => {
     logger.debug(`${widdershinsOptions.user_templates}`);
 
     const apis = _.flatten([argv.api]);
-
+    let masterSchema = {};
     logger.debug('API to process', apis);
     const files = _.reduce(
         [argv.file],
@@ -160,6 +169,10 @@ exports.handler = async (argv) => {
     await Promise.all(_.map(
         files,
         async (file, index) => {
+            if (path.basename(file) === 'oas_niagara.json') {
+                logger.debug('Skipping Niagara');
+                return;
+            }
             logger.info(`Converting OAS ${file} to markdown`);
             logger.debug(`setting CWD to ${path.dirname(file)}`);
             process.chdir(path.dirname(file));
@@ -169,15 +182,14 @@ exports.handler = async (argv) => {
                 oas = jsonSchemaToOas(
                     await RefParser.dereference(require(file)),
                 );
+                masterSchema = {
+                    ...masterSchema,
+                    ...oas,
+                };
             } catch (error) {
                 logger.error(`Failed to process file ${file}`, error);
                 return;
             }
-            //{
-            //   "stack": "SyntaxError: Error resolving $ref pointer \"https://docs.nterprise.com/schemas/niagara/workFlow.json#/properties/workflow_id\". \nToken \"workflow_id\" does not exist.\n    at Pointer.resolve (/Users/chuckreeves/Projects/api-docs/node_modules/@apidevtools/json-schema-ref-parser/lib/pointer.js:87:17)\n    at $Ref.resolve (/Users/chuckreeves/Projects/api-docs/node_modules/@apidevtools/json-schema-ref-parser/lib/ref.js:83:18)\n    at $Refs._resolve (/Users/chuckreeves/Projects/api-docs/node_modules/@apidevtools/json-schema-ref-parser/lib/refs.js:155:15)\n    at dereference$Ref (/Users/chuckreeves/Projects/api-docs/node_modules/@apidevtools/json-schema-ref-parser/lib/dereference.js:99:23)\n    at crawl (/Users/chuckreeves/Projects/api-docs/node_modules/@apidevtools/json-schema-ref-parser/lib/dereference.js:58:26)\n    at crawl (/Users/chuckreeves/Projects/api-docs/node_modules/@apidevtools/json-schema-ref-parser/lib/dereference.js:64:28)\n    at crawl (/Users/chuckreeves/Projects/api-docs/node_modules/@apidevtools/json-schema-ref-parser/lib/dereference.js:64:28)\n    at crawl (/Users/chuckreeves/Projects/api-docs/node_modules/@apidevtools/json-schema-ref-parser/lib/dereference.js:64:28)\n    at crawl (/Users/chuckreeves/Projects/api-docs/node_modules/@apidevtools/json-schema-ref-parser/lib/dereference.js:64:28)",
-            //   "message": "Error resolving $ref pointer \"https://docs.nterprise.com/schemas/niagara/workFlow.json#/properties/workflow_id\". \nToken \"workflow_id\" does not exist.",
-            //   "name": "SyntaxError"
-            // }
 
             logger.debug('Running widdershins on schema');
 
@@ -188,7 +200,7 @@ exports.handler = async (argv) => {
                 path.basename(file),
             );
 
-            fs.writeFileSync(
+            argv._writeFile(
                 schemaFile,
                 JSON.stringify(oas, null, 2),
             );
@@ -207,7 +219,7 @@ exports.handler = async (argv) => {
                     ...str.split('\n').slice(1),
                 ];
 
-                fs.writeFileSync(
+                argv._writeFile(
                     schemaFile.replace('.json', '.md'),
                     parts.join('\n'),
                 );
@@ -216,6 +228,14 @@ exports.handler = async (argv) => {
         },
         [],
     ));
+
+    if (argv.merge) {
+        logger.info('Writing merged OAS file');
+        argv._writeFile(
+            `${folders.v2Path}/oas_niagara.json`,
+            JSON.stringify(masterSchema, null, 2),
+        );
+    }
 
     logger.info('Converted OAS files to markdown');
 };

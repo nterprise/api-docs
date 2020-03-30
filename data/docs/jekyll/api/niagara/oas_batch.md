@@ -14,6 +14,9 @@ headingLevel: 2
 
 <h1 id="batches">Batches v2.0.0</h1>
 
+* Do not remove this line (it will not be displayed)
+{:toc}
+
 > Scroll down for example requests and responses.
 
 When a Work Order is created to configure Units, the production manager will break down the Work Order into one or more Batches.  For example, if a Work Order requested 500 iPads to be provisioned, and those devices are typically completed in boxes of ten, they may choose to create 50 Batches of 10.
@@ -29,6 +32,16 @@ Batches create a relationship between the `work order` and the `queue` allowing 
 ## Security Restrictions
 
 Batches descend from a `queue.` A User must be granted the `create.batch` permission and have access to queue before a batch can be created. 
+
+Base URLs:
+
+* <a href="https://{environment}.nterprise.com">https://{environment}.nterprise.com</a>
+
+    * **environment** -  Default: api
+
+        * api
+
+        * api.dev
 
 <h1 id="batches-batch">Batch</h1>
 
@@ -70,7 +83,7 @@ Fetch Batches
                 "type": "object",
                 "properties": {
                   "self": {
-                    "example": {
+                    "x-example": {
                       "href": "https://api.nterprise.com/batchs/JwlLkLBBm2IVWG"
                     },
                     "type": "object",
@@ -2820,7 +2833,7 @@ Fetch Batches
       "type": "object",
       "properties": {
         "self": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/batchs"
           },
           "type": "object",
@@ -2832,7 +2845,7 @@ Fetch Batches
           }
         },
         "next": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/batchs?offset=QVBrO2wm13iEyl&limit=100"
           },
           "type": "object",
@@ -3436,7 +3449,7 @@ Creates a new batch for a queue
       "type": "object",
       "properties": {
         "self": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/batchs/JwlLkLBBm2IVWG"
           },
           "type": "object",
@@ -6724,7 +6737,7 @@ Fetch Batch
       "type": "object",
       "properties": {
         "self": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/batchs/JwlLkLBBm2IVWG"
           },
           "type": "object",

@@ -7,6 +7,20 @@
     "description": "Customers may have multiple Programs, Projects, and Locations, as well as device Parts and individual Units.",
     "title": "Customers"
   },
+  "servers": [
+    {
+      "url": "https://{environment}.nterprise.com",
+      "variables": {
+        "environment": {
+          "default": "api",
+          "enum": [
+            "api",
+            "api.dev"
+          ]
+        }
+      }
+    }
+  ],
   "paths": {
     "/customers": {
       "$ref": "./paths/customer/customers.json"

@@ -14,6 +14,9 @@ headingLevel: 2
 
 <h1 id="contacts">Contacts v2.0.0</h1>
 
+* Do not remove this line (it will not be displayed)
+{:toc}
+
 > Scroll down for example requests and responses.
 
 Contacts contain email and phone number information for a non-user entity which allows sending notification information without the need to create a user login
@@ -21,6 +24,16 @@ Contacts contain email and phone number information for a non-user entity which 
 ## Security Restrictions
 
 Contacts are considered a top-level `entity.` `Users` must be granted the `create` permission on the Contact entity to be able to create contacts. Grant the `create` or `update` permissions to the user for the linked `entity` for the relationship operation to be approved.
+
+Base URLs:
+
+* <a href="https://{environment}.nterprise.com">https://{environment}.nterprise.com</a>
+
+    * **environment** -  Default: api
+
+        * api
+
+        * api.dev
 
 <h1 id="contacts-contact">Contact</h1>
 
@@ -62,7 +75,7 @@ Fetch Contact
                 "type": "object",
                 "properties": {
                   "self": {
-                    "example": {
+                    "x-example": {
                       "href": "https://api.nterprise.com/contacts/QVBrO2wm13iEyl"
                     },
                     "type": "object",
@@ -126,7 +139,7 @@ Fetch Contact
       "type": "object",
       "properties": {
         "self": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/contacts"
           },
           "type": "object",
@@ -138,7 +151,7 @@ Fetch Contact
           }
         },
         "next": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/contacts?offset=QVBrO2wm13iEyl&limit=100"
           },
           "type": "object",
@@ -291,7 +304,7 @@ Creates a new contact following the contact schema
       "type": "object",
       "properties": {
         "self": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/contacts/QVBrO2wm13iEyl"
           },
           "type": "object",
@@ -482,7 +495,7 @@ Fetch Contact
       "type": "object",
       "properties": {
         "self": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/contacts/QVBrO2wm13iEyl"
           },
           "type": "object",
@@ -690,7 +703,7 @@ Updates a new contact following the contact schema
       "type": "object",
       "properties": {
         "self": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/contacts/QVBrO2wm13iEyl"
           },
           "type": "object",

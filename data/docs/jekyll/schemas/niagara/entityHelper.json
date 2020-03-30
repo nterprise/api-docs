@@ -102,6 +102,16 @@
         "WOR.removed",
         "WOR.updated"
       ]
+    },
+    "meta": {
+      "type": "object",
+      "description": "Data for the resource as a key value pair",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "propertyNames": {
+        "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+      }
     }
   }
 }

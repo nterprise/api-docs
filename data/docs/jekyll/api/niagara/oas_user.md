@@ -1,7 +1,7 @@
 ---
 layout: page
 parent: Niagara API
-nav_order: 16
+nav_order: 17
 title: Users
 language_tabs: ''
 toc_footers: []
@@ -14,9 +14,22 @@ headingLevel: 2
 
 <h1 id="users">Users v2.0.0</h1>
 
+* Do not remove this line (it will not be displayed)
+{:toc}
+
 > Scroll down for example requests and responses.
 
 API for the nterprise application
+
+Base URLs:
+
+* <a href="https://{environment}.nterprise.com">https://{environment}.nterprise.com</a>
+
+    * **environment** -  Default: api
+
+        * api
+
+        * api.dev
 
 <h1 id="users-user">User</h1>
 
@@ -58,7 +71,7 @@ Fetch Users
                 "type": "object",
                 "properties": {
                   "self": {
-                    "example": {
+                    "x-example": {
                       "href": "https://api.nterprise.com/users/QEvVrVMMwVcJ6om"
                     },
                     "type": "object",
@@ -125,7 +138,7 @@ Fetch Users
       "type": "object",
       "properties": {
         "self": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/users"
           },
           "type": "object",
@@ -137,7 +150,7 @@ Fetch Users
           }
         },
         "next": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/users?offset=QVBrO2wm13iEyl&limit=100"
           },
           "type": "object",
@@ -256,7 +269,7 @@ Fetch User
       "type": "object",
       "properties": {
         "self": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/users/QEvVrVMMwVcJ6om"
           },
           "type": "object",
@@ -428,7 +441,7 @@ properties:
   entity_type:
     x-no-api-doc: true
     enum:
-      - UNIT
+      - USER
   label:
     type: string
     description: Label for the entity
@@ -486,5 +499,5 @@ properties:
 
 |Property|Value|
 |---|---|
-|entity_type|UNIT|
+|entity_type|USER|
 

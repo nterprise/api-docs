@@ -16,7 +16,7 @@
     },
     "entity_type": {
       "x-no-api-doc": true,
-      "const": "UNIT"
+      "const": "USER"
     },
     "label": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/label"

@@ -15,9 +15,16 @@
   ],
   "properties": {
     "resource_id": {
-      "type": "string",
       "description": "The identifier for the resource",
-      "pattern": "^[0-9a-zA-Z-_]+$"
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_id"
+    },
+    "entity_id": {
+      "x-no-api-doc": true,
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_id"
+    },
+    "entity_type": {
+      "x-no-api-doc": true,
+      "const": "RES"
     },
     "label": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/label"
@@ -37,55 +44,10 @@
       "pattern": "^[a-z][0-9a-zA-Z-]+$"
     },
     "meta": {
-      "type": "object",
-      "description": "Data for the resource as a key value pair",
-      "additionalProperties": {
-        "type": "string"
-      },
-      "propertyNames": {
-        "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-      }
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityHelper.json#/properties/meta"
     },
     "location": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/location.json"
-    },
-    "resource": {
-      "type": "object",
-      "description": "The parent resource if this is a child resource",
-      "properties": {
-        "resource_id": {
-          "$ref": "https://docs.nterprise.com/schemas/niagara/resource.json#/properties/resource_id"
-        },
-        "entity_id": {
-          "x-no-api-doc": true,
-          "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_id"
-        },
-        "entity_type": {
-          "x-no-api-doc": true,
-          "const": "RES"
-        },
-        "label": {
-          "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/label"
-        },
-        "slug": {
-          "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/slug"
-        },
-        "created": {
-          "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/created"
-        },
-        "updated": {
-          "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/updated"
-        },
-        "resource_type": {
-          "$ref": "https://docs.nterprise.com/schemas/niagara/resource.json#/properties/resource_type"
-        },
-        "meta": {
-          "$ref": "https://docs.nterprise.com/schemas/niagara/resource.json#/properties/meta"
-        },
-        "location": {
-          "$ref": "https://docs.nterprise.com/schemas/niagara/location.json"
-        }
-      }
     }
   }
 }

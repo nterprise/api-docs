@@ -21,13 +21,13 @@
             "type": "object",
             "properties": {
               "self": {
-                "example": {
+                "x-example": {
                   "href": "https://api.nterprise.com/manufacturers"
                 },
                 "$ref": "../schemas/link.json"
               },
               "next": {
-                "example": {
+                "x-example": {
                   "href": "https://api.nterprise.com/manufacturers?offset=QVBrO2wm13iEyl&limit=100"
                 },
                 "$ref": "../schemas/link.json"

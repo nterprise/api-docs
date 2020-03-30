@@ -7,6 +7,20 @@
     "description": "API for the nterprise application",
     "title": "Units"
   },
+  "servers": [
+    {
+      "url": "https://{environment}.nterprise.com",
+      "variables": {
+        "environment": {
+          "default": "api",
+          "enum": [
+            "api",
+            "api.dev"
+          ]
+        }
+      }
+    }
+  ],
   "paths": {
     "/units": {
       "$ref": "./paths/unit/units.json"

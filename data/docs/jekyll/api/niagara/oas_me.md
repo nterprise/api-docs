@@ -14,9 +14,22 @@ headingLevel: 2
 
 <h1 id="me">Me v2.0.0</h1>
 
+* Do not remove this line (it will not be displayed)
+{:toc}
+
 > Scroll down for example requests and responses.
 
 API for the nterprise application
+
+Base URLs:
+
+* <a href="https://{environment}.nterprise.com">https://{environment}.nterprise.com</a>
+
+    * **environment** -  Default: api
+
+        * api
+
+        * api.dev
 
 <h1 id="me-me">Me</h1>
 
@@ -45,7 +58,7 @@ Fetches the current user information along with resources they can access
           "type": "object",
           "properties": {
             "self": {
-              "example": {
+              "x-example": {
                 "href": "https://api.nterprise.com/users/QEvVrVMMwVcJ6om"
               },
               "type": "object",

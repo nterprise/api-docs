@@ -1,7 +1,7 @@
 ---
 layout: page
 parent: Niagara API
-nav_order: 8
+nav_order: 9
 title: Notes
 language_tabs: ''
 toc_footers: []
@@ -14,9 +14,22 @@ headingLevel: 2
 
 <h1 id="notes">Notes v2.0.0</h1>
 
+* Do not remove this line (it will not be displayed)
+{:toc}
+
 > Scroll down for example requests and responses.
 
 API for the nterprise application
+
+Base URLs:
+
+* <a href="https://{environment}.nterprise.com">https://{environment}.nterprise.com</a>
+
+    * **environment** -  Default: api
+
+        * api
+
+        * api.dev
 
 <h1 id="notes-note">Note</h1>
 
@@ -48,7 +61,7 @@ Fetch Note
       "type": "object",
       "properties": {
         "self": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/notes/kk9z7zwvQYH5GKx"
           },
           "type": "object",
@@ -114,7 +127,7 @@ Fetch Note
         "entity_type": {
           "x-no-api-doc": true,
           "enum": [
-            "UNIT"
+            "USER"
           ]
         },
         "label": {
@@ -204,7 +217,7 @@ Status Code **200**
 
 |Property|Value|
 |---|---|
-|entity_type|UNIT|
+|entity_type|USER|
 
 Status Code **401**
 
@@ -472,7 +485,7 @@ properties:
       entity_type:
         x-no-api-doc: true
         enum:
-          - UNIT
+          - USER
       label:
         type: string
         description: Label for the entity
@@ -540,5 +553,5 @@ properties:
 |Property|Value|
 |---|---|
 |entity_type|NOTE|
-|entity_type|UNIT|
+|entity_type|USER|
 

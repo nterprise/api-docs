@@ -1,7 +1,7 @@
 ---
 layout: page
 parent: Niagara API
-nav_order: 10
+nav_order: 11
 title: Programs
 language_tabs: ''
 toc_footers: []
@@ -14,9 +14,22 @@ headingLevel: 2
 
 <h1 id="programs">Programs v2.0.0</h1>
 
+* Do not remove this line (it will not be displayed)
+{:toc}
+
 > Scroll down for example requests and responses.
 
 API for the nterprise application
+
+Base URLs:
+
+* <a href="https://{environment}.nterprise.com">https://{environment}.nterprise.com</a>
+
+    * **environment** -  Default: api
+
+        * api
+
+        * api.dev
 
 <h1 id="programs-program">Program</h1>
 
@@ -58,7 +71,7 @@ Fetch Program
                 "type": "object",
                 "properties": {
                   "self": {
-                    "example": {
+                    "x-example": {
                       "href": "https://api.nterprise.com/programs/ZRPrErZZJrIO6mB"
                     },
                     "type": "object",
@@ -262,7 +275,7 @@ Fetch Program
       "type": "object",
       "properties": {
         "self": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/programs"
           },
           "type": "object",
@@ -274,7 +287,7 @@ Fetch Program
           }
         },
         "next": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/programs?offset=QVBrO2wm13iEyl&limit=100"
           },
           "type": "object",
@@ -521,7 +534,7 @@ Creates a new program
       "type": "object",
       "properties": {
         "self": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/programs/ZRPrErZZJrIO6mB"
           },
           "type": "object",
@@ -867,7 +880,7 @@ Fetch Program
       "type": "object",
       "properties": {
         "self": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/programs/ZRPrErZZJrIO6mB"
           },
           "type": "object",
@@ -1309,7 +1322,7 @@ Updates a program
       "type": "object",
       "properties": {
         "self": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/programs/ZRPrErZZJrIO6mB"
           },
           "type": "object",
@@ -1801,7 +1814,7 @@ Fetch Projects
                 "type": "object",
                 "properties": {
                   "self": {
-                    "example": {
+                    "x-example": {
                       "href": "https://api.nterprise.com/projects/QEvVrVMMwVcJ6om"
                     },
                     "type": "object",
@@ -2214,7 +2227,7 @@ Fetch Projects
       "type": "object",
       "properties": {
         "self": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/projects"
           },
           "type": "object",
@@ -2226,7 +2239,7 @@ Fetch Projects
           }
         },
         "next": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/projects?offset=QVBrO2wm13iEyl&limit=100"
           },
           "type": "object",
@@ -2430,7 +2443,7 @@ Fetch program work orders
                 "type": "object",
                 "properties": {
                   "self": {
-                    "example": {
+                    "x-example": {
                       "href": "https://api.nterprise.com/work_orders/kk9z7zwvQYH5GKx"
                     },
                     "type": "object",
@@ -4604,7 +4617,7 @@ Fetch program work orders
       "type": "object",
       "properties": {
         "self": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/work-orders"
           },
           "type": "object",
@@ -4616,7 +4629,7 @@ Fetch program work orders
           }
         },
         "next": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/work-orders?offset=QVBrO2wm13iEyl&limit=100"
           },
           "type": "object",

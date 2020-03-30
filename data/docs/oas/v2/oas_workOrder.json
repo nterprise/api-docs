@@ -7,6 +7,20 @@
     "description": "API for the nterprise application",
     "title": "Work Orders"
   },
+  "servers": [
+    {
+      "url": "https://{environment}.nterprise.com",
+      "variables": {
+        "environment": {
+          "default": "api",
+          "enum": [
+            "api",
+            "api.dev"
+          ]
+        }
+      }
+    }
+  ],
   "paths": {
     "/work-orders": {
       "$ref": "./paths/workOrder/workOrders.json"

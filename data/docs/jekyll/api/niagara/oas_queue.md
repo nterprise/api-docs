@@ -1,7 +1,7 @@
 ---
 layout: page
 parent: Niagara API
-nav_order: 12
+nav_order: 13
 title: Queues
 language_tabs: ''
 toc_footers: []
@@ -14,9 +14,22 @@ headingLevel: 2
 
 <h1 id="queues">Queues v2.0.0</h1>
 
+* Do not remove this line (it will not be displayed)
+{:toc}
+
 > Scroll down for example requests and responses.
 
 API for the nterprise application
+
+Base URLs:
+
+* <a href="https://{environment}.nterprise.com">https://{environment}.nterprise.com</a>
+
+    * **environment** -  Default: api
+
+        * api
+
+        * api.dev
 
 <h1 id="queues-queue">Queue</h1>
 
@@ -58,7 +71,7 @@ Fetch Queue
                 "type": "object",
                 "properties": {
                   "self": {
-                    "example": {
+                    "x-example": {
                       "href": "https://api.nterprise.com/queues/QEvVrVMMwVcJ6om"
                     },
                     "type": "object",
@@ -523,7 +536,7 @@ Fetch Queue
       "type": "object",
       "properties": {
         "self": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/queues"
           },
           "type": "object",
@@ -535,7 +548,7 @@ Fetch Queue
           }
         },
         "next": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/queues?offset=QVBrO2wm13iEyl&limit=100"
           },
           "type": "object",
@@ -977,7 +990,7 @@ Creates a new queue
       "type": "object",
       "properties": {
         "self": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/queues/QEvVrVMMwVcJ6om"
           },
           "type": "object",
@@ -1833,7 +1846,7 @@ Fetch Queue
       "type": "object",
       "properties": {
         "self": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/queues/QEvVrVMMwVcJ6om"
           },
           "type": "object",
@@ -2731,7 +2744,7 @@ Updates a queue
       "type": "object",
       "properties": {
         "self": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/queues/QEvVrVMMwVcJ6om"
           },
           "type": "object",
@@ -3733,7 +3746,7 @@ Fetch Queue Batches
                 "type": "object",
                 "properties": {
                   "self": {
-                    "example": {
+                    "x-example": {
                       "href": "https://api.nterprise.com/batchs/JwlLkLBBm2IVWG"
                     },
                     "type": "object",
@@ -6483,7 +6496,7 @@ Fetch Queue Batches
       "type": "object",
       "properties": {
         "self": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/batchs"
           },
           "type": "object",
@@ -6495,7 +6508,7 @@ Fetch Queue Batches
           }
         },
         "next": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/batchs?offset=QVBrO2wm13iEyl&limit=100"
           },
           "type": "object",

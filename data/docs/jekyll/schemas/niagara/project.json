@@ -28,6 +28,10 @@
       "x-no-api-doc": true,
       "const": "PRJ"
     },
+    "description": {
+      "type": ["string", "null"],
+      "description": "Project description"
+    },
     "label": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/label"
     },

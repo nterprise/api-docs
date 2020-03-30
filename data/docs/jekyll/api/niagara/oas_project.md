@@ -1,7 +1,7 @@
 ---
 layout: page
 parent: Niagara API
-nav_order: 11
+nav_order: 12
 title: Projects
 language_tabs: ''
 toc_footers: []
@@ -14,9 +14,22 @@ headingLevel: 2
 
 <h1 id="projects">Projects v2.0.0</h1>
 
+* Do not remove this line (it will not be displayed)
+{:toc}
+
 > Scroll down for example requests and responses.
 
 API for the nterprise application
+
+Base URLs:
+
+* <a href="https://{environment}.nterprise.com">https://{environment}.nterprise.com</a>
+
+    * **environment** -  Default: api
+
+        * api
+
+        * api.dev
 
 <h1 id="projects-project">Project</h1>
 
@@ -58,7 +71,7 @@ Fetch Project
                 "type": "object",
                 "properties": {
                   "self": {
-                    "example": {
+                    "x-example": {
                       "href": "https://api.nterprise.com/projects/QEvVrVMMwVcJ6om"
                     },
                     "type": "object",
@@ -471,7 +484,7 @@ Fetch Project
       "type": "object",
       "properties": {
         "self": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/projects"
           },
           "type": "object",
@@ -483,7 +496,7 @@ Fetch Project
           }
         },
         "next": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/projects?offset=QVBrO2wm13iEyl&limit=100"
           },
           "type": "object",
@@ -771,7 +784,7 @@ Creates a new project
       "type": "object",
       "properties": {
         "self": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/projects/QEvVrVMMwVcJ6om"
           },
           "type": "object",
@@ -1367,7 +1380,7 @@ Fetch Project
       "type": "object",
       "properties": {
         "self": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/projects/QEvVrVMMwVcJ6om"
           },
           "type": "object",
@@ -2059,7 +2072,7 @@ Updates a project
       "type": "object",
       "properties": {
         "self": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/projects/QEvVrVMMwVcJ6om"
           },
           "type": "object",
@@ -2801,7 +2814,7 @@ Fetch project work orders
                 "type": "object",
                 "properties": {
                   "self": {
-                    "example": {
+                    "x-example": {
                       "href": "https://api.nterprise.com/work_orders/kk9z7zwvQYH5GKx"
                     },
                     "type": "object",
@@ -4975,7 +4988,7 @@ Fetch project work orders
       "type": "object",
       "properties": {
         "self": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/work-orders"
           },
           "type": "object",
@@ -4987,7 +5000,7 @@ Fetch project work orders
           }
         },
         "next": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/work-orders?offset=QVBrO2wm13iEyl&limit=100"
           },
           "type": "object",

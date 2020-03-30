@@ -7,6 +7,20 @@
     "description": "When a Work Order is created to configure Units, the production manager will break down the Work Order into one or more Batches.  For example, if a Work Order requested 500 iPads to be provisioned, and those devices are typically completed in boxes of ten, they may choose to create 50 Batches of 10.\n\nBatches contain all of the information from the Work Order, including the Workflow, Begin and Due Dates, but also the assigned technician(s).\n\nEach Batch is then placed into a Production Queue, where the assigned technician will access as part of their assignments.\n\nCycles in a batch can be modified after the Batch is created; however, in-flight cycles will continue to process until completion or failure.\n\nBatches create a relationship between the `work order` and the `queue` allowing queues to be filtered by the work order\n\n\n## Security Restrictions\n\nBatches descend from a `queue.` A User must be granted the `create.batch` permission and have access to queue before a batch can be created. ",
     "title": "Batches"
   },
+  "servers": [
+    {
+      "url": "https://{environment}.nterprise.com",
+      "variables": {
+        "environment": {
+          "default": "api",
+          "enum": [
+            "api",
+            "api.dev"
+          ]
+        }
+      }
+    }
+  ],
   "paths": {
     "/batches": {
       "$ref": "./paths/batch/batches.json"

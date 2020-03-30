@@ -55,13 +55,19 @@
       "type": "string",
       "description": "The entity type this work flow applies too",
       "enum": [
-        "unit",
-        "part",
-        "program",
-        "project",
-        "customer",
-        "contact"
+        "UNIT",
+        "PART",
+        "PGM",
+        "PRJ",
+        "CUS",
+        "CON"
       ]
+    },
+    "triggered_by": {
+      "type": "array",
+      "items": {
+        "$ref": "https://docs.nterprise.com/schemas/niagara/entityHelper.json#/properties/entity_events"
+      }
     },
     "starts_at": {
       "type": "string",
@@ -77,6 +83,9 @@
           "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/allSteps.json#/properties/step"
         }
       }
+    },
+    "metadata": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityHelper.json#/properties/meta"
     }
   }
 }

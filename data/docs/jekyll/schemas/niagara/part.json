@@ -46,22 +46,62 @@
       "type": "object",
       "description": "Manufacturer information for the part",
       "required": [
+        "label",
+        "entity_id",
+        "entity_type",
+        "created",
+        "updated",
         "part_number"
       ],
-      "$ref": "https://docs.nterprise.com/schemas/niagara/manufacturer.json",
       "properties": {
         "part_number": {
-          "type": ["string", "null"],
+          "type": "string",
           "description": "Part number the manufacturer uses. If this is not set, then the part number is used"
+        },
+        "manufacturer_id": {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/manufacturer.json#/properties/entity_id"
+        },
+        "entity_id": {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/manufacturer.json#/properties/entity_id"
+        },
+        "entity_type": {
+          "const": "MFR"
+        },
+        "label": {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/manufacturer.json#/properties/label"
+        },
+        "slug": {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/manufacturer.json#/properties/slug"
+        },
+        "created": {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/manufacturer.json#/properties/created"
+        },
+        "updated": {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/manufacturer.json#/properties/updated"
         }
       }
     },
     "serial_prefix": {
-      "type": "string",
+      "type":["string", "null"],
       "description": "A serial number prefix for the part"
     },
     "input_filter": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter.json"
+    },
+    "total_units": {
+      "type": "integer",
+      "description": "Number of units of this part",
+      "readOnly": true
+    },
+    "total_units_allocated": {
+      "type": "integer",
+      "description": "Number of allocated units",
+      "readOnly": true
+    },
+    "total_units_unallocated": {
+      "type": "integer",
+      "description": "Number of free units",
+      "readOnly": true
     }
   }
 }

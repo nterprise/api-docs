@@ -6,7 +6,7 @@
       "properties": {
         "self": {
           "$ref": "./link.json",
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/notes/kk9z7zwvQYH5GKx"
           }
         }

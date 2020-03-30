@@ -25,6 +25,10 @@
         "CANCELLED",
         "BLOCKED"
       ]
+    },
+    "description": {
+      "type": ["string", "null"],
+      "description": "A description for the status"
     }
   }
 }

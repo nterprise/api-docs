@@ -9,8 +9,13 @@
     "entity_type",
     "created",
     "updated",
-    "workflow",
-    "entity"
+    "work_flow",
+    "entity",
+    "waiting_for_user",
+    "current_step",
+    "location",
+    "active",
+    "started_at"
   ],
   "properties": {
     "context_id": {
@@ -38,7 +43,30 @@
       "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/updated"
     },
     "workflow": {
-      "$ref": "./workFlow.json"
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow.json"
+    },
+    "current_location": {
+      "deprecated": true,
+      "$ref": "https://docs.nterprise.com/schemas/niagara/location.json"
+    },
+    "location": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/location.json"
+    },
+    "work_flow": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow.json"
+    },
+    "resource": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/resource.json"
+        },
+        {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/subResource.json"
+        }
+      ]
     },
     "current_step": {
       "type": "string",
@@ -95,9 +123,8 @@
       "readOnly": true
     },
     "ended_at": {
-      "type": "string",
+      "type": ["string", "null"],
       "format": "date-time",
-      "nullable": true,
       "description": "The date time the context ended",
       "readOnly": true
     },
@@ -123,8 +150,6 @@
     },
     "entity": {
       "type": "object",
-      "additionalProperties": false,
-      "readOnly": true,
       "anyOf": [
         {
           "$ref": "https://docs.nterprise.com/schemas/niagara/contact.json"

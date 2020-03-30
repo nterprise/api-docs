@@ -1,7 +1,7 @@
 ---
 layout: page
 parent: Niagara API
-nav_order: 19
+nav_order: 20
 title: Work Orders
 language_tabs: ''
 toc_footers: []
@@ -14,9 +14,22 @@ headingLevel: 2
 
 <h1 id="work-orders">Work Orders v2.0.0</h1>
 
+* Do not remove this line (it will not be displayed)
+{:toc}
+
 > Scroll down for example requests and responses.
 
 API for the nterprise application
+
+Base URLs:
+
+* <a href="https://{environment}.nterprise.com">https://{environment}.nterprise.com</a>
+
+    * **environment** -  Default: api
+
+        * api
+
+        * api.dev
 
 <h1 id="work-orders-work-order">Work Order</h1>
 
@@ -58,7 +71,7 @@ Fetch Work Order
                 "type": "object",
                 "properties": {
                   "self": {
-                    "example": {
+                    "x-example": {
                       "href": "https://api.nterprise.com/work_orders/kk9z7zwvQYH5GKx"
                     },
                     "type": "object",
@@ -2232,7 +2245,7 @@ Fetch Work Order
       "type": "object",
       "properties": {
         "self": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/work-orders"
           },
           "type": "object",
@@ -2244,7 +2257,7 @@ Fetch Work Order
           }
         },
         "next": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/work-orders?offset=QVBrO2wm13iEyl&limit=100"
           },
           "type": "object",
@@ -2586,7 +2599,7 @@ Creates a new work order
       "type": "object",
       "properties": {
         "self": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/work_orders/kk9z7zwvQYH5GKx"
           },
           "type": "object",
@@ -4990,7 +5003,7 @@ Fetch Work order
       "type": "object",
       "properties": {
         "self": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/work_orders/kk9z7zwvQYH5GKx"
           },
           "type": "object",
@@ -7497,7 +7510,7 @@ Updates a work order
       "type": "object",
       "properties": {
         "self": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/work_orders/kk9z7zwvQYH5GKx"
           },
           "type": "object",

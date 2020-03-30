@@ -7,6 +7,20 @@
     "description": "API for the nterprise application",
     "title": "Queues"
   },
+  "servers": [
+    {
+      "url": "https://{environment}.nterprise.com",
+      "variables": {
+        "environment": {
+          "default": "api",
+          "enum": [
+            "api",
+            "api.dev"
+          ]
+        }
+      }
+    }
+  ],
   "paths": {
     "/queues": {
       "$ref": "./paths/queue/queues.json"

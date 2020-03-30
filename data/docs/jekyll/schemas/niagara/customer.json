@@ -43,7 +43,7 @@
       "deprecated": true,
       "patternProperties": {
         "^[A-Za-z][A-Za-z0-9_]*$": {
-          "type": "string"
+          "type": ["string", "null"]
         }
       }
     },

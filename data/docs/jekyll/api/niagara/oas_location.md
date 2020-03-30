@@ -14,9 +14,22 @@ headingLevel: 2
 
 <h1 id="locations">Locations v2.0.0</h1>
 
+* Do not remove this line (it will not be displayed)
+{:toc}
+
 > Scroll down for example requests and responses.
 
 API for the nterprise application
+
+Base URLs:
+
+* <a href="https://{environment}.nterprise.com">https://{environment}.nterprise.com</a>
+
+    * **environment** -  Default: api
+
+        * api
+
+        * api.dev
 
 <h1 id="locations-location">Location</h1>
 
@@ -58,7 +71,7 @@ Fetch facilities
                 "type": "object",
                 "properties": {
                   "self": {
-                    "example": {
+                    "x-example": {
                       "href": "https://api.nterprise.com/locations/23Y1rNJ6zyiRzqN"
                     },
                     "type": "object",
@@ -419,7 +432,7 @@ Fetch facilities
       "type": "object",
       "properties": {
         "self": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/locations"
           },
           "type": "object",
@@ -431,7 +444,7 @@ Fetch facilities
           }
         },
         "next": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/locations?offset=QVBrO2wm13iEyl&limit=100"
           },
           "type": "object",
@@ -824,7 +837,7 @@ Fetch Location
                 "type": "object",
                 "properties": {
                   "self": {
-                    "example": {
+                    "x-example": {
                       "href": "https://api.nterprise.com/locations/23Y1rNJ6zyiRzqN"
                     },
                     "type": "object",
@@ -1185,7 +1198,7 @@ Fetch Location
       "type": "object",
       "properties": {
         "self": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/locations"
           },
           "type": "object",
@@ -1197,7 +1210,7 @@ Fetch Location
           }
         },
         "next": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/locations?offset=QVBrO2wm13iEyl&limit=100"
           },
           "type": "object",
@@ -2173,7 +2186,7 @@ Creates a new location
       "type": "object",
       "properties": {
         "self": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/locations/23Y1rNJ6zyiRzqN"
           },
           "type": "object",
@@ -2907,7 +2920,7 @@ Fetch Location
       "type": "object",
       "properties": {
         "self": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/locations/23Y1rNJ6zyiRzqN"
           },
           "type": "object",
@@ -4235,7 +4248,7 @@ Updates a location
       "type": "object",
       "properties": {
         "self": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/locations/23Y1rNJ6zyiRzqN"
           },
           "type": "object",
@@ -5115,7 +5128,7 @@ Fetch location resources
                 "type": "object",
                 "properties": {
                   "self": {
-                    "example": {
+                    "x-example": {
                       "href": "https://api.nterprise.com/resources/QEvVrVMMwVcJ6om"
                     },
                     "type": "object",
@@ -5978,7 +5991,7 @@ Fetch location resources
       "type": "object",
       "properties": {
         "self": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/resources"
           },
           "type": "object",
@@ -5990,7 +6003,7 @@ Fetch location resources
           }
         },
         "next": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/resources?offset=QVBrO2wm13iEyl&limit=100"
           },
           "type": "object",
@@ -6670,7 +6683,7 @@ Fetch location Resource
       "type": "object",
       "properties": {
         "self": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/resources/QEvVrVMMwVcJ6om"
           },
           "type": "object",
@@ -8212,7 +8225,7 @@ Fetch warehouses
                 "type": "object",
                 "properties": {
                   "self": {
-                    "example": {
+                    "x-example": {
                       "href": "https://api.nterprise.com/locations/23Y1rNJ6zyiRzqN"
                     },
                     "type": "object",
@@ -8573,7 +8586,7 @@ Fetch warehouses
       "type": "object",
       "properties": {
         "self": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/locations"
           },
           "type": "object",
@@ -8585,7 +8598,7 @@ Fetch warehouses
           }
         },
         "next": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/locations?offset=QVBrO2wm13iEyl&limit=100"
           },
           "type": "object",

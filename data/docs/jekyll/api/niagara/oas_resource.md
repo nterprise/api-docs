@@ -1,7 +1,7 @@
 ---
 layout: page
 parent: Niagara API
-nav_order: 13
+nav_order: 14
 title: Resources
 language_tabs: ''
 toc_footers: []
@@ -14,9 +14,22 @@ headingLevel: 2
 
 <h1 id="resources">Resources v2.0.0</h1>
 
+* Do not remove this line (it will not be displayed)
+{:toc}
+
 > Scroll down for example requests and responses.
 
 API for the nterprise application
+
+Base URLs:
+
+* <a href="https://{environment}.nterprise.com">https://{environment}.nterprise.com</a>
+
+    * **environment** -  Default: api
+
+        * api
+
+        * api.dev
 
 <h1 id="resources-resource">Resource</h1>
 
@@ -58,7 +71,7 @@ Fetch resources
                 "type": "object",
                 "properties": {
                   "self": {
-                    "example": {
+                    "x-example": {
                       "href": "https://api.nterprise.com/resources/QEvVrVMMwVcJ6om"
                     },
                     "type": "object",
@@ -921,7 +934,7 @@ Fetch resources
       "type": "object",
       "properties": {
         "self": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/resources"
           },
           "type": "object",
@@ -933,7 +946,7 @@ Fetch resources
           }
         },
         "next": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/resources?offset=QVBrO2wm13iEyl&limit=100"
           },
           "type": "object",
@@ -1680,7 +1693,7 @@ Creates a new resource
       "type": "object",
       "properties": {
         "self": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/resources/QEvVrVMMwVcJ6om"
           },
           "type": "object",
@@ -3212,7 +3225,7 @@ Fetch Resource
       "type": "object",
       "properties": {
         "self": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/resources/QEvVrVMMwVcJ6om"
           },
           "type": "object",
@@ -4813,7 +4826,7 @@ Updates a resource
       "type": "object",
       "properties": {
         "self": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/resources/QEvVrVMMwVcJ6om"
           },
           "type": "object",
@@ -6491,7 +6504,7 @@ Fetch child resources
                 "type": "object",
                 "properties": {
                   "self": {
-                    "example": {
+                    "x-example": {
                       "href": "https://api.nterprise.com/resources/QEvVrVMMwVcJ6om"
                     },
                     "type": "object",
@@ -7354,7 +7367,7 @@ Fetch child resources
       "type": "object",
       "properties": {
         "self": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/resources"
           },
           "type": "object",
@@ -7366,7 +7379,7 @@ Fetch child resources
           }
         },
         "next": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/resources?offset=QVBrO2wm13iEyl&limit=100"
           },
           "type": "object",
@@ -8056,7 +8069,7 @@ Fetches all the contexts at a resource
                 "type": "object",
                 "properties": {
                   "self": {
-                    "example": {
+                    "x-example": {
                       "href": "https://api.nterprise.com/contexts/kk9z7zwvQYH5GKx"
                     },
                     "type": "object",
@@ -10001,7 +10014,8 @@ Fetches all the contexts at a resource
                       "created",
                       "updated",
                       "customer",
-                      "manufacturer"
+                      "manufacturer",
+                      "serial_prefix"
                     ],
                     "properties": {
                       "part_id": {
@@ -10163,7 +10177,8 @@ Fetches all the contexts at a resource
                         "properties": {
                           "part_number": {
                             "type": "string",
-                            "description": "Manufacturer part number"
+                            "nullable": true,
+                            "description": "Part number the manufacturer uses. If this is not set, then the part number is used"
                           }
                         },
                         "additionalProperties": false
@@ -12024,7 +12039,8 @@ Fetches all the contexts at a resource
                           "created",
                           "updated",
                           "customer",
-                          "manufacturer"
+                          "manufacturer",
+                          "serial_prefix"
                         ],
                         "properties": {
                           "part_id": {
@@ -12186,7 +12202,8 @@ Fetches all the contexts at a resource
                             "properties": {
                               "part_number": {
                                 "type": "string",
-                                "description": "Manufacturer part number"
+                                "nullable": true,
+                                "description": "Part number the manufacturer uses. If this is not set, then the part number is used"
                               }
                             },
                             "additionalProperties": false
@@ -15115,7 +15132,7 @@ Fetches all the contexts at a resource
       "type": "object",
       "properties": {
         "self": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/contexts"
           },
           "type": "object",
@@ -15127,7 +15144,7 @@ Fetches all the contexts at a resource
           }
         },
         "next": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/contexts?offset=QVBrO2wm13iEyl&limit=100"
           },
           "type": "object",
@@ -15259,8 +15276,8 @@ Status Code **200**
 |»»»»»»» total_programs|number|false|none|Total programs under the customer|
 |»»»»»»» total_projects|number|false|none|Total projects under the customer|
 |»»»»»» manufacturer|object|true|none|Manufacturer information for the part|
-|»»»»»»» part_number|string|true|none|Manufacturer part number|
-|»»»»»» serial_prefix|string|false|none|A serial number prefix for the part|
+|»»»»»»» part_number|string\|null|true|none|Part number the manufacturer uses. If this is not set, then the part number is used|
+|»»»»»» serial_prefix|string|true|none|A serial number prefix for the part|
 |»»»»»» input_filter|[object]|false|none|Input Filters allow custom fields to be defined for entities|
 |»»»»»»» label|string|true|none|Human readable name|
 |»»»»»»» key|string|true|read-only|Slug used to store the property|
@@ -15694,8 +15711,8 @@ Status Code **200**
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» total_programs|number|false|none|Total programs under the customer|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» total_projects|number|false|none|Total projects under the customer|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» manufacturer|object|true|none|Manufacturer information for the part|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» part_number|string|true|none|Manufacturer part number|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» serial_prefix|string|false|none|A serial number prefix for the part|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» part_number|string\|null|true|none|Part number the manufacturer uses. If this is not set, then the part number is used|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» serial_prefix|string|true|none|A serial number prefix for the part|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» input_filter|[object]|false|none|Input Filters allow custom fields to be defined for entities|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» label|string|true|none|Human readable name|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» key|string|true|read-only|Slug used to store the property|

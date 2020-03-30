@@ -35,9 +35,8 @@
           "default": false
         },
         "default": {
-          "type": "string",
-          "description": "If this is set and the value is not in the approved_list, set the value to this",
-          "nullable": true
+          "type": ["string", "null"],
+          "description": "If this is set and the value is not in the approved_list, set the value to this"
         }
       }
     }

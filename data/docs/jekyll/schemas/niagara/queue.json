@@ -10,7 +10,10 @@
     "entity_type",
     "created",
     "updated",
-    "location"
+    "location",
+    "is_active",
+    "active_batches",
+    "active_cycles"
   ],
   "properties": {
     "queue_id": {
@@ -49,9 +52,29 @@
     "total_work_orders": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/cycle.json"
     },
+    "active_work_orders": {
+      "type": "number",
+      "description": "Total of work orders in an active status",
+      "readOnly": true
+    },
     "total_batches": {
       "type": "integer",
       "description": "Number of batches assigned to the queue",
+      "readOnly": true
+    },
+    "is_active": {
+      "type": "boolean",
+      "description": "Toggle if the batch has active cycles or batches",
+      "readOnly": true
+    },
+    "active_batches": {
+      "type": "number",
+      "description": "Total of batches in the queue with active cycles",
+      "readOnly": true
+    },
+    "active_cycles": {
+      "type": "number",
+      "description": "Total of all active cycles across all batches",
       "readOnly": true
     }
   }

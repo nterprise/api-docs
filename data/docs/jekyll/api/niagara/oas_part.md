@@ -1,7 +1,7 @@
 ---
 layout: page
 parent: Niagara API
-nav_order: 9
+nav_order: 10
 title: Parts
 language_tabs: ''
 toc_footers: []
@@ -14,9 +14,22 @@ headingLevel: 2
 
 <h1 id="parts">Parts v2.0.0</h1>
 
+* Do not remove this line (it will not be displayed)
+{:toc}
+
 > Scroll down for example requests and responses.
 
 API for the nterprise application
+
+Base URLs:
+
+* <a href="https://{environment}.nterprise.com">https://{environment}.nterprise.com</a>
+
+    * **environment** -  Default: api
+
+        * api
+
+        * api.dev
 
 <h1 id="parts-part">Part</h1>
 
@@ -58,7 +71,7 @@ Fetch Part
                 "type": "object",
                 "properties": {
                   "self": {
-                    "example": {
+                    "x-example": {
                       "href": "https://api.nterprise.com/parts/23Y1rNJ6zyiRzqN"
                     },
                     "type": "object",
@@ -212,18 +225,65 @@ Fetch Part
                 "type": "object",
                 "description": "Manufacturer information for the part",
                 "required": [
+                  "label",
+                  "entity_id",
+                  "entity_type",
+                  "created",
+                  "updated",
                   "part_number"
                 ],
                 "properties": {
                   "part_number": {
                     "type": "string",
-                    "description": "Manufacturer part number"
+                    "description": "Part number the manufacturer uses. If this is not set, then the part number is used"
+                  },
+                  "manufacturer_id": {
+                    "x-no-api-doc": true,
+                    "type": "string",
+                    "description": "Customer identifier",
+                    "readOnly": true,
+                    "pattern": "^[0-9a-zA-Z-_]+$"
+                  },
+                  "entity_id": {
+                    "x-no-api-doc": true,
+                    "type": "string",
+                    "description": "Customer identifier",
+                    "readOnly": true,
+                    "pattern": "^[0-9a-zA-Z-_]+$"
+                  },
+                  "entity_type": {
+                    "enum": [
+                      "MFR"
+                    ]
+                  },
+                  "label": {
+                    "type": "string",
+                    "description": "Label for the entity"
+                  },
+                  "slug": {
+                    "type": "string",
+                    "description": "Slug for the entity (Auto-generated from the label)",
+                    "readOnly": true,
+                    "deprecated": true,
+                    "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                  },
+                  "created": {
+                    "description": "Date the entity was created",
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true
+                  },
+                  "updated": {
+                    "description": "Last date the entity was updated",
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true
                   }
-                },
-                "additionalProperties": false
+                }
               },
               "serial_prefix": {
                 "type": "string",
+                "nullable": true,
                 "description": "A serial number prefix for the part"
               },
               "input_filter": {
@@ -291,8 +351,8 @@ Fetch Part
                                   },
                                   "default": {
                                     "type": "string",
-                                    "description": "If this is set and the value is not in the approved_list, set the value to this",
-                                    "nullable": true
+                                    "nullable": true,
+                                    "description": "If this is set and the value is not in the approved_list, set the value to this"
                                   }
                                 }
                               }
@@ -1251,7 +1311,7 @@ Fetch Part
       "type": "object",
       "properties": {
         "self": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/parts"
           },
           "type": "object",
@@ -1263,7 +1323,7 @@ Fetch Part
           }
         },
         "next": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/parts?offset=QVBrO2wm13iEyl&limit=100"
           },
           "type": "object",
@@ -1319,8 +1379,15 @@ Status Code **200**
 |»»»»» total_programs|number|false|none|Total programs under the customer|
 |»»»»» total_projects|number|false|none|Total projects under the customer|
 |»»»» manufacturer|object|false|none|Manufacturer information for the part|
-|»»»»» part_number|string|true|none|Manufacturer part number|
-|»»»» serial_prefix|string|false|none|A serial number prefix for the part|
+|»»»»» part_number|string|true|none|Part number the manufacturer uses. If this is not set, then the part number is used|
+|»»»»» manufacturer_id|string|false|read-only|Customer identifier|
+|»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»» entity_type|string|true|none|none|
+|»»»»» label|string|true|none|Label for the entity|
+|»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»»» serial_prefix|string\|null|false|none|A serial number prefix for the part|
 |»»»» input_filter|[object]|false|none|Input Filters allow custom fields to be defined for entities|
 |»»»»» label|string|true|none|Human readable name|
 |»»»»» key|string|true|read-only|Slug used to store the property|
@@ -1642,6 +1709,7 @@ Status Code **200**
 |category|COMPLETE|
 |category|CANCELLED|
 |category|BLOCKED|
+|entity_type|MFR|
 |type|allowed_list|
 |type|camel|
 |type|date|
@@ -1816,12 +1884,13 @@ Creates a new part  following the part  schema
         },
         "part_number": {
           "type": "string",
-          "description": "Manufacturer part number"
+          "description": "Part number the manufacturer uses. If this is not set, then the part number is used"
         }
       }
     },
     "serial_prefix": {
       "type": "string",
+      "nullable": true,
       "description": "A serial number prefix for the part"
     },
     "input_filter": {
@@ -1889,8 +1958,8 @@ Creates a new part  following the part  schema
                         },
                         "default": {
                           "type": "string",
-                          "description": "If this is set and the value is not in the approved_list, set the value to this",
-                          "nullable": true
+                          "nullable": true,
+                          "description": "If this is set and the value is not in the approved_list, set the value to this"
                         }
                       }
                     }
@@ -2853,8 +2922,8 @@ Creates a new part  following the part  schema
 |» customer_id|body|string|true|Customer identifier|
 |manufacturer|body|object|true|none|
 |» manufacturer_id|body|string|true|Manufacturer identifier|
-|» part_number|body|string|true|Manufacturer part number|
-|serial_prefix|body|string|true|A serial number prefix for the part|
+|» part_number|body|string|true|Part number the manufacturer uses. If this is not set, then the part number is used|
+|serial_prefix|body|string\|null|true|A serial number prefix for the part|
 |input_filter|body|[object]|true|Input Filters allow custom fields to be defined for entities|
 |» label|body|string|true|Human readable name|
 |» key|body|string|true|Slug used to store the property|
@@ -3112,7 +3181,7 @@ Creates a new part  following the part  schema
       "type": "object",
       "properties": {
         "self": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/parts/23Y1rNJ6zyiRzqN"
           },
           "type": "object",
@@ -3266,18 +3335,65 @@ Creates a new part  following the part  schema
       "type": "object",
       "description": "Manufacturer information for the part",
       "required": [
+        "label",
+        "entity_id",
+        "entity_type",
+        "created",
+        "updated",
         "part_number"
       ],
       "properties": {
         "part_number": {
           "type": "string",
-          "description": "Manufacturer part number"
+          "description": "Part number the manufacturer uses. If this is not set, then the part number is used"
+        },
+        "manufacturer_id": {
+          "x-no-api-doc": true,
+          "type": "string",
+          "description": "Customer identifier",
+          "readOnly": true,
+          "pattern": "^[0-9a-zA-Z-_]+$"
+        },
+        "entity_id": {
+          "x-no-api-doc": true,
+          "type": "string",
+          "description": "Customer identifier",
+          "readOnly": true,
+          "pattern": "^[0-9a-zA-Z-_]+$"
+        },
+        "entity_type": {
+          "enum": [
+            "MFR"
+          ]
+        },
+        "label": {
+          "type": "string",
+          "description": "Label for the entity"
+        },
+        "slug": {
+          "type": "string",
+          "description": "Slug for the entity (Auto-generated from the label)",
+          "readOnly": true,
+          "deprecated": true,
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "created": {
+          "description": "Date the entity was created",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "updated": {
+          "description": "Last date the entity was updated",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
         }
-      },
-      "additionalProperties": false
+      }
     },
     "serial_prefix": {
       "type": "string",
+      "nullable": true,
       "description": "A serial number prefix for the part"
     },
     "input_filter": {
@@ -3345,8 +3461,8 @@ Creates a new part  following the part  schema
                         },
                         "default": {
                           "type": "string",
-                          "description": "If this is set and the value is not in the approved_list, set the value to this",
-                          "nullable": true
+                          "nullable": true,
+                          "description": "If this is set and the value is not in the approved_list, set the value to this"
                         }
                       }
                     }
@@ -4339,8 +4455,15 @@ Status Code **200**
 |»»» total_programs|number|false|none|Total programs under the customer|
 |»»» total_projects|number|false|none|Total projects under the customer|
 |»» manufacturer|object|false|none|Manufacturer information for the part|
-|»»» part_number|string|true|none|Manufacturer part number|
-|»» serial_prefix|string|false|none|A serial number prefix for the part|
+|»»» part_number|string|true|none|Part number the manufacturer uses. If this is not set, then the part number is used|
+|»»» manufacturer_id|string|false|read-only|Customer identifier|
+|»»» entity_id|string|true|read-only|Customer identifier|
+|»»» entity_type|string|true|none|none|
+|»»» label|string|true|none|Label for the entity|
+|»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»» serial_prefix|string\|null|false|none|A serial number prefix for the part|
 |»» input_filter|[object]|false|none|Input Filters allow custom fields to be defined for entities|
 |»»» label|string|true|none|Human readable name|
 |»»» key|string|true|read-only|Slug used to store the property|
@@ -4652,6 +4775,7 @@ Status Code **200**
 |category|COMPLETE|
 |category|CANCELLED|
 |category|BLOCKED|
+|entity_type|MFR|
 |type|allowed_list|
 |type|camel|
 |type|date|
@@ -4834,7 +4958,7 @@ Fetch Part
       "type": "object",
       "properties": {
         "self": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/parts/23Y1rNJ6zyiRzqN"
           },
           "type": "object",
@@ -4988,18 +5112,65 @@ Fetch Part
       "type": "object",
       "description": "Manufacturer information for the part",
       "required": [
+        "label",
+        "entity_id",
+        "entity_type",
+        "created",
+        "updated",
         "part_number"
       ],
       "properties": {
         "part_number": {
           "type": "string",
-          "description": "Manufacturer part number"
+          "description": "Part number the manufacturer uses. If this is not set, then the part number is used"
+        },
+        "manufacturer_id": {
+          "x-no-api-doc": true,
+          "type": "string",
+          "description": "Customer identifier",
+          "readOnly": true,
+          "pattern": "^[0-9a-zA-Z-_]+$"
+        },
+        "entity_id": {
+          "x-no-api-doc": true,
+          "type": "string",
+          "description": "Customer identifier",
+          "readOnly": true,
+          "pattern": "^[0-9a-zA-Z-_]+$"
+        },
+        "entity_type": {
+          "enum": [
+            "MFR"
+          ]
+        },
+        "label": {
+          "type": "string",
+          "description": "Label for the entity"
+        },
+        "slug": {
+          "type": "string",
+          "description": "Slug for the entity (Auto-generated from the label)",
+          "readOnly": true,
+          "deprecated": true,
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "created": {
+          "description": "Date the entity was created",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "updated": {
+          "description": "Last date the entity was updated",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
         }
-      },
-      "additionalProperties": false
+      }
     },
     "serial_prefix": {
       "type": "string",
+      "nullable": true,
       "description": "A serial number prefix for the part"
     },
     "input_filter": {
@@ -5067,8 +5238,8 @@ Fetch Part
                         },
                         "default": {
                           "type": "string",
-                          "description": "If this is set and the value is not in the approved_list, set the value to this",
-                          "nullable": true
+                          "nullable": true,
+                          "description": "If this is set and the value is not in the approved_list, set the value to this"
                         }
                       }
                     }
@@ -6060,8 +6231,15 @@ Status Code **200**
 |»»» total_programs|number|false|none|Total programs under the customer|
 |»»» total_projects|number|false|none|Total projects under the customer|
 |»» manufacturer|object|false|none|Manufacturer information for the part|
-|»»» part_number|string|true|none|Manufacturer part number|
-|»» serial_prefix|string|false|none|A serial number prefix for the part|
+|»»» part_number|string|true|none|Part number the manufacturer uses. If this is not set, then the part number is used|
+|»»» manufacturer_id|string|false|read-only|Customer identifier|
+|»»» entity_id|string|true|read-only|Customer identifier|
+|»»» entity_type|string|true|none|none|
+|»»» label|string|true|none|Label for the entity|
+|»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»» serial_prefix|string\|null|false|none|A serial number prefix for the part|
 |»» input_filter|[object]|false|none|Input Filters allow custom fields to be defined for entities|
 |»»» label|string|true|none|Human readable name|
 |»»» key|string|true|read-only|Slug used to store the property|
@@ -6373,6 +6551,7 @@ Status Code **200**
 |category|COMPLETE|
 |category|CANCELLED|
 |category|BLOCKED|
+|entity_type|MFR|
 |type|allowed_list|
 |type|camel|
 |type|date|
@@ -6565,12 +6744,13 @@ Updates a part
         },
         "part_number": {
           "type": "string",
-          "description": "Manufacturer part number"
+          "description": "Part number the manufacturer uses. If this is not set, then the part number is used"
         }
       }
     },
     "serial_prefix": {
       "type": "string",
+      "nullable": true,
       "description": "A serial number prefix for the part"
     },
     "input_filter": {
@@ -6638,8 +6818,8 @@ Updates a part
                         },
                         "default": {
                           "type": "string",
-                          "description": "If this is set and the value is not in the approved_list, set the value to this",
-                          "nullable": true
+                          "nullable": true,
+                          "description": "If this is set and the value is not in the approved_list, set the value to this"
                         }
                       }
                     }
@@ -7603,8 +7783,8 @@ Updates a part
 |» customer_id|body|string|true|Customer identifier|
 |manufacturer|body|object|true|none|
 |» manufacturer_id|body|string|true|Manufacturer identifier|
-|» part_number|body|string|true|Manufacturer part number|
-|serial_prefix|body|string|true|A serial number prefix for the part|
+|» part_number|body|string|true|Part number the manufacturer uses. If this is not set, then the part number is used|
+|serial_prefix|body|string\|null|true|A serial number prefix for the part|
 |input_filter|body|[object]|true|Input Filters allow custom fields to be defined for entities|
 |» label|body|string|true|Human readable name|
 |» key|body|string|true|Slug used to store the property|
@@ -7862,7 +8042,7 @@ Updates a part
       "type": "object",
       "properties": {
         "self": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/parts/23Y1rNJ6zyiRzqN"
           },
           "type": "object",
@@ -8016,18 +8196,65 @@ Updates a part
       "type": "object",
       "description": "Manufacturer information for the part",
       "required": [
+        "label",
+        "entity_id",
+        "entity_type",
+        "created",
+        "updated",
         "part_number"
       ],
       "properties": {
         "part_number": {
           "type": "string",
-          "description": "Manufacturer part number"
+          "description": "Part number the manufacturer uses. If this is not set, then the part number is used"
+        },
+        "manufacturer_id": {
+          "x-no-api-doc": true,
+          "type": "string",
+          "description": "Customer identifier",
+          "readOnly": true,
+          "pattern": "^[0-9a-zA-Z-_]+$"
+        },
+        "entity_id": {
+          "x-no-api-doc": true,
+          "type": "string",
+          "description": "Customer identifier",
+          "readOnly": true,
+          "pattern": "^[0-9a-zA-Z-_]+$"
+        },
+        "entity_type": {
+          "enum": [
+            "MFR"
+          ]
+        },
+        "label": {
+          "type": "string",
+          "description": "Label for the entity"
+        },
+        "slug": {
+          "type": "string",
+          "description": "Slug for the entity (Auto-generated from the label)",
+          "readOnly": true,
+          "deprecated": true,
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "created": {
+          "description": "Date the entity was created",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "updated": {
+          "description": "Last date the entity was updated",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
         }
-      },
-      "additionalProperties": false
+      }
     },
     "serial_prefix": {
       "type": "string",
+      "nullable": true,
       "description": "A serial number prefix for the part"
     },
     "input_filter": {
@@ -8095,8 +8322,8 @@ Updates a part
                         },
                         "default": {
                           "type": "string",
-                          "description": "If this is set and the value is not in the approved_list, set the value to this",
-                          "nullable": true
+                          "nullable": true,
+                          "description": "If this is set and the value is not in the approved_list, set the value to this"
                         }
                       }
                     }
@@ -9089,8 +9316,15 @@ Status Code **200**
 |»»» total_programs|number|false|none|Total programs under the customer|
 |»»» total_projects|number|false|none|Total projects under the customer|
 |»» manufacturer|object|false|none|Manufacturer information for the part|
-|»»» part_number|string|true|none|Manufacturer part number|
-|»» serial_prefix|string|false|none|A serial number prefix for the part|
+|»»» part_number|string|true|none|Part number the manufacturer uses. If this is not set, then the part number is used|
+|»»» manufacturer_id|string|false|read-only|Customer identifier|
+|»»» entity_id|string|true|read-only|Customer identifier|
+|»»» entity_type|string|true|none|none|
+|»»» label|string|true|none|Label for the entity|
+|»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»» serial_prefix|string\|null|false|none|A serial number prefix for the part|
 |»» input_filter|[object]|false|none|Input Filters allow custom fields to be defined for entities|
 |»»» label|string|true|none|Human readable name|
 |»»» key|string|true|read-only|Slug used to store the property|
@@ -9402,6 +9636,7 @@ Status Code **200**
 |category|COMPLETE|
 |category|CANCELLED|
 |category|BLOCKED|
+|entity_type|MFR|
 |type|allowed_list|
 |type|camel|
 |type|date|
@@ -9732,7 +9967,7 @@ Fetch Unit
                 "type": "object",
                 "properties": {
                   "self": {
-                    "example": {
+                    "x-example": {
                       "href": "https://api.nterprise.com/units/QEvVrVMMwVcJ6om"
                     },
                     "type": "object",
@@ -9786,90 +10021,122 @@ Fetch Unit
                 "description": "Identifier set by the tenant"
               },
               "manufacturer": {
-                "description": "The manufacturer that makes this unit",
                 "type": "object",
+                "description": "Manufacturer information for the part",
+                "required": [
+                  "label",
+                  "entity_id",
+                  "entity_type",
+                  "created",
+                  "updated",
+                  "part_number"
+                ],
                 "properties": {
                   "part_number": {
                     "type": "string",
-                    "description": "The part number supplied by the manufacturer"
+                    "description": "Part number the manufacturer uses. If this is not set, then the part number is used"
+                  },
+                  "manufacturer_id": {
+                    "x-no-api-doc": true,
+                    "type": "string",
+                    "description": "Customer identifier",
+                    "readOnly": true,
+                    "pattern": "^[0-9a-zA-Z-_]+$"
+                  },
+                  "entity_id": {
+                    "x-no-api-doc": true,
+                    "type": "string",
+                    "description": "Customer identifier",
+                    "readOnly": true,
+                    "pattern": "^[0-9a-zA-Z-_]+$"
+                  },
+                  "entity_type": {
+                    "enum": [
+                      "MFR"
+                    ]
+                  },
+                  "label": {
+                    "type": "string",
+                    "description": "Label for the entity"
+                  },
+                  "slug": {
+                    "type": "string",
+                    "description": "Slug for the entity (Auto-generated from the label)",
+                    "readOnly": true,
+                    "deprecated": true,
+                    "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                  },
+                  "created": {
+                    "description": "Date the entity was created",
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true
+                  },
+                  "updated": {
+                    "description": "Last date the entity was updated",
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true
                   }
-                },
-                "allOf": [
-                  {
-                    "type": "object",
-                    "description": "A Manufacturer of parts",
-                    "additionalProperties": false,
-                    "required": [
-                      "label",
-                      "entity_id",
-                      "entity_type",
-                      "created",
-                      "updated"
-                    ],
-                    "properties": {
-                      "manufacturer_id": {
-                        "description": "Manufacturer identifier",
-                        "type": "string",
-                        "readOnly": true,
-                        "pattern": "^[0-9a-zA-Z-_]+$"
-                      },
-                      "entity_id": {
-                        "x-no-api-doc": true,
-                        "type": "string",
-                        "description": "Customer identifier",
-                        "readOnly": true,
-                        "pattern": "^[0-9a-zA-Z-_]+$"
-                      },
-                      "entity_type": {
-                        "x-no-api-doc": true,
-                        "enum": [
-                          "MFR"
-                        ]
-                      },
-                      "label": {
-                        "type": "string",
-                        "description": "Label for the entity"
-                      },
-                      "slug": {
-                        "type": "string",
-                        "description": "Slug for the entity (Auto-generated from the label)",
-                        "readOnly": true,
-                        "deprecated": true,
-                        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-                      },
-                      "created": {
-                        "description": "Date the entity was created",
-                        "type": "string",
-                        "format": "date-time",
-                        "readOnly": true
-                      },
-                      "updated": {
-                        "description": "Last date the entity was updated",
-                        "type": "string",
-                        "format": "date-time",
-                        "readOnly": true
-                      }
-                    }
-                  }
-                ]
+                }
               },
               "vendor": {
                 "type": "object",
                 "description": "The vendor that sold this unit",
-                "properties": {
-                  "part_number": {
-                    "type": "string",
-                    "description": "The part number supplied by the vendor"
-                  }
-                },
-                "additionalProperties": false,
                 "required": [
                   "label",
                   "entity_id",
                   "entity_type",
                   "created",
                   "updated"
-                ]
+                ],
+                "properties": {
+                  "vendor_id": {
+                    "type": "string",
+                    "description": "unique id",
+                    "pattern": "^[0-9a-zA-Z-_]+$"
+                  },
+                  "entity_id": {
+                    "x-no-api-doc": true,
+                    "type": "string",
+                    "description": "Customer identifier",
+                    "readOnly": true,
+                    "pattern": "^[0-9a-zA-Z-_]+$"
+                  },
+                  "entity_type": {
+                    "enum": [
+                      "VEN"
+                    ]
+                  },
+                  "label": {
+                    "type": "string",
+                    "description": "Label for the entity"
+                  },
+                  "slug": {
+                    "type": "string",
+                    "description": "Slug for the entity (Auto-generated from the label)",
+                    "readOnly": true,
+                    "deprecated": true,
+                    "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                  },
+                  "created": {
+                    "description": "Date the entity was created",
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true
+                  },
+                  "updated": {
+                    "description": "Last date the entity was updated",
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true
+                  },
+                  "part_number": {
+                    "type": "string",
+                    "nullable": true,
+                    "description": "The part number supplied by the vendor"
+                  }
+                }
               },
               "part": {
                 "type": "object",
@@ -9882,7 +10149,8 @@ Fetch Unit
                   "created",
                   "updated",
                   "customer",
-                  "manufacturer"
+                  "manufacturer",
+                  "serial_prefix"
                 ],
                 "properties": {
                   "part_id": {
@@ -10039,18 +10307,65 @@ Fetch Unit
                     "type": "object",
                     "description": "Manufacturer information for the part",
                     "required": [
+                      "label",
+                      "entity_id",
+                      "entity_type",
+                      "created",
+                      "updated",
                       "part_number"
                     ],
                     "properties": {
                       "part_number": {
                         "type": "string",
-                        "description": "Manufacturer part number"
+                        "description": "Part number the manufacturer uses. If this is not set, then the part number is used"
+                      },
+                      "manufacturer_id": {
+                        "x-no-api-doc": true,
+                        "type": "string",
+                        "description": "Customer identifier",
+                        "readOnly": true,
+                        "pattern": "^[0-9a-zA-Z-_]+$"
+                      },
+                      "entity_id": {
+                        "x-no-api-doc": true,
+                        "type": "string",
+                        "description": "Customer identifier",
+                        "readOnly": true,
+                        "pattern": "^[0-9a-zA-Z-_]+$"
+                      },
+                      "entity_type": {
+                        "enum": [
+                          "MFR"
+                        ]
+                      },
+                      "label": {
+                        "type": "string",
+                        "description": "Label for the entity"
+                      },
+                      "slug": {
+                        "type": "string",
+                        "description": "Slug for the entity (Auto-generated from the label)",
+                        "readOnly": true,
+                        "deprecated": true,
+                        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                      },
+                      "created": {
+                        "description": "Date the entity was created",
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true
+                      },
+                      "updated": {
+                        "description": "Last date the entity was updated",
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true
                       }
-                    },
-                    "additionalProperties": false
+                    }
                   },
                   "serial_prefix": {
                     "type": "string",
+                    "nullable": true,
                     "description": "A serial number prefix for the part"
                   },
                   "input_filter": {
@@ -10118,8 +10433,8 @@ Fetch Unit
                                       },
                                       "default": {
                                         "type": "string",
-                                        "description": "If this is set and the value is not in the approved_list, set the value to this",
-                                        "nullable": true
+                                        "nullable": true,
+                                        "description": "If this is set and the value is not in the approved_list, set the value to this"
                                       }
                                     }
                                   }
@@ -11068,6 +11383,21 @@ Fetch Unit
                         }
                       }
                     }
+                  },
+                  "total_units": {
+                    "type": "integer",
+                    "description": "Number of units of this part",
+                    "readOnly": true
+                  },
+                  "total_units_allocated": {
+                    "type": "integer",
+                    "description": "Number of allocated units",
+                    "readOnly": true
+                  },
+                  "total_units_unallocated": {
+                    "type": "integer",
+                    "description": "Number of free units",
+                    "readOnly": true
                   }
                 }
               },
@@ -11981,8 +12311,8 @@ Fetch Unit
                                   },
                                   "default": {
                                     "type": "string",
-                                    "description": "If this is set and the value is not in the approved_list, set the value to this",
-                                    "nullable": true
+                                    "nullable": true,
+                                    "description": "If this is set and the value is not in the approved_list, set the value to this"
                                   }
                                 }
                               }
@@ -12969,7 +13299,7 @@ Fetch Unit
       "type": "object",
       "properties": {
         "self": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/units"
           },
           "type": "object",
@@ -12981,7 +13311,7 @@ Fetch Unit
           }
         },
         "next": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/units?offset=QVBrO2wm13iEyl&limit=100"
           },
           "type": "object",
@@ -13025,10 +13355,24 @@ Status Code **200**
 |»»»» serial_number|string|false|read-only|Serial number of the unit with prefix stripped|
 |»»»» raw_serial_number|string|false|none|Serial number of the unit|
 |»»»» tenant_part_number|string|false|none|Identifier set by the tenant|
-|»»»» manufacturer|object|false|none|The manufacturer that makes this unit|
-|»»»»» part_number|string|false|none|The part number supplied by the manufacturer|
+|»»»» manufacturer|object|false|none|Manufacturer information for the part|
+|»»»»» part_number|string|true|none|Part number the manufacturer uses. If this is not set, then the part number is used|
+|»»»»» manufacturer_id|string|false|read-only|Customer identifier|
+|»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»» entity_type|string|true|none|none|
+|»»»»» label|string|true|none|Label for the entity|
+|»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
 |»»»» vendor|object|false|none|The vendor that sold this unit|
-|»»»»» part_number|string|false|none|The part number supplied by the vendor|
+|»»»»» vendor_id|string|false|none|unique id|
+|»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»» entity_type|string|true|none|none|
+|»»»»» label|string|true|none|Label for the entity|
+|»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»»»» part_number|string\|null|false|none|The part number supplied by the vendor|
 |»»»» part|object|false|none|Defines the properties for a part|
 |»»»»» part_id|string|false|read-only|Unique identifier|
 |»»»»» entity_id|string|true|read-only|Customer identifier|
@@ -13052,8 +13396,15 @@ Status Code **200**
 |»»»»»» total_programs|number|false|none|Total programs under the customer|
 |»»»»»» total_projects|number|false|none|Total projects under the customer|
 |»»»»» manufacturer|object|true|none|Manufacturer information for the part|
-|»»»»»» part_number|string|true|none|Manufacturer part number|
-|»»»»» serial_prefix|string|false|none|A serial number prefix for the part|
+|»»»»»» part_number|string|true|none|Part number the manufacturer uses. If this is not set, then the part number is used|
+|»»»»»» manufacturer_id|string|false|read-only|Customer identifier|
+|»»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»»» entity_type|string|true|none|none|
+|»»»»»» label|string|true|none|Label for the entity|
+|»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»»»» serial_prefix|string\|null|true|none|A serial number prefix for the part|
 |»»»»» input_filter|[object]|false|none|Input Filters allow custom fields to be defined for entities|
 |»»»»»» label|string|true|none|Human readable name|
 |»»»»»» key|string|true|read-only|Slug used to store the property|
@@ -13358,21 +13709,43 @@ Status Code **200**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» customer|object|false|none|Customer|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» customer_id|string|false|read-only|Customer identifier|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_id|string|true|read-only|Customer identifier|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» label|string|true|none|Label for the entity|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» external_platform|object|false|none|External Identifiers for the customer|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» status|string|true|none|A Custom label for the status|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» category|string|true|none|The classifier for the statues|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» total_programs|number|false|none|Total programs under the customer|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» total_projects|number|false|none|Total projects under the customer|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» current_location|object|false|none|Defines the properties for a part unit|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» total_units|integer|false|read-only|Number of units of this part|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» total_units_allocated|integer|false|read-only|Number of allocated units|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» total_units_unallocated|integer|false|read-only|Number of free units|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»» customer|object|false|none|Customer|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» customer_id|string|false|read-only|Customer identifier|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» label|string|true|none|Label for the entity|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» external_platform|object|false|none|External Identifiers for the customer|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» status|string|true|none|A Custom label for the status|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» category|string|true|none|The classifier for the statues|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» total_programs|number|false|none|Total programs under the customer|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» total_projects|number|false|none|Total projects under the customer|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»» current_location|object|false|none|Defines the properties for a part unit|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location_id|string|false|read-only|The identifier for the location|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» label|string|true|none|Label for the entity|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location_type|string|true|none|The type of location|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» formatted_address|string|false|read-only|Address formatted for the where region the location exists in|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» address|object|true|none|xNAL address for the location|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» country|string|true|none|Three Letter ISO country code|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» administrative_area|string|true|none|State / Province / Region|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» sub_administrative_area|string|false|none|County / District|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» locality|string|true|none|City / Town|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» postal_code|string|true|none|Postal Code / Zip Code|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» thoroughfare|string|true|none|Street Address|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» premise|string|false|none|Apartment / Suite / Box number etc|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» sub_premise|string|false|none|Floor # / Room # / Building label etc|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location|object|false|none|Defines the properties for a part unit|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location_id|string|false|read-only|The identifier for the location|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_id|string|true|read-only|Customer identifier|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_type|string|true|none|none|
@@ -13391,46 +13764,60 @@ Status Code **200**
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» thoroughfare|string|true|none|Street Address|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» premise|string|false|none|Apartment / Suite / Box number etc|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» sub_premise|string|false|none|Floor # / Room # / Building label etc|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location|object|false|none|Defines the properties for a part unit|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location_id|string|false|read-only|The identifier for the location|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_id|string|true|read-only|Customer identifier|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» label|string|true|none|Label for the entity|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location_type|string|true|none|The type of location|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» formatted_address|string|false|read-only|Address formatted for the where region the location exists in|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» address|object|true|none|xNAL address for the location|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» country|string|true|none|Three Letter ISO country code|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» administrative_area|string|true|none|State / Province / Region|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» sub_administrative_area|string|false|none|County / District|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» locality|string|true|none|City / Town|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» postal_code|string|true|none|Postal Code / Zip Code|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» thoroughfare|string|true|none|Street Address|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» premise|string|false|none|Apartment / Suite / Box number etc|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» sub_premise|string|false|none|Floor # / Room # / Building label etc|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» input_filter|[object]|false|none|Input Filters allow custom fields to be defined for entities|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» label|string|true|none|Human readable name|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» key|string|true|read-only|Slug used to store the property|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» filters|[anyOf]|true|none|A Collection of filters applied to the field|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» input_filter|[object]|false|none|Input Filters allow custom fields to be defined for entities|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» label|string|true|none|Human readable name|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» key|string|true|read-only|Slug used to store the property|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» filters|[anyOf]|true|none|A Collection of filters applied to the field|
 
 *anyOf*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|This filter will set the value based on a list of approved values. If the value is not in the list, it will then be set to empty unless the default option is set|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» approved_values|[string]|true|none|The list of approved values|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» default|string\|null|false|none|If this is set and the value is not in the approved_list, set the value to this|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|This filter will set the value based on a list of approved values. If the value is not in the list, it will then be set to empty unless the default option is set|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» approved_values|[string]|true|none|The list of approved values|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» default|string\|null|false|none|If this is set and the value is not in the approved_list, set the value to this|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value camelCase|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value camelCase|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a date|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|Date filter has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform values into null. This is helpful when trying to make a value required. The following are considered empty: # The number 0 or 0.0 # empty string '' # A boolean false # The word 'false' #|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|empty filter has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a float. Non numeric characters (including comma) will be removed|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|How many decimal places to preserve|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value kebab-case|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
 
@@ -13438,32 +13825,32 @@ Status Code **200**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a date|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value lowercase|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|Date filter has no options|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform values into null. This is helpful when trying to make a value required. The following are considered empty: # The number 0 or 0.0 # empty string '' # A boolean false # The word 'false' #|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a number. Non numeric characters (including comma and decimal points) will be removed|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|empty filter has no options|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|Number filter has no options|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a float. Non numeric characters (including comma) will be removed|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Add a prefix to the start of a string. If the string already start with the prefix, it will not prepend.|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|How many decimal places to preserve|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» prefix|string|true|none|The prefix to add|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value kebab-case|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value snake_case|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
 
@@ -13471,262 +13858,231 @@ Status Code **200**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value lowercase|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a string|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|String filter has no options|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a number. Non numeric characters (including comma and decimal points) will be removed|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|Number filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Add a prefix to the start of a string. If the string already start with the prefix, it will not prepend.|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Add a suffix to the start of a string. If the string already start with the suffix, it will not append.|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» prefix|string|true|none|The prefix to add|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» suffix|string|true|none|The suffix to add|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value snake_case|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to trim whitespace from a value|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|By default will trim from the start and end|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» start|boolean|false|none|Remove white space from the start of the string|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» end|boolean|false|none|Remove white space from the end of the string|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a string|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|String filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Add a suffix to the start of a string. If the string already start with the suffix, it will not append.|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» suffix|string|true|none|The suffix to add|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to trim whitespace from a value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value UPPERCASE|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|By default will trim from the start and end|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» start|boolean|false|none|Remove white space from the start of the string|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» end|boolean|false|none|Remove white space from the end of the string|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value UPPERCASE|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
 
 *continued*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» validators|[anyOf]|true|none|A set of validators to use for this field|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» validators|[anyOf]|true|none|A set of validators to use for this field|
 
 *anyOf*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number is between two values. By default, min and max are included|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» min|number|true|none|Minimum value to check|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» max|number|true|none|The maximum value to check|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» include|boolean|false|none|Include the value in the check|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number is between two values. By default, min and max are included|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» min|number|true|none|Minimum value to check|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» max|number|true|none|The maximum value to check|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» include|boolean|false|none|Include the value in the check|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate value does not match a list (black list)|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate value does not match a list (black list)|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» list|[string]|true|none|The list of approved values|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string contains a value|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» list|[string]|true|none|The list of approved values|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» contains|string|true|none|String must contain with this value|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string contains a value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string is a correct email address|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» contains|string|true|none|String must contain with this value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» strict|boolean|false|none|Enforce strict standards from ARPA. This will enforce the length of the string|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» lookup|boolean|false|none|Look up the host name and check if it has a valid MX record|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string is a correct email address|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string ends with a value|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» strict|boolean|false|none|Enforce strict standards from ARPA. This will enforce the length of the string|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» lookup|boolean|false|none|Look up the host name and check if it has a valid MX record|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» ends_with|string|true|none|String must end with this value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string ends with a value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number equals a value|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» ends_with|string|true|none|String must end with this value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» value|number|true|none|The value to compare against|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When value is a float, this will set the decimal precision|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number equals a value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number is greater than a value. By default, this will check if value is greater than or equals to|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» value|number|true|none|The value to compare against|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When value is a float, this will set the decimal precision|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» include|boolean|false|none|Include the value in the check|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number is greater than a value. By default, this will check if value is greater than or equals to|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string has a correct DNS records|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» value|number|true|none|The value to compare against|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» include|boolean|false|none|Include the value in the check|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» record_type|string|false|none|DNS record type to validate|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string has a correct DNS records|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an IP address format. Defaults to matching IPv4|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» record_type|string|false|none|DNS record type to validate|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» versions|[string]|false|none|IP Version to match against|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an IP address format. Defaults to matching IPv4|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string is a certain length|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» versions|[string]|false|none|IP Version to match against|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» length|string|true|none|String must contain with this value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» operator|string|false|none|Which type of length comparision to make|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string is a certain length|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number is less than a value. By default, this will check if value is less than or equals to|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» length|string|true|none|String must contain with this value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» operator|string|false|none|Which type of length comparision to make|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» value|number|true|none|The value to compare against|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» include|boolean|false|none|Include the value in the check|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number is less than a value. By default, this will check if value is less than or equals to|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an MAC address format|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This validator has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches a regular expression|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» value|number|true|none|The value to compare against|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» include|boolean|false|none|Include the value in the check|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» mask|string|true|none|Mask to validate against|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an MAC address format|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This validator has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches a regular expression|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string starts with a value|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» mask|string|true|none|Mask to validate against|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» starts_with|string|true|none|String must start with this value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string starts with a value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validates that a value follows a step. Both start and end options do not have to sync with the step. If they do not sync then find the nearest step.|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» starts_with|string|true|none|String must start with this value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» step|number|true|none|The step value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» start|integer|false|none|Start stepping at this value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» end|integer|false|none|End stepping at this value|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validates that a value follows a step. Both start and end options do not have to sync with the step. If they do not sync then find the nearest step.|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an URI|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» step|number|true|none|The step value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» start|integer|false|none|Start stepping at this value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» end|integer|false|none|End stepping at this value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» schemes|[string]|false|none|Schemes to match. By default all are matched|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an URI|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate value matches a list (white list)|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» schemes|[string]|false|none|Schemes to match. By default all are matched|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate value matches a list (white list)|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» list|[string]|true|none|The list of approved values|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» list|[string]|true|none|The list of approved values|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
 
 *continued*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» current_status|object|false|none|Defines the properties for a status|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» status|string|true|none|A Custom label for the status|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» category|string|true|none|The classifier for the statues|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» _links|object|false|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» self|object|false|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» href|string(uri)|false|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» next|object|false|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» href|string(uri)|false|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» current_status|object|false|none|Defines the properties for a status|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» status|string|true|none|A Custom label for the status|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» category|string|true|none|The classifier for the statues|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» _links|object|false|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» self|object|false|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» href|string(uri)|false|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» next|object|false|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» href|string(uri)|false|none|none|
 
 #### Enumerated Values
 
 |Property|Value|
 |---|---|
+|entity_type|MFR|
+|entity_type|VEN|
 |entity_type|PART|
 |entity_type|CUS|
 |category|PENDING|
@@ -13735,6 +14091,7 @@ Status Code **200**
 |category|COMPLETE|
 |category|CANCELLED|
 |category|BLOCKED|
+|entity_type|MFR|
 |type|allowed_list|
 |type|camel|
 |type|date|
@@ -14467,6 +14824,7 @@ required:
   - updated
   - customer
   - manufacturer
+  - serial_prefix
 properties:
   part_id:
     description: Unique identifier
@@ -14591,14 +14949,55 @@ properties:
     type: object
     description: Manufacturer information for the part
     required:
+      - label
+      - entity_id
+      - entity_type
+      - created
+      - updated
       - part_number
     properties:
       part_number:
         type: string
-        description: Manufacturer part number
-    additionalProperties: false
+        description: >-
+          Part number the manufacturer uses. If this is not set, then the part
+          number is used
+      manufacturer_id:
+        x-no-api-doc: true
+        type: string
+        description: Customer identifier
+        readOnly: true
+        pattern: '^[0-9a-zA-Z-_]+$'
+      entity_id:
+        x-no-api-doc: true
+        type: string
+        description: Customer identifier
+        readOnly: true
+        pattern: '^[0-9a-zA-Z-_]+$'
+      entity_type:
+        enum:
+          - MFR
+      label:
+        type: string
+        description: Label for the entity
+      slug:
+        type: string
+        description: Slug for the entity (Auto-generated from the label)
+        readOnly: true
+        deprecated: true
+        pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+      created:
+        description: Date the entity was created
+        type: string
+        format: date-time
+        readOnly: true
+      updated:
+        description: Last date the entity was updated
+        type: string
+        format: date-time
+        readOnly: true
   serial_prefix:
     type: string
+    nullable: true
     description: A serial number prefix for the part
   input_filter:
     type: array
@@ -14659,10 +15058,10 @@ properties:
                         default: false
                       default:
                         type: string
+                        nullable: true
                         description: >-
                           If this is set and the value is not in the
                           approved_list, set the value to this
-                        nullable: true
               - type: object
                 description: Make the value camelCase
                 required:
@@ -15363,6 +15762,18 @@ properties:
                           Perform a case sensitive match. By default will not
                           match case
                         default: false
+  total_units:
+    type: integer
+    description: Number of units of this part
+    readOnly: true
+  total_units_allocated:
+    type: integer
+    description: Number of allocated units
+    readOnly: true
+  total_units_unallocated:
+    type: integer
+    description: Number of free units
+    readOnly: true
 
 ```
 
@@ -15394,8 +15805,15 @@ properties:
 |» total_programs|number|false|none|Total programs under the customer|
 |» total_projects|number|false|none|Total projects under the customer|
 |manufacturer|object|true|none|Manufacturer information for the part|
-|» part_number|string|true|none|Manufacturer part number|
-|serial_prefix|string|false|none|A serial number prefix for the part|
+|» part_number|string|true|none|Part number the manufacturer uses. If this is not set, then the part number is used|
+|» manufacturer_id|string|false|read-only|Customer identifier|
+|» entity_id|string|true|read-only|Customer identifier|
+|» entity_type|string|true|none|none|
+|» label|string|true|none|Label for the entity|
+|» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|» created|string(date-time)|true|read-only|Date the entity was created|
+|» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|serial_prefix|string\|null|true|none|A serial number prefix for the part|
 |input_filter|[object]|false|none|Input Filters allow custom fields to be defined for entities|
 |» label|string|true|none|Human readable name|
 |» key|string|true|read-only|Slug used to store the property|
@@ -15696,6 +16114,14 @@ properties:
 |»»»»»»»»»»»»»»»»»»»»»»»»» list|[string]|true|none|The list of approved values|
 |»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
 
+*continued*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»» total_units|integer|false|read-only|Number of units of this part|
+|»»»»»»»»»»»»»»»»»»»»»»»» total_units_allocated|integer|false|read-only|Number of allocated units|
+|»»»»»»»»»»»»»»»»»»»»»»»» total_units_unallocated|integer|false|read-only|Number of free units|
+
 #### Enumerated Values
 
 |Property|Value|
@@ -15708,6 +16134,7 @@ properties:
 |category|COMPLETE|
 |category|CANCELLED|
 |category|BLOCKED|
+|entity_type|MFR|
 |type|allowed_list|
 |type|camel|
 |type|date|

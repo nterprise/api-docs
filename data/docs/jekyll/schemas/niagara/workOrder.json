@@ -10,8 +10,9 @@
     "entity_type",
     "created",
     "updated",
-    "part",
-    "work_order_type"
+    "work_order_type",
+    "location",
+    "cycles"
   ],
   "properties": {
     "work_order_id": {
@@ -45,6 +46,13 @@
     "end_date": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/dateRange.json#/properties/end_date"
     },
+    "current_location": {
+      "deprecated": true,
+      "$ref": "https://docs.nterprise.com/schemas/niagara/location.json"
+    },
+    "location": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/location.json"
+    },
     "description": {
       "type": "string",
       "description": "Detailed description for the work order"
@@ -67,26 +75,54 @@
     "project": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/project.json"
     },
-    "work_flows": {
+    "cycles": {
       "type": "array",
-      "description": "Cycles of work flows needed to complete the work order",
+      "minimum": 1,
       "items": {
         "type": "object",
+        "additionalProperties": false,
         "required": [
-          "cycles_needed",
+          "needed",
+          "pending",
+          "in_progress",
+          "verifying",
+          "complete",
+          "blocked",
+          "cancelled",
           "work_flow"
         ],
         "properties": {
-          "cycles_needed": {
+          "needed": {
             "type": "integer",
             "description": "The number of cycles needed",
             "minimum": 1
+          },
+          "pending": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/cycle.json#/properties/pending"
+          },
+          "in_progress": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/cycle.json#/properties/pending"
+          },
+          "verifying": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/cycle.json#/properties/pending"
+          },
+          "complete": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/cycle.json#/properties/pending"
+          },
+          "blocked": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/cycle.json#/properties/pending"
+          },
+          "cancelled": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/cycle.json#/properties/pending"
           },
           "work_flow": {
             "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow.json"
           }
         }
       }
+    },
+    "meta": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityHelper.json#/properties/meta"
     }
   }
 }

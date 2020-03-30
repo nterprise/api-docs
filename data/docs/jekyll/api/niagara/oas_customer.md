@@ -14,9 +14,22 @@ headingLevel: 2
 
 <h1 id="customers">Customers v2.0.0</h1>
 
+* Do not remove this line (it will not be displayed)
+{:toc}
+
 > Scroll down for example requests and responses.
 
 Customers may have multiple Programs, Projects, and Locations, as well as device Parts and individual Units.
+
+Base URLs:
+
+* <a href="https://{environment}.nterprise.com">https://{environment}.nterprise.com</a>
+
+    * **environment** -  Default: api
+
+        * api
+
+        * api.dev
 
 <h1 id="customers-customer">Customer</h1>
 
@@ -1446,7 +1459,7 @@ Fetch customer contacts
                 "type": "object",
                 "properties": {
                   "self": {
-                    "example": {
+                    "x-example": {
                       "href": "https://api.nterprise.com/contacts/QVBrO2wm13iEyl"
                     },
                     "type": "object",
@@ -1510,7 +1523,7 @@ Fetch customer contacts
       "type": "object",
       "properties": {
         "self": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/contacts"
           },
           "type": "object",
@@ -1522,7 +1535,7 @@ Fetch customer contacts
           }
         },
         "next": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/contacts?offset=QVBrO2wm13iEyl&limit=100"
           },
           "type": "object",
@@ -1695,7 +1708,7 @@ Creates a new contact for the customer
       "type": "object",
       "properties": {
         "self": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/contacts/QVBrO2wm13iEyl"
           },
           "type": "object",
@@ -1916,7 +1929,7 @@ Fetch customer parts
                 "type": "object",
                 "properties": {
                   "self": {
-                    "example": {
+                    "x-example": {
                       "href": "https://api.nterprise.com/parts/23Y1rNJ6zyiRzqN"
                     },
                     "type": "object",
@@ -2070,18 +2083,65 @@ Fetch customer parts
                 "type": "object",
                 "description": "Manufacturer information for the part",
                 "required": [
+                  "label",
+                  "entity_id",
+                  "entity_type",
+                  "created",
+                  "updated",
                   "part_number"
                 ],
                 "properties": {
                   "part_number": {
                     "type": "string",
-                    "description": "Manufacturer part number"
+                    "description": "Part number the manufacturer uses. If this is not set, then the part number is used"
+                  },
+                  "manufacturer_id": {
+                    "x-no-api-doc": true,
+                    "type": "string",
+                    "description": "Customer identifier",
+                    "readOnly": true,
+                    "pattern": "^[0-9a-zA-Z-_]+$"
+                  },
+                  "entity_id": {
+                    "x-no-api-doc": true,
+                    "type": "string",
+                    "description": "Customer identifier",
+                    "readOnly": true,
+                    "pattern": "^[0-9a-zA-Z-_]+$"
+                  },
+                  "entity_type": {
+                    "enum": [
+                      "MFR"
+                    ]
+                  },
+                  "label": {
+                    "type": "string",
+                    "description": "Label for the entity"
+                  },
+                  "slug": {
+                    "type": "string",
+                    "description": "Slug for the entity (Auto-generated from the label)",
+                    "readOnly": true,
+                    "deprecated": true,
+                    "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                  },
+                  "created": {
+                    "description": "Date the entity was created",
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true
+                  },
+                  "updated": {
+                    "description": "Last date the entity was updated",
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true
                   }
-                },
-                "additionalProperties": false
+                }
               },
               "serial_prefix": {
                 "type": "string",
+                "nullable": true,
                 "description": "A serial number prefix for the part"
               },
               "input_filter": {
@@ -2149,8 +2209,8 @@ Fetch customer parts
                                   },
                                   "default": {
                                     "type": "string",
-                                    "description": "If this is set and the value is not in the approved_list, set the value to this",
-                                    "nullable": true
+                                    "nullable": true,
+                                    "description": "If this is set and the value is not in the approved_list, set the value to this"
                                   }
                                 }
                               }
@@ -3109,7 +3169,7 @@ Fetch customer parts
       "type": "object",
       "properties": {
         "self": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/parts"
           },
           "type": "object",
@@ -3121,7 +3181,7 @@ Fetch customer parts
           }
         },
         "next": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/parts?offset=QVBrO2wm13iEyl&limit=100"
           },
           "type": "object",
@@ -3178,8 +3238,15 @@ Status Code **200**
 |»»»»» total_programs|number|false|none|Total programs under the customer|
 |»»»»» total_projects|number|false|none|Total projects under the customer|
 |»»»» manufacturer|object|false|none|Manufacturer information for the part|
-|»»»»» part_number|string|true|none|Manufacturer part number|
-|»»»» serial_prefix|string|false|none|A serial number prefix for the part|
+|»»»»» part_number|string|true|none|Part number the manufacturer uses. If this is not set, then the part number is used|
+|»»»»» manufacturer_id|string|false|read-only|Customer identifier|
+|»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»» entity_type|string|true|none|none|
+|»»»»» label|string|true|none|Label for the entity|
+|»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»»» serial_prefix|string\|null|false|none|A serial number prefix for the part|
 |»»»» input_filter|[object]|false|none|Input Filters allow custom fields to be defined for entities|
 |»»»»» label|string|true|none|Human readable name|
 |»»»»» key|string|true|read-only|Slug used to store the property|
@@ -3501,6 +3568,7 @@ Status Code **200**
 |category|COMPLETE|
 |category|CANCELLED|
 |category|BLOCKED|
+|entity_type|MFR|
 |type|allowed_list|
 |type|camel|
 |type|date|
@@ -3676,7 +3744,7 @@ Fetch customer programs
                 "type": "object",
                 "properties": {
                   "self": {
-                    "example": {
+                    "x-example": {
                       "href": "https://api.nterprise.com/programs/ZRPrErZZJrIO6mB"
                     },
                     "type": "object",
@@ -3880,7 +3948,7 @@ Fetch customer programs
       "type": "object",
       "properties": {
         "self": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/programs"
           },
           "type": "object",
@@ -3892,7 +3960,7 @@ Fetch customer programs
           }
         },
         "next": {
-          "example": {
+          "x-example": {
             "href": "https://api.nterprise.com/programs?offset=QVBrO2wm13iEyl&limit=100"
           },
           "type": "object",

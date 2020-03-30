@@ -14,6 +14,9 @@ headingLevel: 2
 
 <h1 id="attachments">Attachments v2.0.0</h1>
 
+* Do not remove this line (it will not be displayed)
+{:toc}
+
 > Scroll down for example requests and responses.
 
 File attachments can be attached to other `entities` and providing simple document storage functionality.
@@ -29,6 +32,16 @@ The maximum file size allowed is 10MB.
 ## Security Restrictions
 
 Files are considered a top-level `entity.` `Users` must be granted the `create` permission on the File entity to be able to upload files. Files cannot be updated. Grant the `create` or `update` permissions to the user for the linked `entity` for the relationship operation to be approved.
+
+Base URLs:
+
+* <a href="https://{environment}.nterprise.com">https://{environment}.nterprise.com</a>
+
+    * **environment** -  Default: api
+
+        * api
+
+        * api.dev
 
 <h1 id="attachments-attachment">Attachment</h1>
 
