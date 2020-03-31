@@ -29,6 +29,10 @@
     "description": {
       "type": ["string", "null"],
       "description": "A description for the status"
+    },
+    "order": {
+      "type": "number",
+      "description": "Order status appears when listing"
     }
   }
 }
