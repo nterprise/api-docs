@@ -107,8 +107,10 @@
       "$ref": "https://docs.nterprise.com/schemas/niagara/location.json"
     },
     "resource": {
-      "type": ["object", "null"],
       "anyOf": [
+        {
+          "type": "null"
+        },
         {
           "$ref": "https://docs.nterprise.com/schemas/niagara/resource.json"
         },
