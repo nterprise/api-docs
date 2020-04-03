@@ -1,0 +1,81 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/queue.json",
+  "type": "object",
+  "description": "Defines the properties for a location queue",
+  "additionalProperties": false,
+  "required": [
+    "label",
+    "entity_id",
+    "entity_type",
+    "created",
+    "updated",
+    "location",
+    "is_active",
+    "active_batches",
+    "active_cycles"
+  ],
+  "properties": {
+    "queue_id": {
+      "type": "string",
+      "description": "The identifier for the queue",
+      "pattern": "^[0-9a-zA-Z-_]+$"
+    },
+    "entity_id": {
+      "x-no-api-doc": true,
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_id"
+    },
+    "entity_type": {
+      "x-no-api-doc": true,
+      "const": "QUE"
+    },
+    "label": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/label"
+    },
+    "slug": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/slug"
+    },
+    "created": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/created"
+    },
+    "updated": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/updated"
+    },
+    "location": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/location.json"
+    },
+    "priority": {
+      "type": "integer",
+      "description": "Priority level for queue",
+      "minimum": 0
+    },
+    "total_work_orders": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/cycle.json"
+    },
+    "active_work_orders": {
+      "type": "number",
+      "description": "Total of work orders in an active status",
+      "readOnly": true
+    },
+    "total_batches": {
+      "type": "integer",
+      "description": "Number of batches assigned to the queue",
+      "readOnly": true
+    },
+    "is_active": {
+      "type": "boolean",
+      "description": "Toggle if the batch has active cycles or batches",
+      "readOnly": true
+    },
+    "active_batches": {
+      "type": "number",
+      "description": "Total of batches in the queue with active cycles",
+      "readOnly": true
+    },
+    "active_cycles": {
+      "type": "number",
+      "description": "Total of all active cycles across all batches",
+      "readOnly": true
+    }
+  }
+}

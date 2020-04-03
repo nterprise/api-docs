@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/prefix.json",
+  "type": "object",
+  "description": "Add a prefix to the start of a string. If the string already start with the prefix, it will not prepend.",
+  "required": [
+    "type",
+    "options"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "prefix"
+      ]
+    },
+    "options": {
+      "type": "object",
+      "required": [
+        "prefix"
+      ],
+      "properties": {
+        "prefix": {
+          "type": "string",
+          "description": "The prefix to add"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "type": "object",
+  "properties": {
+    "_links": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "$ref": "./link.json",
+          "x-example": {
+            "href": "https://api.nterprise.com/locations/23Y1rNJ6zyiRzqN"
+          }
+        }
+      }
+    },
+    "location_id": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/location.json#/properties/location_id"
+    },
+    "label": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/location.json#/properties/label"
+    },
+    "slug": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/location.json#/properties/slug"
+    },
+    "created": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/location.json#/properties/created"
+    },
+    "updated": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/location.json#/properties/updated"
+    },
+    "location_type": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/location.json#/properties/location_type"
+    },
+    "formatted_address": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/location.json#/properties/formatted_address"
+    },
+    "address": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/location.json#/properties/address"
+    }
+  }
+}

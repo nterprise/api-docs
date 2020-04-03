@@ -1,0 +1,22 @@
+{
+  "description": "The note to create",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "required": [
+          "label",
+          "text"
+        ],
+        "properties": {
+          "label": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/note.json#/properties/label"
+          },
+          "text": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/note.json#/properties/label"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepWait.json",
+  "type": "object",
+  "description": "A step which run at certain times",
+  "required": [
+    "stop_at",
+    "time"
+  ],
+  "properties": {
+    "label": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepCommon.json#/properties/label"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "wait"
+      ]
+    },
+    "stop_at": {
+      "type": "integer",
+      "description": "Time in seconds to stop this task",
+      "maximum": 900,
+      "minimum": 1
+    },
+    "time": {
+      "type": "integer",
+      "description": "Time to wait before checking this step",
+      "maximum": 900,
+      "minimum": 1
+    },
+    "listen_for": {
+      "type": "array",
+      "description": "List of events and conditions to listen for to trigger",
+      "items": {
+        "type": "object",
+        "required": [
+          "event"
+        ],
+        "properties": {
+          "event": {
+            "type": "string",
+            "description": "Name of the event to listen for",
+            "allOf": [
+              {
+                "$ref": "https://docs.nterprise.com/schemas/niagara/entityHelper.json#/properties/entity_events"
+              }
+            ]
+          },
+          "event_value": {
+            "type": "object",
+            "description": "The event conditions that have to be met",
+            "allOf": [
+              {
+                "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepChoice.json"
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepCommon.json"
+    }
+  ]
+}

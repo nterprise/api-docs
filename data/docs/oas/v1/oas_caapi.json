@@ -1,0 +1,93 @@
+{
+  "openapi": "3.0.0",
+  "x-api": "caapi",
+  "info": {
+    "version": "1.0.0",
+    "description": "Customer API for FTM and CIMS",
+    "title": "customer-accessible-api",
+    "termsOfService": "https://docs.nterprise.com/tos.html",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api02.nterprise.com",
+      "description": "Production api"
+    }
+  ],
+  "security": [
+    {"signedToken": []}
+  ],
+  "paths": {
+    "/customers/{customer_id}": {
+      "$ref": "./paths/customer.json"
+    },
+    "/customers/": {
+      "$ref": "./paths/customers.json"
+    },
+    "/customers/{customer_id}/projects": {
+      "$ref": "./paths/customerProjects.json"
+    },
+    "/customers/{customer_id}/sites": {
+      "$ref": "./paths/customerSites.json"
+    },
+    "/projects/": {
+      "$ref": "./paths/projects.json"
+    },
+    "/projects/{project_id}": {
+      "$ref": "./paths/project.json"
+    },
+    "/projects/{project_id}/inventory": {
+      "$ref": "./paths/projectAllInventory.json"
+    },
+    "/projects/{project_id}/inventory/{inventory_id}": {
+      "$ref": "./paths/projectInventory.json"
+    },
+    "/projects/{project_id}/kits": {
+      "$ref": "./paths/projectKits.json"
+    },
+    "/projects/{project_id}/kits/{kit_id}": {
+      "$ref": "./paths/projectKit.json"
+    },
+    "/projects/{project_id}/products": {
+      "$ref": "./paths/projectProducts.json"
+    },
+    "/projects/{project_id}/products/{product_id}": {
+      "$ref": "./paths/projectProduct.json"
+    },
+    "/sites/": {
+      "$ref": "./paths/sites.json"
+    },
+    "/sites/{site_id}": {
+      "$ref": "./paths/site.json"
+    },
+    "/work-requests/{work_request_id}": {
+      "$ref": "./paths/workRequests.json"
+    },
+    "/work-requests/{work_request_id}/submissions": {
+      "$ref": "./paths/workRequest.json"
+    }
+  },
+  "components": {
+    "schemas": {
+      "Customer": {"$ref": "./components/schemas/customer.json"},
+      "Inventory": {"$ref": "./components/schemas/inventory.json"},
+      "Kit": {"$ref": "./components/schemas/kit.json"},
+      "Note": {"$ref": "./components/schemas/note.json"},
+      "Project": {"$ref": "./components/schemas/project.json"},
+      "Problem": {"$ref": "./components/schemas/problem.json"},
+      "Site": {"$ref": "./components/schemas/site.json"},
+      "Work Request": {"$ref": "./components/schemas/workRequest.json"}
+    },
+    "securitySchemes": {
+      "signedToken": {
+        "type": "apiKey",
+        "description": "To Generate an API Follow these steps:\n 1. concatenate KEY + URL + REQUEST BODY\n 1. create SHA512 hash of step 1 string\n 1. concatenate USER + \":\" + SHA512 hash\n 1. base64 encode string from step 3\n 1. Pass in as a Bearer token",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
+  }
+}

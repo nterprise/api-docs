@@ -1,0 +1,10 @@
+{
+  "description": "A project response",
+  "content": {
+    "application/hal+json": {
+      "schema": {
+        "$ref": "../schemas/halProject.json"
+      }
+    }
+  }
+}

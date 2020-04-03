@@ -1,0 +1,9 @@
+{
+  "name": "contact_id",
+  "in": "path",
+  "description": "Id of the contact",
+  "required": true,
+  "schema": {
+    "$ref": "https://docs.nterprise.com/schemas/niagara/contact.json#/properties/contact_id"
+  }
+}

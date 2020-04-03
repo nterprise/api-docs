@@ -1,0 +1,54 @@
+{
+  "get": {
+    "operationId": "fetchAllQueues",
+    "summary": "Fetches A Page of queues",
+    "description": "Fetch Queue",
+    "tags": [
+      "Queue"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/limit.json"
+      },
+      {
+        "$ref": "../../components/parameters/offset.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halQueuePage.json"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      }
+    }
+  },
+  "post": {
+    "operationId": "createQueue",
+    "summary": "Creates a queue",
+    "description": "Creates a new queue",
+    "tags": [
+      "Queue"
+    ],
+    "requestBody": {
+      "$ref": "../../components/requestBodies/queue.json"
+    },
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halQueue.json"
+      },
+      "400": {
+        "$ref": "../../components/responses/400badRequest.json"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      }
+    }
+  }
+}

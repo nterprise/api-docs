@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/date.json",
+  "type": "object",
+  "description": "Filter to transform a value into a date",
+  "required": [
+    "type",
+    "options"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "date"
+      ]
+    },
+    "options": {
+      "type": "object",
+      "description": "Date filter has no options"
+    }
+  }
+}

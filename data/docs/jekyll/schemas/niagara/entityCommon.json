@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/entityCommon.json",
+  "type": "object",
+  "description": "Common Properties to all entities",
+  "required": [
+    "label"
+  ],
+  "properties": {
+    "entity_id": {
+      "type": "string",
+      "description": "Customer identifier",
+      "readOnly": true,
+      "pattern": "^[0-9a-zA-Z-_]+$"
+    },
+    "label": {
+      "type": "string",
+      "description": "Label for the entity"
+    },
+    "slug": {
+      "type": "string",
+      "description": "Slug for the entity (Auto-generated from the label)",
+      "readOnly": true,
+      "deprecated": true,
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "created": {
+      "description": "Date the entity was created",
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "updated": {
+      "description": "Last date the entity was updated",
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    }
+  }
+}

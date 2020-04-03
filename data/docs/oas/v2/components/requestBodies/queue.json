@@ -1,0 +1,34 @@
+{
+  "description": "The queue to create",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "required": [
+          "label",
+          "location",
+          "priority"
+        ],
+        "properties": {
+          "label": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/queue.json#/properties/label"
+          },
+          "location": {
+            "type": "object",
+            "required": [
+              "location_id"
+            ],
+            "properties": {
+              "location_id": {
+                "$ref": "https://docs.nterprise.com/schemas/niagara/location.json#/properties/location_id"
+              }
+            }
+          },
+          "priority": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/queue.json#/properties/priority"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,9 +1,0 @@
-{
-  "name": "work_order_id",
-  "in": "path",
-  "description": "Id for the work order",
-  "required": true,
-  "schema": {
-    "$ref": "../schemas/workOrder.json#/properties/work_order_id"
-  }
-}

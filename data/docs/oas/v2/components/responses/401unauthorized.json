@@ -1,0 +1,23 @@
+{
+  "description": "Unauthorized",
+  "content": {
+    "application/problem+json": {
+      "schema": {
+        "properties": {
+          "title": {
+            "const": "Unauthorized"
+          },
+          "type": {
+            "const": "https://docs.nterprise.com/api/problem/Unauthorized"
+          },
+          "status": {
+            "const": 401
+          },
+          "detail": {
+            "const": "You are not authorized to access this resource"
+          }
+        }
+      }
+    }
+  }
+}

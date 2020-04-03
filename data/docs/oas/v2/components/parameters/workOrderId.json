@@ -1,0 +1,9 @@
+{
+  "name": "work_order_id",
+  "in": "path",
+  "description": "Id for the work order",
+  "required": true,
+  "schema": {
+    "$ref": "https://docs.nterprise.com/schemas/niagara/workOrder.json#/properties/work_order_id"
+  }
+}

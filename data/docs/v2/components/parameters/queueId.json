@@ -1,9 +1,0 @@
-{
-  "name": "queue_id",
-  "in": "path",
-  "description": "Id for the queue",
-  "required": true,
-  "schema": {
-    "$ref": "../schemas/queue.json#/properties/queue_id"
-  }
-}

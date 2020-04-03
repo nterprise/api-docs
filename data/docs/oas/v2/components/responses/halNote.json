@@ -1,0 +1,10 @@
+{
+  "description": "A note response",
+  "content": {
+    "application/hal+json": {
+      "schema": {
+        "$ref": "../schemas/halNote.json"
+      }
+    }
+  }
+}

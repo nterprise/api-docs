@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/allSteps.json",
+  "type": "object",
+  "properties": {
+    "step": {
+      "anyOf": [
+        {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/function/allocateUnitsToProject.json"
+        },
+        {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/followPDFInstructions.json"
+        },
+        {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/manualDataEntry.json"
+        },
+        {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/taskList.json"
+        },
+        {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/machine/aceIos.json"
+        },
+        {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepChoice.json"
+        },
+        {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepFail.json"
+        },
+        {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepPass.json"
+        },
+        {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepSuccess.json"
+        },
+        {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepWait.json"
+        }
+      ]
+    }
+  }
+}

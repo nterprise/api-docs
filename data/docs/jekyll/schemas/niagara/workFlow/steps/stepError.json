@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepError.json",
+  "type": "object",
+  "required": [
+    "retry",
+    "finally"
+  ],
+  "properties": {
+    "retry": {
+      "type": "integer",
+      "description": "Number of times to retry this step. Note: retry will only occur on steps which automatically failed. If the step was transitioned using the 'goto-fail' step, the actions will be fired but the step WILL NOT be re-tried",
+      "minimum": 0,
+      "maximum": 10,
+      "default": 0
+    },
+    "finally": {
+      "type": "object",
+      "description": "What to do after all retries",
+      "properties": {
+        "actions": {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json"
+        }
+      }
+    }
+  }
+}

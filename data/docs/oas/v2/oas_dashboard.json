@@ -1,0 +1,36 @@
+{
+  "openapi": "3.0.3",
+  "x-api": "niagara",
+  "x-parent": "Niagara API",
+  "info": {
+    "version": "2.0.0",
+    "description": "API for the nterprise application",
+    "title": "Dashboards"
+  },
+  "servers": [
+    {
+      "url": "https://{environment}.nterprise.com",
+      "variables": {
+        "environment": {
+          "default": "api",
+          "enum": [
+            "api",
+            "api.dev"
+          ]
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/dashboard": {
+      "$ref": "./paths/dashboard/dashboard.json"
+    }
+  },
+  "components": {
+    "schemas": {
+      "Dashboard": {
+        "$ref": "./components/schemas/halDashboard.json"
+      }
+    }
+  }
+}

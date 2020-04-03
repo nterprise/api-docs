@@ -1,0 +1,32 @@
+{
+  "get": {
+    "operationId": "fetchResourceById",
+    "summary": "Fetches a location resource by Id",
+    "description": "Fetch location Resource",
+    "tags": [
+      "Location"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/locationId.json"
+      },
+      {
+        "$ref": "../../components/parameters/resourceId.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halResource.json"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      },
+      "404": {
+        "$ref": "../../components/responses/404notFound.json"
+      }
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/contains.json",
+  "type": "object",
+  "description": "Validate string contains a value",
+  "required": [
+    "type",
+    "options"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "contains"
+      ]
+    },
+    "options": {
+      "type": "object",
+      "required": [
+        "contains"
+      ],
+      "properties": {
+        "contains": {
+          "type": "string",
+          "description": "String must contain with this value"
+        },
+        "check_case": {
+          "type": "boolean",
+          "description": "Perform a case sensitive match. By default will not match case",
+          "default": false
+        }
+      }
+    }
+  }
+}

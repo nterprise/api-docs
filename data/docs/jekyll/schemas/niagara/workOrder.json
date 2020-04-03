@@ -1,0 +1,128 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/workOrder.json",
+  "type": "object",
+  "description": "Defines the properties for a unit",
+  "additionalProperties": false,
+  "required": [
+    "label",
+    "entity_id",
+    "entity_type",
+    "created",
+    "updated",
+    "work_order_type",
+    "location",
+    "cycles"
+  ],
+  "properties": {
+    "work_order_id": {
+      "type": "string",
+      "description": "The identifier for the unit",
+      "pattern": "^[0-9a-zA-Z-_]+$"
+    },
+    "entity_id": {
+      "x-no-api-doc": true,
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_id"
+    },
+    "entity_type": {
+      "x-no-api-doc": true,
+      "const": "WOR"
+    },
+    "label": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/label"
+    },
+    "slug": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/slug"
+    },
+    "created": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/created"
+    },
+    "updated": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/updated"
+    },
+    "start_date": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/dateRange.json#/properties/start_date"
+    },
+    "end_date": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/dateRange.json#/properties/end_date"
+    },
+    "current_location": {
+      "deprecated": true,
+      "$ref": "https://docs.nterprise.com/schemas/niagara/location.json"
+    },
+    "location": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/location.json"
+    },
+    "description": {
+      "type": "string",
+      "description": "Detailed description for the work order"
+    },
+    "work_order_type": {
+      "type": "string",
+      "description": "Type of work order",
+      "enum": [
+        "device"
+      ]
+    },
+    "due_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "End date"
+    },
+    "current_status": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/status.json"
+    },
+    "project": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/project.json"
+    },
+    "cycles": {
+      "type": "array",
+      "minimum": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "needed",
+          "pending",
+          "in_progress",
+          "verifying",
+          "complete",
+          "blocked",
+          "cancelled",
+          "work_flow"
+        ],
+        "properties": {
+          "needed": {
+            "type": "integer",
+            "description": "The number of cycles needed",
+            "minimum": 1
+          },
+          "pending": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/cycle.json#/properties/pending"
+          },
+          "in_progress": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/cycle.json#/properties/pending"
+          },
+          "verifying": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/cycle.json#/properties/pending"
+          },
+          "complete": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/cycle.json#/properties/pending"
+          },
+          "blocked": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/cycle.json#/properties/pending"
+          },
+          "cancelled": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/cycle.json#/properties/pending"
+          },
+          "work_flow": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow.json"
+          }
+        }
+      }
+    },
+    "meta": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityHelper.json#/properties/meta"
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "customer_id",
+  "in": "path",
+  "description": "Id of the customer",
+  "required": true,
+  "schema": {
+    "$ref": "https://docs.nterprise.com/schemas/niagara/customer.json#/properties/customer_id"
+  }
+}

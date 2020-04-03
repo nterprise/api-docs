@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/equals.json",
+  "type": "object",
+  "description": "Validate number equals a value",
+  "required": [
+    "type",
+    "options"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "equals"
+      ]
+    },
+    "options": {
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "number",
+          "description": "The value to compare against"
+        },
+        "precision": {
+          "type": "integer",
+          "description": "When value is a float, this will set the decimal precision",
+          "minimum": 1,
+          "maximum": 8,
+          "default": 3
+        }
+      }
+    }
+  }
+}

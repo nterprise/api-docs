@@ -1,0 +1,39 @@
+{
+  "description": "The program to create",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "description": "Program to create",
+        "required": [
+          "label"
+        ],
+        "properties": {
+          "label": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/program.json#/properties/label"
+          },
+          "customer": {
+            "type": "object",
+            "required": [
+              "customer_id"
+            ],
+            "properties": {
+              "customer_id": {
+                "$ref": "https://docs.nterprise.com/schemas/niagara/customer.json#/properties/customer_id"
+              }
+            }
+          },
+          "allowed_statuses": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/program.json#/properties/allowed_statuses"
+          },
+          "start_date": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/program.json#/properties/start_date"
+          },
+          "end_date": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/program.json#/properties/end_date"
+          }
+        }
+      }
+    }
+  }
+}

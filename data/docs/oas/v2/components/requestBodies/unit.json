@@ -1,0 +1,66 @@
+{
+  "description": "The unit to create",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "required": [
+          "label",
+          "part",
+          "current_location",
+          "current_status"
+        ],
+        "properties": {
+          "label": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/unit.json#/properties/label"
+          },
+          "raw_serial_number": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/unit.json#/properties/serial_number"
+          },
+          "tenant_part_number": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/unit.json#/properties/tenant_part_number"
+          },
+          "part": {
+            "type": "object",
+            "required": [
+              "part_id"
+            ],
+            "properties": {
+              "part_id": {
+                "$ref": "https://docs.nterprise.com/schemas/niagara/part.json#/properties/part_id"
+              }
+            }
+          },
+          "current_status": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/unit.json#/properties/current_status"
+          },
+          "current_location": {
+            "type": "object",
+            "required": [
+              "location_id"
+            ],
+            "properties": {
+              "location_id": {
+                "$ref": "https://docs.nterprise.com/schemas/niagara/unit.json#/properties/current_location"
+              }
+            }
+          },
+          "vendor": {
+            "type": "object",
+            "required": [
+              "vendor_id"
+            ],
+            "properties": {
+              "vendor_id": {
+                "$ref": "https://docs.nterprise.com/schemas/niagara/vendor.json#/properties/vendor_id"
+              },
+              "part_number": {
+                "$ref": "https://docs.nterprise.com/schemas/niagara/unit.json#/properties/vendor/properties/part_number"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

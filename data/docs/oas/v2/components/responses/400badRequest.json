@@ -1,0 +1,24 @@
+{
+  "description": "Bad Request",
+  "content": {
+    "application/problem+json": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "const": "Bad Request"
+          },
+          "type": {
+            "const": "https://docs.nterprise.com/api/problem/BadRequest"
+          },
+          "status": {
+            "const": 400
+          },
+          "detail": {
+            "const": "Invalid request"
+          }
+        }
+      }
+    }
+  }
+}

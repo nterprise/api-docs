@@ -1,0 +1,9 @@
+{
+  "name": "vendor_id",
+  "in": "path",
+  "description": "Id of the vendor",
+  "required": true,
+  "schema": {
+    "$ref": "https://docs.nterprise.com/schemas/niagara/vendor.json#/properties/vendor_id"
+  }
+}

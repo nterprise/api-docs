@@ -1,5 +1,0 @@
-{
-  "get": {
-    "$ref": "../operations/part/fetchAllPartLocations.json"
-  }
-}

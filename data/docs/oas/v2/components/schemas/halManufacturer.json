@@ -1,0 +1,31 @@
+{
+  "type": "object",
+  "properties": {
+    "_links": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "$ref": "./link.json",
+          "x-example": {
+            "href": "https://api.nterprise.com/manufacturers/23Y1rNJ6zyiRzqN"
+          }
+        }
+      }
+    },
+    "manufacturer_id": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/manufacturer.json#/properties/manufacturer_id"
+    },
+    "label": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/manufacturer.json#/properties/label"
+    },
+    "slug": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/manufacturer.json#/properties/slug"
+    },
+    "created": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/manufacturer.json#/properties/created"
+    },
+    "updated": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/manufacturer.json#/properties/updated"
+    }
+  }
+}

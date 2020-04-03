@@ -1,0 +1,23 @@
+{
+  "description": "Resource not found",
+  "content": {
+    "application/problem+json": {
+      "schema": {
+        "properties": {
+          "title": {
+            "const": "Not Found"
+          },
+          "type": {
+            "const": "https://docs.nterprise.com/api/problem/NotFound"
+          },
+          "status": {
+            "const": 404
+          },
+          "detail": {
+            "const": "Resource not found"
+          }
+        }
+      }
+    }
+  }
+}

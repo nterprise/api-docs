@@ -1,0 +1,41 @@
+{
+  "description": "A paged response for parts",
+  "content": {
+    "application/hal+json": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "_embedded": {
+            "type": "object",
+            "properties": {
+              "nter:parts": {
+                "type": "array",
+                "maxItems": 100,
+                "items": {
+                  "$ref": "../schemas/halPart.json"
+                }
+              }
+            }
+          },
+          "_links": {
+            "type": "object",
+            "properties": {
+              "self": {
+                "x-example": {
+                  "href": "https://api.nterprise.com/parts"
+                },
+                "$ref": "../schemas/link.json"
+              },
+              "next": {
+                "x-example": {
+                  "href": "https://api.nterprise.com/parts?offset=QVBrO2wm13iEyl&limit=100"
+                },
+                "$ref": "../schemas/link.json"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

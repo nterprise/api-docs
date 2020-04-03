@@ -1,0 +1,68 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/project.json",
+  "type": "object",
+  "description": "Defines the properties for a project",
+  "additionalProperties": false,
+  "required": [
+    "label",
+    "entity_id",
+    "entity_type",
+    "created",
+    "updated",
+    "customer",
+    "program",
+    "allowed_statuses"
+  ],
+  "properties": {
+    "project_id": {
+      "type": "string",
+      "description": "Unique identifier",
+      "pattern": "^[0-9a-zA-Z-_]+$"
+    },
+    "entity_id": {
+      "x-no-api-doc": true,
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_id"
+    },
+    "entity_type": {
+      "x-no-api-doc": true,
+      "const": "PRJ"
+    },
+    "description": {
+      "type": ["string", "null"],
+      "description": "Project description"
+    },
+    "label": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/label"
+    },
+    "slug": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/slug"
+    },
+    "created": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/created"
+    },
+    "updated": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/updated"
+    },
+    "customer": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/customer.json"
+    },
+    "program": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/program.json"
+    },
+    "allowed_statuses": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/customer.json#/properties/allowed_statuses"
+    },
+    "start_date": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/dateRange.json#/properties/start_date"
+    },
+    "end_date": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/dateRange.json#/properties/end_date"
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json"
+    }
+  ]
+}

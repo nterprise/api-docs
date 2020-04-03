@@ -1,0 +1,39 @@
+{
+  "openapi": "3.0.3",
+  "x-api": "niagara",
+  "x-parent": "Niagara API",
+  "info": {
+    "version": "2.0.0",
+    "description": "API for the nterprise application",
+    "title": "Units"
+  },
+  "servers": [
+    {
+      "url": "https://{environment}.nterprise.com",
+      "variables": {
+        "environment": {
+          "default": "api",
+          "enum": [
+            "api",
+            "api.dev"
+          ]
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/units": {
+      "$ref": "./paths/unit/units.json"
+    },
+    "/units/{unit_id}": {
+      "$ref": "./paths/unit/unit.json"
+    }
+  },
+  "components": {
+    "schemas": {
+      "Unit": {
+        "$ref": "https://docs.nterprise.com/schemas/niagara/unit.json"
+      }
+    }
+  }
+}

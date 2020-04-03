@@ -1,0 +1,41 @@
+{
+  "description": "A paged response for batchs",
+  "content": {
+    "application/hal+json": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "_embedded": {
+            "type": "object",
+            "properties": {
+              "nter:batchs": {
+                "type": "array",
+                "maxItems": 100,
+                "items": {
+                  "$ref": "../schemas/halBatch.json"
+                }
+              }
+            }
+          },
+          "_links": {
+            "type": "object",
+            "properties": {
+              "self": {
+                "x-example": {
+                  "href": "https://api.nterprise.com/batchs"
+                },
+                "$ref": "../schemas/link.json"
+              },
+              "next": {
+                "x-example": {
+                  "href": "https://api.nterprise.com/batchs?offset=QVBrO2wm13iEyl&limit=100"
+                },
+                "$ref": "../schemas/link.json"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

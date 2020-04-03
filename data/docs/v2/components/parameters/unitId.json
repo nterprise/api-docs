@@ -1,9 +1,0 @@
-{
-  "name": "unit_id",
-  "in": "path",
-  "description": "Id for the unit",
-  "required": true,
-  "schema": {
-    "$ref": "../schemas/unit.json#/properties/unit_id"
-  }
-}

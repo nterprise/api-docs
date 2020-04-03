@@ -1,8 +1,0 @@
-{
-  "name": "filter[part_id]",
-  "in": "query",
-  "description": "Filter where the part id is this value",
-  "schema": {
-    "type": "string"
-  }
-}

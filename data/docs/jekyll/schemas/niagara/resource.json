@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/resource.json",
+  "type": "object",
+  "description": "Defines the properties for a resource",
+  "additionalProperties": false,
+  "required": [
+    "label",
+    "entity_id",
+    "entity_type",
+    "created",
+    "updated",
+    "resource_type",
+    "location"
+  ],
+  "properties": {
+    "resource_id": {
+      "description": "The identifier for the resource",
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_id"
+    },
+    "entity_id": {
+      "x-no-api-doc": true,
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_id"
+    },
+    "entity_type": {
+      "x-no-api-doc": true,
+      "const": "RES"
+    },
+    "label": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/label"
+    },
+    "slug": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/slug"
+    },
+    "created": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/created"
+    },
+    "updated": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/updated"
+    },
+    "resource_type": {
+      "type": "string",
+      "description": "Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased",
+      "pattern": "^[a-z][0-9a-zA-Z-]+$"
+    },
+    "meta": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityHelper.json#/properties/meta"
+    },
+    "location": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/location.json"
+    }
+  }
+}

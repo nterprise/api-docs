@@ -1,0 +1,23 @@
+{
+  "description": "Bad Request",
+  "content": {
+    "application/problem+json": {
+      "schema": {
+        "properties": {
+          "title": {
+            "const": "Payload too Large"
+          },
+          "type": {
+            "const": "https://docs.nterprise.com/api/problem/PayloadTooLarge"
+          },
+          "status": {
+            "const": 413
+          },
+          "detail": {
+            "const": "The resource you are trying to upload is too large"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/batch.json",
+  "type": "object",
+  "description": "Defines the properties for a work order batch",
+  "additionalProperties": false,
+  "required": [
+    "queue",
+    "entity_id",
+    "entity_type",
+    "created",
+    "updated",
+    "number_cycles",
+    "cycles",
+    "work_order"
+  ],
+  "properties": {
+    "batch_id": {
+      "description": "The identifier for the batch",
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_id"
+    },
+    "entity_id": {
+      "x-no-api-doc": true,
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_id"
+    },
+    "entity_type": {
+      "x-no-api-doc": true,
+      "const": "BAT"
+    },
+    "label": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/label"
+    },
+    "slug": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/slug"
+    },
+    "created": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/created"
+    },
+    "updated": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/updated"
+    },
+    "queue": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/queue.json"
+    },
+    "order": {
+      "type": "integer",
+      "description": "Order to process the batch",
+      "minimum": 0
+    },
+    "number_cycles": {
+      "type": "integer",
+      "description": "The number of cycles for this batch",
+      "minimum": 1
+    },
+    "cycles": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/cycle.json"
+    },
+    "work_order": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workOrder.json"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "description": "Me Response",
+  "content": {
+    "application/hal+json": {
+      "schema": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "../schemas/halUser.json"
+          }
+        ]
+      }
+    }
+  }
+}

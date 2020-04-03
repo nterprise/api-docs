@@ -1,0 +1,15 @@
+{
+  "description": "A status response",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/status.json"
+          }
+        ]
+      }
+    }
+  }
+}

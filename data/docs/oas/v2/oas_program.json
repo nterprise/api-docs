@@ -1,0 +1,45 @@
+{
+  "openapi": "3.0.3",
+  "x-api": "niagara",
+  "x-parent": "Niagara API",
+  "info": {
+    "version": "2.0.0",
+    "description": "API for the nterprise application",
+    "title": "Programs"
+  },
+  "servers": [
+    {
+      "url": "https://{environment}.nterprise.com",
+      "variables": {
+        "environment": {
+          "default": "api",
+          "enum": [
+            "api",
+            "api.dev"
+          ]
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/programs": {
+      "$ref": "./paths/program/programs.json"
+    },
+    "/programs/{program_id}": {
+      "$ref": "./paths/program/program.json"
+    },
+    "/programs/{program_id}/projects": {
+      "$ref": "./paths/program/projects.json"
+    },
+    "/programs/{program_id}/work-orders": {
+      "$ref": "./paths/program/workOrders.json"
+    }
+  },
+  "components": {
+    "schemas": {
+      "Program": {
+        "$ref": "https://docs.nterprise.com/schemas/niagara/program.json"
+      }
+    }
+  }
+}

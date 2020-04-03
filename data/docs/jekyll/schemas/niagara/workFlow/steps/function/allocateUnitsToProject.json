@@ -1,0 +1,61 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/function/allocateUnitsToProject.json",
+  "type": "object",
+  "description": "Require the user confirm an action. This is normally used when Niagara cannot automatically detect that a task or action has been performed.",
+  "properties": {
+    "label": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/label"
+    },
+    "options": {
+      "type": "object",
+      "required": [
+        "function",
+        "payload"
+      ],
+      "properties": {
+        "function": {
+          "type": "string",
+          "enum": [
+            "allocate-units-to-project"
+          ]
+        },
+        "payload": {
+          "type": "object",
+          "required": [
+            "part_id",
+            "project_id",
+            "qty"
+          ],
+          "properties": {
+            "part_id": {
+              "type": "string",
+              "description": "Part ID of the to assign"
+            },
+            "program_id": {
+              "type": "string",
+              "description": "Program ID of the to assign"
+            },
+            "qty": {
+              "type": "number",
+              "minimum": 1,
+              "description": "Number of units to assign to the project"
+            },
+            "allow_scarcity": {
+              "type": "boolean",
+              "description": "Allow the workflow to continue even if there are not enough units"
+            },
+            "force": {
+              "type": "boolean",
+              "description": "Assign the units even if the project already has units allocated"
+            },
+            "status": {
+              "type": "string",
+              "description": "Only assign units which are in this status"
+            }
+          }
+        }
+      }
+    }
+  }
+}

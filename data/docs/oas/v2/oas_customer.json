@@ -1,0 +1,48 @@
+{
+  "openapi": "3.0.3",
+  "x-api": "niagara",
+  "x-parent": "Niagara API",
+  "info": {
+    "version": "2.0.0",
+    "description": "Customers may have multiple Programs, Projects, and Locations, as well as device Parts and individual Units.",
+    "title": "Customers"
+  },
+  "servers": [
+    {
+      "url": "https://{environment}.nterprise.com",
+      "variables": {
+        "environment": {
+          "default": "api",
+          "enum": [
+            "api",
+            "api.dev"
+          ]
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/customers": {
+      "$ref": "./paths/customer/customers.json"
+    },
+    "/customers/{customer_id}": {
+      "$ref": "./paths/customer/customer.json"
+    },
+    "/customers/{customer_id}/contacts": {
+      "$ref": "./paths/customer/contacts.json"
+    },
+    "/customers/{customer_id}/parts": {
+      "$ref": "./paths/customer/parts.json"
+    },
+    "/customers/{customer_id}/programs": {
+      "$ref": "./paths/customer/programs.json"
+    }
+  },
+  "components": {
+    "schemas": {
+      "Customer": {
+        "$ref": "https://docs.nterprise.com/schemas/niagara/customer.json"
+      }
+    }
+  }
+}

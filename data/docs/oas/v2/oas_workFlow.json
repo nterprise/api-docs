@@ -1,0 +1,42 @@
+{
+  "openapi": "3.0.3",
+  "x-api": "niagara",
+  "x-parent": "Niagara API",
+  "info": {
+    "version": "2.0.0",
+    "description": "API for the nterprise application",
+    "title": "Work Flows"
+  },
+  "servers": [
+    {
+      "url": "https://{environment}.nterprise.com",
+      "variables": {
+        "environment": {
+          "default": "api",
+          "enum": [
+            "api",
+            "api.dev"
+          ]
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/work-flows": {
+      "$ref": "./paths/workflow/workflows.json"
+    },
+    "/work-flows/{workflow_id}": {
+      "$ref": "./paths/workflow/workflow.json"
+    },
+    "/work-flows/{workflow_id}/contexts": {
+      "$ref": "./paths/workflow/context.json"
+    }
+  },
+  "components": {
+    "schemas": {
+      "Workflow": {
+        "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow.json"
+      }
+    }
+  }
+}

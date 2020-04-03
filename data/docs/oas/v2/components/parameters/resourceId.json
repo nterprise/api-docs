@@ -1,0 +1,9 @@
+{
+  "name": "resource_id",
+  "in": "path",
+  "description": "Id for the resource",
+  "required": true,
+  "schema": {
+    "$ref": "https://docs.nterprise.com/schemas/niagara/resource.json#/properties/resource_id"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "location_id",
+  "in": "path",
+  "description": "Id for the location",
+  "required": true,
+  "schema": {
+    "$ref": "https://docs.nterprise.com/schemas/niagara/location.json#/properties/location_id"
+  }
+}

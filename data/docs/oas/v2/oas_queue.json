@@ -1,0 +1,42 @@
+{
+  "openapi": "3.0.3",
+  "x-api": "niagara",
+  "x-parent": "Niagara API",
+  "info": {
+    "version": "2.0.0",
+    "description": "API for the nterprise application",
+    "title": "Queues"
+  },
+  "servers": [
+    {
+      "url": "https://{environment}.nterprise.com",
+      "variables": {
+        "environment": {
+          "default": "api",
+          "enum": [
+            "api",
+            "api.dev"
+          ]
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/queues": {
+      "$ref": "./paths/queue/queues.json"
+    },
+    "/queues/{queue_id}": {
+      "$ref": "./paths/queue/queue.json"
+    },
+    "/queues/{queue_id}/batches": {
+      "$ref": "./paths/queue/batches.json"
+    }
+  },
+  "components": {
+    "schemas": {
+      "Queue": {
+        "$ref": "https://docs.nterprise.com/schemas/niagara/queue.json"
+      }
+    }
+  }
+}

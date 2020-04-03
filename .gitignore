@@ -69,3 +69,8 @@ typings/
 
 # Serverless directories
 .serverless
+.bundle
+vendor
+
+# SASS Cache
+.sass-cache

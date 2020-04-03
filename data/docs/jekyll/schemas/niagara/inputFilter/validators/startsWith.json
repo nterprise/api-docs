@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/startsWith.json",
+  "type": "object",
+  "description": "Validate string starts with a value",
+  "required": [
+    "type",
+    "options"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "startsWith"
+      ]
+    },
+    "options": {
+      "type": "object",
+      "required": [
+        "starts_with"
+      ],
+      "properties": {
+        "starts_with": {
+          "type": "string",
+          "description": "String must start with this value"
+        },
+        "check_case": {
+          "type": "boolean",
+          "description": "Perform a case sensitive match. By default will not match case",
+          "default": false
+        }
+      }
+    }
+  }
+}

@@ -1,8 +1,0 @@
-{
-  "get": {
-    "$ref": "../operations/unit/fetchAllNotesForUnit.json"
-  },
-  "post": {
-    "$ref": "../operations/unit/createNoteForUnit.json"
-  }
-}

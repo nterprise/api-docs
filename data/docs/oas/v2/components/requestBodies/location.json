@@ -1,0 +1,26 @@
+{
+  "description": "The location to create",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "required": [
+          "label",
+          "location_type",
+          "address"
+        ],
+        "properties": {
+          "label": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/location.json#/properties/location_id"
+          },
+          "location_type": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/location.json#/properties/location_type"
+          },
+          "address": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/location.json#/properties/address"
+          }
+        }
+      }
+    }
+  }
+}

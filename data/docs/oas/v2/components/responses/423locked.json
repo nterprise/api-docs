@@ -1,0 +1,23 @@
+{
+  "description": "Forbidden",
+  "content": {
+    "application/problem+json": {
+      "schema": {
+        "properties": {
+          "title": {
+            "const": "Locked"
+          },
+          "type": {
+            "const": "https://docs.nterprise.com/api/problem/Locked"
+          },
+          "status": {
+            "const": 423
+          },
+          "detail": {
+            "const": "The current resource is locked and cannot be modified"
+          }
+        }
+      }
+    }
+  }
+}

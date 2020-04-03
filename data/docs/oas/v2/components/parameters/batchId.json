@@ -1,0 +1,9 @@
+{
+  "name": "batch_id",
+  "in": "path",
+  "description": "Id of the batch",
+  "required": true,
+  "schema": {
+    "$ref": "https://docs.nterprise.com/schemas/niagara/batch.json#/properties/batch_id"
+  }
+}

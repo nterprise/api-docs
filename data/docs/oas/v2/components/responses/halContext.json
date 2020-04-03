@@ -1,0 +1,10 @@
+{
+  "description": "A context response",
+  "content": {
+    "application/hal+json": {
+      "schema": {
+        "$ref": "../schemas/halContext.json"
+      }
+    }
+  }
+}

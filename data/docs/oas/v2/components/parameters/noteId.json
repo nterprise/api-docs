@@ -1,0 +1,9 @@
+{
+  "name": "note_id",
+  "in": "path",
+  "description": "Id of the note",
+  "required": true,
+  "schema": {
+    "$ref": "https://docs.nterprise.com/schemas/niagara/note.json#/properties/note_id"
+  }
+}

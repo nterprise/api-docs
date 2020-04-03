@@ -1,0 +1,44 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/uri.json",
+  "type": "object",
+  "description": "Validate string matches an URI",
+  "required": [
+    "type",
+    "options"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "uri"
+      ]
+    },
+    "options": {
+      "type": "object",
+      "properties": {
+        "schemes": {
+          "type": "array",
+          "description": "Schemes to match. By default all are matched",
+          "items": {
+            "type": "string",
+            "enum": [
+              "http",
+              "https",
+              "sip",
+              "sips",
+              "ftp",
+              "ftps",
+              "ldap",
+              "ldaps",
+              "file",
+              "udp",
+              "tcp",
+              "urn"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

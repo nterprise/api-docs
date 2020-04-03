@@ -1,0 +1,9 @@
+{
+  "name": "manufacturer_id",
+  "in": "path",
+  "description": "Id of the manufacturer",
+  "required": true,
+  "schema": {
+    "$ref": "https://docs.nterprise.com/schemas/niagara/manufacturer.json#/properties/manufacturer_id"
+  }
+}

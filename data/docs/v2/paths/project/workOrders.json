@@ -1,5 +1,0 @@
-{
-  "get": {
-    "$ref": "../operations/project/fetchAllProjectWorkOrders.json"
-  }
-}

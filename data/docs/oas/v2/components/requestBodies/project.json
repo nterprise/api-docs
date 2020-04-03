@@ -1,0 +1,39 @@
+{
+  "description": "The project to create",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "description": "Project to create",
+        "required": [
+          "label"
+        ],
+        "properties": {
+          "label": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/project.json#/properties/label"
+          },
+          "program": {
+            "type": "object",
+            "required": [
+              "program_id"
+            ],
+            "properties": {
+              "program_id": {
+                "$ref": "https://docs.nterprise.com/schemas/niagara/program.json#/properties/program_id"
+              }
+            }
+          },
+          "allowed_statuses": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/project.json#/properties/allowed_statuses"
+          },
+          "start_date": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/project.json#/properties/start_date"
+          },
+          "end_date": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/project.json#/properties/end_date"
+          }
+        }
+      }
+    }
+  }
+}

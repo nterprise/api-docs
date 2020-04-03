@@ -1,0 +1,54 @@
+{
+  "get": {
+    "operationId": "fetchAllWorkOrders",
+    "summary": "Fetches A Page of work orders",
+    "description": "Fetch Work Order",
+    "tags": [
+      "Work Order"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/limit.json"
+      },
+      {
+        "$ref": "../../components/parameters/offset.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halWorkOrderPage.json"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      }
+    }
+  },
+  "post": {
+    "operationId": "createWorkOrder",
+    "summary": "Creates a work order",
+    "description": "Creates a new work order",
+    "tags": [
+      "Work Order"
+    ],
+    "requestBody": {
+      "$ref": "../../components/requestBodies/workOrder.json"
+    },
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halWorkOrder.json"
+      },
+      "400": {
+        "$ref": "../../components/responses/400badRequest.json"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      }
+    }
+  }
+}

@@ -1,8 +1,0 @@
-{
-  "get": {
-    "$ref": "../operations/context/fetchCurrentStepForContext.json"
-  },
-  "patch": {
-    "$ref": "../operations/context/closeStep.json"
-  }
-}

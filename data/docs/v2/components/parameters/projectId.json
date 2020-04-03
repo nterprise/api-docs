@@ -1,9 +1,0 @@
-{
-  "name": "project_id",
-  "in": "path",
-  "description": "Id for the project",
-  "required": true,
-  "schema": {
-    "$ref": "../schemas/project.json#/properties/project_id"
-  }
-}

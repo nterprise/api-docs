@@ -1,9 +1,0 @@
-{
-  "name": "workflow_id",
-  "in": "path",
-  "description": "Id for the workflow",
-  "required": true,
-  "schema": {
-    "$ref": "../schemas/workflow.json#/properties/workflow_id"
-  }
-}

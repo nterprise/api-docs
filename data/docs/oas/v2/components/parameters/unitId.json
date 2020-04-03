@@ -1,0 +1,9 @@
+{
+  "name": "unit_id",
+  "in": "path",
+  "description": "Id for the unit",
+  "required": true,
+  "schema": {
+    "$ref": "https://docs.nterprise.com/schemas/niagara/unit.json#/properties/unit_id"
+  }
+}

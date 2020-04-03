@@ -1,0 +1,29 @@
+{
+  "get": {
+    "operationId": "fetchAllUsers",
+    "summary": "Fetches A Page of users",
+    "description": "Fetch Users",
+    "tags": [
+      "User"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/limit.json"
+      },
+      {
+        "$ref": "../../components/parameters/offset.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halUserPage.json"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      }
+    }
+  }
+}

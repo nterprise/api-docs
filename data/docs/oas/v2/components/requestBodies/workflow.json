@@ -1,0 +1,34 @@
+{
+  "description": "The unit to create",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "required": [
+          "label",
+          "steps",
+          "schema_version",
+          "applies_to",
+          "starts_at"
+        ],
+        "properties": {
+          "label": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow.json#/properties/work_flow_id"
+          },
+          "schema_version": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow.json#/properties/schema_version"
+          },
+          "applies_to": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow.json#/properties/applies_to"
+          },
+          "starts_at": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow.json#/properties/starts_at"
+          },
+          "steps": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow.json#/properties/steps"
+          }
+        }
+      }
+    }
+  }
+}

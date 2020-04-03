@@ -1,0 +1,15 @@
+{
+  "description": "A dashboard response",
+  "content": {
+    "application/hal+json": {
+      "schema": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "../schemas/halDashboard.json"
+          }
+        ]
+      }
+    }
+  }
+}

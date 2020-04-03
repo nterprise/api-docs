@@ -1,0 +1,67 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/customer.json",
+  "type": "object",
+  "description": "Customer",
+  "additionalProperties": false,
+  "required": [
+    "label",
+    "entity_id",
+    "entity_type",
+    "created",
+    "updated",
+    "allowed_statuses"
+  ],
+  "properties": {
+    "customer_id": {
+      "description": "Customer identifier",
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_id"
+    },
+    "entity_id": {
+      "x-no-api-doc": true,
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_id"
+    },
+    "entity_type": {
+      "x-no-api-doc": true,
+      "const": "CUS"
+    },
+    "label": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/label"
+    },
+    "slug": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/slug"
+    },
+    "created": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/created"
+    },
+    "updated": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/updated"
+    },
+    "external_platform": {
+      "type": "object",
+      "description": "External Identifiers for the customer",
+      "deprecated": true,
+      "patternProperties": {
+        "^[A-Za-z][A-Za-z0-9_]*$": {
+          "type": ["string", "null"]
+        }
+      }
+    },
+    "allowed_statuses": {
+      "type": "array",
+      "description": "List of allowed statuses",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "./status.json"
+      }
+    },
+    "total_programs": {
+      "type": "number",
+      "description": "Total programs under the customer"
+    },
+    "total_projects": {
+      "type": "number",
+      "description": "Total projects under the customer"
+    }
+  }
+}

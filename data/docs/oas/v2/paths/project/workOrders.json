@@ -1,0 +1,36 @@
+{
+  "get": {
+    "operationId": "fetchAllProjectWorkOrders",
+    "summary": "Fetches work orders for a project",
+    "description": "Fetch project work orders",
+    "tags": [
+      "Project"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/projectId.json"
+      },
+      {
+        "$ref": "../../components/parameters/limit.json"
+      },
+      {
+        "$ref": "../../components/parameters/offset.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halWorkOrderPage.json"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "404": {
+        "$ref": "../../components/responses/404notFound.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      }
+    }
+
+  }
+}

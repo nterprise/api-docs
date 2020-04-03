@@ -1,0 +1,25 @@
+{
+  "description": "A Customer request body",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "required": [
+          "label",
+          "allowed_statuses"
+        ],
+        "properties": {
+          "label": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/customer.json#/properties/label"
+          },
+          "external_platform": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/customer.json#/properties/external_platform"
+          },
+          "allowed_statuses": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/customer.json#/properties/allowed_statuses"
+          }
+        }
+      }
+    }
+  }
+}

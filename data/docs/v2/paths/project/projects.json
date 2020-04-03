@@ -1,8 +1,0 @@
-{
-  "get": {
-    "$ref": "../operations/project/fetchAllProjects.json"
-  },
-  "post": {
-    "$ref": "../operations/project/createProject.json"
-  }
-}

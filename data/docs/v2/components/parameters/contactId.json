@@ -1,9 +1,0 @@
-{
-  "name": "contact_id",
-  "in": "path",
-  "description": "Id of the contact",
-  "required": true,
-  "schema": {
-    "$ref": "../schemas/contact.json#/properties/contact_id"
-  }
-}

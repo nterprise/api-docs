@@ -1,0 +1,36 @@
+{
+  "openapi": "3.0.3",
+  "x-api": "niagara",
+  "x-parent": "Niagara API",
+  "info": {
+    "version": "2.0.0",
+    "description": "API for the nterprise application",
+    "title": "Notes"
+  },
+  "servers": [
+    {
+      "url": "https://{environment}.nterprise.com",
+      "variables": {
+        "environment": {
+          "default": "api",
+          "enum": [
+            "api",
+            "api.dev"
+          ]
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/notes/{note_id}": {
+      "$ref": "./paths/note/note.json"
+    }
+  },
+  "components": {
+    "schemas": {
+      "Note": {
+        "$ref": "https://docs.nterprise.com/schemas/niagara/note.json"
+      }
+    }
+  }
+}

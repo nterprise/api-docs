@@ -1,0 +1,45 @@
+{
+  "description": "The batch to create",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "required": [
+          "queue",
+          "work_order",
+          "number_cycles"
+        ],
+        "properties": {
+          "priority": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/batch.json#/properties/priority"
+          },
+          "work_order": {
+            "type": "object",
+            "required": [
+              "work_order_id"
+            ],
+            "properties": {
+              "work_order_id": {
+                "$ref": "https://docs.nterprise.com/schemas/niagara/workOrder.json#/properties/work_order_id"
+              }
+            }
+          },
+          "queue": {
+            "type": "object",
+            "required": [
+              "queue_id"
+            ],
+            "properties": {
+              "queue_id": {
+                "$ref": "https://docs.nterprise.com/schemas/niagara/queue.json#/properties/queue_id"
+              }
+            }
+          },
+          "number_cycles": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/batch.json#/properties/priority"
+          }
+        }
+      }
+    }
+  }
+}

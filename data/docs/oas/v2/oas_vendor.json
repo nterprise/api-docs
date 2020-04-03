@@ -1,0 +1,45 @@
+{
+  "openapi": "3.0.3",
+  "x-api": "niagara",
+  "x-parent": "Niagara API",
+  "info": {
+    "version": "2.0.0",
+    "description": "API for the nterprise application",
+    "title": "Vendors"
+  },
+  "servers": [
+    {
+      "url": "https://{environment}.nterprise.com",
+      "variables": {
+        "environment": {
+          "default": "api",
+          "enum": [
+            "api",
+            "api.dev"
+          ]
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/vendors": {
+      "$ref": "./paths/vendor/vendors.json"
+    },
+    "/vendors/{vendor_id}": {
+      "$ref": "./paths/vendor/vendor.json"
+    },
+    "/vendors/{vendor_id}/parts": {
+      "$ref": "./paths/vendor/parts.json"
+    },
+    "/vendors/{vendor_id}/units": {
+      "$ref": "./paths/vendor/units.json"
+    }
+  },
+  "components": {
+    "schemas": {
+      "Vendor": {
+        "$ref": "https://docs.nterprise.com/schemas/niagara/vendor.json"
+      }
+    }
+  }
+}

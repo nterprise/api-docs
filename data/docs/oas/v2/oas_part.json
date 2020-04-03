@@ -1,0 +1,42 @@
+{
+  "openapi": "3.0.3",
+  "x-api": "niagara",
+  "x-parent": "Niagara API",
+  "info": {
+    "version": "2.0.0",
+    "description": "API for the nterprise application",
+    "title": "Parts"
+  },
+  "servers": [
+    {
+      "url": "https://{environment}.nterprise.com",
+      "variables": {
+        "environment": {
+          "default": "api",
+          "enum": [
+            "api",
+            "api.dev"
+          ]
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/parts": {
+      "$ref": "./paths/part/parts.json"
+    },
+    "/parts/{part_id}": {
+      "$ref": "./paths/part/part.json"
+    },
+    "/parts/{part_id}/units": {
+      "$ref": "./paths/part/units.json"
+    }
+  },
+  "components": {
+    "schemas": {
+      "Part": {
+        "$ref": "https://docs.nterprise.com/schemas/niagara/part.json"
+      }
+    }
+  }
+}

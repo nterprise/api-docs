@@ -1,9 +1,0 @@
-{
-  "name": "program_id",
-  "in": "path",
-  "description": "Id for the program",
-  "required": true,
-  "schema": {
-    "$ref": "../schemas/program.json#/properties/program_id"
-  }
-}

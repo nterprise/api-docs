@@ -1,8 +1,0 @@
-{
-  "type": "lessThan",
-  "options": {
-    "value": 42,
-    "precision": 7,
-    "include": true
-  }
-}

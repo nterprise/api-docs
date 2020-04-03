@@ -1,0 +1,36 @@
+{
+  "openapi": "3.0.3",
+  "x-api": "niagara",
+  "x-parent": "Niagara API",
+  "info": {
+    "version": "2.0.0",
+    "description": "API for the nterprise application",
+    "title": "Settings"
+  },
+  "servers": [
+    {
+      "url": "https://{environment}.nterprise.com",
+      "variables": {
+        "environment": {
+          "default": "api",
+          "enum": [
+            "api",
+            "api.dev"
+          ]
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/settings/statuses": {
+      "$ref": "./paths/settings/status.json"
+    }
+  },
+  "components": {
+    "schemas": {
+      "Status": {
+        "$ref": "https://docs.nterprise.com/schemas/niagara/status.json"
+      }
+    }
+  }
+}

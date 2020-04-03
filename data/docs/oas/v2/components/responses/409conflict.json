@@ -1,0 +1,23 @@
+{
+  "description": "Conflict",
+  "content": {
+    "application/problem+json": {
+      "schema": {
+        "properties": {
+          "title": {
+            "const": "Conflict"
+          },
+          "type": {
+            "const": "https://docs.nterprise.com/api/problem/Conflict"
+          },
+          "status": {
+            "const": 409
+          },
+          "detail": {
+            "const": "This request contains a conflict to another resource"
+          }
+        }
+      }
+    }
+  }
+}

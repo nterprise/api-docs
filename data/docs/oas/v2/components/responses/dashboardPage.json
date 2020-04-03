@@ -1,0 +1,29 @@
+{
+  "description": "A paged response for dashboards",
+  "content": {
+    "application/hal+json": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "_embedded": {
+            "type": "object",
+            "properties": {
+              "nter:dashboards": {
+                "type": "array",
+                "maxItems": 100,
+                "items": {
+                  "$ref": "../schemas/hal/halDashboard.json"
+                }
+              }
+            }
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "../schemas/hal/halPaginationOffset.json"
+          }
+        ]
+      }
+    }
+  }
+}

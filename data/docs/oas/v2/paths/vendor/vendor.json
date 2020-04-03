@@ -1,0 +1,92 @@
+{
+  "get": {
+    "operationId": "fetchVendorById",
+    "summary": "Fetches a vendor by Id",
+    "description": "Fetch Vendor",
+    "tags": [
+      "Vendor"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/vendorId.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halVendor.json"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      },
+      "404": {
+        "$ref": "../../components/responses/404notFound.json"
+      }
+    }
+  },
+  "put": {
+    "operationId": "updateVendor",
+    "summary": "Updates a vendor",
+    "description": "Updates a vendor",
+    "tags": [
+      "Vendor"
+    ],
+    "requestBody": {
+      "$ref": "../../components/requestBodies/vendor.json"
+    },
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/vendorId.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halVendor.json"
+      },
+      "400": {
+        "$ref": "../../components/responses/400badRequest.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      },
+      "409": {
+        "$ref": "../../components/responses/409conflict.json"
+      },
+      "423": {
+        "$ref": "../../components/responses/423locked.json"
+      }
+    }
+  },
+  "delete": {
+    "operationId": "deleteVendor",
+    "summary": "Deletes a vendor",
+    "description": "This will remove the vendor from the system",
+    "tags": [
+      "Vendor"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/vendorId.json"
+      }
+    ],
+    "responses": {
+      "205": {
+        "description": "Vendor deleted"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      },
+      "404": {
+        "$ref": "../../components/responses/404notFound.json"
+      },
+      "423": {
+        "$ref": "../../components/responses/423locked.json"
+      }
+    }
+  }
+}

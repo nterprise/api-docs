@@ -1,7 +1,0 @@
-{
-  "type": "length",
-  "options": {
-    "length": "foo",
-    "operator": "greater_than"
-  }
-}

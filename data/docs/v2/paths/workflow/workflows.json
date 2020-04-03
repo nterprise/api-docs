@@ -1,8 +1,0 @@
-{
-  "get": {
-    "$ref": "../operations/workflow/fetchAllWorkflows.json"
-  },
-  "post": {
-    "$ref": "../operations/workflow/createWorkflow.json"
-  }
-}

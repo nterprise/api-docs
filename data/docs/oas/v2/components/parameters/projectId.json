@@ -1,0 +1,9 @@
+{
+  "name": "project_id",
+  "in": "path",
+  "description": "Id for the project",
+  "required": true,
+  "schema": {
+    "$ref": "https://docs.nterprise.com/schemas/niagara/project.json#/properties/project_id"
+  }
+}

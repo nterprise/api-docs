@@ -1,0 +1,54 @@
+{
+  "description": "The part to create",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "required": [
+          "label",
+          "customer",
+          "manufacturer",
+          "input_filter",
+          "serial_prefix"
+        ],
+        "properties": {
+          "label": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/part.json#/properties/label"
+          },
+          "customer": {
+            "type": "object",
+            "required": [
+              "customer_id"
+            ],
+            "properties": {
+              "customer_id": {
+                "$ref": "https://docs.nterprise.com/schemas/niagara/customer.json#/properties/customer_id"
+              }
+            }
+          },
+          "manufacturer": {
+            "type": "object",
+            "required": [
+              "manufacturer_id",
+              "part_number"
+            ],
+            "properties": {
+              "manufacturer_id": {
+                "$ref": "https://docs.nterprise.com/schemas/niagara/manufacturer.json#/properties/manufacturer_id"
+              },
+              "part_number": {
+                "$ref": "https://docs.nterprise.com/schemas/niagara/part.json#/properties/manufacturer/properties/part_number"
+              }
+            }
+          },
+          "serial_prefix": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/part.json#/properties/serial_prefix"
+          },
+          "input_filter": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/part.json#/properties/input_filter"
+          }
+        }
+      }
+    }
+  }
+}

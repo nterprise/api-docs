@@ -1,8 +1,0 @@
-{
-  "get": {
-    "$ref": "../operations/settings/fetchAllStatuses.json"
-  },
-  "post": {
-    "$ref": "../operations/settings/createStatus.json"
-  }
-}

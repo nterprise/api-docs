@@ -1,0 +1,139 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter.json",
+  "type": "array",
+  "description": "Input Filters allow custom fields to be defined for entities",
+  "items": {
+    "type": "object",
+    "description": "Input filter specification",
+    "required": [
+      "label",
+      "key",
+      "filters",
+      "validators"
+    ],
+    "properties": {
+      "label": {
+        "type": "string",
+        "description": "Human readable name"
+      },
+      "key": {
+        "type": "string",
+        "description": "Slug used to store the property",
+        "readOnly": true,
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+      },
+      "filters": {
+        "type": "array",
+        "description": "A Collection of filters applied to the field",
+        "maxItems": 100,
+        "items": {
+          "anyOf": [
+            {
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/allowed.json"
+            },
+            {
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/camelCase.json"
+            },
+            {
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/date.json"
+            },
+            {
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/empty.json"
+            },
+            {
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/float.json"
+            },
+            {
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/kebabCase.json"
+            },
+            {
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/lower.json"
+            },
+            {
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/number.json"
+            },
+            {
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/prefix.json"
+            },
+            {
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/snakeCase.json"
+            },
+            {
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/string.json"
+            },
+            {
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/suffix.json"
+            },
+            {
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/trim.json"
+            },
+            {
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/upper.json"
+            }
+          ]
+        }
+      },
+      "validators": {
+        "type": "array",
+        "description": "A set of validators to use for this field",
+        "maxItems": 100,
+        "items": {
+          "anyOf": [
+            {
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/between.json"
+            },
+            {
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/blackList.json"
+            },
+            {
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/contains.json"
+            },
+            {
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/emailAddress.json"
+            },
+            {
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/endsWith.json"
+            },
+            {
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/equals.json"
+            },
+            {
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/greaterThan.json"
+            },
+            {
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/hostName.json"
+            },
+            {
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/ipAddress.json"
+            },
+            {
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/length.json"
+            },
+            {
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/lessThan.json"
+            },
+            {
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/macAddress.json"
+            },
+            {
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/mask.json"
+            },
+            {
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/startsWith.json"
+            },
+            {
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/step.json"
+            },
+            {
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/uri.json"
+            },
+            {
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/whiteList.json"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

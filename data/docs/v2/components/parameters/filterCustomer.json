@@ -1,8 +1,0 @@
-{
-  "name": "filter[customer_id]",
-  "in": "query",
-  "description": "Filter where the customer id is this value",
-  "schema": {
-    "type": "string"
-  }
-}

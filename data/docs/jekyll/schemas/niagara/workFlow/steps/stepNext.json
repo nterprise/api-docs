@@ -1,0 +1,60 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepNext.json",
+  "type": "object",
+  "required": [
+    "type",
+    "label",
+    "goto"
+  ],
+  "properties": {
+    "goto": {
+      "type": "string",
+      "description": "Step to move to",
+      "pattern": "^[a-z][a-z-]+[a-z]$"
+    },
+    "goto-fail": {
+      "type": "string",
+      "description": "Step to transition too if this step cannot be completed",
+      "pattern": "^[a-z][a-z-]+[a-z]$"
+    },
+    "context": {
+      "type": "array",
+      "description": "Values to set on the context",
+      "items": {
+        "type": "object",
+        "required": [
+          "key",
+          "value"
+        ],
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "The context key to set"
+          },
+          "value": {
+            "type": "string",
+            "description": "Value to set"
+          },
+          "lock": {
+            "type": "boolean",
+            "description": "Prevents other steps from writing this value"
+          },
+          "ignore": {
+            "type": "boolean",
+            "description": "When trying to set a locked key, do not fail"
+          }
+        }
+      }
+    },
+    "onStart": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json"
+    },
+    "onError": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepError.json"
+    },
+    "onTimeout": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepError.json"
+    }
+  }
+}

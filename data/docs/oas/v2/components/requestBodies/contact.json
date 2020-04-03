@@ -1,0 +1,29 @@
+{
+  "description": "The contact to create",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "required": [
+          "label",
+          "name",
+          "email"
+        ],
+        "properties": {
+          "label": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/contact.json#/properties/label"
+          },
+          "name": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/contact.json#/properties/name"
+          },
+          "email": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/contact.json#/properties/email"
+          },
+          "phone": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/contact.json#/properties/phone"
+          }
+        }
+      }
+    }
+  }
+}

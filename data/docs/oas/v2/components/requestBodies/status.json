@@ -1,0 +1,10 @@
+{
+  "description": "A status",
+  "content": {
+    "application/json": {
+      "schema": {
+        "$ref": "https://docs.nterprise.com/schemas/niagara/status.json"
+      }
+    }
+  }
+}

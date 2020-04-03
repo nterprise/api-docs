@@ -1,0 +1,54 @@
+{
+  "get": {
+    "operationId": "fetchAllBatches",
+    "summary": "Fetches A Page of batches",
+    "description": "Fetch Batches",
+    "tags": [
+      "Batch"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/limit.json"
+      },
+      {
+        "$ref": "../../components/parameters/offset.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halBatchPage.json"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      }
+    }
+  },
+  "post": {
+    "operationId": "createBatch",
+    "summary": "Create a batch",
+    "description": "Creates a new batch for a queue",
+    "tags": [
+      "Batch"
+    ],
+    "requestBody": {
+      "$ref": "../../components/requestBodies/batch.json"
+    },
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halBatch.json"
+      },
+      "400": {
+        "$ref": "../../components/responses/400badRequest.json"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      }
+    }
+  }
+}

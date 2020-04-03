@@ -1,0 +1,41 @@
+{
+  "description": "A paged response for queues",
+  "content": {
+    "application/hal+json": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "_embedded": {
+            "type": "object",
+            "properties": {
+              "nter:queues": {
+                "type": "array",
+                "maxItems": 100,
+                "items": {
+                  "$ref": "../schemas/halQueue.json"
+                }
+              }
+            }
+          },
+          "_links": {
+            "type": "object",
+            "properties": {
+              "self": {
+                "x-example": {
+                  "href": "https://api.nterprise.com/queues"
+                },
+                "$ref": "../schemas/link.json"
+              },
+              "next": {
+                "x-example": {
+                  "href": "https://api.nterprise.com/queues?offset=QVBrO2wm13iEyl&limit=100"
+                },
+                "$ref": "../schemas/link.json"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "get": {
+    "operationId": "fetchAllNotesForUnit",
+    "summary": "Fetches the notes for a unit",
+    "description": "Fetch unit notes",
+    "tags": [
+      "Unit"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/unitId.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halNotePage.json"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      },
+      "404": {
+        "$ref": "../../components/responses/404notFound.json"
+      }
+    }
+  },
+  "post": {
+    "operationId": "createNoteForUnit",
+    "summary": "Creates a note for a unit",
+    "description": "Creates a note for a unit",
+    "tags": [
+      "Unit"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/unitId.json"
+      }
+    ],
+    "requestBody": {
+      "$ref": "../../components/requestBodies/note.json"
+    },
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halNote.json"
+      },
+      "400": {
+        "$ref": "../../components/responses/400badRequest.json"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      }
+    }
+
+  }
+}

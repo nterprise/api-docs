@@ -1,0 +1,18 @@
+{
+  "get": {
+    "operationId": "fetchMe",
+    "summary": "Information about the current user",
+    "description": "Fetches the current user information along with resources they can access",
+    "tags": [
+      "Me"
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/me.json"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      }
+    }
+  }
+}

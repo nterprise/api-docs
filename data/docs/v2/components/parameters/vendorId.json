@@ -1,9 +1,0 @@
-{
-  "name": "vendor_id",
-  "in": "path",
-  "description": "Id of the vendor",
-  "required": true,
-  "schema": {
-    "$ref": "../schemas/vendor.json#/properties/vendor_id"
-  }
-}

@@ -1,0 +1,91 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/workFlow.json",
+  "type": "object",
+  "description": "Workflow",
+  "additionalProperties": false,
+  "required": [
+    "label",
+    "entity_id",
+    "entity_type",
+    "created",
+    "updated",
+    "steps",
+    "starts_at",
+    "applies_to",
+    "schema_version"
+  ],
+  "properties": {
+    "work_flow_id": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_id"
+    },
+    "entity_id": {
+      "x-no-api-doc": true,
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_id"
+    },
+    "entity_type": {
+      "x-no-api-doc": true,
+      "const": "WKF"
+    },
+    "label": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/label"
+    },
+    "slug": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/slug"
+    },
+    "created": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/created"
+    },
+    "updated": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/updated"
+    },
+    "schema_version": {
+      "type": "string",
+      "description": "Version of the workflow schema used",
+      "enum": [
+        "1.0"
+      ]
+    },
+    "workflow_version": {
+      "type": "integer",
+      "description": "Version number for the work flows (the number of times it has been changed",
+      "readOnly": true
+    },
+    "applies_to": {
+      "type": "string",
+      "description": "The entity type this work flow applies too",
+      "enum": [
+        "UNIT",
+        "PART",
+        "PGM",
+        "PRJ",
+        "CUS",
+        "CON"
+      ]
+    },
+    "triggered_by": {
+      "type": "array",
+      "items": {
+        "$ref": "https://docs.nterprise.com/schemas/niagara/entityHelper.json#/properties/entity_events"
+      }
+    },
+    "starts_at": {
+      "type": "string",
+      "description": "Starting step"
+    },
+    "steps": {
+      "type": "object",
+      "description": "Steps for the workflow",
+      "uniqueItems": true,
+      "additionalProperties": true,
+      "patternProperties": {
+        "^[A-Za-z][A-Za-z0-9_]*$": {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/allSteps.json#/properties/step"
+        }
+      }
+    },
+    "metadata": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityHelper.json#/properties/meta"
+    }
+  }
+}

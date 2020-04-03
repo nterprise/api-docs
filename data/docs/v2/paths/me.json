@@ -1,5 +1,0 @@
-{
-  "get": {
-    "$ref": "./operations/fetchMe.json"
-  }
-}

@@ -1,9 +1,0 @@
-{
-  "name": "part_id",
-  "in": "path",
-  "description": "Id for the part",
-  "required": true,
-  "schema": {
-    "$ref": "../schemas/part.json#/properties/part_id"
-  }
-}

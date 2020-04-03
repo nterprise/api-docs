@@ -1,9 +1,0 @@
-{
-  "name": "manufacturer_id",
-  "in": "path",
-  "description": "Id of the manufacturer",
-  "required": true,
-  "schema": {
-    "$ref": "../schemas/manufacturer.json#/properties/manufacturer_id"
-  }
-}

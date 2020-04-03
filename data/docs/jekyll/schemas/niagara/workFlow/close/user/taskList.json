@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/close/user/taskList.json",
+  "type": "object",
+  "description": "Close the task-list step",
+  "required": [
+    "fields",
+    "step"
+  ],
+  "properties": {
+    "items": {
+      "type": "array",
+      "description": "Configuration for each task list item",
+      "items": {
+        "type": "object",
+        "required": [
+          "value",
+          "slug"
+        ],
+        "properties": {
+          "value": {
+            "type": ["string", "null"],
+            "enum": [
+              "ok",
+              "na",
+              "bad",
+              null
+            ],
+            "description": "Selects which item the user has selected"
+          },
+          "slug": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/taskList.json#/properties/options/properties/payload/properties/items/items/properties/slug"
+          }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/close/stepCloseCommon.json"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "get": {
+    "operationId": "fetchAllVendor",
+    "summary": "Fetches A Page of vendor",
+    "description": "Fetch Part",
+    "tags": [
+      "Vendor"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/limit.json"
+      },
+      {
+        "$ref": "../../components/parameters/offset.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halVendorPage.json"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      }
+    }
+  },
+  "post": {
+    "operationId": "createVendor",
+    "summary": "Creates a vendor",
+    "description": "Creates a new vendor",
+    "tags": [
+      "Vendor"
+    ],
+    "requestBody": {
+      "$ref": "../../components/requestBodies/vendor.json"
+    },
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halVendor.json"
+      },
+      "400": {
+        "$ref": "../../components/responses/400badRequest.json"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      },
+      "409": {
+        "$ref": "../../components/responses/409conflict.json"
+      }
+    }
+  }
+}

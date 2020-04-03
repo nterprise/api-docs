@@ -1,0 +1,73 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/manualDataEntry.json",
+  "type": "object",
+  "description": "Ask the user to manually enter (or confirm) data for an entity",
+  "properties": {
+    "label": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepCommon.json#/properties/label"
+    },
+    "options": {
+      "type": "object",
+      "required": [
+        "component",
+        "payload"
+      ],
+      "properties": {
+        "component": {
+          "enum": [
+            "manual-data-entry"
+          ]
+        },
+        "payload": {
+          "type": "object",
+          "required": [
+            "fields"
+          ],
+          "properties": {
+            "fields": {
+              "type": "array",
+              "description": "Configuration for each field",
+              "items": {
+                "type": "object",
+                "required": [
+                  "input_type",
+                  "label",
+                  "required",
+                  "entity_field"
+                ],
+                "properties": {
+                  "input_type": {
+                    "type": "string",
+                    "description": "The type of input field to display",
+                    "enum": [
+                      "textbox",
+                      "input"
+                    ]
+                  },
+                  "label": {
+                    "type": "string",
+                    "description": "Label to display for the field"
+                  },
+                  "required": {
+                    "type": "boolean",
+                    "description": "Display the field as required input. Note: this is a helper function. It singles that the user is required to input data at this step. If the field is required on the entity, the user will be presented with a validation message"
+                  },
+                  "entity_field": {
+                    "type": "string",
+                    "description": "JSON Path to the field on the entity. If the path does not start with '$' then the entity on the context is assumed. Otherwise the data will be set on the context path"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepUser.json"
+    }
+  ]
+}

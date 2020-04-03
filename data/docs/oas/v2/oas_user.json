@@ -1,0 +1,39 @@
+{
+  "openapi": "3.0.3",
+  "x-api": "niagara",
+  "x-parent": "Niagara API",
+  "info": {
+    "version": "2.0.0",
+    "description": "API for the nterprise application",
+    "title": "Users"
+  },
+  "servers": [
+    {
+      "url": "https://{environment}.nterprise.com",
+      "variables": {
+        "environment": {
+          "default": "api",
+          "enum": [
+            "api",
+            "api.dev"
+          ]
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/users": {
+      "$ref": "./paths/user/users.json"
+    },
+    "/users/{user_id}": {
+      "$ref": "./paths/user/user.json"
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "$ref": "https://docs.nterprise.com/schemas/niagara/user.json"
+      }
+    }
+  }
+}

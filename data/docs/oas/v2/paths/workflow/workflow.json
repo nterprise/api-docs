@@ -1,0 +1,87 @@
+{
+  "get": {
+    "operationId": "fetchWorkflowById",
+    "summary": "Fetches a workflow by Id",
+    "description": "Fetch Workflow",
+    "tags": [
+      "Workflow"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/workflowId.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halWorkflow.json"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      },
+      "404": {
+        "$ref": "../../components/responses/404notFound.json"
+      }
+    }
+  },
+  "put": {
+    "operationId": "updateWorkflow",
+    "tags": [
+      "Workflow"
+    ],
+    "requestBody": {
+      "$ref": "../../components/requestBodies/workflow.json"
+    },
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/workflowId.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halWorkflow.json"
+      },
+      "400": {
+        "$ref": "../../components/responses/400badRequest.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      },
+      "423": {
+        "$ref": "../../components/responses/423locked.json"
+      }
+    }
+  },
+  "delete": {
+    "operationId": "deleteWorkflow",
+    "summary": "Deletes a workflow",
+    "description": "This will soft delete the workflow",
+    "tags": [
+      "Workflow"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/workflowId.json"
+      }
+    ],
+    "responses": {
+      "205": {
+        "description": "Workflow deleted"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      },
+      "404": {
+        "$ref": "../../components/responses/404notFound.json"
+      },
+      "423": {
+        "$ref": "../../components/responses/423locked.json"
+      }
+    }
+  }
+}

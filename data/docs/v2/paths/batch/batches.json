@@ -1,8 +1,0 @@
-{
-  "get": {
-    "$ref": "../operations/batch/fetchAllBatches.json"
-  },
-  "post": {
-    "$ref": "../operations/batch/createBatch.json"
-  }
-}

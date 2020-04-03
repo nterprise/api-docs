@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/subResource.json",
+  "type": "object",
+  "description": "Defines the properties for a resource",
+  "additionalProperties": false,
+  "required": [
+    "label",
+    "entity_id",
+    "entity_type",
+    "created",
+    "updated",
+    "resource_type",
+    "location",
+    "resource"
+  ],
+  "properties": {
+    "resource_id": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/resource.json#/properties/resource_id"
+    },
+    "entity_id": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/resource.json#/properties/entity_id"
+    },
+    "entity_type": {
+      "x-no-api-doc": true,
+      "const": "SRES"
+    },
+    "label": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/resource.json#/properties/label"
+    },
+    "slug": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/resource.json#/properties/slug"
+    },
+    "created": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/resource.json#/properties/created"
+    },
+    "updated": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/resource.json#/properties/updated"
+    },
+    "resource_type": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/resource.json#/properties/resource_type"
+    },
+    "meta": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/resource.json#/properties/meta"
+    },
+    "location": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/resource.json#/properties/location"
+    },
+    "resource": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/resource.json"
+    }
+  }
+}

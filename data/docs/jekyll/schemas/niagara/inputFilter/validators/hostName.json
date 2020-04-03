@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/hostname.json",
+  "type": "object",
+  "description": "Validate string has a correct DNS records",
+  "required": [
+    "type",
+    "options"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "hostname"
+      ]
+    },
+    "options": {
+      "type": "object",
+      "properties": {
+        "record_type": {
+          "type": "string",
+          "description": "DNS record type to validate",
+          "default": "A",
+          "enum": [
+            "A",
+            "AAAA",
+            "AFSDB",
+            "APL",
+            "CAA",
+            "CDNSKEY",
+            "CDS",
+            "CERT",
+            "CNAME",
+            "CSYNC",
+            "DHCID",
+            "DLV",
+            "DNAME",
+            "DNSKEY",
+            "DS",
+            "HIP",
+            "IPSECKEY",
+            "KEY",
+            "KX",
+            "LOC",
+            "MX",
+            "NAPTR",
+            "NS",
+            "NSEC",
+            "NSEC3",
+            "NSEC3PARAM",
+            "OPENPGPKEY",
+            "PTR",
+            "RRSIG",
+            "RP",
+            "SIG",
+            "SMIMEA",
+            "SOA",
+            "SRV",
+            "SSHFP",
+            "TA",
+            "TKEY",
+            "TLSA",
+            "TSIG",
+            "TXT",
+            "URI"
+          ]
+        }
+      }
+    }
+  }
+}

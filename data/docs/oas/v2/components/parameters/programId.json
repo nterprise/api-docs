@@ -1,0 +1,9 @@
+{
+  "name": "program_id",
+  "in": "path",
+  "description": "Id for the program",
+  "required": true,
+  "schema": {
+    "$ref": "https://docs.nterprise.com/schemas/niagara/program.json#/properties/program_id"
+  }
+}

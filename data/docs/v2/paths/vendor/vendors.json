@@ -1,8 +1,0 @@
-{
-  "get": {
-    "$ref": "../operations/vendor/fetchAllVendors.json"
-  },
-  "post": {
-    "$ref": "../operations/vendor/createVendor.json"
-  }
-}

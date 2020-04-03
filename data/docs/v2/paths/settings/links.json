@@ -1,8 +1,0 @@
-{
-  "get": {
-    "$ref": "../operations/settings/fetchAllLinks.json"
-  },
-  "post": {
-    "$ref": "../operations/settings/createLink.json"
-  }
-}

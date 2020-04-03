@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepChoice.json",
+  "type": "object",
+  "description": "A Step choice",
+  "maxProperties": 2,
+  "minProperties": 2,
+  "required": [
+    "decision"
+  ],
+  "properties": {
+    "decision": {
+      "type": "array",
+      "description": "Context variable to check",
+      "items": {
+        "type": "object",
+        "properties": {
+          "variable": {
+            "type": "string",
+            "description": "Variable or value"
+          },
+          "operator": {
+            "type": "string",
+            "description": "Operator to perform",
+            "enum": [
+              "greater_than_equals",
+              "less_than_equals",
+              "greater_than",
+              "less_than",
+              "equals",
+              "not_equals"
+            ]
+          },
+          "operand": {
+            "type": "string",
+            "description": "operand to compare with"
+          }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepNext.json"
+    }
+  ]
+}

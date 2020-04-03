@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/float.json",
+  "type": "object",
+  "description": "Filter to transform a value into a float. Non numeric characters (including comma) will be removed",
+  "required": [
+    "type",
+    "options"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "float"
+      ]
+    },
+    "options": {
+      "type": "object",
+      "properties": {
+        "precision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 8,
+          "default": 3,
+          "description": "How many decimal places to preserve"
+        }
+      }
+    }
+  }
+}
