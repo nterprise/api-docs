@@ -1,0 +1,79 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/tenant/cognitoSettings.json",
+  "type": "object",
+  "description": "Cognito settings for a tenant",
+  "additionalProperties": false,
+  "properties": {
+    "app": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "List of applications configured",
+      "authorization_code": {
+        "$ref": "https://docs.nterprise.com/schemas/niagara/tenant/cognitoApplications.json#/properties/authorization_code"
+      },
+      "client_credentials": {
+        "$ref": "https://docs.nterprise.com/schemas/niagara/tenant/cognitoApplications.json#/properties/client_credentials"
+      }
+    },
+    "domain": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Domain to reach the tenant's authorization endpoint",
+      "pattern": "^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\\-]*[A-Za-z0-9])$"
+    },
+    "hosted_zone": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Cloudfront hosted zone for the authorization endpoint",
+      "pattern": "^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\\-]*[A-Za-z0-9])$"
+    },
+    "identity_provider": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Name of the identity provider"
+    },
+    "identity_provider_arn": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "ARN for the identity provider"
+    },
+    "region": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "AWS region the tenant's user user pool",
+      "enum": [
+        "us-east-1",
+        "us-east-2",
+        "us-west-1",
+        "us-west-2"
+      ]
+    },
+    "user_pool_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "AWS user pool id"
+    },
+    "user_pool_name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "AWS user pool name"
+    }
+  }
+}

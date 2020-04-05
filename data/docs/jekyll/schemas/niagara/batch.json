@@ -57,6 +57,9 @@
     },
     "work_order": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/workOrder.json"
+    },
+    "current_status": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/status.json"
     }
   }
 }

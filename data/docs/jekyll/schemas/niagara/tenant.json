@@ -1,0 +1,77 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/tenant.json",
+  "type": "object",
+  "description": "Defines the properties for a tenant",
+  "additionalProperties": false,
+  "required": [
+    "entity_id",
+    "entity_type",
+    "created",
+    "updated",
+    "allowed_statuses"
+  ],
+  "properties": {
+    "tenant_id": {
+      "description": "The identifier for the batch",
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_id"
+    },
+    "entity_id": {
+      "x-no-api-doc": true,
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_id"
+    },
+    "entity_type": {
+      "x-no-api-doc": true,
+      "const": "TEN"
+    },
+    "label": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/label"
+    },
+    "slug": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/slug"
+    },
+    "created": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/created"
+    },
+    "updated": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/updated"
+    },
+    "active": {
+      "type": "boolean",
+      "description": "Tenant is active or not"
+    },
+    "bucket": {
+      "type": ["string", "null"],
+      "description": "Location for the tenants s3 bucket"
+    },
+    "cognito": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/tenant/cognitoSettings.json"
+    },
+    "domains": {
+      "type": "object",
+      "description": "List of domains configured for the tenant",
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\\-]*[A-Za-z0-9])$"
+      }
+    },
+    "dns": {
+      "type": ["string", "null"],
+      "description": "URI to the tenant's UI domain",
+      "pattern": "^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\\-]*[A-Za-z0-9])$"
+    },
+    "key": {
+      "type": "string",
+      "deprecated": true,
+      "description": "The key for the slug. This is used as the ID but stored here to allow the tenants name to be changed while preserving references to the tenant"
+    },
+    "allowed_statuses": {
+      "type": "array",
+      "description": "List of allowed statuses",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "./status.json"
+      }
+    }
+  }
+}
