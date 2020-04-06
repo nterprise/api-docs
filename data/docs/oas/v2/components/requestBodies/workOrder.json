@@ -13,6 +13,9 @@
           "label": {
             "$ref": "https://docs.nterprise.com/schemas/niagara/workOrder.json#/properties/label"
           },
+          "description": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/workOrder.json#/properties/description"
+          },
           "work_order_type": {
             "$ref": "https://docs.nterprise.com/schemas/niagara/workOrder.json#/properties/work_order_type"
           },
@@ -35,6 +38,9 @@
           },
           "end_date": {
             "$ref": "https://docs.nterprise.com/schemas/niagara/workOrder.json#/properties/end_date"
+          },
+          "cycles": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/workOrder.json#/properties/cycles"
           }
         }
       }

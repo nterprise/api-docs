@@ -1,7 +1,7 @@
 ---
 layout: page
 parent: Niagara API
-nav_order: 16
+nav_order: 15
 title: Units
 language_tabs: ''
 toc_footers: []
@@ -113,15 +113,18 @@ Fetch Unit
               },
               "serial_number": {
                 "type": "string",
+                "nullable": true,
                 "description": "Serial number of the unit with prefix stripped",
                 "readOnly": true
               },
               "raw_serial_number": {
                 "type": "string",
+                "nullable": true,
                 "description": "Serial number of the unit"
               },
               "tenant_part_number": {
                 "type": "string",
+                "nullable": true,
                 "description": "Identifier set by the tenant"
               },
               "manufacturer": {
@@ -360,7 +363,10 @@ Fetch Unit
                         "deprecated": true,
                         "x-patternProperties": {
                           "^[A-Za-z][A-Za-z0-9_]*$": {
-                            "type": "string"
+                            "type": [
+                              "string",
+                              "null"
+                            ]
                           }
                         }
                       },
@@ -393,6 +399,15 @@ Fetch Unit
                                 "CANCELLED",
                                 "BLOCKED"
                               ]
+                            },
+                            "description": {
+                              "type": "string",
+                              "nullable": true,
+                              "description": "A description for the status"
+                            },
+                            "order": {
+                              "type": "number",
+                              "description": "Order status appears when listing"
                             }
                           }
                         }
@@ -1566,7 +1581,10 @@ Fetch Unit
                     "deprecated": true,
                     "x-patternProperties": {
                       "^[A-Za-z][A-Za-z0-9_]*$": {
-                        "type": "string"
+                        "type": [
+                          "string",
+                          "null"
+                        ]
                       }
                     }
                   },
@@ -1599,6 +1617,15 @@ Fetch Unit
                             "CANCELLED",
                             "BLOCKED"
                           ]
+                        },
+                        "description": {
+                          "type": "string",
+                          "nullable": true,
+                          "description": "A description for the status"
+                        },
+                        "order": {
+                          "type": "number",
+                          "description": "Order status appears when listing"
                         }
                       }
                     }
@@ -2349,6 +2376,1337 @@ Fetch Unit
                     }
                   }
                 }
+              },
+              "resource": {
+                "anyOf": [
+                  {
+                    "type": "null"
+                  },
+                  {
+                    "type": "object",
+                    "description": "Defines the properties for a resource",
+                    "additionalProperties": false,
+                    "required": [
+                      "label",
+                      "entity_id",
+                      "entity_type",
+                      "created",
+                      "updated",
+                      "resource_type",
+                      "location"
+                    ],
+                    "properties": {
+                      "resource_id": {
+                        "description": "The identifier for the resource",
+                        "type": "string",
+                        "readOnly": true,
+                        "pattern": "^[0-9a-zA-Z-_]+$"
+                      },
+                      "entity_id": {
+                        "x-no-api-doc": true,
+                        "type": "string",
+                        "description": "Customer identifier",
+                        "readOnly": true,
+                        "pattern": "^[0-9a-zA-Z-_]+$"
+                      },
+                      "entity_type": {
+                        "x-no-api-doc": true,
+                        "enum": [
+                          "RES"
+                        ]
+                      },
+                      "label": {
+                        "type": "string",
+                        "description": "Label for the entity"
+                      },
+                      "slug": {
+                        "type": "string",
+                        "description": "Slug for the entity (Auto-generated from the label)",
+                        "readOnly": true,
+                        "deprecated": true,
+                        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                      },
+                      "created": {
+                        "description": "Date the entity was created",
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true
+                      },
+                      "updated": {
+                        "description": "Last date the entity was updated",
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true
+                      },
+                      "resource_type": {
+                        "type": "string",
+                        "description": "Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased",
+                        "pattern": "^[a-z][0-9a-zA-Z-]+$"
+                      },
+                      "meta": {
+                        "type": "object",
+                        "description": "Data for the resource as a key value pair",
+                        "additionalProperties": {
+                          "type": "string"
+                        },
+                        "propertyNames": {
+                          "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+                        }
+                      },
+                      "location": {
+                        "type": "object",
+                        "description": "Defines the properties for a part unit",
+                        "additionalProperties": false,
+                        "required": [
+                          "label",
+                          "entity_id",
+                          "entity_type",
+                          "created",
+                          "updated",
+                          "location_type",
+                          "address"
+                        ],
+                        "properties": {
+                          "location_id": {
+                            "description": "The identifier for the location",
+                            "type": "string",
+                            "readOnly": true,
+                            "pattern": "^[0-9a-zA-Z-_]+$"
+                          },
+                          "entity_id": {
+                            "x-no-api-doc": true,
+                            "type": "string",
+                            "description": "Customer identifier",
+                            "readOnly": true,
+                            "pattern": "^[0-9a-zA-Z-_]+$"
+                          },
+                          "entity_type": {
+                            "x-no-api-doc": true,
+                            "enum": [
+                              "LOC"
+                            ]
+                          },
+                          "label": {
+                            "type": "string",
+                            "description": "Label for the entity"
+                          },
+                          "slug": {
+                            "type": "string",
+                            "description": "Slug for the entity (Auto-generated from the label)",
+                            "readOnly": true,
+                            "deprecated": true,
+                            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                          },
+                          "created": {
+                            "description": "Date the entity was created",
+                            "type": "string",
+                            "format": "date-time",
+                            "readOnly": true
+                          },
+                          "updated": {
+                            "description": "Last date the entity was updated",
+                            "type": "string",
+                            "format": "date-time",
+                            "readOnly": true
+                          },
+                          "location_type": {
+                            "type": "string",
+                            "description": "The type of location",
+                            "enum": [
+                              "warehouse",
+                              "facility",
+                              "other"
+                            ]
+                          },
+                          "formatted_address": {
+                            "type": "string",
+                            "readOnly": true,
+                            "description": "Address formatted for the where region the location exists in"
+                          },
+                          "address": {
+                            "type": "object",
+                            "required": [
+                              "country",
+                              "administrative_area",
+                              "locality",
+                              "postal_code",
+                              "thoroughfare"
+                            ],
+                            "description": "xNAL address for the location ",
+                            "properties": {
+                              "country": {
+                                "type": "string",
+                                "description": "Three Letter ISO country code",
+                                "enum": [
+                                  "ABW",
+                                  "AFG",
+                                  "AGO",
+                                  "AIA",
+                                  "ALA",
+                                  "ALB",
+                                  "AND",
+                                  "ARE",
+                                  "ARG",
+                                  "ARM",
+                                  "ASM",
+                                  "ATA",
+                                  "ATF",
+                                  "ATG",
+                                  "AUS",
+                                  "AUT",
+                                  "AZE",
+                                  "BDI",
+                                  "BEL",
+                                  "BEN",
+                                  "BES",
+                                  "BFA",
+                                  "BGD",
+                                  "BGR",
+                                  "BHR",
+                                  "BHS",
+                                  "BIH",
+                                  "BLM",
+                                  "BLR",
+                                  "BLZ",
+                                  "BMU",
+                                  "BOL",
+                                  "BRA",
+                                  "BRB",
+                                  "BRN",
+                                  "BTN",
+                                  "BVT",
+                                  "BWA",
+                                  "CAF",
+                                  "CAN",
+                                  "CCK",
+                                  "CHE",
+                                  "CHL",
+                                  "CHN",
+                                  "CIV",
+                                  "CMR",
+                                  "COD",
+                                  "COG",
+                                  "COK",
+                                  "COL",
+                                  "COM",
+                                  "CPV",
+                                  "CRI",
+                                  "CUB",
+                                  "CUW",
+                                  "CXR",
+                                  "CYM",
+                                  "CYP",
+                                  "CZE",
+                                  "DEU",
+                                  "DJI",
+                                  "DMA",
+                                  "DNK",
+                                  "DOM",
+                                  "DZA",
+                                  "ECU",
+                                  "EGY",
+                                  "ERI",
+                                  "ESH",
+                                  "ESP",
+                                  "EST",
+                                  "ETH",
+                                  "FIN",
+                                  "FJI",
+                                  "FLK",
+                                  "FRA",
+                                  "FRO",
+                                  "FSM",
+                                  "GAB",
+                                  "GBR",
+                                  "GEO",
+                                  "GGY",
+                                  "GHA",
+                                  "GIB",
+                                  "GIN",
+                                  "GLP",
+                                  "GMB",
+                                  "GNB",
+                                  "GNQ",
+                                  "GRC",
+                                  "GRD",
+                                  "GRL",
+                                  "GTM",
+                                  "GUF",
+                                  "GUM",
+                                  "GUY",
+                                  "HKG",
+                                  "HMD",
+                                  "HND",
+                                  "HRV",
+                                  "HTI",
+                                  "HUN",
+                                  "IDN",
+                                  "IMN",
+                                  "IND",
+                                  "IOT",
+                                  "IRL",
+                                  "IRN",
+                                  "IRQ",
+                                  "ISL",
+                                  "ISR",
+                                  "ITA",
+                                  "JAM",
+                                  "JEY",
+                                  "JOR",
+                                  "JPN",
+                                  "KAZ",
+                                  "KEN",
+                                  "KGZ",
+                                  "KHM",
+                                  "KIR",
+                                  "KNA",
+                                  "KOR",
+                                  "KWT",
+                                  "LAO",
+                                  "LBN",
+                                  "LBR",
+                                  "LBY",
+                                  "LCA",
+                                  "LIE",
+                                  "LKA",
+                                  "LSO",
+                                  "LTU",
+                                  "LUX",
+                                  "LVA",
+                                  "MAC",
+                                  "MAF",
+                                  "MAR",
+                                  "MCO",
+                                  "MDA",
+                                  "MDG",
+                                  "MDV",
+                                  "MEX",
+                                  "MHL",
+                                  "MKD",
+                                  "MLI",
+                                  "MLT",
+                                  "MMR",
+                                  "MNE",
+                                  "MNG",
+                                  "MNP",
+                                  "MOZ",
+                                  "MRT",
+                                  "MSR",
+                                  "MTQ",
+                                  "MUS",
+                                  "MWI",
+                                  "MYS",
+                                  "MYT",
+                                  "NAM",
+                                  "NCL",
+                                  "NER",
+                                  "NFK",
+                                  "NGA",
+                                  "NIC",
+                                  "NIU",
+                                  "NLD",
+                                  "NOR",
+                                  "NPL",
+                                  "NRU",
+                                  "NZL",
+                                  "OMN",
+                                  "PAK",
+                                  "PAN",
+                                  "PCN",
+                                  "PER",
+                                  "PHL",
+                                  "PLW",
+                                  "PNG",
+                                  "POL",
+                                  "PRI",
+                                  "PRK",
+                                  "PRT",
+                                  "PRY",
+                                  "PSE",
+                                  "PYF",
+                                  "QAT",
+                                  "REU",
+                                  "ROU",
+                                  "RUS",
+                                  "RWA",
+                                  "SAU",
+                                  "SDN",
+                                  "SEN",
+                                  "SGP",
+                                  "SGS",
+                                  "SHN",
+                                  "SJM",
+                                  "SLB",
+                                  "SLE",
+                                  "SLV",
+                                  "SMR",
+                                  "SOM",
+                                  "SPM",
+                                  "SRB",
+                                  "SSD",
+                                  "STP",
+                                  "SUR",
+                                  "SVK",
+                                  "SVN",
+                                  "SWE",
+                                  "SWZ",
+                                  "SXM",
+                                  "SYC",
+                                  "SYR",
+                                  "TCA",
+                                  "TCD",
+                                  "TGO",
+                                  "THA",
+                                  "TJK",
+                                  "TKL",
+                                  "TKM",
+                                  "TLS",
+                                  "TON",
+                                  "TTO",
+                                  "TUN",
+                                  "TUR",
+                                  "TUV",
+                                  "TWN",
+                                  "TZA",
+                                  "UGA",
+                                  "UKR",
+                                  "UMI",
+                                  "URY",
+                                  "USA",
+                                  "UZB",
+                                  "VAT",
+                                  "VCT",
+                                  "VEN",
+                                  "VGB",
+                                  "VIR",
+                                  "VNM",
+                                  "VUT",
+                                  "WLF",
+                                  "WSM",
+                                  "YEM",
+                                  "ZAF",
+                                  "ZMB",
+                                  "ZWE"
+                                ]
+                              },
+                              "administrative_area": {
+                                "type": "string",
+                                "description": "State / Province / Region"
+                              },
+                              "sub_administrative_area": {
+                                "type": "string",
+                                "description": "County / District"
+                              },
+                              "locality": {
+                                "type": "string",
+                                "description": "City / Town"
+                              },
+                              "postal_code": {
+                                "type": "string",
+                                "description": "Postal Code / Zip Code"
+                              },
+                              "thoroughfare": {
+                                "type": "string",
+                                "description": "Street Address"
+                              },
+                              "premise": {
+                                "type": "string",
+                                "description": "Apartment / Suite / Box number etc"
+                              },
+                              "sub_premise": {
+                                "type": "string",
+                                "description": "Floor # / Room # / Building label etc"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "description": "Defines the properties for a resource",
+                    "additionalProperties": false,
+                    "required": [
+                      "label",
+                      "entity_id",
+                      "entity_type",
+                      "created",
+                      "updated",
+                      "resource_type",
+                      "location",
+                      "resource"
+                    ],
+                    "properties": {
+                      "resource_id": {
+                        "description": "The identifier for the resource",
+                        "type": "string",
+                        "readOnly": true,
+                        "pattern": "^[0-9a-zA-Z-_]+$"
+                      },
+                      "entity_id": {
+                        "x-no-api-doc": true,
+                        "type": "string",
+                        "description": "Customer identifier",
+                        "readOnly": true,
+                        "pattern": "^[0-9a-zA-Z-_]+$"
+                      },
+                      "entity_type": {
+                        "x-no-api-doc": true,
+                        "enum": [
+                          "SRES"
+                        ]
+                      },
+                      "label": {
+                        "type": "string",
+                        "description": "Label for the entity"
+                      },
+                      "slug": {
+                        "type": "string",
+                        "description": "Slug for the entity (Auto-generated from the label)",
+                        "readOnly": true,
+                        "deprecated": true,
+                        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                      },
+                      "created": {
+                        "description": "Date the entity was created",
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true
+                      },
+                      "updated": {
+                        "description": "Last date the entity was updated",
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true
+                      },
+                      "resource_type": {
+                        "type": "string",
+                        "description": "Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased",
+                        "pattern": "^[a-z][0-9a-zA-Z-]+$"
+                      },
+                      "meta": {
+                        "type": "object",
+                        "description": "Data for the resource as a key value pair",
+                        "additionalProperties": {
+                          "type": "string"
+                        },
+                        "propertyNames": {
+                          "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+                        }
+                      },
+                      "location": {
+                        "type": "object",
+                        "description": "Defines the properties for a part unit",
+                        "additionalProperties": false,
+                        "required": [
+                          "label",
+                          "entity_id",
+                          "entity_type",
+                          "created",
+                          "updated",
+                          "location_type",
+                          "address"
+                        ],
+                        "properties": {
+                          "location_id": {
+                            "description": "The identifier for the location",
+                            "type": "string",
+                            "readOnly": true,
+                            "pattern": "^[0-9a-zA-Z-_]+$"
+                          },
+                          "entity_id": {
+                            "x-no-api-doc": true,
+                            "type": "string",
+                            "description": "Customer identifier",
+                            "readOnly": true,
+                            "pattern": "^[0-9a-zA-Z-_]+$"
+                          },
+                          "entity_type": {
+                            "x-no-api-doc": true,
+                            "enum": [
+                              "LOC"
+                            ]
+                          },
+                          "label": {
+                            "type": "string",
+                            "description": "Label for the entity"
+                          },
+                          "slug": {
+                            "type": "string",
+                            "description": "Slug for the entity (Auto-generated from the label)",
+                            "readOnly": true,
+                            "deprecated": true,
+                            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                          },
+                          "created": {
+                            "description": "Date the entity was created",
+                            "type": "string",
+                            "format": "date-time",
+                            "readOnly": true
+                          },
+                          "updated": {
+                            "description": "Last date the entity was updated",
+                            "type": "string",
+                            "format": "date-time",
+                            "readOnly": true
+                          },
+                          "location_type": {
+                            "type": "string",
+                            "description": "The type of location",
+                            "enum": [
+                              "warehouse",
+                              "facility",
+                              "other"
+                            ]
+                          },
+                          "formatted_address": {
+                            "type": "string",
+                            "readOnly": true,
+                            "description": "Address formatted for the where region the location exists in"
+                          },
+                          "address": {
+                            "type": "object",
+                            "required": [
+                              "country",
+                              "administrative_area",
+                              "locality",
+                              "postal_code",
+                              "thoroughfare"
+                            ],
+                            "description": "xNAL address for the location ",
+                            "properties": {
+                              "country": {
+                                "type": "string",
+                                "description": "Three Letter ISO country code",
+                                "enum": [
+                                  "ABW",
+                                  "AFG",
+                                  "AGO",
+                                  "AIA",
+                                  "ALA",
+                                  "ALB",
+                                  "AND",
+                                  "ARE",
+                                  "ARG",
+                                  "ARM",
+                                  "ASM",
+                                  "ATA",
+                                  "ATF",
+                                  "ATG",
+                                  "AUS",
+                                  "AUT",
+                                  "AZE",
+                                  "BDI",
+                                  "BEL",
+                                  "BEN",
+                                  "BES",
+                                  "BFA",
+                                  "BGD",
+                                  "BGR",
+                                  "BHR",
+                                  "BHS",
+                                  "BIH",
+                                  "BLM",
+                                  "BLR",
+                                  "BLZ",
+                                  "BMU",
+                                  "BOL",
+                                  "BRA",
+                                  "BRB",
+                                  "BRN",
+                                  "BTN",
+                                  "BVT",
+                                  "BWA",
+                                  "CAF",
+                                  "CAN",
+                                  "CCK",
+                                  "CHE",
+                                  "CHL",
+                                  "CHN",
+                                  "CIV",
+                                  "CMR",
+                                  "COD",
+                                  "COG",
+                                  "COK",
+                                  "COL",
+                                  "COM",
+                                  "CPV",
+                                  "CRI",
+                                  "CUB",
+                                  "CUW",
+                                  "CXR",
+                                  "CYM",
+                                  "CYP",
+                                  "CZE",
+                                  "DEU",
+                                  "DJI",
+                                  "DMA",
+                                  "DNK",
+                                  "DOM",
+                                  "DZA",
+                                  "ECU",
+                                  "EGY",
+                                  "ERI",
+                                  "ESH",
+                                  "ESP",
+                                  "EST",
+                                  "ETH",
+                                  "FIN",
+                                  "FJI",
+                                  "FLK",
+                                  "FRA",
+                                  "FRO",
+                                  "FSM",
+                                  "GAB",
+                                  "GBR",
+                                  "GEO",
+                                  "GGY",
+                                  "GHA",
+                                  "GIB",
+                                  "GIN",
+                                  "GLP",
+                                  "GMB",
+                                  "GNB",
+                                  "GNQ",
+                                  "GRC",
+                                  "GRD",
+                                  "GRL",
+                                  "GTM",
+                                  "GUF",
+                                  "GUM",
+                                  "GUY",
+                                  "HKG",
+                                  "HMD",
+                                  "HND",
+                                  "HRV",
+                                  "HTI",
+                                  "HUN",
+                                  "IDN",
+                                  "IMN",
+                                  "IND",
+                                  "IOT",
+                                  "IRL",
+                                  "IRN",
+                                  "IRQ",
+                                  "ISL",
+                                  "ISR",
+                                  "ITA",
+                                  "JAM",
+                                  "JEY",
+                                  "JOR",
+                                  "JPN",
+                                  "KAZ",
+                                  "KEN",
+                                  "KGZ",
+                                  "KHM",
+                                  "KIR",
+                                  "KNA",
+                                  "KOR",
+                                  "KWT",
+                                  "LAO",
+                                  "LBN",
+                                  "LBR",
+                                  "LBY",
+                                  "LCA",
+                                  "LIE",
+                                  "LKA",
+                                  "LSO",
+                                  "LTU",
+                                  "LUX",
+                                  "LVA",
+                                  "MAC",
+                                  "MAF",
+                                  "MAR",
+                                  "MCO",
+                                  "MDA",
+                                  "MDG",
+                                  "MDV",
+                                  "MEX",
+                                  "MHL",
+                                  "MKD",
+                                  "MLI",
+                                  "MLT",
+                                  "MMR",
+                                  "MNE",
+                                  "MNG",
+                                  "MNP",
+                                  "MOZ",
+                                  "MRT",
+                                  "MSR",
+                                  "MTQ",
+                                  "MUS",
+                                  "MWI",
+                                  "MYS",
+                                  "MYT",
+                                  "NAM",
+                                  "NCL",
+                                  "NER",
+                                  "NFK",
+                                  "NGA",
+                                  "NIC",
+                                  "NIU",
+                                  "NLD",
+                                  "NOR",
+                                  "NPL",
+                                  "NRU",
+                                  "NZL",
+                                  "OMN",
+                                  "PAK",
+                                  "PAN",
+                                  "PCN",
+                                  "PER",
+                                  "PHL",
+                                  "PLW",
+                                  "PNG",
+                                  "POL",
+                                  "PRI",
+                                  "PRK",
+                                  "PRT",
+                                  "PRY",
+                                  "PSE",
+                                  "PYF",
+                                  "QAT",
+                                  "REU",
+                                  "ROU",
+                                  "RUS",
+                                  "RWA",
+                                  "SAU",
+                                  "SDN",
+                                  "SEN",
+                                  "SGP",
+                                  "SGS",
+                                  "SHN",
+                                  "SJM",
+                                  "SLB",
+                                  "SLE",
+                                  "SLV",
+                                  "SMR",
+                                  "SOM",
+                                  "SPM",
+                                  "SRB",
+                                  "SSD",
+                                  "STP",
+                                  "SUR",
+                                  "SVK",
+                                  "SVN",
+                                  "SWE",
+                                  "SWZ",
+                                  "SXM",
+                                  "SYC",
+                                  "SYR",
+                                  "TCA",
+                                  "TCD",
+                                  "TGO",
+                                  "THA",
+                                  "TJK",
+                                  "TKL",
+                                  "TKM",
+                                  "TLS",
+                                  "TON",
+                                  "TTO",
+                                  "TUN",
+                                  "TUR",
+                                  "TUV",
+                                  "TWN",
+                                  "TZA",
+                                  "UGA",
+                                  "UKR",
+                                  "UMI",
+                                  "URY",
+                                  "USA",
+                                  "UZB",
+                                  "VAT",
+                                  "VCT",
+                                  "VEN",
+                                  "VGB",
+                                  "VIR",
+                                  "VNM",
+                                  "VUT",
+                                  "WLF",
+                                  "WSM",
+                                  "YEM",
+                                  "ZAF",
+                                  "ZMB",
+                                  "ZWE"
+                                ]
+                              },
+                              "administrative_area": {
+                                "type": "string",
+                                "description": "State / Province / Region"
+                              },
+                              "sub_administrative_area": {
+                                "type": "string",
+                                "description": "County / District"
+                              },
+                              "locality": {
+                                "type": "string",
+                                "description": "City / Town"
+                              },
+                              "postal_code": {
+                                "type": "string",
+                                "description": "Postal Code / Zip Code"
+                              },
+                              "thoroughfare": {
+                                "type": "string",
+                                "description": "Street Address"
+                              },
+                              "premise": {
+                                "type": "string",
+                                "description": "Apartment / Suite / Box number etc"
+                              },
+                              "sub_premise": {
+                                "type": "string",
+                                "description": "Floor # / Room # / Building label etc"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "resource": {
+                        "type": "object",
+                        "description": "Defines the properties for a resource",
+                        "additionalProperties": false,
+                        "required": [
+                          "label",
+                          "entity_id",
+                          "entity_type",
+                          "created",
+                          "updated",
+                          "resource_type",
+                          "location"
+                        ],
+                        "properties": {
+                          "resource_id": {
+                            "description": "The identifier for the resource",
+                            "type": "string",
+                            "readOnly": true,
+                            "pattern": "^[0-9a-zA-Z-_]+$"
+                          },
+                          "entity_id": {
+                            "x-no-api-doc": true,
+                            "type": "string",
+                            "description": "Customer identifier",
+                            "readOnly": true,
+                            "pattern": "^[0-9a-zA-Z-_]+$"
+                          },
+                          "entity_type": {
+                            "x-no-api-doc": true,
+                            "enum": [
+                              "RES"
+                            ]
+                          },
+                          "label": {
+                            "type": "string",
+                            "description": "Label for the entity"
+                          },
+                          "slug": {
+                            "type": "string",
+                            "description": "Slug for the entity (Auto-generated from the label)",
+                            "readOnly": true,
+                            "deprecated": true,
+                            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                          },
+                          "created": {
+                            "description": "Date the entity was created",
+                            "type": "string",
+                            "format": "date-time",
+                            "readOnly": true
+                          },
+                          "updated": {
+                            "description": "Last date the entity was updated",
+                            "type": "string",
+                            "format": "date-time",
+                            "readOnly": true
+                          },
+                          "resource_type": {
+                            "type": "string",
+                            "description": "Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased",
+                            "pattern": "^[a-z][0-9a-zA-Z-]+$"
+                          },
+                          "meta": {
+                            "type": "object",
+                            "description": "Data for the resource as a key value pair",
+                            "additionalProperties": {
+                              "type": "string"
+                            },
+                            "propertyNames": {
+                              "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+                            }
+                          },
+                          "location": {
+                            "type": "object",
+                            "description": "Defines the properties for a part unit",
+                            "additionalProperties": false,
+                            "required": [
+                              "label",
+                              "entity_id",
+                              "entity_type",
+                              "created",
+                              "updated",
+                              "location_type",
+                              "address"
+                            ],
+                            "properties": {
+                              "location_id": {
+                                "description": "The identifier for the location",
+                                "type": "string",
+                                "readOnly": true,
+                                "pattern": "^[0-9a-zA-Z-_]+$"
+                              },
+                              "entity_id": {
+                                "x-no-api-doc": true,
+                                "type": "string",
+                                "description": "Customer identifier",
+                                "readOnly": true,
+                                "pattern": "^[0-9a-zA-Z-_]+$"
+                              },
+                              "entity_type": {
+                                "x-no-api-doc": true,
+                                "enum": [
+                                  "LOC"
+                                ]
+                              },
+                              "label": {
+                                "type": "string",
+                                "description": "Label for the entity"
+                              },
+                              "slug": {
+                                "type": "string",
+                                "description": "Slug for the entity (Auto-generated from the label)",
+                                "readOnly": true,
+                                "deprecated": true,
+                                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                              },
+                              "created": {
+                                "description": "Date the entity was created",
+                                "type": "string",
+                                "format": "date-time",
+                                "readOnly": true
+                              },
+                              "updated": {
+                                "description": "Last date the entity was updated",
+                                "type": "string",
+                                "format": "date-time",
+                                "readOnly": true
+                              },
+                              "location_type": {
+                                "type": "string",
+                                "description": "The type of location",
+                                "enum": [
+                                  "warehouse",
+                                  "facility",
+                                  "other"
+                                ]
+                              },
+                              "formatted_address": {
+                                "type": "string",
+                                "readOnly": true,
+                                "description": "Address formatted for the where region the location exists in"
+                              },
+                              "address": {
+                                "type": "object",
+                                "required": [
+                                  "country",
+                                  "administrative_area",
+                                  "locality",
+                                  "postal_code",
+                                  "thoroughfare"
+                                ],
+                                "description": "xNAL address for the location ",
+                                "properties": {
+                                  "country": {
+                                    "type": "string",
+                                    "description": "Three Letter ISO country code",
+                                    "enum": [
+                                      "ABW",
+                                      "AFG",
+                                      "AGO",
+                                      "AIA",
+                                      "ALA",
+                                      "ALB",
+                                      "AND",
+                                      "ARE",
+                                      "ARG",
+                                      "ARM",
+                                      "ASM",
+                                      "ATA",
+                                      "ATF",
+                                      "ATG",
+                                      "AUS",
+                                      "AUT",
+                                      "AZE",
+                                      "BDI",
+                                      "BEL",
+                                      "BEN",
+                                      "BES",
+                                      "BFA",
+                                      "BGD",
+                                      "BGR",
+                                      "BHR",
+                                      "BHS",
+                                      "BIH",
+                                      "BLM",
+                                      "BLR",
+                                      "BLZ",
+                                      "BMU",
+                                      "BOL",
+                                      "BRA",
+                                      "BRB",
+                                      "BRN",
+                                      "BTN",
+                                      "BVT",
+                                      "BWA",
+                                      "CAF",
+                                      "CAN",
+                                      "CCK",
+                                      "CHE",
+                                      "CHL",
+                                      "CHN",
+                                      "CIV",
+                                      "CMR",
+                                      "COD",
+                                      "COG",
+                                      "COK",
+                                      "COL",
+                                      "COM",
+                                      "CPV",
+                                      "CRI",
+                                      "CUB",
+                                      "CUW",
+                                      "CXR",
+                                      "CYM",
+                                      "CYP",
+                                      "CZE",
+                                      "DEU",
+                                      "DJI",
+                                      "DMA",
+                                      "DNK",
+                                      "DOM",
+                                      "DZA",
+                                      "ECU",
+                                      "EGY",
+                                      "ERI",
+                                      "ESH",
+                                      "ESP",
+                                      "EST",
+                                      "ETH",
+                                      "FIN",
+                                      "FJI",
+                                      "FLK",
+                                      "FRA",
+                                      "FRO",
+                                      "FSM",
+                                      "GAB",
+                                      "GBR",
+                                      "GEO",
+                                      "GGY",
+                                      "GHA",
+                                      "GIB",
+                                      "GIN",
+                                      "GLP",
+                                      "GMB",
+                                      "GNB",
+                                      "GNQ",
+                                      "GRC",
+                                      "GRD",
+                                      "GRL",
+                                      "GTM",
+                                      "GUF",
+                                      "GUM",
+                                      "GUY",
+                                      "HKG",
+                                      "HMD",
+                                      "HND",
+                                      "HRV",
+                                      "HTI",
+                                      "HUN",
+                                      "IDN",
+                                      "IMN",
+                                      "IND",
+                                      "IOT",
+                                      "IRL",
+                                      "IRN",
+                                      "IRQ",
+                                      "ISL",
+                                      "ISR",
+                                      "ITA",
+                                      "JAM",
+                                      "JEY",
+                                      "JOR",
+                                      "JPN",
+                                      "KAZ",
+                                      "KEN",
+                                      "KGZ",
+                                      "KHM",
+                                      "KIR",
+                                      "KNA",
+                                      "KOR",
+                                      "KWT",
+                                      "LAO",
+                                      "LBN",
+                                      "LBR",
+                                      "LBY",
+                                      "LCA",
+                                      "LIE",
+                                      "LKA",
+                                      "LSO",
+                                      "LTU",
+                                      "LUX",
+                                      "LVA",
+                                      "MAC",
+                                      "MAF",
+                                      "MAR",
+                                      "MCO",
+                                      "MDA",
+                                      "MDG",
+                                      "MDV",
+                                      "MEX",
+                                      "MHL",
+                                      "MKD",
+                                      "MLI",
+                                      "MLT",
+                                      "MMR",
+                                      "MNE",
+                                      "MNG",
+                                      "MNP",
+                                      "MOZ",
+                                      "MRT",
+                                      "MSR",
+                                      "MTQ",
+                                      "MUS",
+                                      "MWI",
+                                      "MYS",
+                                      "MYT",
+                                      "NAM",
+                                      "NCL",
+                                      "NER",
+                                      "NFK",
+                                      "NGA",
+                                      "NIC",
+                                      "NIU",
+                                      "NLD",
+                                      "NOR",
+                                      "NPL",
+                                      "NRU",
+                                      "NZL",
+                                      "OMN",
+                                      "PAK",
+                                      "PAN",
+                                      "PCN",
+                                      "PER",
+                                      "PHL",
+                                      "PLW",
+                                      "PNG",
+                                      "POL",
+                                      "PRI",
+                                      "PRK",
+                                      "PRT",
+                                      "PRY",
+                                      "PSE",
+                                      "PYF",
+                                      "QAT",
+                                      "REU",
+                                      "ROU",
+                                      "RUS",
+                                      "RWA",
+                                      "SAU",
+                                      "SDN",
+                                      "SEN",
+                                      "SGP",
+                                      "SGS",
+                                      "SHN",
+                                      "SJM",
+                                      "SLB",
+                                      "SLE",
+                                      "SLV",
+                                      "SMR",
+                                      "SOM",
+                                      "SPM",
+                                      "SRB",
+                                      "SSD",
+                                      "STP",
+                                      "SUR",
+                                      "SVK",
+                                      "SVN",
+                                      "SWE",
+                                      "SWZ",
+                                      "SXM",
+                                      "SYC",
+                                      "SYR",
+                                      "TCA",
+                                      "TCD",
+                                      "TGO",
+                                      "THA",
+                                      "TJK",
+                                      "TKL",
+                                      "TKM",
+                                      "TLS",
+                                      "TON",
+                                      "TTO",
+                                      "TUN",
+                                      "TUR",
+                                      "TUV",
+                                      "TWN",
+                                      "TZA",
+                                      "UGA",
+                                      "UKR",
+                                      "UMI",
+                                      "URY",
+                                      "USA",
+                                      "UZB",
+                                      "VAT",
+                                      "VCT",
+                                      "VEN",
+                                      "VGB",
+                                      "VIR",
+                                      "VNM",
+                                      "VUT",
+                                      "WLF",
+                                      "WSM",
+                                      "YEM",
+                                      "ZAF",
+                                      "ZMB",
+                                      "ZWE"
+                                    ]
+                                  },
+                                  "administrative_area": {
+                                    "type": "string",
+                                    "description": "State / Province / Region"
+                                  },
+                                  "sub_administrative_area": {
+                                    "type": "string",
+                                    "description": "County / District"
+                                  },
+                                  "locality": {
+                                    "type": "string",
+                                    "description": "City / Town"
+                                  },
+                                  "postal_code": {
+                                    "type": "string",
+                                    "description": "Postal Code / Zip Code"
+                                  },
+                                  "thoroughfare": {
+                                    "type": "string",
+                                    "description": "Street Address"
+                                  },
+                                  "premise": {
+                                    "type": "string",
+                                    "description": "Apartment / Suite / Box number etc"
+                                  },
+                                  "sub_premise": {
+                                    "type": "string",
+                                    "description": "Floor # / Room # / Building label etc"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
               },
               "input_filter": {
                 "type": "array",
@@ -3391,6 +4749,15 @@ Fetch Unit
                       "CANCELLED",
                       "BLOCKED"
                     ]
+                  },
+                  "description": {
+                    "type": "string",
+                    "nullable": true,
+                    "description": "A description for the status"
+                  },
+                  "order": {
+                    "type": "number",
+                    "description": "Order status appears when listing"
                   }
                 }
               }
@@ -3456,9 +4823,9 @@ Status Code **200**
 |»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
 |»»»» created|string(date-time)|false|read-only|Date the entity was created|
 |»»»» updated|string(date-time)|false|read-only|Last date the entity was updated|
-|»»»» serial_number|string|false|read-only|Serial number of the unit with prefix stripped|
-|»»»» raw_serial_number|string|false|none|Serial number of the unit|
-|»»»» tenant_part_number|string|false|none|Identifier set by the tenant|
+|»»»» serial_number|string\|null|false|read-only|Serial number of the unit with prefix stripped|
+|»»»» raw_serial_number|string\|null|false|none|Serial number of the unit|
+|»»»» tenant_part_number|string\|null|false|none|Identifier set by the tenant|
 |»»»» manufacturer|object|false|none|Manufacturer information for the part|
 |»»»»» part_number|string|true|none|Part number the manufacturer uses. If this is not set, then the part number is used|
 |»»»»» manufacturer_id|string|false|read-only|Customer identifier|
@@ -3497,6 +4864,8 @@ Status Code **200**
 |»»»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
 |»»»»»»» status|string|true|none|A Custom label for the status|
 |»»»»»»» category|string|true|none|The classifier for the statues|
+|»»»»»»» description|string\|null|false|none|A description for the status|
+|»»»»»»» order|number|false|none|Order status appears when listing|
 |»»»»»» total_programs|number|false|none|Total programs under the customer|
 |»»»»»» total_projects|number|false|none|Total projects under the customer|
 |»»»»» manufacturer|object|true|none|Manufacturer information for the part|
@@ -3828,6 +5197,8 @@ Status Code **200**
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» status|string|true|none|A Custom label for the status|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» category|string|true|none|The classifier for the statues|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» description|string\|null|false|none|A description for the status|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» order|number|false|none|Order status appears when listing|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»» total_programs|number|false|none|Total programs under the customer|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»» total_projects|number|false|none|Total projects under the customer|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»» current_location|object|false|none|Defines the properties for a part unit|
@@ -3868,318 +5239,432 @@ Status Code **200**
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» thoroughfare|string|true|none|Street Address|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» premise|string|false|none|Apartment / Suite / Box number etc|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» sub_premise|string|false|none|Floor # / Room # / Building label etc|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» input_filter|[object]|false|none|Input Filters allow custom fields to be defined for entities|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» label|string|true|none|Human readable name|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» key|string|true|read-only|Slug used to store the property|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» filters|[anyOf]|true|none|A Collection of filters applied to the field|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» resource|any|false|none|none|
 
 *anyOf*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|This filter will set the value based on a list of approved values. If the value is not in the list, it will then be set to empty unless the default option is set|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» approved_values|[string]|true|none|The list of approved values|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» default|string\|null|false|none|If this is set and the value is not in the approved_list, set the value to this|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|null|false|none|none|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value camelCase|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Defines the properties for a resource|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» resource_id|string|false|read-only|The identifier for the resource|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» label|string|true|none|Label for the entity|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» resource_type|string|true|none|Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» meta|object|false|none|Data for the resource as a key value pair|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» **additionalProperties**|string|false|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location|object|true|none|Defines the properties for a part unit|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location_id|string|false|read-only|The identifier for the location|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» label|string|true|none|Label for the entity|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location_type|string|true|none|The type of location|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» formatted_address|string|false|read-only|Address formatted for the where region the location exists in|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» address|object|true|none|xNAL address for the location|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» country|string|true|none|Three Letter ISO country code|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» administrative_area|string|true|none|State / Province / Region|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» sub_administrative_area|string|false|none|County / District|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» locality|string|true|none|City / Town|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» postal_code|string|true|none|Postal Code / Zip Code|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» thoroughfare|string|true|none|Street Address|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» premise|string|false|none|Apartment / Suite / Box number etc|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» sub_premise|string|false|none|Floor # / Room # / Building label etc|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a date|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|Date filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform values into null. This is helpful when trying to make a value required. The following are considered empty: # The number 0 or 0.0 # empty string '' # A boolean false # The word 'false' #|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|empty filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a float. Non numeric characters (including comma) will be removed|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|How many decimal places to preserve|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value kebab-case|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value lowercase|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a number. Non numeric characters (including comma and decimal points) will be removed|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|Number filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Add a prefix to the start of a string. If the string already start with the prefix, it will not prepend.|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» prefix|string|true|none|The prefix to add|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value snake_case|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a string|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|String filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Add a suffix to the start of a string. If the string already start with the suffix, it will not append.|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» suffix|string|true|none|The suffix to add|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to trim whitespace from a value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|By default will trim from the start and end|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» start|boolean|false|none|Remove white space from the start of the string|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» end|boolean|false|none|Remove white space from the end of the string|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value UPPERCASE|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Defines the properties for a resource|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» resource_id|string|false|read-only|The identifier for the resource|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» label|string|true|none|Label for the entity|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» resource_type|string|true|none|Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» meta|object|false|none|Data for the resource as a key value pair|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» **additionalProperties**|string|false|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location|object|true|none|Defines the properties for a part unit|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location_id|string|false|read-only|The identifier for the location|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» label|string|true|none|Label for the entity|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location_type|string|true|none|The type of location|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» formatted_address|string|false|read-only|Address formatted for the where region the location exists in|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» address|object|true|none|xNAL address for the location|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» country|string|true|none|Three Letter ISO country code|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» administrative_area|string|true|none|State / Province / Region|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» sub_administrative_area|string|false|none|County / District|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» locality|string|true|none|City / Town|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» postal_code|string|true|none|Postal Code / Zip Code|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» thoroughfare|string|true|none|Street Address|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» premise|string|false|none|Apartment / Suite / Box number etc|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» sub_premise|string|false|none|Floor # / Room # / Building label etc|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» resource|object|true|none|Defines the properties for a resource|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» resource_id|string|false|read-only|The identifier for the resource|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» label|string|true|none|Label for the entity|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» resource_type|string|true|none|Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» meta|object|false|none|Data for the resource as a key value pair|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» **additionalProperties**|string|false|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location|object|true|none|Defines the properties for a part unit|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location_id|string|false|read-only|The identifier for the location|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» label|string|true|none|Label for the entity|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location_type|string|true|none|The type of location|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» formatted_address|string|false|read-only|Address formatted for the where region the location exists in|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» address|object|true|none|xNAL address for the location|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» country|string|true|none|Three Letter ISO country code|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» administrative_area|string|true|none|State / Province / Region|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» sub_administrative_area|string|false|none|County / District|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» locality|string|true|none|City / Town|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» postal_code|string|true|none|Postal Code / Zip Code|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» thoroughfare|string|true|none|Street Address|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» premise|string|false|none|Apartment / Suite / Box number etc|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» sub_premise|string|false|none|Floor # / Room # / Building label etc|
 
 *continued*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» validators|[anyOf]|true|none|A set of validators to use for this field|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» input_filter|[object]|false|none|Input Filters allow custom fields to be defined for entities|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» label|string|true|none|Human readable name|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» key|string|true|read-only|Slug used to store the property|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» filters|[anyOf]|true|none|A Collection of filters applied to the field|
 
 *anyOf*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number is between two values. By default, min and max are included|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» min|number|true|none|Minimum value to check|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» max|number|true|none|The maximum value to check|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» include|boolean|false|none|Include the value in the check|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate value does not match a list (black list)|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|This filter will set the value based on a list of approved values. If the value is not in the list, it will then be set to empty unless the default option is set|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» list|[string]|true|none|The list of approved values|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» approved_values|[string]|true|none|The list of approved values|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» default|string\|null|false|none|If this is set and the value is not in the approved_list, set the value to this|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string contains a value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value camelCase|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a date|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|Date filter has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform values into null. This is helpful when trying to make a value required. The following are considered empty: # The number 0 or 0.0 # empty string '' # A boolean false # The word 'false' #|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|empty filter has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a float. Non numeric characters (including comma) will be removed|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» contains|string|true|none|String must contain with this value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|How many decimal places to preserve|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string is a correct email address|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value kebab-case|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value lowercase|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a number. Non numeric characters (including comma and decimal points) will be removed|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|Number filter has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Add a prefix to the start of a string. If the string already start with the prefix, it will not prepend.|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» strict|boolean|false|none|Enforce strict standards from ARPA. This will enforce the length of the string|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» lookup|boolean|false|none|Look up the host name and check if it has a valid MX record|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» prefix|string|true|none|The prefix to add|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string ends with a value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value snake_case|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a string|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|String filter has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Add a suffix to the start of a string. If the string already start with the suffix, it will not append.|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» ends_with|string|true|none|String must end with this value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» suffix|string|true|none|The suffix to add|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number equals a value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to trim whitespace from a value|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» value|number|true|none|The value to compare against|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When value is a float, this will set the decimal precision|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|By default will trim from the start and end|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» start|boolean|false|none|Remove white space from the start of the string|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» end|boolean|false|none|Remove white space from the end of the string|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number is greater than a value. By default, this will check if value is greater than or equals to|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value UPPERCASE|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» value|number|true|none|The value to compare against|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» include|boolean|false|none|Include the value in the check|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string has a correct DNS records|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» record_type|string|false|none|DNS record type to validate|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an IP address format. Defaults to matching IPv4|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» versions|[string]|false|none|IP Version to match against|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string is a certain length|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» length|string|true|none|String must contain with this value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» operator|string|false|none|Which type of length comparision to make|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number is less than a value. By default, this will check if value is less than or equals to|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» value|number|true|none|The value to compare against|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» include|boolean|false|none|Include the value in the check|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an MAC address format|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This validator has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches a regular expression|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» mask|string|true|none|Mask to validate against|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string starts with a value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» starts_with|string|true|none|String must start with this value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validates that a value follows a step. Both start and end options do not have to sync with the step. If they do not sync then find the nearest step.|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» step|number|true|none|The step value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» start|integer|false|none|Start stepping at this value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» end|integer|false|none|End stepping at this value|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an URI|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» schemes|[string]|false|none|Schemes to match. By default all are matched|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate value matches a list (white list)|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» list|[string]|true|none|The list of approved values|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
 
 *continued*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» current_status|object|false|none|Defines the properties for a status|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» status|string|true|none|A Custom label for the status|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» category|string|true|none|The classifier for the statues|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» _links|object|false|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» self|object|false|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» href|string(uri)|false|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» next|object|false|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» href|string(uri)|false|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» validators|[anyOf]|true|none|A set of validators to use for this field|
+
+*anyOf*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number is between two values. By default, min and max are included|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» min|number|true|none|Minimum value to check|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» max|number|true|none|The maximum value to check|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» include|boolean|false|none|Include the value in the check|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate value does not match a list (black list)|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» list|[string]|true|none|The list of approved values|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string contains a value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» contains|string|true|none|String must contain with this value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string is a correct email address|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» strict|boolean|false|none|Enforce strict standards from ARPA. This will enforce the length of the string|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» lookup|boolean|false|none|Look up the host name and check if it has a valid MX record|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string ends with a value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» ends_with|string|true|none|String must end with this value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number equals a value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» value|number|true|none|The value to compare against|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When value is a float, this will set the decimal precision|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number is greater than a value. By default, this will check if value is greater than or equals to|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» value|number|true|none|The value to compare against|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» include|boolean|false|none|Include the value in the check|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string has a correct DNS records|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» record_type|string|false|none|DNS record type to validate|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an IP address format. Defaults to matching IPv4|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» versions|[string]|false|none|IP Version to match against|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string is a certain length|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» length|string|true|none|String must contain with this value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» operator|string|false|none|Which type of length comparision to make|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number is less than a value. By default, this will check if value is less than or equals to|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» value|number|true|none|The value to compare against|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» include|boolean|false|none|Include the value in the check|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an MAC address format|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This validator has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches a regular expression|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» mask|string|true|none|Mask to validate against|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string starts with a value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» starts_with|string|true|none|String must start with this value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validates that a value follows a step. Both start and end options do not have to sync with the step. If they do not sync then find the nearest step.|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» step|number|true|none|The step value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» start|integer|false|none|Start stepping at this value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» end|integer|false|none|End stepping at this value|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an URI|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» schemes|[string]|false|none|Schemes to match. By default all are matched|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate value matches a list (white list)|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» list|[string]|true|none|The list of approved values|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+
+*continued*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» current_status|object|false|none|Defines the properties for a status|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» status|string|true|none|A Custom label for the status|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» category|string|true|none|The classifier for the statues|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» description|string\|null|false|none|A description for the status|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» order|number|false|none|Order status appears when listing|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» _links|object|false|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» self|object|false|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» href|string(uri)|false|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» next|object|false|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» href|string(uri)|false|none|none|
 
 #### Enumerated Values
 
@@ -4786,6 +6271,768 @@ Status Code **200**
 |country|ZAF|
 |country|ZMB|
 |country|ZWE|
+|entity_type|RES|
+|entity_type|LOC|
+|location_type|warehouse|
+|location_type|facility|
+|location_type|other|
+|country|ABW|
+|country|AFG|
+|country|AGO|
+|country|AIA|
+|country|ALA|
+|country|ALB|
+|country|AND|
+|country|ARE|
+|country|ARG|
+|country|ARM|
+|country|ASM|
+|country|ATA|
+|country|ATF|
+|country|ATG|
+|country|AUS|
+|country|AUT|
+|country|AZE|
+|country|BDI|
+|country|BEL|
+|country|BEN|
+|country|BES|
+|country|BFA|
+|country|BGD|
+|country|BGR|
+|country|BHR|
+|country|BHS|
+|country|BIH|
+|country|BLM|
+|country|BLR|
+|country|BLZ|
+|country|BMU|
+|country|BOL|
+|country|BRA|
+|country|BRB|
+|country|BRN|
+|country|BTN|
+|country|BVT|
+|country|BWA|
+|country|CAF|
+|country|CAN|
+|country|CCK|
+|country|CHE|
+|country|CHL|
+|country|CHN|
+|country|CIV|
+|country|CMR|
+|country|COD|
+|country|COG|
+|country|COK|
+|country|COL|
+|country|COM|
+|country|CPV|
+|country|CRI|
+|country|CUB|
+|country|CUW|
+|country|CXR|
+|country|CYM|
+|country|CYP|
+|country|CZE|
+|country|DEU|
+|country|DJI|
+|country|DMA|
+|country|DNK|
+|country|DOM|
+|country|DZA|
+|country|ECU|
+|country|EGY|
+|country|ERI|
+|country|ESH|
+|country|ESP|
+|country|EST|
+|country|ETH|
+|country|FIN|
+|country|FJI|
+|country|FLK|
+|country|FRA|
+|country|FRO|
+|country|FSM|
+|country|GAB|
+|country|GBR|
+|country|GEO|
+|country|GGY|
+|country|GHA|
+|country|GIB|
+|country|GIN|
+|country|GLP|
+|country|GMB|
+|country|GNB|
+|country|GNQ|
+|country|GRC|
+|country|GRD|
+|country|GRL|
+|country|GTM|
+|country|GUF|
+|country|GUM|
+|country|GUY|
+|country|HKG|
+|country|HMD|
+|country|HND|
+|country|HRV|
+|country|HTI|
+|country|HUN|
+|country|IDN|
+|country|IMN|
+|country|IND|
+|country|IOT|
+|country|IRL|
+|country|IRN|
+|country|IRQ|
+|country|ISL|
+|country|ISR|
+|country|ITA|
+|country|JAM|
+|country|JEY|
+|country|JOR|
+|country|JPN|
+|country|KAZ|
+|country|KEN|
+|country|KGZ|
+|country|KHM|
+|country|KIR|
+|country|KNA|
+|country|KOR|
+|country|KWT|
+|country|LAO|
+|country|LBN|
+|country|LBR|
+|country|LBY|
+|country|LCA|
+|country|LIE|
+|country|LKA|
+|country|LSO|
+|country|LTU|
+|country|LUX|
+|country|LVA|
+|country|MAC|
+|country|MAF|
+|country|MAR|
+|country|MCO|
+|country|MDA|
+|country|MDG|
+|country|MDV|
+|country|MEX|
+|country|MHL|
+|country|MKD|
+|country|MLI|
+|country|MLT|
+|country|MMR|
+|country|MNE|
+|country|MNG|
+|country|MNP|
+|country|MOZ|
+|country|MRT|
+|country|MSR|
+|country|MTQ|
+|country|MUS|
+|country|MWI|
+|country|MYS|
+|country|MYT|
+|country|NAM|
+|country|NCL|
+|country|NER|
+|country|NFK|
+|country|NGA|
+|country|NIC|
+|country|NIU|
+|country|NLD|
+|country|NOR|
+|country|NPL|
+|country|NRU|
+|country|NZL|
+|country|OMN|
+|country|PAK|
+|country|PAN|
+|country|PCN|
+|country|PER|
+|country|PHL|
+|country|PLW|
+|country|PNG|
+|country|POL|
+|country|PRI|
+|country|PRK|
+|country|PRT|
+|country|PRY|
+|country|PSE|
+|country|PYF|
+|country|QAT|
+|country|REU|
+|country|ROU|
+|country|RUS|
+|country|RWA|
+|country|SAU|
+|country|SDN|
+|country|SEN|
+|country|SGP|
+|country|SGS|
+|country|SHN|
+|country|SJM|
+|country|SLB|
+|country|SLE|
+|country|SLV|
+|country|SMR|
+|country|SOM|
+|country|SPM|
+|country|SRB|
+|country|SSD|
+|country|STP|
+|country|SUR|
+|country|SVK|
+|country|SVN|
+|country|SWE|
+|country|SWZ|
+|country|SXM|
+|country|SYC|
+|country|SYR|
+|country|TCA|
+|country|TCD|
+|country|TGO|
+|country|THA|
+|country|TJK|
+|country|TKL|
+|country|TKM|
+|country|TLS|
+|country|TON|
+|country|TTO|
+|country|TUN|
+|country|TUR|
+|country|TUV|
+|country|TWN|
+|country|TZA|
+|country|UGA|
+|country|UKR|
+|country|UMI|
+|country|URY|
+|country|USA|
+|country|UZB|
+|country|VAT|
+|country|VCT|
+|country|VEN|
+|country|VGB|
+|country|VIR|
+|country|VNM|
+|country|VUT|
+|country|WLF|
+|country|WSM|
+|country|YEM|
+|country|ZAF|
+|country|ZMB|
+|country|ZWE|
+|entity_type|SRES|
+|entity_type|LOC|
+|location_type|warehouse|
+|location_type|facility|
+|location_type|other|
+|country|ABW|
+|country|AFG|
+|country|AGO|
+|country|AIA|
+|country|ALA|
+|country|ALB|
+|country|AND|
+|country|ARE|
+|country|ARG|
+|country|ARM|
+|country|ASM|
+|country|ATA|
+|country|ATF|
+|country|ATG|
+|country|AUS|
+|country|AUT|
+|country|AZE|
+|country|BDI|
+|country|BEL|
+|country|BEN|
+|country|BES|
+|country|BFA|
+|country|BGD|
+|country|BGR|
+|country|BHR|
+|country|BHS|
+|country|BIH|
+|country|BLM|
+|country|BLR|
+|country|BLZ|
+|country|BMU|
+|country|BOL|
+|country|BRA|
+|country|BRB|
+|country|BRN|
+|country|BTN|
+|country|BVT|
+|country|BWA|
+|country|CAF|
+|country|CAN|
+|country|CCK|
+|country|CHE|
+|country|CHL|
+|country|CHN|
+|country|CIV|
+|country|CMR|
+|country|COD|
+|country|COG|
+|country|COK|
+|country|COL|
+|country|COM|
+|country|CPV|
+|country|CRI|
+|country|CUB|
+|country|CUW|
+|country|CXR|
+|country|CYM|
+|country|CYP|
+|country|CZE|
+|country|DEU|
+|country|DJI|
+|country|DMA|
+|country|DNK|
+|country|DOM|
+|country|DZA|
+|country|ECU|
+|country|EGY|
+|country|ERI|
+|country|ESH|
+|country|ESP|
+|country|EST|
+|country|ETH|
+|country|FIN|
+|country|FJI|
+|country|FLK|
+|country|FRA|
+|country|FRO|
+|country|FSM|
+|country|GAB|
+|country|GBR|
+|country|GEO|
+|country|GGY|
+|country|GHA|
+|country|GIB|
+|country|GIN|
+|country|GLP|
+|country|GMB|
+|country|GNB|
+|country|GNQ|
+|country|GRC|
+|country|GRD|
+|country|GRL|
+|country|GTM|
+|country|GUF|
+|country|GUM|
+|country|GUY|
+|country|HKG|
+|country|HMD|
+|country|HND|
+|country|HRV|
+|country|HTI|
+|country|HUN|
+|country|IDN|
+|country|IMN|
+|country|IND|
+|country|IOT|
+|country|IRL|
+|country|IRN|
+|country|IRQ|
+|country|ISL|
+|country|ISR|
+|country|ITA|
+|country|JAM|
+|country|JEY|
+|country|JOR|
+|country|JPN|
+|country|KAZ|
+|country|KEN|
+|country|KGZ|
+|country|KHM|
+|country|KIR|
+|country|KNA|
+|country|KOR|
+|country|KWT|
+|country|LAO|
+|country|LBN|
+|country|LBR|
+|country|LBY|
+|country|LCA|
+|country|LIE|
+|country|LKA|
+|country|LSO|
+|country|LTU|
+|country|LUX|
+|country|LVA|
+|country|MAC|
+|country|MAF|
+|country|MAR|
+|country|MCO|
+|country|MDA|
+|country|MDG|
+|country|MDV|
+|country|MEX|
+|country|MHL|
+|country|MKD|
+|country|MLI|
+|country|MLT|
+|country|MMR|
+|country|MNE|
+|country|MNG|
+|country|MNP|
+|country|MOZ|
+|country|MRT|
+|country|MSR|
+|country|MTQ|
+|country|MUS|
+|country|MWI|
+|country|MYS|
+|country|MYT|
+|country|NAM|
+|country|NCL|
+|country|NER|
+|country|NFK|
+|country|NGA|
+|country|NIC|
+|country|NIU|
+|country|NLD|
+|country|NOR|
+|country|NPL|
+|country|NRU|
+|country|NZL|
+|country|OMN|
+|country|PAK|
+|country|PAN|
+|country|PCN|
+|country|PER|
+|country|PHL|
+|country|PLW|
+|country|PNG|
+|country|POL|
+|country|PRI|
+|country|PRK|
+|country|PRT|
+|country|PRY|
+|country|PSE|
+|country|PYF|
+|country|QAT|
+|country|REU|
+|country|ROU|
+|country|RUS|
+|country|RWA|
+|country|SAU|
+|country|SDN|
+|country|SEN|
+|country|SGP|
+|country|SGS|
+|country|SHN|
+|country|SJM|
+|country|SLB|
+|country|SLE|
+|country|SLV|
+|country|SMR|
+|country|SOM|
+|country|SPM|
+|country|SRB|
+|country|SSD|
+|country|STP|
+|country|SUR|
+|country|SVK|
+|country|SVN|
+|country|SWE|
+|country|SWZ|
+|country|SXM|
+|country|SYC|
+|country|SYR|
+|country|TCA|
+|country|TCD|
+|country|TGO|
+|country|THA|
+|country|TJK|
+|country|TKL|
+|country|TKM|
+|country|TLS|
+|country|TON|
+|country|TTO|
+|country|TUN|
+|country|TUR|
+|country|TUV|
+|country|TWN|
+|country|TZA|
+|country|UGA|
+|country|UKR|
+|country|UMI|
+|country|URY|
+|country|USA|
+|country|UZB|
+|country|VAT|
+|country|VCT|
+|country|VEN|
+|country|VGB|
+|country|VIR|
+|country|VNM|
+|country|VUT|
+|country|WLF|
+|country|WSM|
+|country|YEM|
+|country|ZAF|
+|country|ZMB|
+|country|ZWE|
+|entity_type|RES|
+|entity_type|LOC|
+|location_type|warehouse|
+|location_type|facility|
+|location_type|other|
+|country|ABW|
+|country|AFG|
+|country|AGO|
+|country|AIA|
+|country|ALA|
+|country|ALB|
+|country|AND|
+|country|ARE|
+|country|ARG|
+|country|ARM|
+|country|ASM|
+|country|ATA|
+|country|ATF|
+|country|ATG|
+|country|AUS|
+|country|AUT|
+|country|AZE|
+|country|BDI|
+|country|BEL|
+|country|BEN|
+|country|BES|
+|country|BFA|
+|country|BGD|
+|country|BGR|
+|country|BHR|
+|country|BHS|
+|country|BIH|
+|country|BLM|
+|country|BLR|
+|country|BLZ|
+|country|BMU|
+|country|BOL|
+|country|BRA|
+|country|BRB|
+|country|BRN|
+|country|BTN|
+|country|BVT|
+|country|BWA|
+|country|CAF|
+|country|CAN|
+|country|CCK|
+|country|CHE|
+|country|CHL|
+|country|CHN|
+|country|CIV|
+|country|CMR|
+|country|COD|
+|country|COG|
+|country|COK|
+|country|COL|
+|country|COM|
+|country|CPV|
+|country|CRI|
+|country|CUB|
+|country|CUW|
+|country|CXR|
+|country|CYM|
+|country|CYP|
+|country|CZE|
+|country|DEU|
+|country|DJI|
+|country|DMA|
+|country|DNK|
+|country|DOM|
+|country|DZA|
+|country|ECU|
+|country|EGY|
+|country|ERI|
+|country|ESH|
+|country|ESP|
+|country|EST|
+|country|ETH|
+|country|FIN|
+|country|FJI|
+|country|FLK|
+|country|FRA|
+|country|FRO|
+|country|FSM|
+|country|GAB|
+|country|GBR|
+|country|GEO|
+|country|GGY|
+|country|GHA|
+|country|GIB|
+|country|GIN|
+|country|GLP|
+|country|GMB|
+|country|GNB|
+|country|GNQ|
+|country|GRC|
+|country|GRD|
+|country|GRL|
+|country|GTM|
+|country|GUF|
+|country|GUM|
+|country|GUY|
+|country|HKG|
+|country|HMD|
+|country|HND|
+|country|HRV|
+|country|HTI|
+|country|HUN|
+|country|IDN|
+|country|IMN|
+|country|IND|
+|country|IOT|
+|country|IRL|
+|country|IRN|
+|country|IRQ|
+|country|ISL|
+|country|ISR|
+|country|ITA|
+|country|JAM|
+|country|JEY|
+|country|JOR|
+|country|JPN|
+|country|KAZ|
+|country|KEN|
+|country|KGZ|
+|country|KHM|
+|country|KIR|
+|country|KNA|
+|country|KOR|
+|country|KWT|
+|country|LAO|
+|country|LBN|
+|country|LBR|
+|country|LBY|
+|country|LCA|
+|country|LIE|
+|country|LKA|
+|country|LSO|
+|country|LTU|
+|country|LUX|
+|country|LVA|
+|country|MAC|
+|country|MAF|
+|country|MAR|
+|country|MCO|
+|country|MDA|
+|country|MDG|
+|country|MDV|
+|country|MEX|
+|country|MHL|
+|country|MKD|
+|country|MLI|
+|country|MLT|
+|country|MMR|
+|country|MNE|
+|country|MNG|
+|country|MNP|
+|country|MOZ|
+|country|MRT|
+|country|MSR|
+|country|MTQ|
+|country|MUS|
+|country|MWI|
+|country|MYS|
+|country|MYT|
+|country|NAM|
+|country|NCL|
+|country|NER|
+|country|NFK|
+|country|NGA|
+|country|NIC|
+|country|NIU|
+|country|NLD|
+|country|NOR|
+|country|NPL|
+|country|NRU|
+|country|NZL|
+|country|OMN|
+|country|PAK|
+|country|PAN|
+|country|PCN|
+|country|PER|
+|country|PHL|
+|country|PLW|
+|country|PNG|
+|country|POL|
+|country|PRI|
+|country|PRK|
+|country|PRT|
+|country|PRY|
+|country|PSE|
+|country|PYF|
+|country|QAT|
+|country|REU|
+|country|ROU|
+|country|RUS|
+|country|RWA|
+|country|SAU|
+|country|SDN|
+|country|SEN|
+|country|SGP|
+|country|SGS|
+|country|SHN|
+|country|SJM|
+|country|SLB|
+|country|SLE|
+|country|SLV|
+|country|SMR|
+|country|SOM|
+|country|SPM|
+|country|SRB|
+|country|SSD|
+|country|STP|
+|country|SUR|
+|country|SVK|
+|country|SVN|
+|country|SWE|
+|country|SWZ|
+|country|SXM|
+|country|SYC|
+|country|SYR|
+|country|TCA|
+|country|TCD|
+|country|TGO|
+|country|THA|
+|country|TJK|
+|country|TKL|
+|country|TKM|
+|country|TLS|
+|country|TON|
+|country|TTO|
+|country|TUN|
+|country|TUR|
+|country|TUV|
+|country|TWN|
+|country|TZA|
+|country|UGA|
+|country|UKR|
+|country|UMI|
+|country|URY|
+|country|USA|
+|country|UZB|
+|country|VAT|
+|country|VCT|
+|country|VEN|
+|country|VGB|
+|country|VIR|
+|country|VNM|
+|country|VUT|
+|country|WLF|
+|country|WSM|
+|country|YEM|
+|country|ZAF|
+|country|ZMB|
+|country|ZWE|
 |type|allowed_list|
 |type|camel|
 |type|date|
@@ -4938,11 +7185,13 @@ Creates a new unit
     },
     "raw_serial_number": {
       "type": "string",
+      "nullable": true,
       "description": "Serial number of the unit with prefix stripped",
       "readOnly": true
     },
     "tenant_part_number": {
       "type": "string",
+      "nullable": true,
       "description": "Identifier set by the tenant"
     },
     "part": {
@@ -4984,6 +7233,15 @@ Creates a new unit
             "CANCELLED",
             "BLOCKED"
           ]
+        },
+        "description": {
+          "type": "string",
+          "nullable": true,
+          "description": "A description for the status"
+        },
+        "order": {
+          "type": "number",
+          "description": "Order status appears when listing"
         }
       }
     },
@@ -5364,6 +7622,1337 @@ Creates a new unit
         }
       }
     },
+    "resource": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "description": "Defines the properties for a resource",
+          "additionalProperties": false,
+          "required": [
+            "label",
+            "entity_id",
+            "entity_type",
+            "created",
+            "updated",
+            "resource_type",
+            "location"
+          ],
+          "properties": {
+            "resource_id": {
+              "description": "The identifier for the resource",
+              "type": "string",
+              "readOnly": true,
+              "pattern": "^[0-9a-zA-Z-_]+$"
+            },
+            "entity_id": {
+              "x-no-api-doc": true,
+              "type": "string",
+              "description": "Customer identifier",
+              "readOnly": true,
+              "pattern": "^[0-9a-zA-Z-_]+$"
+            },
+            "entity_type": {
+              "x-no-api-doc": true,
+              "enum": [
+                "RES"
+              ]
+            },
+            "label": {
+              "type": "string",
+              "description": "Label for the entity"
+            },
+            "slug": {
+              "type": "string",
+              "description": "Slug for the entity (Auto-generated from the label)",
+              "readOnly": true,
+              "deprecated": true,
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+            },
+            "created": {
+              "description": "Date the entity was created",
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true
+            },
+            "updated": {
+              "description": "Last date the entity was updated",
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true
+            },
+            "resource_type": {
+              "type": "string",
+              "description": "Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased",
+              "pattern": "^[a-z][0-9a-zA-Z-]+$"
+            },
+            "meta": {
+              "type": "object",
+              "description": "Data for the resource as a key value pair",
+              "additionalProperties": {
+                "type": "string"
+              },
+              "propertyNames": {
+                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+              }
+            },
+            "location": {
+              "type": "object",
+              "description": "Defines the properties for a part unit",
+              "additionalProperties": false,
+              "required": [
+                "label",
+                "entity_id",
+                "entity_type",
+                "created",
+                "updated",
+                "location_type",
+                "address"
+              ],
+              "properties": {
+                "location_id": {
+                  "description": "The identifier for the location",
+                  "type": "string",
+                  "readOnly": true,
+                  "pattern": "^[0-9a-zA-Z-_]+$"
+                },
+                "entity_id": {
+                  "x-no-api-doc": true,
+                  "type": "string",
+                  "description": "Customer identifier",
+                  "readOnly": true,
+                  "pattern": "^[0-9a-zA-Z-_]+$"
+                },
+                "entity_type": {
+                  "x-no-api-doc": true,
+                  "enum": [
+                    "LOC"
+                  ]
+                },
+                "label": {
+                  "type": "string",
+                  "description": "Label for the entity"
+                },
+                "slug": {
+                  "type": "string",
+                  "description": "Slug for the entity (Auto-generated from the label)",
+                  "readOnly": true,
+                  "deprecated": true,
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                },
+                "created": {
+                  "description": "Date the entity was created",
+                  "type": "string",
+                  "format": "date-time",
+                  "readOnly": true
+                },
+                "updated": {
+                  "description": "Last date the entity was updated",
+                  "type": "string",
+                  "format": "date-time",
+                  "readOnly": true
+                },
+                "location_type": {
+                  "type": "string",
+                  "description": "The type of location",
+                  "enum": [
+                    "warehouse",
+                    "facility",
+                    "other"
+                  ]
+                },
+                "formatted_address": {
+                  "type": "string",
+                  "readOnly": true,
+                  "description": "Address formatted for the where region the location exists in"
+                },
+                "address": {
+                  "type": "object",
+                  "required": [
+                    "country",
+                    "administrative_area",
+                    "locality",
+                    "postal_code",
+                    "thoroughfare"
+                  ],
+                  "description": "xNAL address for the location ",
+                  "properties": {
+                    "country": {
+                      "type": "string",
+                      "description": "Three Letter ISO country code",
+                      "enum": [
+                        "ABW",
+                        "AFG",
+                        "AGO",
+                        "AIA",
+                        "ALA",
+                        "ALB",
+                        "AND",
+                        "ARE",
+                        "ARG",
+                        "ARM",
+                        "ASM",
+                        "ATA",
+                        "ATF",
+                        "ATG",
+                        "AUS",
+                        "AUT",
+                        "AZE",
+                        "BDI",
+                        "BEL",
+                        "BEN",
+                        "BES",
+                        "BFA",
+                        "BGD",
+                        "BGR",
+                        "BHR",
+                        "BHS",
+                        "BIH",
+                        "BLM",
+                        "BLR",
+                        "BLZ",
+                        "BMU",
+                        "BOL",
+                        "BRA",
+                        "BRB",
+                        "BRN",
+                        "BTN",
+                        "BVT",
+                        "BWA",
+                        "CAF",
+                        "CAN",
+                        "CCK",
+                        "CHE",
+                        "CHL",
+                        "CHN",
+                        "CIV",
+                        "CMR",
+                        "COD",
+                        "COG",
+                        "COK",
+                        "COL",
+                        "COM",
+                        "CPV",
+                        "CRI",
+                        "CUB",
+                        "CUW",
+                        "CXR",
+                        "CYM",
+                        "CYP",
+                        "CZE",
+                        "DEU",
+                        "DJI",
+                        "DMA",
+                        "DNK",
+                        "DOM",
+                        "DZA",
+                        "ECU",
+                        "EGY",
+                        "ERI",
+                        "ESH",
+                        "ESP",
+                        "EST",
+                        "ETH",
+                        "FIN",
+                        "FJI",
+                        "FLK",
+                        "FRA",
+                        "FRO",
+                        "FSM",
+                        "GAB",
+                        "GBR",
+                        "GEO",
+                        "GGY",
+                        "GHA",
+                        "GIB",
+                        "GIN",
+                        "GLP",
+                        "GMB",
+                        "GNB",
+                        "GNQ",
+                        "GRC",
+                        "GRD",
+                        "GRL",
+                        "GTM",
+                        "GUF",
+                        "GUM",
+                        "GUY",
+                        "HKG",
+                        "HMD",
+                        "HND",
+                        "HRV",
+                        "HTI",
+                        "HUN",
+                        "IDN",
+                        "IMN",
+                        "IND",
+                        "IOT",
+                        "IRL",
+                        "IRN",
+                        "IRQ",
+                        "ISL",
+                        "ISR",
+                        "ITA",
+                        "JAM",
+                        "JEY",
+                        "JOR",
+                        "JPN",
+                        "KAZ",
+                        "KEN",
+                        "KGZ",
+                        "KHM",
+                        "KIR",
+                        "KNA",
+                        "KOR",
+                        "KWT",
+                        "LAO",
+                        "LBN",
+                        "LBR",
+                        "LBY",
+                        "LCA",
+                        "LIE",
+                        "LKA",
+                        "LSO",
+                        "LTU",
+                        "LUX",
+                        "LVA",
+                        "MAC",
+                        "MAF",
+                        "MAR",
+                        "MCO",
+                        "MDA",
+                        "MDG",
+                        "MDV",
+                        "MEX",
+                        "MHL",
+                        "MKD",
+                        "MLI",
+                        "MLT",
+                        "MMR",
+                        "MNE",
+                        "MNG",
+                        "MNP",
+                        "MOZ",
+                        "MRT",
+                        "MSR",
+                        "MTQ",
+                        "MUS",
+                        "MWI",
+                        "MYS",
+                        "MYT",
+                        "NAM",
+                        "NCL",
+                        "NER",
+                        "NFK",
+                        "NGA",
+                        "NIC",
+                        "NIU",
+                        "NLD",
+                        "NOR",
+                        "NPL",
+                        "NRU",
+                        "NZL",
+                        "OMN",
+                        "PAK",
+                        "PAN",
+                        "PCN",
+                        "PER",
+                        "PHL",
+                        "PLW",
+                        "PNG",
+                        "POL",
+                        "PRI",
+                        "PRK",
+                        "PRT",
+                        "PRY",
+                        "PSE",
+                        "PYF",
+                        "QAT",
+                        "REU",
+                        "ROU",
+                        "RUS",
+                        "RWA",
+                        "SAU",
+                        "SDN",
+                        "SEN",
+                        "SGP",
+                        "SGS",
+                        "SHN",
+                        "SJM",
+                        "SLB",
+                        "SLE",
+                        "SLV",
+                        "SMR",
+                        "SOM",
+                        "SPM",
+                        "SRB",
+                        "SSD",
+                        "STP",
+                        "SUR",
+                        "SVK",
+                        "SVN",
+                        "SWE",
+                        "SWZ",
+                        "SXM",
+                        "SYC",
+                        "SYR",
+                        "TCA",
+                        "TCD",
+                        "TGO",
+                        "THA",
+                        "TJK",
+                        "TKL",
+                        "TKM",
+                        "TLS",
+                        "TON",
+                        "TTO",
+                        "TUN",
+                        "TUR",
+                        "TUV",
+                        "TWN",
+                        "TZA",
+                        "UGA",
+                        "UKR",
+                        "UMI",
+                        "URY",
+                        "USA",
+                        "UZB",
+                        "VAT",
+                        "VCT",
+                        "VEN",
+                        "VGB",
+                        "VIR",
+                        "VNM",
+                        "VUT",
+                        "WLF",
+                        "WSM",
+                        "YEM",
+                        "ZAF",
+                        "ZMB",
+                        "ZWE"
+                      ]
+                    },
+                    "administrative_area": {
+                      "type": "string",
+                      "description": "State / Province / Region"
+                    },
+                    "sub_administrative_area": {
+                      "type": "string",
+                      "description": "County / District"
+                    },
+                    "locality": {
+                      "type": "string",
+                      "description": "City / Town"
+                    },
+                    "postal_code": {
+                      "type": "string",
+                      "description": "Postal Code / Zip Code"
+                    },
+                    "thoroughfare": {
+                      "type": "string",
+                      "description": "Street Address"
+                    },
+                    "premise": {
+                      "type": "string",
+                      "description": "Apartment / Suite / Box number etc"
+                    },
+                    "sub_premise": {
+                      "type": "string",
+                      "description": "Floor # / Room # / Building label etc"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "description": "Defines the properties for a resource",
+          "additionalProperties": false,
+          "required": [
+            "label",
+            "entity_id",
+            "entity_type",
+            "created",
+            "updated",
+            "resource_type",
+            "location",
+            "resource"
+          ],
+          "properties": {
+            "resource_id": {
+              "description": "The identifier for the resource",
+              "type": "string",
+              "readOnly": true,
+              "pattern": "^[0-9a-zA-Z-_]+$"
+            },
+            "entity_id": {
+              "x-no-api-doc": true,
+              "type": "string",
+              "description": "Customer identifier",
+              "readOnly": true,
+              "pattern": "^[0-9a-zA-Z-_]+$"
+            },
+            "entity_type": {
+              "x-no-api-doc": true,
+              "enum": [
+                "SRES"
+              ]
+            },
+            "label": {
+              "type": "string",
+              "description": "Label for the entity"
+            },
+            "slug": {
+              "type": "string",
+              "description": "Slug for the entity (Auto-generated from the label)",
+              "readOnly": true,
+              "deprecated": true,
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+            },
+            "created": {
+              "description": "Date the entity was created",
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true
+            },
+            "updated": {
+              "description": "Last date the entity was updated",
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true
+            },
+            "resource_type": {
+              "type": "string",
+              "description": "Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased",
+              "pattern": "^[a-z][0-9a-zA-Z-]+$"
+            },
+            "meta": {
+              "type": "object",
+              "description": "Data for the resource as a key value pair",
+              "additionalProperties": {
+                "type": "string"
+              },
+              "propertyNames": {
+                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+              }
+            },
+            "location": {
+              "type": "object",
+              "description": "Defines the properties for a part unit",
+              "additionalProperties": false,
+              "required": [
+                "label",
+                "entity_id",
+                "entity_type",
+                "created",
+                "updated",
+                "location_type",
+                "address"
+              ],
+              "properties": {
+                "location_id": {
+                  "description": "The identifier for the location",
+                  "type": "string",
+                  "readOnly": true,
+                  "pattern": "^[0-9a-zA-Z-_]+$"
+                },
+                "entity_id": {
+                  "x-no-api-doc": true,
+                  "type": "string",
+                  "description": "Customer identifier",
+                  "readOnly": true,
+                  "pattern": "^[0-9a-zA-Z-_]+$"
+                },
+                "entity_type": {
+                  "x-no-api-doc": true,
+                  "enum": [
+                    "LOC"
+                  ]
+                },
+                "label": {
+                  "type": "string",
+                  "description": "Label for the entity"
+                },
+                "slug": {
+                  "type": "string",
+                  "description": "Slug for the entity (Auto-generated from the label)",
+                  "readOnly": true,
+                  "deprecated": true,
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                },
+                "created": {
+                  "description": "Date the entity was created",
+                  "type": "string",
+                  "format": "date-time",
+                  "readOnly": true
+                },
+                "updated": {
+                  "description": "Last date the entity was updated",
+                  "type": "string",
+                  "format": "date-time",
+                  "readOnly": true
+                },
+                "location_type": {
+                  "type": "string",
+                  "description": "The type of location",
+                  "enum": [
+                    "warehouse",
+                    "facility",
+                    "other"
+                  ]
+                },
+                "formatted_address": {
+                  "type": "string",
+                  "readOnly": true,
+                  "description": "Address formatted for the where region the location exists in"
+                },
+                "address": {
+                  "type": "object",
+                  "required": [
+                    "country",
+                    "administrative_area",
+                    "locality",
+                    "postal_code",
+                    "thoroughfare"
+                  ],
+                  "description": "xNAL address for the location ",
+                  "properties": {
+                    "country": {
+                      "type": "string",
+                      "description": "Three Letter ISO country code",
+                      "enum": [
+                        "ABW",
+                        "AFG",
+                        "AGO",
+                        "AIA",
+                        "ALA",
+                        "ALB",
+                        "AND",
+                        "ARE",
+                        "ARG",
+                        "ARM",
+                        "ASM",
+                        "ATA",
+                        "ATF",
+                        "ATG",
+                        "AUS",
+                        "AUT",
+                        "AZE",
+                        "BDI",
+                        "BEL",
+                        "BEN",
+                        "BES",
+                        "BFA",
+                        "BGD",
+                        "BGR",
+                        "BHR",
+                        "BHS",
+                        "BIH",
+                        "BLM",
+                        "BLR",
+                        "BLZ",
+                        "BMU",
+                        "BOL",
+                        "BRA",
+                        "BRB",
+                        "BRN",
+                        "BTN",
+                        "BVT",
+                        "BWA",
+                        "CAF",
+                        "CAN",
+                        "CCK",
+                        "CHE",
+                        "CHL",
+                        "CHN",
+                        "CIV",
+                        "CMR",
+                        "COD",
+                        "COG",
+                        "COK",
+                        "COL",
+                        "COM",
+                        "CPV",
+                        "CRI",
+                        "CUB",
+                        "CUW",
+                        "CXR",
+                        "CYM",
+                        "CYP",
+                        "CZE",
+                        "DEU",
+                        "DJI",
+                        "DMA",
+                        "DNK",
+                        "DOM",
+                        "DZA",
+                        "ECU",
+                        "EGY",
+                        "ERI",
+                        "ESH",
+                        "ESP",
+                        "EST",
+                        "ETH",
+                        "FIN",
+                        "FJI",
+                        "FLK",
+                        "FRA",
+                        "FRO",
+                        "FSM",
+                        "GAB",
+                        "GBR",
+                        "GEO",
+                        "GGY",
+                        "GHA",
+                        "GIB",
+                        "GIN",
+                        "GLP",
+                        "GMB",
+                        "GNB",
+                        "GNQ",
+                        "GRC",
+                        "GRD",
+                        "GRL",
+                        "GTM",
+                        "GUF",
+                        "GUM",
+                        "GUY",
+                        "HKG",
+                        "HMD",
+                        "HND",
+                        "HRV",
+                        "HTI",
+                        "HUN",
+                        "IDN",
+                        "IMN",
+                        "IND",
+                        "IOT",
+                        "IRL",
+                        "IRN",
+                        "IRQ",
+                        "ISL",
+                        "ISR",
+                        "ITA",
+                        "JAM",
+                        "JEY",
+                        "JOR",
+                        "JPN",
+                        "KAZ",
+                        "KEN",
+                        "KGZ",
+                        "KHM",
+                        "KIR",
+                        "KNA",
+                        "KOR",
+                        "KWT",
+                        "LAO",
+                        "LBN",
+                        "LBR",
+                        "LBY",
+                        "LCA",
+                        "LIE",
+                        "LKA",
+                        "LSO",
+                        "LTU",
+                        "LUX",
+                        "LVA",
+                        "MAC",
+                        "MAF",
+                        "MAR",
+                        "MCO",
+                        "MDA",
+                        "MDG",
+                        "MDV",
+                        "MEX",
+                        "MHL",
+                        "MKD",
+                        "MLI",
+                        "MLT",
+                        "MMR",
+                        "MNE",
+                        "MNG",
+                        "MNP",
+                        "MOZ",
+                        "MRT",
+                        "MSR",
+                        "MTQ",
+                        "MUS",
+                        "MWI",
+                        "MYS",
+                        "MYT",
+                        "NAM",
+                        "NCL",
+                        "NER",
+                        "NFK",
+                        "NGA",
+                        "NIC",
+                        "NIU",
+                        "NLD",
+                        "NOR",
+                        "NPL",
+                        "NRU",
+                        "NZL",
+                        "OMN",
+                        "PAK",
+                        "PAN",
+                        "PCN",
+                        "PER",
+                        "PHL",
+                        "PLW",
+                        "PNG",
+                        "POL",
+                        "PRI",
+                        "PRK",
+                        "PRT",
+                        "PRY",
+                        "PSE",
+                        "PYF",
+                        "QAT",
+                        "REU",
+                        "ROU",
+                        "RUS",
+                        "RWA",
+                        "SAU",
+                        "SDN",
+                        "SEN",
+                        "SGP",
+                        "SGS",
+                        "SHN",
+                        "SJM",
+                        "SLB",
+                        "SLE",
+                        "SLV",
+                        "SMR",
+                        "SOM",
+                        "SPM",
+                        "SRB",
+                        "SSD",
+                        "STP",
+                        "SUR",
+                        "SVK",
+                        "SVN",
+                        "SWE",
+                        "SWZ",
+                        "SXM",
+                        "SYC",
+                        "SYR",
+                        "TCA",
+                        "TCD",
+                        "TGO",
+                        "THA",
+                        "TJK",
+                        "TKL",
+                        "TKM",
+                        "TLS",
+                        "TON",
+                        "TTO",
+                        "TUN",
+                        "TUR",
+                        "TUV",
+                        "TWN",
+                        "TZA",
+                        "UGA",
+                        "UKR",
+                        "UMI",
+                        "URY",
+                        "USA",
+                        "UZB",
+                        "VAT",
+                        "VCT",
+                        "VEN",
+                        "VGB",
+                        "VIR",
+                        "VNM",
+                        "VUT",
+                        "WLF",
+                        "WSM",
+                        "YEM",
+                        "ZAF",
+                        "ZMB",
+                        "ZWE"
+                      ]
+                    },
+                    "administrative_area": {
+                      "type": "string",
+                      "description": "State / Province / Region"
+                    },
+                    "sub_administrative_area": {
+                      "type": "string",
+                      "description": "County / District"
+                    },
+                    "locality": {
+                      "type": "string",
+                      "description": "City / Town"
+                    },
+                    "postal_code": {
+                      "type": "string",
+                      "description": "Postal Code / Zip Code"
+                    },
+                    "thoroughfare": {
+                      "type": "string",
+                      "description": "Street Address"
+                    },
+                    "premise": {
+                      "type": "string",
+                      "description": "Apartment / Suite / Box number etc"
+                    },
+                    "sub_premise": {
+                      "type": "string",
+                      "description": "Floor # / Room # / Building label etc"
+                    }
+                  }
+                }
+              }
+            },
+            "resource": {
+              "type": "object",
+              "description": "Defines the properties for a resource",
+              "additionalProperties": false,
+              "required": [
+                "label",
+                "entity_id",
+                "entity_type",
+                "created",
+                "updated",
+                "resource_type",
+                "location"
+              ],
+              "properties": {
+                "resource_id": {
+                  "description": "The identifier for the resource",
+                  "type": "string",
+                  "readOnly": true,
+                  "pattern": "^[0-9a-zA-Z-_]+$"
+                },
+                "entity_id": {
+                  "x-no-api-doc": true,
+                  "type": "string",
+                  "description": "Customer identifier",
+                  "readOnly": true,
+                  "pattern": "^[0-9a-zA-Z-_]+$"
+                },
+                "entity_type": {
+                  "x-no-api-doc": true,
+                  "enum": [
+                    "RES"
+                  ]
+                },
+                "label": {
+                  "type": "string",
+                  "description": "Label for the entity"
+                },
+                "slug": {
+                  "type": "string",
+                  "description": "Slug for the entity (Auto-generated from the label)",
+                  "readOnly": true,
+                  "deprecated": true,
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                },
+                "created": {
+                  "description": "Date the entity was created",
+                  "type": "string",
+                  "format": "date-time",
+                  "readOnly": true
+                },
+                "updated": {
+                  "description": "Last date the entity was updated",
+                  "type": "string",
+                  "format": "date-time",
+                  "readOnly": true
+                },
+                "resource_type": {
+                  "type": "string",
+                  "description": "Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased",
+                  "pattern": "^[a-z][0-9a-zA-Z-]+$"
+                },
+                "meta": {
+                  "type": "object",
+                  "description": "Data for the resource as a key value pair",
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "propertyNames": {
+                    "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+                  }
+                },
+                "location": {
+                  "type": "object",
+                  "description": "Defines the properties for a part unit",
+                  "additionalProperties": false,
+                  "required": [
+                    "label",
+                    "entity_id",
+                    "entity_type",
+                    "created",
+                    "updated",
+                    "location_type",
+                    "address"
+                  ],
+                  "properties": {
+                    "location_id": {
+                      "description": "The identifier for the location",
+                      "type": "string",
+                      "readOnly": true,
+                      "pattern": "^[0-9a-zA-Z-_]+$"
+                    },
+                    "entity_id": {
+                      "x-no-api-doc": true,
+                      "type": "string",
+                      "description": "Customer identifier",
+                      "readOnly": true,
+                      "pattern": "^[0-9a-zA-Z-_]+$"
+                    },
+                    "entity_type": {
+                      "x-no-api-doc": true,
+                      "enum": [
+                        "LOC"
+                      ]
+                    },
+                    "label": {
+                      "type": "string",
+                      "description": "Label for the entity"
+                    },
+                    "slug": {
+                      "type": "string",
+                      "description": "Slug for the entity (Auto-generated from the label)",
+                      "readOnly": true,
+                      "deprecated": true,
+                      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                    },
+                    "created": {
+                      "description": "Date the entity was created",
+                      "type": "string",
+                      "format": "date-time",
+                      "readOnly": true
+                    },
+                    "updated": {
+                      "description": "Last date the entity was updated",
+                      "type": "string",
+                      "format": "date-time",
+                      "readOnly": true
+                    },
+                    "location_type": {
+                      "type": "string",
+                      "description": "The type of location",
+                      "enum": [
+                        "warehouse",
+                        "facility",
+                        "other"
+                      ]
+                    },
+                    "formatted_address": {
+                      "type": "string",
+                      "readOnly": true,
+                      "description": "Address formatted for the where region the location exists in"
+                    },
+                    "address": {
+                      "type": "object",
+                      "required": [
+                        "country",
+                        "administrative_area",
+                        "locality",
+                        "postal_code",
+                        "thoroughfare"
+                      ],
+                      "description": "xNAL address for the location ",
+                      "properties": {
+                        "country": {
+                          "type": "string",
+                          "description": "Three Letter ISO country code",
+                          "enum": [
+                            "ABW",
+                            "AFG",
+                            "AGO",
+                            "AIA",
+                            "ALA",
+                            "ALB",
+                            "AND",
+                            "ARE",
+                            "ARG",
+                            "ARM",
+                            "ASM",
+                            "ATA",
+                            "ATF",
+                            "ATG",
+                            "AUS",
+                            "AUT",
+                            "AZE",
+                            "BDI",
+                            "BEL",
+                            "BEN",
+                            "BES",
+                            "BFA",
+                            "BGD",
+                            "BGR",
+                            "BHR",
+                            "BHS",
+                            "BIH",
+                            "BLM",
+                            "BLR",
+                            "BLZ",
+                            "BMU",
+                            "BOL",
+                            "BRA",
+                            "BRB",
+                            "BRN",
+                            "BTN",
+                            "BVT",
+                            "BWA",
+                            "CAF",
+                            "CAN",
+                            "CCK",
+                            "CHE",
+                            "CHL",
+                            "CHN",
+                            "CIV",
+                            "CMR",
+                            "COD",
+                            "COG",
+                            "COK",
+                            "COL",
+                            "COM",
+                            "CPV",
+                            "CRI",
+                            "CUB",
+                            "CUW",
+                            "CXR",
+                            "CYM",
+                            "CYP",
+                            "CZE",
+                            "DEU",
+                            "DJI",
+                            "DMA",
+                            "DNK",
+                            "DOM",
+                            "DZA",
+                            "ECU",
+                            "EGY",
+                            "ERI",
+                            "ESH",
+                            "ESP",
+                            "EST",
+                            "ETH",
+                            "FIN",
+                            "FJI",
+                            "FLK",
+                            "FRA",
+                            "FRO",
+                            "FSM",
+                            "GAB",
+                            "GBR",
+                            "GEO",
+                            "GGY",
+                            "GHA",
+                            "GIB",
+                            "GIN",
+                            "GLP",
+                            "GMB",
+                            "GNB",
+                            "GNQ",
+                            "GRC",
+                            "GRD",
+                            "GRL",
+                            "GTM",
+                            "GUF",
+                            "GUM",
+                            "GUY",
+                            "HKG",
+                            "HMD",
+                            "HND",
+                            "HRV",
+                            "HTI",
+                            "HUN",
+                            "IDN",
+                            "IMN",
+                            "IND",
+                            "IOT",
+                            "IRL",
+                            "IRN",
+                            "IRQ",
+                            "ISL",
+                            "ISR",
+                            "ITA",
+                            "JAM",
+                            "JEY",
+                            "JOR",
+                            "JPN",
+                            "KAZ",
+                            "KEN",
+                            "KGZ",
+                            "KHM",
+                            "KIR",
+                            "KNA",
+                            "KOR",
+                            "KWT",
+                            "LAO",
+                            "LBN",
+                            "LBR",
+                            "LBY",
+                            "LCA",
+                            "LIE",
+                            "LKA",
+                            "LSO",
+                            "LTU",
+                            "LUX",
+                            "LVA",
+                            "MAC",
+                            "MAF",
+                            "MAR",
+                            "MCO",
+                            "MDA",
+                            "MDG",
+                            "MDV",
+                            "MEX",
+                            "MHL",
+                            "MKD",
+                            "MLI",
+                            "MLT",
+                            "MMR",
+                            "MNE",
+                            "MNG",
+                            "MNP",
+                            "MOZ",
+                            "MRT",
+                            "MSR",
+                            "MTQ",
+                            "MUS",
+                            "MWI",
+                            "MYS",
+                            "MYT",
+                            "NAM",
+                            "NCL",
+                            "NER",
+                            "NFK",
+                            "NGA",
+                            "NIC",
+                            "NIU",
+                            "NLD",
+                            "NOR",
+                            "NPL",
+                            "NRU",
+                            "NZL",
+                            "OMN",
+                            "PAK",
+                            "PAN",
+                            "PCN",
+                            "PER",
+                            "PHL",
+                            "PLW",
+                            "PNG",
+                            "POL",
+                            "PRI",
+                            "PRK",
+                            "PRT",
+                            "PRY",
+                            "PSE",
+                            "PYF",
+                            "QAT",
+                            "REU",
+                            "ROU",
+                            "RUS",
+                            "RWA",
+                            "SAU",
+                            "SDN",
+                            "SEN",
+                            "SGP",
+                            "SGS",
+                            "SHN",
+                            "SJM",
+                            "SLB",
+                            "SLE",
+                            "SLV",
+                            "SMR",
+                            "SOM",
+                            "SPM",
+                            "SRB",
+                            "SSD",
+                            "STP",
+                            "SUR",
+                            "SVK",
+                            "SVN",
+                            "SWE",
+                            "SWZ",
+                            "SXM",
+                            "SYC",
+                            "SYR",
+                            "TCA",
+                            "TCD",
+                            "TGO",
+                            "THA",
+                            "TJK",
+                            "TKL",
+                            "TKM",
+                            "TLS",
+                            "TON",
+                            "TTO",
+                            "TUN",
+                            "TUR",
+                            "TUV",
+                            "TWN",
+                            "TZA",
+                            "UGA",
+                            "UKR",
+                            "UMI",
+                            "URY",
+                            "USA",
+                            "UZB",
+                            "VAT",
+                            "VCT",
+                            "VEN",
+                            "VGB",
+                            "VIR",
+                            "VNM",
+                            "VUT",
+                            "WLF",
+                            "WSM",
+                            "YEM",
+                            "ZAF",
+                            "ZMB",
+                            "ZWE"
+                          ]
+                        },
+                        "administrative_area": {
+                          "type": "string",
+                          "description": "State / Province / Region"
+                        },
+                        "sub_administrative_area": {
+                          "type": "string",
+                          "description": "County / District"
+                        },
+                        "locality": {
+                          "type": "string",
+                          "description": "City / Town"
+                        },
+                        "postal_code": {
+                          "type": "string",
+                          "description": "Postal Code / Zip Code"
+                        },
+                        "thoroughfare": {
+                          "type": "string",
+                          "description": "Street Address"
+                        },
+                        "premise": {
+                          "type": "string",
+                          "description": "Apartment / Suite / Box number etc"
+                        },
+                        "sub_premise": {
+                          "type": "string",
+                          "description": "Floor # / Room # / Building label etc"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
     "vendor": {
       "type": "object",
       "required": [
@@ -5391,13 +8980,15 @@ Creates a new unit
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |label|body|string|true|Label for the entity|
-|raw_serial_number|body|string|false|Serial number of the unit with prefix stripped|
-|tenant_part_number|body|string|false|Identifier set by the tenant|
+|raw_serial_number|body|string\|null|false|Serial number of the unit with prefix stripped|
+|tenant_part_number|body|string\|null|false|Identifier set by the tenant|
 |part|body|object|true|none|
 |» part_id|body|string|true|Unique identifier|
 |current_status|body|object|true|Defines the properties for a status|
 |» status|body|string|true|A Custom label for the status|
 |» category|body|string|true|The classifier for the statues|
+|» description|body|string\|null|false|A description for the status|
+|» order|body|number|false|Order status appears when listing|
 |current_location|body|object|true|none|
 |» location_id|body|object|true|Defines the properties for a part unit|
 |»» location_id|body|string|false|The identifier for the location|
@@ -5418,9 +9009,101 @@ Creates a new unit
 |»»» thoroughfare|body|string|true|Street Address|
 |»»» premise|body|string|false|Apartment / Suite / Box number etc|
 |»»» sub_premise|body|string|false|Floor # / Room # / Building label etc|
-|»» vendor|body|object|false|none|
-|»»» vendor_id|body|string|true|unique id|
-|»»» part_number|body|string\|null|false|The part number supplied by the vendor|
+|»» resource|body|any|false|none|
+|»»» *anonymous*|body|null|false|none|
+|»»» *anonymous*|body|object|false|Defines the properties for a resource|
+|»»»» resource_id|body|string|false|The identifier for the resource|
+|»»»» entity_id|body|string|true|Customer identifier|
+|»»»» entity_type|body|string|true|none|
+|»»»» label|body|string|true|Label for the entity|
+|»»»» slug|body|string|false|Slug for the entity (Auto-generated from the label)|
+|»»»» created|body|string(date-time)|true|Date the entity was created|
+|»»»» updated|body|string(date-time)|true|Last date the entity was updated|
+|»»»» resource_type|body|string|true|Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased|
+|»»»» meta|body|object|false|Data for the resource as a key value pair|
+|»»»»» **additionalProperties**|body|string|false|none|
+|»»»» location|body|object|true|Defines the properties for a part unit|
+|»»»»» location_id|body|string|false|The identifier for the location|
+|»»»»» entity_id|body|string|true|Customer identifier|
+|»»»»» entity_type|body|string|true|none|
+|»»»»» label|body|string|true|Label for the entity|
+|»»»»» slug|body|string|false|Slug for the entity (Auto-generated from the label)|
+|»»»»» created|body|string(date-time)|true|Date the entity was created|
+|»»»»» updated|body|string(date-time)|true|Last date the entity was updated|
+|»»»»» location_type|body|string|true|The type of location|
+|»»»»» formatted_address|body|string|false|Address formatted for the where region the location exists in|
+|»»»»» address|body|object|true|xNAL address for the location|
+|»»»»»» country|body|string|true|Three Letter ISO country code|
+|»»»»»» administrative_area|body|string|true|State / Province / Region|
+|»»»»»» sub_administrative_area|body|string|false|County / District|
+|»»»»»» locality|body|string|true|City / Town|
+|»»»»»» postal_code|body|string|true|Postal Code / Zip Code|
+|»»»»»» thoroughfare|body|string|true|Street Address|
+|»»»»»» premise|body|string|false|Apartment / Suite / Box number etc|
+|»»»»»» sub_premise|body|string|false|Floor # / Room # / Building label etc|
+|»»»»» *anonymous*|body|object|false|Defines the properties for a resource|
+|»»»»»» resource_id|body|string|false|The identifier for the resource|
+|»»»»»» entity_id|body|string|true|Customer identifier|
+|»»»»»» entity_type|body|string|true|none|
+|»»»»»» label|body|string|true|Label for the entity|
+|»»»»»» slug|body|string|false|Slug for the entity (Auto-generated from the label)|
+|»»»»»» created|body|string(date-time)|true|Date the entity was created|
+|»»»»»» updated|body|string(date-time)|true|Last date the entity was updated|
+|»»»»»» resource_type|body|string|true|Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased|
+|»»»»»» meta|body|object|false|Data for the resource as a key value pair|
+|»»»»»»» **additionalProperties**|body|string|false|none|
+|»»»»»» location|body|object|true|Defines the properties for a part unit|
+|»»»»»»» location_id|body|string|false|The identifier for the location|
+|»»»»»»» entity_id|body|string|true|Customer identifier|
+|»»»»»»» entity_type|body|string|true|none|
+|»»»»»»» label|body|string|true|Label for the entity|
+|»»»»»»» slug|body|string|false|Slug for the entity (Auto-generated from the label)|
+|»»»»»»» created|body|string(date-time)|true|Date the entity was created|
+|»»»»»»» updated|body|string(date-time)|true|Last date the entity was updated|
+|»»»»»»» location_type|body|string|true|The type of location|
+|»»»»»»» formatted_address|body|string|false|Address formatted for the where region the location exists in|
+|»»»»»»» address|body|object|true|xNAL address for the location|
+|»»»»»»»» country|body|string|true|Three Letter ISO country code|
+|»»»»»»»» administrative_area|body|string|true|State / Province / Region|
+|»»»»»»»» sub_administrative_area|body|string|false|County / District|
+|»»»»»»»» locality|body|string|true|City / Town|
+|»»»»»»»» postal_code|body|string|true|Postal Code / Zip Code|
+|»»»»»»»» thoroughfare|body|string|true|Street Address|
+|»»»»»»»» premise|body|string|false|Apartment / Suite / Box number etc|
+|»»»»»»»» sub_premise|body|string|false|Floor # / Room # / Building label etc|
+|»»»»»»» resource|body|object|true|Defines the properties for a resource|
+|»»»»»»»» resource_id|body|string|false|The identifier for the resource|
+|»»»»»»»» entity_id|body|string|true|Customer identifier|
+|»»»»»»»» entity_type|body|string|true|none|
+|»»»»»»»» label|body|string|true|Label for the entity|
+|»»»»»»»» slug|body|string|false|Slug for the entity (Auto-generated from the label)|
+|»»»»»»»» created|body|string(date-time)|true|Date the entity was created|
+|»»»»»»»» updated|body|string(date-time)|true|Last date the entity was updated|
+|»»»»»»»» resource_type|body|string|true|Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased|
+|»»»»»»»» meta|body|object|false|Data for the resource as a key value pair|
+|»»»»»»»»» **additionalProperties**|body|string|false|none|
+|»»»»»»»» location|body|object|true|Defines the properties for a part unit|
+|»»»»»»»»» location_id|body|string|false|The identifier for the location|
+|»»»»»»»»» entity_id|body|string|true|Customer identifier|
+|»»»»»»»»» entity_type|body|string|true|none|
+|»»»»»»»»» label|body|string|true|Label for the entity|
+|»»»»»»»»» slug|body|string|false|Slug for the entity (Auto-generated from the label)|
+|»»»»»»»»» created|body|string(date-time)|true|Date the entity was created|
+|»»»»»»»»» updated|body|string(date-time)|true|Last date the entity was updated|
+|»»»»»»»»» location_type|body|string|true|The type of location|
+|»»»»»»»»» formatted_address|body|string|false|Address formatted for the where region the location exists in|
+|»»»»»»»»» address|body|object|true|xNAL address for the location|
+|»»»»»»»»»» country|body|string|true|Three Letter ISO country code|
+|»»»»»»»»»» administrative_area|body|string|true|State / Province / Region|
+|»»»»»»»»»» sub_administrative_area|body|string|false|County / District|
+|»»»»»»»»»» locality|body|string|true|City / Town|
+|»»»»»»»»»» postal_code|body|string|true|Postal Code / Zip Code|
+|»»»»»»»»»» thoroughfare|body|string|true|Street Address|
+|»»»»»»»»»» premise|body|string|false|Apartment / Suite / Box number etc|
+|»»»»»»»»»» sub_premise|body|string|false|Floor # / Room # / Building label etc|
+|»»»»»»»»» vendor|body|object|false|none|
+|»»»»»»»»»» vendor_id|body|string|true|unique id|
+|»»»»»»»»»» part_number|body|string\|null|false|The part number supplied by the vendor|
 
 #### Enumerated Values
 
@@ -5685,6 +9368,768 @@ Creates a new unit
 |»»» country|ZAF|
 |»»» country|ZMB|
 |»»» country|ZWE|
+|»»»» entity_type|RES|
+|»»»»» entity_type|LOC|
+|»»»»» location_type|warehouse|
+|»»»»» location_type|facility|
+|»»»»» location_type|other|
+|»»»»»» country|ABW|
+|»»»»»» country|AFG|
+|»»»»»» country|AGO|
+|»»»»»» country|AIA|
+|»»»»»» country|ALA|
+|»»»»»» country|ALB|
+|»»»»»» country|AND|
+|»»»»»» country|ARE|
+|»»»»»» country|ARG|
+|»»»»»» country|ARM|
+|»»»»»» country|ASM|
+|»»»»»» country|ATA|
+|»»»»»» country|ATF|
+|»»»»»» country|ATG|
+|»»»»»» country|AUS|
+|»»»»»» country|AUT|
+|»»»»»» country|AZE|
+|»»»»»» country|BDI|
+|»»»»»» country|BEL|
+|»»»»»» country|BEN|
+|»»»»»» country|BES|
+|»»»»»» country|BFA|
+|»»»»»» country|BGD|
+|»»»»»» country|BGR|
+|»»»»»» country|BHR|
+|»»»»»» country|BHS|
+|»»»»»» country|BIH|
+|»»»»»» country|BLM|
+|»»»»»» country|BLR|
+|»»»»»» country|BLZ|
+|»»»»»» country|BMU|
+|»»»»»» country|BOL|
+|»»»»»» country|BRA|
+|»»»»»» country|BRB|
+|»»»»»» country|BRN|
+|»»»»»» country|BTN|
+|»»»»»» country|BVT|
+|»»»»»» country|BWA|
+|»»»»»» country|CAF|
+|»»»»»» country|CAN|
+|»»»»»» country|CCK|
+|»»»»»» country|CHE|
+|»»»»»» country|CHL|
+|»»»»»» country|CHN|
+|»»»»»» country|CIV|
+|»»»»»» country|CMR|
+|»»»»»» country|COD|
+|»»»»»» country|COG|
+|»»»»»» country|COK|
+|»»»»»» country|COL|
+|»»»»»» country|COM|
+|»»»»»» country|CPV|
+|»»»»»» country|CRI|
+|»»»»»» country|CUB|
+|»»»»»» country|CUW|
+|»»»»»» country|CXR|
+|»»»»»» country|CYM|
+|»»»»»» country|CYP|
+|»»»»»» country|CZE|
+|»»»»»» country|DEU|
+|»»»»»» country|DJI|
+|»»»»»» country|DMA|
+|»»»»»» country|DNK|
+|»»»»»» country|DOM|
+|»»»»»» country|DZA|
+|»»»»»» country|ECU|
+|»»»»»» country|EGY|
+|»»»»»» country|ERI|
+|»»»»»» country|ESH|
+|»»»»»» country|ESP|
+|»»»»»» country|EST|
+|»»»»»» country|ETH|
+|»»»»»» country|FIN|
+|»»»»»» country|FJI|
+|»»»»»» country|FLK|
+|»»»»»» country|FRA|
+|»»»»»» country|FRO|
+|»»»»»» country|FSM|
+|»»»»»» country|GAB|
+|»»»»»» country|GBR|
+|»»»»»» country|GEO|
+|»»»»»» country|GGY|
+|»»»»»» country|GHA|
+|»»»»»» country|GIB|
+|»»»»»» country|GIN|
+|»»»»»» country|GLP|
+|»»»»»» country|GMB|
+|»»»»»» country|GNB|
+|»»»»»» country|GNQ|
+|»»»»»» country|GRC|
+|»»»»»» country|GRD|
+|»»»»»» country|GRL|
+|»»»»»» country|GTM|
+|»»»»»» country|GUF|
+|»»»»»» country|GUM|
+|»»»»»» country|GUY|
+|»»»»»» country|HKG|
+|»»»»»» country|HMD|
+|»»»»»» country|HND|
+|»»»»»» country|HRV|
+|»»»»»» country|HTI|
+|»»»»»» country|HUN|
+|»»»»»» country|IDN|
+|»»»»»» country|IMN|
+|»»»»»» country|IND|
+|»»»»»» country|IOT|
+|»»»»»» country|IRL|
+|»»»»»» country|IRN|
+|»»»»»» country|IRQ|
+|»»»»»» country|ISL|
+|»»»»»» country|ISR|
+|»»»»»» country|ITA|
+|»»»»»» country|JAM|
+|»»»»»» country|JEY|
+|»»»»»» country|JOR|
+|»»»»»» country|JPN|
+|»»»»»» country|KAZ|
+|»»»»»» country|KEN|
+|»»»»»» country|KGZ|
+|»»»»»» country|KHM|
+|»»»»»» country|KIR|
+|»»»»»» country|KNA|
+|»»»»»» country|KOR|
+|»»»»»» country|KWT|
+|»»»»»» country|LAO|
+|»»»»»» country|LBN|
+|»»»»»» country|LBR|
+|»»»»»» country|LBY|
+|»»»»»» country|LCA|
+|»»»»»» country|LIE|
+|»»»»»» country|LKA|
+|»»»»»» country|LSO|
+|»»»»»» country|LTU|
+|»»»»»» country|LUX|
+|»»»»»» country|LVA|
+|»»»»»» country|MAC|
+|»»»»»» country|MAF|
+|»»»»»» country|MAR|
+|»»»»»» country|MCO|
+|»»»»»» country|MDA|
+|»»»»»» country|MDG|
+|»»»»»» country|MDV|
+|»»»»»» country|MEX|
+|»»»»»» country|MHL|
+|»»»»»» country|MKD|
+|»»»»»» country|MLI|
+|»»»»»» country|MLT|
+|»»»»»» country|MMR|
+|»»»»»» country|MNE|
+|»»»»»» country|MNG|
+|»»»»»» country|MNP|
+|»»»»»» country|MOZ|
+|»»»»»» country|MRT|
+|»»»»»» country|MSR|
+|»»»»»» country|MTQ|
+|»»»»»» country|MUS|
+|»»»»»» country|MWI|
+|»»»»»» country|MYS|
+|»»»»»» country|MYT|
+|»»»»»» country|NAM|
+|»»»»»» country|NCL|
+|»»»»»» country|NER|
+|»»»»»» country|NFK|
+|»»»»»» country|NGA|
+|»»»»»» country|NIC|
+|»»»»»» country|NIU|
+|»»»»»» country|NLD|
+|»»»»»» country|NOR|
+|»»»»»» country|NPL|
+|»»»»»» country|NRU|
+|»»»»»» country|NZL|
+|»»»»»» country|OMN|
+|»»»»»» country|PAK|
+|»»»»»» country|PAN|
+|»»»»»» country|PCN|
+|»»»»»» country|PER|
+|»»»»»» country|PHL|
+|»»»»»» country|PLW|
+|»»»»»» country|PNG|
+|»»»»»» country|POL|
+|»»»»»» country|PRI|
+|»»»»»» country|PRK|
+|»»»»»» country|PRT|
+|»»»»»» country|PRY|
+|»»»»»» country|PSE|
+|»»»»»» country|PYF|
+|»»»»»» country|QAT|
+|»»»»»» country|REU|
+|»»»»»» country|ROU|
+|»»»»»» country|RUS|
+|»»»»»» country|RWA|
+|»»»»»» country|SAU|
+|»»»»»» country|SDN|
+|»»»»»» country|SEN|
+|»»»»»» country|SGP|
+|»»»»»» country|SGS|
+|»»»»»» country|SHN|
+|»»»»»» country|SJM|
+|»»»»»» country|SLB|
+|»»»»»» country|SLE|
+|»»»»»» country|SLV|
+|»»»»»» country|SMR|
+|»»»»»» country|SOM|
+|»»»»»» country|SPM|
+|»»»»»» country|SRB|
+|»»»»»» country|SSD|
+|»»»»»» country|STP|
+|»»»»»» country|SUR|
+|»»»»»» country|SVK|
+|»»»»»» country|SVN|
+|»»»»»» country|SWE|
+|»»»»»» country|SWZ|
+|»»»»»» country|SXM|
+|»»»»»» country|SYC|
+|»»»»»» country|SYR|
+|»»»»»» country|TCA|
+|»»»»»» country|TCD|
+|»»»»»» country|TGO|
+|»»»»»» country|THA|
+|»»»»»» country|TJK|
+|»»»»»» country|TKL|
+|»»»»»» country|TKM|
+|»»»»»» country|TLS|
+|»»»»»» country|TON|
+|»»»»»» country|TTO|
+|»»»»»» country|TUN|
+|»»»»»» country|TUR|
+|»»»»»» country|TUV|
+|»»»»»» country|TWN|
+|»»»»»» country|TZA|
+|»»»»»» country|UGA|
+|»»»»»» country|UKR|
+|»»»»»» country|UMI|
+|»»»»»» country|URY|
+|»»»»»» country|USA|
+|»»»»»» country|UZB|
+|»»»»»» country|VAT|
+|»»»»»» country|VCT|
+|»»»»»» country|VEN|
+|»»»»»» country|VGB|
+|»»»»»» country|VIR|
+|»»»»»» country|VNM|
+|»»»»»» country|VUT|
+|»»»»»» country|WLF|
+|»»»»»» country|WSM|
+|»»»»»» country|YEM|
+|»»»»»» country|ZAF|
+|»»»»»» country|ZMB|
+|»»»»»» country|ZWE|
+|»»»»»» entity_type|SRES|
+|»»»»»»» entity_type|LOC|
+|»»»»»»» location_type|warehouse|
+|»»»»»»» location_type|facility|
+|»»»»»»» location_type|other|
+|»»»»»»»» country|ABW|
+|»»»»»»»» country|AFG|
+|»»»»»»»» country|AGO|
+|»»»»»»»» country|AIA|
+|»»»»»»»» country|ALA|
+|»»»»»»»» country|ALB|
+|»»»»»»»» country|AND|
+|»»»»»»»» country|ARE|
+|»»»»»»»» country|ARG|
+|»»»»»»»» country|ARM|
+|»»»»»»»» country|ASM|
+|»»»»»»»» country|ATA|
+|»»»»»»»» country|ATF|
+|»»»»»»»» country|ATG|
+|»»»»»»»» country|AUS|
+|»»»»»»»» country|AUT|
+|»»»»»»»» country|AZE|
+|»»»»»»»» country|BDI|
+|»»»»»»»» country|BEL|
+|»»»»»»»» country|BEN|
+|»»»»»»»» country|BES|
+|»»»»»»»» country|BFA|
+|»»»»»»»» country|BGD|
+|»»»»»»»» country|BGR|
+|»»»»»»»» country|BHR|
+|»»»»»»»» country|BHS|
+|»»»»»»»» country|BIH|
+|»»»»»»»» country|BLM|
+|»»»»»»»» country|BLR|
+|»»»»»»»» country|BLZ|
+|»»»»»»»» country|BMU|
+|»»»»»»»» country|BOL|
+|»»»»»»»» country|BRA|
+|»»»»»»»» country|BRB|
+|»»»»»»»» country|BRN|
+|»»»»»»»» country|BTN|
+|»»»»»»»» country|BVT|
+|»»»»»»»» country|BWA|
+|»»»»»»»» country|CAF|
+|»»»»»»»» country|CAN|
+|»»»»»»»» country|CCK|
+|»»»»»»»» country|CHE|
+|»»»»»»»» country|CHL|
+|»»»»»»»» country|CHN|
+|»»»»»»»» country|CIV|
+|»»»»»»»» country|CMR|
+|»»»»»»»» country|COD|
+|»»»»»»»» country|COG|
+|»»»»»»»» country|COK|
+|»»»»»»»» country|COL|
+|»»»»»»»» country|COM|
+|»»»»»»»» country|CPV|
+|»»»»»»»» country|CRI|
+|»»»»»»»» country|CUB|
+|»»»»»»»» country|CUW|
+|»»»»»»»» country|CXR|
+|»»»»»»»» country|CYM|
+|»»»»»»»» country|CYP|
+|»»»»»»»» country|CZE|
+|»»»»»»»» country|DEU|
+|»»»»»»»» country|DJI|
+|»»»»»»»» country|DMA|
+|»»»»»»»» country|DNK|
+|»»»»»»»» country|DOM|
+|»»»»»»»» country|DZA|
+|»»»»»»»» country|ECU|
+|»»»»»»»» country|EGY|
+|»»»»»»»» country|ERI|
+|»»»»»»»» country|ESH|
+|»»»»»»»» country|ESP|
+|»»»»»»»» country|EST|
+|»»»»»»»» country|ETH|
+|»»»»»»»» country|FIN|
+|»»»»»»»» country|FJI|
+|»»»»»»»» country|FLK|
+|»»»»»»»» country|FRA|
+|»»»»»»»» country|FRO|
+|»»»»»»»» country|FSM|
+|»»»»»»»» country|GAB|
+|»»»»»»»» country|GBR|
+|»»»»»»»» country|GEO|
+|»»»»»»»» country|GGY|
+|»»»»»»»» country|GHA|
+|»»»»»»»» country|GIB|
+|»»»»»»»» country|GIN|
+|»»»»»»»» country|GLP|
+|»»»»»»»» country|GMB|
+|»»»»»»»» country|GNB|
+|»»»»»»»» country|GNQ|
+|»»»»»»»» country|GRC|
+|»»»»»»»» country|GRD|
+|»»»»»»»» country|GRL|
+|»»»»»»»» country|GTM|
+|»»»»»»»» country|GUF|
+|»»»»»»»» country|GUM|
+|»»»»»»»» country|GUY|
+|»»»»»»»» country|HKG|
+|»»»»»»»» country|HMD|
+|»»»»»»»» country|HND|
+|»»»»»»»» country|HRV|
+|»»»»»»»» country|HTI|
+|»»»»»»»» country|HUN|
+|»»»»»»»» country|IDN|
+|»»»»»»»» country|IMN|
+|»»»»»»»» country|IND|
+|»»»»»»»» country|IOT|
+|»»»»»»»» country|IRL|
+|»»»»»»»» country|IRN|
+|»»»»»»»» country|IRQ|
+|»»»»»»»» country|ISL|
+|»»»»»»»» country|ISR|
+|»»»»»»»» country|ITA|
+|»»»»»»»» country|JAM|
+|»»»»»»»» country|JEY|
+|»»»»»»»» country|JOR|
+|»»»»»»»» country|JPN|
+|»»»»»»»» country|KAZ|
+|»»»»»»»» country|KEN|
+|»»»»»»»» country|KGZ|
+|»»»»»»»» country|KHM|
+|»»»»»»»» country|KIR|
+|»»»»»»»» country|KNA|
+|»»»»»»»» country|KOR|
+|»»»»»»»» country|KWT|
+|»»»»»»»» country|LAO|
+|»»»»»»»» country|LBN|
+|»»»»»»»» country|LBR|
+|»»»»»»»» country|LBY|
+|»»»»»»»» country|LCA|
+|»»»»»»»» country|LIE|
+|»»»»»»»» country|LKA|
+|»»»»»»»» country|LSO|
+|»»»»»»»» country|LTU|
+|»»»»»»»» country|LUX|
+|»»»»»»»» country|LVA|
+|»»»»»»»» country|MAC|
+|»»»»»»»» country|MAF|
+|»»»»»»»» country|MAR|
+|»»»»»»»» country|MCO|
+|»»»»»»»» country|MDA|
+|»»»»»»»» country|MDG|
+|»»»»»»»» country|MDV|
+|»»»»»»»» country|MEX|
+|»»»»»»»» country|MHL|
+|»»»»»»»» country|MKD|
+|»»»»»»»» country|MLI|
+|»»»»»»»» country|MLT|
+|»»»»»»»» country|MMR|
+|»»»»»»»» country|MNE|
+|»»»»»»»» country|MNG|
+|»»»»»»»» country|MNP|
+|»»»»»»»» country|MOZ|
+|»»»»»»»» country|MRT|
+|»»»»»»»» country|MSR|
+|»»»»»»»» country|MTQ|
+|»»»»»»»» country|MUS|
+|»»»»»»»» country|MWI|
+|»»»»»»»» country|MYS|
+|»»»»»»»» country|MYT|
+|»»»»»»»» country|NAM|
+|»»»»»»»» country|NCL|
+|»»»»»»»» country|NER|
+|»»»»»»»» country|NFK|
+|»»»»»»»» country|NGA|
+|»»»»»»»» country|NIC|
+|»»»»»»»» country|NIU|
+|»»»»»»»» country|NLD|
+|»»»»»»»» country|NOR|
+|»»»»»»»» country|NPL|
+|»»»»»»»» country|NRU|
+|»»»»»»»» country|NZL|
+|»»»»»»»» country|OMN|
+|»»»»»»»» country|PAK|
+|»»»»»»»» country|PAN|
+|»»»»»»»» country|PCN|
+|»»»»»»»» country|PER|
+|»»»»»»»» country|PHL|
+|»»»»»»»» country|PLW|
+|»»»»»»»» country|PNG|
+|»»»»»»»» country|POL|
+|»»»»»»»» country|PRI|
+|»»»»»»»» country|PRK|
+|»»»»»»»» country|PRT|
+|»»»»»»»» country|PRY|
+|»»»»»»»» country|PSE|
+|»»»»»»»» country|PYF|
+|»»»»»»»» country|QAT|
+|»»»»»»»» country|REU|
+|»»»»»»»» country|ROU|
+|»»»»»»»» country|RUS|
+|»»»»»»»» country|RWA|
+|»»»»»»»» country|SAU|
+|»»»»»»»» country|SDN|
+|»»»»»»»» country|SEN|
+|»»»»»»»» country|SGP|
+|»»»»»»»» country|SGS|
+|»»»»»»»» country|SHN|
+|»»»»»»»» country|SJM|
+|»»»»»»»» country|SLB|
+|»»»»»»»» country|SLE|
+|»»»»»»»» country|SLV|
+|»»»»»»»» country|SMR|
+|»»»»»»»» country|SOM|
+|»»»»»»»» country|SPM|
+|»»»»»»»» country|SRB|
+|»»»»»»»» country|SSD|
+|»»»»»»»» country|STP|
+|»»»»»»»» country|SUR|
+|»»»»»»»» country|SVK|
+|»»»»»»»» country|SVN|
+|»»»»»»»» country|SWE|
+|»»»»»»»» country|SWZ|
+|»»»»»»»» country|SXM|
+|»»»»»»»» country|SYC|
+|»»»»»»»» country|SYR|
+|»»»»»»»» country|TCA|
+|»»»»»»»» country|TCD|
+|»»»»»»»» country|TGO|
+|»»»»»»»» country|THA|
+|»»»»»»»» country|TJK|
+|»»»»»»»» country|TKL|
+|»»»»»»»» country|TKM|
+|»»»»»»»» country|TLS|
+|»»»»»»»» country|TON|
+|»»»»»»»» country|TTO|
+|»»»»»»»» country|TUN|
+|»»»»»»»» country|TUR|
+|»»»»»»»» country|TUV|
+|»»»»»»»» country|TWN|
+|»»»»»»»» country|TZA|
+|»»»»»»»» country|UGA|
+|»»»»»»»» country|UKR|
+|»»»»»»»» country|UMI|
+|»»»»»»»» country|URY|
+|»»»»»»»» country|USA|
+|»»»»»»»» country|UZB|
+|»»»»»»»» country|VAT|
+|»»»»»»»» country|VCT|
+|»»»»»»»» country|VEN|
+|»»»»»»»» country|VGB|
+|»»»»»»»» country|VIR|
+|»»»»»»»» country|VNM|
+|»»»»»»»» country|VUT|
+|»»»»»»»» country|WLF|
+|»»»»»»»» country|WSM|
+|»»»»»»»» country|YEM|
+|»»»»»»»» country|ZAF|
+|»»»»»»»» country|ZMB|
+|»»»»»»»» country|ZWE|
+|»»»»»»»» entity_type|RES|
+|»»»»»»»»» entity_type|LOC|
+|»»»»»»»»» location_type|warehouse|
+|»»»»»»»»» location_type|facility|
+|»»»»»»»»» location_type|other|
+|»»»»»»»»»» country|ABW|
+|»»»»»»»»»» country|AFG|
+|»»»»»»»»»» country|AGO|
+|»»»»»»»»»» country|AIA|
+|»»»»»»»»»» country|ALA|
+|»»»»»»»»»» country|ALB|
+|»»»»»»»»»» country|AND|
+|»»»»»»»»»» country|ARE|
+|»»»»»»»»»» country|ARG|
+|»»»»»»»»»» country|ARM|
+|»»»»»»»»»» country|ASM|
+|»»»»»»»»»» country|ATA|
+|»»»»»»»»»» country|ATF|
+|»»»»»»»»»» country|ATG|
+|»»»»»»»»»» country|AUS|
+|»»»»»»»»»» country|AUT|
+|»»»»»»»»»» country|AZE|
+|»»»»»»»»»» country|BDI|
+|»»»»»»»»»» country|BEL|
+|»»»»»»»»»» country|BEN|
+|»»»»»»»»»» country|BES|
+|»»»»»»»»»» country|BFA|
+|»»»»»»»»»» country|BGD|
+|»»»»»»»»»» country|BGR|
+|»»»»»»»»»» country|BHR|
+|»»»»»»»»»» country|BHS|
+|»»»»»»»»»» country|BIH|
+|»»»»»»»»»» country|BLM|
+|»»»»»»»»»» country|BLR|
+|»»»»»»»»»» country|BLZ|
+|»»»»»»»»»» country|BMU|
+|»»»»»»»»»» country|BOL|
+|»»»»»»»»»» country|BRA|
+|»»»»»»»»»» country|BRB|
+|»»»»»»»»»» country|BRN|
+|»»»»»»»»»» country|BTN|
+|»»»»»»»»»» country|BVT|
+|»»»»»»»»»» country|BWA|
+|»»»»»»»»»» country|CAF|
+|»»»»»»»»»» country|CAN|
+|»»»»»»»»»» country|CCK|
+|»»»»»»»»»» country|CHE|
+|»»»»»»»»»» country|CHL|
+|»»»»»»»»»» country|CHN|
+|»»»»»»»»»» country|CIV|
+|»»»»»»»»»» country|CMR|
+|»»»»»»»»»» country|COD|
+|»»»»»»»»»» country|COG|
+|»»»»»»»»»» country|COK|
+|»»»»»»»»»» country|COL|
+|»»»»»»»»»» country|COM|
+|»»»»»»»»»» country|CPV|
+|»»»»»»»»»» country|CRI|
+|»»»»»»»»»» country|CUB|
+|»»»»»»»»»» country|CUW|
+|»»»»»»»»»» country|CXR|
+|»»»»»»»»»» country|CYM|
+|»»»»»»»»»» country|CYP|
+|»»»»»»»»»» country|CZE|
+|»»»»»»»»»» country|DEU|
+|»»»»»»»»»» country|DJI|
+|»»»»»»»»»» country|DMA|
+|»»»»»»»»»» country|DNK|
+|»»»»»»»»»» country|DOM|
+|»»»»»»»»»» country|DZA|
+|»»»»»»»»»» country|ECU|
+|»»»»»»»»»» country|EGY|
+|»»»»»»»»»» country|ERI|
+|»»»»»»»»»» country|ESH|
+|»»»»»»»»»» country|ESP|
+|»»»»»»»»»» country|EST|
+|»»»»»»»»»» country|ETH|
+|»»»»»»»»»» country|FIN|
+|»»»»»»»»»» country|FJI|
+|»»»»»»»»»» country|FLK|
+|»»»»»»»»»» country|FRA|
+|»»»»»»»»»» country|FRO|
+|»»»»»»»»»» country|FSM|
+|»»»»»»»»»» country|GAB|
+|»»»»»»»»»» country|GBR|
+|»»»»»»»»»» country|GEO|
+|»»»»»»»»»» country|GGY|
+|»»»»»»»»»» country|GHA|
+|»»»»»»»»»» country|GIB|
+|»»»»»»»»»» country|GIN|
+|»»»»»»»»»» country|GLP|
+|»»»»»»»»»» country|GMB|
+|»»»»»»»»»» country|GNB|
+|»»»»»»»»»» country|GNQ|
+|»»»»»»»»»» country|GRC|
+|»»»»»»»»»» country|GRD|
+|»»»»»»»»»» country|GRL|
+|»»»»»»»»»» country|GTM|
+|»»»»»»»»»» country|GUF|
+|»»»»»»»»»» country|GUM|
+|»»»»»»»»»» country|GUY|
+|»»»»»»»»»» country|HKG|
+|»»»»»»»»»» country|HMD|
+|»»»»»»»»»» country|HND|
+|»»»»»»»»»» country|HRV|
+|»»»»»»»»»» country|HTI|
+|»»»»»»»»»» country|HUN|
+|»»»»»»»»»» country|IDN|
+|»»»»»»»»»» country|IMN|
+|»»»»»»»»»» country|IND|
+|»»»»»»»»»» country|IOT|
+|»»»»»»»»»» country|IRL|
+|»»»»»»»»»» country|IRN|
+|»»»»»»»»»» country|IRQ|
+|»»»»»»»»»» country|ISL|
+|»»»»»»»»»» country|ISR|
+|»»»»»»»»»» country|ITA|
+|»»»»»»»»»» country|JAM|
+|»»»»»»»»»» country|JEY|
+|»»»»»»»»»» country|JOR|
+|»»»»»»»»»» country|JPN|
+|»»»»»»»»»» country|KAZ|
+|»»»»»»»»»» country|KEN|
+|»»»»»»»»»» country|KGZ|
+|»»»»»»»»»» country|KHM|
+|»»»»»»»»»» country|KIR|
+|»»»»»»»»»» country|KNA|
+|»»»»»»»»»» country|KOR|
+|»»»»»»»»»» country|KWT|
+|»»»»»»»»»» country|LAO|
+|»»»»»»»»»» country|LBN|
+|»»»»»»»»»» country|LBR|
+|»»»»»»»»»» country|LBY|
+|»»»»»»»»»» country|LCA|
+|»»»»»»»»»» country|LIE|
+|»»»»»»»»»» country|LKA|
+|»»»»»»»»»» country|LSO|
+|»»»»»»»»»» country|LTU|
+|»»»»»»»»»» country|LUX|
+|»»»»»»»»»» country|LVA|
+|»»»»»»»»»» country|MAC|
+|»»»»»»»»»» country|MAF|
+|»»»»»»»»»» country|MAR|
+|»»»»»»»»»» country|MCO|
+|»»»»»»»»»» country|MDA|
+|»»»»»»»»»» country|MDG|
+|»»»»»»»»»» country|MDV|
+|»»»»»»»»»» country|MEX|
+|»»»»»»»»»» country|MHL|
+|»»»»»»»»»» country|MKD|
+|»»»»»»»»»» country|MLI|
+|»»»»»»»»»» country|MLT|
+|»»»»»»»»»» country|MMR|
+|»»»»»»»»»» country|MNE|
+|»»»»»»»»»» country|MNG|
+|»»»»»»»»»» country|MNP|
+|»»»»»»»»»» country|MOZ|
+|»»»»»»»»»» country|MRT|
+|»»»»»»»»»» country|MSR|
+|»»»»»»»»»» country|MTQ|
+|»»»»»»»»»» country|MUS|
+|»»»»»»»»»» country|MWI|
+|»»»»»»»»»» country|MYS|
+|»»»»»»»»»» country|MYT|
+|»»»»»»»»»» country|NAM|
+|»»»»»»»»»» country|NCL|
+|»»»»»»»»»» country|NER|
+|»»»»»»»»»» country|NFK|
+|»»»»»»»»»» country|NGA|
+|»»»»»»»»»» country|NIC|
+|»»»»»»»»»» country|NIU|
+|»»»»»»»»»» country|NLD|
+|»»»»»»»»»» country|NOR|
+|»»»»»»»»»» country|NPL|
+|»»»»»»»»»» country|NRU|
+|»»»»»»»»»» country|NZL|
+|»»»»»»»»»» country|OMN|
+|»»»»»»»»»» country|PAK|
+|»»»»»»»»»» country|PAN|
+|»»»»»»»»»» country|PCN|
+|»»»»»»»»»» country|PER|
+|»»»»»»»»»» country|PHL|
+|»»»»»»»»»» country|PLW|
+|»»»»»»»»»» country|PNG|
+|»»»»»»»»»» country|POL|
+|»»»»»»»»»» country|PRI|
+|»»»»»»»»»» country|PRK|
+|»»»»»»»»»» country|PRT|
+|»»»»»»»»»» country|PRY|
+|»»»»»»»»»» country|PSE|
+|»»»»»»»»»» country|PYF|
+|»»»»»»»»»» country|QAT|
+|»»»»»»»»»» country|REU|
+|»»»»»»»»»» country|ROU|
+|»»»»»»»»»» country|RUS|
+|»»»»»»»»»» country|RWA|
+|»»»»»»»»»» country|SAU|
+|»»»»»»»»»» country|SDN|
+|»»»»»»»»»» country|SEN|
+|»»»»»»»»»» country|SGP|
+|»»»»»»»»»» country|SGS|
+|»»»»»»»»»» country|SHN|
+|»»»»»»»»»» country|SJM|
+|»»»»»»»»»» country|SLB|
+|»»»»»»»»»» country|SLE|
+|»»»»»»»»»» country|SLV|
+|»»»»»»»»»» country|SMR|
+|»»»»»»»»»» country|SOM|
+|»»»»»»»»»» country|SPM|
+|»»»»»»»»»» country|SRB|
+|»»»»»»»»»» country|SSD|
+|»»»»»»»»»» country|STP|
+|»»»»»»»»»» country|SUR|
+|»»»»»»»»»» country|SVK|
+|»»»»»»»»»» country|SVN|
+|»»»»»»»»»» country|SWE|
+|»»»»»»»»»» country|SWZ|
+|»»»»»»»»»» country|SXM|
+|»»»»»»»»»» country|SYC|
+|»»»»»»»»»» country|SYR|
+|»»»»»»»»»» country|TCA|
+|»»»»»»»»»» country|TCD|
+|»»»»»»»»»» country|TGO|
+|»»»»»»»»»» country|THA|
+|»»»»»»»»»» country|TJK|
+|»»»»»»»»»» country|TKL|
+|»»»»»»»»»» country|TKM|
+|»»»»»»»»»» country|TLS|
+|»»»»»»»»»» country|TON|
+|»»»»»»»»»» country|TTO|
+|»»»»»»»»»» country|TUN|
+|»»»»»»»»»» country|TUR|
+|»»»»»»»»»» country|TUV|
+|»»»»»»»»»» country|TWN|
+|»»»»»»»»»» country|TZA|
+|»»»»»»»»»» country|UGA|
+|»»»»»»»»»» country|UKR|
+|»»»»»»»»»» country|UMI|
+|»»»»»»»»»» country|URY|
+|»»»»»»»»»» country|USA|
+|»»»»»»»»»» country|UZB|
+|»»»»»»»»»» country|VAT|
+|»»»»»»»»»» country|VCT|
+|»»»»»»»»»» country|VEN|
+|»»»»»»»»»» country|VGB|
+|»»»»»»»»»» country|VIR|
+|»»»»»»»»»» country|VNM|
+|»»»»»»»»»» country|VUT|
+|»»»»»»»»»» country|WLF|
+|»»»»»»»»»» country|WSM|
+|»»»»»»»»»» country|YEM|
+|»»»»»»»»»» country|ZAF|
+|»»»»»»»»»» country|ZMB|
+|»»»»»»»»»» country|ZWE|
 
 > Example responses
 
@@ -5740,15 +10185,18 @@ Creates a new unit
     },
     "serial_number": {
       "type": "string",
+      "nullable": true,
       "description": "Serial number of the unit with prefix stripped",
       "readOnly": true
     },
     "raw_serial_number": {
       "type": "string",
+      "nullable": true,
       "description": "Serial number of the unit"
     },
     "tenant_part_number": {
       "type": "string",
+      "nullable": true,
       "description": "Identifier set by the tenant"
     },
     "manufacturer": {
@@ -5987,7 +10435,10 @@ Creates a new unit
               "deprecated": true,
               "x-patternProperties": {
                 "^[A-Za-z][A-Za-z0-9_]*$": {
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 }
               }
             },
@@ -6020,6 +10471,15 @@ Creates a new unit
                       "CANCELLED",
                       "BLOCKED"
                     ]
+                  },
+                  "description": {
+                    "type": "string",
+                    "nullable": true,
+                    "description": "A description for the status"
+                  },
+                  "order": {
+                    "type": "number",
+                    "description": "Order status appears when listing"
                   }
                 }
               }
@@ -7193,7 +11653,10 @@ Creates a new unit
           "deprecated": true,
           "x-patternProperties": {
             "^[A-Za-z][A-Za-z0-9_]*$": {
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             }
           }
         },
@@ -7226,6 +11689,15 @@ Creates a new unit
                   "CANCELLED",
                   "BLOCKED"
                 ]
+              },
+              "description": {
+                "type": "string",
+                "nullable": true,
+                "description": "A description for the status"
+              },
+              "order": {
+                "type": "number",
+                "description": "Order status appears when listing"
               }
             }
           }
@@ -7976,6 +12448,1337 @@ Creates a new unit
           }
         }
       }
+    },
+    "resource": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "description": "Defines the properties for a resource",
+          "additionalProperties": false,
+          "required": [
+            "label",
+            "entity_id",
+            "entity_type",
+            "created",
+            "updated",
+            "resource_type",
+            "location"
+          ],
+          "properties": {
+            "resource_id": {
+              "description": "The identifier for the resource",
+              "type": "string",
+              "readOnly": true,
+              "pattern": "^[0-9a-zA-Z-_]+$"
+            },
+            "entity_id": {
+              "x-no-api-doc": true,
+              "type": "string",
+              "description": "Customer identifier",
+              "readOnly": true,
+              "pattern": "^[0-9a-zA-Z-_]+$"
+            },
+            "entity_type": {
+              "x-no-api-doc": true,
+              "enum": [
+                "RES"
+              ]
+            },
+            "label": {
+              "type": "string",
+              "description": "Label for the entity"
+            },
+            "slug": {
+              "type": "string",
+              "description": "Slug for the entity (Auto-generated from the label)",
+              "readOnly": true,
+              "deprecated": true,
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+            },
+            "created": {
+              "description": "Date the entity was created",
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true
+            },
+            "updated": {
+              "description": "Last date the entity was updated",
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true
+            },
+            "resource_type": {
+              "type": "string",
+              "description": "Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased",
+              "pattern": "^[a-z][0-9a-zA-Z-]+$"
+            },
+            "meta": {
+              "type": "object",
+              "description": "Data for the resource as a key value pair",
+              "additionalProperties": {
+                "type": "string"
+              },
+              "propertyNames": {
+                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+              }
+            },
+            "location": {
+              "type": "object",
+              "description": "Defines the properties for a part unit",
+              "additionalProperties": false,
+              "required": [
+                "label",
+                "entity_id",
+                "entity_type",
+                "created",
+                "updated",
+                "location_type",
+                "address"
+              ],
+              "properties": {
+                "location_id": {
+                  "description": "The identifier for the location",
+                  "type": "string",
+                  "readOnly": true,
+                  "pattern": "^[0-9a-zA-Z-_]+$"
+                },
+                "entity_id": {
+                  "x-no-api-doc": true,
+                  "type": "string",
+                  "description": "Customer identifier",
+                  "readOnly": true,
+                  "pattern": "^[0-9a-zA-Z-_]+$"
+                },
+                "entity_type": {
+                  "x-no-api-doc": true,
+                  "enum": [
+                    "LOC"
+                  ]
+                },
+                "label": {
+                  "type": "string",
+                  "description": "Label for the entity"
+                },
+                "slug": {
+                  "type": "string",
+                  "description": "Slug for the entity (Auto-generated from the label)",
+                  "readOnly": true,
+                  "deprecated": true,
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                },
+                "created": {
+                  "description": "Date the entity was created",
+                  "type": "string",
+                  "format": "date-time",
+                  "readOnly": true
+                },
+                "updated": {
+                  "description": "Last date the entity was updated",
+                  "type": "string",
+                  "format": "date-time",
+                  "readOnly": true
+                },
+                "location_type": {
+                  "type": "string",
+                  "description": "The type of location",
+                  "enum": [
+                    "warehouse",
+                    "facility",
+                    "other"
+                  ]
+                },
+                "formatted_address": {
+                  "type": "string",
+                  "readOnly": true,
+                  "description": "Address formatted for the where region the location exists in"
+                },
+                "address": {
+                  "type": "object",
+                  "required": [
+                    "country",
+                    "administrative_area",
+                    "locality",
+                    "postal_code",
+                    "thoroughfare"
+                  ],
+                  "description": "xNAL address for the location ",
+                  "properties": {
+                    "country": {
+                      "type": "string",
+                      "description": "Three Letter ISO country code",
+                      "enum": [
+                        "ABW",
+                        "AFG",
+                        "AGO",
+                        "AIA",
+                        "ALA",
+                        "ALB",
+                        "AND",
+                        "ARE",
+                        "ARG",
+                        "ARM",
+                        "ASM",
+                        "ATA",
+                        "ATF",
+                        "ATG",
+                        "AUS",
+                        "AUT",
+                        "AZE",
+                        "BDI",
+                        "BEL",
+                        "BEN",
+                        "BES",
+                        "BFA",
+                        "BGD",
+                        "BGR",
+                        "BHR",
+                        "BHS",
+                        "BIH",
+                        "BLM",
+                        "BLR",
+                        "BLZ",
+                        "BMU",
+                        "BOL",
+                        "BRA",
+                        "BRB",
+                        "BRN",
+                        "BTN",
+                        "BVT",
+                        "BWA",
+                        "CAF",
+                        "CAN",
+                        "CCK",
+                        "CHE",
+                        "CHL",
+                        "CHN",
+                        "CIV",
+                        "CMR",
+                        "COD",
+                        "COG",
+                        "COK",
+                        "COL",
+                        "COM",
+                        "CPV",
+                        "CRI",
+                        "CUB",
+                        "CUW",
+                        "CXR",
+                        "CYM",
+                        "CYP",
+                        "CZE",
+                        "DEU",
+                        "DJI",
+                        "DMA",
+                        "DNK",
+                        "DOM",
+                        "DZA",
+                        "ECU",
+                        "EGY",
+                        "ERI",
+                        "ESH",
+                        "ESP",
+                        "EST",
+                        "ETH",
+                        "FIN",
+                        "FJI",
+                        "FLK",
+                        "FRA",
+                        "FRO",
+                        "FSM",
+                        "GAB",
+                        "GBR",
+                        "GEO",
+                        "GGY",
+                        "GHA",
+                        "GIB",
+                        "GIN",
+                        "GLP",
+                        "GMB",
+                        "GNB",
+                        "GNQ",
+                        "GRC",
+                        "GRD",
+                        "GRL",
+                        "GTM",
+                        "GUF",
+                        "GUM",
+                        "GUY",
+                        "HKG",
+                        "HMD",
+                        "HND",
+                        "HRV",
+                        "HTI",
+                        "HUN",
+                        "IDN",
+                        "IMN",
+                        "IND",
+                        "IOT",
+                        "IRL",
+                        "IRN",
+                        "IRQ",
+                        "ISL",
+                        "ISR",
+                        "ITA",
+                        "JAM",
+                        "JEY",
+                        "JOR",
+                        "JPN",
+                        "KAZ",
+                        "KEN",
+                        "KGZ",
+                        "KHM",
+                        "KIR",
+                        "KNA",
+                        "KOR",
+                        "KWT",
+                        "LAO",
+                        "LBN",
+                        "LBR",
+                        "LBY",
+                        "LCA",
+                        "LIE",
+                        "LKA",
+                        "LSO",
+                        "LTU",
+                        "LUX",
+                        "LVA",
+                        "MAC",
+                        "MAF",
+                        "MAR",
+                        "MCO",
+                        "MDA",
+                        "MDG",
+                        "MDV",
+                        "MEX",
+                        "MHL",
+                        "MKD",
+                        "MLI",
+                        "MLT",
+                        "MMR",
+                        "MNE",
+                        "MNG",
+                        "MNP",
+                        "MOZ",
+                        "MRT",
+                        "MSR",
+                        "MTQ",
+                        "MUS",
+                        "MWI",
+                        "MYS",
+                        "MYT",
+                        "NAM",
+                        "NCL",
+                        "NER",
+                        "NFK",
+                        "NGA",
+                        "NIC",
+                        "NIU",
+                        "NLD",
+                        "NOR",
+                        "NPL",
+                        "NRU",
+                        "NZL",
+                        "OMN",
+                        "PAK",
+                        "PAN",
+                        "PCN",
+                        "PER",
+                        "PHL",
+                        "PLW",
+                        "PNG",
+                        "POL",
+                        "PRI",
+                        "PRK",
+                        "PRT",
+                        "PRY",
+                        "PSE",
+                        "PYF",
+                        "QAT",
+                        "REU",
+                        "ROU",
+                        "RUS",
+                        "RWA",
+                        "SAU",
+                        "SDN",
+                        "SEN",
+                        "SGP",
+                        "SGS",
+                        "SHN",
+                        "SJM",
+                        "SLB",
+                        "SLE",
+                        "SLV",
+                        "SMR",
+                        "SOM",
+                        "SPM",
+                        "SRB",
+                        "SSD",
+                        "STP",
+                        "SUR",
+                        "SVK",
+                        "SVN",
+                        "SWE",
+                        "SWZ",
+                        "SXM",
+                        "SYC",
+                        "SYR",
+                        "TCA",
+                        "TCD",
+                        "TGO",
+                        "THA",
+                        "TJK",
+                        "TKL",
+                        "TKM",
+                        "TLS",
+                        "TON",
+                        "TTO",
+                        "TUN",
+                        "TUR",
+                        "TUV",
+                        "TWN",
+                        "TZA",
+                        "UGA",
+                        "UKR",
+                        "UMI",
+                        "URY",
+                        "USA",
+                        "UZB",
+                        "VAT",
+                        "VCT",
+                        "VEN",
+                        "VGB",
+                        "VIR",
+                        "VNM",
+                        "VUT",
+                        "WLF",
+                        "WSM",
+                        "YEM",
+                        "ZAF",
+                        "ZMB",
+                        "ZWE"
+                      ]
+                    },
+                    "administrative_area": {
+                      "type": "string",
+                      "description": "State / Province / Region"
+                    },
+                    "sub_administrative_area": {
+                      "type": "string",
+                      "description": "County / District"
+                    },
+                    "locality": {
+                      "type": "string",
+                      "description": "City / Town"
+                    },
+                    "postal_code": {
+                      "type": "string",
+                      "description": "Postal Code / Zip Code"
+                    },
+                    "thoroughfare": {
+                      "type": "string",
+                      "description": "Street Address"
+                    },
+                    "premise": {
+                      "type": "string",
+                      "description": "Apartment / Suite / Box number etc"
+                    },
+                    "sub_premise": {
+                      "type": "string",
+                      "description": "Floor # / Room # / Building label etc"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "description": "Defines the properties for a resource",
+          "additionalProperties": false,
+          "required": [
+            "label",
+            "entity_id",
+            "entity_type",
+            "created",
+            "updated",
+            "resource_type",
+            "location",
+            "resource"
+          ],
+          "properties": {
+            "resource_id": {
+              "description": "The identifier for the resource",
+              "type": "string",
+              "readOnly": true,
+              "pattern": "^[0-9a-zA-Z-_]+$"
+            },
+            "entity_id": {
+              "x-no-api-doc": true,
+              "type": "string",
+              "description": "Customer identifier",
+              "readOnly": true,
+              "pattern": "^[0-9a-zA-Z-_]+$"
+            },
+            "entity_type": {
+              "x-no-api-doc": true,
+              "enum": [
+                "SRES"
+              ]
+            },
+            "label": {
+              "type": "string",
+              "description": "Label for the entity"
+            },
+            "slug": {
+              "type": "string",
+              "description": "Slug for the entity (Auto-generated from the label)",
+              "readOnly": true,
+              "deprecated": true,
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+            },
+            "created": {
+              "description": "Date the entity was created",
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true
+            },
+            "updated": {
+              "description": "Last date the entity was updated",
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true
+            },
+            "resource_type": {
+              "type": "string",
+              "description": "Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased",
+              "pattern": "^[a-z][0-9a-zA-Z-]+$"
+            },
+            "meta": {
+              "type": "object",
+              "description": "Data for the resource as a key value pair",
+              "additionalProperties": {
+                "type": "string"
+              },
+              "propertyNames": {
+                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+              }
+            },
+            "location": {
+              "type": "object",
+              "description": "Defines the properties for a part unit",
+              "additionalProperties": false,
+              "required": [
+                "label",
+                "entity_id",
+                "entity_type",
+                "created",
+                "updated",
+                "location_type",
+                "address"
+              ],
+              "properties": {
+                "location_id": {
+                  "description": "The identifier for the location",
+                  "type": "string",
+                  "readOnly": true,
+                  "pattern": "^[0-9a-zA-Z-_]+$"
+                },
+                "entity_id": {
+                  "x-no-api-doc": true,
+                  "type": "string",
+                  "description": "Customer identifier",
+                  "readOnly": true,
+                  "pattern": "^[0-9a-zA-Z-_]+$"
+                },
+                "entity_type": {
+                  "x-no-api-doc": true,
+                  "enum": [
+                    "LOC"
+                  ]
+                },
+                "label": {
+                  "type": "string",
+                  "description": "Label for the entity"
+                },
+                "slug": {
+                  "type": "string",
+                  "description": "Slug for the entity (Auto-generated from the label)",
+                  "readOnly": true,
+                  "deprecated": true,
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                },
+                "created": {
+                  "description": "Date the entity was created",
+                  "type": "string",
+                  "format": "date-time",
+                  "readOnly": true
+                },
+                "updated": {
+                  "description": "Last date the entity was updated",
+                  "type": "string",
+                  "format": "date-time",
+                  "readOnly": true
+                },
+                "location_type": {
+                  "type": "string",
+                  "description": "The type of location",
+                  "enum": [
+                    "warehouse",
+                    "facility",
+                    "other"
+                  ]
+                },
+                "formatted_address": {
+                  "type": "string",
+                  "readOnly": true,
+                  "description": "Address formatted for the where region the location exists in"
+                },
+                "address": {
+                  "type": "object",
+                  "required": [
+                    "country",
+                    "administrative_area",
+                    "locality",
+                    "postal_code",
+                    "thoroughfare"
+                  ],
+                  "description": "xNAL address for the location ",
+                  "properties": {
+                    "country": {
+                      "type": "string",
+                      "description": "Three Letter ISO country code",
+                      "enum": [
+                        "ABW",
+                        "AFG",
+                        "AGO",
+                        "AIA",
+                        "ALA",
+                        "ALB",
+                        "AND",
+                        "ARE",
+                        "ARG",
+                        "ARM",
+                        "ASM",
+                        "ATA",
+                        "ATF",
+                        "ATG",
+                        "AUS",
+                        "AUT",
+                        "AZE",
+                        "BDI",
+                        "BEL",
+                        "BEN",
+                        "BES",
+                        "BFA",
+                        "BGD",
+                        "BGR",
+                        "BHR",
+                        "BHS",
+                        "BIH",
+                        "BLM",
+                        "BLR",
+                        "BLZ",
+                        "BMU",
+                        "BOL",
+                        "BRA",
+                        "BRB",
+                        "BRN",
+                        "BTN",
+                        "BVT",
+                        "BWA",
+                        "CAF",
+                        "CAN",
+                        "CCK",
+                        "CHE",
+                        "CHL",
+                        "CHN",
+                        "CIV",
+                        "CMR",
+                        "COD",
+                        "COG",
+                        "COK",
+                        "COL",
+                        "COM",
+                        "CPV",
+                        "CRI",
+                        "CUB",
+                        "CUW",
+                        "CXR",
+                        "CYM",
+                        "CYP",
+                        "CZE",
+                        "DEU",
+                        "DJI",
+                        "DMA",
+                        "DNK",
+                        "DOM",
+                        "DZA",
+                        "ECU",
+                        "EGY",
+                        "ERI",
+                        "ESH",
+                        "ESP",
+                        "EST",
+                        "ETH",
+                        "FIN",
+                        "FJI",
+                        "FLK",
+                        "FRA",
+                        "FRO",
+                        "FSM",
+                        "GAB",
+                        "GBR",
+                        "GEO",
+                        "GGY",
+                        "GHA",
+                        "GIB",
+                        "GIN",
+                        "GLP",
+                        "GMB",
+                        "GNB",
+                        "GNQ",
+                        "GRC",
+                        "GRD",
+                        "GRL",
+                        "GTM",
+                        "GUF",
+                        "GUM",
+                        "GUY",
+                        "HKG",
+                        "HMD",
+                        "HND",
+                        "HRV",
+                        "HTI",
+                        "HUN",
+                        "IDN",
+                        "IMN",
+                        "IND",
+                        "IOT",
+                        "IRL",
+                        "IRN",
+                        "IRQ",
+                        "ISL",
+                        "ISR",
+                        "ITA",
+                        "JAM",
+                        "JEY",
+                        "JOR",
+                        "JPN",
+                        "KAZ",
+                        "KEN",
+                        "KGZ",
+                        "KHM",
+                        "KIR",
+                        "KNA",
+                        "KOR",
+                        "KWT",
+                        "LAO",
+                        "LBN",
+                        "LBR",
+                        "LBY",
+                        "LCA",
+                        "LIE",
+                        "LKA",
+                        "LSO",
+                        "LTU",
+                        "LUX",
+                        "LVA",
+                        "MAC",
+                        "MAF",
+                        "MAR",
+                        "MCO",
+                        "MDA",
+                        "MDG",
+                        "MDV",
+                        "MEX",
+                        "MHL",
+                        "MKD",
+                        "MLI",
+                        "MLT",
+                        "MMR",
+                        "MNE",
+                        "MNG",
+                        "MNP",
+                        "MOZ",
+                        "MRT",
+                        "MSR",
+                        "MTQ",
+                        "MUS",
+                        "MWI",
+                        "MYS",
+                        "MYT",
+                        "NAM",
+                        "NCL",
+                        "NER",
+                        "NFK",
+                        "NGA",
+                        "NIC",
+                        "NIU",
+                        "NLD",
+                        "NOR",
+                        "NPL",
+                        "NRU",
+                        "NZL",
+                        "OMN",
+                        "PAK",
+                        "PAN",
+                        "PCN",
+                        "PER",
+                        "PHL",
+                        "PLW",
+                        "PNG",
+                        "POL",
+                        "PRI",
+                        "PRK",
+                        "PRT",
+                        "PRY",
+                        "PSE",
+                        "PYF",
+                        "QAT",
+                        "REU",
+                        "ROU",
+                        "RUS",
+                        "RWA",
+                        "SAU",
+                        "SDN",
+                        "SEN",
+                        "SGP",
+                        "SGS",
+                        "SHN",
+                        "SJM",
+                        "SLB",
+                        "SLE",
+                        "SLV",
+                        "SMR",
+                        "SOM",
+                        "SPM",
+                        "SRB",
+                        "SSD",
+                        "STP",
+                        "SUR",
+                        "SVK",
+                        "SVN",
+                        "SWE",
+                        "SWZ",
+                        "SXM",
+                        "SYC",
+                        "SYR",
+                        "TCA",
+                        "TCD",
+                        "TGO",
+                        "THA",
+                        "TJK",
+                        "TKL",
+                        "TKM",
+                        "TLS",
+                        "TON",
+                        "TTO",
+                        "TUN",
+                        "TUR",
+                        "TUV",
+                        "TWN",
+                        "TZA",
+                        "UGA",
+                        "UKR",
+                        "UMI",
+                        "URY",
+                        "USA",
+                        "UZB",
+                        "VAT",
+                        "VCT",
+                        "VEN",
+                        "VGB",
+                        "VIR",
+                        "VNM",
+                        "VUT",
+                        "WLF",
+                        "WSM",
+                        "YEM",
+                        "ZAF",
+                        "ZMB",
+                        "ZWE"
+                      ]
+                    },
+                    "administrative_area": {
+                      "type": "string",
+                      "description": "State / Province / Region"
+                    },
+                    "sub_administrative_area": {
+                      "type": "string",
+                      "description": "County / District"
+                    },
+                    "locality": {
+                      "type": "string",
+                      "description": "City / Town"
+                    },
+                    "postal_code": {
+                      "type": "string",
+                      "description": "Postal Code / Zip Code"
+                    },
+                    "thoroughfare": {
+                      "type": "string",
+                      "description": "Street Address"
+                    },
+                    "premise": {
+                      "type": "string",
+                      "description": "Apartment / Suite / Box number etc"
+                    },
+                    "sub_premise": {
+                      "type": "string",
+                      "description": "Floor # / Room # / Building label etc"
+                    }
+                  }
+                }
+              }
+            },
+            "resource": {
+              "type": "object",
+              "description": "Defines the properties for a resource",
+              "additionalProperties": false,
+              "required": [
+                "label",
+                "entity_id",
+                "entity_type",
+                "created",
+                "updated",
+                "resource_type",
+                "location"
+              ],
+              "properties": {
+                "resource_id": {
+                  "description": "The identifier for the resource",
+                  "type": "string",
+                  "readOnly": true,
+                  "pattern": "^[0-9a-zA-Z-_]+$"
+                },
+                "entity_id": {
+                  "x-no-api-doc": true,
+                  "type": "string",
+                  "description": "Customer identifier",
+                  "readOnly": true,
+                  "pattern": "^[0-9a-zA-Z-_]+$"
+                },
+                "entity_type": {
+                  "x-no-api-doc": true,
+                  "enum": [
+                    "RES"
+                  ]
+                },
+                "label": {
+                  "type": "string",
+                  "description": "Label for the entity"
+                },
+                "slug": {
+                  "type": "string",
+                  "description": "Slug for the entity (Auto-generated from the label)",
+                  "readOnly": true,
+                  "deprecated": true,
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                },
+                "created": {
+                  "description": "Date the entity was created",
+                  "type": "string",
+                  "format": "date-time",
+                  "readOnly": true
+                },
+                "updated": {
+                  "description": "Last date the entity was updated",
+                  "type": "string",
+                  "format": "date-time",
+                  "readOnly": true
+                },
+                "resource_type": {
+                  "type": "string",
+                  "description": "Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased",
+                  "pattern": "^[a-z][0-9a-zA-Z-]+$"
+                },
+                "meta": {
+                  "type": "object",
+                  "description": "Data for the resource as a key value pair",
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "propertyNames": {
+                    "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+                  }
+                },
+                "location": {
+                  "type": "object",
+                  "description": "Defines the properties for a part unit",
+                  "additionalProperties": false,
+                  "required": [
+                    "label",
+                    "entity_id",
+                    "entity_type",
+                    "created",
+                    "updated",
+                    "location_type",
+                    "address"
+                  ],
+                  "properties": {
+                    "location_id": {
+                      "description": "The identifier for the location",
+                      "type": "string",
+                      "readOnly": true,
+                      "pattern": "^[0-9a-zA-Z-_]+$"
+                    },
+                    "entity_id": {
+                      "x-no-api-doc": true,
+                      "type": "string",
+                      "description": "Customer identifier",
+                      "readOnly": true,
+                      "pattern": "^[0-9a-zA-Z-_]+$"
+                    },
+                    "entity_type": {
+                      "x-no-api-doc": true,
+                      "enum": [
+                        "LOC"
+                      ]
+                    },
+                    "label": {
+                      "type": "string",
+                      "description": "Label for the entity"
+                    },
+                    "slug": {
+                      "type": "string",
+                      "description": "Slug for the entity (Auto-generated from the label)",
+                      "readOnly": true,
+                      "deprecated": true,
+                      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                    },
+                    "created": {
+                      "description": "Date the entity was created",
+                      "type": "string",
+                      "format": "date-time",
+                      "readOnly": true
+                    },
+                    "updated": {
+                      "description": "Last date the entity was updated",
+                      "type": "string",
+                      "format": "date-time",
+                      "readOnly": true
+                    },
+                    "location_type": {
+                      "type": "string",
+                      "description": "The type of location",
+                      "enum": [
+                        "warehouse",
+                        "facility",
+                        "other"
+                      ]
+                    },
+                    "formatted_address": {
+                      "type": "string",
+                      "readOnly": true,
+                      "description": "Address formatted for the where region the location exists in"
+                    },
+                    "address": {
+                      "type": "object",
+                      "required": [
+                        "country",
+                        "administrative_area",
+                        "locality",
+                        "postal_code",
+                        "thoroughfare"
+                      ],
+                      "description": "xNAL address for the location ",
+                      "properties": {
+                        "country": {
+                          "type": "string",
+                          "description": "Three Letter ISO country code",
+                          "enum": [
+                            "ABW",
+                            "AFG",
+                            "AGO",
+                            "AIA",
+                            "ALA",
+                            "ALB",
+                            "AND",
+                            "ARE",
+                            "ARG",
+                            "ARM",
+                            "ASM",
+                            "ATA",
+                            "ATF",
+                            "ATG",
+                            "AUS",
+                            "AUT",
+                            "AZE",
+                            "BDI",
+                            "BEL",
+                            "BEN",
+                            "BES",
+                            "BFA",
+                            "BGD",
+                            "BGR",
+                            "BHR",
+                            "BHS",
+                            "BIH",
+                            "BLM",
+                            "BLR",
+                            "BLZ",
+                            "BMU",
+                            "BOL",
+                            "BRA",
+                            "BRB",
+                            "BRN",
+                            "BTN",
+                            "BVT",
+                            "BWA",
+                            "CAF",
+                            "CAN",
+                            "CCK",
+                            "CHE",
+                            "CHL",
+                            "CHN",
+                            "CIV",
+                            "CMR",
+                            "COD",
+                            "COG",
+                            "COK",
+                            "COL",
+                            "COM",
+                            "CPV",
+                            "CRI",
+                            "CUB",
+                            "CUW",
+                            "CXR",
+                            "CYM",
+                            "CYP",
+                            "CZE",
+                            "DEU",
+                            "DJI",
+                            "DMA",
+                            "DNK",
+                            "DOM",
+                            "DZA",
+                            "ECU",
+                            "EGY",
+                            "ERI",
+                            "ESH",
+                            "ESP",
+                            "EST",
+                            "ETH",
+                            "FIN",
+                            "FJI",
+                            "FLK",
+                            "FRA",
+                            "FRO",
+                            "FSM",
+                            "GAB",
+                            "GBR",
+                            "GEO",
+                            "GGY",
+                            "GHA",
+                            "GIB",
+                            "GIN",
+                            "GLP",
+                            "GMB",
+                            "GNB",
+                            "GNQ",
+                            "GRC",
+                            "GRD",
+                            "GRL",
+                            "GTM",
+                            "GUF",
+                            "GUM",
+                            "GUY",
+                            "HKG",
+                            "HMD",
+                            "HND",
+                            "HRV",
+                            "HTI",
+                            "HUN",
+                            "IDN",
+                            "IMN",
+                            "IND",
+                            "IOT",
+                            "IRL",
+                            "IRN",
+                            "IRQ",
+                            "ISL",
+                            "ISR",
+                            "ITA",
+                            "JAM",
+                            "JEY",
+                            "JOR",
+                            "JPN",
+                            "KAZ",
+                            "KEN",
+                            "KGZ",
+                            "KHM",
+                            "KIR",
+                            "KNA",
+                            "KOR",
+                            "KWT",
+                            "LAO",
+                            "LBN",
+                            "LBR",
+                            "LBY",
+                            "LCA",
+                            "LIE",
+                            "LKA",
+                            "LSO",
+                            "LTU",
+                            "LUX",
+                            "LVA",
+                            "MAC",
+                            "MAF",
+                            "MAR",
+                            "MCO",
+                            "MDA",
+                            "MDG",
+                            "MDV",
+                            "MEX",
+                            "MHL",
+                            "MKD",
+                            "MLI",
+                            "MLT",
+                            "MMR",
+                            "MNE",
+                            "MNG",
+                            "MNP",
+                            "MOZ",
+                            "MRT",
+                            "MSR",
+                            "MTQ",
+                            "MUS",
+                            "MWI",
+                            "MYS",
+                            "MYT",
+                            "NAM",
+                            "NCL",
+                            "NER",
+                            "NFK",
+                            "NGA",
+                            "NIC",
+                            "NIU",
+                            "NLD",
+                            "NOR",
+                            "NPL",
+                            "NRU",
+                            "NZL",
+                            "OMN",
+                            "PAK",
+                            "PAN",
+                            "PCN",
+                            "PER",
+                            "PHL",
+                            "PLW",
+                            "PNG",
+                            "POL",
+                            "PRI",
+                            "PRK",
+                            "PRT",
+                            "PRY",
+                            "PSE",
+                            "PYF",
+                            "QAT",
+                            "REU",
+                            "ROU",
+                            "RUS",
+                            "RWA",
+                            "SAU",
+                            "SDN",
+                            "SEN",
+                            "SGP",
+                            "SGS",
+                            "SHN",
+                            "SJM",
+                            "SLB",
+                            "SLE",
+                            "SLV",
+                            "SMR",
+                            "SOM",
+                            "SPM",
+                            "SRB",
+                            "SSD",
+                            "STP",
+                            "SUR",
+                            "SVK",
+                            "SVN",
+                            "SWE",
+                            "SWZ",
+                            "SXM",
+                            "SYC",
+                            "SYR",
+                            "TCA",
+                            "TCD",
+                            "TGO",
+                            "THA",
+                            "TJK",
+                            "TKL",
+                            "TKM",
+                            "TLS",
+                            "TON",
+                            "TTO",
+                            "TUN",
+                            "TUR",
+                            "TUV",
+                            "TWN",
+                            "TZA",
+                            "UGA",
+                            "UKR",
+                            "UMI",
+                            "URY",
+                            "USA",
+                            "UZB",
+                            "VAT",
+                            "VCT",
+                            "VEN",
+                            "VGB",
+                            "VIR",
+                            "VNM",
+                            "VUT",
+                            "WLF",
+                            "WSM",
+                            "YEM",
+                            "ZAF",
+                            "ZMB",
+                            "ZWE"
+                          ]
+                        },
+                        "administrative_area": {
+                          "type": "string",
+                          "description": "State / Province / Region"
+                        },
+                        "sub_administrative_area": {
+                          "type": "string",
+                          "description": "County / District"
+                        },
+                        "locality": {
+                          "type": "string",
+                          "description": "City / Town"
+                        },
+                        "postal_code": {
+                          "type": "string",
+                          "description": "Postal Code / Zip Code"
+                        },
+                        "thoroughfare": {
+                          "type": "string",
+                          "description": "Street Address"
+                        },
+                        "premise": {
+                          "type": "string",
+                          "description": "Apartment / Suite / Box number etc"
+                        },
+                        "sub_premise": {
+                          "type": "string",
+                          "description": "Floor # / Room # / Building label etc"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
     },
     "input_filter": {
       "type": "array",
@@ -9018,6 +14821,15 @@ Creates a new unit
             "CANCELLED",
             "BLOCKED"
           ]
+        },
+        "description": {
+          "type": "string",
+          "nullable": true,
+          "description": "A description for the status"
+        },
+        "order": {
+          "type": "number",
+          "description": "Order status appears when listing"
         }
       }
     }
@@ -9048,9 +14860,9 @@ Status Code **200**
 |»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
 |»» created|string(date-time)|false|read-only|Date the entity was created|
 |»» updated|string(date-time)|false|read-only|Last date the entity was updated|
-|»» serial_number|string|false|read-only|Serial number of the unit with prefix stripped|
-|»» raw_serial_number|string|false|none|Serial number of the unit|
-|»» tenant_part_number|string|false|none|Identifier set by the tenant|
+|»» serial_number|string\|null|false|read-only|Serial number of the unit with prefix stripped|
+|»» raw_serial_number|string\|null|false|none|Serial number of the unit|
+|»» tenant_part_number|string\|null|false|none|Identifier set by the tenant|
 |»» manufacturer|object|false|none|Manufacturer information for the part|
 |»»» part_number|string|true|none|Part number the manufacturer uses. If this is not set, then the part number is used|
 |»»» manufacturer_id|string|false|read-only|Customer identifier|
@@ -9089,6 +14901,8 @@ Status Code **200**
 |»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
 |»»»»» status|string|true|none|A Custom label for the status|
 |»»»»» category|string|true|none|The classifier for the statues|
+|»»»»» description|string\|null|false|none|A description for the status|
+|»»»»» order|number|false|none|Order status appears when listing|
 |»»»» total_programs|number|false|none|Total programs under the customer|
 |»»»» total_projects|number|false|none|Total projects under the customer|
 |»»» manufacturer|object|true|none|Manufacturer information for the part|
@@ -9420,6 +15234,8 @@ Status Code **200**
 |»»»»»»»»»»»»»»»»»»»»»»»»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»» status|string|true|none|A Custom label for the status|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»» category|string|true|none|The classifier for the statues|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»» description|string\|null|false|none|A description for the status|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»» order|number|false|none|Order status appears when listing|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»» total_programs|number|false|none|Total programs under the customer|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»» total_projects|number|false|none|Total projects under the customer|
 |»»»»»»»»»»»»»»»»»»»»»»»»»» current_location|object|false|none|Defines the properties for a part unit|
@@ -9460,313 +15276,427 @@ Status Code **200**
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»» thoroughfare|string|true|none|Street Address|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»» premise|string|false|none|Apartment / Suite / Box number etc|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»» sub_premise|string|false|none|Floor # / Room # / Building label etc|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»» input_filter|[object]|false|none|Input Filters allow custom fields to be defined for entities|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» label|string|true|none|Human readable name|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» key|string|true|read-only|Slug used to store the property|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» filters|[anyOf]|true|none|A Collection of filters applied to the field|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»» resource|any|false|none|none|
 
 *anyOf*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|This filter will set the value based on a list of approved values. If the value is not in the list, it will then be set to empty unless the default option is set|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» approved_values|[string]|true|none|The list of approved values|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» default|string\|null|false|none|If this is set and the value is not in the approved_list, set the value to this|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|null|false|none|none|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value camelCase|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Defines the properties for a resource|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» resource_id|string|false|read-only|The identifier for the resource|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» label|string|true|none|Label for the entity|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» resource_type|string|true|none|Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» meta|object|false|none|Data for the resource as a key value pair|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» **additionalProperties**|string|false|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location|object|true|none|Defines the properties for a part unit|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location_id|string|false|read-only|The identifier for the location|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» label|string|true|none|Label for the entity|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location_type|string|true|none|The type of location|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» formatted_address|string|false|read-only|Address formatted for the where region the location exists in|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» address|object|true|none|xNAL address for the location|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» country|string|true|none|Three Letter ISO country code|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» administrative_area|string|true|none|State / Province / Region|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» sub_administrative_area|string|false|none|County / District|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» locality|string|true|none|City / Town|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» postal_code|string|true|none|Postal Code / Zip Code|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» thoroughfare|string|true|none|Street Address|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» premise|string|false|none|Apartment / Suite / Box number etc|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» sub_premise|string|false|none|Floor # / Room # / Building label etc|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a date|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|Date filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform values into null. This is helpful when trying to make a value required. The following are considered empty: # The number 0 or 0.0 # empty string '' # A boolean false # The word 'false' #|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|empty filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a float. Non numeric characters (including comma) will be removed|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|How many decimal places to preserve|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value kebab-case|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value lowercase|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a number. Non numeric characters (including comma and decimal points) will be removed|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|Number filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Add a prefix to the start of a string. If the string already start with the prefix, it will not prepend.|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» prefix|string|true|none|The prefix to add|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value snake_case|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a string|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|String filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Add a suffix to the start of a string. If the string already start with the suffix, it will not append.|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» suffix|string|true|none|The suffix to add|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to trim whitespace from a value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|By default will trim from the start and end|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» start|boolean|false|none|Remove white space from the start of the string|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» end|boolean|false|none|Remove white space from the end of the string|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value UPPERCASE|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Defines the properties for a resource|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» resource_id|string|false|read-only|The identifier for the resource|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» label|string|true|none|Label for the entity|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» resource_type|string|true|none|Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» meta|object|false|none|Data for the resource as a key value pair|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» **additionalProperties**|string|false|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location|object|true|none|Defines the properties for a part unit|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location_id|string|false|read-only|The identifier for the location|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» label|string|true|none|Label for the entity|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location_type|string|true|none|The type of location|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» formatted_address|string|false|read-only|Address formatted for the where region the location exists in|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» address|object|true|none|xNAL address for the location|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» country|string|true|none|Three Letter ISO country code|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» administrative_area|string|true|none|State / Province / Region|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» sub_administrative_area|string|false|none|County / District|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» locality|string|true|none|City / Town|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» postal_code|string|true|none|Postal Code / Zip Code|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» thoroughfare|string|true|none|Street Address|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» premise|string|false|none|Apartment / Suite / Box number etc|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» sub_premise|string|false|none|Floor # / Room # / Building label etc|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» resource|object|true|none|Defines the properties for a resource|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» resource_id|string|false|read-only|The identifier for the resource|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» label|string|true|none|Label for the entity|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» resource_type|string|true|none|Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» meta|object|false|none|Data for the resource as a key value pair|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» **additionalProperties**|string|false|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location|object|true|none|Defines the properties for a part unit|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location_id|string|false|read-only|The identifier for the location|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» label|string|true|none|Label for the entity|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location_type|string|true|none|The type of location|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» formatted_address|string|false|read-only|Address formatted for the where region the location exists in|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» address|object|true|none|xNAL address for the location|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» country|string|true|none|Three Letter ISO country code|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» administrative_area|string|true|none|State / Province / Region|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» sub_administrative_area|string|false|none|County / District|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» locality|string|true|none|City / Town|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» postal_code|string|true|none|Postal Code / Zip Code|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» thoroughfare|string|true|none|Street Address|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» premise|string|false|none|Apartment / Suite / Box number etc|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» sub_premise|string|false|none|Floor # / Room # / Building label etc|
 
 *continued*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» validators|[anyOf]|true|none|A set of validators to use for this field|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» input_filter|[object]|false|none|Input Filters allow custom fields to be defined for entities|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» label|string|true|none|Human readable name|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» key|string|true|read-only|Slug used to store the property|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» filters|[anyOf]|true|none|A Collection of filters applied to the field|
 
 *anyOf*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number is between two values. By default, min and max are included|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» min|number|true|none|Minimum value to check|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» max|number|true|none|The maximum value to check|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» include|boolean|false|none|Include the value in the check|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate value does not match a list (black list)|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|This filter will set the value based on a list of approved values. If the value is not in the list, it will then be set to empty unless the default option is set|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» list|[string]|true|none|The list of approved values|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» approved_values|[string]|true|none|The list of approved values|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» default|string\|null|false|none|If this is set and the value is not in the approved_list, set the value to this|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string contains a value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value camelCase|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a date|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|Date filter has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform values into null. This is helpful when trying to make a value required. The following are considered empty: # The number 0 or 0.0 # empty string '' # A boolean false # The word 'false' #|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|empty filter has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a float. Non numeric characters (including comma) will be removed|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» contains|string|true|none|String must contain with this value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|How many decimal places to preserve|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string is a correct email address|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value kebab-case|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value lowercase|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a number. Non numeric characters (including comma and decimal points) will be removed|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|Number filter has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Add a prefix to the start of a string. If the string already start with the prefix, it will not prepend.|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» strict|boolean|false|none|Enforce strict standards from ARPA. This will enforce the length of the string|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» lookup|boolean|false|none|Look up the host name and check if it has a valid MX record|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» prefix|string|true|none|The prefix to add|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string ends with a value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value snake_case|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a string|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|String filter has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Add a suffix to the start of a string. If the string already start with the suffix, it will not append.|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» ends_with|string|true|none|String must end with this value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» suffix|string|true|none|The suffix to add|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number equals a value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to trim whitespace from a value|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» value|number|true|none|The value to compare against|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When value is a float, this will set the decimal precision|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|By default will trim from the start and end|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» start|boolean|false|none|Remove white space from the start of the string|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» end|boolean|false|none|Remove white space from the end of the string|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number is greater than a value. By default, this will check if value is greater than or equals to|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value UPPERCASE|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» value|number|true|none|The value to compare against|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» include|boolean|false|none|Include the value in the check|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string has a correct DNS records|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» record_type|string|false|none|DNS record type to validate|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an IP address format. Defaults to matching IPv4|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» versions|[string]|false|none|IP Version to match against|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string is a certain length|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» length|string|true|none|String must contain with this value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» operator|string|false|none|Which type of length comparision to make|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number is less than a value. By default, this will check if value is less than or equals to|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» value|number|true|none|The value to compare against|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» include|boolean|false|none|Include the value in the check|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an MAC address format|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This validator has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches a regular expression|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» mask|string|true|none|Mask to validate against|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string starts with a value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» starts_with|string|true|none|String must start with this value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validates that a value follows a step. Both start and end options do not have to sync with the step. If they do not sync then find the nearest step.|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» step|number|true|none|The step value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» start|integer|false|none|Start stepping at this value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» end|integer|false|none|End stepping at this value|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an URI|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» schemes|[string]|false|none|Schemes to match. By default all are matched|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate value matches a list (white list)|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» list|[string]|true|none|The list of approved values|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
 
 *continued*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» current_status|object|false|none|Defines the properties for a status|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» status|string|true|none|A Custom label for the status|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» category|string|true|none|The classifier for the statues|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» validators|[anyOf]|true|none|A set of validators to use for this field|
+
+*anyOf*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number is between two values. By default, min and max are included|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» min|number|true|none|Minimum value to check|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» max|number|true|none|The maximum value to check|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» include|boolean|false|none|Include the value in the check|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate value does not match a list (black list)|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» list|[string]|true|none|The list of approved values|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string contains a value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» contains|string|true|none|String must contain with this value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string is a correct email address|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» strict|boolean|false|none|Enforce strict standards from ARPA. This will enforce the length of the string|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» lookup|boolean|false|none|Look up the host name and check if it has a valid MX record|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string ends with a value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» ends_with|string|true|none|String must end with this value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number equals a value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» value|number|true|none|The value to compare against|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When value is a float, this will set the decimal precision|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number is greater than a value. By default, this will check if value is greater than or equals to|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» value|number|true|none|The value to compare against|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» include|boolean|false|none|Include the value in the check|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string has a correct DNS records|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» record_type|string|false|none|DNS record type to validate|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an IP address format. Defaults to matching IPv4|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» versions|[string]|false|none|IP Version to match against|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string is a certain length|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» length|string|true|none|String must contain with this value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» operator|string|false|none|Which type of length comparision to make|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number is less than a value. By default, this will check if value is less than or equals to|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» value|number|true|none|The value to compare against|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» include|boolean|false|none|Include the value in the check|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an MAC address format|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This validator has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches a regular expression|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» mask|string|true|none|Mask to validate against|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string starts with a value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» starts_with|string|true|none|String must start with this value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validates that a value follows a step. Both start and end options do not have to sync with the step. If they do not sync then find the nearest step.|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» step|number|true|none|The step value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» start|integer|false|none|Start stepping at this value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» end|integer|false|none|End stepping at this value|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an URI|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» schemes|[string]|false|none|Schemes to match. By default all are matched|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate value matches a list (white list)|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» list|[string]|true|none|The list of approved values|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+
+*continued*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» current_status|object|false|none|Defines the properties for a status|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» status|string|true|none|A Custom label for the status|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» category|string|true|none|The classifier for the statues|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» description|string\|null|false|none|A description for the status|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» order|number|false|none|Order status appears when listing|
 
 #### Enumerated Values
 
@@ -10120,6 +16050,768 @@ Status Code **200**
 |country|ZAF|
 |country|ZMB|
 |country|ZWE|
+|entity_type|LOC|
+|location_type|warehouse|
+|location_type|facility|
+|location_type|other|
+|country|ABW|
+|country|AFG|
+|country|AGO|
+|country|AIA|
+|country|ALA|
+|country|ALB|
+|country|AND|
+|country|ARE|
+|country|ARG|
+|country|ARM|
+|country|ASM|
+|country|ATA|
+|country|ATF|
+|country|ATG|
+|country|AUS|
+|country|AUT|
+|country|AZE|
+|country|BDI|
+|country|BEL|
+|country|BEN|
+|country|BES|
+|country|BFA|
+|country|BGD|
+|country|BGR|
+|country|BHR|
+|country|BHS|
+|country|BIH|
+|country|BLM|
+|country|BLR|
+|country|BLZ|
+|country|BMU|
+|country|BOL|
+|country|BRA|
+|country|BRB|
+|country|BRN|
+|country|BTN|
+|country|BVT|
+|country|BWA|
+|country|CAF|
+|country|CAN|
+|country|CCK|
+|country|CHE|
+|country|CHL|
+|country|CHN|
+|country|CIV|
+|country|CMR|
+|country|COD|
+|country|COG|
+|country|COK|
+|country|COL|
+|country|COM|
+|country|CPV|
+|country|CRI|
+|country|CUB|
+|country|CUW|
+|country|CXR|
+|country|CYM|
+|country|CYP|
+|country|CZE|
+|country|DEU|
+|country|DJI|
+|country|DMA|
+|country|DNK|
+|country|DOM|
+|country|DZA|
+|country|ECU|
+|country|EGY|
+|country|ERI|
+|country|ESH|
+|country|ESP|
+|country|EST|
+|country|ETH|
+|country|FIN|
+|country|FJI|
+|country|FLK|
+|country|FRA|
+|country|FRO|
+|country|FSM|
+|country|GAB|
+|country|GBR|
+|country|GEO|
+|country|GGY|
+|country|GHA|
+|country|GIB|
+|country|GIN|
+|country|GLP|
+|country|GMB|
+|country|GNB|
+|country|GNQ|
+|country|GRC|
+|country|GRD|
+|country|GRL|
+|country|GTM|
+|country|GUF|
+|country|GUM|
+|country|GUY|
+|country|HKG|
+|country|HMD|
+|country|HND|
+|country|HRV|
+|country|HTI|
+|country|HUN|
+|country|IDN|
+|country|IMN|
+|country|IND|
+|country|IOT|
+|country|IRL|
+|country|IRN|
+|country|IRQ|
+|country|ISL|
+|country|ISR|
+|country|ITA|
+|country|JAM|
+|country|JEY|
+|country|JOR|
+|country|JPN|
+|country|KAZ|
+|country|KEN|
+|country|KGZ|
+|country|KHM|
+|country|KIR|
+|country|KNA|
+|country|KOR|
+|country|KWT|
+|country|LAO|
+|country|LBN|
+|country|LBR|
+|country|LBY|
+|country|LCA|
+|country|LIE|
+|country|LKA|
+|country|LSO|
+|country|LTU|
+|country|LUX|
+|country|LVA|
+|country|MAC|
+|country|MAF|
+|country|MAR|
+|country|MCO|
+|country|MDA|
+|country|MDG|
+|country|MDV|
+|country|MEX|
+|country|MHL|
+|country|MKD|
+|country|MLI|
+|country|MLT|
+|country|MMR|
+|country|MNE|
+|country|MNG|
+|country|MNP|
+|country|MOZ|
+|country|MRT|
+|country|MSR|
+|country|MTQ|
+|country|MUS|
+|country|MWI|
+|country|MYS|
+|country|MYT|
+|country|NAM|
+|country|NCL|
+|country|NER|
+|country|NFK|
+|country|NGA|
+|country|NIC|
+|country|NIU|
+|country|NLD|
+|country|NOR|
+|country|NPL|
+|country|NRU|
+|country|NZL|
+|country|OMN|
+|country|PAK|
+|country|PAN|
+|country|PCN|
+|country|PER|
+|country|PHL|
+|country|PLW|
+|country|PNG|
+|country|POL|
+|country|PRI|
+|country|PRK|
+|country|PRT|
+|country|PRY|
+|country|PSE|
+|country|PYF|
+|country|QAT|
+|country|REU|
+|country|ROU|
+|country|RUS|
+|country|RWA|
+|country|SAU|
+|country|SDN|
+|country|SEN|
+|country|SGP|
+|country|SGS|
+|country|SHN|
+|country|SJM|
+|country|SLB|
+|country|SLE|
+|country|SLV|
+|country|SMR|
+|country|SOM|
+|country|SPM|
+|country|SRB|
+|country|SSD|
+|country|STP|
+|country|SUR|
+|country|SVK|
+|country|SVN|
+|country|SWE|
+|country|SWZ|
+|country|SXM|
+|country|SYC|
+|country|SYR|
+|country|TCA|
+|country|TCD|
+|country|TGO|
+|country|THA|
+|country|TJK|
+|country|TKL|
+|country|TKM|
+|country|TLS|
+|country|TON|
+|country|TTO|
+|country|TUN|
+|country|TUR|
+|country|TUV|
+|country|TWN|
+|country|TZA|
+|country|UGA|
+|country|UKR|
+|country|UMI|
+|country|URY|
+|country|USA|
+|country|UZB|
+|country|VAT|
+|country|VCT|
+|country|VEN|
+|country|VGB|
+|country|VIR|
+|country|VNM|
+|country|VUT|
+|country|WLF|
+|country|WSM|
+|country|YEM|
+|country|ZAF|
+|country|ZMB|
+|country|ZWE|
+|entity_type|RES|
+|entity_type|LOC|
+|location_type|warehouse|
+|location_type|facility|
+|location_type|other|
+|country|ABW|
+|country|AFG|
+|country|AGO|
+|country|AIA|
+|country|ALA|
+|country|ALB|
+|country|AND|
+|country|ARE|
+|country|ARG|
+|country|ARM|
+|country|ASM|
+|country|ATA|
+|country|ATF|
+|country|ATG|
+|country|AUS|
+|country|AUT|
+|country|AZE|
+|country|BDI|
+|country|BEL|
+|country|BEN|
+|country|BES|
+|country|BFA|
+|country|BGD|
+|country|BGR|
+|country|BHR|
+|country|BHS|
+|country|BIH|
+|country|BLM|
+|country|BLR|
+|country|BLZ|
+|country|BMU|
+|country|BOL|
+|country|BRA|
+|country|BRB|
+|country|BRN|
+|country|BTN|
+|country|BVT|
+|country|BWA|
+|country|CAF|
+|country|CAN|
+|country|CCK|
+|country|CHE|
+|country|CHL|
+|country|CHN|
+|country|CIV|
+|country|CMR|
+|country|COD|
+|country|COG|
+|country|COK|
+|country|COL|
+|country|COM|
+|country|CPV|
+|country|CRI|
+|country|CUB|
+|country|CUW|
+|country|CXR|
+|country|CYM|
+|country|CYP|
+|country|CZE|
+|country|DEU|
+|country|DJI|
+|country|DMA|
+|country|DNK|
+|country|DOM|
+|country|DZA|
+|country|ECU|
+|country|EGY|
+|country|ERI|
+|country|ESH|
+|country|ESP|
+|country|EST|
+|country|ETH|
+|country|FIN|
+|country|FJI|
+|country|FLK|
+|country|FRA|
+|country|FRO|
+|country|FSM|
+|country|GAB|
+|country|GBR|
+|country|GEO|
+|country|GGY|
+|country|GHA|
+|country|GIB|
+|country|GIN|
+|country|GLP|
+|country|GMB|
+|country|GNB|
+|country|GNQ|
+|country|GRC|
+|country|GRD|
+|country|GRL|
+|country|GTM|
+|country|GUF|
+|country|GUM|
+|country|GUY|
+|country|HKG|
+|country|HMD|
+|country|HND|
+|country|HRV|
+|country|HTI|
+|country|HUN|
+|country|IDN|
+|country|IMN|
+|country|IND|
+|country|IOT|
+|country|IRL|
+|country|IRN|
+|country|IRQ|
+|country|ISL|
+|country|ISR|
+|country|ITA|
+|country|JAM|
+|country|JEY|
+|country|JOR|
+|country|JPN|
+|country|KAZ|
+|country|KEN|
+|country|KGZ|
+|country|KHM|
+|country|KIR|
+|country|KNA|
+|country|KOR|
+|country|KWT|
+|country|LAO|
+|country|LBN|
+|country|LBR|
+|country|LBY|
+|country|LCA|
+|country|LIE|
+|country|LKA|
+|country|LSO|
+|country|LTU|
+|country|LUX|
+|country|LVA|
+|country|MAC|
+|country|MAF|
+|country|MAR|
+|country|MCO|
+|country|MDA|
+|country|MDG|
+|country|MDV|
+|country|MEX|
+|country|MHL|
+|country|MKD|
+|country|MLI|
+|country|MLT|
+|country|MMR|
+|country|MNE|
+|country|MNG|
+|country|MNP|
+|country|MOZ|
+|country|MRT|
+|country|MSR|
+|country|MTQ|
+|country|MUS|
+|country|MWI|
+|country|MYS|
+|country|MYT|
+|country|NAM|
+|country|NCL|
+|country|NER|
+|country|NFK|
+|country|NGA|
+|country|NIC|
+|country|NIU|
+|country|NLD|
+|country|NOR|
+|country|NPL|
+|country|NRU|
+|country|NZL|
+|country|OMN|
+|country|PAK|
+|country|PAN|
+|country|PCN|
+|country|PER|
+|country|PHL|
+|country|PLW|
+|country|PNG|
+|country|POL|
+|country|PRI|
+|country|PRK|
+|country|PRT|
+|country|PRY|
+|country|PSE|
+|country|PYF|
+|country|QAT|
+|country|REU|
+|country|ROU|
+|country|RUS|
+|country|RWA|
+|country|SAU|
+|country|SDN|
+|country|SEN|
+|country|SGP|
+|country|SGS|
+|country|SHN|
+|country|SJM|
+|country|SLB|
+|country|SLE|
+|country|SLV|
+|country|SMR|
+|country|SOM|
+|country|SPM|
+|country|SRB|
+|country|SSD|
+|country|STP|
+|country|SUR|
+|country|SVK|
+|country|SVN|
+|country|SWE|
+|country|SWZ|
+|country|SXM|
+|country|SYC|
+|country|SYR|
+|country|TCA|
+|country|TCD|
+|country|TGO|
+|country|THA|
+|country|TJK|
+|country|TKL|
+|country|TKM|
+|country|TLS|
+|country|TON|
+|country|TTO|
+|country|TUN|
+|country|TUR|
+|country|TUV|
+|country|TWN|
+|country|TZA|
+|country|UGA|
+|country|UKR|
+|country|UMI|
+|country|URY|
+|country|USA|
+|country|UZB|
+|country|VAT|
+|country|VCT|
+|country|VEN|
+|country|VGB|
+|country|VIR|
+|country|VNM|
+|country|VUT|
+|country|WLF|
+|country|WSM|
+|country|YEM|
+|country|ZAF|
+|country|ZMB|
+|country|ZWE|
+|entity_type|SRES|
+|entity_type|LOC|
+|location_type|warehouse|
+|location_type|facility|
+|location_type|other|
+|country|ABW|
+|country|AFG|
+|country|AGO|
+|country|AIA|
+|country|ALA|
+|country|ALB|
+|country|AND|
+|country|ARE|
+|country|ARG|
+|country|ARM|
+|country|ASM|
+|country|ATA|
+|country|ATF|
+|country|ATG|
+|country|AUS|
+|country|AUT|
+|country|AZE|
+|country|BDI|
+|country|BEL|
+|country|BEN|
+|country|BES|
+|country|BFA|
+|country|BGD|
+|country|BGR|
+|country|BHR|
+|country|BHS|
+|country|BIH|
+|country|BLM|
+|country|BLR|
+|country|BLZ|
+|country|BMU|
+|country|BOL|
+|country|BRA|
+|country|BRB|
+|country|BRN|
+|country|BTN|
+|country|BVT|
+|country|BWA|
+|country|CAF|
+|country|CAN|
+|country|CCK|
+|country|CHE|
+|country|CHL|
+|country|CHN|
+|country|CIV|
+|country|CMR|
+|country|COD|
+|country|COG|
+|country|COK|
+|country|COL|
+|country|COM|
+|country|CPV|
+|country|CRI|
+|country|CUB|
+|country|CUW|
+|country|CXR|
+|country|CYM|
+|country|CYP|
+|country|CZE|
+|country|DEU|
+|country|DJI|
+|country|DMA|
+|country|DNK|
+|country|DOM|
+|country|DZA|
+|country|ECU|
+|country|EGY|
+|country|ERI|
+|country|ESH|
+|country|ESP|
+|country|EST|
+|country|ETH|
+|country|FIN|
+|country|FJI|
+|country|FLK|
+|country|FRA|
+|country|FRO|
+|country|FSM|
+|country|GAB|
+|country|GBR|
+|country|GEO|
+|country|GGY|
+|country|GHA|
+|country|GIB|
+|country|GIN|
+|country|GLP|
+|country|GMB|
+|country|GNB|
+|country|GNQ|
+|country|GRC|
+|country|GRD|
+|country|GRL|
+|country|GTM|
+|country|GUF|
+|country|GUM|
+|country|GUY|
+|country|HKG|
+|country|HMD|
+|country|HND|
+|country|HRV|
+|country|HTI|
+|country|HUN|
+|country|IDN|
+|country|IMN|
+|country|IND|
+|country|IOT|
+|country|IRL|
+|country|IRN|
+|country|IRQ|
+|country|ISL|
+|country|ISR|
+|country|ITA|
+|country|JAM|
+|country|JEY|
+|country|JOR|
+|country|JPN|
+|country|KAZ|
+|country|KEN|
+|country|KGZ|
+|country|KHM|
+|country|KIR|
+|country|KNA|
+|country|KOR|
+|country|KWT|
+|country|LAO|
+|country|LBN|
+|country|LBR|
+|country|LBY|
+|country|LCA|
+|country|LIE|
+|country|LKA|
+|country|LSO|
+|country|LTU|
+|country|LUX|
+|country|LVA|
+|country|MAC|
+|country|MAF|
+|country|MAR|
+|country|MCO|
+|country|MDA|
+|country|MDG|
+|country|MDV|
+|country|MEX|
+|country|MHL|
+|country|MKD|
+|country|MLI|
+|country|MLT|
+|country|MMR|
+|country|MNE|
+|country|MNG|
+|country|MNP|
+|country|MOZ|
+|country|MRT|
+|country|MSR|
+|country|MTQ|
+|country|MUS|
+|country|MWI|
+|country|MYS|
+|country|MYT|
+|country|NAM|
+|country|NCL|
+|country|NER|
+|country|NFK|
+|country|NGA|
+|country|NIC|
+|country|NIU|
+|country|NLD|
+|country|NOR|
+|country|NPL|
+|country|NRU|
+|country|NZL|
+|country|OMN|
+|country|PAK|
+|country|PAN|
+|country|PCN|
+|country|PER|
+|country|PHL|
+|country|PLW|
+|country|PNG|
+|country|POL|
+|country|PRI|
+|country|PRK|
+|country|PRT|
+|country|PRY|
+|country|PSE|
+|country|PYF|
+|country|QAT|
+|country|REU|
+|country|ROU|
+|country|RUS|
+|country|RWA|
+|country|SAU|
+|country|SDN|
+|country|SEN|
+|country|SGP|
+|country|SGS|
+|country|SHN|
+|country|SJM|
+|country|SLB|
+|country|SLE|
+|country|SLV|
+|country|SMR|
+|country|SOM|
+|country|SPM|
+|country|SRB|
+|country|SSD|
+|country|STP|
+|country|SUR|
+|country|SVK|
+|country|SVN|
+|country|SWE|
+|country|SWZ|
+|country|SXM|
+|country|SYC|
+|country|SYR|
+|country|TCA|
+|country|TCD|
+|country|TGO|
+|country|THA|
+|country|TJK|
+|country|TKL|
+|country|TKM|
+|country|TLS|
+|country|TON|
+|country|TTO|
+|country|TUN|
+|country|TUR|
+|country|TUV|
+|country|TWN|
+|country|TZA|
+|country|UGA|
+|country|UKR|
+|country|UMI|
+|country|URY|
+|country|USA|
+|country|UZB|
+|country|VAT|
+|country|VCT|
+|country|VEN|
+|country|VGB|
+|country|VIR|
+|country|VNM|
+|country|VUT|
+|country|WLF|
+|country|WSM|
+|country|YEM|
+|country|ZAF|
+|country|ZMB|
+|country|ZWE|
+|entity_type|RES|
 |entity_type|LOC|
 |location_type|warehouse|
 |location_type|facility|
@@ -10585,15 +17277,18 @@ Fetch Unit
     },
     "serial_number": {
       "type": "string",
+      "nullable": true,
       "description": "Serial number of the unit with prefix stripped",
       "readOnly": true
     },
     "raw_serial_number": {
       "type": "string",
+      "nullable": true,
       "description": "Serial number of the unit"
     },
     "tenant_part_number": {
       "type": "string",
+      "nullable": true,
       "description": "Identifier set by the tenant"
     },
     "manufacturer": {
@@ -10832,7 +17527,10 @@ Fetch Unit
               "deprecated": true,
               "x-patternProperties": {
                 "^[A-Za-z][A-Za-z0-9_]*$": {
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 }
               }
             },
@@ -10865,6 +17563,15 @@ Fetch Unit
                       "CANCELLED",
                       "BLOCKED"
                     ]
+                  },
+                  "description": {
+                    "type": "string",
+                    "nullable": true,
+                    "description": "A description for the status"
+                  },
+                  "order": {
+                    "type": "number",
+                    "description": "Order status appears when listing"
                   }
                 }
               }
@@ -12038,7 +18745,10 @@ Fetch Unit
           "deprecated": true,
           "x-patternProperties": {
             "^[A-Za-z][A-Za-z0-9_]*$": {
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             }
           }
         },
@@ -12071,6 +18781,15 @@ Fetch Unit
                   "CANCELLED",
                   "BLOCKED"
                 ]
+              },
+              "description": {
+                "type": "string",
+                "nullable": true,
+                "description": "A description for the status"
+              },
+              "order": {
+                "type": "number",
+                "description": "Order status appears when listing"
               }
             }
           }
@@ -12821,6 +19540,1337 @@ Fetch Unit
           }
         }
       }
+    },
+    "resource": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "description": "Defines the properties for a resource",
+          "additionalProperties": false,
+          "required": [
+            "label",
+            "entity_id",
+            "entity_type",
+            "created",
+            "updated",
+            "resource_type",
+            "location"
+          ],
+          "properties": {
+            "resource_id": {
+              "description": "The identifier for the resource",
+              "type": "string",
+              "readOnly": true,
+              "pattern": "^[0-9a-zA-Z-_]+$"
+            },
+            "entity_id": {
+              "x-no-api-doc": true,
+              "type": "string",
+              "description": "Customer identifier",
+              "readOnly": true,
+              "pattern": "^[0-9a-zA-Z-_]+$"
+            },
+            "entity_type": {
+              "x-no-api-doc": true,
+              "enum": [
+                "RES"
+              ]
+            },
+            "label": {
+              "type": "string",
+              "description": "Label for the entity"
+            },
+            "slug": {
+              "type": "string",
+              "description": "Slug for the entity (Auto-generated from the label)",
+              "readOnly": true,
+              "deprecated": true,
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+            },
+            "created": {
+              "description": "Date the entity was created",
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true
+            },
+            "updated": {
+              "description": "Last date the entity was updated",
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true
+            },
+            "resource_type": {
+              "type": "string",
+              "description": "Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased",
+              "pattern": "^[a-z][0-9a-zA-Z-]+$"
+            },
+            "meta": {
+              "type": "object",
+              "description": "Data for the resource as a key value pair",
+              "additionalProperties": {
+                "type": "string"
+              },
+              "propertyNames": {
+                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+              }
+            },
+            "location": {
+              "type": "object",
+              "description": "Defines the properties for a part unit",
+              "additionalProperties": false,
+              "required": [
+                "label",
+                "entity_id",
+                "entity_type",
+                "created",
+                "updated",
+                "location_type",
+                "address"
+              ],
+              "properties": {
+                "location_id": {
+                  "description": "The identifier for the location",
+                  "type": "string",
+                  "readOnly": true,
+                  "pattern": "^[0-9a-zA-Z-_]+$"
+                },
+                "entity_id": {
+                  "x-no-api-doc": true,
+                  "type": "string",
+                  "description": "Customer identifier",
+                  "readOnly": true,
+                  "pattern": "^[0-9a-zA-Z-_]+$"
+                },
+                "entity_type": {
+                  "x-no-api-doc": true,
+                  "enum": [
+                    "LOC"
+                  ]
+                },
+                "label": {
+                  "type": "string",
+                  "description": "Label for the entity"
+                },
+                "slug": {
+                  "type": "string",
+                  "description": "Slug for the entity (Auto-generated from the label)",
+                  "readOnly": true,
+                  "deprecated": true,
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                },
+                "created": {
+                  "description": "Date the entity was created",
+                  "type": "string",
+                  "format": "date-time",
+                  "readOnly": true
+                },
+                "updated": {
+                  "description": "Last date the entity was updated",
+                  "type": "string",
+                  "format": "date-time",
+                  "readOnly": true
+                },
+                "location_type": {
+                  "type": "string",
+                  "description": "The type of location",
+                  "enum": [
+                    "warehouse",
+                    "facility",
+                    "other"
+                  ]
+                },
+                "formatted_address": {
+                  "type": "string",
+                  "readOnly": true,
+                  "description": "Address formatted for the where region the location exists in"
+                },
+                "address": {
+                  "type": "object",
+                  "required": [
+                    "country",
+                    "administrative_area",
+                    "locality",
+                    "postal_code",
+                    "thoroughfare"
+                  ],
+                  "description": "xNAL address for the location ",
+                  "properties": {
+                    "country": {
+                      "type": "string",
+                      "description": "Three Letter ISO country code",
+                      "enum": [
+                        "ABW",
+                        "AFG",
+                        "AGO",
+                        "AIA",
+                        "ALA",
+                        "ALB",
+                        "AND",
+                        "ARE",
+                        "ARG",
+                        "ARM",
+                        "ASM",
+                        "ATA",
+                        "ATF",
+                        "ATG",
+                        "AUS",
+                        "AUT",
+                        "AZE",
+                        "BDI",
+                        "BEL",
+                        "BEN",
+                        "BES",
+                        "BFA",
+                        "BGD",
+                        "BGR",
+                        "BHR",
+                        "BHS",
+                        "BIH",
+                        "BLM",
+                        "BLR",
+                        "BLZ",
+                        "BMU",
+                        "BOL",
+                        "BRA",
+                        "BRB",
+                        "BRN",
+                        "BTN",
+                        "BVT",
+                        "BWA",
+                        "CAF",
+                        "CAN",
+                        "CCK",
+                        "CHE",
+                        "CHL",
+                        "CHN",
+                        "CIV",
+                        "CMR",
+                        "COD",
+                        "COG",
+                        "COK",
+                        "COL",
+                        "COM",
+                        "CPV",
+                        "CRI",
+                        "CUB",
+                        "CUW",
+                        "CXR",
+                        "CYM",
+                        "CYP",
+                        "CZE",
+                        "DEU",
+                        "DJI",
+                        "DMA",
+                        "DNK",
+                        "DOM",
+                        "DZA",
+                        "ECU",
+                        "EGY",
+                        "ERI",
+                        "ESH",
+                        "ESP",
+                        "EST",
+                        "ETH",
+                        "FIN",
+                        "FJI",
+                        "FLK",
+                        "FRA",
+                        "FRO",
+                        "FSM",
+                        "GAB",
+                        "GBR",
+                        "GEO",
+                        "GGY",
+                        "GHA",
+                        "GIB",
+                        "GIN",
+                        "GLP",
+                        "GMB",
+                        "GNB",
+                        "GNQ",
+                        "GRC",
+                        "GRD",
+                        "GRL",
+                        "GTM",
+                        "GUF",
+                        "GUM",
+                        "GUY",
+                        "HKG",
+                        "HMD",
+                        "HND",
+                        "HRV",
+                        "HTI",
+                        "HUN",
+                        "IDN",
+                        "IMN",
+                        "IND",
+                        "IOT",
+                        "IRL",
+                        "IRN",
+                        "IRQ",
+                        "ISL",
+                        "ISR",
+                        "ITA",
+                        "JAM",
+                        "JEY",
+                        "JOR",
+                        "JPN",
+                        "KAZ",
+                        "KEN",
+                        "KGZ",
+                        "KHM",
+                        "KIR",
+                        "KNA",
+                        "KOR",
+                        "KWT",
+                        "LAO",
+                        "LBN",
+                        "LBR",
+                        "LBY",
+                        "LCA",
+                        "LIE",
+                        "LKA",
+                        "LSO",
+                        "LTU",
+                        "LUX",
+                        "LVA",
+                        "MAC",
+                        "MAF",
+                        "MAR",
+                        "MCO",
+                        "MDA",
+                        "MDG",
+                        "MDV",
+                        "MEX",
+                        "MHL",
+                        "MKD",
+                        "MLI",
+                        "MLT",
+                        "MMR",
+                        "MNE",
+                        "MNG",
+                        "MNP",
+                        "MOZ",
+                        "MRT",
+                        "MSR",
+                        "MTQ",
+                        "MUS",
+                        "MWI",
+                        "MYS",
+                        "MYT",
+                        "NAM",
+                        "NCL",
+                        "NER",
+                        "NFK",
+                        "NGA",
+                        "NIC",
+                        "NIU",
+                        "NLD",
+                        "NOR",
+                        "NPL",
+                        "NRU",
+                        "NZL",
+                        "OMN",
+                        "PAK",
+                        "PAN",
+                        "PCN",
+                        "PER",
+                        "PHL",
+                        "PLW",
+                        "PNG",
+                        "POL",
+                        "PRI",
+                        "PRK",
+                        "PRT",
+                        "PRY",
+                        "PSE",
+                        "PYF",
+                        "QAT",
+                        "REU",
+                        "ROU",
+                        "RUS",
+                        "RWA",
+                        "SAU",
+                        "SDN",
+                        "SEN",
+                        "SGP",
+                        "SGS",
+                        "SHN",
+                        "SJM",
+                        "SLB",
+                        "SLE",
+                        "SLV",
+                        "SMR",
+                        "SOM",
+                        "SPM",
+                        "SRB",
+                        "SSD",
+                        "STP",
+                        "SUR",
+                        "SVK",
+                        "SVN",
+                        "SWE",
+                        "SWZ",
+                        "SXM",
+                        "SYC",
+                        "SYR",
+                        "TCA",
+                        "TCD",
+                        "TGO",
+                        "THA",
+                        "TJK",
+                        "TKL",
+                        "TKM",
+                        "TLS",
+                        "TON",
+                        "TTO",
+                        "TUN",
+                        "TUR",
+                        "TUV",
+                        "TWN",
+                        "TZA",
+                        "UGA",
+                        "UKR",
+                        "UMI",
+                        "URY",
+                        "USA",
+                        "UZB",
+                        "VAT",
+                        "VCT",
+                        "VEN",
+                        "VGB",
+                        "VIR",
+                        "VNM",
+                        "VUT",
+                        "WLF",
+                        "WSM",
+                        "YEM",
+                        "ZAF",
+                        "ZMB",
+                        "ZWE"
+                      ]
+                    },
+                    "administrative_area": {
+                      "type": "string",
+                      "description": "State / Province / Region"
+                    },
+                    "sub_administrative_area": {
+                      "type": "string",
+                      "description": "County / District"
+                    },
+                    "locality": {
+                      "type": "string",
+                      "description": "City / Town"
+                    },
+                    "postal_code": {
+                      "type": "string",
+                      "description": "Postal Code / Zip Code"
+                    },
+                    "thoroughfare": {
+                      "type": "string",
+                      "description": "Street Address"
+                    },
+                    "premise": {
+                      "type": "string",
+                      "description": "Apartment / Suite / Box number etc"
+                    },
+                    "sub_premise": {
+                      "type": "string",
+                      "description": "Floor # / Room # / Building label etc"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "description": "Defines the properties for a resource",
+          "additionalProperties": false,
+          "required": [
+            "label",
+            "entity_id",
+            "entity_type",
+            "created",
+            "updated",
+            "resource_type",
+            "location",
+            "resource"
+          ],
+          "properties": {
+            "resource_id": {
+              "description": "The identifier for the resource",
+              "type": "string",
+              "readOnly": true,
+              "pattern": "^[0-9a-zA-Z-_]+$"
+            },
+            "entity_id": {
+              "x-no-api-doc": true,
+              "type": "string",
+              "description": "Customer identifier",
+              "readOnly": true,
+              "pattern": "^[0-9a-zA-Z-_]+$"
+            },
+            "entity_type": {
+              "x-no-api-doc": true,
+              "enum": [
+                "SRES"
+              ]
+            },
+            "label": {
+              "type": "string",
+              "description": "Label for the entity"
+            },
+            "slug": {
+              "type": "string",
+              "description": "Slug for the entity (Auto-generated from the label)",
+              "readOnly": true,
+              "deprecated": true,
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+            },
+            "created": {
+              "description": "Date the entity was created",
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true
+            },
+            "updated": {
+              "description": "Last date the entity was updated",
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true
+            },
+            "resource_type": {
+              "type": "string",
+              "description": "Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased",
+              "pattern": "^[a-z][0-9a-zA-Z-]+$"
+            },
+            "meta": {
+              "type": "object",
+              "description": "Data for the resource as a key value pair",
+              "additionalProperties": {
+                "type": "string"
+              },
+              "propertyNames": {
+                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+              }
+            },
+            "location": {
+              "type": "object",
+              "description": "Defines the properties for a part unit",
+              "additionalProperties": false,
+              "required": [
+                "label",
+                "entity_id",
+                "entity_type",
+                "created",
+                "updated",
+                "location_type",
+                "address"
+              ],
+              "properties": {
+                "location_id": {
+                  "description": "The identifier for the location",
+                  "type": "string",
+                  "readOnly": true,
+                  "pattern": "^[0-9a-zA-Z-_]+$"
+                },
+                "entity_id": {
+                  "x-no-api-doc": true,
+                  "type": "string",
+                  "description": "Customer identifier",
+                  "readOnly": true,
+                  "pattern": "^[0-9a-zA-Z-_]+$"
+                },
+                "entity_type": {
+                  "x-no-api-doc": true,
+                  "enum": [
+                    "LOC"
+                  ]
+                },
+                "label": {
+                  "type": "string",
+                  "description": "Label for the entity"
+                },
+                "slug": {
+                  "type": "string",
+                  "description": "Slug for the entity (Auto-generated from the label)",
+                  "readOnly": true,
+                  "deprecated": true,
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                },
+                "created": {
+                  "description": "Date the entity was created",
+                  "type": "string",
+                  "format": "date-time",
+                  "readOnly": true
+                },
+                "updated": {
+                  "description": "Last date the entity was updated",
+                  "type": "string",
+                  "format": "date-time",
+                  "readOnly": true
+                },
+                "location_type": {
+                  "type": "string",
+                  "description": "The type of location",
+                  "enum": [
+                    "warehouse",
+                    "facility",
+                    "other"
+                  ]
+                },
+                "formatted_address": {
+                  "type": "string",
+                  "readOnly": true,
+                  "description": "Address formatted for the where region the location exists in"
+                },
+                "address": {
+                  "type": "object",
+                  "required": [
+                    "country",
+                    "administrative_area",
+                    "locality",
+                    "postal_code",
+                    "thoroughfare"
+                  ],
+                  "description": "xNAL address for the location ",
+                  "properties": {
+                    "country": {
+                      "type": "string",
+                      "description": "Three Letter ISO country code",
+                      "enum": [
+                        "ABW",
+                        "AFG",
+                        "AGO",
+                        "AIA",
+                        "ALA",
+                        "ALB",
+                        "AND",
+                        "ARE",
+                        "ARG",
+                        "ARM",
+                        "ASM",
+                        "ATA",
+                        "ATF",
+                        "ATG",
+                        "AUS",
+                        "AUT",
+                        "AZE",
+                        "BDI",
+                        "BEL",
+                        "BEN",
+                        "BES",
+                        "BFA",
+                        "BGD",
+                        "BGR",
+                        "BHR",
+                        "BHS",
+                        "BIH",
+                        "BLM",
+                        "BLR",
+                        "BLZ",
+                        "BMU",
+                        "BOL",
+                        "BRA",
+                        "BRB",
+                        "BRN",
+                        "BTN",
+                        "BVT",
+                        "BWA",
+                        "CAF",
+                        "CAN",
+                        "CCK",
+                        "CHE",
+                        "CHL",
+                        "CHN",
+                        "CIV",
+                        "CMR",
+                        "COD",
+                        "COG",
+                        "COK",
+                        "COL",
+                        "COM",
+                        "CPV",
+                        "CRI",
+                        "CUB",
+                        "CUW",
+                        "CXR",
+                        "CYM",
+                        "CYP",
+                        "CZE",
+                        "DEU",
+                        "DJI",
+                        "DMA",
+                        "DNK",
+                        "DOM",
+                        "DZA",
+                        "ECU",
+                        "EGY",
+                        "ERI",
+                        "ESH",
+                        "ESP",
+                        "EST",
+                        "ETH",
+                        "FIN",
+                        "FJI",
+                        "FLK",
+                        "FRA",
+                        "FRO",
+                        "FSM",
+                        "GAB",
+                        "GBR",
+                        "GEO",
+                        "GGY",
+                        "GHA",
+                        "GIB",
+                        "GIN",
+                        "GLP",
+                        "GMB",
+                        "GNB",
+                        "GNQ",
+                        "GRC",
+                        "GRD",
+                        "GRL",
+                        "GTM",
+                        "GUF",
+                        "GUM",
+                        "GUY",
+                        "HKG",
+                        "HMD",
+                        "HND",
+                        "HRV",
+                        "HTI",
+                        "HUN",
+                        "IDN",
+                        "IMN",
+                        "IND",
+                        "IOT",
+                        "IRL",
+                        "IRN",
+                        "IRQ",
+                        "ISL",
+                        "ISR",
+                        "ITA",
+                        "JAM",
+                        "JEY",
+                        "JOR",
+                        "JPN",
+                        "KAZ",
+                        "KEN",
+                        "KGZ",
+                        "KHM",
+                        "KIR",
+                        "KNA",
+                        "KOR",
+                        "KWT",
+                        "LAO",
+                        "LBN",
+                        "LBR",
+                        "LBY",
+                        "LCA",
+                        "LIE",
+                        "LKA",
+                        "LSO",
+                        "LTU",
+                        "LUX",
+                        "LVA",
+                        "MAC",
+                        "MAF",
+                        "MAR",
+                        "MCO",
+                        "MDA",
+                        "MDG",
+                        "MDV",
+                        "MEX",
+                        "MHL",
+                        "MKD",
+                        "MLI",
+                        "MLT",
+                        "MMR",
+                        "MNE",
+                        "MNG",
+                        "MNP",
+                        "MOZ",
+                        "MRT",
+                        "MSR",
+                        "MTQ",
+                        "MUS",
+                        "MWI",
+                        "MYS",
+                        "MYT",
+                        "NAM",
+                        "NCL",
+                        "NER",
+                        "NFK",
+                        "NGA",
+                        "NIC",
+                        "NIU",
+                        "NLD",
+                        "NOR",
+                        "NPL",
+                        "NRU",
+                        "NZL",
+                        "OMN",
+                        "PAK",
+                        "PAN",
+                        "PCN",
+                        "PER",
+                        "PHL",
+                        "PLW",
+                        "PNG",
+                        "POL",
+                        "PRI",
+                        "PRK",
+                        "PRT",
+                        "PRY",
+                        "PSE",
+                        "PYF",
+                        "QAT",
+                        "REU",
+                        "ROU",
+                        "RUS",
+                        "RWA",
+                        "SAU",
+                        "SDN",
+                        "SEN",
+                        "SGP",
+                        "SGS",
+                        "SHN",
+                        "SJM",
+                        "SLB",
+                        "SLE",
+                        "SLV",
+                        "SMR",
+                        "SOM",
+                        "SPM",
+                        "SRB",
+                        "SSD",
+                        "STP",
+                        "SUR",
+                        "SVK",
+                        "SVN",
+                        "SWE",
+                        "SWZ",
+                        "SXM",
+                        "SYC",
+                        "SYR",
+                        "TCA",
+                        "TCD",
+                        "TGO",
+                        "THA",
+                        "TJK",
+                        "TKL",
+                        "TKM",
+                        "TLS",
+                        "TON",
+                        "TTO",
+                        "TUN",
+                        "TUR",
+                        "TUV",
+                        "TWN",
+                        "TZA",
+                        "UGA",
+                        "UKR",
+                        "UMI",
+                        "URY",
+                        "USA",
+                        "UZB",
+                        "VAT",
+                        "VCT",
+                        "VEN",
+                        "VGB",
+                        "VIR",
+                        "VNM",
+                        "VUT",
+                        "WLF",
+                        "WSM",
+                        "YEM",
+                        "ZAF",
+                        "ZMB",
+                        "ZWE"
+                      ]
+                    },
+                    "administrative_area": {
+                      "type": "string",
+                      "description": "State / Province / Region"
+                    },
+                    "sub_administrative_area": {
+                      "type": "string",
+                      "description": "County / District"
+                    },
+                    "locality": {
+                      "type": "string",
+                      "description": "City / Town"
+                    },
+                    "postal_code": {
+                      "type": "string",
+                      "description": "Postal Code / Zip Code"
+                    },
+                    "thoroughfare": {
+                      "type": "string",
+                      "description": "Street Address"
+                    },
+                    "premise": {
+                      "type": "string",
+                      "description": "Apartment / Suite / Box number etc"
+                    },
+                    "sub_premise": {
+                      "type": "string",
+                      "description": "Floor # / Room # / Building label etc"
+                    }
+                  }
+                }
+              }
+            },
+            "resource": {
+              "type": "object",
+              "description": "Defines the properties for a resource",
+              "additionalProperties": false,
+              "required": [
+                "label",
+                "entity_id",
+                "entity_type",
+                "created",
+                "updated",
+                "resource_type",
+                "location"
+              ],
+              "properties": {
+                "resource_id": {
+                  "description": "The identifier for the resource",
+                  "type": "string",
+                  "readOnly": true,
+                  "pattern": "^[0-9a-zA-Z-_]+$"
+                },
+                "entity_id": {
+                  "x-no-api-doc": true,
+                  "type": "string",
+                  "description": "Customer identifier",
+                  "readOnly": true,
+                  "pattern": "^[0-9a-zA-Z-_]+$"
+                },
+                "entity_type": {
+                  "x-no-api-doc": true,
+                  "enum": [
+                    "RES"
+                  ]
+                },
+                "label": {
+                  "type": "string",
+                  "description": "Label for the entity"
+                },
+                "slug": {
+                  "type": "string",
+                  "description": "Slug for the entity (Auto-generated from the label)",
+                  "readOnly": true,
+                  "deprecated": true,
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                },
+                "created": {
+                  "description": "Date the entity was created",
+                  "type": "string",
+                  "format": "date-time",
+                  "readOnly": true
+                },
+                "updated": {
+                  "description": "Last date the entity was updated",
+                  "type": "string",
+                  "format": "date-time",
+                  "readOnly": true
+                },
+                "resource_type": {
+                  "type": "string",
+                  "description": "Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased",
+                  "pattern": "^[a-z][0-9a-zA-Z-]+$"
+                },
+                "meta": {
+                  "type": "object",
+                  "description": "Data for the resource as a key value pair",
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "propertyNames": {
+                    "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+                  }
+                },
+                "location": {
+                  "type": "object",
+                  "description": "Defines the properties for a part unit",
+                  "additionalProperties": false,
+                  "required": [
+                    "label",
+                    "entity_id",
+                    "entity_type",
+                    "created",
+                    "updated",
+                    "location_type",
+                    "address"
+                  ],
+                  "properties": {
+                    "location_id": {
+                      "description": "The identifier for the location",
+                      "type": "string",
+                      "readOnly": true,
+                      "pattern": "^[0-9a-zA-Z-_]+$"
+                    },
+                    "entity_id": {
+                      "x-no-api-doc": true,
+                      "type": "string",
+                      "description": "Customer identifier",
+                      "readOnly": true,
+                      "pattern": "^[0-9a-zA-Z-_]+$"
+                    },
+                    "entity_type": {
+                      "x-no-api-doc": true,
+                      "enum": [
+                        "LOC"
+                      ]
+                    },
+                    "label": {
+                      "type": "string",
+                      "description": "Label for the entity"
+                    },
+                    "slug": {
+                      "type": "string",
+                      "description": "Slug for the entity (Auto-generated from the label)",
+                      "readOnly": true,
+                      "deprecated": true,
+                      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                    },
+                    "created": {
+                      "description": "Date the entity was created",
+                      "type": "string",
+                      "format": "date-time",
+                      "readOnly": true
+                    },
+                    "updated": {
+                      "description": "Last date the entity was updated",
+                      "type": "string",
+                      "format": "date-time",
+                      "readOnly": true
+                    },
+                    "location_type": {
+                      "type": "string",
+                      "description": "The type of location",
+                      "enum": [
+                        "warehouse",
+                        "facility",
+                        "other"
+                      ]
+                    },
+                    "formatted_address": {
+                      "type": "string",
+                      "readOnly": true,
+                      "description": "Address formatted for the where region the location exists in"
+                    },
+                    "address": {
+                      "type": "object",
+                      "required": [
+                        "country",
+                        "administrative_area",
+                        "locality",
+                        "postal_code",
+                        "thoroughfare"
+                      ],
+                      "description": "xNAL address for the location ",
+                      "properties": {
+                        "country": {
+                          "type": "string",
+                          "description": "Three Letter ISO country code",
+                          "enum": [
+                            "ABW",
+                            "AFG",
+                            "AGO",
+                            "AIA",
+                            "ALA",
+                            "ALB",
+                            "AND",
+                            "ARE",
+                            "ARG",
+                            "ARM",
+                            "ASM",
+                            "ATA",
+                            "ATF",
+                            "ATG",
+                            "AUS",
+                            "AUT",
+                            "AZE",
+                            "BDI",
+                            "BEL",
+                            "BEN",
+                            "BES",
+                            "BFA",
+                            "BGD",
+                            "BGR",
+                            "BHR",
+                            "BHS",
+                            "BIH",
+                            "BLM",
+                            "BLR",
+                            "BLZ",
+                            "BMU",
+                            "BOL",
+                            "BRA",
+                            "BRB",
+                            "BRN",
+                            "BTN",
+                            "BVT",
+                            "BWA",
+                            "CAF",
+                            "CAN",
+                            "CCK",
+                            "CHE",
+                            "CHL",
+                            "CHN",
+                            "CIV",
+                            "CMR",
+                            "COD",
+                            "COG",
+                            "COK",
+                            "COL",
+                            "COM",
+                            "CPV",
+                            "CRI",
+                            "CUB",
+                            "CUW",
+                            "CXR",
+                            "CYM",
+                            "CYP",
+                            "CZE",
+                            "DEU",
+                            "DJI",
+                            "DMA",
+                            "DNK",
+                            "DOM",
+                            "DZA",
+                            "ECU",
+                            "EGY",
+                            "ERI",
+                            "ESH",
+                            "ESP",
+                            "EST",
+                            "ETH",
+                            "FIN",
+                            "FJI",
+                            "FLK",
+                            "FRA",
+                            "FRO",
+                            "FSM",
+                            "GAB",
+                            "GBR",
+                            "GEO",
+                            "GGY",
+                            "GHA",
+                            "GIB",
+                            "GIN",
+                            "GLP",
+                            "GMB",
+                            "GNB",
+                            "GNQ",
+                            "GRC",
+                            "GRD",
+                            "GRL",
+                            "GTM",
+                            "GUF",
+                            "GUM",
+                            "GUY",
+                            "HKG",
+                            "HMD",
+                            "HND",
+                            "HRV",
+                            "HTI",
+                            "HUN",
+                            "IDN",
+                            "IMN",
+                            "IND",
+                            "IOT",
+                            "IRL",
+                            "IRN",
+                            "IRQ",
+                            "ISL",
+                            "ISR",
+                            "ITA",
+                            "JAM",
+                            "JEY",
+                            "JOR",
+                            "JPN",
+                            "KAZ",
+                            "KEN",
+                            "KGZ",
+                            "KHM",
+                            "KIR",
+                            "KNA",
+                            "KOR",
+                            "KWT",
+                            "LAO",
+                            "LBN",
+                            "LBR",
+                            "LBY",
+                            "LCA",
+                            "LIE",
+                            "LKA",
+                            "LSO",
+                            "LTU",
+                            "LUX",
+                            "LVA",
+                            "MAC",
+                            "MAF",
+                            "MAR",
+                            "MCO",
+                            "MDA",
+                            "MDG",
+                            "MDV",
+                            "MEX",
+                            "MHL",
+                            "MKD",
+                            "MLI",
+                            "MLT",
+                            "MMR",
+                            "MNE",
+                            "MNG",
+                            "MNP",
+                            "MOZ",
+                            "MRT",
+                            "MSR",
+                            "MTQ",
+                            "MUS",
+                            "MWI",
+                            "MYS",
+                            "MYT",
+                            "NAM",
+                            "NCL",
+                            "NER",
+                            "NFK",
+                            "NGA",
+                            "NIC",
+                            "NIU",
+                            "NLD",
+                            "NOR",
+                            "NPL",
+                            "NRU",
+                            "NZL",
+                            "OMN",
+                            "PAK",
+                            "PAN",
+                            "PCN",
+                            "PER",
+                            "PHL",
+                            "PLW",
+                            "PNG",
+                            "POL",
+                            "PRI",
+                            "PRK",
+                            "PRT",
+                            "PRY",
+                            "PSE",
+                            "PYF",
+                            "QAT",
+                            "REU",
+                            "ROU",
+                            "RUS",
+                            "RWA",
+                            "SAU",
+                            "SDN",
+                            "SEN",
+                            "SGP",
+                            "SGS",
+                            "SHN",
+                            "SJM",
+                            "SLB",
+                            "SLE",
+                            "SLV",
+                            "SMR",
+                            "SOM",
+                            "SPM",
+                            "SRB",
+                            "SSD",
+                            "STP",
+                            "SUR",
+                            "SVK",
+                            "SVN",
+                            "SWE",
+                            "SWZ",
+                            "SXM",
+                            "SYC",
+                            "SYR",
+                            "TCA",
+                            "TCD",
+                            "TGO",
+                            "THA",
+                            "TJK",
+                            "TKL",
+                            "TKM",
+                            "TLS",
+                            "TON",
+                            "TTO",
+                            "TUN",
+                            "TUR",
+                            "TUV",
+                            "TWN",
+                            "TZA",
+                            "UGA",
+                            "UKR",
+                            "UMI",
+                            "URY",
+                            "USA",
+                            "UZB",
+                            "VAT",
+                            "VCT",
+                            "VEN",
+                            "VGB",
+                            "VIR",
+                            "VNM",
+                            "VUT",
+                            "WLF",
+                            "WSM",
+                            "YEM",
+                            "ZAF",
+                            "ZMB",
+                            "ZWE"
+                          ]
+                        },
+                        "administrative_area": {
+                          "type": "string",
+                          "description": "State / Province / Region"
+                        },
+                        "sub_administrative_area": {
+                          "type": "string",
+                          "description": "County / District"
+                        },
+                        "locality": {
+                          "type": "string",
+                          "description": "City / Town"
+                        },
+                        "postal_code": {
+                          "type": "string",
+                          "description": "Postal Code / Zip Code"
+                        },
+                        "thoroughfare": {
+                          "type": "string",
+                          "description": "Street Address"
+                        },
+                        "premise": {
+                          "type": "string",
+                          "description": "Apartment / Suite / Box number etc"
+                        },
+                        "sub_premise": {
+                          "type": "string",
+                          "description": "Floor # / Room # / Building label etc"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
     },
     "input_filter": {
       "type": "array",
@@ -13863,6 +21913,15 @@ Fetch Unit
             "CANCELLED",
             "BLOCKED"
           ]
+        },
+        "description": {
+          "type": "string",
+          "nullable": true,
+          "description": "A description for the status"
+        },
+        "order": {
+          "type": "number",
+          "description": "Order status appears when listing"
         }
       }
     }
@@ -13893,9 +21952,9 @@ Status Code **200**
 |»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
 |»» created|string(date-time)|false|read-only|Date the entity was created|
 |»» updated|string(date-time)|false|read-only|Last date the entity was updated|
-|»» serial_number|string|false|read-only|Serial number of the unit with prefix stripped|
-|»» raw_serial_number|string|false|none|Serial number of the unit|
-|»» tenant_part_number|string|false|none|Identifier set by the tenant|
+|»» serial_number|string\|null|false|read-only|Serial number of the unit with prefix stripped|
+|»» raw_serial_number|string\|null|false|none|Serial number of the unit|
+|»» tenant_part_number|string\|null|false|none|Identifier set by the tenant|
 |»» manufacturer|object|false|none|Manufacturer information for the part|
 |»»» part_number|string|true|none|Part number the manufacturer uses. If this is not set, then the part number is used|
 |»»» manufacturer_id|string|false|read-only|Customer identifier|
@@ -13934,6 +21993,8 @@ Status Code **200**
 |»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
 |»»»»» status|string|true|none|A Custom label for the status|
 |»»»»» category|string|true|none|The classifier for the statues|
+|»»»»» description|string\|null|false|none|A description for the status|
+|»»»»» order|number|false|none|Order status appears when listing|
 |»»»» total_programs|number|false|none|Total programs under the customer|
 |»»»» total_projects|number|false|none|Total projects under the customer|
 |»»» manufacturer|object|true|none|Manufacturer information for the part|
@@ -14265,6 +22326,8 @@ Status Code **200**
 |»»»»»»»»»»»»»»»»»»»»»»»»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»» status|string|true|none|A Custom label for the status|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»» category|string|true|none|The classifier for the statues|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»» description|string\|null|false|none|A description for the status|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»» order|number|false|none|Order status appears when listing|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»» total_programs|number|false|none|Total programs under the customer|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»» total_projects|number|false|none|Total projects under the customer|
 |»»»»»»»»»»»»»»»»»»»»»»»»»» current_location|object|false|none|Defines the properties for a part unit|
@@ -14305,313 +22368,427 @@ Status Code **200**
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»» thoroughfare|string|true|none|Street Address|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»» premise|string|false|none|Apartment / Suite / Box number etc|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»» sub_premise|string|false|none|Floor # / Room # / Building label etc|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»» input_filter|[object]|false|none|Input Filters allow custom fields to be defined for entities|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» label|string|true|none|Human readable name|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» key|string|true|read-only|Slug used to store the property|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» filters|[anyOf]|true|none|A Collection of filters applied to the field|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»» resource|any|false|none|none|
 
 *anyOf*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|This filter will set the value based on a list of approved values. If the value is not in the list, it will then be set to empty unless the default option is set|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» approved_values|[string]|true|none|The list of approved values|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» default|string\|null|false|none|If this is set and the value is not in the approved_list, set the value to this|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|null|false|none|none|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value camelCase|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Defines the properties for a resource|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» resource_id|string|false|read-only|The identifier for the resource|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» label|string|true|none|Label for the entity|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» resource_type|string|true|none|Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» meta|object|false|none|Data for the resource as a key value pair|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» **additionalProperties**|string|false|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location|object|true|none|Defines the properties for a part unit|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location_id|string|false|read-only|The identifier for the location|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» label|string|true|none|Label for the entity|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location_type|string|true|none|The type of location|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» formatted_address|string|false|read-only|Address formatted for the where region the location exists in|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» address|object|true|none|xNAL address for the location|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» country|string|true|none|Three Letter ISO country code|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» administrative_area|string|true|none|State / Province / Region|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» sub_administrative_area|string|false|none|County / District|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» locality|string|true|none|City / Town|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» postal_code|string|true|none|Postal Code / Zip Code|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» thoroughfare|string|true|none|Street Address|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» premise|string|false|none|Apartment / Suite / Box number etc|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» sub_premise|string|false|none|Floor # / Room # / Building label etc|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a date|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|Date filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform values into null. This is helpful when trying to make a value required. The following are considered empty: # The number 0 or 0.0 # empty string '' # A boolean false # The word 'false' #|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|empty filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a float. Non numeric characters (including comma) will be removed|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|How many decimal places to preserve|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value kebab-case|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value lowercase|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a number. Non numeric characters (including comma and decimal points) will be removed|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|Number filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Add a prefix to the start of a string. If the string already start with the prefix, it will not prepend.|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» prefix|string|true|none|The prefix to add|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value snake_case|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a string|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|String filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Add a suffix to the start of a string. If the string already start with the suffix, it will not append.|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» suffix|string|true|none|The suffix to add|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to trim whitespace from a value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|By default will trim from the start and end|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» start|boolean|false|none|Remove white space from the start of the string|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» end|boolean|false|none|Remove white space from the end of the string|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value UPPERCASE|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Defines the properties for a resource|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» resource_id|string|false|read-only|The identifier for the resource|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» label|string|true|none|Label for the entity|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» resource_type|string|true|none|Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» meta|object|false|none|Data for the resource as a key value pair|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» **additionalProperties**|string|false|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location|object|true|none|Defines the properties for a part unit|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location_id|string|false|read-only|The identifier for the location|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» label|string|true|none|Label for the entity|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location_type|string|true|none|The type of location|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» formatted_address|string|false|read-only|Address formatted for the where region the location exists in|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» address|object|true|none|xNAL address for the location|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» country|string|true|none|Three Letter ISO country code|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» administrative_area|string|true|none|State / Province / Region|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» sub_administrative_area|string|false|none|County / District|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» locality|string|true|none|City / Town|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» postal_code|string|true|none|Postal Code / Zip Code|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» thoroughfare|string|true|none|Street Address|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» premise|string|false|none|Apartment / Suite / Box number etc|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» sub_premise|string|false|none|Floor # / Room # / Building label etc|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» resource|object|true|none|Defines the properties for a resource|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» resource_id|string|false|read-only|The identifier for the resource|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» label|string|true|none|Label for the entity|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» resource_type|string|true|none|Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» meta|object|false|none|Data for the resource as a key value pair|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» **additionalProperties**|string|false|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location|object|true|none|Defines the properties for a part unit|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location_id|string|false|read-only|The identifier for the location|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» label|string|true|none|Label for the entity|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location_type|string|true|none|The type of location|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» formatted_address|string|false|read-only|Address formatted for the where region the location exists in|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» address|object|true|none|xNAL address for the location|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» country|string|true|none|Three Letter ISO country code|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» administrative_area|string|true|none|State / Province / Region|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» sub_administrative_area|string|false|none|County / District|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» locality|string|true|none|City / Town|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» postal_code|string|true|none|Postal Code / Zip Code|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» thoroughfare|string|true|none|Street Address|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» premise|string|false|none|Apartment / Suite / Box number etc|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» sub_premise|string|false|none|Floor # / Room # / Building label etc|
 
 *continued*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» validators|[anyOf]|true|none|A set of validators to use for this field|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» input_filter|[object]|false|none|Input Filters allow custom fields to be defined for entities|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» label|string|true|none|Human readable name|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» key|string|true|read-only|Slug used to store the property|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» filters|[anyOf]|true|none|A Collection of filters applied to the field|
 
 *anyOf*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number is between two values. By default, min and max are included|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» min|number|true|none|Minimum value to check|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» max|number|true|none|The maximum value to check|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» include|boolean|false|none|Include the value in the check|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate value does not match a list (black list)|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|This filter will set the value based on a list of approved values. If the value is not in the list, it will then be set to empty unless the default option is set|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» list|[string]|true|none|The list of approved values|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» approved_values|[string]|true|none|The list of approved values|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» default|string\|null|false|none|If this is set and the value is not in the approved_list, set the value to this|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string contains a value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value camelCase|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a date|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|Date filter has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform values into null. This is helpful when trying to make a value required. The following are considered empty: # The number 0 or 0.0 # empty string '' # A boolean false # The word 'false' #|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|empty filter has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a float. Non numeric characters (including comma) will be removed|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» contains|string|true|none|String must contain with this value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|How many decimal places to preserve|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string is a correct email address|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value kebab-case|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value lowercase|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a number. Non numeric characters (including comma and decimal points) will be removed|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|Number filter has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Add a prefix to the start of a string. If the string already start with the prefix, it will not prepend.|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» strict|boolean|false|none|Enforce strict standards from ARPA. This will enforce the length of the string|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» lookup|boolean|false|none|Look up the host name and check if it has a valid MX record|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» prefix|string|true|none|The prefix to add|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string ends with a value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value snake_case|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a string|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|String filter has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Add a suffix to the start of a string. If the string already start with the suffix, it will not append.|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» ends_with|string|true|none|String must end with this value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» suffix|string|true|none|The suffix to add|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number equals a value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to trim whitespace from a value|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» value|number|true|none|The value to compare against|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When value is a float, this will set the decimal precision|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|By default will trim from the start and end|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» start|boolean|false|none|Remove white space from the start of the string|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» end|boolean|false|none|Remove white space from the end of the string|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number is greater than a value. By default, this will check if value is greater than or equals to|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value UPPERCASE|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» value|number|true|none|The value to compare against|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» include|boolean|false|none|Include the value in the check|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string has a correct DNS records|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» record_type|string|false|none|DNS record type to validate|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an IP address format. Defaults to matching IPv4|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» versions|[string]|false|none|IP Version to match against|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string is a certain length|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» length|string|true|none|String must contain with this value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» operator|string|false|none|Which type of length comparision to make|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number is less than a value. By default, this will check if value is less than or equals to|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» value|number|true|none|The value to compare against|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» include|boolean|false|none|Include the value in the check|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an MAC address format|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This validator has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches a regular expression|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» mask|string|true|none|Mask to validate against|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string starts with a value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» starts_with|string|true|none|String must start with this value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validates that a value follows a step. Both start and end options do not have to sync with the step. If they do not sync then find the nearest step.|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» step|number|true|none|The step value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» start|integer|false|none|Start stepping at this value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» end|integer|false|none|End stepping at this value|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an URI|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» schemes|[string]|false|none|Schemes to match. By default all are matched|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate value matches a list (white list)|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» list|[string]|true|none|The list of approved values|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
 
 *continued*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» current_status|object|false|none|Defines the properties for a status|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» status|string|true|none|A Custom label for the status|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» category|string|true|none|The classifier for the statues|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» validators|[anyOf]|true|none|A set of validators to use for this field|
+
+*anyOf*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number is between two values. By default, min and max are included|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» min|number|true|none|Minimum value to check|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» max|number|true|none|The maximum value to check|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» include|boolean|false|none|Include the value in the check|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate value does not match a list (black list)|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» list|[string]|true|none|The list of approved values|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string contains a value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» contains|string|true|none|String must contain with this value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string is a correct email address|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» strict|boolean|false|none|Enforce strict standards from ARPA. This will enforce the length of the string|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» lookup|boolean|false|none|Look up the host name and check if it has a valid MX record|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string ends with a value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» ends_with|string|true|none|String must end with this value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number equals a value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» value|number|true|none|The value to compare against|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When value is a float, this will set the decimal precision|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number is greater than a value. By default, this will check if value is greater than or equals to|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» value|number|true|none|The value to compare against|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» include|boolean|false|none|Include the value in the check|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string has a correct DNS records|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» record_type|string|false|none|DNS record type to validate|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an IP address format. Defaults to matching IPv4|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» versions|[string]|false|none|IP Version to match against|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string is a certain length|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» length|string|true|none|String must contain with this value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» operator|string|false|none|Which type of length comparision to make|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number is less than a value. By default, this will check if value is less than or equals to|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» value|number|true|none|The value to compare against|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» include|boolean|false|none|Include the value in the check|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an MAC address format|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This validator has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches a regular expression|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» mask|string|true|none|Mask to validate against|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string starts with a value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» starts_with|string|true|none|String must start with this value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validates that a value follows a step. Both start and end options do not have to sync with the step. If they do not sync then find the nearest step.|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» step|number|true|none|The step value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» start|integer|false|none|Start stepping at this value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» end|integer|false|none|End stepping at this value|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an URI|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» schemes|[string]|false|none|Schemes to match. By default all are matched|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate value matches a list (white list)|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» list|[string]|true|none|The list of approved values|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+
+*continued*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» current_status|object|false|none|Defines the properties for a status|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» status|string|true|none|A Custom label for the status|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» category|string|true|none|The classifier for the statues|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» description|string\|null|false|none|A description for the status|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» order|number|false|none|Order status appears when listing|
 
 #### Enumerated Values
 
@@ -14965,6 +23142,768 @@ Status Code **200**
 |country|ZAF|
 |country|ZMB|
 |country|ZWE|
+|entity_type|LOC|
+|location_type|warehouse|
+|location_type|facility|
+|location_type|other|
+|country|ABW|
+|country|AFG|
+|country|AGO|
+|country|AIA|
+|country|ALA|
+|country|ALB|
+|country|AND|
+|country|ARE|
+|country|ARG|
+|country|ARM|
+|country|ASM|
+|country|ATA|
+|country|ATF|
+|country|ATG|
+|country|AUS|
+|country|AUT|
+|country|AZE|
+|country|BDI|
+|country|BEL|
+|country|BEN|
+|country|BES|
+|country|BFA|
+|country|BGD|
+|country|BGR|
+|country|BHR|
+|country|BHS|
+|country|BIH|
+|country|BLM|
+|country|BLR|
+|country|BLZ|
+|country|BMU|
+|country|BOL|
+|country|BRA|
+|country|BRB|
+|country|BRN|
+|country|BTN|
+|country|BVT|
+|country|BWA|
+|country|CAF|
+|country|CAN|
+|country|CCK|
+|country|CHE|
+|country|CHL|
+|country|CHN|
+|country|CIV|
+|country|CMR|
+|country|COD|
+|country|COG|
+|country|COK|
+|country|COL|
+|country|COM|
+|country|CPV|
+|country|CRI|
+|country|CUB|
+|country|CUW|
+|country|CXR|
+|country|CYM|
+|country|CYP|
+|country|CZE|
+|country|DEU|
+|country|DJI|
+|country|DMA|
+|country|DNK|
+|country|DOM|
+|country|DZA|
+|country|ECU|
+|country|EGY|
+|country|ERI|
+|country|ESH|
+|country|ESP|
+|country|EST|
+|country|ETH|
+|country|FIN|
+|country|FJI|
+|country|FLK|
+|country|FRA|
+|country|FRO|
+|country|FSM|
+|country|GAB|
+|country|GBR|
+|country|GEO|
+|country|GGY|
+|country|GHA|
+|country|GIB|
+|country|GIN|
+|country|GLP|
+|country|GMB|
+|country|GNB|
+|country|GNQ|
+|country|GRC|
+|country|GRD|
+|country|GRL|
+|country|GTM|
+|country|GUF|
+|country|GUM|
+|country|GUY|
+|country|HKG|
+|country|HMD|
+|country|HND|
+|country|HRV|
+|country|HTI|
+|country|HUN|
+|country|IDN|
+|country|IMN|
+|country|IND|
+|country|IOT|
+|country|IRL|
+|country|IRN|
+|country|IRQ|
+|country|ISL|
+|country|ISR|
+|country|ITA|
+|country|JAM|
+|country|JEY|
+|country|JOR|
+|country|JPN|
+|country|KAZ|
+|country|KEN|
+|country|KGZ|
+|country|KHM|
+|country|KIR|
+|country|KNA|
+|country|KOR|
+|country|KWT|
+|country|LAO|
+|country|LBN|
+|country|LBR|
+|country|LBY|
+|country|LCA|
+|country|LIE|
+|country|LKA|
+|country|LSO|
+|country|LTU|
+|country|LUX|
+|country|LVA|
+|country|MAC|
+|country|MAF|
+|country|MAR|
+|country|MCO|
+|country|MDA|
+|country|MDG|
+|country|MDV|
+|country|MEX|
+|country|MHL|
+|country|MKD|
+|country|MLI|
+|country|MLT|
+|country|MMR|
+|country|MNE|
+|country|MNG|
+|country|MNP|
+|country|MOZ|
+|country|MRT|
+|country|MSR|
+|country|MTQ|
+|country|MUS|
+|country|MWI|
+|country|MYS|
+|country|MYT|
+|country|NAM|
+|country|NCL|
+|country|NER|
+|country|NFK|
+|country|NGA|
+|country|NIC|
+|country|NIU|
+|country|NLD|
+|country|NOR|
+|country|NPL|
+|country|NRU|
+|country|NZL|
+|country|OMN|
+|country|PAK|
+|country|PAN|
+|country|PCN|
+|country|PER|
+|country|PHL|
+|country|PLW|
+|country|PNG|
+|country|POL|
+|country|PRI|
+|country|PRK|
+|country|PRT|
+|country|PRY|
+|country|PSE|
+|country|PYF|
+|country|QAT|
+|country|REU|
+|country|ROU|
+|country|RUS|
+|country|RWA|
+|country|SAU|
+|country|SDN|
+|country|SEN|
+|country|SGP|
+|country|SGS|
+|country|SHN|
+|country|SJM|
+|country|SLB|
+|country|SLE|
+|country|SLV|
+|country|SMR|
+|country|SOM|
+|country|SPM|
+|country|SRB|
+|country|SSD|
+|country|STP|
+|country|SUR|
+|country|SVK|
+|country|SVN|
+|country|SWE|
+|country|SWZ|
+|country|SXM|
+|country|SYC|
+|country|SYR|
+|country|TCA|
+|country|TCD|
+|country|TGO|
+|country|THA|
+|country|TJK|
+|country|TKL|
+|country|TKM|
+|country|TLS|
+|country|TON|
+|country|TTO|
+|country|TUN|
+|country|TUR|
+|country|TUV|
+|country|TWN|
+|country|TZA|
+|country|UGA|
+|country|UKR|
+|country|UMI|
+|country|URY|
+|country|USA|
+|country|UZB|
+|country|VAT|
+|country|VCT|
+|country|VEN|
+|country|VGB|
+|country|VIR|
+|country|VNM|
+|country|VUT|
+|country|WLF|
+|country|WSM|
+|country|YEM|
+|country|ZAF|
+|country|ZMB|
+|country|ZWE|
+|entity_type|RES|
+|entity_type|LOC|
+|location_type|warehouse|
+|location_type|facility|
+|location_type|other|
+|country|ABW|
+|country|AFG|
+|country|AGO|
+|country|AIA|
+|country|ALA|
+|country|ALB|
+|country|AND|
+|country|ARE|
+|country|ARG|
+|country|ARM|
+|country|ASM|
+|country|ATA|
+|country|ATF|
+|country|ATG|
+|country|AUS|
+|country|AUT|
+|country|AZE|
+|country|BDI|
+|country|BEL|
+|country|BEN|
+|country|BES|
+|country|BFA|
+|country|BGD|
+|country|BGR|
+|country|BHR|
+|country|BHS|
+|country|BIH|
+|country|BLM|
+|country|BLR|
+|country|BLZ|
+|country|BMU|
+|country|BOL|
+|country|BRA|
+|country|BRB|
+|country|BRN|
+|country|BTN|
+|country|BVT|
+|country|BWA|
+|country|CAF|
+|country|CAN|
+|country|CCK|
+|country|CHE|
+|country|CHL|
+|country|CHN|
+|country|CIV|
+|country|CMR|
+|country|COD|
+|country|COG|
+|country|COK|
+|country|COL|
+|country|COM|
+|country|CPV|
+|country|CRI|
+|country|CUB|
+|country|CUW|
+|country|CXR|
+|country|CYM|
+|country|CYP|
+|country|CZE|
+|country|DEU|
+|country|DJI|
+|country|DMA|
+|country|DNK|
+|country|DOM|
+|country|DZA|
+|country|ECU|
+|country|EGY|
+|country|ERI|
+|country|ESH|
+|country|ESP|
+|country|EST|
+|country|ETH|
+|country|FIN|
+|country|FJI|
+|country|FLK|
+|country|FRA|
+|country|FRO|
+|country|FSM|
+|country|GAB|
+|country|GBR|
+|country|GEO|
+|country|GGY|
+|country|GHA|
+|country|GIB|
+|country|GIN|
+|country|GLP|
+|country|GMB|
+|country|GNB|
+|country|GNQ|
+|country|GRC|
+|country|GRD|
+|country|GRL|
+|country|GTM|
+|country|GUF|
+|country|GUM|
+|country|GUY|
+|country|HKG|
+|country|HMD|
+|country|HND|
+|country|HRV|
+|country|HTI|
+|country|HUN|
+|country|IDN|
+|country|IMN|
+|country|IND|
+|country|IOT|
+|country|IRL|
+|country|IRN|
+|country|IRQ|
+|country|ISL|
+|country|ISR|
+|country|ITA|
+|country|JAM|
+|country|JEY|
+|country|JOR|
+|country|JPN|
+|country|KAZ|
+|country|KEN|
+|country|KGZ|
+|country|KHM|
+|country|KIR|
+|country|KNA|
+|country|KOR|
+|country|KWT|
+|country|LAO|
+|country|LBN|
+|country|LBR|
+|country|LBY|
+|country|LCA|
+|country|LIE|
+|country|LKA|
+|country|LSO|
+|country|LTU|
+|country|LUX|
+|country|LVA|
+|country|MAC|
+|country|MAF|
+|country|MAR|
+|country|MCO|
+|country|MDA|
+|country|MDG|
+|country|MDV|
+|country|MEX|
+|country|MHL|
+|country|MKD|
+|country|MLI|
+|country|MLT|
+|country|MMR|
+|country|MNE|
+|country|MNG|
+|country|MNP|
+|country|MOZ|
+|country|MRT|
+|country|MSR|
+|country|MTQ|
+|country|MUS|
+|country|MWI|
+|country|MYS|
+|country|MYT|
+|country|NAM|
+|country|NCL|
+|country|NER|
+|country|NFK|
+|country|NGA|
+|country|NIC|
+|country|NIU|
+|country|NLD|
+|country|NOR|
+|country|NPL|
+|country|NRU|
+|country|NZL|
+|country|OMN|
+|country|PAK|
+|country|PAN|
+|country|PCN|
+|country|PER|
+|country|PHL|
+|country|PLW|
+|country|PNG|
+|country|POL|
+|country|PRI|
+|country|PRK|
+|country|PRT|
+|country|PRY|
+|country|PSE|
+|country|PYF|
+|country|QAT|
+|country|REU|
+|country|ROU|
+|country|RUS|
+|country|RWA|
+|country|SAU|
+|country|SDN|
+|country|SEN|
+|country|SGP|
+|country|SGS|
+|country|SHN|
+|country|SJM|
+|country|SLB|
+|country|SLE|
+|country|SLV|
+|country|SMR|
+|country|SOM|
+|country|SPM|
+|country|SRB|
+|country|SSD|
+|country|STP|
+|country|SUR|
+|country|SVK|
+|country|SVN|
+|country|SWE|
+|country|SWZ|
+|country|SXM|
+|country|SYC|
+|country|SYR|
+|country|TCA|
+|country|TCD|
+|country|TGO|
+|country|THA|
+|country|TJK|
+|country|TKL|
+|country|TKM|
+|country|TLS|
+|country|TON|
+|country|TTO|
+|country|TUN|
+|country|TUR|
+|country|TUV|
+|country|TWN|
+|country|TZA|
+|country|UGA|
+|country|UKR|
+|country|UMI|
+|country|URY|
+|country|USA|
+|country|UZB|
+|country|VAT|
+|country|VCT|
+|country|VEN|
+|country|VGB|
+|country|VIR|
+|country|VNM|
+|country|VUT|
+|country|WLF|
+|country|WSM|
+|country|YEM|
+|country|ZAF|
+|country|ZMB|
+|country|ZWE|
+|entity_type|SRES|
+|entity_type|LOC|
+|location_type|warehouse|
+|location_type|facility|
+|location_type|other|
+|country|ABW|
+|country|AFG|
+|country|AGO|
+|country|AIA|
+|country|ALA|
+|country|ALB|
+|country|AND|
+|country|ARE|
+|country|ARG|
+|country|ARM|
+|country|ASM|
+|country|ATA|
+|country|ATF|
+|country|ATG|
+|country|AUS|
+|country|AUT|
+|country|AZE|
+|country|BDI|
+|country|BEL|
+|country|BEN|
+|country|BES|
+|country|BFA|
+|country|BGD|
+|country|BGR|
+|country|BHR|
+|country|BHS|
+|country|BIH|
+|country|BLM|
+|country|BLR|
+|country|BLZ|
+|country|BMU|
+|country|BOL|
+|country|BRA|
+|country|BRB|
+|country|BRN|
+|country|BTN|
+|country|BVT|
+|country|BWA|
+|country|CAF|
+|country|CAN|
+|country|CCK|
+|country|CHE|
+|country|CHL|
+|country|CHN|
+|country|CIV|
+|country|CMR|
+|country|COD|
+|country|COG|
+|country|COK|
+|country|COL|
+|country|COM|
+|country|CPV|
+|country|CRI|
+|country|CUB|
+|country|CUW|
+|country|CXR|
+|country|CYM|
+|country|CYP|
+|country|CZE|
+|country|DEU|
+|country|DJI|
+|country|DMA|
+|country|DNK|
+|country|DOM|
+|country|DZA|
+|country|ECU|
+|country|EGY|
+|country|ERI|
+|country|ESH|
+|country|ESP|
+|country|EST|
+|country|ETH|
+|country|FIN|
+|country|FJI|
+|country|FLK|
+|country|FRA|
+|country|FRO|
+|country|FSM|
+|country|GAB|
+|country|GBR|
+|country|GEO|
+|country|GGY|
+|country|GHA|
+|country|GIB|
+|country|GIN|
+|country|GLP|
+|country|GMB|
+|country|GNB|
+|country|GNQ|
+|country|GRC|
+|country|GRD|
+|country|GRL|
+|country|GTM|
+|country|GUF|
+|country|GUM|
+|country|GUY|
+|country|HKG|
+|country|HMD|
+|country|HND|
+|country|HRV|
+|country|HTI|
+|country|HUN|
+|country|IDN|
+|country|IMN|
+|country|IND|
+|country|IOT|
+|country|IRL|
+|country|IRN|
+|country|IRQ|
+|country|ISL|
+|country|ISR|
+|country|ITA|
+|country|JAM|
+|country|JEY|
+|country|JOR|
+|country|JPN|
+|country|KAZ|
+|country|KEN|
+|country|KGZ|
+|country|KHM|
+|country|KIR|
+|country|KNA|
+|country|KOR|
+|country|KWT|
+|country|LAO|
+|country|LBN|
+|country|LBR|
+|country|LBY|
+|country|LCA|
+|country|LIE|
+|country|LKA|
+|country|LSO|
+|country|LTU|
+|country|LUX|
+|country|LVA|
+|country|MAC|
+|country|MAF|
+|country|MAR|
+|country|MCO|
+|country|MDA|
+|country|MDG|
+|country|MDV|
+|country|MEX|
+|country|MHL|
+|country|MKD|
+|country|MLI|
+|country|MLT|
+|country|MMR|
+|country|MNE|
+|country|MNG|
+|country|MNP|
+|country|MOZ|
+|country|MRT|
+|country|MSR|
+|country|MTQ|
+|country|MUS|
+|country|MWI|
+|country|MYS|
+|country|MYT|
+|country|NAM|
+|country|NCL|
+|country|NER|
+|country|NFK|
+|country|NGA|
+|country|NIC|
+|country|NIU|
+|country|NLD|
+|country|NOR|
+|country|NPL|
+|country|NRU|
+|country|NZL|
+|country|OMN|
+|country|PAK|
+|country|PAN|
+|country|PCN|
+|country|PER|
+|country|PHL|
+|country|PLW|
+|country|PNG|
+|country|POL|
+|country|PRI|
+|country|PRK|
+|country|PRT|
+|country|PRY|
+|country|PSE|
+|country|PYF|
+|country|QAT|
+|country|REU|
+|country|ROU|
+|country|RUS|
+|country|RWA|
+|country|SAU|
+|country|SDN|
+|country|SEN|
+|country|SGP|
+|country|SGS|
+|country|SHN|
+|country|SJM|
+|country|SLB|
+|country|SLE|
+|country|SLV|
+|country|SMR|
+|country|SOM|
+|country|SPM|
+|country|SRB|
+|country|SSD|
+|country|STP|
+|country|SUR|
+|country|SVK|
+|country|SVN|
+|country|SWE|
+|country|SWZ|
+|country|SXM|
+|country|SYC|
+|country|SYR|
+|country|TCA|
+|country|TCD|
+|country|TGO|
+|country|THA|
+|country|TJK|
+|country|TKL|
+|country|TKM|
+|country|TLS|
+|country|TON|
+|country|TTO|
+|country|TUN|
+|country|TUR|
+|country|TUV|
+|country|TWN|
+|country|TZA|
+|country|UGA|
+|country|UKR|
+|country|UMI|
+|country|URY|
+|country|USA|
+|country|UZB|
+|country|VAT|
+|country|VCT|
+|country|VEN|
+|country|VGB|
+|country|VIR|
+|country|VNM|
+|country|VUT|
+|country|WLF|
+|country|WSM|
+|country|YEM|
+|country|ZAF|
+|country|ZMB|
+|country|ZWE|
+|entity_type|RES|
 |entity_type|LOC|
 |location_type|warehouse|
 |location_type|facility|
@@ -15388,11 +24327,13 @@ Updates a unit
     },
     "raw_serial_number": {
       "type": "string",
+      "nullable": true,
       "description": "Serial number of the unit with prefix stripped",
       "readOnly": true
     },
     "tenant_part_number": {
       "type": "string",
+      "nullable": true,
       "description": "Identifier set by the tenant"
     },
     "part": {
@@ -15434,6 +24375,15 @@ Updates a unit
             "CANCELLED",
             "BLOCKED"
           ]
+        },
+        "description": {
+          "type": "string",
+          "nullable": true,
+          "description": "A description for the status"
+        },
+        "order": {
+          "type": "number",
+          "description": "Order status appears when listing"
         }
       }
     },
@@ -15814,6 +24764,1337 @@ Updates a unit
         }
       }
     },
+    "resource": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "description": "Defines the properties for a resource",
+          "additionalProperties": false,
+          "required": [
+            "label",
+            "entity_id",
+            "entity_type",
+            "created",
+            "updated",
+            "resource_type",
+            "location"
+          ],
+          "properties": {
+            "resource_id": {
+              "description": "The identifier for the resource",
+              "type": "string",
+              "readOnly": true,
+              "pattern": "^[0-9a-zA-Z-_]+$"
+            },
+            "entity_id": {
+              "x-no-api-doc": true,
+              "type": "string",
+              "description": "Customer identifier",
+              "readOnly": true,
+              "pattern": "^[0-9a-zA-Z-_]+$"
+            },
+            "entity_type": {
+              "x-no-api-doc": true,
+              "enum": [
+                "RES"
+              ]
+            },
+            "label": {
+              "type": "string",
+              "description": "Label for the entity"
+            },
+            "slug": {
+              "type": "string",
+              "description": "Slug for the entity (Auto-generated from the label)",
+              "readOnly": true,
+              "deprecated": true,
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+            },
+            "created": {
+              "description": "Date the entity was created",
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true
+            },
+            "updated": {
+              "description": "Last date the entity was updated",
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true
+            },
+            "resource_type": {
+              "type": "string",
+              "description": "Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased",
+              "pattern": "^[a-z][0-9a-zA-Z-]+$"
+            },
+            "meta": {
+              "type": "object",
+              "description": "Data for the resource as a key value pair",
+              "additionalProperties": {
+                "type": "string"
+              },
+              "propertyNames": {
+                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+              }
+            },
+            "location": {
+              "type": "object",
+              "description": "Defines the properties for a part unit",
+              "additionalProperties": false,
+              "required": [
+                "label",
+                "entity_id",
+                "entity_type",
+                "created",
+                "updated",
+                "location_type",
+                "address"
+              ],
+              "properties": {
+                "location_id": {
+                  "description": "The identifier for the location",
+                  "type": "string",
+                  "readOnly": true,
+                  "pattern": "^[0-9a-zA-Z-_]+$"
+                },
+                "entity_id": {
+                  "x-no-api-doc": true,
+                  "type": "string",
+                  "description": "Customer identifier",
+                  "readOnly": true,
+                  "pattern": "^[0-9a-zA-Z-_]+$"
+                },
+                "entity_type": {
+                  "x-no-api-doc": true,
+                  "enum": [
+                    "LOC"
+                  ]
+                },
+                "label": {
+                  "type": "string",
+                  "description": "Label for the entity"
+                },
+                "slug": {
+                  "type": "string",
+                  "description": "Slug for the entity (Auto-generated from the label)",
+                  "readOnly": true,
+                  "deprecated": true,
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                },
+                "created": {
+                  "description": "Date the entity was created",
+                  "type": "string",
+                  "format": "date-time",
+                  "readOnly": true
+                },
+                "updated": {
+                  "description": "Last date the entity was updated",
+                  "type": "string",
+                  "format": "date-time",
+                  "readOnly": true
+                },
+                "location_type": {
+                  "type": "string",
+                  "description": "The type of location",
+                  "enum": [
+                    "warehouse",
+                    "facility",
+                    "other"
+                  ]
+                },
+                "formatted_address": {
+                  "type": "string",
+                  "readOnly": true,
+                  "description": "Address formatted for the where region the location exists in"
+                },
+                "address": {
+                  "type": "object",
+                  "required": [
+                    "country",
+                    "administrative_area",
+                    "locality",
+                    "postal_code",
+                    "thoroughfare"
+                  ],
+                  "description": "xNAL address for the location ",
+                  "properties": {
+                    "country": {
+                      "type": "string",
+                      "description": "Three Letter ISO country code",
+                      "enum": [
+                        "ABW",
+                        "AFG",
+                        "AGO",
+                        "AIA",
+                        "ALA",
+                        "ALB",
+                        "AND",
+                        "ARE",
+                        "ARG",
+                        "ARM",
+                        "ASM",
+                        "ATA",
+                        "ATF",
+                        "ATG",
+                        "AUS",
+                        "AUT",
+                        "AZE",
+                        "BDI",
+                        "BEL",
+                        "BEN",
+                        "BES",
+                        "BFA",
+                        "BGD",
+                        "BGR",
+                        "BHR",
+                        "BHS",
+                        "BIH",
+                        "BLM",
+                        "BLR",
+                        "BLZ",
+                        "BMU",
+                        "BOL",
+                        "BRA",
+                        "BRB",
+                        "BRN",
+                        "BTN",
+                        "BVT",
+                        "BWA",
+                        "CAF",
+                        "CAN",
+                        "CCK",
+                        "CHE",
+                        "CHL",
+                        "CHN",
+                        "CIV",
+                        "CMR",
+                        "COD",
+                        "COG",
+                        "COK",
+                        "COL",
+                        "COM",
+                        "CPV",
+                        "CRI",
+                        "CUB",
+                        "CUW",
+                        "CXR",
+                        "CYM",
+                        "CYP",
+                        "CZE",
+                        "DEU",
+                        "DJI",
+                        "DMA",
+                        "DNK",
+                        "DOM",
+                        "DZA",
+                        "ECU",
+                        "EGY",
+                        "ERI",
+                        "ESH",
+                        "ESP",
+                        "EST",
+                        "ETH",
+                        "FIN",
+                        "FJI",
+                        "FLK",
+                        "FRA",
+                        "FRO",
+                        "FSM",
+                        "GAB",
+                        "GBR",
+                        "GEO",
+                        "GGY",
+                        "GHA",
+                        "GIB",
+                        "GIN",
+                        "GLP",
+                        "GMB",
+                        "GNB",
+                        "GNQ",
+                        "GRC",
+                        "GRD",
+                        "GRL",
+                        "GTM",
+                        "GUF",
+                        "GUM",
+                        "GUY",
+                        "HKG",
+                        "HMD",
+                        "HND",
+                        "HRV",
+                        "HTI",
+                        "HUN",
+                        "IDN",
+                        "IMN",
+                        "IND",
+                        "IOT",
+                        "IRL",
+                        "IRN",
+                        "IRQ",
+                        "ISL",
+                        "ISR",
+                        "ITA",
+                        "JAM",
+                        "JEY",
+                        "JOR",
+                        "JPN",
+                        "KAZ",
+                        "KEN",
+                        "KGZ",
+                        "KHM",
+                        "KIR",
+                        "KNA",
+                        "KOR",
+                        "KWT",
+                        "LAO",
+                        "LBN",
+                        "LBR",
+                        "LBY",
+                        "LCA",
+                        "LIE",
+                        "LKA",
+                        "LSO",
+                        "LTU",
+                        "LUX",
+                        "LVA",
+                        "MAC",
+                        "MAF",
+                        "MAR",
+                        "MCO",
+                        "MDA",
+                        "MDG",
+                        "MDV",
+                        "MEX",
+                        "MHL",
+                        "MKD",
+                        "MLI",
+                        "MLT",
+                        "MMR",
+                        "MNE",
+                        "MNG",
+                        "MNP",
+                        "MOZ",
+                        "MRT",
+                        "MSR",
+                        "MTQ",
+                        "MUS",
+                        "MWI",
+                        "MYS",
+                        "MYT",
+                        "NAM",
+                        "NCL",
+                        "NER",
+                        "NFK",
+                        "NGA",
+                        "NIC",
+                        "NIU",
+                        "NLD",
+                        "NOR",
+                        "NPL",
+                        "NRU",
+                        "NZL",
+                        "OMN",
+                        "PAK",
+                        "PAN",
+                        "PCN",
+                        "PER",
+                        "PHL",
+                        "PLW",
+                        "PNG",
+                        "POL",
+                        "PRI",
+                        "PRK",
+                        "PRT",
+                        "PRY",
+                        "PSE",
+                        "PYF",
+                        "QAT",
+                        "REU",
+                        "ROU",
+                        "RUS",
+                        "RWA",
+                        "SAU",
+                        "SDN",
+                        "SEN",
+                        "SGP",
+                        "SGS",
+                        "SHN",
+                        "SJM",
+                        "SLB",
+                        "SLE",
+                        "SLV",
+                        "SMR",
+                        "SOM",
+                        "SPM",
+                        "SRB",
+                        "SSD",
+                        "STP",
+                        "SUR",
+                        "SVK",
+                        "SVN",
+                        "SWE",
+                        "SWZ",
+                        "SXM",
+                        "SYC",
+                        "SYR",
+                        "TCA",
+                        "TCD",
+                        "TGO",
+                        "THA",
+                        "TJK",
+                        "TKL",
+                        "TKM",
+                        "TLS",
+                        "TON",
+                        "TTO",
+                        "TUN",
+                        "TUR",
+                        "TUV",
+                        "TWN",
+                        "TZA",
+                        "UGA",
+                        "UKR",
+                        "UMI",
+                        "URY",
+                        "USA",
+                        "UZB",
+                        "VAT",
+                        "VCT",
+                        "VEN",
+                        "VGB",
+                        "VIR",
+                        "VNM",
+                        "VUT",
+                        "WLF",
+                        "WSM",
+                        "YEM",
+                        "ZAF",
+                        "ZMB",
+                        "ZWE"
+                      ]
+                    },
+                    "administrative_area": {
+                      "type": "string",
+                      "description": "State / Province / Region"
+                    },
+                    "sub_administrative_area": {
+                      "type": "string",
+                      "description": "County / District"
+                    },
+                    "locality": {
+                      "type": "string",
+                      "description": "City / Town"
+                    },
+                    "postal_code": {
+                      "type": "string",
+                      "description": "Postal Code / Zip Code"
+                    },
+                    "thoroughfare": {
+                      "type": "string",
+                      "description": "Street Address"
+                    },
+                    "premise": {
+                      "type": "string",
+                      "description": "Apartment / Suite / Box number etc"
+                    },
+                    "sub_premise": {
+                      "type": "string",
+                      "description": "Floor # / Room # / Building label etc"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "description": "Defines the properties for a resource",
+          "additionalProperties": false,
+          "required": [
+            "label",
+            "entity_id",
+            "entity_type",
+            "created",
+            "updated",
+            "resource_type",
+            "location",
+            "resource"
+          ],
+          "properties": {
+            "resource_id": {
+              "description": "The identifier for the resource",
+              "type": "string",
+              "readOnly": true,
+              "pattern": "^[0-9a-zA-Z-_]+$"
+            },
+            "entity_id": {
+              "x-no-api-doc": true,
+              "type": "string",
+              "description": "Customer identifier",
+              "readOnly": true,
+              "pattern": "^[0-9a-zA-Z-_]+$"
+            },
+            "entity_type": {
+              "x-no-api-doc": true,
+              "enum": [
+                "SRES"
+              ]
+            },
+            "label": {
+              "type": "string",
+              "description": "Label for the entity"
+            },
+            "slug": {
+              "type": "string",
+              "description": "Slug for the entity (Auto-generated from the label)",
+              "readOnly": true,
+              "deprecated": true,
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+            },
+            "created": {
+              "description": "Date the entity was created",
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true
+            },
+            "updated": {
+              "description": "Last date the entity was updated",
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true
+            },
+            "resource_type": {
+              "type": "string",
+              "description": "Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased",
+              "pattern": "^[a-z][0-9a-zA-Z-]+$"
+            },
+            "meta": {
+              "type": "object",
+              "description": "Data for the resource as a key value pair",
+              "additionalProperties": {
+                "type": "string"
+              },
+              "propertyNames": {
+                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+              }
+            },
+            "location": {
+              "type": "object",
+              "description": "Defines the properties for a part unit",
+              "additionalProperties": false,
+              "required": [
+                "label",
+                "entity_id",
+                "entity_type",
+                "created",
+                "updated",
+                "location_type",
+                "address"
+              ],
+              "properties": {
+                "location_id": {
+                  "description": "The identifier for the location",
+                  "type": "string",
+                  "readOnly": true,
+                  "pattern": "^[0-9a-zA-Z-_]+$"
+                },
+                "entity_id": {
+                  "x-no-api-doc": true,
+                  "type": "string",
+                  "description": "Customer identifier",
+                  "readOnly": true,
+                  "pattern": "^[0-9a-zA-Z-_]+$"
+                },
+                "entity_type": {
+                  "x-no-api-doc": true,
+                  "enum": [
+                    "LOC"
+                  ]
+                },
+                "label": {
+                  "type": "string",
+                  "description": "Label for the entity"
+                },
+                "slug": {
+                  "type": "string",
+                  "description": "Slug for the entity (Auto-generated from the label)",
+                  "readOnly": true,
+                  "deprecated": true,
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                },
+                "created": {
+                  "description": "Date the entity was created",
+                  "type": "string",
+                  "format": "date-time",
+                  "readOnly": true
+                },
+                "updated": {
+                  "description": "Last date the entity was updated",
+                  "type": "string",
+                  "format": "date-time",
+                  "readOnly": true
+                },
+                "location_type": {
+                  "type": "string",
+                  "description": "The type of location",
+                  "enum": [
+                    "warehouse",
+                    "facility",
+                    "other"
+                  ]
+                },
+                "formatted_address": {
+                  "type": "string",
+                  "readOnly": true,
+                  "description": "Address formatted for the where region the location exists in"
+                },
+                "address": {
+                  "type": "object",
+                  "required": [
+                    "country",
+                    "administrative_area",
+                    "locality",
+                    "postal_code",
+                    "thoroughfare"
+                  ],
+                  "description": "xNAL address for the location ",
+                  "properties": {
+                    "country": {
+                      "type": "string",
+                      "description": "Three Letter ISO country code",
+                      "enum": [
+                        "ABW",
+                        "AFG",
+                        "AGO",
+                        "AIA",
+                        "ALA",
+                        "ALB",
+                        "AND",
+                        "ARE",
+                        "ARG",
+                        "ARM",
+                        "ASM",
+                        "ATA",
+                        "ATF",
+                        "ATG",
+                        "AUS",
+                        "AUT",
+                        "AZE",
+                        "BDI",
+                        "BEL",
+                        "BEN",
+                        "BES",
+                        "BFA",
+                        "BGD",
+                        "BGR",
+                        "BHR",
+                        "BHS",
+                        "BIH",
+                        "BLM",
+                        "BLR",
+                        "BLZ",
+                        "BMU",
+                        "BOL",
+                        "BRA",
+                        "BRB",
+                        "BRN",
+                        "BTN",
+                        "BVT",
+                        "BWA",
+                        "CAF",
+                        "CAN",
+                        "CCK",
+                        "CHE",
+                        "CHL",
+                        "CHN",
+                        "CIV",
+                        "CMR",
+                        "COD",
+                        "COG",
+                        "COK",
+                        "COL",
+                        "COM",
+                        "CPV",
+                        "CRI",
+                        "CUB",
+                        "CUW",
+                        "CXR",
+                        "CYM",
+                        "CYP",
+                        "CZE",
+                        "DEU",
+                        "DJI",
+                        "DMA",
+                        "DNK",
+                        "DOM",
+                        "DZA",
+                        "ECU",
+                        "EGY",
+                        "ERI",
+                        "ESH",
+                        "ESP",
+                        "EST",
+                        "ETH",
+                        "FIN",
+                        "FJI",
+                        "FLK",
+                        "FRA",
+                        "FRO",
+                        "FSM",
+                        "GAB",
+                        "GBR",
+                        "GEO",
+                        "GGY",
+                        "GHA",
+                        "GIB",
+                        "GIN",
+                        "GLP",
+                        "GMB",
+                        "GNB",
+                        "GNQ",
+                        "GRC",
+                        "GRD",
+                        "GRL",
+                        "GTM",
+                        "GUF",
+                        "GUM",
+                        "GUY",
+                        "HKG",
+                        "HMD",
+                        "HND",
+                        "HRV",
+                        "HTI",
+                        "HUN",
+                        "IDN",
+                        "IMN",
+                        "IND",
+                        "IOT",
+                        "IRL",
+                        "IRN",
+                        "IRQ",
+                        "ISL",
+                        "ISR",
+                        "ITA",
+                        "JAM",
+                        "JEY",
+                        "JOR",
+                        "JPN",
+                        "KAZ",
+                        "KEN",
+                        "KGZ",
+                        "KHM",
+                        "KIR",
+                        "KNA",
+                        "KOR",
+                        "KWT",
+                        "LAO",
+                        "LBN",
+                        "LBR",
+                        "LBY",
+                        "LCA",
+                        "LIE",
+                        "LKA",
+                        "LSO",
+                        "LTU",
+                        "LUX",
+                        "LVA",
+                        "MAC",
+                        "MAF",
+                        "MAR",
+                        "MCO",
+                        "MDA",
+                        "MDG",
+                        "MDV",
+                        "MEX",
+                        "MHL",
+                        "MKD",
+                        "MLI",
+                        "MLT",
+                        "MMR",
+                        "MNE",
+                        "MNG",
+                        "MNP",
+                        "MOZ",
+                        "MRT",
+                        "MSR",
+                        "MTQ",
+                        "MUS",
+                        "MWI",
+                        "MYS",
+                        "MYT",
+                        "NAM",
+                        "NCL",
+                        "NER",
+                        "NFK",
+                        "NGA",
+                        "NIC",
+                        "NIU",
+                        "NLD",
+                        "NOR",
+                        "NPL",
+                        "NRU",
+                        "NZL",
+                        "OMN",
+                        "PAK",
+                        "PAN",
+                        "PCN",
+                        "PER",
+                        "PHL",
+                        "PLW",
+                        "PNG",
+                        "POL",
+                        "PRI",
+                        "PRK",
+                        "PRT",
+                        "PRY",
+                        "PSE",
+                        "PYF",
+                        "QAT",
+                        "REU",
+                        "ROU",
+                        "RUS",
+                        "RWA",
+                        "SAU",
+                        "SDN",
+                        "SEN",
+                        "SGP",
+                        "SGS",
+                        "SHN",
+                        "SJM",
+                        "SLB",
+                        "SLE",
+                        "SLV",
+                        "SMR",
+                        "SOM",
+                        "SPM",
+                        "SRB",
+                        "SSD",
+                        "STP",
+                        "SUR",
+                        "SVK",
+                        "SVN",
+                        "SWE",
+                        "SWZ",
+                        "SXM",
+                        "SYC",
+                        "SYR",
+                        "TCA",
+                        "TCD",
+                        "TGO",
+                        "THA",
+                        "TJK",
+                        "TKL",
+                        "TKM",
+                        "TLS",
+                        "TON",
+                        "TTO",
+                        "TUN",
+                        "TUR",
+                        "TUV",
+                        "TWN",
+                        "TZA",
+                        "UGA",
+                        "UKR",
+                        "UMI",
+                        "URY",
+                        "USA",
+                        "UZB",
+                        "VAT",
+                        "VCT",
+                        "VEN",
+                        "VGB",
+                        "VIR",
+                        "VNM",
+                        "VUT",
+                        "WLF",
+                        "WSM",
+                        "YEM",
+                        "ZAF",
+                        "ZMB",
+                        "ZWE"
+                      ]
+                    },
+                    "administrative_area": {
+                      "type": "string",
+                      "description": "State / Province / Region"
+                    },
+                    "sub_administrative_area": {
+                      "type": "string",
+                      "description": "County / District"
+                    },
+                    "locality": {
+                      "type": "string",
+                      "description": "City / Town"
+                    },
+                    "postal_code": {
+                      "type": "string",
+                      "description": "Postal Code / Zip Code"
+                    },
+                    "thoroughfare": {
+                      "type": "string",
+                      "description": "Street Address"
+                    },
+                    "premise": {
+                      "type": "string",
+                      "description": "Apartment / Suite / Box number etc"
+                    },
+                    "sub_premise": {
+                      "type": "string",
+                      "description": "Floor # / Room # / Building label etc"
+                    }
+                  }
+                }
+              }
+            },
+            "resource": {
+              "type": "object",
+              "description": "Defines the properties for a resource",
+              "additionalProperties": false,
+              "required": [
+                "label",
+                "entity_id",
+                "entity_type",
+                "created",
+                "updated",
+                "resource_type",
+                "location"
+              ],
+              "properties": {
+                "resource_id": {
+                  "description": "The identifier for the resource",
+                  "type": "string",
+                  "readOnly": true,
+                  "pattern": "^[0-9a-zA-Z-_]+$"
+                },
+                "entity_id": {
+                  "x-no-api-doc": true,
+                  "type": "string",
+                  "description": "Customer identifier",
+                  "readOnly": true,
+                  "pattern": "^[0-9a-zA-Z-_]+$"
+                },
+                "entity_type": {
+                  "x-no-api-doc": true,
+                  "enum": [
+                    "RES"
+                  ]
+                },
+                "label": {
+                  "type": "string",
+                  "description": "Label for the entity"
+                },
+                "slug": {
+                  "type": "string",
+                  "description": "Slug for the entity (Auto-generated from the label)",
+                  "readOnly": true,
+                  "deprecated": true,
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                },
+                "created": {
+                  "description": "Date the entity was created",
+                  "type": "string",
+                  "format": "date-time",
+                  "readOnly": true
+                },
+                "updated": {
+                  "description": "Last date the entity was updated",
+                  "type": "string",
+                  "format": "date-time",
+                  "readOnly": true
+                },
+                "resource_type": {
+                  "type": "string",
+                  "description": "Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased",
+                  "pattern": "^[a-z][0-9a-zA-Z-]+$"
+                },
+                "meta": {
+                  "type": "object",
+                  "description": "Data for the resource as a key value pair",
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "propertyNames": {
+                    "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+                  }
+                },
+                "location": {
+                  "type": "object",
+                  "description": "Defines the properties for a part unit",
+                  "additionalProperties": false,
+                  "required": [
+                    "label",
+                    "entity_id",
+                    "entity_type",
+                    "created",
+                    "updated",
+                    "location_type",
+                    "address"
+                  ],
+                  "properties": {
+                    "location_id": {
+                      "description": "The identifier for the location",
+                      "type": "string",
+                      "readOnly": true,
+                      "pattern": "^[0-9a-zA-Z-_]+$"
+                    },
+                    "entity_id": {
+                      "x-no-api-doc": true,
+                      "type": "string",
+                      "description": "Customer identifier",
+                      "readOnly": true,
+                      "pattern": "^[0-9a-zA-Z-_]+$"
+                    },
+                    "entity_type": {
+                      "x-no-api-doc": true,
+                      "enum": [
+                        "LOC"
+                      ]
+                    },
+                    "label": {
+                      "type": "string",
+                      "description": "Label for the entity"
+                    },
+                    "slug": {
+                      "type": "string",
+                      "description": "Slug for the entity (Auto-generated from the label)",
+                      "readOnly": true,
+                      "deprecated": true,
+                      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                    },
+                    "created": {
+                      "description": "Date the entity was created",
+                      "type": "string",
+                      "format": "date-time",
+                      "readOnly": true
+                    },
+                    "updated": {
+                      "description": "Last date the entity was updated",
+                      "type": "string",
+                      "format": "date-time",
+                      "readOnly": true
+                    },
+                    "location_type": {
+                      "type": "string",
+                      "description": "The type of location",
+                      "enum": [
+                        "warehouse",
+                        "facility",
+                        "other"
+                      ]
+                    },
+                    "formatted_address": {
+                      "type": "string",
+                      "readOnly": true,
+                      "description": "Address formatted for the where region the location exists in"
+                    },
+                    "address": {
+                      "type": "object",
+                      "required": [
+                        "country",
+                        "administrative_area",
+                        "locality",
+                        "postal_code",
+                        "thoroughfare"
+                      ],
+                      "description": "xNAL address for the location ",
+                      "properties": {
+                        "country": {
+                          "type": "string",
+                          "description": "Three Letter ISO country code",
+                          "enum": [
+                            "ABW",
+                            "AFG",
+                            "AGO",
+                            "AIA",
+                            "ALA",
+                            "ALB",
+                            "AND",
+                            "ARE",
+                            "ARG",
+                            "ARM",
+                            "ASM",
+                            "ATA",
+                            "ATF",
+                            "ATG",
+                            "AUS",
+                            "AUT",
+                            "AZE",
+                            "BDI",
+                            "BEL",
+                            "BEN",
+                            "BES",
+                            "BFA",
+                            "BGD",
+                            "BGR",
+                            "BHR",
+                            "BHS",
+                            "BIH",
+                            "BLM",
+                            "BLR",
+                            "BLZ",
+                            "BMU",
+                            "BOL",
+                            "BRA",
+                            "BRB",
+                            "BRN",
+                            "BTN",
+                            "BVT",
+                            "BWA",
+                            "CAF",
+                            "CAN",
+                            "CCK",
+                            "CHE",
+                            "CHL",
+                            "CHN",
+                            "CIV",
+                            "CMR",
+                            "COD",
+                            "COG",
+                            "COK",
+                            "COL",
+                            "COM",
+                            "CPV",
+                            "CRI",
+                            "CUB",
+                            "CUW",
+                            "CXR",
+                            "CYM",
+                            "CYP",
+                            "CZE",
+                            "DEU",
+                            "DJI",
+                            "DMA",
+                            "DNK",
+                            "DOM",
+                            "DZA",
+                            "ECU",
+                            "EGY",
+                            "ERI",
+                            "ESH",
+                            "ESP",
+                            "EST",
+                            "ETH",
+                            "FIN",
+                            "FJI",
+                            "FLK",
+                            "FRA",
+                            "FRO",
+                            "FSM",
+                            "GAB",
+                            "GBR",
+                            "GEO",
+                            "GGY",
+                            "GHA",
+                            "GIB",
+                            "GIN",
+                            "GLP",
+                            "GMB",
+                            "GNB",
+                            "GNQ",
+                            "GRC",
+                            "GRD",
+                            "GRL",
+                            "GTM",
+                            "GUF",
+                            "GUM",
+                            "GUY",
+                            "HKG",
+                            "HMD",
+                            "HND",
+                            "HRV",
+                            "HTI",
+                            "HUN",
+                            "IDN",
+                            "IMN",
+                            "IND",
+                            "IOT",
+                            "IRL",
+                            "IRN",
+                            "IRQ",
+                            "ISL",
+                            "ISR",
+                            "ITA",
+                            "JAM",
+                            "JEY",
+                            "JOR",
+                            "JPN",
+                            "KAZ",
+                            "KEN",
+                            "KGZ",
+                            "KHM",
+                            "KIR",
+                            "KNA",
+                            "KOR",
+                            "KWT",
+                            "LAO",
+                            "LBN",
+                            "LBR",
+                            "LBY",
+                            "LCA",
+                            "LIE",
+                            "LKA",
+                            "LSO",
+                            "LTU",
+                            "LUX",
+                            "LVA",
+                            "MAC",
+                            "MAF",
+                            "MAR",
+                            "MCO",
+                            "MDA",
+                            "MDG",
+                            "MDV",
+                            "MEX",
+                            "MHL",
+                            "MKD",
+                            "MLI",
+                            "MLT",
+                            "MMR",
+                            "MNE",
+                            "MNG",
+                            "MNP",
+                            "MOZ",
+                            "MRT",
+                            "MSR",
+                            "MTQ",
+                            "MUS",
+                            "MWI",
+                            "MYS",
+                            "MYT",
+                            "NAM",
+                            "NCL",
+                            "NER",
+                            "NFK",
+                            "NGA",
+                            "NIC",
+                            "NIU",
+                            "NLD",
+                            "NOR",
+                            "NPL",
+                            "NRU",
+                            "NZL",
+                            "OMN",
+                            "PAK",
+                            "PAN",
+                            "PCN",
+                            "PER",
+                            "PHL",
+                            "PLW",
+                            "PNG",
+                            "POL",
+                            "PRI",
+                            "PRK",
+                            "PRT",
+                            "PRY",
+                            "PSE",
+                            "PYF",
+                            "QAT",
+                            "REU",
+                            "ROU",
+                            "RUS",
+                            "RWA",
+                            "SAU",
+                            "SDN",
+                            "SEN",
+                            "SGP",
+                            "SGS",
+                            "SHN",
+                            "SJM",
+                            "SLB",
+                            "SLE",
+                            "SLV",
+                            "SMR",
+                            "SOM",
+                            "SPM",
+                            "SRB",
+                            "SSD",
+                            "STP",
+                            "SUR",
+                            "SVK",
+                            "SVN",
+                            "SWE",
+                            "SWZ",
+                            "SXM",
+                            "SYC",
+                            "SYR",
+                            "TCA",
+                            "TCD",
+                            "TGO",
+                            "THA",
+                            "TJK",
+                            "TKL",
+                            "TKM",
+                            "TLS",
+                            "TON",
+                            "TTO",
+                            "TUN",
+                            "TUR",
+                            "TUV",
+                            "TWN",
+                            "TZA",
+                            "UGA",
+                            "UKR",
+                            "UMI",
+                            "URY",
+                            "USA",
+                            "UZB",
+                            "VAT",
+                            "VCT",
+                            "VEN",
+                            "VGB",
+                            "VIR",
+                            "VNM",
+                            "VUT",
+                            "WLF",
+                            "WSM",
+                            "YEM",
+                            "ZAF",
+                            "ZMB",
+                            "ZWE"
+                          ]
+                        },
+                        "administrative_area": {
+                          "type": "string",
+                          "description": "State / Province / Region"
+                        },
+                        "sub_administrative_area": {
+                          "type": "string",
+                          "description": "County / District"
+                        },
+                        "locality": {
+                          "type": "string",
+                          "description": "City / Town"
+                        },
+                        "postal_code": {
+                          "type": "string",
+                          "description": "Postal Code / Zip Code"
+                        },
+                        "thoroughfare": {
+                          "type": "string",
+                          "description": "Street Address"
+                        },
+                        "premise": {
+                          "type": "string",
+                          "description": "Apartment / Suite / Box number etc"
+                        },
+                        "sub_premise": {
+                          "type": "string",
+                          "description": "Floor # / Room # / Building label etc"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
     "vendor": {
       "type": "object",
       "required": [
@@ -15842,13 +26123,15 @@ Updates a unit
 |---|---|---|---|---|
 |unit_id|path|string|true|Id for the unit|
 |label|body|string|true|Label for the entity|
-|raw_serial_number|body|string|false|Serial number of the unit with prefix stripped|
-|tenant_part_number|body|string|false|Identifier set by the tenant|
+|raw_serial_number|body|string\|null|false|Serial number of the unit with prefix stripped|
+|tenant_part_number|body|string\|null|false|Identifier set by the tenant|
 |part|body|object|true|none|
 |» part_id|body|string|true|Unique identifier|
 |current_status|body|object|true|Defines the properties for a status|
 |» status|body|string|true|A Custom label for the status|
 |» category|body|string|true|The classifier for the statues|
+|» description|body|string\|null|false|A description for the status|
+|» order|body|number|false|Order status appears when listing|
 |current_location|body|object|true|none|
 |» location_id|body|object|true|Defines the properties for a part unit|
 |»» location_id|body|string|false|The identifier for the location|
@@ -15869,9 +26152,101 @@ Updates a unit
 |»»» thoroughfare|body|string|true|Street Address|
 |»»» premise|body|string|false|Apartment / Suite / Box number etc|
 |»»» sub_premise|body|string|false|Floor # / Room # / Building label etc|
-|»» vendor|body|object|false|none|
-|»»» vendor_id|body|string|true|unique id|
-|»»» part_number|body|string\|null|false|The part number supplied by the vendor|
+|»» resource|body|any|false|none|
+|»»» *anonymous*|body|null|false|none|
+|»»» *anonymous*|body|object|false|Defines the properties for a resource|
+|»»»» resource_id|body|string|false|The identifier for the resource|
+|»»»» entity_id|body|string|true|Customer identifier|
+|»»»» entity_type|body|string|true|none|
+|»»»» label|body|string|true|Label for the entity|
+|»»»» slug|body|string|false|Slug for the entity (Auto-generated from the label)|
+|»»»» created|body|string(date-time)|true|Date the entity was created|
+|»»»» updated|body|string(date-time)|true|Last date the entity was updated|
+|»»»» resource_type|body|string|true|Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased|
+|»»»» meta|body|object|false|Data for the resource as a key value pair|
+|»»»»» **additionalProperties**|body|string|false|none|
+|»»»» location|body|object|true|Defines the properties for a part unit|
+|»»»»» location_id|body|string|false|The identifier for the location|
+|»»»»» entity_id|body|string|true|Customer identifier|
+|»»»»» entity_type|body|string|true|none|
+|»»»»» label|body|string|true|Label for the entity|
+|»»»»» slug|body|string|false|Slug for the entity (Auto-generated from the label)|
+|»»»»» created|body|string(date-time)|true|Date the entity was created|
+|»»»»» updated|body|string(date-time)|true|Last date the entity was updated|
+|»»»»» location_type|body|string|true|The type of location|
+|»»»»» formatted_address|body|string|false|Address formatted for the where region the location exists in|
+|»»»»» address|body|object|true|xNAL address for the location|
+|»»»»»» country|body|string|true|Three Letter ISO country code|
+|»»»»»» administrative_area|body|string|true|State / Province / Region|
+|»»»»»» sub_administrative_area|body|string|false|County / District|
+|»»»»»» locality|body|string|true|City / Town|
+|»»»»»» postal_code|body|string|true|Postal Code / Zip Code|
+|»»»»»» thoroughfare|body|string|true|Street Address|
+|»»»»»» premise|body|string|false|Apartment / Suite / Box number etc|
+|»»»»»» sub_premise|body|string|false|Floor # / Room # / Building label etc|
+|»»»»» *anonymous*|body|object|false|Defines the properties for a resource|
+|»»»»»» resource_id|body|string|false|The identifier for the resource|
+|»»»»»» entity_id|body|string|true|Customer identifier|
+|»»»»»» entity_type|body|string|true|none|
+|»»»»»» label|body|string|true|Label for the entity|
+|»»»»»» slug|body|string|false|Slug for the entity (Auto-generated from the label)|
+|»»»»»» created|body|string(date-time)|true|Date the entity was created|
+|»»»»»» updated|body|string(date-time)|true|Last date the entity was updated|
+|»»»»»» resource_type|body|string|true|Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased|
+|»»»»»» meta|body|object|false|Data for the resource as a key value pair|
+|»»»»»»» **additionalProperties**|body|string|false|none|
+|»»»»»» location|body|object|true|Defines the properties for a part unit|
+|»»»»»»» location_id|body|string|false|The identifier for the location|
+|»»»»»»» entity_id|body|string|true|Customer identifier|
+|»»»»»»» entity_type|body|string|true|none|
+|»»»»»»» label|body|string|true|Label for the entity|
+|»»»»»»» slug|body|string|false|Slug for the entity (Auto-generated from the label)|
+|»»»»»»» created|body|string(date-time)|true|Date the entity was created|
+|»»»»»»» updated|body|string(date-time)|true|Last date the entity was updated|
+|»»»»»»» location_type|body|string|true|The type of location|
+|»»»»»»» formatted_address|body|string|false|Address formatted for the where region the location exists in|
+|»»»»»»» address|body|object|true|xNAL address for the location|
+|»»»»»»»» country|body|string|true|Three Letter ISO country code|
+|»»»»»»»» administrative_area|body|string|true|State / Province / Region|
+|»»»»»»»» sub_administrative_area|body|string|false|County / District|
+|»»»»»»»» locality|body|string|true|City / Town|
+|»»»»»»»» postal_code|body|string|true|Postal Code / Zip Code|
+|»»»»»»»» thoroughfare|body|string|true|Street Address|
+|»»»»»»»» premise|body|string|false|Apartment / Suite / Box number etc|
+|»»»»»»»» sub_premise|body|string|false|Floor # / Room # / Building label etc|
+|»»»»»»» resource|body|object|true|Defines the properties for a resource|
+|»»»»»»»» resource_id|body|string|false|The identifier for the resource|
+|»»»»»»»» entity_id|body|string|true|Customer identifier|
+|»»»»»»»» entity_type|body|string|true|none|
+|»»»»»»»» label|body|string|true|Label for the entity|
+|»»»»»»»» slug|body|string|false|Slug for the entity (Auto-generated from the label)|
+|»»»»»»»» created|body|string(date-time)|true|Date the entity was created|
+|»»»»»»»» updated|body|string(date-time)|true|Last date the entity was updated|
+|»»»»»»»» resource_type|body|string|true|Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased|
+|»»»»»»»» meta|body|object|false|Data for the resource as a key value pair|
+|»»»»»»»»» **additionalProperties**|body|string|false|none|
+|»»»»»»»» location|body|object|true|Defines the properties for a part unit|
+|»»»»»»»»» location_id|body|string|false|The identifier for the location|
+|»»»»»»»»» entity_id|body|string|true|Customer identifier|
+|»»»»»»»»» entity_type|body|string|true|none|
+|»»»»»»»»» label|body|string|true|Label for the entity|
+|»»»»»»»»» slug|body|string|false|Slug for the entity (Auto-generated from the label)|
+|»»»»»»»»» created|body|string(date-time)|true|Date the entity was created|
+|»»»»»»»»» updated|body|string(date-time)|true|Last date the entity was updated|
+|»»»»»»»»» location_type|body|string|true|The type of location|
+|»»»»»»»»» formatted_address|body|string|false|Address formatted for the where region the location exists in|
+|»»»»»»»»» address|body|object|true|xNAL address for the location|
+|»»»»»»»»»» country|body|string|true|Three Letter ISO country code|
+|»»»»»»»»»» administrative_area|body|string|true|State / Province / Region|
+|»»»»»»»»»» sub_administrative_area|body|string|false|County / District|
+|»»»»»»»»»» locality|body|string|true|City / Town|
+|»»»»»»»»»» postal_code|body|string|true|Postal Code / Zip Code|
+|»»»»»»»»»» thoroughfare|body|string|true|Street Address|
+|»»»»»»»»»» premise|body|string|false|Apartment / Suite / Box number etc|
+|»»»»»»»»»» sub_premise|body|string|false|Floor # / Room # / Building label etc|
+|»»»»»»»»» vendor|body|object|false|none|
+|»»»»»»»»»» vendor_id|body|string|true|unique id|
+|»»»»»»»»»» part_number|body|string\|null|false|The part number supplied by the vendor|
 
 #### Enumerated Values
 
@@ -16136,6 +26511,768 @@ Updates a unit
 |»»» country|ZAF|
 |»»» country|ZMB|
 |»»» country|ZWE|
+|»»»» entity_type|RES|
+|»»»»» entity_type|LOC|
+|»»»»» location_type|warehouse|
+|»»»»» location_type|facility|
+|»»»»» location_type|other|
+|»»»»»» country|ABW|
+|»»»»»» country|AFG|
+|»»»»»» country|AGO|
+|»»»»»» country|AIA|
+|»»»»»» country|ALA|
+|»»»»»» country|ALB|
+|»»»»»» country|AND|
+|»»»»»» country|ARE|
+|»»»»»» country|ARG|
+|»»»»»» country|ARM|
+|»»»»»» country|ASM|
+|»»»»»» country|ATA|
+|»»»»»» country|ATF|
+|»»»»»» country|ATG|
+|»»»»»» country|AUS|
+|»»»»»» country|AUT|
+|»»»»»» country|AZE|
+|»»»»»» country|BDI|
+|»»»»»» country|BEL|
+|»»»»»» country|BEN|
+|»»»»»» country|BES|
+|»»»»»» country|BFA|
+|»»»»»» country|BGD|
+|»»»»»» country|BGR|
+|»»»»»» country|BHR|
+|»»»»»» country|BHS|
+|»»»»»» country|BIH|
+|»»»»»» country|BLM|
+|»»»»»» country|BLR|
+|»»»»»» country|BLZ|
+|»»»»»» country|BMU|
+|»»»»»» country|BOL|
+|»»»»»» country|BRA|
+|»»»»»» country|BRB|
+|»»»»»» country|BRN|
+|»»»»»» country|BTN|
+|»»»»»» country|BVT|
+|»»»»»» country|BWA|
+|»»»»»» country|CAF|
+|»»»»»» country|CAN|
+|»»»»»» country|CCK|
+|»»»»»» country|CHE|
+|»»»»»» country|CHL|
+|»»»»»» country|CHN|
+|»»»»»» country|CIV|
+|»»»»»» country|CMR|
+|»»»»»» country|COD|
+|»»»»»» country|COG|
+|»»»»»» country|COK|
+|»»»»»» country|COL|
+|»»»»»» country|COM|
+|»»»»»» country|CPV|
+|»»»»»» country|CRI|
+|»»»»»» country|CUB|
+|»»»»»» country|CUW|
+|»»»»»» country|CXR|
+|»»»»»» country|CYM|
+|»»»»»» country|CYP|
+|»»»»»» country|CZE|
+|»»»»»» country|DEU|
+|»»»»»» country|DJI|
+|»»»»»» country|DMA|
+|»»»»»» country|DNK|
+|»»»»»» country|DOM|
+|»»»»»» country|DZA|
+|»»»»»» country|ECU|
+|»»»»»» country|EGY|
+|»»»»»» country|ERI|
+|»»»»»» country|ESH|
+|»»»»»» country|ESP|
+|»»»»»» country|EST|
+|»»»»»» country|ETH|
+|»»»»»» country|FIN|
+|»»»»»» country|FJI|
+|»»»»»» country|FLK|
+|»»»»»» country|FRA|
+|»»»»»» country|FRO|
+|»»»»»» country|FSM|
+|»»»»»» country|GAB|
+|»»»»»» country|GBR|
+|»»»»»» country|GEO|
+|»»»»»» country|GGY|
+|»»»»»» country|GHA|
+|»»»»»» country|GIB|
+|»»»»»» country|GIN|
+|»»»»»» country|GLP|
+|»»»»»» country|GMB|
+|»»»»»» country|GNB|
+|»»»»»» country|GNQ|
+|»»»»»» country|GRC|
+|»»»»»» country|GRD|
+|»»»»»» country|GRL|
+|»»»»»» country|GTM|
+|»»»»»» country|GUF|
+|»»»»»» country|GUM|
+|»»»»»» country|GUY|
+|»»»»»» country|HKG|
+|»»»»»» country|HMD|
+|»»»»»» country|HND|
+|»»»»»» country|HRV|
+|»»»»»» country|HTI|
+|»»»»»» country|HUN|
+|»»»»»» country|IDN|
+|»»»»»» country|IMN|
+|»»»»»» country|IND|
+|»»»»»» country|IOT|
+|»»»»»» country|IRL|
+|»»»»»» country|IRN|
+|»»»»»» country|IRQ|
+|»»»»»» country|ISL|
+|»»»»»» country|ISR|
+|»»»»»» country|ITA|
+|»»»»»» country|JAM|
+|»»»»»» country|JEY|
+|»»»»»» country|JOR|
+|»»»»»» country|JPN|
+|»»»»»» country|KAZ|
+|»»»»»» country|KEN|
+|»»»»»» country|KGZ|
+|»»»»»» country|KHM|
+|»»»»»» country|KIR|
+|»»»»»» country|KNA|
+|»»»»»» country|KOR|
+|»»»»»» country|KWT|
+|»»»»»» country|LAO|
+|»»»»»» country|LBN|
+|»»»»»» country|LBR|
+|»»»»»» country|LBY|
+|»»»»»» country|LCA|
+|»»»»»» country|LIE|
+|»»»»»» country|LKA|
+|»»»»»» country|LSO|
+|»»»»»» country|LTU|
+|»»»»»» country|LUX|
+|»»»»»» country|LVA|
+|»»»»»» country|MAC|
+|»»»»»» country|MAF|
+|»»»»»» country|MAR|
+|»»»»»» country|MCO|
+|»»»»»» country|MDA|
+|»»»»»» country|MDG|
+|»»»»»» country|MDV|
+|»»»»»» country|MEX|
+|»»»»»» country|MHL|
+|»»»»»» country|MKD|
+|»»»»»» country|MLI|
+|»»»»»» country|MLT|
+|»»»»»» country|MMR|
+|»»»»»» country|MNE|
+|»»»»»» country|MNG|
+|»»»»»» country|MNP|
+|»»»»»» country|MOZ|
+|»»»»»» country|MRT|
+|»»»»»» country|MSR|
+|»»»»»» country|MTQ|
+|»»»»»» country|MUS|
+|»»»»»» country|MWI|
+|»»»»»» country|MYS|
+|»»»»»» country|MYT|
+|»»»»»» country|NAM|
+|»»»»»» country|NCL|
+|»»»»»» country|NER|
+|»»»»»» country|NFK|
+|»»»»»» country|NGA|
+|»»»»»» country|NIC|
+|»»»»»» country|NIU|
+|»»»»»» country|NLD|
+|»»»»»» country|NOR|
+|»»»»»» country|NPL|
+|»»»»»» country|NRU|
+|»»»»»» country|NZL|
+|»»»»»» country|OMN|
+|»»»»»» country|PAK|
+|»»»»»» country|PAN|
+|»»»»»» country|PCN|
+|»»»»»» country|PER|
+|»»»»»» country|PHL|
+|»»»»»» country|PLW|
+|»»»»»» country|PNG|
+|»»»»»» country|POL|
+|»»»»»» country|PRI|
+|»»»»»» country|PRK|
+|»»»»»» country|PRT|
+|»»»»»» country|PRY|
+|»»»»»» country|PSE|
+|»»»»»» country|PYF|
+|»»»»»» country|QAT|
+|»»»»»» country|REU|
+|»»»»»» country|ROU|
+|»»»»»» country|RUS|
+|»»»»»» country|RWA|
+|»»»»»» country|SAU|
+|»»»»»» country|SDN|
+|»»»»»» country|SEN|
+|»»»»»» country|SGP|
+|»»»»»» country|SGS|
+|»»»»»» country|SHN|
+|»»»»»» country|SJM|
+|»»»»»» country|SLB|
+|»»»»»» country|SLE|
+|»»»»»» country|SLV|
+|»»»»»» country|SMR|
+|»»»»»» country|SOM|
+|»»»»»» country|SPM|
+|»»»»»» country|SRB|
+|»»»»»» country|SSD|
+|»»»»»» country|STP|
+|»»»»»» country|SUR|
+|»»»»»» country|SVK|
+|»»»»»» country|SVN|
+|»»»»»» country|SWE|
+|»»»»»» country|SWZ|
+|»»»»»» country|SXM|
+|»»»»»» country|SYC|
+|»»»»»» country|SYR|
+|»»»»»» country|TCA|
+|»»»»»» country|TCD|
+|»»»»»» country|TGO|
+|»»»»»» country|THA|
+|»»»»»» country|TJK|
+|»»»»»» country|TKL|
+|»»»»»» country|TKM|
+|»»»»»» country|TLS|
+|»»»»»» country|TON|
+|»»»»»» country|TTO|
+|»»»»»» country|TUN|
+|»»»»»» country|TUR|
+|»»»»»» country|TUV|
+|»»»»»» country|TWN|
+|»»»»»» country|TZA|
+|»»»»»» country|UGA|
+|»»»»»» country|UKR|
+|»»»»»» country|UMI|
+|»»»»»» country|URY|
+|»»»»»» country|USA|
+|»»»»»» country|UZB|
+|»»»»»» country|VAT|
+|»»»»»» country|VCT|
+|»»»»»» country|VEN|
+|»»»»»» country|VGB|
+|»»»»»» country|VIR|
+|»»»»»» country|VNM|
+|»»»»»» country|VUT|
+|»»»»»» country|WLF|
+|»»»»»» country|WSM|
+|»»»»»» country|YEM|
+|»»»»»» country|ZAF|
+|»»»»»» country|ZMB|
+|»»»»»» country|ZWE|
+|»»»»»» entity_type|SRES|
+|»»»»»»» entity_type|LOC|
+|»»»»»»» location_type|warehouse|
+|»»»»»»» location_type|facility|
+|»»»»»»» location_type|other|
+|»»»»»»»» country|ABW|
+|»»»»»»»» country|AFG|
+|»»»»»»»» country|AGO|
+|»»»»»»»» country|AIA|
+|»»»»»»»» country|ALA|
+|»»»»»»»» country|ALB|
+|»»»»»»»» country|AND|
+|»»»»»»»» country|ARE|
+|»»»»»»»» country|ARG|
+|»»»»»»»» country|ARM|
+|»»»»»»»» country|ASM|
+|»»»»»»»» country|ATA|
+|»»»»»»»» country|ATF|
+|»»»»»»»» country|ATG|
+|»»»»»»»» country|AUS|
+|»»»»»»»» country|AUT|
+|»»»»»»»» country|AZE|
+|»»»»»»»» country|BDI|
+|»»»»»»»» country|BEL|
+|»»»»»»»» country|BEN|
+|»»»»»»»» country|BES|
+|»»»»»»»» country|BFA|
+|»»»»»»»» country|BGD|
+|»»»»»»»» country|BGR|
+|»»»»»»»» country|BHR|
+|»»»»»»»» country|BHS|
+|»»»»»»»» country|BIH|
+|»»»»»»»» country|BLM|
+|»»»»»»»» country|BLR|
+|»»»»»»»» country|BLZ|
+|»»»»»»»» country|BMU|
+|»»»»»»»» country|BOL|
+|»»»»»»»» country|BRA|
+|»»»»»»»» country|BRB|
+|»»»»»»»» country|BRN|
+|»»»»»»»» country|BTN|
+|»»»»»»»» country|BVT|
+|»»»»»»»» country|BWA|
+|»»»»»»»» country|CAF|
+|»»»»»»»» country|CAN|
+|»»»»»»»» country|CCK|
+|»»»»»»»» country|CHE|
+|»»»»»»»» country|CHL|
+|»»»»»»»» country|CHN|
+|»»»»»»»» country|CIV|
+|»»»»»»»» country|CMR|
+|»»»»»»»» country|COD|
+|»»»»»»»» country|COG|
+|»»»»»»»» country|COK|
+|»»»»»»»» country|COL|
+|»»»»»»»» country|COM|
+|»»»»»»»» country|CPV|
+|»»»»»»»» country|CRI|
+|»»»»»»»» country|CUB|
+|»»»»»»»» country|CUW|
+|»»»»»»»» country|CXR|
+|»»»»»»»» country|CYM|
+|»»»»»»»» country|CYP|
+|»»»»»»»» country|CZE|
+|»»»»»»»» country|DEU|
+|»»»»»»»» country|DJI|
+|»»»»»»»» country|DMA|
+|»»»»»»»» country|DNK|
+|»»»»»»»» country|DOM|
+|»»»»»»»» country|DZA|
+|»»»»»»»» country|ECU|
+|»»»»»»»» country|EGY|
+|»»»»»»»» country|ERI|
+|»»»»»»»» country|ESH|
+|»»»»»»»» country|ESP|
+|»»»»»»»» country|EST|
+|»»»»»»»» country|ETH|
+|»»»»»»»» country|FIN|
+|»»»»»»»» country|FJI|
+|»»»»»»»» country|FLK|
+|»»»»»»»» country|FRA|
+|»»»»»»»» country|FRO|
+|»»»»»»»» country|FSM|
+|»»»»»»»» country|GAB|
+|»»»»»»»» country|GBR|
+|»»»»»»»» country|GEO|
+|»»»»»»»» country|GGY|
+|»»»»»»»» country|GHA|
+|»»»»»»»» country|GIB|
+|»»»»»»»» country|GIN|
+|»»»»»»»» country|GLP|
+|»»»»»»»» country|GMB|
+|»»»»»»»» country|GNB|
+|»»»»»»»» country|GNQ|
+|»»»»»»»» country|GRC|
+|»»»»»»»» country|GRD|
+|»»»»»»»» country|GRL|
+|»»»»»»»» country|GTM|
+|»»»»»»»» country|GUF|
+|»»»»»»»» country|GUM|
+|»»»»»»»» country|GUY|
+|»»»»»»»» country|HKG|
+|»»»»»»»» country|HMD|
+|»»»»»»»» country|HND|
+|»»»»»»»» country|HRV|
+|»»»»»»»» country|HTI|
+|»»»»»»»» country|HUN|
+|»»»»»»»» country|IDN|
+|»»»»»»»» country|IMN|
+|»»»»»»»» country|IND|
+|»»»»»»»» country|IOT|
+|»»»»»»»» country|IRL|
+|»»»»»»»» country|IRN|
+|»»»»»»»» country|IRQ|
+|»»»»»»»» country|ISL|
+|»»»»»»»» country|ISR|
+|»»»»»»»» country|ITA|
+|»»»»»»»» country|JAM|
+|»»»»»»»» country|JEY|
+|»»»»»»»» country|JOR|
+|»»»»»»»» country|JPN|
+|»»»»»»»» country|KAZ|
+|»»»»»»»» country|KEN|
+|»»»»»»»» country|KGZ|
+|»»»»»»»» country|KHM|
+|»»»»»»»» country|KIR|
+|»»»»»»»» country|KNA|
+|»»»»»»»» country|KOR|
+|»»»»»»»» country|KWT|
+|»»»»»»»» country|LAO|
+|»»»»»»»» country|LBN|
+|»»»»»»»» country|LBR|
+|»»»»»»»» country|LBY|
+|»»»»»»»» country|LCA|
+|»»»»»»»» country|LIE|
+|»»»»»»»» country|LKA|
+|»»»»»»»» country|LSO|
+|»»»»»»»» country|LTU|
+|»»»»»»»» country|LUX|
+|»»»»»»»» country|LVA|
+|»»»»»»»» country|MAC|
+|»»»»»»»» country|MAF|
+|»»»»»»»» country|MAR|
+|»»»»»»»» country|MCO|
+|»»»»»»»» country|MDA|
+|»»»»»»»» country|MDG|
+|»»»»»»»» country|MDV|
+|»»»»»»»» country|MEX|
+|»»»»»»»» country|MHL|
+|»»»»»»»» country|MKD|
+|»»»»»»»» country|MLI|
+|»»»»»»»» country|MLT|
+|»»»»»»»» country|MMR|
+|»»»»»»»» country|MNE|
+|»»»»»»»» country|MNG|
+|»»»»»»»» country|MNP|
+|»»»»»»»» country|MOZ|
+|»»»»»»»» country|MRT|
+|»»»»»»»» country|MSR|
+|»»»»»»»» country|MTQ|
+|»»»»»»»» country|MUS|
+|»»»»»»»» country|MWI|
+|»»»»»»»» country|MYS|
+|»»»»»»»» country|MYT|
+|»»»»»»»» country|NAM|
+|»»»»»»»» country|NCL|
+|»»»»»»»» country|NER|
+|»»»»»»»» country|NFK|
+|»»»»»»»» country|NGA|
+|»»»»»»»» country|NIC|
+|»»»»»»»» country|NIU|
+|»»»»»»»» country|NLD|
+|»»»»»»»» country|NOR|
+|»»»»»»»» country|NPL|
+|»»»»»»»» country|NRU|
+|»»»»»»»» country|NZL|
+|»»»»»»»» country|OMN|
+|»»»»»»»» country|PAK|
+|»»»»»»»» country|PAN|
+|»»»»»»»» country|PCN|
+|»»»»»»»» country|PER|
+|»»»»»»»» country|PHL|
+|»»»»»»»» country|PLW|
+|»»»»»»»» country|PNG|
+|»»»»»»»» country|POL|
+|»»»»»»»» country|PRI|
+|»»»»»»»» country|PRK|
+|»»»»»»»» country|PRT|
+|»»»»»»»» country|PRY|
+|»»»»»»»» country|PSE|
+|»»»»»»»» country|PYF|
+|»»»»»»»» country|QAT|
+|»»»»»»»» country|REU|
+|»»»»»»»» country|ROU|
+|»»»»»»»» country|RUS|
+|»»»»»»»» country|RWA|
+|»»»»»»»» country|SAU|
+|»»»»»»»» country|SDN|
+|»»»»»»»» country|SEN|
+|»»»»»»»» country|SGP|
+|»»»»»»»» country|SGS|
+|»»»»»»»» country|SHN|
+|»»»»»»»» country|SJM|
+|»»»»»»»» country|SLB|
+|»»»»»»»» country|SLE|
+|»»»»»»»» country|SLV|
+|»»»»»»»» country|SMR|
+|»»»»»»»» country|SOM|
+|»»»»»»»» country|SPM|
+|»»»»»»»» country|SRB|
+|»»»»»»»» country|SSD|
+|»»»»»»»» country|STP|
+|»»»»»»»» country|SUR|
+|»»»»»»»» country|SVK|
+|»»»»»»»» country|SVN|
+|»»»»»»»» country|SWE|
+|»»»»»»»» country|SWZ|
+|»»»»»»»» country|SXM|
+|»»»»»»»» country|SYC|
+|»»»»»»»» country|SYR|
+|»»»»»»»» country|TCA|
+|»»»»»»»» country|TCD|
+|»»»»»»»» country|TGO|
+|»»»»»»»» country|THA|
+|»»»»»»»» country|TJK|
+|»»»»»»»» country|TKL|
+|»»»»»»»» country|TKM|
+|»»»»»»»» country|TLS|
+|»»»»»»»» country|TON|
+|»»»»»»»» country|TTO|
+|»»»»»»»» country|TUN|
+|»»»»»»»» country|TUR|
+|»»»»»»»» country|TUV|
+|»»»»»»»» country|TWN|
+|»»»»»»»» country|TZA|
+|»»»»»»»» country|UGA|
+|»»»»»»»» country|UKR|
+|»»»»»»»» country|UMI|
+|»»»»»»»» country|URY|
+|»»»»»»»» country|USA|
+|»»»»»»»» country|UZB|
+|»»»»»»»» country|VAT|
+|»»»»»»»» country|VCT|
+|»»»»»»»» country|VEN|
+|»»»»»»»» country|VGB|
+|»»»»»»»» country|VIR|
+|»»»»»»»» country|VNM|
+|»»»»»»»» country|VUT|
+|»»»»»»»» country|WLF|
+|»»»»»»»» country|WSM|
+|»»»»»»»» country|YEM|
+|»»»»»»»» country|ZAF|
+|»»»»»»»» country|ZMB|
+|»»»»»»»» country|ZWE|
+|»»»»»»»» entity_type|RES|
+|»»»»»»»»» entity_type|LOC|
+|»»»»»»»»» location_type|warehouse|
+|»»»»»»»»» location_type|facility|
+|»»»»»»»»» location_type|other|
+|»»»»»»»»»» country|ABW|
+|»»»»»»»»»» country|AFG|
+|»»»»»»»»»» country|AGO|
+|»»»»»»»»»» country|AIA|
+|»»»»»»»»»» country|ALA|
+|»»»»»»»»»» country|ALB|
+|»»»»»»»»»» country|AND|
+|»»»»»»»»»» country|ARE|
+|»»»»»»»»»» country|ARG|
+|»»»»»»»»»» country|ARM|
+|»»»»»»»»»» country|ASM|
+|»»»»»»»»»» country|ATA|
+|»»»»»»»»»» country|ATF|
+|»»»»»»»»»» country|ATG|
+|»»»»»»»»»» country|AUS|
+|»»»»»»»»»» country|AUT|
+|»»»»»»»»»» country|AZE|
+|»»»»»»»»»» country|BDI|
+|»»»»»»»»»» country|BEL|
+|»»»»»»»»»» country|BEN|
+|»»»»»»»»»» country|BES|
+|»»»»»»»»»» country|BFA|
+|»»»»»»»»»» country|BGD|
+|»»»»»»»»»» country|BGR|
+|»»»»»»»»»» country|BHR|
+|»»»»»»»»»» country|BHS|
+|»»»»»»»»»» country|BIH|
+|»»»»»»»»»» country|BLM|
+|»»»»»»»»»» country|BLR|
+|»»»»»»»»»» country|BLZ|
+|»»»»»»»»»» country|BMU|
+|»»»»»»»»»» country|BOL|
+|»»»»»»»»»» country|BRA|
+|»»»»»»»»»» country|BRB|
+|»»»»»»»»»» country|BRN|
+|»»»»»»»»»» country|BTN|
+|»»»»»»»»»» country|BVT|
+|»»»»»»»»»» country|BWA|
+|»»»»»»»»»» country|CAF|
+|»»»»»»»»»» country|CAN|
+|»»»»»»»»»» country|CCK|
+|»»»»»»»»»» country|CHE|
+|»»»»»»»»»» country|CHL|
+|»»»»»»»»»» country|CHN|
+|»»»»»»»»»» country|CIV|
+|»»»»»»»»»» country|CMR|
+|»»»»»»»»»» country|COD|
+|»»»»»»»»»» country|COG|
+|»»»»»»»»»» country|COK|
+|»»»»»»»»»» country|COL|
+|»»»»»»»»»» country|COM|
+|»»»»»»»»»» country|CPV|
+|»»»»»»»»»» country|CRI|
+|»»»»»»»»»» country|CUB|
+|»»»»»»»»»» country|CUW|
+|»»»»»»»»»» country|CXR|
+|»»»»»»»»»» country|CYM|
+|»»»»»»»»»» country|CYP|
+|»»»»»»»»»» country|CZE|
+|»»»»»»»»»» country|DEU|
+|»»»»»»»»»» country|DJI|
+|»»»»»»»»»» country|DMA|
+|»»»»»»»»»» country|DNK|
+|»»»»»»»»»» country|DOM|
+|»»»»»»»»»» country|DZA|
+|»»»»»»»»»» country|ECU|
+|»»»»»»»»»» country|EGY|
+|»»»»»»»»»» country|ERI|
+|»»»»»»»»»» country|ESH|
+|»»»»»»»»»» country|ESP|
+|»»»»»»»»»» country|EST|
+|»»»»»»»»»» country|ETH|
+|»»»»»»»»»» country|FIN|
+|»»»»»»»»»» country|FJI|
+|»»»»»»»»»» country|FLK|
+|»»»»»»»»»» country|FRA|
+|»»»»»»»»»» country|FRO|
+|»»»»»»»»»» country|FSM|
+|»»»»»»»»»» country|GAB|
+|»»»»»»»»»» country|GBR|
+|»»»»»»»»»» country|GEO|
+|»»»»»»»»»» country|GGY|
+|»»»»»»»»»» country|GHA|
+|»»»»»»»»»» country|GIB|
+|»»»»»»»»»» country|GIN|
+|»»»»»»»»»» country|GLP|
+|»»»»»»»»»» country|GMB|
+|»»»»»»»»»» country|GNB|
+|»»»»»»»»»» country|GNQ|
+|»»»»»»»»»» country|GRC|
+|»»»»»»»»»» country|GRD|
+|»»»»»»»»»» country|GRL|
+|»»»»»»»»»» country|GTM|
+|»»»»»»»»»» country|GUF|
+|»»»»»»»»»» country|GUM|
+|»»»»»»»»»» country|GUY|
+|»»»»»»»»»» country|HKG|
+|»»»»»»»»»» country|HMD|
+|»»»»»»»»»» country|HND|
+|»»»»»»»»»» country|HRV|
+|»»»»»»»»»» country|HTI|
+|»»»»»»»»»» country|HUN|
+|»»»»»»»»»» country|IDN|
+|»»»»»»»»»» country|IMN|
+|»»»»»»»»»» country|IND|
+|»»»»»»»»»» country|IOT|
+|»»»»»»»»»» country|IRL|
+|»»»»»»»»»» country|IRN|
+|»»»»»»»»»» country|IRQ|
+|»»»»»»»»»» country|ISL|
+|»»»»»»»»»» country|ISR|
+|»»»»»»»»»» country|ITA|
+|»»»»»»»»»» country|JAM|
+|»»»»»»»»»» country|JEY|
+|»»»»»»»»»» country|JOR|
+|»»»»»»»»»» country|JPN|
+|»»»»»»»»»» country|KAZ|
+|»»»»»»»»»» country|KEN|
+|»»»»»»»»»» country|KGZ|
+|»»»»»»»»»» country|KHM|
+|»»»»»»»»»» country|KIR|
+|»»»»»»»»»» country|KNA|
+|»»»»»»»»»» country|KOR|
+|»»»»»»»»»» country|KWT|
+|»»»»»»»»»» country|LAO|
+|»»»»»»»»»» country|LBN|
+|»»»»»»»»»» country|LBR|
+|»»»»»»»»»» country|LBY|
+|»»»»»»»»»» country|LCA|
+|»»»»»»»»»» country|LIE|
+|»»»»»»»»»» country|LKA|
+|»»»»»»»»»» country|LSO|
+|»»»»»»»»»» country|LTU|
+|»»»»»»»»»» country|LUX|
+|»»»»»»»»»» country|LVA|
+|»»»»»»»»»» country|MAC|
+|»»»»»»»»»» country|MAF|
+|»»»»»»»»»» country|MAR|
+|»»»»»»»»»» country|MCO|
+|»»»»»»»»»» country|MDA|
+|»»»»»»»»»» country|MDG|
+|»»»»»»»»»» country|MDV|
+|»»»»»»»»»» country|MEX|
+|»»»»»»»»»» country|MHL|
+|»»»»»»»»»» country|MKD|
+|»»»»»»»»»» country|MLI|
+|»»»»»»»»»» country|MLT|
+|»»»»»»»»»» country|MMR|
+|»»»»»»»»»» country|MNE|
+|»»»»»»»»»» country|MNG|
+|»»»»»»»»»» country|MNP|
+|»»»»»»»»»» country|MOZ|
+|»»»»»»»»»» country|MRT|
+|»»»»»»»»»» country|MSR|
+|»»»»»»»»»» country|MTQ|
+|»»»»»»»»»» country|MUS|
+|»»»»»»»»»» country|MWI|
+|»»»»»»»»»» country|MYS|
+|»»»»»»»»»» country|MYT|
+|»»»»»»»»»» country|NAM|
+|»»»»»»»»»» country|NCL|
+|»»»»»»»»»» country|NER|
+|»»»»»»»»»» country|NFK|
+|»»»»»»»»»» country|NGA|
+|»»»»»»»»»» country|NIC|
+|»»»»»»»»»» country|NIU|
+|»»»»»»»»»» country|NLD|
+|»»»»»»»»»» country|NOR|
+|»»»»»»»»»» country|NPL|
+|»»»»»»»»»» country|NRU|
+|»»»»»»»»»» country|NZL|
+|»»»»»»»»»» country|OMN|
+|»»»»»»»»»» country|PAK|
+|»»»»»»»»»» country|PAN|
+|»»»»»»»»»» country|PCN|
+|»»»»»»»»»» country|PER|
+|»»»»»»»»»» country|PHL|
+|»»»»»»»»»» country|PLW|
+|»»»»»»»»»» country|PNG|
+|»»»»»»»»»» country|POL|
+|»»»»»»»»»» country|PRI|
+|»»»»»»»»»» country|PRK|
+|»»»»»»»»»» country|PRT|
+|»»»»»»»»»» country|PRY|
+|»»»»»»»»»» country|PSE|
+|»»»»»»»»»» country|PYF|
+|»»»»»»»»»» country|QAT|
+|»»»»»»»»»» country|REU|
+|»»»»»»»»»» country|ROU|
+|»»»»»»»»»» country|RUS|
+|»»»»»»»»»» country|RWA|
+|»»»»»»»»»» country|SAU|
+|»»»»»»»»»» country|SDN|
+|»»»»»»»»»» country|SEN|
+|»»»»»»»»»» country|SGP|
+|»»»»»»»»»» country|SGS|
+|»»»»»»»»»» country|SHN|
+|»»»»»»»»»» country|SJM|
+|»»»»»»»»»» country|SLB|
+|»»»»»»»»»» country|SLE|
+|»»»»»»»»»» country|SLV|
+|»»»»»»»»»» country|SMR|
+|»»»»»»»»»» country|SOM|
+|»»»»»»»»»» country|SPM|
+|»»»»»»»»»» country|SRB|
+|»»»»»»»»»» country|SSD|
+|»»»»»»»»»» country|STP|
+|»»»»»»»»»» country|SUR|
+|»»»»»»»»»» country|SVK|
+|»»»»»»»»»» country|SVN|
+|»»»»»»»»»» country|SWE|
+|»»»»»»»»»» country|SWZ|
+|»»»»»»»»»» country|SXM|
+|»»»»»»»»»» country|SYC|
+|»»»»»»»»»» country|SYR|
+|»»»»»»»»»» country|TCA|
+|»»»»»»»»»» country|TCD|
+|»»»»»»»»»» country|TGO|
+|»»»»»»»»»» country|THA|
+|»»»»»»»»»» country|TJK|
+|»»»»»»»»»» country|TKL|
+|»»»»»»»»»» country|TKM|
+|»»»»»»»»»» country|TLS|
+|»»»»»»»»»» country|TON|
+|»»»»»»»»»» country|TTO|
+|»»»»»»»»»» country|TUN|
+|»»»»»»»»»» country|TUR|
+|»»»»»»»»»» country|TUV|
+|»»»»»»»»»» country|TWN|
+|»»»»»»»»»» country|TZA|
+|»»»»»»»»»» country|UGA|
+|»»»»»»»»»» country|UKR|
+|»»»»»»»»»» country|UMI|
+|»»»»»»»»»» country|URY|
+|»»»»»»»»»» country|USA|
+|»»»»»»»»»» country|UZB|
+|»»»»»»»»»» country|VAT|
+|»»»»»»»»»» country|VCT|
+|»»»»»»»»»» country|VEN|
+|»»»»»»»»»» country|VGB|
+|»»»»»»»»»» country|VIR|
+|»»»»»»»»»» country|VNM|
+|»»»»»»»»»» country|VUT|
+|»»»»»»»»»» country|WLF|
+|»»»»»»»»»» country|WSM|
+|»»»»»»»»»» country|YEM|
+|»»»»»»»»»» country|ZAF|
+|»»»»»»»»»» country|ZMB|
+|»»»»»»»»»» country|ZWE|
 
 > Example responses
 
@@ -16191,15 +27328,18 @@ Updates a unit
     },
     "serial_number": {
       "type": "string",
+      "nullable": true,
       "description": "Serial number of the unit with prefix stripped",
       "readOnly": true
     },
     "raw_serial_number": {
       "type": "string",
+      "nullable": true,
       "description": "Serial number of the unit"
     },
     "tenant_part_number": {
       "type": "string",
+      "nullable": true,
       "description": "Identifier set by the tenant"
     },
     "manufacturer": {
@@ -16438,7 +27578,10 @@ Updates a unit
               "deprecated": true,
               "x-patternProperties": {
                 "^[A-Za-z][A-Za-z0-9_]*$": {
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 }
               }
             },
@@ -16471,6 +27614,15 @@ Updates a unit
                       "CANCELLED",
                       "BLOCKED"
                     ]
+                  },
+                  "description": {
+                    "type": "string",
+                    "nullable": true,
+                    "description": "A description for the status"
+                  },
+                  "order": {
+                    "type": "number",
+                    "description": "Order status appears when listing"
                   }
                 }
               }
@@ -17644,7 +28796,10 @@ Updates a unit
           "deprecated": true,
           "x-patternProperties": {
             "^[A-Za-z][A-Za-z0-9_]*$": {
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             }
           }
         },
@@ -17677,6 +28832,15 @@ Updates a unit
                   "CANCELLED",
                   "BLOCKED"
                 ]
+              },
+              "description": {
+                "type": "string",
+                "nullable": true,
+                "description": "A description for the status"
+              },
+              "order": {
+                "type": "number",
+                "description": "Order status appears when listing"
               }
             }
           }
@@ -18427,6 +29591,1337 @@ Updates a unit
           }
         }
       }
+    },
+    "resource": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "description": "Defines the properties for a resource",
+          "additionalProperties": false,
+          "required": [
+            "label",
+            "entity_id",
+            "entity_type",
+            "created",
+            "updated",
+            "resource_type",
+            "location"
+          ],
+          "properties": {
+            "resource_id": {
+              "description": "The identifier for the resource",
+              "type": "string",
+              "readOnly": true,
+              "pattern": "^[0-9a-zA-Z-_]+$"
+            },
+            "entity_id": {
+              "x-no-api-doc": true,
+              "type": "string",
+              "description": "Customer identifier",
+              "readOnly": true,
+              "pattern": "^[0-9a-zA-Z-_]+$"
+            },
+            "entity_type": {
+              "x-no-api-doc": true,
+              "enum": [
+                "RES"
+              ]
+            },
+            "label": {
+              "type": "string",
+              "description": "Label for the entity"
+            },
+            "slug": {
+              "type": "string",
+              "description": "Slug for the entity (Auto-generated from the label)",
+              "readOnly": true,
+              "deprecated": true,
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+            },
+            "created": {
+              "description": "Date the entity was created",
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true
+            },
+            "updated": {
+              "description": "Last date the entity was updated",
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true
+            },
+            "resource_type": {
+              "type": "string",
+              "description": "Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased",
+              "pattern": "^[a-z][0-9a-zA-Z-]+$"
+            },
+            "meta": {
+              "type": "object",
+              "description": "Data for the resource as a key value pair",
+              "additionalProperties": {
+                "type": "string"
+              },
+              "propertyNames": {
+                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+              }
+            },
+            "location": {
+              "type": "object",
+              "description": "Defines the properties for a part unit",
+              "additionalProperties": false,
+              "required": [
+                "label",
+                "entity_id",
+                "entity_type",
+                "created",
+                "updated",
+                "location_type",
+                "address"
+              ],
+              "properties": {
+                "location_id": {
+                  "description": "The identifier for the location",
+                  "type": "string",
+                  "readOnly": true,
+                  "pattern": "^[0-9a-zA-Z-_]+$"
+                },
+                "entity_id": {
+                  "x-no-api-doc": true,
+                  "type": "string",
+                  "description": "Customer identifier",
+                  "readOnly": true,
+                  "pattern": "^[0-9a-zA-Z-_]+$"
+                },
+                "entity_type": {
+                  "x-no-api-doc": true,
+                  "enum": [
+                    "LOC"
+                  ]
+                },
+                "label": {
+                  "type": "string",
+                  "description": "Label for the entity"
+                },
+                "slug": {
+                  "type": "string",
+                  "description": "Slug for the entity (Auto-generated from the label)",
+                  "readOnly": true,
+                  "deprecated": true,
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                },
+                "created": {
+                  "description": "Date the entity was created",
+                  "type": "string",
+                  "format": "date-time",
+                  "readOnly": true
+                },
+                "updated": {
+                  "description": "Last date the entity was updated",
+                  "type": "string",
+                  "format": "date-time",
+                  "readOnly": true
+                },
+                "location_type": {
+                  "type": "string",
+                  "description": "The type of location",
+                  "enum": [
+                    "warehouse",
+                    "facility",
+                    "other"
+                  ]
+                },
+                "formatted_address": {
+                  "type": "string",
+                  "readOnly": true,
+                  "description": "Address formatted for the where region the location exists in"
+                },
+                "address": {
+                  "type": "object",
+                  "required": [
+                    "country",
+                    "administrative_area",
+                    "locality",
+                    "postal_code",
+                    "thoroughfare"
+                  ],
+                  "description": "xNAL address for the location ",
+                  "properties": {
+                    "country": {
+                      "type": "string",
+                      "description": "Three Letter ISO country code",
+                      "enum": [
+                        "ABW",
+                        "AFG",
+                        "AGO",
+                        "AIA",
+                        "ALA",
+                        "ALB",
+                        "AND",
+                        "ARE",
+                        "ARG",
+                        "ARM",
+                        "ASM",
+                        "ATA",
+                        "ATF",
+                        "ATG",
+                        "AUS",
+                        "AUT",
+                        "AZE",
+                        "BDI",
+                        "BEL",
+                        "BEN",
+                        "BES",
+                        "BFA",
+                        "BGD",
+                        "BGR",
+                        "BHR",
+                        "BHS",
+                        "BIH",
+                        "BLM",
+                        "BLR",
+                        "BLZ",
+                        "BMU",
+                        "BOL",
+                        "BRA",
+                        "BRB",
+                        "BRN",
+                        "BTN",
+                        "BVT",
+                        "BWA",
+                        "CAF",
+                        "CAN",
+                        "CCK",
+                        "CHE",
+                        "CHL",
+                        "CHN",
+                        "CIV",
+                        "CMR",
+                        "COD",
+                        "COG",
+                        "COK",
+                        "COL",
+                        "COM",
+                        "CPV",
+                        "CRI",
+                        "CUB",
+                        "CUW",
+                        "CXR",
+                        "CYM",
+                        "CYP",
+                        "CZE",
+                        "DEU",
+                        "DJI",
+                        "DMA",
+                        "DNK",
+                        "DOM",
+                        "DZA",
+                        "ECU",
+                        "EGY",
+                        "ERI",
+                        "ESH",
+                        "ESP",
+                        "EST",
+                        "ETH",
+                        "FIN",
+                        "FJI",
+                        "FLK",
+                        "FRA",
+                        "FRO",
+                        "FSM",
+                        "GAB",
+                        "GBR",
+                        "GEO",
+                        "GGY",
+                        "GHA",
+                        "GIB",
+                        "GIN",
+                        "GLP",
+                        "GMB",
+                        "GNB",
+                        "GNQ",
+                        "GRC",
+                        "GRD",
+                        "GRL",
+                        "GTM",
+                        "GUF",
+                        "GUM",
+                        "GUY",
+                        "HKG",
+                        "HMD",
+                        "HND",
+                        "HRV",
+                        "HTI",
+                        "HUN",
+                        "IDN",
+                        "IMN",
+                        "IND",
+                        "IOT",
+                        "IRL",
+                        "IRN",
+                        "IRQ",
+                        "ISL",
+                        "ISR",
+                        "ITA",
+                        "JAM",
+                        "JEY",
+                        "JOR",
+                        "JPN",
+                        "KAZ",
+                        "KEN",
+                        "KGZ",
+                        "KHM",
+                        "KIR",
+                        "KNA",
+                        "KOR",
+                        "KWT",
+                        "LAO",
+                        "LBN",
+                        "LBR",
+                        "LBY",
+                        "LCA",
+                        "LIE",
+                        "LKA",
+                        "LSO",
+                        "LTU",
+                        "LUX",
+                        "LVA",
+                        "MAC",
+                        "MAF",
+                        "MAR",
+                        "MCO",
+                        "MDA",
+                        "MDG",
+                        "MDV",
+                        "MEX",
+                        "MHL",
+                        "MKD",
+                        "MLI",
+                        "MLT",
+                        "MMR",
+                        "MNE",
+                        "MNG",
+                        "MNP",
+                        "MOZ",
+                        "MRT",
+                        "MSR",
+                        "MTQ",
+                        "MUS",
+                        "MWI",
+                        "MYS",
+                        "MYT",
+                        "NAM",
+                        "NCL",
+                        "NER",
+                        "NFK",
+                        "NGA",
+                        "NIC",
+                        "NIU",
+                        "NLD",
+                        "NOR",
+                        "NPL",
+                        "NRU",
+                        "NZL",
+                        "OMN",
+                        "PAK",
+                        "PAN",
+                        "PCN",
+                        "PER",
+                        "PHL",
+                        "PLW",
+                        "PNG",
+                        "POL",
+                        "PRI",
+                        "PRK",
+                        "PRT",
+                        "PRY",
+                        "PSE",
+                        "PYF",
+                        "QAT",
+                        "REU",
+                        "ROU",
+                        "RUS",
+                        "RWA",
+                        "SAU",
+                        "SDN",
+                        "SEN",
+                        "SGP",
+                        "SGS",
+                        "SHN",
+                        "SJM",
+                        "SLB",
+                        "SLE",
+                        "SLV",
+                        "SMR",
+                        "SOM",
+                        "SPM",
+                        "SRB",
+                        "SSD",
+                        "STP",
+                        "SUR",
+                        "SVK",
+                        "SVN",
+                        "SWE",
+                        "SWZ",
+                        "SXM",
+                        "SYC",
+                        "SYR",
+                        "TCA",
+                        "TCD",
+                        "TGO",
+                        "THA",
+                        "TJK",
+                        "TKL",
+                        "TKM",
+                        "TLS",
+                        "TON",
+                        "TTO",
+                        "TUN",
+                        "TUR",
+                        "TUV",
+                        "TWN",
+                        "TZA",
+                        "UGA",
+                        "UKR",
+                        "UMI",
+                        "URY",
+                        "USA",
+                        "UZB",
+                        "VAT",
+                        "VCT",
+                        "VEN",
+                        "VGB",
+                        "VIR",
+                        "VNM",
+                        "VUT",
+                        "WLF",
+                        "WSM",
+                        "YEM",
+                        "ZAF",
+                        "ZMB",
+                        "ZWE"
+                      ]
+                    },
+                    "administrative_area": {
+                      "type": "string",
+                      "description": "State / Province / Region"
+                    },
+                    "sub_administrative_area": {
+                      "type": "string",
+                      "description": "County / District"
+                    },
+                    "locality": {
+                      "type": "string",
+                      "description": "City / Town"
+                    },
+                    "postal_code": {
+                      "type": "string",
+                      "description": "Postal Code / Zip Code"
+                    },
+                    "thoroughfare": {
+                      "type": "string",
+                      "description": "Street Address"
+                    },
+                    "premise": {
+                      "type": "string",
+                      "description": "Apartment / Suite / Box number etc"
+                    },
+                    "sub_premise": {
+                      "type": "string",
+                      "description": "Floor # / Room # / Building label etc"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "description": "Defines the properties for a resource",
+          "additionalProperties": false,
+          "required": [
+            "label",
+            "entity_id",
+            "entity_type",
+            "created",
+            "updated",
+            "resource_type",
+            "location",
+            "resource"
+          ],
+          "properties": {
+            "resource_id": {
+              "description": "The identifier for the resource",
+              "type": "string",
+              "readOnly": true,
+              "pattern": "^[0-9a-zA-Z-_]+$"
+            },
+            "entity_id": {
+              "x-no-api-doc": true,
+              "type": "string",
+              "description": "Customer identifier",
+              "readOnly": true,
+              "pattern": "^[0-9a-zA-Z-_]+$"
+            },
+            "entity_type": {
+              "x-no-api-doc": true,
+              "enum": [
+                "SRES"
+              ]
+            },
+            "label": {
+              "type": "string",
+              "description": "Label for the entity"
+            },
+            "slug": {
+              "type": "string",
+              "description": "Slug for the entity (Auto-generated from the label)",
+              "readOnly": true,
+              "deprecated": true,
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+            },
+            "created": {
+              "description": "Date the entity was created",
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true
+            },
+            "updated": {
+              "description": "Last date the entity was updated",
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true
+            },
+            "resource_type": {
+              "type": "string",
+              "description": "Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased",
+              "pattern": "^[a-z][0-9a-zA-Z-]+$"
+            },
+            "meta": {
+              "type": "object",
+              "description": "Data for the resource as a key value pair",
+              "additionalProperties": {
+                "type": "string"
+              },
+              "propertyNames": {
+                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+              }
+            },
+            "location": {
+              "type": "object",
+              "description": "Defines the properties for a part unit",
+              "additionalProperties": false,
+              "required": [
+                "label",
+                "entity_id",
+                "entity_type",
+                "created",
+                "updated",
+                "location_type",
+                "address"
+              ],
+              "properties": {
+                "location_id": {
+                  "description": "The identifier for the location",
+                  "type": "string",
+                  "readOnly": true,
+                  "pattern": "^[0-9a-zA-Z-_]+$"
+                },
+                "entity_id": {
+                  "x-no-api-doc": true,
+                  "type": "string",
+                  "description": "Customer identifier",
+                  "readOnly": true,
+                  "pattern": "^[0-9a-zA-Z-_]+$"
+                },
+                "entity_type": {
+                  "x-no-api-doc": true,
+                  "enum": [
+                    "LOC"
+                  ]
+                },
+                "label": {
+                  "type": "string",
+                  "description": "Label for the entity"
+                },
+                "slug": {
+                  "type": "string",
+                  "description": "Slug for the entity (Auto-generated from the label)",
+                  "readOnly": true,
+                  "deprecated": true,
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                },
+                "created": {
+                  "description": "Date the entity was created",
+                  "type": "string",
+                  "format": "date-time",
+                  "readOnly": true
+                },
+                "updated": {
+                  "description": "Last date the entity was updated",
+                  "type": "string",
+                  "format": "date-time",
+                  "readOnly": true
+                },
+                "location_type": {
+                  "type": "string",
+                  "description": "The type of location",
+                  "enum": [
+                    "warehouse",
+                    "facility",
+                    "other"
+                  ]
+                },
+                "formatted_address": {
+                  "type": "string",
+                  "readOnly": true,
+                  "description": "Address formatted for the where region the location exists in"
+                },
+                "address": {
+                  "type": "object",
+                  "required": [
+                    "country",
+                    "administrative_area",
+                    "locality",
+                    "postal_code",
+                    "thoroughfare"
+                  ],
+                  "description": "xNAL address for the location ",
+                  "properties": {
+                    "country": {
+                      "type": "string",
+                      "description": "Three Letter ISO country code",
+                      "enum": [
+                        "ABW",
+                        "AFG",
+                        "AGO",
+                        "AIA",
+                        "ALA",
+                        "ALB",
+                        "AND",
+                        "ARE",
+                        "ARG",
+                        "ARM",
+                        "ASM",
+                        "ATA",
+                        "ATF",
+                        "ATG",
+                        "AUS",
+                        "AUT",
+                        "AZE",
+                        "BDI",
+                        "BEL",
+                        "BEN",
+                        "BES",
+                        "BFA",
+                        "BGD",
+                        "BGR",
+                        "BHR",
+                        "BHS",
+                        "BIH",
+                        "BLM",
+                        "BLR",
+                        "BLZ",
+                        "BMU",
+                        "BOL",
+                        "BRA",
+                        "BRB",
+                        "BRN",
+                        "BTN",
+                        "BVT",
+                        "BWA",
+                        "CAF",
+                        "CAN",
+                        "CCK",
+                        "CHE",
+                        "CHL",
+                        "CHN",
+                        "CIV",
+                        "CMR",
+                        "COD",
+                        "COG",
+                        "COK",
+                        "COL",
+                        "COM",
+                        "CPV",
+                        "CRI",
+                        "CUB",
+                        "CUW",
+                        "CXR",
+                        "CYM",
+                        "CYP",
+                        "CZE",
+                        "DEU",
+                        "DJI",
+                        "DMA",
+                        "DNK",
+                        "DOM",
+                        "DZA",
+                        "ECU",
+                        "EGY",
+                        "ERI",
+                        "ESH",
+                        "ESP",
+                        "EST",
+                        "ETH",
+                        "FIN",
+                        "FJI",
+                        "FLK",
+                        "FRA",
+                        "FRO",
+                        "FSM",
+                        "GAB",
+                        "GBR",
+                        "GEO",
+                        "GGY",
+                        "GHA",
+                        "GIB",
+                        "GIN",
+                        "GLP",
+                        "GMB",
+                        "GNB",
+                        "GNQ",
+                        "GRC",
+                        "GRD",
+                        "GRL",
+                        "GTM",
+                        "GUF",
+                        "GUM",
+                        "GUY",
+                        "HKG",
+                        "HMD",
+                        "HND",
+                        "HRV",
+                        "HTI",
+                        "HUN",
+                        "IDN",
+                        "IMN",
+                        "IND",
+                        "IOT",
+                        "IRL",
+                        "IRN",
+                        "IRQ",
+                        "ISL",
+                        "ISR",
+                        "ITA",
+                        "JAM",
+                        "JEY",
+                        "JOR",
+                        "JPN",
+                        "KAZ",
+                        "KEN",
+                        "KGZ",
+                        "KHM",
+                        "KIR",
+                        "KNA",
+                        "KOR",
+                        "KWT",
+                        "LAO",
+                        "LBN",
+                        "LBR",
+                        "LBY",
+                        "LCA",
+                        "LIE",
+                        "LKA",
+                        "LSO",
+                        "LTU",
+                        "LUX",
+                        "LVA",
+                        "MAC",
+                        "MAF",
+                        "MAR",
+                        "MCO",
+                        "MDA",
+                        "MDG",
+                        "MDV",
+                        "MEX",
+                        "MHL",
+                        "MKD",
+                        "MLI",
+                        "MLT",
+                        "MMR",
+                        "MNE",
+                        "MNG",
+                        "MNP",
+                        "MOZ",
+                        "MRT",
+                        "MSR",
+                        "MTQ",
+                        "MUS",
+                        "MWI",
+                        "MYS",
+                        "MYT",
+                        "NAM",
+                        "NCL",
+                        "NER",
+                        "NFK",
+                        "NGA",
+                        "NIC",
+                        "NIU",
+                        "NLD",
+                        "NOR",
+                        "NPL",
+                        "NRU",
+                        "NZL",
+                        "OMN",
+                        "PAK",
+                        "PAN",
+                        "PCN",
+                        "PER",
+                        "PHL",
+                        "PLW",
+                        "PNG",
+                        "POL",
+                        "PRI",
+                        "PRK",
+                        "PRT",
+                        "PRY",
+                        "PSE",
+                        "PYF",
+                        "QAT",
+                        "REU",
+                        "ROU",
+                        "RUS",
+                        "RWA",
+                        "SAU",
+                        "SDN",
+                        "SEN",
+                        "SGP",
+                        "SGS",
+                        "SHN",
+                        "SJM",
+                        "SLB",
+                        "SLE",
+                        "SLV",
+                        "SMR",
+                        "SOM",
+                        "SPM",
+                        "SRB",
+                        "SSD",
+                        "STP",
+                        "SUR",
+                        "SVK",
+                        "SVN",
+                        "SWE",
+                        "SWZ",
+                        "SXM",
+                        "SYC",
+                        "SYR",
+                        "TCA",
+                        "TCD",
+                        "TGO",
+                        "THA",
+                        "TJK",
+                        "TKL",
+                        "TKM",
+                        "TLS",
+                        "TON",
+                        "TTO",
+                        "TUN",
+                        "TUR",
+                        "TUV",
+                        "TWN",
+                        "TZA",
+                        "UGA",
+                        "UKR",
+                        "UMI",
+                        "URY",
+                        "USA",
+                        "UZB",
+                        "VAT",
+                        "VCT",
+                        "VEN",
+                        "VGB",
+                        "VIR",
+                        "VNM",
+                        "VUT",
+                        "WLF",
+                        "WSM",
+                        "YEM",
+                        "ZAF",
+                        "ZMB",
+                        "ZWE"
+                      ]
+                    },
+                    "administrative_area": {
+                      "type": "string",
+                      "description": "State / Province / Region"
+                    },
+                    "sub_administrative_area": {
+                      "type": "string",
+                      "description": "County / District"
+                    },
+                    "locality": {
+                      "type": "string",
+                      "description": "City / Town"
+                    },
+                    "postal_code": {
+                      "type": "string",
+                      "description": "Postal Code / Zip Code"
+                    },
+                    "thoroughfare": {
+                      "type": "string",
+                      "description": "Street Address"
+                    },
+                    "premise": {
+                      "type": "string",
+                      "description": "Apartment / Suite / Box number etc"
+                    },
+                    "sub_premise": {
+                      "type": "string",
+                      "description": "Floor # / Room # / Building label etc"
+                    }
+                  }
+                }
+              }
+            },
+            "resource": {
+              "type": "object",
+              "description": "Defines the properties for a resource",
+              "additionalProperties": false,
+              "required": [
+                "label",
+                "entity_id",
+                "entity_type",
+                "created",
+                "updated",
+                "resource_type",
+                "location"
+              ],
+              "properties": {
+                "resource_id": {
+                  "description": "The identifier for the resource",
+                  "type": "string",
+                  "readOnly": true,
+                  "pattern": "^[0-9a-zA-Z-_]+$"
+                },
+                "entity_id": {
+                  "x-no-api-doc": true,
+                  "type": "string",
+                  "description": "Customer identifier",
+                  "readOnly": true,
+                  "pattern": "^[0-9a-zA-Z-_]+$"
+                },
+                "entity_type": {
+                  "x-no-api-doc": true,
+                  "enum": [
+                    "RES"
+                  ]
+                },
+                "label": {
+                  "type": "string",
+                  "description": "Label for the entity"
+                },
+                "slug": {
+                  "type": "string",
+                  "description": "Slug for the entity (Auto-generated from the label)",
+                  "readOnly": true,
+                  "deprecated": true,
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                },
+                "created": {
+                  "description": "Date the entity was created",
+                  "type": "string",
+                  "format": "date-time",
+                  "readOnly": true
+                },
+                "updated": {
+                  "description": "Last date the entity was updated",
+                  "type": "string",
+                  "format": "date-time",
+                  "readOnly": true
+                },
+                "resource_type": {
+                  "type": "string",
+                  "description": "Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased",
+                  "pattern": "^[a-z][0-9a-zA-Z-]+$"
+                },
+                "meta": {
+                  "type": "object",
+                  "description": "Data for the resource as a key value pair",
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "propertyNames": {
+                    "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+                  }
+                },
+                "location": {
+                  "type": "object",
+                  "description": "Defines the properties for a part unit",
+                  "additionalProperties": false,
+                  "required": [
+                    "label",
+                    "entity_id",
+                    "entity_type",
+                    "created",
+                    "updated",
+                    "location_type",
+                    "address"
+                  ],
+                  "properties": {
+                    "location_id": {
+                      "description": "The identifier for the location",
+                      "type": "string",
+                      "readOnly": true,
+                      "pattern": "^[0-9a-zA-Z-_]+$"
+                    },
+                    "entity_id": {
+                      "x-no-api-doc": true,
+                      "type": "string",
+                      "description": "Customer identifier",
+                      "readOnly": true,
+                      "pattern": "^[0-9a-zA-Z-_]+$"
+                    },
+                    "entity_type": {
+                      "x-no-api-doc": true,
+                      "enum": [
+                        "LOC"
+                      ]
+                    },
+                    "label": {
+                      "type": "string",
+                      "description": "Label for the entity"
+                    },
+                    "slug": {
+                      "type": "string",
+                      "description": "Slug for the entity (Auto-generated from the label)",
+                      "readOnly": true,
+                      "deprecated": true,
+                      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                    },
+                    "created": {
+                      "description": "Date the entity was created",
+                      "type": "string",
+                      "format": "date-time",
+                      "readOnly": true
+                    },
+                    "updated": {
+                      "description": "Last date the entity was updated",
+                      "type": "string",
+                      "format": "date-time",
+                      "readOnly": true
+                    },
+                    "location_type": {
+                      "type": "string",
+                      "description": "The type of location",
+                      "enum": [
+                        "warehouse",
+                        "facility",
+                        "other"
+                      ]
+                    },
+                    "formatted_address": {
+                      "type": "string",
+                      "readOnly": true,
+                      "description": "Address formatted for the where region the location exists in"
+                    },
+                    "address": {
+                      "type": "object",
+                      "required": [
+                        "country",
+                        "administrative_area",
+                        "locality",
+                        "postal_code",
+                        "thoroughfare"
+                      ],
+                      "description": "xNAL address for the location ",
+                      "properties": {
+                        "country": {
+                          "type": "string",
+                          "description": "Three Letter ISO country code",
+                          "enum": [
+                            "ABW",
+                            "AFG",
+                            "AGO",
+                            "AIA",
+                            "ALA",
+                            "ALB",
+                            "AND",
+                            "ARE",
+                            "ARG",
+                            "ARM",
+                            "ASM",
+                            "ATA",
+                            "ATF",
+                            "ATG",
+                            "AUS",
+                            "AUT",
+                            "AZE",
+                            "BDI",
+                            "BEL",
+                            "BEN",
+                            "BES",
+                            "BFA",
+                            "BGD",
+                            "BGR",
+                            "BHR",
+                            "BHS",
+                            "BIH",
+                            "BLM",
+                            "BLR",
+                            "BLZ",
+                            "BMU",
+                            "BOL",
+                            "BRA",
+                            "BRB",
+                            "BRN",
+                            "BTN",
+                            "BVT",
+                            "BWA",
+                            "CAF",
+                            "CAN",
+                            "CCK",
+                            "CHE",
+                            "CHL",
+                            "CHN",
+                            "CIV",
+                            "CMR",
+                            "COD",
+                            "COG",
+                            "COK",
+                            "COL",
+                            "COM",
+                            "CPV",
+                            "CRI",
+                            "CUB",
+                            "CUW",
+                            "CXR",
+                            "CYM",
+                            "CYP",
+                            "CZE",
+                            "DEU",
+                            "DJI",
+                            "DMA",
+                            "DNK",
+                            "DOM",
+                            "DZA",
+                            "ECU",
+                            "EGY",
+                            "ERI",
+                            "ESH",
+                            "ESP",
+                            "EST",
+                            "ETH",
+                            "FIN",
+                            "FJI",
+                            "FLK",
+                            "FRA",
+                            "FRO",
+                            "FSM",
+                            "GAB",
+                            "GBR",
+                            "GEO",
+                            "GGY",
+                            "GHA",
+                            "GIB",
+                            "GIN",
+                            "GLP",
+                            "GMB",
+                            "GNB",
+                            "GNQ",
+                            "GRC",
+                            "GRD",
+                            "GRL",
+                            "GTM",
+                            "GUF",
+                            "GUM",
+                            "GUY",
+                            "HKG",
+                            "HMD",
+                            "HND",
+                            "HRV",
+                            "HTI",
+                            "HUN",
+                            "IDN",
+                            "IMN",
+                            "IND",
+                            "IOT",
+                            "IRL",
+                            "IRN",
+                            "IRQ",
+                            "ISL",
+                            "ISR",
+                            "ITA",
+                            "JAM",
+                            "JEY",
+                            "JOR",
+                            "JPN",
+                            "KAZ",
+                            "KEN",
+                            "KGZ",
+                            "KHM",
+                            "KIR",
+                            "KNA",
+                            "KOR",
+                            "KWT",
+                            "LAO",
+                            "LBN",
+                            "LBR",
+                            "LBY",
+                            "LCA",
+                            "LIE",
+                            "LKA",
+                            "LSO",
+                            "LTU",
+                            "LUX",
+                            "LVA",
+                            "MAC",
+                            "MAF",
+                            "MAR",
+                            "MCO",
+                            "MDA",
+                            "MDG",
+                            "MDV",
+                            "MEX",
+                            "MHL",
+                            "MKD",
+                            "MLI",
+                            "MLT",
+                            "MMR",
+                            "MNE",
+                            "MNG",
+                            "MNP",
+                            "MOZ",
+                            "MRT",
+                            "MSR",
+                            "MTQ",
+                            "MUS",
+                            "MWI",
+                            "MYS",
+                            "MYT",
+                            "NAM",
+                            "NCL",
+                            "NER",
+                            "NFK",
+                            "NGA",
+                            "NIC",
+                            "NIU",
+                            "NLD",
+                            "NOR",
+                            "NPL",
+                            "NRU",
+                            "NZL",
+                            "OMN",
+                            "PAK",
+                            "PAN",
+                            "PCN",
+                            "PER",
+                            "PHL",
+                            "PLW",
+                            "PNG",
+                            "POL",
+                            "PRI",
+                            "PRK",
+                            "PRT",
+                            "PRY",
+                            "PSE",
+                            "PYF",
+                            "QAT",
+                            "REU",
+                            "ROU",
+                            "RUS",
+                            "RWA",
+                            "SAU",
+                            "SDN",
+                            "SEN",
+                            "SGP",
+                            "SGS",
+                            "SHN",
+                            "SJM",
+                            "SLB",
+                            "SLE",
+                            "SLV",
+                            "SMR",
+                            "SOM",
+                            "SPM",
+                            "SRB",
+                            "SSD",
+                            "STP",
+                            "SUR",
+                            "SVK",
+                            "SVN",
+                            "SWE",
+                            "SWZ",
+                            "SXM",
+                            "SYC",
+                            "SYR",
+                            "TCA",
+                            "TCD",
+                            "TGO",
+                            "THA",
+                            "TJK",
+                            "TKL",
+                            "TKM",
+                            "TLS",
+                            "TON",
+                            "TTO",
+                            "TUN",
+                            "TUR",
+                            "TUV",
+                            "TWN",
+                            "TZA",
+                            "UGA",
+                            "UKR",
+                            "UMI",
+                            "URY",
+                            "USA",
+                            "UZB",
+                            "VAT",
+                            "VCT",
+                            "VEN",
+                            "VGB",
+                            "VIR",
+                            "VNM",
+                            "VUT",
+                            "WLF",
+                            "WSM",
+                            "YEM",
+                            "ZAF",
+                            "ZMB",
+                            "ZWE"
+                          ]
+                        },
+                        "administrative_area": {
+                          "type": "string",
+                          "description": "State / Province / Region"
+                        },
+                        "sub_administrative_area": {
+                          "type": "string",
+                          "description": "County / District"
+                        },
+                        "locality": {
+                          "type": "string",
+                          "description": "City / Town"
+                        },
+                        "postal_code": {
+                          "type": "string",
+                          "description": "Postal Code / Zip Code"
+                        },
+                        "thoroughfare": {
+                          "type": "string",
+                          "description": "Street Address"
+                        },
+                        "premise": {
+                          "type": "string",
+                          "description": "Apartment / Suite / Box number etc"
+                        },
+                        "sub_premise": {
+                          "type": "string",
+                          "description": "Floor # / Room # / Building label etc"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
     },
     "input_filter": {
       "type": "array",
@@ -19469,6 +31964,15 @@ Updates a unit
             "CANCELLED",
             "BLOCKED"
           ]
+        },
+        "description": {
+          "type": "string",
+          "nullable": true,
+          "description": "A description for the status"
+        },
+        "order": {
+          "type": "number",
+          "description": "Order status appears when listing"
         }
       }
     }
@@ -19499,9 +32003,9 @@ Status Code **200**
 |»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
 |»» created|string(date-time)|false|read-only|Date the entity was created|
 |»» updated|string(date-time)|false|read-only|Last date the entity was updated|
-|»» serial_number|string|false|read-only|Serial number of the unit with prefix stripped|
-|»» raw_serial_number|string|false|none|Serial number of the unit|
-|»» tenant_part_number|string|false|none|Identifier set by the tenant|
+|»» serial_number|string\|null|false|read-only|Serial number of the unit with prefix stripped|
+|»» raw_serial_number|string\|null|false|none|Serial number of the unit|
+|»» tenant_part_number|string\|null|false|none|Identifier set by the tenant|
 |»» manufacturer|object|false|none|Manufacturer information for the part|
 |»»» part_number|string|true|none|Part number the manufacturer uses. If this is not set, then the part number is used|
 |»»» manufacturer_id|string|false|read-only|Customer identifier|
@@ -19540,6 +32044,8 @@ Status Code **200**
 |»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
 |»»»»» status|string|true|none|A Custom label for the status|
 |»»»»» category|string|true|none|The classifier for the statues|
+|»»»»» description|string\|null|false|none|A description for the status|
+|»»»»» order|number|false|none|Order status appears when listing|
 |»»»» total_programs|number|false|none|Total programs under the customer|
 |»»»» total_projects|number|false|none|Total projects under the customer|
 |»»» manufacturer|object|true|none|Manufacturer information for the part|
@@ -19871,6 +32377,8 @@ Status Code **200**
 |»»»»»»»»»»»»»»»»»»»»»»»»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»» status|string|true|none|A Custom label for the status|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»» category|string|true|none|The classifier for the statues|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»» description|string\|null|false|none|A description for the status|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»» order|number|false|none|Order status appears when listing|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»» total_programs|number|false|none|Total programs under the customer|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»» total_projects|number|false|none|Total projects under the customer|
 |»»»»»»»»»»»»»»»»»»»»»»»»»» current_location|object|false|none|Defines the properties for a part unit|
@@ -19911,313 +32419,427 @@ Status Code **200**
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»» thoroughfare|string|true|none|Street Address|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»» premise|string|false|none|Apartment / Suite / Box number etc|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»» sub_premise|string|false|none|Floor # / Room # / Building label etc|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»» input_filter|[object]|false|none|Input Filters allow custom fields to be defined for entities|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» label|string|true|none|Human readable name|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» key|string|true|read-only|Slug used to store the property|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» filters|[anyOf]|true|none|A Collection of filters applied to the field|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»» resource|any|false|none|none|
 
 *anyOf*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|This filter will set the value based on a list of approved values. If the value is not in the list, it will then be set to empty unless the default option is set|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» approved_values|[string]|true|none|The list of approved values|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» default|string\|null|false|none|If this is set and the value is not in the approved_list, set the value to this|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|null|false|none|none|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value camelCase|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Defines the properties for a resource|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» resource_id|string|false|read-only|The identifier for the resource|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» label|string|true|none|Label for the entity|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» resource_type|string|true|none|Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» meta|object|false|none|Data for the resource as a key value pair|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» **additionalProperties**|string|false|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location|object|true|none|Defines the properties for a part unit|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location_id|string|false|read-only|The identifier for the location|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» label|string|true|none|Label for the entity|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location_type|string|true|none|The type of location|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» formatted_address|string|false|read-only|Address formatted for the where region the location exists in|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» address|object|true|none|xNAL address for the location|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» country|string|true|none|Three Letter ISO country code|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» administrative_area|string|true|none|State / Province / Region|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» sub_administrative_area|string|false|none|County / District|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» locality|string|true|none|City / Town|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» postal_code|string|true|none|Postal Code / Zip Code|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» thoroughfare|string|true|none|Street Address|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» premise|string|false|none|Apartment / Suite / Box number etc|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» sub_premise|string|false|none|Floor # / Room # / Building label etc|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a date|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|Date filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform values into null. This is helpful when trying to make a value required. The following are considered empty: # The number 0 or 0.0 # empty string '' # A boolean false # The word 'false' #|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|empty filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a float. Non numeric characters (including comma) will be removed|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|How many decimal places to preserve|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value kebab-case|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value lowercase|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a number. Non numeric characters (including comma and decimal points) will be removed|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|Number filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Add a prefix to the start of a string. If the string already start with the prefix, it will not prepend.|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» prefix|string|true|none|The prefix to add|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value snake_case|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a string|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|String filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Add a suffix to the start of a string. If the string already start with the suffix, it will not append.|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» suffix|string|true|none|The suffix to add|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to trim whitespace from a value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|By default will trim from the start and end|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» start|boolean|false|none|Remove white space from the start of the string|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» end|boolean|false|none|Remove white space from the end of the string|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value UPPERCASE|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Defines the properties for a resource|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» resource_id|string|false|read-only|The identifier for the resource|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» label|string|true|none|Label for the entity|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» resource_type|string|true|none|Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» meta|object|false|none|Data for the resource as a key value pair|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» **additionalProperties**|string|false|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location|object|true|none|Defines the properties for a part unit|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location_id|string|false|read-only|The identifier for the location|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» label|string|true|none|Label for the entity|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location_type|string|true|none|The type of location|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» formatted_address|string|false|read-only|Address formatted for the where region the location exists in|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» address|object|true|none|xNAL address for the location|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» country|string|true|none|Three Letter ISO country code|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» administrative_area|string|true|none|State / Province / Region|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» sub_administrative_area|string|false|none|County / District|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» locality|string|true|none|City / Town|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» postal_code|string|true|none|Postal Code / Zip Code|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» thoroughfare|string|true|none|Street Address|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» premise|string|false|none|Apartment / Suite / Box number etc|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» sub_premise|string|false|none|Floor # / Room # / Building label etc|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» resource|object|true|none|Defines the properties for a resource|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» resource_id|string|false|read-only|The identifier for the resource|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» label|string|true|none|Label for the entity|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» resource_type|string|true|none|Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» meta|object|false|none|Data for the resource as a key value pair|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» **additionalProperties**|string|false|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location|object|true|none|Defines the properties for a part unit|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location_id|string|false|read-only|The identifier for the location|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» label|string|true|none|Label for the entity|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location_type|string|true|none|The type of location|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» formatted_address|string|false|read-only|Address formatted for the where region the location exists in|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» address|object|true|none|xNAL address for the location|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» country|string|true|none|Three Letter ISO country code|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» administrative_area|string|true|none|State / Province / Region|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» sub_administrative_area|string|false|none|County / District|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» locality|string|true|none|City / Town|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» postal_code|string|true|none|Postal Code / Zip Code|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» thoroughfare|string|true|none|Street Address|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» premise|string|false|none|Apartment / Suite / Box number etc|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» sub_premise|string|false|none|Floor # / Room # / Building label etc|
 
 *continued*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» validators|[anyOf]|true|none|A set of validators to use for this field|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» input_filter|[object]|false|none|Input Filters allow custom fields to be defined for entities|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» label|string|true|none|Human readable name|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» key|string|true|read-only|Slug used to store the property|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» filters|[anyOf]|true|none|A Collection of filters applied to the field|
 
 *anyOf*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number is between two values. By default, min and max are included|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» min|number|true|none|Minimum value to check|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» max|number|true|none|The maximum value to check|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» include|boolean|false|none|Include the value in the check|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate value does not match a list (black list)|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|This filter will set the value based on a list of approved values. If the value is not in the list, it will then be set to empty unless the default option is set|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» list|[string]|true|none|The list of approved values|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» approved_values|[string]|true|none|The list of approved values|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» default|string\|null|false|none|If this is set and the value is not in the approved_list, set the value to this|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string contains a value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value camelCase|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a date|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|Date filter has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform values into null. This is helpful when trying to make a value required. The following are considered empty: # The number 0 or 0.0 # empty string '' # A boolean false # The word 'false' #|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|empty filter has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a float. Non numeric characters (including comma) will be removed|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» contains|string|true|none|String must contain with this value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|How many decimal places to preserve|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string is a correct email address|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value kebab-case|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value lowercase|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a number. Non numeric characters (including comma and decimal points) will be removed|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|Number filter has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Add a prefix to the start of a string. If the string already start with the prefix, it will not prepend.|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» strict|boolean|false|none|Enforce strict standards from ARPA. This will enforce the length of the string|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» lookup|boolean|false|none|Look up the host name and check if it has a valid MX record|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» prefix|string|true|none|The prefix to add|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string ends with a value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value snake_case|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a string|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|String filter has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Add a suffix to the start of a string. If the string already start with the suffix, it will not append.|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» ends_with|string|true|none|String must end with this value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» suffix|string|true|none|The suffix to add|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number equals a value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to trim whitespace from a value|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» value|number|true|none|The value to compare against|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When value is a float, this will set the decimal precision|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|By default will trim from the start and end|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» start|boolean|false|none|Remove white space from the start of the string|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» end|boolean|false|none|Remove white space from the end of the string|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number is greater than a value. By default, this will check if value is greater than or equals to|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value UPPERCASE|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» value|number|true|none|The value to compare against|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» include|boolean|false|none|Include the value in the check|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string has a correct DNS records|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» record_type|string|false|none|DNS record type to validate|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an IP address format. Defaults to matching IPv4|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» versions|[string]|false|none|IP Version to match against|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string is a certain length|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» length|string|true|none|String must contain with this value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» operator|string|false|none|Which type of length comparision to make|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number is less than a value. By default, this will check if value is less than or equals to|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» value|number|true|none|The value to compare against|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» include|boolean|false|none|Include the value in the check|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an MAC address format|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This validator has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches a regular expression|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» mask|string|true|none|Mask to validate against|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string starts with a value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» starts_with|string|true|none|String must start with this value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validates that a value follows a step. Both start and end options do not have to sync with the step. If they do not sync then find the nearest step.|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» step|number|true|none|The step value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» start|integer|false|none|Start stepping at this value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» end|integer|false|none|End stepping at this value|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an URI|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» schemes|[string]|false|none|Schemes to match. By default all are matched|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate value matches a list (white list)|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» list|[string]|true|none|The list of approved values|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
 
 *continued*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» current_status|object|false|none|Defines the properties for a status|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» status|string|true|none|A Custom label for the status|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» category|string|true|none|The classifier for the statues|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» validators|[anyOf]|true|none|A set of validators to use for this field|
+
+*anyOf*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number is between two values. By default, min and max are included|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» min|number|true|none|Minimum value to check|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» max|number|true|none|The maximum value to check|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» include|boolean|false|none|Include the value in the check|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate value does not match a list (black list)|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» list|[string]|true|none|The list of approved values|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string contains a value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» contains|string|true|none|String must contain with this value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string is a correct email address|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» strict|boolean|false|none|Enforce strict standards from ARPA. This will enforce the length of the string|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» lookup|boolean|false|none|Look up the host name and check if it has a valid MX record|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string ends with a value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» ends_with|string|true|none|String must end with this value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number equals a value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» value|number|true|none|The value to compare against|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When value is a float, this will set the decimal precision|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number is greater than a value. By default, this will check if value is greater than or equals to|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» value|number|true|none|The value to compare against|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» include|boolean|false|none|Include the value in the check|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string has a correct DNS records|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» record_type|string|false|none|DNS record type to validate|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an IP address format. Defaults to matching IPv4|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» versions|[string]|false|none|IP Version to match against|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string is a certain length|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» length|string|true|none|String must contain with this value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» operator|string|false|none|Which type of length comparision to make|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number is less than a value. By default, this will check if value is less than or equals to|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» value|number|true|none|The value to compare against|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» include|boolean|false|none|Include the value in the check|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an MAC address format|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This validator has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches a regular expression|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» mask|string|true|none|Mask to validate against|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string starts with a value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» starts_with|string|true|none|String must start with this value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validates that a value follows a step. Both start and end options do not have to sync with the step. If they do not sync then find the nearest step.|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» step|number|true|none|The step value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» start|integer|false|none|Start stepping at this value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» end|integer|false|none|End stepping at this value|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an URI|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» schemes|[string]|false|none|Schemes to match. By default all are matched|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate value matches a list (white list)|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» list|[string]|true|none|The list of approved values|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+
+*continued*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» current_status|object|false|none|Defines the properties for a status|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» status|string|true|none|A Custom label for the status|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» category|string|true|none|The classifier for the statues|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» description|string\|null|false|none|A description for the status|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» order|number|false|none|Order status appears when listing|
 
 #### Enumerated Values
 
@@ -20571,6 +33193,768 @@ Status Code **200**
 |country|ZAF|
 |country|ZMB|
 |country|ZWE|
+|entity_type|LOC|
+|location_type|warehouse|
+|location_type|facility|
+|location_type|other|
+|country|ABW|
+|country|AFG|
+|country|AGO|
+|country|AIA|
+|country|ALA|
+|country|ALB|
+|country|AND|
+|country|ARE|
+|country|ARG|
+|country|ARM|
+|country|ASM|
+|country|ATA|
+|country|ATF|
+|country|ATG|
+|country|AUS|
+|country|AUT|
+|country|AZE|
+|country|BDI|
+|country|BEL|
+|country|BEN|
+|country|BES|
+|country|BFA|
+|country|BGD|
+|country|BGR|
+|country|BHR|
+|country|BHS|
+|country|BIH|
+|country|BLM|
+|country|BLR|
+|country|BLZ|
+|country|BMU|
+|country|BOL|
+|country|BRA|
+|country|BRB|
+|country|BRN|
+|country|BTN|
+|country|BVT|
+|country|BWA|
+|country|CAF|
+|country|CAN|
+|country|CCK|
+|country|CHE|
+|country|CHL|
+|country|CHN|
+|country|CIV|
+|country|CMR|
+|country|COD|
+|country|COG|
+|country|COK|
+|country|COL|
+|country|COM|
+|country|CPV|
+|country|CRI|
+|country|CUB|
+|country|CUW|
+|country|CXR|
+|country|CYM|
+|country|CYP|
+|country|CZE|
+|country|DEU|
+|country|DJI|
+|country|DMA|
+|country|DNK|
+|country|DOM|
+|country|DZA|
+|country|ECU|
+|country|EGY|
+|country|ERI|
+|country|ESH|
+|country|ESP|
+|country|EST|
+|country|ETH|
+|country|FIN|
+|country|FJI|
+|country|FLK|
+|country|FRA|
+|country|FRO|
+|country|FSM|
+|country|GAB|
+|country|GBR|
+|country|GEO|
+|country|GGY|
+|country|GHA|
+|country|GIB|
+|country|GIN|
+|country|GLP|
+|country|GMB|
+|country|GNB|
+|country|GNQ|
+|country|GRC|
+|country|GRD|
+|country|GRL|
+|country|GTM|
+|country|GUF|
+|country|GUM|
+|country|GUY|
+|country|HKG|
+|country|HMD|
+|country|HND|
+|country|HRV|
+|country|HTI|
+|country|HUN|
+|country|IDN|
+|country|IMN|
+|country|IND|
+|country|IOT|
+|country|IRL|
+|country|IRN|
+|country|IRQ|
+|country|ISL|
+|country|ISR|
+|country|ITA|
+|country|JAM|
+|country|JEY|
+|country|JOR|
+|country|JPN|
+|country|KAZ|
+|country|KEN|
+|country|KGZ|
+|country|KHM|
+|country|KIR|
+|country|KNA|
+|country|KOR|
+|country|KWT|
+|country|LAO|
+|country|LBN|
+|country|LBR|
+|country|LBY|
+|country|LCA|
+|country|LIE|
+|country|LKA|
+|country|LSO|
+|country|LTU|
+|country|LUX|
+|country|LVA|
+|country|MAC|
+|country|MAF|
+|country|MAR|
+|country|MCO|
+|country|MDA|
+|country|MDG|
+|country|MDV|
+|country|MEX|
+|country|MHL|
+|country|MKD|
+|country|MLI|
+|country|MLT|
+|country|MMR|
+|country|MNE|
+|country|MNG|
+|country|MNP|
+|country|MOZ|
+|country|MRT|
+|country|MSR|
+|country|MTQ|
+|country|MUS|
+|country|MWI|
+|country|MYS|
+|country|MYT|
+|country|NAM|
+|country|NCL|
+|country|NER|
+|country|NFK|
+|country|NGA|
+|country|NIC|
+|country|NIU|
+|country|NLD|
+|country|NOR|
+|country|NPL|
+|country|NRU|
+|country|NZL|
+|country|OMN|
+|country|PAK|
+|country|PAN|
+|country|PCN|
+|country|PER|
+|country|PHL|
+|country|PLW|
+|country|PNG|
+|country|POL|
+|country|PRI|
+|country|PRK|
+|country|PRT|
+|country|PRY|
+|country|PSE|
+|country|PYF|
+|country|QAT|
+|country|REU|
+|country|ROU|
+|country|RUS|
+|country|RWA|
+|country|SAU|
+|country|SDN|
+|country|SEN|
+|country|SGP|
+|country|SGS|
+|country|SHN|
+|country|SJM|
+|country|SLB|
+|country|SLE|
+|country|SLV|
+|country|SMR|
+|country|SOM|
+|country|SPM|
+|country|SRB|
+|country|SSD|
+|country|STP|
+|country|SUR|
+|country|SVK|
+|country|SVN|
+|country|SWE|
+|country|SWZ|
+|country|SXM|
+|country|SYC|
+|country|SYR|
+|country|TCA|
+|country|TCD|
+|country|TGO|
+|country|THA|
+|country|TJK|
+|country|TKL|
+|country|TKM|
+|country|TLS|
+|country|TON|
+|country|TTO|
+|country|TUN|
+|country|TUR|
+|country|TUV|
+|country|TWN|
+|country|TZA|
+|country|UGA|
+|country|UKR|
+|country|UMI|
+|country|URY|
+|country|USA|
+|country|UZB|
+|country|VAT|
+|country|VCT|
+|country|VEN|
+|country|VGB|
+|country|VIR|
+|country|VNM|
+|country|VUT|
+|country|WLF|
+|country|WSM|
+|country|YEM|
+|country|ZAF|
+|country|ZMB|
+|country|ZWE|
+|entity_type|RES|
+|entity_type|LOC|
+|location_type|warehouse|
+|location_type|facility|
+|location_type|other|
+|country|ABW|
+|country|AFG|
+|country|AGO|
+|country|AIA|
+|country|ALA|
+|country|ALB|
+|country|AND|
+|country|ARE|
+|country|ARG|
+|country|ARM|
+|country|ASM|
+|country|ATA|
+|country|ATF|
+|country|ATG|
+|country|AUS|
+|country|AUT|
+|country|AZE|
+|country|BDI|
+|country|BEL|
+|country|BEN|
+|country|BES|
+|country|BFA|
+|country|BGD|
+|country|BGR|
+|country|BHR|
+|country|BHS|
+|country|BIH|
+|country|BLM|
+|country|BLR|
+|country|BLZ|
+|country|BMU|
+|country|BOL|
+|country|BRA|
+|country|BRB|
+|country|BRN|
+|country|BTN|
+|country|BVT|
+|country|BWA|
+|country|CAF|
+|country|CAN|
+|country|CCK|
+|country|CHE|
+|country|CHL|
+|country|CHN|
+|country|CIV|
+|country|CMR|
+|country|COD|
+|country|COG|
+|country|COK|
+|country|COL|
+|country|COM|
+|country|CPV|
+|country|CRI|
+|country|CUB|
+|country|CUW|
+|country|CXR|
+|country|CYM|
+|country|CYP|
+|country|CZE|
+|country|DEU|
+|country|DJI|
+|country|DMA|
+|country|DNK|
+|country|DOM|
+|country|DZA|
+|country|ECU|
+|country|EGY|
+|country|ERI|
+|country|ESH|
+|country|ESP|
+|country|EST|
+|country|ETH|
+|country|FIN|
+|country|FJI|
+|country|FLK|
+|country|FRA|
+|country|FRO|
+|country|FSM|
+|country|GAB|
+|country|GBR|
+|country|GEO|
+|country|GGY|
+|country|GHA|
+|country|GIB|
+|country|GIN|
+|country|GLP|
+|country|GMB|
+|country|GNB|
+|country|GNQ|
+|country|GRC|
+|country|GRD|
+|country|GRL|
+|country|GTM|
+|country|GUF|
+|country|GUM|
+|country|GUY|
+|country|HKG|
+|country|HMD|
+|country|HND|
+|country|HRV|
+|country|HTI|
+|country|HUN|
+|country|IDN|
+|country|IMN|
+|country|IND|
+|country|IOT|
+|country|IRL|
+|country|IRN|
+|country|IRQ|
+|country|ISL|
+|country|ISR|
+|country|ITA|
+|country|JAM|
+|country|JEY|
+|country|JOR|
+|country|JPN|
+|country|KAZ|
+|country|KEN|
+|country|KGZ|
+|country|KHM|
+|country|KIR|
+|country|KNA|
+|country|KOR|
+|country|KWT|
+|country|LAO|
+|country|LBN|
+|country|LBR|
+|country|LBY|
+|country|LCA|
+|country|LIE|
+|country|LKA|
+|country|LSO|
+|country|LTU|
+|country|LUX|
+|country|LVA|
+|country|MAC|
+|country|MAF|
+|country|MAR|
+|country|MCO|
+|country|MDA|
+|country|MDG|
+|country|MDV|
+|country|MEX|
+|country|MHL|
+|country|MKD|
+|country|MLI|
+|country|MLT|
+|country|MMR|
+|country|MNE|
+|country|MNG|
+|country|MNP|
+|country|MOZ|
+|country|MRT|
+|country|MSR|
+|country|MTQ|
+|country|MUS|
+|country|MWI|
+|country|MYS|
+|country|MYT|
+|country|NAM|
+|country|NCL|
+|country|NER|
+|country|NFK|
+|country|NGA|
+|country|NIC|
+|country|NIU|
+|country|NLD|
+|country|NOR|
+|country|NPL|
+|country|NRU|
+|country|NZL|
+|country|OMN|
+|country|PAK|
+|country|PAN|
+|country|PCN|
+|country|PER|
+|country|PHL|
+|country|PLW|
+|country|PNG|
+|country|POL|
+|country|PRI|
+|country|PRK|
+|country|PRT|
+|country|PRY|
+|country|PSE|
+|country|PYF|
+|country|QAT|
+|country|REU|
+|country|ROU|
+|country|RUS|
+|country|RWA|
+|country|SAU|
+|country|SDN|
+|country|SEN|
+|country|SGP|
+|country|SGS|
+|country|SHN|
+|country|SJM|
+|country|SLB|
+|country|SLE|
+|country|SLV|
+|country|SMR|
+|country|SOM|
+|country|SPM|
+|country|SRB|
+|country|SSD|
+|country|STP|
+|country|SUR|
+|country|SVK|
+|country|SVN|
+|country|SWE|
+|country|SWZ|
+|country|SXM|
+|country|SYC|
+|country|SYR|
+|country|TCA|
+|country|TCD|
+|country|TGO|
+|country|THA|
+|country|TJK|
+|country|TKL|
+|country|TKM|
+|country|TLS|
+|country|TON|
+|country|TTO|
+|country|TUN|
+|country|TUR|
+|country|TUV|
+|country|TWN|
+|country|TZA|
+|country|UGA|
+|country|UKR|
+|country|UMI|
+|country|URY|
+|country|USA|
+|country|UZB|
+|country|VAT|
+|country|VCT|
+|country|VEN|
+|country|VGB|
+|country|VIR|
+|country|VNM|
+|country|VUT|
+|country|WLF|
+|country|WSM|
+|country|YEM|
+|country|ZAF|
+|country|ZMB|
+|country|ZWE|
+|entity_type|SRES|
+|entity_type|LOC|
+|location_type|warehouse|
+|location_type|facility|
+|location_type|other|
+|country|ABW|
+|country|AFG|
+|country|AGO|
+|country|AIA|
+|country|ALA|
+|country|ALB|
+|country|AND|
+|country|ARE|
+|country|ARG|
+|country|ARM|
+|country|ASM|
+|country|ATA|
+|country|ATF|
+|country|ATG|
+|country|AUS|
+|country|AUT|
+|country|AZE|
+|country|BDI|
+|country|BEL|
+|country|BEN|
+|country|BES|
+|country|BFA|
+|country|BGD|
+|country|BGR|
+|country|BHR|
+|country|BHS|
+|country|BIH|
+|country|BLM|
+|country|BLR|
+|country|BLZ|
+|country|BMU|
+|country|BOL|
+|country|BRA|
+|country|BRB|
+|country|BRN|
+|country|BTN|
+|country|BVT|
+|country|BWA|
+|country|CAF|
+|country|CAN|
+|country|CCK|
+|country|CHE|
+|country|CHL|
+|country|CHN|
+|country|CIV|
+|country|CMR|
+|country|COD|
+|country|COG|
+|country|COK|
+|country|COL|
+|country|COM|
+|country|CPV|
+|country|CRI|
+|country|CUB|
+|country|CUW|
+|country|CXR|
+|country|CYM|
+|country|CYP|
+|country|CZE|
+|country|DEU|
+|country|DJI|
+|country|DMA|
+|country|DNK|
+|country|DOM|
+|country|DZA|
+|country|ECU|
+|country|EGY|
+|country|ERI|
+|country|ESH|
+|country|ESP|
+|country|EST|
+|country|ETH|
+|country|FIN|
+|country|FJI|
+|country|FLK|
+|country|FRA|
+|country|FRO|
+|country|FSM|
+|country|GAB|
+|country|GBR|
+|country|GEO|
+|country|GGY|
+|country|GHA|
+|country|GIB|
+|country|GIN|
+|country|GLP|
+|country|GMB|
+|country|GNB|
+|country|GNQ|
+|country|GRC|
+|country|GRD|
+|country|GRL|
+|country|GTM|
+|country|GUF|
+|country|GUM|
+|country|GUY|
+|country|HKG|
+|country|HMD|
+|country|HND|
+|country|HRV|
+|country|HTI|
+|country|HUN|
+|country|IDN|
+|country|IMN|
+|country|IND|
+|country|IOT|
+|country|IRL|
+|country|IRN|
+|country|IRQ|
+|country|ISL|
+|country|ISR|
+|country|ITA|
+|country|JAM|
+|country|JEY|
+|country|JOR|
+|country|JPN|
+|country|KAZ|
+|country|KEN|
+|country|KGZ|
+|country|KHM|
+|country|KIR|
+|country|KNA|
+|country|KOR|
+|country|KWT|
+|country|LAO|
+|country|LBN|
+|country|LBR|
+|country|LBY|
+|country|LCA|
+|country|LIE|
+|country|LKA|
+|country|LSO|
+|country|LTU|
+|country|LUX|
+|country|LVA|
+|country|MAC|
+|country|MAF|
+|country|MAR|
+|country|MCO|
+|country|MDA|
+|country|MDG|
+|country|MDV|
+|country|MEX|
+|country|MHL|
+|country|MKD|
+|country|MLI|
+|country|MLT|
+|country|MMR|
+|country|MNE|
+|country|MNG|
+|country|MNP|
+|country|MOZ|
+|country|MRT|
+|country|MSR|
+|country|MTQ|
+|country|MUS|
+|country|MWI|
+|country|MYS|
+|country|MYT|
+|country|NAM|
+|country|NCL|
+|country|NER|
+|country|NFK|
+|country|NGA|
+|country|NIC|
+|country|NIU|
+|country|NLD|
+|country|NOR|
+|country|NPL|
+|country|NRU|
+|country|NZL|
+|country|OMN|
+|country|PAK|
+|country|PAN|
+|country|PCN|
+|country|PER|
+|country|PHL|
+|country|PLW|
+|country|PNG|
+|country|POL|
+|country|PRI|
+|country|PRK|
+|country|PRT|
+|country|PRY|
+|country|PSE|
+|country|PYF|
+|country|QAT|
+|country|REU|
+|country|ROU|
+|country|RUS|
+|country|RWA|
+|country|SAU|
+|country|SDN|
+|country|SEN|
+|country|SGP|
+|country|SGS|
+|country|SHN|
+|country|SJM|
+|country|SLB|
+|country|SLE|
+|country|SLV|
+|country|SMR|
+|country|SOM|
+|country|SPM|
+|country|SRB|
+|country|SSD|
+|country|STP|
+|country|SUR|
+|country|SVK|
+|country|SVN|
+|country|SWE|
+|country|SWZ|
+|country|SXM|
+|country|SYC|
+|country|SYR|
+|country|TCA|
+|country|TCD|
+|country|TGO|
+|country|THA|
+|country|TJK|
+|country|TKL|
+|country|TKM|
+|country|TLS|
+|country|TON|
+|country|TTO|
+|country|TUN|
+|country|TUR|
+|country|TUV|
+|country|TWN|
+|country|TZA|
+|country|UGA|
+|country|UKR|
+|country|UMI|
+|country|URY|
+|country|USA|
+|country|UZB|
+|country|VAT|
+|country|VCT|
+|country|VEN|
+|country|VGB|
+|country|VIR|
+|country|VNM|
+|country|VUT|
+|country|WLF|
+|country|WSM|
+|country|YEM|
+|country|ZAF|
+|country|ZMB|
+|country|ZWE|
+|entity_type|RES|
 |entity_type|LOC|
 |location_type|warehouse|
 |location_type|facility|
@@ -20994,11 +34378,13 @@ Update the current status or current location for a unit
     },
     "raw_serial_number": {
       "type": "string",
+      "nullable": true,
       "description": "Serial number of the unit with prefix stripped",
       "readOnly": true
     },
     "tenant_part_number": {
       "type": "string",
+      "nullable": true,
       "description": "Identifier set by the tenant"
     },
     "part": {
@@ -21040,6 +34426,15 @@ Update the current status or current location for a unit
             "CANCELLED",
             "BLOCKED"
           ]
+        },
+        "description": {
+          "type": "string",
+          "nullable": true,
+          "description": "A description for the status"
+        },
+        "order": {
+          "type": "number",
+          "description": "Order status appears when listing"
         }
       }
     },
@@ -21420,6 +34815,1337 @@ Update the current status or current location for a unit
         }
       }
     },
+    "resource": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "description": "Defines the properties for a resource",
+          "additionalProperties": false,
+          "required": [
+            "label",
+            "entity_id",
+            "entity_type",
+            "created",
+            "updated",
+            "resource_type",
+            "location"
+          ],
+          "properties": {
+            "resource_id": {
+              "description": "The identifier for the resource",
+              "type": "string",
+              "readOnly": true,
+              "pattern": "^[0-9a-zA-Z-_]+$"
+            },
+            "entity_id": {
+              "x-no-api-doc": true,
+              "type": "string",
+              "description": "Customer identifier",
+              "readOnly": true,
+              "pattern": "^[0-9a-zA-Z-_]+$"
+            },
+            "entity_type": {
+              "x-no-api-doc": true,
+              "enum": [
+                "RES"
+              ]
+            },
+            "label": {
+              "type": "string",
+              "description": "Label for the entity"
+            },
+            "slug": {
+              "type": "string",
+              "description": "Slug for the entity (Auto-generated from the label)",
+              "readOnly": true,
+              "deprecated": true,
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+            },
+            "created": {
+              "description": "Date the entity was created",
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true
+            },
+            "updated": {
+              "description": "Last date the entity was updated",
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true
+            },
+            "resource_type": {
+              "type": "string",
+              "description": "Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased",
+              "pattern": "^[a-z][0-9a-zA-Z-]+$"
+            },
+            "meta": {
+              "type": "object",
+              "description": "Data for the resource as a key value pair",
+              "additionalProperties": {
+                "type": "string"
+              },
+              "propertyNames": {
+                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+              }
+            },
+            "location": {
+              "type": "object",
+              "description": "Defines the properties for a part unit",
+              "additionalProperties": false,
+              "required": [
+                "label",
+                "entity_id",
+                "entity_type",
+                "created",
+                "updated",
+                "location_type",
+                "address"
+              ],
+              "properties": {
+                "location_id": {
+                  "description": "The identifier for the location",
+                  "type": "string",
+                  "readOnly": true,
+                  "pattern": "^[0-9a-zA-Z-_]+$"
+                },
+                "entity_id": {
+                  "x-no-api-doc": true,
+                  "type": "string",
+                  "description": "Customer identifier",
+                  "readOnly": true,
+                  "pattern": "^[0-9a-zA-Z-_]+$"
+                },
+                "entity_type": {
+                  "x-no-api-doc": true,
+                  "enum": [
+                    "LOC"
+                  ]
+                },
+                "label": {
+                  "type": "string",
+                  "description": "Label for the entity"
+                },
+                "slug": {
+                  "type": "string",
+                  "description": "Slug for the entity (Auto-generated from the label)",
+                  "readOnly": true,
+                  "deprecated": true,
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                },
+                "created": {
+                  "description": "Date the entity was created",
+                  "type": "string",
+                  "format": "date-time",
+                  "readOnly": true
+                },
+                "updated": {
+                  "description": "Last date the entity was updated",
+                  "type": "string",
+                  "format": "date-time",
+                  "readOnly": true
+                },
+                "location_type": {
+                  "type": "string",
+                  "description": "The type of location",
+                  "enum": [
+                    "warehouse",
+                    "facility",
+                    "other"
+                  ]
+                },
+                "formatted_address": {
+                  "type": "string",
+                  "readOnly": true,
+                  "description": "Address formatted for the where region the location exists in"
+                },
+                "address": {
+                  "type": "object",
+                  "required": [
+                    "country",
+                    "administrative_area",
+                    "locality",
+                    "postal_code",
+                    "thoroughfare"
+                  ],
+                  "description": "xNAL address for the location ",
+                  "properties": {
+                    "country": {
+                      "type": "string",
+                      "description": "Three Letter ISO country code",
+                      "enum": [
+                        "ABW",
+                        "AFG",
+                        "AGO",
+                        "AIA",
+                        "ALA",
+                        "ALB",
+                        "AND",
+                        "ARE",
+                        "ARG",
+                        "ARM",
+                        "ASM",
+                        "ATA",
+                        "ATF",
+                        "ATG",
+                        "AUS",
+                        "AUT",
+                        "AZE",
+                        "BDI",
+                        "BEL",
+                        "BEN",
+                        "BES",
+                        "BFA",
+                        "BGD",
+                        "BGR",
+                        "BHR",
+                        "BHS",
+                        "BIH",
+                        "BLM",
+                        "BLR",
+                        "BLZ",
+                        "BMU",
+                        "BOL",
+                        "BRA",
+                        "BRB",
+                        "BRN",
+                        "BTN",
+                        "BVT",
+                        "BWA",
+                        "CAF",
+                        "CAN",
+                        "CCK",
+                        "CHE",
+                        "CHL",
+                        "CHN",
+                        "CIV",
+                        "CMR",
+                        "COD",
+                        "COG",
+                        "COK",
+                        "COL",
+                        "COM",
+                        "CPV",
+                        "CRI",
+                        "CUB",
+                        "CUW",
+                        "CXR",
+                        "CYM",
+                        "CYP",
+                        "CZE",
+                        "DEU",
+                        "DJI",
+                        "DMA",
+                        "DNK",
+                        "DOM",
+                        "DZA",
+                        "ECU",
+                        "EGY",
+                        "ERI",
+                        "ESH",
+                        "ESP",
+                        "EST",
+                        "ETH",
+                        "FIN",
+                        "FJI",
+                        "FLK",
+                        "FRA",
+                        "FRO",
+                        "FSM",
+                        "GAB",
+                        "GBR",
+                        "GEO",
+                        "GGY",
+                        "GHA",
+                        "GIB",
+                        "GIN",
+                        "GLP",
+                        "GMB",
+                        "GNB",
+                        "GNQ",
+                        "GRC",
+                        "GRD",
+                        "GRL",
+                        "GTM",
+                        "GUF",
+                        "GUM",
+                        "GUY",
+                        "HKG",
+                        "HMD",
+                        "HND",
+                        "HRV",
+                        "HTI",
+                        "HUN",
+                        "IDN",
+                        "IMN",
+                        "IND",
+                        "IOT",
+                        "IRL",
+                        "IRN",
+                        "IRQ",
+                        "ISL",
+                        "ISR",
+                        "ITA",
+                        "JAM",
+                        "JEY",
+                        "JOR",
+                        "JPN",
+                        "KAZ",
+                        "KEN",
+                        "KGZ",
+                        "KHM",
+                        "KIR",
+                        "KNA",
+                        "KOR",
+                        "KWT",
+                        "LAO",
+                        "LBN",
+                        "LBR",
+                        "LBY",
+                        "LCA",
+                        "LIE",
+                        "LKA",
+                        "LSO",
+                        "LTU",
+                        "LUX",
+                        "LVA",
+                        "MAC",
+                        "MAF",
+                        "MAR",
+                        "MCO",
+                        "MDA",
+                        "MDG",
+                        "MDV",
+                        "MEX",
+                        "MHL",
+                        "MKD",
+                        "MLI",
+                        "MLT",
+                        "MMR",
+                        "MNE",
+                        "MNG",
+                        "MNP",
+                        "MOZ",
+                        "MRT",
+                        "MSR",
+                        "MTQ",
+                        "MUS",
+                        "MWI",
+                        "MYS",
+                        "MYT",
+                        "NAM",
+                        "NCL",
+                        "NER",
+                        "NFK",
+                        "NGA",
+                        "NIC",
+                        "NIU",
+                        "NLD",
+                        "NOR",
+                        "NPL",
+                        "NRU",
+                        "NZL",
+                        "OMN",
+                        "PAK",
+                        "PAN",
+                        "PCN",
+                        "PER",
+                        "PHL",
+                        "PLW",
+                        "PNG",
+                        "POL",
+                        "PRI",
+                        "PRK",
+                        "PRT",
+                        "PRY",
+                        "PSE",
+                        "PYF",
+                        "QAT",
+                        "REU",
+                        "ROU",
+                        "RUS",
+                        "RWA",
+                        "SAU",
+                        "SDN",
+                        "SEN",
+                        "SGP",
+                        "SGS",
+                        "SHN",
+                        "SJM",
+                        "SLB",
+                        "SLE",
+                        "SLV",
+                        "SMR",
+                        "SOM",
+                        "SPM",
+                        "SRB",
+                        "SSD",
+                        "STP",
+                        "SUR",
+                        "SVK",
+                        "SVN",
+                        "SWE",
+                        "SWZ",
+                        "SXM",
+                        "SYC",
+                        "SYR",
+                        "TCA",
+                        "TCD",
+                        "TGO",
+                        "THA",
+                        "TJK",
+                        "TKL",
+                        "TKM",
+                        "TLS",
+                        "TON",
+                        "TTO",
+                        "TUN",
+                        "TUR",
+                        "TUV",
+                        "TWN",
+                        "TZA",
+                        "UGA",
+                        "UKR",
+                        "UMI",
+                        "URY",
+                        "USA",
+                        "UZB",
+                        "VAT",
+                        "VCT",
+                        "VEN",
+                        "VGB",
+                        "VIR",
+                        "VNM",
+                        "VUT",
+                        "WLF",
+                        "WSM",
+                        "YEM",
+                        "ZAF",
+                        "ZMB",
+                        "ZWE"
+                      ]
+                    },
+                    "administrative_area": {
+                      "type": "string",
+                      "description": "State / Province / Region"
+                    },
+                    "sub_administrative_area": {
+                      "type": "string",
+                      "description": "County / District"
+                    },
+                    "locality": {
+                      "type": "string",
+                      "description": "City / Town"
+                    },
+                    "postal_code": {
+                      "type": "string",
+                      "description": "Postal Code / Zip Code"
+                    },
+                    "thoroughfare": {
+                      "type": "string",
+                      "description": "Street Address"
+                    },
+                    "premise": {
+                      "type": "string",
+                      "description": "Apartment / Suite / Box number etc"
+                    },
+                    "sub_premise": {
+                      "type": "string",
+                      "description": "Floor # / Room # / Building label etc"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "description": "Defines the properties for a resource",
+          "additionalProperties": false,
+          "required": [
+            "label",
+            "entity_id",
+            "entity_type",
+            "created",
+            "updated",
+            "resource_type",
+            "location",
+            "resource"
+          ],
+          "properties": {
+            "resource_id": {
+              "description": "The identifier for the resource",
+              "type": "string",
+              "readOnly": true,
+              "pattern": "^[0-9a-zA-Z-_]+$"
+            },
+            "entity_id": {
+              "x-no-api-doc": true,
+              "type": "string",
+              "description": "Customer identifier",
+              "readOnly": true,
+              "pattern": "^[0-9a-zA-Z-_]+$"
+            },
+            "entity_type": {
+              "x-no-api-doc": true,
+              "enum": [
+                "SRES"
+              ]
+            },
+            "label": {
+              "type": "string",
+              "description": "Label for the entity"
+            },
+            "slug": {
+              "type": "string",
+              "description": "Slug for the entity (Auto-generated from the label)",
+              "readOnly": true,
+              "deprecated": true,
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+            },
+            "created": {
+              "description": "Date the entity was created",
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true
+            },
+            "updated": {
+              "description": "Last date the entity was updated",
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true
+            },
+            "resource_type": {
+              "type": "string",
+              "description": "Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased",
+              "pattern": "^[a-z][0-9a-zA-Z-]+$"
+            },
+            "meta": {
+              "type": "object",
+              "description": "Data for the resource as a key value pair",
+              "additionalProperties": {
+                "type": "string"
+              },
+              "propertyNames": {
+                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+              }
+            },
+            "location": {
+              "type": "object",
+              "description": "Defines the properties for a part unit",
+              "additionalProperties": false,
+              "required": [
+                "label",
+                "entity_id",
+                "entity_type",
+                "created",
+                "updated",
+                "location_type",
+                "address"
+              ],
+              "properties": {
+                "location_id": {
+                  "description": "The identifier for the location",
+                  "type": "string",
+                  "readOnly": true,
+                  "pattern": "^[0-9a-zA-Z-_]+$"
+                },
+                "entity_id": {
+                  "x-no-api-doc": true,
+                  "type": "string",
+                  "description": "Customer identifier",
+                  "readOnly": true,
+                  "pattern": "^[0-9a-zA-Z-_]+$"
+                },
+                "entity_type": {
+                  "x-no-api-doc": true,
+                  "enum": [
+                    "LOC"
+                  ]
+                },
+                "label": {
+                  "type": "string",
+                  "description": "Label for the entity"
+                },
+                "slug": {
+                  "type": "string",
+                  "description": "Slug for the entity (Auto-generated from the label)",
+                  "readOnly": true,
+                  "deprecated": true,
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                },
+                "created": {
+                  "description": "Date the entity was created",
+                  "type": "string",
+                  "format": "date-time",
+                  "readOnly": true
+                },
+                "updated": {
+                  "description": "Last date the entity was updated",
+                  "type": "string",
+                  "format": "date-time",
+                  "readOnly": true
+                },
+                "location_type": {
+                  "type": "string",
+                  "description": "The type of location",
+                  "enum": [
+                    "warehouse",
+                    "facility",
+                    "other"
+                  ]
+                },
+                "formatted_address": {
+                  "type": "string",
+                  "readOnly": true,
+                  "description": "Address formatted for the where region the location exists in"
+                },
+                "address": {
+                  "type": "object",
+                  "required": [
+                    "country",
+                    "administrative_area",
+                    "locality",
+                    "postal_code",
+                    "thoroughfare"
+                  ],
+                  "description": "xNAL address for the location ",
+                  "properties": {
+                    "country": {
+                      "type": "string",
+                      "description": "Three Letter ISO country code",
+                      "enum": [
+                        "ABW",
+                        "AFG",
+                        "AGO",
+                        "AIA",
+                        "ALA",
+                        "ALB",
+                        "AND",
+                        "ARE",
+                        "ARG",
+                        "ARM",
+                        "ASM",
+                        "ATA",
+                        "ATF",
+                        "ATG",
+                        "AUS",
+                        "AUT",
+                        "AZE",
+                        "BDI",
+                        "BEL",
+                        "BEN",
+                        "BES",
+                        "BFA",
+                        "BGD",
+                        "BGR",
+                        "BHR",
+                        "BHS",
+                        "BIH",
+                        "BLM",
+                        "BLR",
+                        "BLZ",
+                        "BMU",
+                        "BOL",
+                        "BRA",
+                        "BRB",
+                        "BRN",
+                        "BTN",
+                        "BVT",
+                        "BWA",
+                        "CAF",
+                        "CAN",
+                        "CCK",
+                        "CHE",
+                        "CHL",
+                        "CHN",
+                        "CIV",
+                        "CMR",
+                        "COD",
+                        "COG",
+                        "COK",
+                        "COL",
+                        "COM",
+                        "CPV",
+                        "CRI",
+                        "CUB",
+                        "CUW",
+                        "CXR",
+                        "CYM",
+                        "CYP",
+                        "CZE",
+                        "DEU",
+                        "DJI",
+                        "DMA",
+                        "DNK",
+                        "DOM",
+                        "DZA",
+                        "ECU",
+                        "EGY",
+                        "ERI",
+                        "ESH",
+                        "ESP",
+                        "EST",
+                        "ETH",
+                        "FIN",
+                        "FJI",
+                        "FLK",
+                        "FRA",
+                        "FRO",
+                        "FSM",
+                        "GAB",
+                        "GBR",
+                        "GEO",
+                        "GGY",
+                        "GHA",
+                        "GIB",
+                        "GIN",
+                        "GLP",
+                        "GMB",
+                        "GNB",
+                        "GNQ",
+                        "GRC",
+                        "GRD",
+                        "GRL",
+                        "GTM",
+                        "GUF",
+                        "GUM",
+                        "GUY",
+                        "HKG",
+                        "HMD",
+                        "HND",
+                        "HRV",
+                        "HTI",
+                        "HUN",
+                        "IDN",
+                        "IMN",
+                        "IND",
+                        "IOT",
+                        "IRL",
+                        "IRN",
+                        "IRQ",
+                        "ISL",
+                        "ISR",
+                        "ITA",
+                        "JAM",
+                        "JEY",
+                        "JOR",
+                        "JPN",
+                        "KAZ",
+                        "KEN",
+                        "KGZ",
+                        "KHM",
+                        "KIR",
+                        "KNA",
+                        "KOR",
+                        "KWT",
+                        "LAO",
+                        "LBN",
+                        "LBR",
+                        "LBY",
+                        "LCA",
+                        "LIE",
+                        "LKA",
+                        "LSO",
+                        "LTU",
+                        "LUX",
+                        "LVA",
+                        "MAC",
+                        "MAF",
+                        "MAR",
+                        "MCO",
+                        "MDA",
+                        "MDG",
+                        "MDV",
+                        "MEX",
+                        "MHL",
+                        "MKD",
+                        "MLI",
+                        "MLT",
+                        "MMR",
+                        "MNE",
+                        "MNG",
+                        "MNP",
+                        "MOZ",
+                        "MRT",
+                        "MSR",
+                        "MTQ",
+                        "MUS",
+                        "MWI",
+                        "MYS",
+                        "MYT",
+                        "NAM",
+                        "NCL",
+                        "NER",
+                        "NFK",
+                        "NGA",
+                        "NIC",
+                        "NIU",
+                        "NLD",
+                        "NOR",
+                        "NPL",
+                        "NRU",
+                        "NZL",
+                        "OMN",
+                        "PAK",
+                        "PAN",
+                        "PCN",
+                        "PER",
+                        "PHL",
+                        "PLW",
+                        "PNG",
+                        "POL",
+                        "PRI",
+                        "PRK",
+                        "PRT",
+                        "PRY",
+                        "PSE",
+                        "PYF",
+                        "QAT",
+                        "REU",
+                        "ROU",
+                        "RUS",
+                        "RWA",
+                        "SAU",
+                        "SDN",
+                        "SEN",
+                        "SGP",
+                        "SGS",
+                        "SHN",
+                        "SJM",
+                        "SLB",
+                        "SLE",
+                        "SLV",
+                        "SMR",
+                        "SOM",
+                        "SPM",
+                        "SRB",
+                        "SSD",
+                        "STP",
+                        "SUR",
+                        "SVK",
+                        "SVN",
+                        "SWE",
+                        "SWZ",
+                        "SXM",
+                        "SYC",
+                        "SYR",
+                        "TCA",
+                        "TCD",
+                        "TGO",
+                        "THA",
+                        "TJK",
+                        "TKL",
+                        "TKM",
+                        "TLS",
+                        "TON",
+                        "TTO",
+                        "TUN",
+                        "TUR",
+                        "TUV",
+                        "TWN",
+                        "TZA",
+                        "UGA",
+                        "UKR",
+                        "UMI",
+                        "URY",
+                        "USA",
+                        "UZB",
+                        "VAT",
+                        "VCT",
+                        "VEN",
+                        "VGB",
+                        "VIR",
+                        "VNM",
+                        "VUT",
+                        "WLF",
+                        "WSM",
+                        "YEM",
+                        "ZAF",
+                        "ZMB",
+                        "ZWE"
+                      ]
+                    },
+                    "administrative_area": {
+                      "type": "string",
+                      "description": "State / Province / Region"
+                    },
+                    "sub_administrative_area": {
+                      "type": "string",
+                      "description": "County / District"
+                    },
+                    "locality": {
+                      "type": "string",
+                      "description": "City / Town"
+                    },
+                    "postal_code": {
+                      "type": "string",
+                      "description": "Postal Code / Zip Code"
+                    },
+                    "thoroughfare": {
+                      "type": "string",
+                      "description": "Street Address"
+                    },
+                    "premise": {
+                      "type": "string",
+                      "description": "Apartment / Suite / Box number etc"
+                    },
+                    "sub_premise": {
+                      "type": "string",
+                      "description": "Floor # / Room # / Building label etc"
+                    }
+                  }
+                }
+              }
+            },
+            "resource": {
+              "type": "object",
+              "description": "Defines the properties for a resource",
+              "additionalProperties": false,
+              "required": [
+                "label",
+                "entity_id",
+                "entity_type",
+                "created",
+                "updated",
+                "resource_type",
+                "location"
+              ],
+              "properties": {
+                "resource_id": {
+                  "description": "The identifier for the resource",
+                  "type": "string",
+                  "readOnly": true,
+                  "pattern": "^[0-9a-zA-Z-_]+$"
+                },
+                "entity_id": {
+                  "x-no-api-doc": true,
+                  "type": "string",
+                  "description": "Customer identifier",
+                  "readOnly": true,
+                  "pattern": "^[0-9a-zA-Z-_]+$"
+                },
+                "entity_type": {
+                  "x-no-api-doc": true,
+                  "enum": [
+                    "RES"
+                  ]
+                },
+                "label": {
+                  "type": "string",
+                  "description": "Label for the entity"
+                },
+                "slug": {
+                  "type": "string",
+                  "description": "Slug for the entity (Auto-generated from the label)",
+                  "readOnly": true,
+                  "deprecated": true,
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                },
+                "created": {
+                  "description": "Date the entity was created",
+                  "type": "string",
+                  "format": "date-time",
+                  "readOnly": true
+                },
+                "updated": {
+                  "description": "Last date the entity was updated",
+                  "type": "string",
+                  "format": "date-time",
+                  "readOnly": true
+                },
+                "resource_type": {
+                  "type": "string",
+                  "description": "Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased",
+                  "pattern": "^[a-z][0-9a-zA-Z-]+$"
+                },
+                "meta": {
+                  "type": "object",
+                  "description": "Data for the resource as a key value pair",
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "propertyNames": {
+                    "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+                  }
+                },
+                "location": {
+                  "type": "object",
+                  "description": "Defines the properties for a part unit",
+                  "additionalProperties": false,
+                  "required": [
+                    "label",
+                    "entity_id",
+                    "entity_type",
+                    "created",
+                    "updated",
+                    "location_type",
+                    "address"
+                  ],
+                  "properties": {
+                    "location_id": {
+                      "description": "The identifier for the location",
+                      "type": "string",
+                      "readOnly": true,
+                      "pattern": "^[0-9a-zA-Z-_]+$"
+                    },
+                    "entity_id": {
+                      "x-no-api-doc": true,
+                      "type": "string",
+                      "description": "Customer identifier",
+                      "readOnly": true,
+                      "pattern": "^[0-9a-zA-Z-_]+$"
+                    },
+                    "entity_type": {
+                      "x-no-api-doc": true,
+                      "enum": [
+                        "LOC"
+                      ]
+                    },
+                    "label": {
+                      "type": "string",
+                      "description": "Label for the entity"
+                    },
+                    "slug": {
+                      "type": "string",
+                      "description": "Slug for the entity (Auto-generated from the label)",
+                      "readOnly": true,
+                      "deprecated": true,
+                      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                    },
+                    "created": {
+                      "description": "Date the entity was created",
+                      "type": "string",
+                      "format": "date-time",
+                      "readOnly": true
+                    },
+                    "updated": {
+                      "description": "Last date the entity was updated",
+                      "type": "string",
+                      "format": "date-time",
+                      "readOnly": true
+                    },
+                    "location_type": {
+                      "type": "string",
+                      "description": "The type of location",
+                      "enum": [
+                        "warehouse",
+                        "facility",
+                        "other"
+                      ]
+                    },
+                    "formatted_address": {
+                      "type": "string",
+                      "readOnly": true,
+                      "description": "Address formatted for the where region the location exists in"
+                    },
+                    "address": {
+                      "type": "object",
+                      "required": [
+                        "country",
+                        "administrative_area",
+                        "locality",
+                        "postal_code",
+                        "thoroughfare"
+                      ],
+                      "description": "xNAL address for the location ",
+                      "properties": {
+                        "country": {
+                          "type": "string",
+                          "description": "Three Letter ISO country code",
+                          "enum": [
+                            "ABW",
+                            "AFG",
+                            "AGO",
+                            "AIA",
+                            "ALA",
+                            "ALB",
+                            "AND",
+                            "ARE",
+                            "ARG",
+                            "ARM",
+                            "ASM",
+                            "ATA",
+                            "ATF",
+                            "ATG",
+                            "AUS",
+                            "AUT",
+                            "AZE",
+                            "BDI",
+                            "BEL",
+                            "BEN",
+                            "BES",
+                            "BFA",
+                            "BGD",
+                            "BGR",
+                            "BHR",
+                            "BHS",
+                            "BIH",
+                            "BLM",
+                            "BLR",
+                            "BLZ",
+                            "BMU",
+                            "BOL",
+                            "BRA",
+                            "BRB",
+                            "BRN",
+                            "BTN",
+                            "BVT",
+                            "BWA",
+                            "CAF",
+                            "CAN",
+                            "CCK",
+                            "CHE",
+                            "CHL",
+                            "CHN",
+                            "CIV",
+                            "CMR",
+                            "COD",
+                            "COG",
+                            "COK",
+                            "COL",
+                            "COM",
+                            "CPV",
+                            "CRI",
+                            "CUB",
+                            "CUW",
+                            "CXR",
+                            "CYM",
+                            "CYP",
+                            "CZE",
+                            "DEU",
+                            "DJI",
+                            "DMA",
+                            "DNK",
+                            "DOM",
+                            "DZA",
+                            "ECU",
+                            "EGY",
+                            "ERI",
+                            "ESH",
+                            "ESP",
+                            "EST",
+                            "ETH",
+                            "FIN",
+                            "FJI",
+                            "FLK",
+                            "FRA",
+                            "FRO",
+                            "FSM",
+                            "GAB",
+                            "GBR",
+                            "GEO",
+                            "GGY",
+                            "GHA",
+                            "GIB",
+                            "GIN",
+                            "GLP",
+                            "GMB",
+                            "GNB",
+                            "GNQ",
+                            "GRC",
+                            "GRD",
+                            "GRL",
+                            "GTM",
+                            "GUF",
+                            "GUM",
+                            "GUY",
+                            "HKG",
+                            "HMD",
+                            "HND",
+                            "HRV",
+                            "HTI",
+                            "HUN",
+                            "IDN",
+                            "IMN",
+                            "IND",
+                            "IOT",
+                            "IRL",
+                            "IRN",
+                            "IRQ",
+                            "ISL",
+                            "ISR",
+                            "ITA",
+                            "JAM",
+                            "JEY",
+                            "JOR",
+                            "JPN",
+                            "KAZ",
+                            "KEN",
+                            "KGZ",
+                            "KHM",
+                            "KIR",
+                            "KNA",
+                            "KOR",
+                            "KWT",
+                            "LAO",
+                            "LBN",
+                            "LBR",
+                            "LBY",
+                            "LCA",
+                            "LIE",
+                            "LKA",
+                            "LSO",
+                            "LTU",
+                            "LUX",
+                            "LVA",
+                            "MAC",
+                            "MAF",
+                            "MAR",
+                            "MCO",
+                            "MDA",
+                            "MDG",
+                            "MDV",
+                            "MEX",
+                            "MHL",
+                            "MKD",
+                            "MLI",
+                            "MLT",
+                            "MMR",
+                            "MNE",
+                            "MNG",
+                            "MNP",
+                            "MOZ",
+                            "MRT",
+                            "MSR",
+                            "MTQ",
+                            "MUS",
+                            "MWI",
+                            "MYS",
+                            "MYT",
+                            "NAM",
+                            "NCL",
+                            "NER",
+                            "NFK",
+                            "NGA",
+                            "NIC",
+                            "NIU",
+                            "NLD",
+                            "NOR",
+                            "NPL",
+                            "NRU",
+                            "NZL",
+                            "OMN",
+                            "PAK",
+                            "PAN",
+                            "PCN",
+                            "PER",
+                            "PHL",
+                            "PLW",
+                            "PNG",
+                            "POL",
+                            "PRI",
+                            "PRK",
+                            "PRT",
+                            "PRY",
+                            "PSE",
+                            "PYF",
+                            "QAT",
+                            "REU",
+                            "ROU",
+                            "RUS",
+                            "RWA",
+                            "SAU",
+                            "SDN",
+                            "SEN",
+                            "SGP",
+                            "SGS",
+                            "SHN",
+                            "SJM",
+                            "SLB",
+                            "SLE",
+                            "SLV",
+                            "SMR",
+                            "SOM",
+                            "SPM",
+                            "SRB",
+                            "SSD",
+                            "STP",
+                            "SUR",
+                            "SVK",
+                            "SVN",
+                            "SWE",
+                            "SWZ",
+                            "SXM",
+                            "SYC",
+                            "SYR",
+                            "TCA",
+                            "TCD",
+                            "TGO",
+                            "THA",
+                            "TJK",
+                            "TKL",
+                            "TKM",
+                            "TLS",
+                            "TON",
+                            "TTO",
+                            "TUN",
+                            "TUR",
+                            "TUV",
+                            "TWN",
+                            "TZA",
+                            "UGA",
+                            "UKR",
+                            "UMI",
+                            "URY",
+                            "USA",
+                            "UZB",
+                            "VAT",
+                            "VCT",
+                            "VEN",
+                            "VGB",
+                            "VIR",
+                            "VNM",
+                            "VUT",
+                            "WLF",
+                            "WSM",
+                            "YEM",
+                            "ZAF",
+                            "ZMB",
+                            "ZWE"
+                          ]
+                        },
+                        "administrative_area": {
+                          "type": "string",
+                          "description": "State / Province / Region"
+                        },
+                        "sub_administrative_area": {
+                          "type": "string",
+                          "description": "County / District"
+                        },
+                        "locality": {
+                          "type": "string",
+                          "description": "City / Town"
+                        },
+                        "postal_code": {
+                          "type": "string",
+                          "description": "Postal Code / Zip Code"
+                        },
+                        "thoroughfare": {
+                          "type": "string",
+                          "description": "Street Address"
+                        },
+                        "premise": {
+                          "type": "string",
+                          "description": "Apartment / Suite / Box number etc"
+                        },
+                        "sub_premise": {
+                          "type": "string",
+                          "description": "Floor # / Room # / Building label etc"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
     "vendor": {
       "type": "object",
       "required": [
@@ -21448,13 +36174,15 @@ Update the current status or current location for a unit
 |---|---|---|---|---|
 |unit_id|path|string|true|Id for the unit|
 |label|body|string|true|Label for the entity|
-|raw_serial_number|body|string|false|Serial number of the unit with prefix stripped|
-|tenant_part_number|body|string|false|Identifier set by the tenant|
+|raw_serial_number|body|string\|null|false|Serial number of the unit with prefix stripped|
+|tenant_part_number|body|string\|null|false|Identifier set by the tenant|
 |part|body|object|true|none|
 |» part_id|body|string|true|Unique identifier|
 |current_status|body|object|true|Defines the properties for a status|
 |» status|body|string|true|A Custom label for the status|
 |» category|body|string|true|The classifier for the statues|
+|» description|body|string\|null|false|A description for the status|
+|» order|body|number|false|Order status appears when listing|
 |current_location|body|object|true|none|
 |» location_id|body|object|true|Defines the properties for a part unit|
 |»» location_id|body|string|false|The identifier for the location|
@@ -21475,9 +36203,101 @@ Update the current status or current location for a unit
 |»»» thoroughfare|body|string|true|Street Address|
 |»»» premise|body|string|false|Apartment / Suite / Box number etc|
 |»»» sub_premise|body|string|false|Floor # / Room # / Building label etc|
-|»» vendor|body|object|false|none|
-|»»» vendor_id|body|string|true|unique id|
-|»»» part_number|body|string\|null|false|The part number supplied by the vendor|
+|»» resource|body|any|false|none|
+|»»» *anonymous*|body|null|false|none|
+|»»» *anonymous*|body|object|false|Defines the properties for a resource|
+|»»»» resource_id|body|string|false|The identifier for the resource|
+|»»»» entity_id|body|string|true|Customer identifier|
+|»»»» entity_type|body|string|true|none|
+|»»»» label|body|string|true|Label for the entity|
+|»»»» slug|body|string|false|Slug for the entity (Auto-generated from the label)|
+|»»»» created|body|string(date-time)|true|Date the entity was created|
+|»»»» updated|body|string(date-time)|true|Last date the entity was updated|
+|»»»» resource_type|body|string|true|Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased|
+|»»»» meta|body|object|false|Data for the resource as a key value pair|
+|»»»»» **additionalProperties**|body|string|false|none|
+|»»»» location|body|object|true|Defines the properties for a part unit|
+|»»»»» location_id|body|string|false|The identifier for the location|
+|»»»»» entity_id|body|string|true|Customer identifier|
+|»»»»» entity_type|body|string|true|none|
+|»»»»» label|body|string|true|Label for the entity|
+|»»»»» slug|body|string|false|Slug for the entity (Auto-generated from the label)|
+|»»»»» created|body|string(date-time)|true|Date the entity was created|
+|»»»»» updated|body|string(date-time)|true|Last date the entity was updated|
+|»»»»» location_type|body|string|true|The type of location|
+|»»»»» formatted_address|body|string|false|Address formatted for the where region the location exists in|
+|»»»»» address|body|object|true|xNAL address for the location|
+|»»»»»» country|body|string|true|Three Letter ISO country code|
+|»»»»»» administrative_area|body|string|true|State / Province / Region|
+|»»»»»» sub_administrative_area|body|string|false|County / District|
+|»»»»»» locality|body|string|true|City / Town|
+|»»»»»» postal_code|body|string|true|Postal Code / Zip Code|
+|»»»»»» thoroughfare|body|string|true|Street Address|
+|»»»»»» premise|body|string|false|Apartment / Suite / Box number etc|
+|»»»»»» sub_premise|body|string|false|Floor # / Room # / Building label etc|
+|»»»»» *anonymous*|body|object|false|Defines the properties for a resource|
+|»»»»»» resource_id|body|string|false|The identifier for the resource|
+|»»»»»» entity_id|body|string|true|Customer identifier|
+|»»»»»» entity_type|body|string|true|none|
+|»»»»»» label|body|string|true|Label for the entity|
+|»»»»»» slug|body|string|false|Slug for the entity (Auto-generated from the label)|
+|»»»»»» created|body|string(date-time)|true|Date the entity was created|
+|»»»»»» updated|body|string(date-time)|true|Last date the entity was updated|
+|»»»»»» resource_type|body|string|true|Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased|
+|»»»»»» meta|body|object|false|Data for the resource as a key value pair|
+|»»»»»»» **additionalProperties**|body|string|false|none|
+|»»»»»» location|body|object|true|Defines the properties for a part unit|
+|»»»»»»» location_id|body|string|false|The identifier for the location|
+|»»»»»»» entity_id|body|string|true|Customer identifier|
+|»»»»»»» entity_type|body|string|true|none|
+|»»»»»»» label|body|string|true|Label for the entity|
+|»»»»»»» slug|body|string|false|Slug for the entity (Auto-generated from the label)|
+|»»»»»»» created|body|string(date-time)|true|Date the entity was created|
+|»»»»»»» updated|body|string(date-time)|true|Last date the entity was updated|
+|»»»»»»» location_type|body|string|true|The type of location|
+|»»»»»»» formatted_address|body|string|false|Address formatted for the where region the location exists in|
+|»»»»»»» address|body|object|true|xNAL address for the location|
+|»»»»»»»» country|body|string|true|Three Letter ISO country code|
+|»»»»»»»» administrative_area|body|string|true|State / Province / Region|
+|»»»»»»»» sub_administrative_area|body|string|false|County / District|
+|»»»»»»»» locality|body|string|true|City / Town|
+|»»»»»»»» postal_code|body|string|true|Postal Code / Zip Code|
+|»»»»»»»» thoroughfare|body|string|true|Street Address|
+|»»»»»»»» premise|body|string|false|Apartment / Suite / Box number etc|
+|»»»»»»»» sub_premise|body|string|false|Floor # / Room # / Building label etc|
+|»»»»»»» resource|body|object|true|Defines the properties for a resource|
+|»»»»»»»» resource_id|body|string|false|The identifier for the resource|
+|»»»»»»»» entity_id|body|string|true|Customer identifier|
+|»»»»»»»» entity_type|body|string|true|none|
+|»»»»»»»» label|body|string|true|Label for the entity|
+|»»»»»»»» slug|body|string|false|Slug for the entity (Auto-generated from the label)|
+|»»»»»»»» created|body|string(date-time)|true|Date the entity was created|
+|»»»»»»»» updated|body|string(date-time)|true|Last date the entity was updated|
+|»»»»»»»» resource_type|body|string|true|Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased|
+|»»»»»»»» meta|body|object|false|Data for the resource as a key value pair|
+|»»»»»»»»» **additionalProperties**|body|string|false|none|
+|»»»»»»»» location|body|object|true|Defines the properties for a part unit|
+|»»»»»»»»» location_id|body|string|false|The identifier for the location|
+|»»»»»»»»» entity_id|body|string|true|Customer identifier|
+|»»»»»»»»» entity_type|body|string|true|none|
+|»»»»»»»»» label|body|string|true|Label for the entity|
+|»»»»»»»»» slug|body|string|false|Slug for the entity (Auto-generated from the label)|
+|»»»»»»»»» created|body|string(date-time)|true|Date the entity was created|
+|»»»»»»»»» updated|body|string(date-time)|true|Last date the entity was updated|
+|»»»»»»»»» location_type|body|string|true|The type of location|
+|»»»»»»»»» formatted_address|body|string|false|Address formatted for the where region the location exists in|
+|»»»»»»»»» address|body|object|true|xNAL address for the location|
+|»»»»»»»»»» country|body|string|true|Three Letter ISO country code|
+|»»»»»»»»»» administrative_area|body|string|true|State / Province / Region|
+|»»»»»»»»»» sub_administrative_area|body|string|false|County / District|
+|»»»»»»»»»» locality|body|string|true|City / Town|
+|»»»»»»»»»» postal_code|body|string|true|Postal Code / Zip Code|
+|»»»»»»»»»» thoroughfare|body|string|true|Street Address|
+|»»»»»»»»»» premise|body|string|false|Apartment / Suite / Box number etc|
+|»»»»»»»»»» sub_premise|body|string|false|Floor # / Room # / Building label etc|
+|»»»»»»»»» vendor|body|object|false|none|
+|»»»»»»»»»» vendor_id|body|string|true|unique id|
+|»»»»»»»»»» part_number|body|string\|null|false|The part number supplied by the vendor|
 
 #### Enumerated Values
 
@@ -21742,6 +36562,768 @@ Update the current status or current location for a unit
 |»»» country|ZAF|
 |»»» country|ZMB|
 |»»» country|ZWE|
+|»»»» entity_type|RES|
+|»»»»» entity_type|LOC|
+|»»»»» location_type|warehouse|
+|»»»»» location_type|facility|
+|»»»»» location_type|other|
+|»»»»»» country|ABW|
+|»»»»»» country|AFG|
+|»»»»»» country|AGO|
+|»»»»»» country|AIA|
+|»»»»»» country|ALA|
+|»»»»»» country|ALB|
+|»»»»»» country|AND|
+|»»»»»» country|ARE|
+|»»»»»» country|ARG|
+|»»»»»» country|ARM|
+|»»»»»» country|ASM|
+|»»»»»» country|ATA|
+|»»»»»» country|ATF|
+|»»»»»» country|ATG|
+|»»»»»» country|AUS|
+|»»»»»» country|AUT|
+|»»»»»» country|AZE|
+|»»»»»» country|BDI|
+|»»»»»» country|BEL|
+|»»»»»» country|BEN|
+|»»»»»» country|BES|
+|»»»»»» country|BFA|
+|»»»»»» country|BGD|
+|»»»»»» country|BGR|
+|»»»»»» country|BHR|
+|»»»»»» country|BHS|
+|»»»»»» country|BIH|
+|»»»»»» country|BLM|
+|»»»»»» country|BLR|
+|»»»»»» country|BLZ|
+|»»»»»» country|BMU|
+|»»»»»» country|BOL|
+|»»»»»» country|BRA|
+|»»»»»» country|BRB|
+|»»»»»» country|BRN|
+|»»»»»» country|BTN|
+|»»»»»» country|BVT|
+|»»»»»» country|BWA|
+|»»»»»» country|CAF|
+|»»»»»» country|CAN|
+|»»»»»» country|CCK|
+|»»»»»» country|CHE|
+|»»»»»» country|CHL|
+|»»»»»» country|CHN|
+|»»»»»» country|CIV|
+|»»»»»» country|CMR|
+|»»»»»» country|COD|
+|»»»»»» country|COG|
+|»»»»»» country|COK|
+|»»»»»» country|COL|
+|»»»»»» country|COM|
+|»»»»»» country|CPV|
+|»»»»»» country|CRI|
+|»»»»»» country|CUB|
+|»»»»»» country|CUW|
+|»»»»»» country|CXR|
+|»»»»»» country|CYM|
+|»»»»»» country|CYP|
+|»»»»»» country|CZE|
+|»»»»»» country|DEU|
+|»»»»»» country|DJI|
+|»»»»»» country|DMA|
+|»»»»»» country|DNK|
+|»»»»»» country|DOM|
+|»»»»»» country|DZA|
+|»»»»»» country|ECU|
+|»»»»»» country|EGY|
+|»»»»»» country|ERI|
+|»»»»»» country|ESH|
+|»»»»»» country|ESP|
+|»»»»»» country|EST|
+|»»»»»» country|ETH|
+|»»»»»» country|FIN|
+|»»»»»» country|FJI|
+|»»»»»» country|FLK|
+|»»»»»» country|FRA|
+|»»»»»» country|FRO|
+|»»»»»» country|FSM|
+|»»»»»» country|GAB|
+|»»»»»» country|GBR|
+|»»»»»» country|GEO|
+|»»»»»» country|GGY|
+|»»»»»» country|GHA|
+|»»»»»» country|GIB|
+|»»»»»» country|GIN|
+|»»»»»» country|GLP|
+|»»»»»» country|GMB|
+|»»»»»» country|GNB|
+|»»»»»» country|GNQ|
+|»»»»»» country|GRC|
+|»»»»»» country|GRD|
+|»»»»»» country|GRL|
+|»»»»»» country|GTM|
+|»»»»»» country|GUF|
+|»»»»»» country|GUM|
+|»»»»»» country|GUY|
+|»»»»»» country|HKG|
+|»»»»»» country|HMD|
+|»»»»»» country|HND|
+|»»»»»» country|HRV|
+|»»»»»» country|HTI|
+|»»»»»» country|HUN|
+|»»»»»» country|IDN|
+|»»»»»» country|IMN|
+|»»»»»» country|IND|
+|»»»»»» country|IOT|
+|»»»»»» country|IRL|
+|»»»»»» country|IRN|
+|»»»»»» country|IRQ|
+|»»»»»» country|ISL|
+|»»»»»» country|ISR|
+|»»»»»» country|ITA|
+|»»»»»» country|JAM|
+|»»»»»» country|JEY|
+|»»»»»» country|JOR|
+|»»»»»» country|JPN|
+|»»»»»» country|KAZ|
+|»»»»»» country|KEN|
+|»»»»»» country|KGZ|
+|»»»»»» country|KHM|
+|»»»»»» country|KIR|
+|»»»»»» country|KNA|
+|»»»»»» country|KOR|
+|»»»»»» country|KWT|
+|»»»»»» country|LAO|
+|»»»»»» country|LBN|
+|»»»»»» country|LBR|
+|»»»»»» country|LBY|
+|»»»»»» country|LCA|
+|»»»»»» country|LIE|
+|»»»»»» country|LKA|
+|»»»»»» country|LSO|
+|»»»»»» country|LTU|
+|»»»»»» country|LUX|
+|»»»»»» country|LVA|
+|»»»»»» country|MAC|
+|»»»»»» country|MAF|
+|»»»»»» country|MAR|
+|»»»»»» country|MCO|
+|»»»»»» country|MDA|
+|»»»»»» country|MDG|
+|»»»»»» country|MDV|
+|»»»»»» country|MEX|
+|»»»»»» country|MHL|
+|»»»»»» country|MKD|
+|»»»»»» country|MLI|
+|»»»»»» country|MLT|
+|»»»»»» country|MMR|
+|»»»»»» country|MNE|
+|»»»»»» country|MNG|
+|»»»»»» country|MNP|
+|»»»»»» country|MOZ|
+|»»»»»» country|MRT|
+|»»»»»» country|MSR|
+|»»»»»» country|MTQ|
+|»»»»»» country|MUS|
+|»»»»»» country|MWI|
+|»»»»»» country|MYS|
+|»»»»»» country|MYT|
+|»»»»»» country|NAM|
+|»»»»»» country|NCL|
+|»»»»»» country|NER|
+|»»»»»» country|NFK|
+|»»»»»» country|NGA|
+|»»»»»» country|NIC|
+|»»»»»» country|NIU|
+|»»»»»» country|NLD|
+|»»»»»» country|NOR|
+|»»»»»» country|NPL|
+|»»»»»» country|NRU|
+|»»»»»» country|NZL|
+|»»»»»» country|OMN|
+|»»»»»» country|PAK|
+|»»»»»» country|PAN|
+|»»»»»» country|PCN|
+|»»»»»» country|PER|
+|»»»»»» country|PHL|
+|»»»»»» country|PLW|
+|»»»»»» country|PNG|
+|»»»»»» country|POL|
+|»»»»»» country|PRI|
+|»»»»»» country|PRK|
+|»»»»»» country|PRT|
+|»»»»»» country|PRY|
+|»»»»»» country|PSE|
+|»»»»»» country|PYF|
+|»»»»»» country|QAT|
+|»»»»»» country|REU|
+|»»»»»» country|ROU|
+|»»»»»» country|RUS|
+|»»»»»» country|RWA|
+|»»»»»» country|SAU|
+|»»»»»» country|SDN|
+|»»»»»» country|SEN|
+|»»»»»» country|SGP|
+|»»»»»» country|SGS|
+|»»»»»» country|SHN|
+|»»»»»» country|SJM|
+|»»»»»» country|SLB|
+|»»»»»» country|SLE|
+|»»»»»» country|SLV|
+|»»»»»» country|SMR|
+|»»»»»» country|SOM|
+|»»»»»» country|SPM|
+|»»»»»» country|SRB|
+|»»»»»» country|SSD|
+|»»»»»» country|STP|
+|»»»»»» country|SUR|
+|»»»»»» country|SVK|
+|»»»»»» country|SVN|
+|»»»»»» country|SWE|
+|»»»»»» country|SWZ|
+|»»»»»» country|SXM|
+|»»»»»» country|SYC|
+|»»»»»» country|SYR|
+|»»»»»» country|TCA|
+|»»»»»» country|TCD|
+|»»»»»» country|TGO|
+|»»»»»» country|THA|
+|»»»»»» country|TJK|
+|»»»»»» country|TKL|
+|»»»»»» country|TKM|
+|»»»»»» country|TLS|
+|»»»»»» country|TON|
+|»»»»»» country|TTO|
+|»»»»»» country|TUN|
+|»»»»»» country|TUR|
+|»»»»»» country|TUV|
+|»»»»»» country|TWN|
+|»»»»»» country|TZA|
+|»»»»»» country|UGA|
+|»»»»»» country|UKR|
+|»»»»»» country|UMI|
+|»»»»»» country|URY|
+|»»»»»» country|USA|
+|»»»»»» country|UZB|
+|»»»»»» country|VAT|
+|»»»»»» country|VCT|
+|»»»»»» country|VEN|
+|»»»»»» country|VGB|
+|»»»»»» country|VIR|
+|»»»»»» country|VNM|
+|»»»»»» country|VUT|
+|»»»»»» country|WLF|
+|»»»»»» country|WSM|
+|»»»»»» country|YEM|
+|»»»»»» country|ZAF|
+|»»»»»» country|ZMB|
+|»»»»»» country|ZWE|
+|»»»»»» entity_type|SRES|
+|»»»»»»» entity_type|LOC|
+|»»»»»»» location_type|warehouse|
+|»»»»»»» location_type|facility|
+|»»»»»»» location_type|other|
+|»»»»»»»» country|ABW|
+|»»»»»»»» country|AFG|
+|»»»»»»»» country|AGO|
+|»»»»»»»» country|AIA|
+|»»»»»»»» country|ALA|
+|»»»»»»»» country|ALB|
+|»»»»»»»» country|AND|
+|»»»»»»»» country|ARE|
+|»»»»»»»» country|ARG|
+|»»»»»»»» country|ARM|
+|»»»»»»»» country|ASM|
+|»»»»»»»» country|ATA|
+|»»»»»»»» country|ATF|
+|»»»»»»»» country|ATG|
+|»»»»»»»» country|AUS|
+|»»»»»»»» country|AUT|
+|»»»»»»»» country|AZE|
+|»»»»»»»» country|BDI|
+|»»»»»»»» country|BEL|
+|»»»»»»»» country|BEN|
+|»»»»»»»» country|BES|
+|»»»»»»»» country|BFA|
+|»»»»»»»» country|BGD|
+|»»»»»»»» country|BGR|
+|»»»»»»»» country|BHR|
+|»»»»»»»» country|BHS|
+|»»»»»»»» country|BIH|
+|»»»»»»»» country|BLM|
+|»»»»»»»» country|BLR|
+|»»»»»»»» country|BLZ|
+|»»»»»»»» country|BMU|
+|»»»»»»»» country|BOL|
+|»»»»»»»» country|BRA|
+|»»»»»»»» country|BRB|
+|»»»»»»»» country|BRN|
+|»»»»»»»» country|BTN|
+|»»»»»»»» country|BVT|
+|»»»»»»»» country|BWA|
+|»»»»»»»» country|CAF|
+|»»»»»»»» country|CAN|
+|»»»»»»»» country|CCK|
+|»»»»»»»» country|CHE|
+|»»»»»»»» country|CHL|
+|»»»»»»»» country|CHN|
+|»»»»»»»» country|CIV|
+|»»»»»»»» country|CMR|
+|»»»»»»»» country|COD|
+|»»»»»»»» country|COG|
+|»»»»»»»» country|COK|
+|»»»»»»»» country|COL|
+|»»»»»»»» country|COM|
+|»»»»»»»» country|CPV|
+|»»»»»»»» country|CRI|
+|»»»»»»»» country|CUB|
+|»»»»»»»» country|CUW|
+|»»»»»»»» country|CXR|
+|»»»»»»»» country|CYM|
+|»»»»»»»» country|CYP|
+|»»»»»»»» country|CZE|
+|»»»»»»»» country|DEU|
+|»»»»»»»» country|DJI|
+|»»»»»»»» country|DMA|
+|»»»»»»»» country|DNK|
+|»»»»»»»» country|DOM|
+|»»»»»»»» country|DZA|
+|»»»»»»»» country|ECU|
+|»»»»»»»» country|EGY|
+|»»»»»»»» country|ERI|
+|»»»»»»»» country|ESH|
+|»»»»»»»» country|ESP|
+|»»»»»»»» country|EST|
+|»»»»»»»» country|ETH|
+|»»»»»»»» country|FIN|
+|»»»»»»»» country|FJI|
+|»»»»»»»» country|FLK|
+|»»»»»»»» country|FRA|
+|»»»»»»»» country|FRO|
+|»»»»»»»» country|FSM|
+|»»»»»»»» country|GAB|
+|»»»»»»»» country|GBR|
+|»»»»»»»» country|GEO|
+|»»»»»»»» country|GGY|
+|»»»»»»»» country|GHA|
+|»»»»»»»» country|GIB|
+|»»»»»»»» country|GIN|
+|»»»»»»»» country|GLP|
+|»»»»»»»» country|GMB|
+|»»»»»»»» country|GNB|
+|»»»»»»»» country|GNQ|
+|»»»»»»»» country|GRC|
+|»»»»»»»» country|GRD|
+|»»»»»»»» country|GRL|
+|»»»»»»»» country|GTM|
+|»»»»»»»» country|GUF|
+|»»»»»»»» country|GUM|
+|»»»»»»»» country|GUY|
+|»»»»»»»» country|HKG|
+|»»»»»»»» country|HMD|
+|»»»»»»»» country|HND|
+|»»»»»»»» country|HRV|
+|»»»»»»»» country|HTI|
+|»»»»»»»» country|HUN|
+|»»»»»»»» country|IDN|
+|»»»»»»»» country|IMN|
+|»»»»»»»» country|IND|
+|»»»»»»»» country|IOT|
+|»»»»»»»» country|IRL|
+|»»»»»»»» country|IRN|
+|»»»»»»»» country|IRQ|
+|»»»»»»»» country|ISL|
+|»»»»»»»» country|ISR|
+|»»»»»»»» country|ITA|
+|»»»»»»»» country|JAM|
+|»»»»»»»» country|JEY|
+|»»»»»»»» country|JOR|
+|»»»»»»»» country|JPN|
+|»»»»»»»» country|KAZ|
+|»»»»»»»» country|KEN|
+|»»»»»»»» country|KGZ|
+|»»»»»»»» country|KHM|
+|»»»»»»»» country|KIR|
+|»»»»»»»» country|KNA|
+|»»»»»»»» country|KOR|
+|»»»»»»»» country|KWT|
+|»»»»»»»» country|LAO|
+|»»»»»»»» country|LBN|
+|»»»»»»»» country|LBR|
+|»»»»»»»» country|LBY|
+|»»»»»»»» country|LCA|
+|»»»»»»»» country|LIE|
+|»»»»»»»» country|LKA|
+|»»»»»»»» country|LSO|
+|»»»»»»»» country|LTU|
+|»»»»»»»» country|LUX|
+|»»»»»»»» country|LVA|
+|»»»»»»»» country|MAC|
+|»»»»»»»» country|MAF|
+|»»»»»»»» country|MAR|
+|»»»»»»»» country|MCO|
+|»»»»»»»» country|MDA|
+|»»»»»»»» country|MDG|
+|»»»»»»»» country|MDV|
+|»»»»»»»» country|MEX|
+|»»»»»»»» country|MHL|
+|»»»»»»»» country|MKD|
+|»»»»»»»» country|MLI|
+|»»»»»»»» country|MLT|
+|»»»»»»»» country|MMR|
+|»»»»»»»» country|MNE|
+|»»»»»»»» country|MNG|
+|»»»»»»»» country|MNP|
+|»»»»»»»» country|MOZ|
+|»»»»»»»» country|MRT|
+|»»»»»»»» country|MSR|
+|»»»»»»»» country|MTQ|
+|»»»»»»»» country|MUS|
+|»»»»»»»» country|MWI|
+|»»»»»»»» country|MYS|
+|»»»»»»»» country|MYT|
+|»»»»»»»» country|NAM|
+|»»»»»»»» country|NCL|
+|»»»»»»»» country|NER|
+|»»»»»»»» country|NFK|
+|»»»»»»»» country|NGA|
+|»»»»»»»» country|NIC|
+|»»»»»»»» country|NIU|
+|»»»»»»»» country|NLD|
+|»»»»»»»» country|NOR|
+|»»»»»»»» country|NPL|
+|»»»»»»»» country|NRU|
+|»»»»»»»» country|NZL|
+|»»»»»»»» country|OMN|
+|»»»»»»»» country|PAK|
+|»»»»»»»» country|PAN|
+|»»»»»»»» country|PCN|
+|»»»»»»»» country|PER|
+|»»»»»»»» country|PHL|
+|»»»»»»»» country|PLW|
+|»»»»»»»» country|PNG|
+|»»»»»»»» country|POL|
+|»»»»»»»» country|PRI|
+|»»»»»»»» country|PRK|
+|»»»»»»»» country|PRT|
+|»»»»»»»» country|PRY|
+|»»»»»»»» country|PSE|
+|»»»»»»»» country|PYF|
+|»»»»»»»» country|QAT|
+|»»»»»»»» country|REU|
+|»»»»»»»» country|ROU|
+|»»»»»»»» country|RUS|
+|»»»»»»»» country|RWA|
+|»»»»»»»» country|SAU|
+|»»»»»»»» country|SDN|
+|»»»»»»»» country|SEN|
+|»»»»»»»» country|SGP|
+|»»»»»»»» country|SGS|
+|»»»»»»»» country|SHN|
+|»»»»»»»» country|SJM|
+|»»»»»»»» country|SLB|
+|»»»»»»»» country|SLE|
+|»»»»»»»» country|SLV|
+|»»»»»»»» country|SMR|
+|»»»»»»»» country|SOM|
+|»»»»»»»» country|SPM|
+|»»»»»»»» country|SRB|
+|»»»»»»»» country|SSD|
+|»»»»»»»» country|STP|
+|»»»»»»»» country|SUR|
+|»»»»»»»» country|SVK|
+|»»»»»»»» country|SVN|
+|»»»»»»»» country|SWE|
+|»»»»»»»» country|SWZ|
+|»»»»»»»» country|SXM|
+|»»»»»»»» country|SYC|
+|»»»»»»»» country|SYR|
+|»»»»»»»» country|TCA|
+|»»»»»»»» country|TCD|
+|»»»»»»»» country|TGO|
+|»»»»»»»» country|THA|
+|»»»»»»»» country|TJK|
+|»»»»»»»» country|TKL|
+|»»»»»»»» country|TKM|
+|»»»»»»»» country|TLS|
+|»»»»»»»» country|TON|
+|»»»»»»»» country|TTO|
+|»»»»»»»» country|TUN|
+|»»»»»»»» country|TUR|
+|»»»»»»»» country|TUV|
+|»»»»»»»» country|TWN|
+|»»»»»»»» country|TZA|
+|»»»»»»»» country|UGA|
+|»»»»»»»» country|UKR|
+|»»»»»»»» country|UMI|
+|»»»»»»»» country|URY|
+|»»»»»»»» country|USA|
+|»»»»»»»» country|UZB|
+|»»»»»»»» country|VAT|
+|»»»»»»»» country|VCT|
+|»»»»»»»» country|VEN|
+|»»»»»»»» country|VGB|
+|»»»»»»»» country|VIR|
+|»»»»»»»» country|VNM|
+|»»»»»»»» country|VUT|
+|»»»»»»»» country|WLF|
+|»»»»»»»» country|WSM|
+|»»»»»»»» country|YEM|
+|»»»»»»»» country|ZAF|
+|»»»»»»»» country|ZMB|
+|»»»»»»»» country|ZWE|
+|»»»»»»»» entity_type|RES|
+|»»»»»»»»» entity_type|LOC|
+|»»»»»»»»» location_type|warehouse|
+|»»»»»»»»» location_type|facility|
+|»»»»»»»»» location_type|other|
+|»»»»»»»»»» country|ABW|
+|»»»»»»»»»» country|AFG|
+|»»»»»»»»»» country|AGO|
+|»»»»»»»»»» country|AIA|
+|»»»»»»»»»» country|ALA|
+|»»»»»»»»»» country|ALB|
+|»»»»»»»»»» country|AND|
+|»»»»»»»»»» country|ARE|
+|»»»»»»»»»» country|ARG|
+|»»»»»»»»»» country|ARM|
+|»»»»»»»»»» country|ASM|
+|»»»»»»»»»» country|ATA|
+|»»»»»»»»»» country|ATF|
+|»»»»»»»»»» country|ATG|
+|»»»»»»»»»» country|AUS|
+|»»»»»»»»»» country|AUT|
+|»»»»»»»»»» country|AZE|
+|»»»»»»»»»» country|BDI|
+|»»»»»»»»»» country|BEL|
+|»»»»»»»»»» country|BEN|
+|»»»»»»»»»» country|BES|
+|»»»»»»»»»» country|BFA|
+|»»»»»»»»»» country|BGD|
+|»»»»»»»»»» country|BGR|
+|»»»»»»»»»» country|BHR|
+|»»»»»»»»»» country|BHS|
+|»»»»»»»»»» country|BIH|
+|»»»»»»»»»» country|BLM|
+|»»»»»»»»»» country|BLR|
+|»»»»»»»»»» country|BLZ|
+|»»»»»»»»»» country|BMU|
+|»»»»»»»»»» country|BOL|
+|»»»»»»»»»» country|BRA|
+|»»»»»»»»»» country|BRB|
+|»»»»»»»»»» country|BRN|
+|»»»»»»»»»» country|BTN|
+|»»»»»»»»»» country|BVT|
+|»»»»»»»»»» country|BWA|
+|»»»»»»»»»» country|CAF|
+|»»»»»»»»»» country|CAN|
+|»»»»»»»»»» country|CCK|
+|»»»»»»»»»» country|CHE|
+|»»»»»»»»»» country|CHL|
+|»»»»»»»»»» country|CHN|
+|»»»»»»»»»» country|CIV|
+|»»»»»»»»»» country|CMR|
+|»»»»»»»»»» country|COD|
+|»»»»»»»»»» country|COG|
+|»»»»»»»»»» country|COK|
+|»»»»»»»»»» country|COL|
+|»»»»»»»»»» country|COM|
+|»»»»»»»»»» country|CPV|
+|»»»»»»»»»» country|CRI|
+|»»»»»»»»»» country|CUB|
+|»»»»»»»»»» country|CUW|
+|»»»»»»»»»» country|CXR|
+|»»»»»»»»»» country|CYM|
+|»»»»»»»»»» country|CYP|
+|»»»»»»»»»» country|CZE|
+|»»»»»»»»»» country|DEU|
+|»»»»»»»»»» country|DJI|
+|»»»»»»»»»» country|DMA|
+|»»»»»»»»»» country|DNK|
+|»»»»»»»»»» country|DOM|
+|»»»»»»»»»» country|DZA|
+|»»»»»»»»»» country|ECU|
+|»»»»»»»»»» country|EGY|
+|»»»»»»»»»» country|ERI|
+|»»»»»»»»»» country|ESH|
+|»»»»»»»»»» country|ESP|
+|»»»»»»»»»» country|EST|
+|»»»»»»»»»» country|ETH|
+|»»»»»»»»»» country|FIN|
+|»»»»»»»»»» country|FJI|
+|»»»»»»»»»» country|FLK|
+|»»»»»»»»»» country|FRA|
+|»»»»»»»»»» country|FRO|
+|»»»»»»»»»» country|FSM|
+|»»»»»»»»»» country|GAB|
+|»»»»»»»»»» country|GBR|
+|»»»»»»»»»» country|GEO|
+|»»»»»»»»»» country|GGY|
+|»»»»»»»»»» country|GHA|
+|»»»»»»»»»» country|GIB|
+|»»»»»»»»»» country|GIN|
+|»»»»»»»»»» country|GLP|
+|»»»»»»»»»» country|GMB|
+|»»»»»»»»»» country|GNB|
+|»»»»»»»»»» country|GNQ|
+|»»»»»»»»»» country|GRC|
+|»»»»»»»»»» country|GRD|
+|»»»»»»»»»» country|GRL|
+|»»»»»»»»»» country|GTM|
+|»»»»»»»»»» country|GUF|
+|»»»»»»»»»» country|GUM|
+|»»»»»»»»»» country|GUY|
+|»»»»»»»»»» country|HKG|
+|»»»»»»»»»» country|HMD|
+|»»»»»»»»»» country|HND|
+|»»»»»»»»»» country|HRV|
+|»»»»»»»»»» country|HTI|
+|»»»»»»»»»» country|HUN|
+|»»»»»»»»»» country|IDN|
+|»»»»»»»»»» country|IMN|
+|»»»»»»»»»» country|IND|
+|»»»»»»»»»» country|IOT|
+|»»»»»»»»»» country|IRL|
+|»»»»»»»»»» country|IRN|
+|»»»»»»»»»» country|IRQ|
+|»»»»»»»»»» country|ISL|
+|»»»»»»»»»» country|ISR|
+|»»»»»»»»»» country|ITA|
+|»»»»»»»»»» country|JAM|
+|»»»»»»»»»» country|JEY|
+|»»»»»»»»»» country|JOR|
+|»»»»»»»»»» country|JPN|
+|»»»»»»»»»» country|KAZ|
+|»»»»»»»»»» country|KEN|
+|»»»»»»»»»» country|KGZ|
+|»»»»»»»»»» country|KHM|
+|»»»»»»»»»» country|KIR|
+|»»»»»»»»»» country|KNA|
+|»»»»»»»»»» country|KOR|
+|»»»»»»»»»» country|KWT|
+|»»»»»»»»»» country|LAO|
+|»»»»»»»»»» country|LBN|
+|»»»»»»»»»» country|LBR|
+|»»»»»»»»»» country|LBY|
+|»»»»»»»»»» country|LCA|
+|»»»»»»»»»» country|LIE|
+|»»»»»»»»»» country|LKA|
+|»»»»»»»»»» country|LSO|
+|»»»»»»»»»» country|LTU|
+|»»»»»»»»»» country|LUX|
+|»»»»»»»»»» country|LVA|
+|»»»»»»»»»» country|MAC|
+|»»»»»»»»»» country|MAF|
+|»»»»»»»»»» country|MAR|
+|»»»»»»»»»» country|MCO|
+|»»»»»»»»»» country|MDA|
+|»»»»»»»»»» country|MDG|
+|»»»»»»»»»» country|MDV|
+|»»»»»»»»»» country|MEX|
+|»»»»»»»»»» country|MHL|
+|»»»»»»»»»» country|MKD|
+|»»»»»»»»»» country|MLI|
+|»»»»»»»»»» country|MLT|
+|»»»»»»»»»» country|MMR|
+|»»»»»»»»»» country|MNE|
+|»»»»»»»»»» country|MNG|
+|»»»»»»»»»» country|MNP|
+|»»»»»»»»»» country|MOZ|
+|»»»»»»»»»» country|MRT|
+|»»»»»»»»»» country|MSR|
+|»»»»»»»»»» country|MTQ|
+|»»»»»»»»»» country|MUS|
+|»»»»»»»»»» country|MWI|
+|»»»»»»»»»» country|MYS|
+|»»»»»»»»»» country|MYT|
+|»»»»»»»»»» country|NAM|
+|»»»»»»»»»» country|NCL|
+|»»»»»»»»»» country|NER|
+|»»»»»»»»»» country|NFK|
+|»»»»»»»»»» country|NGA|
+|»»»»»»»»»» country|NIC|
+|»»»»»»»»»» country|NIU|
+|»»»»»»»»»» country|NLD|
+|»»»»»»»»»» country|NOR|
+|»»»»»»»»»» country|NPL|
+|»»»»»»»»»» country|NRU|
+|»»»»»»»»»» country|NZL|
+|»»»»»»»»»» country|OMN|
+|»»»»»»»»»» country|PAK|
+|»»»»»»»»»» country|PAN|
+|»»»»»»»»»» country|PCN|
+|»»»»»»»»»» country|PER|
+|»»»»»»»»»» country|PHL|
+|»»»»»»»»»» country|PLW|
+|»»»»»»»»»» country|PNG|
+|»»»»»»»»»» country|POL|
+|»»»»»»»»»» country|PRI|
+|»»»»»»»»»» country|PRK|
+|»»»»»»»»»» country|PRT|
+|»»»»»»»»»» country|PRY|
+|»»»»»»»»»» country|PSE|
+|»»»»»»»»»» country|PYF|
+|»»»»»»»»»» country|QAT|
+|»»»»»»»»»» country|REU|
+|»»»»»»»»»» country|ROU|
+|»»»»»»»»»» country|RUS|
+|»»»»»»»»»» country|RWA|
+|»»»»»»»»»» country|SAU|
+|»»»»»»»»»» country|SDN|
+|»»»»»»»»»» country|SEN|
+|»»»»»»»»»» country|SGP|
+|»»»»»»»»»» country|SGS|
+|»»»»»»»»»» country|SHN|
+|»»»»»»»»»» country|SJM|
+|»»»»»»»»»» country|SLB|
+|»»»»»»»»»» country|SLE|
+|»»»»»»»»»» country|SLV|
+|»»»»»»»»»» country|SMR|
+|»»»»»»»»»» country|SOM|
+|»»»»»»»»»» country|SPM|
+|»»»»»»»»»» country|SRB|
+|»»»»»»»»»» country|SSD|
+|»»»»»»»»»» country|STP|
+|»»»»»»»»»» country|SUR|
+|»»»»»»»»»» country|SVK|
+|»»»»»»»»»» country|SVN|
+|»»»»»»»»»» country|SWE|
+|»»»»»»»»»» country|SWZ|
+|»»»»»»»»»» country|SXM|
+|»»»»»»»»»» country|SYC|
+|»»»»»»»»»» country|SYR|
+|»»»»»»»»»» country|TCA|
+|»»»»»»»»»» country|TCD|
+|»»»»»»»»»» country|TGO|
+|»»»»»»»»»» country|THA|
+|»»»»»»»»»» country|TJK|
+|»»»»»»»»»» country|TKL|
+|»»»»»»»»»» country|TKM|
+|»»»»»»»»»» country|TLS|
+|»»»»»»»»»» country|TON|
+|»»»»»»»»»» country|TTO|
+|»»»»»»»»»» country|TUN|
+|»»»»»»»»»» country|TUR|
+|»»»»»»»»»» country|TUV|
+|»»»»»»»»»» country|TWN|
+|»»»»»»»»»» country|TZA|
+|»»»»»»»»»» country|UGA|
+|»»»»»»»»»» country|UKR|
+|»»»»»»»»»» country|UMI|
+|»»»»»»»»»» country|URY|
+|»»»»»»»»»» country|USA|
+|»»»»»»»»»» country|UZB|
+|»»»»»»»»»» country|VAT|
+|»»»»»»»»»» country|VCT|
+|»»»»»»»»»» country|VEN|
+|»»»»»»»»»» country|VGB|
+|»»»»»»»»»» country|VIR|
+|»»»»»»»»»» country|VNM|
+|»»»»»»»»»» country|VUT|
+|»»»»»»»»»» country|WLF|
+|»»»»»»»»»» country|WSM|
+|»»»»»»»»»» country|YEM|
+|»»»»»»»»»» country|ZAF|
+|»»»»»»»»»» country|ZMB|
+|»»»»»»»»»» country|ZWE|
 
 > Example responses
 
@@ -21797,15 +37379,18 @@ Update the current status or current location for a unit
     },
     "serial_number": {
       "type": "string",
+      "nullable": true,
       "description": "Serial number of the unit with prefix stripped",
       "readOnly": true
     },
     "raw_serial_number": {
       "type": "string",
+      "nullable": true,
       "description": "Serial number of the unit"
     },
     "tenant_part_number": {
       "type": "string",
+      "nullable": true,
       "description": "Identifier set by the tenant"
     },
     "manufacturer": {
@@ -22044,7 +37629,10 @@ Update the current status or current location for a unit
               "deprecated": true,
               "x-patternProperties": {
                 "^[A-Za-z][A-Za-z0-9_]*$": {
-                  "type": "string"
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 }
               }
             },
@@ -22077,6 +37665,15 @@ Update the current status or current location for a unit
                       "CANCELLED",
                       "BLOCKED"
                     ]
+                  },
+                  "description": {
+                    "type": "string",
+                    "nullable": true,
+                    "description": "A description for the status"
+                  },
+                  "order": {
+                    "type": "number",
+                    "description": "Order status appears when listing"
                   }
                 }
               }
@@ -23250,7 +38847,10 @@ Update the current status or current location for a unit
           "deprecated": true,
           "x-patternProperties": {
             "^[A-Za-z][A-Za-z0-9_]*$": {
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             }
           }
         },
@@ -23283,6 +38883,15 @@ Update the current status or current location for a unit
                   "CANCELLED",
                   "BLOCKED"
                 ]
+              },
+              "description": {
+                "type": "string",
+                "nullable": true,
+                "description": "A description for the status"
+              },
+              "order": {
+                "type": "number",
+                "description": "Order status appears when listing"
               }
             }
           }
@@ -24033,6 +39642,1337 @@ Update the current status or current location for a unit
           }
         }
       }
+    },
+    "resource": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "description": "Defines the properties for a resource",
+          "additionalProperties": false,
+          "required": [
+            "label",
+            "entity_id",
+            "entity_type",
+            "created",
+            "updated",
+            "resource_type",
+            "location"
+          ],
+          "properties": {
+            "resource_id": {
+              "description": "The identifier for the resource",
+              "type": "string",
+              "readOnly": true,
+              "pattern": "^[0-9a-zA-Z-_]+$"
+            },
+            "entity_id": {
+              "x-no-api-doc": true,
+              "type": "string",
+              "description": "Customer identifier",
+              "readOnly": true,
+              "pattern": "^[0-9a-zA-Z-_]+$"
+            },
+            "entity_type": {
+              "x-no-api-doc": true,
+              "enum": [
+                "RES"
+              ]
+            },
+            "label": {
+              "type": "string",
+              "description": "Label for the entity"
+            },
+            "slug": {
+              "type": "string",
+              "description": "Slug for the entity (Auto-generated from the label)",
+              "readOnly": true,
+              "deprecated": true,
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+            },
+            "created": {
+              "description": "Date the entity was created",
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true
+            },
+            "updated": {
+              "description": "Last date the entity was updated",
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true
+            },
+            "resource_type": {
+              "type": "string",
+              "description": "Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased",
+              "pattern": "^[a-z][0-9a-zA-Z-]+$"
+            },
+            "meta": {
+              "type": "object",
+              "description": "Data for the resource as a key value pair",
+              "additionalProperties": {
+                "type": "string"
+              },
+              "propertyNames": {
+                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+              }
+            },
+            "location": {
+              "type": "object",
+              "description": "Defines the properties for a part unit",
+              "additionalProperties": false,
+              "required": [
+                "label",
+                "entity_id",
+                "entity_type",
+                "created",
+                "updated",
+                "location_type",
+                "address"
+              ],
+              "properties": {
+                "location_id": {
+                  "description": "The identifier for the location",
+                  "type": "string",
+                  "readOnly": true,
+                  "pattern": "^[0-9a-zA-Z-_]+$"
+                },
+                "entity_id": {
+                  "x-no-api-doc": true,
+                  "type": "string",
+                  "description": "Customer identifier",
+                  "readOnly": true,
+                  "pattern": "^[0-9a-zA-Z-_]+$"
+                },
+                "entity_type": {
+                  "x-no-api-doc": true,
+                  "enum": [
+                    "LOC"
+                  ]
+                },
+                "label": {
+                  "type": "string",
+                  "description": "Label for the entity"
+                },
+                "slug": {
+                  "type": "string",
+                  "description": "Slug for the entity (Auto-generated from the label)",
+                  "readOnly": true,
+                  "deprecated": true,
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                },
+                "created": {
+                  "description": "Date the entity was created",
+                  "type": "string",
+                  "format": "date-time",
+                  "readOnly": true
+                },
+                "updated": {
+                  "description": "Last date the entity was updated",
+                  "type": "string",
+                  "format": "date-time",
+                  "readOnly": true
+                },
+                "location_type": {
+                  "type": "string",
+                  "description": "The type of location",
+                  "enum": [
+                    "warehouse",
+                    "facility",
+                    "other"
+                  ]
+                },
+                "formatted_address": {
+                  "type": "string",
+                  "readOnly": true,
+                  "description": "Address formatted for the where region the location exists in"
+                },
+                "address": {
+                  "type": "object",
+                  "required": [
+                    "country",
+                    "administrative_area",
+                    "locality",
+                    "postal_code",
+                    "thoroughfare"
+                  ],
+                  "description": "xNAL address for the location ",
+                  "properties": {
+                    "country": {
+                      "type": "string",
+                      "description": "Three Letter ISO country code",
+                      "enum": [
+                        "ABW",
+                        "AFG",
+                        "AGO",
+                        "AIA",
+                        "ALA",
+                        "ALB",
+                        "AND",
+                        "ARE",
+                        "ARG",
+                        "ARM",
+                        "ASM",
+                        "ATA",
+                        "ATF",
+                        "ATG",
+                        "AUS",
+                        "AUT",
+                        "AZE",
+                        "BDI",
+                        "BEL",
+                        "BEN",
+                        "BES",
+                        "BFA",
+                        "BGD",
+                        "BGR",
+                        "BHR",
+                        "BHS",
+                        "BIH",
+                        "BLM",
+                        "BLR",
+                        "BLZ",
+                        "BMU",
+                        "BOL",
+                        "BRA",
+                        "BRB",
+                        "BRN",
+                        "BTN",
+                        "BVT",
+                        "BWA",
+                        "CAF",
+                        "CAN",
+                        "CCK",
+                        "CHE",
+                        "CHL",
+                        "CHN",
+                        "CIV",
+                        "CMR",
+                        "COD",
+                        "COG",
+                        "COK",
+                        "COL",
+                        "COM",
+                        "CPV",
+                        "CRI",
+                        "CUB",
+                        "CUW",
+                        "CXR",
+                        "CYM",
+                        "CYP",
+                        "CZE",
+                        "DEU",
+                        "DJI",
+                        "DMA",
+                        "DNK",
+                        "DOM",
+                        "DZA",
+                        "ECU",
+                        "EGY",
+                        "ERI",
+                        "ESH",
+                        "ESP",
+                        "EST",
+                        "ETH",
+                        "FIN",
+                        "FJI",
+                        "FLK",
+                        "FRA",
+                        "FRO",
+                        "FSM",
+                        "GAB",
+                        "GBR",
+                        "GEO",
+                        "GGY",
+                        "GHA",
+                        "GIB",
+                        "GIN",
+                        "GLP",
+                        "GMB",
+                        "GNB",
+                        "GNQ",
+                        "GRC",
+                        "GRD",
+                        "GRL",
+                        "GTM",
+                        "GUF",
+                        "GUM",
+                        "GUY",
+                        "HKG",
+                        "HMD",
+                        "HND",
+                        "HRV",
+                        "HTI",
+                        "HUN",
+                        "IDN",
+                        "IMN",
+                        "IND",
+                        "IOT",
+                        "IRL",
+                        "IRN",
+                        "IRQ",
+                        "ISL",
+                        "ISR",
+                        "ITA",
+                        "JAM",
+                        "JEY",
+                        "JOR",
+                        "JPN",
+                        "KAZ",
+                        "KEN",
+                        "KGZ",
+                        "KHM",
+                        "KIR",
+                        "KNA",
+                        "KOR",
+                        "KWT",
+                        "LAO",
+                        "LBN",
+                        "LBR",
+                        "LBY",
+                        "LCA",
+                        "LIE",
+                        "LKA",
+                        "LSO",
+                        "LTU",
+                        "LUX",
+                        "LVA",
+                        "MAC",
+                        "MAF",
+                        "MAR",
+                        "MCO",
+                        "MDA",
+                        "MDG",
+                        "MDV",
+                        "MEX",
+                        "MHL",
+                        "MKD",
+                        "MLI",
+                        "MLT",
+                        "MMR",
+                        "MNE",
+                        "MNG",
+                        "MNP",
+                        "MOZ",
+                        "MRT",
+                        "MSR",
+                        "MTQ",
+                        "MUS",
+                        "MWI",
+                        "MYS",
+                        "MYT",
+                        "NAM",
+                        "NCL",
+                        "NER",
+                        "NFK",
+                        "NGA",
+                        "NIC",
+                        "NIU",
+                        "NLD",
+                        "NOR",
+                        "NPL",
+                        "NRU",
+                        "NZL",
+                        "OMN",
+                        "PAK",
+                        "PAN",
+                        "PCN",
+                        "PER",
+                        "PHL",
+                        "PLW",
+                        "PNG",
+                        "POL",
+                        "PRI",
+                        "PRK",
+                        "PRT",
+                        "PRY",
+                        "PSE",
+                        "PYF",
+                        "QAT",
+                        "REU",
+                        "ROU",
+                        "RUS",
+                        "RWA",
+                        "SAU",
+                        "SDN",
+                        "SEN",
+                        "SGP",
+                        "SGS",
+                        "SHN",
+                        "SJM",
+                        "SLB",
+                        "SLE",
+                        "SLV",
+                        "SMR",
+                        "SOM",
+                        "SPM",
+                        "SRB",
+                        "SSD",
+                        "STP",
+                        "SUR",
+                        "SVK",
+                        "SVN",
+                        "SWE",
+                        "SWZ",
+                        "SXM",
+                        "SYC",
+                        "SYR",
+                        "TCA",
+                        "TCD",
+                        "TGO",
+                        "THA",
+                        "TJK",
+                        "TKL",
+                        "TKM",
+                        "TLS",
+                        "TON",
+                        "TTO",
+                        "TUN",
+                        "TUR",
+                        "TUV",
+                        "TWN",
+                        "TZA",
+                        "UGA",
+                        "UKR",
+                        "UMI",
+                        "URY",
+                        "USA",
+                        "UZB",
+                        "VAT",
+                        "VCT",
+                        "VEN",
+                        "VGB",
+                        "VIR",
+                        "VNM",
+                        "VUT",
+                        "WLF",
+                        "WSM",
+                        "YEM",
+                        "ZAF",
+                        "ZMB",
+                        "ZWE"
+                      ]
+                    },
+                    "administrative_area": {
+                      "type": "string",
+                      "description": "State / Province / Region"
+                    },
+                    "sub_administrative_area": {
+                      "type": "string",
+                      "description": "County / District"
+                    },
+                    "locality": {
+                      "type": "string",
+                      "description": "City / Town"
+                    },
+                    "postal_code": {
+                      "type": "string",
+                      "description": "Postal Code / Zip Code"
+                    },
+                    "thoroughfare": {
+                      "type": "string",
+                      "description": "Street Address"
+                    },
+                    "premise": {
+                      "type": "string",
+                      "description": "Apartment / Suite / Box number etc"
+                    },
+                    "sub_premise": {
+                      "type": "string",
+                      "description": "Floor # / Room # / Building label etc"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "description": "Defines the properties for a resource",
+          "additionalProperties": false,
+          "required": [
+            "label",
+            "entity_id",
+            "entity_type",
+            "created",
+            "updated",
+            "resource_type",
+            "location",
+            "resource"
+          ],
+          "properties": {
+            "resource_id": {
+              "description": "The identifier for the resource",
+              "type": "string",
+              "readOnly": true,
+              "pattern": "^[0-9a-zA-Z-_]+$"
+            },
+            "entity_id": {
+              "x-no-api-doc": true,
+              "type": "string",
+              "description": "Customer identifier",
+              "readOnly": true,
+              "pattern": "^[0-9a-zA-Z-_]+$"
+            },
+            "entity_type": {
+              "x-no-api-doc": true,
+              "enum": [
+                "SRES"
+              ]
+            },
+            "label": {
+              "type": "string",
+              "description": "Label for the entity"
+            },
+            "slug": {
+              "type": "string",
+              "description": "Slug for the entity (Auto-generated from the label)",
+              "readOnly": true,
+              "deprecated": true,
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+            },
+            "created": {
+              "description": "Date the entity was created",
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true
+            },
+            "updated": {
+              "description": "Last date the entity was updated",
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true
+            },
+            "resource_type": {
+              "type": "string",
+              "description": "Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased",
+              "pattern": "^[a-z][0-9a-zA-Z-]+$"
+            },
+            "meta": {
+              "type": "object",
+              "description": "Data for the resource as a key value pair",
+              "additionalProperties": {
+                "type": "string"
+              },
+              "propertyNames": {
+                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+              }
+            },
+            "location": {
+              "type": "object",
+              "description": "Defines the properties for a part unit",
+              "additionalProperties": false,
+              "required": [
+                "label",
+                "entity_id",
+                "entity_type",
+                "created",
+                "updated",
+                "location_type",
+                "address"
+              ],
+              "properties": {
+                "location_id": {
+                  "description": "The identifier for the location",
+                  "type": "string",
+                  "readOnly": true,
+                  "pattern": "^[0-9a-zA-Z-_]+$"
+                },
+                "entity_id": {
+                  "x-no-api-doc": true,
+                  "type": "string",
+                  "description": "Customer identifier",
+                  "readOnly": true,
+                  "pattern": "^[0-9a-zA-Z-_]+$"
+                },
+                "entity_type": {
+                  "x-no-api-doc": true,
+                  "enum": [
+                    "LOC"
+                  ]
+                },
+                "label": {
+                  "type": "string",
+                  "description": "Label for the entity"
+                },
+                "slug": {
+                  "type": "string",
+                  "description": "Slug for the entity (Auto-generated from the label)",
+                  "readOnly": true,
+                  "deprecated": true,
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                },
+                "created": {
+                  "description": "Date the entity was created",
+                  "type": "string",
+                  "format": "date-time",
+                  "readOnly": true
+                },
+                "updated": {
+                  "description": "Last date the entity was updated",
+                  "type": "string",
+                  "format": "date-time",
+                  "readOnly": true
+                },
+                "location_type": {
+                  "type": "string",
+                  "description": "The type of location",
+                  "enum": [
+                    "warehouse",
+                    "facility",
+                    "other"
+                  ]
+                },
+                "formatted_address": {
+                  "type": "string",
+                  "readOnly": true,
+                  "description": "Address formatted for the where region the location exists in"
+                },
+                "address": {
+                  "type": "object",
+                  "required": [
+                    "country",
+                    "administrative_area",
+                    "locality",
+                    "postal_code",
+                    "thoroughfare"
+                  ],
+                  "description": "xNAL address for the location ",
+                  "properties": {
+                    "country": {
+                      "type": "string",
+                      "description": "Three Letter ISO country code",
+                      "enum": [
+                        "ABW",
+                        "AFG",
+                        "AGO",
+                        "AIA",
+                        "ALA",
+                        "ALB",
+                        "AND",
+                        "ARE",
+                        "ARG",
+                        "ARM",
+                        "ASM",
+                        "ATA",
+                        "ATF",
+                        "ATG",
+                        "AUS",
+                        "AUT",
+                        "AZE",
+                        "BDI",
+                        "BEL",
+                        "BEN",
+                        "BES",
+                        "BFA",
+                        "BGD",
+                        "BGR",
+                        "BHR",
+                        "BHS",
+                        "BIH",
+                        "BLM",
+                        "BLR",
+                        "BLZ",
+                        "BMU",
+                        "BOL",
+                        "BRA",
+                        "BRB",
+                        "BRN",
+                        "BTN",
+                        "BVT",
+                        "BWA",
+                        "CAF",
+                        "CAN",
+                        "CCK",
+                        "CHE",
+                        "CHL",
+                        "CHN",
+                        "CIV",
+                        "CMR",
+                        "COD",
+                        "COG",
+                        "COK",
+                        "COL",
+                        "COM",
+                        "CPV",
+                        "CRI",
+                        "CUB",
+                        "CUW",
+                        "CXR",
+                        "CYM",
+                        "CYP",
+                        "CZE",
+                        "DEU",
+                        "DJI",
+                        "DMA",
+                        "DNK",
+                        "DOM",
+                        "DZA",
+                        "ECU",
+                        "EGY",
+                        "ERI",
+                        "ESH",
+                        "ESP",
+                        "EST",
+                        "ETH",
+                        "FIN",
+                        "FJI",
+                        "FLK",
+                        "FRA",
+                        "FRO",
+                        "FSM",
+                        "GAB",
+                        "GBR",
+                        "GEO",
+                        "GGY",
+                        "GHA",
+                        "GIB",
+                        "GIN",
+                        "GLP",
+                        "GMB",
+                        "GNB",
+                        "GNQ",
+                        "GRC",
+                        "GRD",
+                        "GRL",
+                        "GTM",
+                        "GUF",
+                        "GUM",
+                        "GUY",
+                        "HKG",
+                        "HMD",
+                        "HND",
+                        "HRV",
+                        "HTI",
+                        "HUN",
+                        "IDN",
+                        "IMN",
+                        "IND",
+                        "IOT",
+                        "IRL",
+                        "IRN",
+                        "IRQ",
+                        "ISL",
+                        "ISR",
+                        "ITA",
+                        "JAM",
+                        "JEY",
+                        "JOR",
+                        "JPN",
+                        "KAZ",
+                        "KEN",
+                        "KGZ",
+                        "KHM",
+                        "KIR",
+                        "KNA",
+                        "KOR",
+                        "KWT",
+                        "LAO",
+                        "LBN",
+                        "LBR",
+                        "LBY",
+                        "LCA",
+                        "LIE",
+                        "LKA",
+                        "LSO",
+                        "LTU",
+                        "LUX",
+                        "LVA",
+                        "MAC",
+                        "MAF",
+                        "MAR",
+                        "MCO",
+                        "MDA",
+                        "MDG",
+                        "MDV",
+                        "MEX",
+                        "MHL",
+                        "MKD",
+                        "MLI",
+                        "MLT",
+                        "MMR",
+                        "MNE",
+                        "MNG",
+                        "MNP",
+                        "MOZ",
+                        "MRT",
+                        "MSR",
+                        "MTQ",
+                        "MUS",
+                        "MWI",
+                        "MYS",
+                        "MYT",
+                        "NAM",
+                        "NCL",
+                        "NER",
+                        "NFK",
+                        "NGA",
+                        "NIC",
+                        "NIU",
+                        "NLD",
+                        "NOR",
+                        "NPL",
+                        "NRU",
+                        "NZL",
+                        "OMN",
+                        "PAK",
+                        "PAN",
+                        "PCN",
+                        "PER",
+                        "PHL",
+                        "PLW",
+                        "PNG",
+                        "POL",
+                        "PRI",
+                        "PRK",
+                        "PRT",
+                        "PRY",
+                        "PSE",
+                        "PYF",
+                        "QAT",
+                        "REU",
+                        "ROU",
+                        "RUS",
+                        "RWA",
+                        "SAU",
+                        "SDN",
+                        "SEN",
+                        "SGP",
+                        "SGS",
+                        "SHN",
+                        "SJM",
+                        "SLB",
+                        "SLE",
+                        "SLV",
+                        "SMR",
+                        "SOM",
+                        "SPM",
+                        "SRB",
+                        "SSD",
+                        "STP",
+                        "SUR",
+                        "SVK",
+                        "SVN",
+                        "SWE",
+                        "SWZ",
+                        "SXM",
+                        "SYC",
+                        "SYR",
+                        "TCA",
+                        "TCD",
+                        "TGO",
+                        "THA",
+                        "TJK",
+                        "TKL",
+                        "TKM",
+                        "TLS",
+                        "TON",
+                        "TTO",
+                        "TUN",
+                        "TUR",
+                        "TUV",
+                        "TWN",
+                        "TZA",
+                        "UGA",
+                        "UKR",
+                        "UMI",
+                        "URY",
+                        "USA",
+                        "UZB",
+                        "VAT",
+                        "VCT",
+                        "VEN",
+                        "VGB",
+                        "VIR",
+                        "VNM",
+                        "VUT",
+                        "WLF",
+                        "WSM",
+                        "YEM",
+                        "ZAF",
+                        "ZMB",
+                        "ZWE"
+                      ]
+                    },
+                    "administrative_area": {
+                      "type": "string",
+                      "description": "State / Province / Region"
+                    },
+                    "sub_administrative_area": {
+                      "type": "string",
+                      "description": "County / District"
+                    },
+                    "locality": {
+                      "type": "string",
+                      "description": "City / Town"
+                    },
+                    "postal_code": {
+                      "type": "string",
+                      "description": "Postal Code / Zip Code"
+                    },
+                    "thoroughfare": {
+                      "type": "string",
+                      "description": "Street Address"
+                    },
+                    "premise": {
+                      "type": "string",
+                      "description": "Apartment / Suite / Box number etc"
+                    },
+                    "sub_premise": {
+                      "type": "string",
+                      "description": "Floor # / Room # / Building label etc"
+                    }
+                  }
+                }
+              }
+            },
+            "resource": {
+              "type": "object",
+              "description": "Defines the properties for a resource",
+              "additionalProperties": false,
+              "required": [
+                "label",
+                "entity_id",
+                "entity_type",
+                "created",
+                "updated",
+                "resource_type",
+                "location"
+              ],
+              "properties": {
+                "resource_id": {
+                  "description": "The identifier for the resource",
+                  "type": "string",
+                  "readOnly": true,
+                  "pattern": "^[0-9a-zA-Z-_]+$"
+                },
+                "entity_id": {
+                  "x-no-api-doc": true,
+                  "type": "string",
+                  "description": "Customer identifier",
+                  "readOnly": true,
+                  "pattern": "^[0-9a-zA-Z-_]+$"
+                },
+                "entity_type": {
+                  "x-no-api-doc": true,
+                  "enum": [
+                    "RES"
+                  ]
+                },
+                "label": {
+                  "type": "string",
+                  "description": "Label for the entity"
+                },
+                "slug": {
+                  "type": "string",
+                  "description": "Slug for the entity (Auto-generated from the label)",
+                  "readOnly": true,
+                  "deprecated": true,
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                },
+                "created": {
+                  "description": "Date the entity was created",
+                  "type": "string",
+                  "format": "date-time",
+                  "readOnly": true
+                },
+                "updated": {
+                  "description": "Last date the entity was updated",
+                  "type": "string",
+                  "format": "date-time",
+                  "readOnly": true
+                },
+                "resource_type": {
+                  "type": "string",
+                  "description": "Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased",
+                  "pattern": "^[a-z][0-9a-zA-Z-]+$"
+                },
+                "meta": {
+                  "type": "object",
+                  "description": "Data for the resource as a key value pair",
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "propertyNames": {
+                    "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+                  }
+                },
+                "location": {
+                  "type": "object",
+                  "description": "Defines the properties for a part unit",
+                  "additionalProperties": false,
+                  "required": [
+                    "label",
+                    "entity_id",
+                    "entity_type",
+                    "created",
+                    "updated",
+                    "location_type",
+                    "address"
+                  ],
+                  "properties": {
+                    "location_id": {
+                      "description": "The identifier for the location",
+                      "type": "string",
+                      "readOnly": true,
+                      "pattern": "^[0-9a-zA-Z-_]+$"
+                    },
+                    "entity_id": {
+                      "x-no-api-doc": true,
+                      "type": "string",
+                      "description": "Customer identifier",
+                      "readOnly": true,
+                      "pattern": "^[0-9a-zA-Z-_]+$"
+                    },
+                    "entity_type": {
+                      "x-no-api-doc": true,
+                      "enum": [
+                        "LOC"
+                      ]
+                    },
+                    "label": {
+                      "type": "string",
+                      "description": "Label for the entity"
+                    },
+                    "slug": {
+                      "type": "string",
+                      "description": "Slug for the entity (Auto-generated from the label)",
+                      "readOnly": true,
+                      "deprecated": true,
+                      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                    },
+                    "created": {
+                      "description": "Date the entity was created",
+                      "type": "string",
+                      "format": "date-time",
+                      "readOnly": true
+                    },
+                    "updated": {
+                      "description": "Last date the entity was updated",
+                      "type": "string",
+                      "format": "date-time",
+                      "readOnly": true
+                    },
+                    "location_type": {
+                      "type": "string",
+                      "description": "The type of location",
+                      "enum": [
+                        "warehouse",
+                        "facility",
+                        "other"
+                      ]
+                    },
+                    "formatted_address": {
+                      "type": "string",
+                      "readOnly": true,
+                      "description": "Address formatted for the where region the location exists in"
+                    },
+                    "address": {
+                      "type": "object",
+                      "required": [
+                        "country",
+                        "administrative_area",
+                        "locality",
+                        "postal_code",
+                        "thoroughfare"
+                      ],
+                      "description": "xNAL address for the location ",
+                      "properties": {
+                        "country": {
+                          "type": "string",
+                          "description": "Three Letter ISO country code",
+                          "enum": [
+                            "ABW",
+                            "AFG",
+                            "AGO",
+                            "AIA",
+                            "ALA",
+                            "ALB",
+                            "AND",
+                            "ARE",
+                            "ARG",
+                            "ARM",
+                            "ASM",
+                            "ATA",
+                            "ATF",
+                            "ATG",
+                            "AUS",
+                            "AUT",
+                            "AZE",
+                            "BDI",
+                            "BEL",
+                            "BEN",
+                            "BES",
+                            "BFA",
+                            "BGD",
+                            "BGR",
+                            "BHR",
+                            "BHS",
+                            "BIH",
+                            "BLM",
+                            "BLR",
+                            "BLZ",
+                            "BMU",
+                            "BOL",
+                            "BRA",
+                            "BRB",
+                            "BRN",
+                            "BTN",
+                            "BVT",
+                            "BWA",
+                            "CAF",
+                            "CAN",
+                            "CCK",
+                            "CHE",
+                            "CHL",
+                            "CHN",
+                            "CIV",
+                            "CMR",
+                            "COD",
+                            "COG",
+                            "COK",
+                            "COL",
+                            "COM",
+                            "CPV",
+                            "CRI",
+                            "CUB",
+                            "CUW",
+                            "CXR",
+                            "CYM",
+                            "CYP",
+                            "CZE",
+                            "DEU",
+                            "DJI",
+                            "DMA",
+                            "DNK",
+                            "DOM",
+                            "DZA",
+                            "ECU",
+                            "EGY",
+                            "ERI",
+                            "ESH",
+                            "ESP",
+                            "EST",
+                            "ETH",
+                            "FIN",
+                            "FJI",
+                            "FLK",
+                            "FRA",
+                            "FRO",
+                            "FSM",
+                            "GAB",
+                            "GBR",
+                            "GEO",
+                            "GGY",
+                            "GHA",
+                            "GIB",
+                            "GIN",
+                            "GLP",
+                            "GMB",
+                            "GNB",
+                            "GNQ",
+                            "GRC",
+                            "GRD",
+                            "GRL",
+                            "GTM",
+                            "GUF",
+                            "GUM",
+                            "GUY",
+                            "HKG",
+                            "HMD",
+                            "HND",
+                            "HRV",
+                            "HTI",
+                            "HUN",
+                            "IDN",
+                            "IMN",
+                            "IND",
+                            "IOT",
+                            "IRL",
+                            "IRN",
+                            "IRQ",
+                            "ISL",
+                            "ISR",
+                            "ITA",
+                            "JAM",
+                            "JEY",
+                            "JOR",
+                            "JPN",
+                            "KAZ",
+                            "KEN",
+                            "KGZ",
+                            "KHM",
+                            "KIR",
+                            "KNA",
+                            "KOR",
+                            "KWT",
+                            "LAO",
+                            "LBN",
+                            "LBR",
+                            "LBY",
+                            "LCA",
+                            "LIE",
+                            "LKA",
+                            "LSO",
+                            "LTU",
+                            "LUX",
+                            "LVA",
+                            "MAC",
+                            "MAF",
+                            "MAR",
+                            "MCO",
+                            "MDA",
+                            "MDG",
+                            "MDV",
+                            "MEX",
+                            "MHL",
+                            "MKD",
+                            "MLI",
+                            "MLT",
+                            "MMR",
+                            "MNE",
+                            "MNG",
+                            "MNP",
+                            "MOZ",
+                            "MRT",
+                            "MSR",
+                            "MTQ",
+                            "MUS",
+                            "MWI",
+                            "MYS",
+                            "MYT",
+                            "NAM",
+                            "NCL",
+                            "NER",
+                            "NFK",
+                            "NGA",
+                            "NIC",
+                            "NIU",
+                            "NLD",
+                            "NOR",
+                            "NPL",
+                            "NRU",
+                            "NZL",
+                            "OMN",
+                            "PAK",
+                            "PAN",
+                            "PCN",
+                            "PER",
+                            "PHL",
+                            "PLW",
+                            "PNG",
+                            "POL",
+                            "PRI",
+                            "PRK",
+                            "PRT",
+                            "PRY",
+                            "PSE",
+                            "PYF",
+                            "QAT",
+                            "REU",
+                            "ROU",
+                            "RUS",
+                            "RWA",
+                            "SAU",
+                            "SDN",
+                            "SEN",
+                            "SGP",
+                            "SGS",
+                            "SHN",
+                            "SJM",
+                            "SLB",
+                            "SLE",
+                            "SLV",
+                            "SMR",
+                            "SOM",
+                            "SPM",
+                            "SRB",
+                            "SSD",
+                            "STP",
+                            "SUR",
+                            "SVK",
+                            "SVN",
+                            "SWE",
+                            "SWZ",
+                            "SXM",
+                            "SYC",
+                            "SYR",
+                            "TCA",
+                            "TCD",
+                            "TGO",
+                            "THA",
+                            "TJK",
+                            "TKL",
+                            "TKM",
+                            "TLS",
+                            "TON",
+                            "TTO",
+                            "TUN",
+                            "TUR",
+                            "TUV",
+                            "TWN",
+                            "TZA",
+                            "UGA",
+                            "UKR",
+                            "UMI",
+                            "URY",
+                            "USA",
+                            "UZB",
+                            "VAT",
+                            "VCT",
+                            "VEN",
+                            "VGB",
+                            "VIR",
+                            "VNM",
+                            "VUT",
+                            "WLF",
+                            "WSM",
+                            "YEM",
+                            "ZAF",
+                            "ZMB",
+                            "ZWE"
+                          ]
+                        },
+                        "administrative_area": {
+                          "type": "string",
+                          "description": "State / Province / Region"
+                        },
+                        "sub_administrative_area": {
+                          "type": "string",
+                          "description": "County / District"
+                        },
+                        "locality": {
+                          "type": "string",
+                          "description": "City / Town"
+                        },
+                        "postal_code": {
+                          "type": "string",
+                          "description": "Postal Code / Zip Code"
+                        },
+                        "thoroughfare": {
+                          "type": "string",
+                          "description": "Street Address"
+                        },
+                        "premise": {
+                          "type": "string",
+                          "description": "Apartment / Suite / Box number etc"
+                        },
+                        "sub_premise": {
+                          "type": "string",
+                          "description": "Floor # / Room # / Building label etc"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
     },
     "input_filter": {
       "type": "array",
@@ -25075,6 +42015,15 @@ Update the current status or current location for a unit
             "CANCELLED",
             "BLOCKED"
           ]
+        },
+        "description": {
+          "type": "string",
+          "nullable": true,
+          "description": "A description for the status"
+        },
+        "order": {
+          "type": "number",
+          "description": "Order status appears when listing"
         }
       }
     }
@@ -25104,9 +42053,9 @@ Status Code **200**
 |»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
 |»» created|string(date-time)|false|read-only|Date the entity was created|
 |»» updated|string(date-time)|false|read-only|Last date the entity was updated|
-|»» serial_number|string|false|read-only|Serial number of the unit with prefix stripped|
-|»» raw_serial_number|string|false|none|Serial number of the unit|
-|»» tenant_part_number|string|false|none|Identifier set by the tenant|
+|»» serial_number|string\|null|false|read-only|Serial number of the unit with prefix stripped|
+|»» raw_serial_number|string\|null|false|none|Serial number of the unit|
+|»» tenant_part_number|string\|null|false|none|Identifier set by the tenant|
 |»» manufacturer|object|false|none|Manufacturer information for the part|
 |»»» part_number|string|true|none|Part number the manufacturer uses. If this is not set, then the part number is used|
 |»»» manufacturer_id|string|false|read-only|Customer identifier|
@@ -25145,6 +42094,8 @@ Status Code **200**
 |»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
 |»»»»» status|string|true|none|A Custom label for the status|
 |»»»»» category|string|true|none|The classifier for the statues|
+|»»»»» description|string\|null|false|none|A description for the status|
+|»»»»» order|number|false|none|Order status appears when listing|
 |»»»» total_programs|number|false|none|Total programs under the customer|
 |»»»» total_projects|number|false|none|Total projects under the customer|
 |»»» manufacturer|object|true|none|Manufacturer information for the part|
@@ -25476,6 +42427,8 @@ Status Code **200**
 |»»»»»»»»»»»»»»»»»»»»»»»»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»» status|string|true|none|A Custom label for the status|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»» category|string|true|none|The classifier for the statues|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»» description|string\|null|false|none|A description for the status|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»» order|number|false|none|Order status appears when listing|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»» total_programs|number|false|none|Total programs under the customer|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»» total_projects|number|false|none|Total projects under the customer|
 |»»»»»»»»»»»»»»»»»»»»»»»»»» current_location|object|false|none|Defines the properties for a part unit|
@@ -25516,313 +42469,427 @@ Status Code **200**
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»» thoroughfare|string|true|none|Street Address|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»» premise|string|false|none|Apartment / Suite / Box number etc|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»» sub_premise|string|false|none|Floor # / Room # / Building label etc|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»» input_filter|[object]|false|none|Input Filters allow custom fields to be defined for entities|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» label|string|true|none|Human readable name|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» key|string|true|read-only|Slug used to store the property|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» filters|[anyOf]|true|none|A Collection of filters applied to the field|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»» resource|any|false|none|none|
 
 *anyOf*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|This filter will set the value based on a list of approved values. If the value is not in the list, it will then be set to empty unless the default option is set|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» approved_values|[string]|true|none|The list of approved values|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» default|string\|null|false|none|If this is set and the value is not in the approved_list, set the value to this|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|null|false|none|none|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value camelCase|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Defines the properties for a resource|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» resource_id|string|false|read-only|The identifier for the resource|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» label|string|true|none|Label for the entity|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» resource_type|string|true|none|Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» meta|object|false|none|Data for the resource as a key value pair|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» **additionalProperties**|string|false|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location|object|true|none|Defines the properties for a part unit|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location_id|string|false|read-only|The identifier for the location|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» label|string|true|none|Label for the entity|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location_type|string|true|none|The type of location|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» formatted_address|string|false|read-only|Address formatted for the where region the location exists in|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» address|object|true|none|xNAL address for the location|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» country|string|true|none|Three Letter ISO country code|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» administrative_area|string|true|none|State / Province / Region|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» sub_administrative_area|string|false|none|County / District|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» locality|string|true|none|City / Town|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» postal_code|string|true|none|Postal Code / Zip Code|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» thoroughfare|string|true|none|Street Address|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» premise|string|false|none|Apartment / Suite / Box number etc|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» sub_premise|string|false|none|Floor # / Room # / Building label etc|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a date|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|Date filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform values into null. This is helpful when trying to make a value required. The following are considered empty: # The number 0 or 0.0 # empty string '' # A boolean false # The word 'false' #|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|empty filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a float. Non numeric characters (including comma) will be removed|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|How many decimal places to preserve|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value kebab-case|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value lowercase|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a number. Non numeric characters (including comma and decimal points) will be removed|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|Number filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Add a prefix to the start of a string. If the string already start with the prefix, it will not prepend.|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» prefix|string|true|none|The prefix to add|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value snake_case|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a string|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|String filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Add a suffix to the start of a string. If the string already start with the suffix, it will not append.|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» suffix|string|true|none|The suffix to add|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to trim whitespace from a value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|By default will trim from the start and end|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» start|boolean|false|none|Remove white space from the start of the string|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» end|boolean|false|none|Remove white space from the end of the string|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value UPPERCASE|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Defines the properties for a resource|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» resource_id|string|false|read-only|The identifier for the resource|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» label|string|true|none|Label for the entity|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» resource_type|string|true|none|Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» meta|object|false|none|Data for the resource as a key value pair|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» **additionalProperties**|string|false|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location|object|true|none|Defines the properties for a part unit|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location_id|string|false|read-only|The identifier for the location|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» label|string|true|none|Label for the entity|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location_type|string|true|none|The type of location|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» formatted_address|string|false|read-only|Address formatted for the where region the location exists in|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» address|object|true|none|xNAL address for the location|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» country|string|true|none|Three Letter ISO country code|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» administrative_area|string|true|none|State / Province / Region|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» sub_administrative_area|string|false|none|County / District|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» locality|string|true|none|City / Town|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» postal_code|string|true|none|Postal Code / Zip Code|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» thoroughfare|string|true|none|Street Address|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» premise|string|false|none|Apartment / Suite / Box number etc|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» sub_premise|string|false|none|Floor # / Room # / Building label etc|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» resource|object|true|none|Defines the properties for a resource|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» resource_id|string|false|read-only|The identifier for the resource|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» label|string|true|none|Label for the entity|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» resource_type|string|true|none|Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» meta|object|false|none|Data for the resource as a key value pair|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» **additionalProperties**|string|false|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location|object|true|none|Defines the properties for a part unit|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location_id|string|false|read-only|The identifier for the location|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» label|string|true|none|Label for the entity|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location_type|string|true|none|The type of location|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» formatted_address|string|false|read-only|Address formatted for the where region the location exists in|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» address|object|true|none|xNAL address for the location|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» country|string|true|none|Three Letter ISO country code|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» administrative_area|string|true|none|State / Province / Region|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» sub_administrative_area|string|false|none|County / District|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» locality|string|true|none|City / Town|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» postal_code|string|true|none|Postal Code / Zip Code|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» thoroughfare|string|true|none|Street Address|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» premise|string|false|none|Apartment / Suite / Box number etc|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» sub_premise|string|false|none|Floor # / Room # / Building label etc|
 
 *continued*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» validators|[anyOf]|true|none|A set of validators to use for this field|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» input_filter|[object]|false|none|Input Filters allow custom fields to be defined for entities|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» label|string|true|none|Human readable name|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» key|string|true|read-only|Slug used to store the property|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» filters|[anyOf]|true|none|A Collection of filters applied to the field|
 
 *anyOf*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number is between two values. By default, min and max are included|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» min|number|true|none|Minimum value to check|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» max|number|true|none|The maximum value to check|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» include|boolean|false|none|Include the value in the check|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate value does not match a list (black list)|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|This filter will set the value based on a list of approved values. If the value is not in the list, it will then be set to empty unless the default option is set|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» list|[string]|true|none|The list of approved values|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» approved_values|[string]|true|none|The list of approved values|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» default|string\|null|false|none|If this is set and the value is not in the approved_list, set the value to this|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string contains a value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value camelCase|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a date|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|Date filter has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform values into null. This is helpful when trying to make a value required. The following are considered empty: # The number 0 or 0.0 # empty string '' # A boolean false # The word 'false' #|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|empty filter has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a float. Non numeric characters (including comma) will be removed|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» contains|string|true|none|String must contain with this value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|How many decimal places to preserve|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string is a correct email address|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value kebab-case|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value lowercase|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a number. Non numeric characters (including comma and decimal points) will be removed|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|Number filter has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Add a prefix to the start of a string. If the string already start with the prefix, it will not prepend.|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» strict|boolean|false|none|Enforce strict standards from ARPA. This will enforce the length of the string|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» lookup|boolean|false|none|Look up the host name and check if it has a valid MX record|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» prefix|string|true|none|The prefix to add|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string ends with a value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value snake_case|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a string|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|String filter has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Add a suffix to the start of a string. If the string already start with the suffix, it will not append.|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» ends_with|string|true|none|String must end with this value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» suffix|string|true|none|The suffix to add|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number equals a value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to trim whitespace from a value|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» value|number|true|none|The value to compare against|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When value is a float, this will set the decimal precision|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|By default will trim from the start and end|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» start|boolean|false|none|Remove white space from the start of the string|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» end|boolean|false|none|Remove white space from the end of the string|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number is greater than a value. By default, this will check if value is greater than or equals to|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value UPPERCASE|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» value|number|true|none|The value to compare against|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» include|boolean|false|none|Include the value in the check|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string has a correct DNS records|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» record_type|string|false|none|DNS record type to validate|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an IP address format. Defaults to matching IPv4|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» versions|[string]|false|none|IP Version to match against|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string is a certain length|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» length|string|true|none|String must contain with this value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» operator|string|false|none|Which type of length comparision to make|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number is less than a value. By default, this will check if value is less than or equals to|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» value|number|true|none|The value to compare against|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» include|boolean|false|none|Include the value in the check|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an MAC address format|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This validator has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches a regular expression|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» mask|string|true|none|Mask to validate against|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string starts with a value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» starts_with|string|true|none|String must start with this value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validates that a value follows a step. Both start and end options do not have to sync with the step. If they do not sync then find the nearest step.|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» step|number|true|none|The step value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» start|integer|false|none|Start stepping at this value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» end|integer|false|none|End stepping at this value|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an URI|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» schemes|[string]|false|none|Schemes to match. By default all are matched|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate value matches a list (white list)|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» list|[string]|true|none|The list of approved values|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
 
 *continued*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» current_status|object|false|none|Defines the properties for a status|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» status|string|true|none|A Custom label for the status|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» category|string|true|none|The classifier for the statues|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» validators|[anyOf]|true|none|A set of validators to use for this field|
+
+*anyOf*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number is between two values. By default, min and max are included|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» min|number|true|none|Minimum value to check|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» max|number|true|none|The maximum value to check|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» include|boolean|false|none|Include the value in the check|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate value does not match a list (black list)|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» list|[string]|true|none|The list of approved values|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string contains a value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» contains|string|true|none|String must contain with this value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string is a correct email address|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» strict|boolean|false|none|Enforce strict standards from ARPA. This will enforce the length of the string|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» lookup|boolean|false|none|Look up the host name and check if it has a valid MX record|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string ends with a value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» ends_with|string|true|none|String must end with this value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number equals a value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» value|number|true|none|The value to compare against|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When value is a float, this will set the decimal precision|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number is greater than a value. By default, this will check if value is greater than or equals to|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» value|number|true|none|The value to compare against|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» include|boolean|false|none|Include the value in the check|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string has a correct DNS records|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» record_type|string|false|none|DNS record type to validate|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an IP address format. Defaults to matching IPv4|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» versions|[string]|false|none|IP Version to match against|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string is a certain length|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» length|string|true|none|String must contain with this value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» operator|string|false|none|Which type of length comparision to make|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number is less than a value. By default, this will check if value is less than or equals to|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» value|number|true|none|The value to compare against|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» include|boolean|false|none|Include the value in the check|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an MAC address format|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This validator has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches a regular expression|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» mask|string|true|none|Mask to validate against|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string starts with a value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» starts_with|string|true|none|String must start with this value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validates that a value follows a step. Both start and end options do not have to sync with the step. If they do not sync then find the nearest step.|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» step|number|true|none|The step value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» start|integer|false|none|Start stepping at this value|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» end|integer|false|none|End stepping at this value|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an URI|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» schemes|[string]|false|none|Schemes to match. By default all are matched|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate value matches a list (white list)|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» list|[string]|true|none|The list of approved values|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+
+*continued*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» current_status|object|false|none|Defines the properties for a status|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» status|string|true|none|A Custom label for the status|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» category|string|true|none|The classifier for the statues|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» description|string\|null|false|none|A description for the status|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» order|number|false|none|Order status appears when listing|
 
 #### Enumerated Values
 
@@ -26176,6 +43243,768 @@ Status Code **200**
 |country|ZAF|
 |country|ZMB|
 |country|ZWE|
+|entity_type|LOC|
+|location_type|warehouse|
+|location_type|facility|
+|location_type|other|
+|country|ABW|
+|country|AFG|
+|country|AGO|
+|country|AIA|
+|country|ALA|
+|country|ALB|
+|country|AND|
+|country|ARE|
+|country|ARG|
+|country|ARM|
+|country|ASM|
+|country|ATA|
+|country|ATF|
+|country|ATG|
+|country|AUS|
+|country|AUT|
+|country|AZE|
+|country|BDI|
+|country|BEL|
+|country|BEN|
+|country|BES|
+|country|BFA|
+|country|BGD|
+|country|BGR|
+|country|BHR|
+|country|BHS|
+|country|BIH|
+|country|BLM|
+|country|BLR|
+|country|BLZ|
+|country|BMU|
+|country|BOL|
+|country|BRA|
+|country|BRB|
+|country|BRN|
+|country|BTN|
+|country|BVT|
+|country|BWA|
+|country|CAF|
+|country|CAN|
+|country|CCK|
+|country|CHE|
+|country|CHL|
+|country|CHN|
+|country|CIV|
+|country|CMR|
+|country|COD|
+|country|COG|
+|country|COK|
+|country|COL|
+|country|COM|
+|country|CPV|
+|country|CRI|
+|country|CUB|
+|country|CUW|
+|country|CXR|
+|country|CYM|
+|country|CYP|
+|country|CZE|
+|country|DEU|
+|country|DJI|
+|country|DMA|
+|country|DNK|
+|country|DOM|
+|country|DZA|
+|country|ECU|
+|country|EGY|
+|country|ERI|
+|country|ESH|
+|country|ESP|
+|country|EST|
+|country|ETH|
+|country|FIN|
+|country|FJI|
+|country|FLK|
+|country|FRA|
+|country|FRO|
+|country|FSM|
+|country|GAB|
+|country|GBR|
+|country|GEO|
+|country|GGY|
+|country|GHA|
+|country|GIB|
+|country|GIN|
+|country|GLP|
+|country|GMB|
+|country|GNB|
+|country|GNQ|
+|country|GRC|
+|country|GRD|
+|country|GRL|
+|country|GTM|
+|country|GUF|
+|country|GUM|
+|country|GUY|
+|country|HKG|
+|country|HMD|
+|country|HND|
+|country|HRV|
+|country|HTI|
+|country|HUN|
+|country|IDN|
+|country|IMN|
+|country|IND|
+|country|IOT|
+|country|IRL|
+|country|IRN|
+|country|IRQ|
+|country|ISL|
+|country|ISR|
+|country|ITA|
+|country|JAM|
+|country|JEY|
+|country|JOR|
+|country|JPN|
+|country|KAZ|
+|country|KEN|
+|country|KGZ|
+|country|KHM|
+|country|KIR|
+|country|KNA|
+|country|KOR|
+|country|KWT|
+|country|LAO|
+|country|LBN|
+|country|LBR|
+|country|LBY|
+|country|LCA|
+|country|LIE|
+|country|LKA|
+|country|LSO|
+|country|LTU|
+|country|LUX|
+|country|LVA|
+|country|MAC|
+|country|MAF|
+|country|MAR|
+|country|MCO|
+|country|MDA|
+|country|MDG|
+|country|MDV|
+|country|MEX|
+|country|MHL|
+|country|MKD|
+|country|MLI|
+|country|MLT|
+|country|MMR|
+|country|MNE|
+|country|MNG|
+|country|MNP|
+|country|MOZ|
+|country|MRT|
+|country|MSR|
+|country|MTQ|
+|country|MUS|
+|country|MWI|
+|country|MYS|
+|country|MYT|
+|country|NAM|
+|country|NCL|
+|country|NER|
+|country|NFK|
+|country|NGA|
+|country|NIC|
+|country|NIU|
+|country|NLD|
+|country|NOR|
+|country|NPL|
+|country|NRU|
+|country|NZL|
+|country|OMN|
+|country|PAK|
+|country|PAN|
+|country|PCN|
+|country|PER|
+|country|PHL|
+|country|PLW|
+|country|PNG|
+|country|POL|
+|country|PRI|
+|country|PRK|
+|country|PRT|
+|country|PRY|
+|country|PSE|
+|country|PYF|
+|country|QAT|
+|country|REU|
+|country|ROU|
+|country|RUS|
+|country|RWA|
+|country|SAU|
+|country|SDN|
+|country|SEN|
+|country|SGP|
+|country|SGS|
+|country|SHN|
+|country|SJM|
+|country|SLB|
+|country|SLE|
+|country|SLV|
+|country|SMR|
+|country|SOM|
+|country|SPM|
+|country|SRB|
+|country|SSD|
+|country|STP|
+|country|SUR|
+|country|SVK|
+|country|SVN|
+|country|SWE|
+|country|SWZ|
+|country|SXM|
+|country|SYC|
+|country|SYR|
+|country|TCA|
+|country|TCD|
+|country|TGO|
+|country|THA|
+|country|TJK|
+|country|TKL|
+|country|TKM|
+|country|TLS|
+|country|TON|
+|country|TTO|
+|country|TUN|
+|country|TUR|
+|country|TUV|
+|country|TWN|
+|country|TZA|
+|country|UGA|
+|country|UKR|
+|country|UMI|
+|country|URY|
+|country|USA|
+|country|UZB|
+|country|VAT|
+|country|VCT|
+|country|VEN|
+|country|VGB|
+|country|VIR|
+|country|VNM|
+|country|VUT|
+|country|WLF|
+|country|WSM|
+|country|YEM|
+|country|ZAF|
+|country|ZMB|
+|country|ZWE|
+|entity_type|RES|
+|entity_type|LOC|
+|location_type|warehouse|
+|location_type|facility|
+|location_type|other|
+|country|ABW|
+|country|AFG|
+|country|AGO|
+|country|AIA|
+|country|ALA|
+|country|ALB|
+|country|AND|
+|country|ARE|
+|country|ARG|
+|country|ARM|
+|country|ASM|
+|country|ATA|
+|country|ATF|
+|country|ATG|
+|country|AUS|
+|country|AUT|
+|country|AZE|
+|country|BDI|
+|country|BEL|
+|country|BEN|
+|country|BES|
+|country|BFA|
+|country|BGD|
+|country|BGR|
+|country|BHR|
+|country|BHS|
+|country|BIH|
+|country|BLM|
+|country|BLR|
+|country|BLZ|
+|country|BMU|
+|country|BOL|
+|country|BRA|
+|country|BRB|
+|country|BRN|
+|country|BTN|
+|country|BVT|
+|country|BWA|
+|country|CAF|
+|country|CAN|
+|country|CCK|
+|country|CHE|
+|country|CHL|
+|country|CHN|
+|country|CIV|
+|country|CMR|
+|country|COD|
+|country|COG|
+|country|COK|
+|country|COL|
+|country|COM|
+|country|CPV|
+|country|CRI|
+|country|CUB|
+|country|CUW|
+|country|CXR|
+|country|CYM|
+|country|CYP|
+|country|CZE|
+|country|DEU|
+|country|DJI|
+|country|DMA|
+|country|DNK|
+|country|DOM|
+|country|DZA|
+|country|ECU|
+|country|EGY|
+|country|ERI|
+|country|ESH|
+|country|ESP|
+|country|EST|
+|country|ETH|
+|country|FIN|
+|country|FJI|
+|country|FLK|
+|country|FRA|
+|country|FRO|
+|country|FSM|
+|country|GAB|
+|country|GBR|
+|country|GEO|
+|country|GGY|
+|country|GHA|
+|country|GIB|
+|country|GIN|
+|country|GLP|
+|country|GMB|
+|country|GNB|
+|country|GNQ|
+|country|GRC|
+|country|GRD|
+|country|GRL|
+|country|GTM|
+|country|GUF|
+|country|GUM|
+|country|GUY|
+|country|HKG|
+|country|HMD|
+|country|HND|
+|country|HRV|
+|country|HTI|
+|country|HUN|
+|country|IDN|
+|country|IMN|
+|country|IND|
+|country|IOT|
+|country|IRL|
+|country|IRN|
+|country|IRQ|
+|country|ISL|
+|country|ISR|
+|country|ITA|
+|country|JAM|
+|country|JEY|
+|country|JOR|
+|country|JPN|
+|country|KAZ|
+|country|KEN|
+|country|KGZ|
+|country|KHM|
+|country|KIR|
+|country|KNA|
+|country|KOR|
+|country|KWT|
+|country|LAO|
+|country|LBN|
+|country|LBR|
+|country|LBY|
+|country|LCA|
+|country|LIE|
+|country|LKA|
+|country|LSO|
+|country|LTU|
+|country|LUX|
+|country|LVA|
+|country|MAC|
+|country|MAF|
+|country|MAR|
+|country|MCO|
+|country|MDA|
+|country|MDG|
+|country|MDV|
+|country|MEX|
+|country|MHL|
+|country|MKD|
+|country|MLI|
+|country|MLT|
+|country|MMR|
+|country|MNE|
+|country|MNG|
+|country|MNP|
+|country|MOZ|
+|country|MRT|
+|country|MSR|
+|country|MTQ|
+|country|MUS|
+|country|MWI|
+|country|MYS|
+|country|MYT|
+|country|NAM|
+|country|NCL|
+|country|NER|
+|country|NFK|
+|country|NGA|
+|country|NIC|
+|country|NIU|
+|country|NLD|
+|country|NOR|
+|country|NPL|
+|country|NRU|
+|country|NZL|
+|country|OMN|
+|country|PAK|
+|country|PAN|
+|country|PCN|
+|country|PER|
+|country|PHL|
+|country|PLW|
+|country|PNG|
+|country|POL|
+|country|PRI|
+|country|PRK|
+|country|PRT|
+|country|PRY|
+|country|PSE|
+|country|PYF|
+|country|QAT|
+|country|REU|
+|country|ROU|
+|country|RUS|
+|country|RWA|
+|country|SAU|
+|country|SDN|
+|country|SEN|
+|country|SGP|
+|country|SGS|
+|country|SHN|
+|country|SJM|
+|country|SLB|
+|country|SLE|
+|country|SLV|
+|country|SMR|
+|country|SOM|
+|country|SPM|
+|country|SRB|
+|country|SSD|
+|country|STP|
+|country|SUR|
+|country|SVK|
+|country|SVN|
+|country|SWE|
+|country|SWZ|
+|country|SXM|
+|country|SYC|
+|country|SYR|
+|country|TCA|
+|country|TCD|
+|country|TGO|
+|country|THA|
+|country|TJK|
+|country|TKL|
+|country|TKM|
+|country|TLS|
+|country|TON|
+|country|TTO|
+|country|TUN|
+|country|TUR|
+|country|TUV|
+|country|TWN|
+|country|TZA|
+|country|UGA|
+|country|UKR|
+|country|UMI|
+|country|URY|
+|country|USA|
+|country|UZB|
+|country|VAT|
+|country|VCT|
+|country|VEN|
+|country|VGB|
+|country|VIR|
+|country|VNM|
+|country|VUT|
+|country|WLF|
+|country|WSM|
+|country|YEM|
+|country|ZAF|
+|country|ZMB|
+|country|ZWE|
+|entity_type|SRES|
+|entity_type|LOC|
+|location_type|warehouse|
+|location_type|facility|
+|location_type|other|
+|country|ABW|
+|country|AFG|
+|country|AGO|
+|country|AIA|
+|country|ALA|
+|country|ALB|
+|country|AND|
+|country|ARE|
+|country|ARG|
+|country|ARM|
+|country|ASM|
+|country|ATA|
+|country|ATF|
+|country|ATG|
+|country|AUS|
+|country|AUT|
+|country|AZE|
+|country|BDI|
+|country|BEL|
+|country|BEN|
+|country|BES|
+|country|BFA|
+|country|BGD|
+|country|BGR|
+|country|BHR|
+|country|BHS|
+|country|BIH|
+|country|BLM|
+|country|BLR|
+|country|BLZ|
+|country|BMU|
+|country|BOL|
+|country|BRA|
+|country|BRB|
+|country|BRN|
+|country|BTN|
+|country|BVT|
+|country|BWA|
+|country|CAF|
+|country|CAN|
+|country|CCK|
+|country|CHE|
+|country|CHL|
+|country|CHN|
+|country|CIV|
+|country|CMR|
+|country|COD|
+|country|COG|
+|country|COK|
+|country|COL|
+|country|COM|
+|country|CPV|
+|country|CRI|
+|country|CUB|
+|country|CUW|
+|country|CXR|
+|country|CYM|
+|country|CYP|
+|country|CZE|
+|country|DEU|
+|country|DJI|
+|country|DMA|
+|country|DNK|
+|country|DOM|
+|country|DZA|
+|country|ECU|
+|country|EGY|
+|country|ERI|
+|country|ESH|
+|country|ESP|
+|country|EST|
+|country|ETH|
+|country|FIN|
+|country|FJI|
+|country|FLK|
+|country|FRA|
+|country|FRO|
+|country|FSM|
+|country|GAB|
+|country|GBR|
+|country|GEO|
+|country|GGY|
+|country|GHA|
+|country|GIB|
+|country|GIN|
+|country|GLP|
+|country|GMB|
+|country|GNB|
+|country|GNQ|
+|country|GRC|
+|country|GRD|
+|country|GRL|
+|country|GTM|
+|country|GUF|
+|country|GUM|
+|country|GUY|
+|country|HKG|
+|country|HMD|
+|country|HND|
+|country|HRV|
+|country|HTI|
+|country|HUN|
+|country|IDN|
+|country|IMN|
+|country|IND|
+|country|IOT|
+|country|IRL|
+|country|IRN|
+|country|IRQ|
+|country|ISL|
+|country|ISR|
+|country|ITA|
+|country|JAM|
+|country|JEY|
+|country|JOR|
+|country|JPN|
+|country|KAZ|
+|country|KEN|
+|country|KGZ|
+|country|KHM|
+|country|KIR|
+|country|KNA|
+|country|KOR|
+|country|KWT|
+|country|LAO|
+|country|LBN|
+|country|LBR|
+|country|LBY|
+|country|LCA|
+|country|LIE|
+|country|LKA|
+|country|LSO|
+|country|LTU|
+|country|LUX|
+|country|LVA|
+|country|MAC|
+|country|MAF|
+|country|MAR|
+|country|MCO|
+|country|MDA|
+|country|MDG|
+|country|MDV|
+|country|MEX|
+|country|MHL|
+|country|MKD|
+|country|MLI|
+|country|MLT|
+|country|MMR|
+|country|MNE|
+|country|MNG|
+|country|MNP|
+|country|MOZ|
+|country|MRT|
+|country|MSR|
+|country|MTQ|
+|country|MUS|
+|country|MWI|
+|country|MYS|
+|country|MYT|
+|country|NAM|
+|country|NCL|
+|country|NER|
+|country|NFK|
+|country|NGA|
+|country|NIC|
+|country|NIU|
+|country|NLD|
+|country|NOR|
+|country|NPL|
+|country|NRU|
+|country|NZL|
+|country|OMN|
+|country|PAK|
+|country|PAN|
+|country|PCN|
+|country|PER|
+|country|PHL|
+|country|PLW|
+|country|PNG|
+|country|POL|
+|country|PRI|
+|country|PRK|
+|country|PRT|
+|country|PRY|
+|country|PSE|
+|country|PYF|
+|country|QAT|
+|country|REU|
+|country|ROU|
+|country|RUS|
+|country|RWA|
+|country|SAU|
+|country|SDN|
+|country|SEN|
+|country|SGP|
+|country|SGS|
+|country|SHN|
+|country|SJM|
+|country|SLB|
+|country|SLE|
+|country|SLV|
+|country|SMR|
+|country|SOM|
+|country|SPM|
+|country|SRB|
+|country|SSD|
+|country|STP|
+|country|SUR|
+|country|SVK|
+|country|SVN|
+|country|SWE|
+|country|SWZ|
+|country|SXM|
+|country|SYC|
+|country|SYR|
+|country|TCA|
+|country|TCD|
+|country|TGO|
+|country|THA|
+|country|TJK|
+|country|TKL|
+|country|TKM|
+|country|TLS|
+|country|TON|
+|country|TTO|
+|country|TUN|
+|country|TUR|
+|country|TUV|
+|country|TWN|
+|country|TZA|
+|country|UGA|
+|country|UKR|
+|country|UMI|
+|country|URY|
+|country|USA|
+|country|UZB|
+|country|VAT|
+|country|VCT|
+|country|VEN|
+|country|VGB|
+|country|VIR|
+|country|VNM|
+|country|VUT|
+|country|WLF|
+|country|WSM|
+|country|YEM|
+|country|ZAF|
+|country|ZMB|
+|country|ZWE|
+|entity_type|RES|
 |entity_type|LOC|
 |location_type|warehouse|
 |location_type|facility|
@@ -26740,13 +44569,16 @@ properties:
     readOnly: true
   serial_number:
     type: string
+    nullable: true
     description: Serial number of the unit with prefix stripped
     readOnly: true
   raw_serial_number:
     type: string
+    nullable: true
     description: Serial number of the unit
   tenant_part_number:
     type: string
+    nullable: true
     description: Identifier set by the tenant
   manufacturer:
     type: object
@@ -26944,7 +44776,9 @@ properties:
             deprecated: true
             x-patternProperties: &ref_0
               '^[A-Za-z][A-Za-z0-9_]*$':
-                type: string
+                type:
+                  - string
+                  - 'null'
           allowed_statuses:
             type: array
             description: List of allowed statuses
@@ -26971,6 +44805,13 @@ properties:
                     - COMPLETE
                     - CANCELLED
                     - BLOCKED
+                description:
+                  type: string
+                  nullable: true
+                  description: A description for the status
+                order:
+                  type: number
+                  description: Order status appears when listing
           total_programs:
             type: number
             description: Total programs under the customer
@@ -27883,6 +45724,13 @@ properties:
                 - COMPLETE
                 - CANCELLED
                 - BLOCKED
+            description:
+              type: string
+              nullable: true
+              description: A description for the status
+            order:
+              type: number
+              description: Order status appears when listing
       total_programs:
         type: number
         description: Total programs under the customer
@@ -28575,9 +46423,8 @@ properties:
             type: string
             description: 'Floor # / Room # / Building label etc'
   resource:
-    type: object
-    nullable: true
     anyOf:
+      - type: 'null'
       - type: object
         description: Defines the properties for a resource
         additionalProperties: false
@@ -30570,6 +48417,13 @@ properties:
           - COMPLETE
           - CANCELLED
           - BLOCKED
+      description:
+        type: string
+        nullable: true
+        description: A description for the status
+      order:
+        type: number
+        description: Order status appears when listing
 
 ```
 
@@ -30586,9 +48440,9 @@ properties:
 |slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
 |created|string(date-time)|true|read-only|Date the entity was created|
 |updated|string(date-time)|true|read-only|Last date the entity was updated|
-|serial_number|string|false|read-only|Serial number of the unit with prefix stripped|
-|raw_serial_number|string|false|none|Serial number of the unit|
-|tenant_part_number|string|false|none|Identifier set by the tenant|
+|serial_number|string\|null|false|read-only|Serial number of the unit with prefix stripped|
+|raw_serial_number|string\|null|false|none|Serial number of the unit|
+|tenant_part_number|string\|null|false|none|Identifier set by the tenant|
 |manufacturer|object|false|none|Manufacturer information for the part|
 |» part_number|string|true|none|Part number the manufacturer uses. If this is not set, then the part number is used|
 |» manufacturer_id|string|false|read-only|Customer identifier|
@@ -30627,6 +48481,8 @@ properties:
 |»» allowed_statuses|[object]|true|none|List of allowed statuses|
 |»»» status|string|true|none|A Custom label for the status|
 |»»» category|string|true|none|The classifier for the statues|
+|»»» description|string\|null|false|none|A description for the status|
+|»»» order|number|false|none|Order status appears when listing|
 |»» total_programs|number|false|none|Total programs under the customer|
 |»» total_projects|number|false|none|Total projects under the customer|
 |» manufacturer|object|true|none|Manufacturer information for the part|
@@ -30958,6 +48814,8 @@ properties:
 |»»»»»»»»»»»»»»»»»»»»»»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
 |»»»»»»»»»»»»»»»»»»»»»»»»»» status|string|true|none|A Custom label for the status|
 |»»»»»»»»»»»»»»»»»»»»»»»»»» category|string|true|none|The classifier for the statues|
+|»»»»»»»»»»»»»»»»»»»»»»»»»» description|string\|null|false|none|A description for the status|
+|»»»»»»»»»»»»»»»»»»»»»»»»»» order|number|false|none|Order status appears when listing|
 |»»»»»»»»»»»»»»»»»»»»»»»»» total_programs|number|false|none|Total programs under the customer|
 |»»»»»»»»»»»»»»»»»»»»»»»»» total_projects|number|false|none|Total projects under the customer|
 |»»»»»»»»»»»»»»»»»»»»»»»» current_location|object|false|none|Defines the properties for a part unit|
@@ -30998,9 +48856,15 @@ properties:
 |»»»»»»»»»»»»»»»»»»»»»»»»»»» thoroughfare|string|true|none|Street Address|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»» premise|string|false|none|Apartment / Suite / Box number etc|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»» sub_premise|string|false|none|Floor # / Room # / Building label etc|
-|»»»»»»»»»»»»»»»»»»»»»»»»»» resource|object\|null|false|none|none|
+|»»»»»»»»»»»»»»»»»»»»»»»»»» resource|any|false|none|none|
 
 *anyOf*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|null|false|none|none|
+
+*or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
@@ -31411,6 +49275,8 @@ properties:
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» current_status|object|false|none|Defines the properties for a status|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» status|string|true|none|A Custom label for the status|
 |»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» category|string|true|none|The classifier for the statues|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» description|string\|null|false|none|A description for the status|
+|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» order|number|false|none|Order status appears when listing|
 
 #### Enumerated Values
 

@@ -54,7 +54,7 @@
       "$ref": "https://docs.nterprise.com/schemas/niagara/location.json"
     },
     "description": {
-      "type": "string",
+      "type": ["string", "null"],
       "description": "Detailed description for the work order"
     },
     "work_order_type": {

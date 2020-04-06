@@ -48,8 +48,8 @@
     "project": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/workOrder.json#/properties/project"
     },
-    "work_flows":{
-      "$ref": "https://docs.nterprise.com/schemas/niagara/workOrder.json#/properties/work_flows"
+    "cycles":{
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workOrder.json#/properties/cycles"
     }
   }
 }

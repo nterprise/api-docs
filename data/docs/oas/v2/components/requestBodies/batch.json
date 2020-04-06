@@ -10,8 +10,11 @@
           "number_cycles"
         ],
         "properties": {
-          "priority": {
-            "$ref": "https://docs.nterprise.com/schemas/niagara/batch.json#/properties/priority"
+          "order": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/batch.json#/properties/order"
+          },
+          "current_status": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/batch.json#/properties/current_status"
           },
           "work_order": {
             "type": "object",
@@ -36,7 +39,7 @@
             }
           },
           "number_cycles": {
-            "$ref": "https://docs.nterprise.com/schemas/niagara/batch.json#/properties/priority"
+            "$ref": "https://docs.nterprise.com/schemas/niagara/batch.json#/properties/number_cycles"
           }
         }
       }
