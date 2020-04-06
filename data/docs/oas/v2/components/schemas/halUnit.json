@@ -54,6 +54,9 @@
     "location": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/unit.json#/properties/location"
     },
+    "resource": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/unit.json#/properties/resource"
+    },
     "input_filter": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/unit.json#/properties/input_filter"
     },

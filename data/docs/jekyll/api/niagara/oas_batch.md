@@ -135,7 +135,10 @@ Fetch Batches
                   "entity_type",
                   "created",
                   "updated",
-                  "location"
+                  "location",
+                  "is_active",
+                  "active_batches",
+                  "active_cycles"
                 ],
                 "properties": {
                   "queue_id": {
@@ -589,17 +592,74 @@ Fetch Batches
                       }
                     }
                   },
+                  "active_work_orders": {
+                    "type": "number",
+                    "description": "Total of work orders in an active status",
+                    "readOnly": true
+                  },
                   "total_batches": {
                     "type": "integer",
                     "description": "Number of batches assigned to the queue",
                     "readOnly": true
+                  },
+                  "is_active": {
+                    "type": "boolean",
+                    "description": "Toggle if the batch has active cycles or batches",
+                    "readOnly": true
+                  },
+                  "active_batches": {
+                    "type": "number",
+                    "description": "Total of batches in the queue with active cycles",
+                    "readOnly": true
+                  },
+                  "active_cycles": {
+                    "type": "number",
+                    "description": "Total of all active cycles across all batches",
+                    "readOnly": true
                   }
                 }
               },
-              "priority": {
+              "order": {
                 "type": "integer",
-                "description": "Priority order for the batch",
+                "description": "Order to process the batch",
                 "minimum": 0
+              },
+              "current_status": {
+                "type": "object",
+                "description": "Defines the properties for a status",
+                "additionalProperties": false,
+                "required": [
+                  "status",
+                  "category"
+                ],
+                "properties": {
+                  "status": {
+                    "type": "string",
+                    "description": "A Custom label for the status",
+                    "pattern": "^[A-Za-z][0-9a-zA-Z-_ ]+$"
+                  },
+                  "category": {
+                    "type": "string",
+                    "description": "The classifier for the statues",
+                    "enum": [
+                      "PENDING",
+                      "IN_PROGRESS",
+                      "VERIFYING",
+                      "COMPLETE",
+                      "CANCELLED",
+                      "BLOCKED"
+                    ]
+                  },
+                  "description": {
+                    "type": "string",
+                    "nullable": true,
+                    "description": "A description for the status"
+                  },
+                  "order": {
+                    "type": "number",
+                    "description": "Order status appears when listing"
+                  }
+                }
               },
               "number_cycles": {
                 "type": "integer",
@@ -653,8 +713,9 @@ Fetch Batches
                   "entity_type",
                   "created",
                   "updated",
-                  "part",
-                  "work_order_type"
+                  "work_order_type",
+                  "location",
+                  "cycles"
                 ],
                 "properties": {
                   "work_order_id": {
@@ -710,8 +771,746 @@ Fetch Batches
                     "format": "date-time",
                     "description": "End date"
                   },
+                  "current_location": {
+                    "deprecated": true,
+                    "type": "object",
+                    "description": "Defines the properties for a part unit",
+                    "additionalProperties": false,
+                    "required": [
+                      "label",
+                      "entity_id",
+                      "entity_type",
+                      "created",
+                      "updated",
+                      "location_type",
+                      "address"
+                    ],
+                    "properties": {
+                      "location_id": {
+                        "description": "The identifier for the location",
+                        "type": "string",
+                        "readOnly": true,
+                        "pattern": "^[0-9a-zA-Z-_]+$"
+                      },
+                      "entity_id": {
+                        "x-no-api-doc": true,
+                        "type": "string",
+                        "description": "Customer identifier",
+                        "readOnly": true,
+                        "pattern": "^[0-9a-zA-Z-_]+$"
+                      },
+                      "entity_type": {
+                        "x-no-api-doc": true,
+                        "enum": [
+                          "LOC"
+                        ]
+                      },
+                      "label": {
+                        "type": "string",
+                        "description": "Label for the entity"
+                      },
+                      "slug": {
+                        "type": "string",
+                        "description": "Slug for the entity (Auto-generated from the label)",
+                        "readOnly": true,
+                        "deprecated": true,
+                        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                      },
+                      "created": {
+                        "description": "Date the entity was created",
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true
+                      },
+                      "updated": {
+                        "description": "Last date the entity was updated",
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true
+                      },
+                      "location_type": {
+                        "type": "string",
+                        "description": "The type of location",
+                        "enum": [
+                          "warehouse",
+                          "facility",
+                          "other"
+                        ]
+                      },
+                      "formatted_address": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "Address formatted for the where region the location exists in"
+                      },
+                      "address": {
+                        "type": "object",
+                        "required": [
+                          "country",
+                          "administrative_area",
+                          "locality",
+                          "postal_code",
+                          "thoroughfare"
+                        ],
+                        "description": "xNAL address for the location ",
+                        "properties": {
+                          "country": {
+                            "type": "string",
+                            "description": "Three Letter ISO country code",
+                            "enum": [
+                              "ABW",
+                              "AFG",
+                              "AGO",
+                              "AIA",
+                              "ALA",
+                              "ALB",
+                              "AND",
+                              "ARE",
+                              "ARG",
+                              "ARM",
+                              "ASM",
+                              "ATA",
+                              "ATF",
+                              "ATG",
+                              "AUS",
+                              "AUT",
+                              "AZE",
+                              "BDI",
+                              "BEL",
+                              "BEN",
+                              "BES",
+                              "BFA",
+                              "BGD",
+                              "BGR",
+                              "BHR",
+                              "BHS",
+                              "BIH",
+                              "BLM",
+                              "BLR",
+                              "BLZ",
+                              "BMU",
+                              "BOL",
+                              "BRA",
+                              "BRB",
+                              "BRN",
+                              "BTN",
+                              "BVT",
+                              "BWA",
+                              "CAF",
+                              "CAN",
+                              "CCK",
+                              "CHE",
+                              "CHL",
+                              "CHN",
+                              "CIV",
+                              "CMR",
+                              "COD",
+                              "COG",
+                              "COK",
+                              "COL",
+                              "COM",
+                              "CPV",
+                              "CRI",
+                              "CUB",
+                              "CUW",
+                              "CXR",
+                              "CYM",
+                              "CYP",
+                              "CZE",
+                              "DEU",
+                              "DJI",
+                              "DMA",
+                              "DNK",
+                              "DOM",
+                              "DZA",
+                              "ECU",
+                              "EGY",
+                              "ERI",
+                              "ESH",
+                              "ESP",
+                              "EST",
+                              "ETH",
+                              "FIN",
+                              "FJI",
+                              "FLK",
+                              "FRA",
+                              "FRO",
+                              "FSM",
+                              "GAB",
+                              "GBR",
+                              "GEO",
+                              "GGY",
+                              "GHA",
+                              "GIB",
+                              "GIN",
+                              "GLP",
+                              "GMB",
+                              "GNB",
+                              "GNQ",
+                              "GRC",
+                              "GRD",
+                              "GRL",
+                              "GTM",
+                              "GUF",
+                              "GUM",
+                              "GUY",
+                              "HKG",
+                              "HMD",
+                              "HND",
+                              "HRV",
+                              "HTI",
+                              "HUN",
+                              "IDN",
+                              "IMN",
+                              "IND",
+                              "IOT",
+                              "IRL",
+                              "IRN",
+                              "IRQ",
+                              "ISL",
+                              "ISR",
+                              "ITA",
+                              "JAM",
+                              "JEY",
+                              "JOR",
+                              "JPN",
+                              "KAZ",
+                              "KEN",
+                              "KGZ",
+                              "KHM",
+                              "KIR",
+                              "KNA",
+                              "KOR",
+                              "KWT",
+                              "LAO",
+                              "LBN",
+                              "LBR",
+                              "LBY",
+                              "LCA",
+                              "LIE",
+                              "LKA",
+                              "LSO",
+                              "LTU",
+                              "LUX",
+                              "LVA",
+                              "MAC",
+                              "MAF",
+                              "MAR",
+                              "MCO",
+                              "MDA",
+                              "MDG",
+                              "MDV",
+                              "MEX",
+                              "MHL",
+                              "MKD",
+                              "MLI",
+                              "MLT",
+                              "MMR",
+                              "MNE",
+                              "MNG",
+                              "MNP",
+                              "MOZ",
+                              "MRT",
+                              "MSR",
+                              "MTQ",
+                              "MUS",
+                              "MWI",
+                              "MYS",
+                              "MYT",
+                              "NAM",
+                              "NCL",
+                              "NER",
+                              "NFK",
+                              "NGA",
+                              "NIC",
+                              "NIU",
+                              "NLD",
+                              "NOR",
+                              "NPL",
+                              "NRU",
+                              "NZL",
+                              "OMN",
+                              "PAK",
+                              "PAN",
+                              "PCN",
+                              "PER",
+                              "PHL",
+                              "PLW",
+                              "PNG",
+                              "POL",
+                              "PRI",
+                              "PRK",
+                              "PRT",
+                              "PRY",
+                              "PSE",
+                              "PYF",
+                              "QAT",
+                              "REU",
+                              "ROU",
+                              "RUS",
+                              "RWA",
+                              "SAU",
+                              "SDN",
+                              "SEN",
+                              "SGP",
+                              "SGS",
+                              "SHN",
+                              "SJM",
+                              "SLB",
+                              "SLE",
+                              "SLV",
+                              "SMR",
+                              "SOM",
+                              "SPM",
+                              "SRB",
+                              "SSD",
+                              "STP",
+                              "SUR",
+                              "SVK",
+                              "SVN",
+                              "SWE",
+                              "SWZ",
+                              "SXM",
+                              "SYC",
+                              "SYR",
+                              "TCA",
+                              "TCD",
+                              "TGO",
+                              "THA",
+                              "TJK",
+                              "TKL",
+                              "TKM",
+                              "TLS",
+                              "TON",
+                              "TTO",
+                              "TUN",
+                              "TUR",
+                              "TUV",
+                              "TWN",
+                              "TZA",
+                              "UGA",
+                              "UKR",
+                              "UMI",
+                              "URY",
+                              "USA",
+                              "UZB",
+                              "VAT",
+                              "VCT",
+                              "VEN",
+                              "VGB",
+                              "VIR",
+                              "VNM",
+                              "VUT",
+                              "WLF",
+                              "WSM",
+                              "YEM",
+                              "ZAF",
+                              "ZMB",
+                              "ZWE"
+                            ]
+                          },
+                          "administrative_area": {
+                            "type": "string",
+                            "description": "State / Province / Region"
+                          },
+                          "sub_administrative_area": {
+                            "type": "string",
+                            "description": "County / District"
+                          },
+                          "locality": {
+                            "type": "string",
+                            "description": "City / Town"
+                          },
+                          "postal_code": {
+                            "type": "string",
+                            "description": "Postal Code / Zip Code"
+                          },
+                          "thoroughfare": {
+                            "type": "string",
+                            "description": "Street Address"
+                          },
+                          "premise": {
+                            "type": "string",
+                            "description": "Apartment / Suite / Box number etc"
+                          },
+                          "sub_premise": {
+                            "type": "string",
+                            "description": "Floor # / Room # / Building label etc"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "location": {
+                    "type": "object",
+                    "description": "Defines the properties for a part unit",
+                    "additionalProperties": false,
+                    "required": [
+                      "label",
+                      "entity_id",
+                      "entity_type",
+                      "created",
+                      "updated",
+                      "location_type",
+                      "address"
+                    ],
+                    "properties": {
+                      "location_id": {
+                        "description": "The identifier for the location",
+                        "type": "string",
+                        "readOnly": true,
+                        "pattern": "^[0-9a-zA-Z-_]+$"
+                      },
+                      "entity_id": {
+                        "x-no-api-doc": true,
+                        "type": "string",
+                        "description": "Customer identifier",
+                        "readOnly": true,
+                        "pattern": "^[0-9a-zA-Z-_]+$"
+                      },
+                      "entity_type": {
+                        "x-no-api-doc": true,
+                        "enum": [
+                          "LOC"
+                        ]
+                      },
+                      "label": {
+                        "type": "string",
+                        "description": "Label for the entity"
+                      },
+                      "slug": {
+                        "type": "string",
+                        "description": "Slug for the entity (Auto-generated from the label)",
+                        "readOnly": true,
+                        "deprecated": true,
+                        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                      },
+                      "created": {
+                        "description": "Date the entity was created",
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true
+                      },
+                      "updated": {
+                        "description": "Last date the entity was updated",
+                        "type": "string",
+                        "format": "date-time",
+                        "readOnly": true
+                      },
+                      "location_type": {
+                        "type": "string",
+                        "description": "The type of location",
+                        "enum": [
+                          "warehouse",
+                          "facility",
+                          "other"
+                        ]
+                      },
+                      "formatted_address": {
+                        "type": "string",
+                        "readOnly": true,
+                        "description": "Address formatted for the where region the location exists in"
+                      },
+                      "address": {
+                        "type": "object",
+                        "required": [
+                          "country",
+                          "administrative_area",
+                          "locality",
+                          "postal_code",
+                          "thoroughfare"
+                        ],
+                        "description": "xNAL address for the location ",
+                        "properties": {
+                          "country": {
+                            "type": "string",
+                            "description": "Three Letter ISO country code",
+                            "enum": [
+                              "ABW",
+                              "AFG",
+                              "AGO",
+                              "AIA",
+                              "ALA",
+                              "ALB",
+                              "AND",
+                              "ARE",
+                              "ARG",
+                              "ARM",
+                              "ASM",
+                              "ATA",
+                              "ATF",
+                              "ATG",
+                              "AUS",
+                              "AUT",
+                              "AZE",
+                              "BDI",
+                              "BEL",
+                              "BEN",
+                              "BES",
+                              "BFA",
+                              "BGD",
+                              "BGR",
+                              "BHR",
+                              "BHS",
+                              "BIH",
+                              "BLM",
+                              "BLR",
+                              "BLZ",
+                              "BMU",
+                              "BOL",
+                              "BRA",
+                              "BRB",
+                              "BRN",
+                              "BTN",
+                              "BVT",
+                              "BWA",
+                              "CAF",
+                              "CAN",
+                              "CCK",
+                              "CHE",
+                              "CHL",
+                              "CHN",
+                              "CIV",
+                              "CMR",
+                              "COD",
+                              "COG",
+                              "COK",
+                              "COL",
+                              "COM",
+                              "CPV",
+                              "CRI",
+                              "CUB",
+                              "CUW",
+                              "CXR",
+                              "CYM",
+                              "CYP",
+                              "CZE",
+                              "DEU",
+                              "DJI",
+                              "DMA",
+                              "DNK",
+                              "DOM",
+                              "DZA",
+                              "ECU",
+                              "EGY",
+                              "ERI",
+                              "ESH",
+                              "ESP",
+                              "EST",
+                              "ETH",
+                              "FIN",
+                              "FJI",
+                              "FLK",
+                              "FRA",
+                              "FRO",
+                              "FSM",
+                              "GAB",
+                              "GBR",
+                              "GEO",
+                              "GGY",
+                              "GHA",
+                              "GIB",
+                              "GIN",
+                              "GLP",
+                              "GMB",
+                              "GNB",
+                              "GNQ",
+                              "GRC",
+                              "GRD",
+                              "GRL",
+                              "GTM",
+                              "GUF",
+                              "GUM",
+                              "GUY",
+                              "HKG",
+                              "HMD",
+                              "HND",
+                              "HRV",
+                              "HTI",
+                              "HUN",
+                              "IDN",
+                              "IMN",
+                              "IND",
+                              "IOT",
+                              "IRL",
+                              "IRN",
+                              "IRQ",
+                              "ISL",
+                              "ISR",
+                              "ITA",
+                              "JAM",
+                              "JEY",
+                              "JOR",
+                              "JPN",
+                              "KAZ",
+                              "KEN",
+                              "KGZ",
+                              "KHM",
+                              "KIR",
+                              "KNA",
+                              "KOR",
+                              "KWT",
+                              "LAO",
+                              "LBN",
+                              "LBR",
+                              "LBY",
+                              "LCA",
+                              "LIE",
+                              "LKA",
+                              "LSO",
+                              "LTU",
+                              "LUX",
+                              "LVA",
+                              "MAC",
+                              "MAF",
+                              "MAR",
+                              "MCO",
+                              "MDA",
+                              "MDG",
+                              "MDV",
+                              "MEX",
+                              "MHL",
+                              "MKD",
+                              "MLI",
+                              "MLT",
+                              "MMR",
+                              "MNE",
+                              "MNG",
+                              "MNP",
+                              "MOZ",
+                              "MRT",
+                              "MSR",
+                              "MTQ",
+                              "MUS",
+                              "MWI",
+                              "MYS",
+                              "MYT",
+                              "NAM",
+                              "NCL",
+                              "NER",
+                              "NFK",
+                              "NGA",
+                              "NIC",
+                              "NIU",
+                              "NLD",
+                              "NOR",
+                              "NPL",
+                              "NRU",
+                              "NZL",
+                              "OMN",
+                              "PAK",
+                              "PAN",
+                              "PCN",
+                              "PER",
+                              "PHL",
+                              "PLW",
+                              "PNG",
+                              "POL",
+                              "PRI",
+                              "PRK",
+                              "PRT",
+                              "PRY",
+                              "PSE",
+                              "PYF",
+                              "QAT",
+                              "REU",
+                              "ROU",
+                              "RUS",
+                              "RWA",
+                              "SAU",
+                              "SDN",
+                              "SEN",
+                              "SGP",
+                              "SGS",
+                              "SHN",
+                              "SJM",
+                              "SLB",
+                              "SLE",
+                              "SLV",
+                              "SMR",
+                              "SOM",
+                              "SPM",
+                              "SRB",
+                              "SSD",
+                              "STP",
+                              "SUR",
+                              "SVK",
+                              "SVN",
+                              "SWE",
+                              "SWZ",
+                              "SXM",
+                              "SYC",
+                              "SYR",
+                              "TCA",
+                              "TCD",
+                              "TGO",
+                              "THA",
+                              "TJK",
+                              "TKL",
+                              "TKM",
+                              "TLS",
+                              "TON",
+                              "TTO",
+                              "TUN",
+                              "TUR",
+                              "TUV",
+                              "TWN",
+                              "TZA",
+                              "UGA",
+                              "UKR",
+                              "UMI",
+                              "URY",
+                              "USA",
+                              "UZB",
+                              "VAT",
+                              "VCT",
+                              "VEN",
+                              "VGB",
+                              "VIR",
+                              "VNM",
+                              "VUT",
+                              "WLF",
+                              "WSM",
+                              "YEM",
+                              "ZAF",
+                              "ZMB",
+                              "ZWE"
+                            ]
+                          },
+                          "administrative_area": {
+                            "type": "string",
+                            "description": "State / Province / Region"
+                          },
+                          "sub_administrative_area": {
+                            "type": "string",
+                            "description": "County / District"
+                          },
+                          "locality": {
+                            "type": "string",
+                            "description": "City / Town"
+                          },
+                          "postal_code": {
+                            "type": "string",
+                            "description": "Postal Code / Zip Code"
+                          },
+                          "thoroughfare": {
+                            "type": "string",
+                            "description": "Street Address"
+                          },
+                          "premise": {
+                            "type": "string",
+                            "description": "Apartment / Suite / Box number etc"
+                          },
+                          "sub_premise": {
+                            "type": "string",
+                            "description": "Floor # / Room # / Building label etc"
+                          }
+                        }
+                      }
+                    }
+                  },
                   "description": {
                     "type": "string",
+                    "nullable": true,
                     "description": "Detailed description for the work order"
                   },
                   "work_order_type": {
@@ -751,6 +1550,15 @@ Fetch Batches
                           "CANCELLED",
                           "BLOCKED"
                         ]
+                      },
+                      "description": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "A description for the status"
+                      },
+                      "order": {
+                        "type": "number",
+                        "description": "Order status appears when listing"
                       }
                     }
                   },
@@ -786,6 +1594,11 @@ Fetch Batches
                         "enum": [
                           "PRJ"
                         ]
+                      },
+                      "description": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "Project description"
                       },
                       "label": {
                         "type": "string",
@@ -871,7 +1684,10 @@ Fetch Batches
                             "deprecated": true,
                             "x-patternProperties": {
                               "^[A-Za-z][A-Za-z0-9_]*$": {
-                                "type": "string"
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
                               }
                             }
                           },
@@ -904,6 +1720,15 @@ Fetch Batches
                                     "CANCELLED",
                                     "BLOCKED"
                                   ]
+                                },
+                                "description": {
+                                  "type": "string",
+                                  "nullable": true,
+                                  "description": "A description for the status"
+                                },
+                                "order": {
+                                  "type": "number",
+                                  "description": "Order status appears when listing"
                                 }
                               }
                             }
@@ -1046,7 +1871,10 @@ Fetch Batches
                                 "deprecated": true,
                                 "x-patternProperties": {
                                   "^[A-Za-z][A-Za-z0-9_]*$": {
-                                    "type": "string"
+                                    "type": [
+                                      "string",
+                                      "null"
+                                    ]
                                   }
                                 }
                               },
@@ -1079,6 +1907,15 @@ Fetch Batches
                                         "CANCELLED",
                                         "BLOCKED"
                                       ]
+                                    },
+                                    "description": {
+                                      "type": "string",
+                                      "nullable": true,
+                                      "description": "A description for the status"
+                                    },
+                                    "order": {
+                                      "type": "number",
+                                      "description": "Order status appears when listing"
                                     }
                                   }
                                 }
@@ -1122,6 +1959,15 @@ Fetch Batches
                                     "CANCELLED",
                                     "BLOCKED"
                                   ]
+                                },
+                                "description": {
+                                  "type": "string",
+                                  "nullable": true,
+                                  "description": "A description for the status"
+                                },
+                                "order": {
+                                  "type": "number",
+                                  "description": "Order status appears when listing"
                                 }
                               }
                             }
@@ -1157,6 +2003,15 @@ Fetch Batches
                                 "CANCELLED",
                                 "BLOCKED"
                               ]
+                            },
+                            "description": {
+                              "type": "string",
+                              "nullable": true,
+                              "description": "A description for the status"
+                            },
+                            "order": {
+                              "type": "number",
+                              "description": "Order status appears when listing"
                             }
                           }
                         }
@@ -1215,20 +2070,57 @@ Fetch Batches
                       }
                     ]
                   },
-                  "work_flows": {
+                  "cycles": {
                     "type": "array",
-                    "description": "Cycles of work flows needed to complete the work order",
+                    "minimum": 1,
                     "items": {
                       "type": "object",
+                      "additionalProperties": false,
                       "required": [
-                        "cycles_needed",
+                        "needed",
+                        "pending",
+                        "in_progress",
+                        "verifying",
+                        "complete",
+                        "blocked",
+                        "cancelled",
                         "work_flow"
                       ],
                       "properties": {
-                        "cycles_needed": {
+                        "needed": {
                           "type": "integer",
                           "description": "The number of cycles needed",
                           "minimum": 1
+                        },
+                        "pending": {
+                          "type": "integer",
+                          "description": "The number of cycles pending",
+                          "readOnly": true
+                        },
+                        "in_progress": {
+                          "type": "integer",
+                          "description": "The number of cycles pending",
+                          "readOnly": true
+                        },
+                        "verifying": {
+                          "type": "integer",
+                          "description": "The number of cycles pending",
+                          "readOnly": true
+                        },
+                        "complete": {
+                          "type": "integer",
+                          "description": "The number of cycles pending",
+                          "readOnly": true
+                        },
+                        "blocked": {
+                          "type": "integer",
+                          "description": "The number of cycles pending",
+                          "readOnly": true
+                        },
+                        "cancelled": {
+                          "type": "integer",
+                          "description": "The number of cycles pending",
+                          "readOnly": true
                         },
                         "work_flow": {
                           "type": "object",
@@ -1304,13 +2196,94 @@ Fetch Batches
                               "type": "string",
                               "description": "The entity type this work flow applies too",
                               "enum": [
-                                "unit",
-                                "part",
-                                "program",
-                                "project",
-                                "customer",
-                                "contact"
+                                "UNIT",
+                                "PART",
+                                "PGM",
+                                "PRJ",
+                                "CUS",
+                                "CON"
                               ]
+                            },
+                            "triggered_by": {
+                              "type": "array",
+                              "items": {
+                                "type": "string",
+                                "description": "Possible entity events",
+                                "enum": [
+                                  "CON.attached",
+                                  "CON.created",
+                                  "CON.deleted",
+                                  "CON.detached",
+                                  "CON.removed",
+                                  "CON.updated",
+                                  "CUS.attached",
+                                  "CUS.created",
+                                  "CUS.deleted",
+                                  "CUS.detached",
+                                  "CUS.removed",
+                                  "CUS.updated",
+                                  "LOC.attached",
+                                  "LOC.created",
+                                  "LOC.deleted",
+                                  "LOC.detached",
+                                  "LOC.removed",
+                                  "LOC.updated",
+                                  "NOTE.attached",
+                                  "NOTE.created",
+                                  "NOTE.deleted",
+                                  "NOTE.detached",
+                                  "NOTE.removed",
+                                  "NOTE.updated",
+                                  "PART.attached",
+                                  "PART.created",
+                                  "PART.deleted",
+                                  "PART.detached",
+                                  "PART.removed",
+                                  "PART.updated",
+                                  "PGM.attached",
+                                  "PGM.created",
+                                  "PGM.deleted",
+                                  "PGM.detached",
+                                  "PGM.removed",
+                                  "PGM.updated",
+                                  "PRO.attached",
+                                  "PRO.created",
+                                  "PRO.deleted",
+                                  "PRO.detached",
+                                  "PRO.removed",
+                                  "PRO.updated",
+                                  "RES.attached",
+                                  "RES.created",
+                                  "RES.deleted",
+                                  "RES.detached",
+                                  "RES.removed",
+                                  "RES.updated",
+                                  "UNIT.attached",
+                                  "UNIT.created",
+                                  "UNIT.deleted",
+                                  "UNIT.detached",
+                                  "UNIT.removed",
+                                  "UNIT.updated",
+                                  "USER.attached",
+                                  "USER.created",
+                                  "USER.deleted",
+                                  "USER.detached",
+                                  "USER.removed",
+                                  "USER.updated",
+                                  "WKF.attached",
+                                  "WKF.created",
+                                  "WKF.deleted",
+                                  "WKF.detached",
+                                  "WKF.removed",
+                                  "WKF.updated",
+                                  "WOR.attached",
+                                  "WOR.created",
+                                  "WOR.deleted",
+                                  "WOR.detached",
+                                  "WOR.removed",
+                                  "WOR.updated"
+                                ]
+                              }
                             },
                             "starts_at": {
                               "type": "string",
@@ -2816,10 +3789,30 @@ Fetch Batches
                                   ]
                                 }
                               }
+                            },
+                            "metadata": {
+                              "type": "object",
+                              "description": "Data for the resource as a key value pair",
+                              "additionalProperties": {
+                                "type": "string"
+                              },
+                              "propertyNames": {
+                                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+                              }
                             }
                           }
                         }
                       }
+                    }
+                  },
+                  "meta": {
+                    "type": "object",
+                    "description": "Data for the resource as a key value pair",
+                    "additionalProperties": {
+                      "type": "string"
+                    },
+                    "propertyNames": {
+                      "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
                     }
                   }
                 }
@@ -2921,8 +3914,17 @@ Status Code **200**
 |»»»»»»» complete|integer|false|read-only|The number of cycles complete|
 |»»»»»»» blocked|integer|false|read-only|The number of cycles blocked|
 |»»»»»»» cancelled|integer|false|read-only|The number of cycles cancelled|
+|»»»»»» active_work_orders|number|false|read-only|Total of work orders in an active status|
 |»»»»»» total_batches|integer|false|read-only|Number of batches assigned to the queue|
-|»»»»» priority|integer|false|none|Priority order for the batch|
+|»»»»»» is_active|boolean|true|read-only|Toggle if the batch has active cycles or batches|
+|»»»»»» active_batches|number|true|read-only|Total of batches in the queue with active cycles|
+|»»»»»» active_cycles|number|true|read-only|Total of all active cycles across all batches|
+|»»»»» order|integer|false|none|Order to process the batch|
+|»»»»» current_status|object|false|none|Defines the properties for a status|
+|»»»»»» status|string|true|none|A Custom label for the status|
+|»»»»»» category|string|true|none|The classifier for the statues|
+|»»»»»» description|string\|null|false|none|A description for the status|
+|»»»»»» order|number|false|none|Order status appears when listing|
 |»»»»» number_cycles|integer|false|none|The number of cycles for this batch|
 |»»»»» cycles|object|false|read-only|none|
 |»»»»»» pending|integer|false|read-only|The number of cycles pending|
@@ -2941,86 +3943,146 @@ Status Code **200**
 |»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
 |»»»»»» start_date|string(date-time)\|null|false|none|Start date|
 |»»»»»» end_date|string(date-time)\|null|false|none|End date|
-|»»»»»» description|string|false|none|Detailed description for the work order|
-|»»»»»» work_order_type|string|true|none|Type of work order|
-|»»»»»» due_date|string(date-time)|false|none|End date|
-|»»»»»» current_status|object|false|none|Defines the properties for a status|
-|»»»»»»» status|string|true|none|A Custom label for the status|
-|»»»»»»» category|string|true|none|The classifier for the statues|
-|»»»»»» project|object|false|none|Defines the properties for a project|
-|»»»»»»» project_id|string|false|none|Unique identifier|
+|»»»»»» current_location|object|false|none|Defines the properties for a part unit|
+|»»»»»»» location_id|string|false|read-only|The identifier for the location|
 |»»»»»»» entity_id|string|true|read-only|Customer identifier|
 |»»»»»»» entity_type|string|true|none|none|
 |»»»»»»» label|string|true|none|Label for the entity|
 |»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
 |»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
 |»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»»»»»» customer|object|true|none|Customer|
-|»»»»»»»» customer_id|string|false|read-only|Customer identifier|
+|»»»»»»» location_type|string|true|none|The type of location|
+|»»»»»»» formatted_address|string|false|read-only|Address formatted for the where region the location exists in|
+|»»»»»»» address|object|true|none|xNAL address for the location|
+|»»»»»»»» country|string|true|none|Three Letter ISO country code|
+|»»»»»»»» administrative_area|string|true|none|State / Province / Region|
+|»»»»»»»» sub_administrative_area|string|false|none|County / District|
+|»»»»»»»» locality|string|true|none|City / Town|
+|»»»»»»»» postal_code|string|true|none|Postal Code / Zip Code|
+|»»»»»»»» thoroughfare|string|true|none|Street Address|
+|»»»»»»»» premise|string|false|none|Apartment / Suite / Box number etc|
+|»»»»»»»» sub_premise|string|false|none|Floor # / Room # / Building label etc|
+|»»»»»»» location|object|true|none|Defines the properties for a part unit|
+|»»»»»»»» location_id|string|false|read-only|The identifier for the location|
 |»»»»»»»» entity_id|string|true|read-only|Customer identifier|
 |»»»»»»»» entity_type|string|true|none|none|
 |»»»»»»»» label|string|true|none|Label for the entity|
 |»»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
 |»»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
 |»»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»»»»»»» external_platform|object|false|none|External Identifiers for the customer|
-|»»»»»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
+|»»»»»»»» location_type|string|true|none|The type of location|
+|»»»»»»»» formatted_address|string|false|read-only|Address formatted for the where region the location exists in|
+|»»»»»»»» address|object|true|none|xNAL address for the location|
+|»»»»»»»»» country|string|true|none|Three Letter ISO country code|
+|»»»»»»»»» administrative_area|string|true|none|State / Province / Region|
+|»»»»»»»»» sub_administrative_area|string|false|none|County / District|
+|»»»»»»»»» locality|string|true|none|City / Town|
+|»»»»»»»»» postal_code|string|true|none|Postal Code / Zip Code|
+|»»»»»»»»» thoroughfare|string|true|none|Street Address|
+|»»»»»»»»» premise|string|false|none|Apartment / Suite / Box number etc|
+|»»»»»»»»» sub_premise|string|false|none|Floor # / Room # / Building label etc|
+|»»»»»»»» description|string\|null|false|none|Detailed description for the work order|
+|»»»»»»»» work_order_type|string|true|none|Type of work order|
+|»»»»»»»» due_date|string(date-time)|false|none|End date|
+|»»»»»»»» current_status|object|false|none|Defines the properties for a status|
 |»»»»»»»»» status|string|true|none|A Custom label for the status|
 |»»»»»»»»» category|string|true|none|The classifier for the statues|
-|»»»»»»»» total_programs|number|false|none|Total programs under the customer|
-|»»»»»»»» total_projects|number|false|none|Total projects under the customer|
-|»»»»»»» program|object|true|none|Defines the properties for a program|
-|»»»»»»»» program_id|string|false|read-only|Unique identifier|
-|»»»»»»»» entity_id|string|true|read-only|Customer identifier|
-|»»»»»»»» entity_type|string|true|none|none|
-|»»»»»»»» label|string|false|none|Label for the entity|
-|»»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
-|»»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»»»»»»» start_date|string(date-time)\|null|false|none|Start date|
-|»»»»»»»» end_date|string(date-time)\|null|false|none|End date|
-|»»»»»»»» customer|object|true|none|Customer|
-|»»»»»»»»» customer_id|string|false|read-only|Customer identifier|
+|»»»»»»»»» description|string\|null|false|none|A description for the status|
+|»»»»»»»»» order|number|false|none|Order status appears when listing|
+|»»»»»»»» project|object|false|none|Defines the properties for a project|
+|»»»»»»»»» project_id|string|false|none|Unique identifier|
 |»»»»»»»»» entity_id|string|true|read-only|Customer identifier|
 |»»»»»»»»» entity_type|string|true|none|none|
+|»»»»»»»»» description|string\|null|false|none|Project description|
 |»»»»»»»»» label|string|true|none|Label for the entity|
 |»»»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
 |»»»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
 |»»»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»»»»»»»» external_platform|object|false|none|External Identifiers for the customer|
-|»»»»»»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
-|»»»»»»»»»» status|string|true|none|A Custom label for the status|
-|»»»»»»»»»» category|string|true|none|The classifier for the statues|
-|»»»»»»»»» total_programs|number|false|none|Total programs under the customer|
-|»»»»»»»»» total_projects|number|false|none|Total projects under the customer|
-|»»»»»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
-|»»»»»»»»» status|string|true|none|A Custom label for the status|
-|»»»»»»»»» category|string|true|none|The classifier for the statues|
-|»»»»»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
-|»»»»»»»»» status|string|true|none|A Custom label for the status|
-|»»»»»»»»» category|string|true|none|The classifier for the statues|
-|»»»»»»»» start_date|string(date-time)\|null|false|none|Start date|
-|»»»»»»»» end_date|string(date-time)\|null|false|none|End date|
-|»»»»»»» work_flows|[object]|false|none|Cycles of work flows needed to complete the work order|
-|»»»»»»»» cycles_needed|integer|true|none|The number of cycles needed|
-|»»»»»»»» work_flow|object|true|none|Workflow|
-|»»»»»»»»» work_flow_id|string|false|read-only|Customer identifier|
-|»»»»»»»»» entity_id|string|true|read-only|Customer identifier|
-|»»»»»»»»» entity_type|string|true|none|none|
-|»»»»»»»»» label|string|true|none|Label for the entity|
-|»»»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»»»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
-|»»»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»»»»»»»» schema_version|string|true|none|Version of the workflow schema used|
-|»»»»»»»»» workflow_version|integer|false|read-only|Version number for the work flows (the number of times it has been changed|
-|»»»»»»»»» applies_to|string|true|none|The entity type this work flow applies too|
-|»»»»»»»»» starts_at|string|true|none|Starting step|
-|»»»»»»»»» steps|object|true|none|Steps for the workflow|
-|»»»»»»»» _links|object|false|none|none|
-|»»»»»»»»» self|object|false|none|none|
-|»»»»»»»»»» href|string(uri)|false|none|none|
-|»»»»»»»»» next|object|false|none|none|
-|»»»»»»»»»» href|string(uri)|false|none|none|
+|»»»»»»»»» customer|object|true|none|Customer|
+|»»»»»»»»»» customer_id|string|false|read-only|Customer identifier|
+|»»»»»»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»»»»»»» entity_type|string|true|none|none|
+|»»»»»»»»»» label|string|true|none|Label for the entity|
+|»»»»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»»»»»»»»» external_platform|object|false|none|External Identifiers for the customer|
+|»»»»»»»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
+|»»»»»»»»»»» status|string|true|none|A Custom label for the status|
+|»»»»»»»»»»» category|string|true|none|The classifier for the statues|
+|»»»»»»»»»»» description|string\|null|false|none|A description for the status|
+|»»»»»»»»»»» order|number|false|none|Order status appears when listing|
+|»»»»»»»»»» total_programs|number|false|none|Total programs under the customer|
+|»»»»»»»»»» total_projects|number|false|none|Total projects under the customer|
+|»»»»»»»»» program|object|true|none|Defines the properties for a program|
+|»»»»»»»»»» program_id|string|false|read-only|Unique identifier|
+|»»»»»»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»»»»»»» entity_type|string|true|none|none|
+|»»»»»»»»»» label|string|false|none|Label for the entity|
+|»»»»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»»»»»»»»» start_date|string(date-time)\|null|false|none|Start date|
+|»»»»»»»»»» end_date|string(date-time)\|null|false|none|End date|
+|»»»»»»»»»» customer|object|true|none|Customer|
+|»»»»»»»»»»» customer_id|string|false|read-only|Customer identifier|
+|»»»»»»»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»»»»»»»» entity_type|string|true|none|none|
+|»»»»»»»»»»» label|string|true|none|Label for the entity|
+|»»»»»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»»»»»»»»»» external_platform|object|false|none|External Identifiers for the customer|
+|»»»»»»»»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
+|»»»»»»»»»»»» status|string|true|none|A Custom label for the status|
+|»»»»»»»»»»»» category|string|true|none|The classifier for the statues|
+|»»»»»»»»»»»» description|string\|null|false|none|A description for the status|
+|»»»»»»»»»»»» order|number|false|none|Order status appears when listing|
+|»»»»»»»»»»» total_programs|number|false|none|Total programs under the customer|
+|»»»»»»»»»»» total_projects|number|false|none|Total projects under the customer|
+|»»»»»»»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
+|»»»»»»»»»»» status|string|true|none|A Custom label for the status|
+|»»»»»»»»»»» category|string|true|none|The classifier for the statues|
+|»»»»»»»»»»» description|string\|null|false|none|A description for the status|
+|»»»»»»»»»»» order|number|false|none|Order status appears when listing|
+|»»»»»»»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
+|»»»»»»»»»»» status|string|true|none|A Custom label for the status|
+|»»»»»»»»»»» category|string|true|none|The classifier for the statues|
+|»»»»»»»»»»» description|string\|null|false|none|A description for the status|
+|»»»»»»»»»»» order|number|false|none|Order status appears when listing|
+|»»»»»»»»»» start_date|string(date-time)\|null|false|none|Start date|
+|»»»»»»»»»» end_date|string(date-time)\|null|false|none|End date|
+|»»»»»»»»» cycles|[object]|true|none|none|
+|»»»»»»»»»» needed|integer|true|none|The number of cycles needed|
+|»»»»»»»»»» pending|integer|true|read-only|The number of cycles pending|
+|»»»»»»»»»» in_progress|integer|true|read-only|The number of cycles pending|
+|»»»»»»»»»» verifying|integer|true|read-only|The number of cycles pending|
+|»»»»»»»»»» complete|integer|true|read-only|The number of cycles pending|
+|»»»»»»»»»» blocked|integer|true|read-only|The number of cycles pending|
+|»»»»»»»»»» cancelled|integer|true|read-only|The number of cycles pending|
+|»»»»»»»»»» work_flow|object|true|none|Workflow|
+|»»»»»»»»»»» work_flow_id|string|false|read-only|Customer identifier|
+|»»»»»»»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»»»»»»»» entity_type|string|true|none|none|
+|»»»»»»»»»»» label|string|true|none|Label for the entity|
+|»»»»»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»»»»»»»»»» schema_version|string|true|none|Version of the workflow schema used|
+|»»»»»»»»»»» workflow_version|integer|false|read-only|Version number for the work flows (the number of times it has been changed|
+|»»»»»»»»»»» applies_to|string|true|none|The entity type this work flow applies too|
+|»»»»»»»»»»» triggered_by|[string]|false|none|none|
+|»»»»»»»»»»» starts_at|string|true|none|Starting step|
+|»»»»»»»»»»» steps|object|true|none|Steps for the workflow|
+|»»»»»»»»»»» metadata|object|false|none|Data for the resource as a key value pair|
+|»»»»»»»»»»»» **additionalProperties**|string|false|none|none|
+|»»»»»»»»»»» meta|object|false|none|Data for the resource as a key value pair|
+|»»»»»»»»»»»» **additionalProperties**|string|false|none|none|
+|»»»»»»»»»»» _links|object|false|none|none|
+|»»»»»»»»»»»» self|object|false|none|none|
+|»»»»»»»»»»»»» href|string(uri)|false|none|none|
+|»»»»»»»»»»»» next|object|false|none|none|
+|»»»»»»»»»»»»» href|string(uri)|false|none|none|
 
 #### Enumerated Values
 
@@ -3280,7 +4342,519 @@ Status Code **200**
 |country|ZAF|
 |country|ZMB|
 |country|ZWE|
+|category|PENDING|
+|category|IN_PROGRESS|
+|category|VERIFYING|
+|category|COMPLETE|
+|category|CANCELLED|
+|category|BLOCKED|
 |entity_type|WOR|
+|entity_type|LOC|
+|location_type|warehouse|
+|location_type|facility|
+|location_type|other|
+|country|ABW|
+|country|AFG|
+|country|AGO|
+|country|AIA|
+|country|ALA|
+|country|ALB|
+|country|AND|
+|country|ARE|
+|country|ARG|
+|country|ARM|
+|country|ASM|
+|country|ATA|
+|country|ATF|
+|country|ATG|
+|country|AUS|
+|country|AUT|
+|country|AZE|
+|country|BDI|
+|country|BEL|
+|country|BEN|
+|country|BES|
+|country|BFA|
+|country|BGD|
+|country|BGR|
+|country|BHR|
+|country|BHS|
+|country|BIH|
+|country|BLM|
+|country|BLR|
+|country|BLZ|
+|country|BMU|
+|country|BOL|
+|country|BRA|
+|country|BRB|
+|country|BRN|
+|country|BTN|
+|country|BVT|
+|country|BWA|
+|country|CAF|
+|country|CAN|
+|country|CCK|
+|country|CHE|
+|country|CHL|
+|country|CHN|
+|country|CIV|
+|country|CMR|
+|country|COD|
+|country|COG|
+|country|COK|
+|country|COL|
+|country|COM|
+|country|CPV|
+|country|CRI|
+|country|CUB|
+|country|CUW|
+|country|CXR|
+|country|CYM|
+|country|CYP|
+|country|CZE|
+|country|DEU|
+|country|DJI|
+|country|DMA|
+|country|DNK|
+|country|DOM|
+|country|DZA|
+|country|ECU|
+|country|EGY|
+|country|ERI|
+|country|ESH|
+|country|ESP|
+|country|EST|
+|country|ETH|
+|country|FIN|
+|country|FJI|
+|country|FLK|
+|country|FRA|
+|country|FRO|
+|country|FSM|
+|country|GAB|
+|country|GBR|
+|country|GEO|
+|country|GGY|
+|country|GHA|
+|country|GIB|
+|country|GIN|
+|country|GLP|
+|country|GMB|
+|country|GNB|
+|country|GNQ|
+|country|GRC|
+|country|GRD|
+|country|GRL|
+|country|GTM|
+|country|GUF|
+|country|GUM|
+|country|GUY|
+|country|HKG|
+|country|HMD|
+|country|HND|
+|country|HRV|
+|country|HTI|
+|country|HUN|
+|country|IDN|
+|country|IMN|
+|country|IND|
+|country|IOT|
+|country|IRL|
+|country|IRN|
+|country|IRQ|
+|country|ISL|
+|country|ISR|
+|country|ITA|
+|country|JAM|
+|country|JEY|
+|country|JOR|
+|country|JPN|
+|country|KAZ|
+|country|KEN|
+|country|KGZ|
+|country|KHM|
+|country|KIR|
+|country|KNA|
+|country|KOR|
+|country|KWT|
+|country|LAO|
+|country|LBN|
+|country|LBR|
+|country|LBY|
+|country|LCA|
+|country|LIE|
+|country|LKA|
+|country|LSO|
+|country|LTU|
+|country|LUX|
+|country|LVA|
+|country|MAC|
+|country|MAF|
+|country|MAR|
+|country|MCO|
+|country|MDA|
+|country|MDG|
+|country|MDV|
+|country|MEX|
+|country|MHL|
+|country|MKD|
+|country|MLI|
+|country|MLT|
+|country|MMR|
+|country|MNE|
+|country|MNG|
+|country|MNP|
+|country|MOZ|
+|country|MRT|
+|country|MSR|
+|country|MTQ|
+|country|MUS|
+|country|MWI|
+|country|MYS|
+|country|MYT|
+|country|NAM|
+|country|NCL|
+|country|NER|
+|country|NFK|
+|country|NGA|
+|country|NIC|
+|country|NIU|
+|country|NLD|
+|country|NOR|
+|country|NPL|
+|country|NRU|
+|country|NZL|
+|country|OMN|
+|country|PAK|
+|country|PAN|
+|country|PCN|
+|country|PER|
+|country|PHL|
+|country|PLW|
+|country|PNG|
+|country|POL|
+|country|PRI|
+|country|PRK|
+|country|PRT|
+|country|PRY|
+|country|PSE|
+|country|PYF|
+|country|QAT|
+|country|REU|
+|country|ROU|
+|country|RUS|
+|country|RWA|
+|country|SAU|
+|country|SDN|
+|country|SEN|
+|country|SGP|
+|country|SGS|
+|country|SHN|
+|country|SJM|
+|country|SLB|
+|country|SLE|
+|country|SLV|
+|country|SMR|
+|country|SOM|
+|country|SPM|
+|country|SRB|
+|country|SSD|
+|country|STP|
+|country|SUR|
+|country|SVK|
+|country|SVN|
+|country|SWE|
+|country|SWZ|
+|country|SXM|
+|country|SYC|
+|country|SYR|
+|country|TCA|
+|country|TCD|
+|country|TGO|
+|country|THA|
+|country|TJK|
+|country|TKL|
+|country|TKM|
+|country|TLS|
+|country|TON|
+|country|TTO|
+|country|TUN|
+|country|TUR|
+|country|TUV|
+|country|TWN|
+|country|TZA|
+|country|UGA|
+|country|UKR|
+|country|UMI|
+|country|URY|
+|country|USA|
+|country|UZB|
+|country|VAT|
+|country|VCT|
+|country|VEN|
+|country|VGB|
+|country|VIR|
+|country|VNM|
+|country|VUT|
+|country|WLF|
+|country|WSM|
+|country|YEM|
+|country|ZAF|
+|country|ZMB|
+|country|ZWE|
+|entity_type|LOC|
+|location_type|warehouse|
+|location_type|facility|
+|location_type|other|
+|country|ABW|
+|country|AFG|
+|country|AGO|
+|country|AIA|
+|country|ALA|
+|country|ALB|
+|country|AND|
+|country|ARE|
+|country|ARG|
+|country|ARM|
+|country|ASM|
+|country|ATA|
+|country|ATF|
+|country|ATG|
+|country|AUS|
+|country|AUT|
+|country|AZE|
+|country|BDI|
+|country|BEL|
+|country|BEN|
+|country|BES|
+|country|BFA|
+|country|BGD|
+|country|BGR|
+|country|BHR|
+|country|BHS|
+|country|BIH|
+|country|BLM|
+|country|BLR|
+|country|BLZ|
+|country|BMU|
+|country|BOL|
+|country|BRA|
+|country|BRB|
+|country|BRN|
+|country|BTN|
+|country|BVT|
+|country|BWA|
+|country|CAF|
+|country|CAN|
+|country|CCK|
+|country|CHE|
+|country|CHL|
+|country|CHN|
+|country|CIV|
+|country|CMR|
+|country|COD|
+|country|COG|
+|country|COK|
+|country|COL|
+|country|COM|
+|country|CPV|
+|country|CRI|
+|country|CUB|
+|country|CUW|
+|country|CXR|
+|country|CYM|
+|country|CYP|
+|country|CZE|
+|country|DEU|
+|country|DJI|
+|country|DMA|
+|country|DNK|
+|country|DOM|
+|country|DZA|
+|country|ECU|
+|country|EGY|
+|country|ERI|
+|country|ESH|
+|country|ESP|
+|country|EST|
+|country|ETH|
+|country|FIN|
+|country|FJI|
+|country|FLK|
+|country|FRA|
+|country|FRO|
+|country|FSM|
+|country|GAB|
+|country|GBR|
+|country|GEO|
+|country|GGY|
+|country|GHA|
+|country|GIB|
+|country|GIN|
+|country|GLP|
+|country|GMB|
+|country|GNB|
+|country|GNQ|
+|country|GRC|
+|country|GRD|
+|country|GRL|
+|country|GTM|
+|country|GUF|
+|country|GUM|
+|country|GUY|
+|country|HKG|
+|country|HMD|
+|country|HND|
+|country|HRV|
+|country|HTI|
+|country|HUN|
+|country|IDN|
+|country|IMN|
+|country|IND|
+|country|IOT|
+|country|IRL|
+|country|IRN|
+|country|IRQ|
+|country|ISL|
+|country|ISR|
+|country|ITA|
+|country|JAM|
+|country|JEY|
+|country|JOR|
+|country|JPN|
+|country|KAZ|
+|country|KEN|
+|country|KGZ|
+|country|KHM|
+|country|KIR|
+|country|KNA|
+|country|KOR|
+|country|KWT|
+|country|LAO|
+|country|LBN|
+|country|LBR|
+|country|LBY|
+|country|LCA|
+|country|LIE|
+|country|LKA|
+|country|LSO|
+|country|LTU|
+|country|LUX|
+|country|LVA|
+|country|MAC|
+|country|MAF|
+|country|MAR|
+|country|MCO|
+|country|MDA|
+|country|MDG|
+|country|MDV|
+|country|MEX|
+|country|MHL|
+|country|MKD|
+|country|MLI|
+|country|MLT|
+|country|MMR|
+|country|MNE|
+|country|MNG|
+|country|MNP|
+|country|MOZ|
+|country|MRT|
+|country|MSR|
+|country|MTQ|
+|country|MUS|
+|country|MWI|
+|country|MYS|
+|country|MYT|
+|country|NAM|
+|country|NCL|
+|country|NER|
+|country|NFK|
+|country|NGA|
+|country|NIC|
+|country|NIU|
+|country|NLD|
+|country|NOR|
+|country|NPL|
+|country|NRU|
+|country|NZL|
+|country|OMN|
+|country|PAK|
+|country|PAN|
+|country|PCN|
+|country|PER|
+|country|PHL|
+|country|PLW|
+|country|PNG|
+|country|POL|
+|country|PRI|
+|country|PRK|
+|country|PRT|
+|country|PRY|
+|country|PSE|
+|country|PYF|
+|country|QAT|
+|country|REU|
+|country|ROU|
+|country|RUS|
+|country|RWA|
+|country|SAU|
+|country|SDN|
+|country|SEN|
+|country|SGP|
+|country|SGS|
+|country|SHN|
+|country|SJM|
+|country|SLB|
+|country|SLE|
+|country|SLV|
+|country|SMR|
+|country|SOM|
+|country|SPM|
+|country|SRB|
+|country|SSD|
+|country|STP|
+|country|SUR|
+|country|SVK|
+|country|SVN|
+|country|SWE|
+|country|SWZ|
+|country|SXM|
+|country|SYC|
+|country|SYR|
+|country|TCA|
+|country|TCD|
+|country|TGO|
+|country|THA|
+|country|TJK|
+|country|TKL|
+|country|TKM|
+|country|TLS|
+|country|TON|
+|country|TTO|
+|country|TUN|
+|country|TUR|
+|country|TUV|
+|country|TWN|
+|country|TZA|
+|country|UGA|
+|country|UKR|
+|country|UMI|
+|country|URY|
+|country|USA|
+|country|UZB|
+|country|VAT|
+|country|VCT|
+|country|VEN|
+|country|VGB|
+|country|VIR|
+|country|VNM|
+|country|VUT|
+|country|WLF|
+|country|WSM|
+|country|YEM|
+|country|ZAF|
+|country|ZMB|
+|country|ZWE|
 |work_order_type|device|
 |category|PENDING|
 |category|IN_PROGRESS|
@@ -3318,12 +4892,12 @@ Status Code **200**
 |category|BLOCKED|
 |entity_type|WKF|
 |schema_version|1.0|
-|applies_to|unit|
-|applies_to|part|
-|applies_to|program|
-|applies_to|project|
-|applies_to|customer|
-|applies_to|contact|
+|applies_to|UNIT|
+|applies_to|PART|
+|applies_to|PGM|
+|applies_to|PRJ|
+|applies_to|CUS|
+|applies_to|CON|
 
 Status Code **401**
 
@@ -3386,10 +4960,47 @@ Creates a new batch for a queue
     "number_cycles"
   ],
   "properties": {
-    "priority": {
+    "order": {
       "type": "integer",
-      "description": "Priority order for the batch",
+      "description": "Order to process the batch",
       "minimum": 0
+    },
+    "current_status": {
+      "type": "object",
+      "description": "Defines the properties for a status",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "category"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "A Custom label for the status",
+          "pattern": "^[A-Za-z][0-9a-zA-Z-_ ]+$"
+        },
+        "category": {
+          "type": "string",
+          "description": "The classifier for the statues",
+          "enum": [
+            "PENDING",
+            "IN_PROGRESS",
+            "VERIFYING",
+            "COMPLETE",
+            "CANCELLED",
+            "BLOCKED"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "nullable": true,
+          "description": "A description for the status"
+        },
+        "order": {
+          "type": "number",
+          "description": "Order status appears when listing"
+        }
+      }
     },
     "work_order": {
       "type": "object",
@@ -3419,8 +5030,8 @@ Creates a new batch for a queue
     },
     "number_cycles": {
       "type": "integer",
-      "description": "Priority order for the batch",
-      "minimum": 0
+      "description": "The number of cycles for this batch",
+      "minimum": 1
     }
   }
 }
@@ -3430,12 +5041,28 @@ Creates a new batch for a queue
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|priority|body|integer|false|Priority order for the batch|
+|order|body|integer|false|Order to process the batch|
+|current_status|body|object|false|Defines the properties for a status|
+|» status|body|string|true|A Custom label for the status|
+|» category|body|string|true|The classifier for the statues|
+|» description|body|string\|null|false|A description for the status|
+|» order|body|number|false|Order status appears when listing|
 |work_order|body|object|true|none|
 |» work_order_id|body|string|true|The identifier for the unit|
 |queue|body|object|true|none|
 |» queue_id|body|string|true|The identifier for the queue|
-|number_cycles|body|integer|true|Priority order for the batch|
+|number_cycles|body|integer|true|The number of cycles for this batch|
+
+#### Enumerated Values
+
+|Parameter|Value|
+|---|---|
+|» category|PENDING|
+|» category|IN_PROGRESS|
+|» category|VERIFYING|
+|» category|COMPLETE|
+|» category|CANCELLED|
+|» category|BLOCKED|
 
 > Example responses
 
@@ -3501,7 +5128,10 @@ Creates a new batch for a queue
         "entity_type",
         "created",
         "updated",
-        "location"
+        "location",
+        "is_active",
+        "active_batches",
+        "active_cycles"
       ],
       "properties": {
         "queue_id": {
@@ -3955,17 +5585,74 @@ Creates a new batch for a queue
             }
           }
         },
+        "active_work_orders": {
+          "type": "number",
+          "description": "Total of work orders in an active status",
+          "readOnly": true
+        },
         "total_batches": {
           "type": "integer",
           "description": "Number of batches assigned to the queue",
           "readOnly": true
+        },
+        "is_active": {
+          "type": "boolean",
+          "description": "Toggle if the batch has active cycles or batches",
+          "readOnly": true
+        },
+        "active_batches": {
+          "type": "number",
+          "description": "Total of batches in the queue with active cycles",
+          "readOnly": true
+        },
+        "active_cycles": {
+          "type": "number",
+          "description": "Total of all active cycles across all batches",
+          "readOnly": true
         }
       }
     },
-    "priority": {
+    "order": {
       "type": "integer",
-      "description": "Priority order for the batch",
+      "description": "Order to process the batch",
       "minimum": 0
+    },
+    "current_status": {
+      "type": "object",
+      "description": "Defines the properties for a status",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "category"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "A Custom label for the status",
+          "pattern": "^[A-Za-z][0-9a-zA-Z-_ ]+$"
+        },
+        "category": {
+          "type": "string",
+          "description": "The classifier for the statues",
+          "enum": [
+            "PENDING",
+            "IN_PROGRESS",
+            "VERIFYING",
+            "COMPLETE",
+            "CANCELLED",
+            "BLOCKED"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "nullable": true,
+          "description": "A description for the status"
+        },
+        "order": {
+          "type": "number",
+          "description": "Order status appears when listing"
+        }
+      }
     },
     "number_cycles": {
       "type": "integer",
@@ -4019,8 +5706,9 @@ Creates a new batch for a queue
         "entity_type",
         "created",
         "updated",
-        "part",
-        "work_order_type"
+        "work_order_type",
+        "location",
+        "cycles"
       ],
       "properties": {
         "work_order_id": {
@@ -4076,8 +5764,746 @@ Creates a new batch for a queue
           "format": "date-time",
           "description": "End date"
         },
+        "current_location": {
+          "deprecated": true,
+          "type": "object",
+          "description": "Defines the properties for a part unit",
+          "additionalProperties": false,
+          "required": [
+            "label",
+            "entity_id",
+            "entity_type",
+            "created",
+            "updated",
+            "location_type",
+            "address"
+          ],
+          "properties": {
+            "location_id": {
+              "description": "The identifier for the location",
+              "type": "string",
+              "readOnly": true,
+              "pattern": "^[0-9a-zA-Z-_]+$"
+            },
+            "entity_id": {
+              "x-no-api-doc": true,
+              "type": "string",
+              "description": "Customer identifier",
+              "readOnly": true,
+              "pattern": "^[0-9a-zA-Z-_]+$"
+            },
+            "entity_type": {
+              "x-no-api-doc": true,
+              "enum": [
+                "LOC"
+              ]
+            },
+            "label": {
+              "type": "string",
+              "description": "Label for the entity"
+            },
+            "slug": {
+              "type": "string",
+              "description": "Slug for the entity (Auto-generated from the label)",
+              "readOnly": true,
+              "deprecated": true,
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+            },
+            "created": {
+              "description": "Date the entity was created",
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true
+            },
+            "updated": {
+              "description": "Last date the entity was updated",
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true
+            },
+            "location_type": {
+              "type": "string",
+              "description": "The type of location",
+              "enum": [
+                "warehouse",
+                "facility",
+                "other"
+              ]
+            },
+            "formatted_address": {
+              "type": "string",
+              "readOnly": true,
+              "description": "Address formatted for the where region the location exists in"
+            },
+            "address": {
+              "type": "object",
+              "required": [
+                "country",
+                "administrative_area",
+                "locality",
+                "postal_code",
+                "thoroughfare"
+              ],
+              "description": "xNAL address for the location ",
+              "properties": {
+                "country": {
+                  "type": "string",
+                  "description": "Three Letter ISO country code",
+                  "enum": [
+                    "ABW",
+                    "AFG",
+                    "AGO",
+                    "AIA",
+                    "ALA",
+                    "ALB",
+                    "AND",
+                    "ARE",
+                    "ARG",
+                    "ARM",
+                    "ASM",
+                    "ATA",
+                    "ATF",
+                    "ATG",
+                    "AUS",
+                    "AUT",
+                    "AZE",
+                    "BDI",
+                    "BEL",
+                    "BEN",
+                    "BES",
+                    "BFA",
+                    "BGD",
+                    "BGR",
+                    "BHR",
+                    "BHS",
+                    "BIH",
+                    "BLM",
+                    "BLR",
+                    "BLZ",
+                    "BMU",
+                    "BOL",
+                    "BRA",
+                    "BRB",
+                    "BRN",
+                    "BTN",
+                    "BVT",
+                    "BWA",
+                    "CAF",
+                    "CAN",
+                    "CCK",
+                    "CHE",
+                    "CHL",
+                    "CHN",
+                    "CIV",
+                    "CMR",
+                    "COD",
+                    "COG",
+                    "COK",
+                    "COL",
+                    "COM",
+                    "CPV",
+                    "CRI",
+                    "CUB",
+                    "CUW",
+                    "CXR",
+                    "CYM",
+                    "CYP",
+                    "CZE",
+                    "DEU",
+                    "DJI",
+                    "DMA",
+                    "DNK",
+                    "DOM",
+                    "DZA",
+                    "ECU",
+                    "EGY",
+                    "ERI",
+                    "ESH",
+                    "ESP",
+                    "EST",
+                    "ETH",
+                    "FIN",
+                    "FJI",
+                    "FLK",
+                    "FRA",
+                    "FRO",
+                    "FSM",
+                    "GAB",
+                    "GBR",
+                    "GEO",
+                    "GGY",
+                    "GHA",
+                    "GIB",
+                    "GIN",
+                    "GLP",
+                    "GMB",
+                    "GNB",
+                    "GNQ",
+                    "GRC",
+                    "GRD",
+                    "GRL",
+                    "GTM",
+                    "GUF",
+                    "GUM",
+                    "GUY",
+                    "HKG",
+                    "HMD",
+                    "HND",
+                    "HRV",
+                    "HTI",
+                    "HUN",
+                    "IDN",
+                    "IMN",
+                    "IND",
+                    "IOT",
+                    "IRL",
+                    "IRN",
+                    "IRQ",
+                    "ISL",
+                    "ISR",
+                    "ITA",
+                    "JAM",
+                    "JEY",
+                    "JOR",
+                    "JPN",
+                    "KAZ",
+                    "KEN",
+                    "KGZ",
+                    "KHM",
+                    "KIR",
+                    "KNA",
+                    "KOR",
+                    "KWT",
+                    "LAO",
+                    "LBN",
+                    "LBR",
+                    "LBY",
+                    "LCA",
+                    "LIE",
+                    "LKA",
+                    "LSO",
+                    "LTU",
+                    "LUX",
+                    "LVA",
+                    "MAC",
+                    "MAF",
+                    "MAR",
+                    "MCO",
+                    "MDA",
+                    "MDG",
+                    "MDV",
+                    "MEX",
+                    "MHL",
+                    "MKD",
+                    "MLI",
+                    "MLT",
+                    "MMR",
+                    "MNE",
+                    "MNG",
+                    "MNP",
+                    "MOZ",
+                    "MRT",
+                    "MSR",
+                    "MTQ",
+                    "MUS",
+                    "MWI",
+                    "MYS",
+                    "MYT",
+                    "NAM",
+                    "NCL",
+                    "NER",
+                    "NFK",
+                    "NGA",
+                    "NIC",
+                    "NIU",
+                    "NLD",
+                    "NOR",
+                    "NPL",
+                    "NRU",
+                    "NZL",
+                    "OMN",
+                    "PAK",
+                    "PAN",
+                    "PCN",
+                    "PER",
+                    "PHL",
+                    "PLW",
+                    "PNG",
+                    "POL",
+                    "PRI",
+                    "PRK",
+                    "PRT",
+                    "PRY",
+                    "PSE",
+                    "PYF",
+                    "QAT",
+                    "REU",
+                    "ROU",
+                    "RUS",
+                    "RWA",
+                    "SAU",
+                    "SDN",
+                    "SEN",
+                    "SGP",
+                    "SGS",
+                    "SHN",
+                    "SJM",
+                    "SLB",
+                    "SLE",
+                    "SLV",
+                    "SMR",
+                    "SOM",
+                    "SPM",
+                    "SRB",
+                    "SSD",
+                    "STP",
+                    "SUR",
+                    "SVK",
+                    "SVN",
+                    "SWE",
+                    "SWZ",
+                    "SXM",
+                    "SYC",
+                    "SYR",
+                    "TCA",
+                    "TCD",
+                    "TGO",
+                    "THA",
+                    "TJK",
+                    "TKL",
+                    "TKM",
+                    "TLS",
+                    "TON",
+                    "TTO",
+                    "TUN",
+                    "TUR",
+                    "TUV",
+                    "TWN",
+                    "TZA",
+                    "UGA",
+                    "UKR",
+                    "UMI",
+                    "URY",
+                    "USA",
+                    "UZB",
+                    "VAT",
+                    "VCT",
+                    "VEN",
+                    "VGB",
+                    "VIR",
+                    "VNM",
+                    "VUT",
+                    "WLF",
+                    "WSM",
+                    "YEM",
+                    "ZAF",
+                    "ZMB",
+                    "ZWE"
+                  ]
+                },
+                "administrative_area": {
+                  "type": "string",
+                  "description": "State / Province / Region"
+                },
+                "sub_administrative_area": {
+                  "type": "string",
+                  "description": "County / District"
+                },
+                "locality": {
+                  "type": "string",
+                  "description": "City / Town"
+                },
+                "postal_code": {
+                  "type": "string",
+                  "description": "Postal Code / Zip Code"
+                },
+                "thoroughfare": {
+                  "type": "string",
+                  "description": "Street Address"
+                },
+                "premise": {
+                  "type": "string",
+                  "description": "Apartment / Suite / Box number etc"
+                },
+                "sub_premise": {
+                  "type": "string",
+                  "description": "Floor # / Room # / Building label etc"
+                }
+              }
+            }
+          }
+        },
+        "location": {
+          "type": "object",
+          "description": "Defines the properties for a part unit",
+          "additionalProperties": false,
+          "required": [
+            "label",
+            "entity_id",
+            "entity_type",
+            "created",
+            "updated",
+            "location_type",
+            "address"
+          ],
+          "properties": {
+            "location_id": {
+              "description": "The identifier for the location",
+              "type": "string",
+              "readOnly": true,
+              "pattern": "^[0-9a-zA-Z-_]+$"
+            },
+            "entity_id": {
+              "x-no-api-doc": true,
+              "type": "string",
+              "description": "Customer identifier",
+              "readOnly": true,
+              "pattern": "^[0-9a-zA-Z-_]+$"
+            },
+            "entity_type": {
+              "x-no-api-doc": true,
+              "enum": [
+                "LOC"
+              ]
+            },
+            "label": {
+              "type": "string",
+              "description": "Label for the entity"
+            },
+            "slug": {
+              "type": "string",
+              "description": "Slug for the entity (Auto-generated from the label)",
+              "readOnly": true,
+              "deprecated": true,
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+            },
+            "created": {
+              "description": "Date the entity was created",
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true
+            },
+            "updated": {
+              "description": "Last date the entity was updated",
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true
+            },
+            "location_type": {
+              "type": "string",
+              "description": "The type of location",
+              "enum": [
+                "warehouse",
+                "facility",
+                "other"
+              ]
+            },
+            "formatted_address": {
+              "type": "string",
+              "readOnly": true,
+              "description": "Address formatted for the where region the location exists in"
+            },
+            "address": {
+              "type": "object",
+              "required": [
+                "country",
+                "administrative_area",
+                "locality",
+                "postal_code",
+                "thoroughfare"
+              ],
+              "description": "xNAL address for the location ",
+              "properties": {
+                "country": {
+                  "type": "string",
+                  "description": "Three Letter ISO country code",
+                  "enum": [
+                    "ABW",
+                    "AFG",
+                    "AGO",
+                    "AIA",
+                    "ALA",
+                    "ALB",
+                    "AND",
+                    "ARE",
+                    "ARG",
+                    "ARM",
+                    "ASM",
+                    "ATA",
+                    "ATF",
+                    "ATG",
+                    "AUS",
+                    "AUT",
+                    "AZE",
+                    "BDI",
+                    "BEL",
+                    "BEN",
+                    "BES",
+                    "BFA",
+                    "BGD",
+                    "BGR",
+                    "BHR",
+                    "BHS",
+                    "BIH",
+                    "BLM",
+                    "BLR",
+                    "BLZ",
+                    "BMU",
+                    "BOL",
+                    "BRA",
+                    "BRB",
+                    "BRN",
+                    "BTN",
+                    "BVT",
+                    "BWA",
+                    "CAF",
+                    "CAN",
+                    "CCK",
+                    "CHE",
+                    "CHL",
+                    "CHN",
+                    "CIV",
+                    "CMR",
+                    "COD",
+                    "COG",
+                    "COK",
+                    "COL",
+                    "COM",
+                    "CPV",
+                    "CRI",
+                    "CUB",
+                    "CUW",
+                    "CXR",
+                    "CYM",
+                    "CYP",
+                    "CZE",
+                    "DEU",
+                    "DJI",
+                    "DMA",
+                    "DNK",
+                    "DOM",
+                    "DZA",
+                    "ECU",
+                    "EGY",
+                    "ERI",
+                    "ESH",
+                    "ESP",
+                    "EST",
+                    "ETH",
+                    "FIN",
+                    "FJI",
+                    "FLK",
+                    "FRA",
+                    "FRO",
+                    "FSM",
+                    "GAB",
+                    "GBR",
+                    "GEO",
+                    "GGY",
+                    "GHA",
+                    "GIB",
+                    "GIN",
+                    "GLP",
+                    "GMB",
+                    "GNB",
+                    "GNQ",
+                    "GRC",
+                    "GRD",
+                    "GRL",
+                    "GTM",
+                    "GUF",
+                    "GUM",
+                    "GUY",
+                    "HKG",
+                    "HMD",
+                    "HND",
+                    "HRV",
+                    "HTI",
+                    "HUN",
+                    "IDN",
+                    "IMN",
+                    "IND",
+                    "IOT",
+                    "IRL",
+                    "IRN",
+                    "IRQ",
+                    "ISL",
+                    "ISR",
+                    "ITA",
+                    "JAM",
+                    "JEY",
+                    "JOR",
+                    "JPN",
+                    "KAZ",
+                    "KEN",
+                    "KGZ",
+                    "KHM",
+                    "KIR",
+                    "KNA",
+                    "KOR",
+                    "KWT",
+                    "LAO",
+                    "LBN",
+                    "LBR",
+                    "LBY",
+                    "LCA",
+                    "LIE",
+                    "LKA",
+                    "LSO",
+                    "LTU",
+                    "LUX",
+                    "LVA",
+                    "MAC",
+                    "MAF",
+                    "MAR",
+                    "MCO",
+                    "MDA",
+                    "MDG",
+                    "MDV",
+                    "MEX",
+                    "MHL",
+                    "MKD",
+                    "MLI",
+                    "MLT",
+                    "MMR",
+                    "MNE",
+                    "MNG",
+                    "MNP",
+                    "MOZ",
+                    "MRT",
+                    "MSR",
+                    "MTQ",
+                    "MUS",
+                    "MWI",
+                    "MYS",
+                    "MYT",
+                    "NAM",
+                    "NCL",
+                    "NER",
+                    "NFK",
+                    "NGA",
+                    "NIC",
+                    "NIU",
+                    "NLD",
+                    "NOR",
+                    "NPL",
+                    "NRU",
+                    "NZL",
+                    "OMN",
+                    "PAK",
+                    "PAN",
+                    "PCN",
+                    "PER",
+                    "PHL",
+                    "PLW",
+                    "PNG",
+                    "POL",
+                    "PRI",
+                    "PRK",
+                    "PRT",
+                    "PRY",
+                    "PSE",
+                    "PYF",
+                    "QAT",
+                    "REU",
+                    "ROU",
+                    "RUS",
+                    "RWA",
+                    "SAU",
+                    "SDN",
+                    "SEN",
+                    "SGP",
+                    "SGS",
+                    "SHN",
+                    "SJM",
+                    "SLB",
+                    "SLE",
+                    "SLV",
+                    "SMR",
+                    "SOM",
+                    "SPM",
+                    "SRB",
+                    "SSD",
+                    "STP",
+                    "SUR",
+                    "SVK",
+                    "SVN",
+                    "SWE",
+                    "SWZ",
+                    "SXM",
+                    "SYC",
+                    "SYR",
+                    "TCA",
+                    "TCD",
+                    "TGO",
+                    "THA",
+                    "TJK",
+                    "TKL",
+                    "TKM",
+                    "TLS",
+                    "TON",
+                    "TTO",
+                    "TUN",
+                    "TUR",
+                    "TUV",
+                    "TWN",
+                    "TZA",
+                    "UGA",
+                    "UKR",
+                    "UMI",
+                    "URY",
+                    "USA",
+                    "UZB",
+                    "VAT",
+                    "VCT",
+                    "VEN",
+                    "VGB",
+                    "VIR",
+                    "VNM",
+                    "VUT",
+                    "WLF",
+                    "WSM",
+                    "YEM",
+                    "ZAF",
+                    "ZMB",
+                    "ZWE"
+                  ]
+                },
+                "administrative_area": {
+                  "type": "string",
+                  "description": "State / Province / Region"
+                },
+                "sub_administrative_area": {
+                  "type": "string",
+                  "description": "County / District"
+                },
+                "locality": {
+                  "type": "string",
+                  "description": "City / Town"
+                },
+                "postal_code": {
+                  "type": "string",
+                  "description": "Postal Code / Zip Code"
+                },
+                "thoroughfare": {
+                  "type": "string",
+                  "description": "Street Address"
+                },
+                "premise": {
+                  "type": "string",
+                  "description": "Apartment / Suite / Box number etc"
+                },
+                "sub_premise": {
+                  "type": "string",
+                  "description": "Floor # / Room # / Building label etc"
+                }
+              }
+            }
+          }
+        },
         "description": {
           "type": "string",
+          "nullable": true,
           "description": "Detailed description for the work order"
         },
         "work_order_type": {
@@ -4117,6 +6543,15 @@ Creates a new batch for a queue
                 "CANCELLED",
                 "BLOCKED"
               ]
+            },
+            "description": {
+              "type": "string",
+              "nullable": true,
+              "description": "A description for the status"
+            },
+            "order": {
+              "type": "number",
+              "description": "Order status appears when listing"
             }
           }
         },
@@ -4152,6 +6587,11 @@ Creates a new batch for a queue
               "enum": [
                 "PRJ"
               ]
+            },
+            "description": {
+              "type": "string",
+              "nullable": true,
+              "description": "Project description"
             },
             "label": {
               "type": "string",
@@ -4237,7 +6677,10 @@ Creates a new batch for a queue
                   "deprecated": true,
                   "x-patternProperties": {
                     "^[A-Za-z][A-Za-z0-9_]*$": {
-                      "type": "string"
+                      "type": [
+                        "string",
+                        "null"
+                      ]
                     }
                   }
                 },
@@ -4270,6 +6713,15 @@ Creates a new batch for a queue
                           "CANCELLED",
                           "BLOCKED"
                         ]
+                      },
+                      "description": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "A description for the status"
+                      },
+                      "order": {
+                        "type": "number",
+                        "description": "Order status appears when listing"
                       }
                     }
                   }
@@ -4412,7 +6864,10 @@ Creates a new batch for a queue
                       "deprecated": true,
                       "x-patternProperties": {
                         "^[A-Za-z][A-Za-z0-9_]*$": {
-                          "type": "string"
+                          "type": [
+                            "string",
+                            "null"
+                          ]
                         }
                       }
                     },
@@ -4445,6 +6900,15 @@ Creates a new batch for a queue
                               "CANCELLED",
                               "BLOCKED"
                             ]
+                          },
+                          "description": {
+                            "type": "string",
+                            "nullable": true,
+                            "description": "A description for the status"
+                          },
+                          "order": {
+                            "type": "number",
+                            "description": "Order status appears when listing"
                           }
                         }
                       }
@@ -4488,6 +6952,15 @@ Creates a new batch for a queue
                           "CANCELLED",
                           "BLOCKED"
                         ]
+                      },
+                      "description": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "A description for the status"
+                      },
+                      "order": {
+                        "type": "number",
+                        "description": "Order status appears when listing"
                       }
                     }
                   }
@@ -4523,6 +6996,15 @@ Creates a new batch for a queue
                       "CANCELLED",
                       "BLOCKED"
                     ]
+                  },
+                  "description": {
+                    "type": "string",
+                    "nullable": true,
+                    "description": "A description for the status"
+                  },
+                  "order": {
+                    "type": "number",
+                    "description": "Order status appears when listing"
                   }
                 }
               }
@@ -4581,20 +7063,57 @@ Creates a new batch for a queue
             }
           ]
         },
-        "work_flows": {
+        "cycles": {
           "type": "array",
-          "description": "Cycles of work flows needed to complete the work order",
+          "minimum": 1,
           "items": {
             "type": "object",
+            "additionalProperties": false,
             "required": [
-              "cycles_needed",
+              "needed",
+              "pending",
+              "in_progress",
+              "verifying",
+              "complete",
+              "blocked",
+              "cancelled",
               "work_flow"
             ],
             "properties": {
-              "cycles_needed": {
+              "needed": {
                 "type": "integer",
                 "description": "The number of cycles needed",
                 "minimum": 1
+              },
+              "pending": {
+                "type": "integer",
+                "description": "The number of cycles pending",
+                "readOnly": true
+              },
+              "in_progress": {
+                "type": "integer",
+                "description": "The number of cycles pending",
+                "readOnly": true
+              },
+              "verifying": {
+                "type": "integer",
+                "description": "The number of cycles pending",
+                "readOnly": true
+              },
+              "complete": {
+                "type": "integer",
+                "description": "The number of cycles pending",
+                "readOnly": true
+              },
+              "blocked": {
+                "type": "integer",
+                "description": "The number of cycles pending",
+                "readOnly": true
+              },
+              "cancelled": {
+                "type": "integer",
+                "description": "The number of cycles pending",
+                "readOnly": true
               },
               "work_flow": {
                 "type": "object",
@@ -4670,13 +7189,94 @@ Creates a new batch for a queue
                     "type": "string",
                     "description": "The entity type this work flow applies too",
                     "enum": [
-                      "unit",
-                      "part",
-                      "program",
-                      "project",
-                      "customer",
-                      "contact"
+                      "UNIT",
+                      "PART",
+                      "PGM",
+                      "PRJ",
+                      "CUS",
+                      "CON"
                     ]
+                  },
+                  "triggered_by": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "description": "Possible entity events",
+                      "enum": [
+                        "CON.attached",
+                        "CON.created",
+                        "CON.deleted",
+                        "CON.detached",
+                        "CON.removed",
+                        "CON.updated",
+                        "CUS.attached",
+                        "CUS.created",
+                        "CUS.deleted",
+                        "CUS.detached",
+                        "CUS.removed",
+                        "CUS.updated",
+                        "LOC.attached",
+                        "LOC.created",
+                        "LOC.deleted",
+                        "LOC.detached",
+                        "LOC.removed",
+                        "LOC.updated",
+                        "NOTE.attached",
+                        "NOTE.created",
+                        "NOTE.deleted",
+                        "NOTE.detached",
+                        "NOTE.removed",
+                        "NOTE.updated",
+                        "PART.attached",
+                        "PART.created",
+                        "PART.deleted",
+                        "PART.detached",
+                        "PART.removed",
+                        "PART.updated",
+                        "PGM.attached",
+                        "PGM.created",
+                        "PGM.deleted",
+                        "PGM.detached",
+                        "PGM.removed",
+                        "PGM.updated",
+                        "PRO.attached",
+                        "PRO.created",
+                        "PRO.deleted",
+                        "PRO.detached",
+                        "PRO.removed",
+                        "PRO.updated",
+                        "RES.attached",
+                        "RES.created",
+                        "RES.deleted",
+                        "RES.detached",
+                        "RES.removed",
+                        "RES.updated",
+                        "UNIT.attached",
+                        "UNIT.created",
+                        "UNIT.deleted",
+                        "UNIT.detached",
+                        "UNIT.removed",
+                        "UNIT.updated",
+                        "USER.attached",
+                        "USER.created",
+                        "USER.deleted",
+                        "USER.detached",
+                        "USER.removed",
+                        "USER.updated",
+                        "WKF.attached",
+                        "WKF.created",
+                        "WKF.deleted",
+                        "WKF.detached",
+                        "WKF.removed",
+                        "WKF.updated",
+                        "WOR.attached",
+                        "WOR.created",
+                        "WOR.deleted",
+                        "WOR.detached",
+                        "WOR.removed",
+                        "WOR.updated"
+                      ]
+                    }
                   },
                   "starts_at": {
                     "type": "string",
@@ -6182,10 +8782,30 @@ Creates a new batch for a queue
                         ]
                       }
                     }
+                  },
+                  "metadata": {
+                    "type": "object",
+                    "description": "Data for the resource as a key value pair",
+                    "additionalProperties": {
+                      "type": "string"
+                    },
+                    "propertyNames": {
+                      "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+                    }
                   }
                 }
               }
             }
+          }
+        },
+        "meta": {
+          "type": "object",
+          "description": "Data for the resource as a key value pair",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "propertyNames": {
+            "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
           }
         }
       }
@@ -6252,8 +8872,17 @@ Status Code **200**
 |»»»»» complete|integer|false|read-only|The number of cycles complete|
 |»»»»» blocked|integer|false|read-only|The number of cycles blocked|
 |»»»»» cancelled|integer|false|read-only|The number of cycles cancelled|
+|»»»» active_work_orders|number|false|read-only|Total of work orders in an active status|
 |»»»» total_batches|integer|false|read-only|Number of batches assigned to the queue|
-|»»» priority|integer|false|none|Priority order for the batch|
+|»»»» is_active|boolean|true|read-only|Toggle if the batch has active cycles or batches|
+|»»»» active_batches|number|true|read-only|Total of batches in the queue with active cycles|
+|»»»» active_cycles|number|true|read-only|Total of all active cycles across all batches|
+|»»» order|integer|false|none|Order to process the batch|
+|»»» current_status|object|false|none|Defines the properties for a status|
+|»»»» status|string|true|none|A Custom label for the status|
+|»»»» category|string|true|none|The classifier for the statues|
+|»»»» description|string\|null|false|none|A description for the status|
+|»»»» order|number|false|none|Order status appears when listing|
 |»»» number_cycles|integer|false|none|The number of cycles for this batch|
 |»»» cycles|object|false|read-only|none|
 |»»»» pending|integer|false|read-only|The number of cycles pending|
@@ -6272,81 +8901,141 @@ Status Code **200**
 |»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
 |»»»» start_date|string(date-time)\|null|false|none|Start date|
 |»»»» end_date|string(date-time)\|null|false|none|End date|
-|»»»» description|string|false|none|Detailed description for the work order|
-|»»»» work_order_type|string|true|none|Type of work order|
-|»»»» due_date|string(date-time)|false|none|End date|
-|»»»» current_status|object|false|none|Defines the properties for a status|
-|»»»»» status|string|true|none|A Custom label for the status|
-|»»»»» category|string|true|none|The classifier for the statues|
-|»»»» project|object|false|none|Defines the properties for a project|
-|»»»»» project_id|string|false|none|Unique identifier|
+|»»»» current_location|object|false|none|Defines the properties for a part unit|
+|»»»»» location_id|string|false|read-only|The identifier for the location|
 |»»»»» entity_id|string|true|read-only|Customer identifier|
 |»»»»» entity_type|string|true|none|none|
 |»»»»» label|string|true|none|Label for the entity|
 |»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
 |»»»»» created|string(date-time)|true|read-only|Date the entity was created|
 |»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»»»» customer|object|true|none|Customer|
-|»»»»»» customer_id|string|false|read-only|Customer identifier|
+|»»»»» location_type|string|true|none|The type of location|
+|»»»»» formatted_address|string|false|read-only|Address formatted for the where region the location exists in|
+|»»»»» address|object|true|none|xNAL address for the location|
+|»»»»»» country|string|true|none|Three Letter ISO country code|
+|»»»»»» administrative_area|string|true|none|State / Province / Region|
+|»»»»»» sub_administrative_area|string|false|none|County / District|
+|»»»»»» locality|string|true|none|City / Town|
+|»»»»»» postal_code|string|true|none|Postal Code / Zip Code|
+|»»»»»» thoroughfare|string|true|none|Street Address|
+|»»»»»» premise|string|false|none|Apartment / Suite / Box number etc|
+|»»»»»» sub_premise|string|false|none|Floor # / Room # / Building label etc|
+|»»»»» location|object|true|none|Defines the properties for a part unit|
+|»»»»»» location_id|string|false|read-only|The identifier for the location|
 |»»»»»» entity_id|string|true|read-only|Customer identifier|
 |»»»»»» entity_type|string|true|none|none|
 |»»»»»» label|string|true|none|Label for the entity|
 |»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
 |»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
 |»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»»»»» external_platform|object|false|none|External Identifiers for the customer|
-|»»»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
+|»»»»»» location_type|string|true|none|The type of location|
+|»»»»»» formatted_address|string|false|read-only|Address formatted for the where region the location exists in|
+|»»»»»» address|object|true|none|xNAL address for the location|
+|»»»»»»» country|string|true|none|Three Letter ISO country code|
+|»»»»»»» administrative_area|string|true|none|State / Province / Region|
+|»»»»»»» sub_administrative_area|string|false|none|County / District|
+|»»»»»»» locality|string|true|none|City / Town|
+|»»»»»»» postal_code|string|true|none|Postal Code / Zip Code|
+|»»»»»»» thoroughfare|string|true|none|Street Address|
+|»»»»»»» premise|string|false|none|Apartment / Suite / Box number etc|
+|»»»»»»» sub_premise|string|false|none|Floor # / Room # / Building label etc|
+|»»»»»» description|string\|null|false|none|Detailed description for the work order|
+|»»»»»» work_order_type|string|true|none|Type of work order|
+|»»»»»» due_date|string(date-time)|false|none|End date|
+|»»»»»» current_status|object|false|none|Defines the properties for a status|
 |»»»»»»» status|string|true|none|A Custom label for the status|
 |»»»»»»» category|string|true|none|The classifier for the statues|
-|»»»»»» total_programs|number|false|none|Total programs under the customer|
-|»»»»»» total_projects|number|false|none|Total projects under the customer|
-|»»»»» program|object|true|none|Defines the properties for a program|
-|»»»»»» program_id|string|false|read-only|Unique identifier|
-|»»»»»» entity_id|string|true|read-only|Customer identifier|
-|»»»»»» entity_type|string|true|none|none|
-|»»»»»» label|string|false|none|Label for the entity|
-|»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
-|»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»»»»» start_date|string(date-time)\|null|false|none|Start date|
-|»»»»»» end_date|string(date-time)\|null|false|none|End date|
-|»»»»»» customer|object|true|none|Customer|
-|»»»»»»» customer_id|string|false|read-only|Customer identifier|
+|»»»»»»» description|string\|null|false|none|A description for the status|
+|»»»»»»» order|number|false|none|Order status appears when listing|
+|»»»»»» project|object|false|none|Defines the properties for a project|
+|»»»»»»» project_id|string|false|none|Unique identifier|
 |»»»»»»» entity_id|string|true|read-only|Customer identifier|
 |»»»»»»» entity_type|string|true|none|none|
+|»»»»»»» description|string\|null|false|none|Project description|
 |»»»»»»» label|string|true|none|Label for the entity|
 |»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
 |»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
 |»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»»»»»» external_platform|object|false|none|External Identifiers for the customer|
-|»»»»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
-|»»»»»»»» status|string|true|none|A Custom label for the status|
-|»»»»»»»» category|string|true|none|The classifier for the statues|
-|»»»»»»» total_programs|number|false|none|Total programs under the customer|
-|»»»»»»» total_projects|number|false|none|Total projects under the customer|
-|»»»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
-|»»»»»»» status|string|true|none|A Custom label for the status|
-|»»»»»»» category|string|true|none|The classifier for the statues|
-|»»»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
-|»»»»»»» status|string|true|none|A Custom label for the status|
-|»»»»»»» category|string|true|none|The classifier for the statues|
-|»»»»»» start_date|string(date-time)\|null|false|none|Start date|
-|»»»»»» end_date|string(date-time)\|null|false|none|End date|
-|»»»»» work_flows|[object]|false|none|Cycles of work flows needed to complete the work order|
-|»»»»»» cycles_needed|integer|true|none|The number of cycles needed|
-|»»»»»» work_flow|object|true|none|Workflow|
-|»»»»»»» work_flow_id|string|false|read-only|Customer identifier|
-|»»»»»»» entity_id|string|true|read-only|Customer identifier|
-|»»»»»»» entity_type|string|true|none|none|
-|»»»»»»» label|string|true|none|Label for the entity|
-|»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
-|»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»»»»»» schema_version|string|true|none|Version of the workflow schema used|
-|»»»»»»» workflow_version|integer|false|read-only|Version number for the work flows (the number of times it has been changed|
-|»»»»»»» applies_to|string|true|none|The entity type this work flow applies too|
-|»»»»»»» starts_at|string|true|none|Starting step|
-|»»»»»»» steps|object|true|none|Steps for the workflow|
+|»»»»»»» customer|object|true|none|Customer|
+|»»»»»»»» customer_id|string|false|read-only|Customer identifier|
+|»»»»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»»»»» entity_type|string|true|none|none|
+|»»»»»»»» label|string|true|none|Label for the entity|
+|»»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»»»»»»» external_platform|object|false|none|External Identifiers for the customer|
+|»»»»»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
+|»»»»»»»»» status|string|true|none|A Custom label for the status|
+|»»»»»»»»» category|string|true|none|The classifier for the statues|
+|»»»»»»»»» description|string\|null|false|none|A description for the status|
+|»»»»»»»»» order|number|false|none|Order status appears when listing|
+|»»»»»»»» total_programs|number|false|none|Total programs under the customer|
+|»»»»»»»» total_projects|number|false|none|Total projects under the customer|
+|»»»»»»» program|object|true|none|Defines the properties for a program|
+|»»»»»»»» program_id|string|false|read-only|Unique identifier|
+|»»»»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»»»»» entity_type|string|true|none|none|
+|»»»»»»»» label|string|false|none|Label for the entity|
+|»»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»»»»»»» start_date|string(date-time)\|null|false|none|Start date|
+|»»»»»»»» end_date|string(date-time)\|null|false|none|End date|
+|»»»»»»»» customer|object|true|none|Customer|
+|»»»»»»»»» customer_id|string|false|read-only|Customer identifier|
+|»»»»»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»»»»»» entity_type|string|true|none|none|
+|»»»»»»»»» label|string|true|none|Label for the entity|
+|»»»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»»»»»»»» external_platform|object|false|none|External Identifiers for the customer|
+|»»»»»»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
+|»»»»»»»»»» status|string|true|none|A Custom label for the status|
+|»»»»»»»»»» category|string|true|none|The classifier for the statues|
+|»»»»»»»»»» description|string\|null|false|none|A description for the status|
+|»»»»»»»»»» order|number|false|none|Order status appears when listing|
+|»»»»»»»»» total_programs|number|false|none|Total programs under the customer|
+|»»»»»»»»» total_projects|number|false|none|Total projects under the customer|
+|»»»»»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
+|»»»»»»»»» status|string|true|none|A Custom label for the status|
+|»»»»»»»»» category|string|true|none|The classifier for the statues|
+|»»»»»»»»» description|string\|null|false|none|A description for the status|
+|»»»»»»»»» order|number|false|none|Order status appears when listing|
+|»»»»»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
+|»»»»»»»»» status|string|true|none|A Custom label for the status|
+|»»»»»»»»» category|string|true|none|The classifier for the statues|
+|»»»»»»»»» description|string\|null|false|none|A description for the status|
+|»»»»»»»»» order|number|false|none|Order status appears when listing|
+|»»»»»»»» start_date|string(date-time)\|null|false|none|Start date|
+|»»»»»»»» end_date|string(date-time)\|null|false|none|End date|
+|»»»»»»» cycles|[object]|true|none|none|
+|»»»»»»»» needed|integer|true|none|The number of cycles needed|
+|»»»»»»»» pending|integer|true|read-only|The number of cycles pending|
+|»»»»»»»» in_progress|integer|true|read-only|The number of cycles pending|
+|»»»»»»»» verifying|integer|true|read-only|The number of cycles pending|
+|»»»»»»»» complete|integer|true|read-only|The number of cycles pending|
+|»»»»»»»» blocked|integer|true|read-only|The number of cycles pending|
+|»»»»»»»» cancelled|integer|true|read-only|The number of cycles pending|
+|»»»»»»»» work_flow|object|true|none|Workflow|
+|»»»»»»»»» work_flow_id|string|false|read-only|Customer identifier|
+|»»»»»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»»»»»» entity_type|string|true|none|none|
+|»»»»»»»»» label|string|true|none|Label for the entity|
+|»»»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»»»»»»»» schema_version|string|true|none|Version of the workflow schema used|
+|»»»»»»»»» workflow_version|integer|false|read-only|Version number for the work flows (the number of times it has been changed|
+|»»»»»»»»» applies_to|string|true|none|The entity type this work flow applies too|
+|»»»»»»»»» triggered_by|[string]|false|none|none|
+|»»»»»»»»» starts_at|string|true|none|Starting step|
+|»»»»»»»»» steps|object|true|none|Steps for the workflow|
+|»»»»»»»»» metadata|object|false|none|Data for the resource as a key value pair|
+|»»»»»»»»»» **additionalProperties**|string|false|none|none|
+|»»»»»»»»» meta|object|false|none|Data for the resource as a key value pair|
+|»»»»»»»»»» **additionalProperties**|string|false|none|none|
 
 #### Enumerated Values
 
@@ -6606,7 +9295,519 @@ Status Code **200**
 |country|ZAF|
 |country|ZMB|
 |country|ZWE|
+|category|PENDING|
+|category|IN_PROGRESS|
+|category|VERIFYING|
+|category|COMPLETE|
+|category|CANCELLED|
+|category|BLOCKED|
 |entity_type|WOR|
+|entity_type|LOC|
+|location_type|warehouse|
+|location_type|facility|
+|location_type|other|
+|country|ABW|
+|country|AFG|
+|country|AGO|
+|country|AIA|
+|country|ALA|
+|country|ALB|
+|country|AND|
+|country|ARE|
+|country|ARG|
+|country|ARM|
+|country|ASM|
+|country|ATA|
+|country|ATF|
+|country|ATG|
+|country|AUS|
+|country|AUT|
+|country|AZE|
+|country|BDI|
+|country|BEL|
+|country|BEN|
+|country|BES|
+|country|BFA|
+|country|BGD|
+|country|BGR|
+|country|BHR|
+|country|BHS|
+|country|BIH|
+|country|BLM|
+|country|BLR|
+|country|BLZ|
+|country|BMU|
+|country|BOL|
+|country|BRA|
+|country|BRB|
+|country|BRN|
+|country|BTN|
+|country|BVT|
+|country|BWA|
+|country|CAF|
+|country|CAN|
+|country|CCK|
+|country|CHE|
+|country|CHL|
+|country|CHN|
+|country|CIV|
+|country|CMR|
+|country|COD|
+|country|COG|
+|country|COK|
+|country|COL|
+|country|COM|
+|country|CPV|
+|country|CRI|
+|country|CUB|
+|country|CUW|
+|country|CXR|
+|country|CYM|
+|country|CYP|
+|country|CZE|
+|country|DEU|
+|country|DJI|
+|country|DMA|
+|country|DNK|
+|country|DOM|
+|country|DZA|
+|country|ECU|
+|country|EGY|
+|country|ERI|
+|country|ESH|
+|country|ESP|
+|country|EST|
+|country|ETH|
+|country|FIN|
+|country|FJI|
+|country|FLK|
+|country|FRA|
+|country|FRO|
+|country|FSM|
+|country|GAB|
+|country|GBR|
+|country|GEO|
+|country|GGY|
+|country|GHA|
+|country|GIB|
+|country|GIN|
+|country|GLP|
+|country|GMB|
+|country|GNB|
+|country|GNQ|
+|country|GRC|
+|country|GRD|
+|country|GRL|
+|country|GTM|
+|country|GUF|
+|country|GUM|
+|country|GUY|
+|country|HKG|
+|country|HMD|
+|country|HND|
+|country|HRV|
+|country|HTI|
+|country|HUN|
+|country|IDN|
+|country|IMN|
+|country|IND|
+|country|IOT|
+|country|IRL|
+|country|IRN|
+|country|IRQ|
+|country|ISL|
+|country|ISR|
+|country|ITA|
+|country|JAM|
+|country|JEY|
+|country|JOR|
+|country|JPN|
+|country|KAZ|
+|country|KEN|
+|country|KGZ|
+|country|KHM|
+|country|KIR|
+|country|KNA|
+|country|KOR|
+|country|KWT|
+|country|LAO|
+|country|LBN|
+|country|LBR|
+|country|LBY|
+|country|LCA|
+|country|LIE|
+|country|LKA|
+|country|LSO|
+|country|LTU|
+|country|LUX|
+|country|LVA|
+|country|MAC|
+|country|MAF|
+|country|MAR|
+|country|MCO|
+|country|MDA|
+|country|MDG|
+|country|MDV|
+|country|MEX|
+|country|MHL|
+|country|MKD|
+|country|MLI|
+|country|MLT|
+|country|MMR|
+|country|MNE|
+|country|MNG|
+|country|MNP|
+|country|MOZ|
+|country|MRT|
+|country|MSR|
+|country|MTQ|
+|country|MUS|
+|country|MWI|
+|country|MYS|
+|country|MYT|
+|country|NAM|
+|country|NCL|
+|country|NER|
+|country|NFK|
+|country|NGA|
+|country|NIC|
+|country|NIU|
+|country|NLD|
+|country|NOR|
+|country|NPL|
+|country|NRU|
+|country|NZL|
+|country|OMN|
+|country|PAK|
+|country|PAN|
+|country|PCN|
+|country|PER|
+|country|PHL|
+|country|PLW|
+|country|PNG|
+|country|POL|
+|country|PRI|
+|country|PRK|
+|country|PRT|
+|country|PRY|
+|country|PSE|
+|country|PYF|
+|country|QAT|
+|country|REU|
+|country|ROU|
+|country|RUS|
+|country|RWA|
+|country|SAU|
+|country|SDN|
+|country|SEN|
+|country|SGP|
+|country|SGS|
+|country|SHN|
+|country|SJM|
+|country|SLB|
+|country|SLE|
+|country|SLV|
+|country|SMR|
+|country|SOM|
+|country|SPM|
+|country|SRB|
+|country|SSD|
+|country|STP|
+|country|SUR|
+|country|SVK|
+|country|SVN|
+|country|SWE|
+|country|SWZ|
+|country|SXM|
+|country|SYC|
+|country|SYR|
+|country|TCA|
+|country|TCD|
+|country|TGO|
+|country|THA|
+|country|TJK|
+|country|TKL|
+|country|TKM|
+|country|TLS|
+|country|TON|
+|country|TTO|
+|country|TUN|
+|country|TUR|
+|country|TUV|
+|country|TWN|
+|country|TZA|
+|country|UGA|
+|country|UKR|
+|country|UMI|
+|country|URY|
+|country|USA|
+|country|UZB|
+|country|VAT|
+|country|VCT|
+|country|VEN|
+|country|VGB|
+|country|VIR|
+|country|VNM|
+|country|VUT|
+|country|WLF|
+|country|WSM|
+|country|YEM|
+|country|ZAF|
+|country|ZMB|
+|country|ZWE|
+|entity_type|LOC|
+|location_type|warehouse|
+|location_type|facility|
+|location_type|other|
+|country|ABW|
+|country|AFG|
+|country|AGO|
+|country|AIA|
+|country|ALA|
+|country|ALB|
+|country|AND|
+|country|ARE|
+|country|ARG|
+|country|ARM|
+|country|ASM|
+|country|ATA|
+|country|ATF|
+|country|ATG|
+|country|AUS|
+|country|AUT|
+|country|AZE|
+|country|BDI|
+|country|BEL|
+|country|BEN|
+|country|BES|
+|country|BFA|
+|country|BGD|
+|country|BGR|
+|country|BHR|
+|country|BHS|
+|country|BIH|
+|country|BLM|
+|country|BLR|
+|country|BLZ|
+|country|BMU|
+|country|BOL|
+|country|BRA|
+|country|BRB|
+|country|BRN|
+|country|BTN|
+|country|BVT|
+|country|BWA|
+|country|CAF|
+|country|CAN|
+|country|CCK|
+|country|CHE|
+|country|CHL|
+|country|CHN|
+|country|CIV|
+|country|CMR|
+|country|COD|
+|country|COG|
+|country|COK|
+|country|COL|
+|country|COM|
+|country|CPV|
+|country|CRI|
+|country|CUB|
+|country|CUW|
+|country|CXR|
+|country|CYM|
+|country|CYP|
+|country|CZE|
+|country|DEU|
+|country|DJI|
+|country|DMA|
+|country|DNK|
+|country|DOM|
+|country|DZA|
+|country|ECU|
+|country|EGY|
+|country|ERI|
+|country|ESH|
+|country|ESP|
+|country|EST|
+|country|ETH|
+|country|FIN|
+|country|FJI|
+|country|FLK|
+|country|FRA|
+|country|FRO|
+|country|FSM|
+|country|GAB|
+|country|GBR|
+|country|GEO|
+|country|GGY|
+|country|GHA|
+|country|GIB|
+|country|GIN|
+|country|GLP|
+|country|GMB|
+|country|GNB|
+|country|GNQ|
+|country|GRC|
+|country|GRD|
+|country|GRL|
+|country|GTM|
+|country|GUF|
+|country|GUM|
+|country|GUY|
+|country|HKG|
+|country|HMD|
+|country|HND|
+|country|HRV|
+|country|HTI|
+|country|HUN|
+|country|IDN|
+|country|IMN|
+|country|IND|
+|country|IOT|
+|country|IRL|
+|country|IRN|
+|country|IRQ|
+|country|ISL|
+|country|ISR|
+|country|ITA|
+|country|JAM|
+|country|JEY|
+|country|JOR|
+|country|JPN|
+|country|KAZ|
+|country|KEN|
+|country|KGZ|
+|country|KHM|
+|country|KIR|
+|country|KNA|
+|country|KOR|
+|country|KWT|
+|country|LAO|
+|country|LBN|
+|country|LBR|
+|country|LBY|
+|country|LCA|
+|country|LIE|
+|country|LKA|
+|country|LSO|
+|country|LTU|
+|country|LUX|
+|country|LVA|
+|country|MAC|
+|country|MAF|
+|country|MAR|
+|country|MCO|
+|country|MDA|
+|country|MDG|
+|country|MDV|
+|country|MEX|
+|country|MHL|
+|country|MKD|
+|country|MLI|
+|country|MLT|
+|country|MMR|
+|country|MNE|
+|country|MNG|
+|country|MNP|
+|country|MOZ|
+|country|MRT|
+|country|MSR|
+|country|MTQ|
+|country|MUS|
+|country|MWI|
+|country|MYS|
+|country|MYT|
+|country|NAM|
+|country|NCL|
+|country|NER|
+|country|NFK|
+|country|NGA|
+|country|NIC|
+|country|NIU|
+|country|NLD|
+|country|NOR|
+|country|NPL|
+|country|NRU|
+|country|NZL|
+|country|OMN|
+|country|PAK|
+|country|PAN|
+|country|PCN|
+|country|PER|
+|country|PHL|
+|country|PLW|
+|country|PNG|
+|country|POL|
+|country|PRI|
+|country|PRK|
+|country|PRT|
+|country|PRY|
+|country|PSE|
+|country|PYF|
+|country|QAT|
+|country|REU|
+|country|ROU|
+|country|RUS|
+|country|RWA|
+|country|SAU|
+|country|SDN|
+|country|SEN|
+|country|SGP|
+|country|SGS|
+|country|SHN|
+|country|SJM|
+|country|SLB|
+|country|SLE|
+|country|SLV|
+|country|SMR|
+|country|SOM|
+|country|SPM|
+|country|SRB|
+|country|SSD|
+|country|STP|
+|country|SUR|
+|country|SVK|
+|country|SVN|
+|country|SWE|
+|country|SWZ|
+|country|SXM|
+|country|SYC|
+|country|SYR|
+|country|TCA|
+|country|TCD|
+|country|TGO|
+|country|THA|
+|country|TJK|
+|country|TKL|
+|country|TKM|
+|country|TLS|
+|country|TON|
+|country|TTO|
+|country|TUN|
+|country|TUR|
+|country|TUV|
+|country|TWN|
+|country|TZA|
+|country|UGA|
+|country|UKR|
+|country|UMI|
+|country|URY|
+|country|USA|
+|country|UZB|
+|country|VAT|
+|country|VCT|
+|country|VEN|
+|country|VGB|
+|country|VIR|
+|country|VNM|
+|country|VUT|
+|country|WLF|
+|country|WSM|
+|country|YEM|
+|country|ZAF|
+|country|ZMB|
+|country|ZWE|
 |work_order_type|device|
 |category|PENDING|
 |category|IN_PROGRESS|
@@ -6644,12 +9845,12 @@ Status Code **200**
 |category|BLOCKED|
 |entity_type|WKF|
 |schema_version|1.0|
-|applies_to|unit|
-|applies_to|part|
-|applies_to|program|
-|applies_to|project|
-|applies_to|customer|
-|applies_to|contact|
+|applies_to|UNIT|
+|applies_to|PART|
+|applies_to|PGM|
+|applies_to|PRJ|
+|applies_to|CUS|
+|applies_to|CON|
 
 Status Code **400**
 
@@ -6789,7 +9990,10 @@ Fetch Batch
         "entity_type",
         "created",
         "updated",
-        "location"
+        "location",
+        "is_active",
+        "active_batches",
+        "active_cycles"
       ],
       "properties": {
         "queue_id": {
@@ -7243,17 +10447,74 @@ Fetch Batch
             }
           }
         },
+        "active_work_orders": {
+          "type": "number",
+          "description": "Total of work orders in an active status",
+          "readOnly": true
+        },
         "total_batches": {
           "type": "integer",
           "description": "Number of batches assigned to the queue",
           "readOnly": true
+        },
+        "is_active": {
+          "type": "boolean",
+          "description": "Toggle if the batch has active cycles or batches",
+          "readOnly": true
+        },
+        "active_batches": {
+          "type": "number",
+          "description": "Total of batches in the queue with active cycles",
+          "readOnly": true
+        },
+        "active_cycles": {
+          "type": "number",
+          "description": "Total of all active cycles across all batches",
+          "readOnly": true
         }
       }
     },
-    "priority": {
+    "order": {
       "type": "integer",
-      "description": "Priority order for the batch",
+      "description": "Order to process the batch",
       "minimum": 0
+    },
+    "current_status": {
+      "type": "object",
+      "description": "Defines the properties for a status",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "category"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "A Custom label for the status",
+          "pattern": "^[A-Za-z][0-9a-zA-Z-_ ]+$"
+        },
+        "category": {
+          "type": "string",
+          "description": "The classifier for the statues",
+          "enum": [
+            "PENDING",
+            "IN_PROGRESS",
+            "VERIFYING",
+            "COMPLETE",
+            "CANCELLED",
+            "BLOCKED"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "nullable": true,
+          "description": "A description for the status"
+        },
+        "order": {
+          "type": "number",
+          "description": "Order status appears when listing"
+        }
+      }
     },
     "number_cycles": {
       "type": "integer",
@@ -7307,8 +10568,9 @@ Fetch Batch
         "entity_type",
         "created",
         "updated",
-        "part",
-        "work_order_type"
+        "work_order_type",
+        "location",
+        "cycles"
       ],
       "properties": {
         "work_order_id": {
@@ -7364,8 +10626,746 @@ Fetch Batch
           "format": "date-time",
           "description": "End date"
         },
+        "current_location": {
+          "deprecated": true,
+          "type": "object",
+          "description": "Defines the properties for a part unit",
+          "additionalProperties": false,
+          "required": [
+            "label",
+            "entity_id",
+            "entity_type",
+            "created",
+            "updated",
+            "location_type",
+            "address"
+          ],
+          "properties": {
+            "location_id": {
+              "description": "The identifier for the location",
+              "type": "string",
+              "readOnly": true,
+              "pattern": "^[0-9a-zA-Z-_]+$"
+            },
+            "entity_id": {
+              "x-no-api-doc": true,
+              "type": "string",
+              "description": "Customer identifier",
+              "readOnly": true,
+              "pattern": "^[0-9a-zA-Z-_]+$"
+            },
+            "entity_type": {
+              "x-no-api-doc": true,
+              "enum": [
+                "LOC"
+              ]
+            },
+            "label": {
+              "type": "string",
+              "description": "Label for the entity"
+            },
+            "slug": {
+              "type": "string",
+              "description": "Slug for the entity (Auto-generated from the label)",
+              "readOnly": true,
+              "deprecated": true,
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+            },
+            "created": {
+              "description": "Date the entity was created",
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true
+            },
+            "updated": {
+              "description": "Last date the entity was updated",
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true
+            },
+            "location_type": {
+              "type": "string",
+              "description": "The type of location",
+              "enum": [
+                "warehouse",
+                "facility",
+                "other"
+              ]
+            },
+            "formatted_address": {
+              "type": "string",
+              "readOnly": true,
+              "description": "Address formatted for the where region the location exists in"
+            },
+            "address": {
+              "type": "object",
+              "required": [
+                "country",
+                "administrative_area",
+                "locality",
+                "postal_code",
+                "thoroughfare"
+              ],
+              "description": "xNAL address for the location ",
+              "properties": {
+                "country": {
+                  "type": "string",
+                  "description": "Three Letter ISO country code",
+                  "enum": [
+                    "ABW",
+                    "AFG",
+                    "AGO",
+                    "AIA",
+                    "ALA",
+                    "ALB",
+                    "AND",
+                    "ARE",
+                    "ARG",
+                    "ARM",
+                    "ASM",
+                    "ATA",
+                    "ATF",
+                    "ATG",
+                    "AUS",
+                    "AUT",
+                    "AZE",
+                    "BDI",
+                    "BEL",
+                    "BEN",
+                    "BES",
+                    "BFA",
+                    "BGD",
+                    "BGR",
+                    "BHR",
+                    "BHS",
+                    "BIH",
+                    "BLM",
+                    "BLR",
+                    "BLZ",
+                    "BMU",
+                    "BOL",
+                    "BRA",
+                    "BRB",
+                    "BRN",
+                    "BTN",
+                    "BVT",
+                    "BWA",
+                    "CAF",
+                    "CAN",
+                    "CCK",
+                    "CHE",
+                    "CHL",
+                    "CHN",
+                    "CIV",
+                    "CMR",
+                    "COD",
+                    "COG",
+                    "COK",
+                    "COL",
+                    "COM",
+                    "CPV",
+                    "CRI",
+                    "CUB",
+                    "CUW",
+                    "CXR",
+                    "CYM",
+                    "CYP",
+                    "CZE",
+                    "DEU",
+                    "DJI",
+                    "DMA",
+                    "DNK",
+                    "DOM",
+                    "DZA",
+                    "ECU",
+                    "EGY",
+                    "ERI",
+                    "ESH",
+                    "ESP",
+                    "EST",
+                    "ETH",
+                    "FIN",
+                    "FJI",
+                    "FLK",
+                    "FRA",
+                    "FRO",
+                    "FSM",
+                    "GAB",
+                    "GBR",
+                    "GEO",
+                    "GGY",
+                    "GHA",
+                    "GIB",
+                    "GIN",
+                    "GLP",
+                    "GMB",
+                    "GNB",
+                    "GNQ",
+                    "GRC",
+                    "GRD",
+                    "GRL",
+                    "GTM",
+                    "GUF",
+                    "GUM",
+                    "GUY",
+                    "HKG",
+                    "HMD",
+                    "HND",
+                    "HRV",
+                    "HTI",
+                    "HUN",
+                    "IDN",
+                    "IMN",
+                    "IND",
+                    "IOT",
+                    "IRL",
+                    "IRN",
+                    "IRQ",
+                    "ISL",
+                    "ISR",
+                    "ITA",
+                    "JAM",
+                    "JEY",
+                    "JOR",
+                    "JPN",
+                    "KAZ",
+                    "KEN",
+                    "KGZ",
+                    "KHM",
+                    "KIR",
+                    "KNA",
+                    "KOR",
+                    "KWT",
+                    "LAO",
+                    "LBN",
+                    "LBR",
+                    "LBY",
+                    "LCA",
+                    "LIE",
+                    "LKA",
+                    "LSO",
+                    "LTU",
+                    "LUX",
+                    "LVA",
+                    "MAC",
+                    "MAF",
+                    "MAR",
+                    "MCO",
+                    "MDA",
+                    "MDG",
+                    "MDV",
+                    "MEX",
+                    "MHL",
+                    "MKD",
+                    "MLI",
+                    "MLT",
+                    "MMR",
+                    "MNE",
+                    "MNG",
+                    "MNP",
+                    "MOZ",
+                    "MRT",
+                    "MSR",
+                    "MTQ",
+                    "MUS",
+                    "MWI",
+                    "MYS",
+                    "MYT",
+                    "NAM",
+                    "NCL",
+                    "NER",
+                    "NFK",
+                    "NGA",
+                    "NIC",
+                    "NIU",
+                    "NLD",
+                    "NOR",
+                    "NPL",
+                    "NRU",
+                    "NZL",
+                    "OMN",
+                    "PAK",
+                    "PAN",
+                    "PCN",
+                    "PER",
+                    "PHL",
+                    "PLW",
+                    "PNG",
+                    "POL",
+                    "PRI",
+                    "PRK",
+                    "PRT",
+                    "PRY",
+                    "PSE",
+                    "PYF",
+                    "QAT",
+                    "REU",
+                    "ROU",
+                    "RUS",
+                    "RWA",
+                    "SAU",
+                    "SDN",
+                    "SEN",
+                    "SGP",
+                    "SGS",
+                    "SHN",
+                    "SJM",
+                    "SLB",
+                    "SLE",
+                    "SLV",
+                    "SMR",
+                    "SOM",
+                    "SPM",
+                    "SRB",
+                    "SSD",
+                    "STP",
+                    "SUR",
+                    "SVK",
+                    "SVN",
+                    "SWE",
+                    "SWZ",
+                    "SXM",
+                    "SYC",
+                    "SYR",
+                    "TCA",
+                    "TCD",
+                    "TGO",
+                    "THA",
+                    "TJK",
+                    "TKL",
+                    "TKM",
+                    "TLS",
+                    "TON",
+                    "TTO",
+                    "TUN",
+                    "TUR",
+                    "TUV",
+                    "TWN",
+                    "TZA",
+                    "UGA",
+                    "UKR",
+                    "UMI",
+                    "URY",
+                    "USA",
+                    "UZB",
+                    "VAT",
+                    "VCT",
+                    "VEN",
+                    "VGB",
+                    "VIR",
+                    "VNM",
+                    "VUT",
+                    "WLF",
+                    "WSM",
+                    "YEM",
+                    "ZAF",
+                    "ZMB",
+                    "ZWE"
+                  ]
+                },
+                "administrative_area": {
+                  "type": "string",
+                  "description": "State / Province / Region"
+                },
+                "sub_administrative_area": {
+                  "type": "string",
+                  "description": "County / District"
+                },
+                "locality": {
+                  "type": "string",
+                  "description": "City / Town"
+                },
+                "postal_code": {
+                  "type": "string",
+                  "description": "Postal Code / Zip Code"
+                },
+                "thoroughfare": {
+                  "type": "string",
+                  "description": "Street Address"
+                },
+                "premise": {
+                  "type": "string",
+                  "description": "Apartment / Suite / Box number etc"
+                },
+                "sub_premise": {
+                  "type": "string",
+                  "description": "Floor # / Room # / Building label etc"
+                }
+              }
+            }
+          }
+        },
+        "location": {
+          "type": "object",
+          "description": "Defines the properties for a part unit",
+          "additionalProperties": false,
+          "required": [
+            "label",
+            "entity_id",
+            "entity_type",
+            "created",
+            "updated",
+            "location_type",
+            "address"
+          ],
+          "properties": {
+            "location_id": {
+              "description": "The identifier for the location",
+              "type": "string",
+              "readOnly": true,
+              "pattern": "^[0-9a-zA-Z-_]+$"
+            },
+            "entity_id": {
+              "x-no-api-doc": true,
+              "type": "string",
+              "description": "Customer identifier",
+              "readOnly": true,
+              "pattern": "^[0-9a-zA-Z-_]+$"
+            },
+            "entity_type": {
+              "x-no-api-doc": true,
+              "enum": [
+                "LOC"
+              ]
+            },
+            "label": {
+              "type": "string",
+              "description": "Label for the entity"
+            },
+            "slug": {
+              "type": "string",
+              "description": "Slug for the entity (Auto-generated from the label)",
+              "readOnly": true,
+              "deprecated": true,
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+            },
+            "created": {
+              "description": "Date the entity was created",
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true
+            },
+            "updated": {
+              "description": "Last date the entity was updated",
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true
+            },
+            "location_type": {
+              "type": "string",
+              "description": "The type of location",
+              "enum": [
+                "warehouse",
+                "facility",
+                "other"
+              ]
+            },
+            "formatted_address": {
+              "type": "string",
+              "readOnly": true,
+              "description": "Address formatted for the where region the location exists in"
+            },
+            "address": {
+              "type": "object",
+              "required": [
+                "country",
+                "administrative_area",
+                "locality",
+                "postal_code",
+                "thoroughfare"
+              ],
+              "description": "xNAL address for the location ",
+              "properties": {
+                "country": {
+                  "type": "string",
+                  "description": "Three Letter ISO country code",
+                  "enum": [
+                    "ABW",
+                    "AFG",
+                    "AGO",
+                    "AIA",
+                    "ALA",
+                    "ALB",
+                    "AND",
+                    "ARE",
+                    "ARG",
+                    "ARM",
+                    "ASM",
+                    "ATA",
+                    "ATF",
+                    "ATG",
+                    "AUS",
+                    "AUT",
+                    "AZE",
+                    "BDI",
+                    "BEL",
+                    "BEN",
+                    "BES",
+                    "BFA",
+                    "BGD",
+                    "BGR",
+                    "BHR",
+                    "BHS",
+                    "BIH",
+                    "BLM",
+                    "BLR",
+                    "BLZ",
+                    "BMU",
+                    "BOL",
+                    "BRA",
+                    "BRB",
+                    "BRN",
+                    "BTN",
+                    "BVT",
+                    "BWA",
+                    "CAF",
+                    "CAN",
+                    "CCK",
+                    "CHE",
+                    "CHL",
+                    "CHN",
+                    "CIV",
+                    "CMR",
+                    "COD",
+                    "COG",
+                    "COK",
+                    "COL",
+                    "COM",
+                    "CPV",
+                    "CRI",
+                    "CUB",
+                    "CUW",
+                    "CXR",
+                    "CYM",
+                    "CYP",
+                    "CZE",
+                    "DEU",
+                    "DJI",
+                    "DMA",
+                    "DNK",
+                    "DOM",
+                    "DZA",
+                    "ECU",
+                    "EGY",
+                    "ERI",
+                    "ESH",
+                    "ESP",
+                    "EST",
+                    "ETH",
+                    "FIN",
+                    "FJI",
+                    "FLK",
+                    "FRA",
+                    "FRO",
+                    "FSM",
+                    "GAB",
+                    "GBR",
+                    "GEO",
+                    "GGY",
+                    "GHA",
+                    "GIB",
+                    "GIN",
+                    "GLP",
+                    "GMB",
+                    "GNB",
+                    "GNQ",
+                    "GRC",
+                    "GRD",
+                    "GRL",
+                    "GTM",
+                    "GUF",
+                    "GUM",
+                    "GUY",
+                    "HKG",
+                    "HMD",
+                    "HND",
+                    "HRV",
+                    "HTI",
+                    "HUN",
+                    "IDN",
+                    "IMN",
+                    "IND",
+                    "IOT",
+                    "IRL",
+                    "IRN",
+                    "IRQ",
+                    "ISL",
+                    "ISR",
+                    "ITA",
+                    "JAM",
+                    "JEY",
+                    "JOR",
+                    "JPN",
+                    "KAZ",
+                    "KEN",
+                    "KGZ",
+                    "KHM",
+                    "KIR",
+                    "KNA",
+                    "KOR",
+                    "KWT",
+                    "LAO",
+                    "LBN",
+                    "LBR",
+                    "LBY",
+                    "LCA",
+                    "LIE",
+                    "LKA",
+                    "LSO",
+                    "LTU",
+                    "LUX",
+                    "LVA",
+                    "MAC",
+                    "MAF",
+                    "MAR",
+                    "MCO",
+                    "MDA",
+                    "MDG",
+                    "MDV",
+                    "MEX",
+                    "MHL",
+                    "MKD",
+                    "MLI",
+                    "MLT",
+                    "MMR",
+                    "MNE",
+                    "MNG",
+                    "MNP",
+                    "MOZ",
+                    "MRT",
+                    "MSR",
+                    "MTQ",
+                    "MUS",
+                    "MWI",
+                    "MYS",
+                    "MYT",
+                    "NAM",
+                    "NCL",
+                    "NER",
+                    "NFK",
+                    "NGA",
+                    "NIC",
+                    "NIU",
+                    "NLD",
+                    "NOR",
+                    "NPL",
+                    "NRU",
+                    "NZL",
+                    "OMN",
+                    "PAK",
+                    "PAN",
+                    "PCN",
+                    "PER",
+                    "PHL",
+                    "PLW",
+                    "PNG",
+                    "POL",
+                    "PRI",
+                    "PRK",
+                    "PRT",
+                    "PRY",
+                    "PSE",
+                    "PYF",
+                    "QAT",
+                    "REU",
+                    "ROU",
+                    "RUS",
+                    "RWA",
+                    "SAU",
+                    "SDN",
+                    "SEN",
+                    "SGP",
+                    "SGS",
+                    "SHN",
+                    "SJM",
+                    "SLB",
+                    "SLE",
+                    "SLV",
+                    "SMR",
+                    "SOM",
+                    "SPM",
+                    "SRB",
+                    "SSD",
+                    "STP",
+                    "SUR",
+                    "SVK",
+                    "SVN",
+                    "SWE",
+                    "SWZ",
+                    "SXM",
+                    "SYC",
+                    "SYR",
+                    "TCA",
+                    "TCD",
+                    "TGO",
+                    "THA",
+                    "TJK",
+                    "TKL",
+                    "TKM",
+                    "TLS",
+                    "TON",
+                    "TTO",
+                    "TUN",
+                    "TUR",
+                    "TUV",
+                    "TWN",
+                    "TZA",
+                    "UGA",
+                    "UKR",
+                    "UMI",
+                    "URY",
+                    "USA",
+                    "UZB",
+                    "VAT",
+                    "VCT",
+                    "VEN",
+                    "VGB",
+                    "VIR",
+                    "VNM",
+                    "VUT",
+                    "WLF",
+                    "WSM",
+                    "YEM",
+                    "ZAF",
+                    "ZMB",
+                    "ZWE"
+                  ]
+                },
+                "administrative_area": {
+                  "type": "string",
+                  "description": "State / Province / Region"
+                },
+                "sub_administrative_area": {
+                  "type": "string",
+                  "description": "County / District"
+                },
+                "locality": {
+                  "type": "string",
+                  "description": "City / Town"
+                },
+                "postal_code": {
+                  "type": "string",
+                  "description": "Postal Code / Zip Code"
+                },
+                "thoroughfare": {
+                  "type": "string",
+                  "description": "Street Address"
+                },
+                "premise": {
+                  "type": "string",
+                  "description": "Apartment / Suite / Box number etc"
+                },
+                "sub_premise": {
+                  "type": "string",
+                  "description": "Floor # / Room # / Building label etc"
+                }
+              }
+            }
+          }
+        },
         "description": {
           "type": "string",
+          "nullable": true,
           "description": "Detailed description for the work order"
         },
         "work_order_type": {
@@ -7405,6 +11405,15 @@ Fetch Batch
                 "CANCELLED",
                 "BLOCKED"
               ]
+            },
+            "description": {
+              "type": "string",
+              "nullable": true,
+              "description": "A description for the status"
+            },
+            "order": {
+              "type": "number",
+              "description": "Order status appears when listing"
             }
           }
         },
@@ -7440,6 +11449,11 @@ Fetch Batch
               "enum": [
                 "PRJ"
               ]
+            },
+            "description": {
+              "type": "string",
+              "nullable": true,
+              "description": "Project description"
             },
             "label": {
               "type": "string",
@@ -7525,7 +11539,10 @@ Fetch Batch
                   "deprecated": true,
                   "x-patternProperties": {
                     "^[A-Za-z][A-Za-z0-9_]*$": {
-                      "type": "string"
+                      "type": [
+                        "string",
+                        "null"
+                      ]
                     }
                   }
                 },
@@ -7558,6 +11575,15 @@ Fetch Batch
                           "CANCELLED",
                           "BLOCKED"
                         ]
+                      },
+                      "description": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "A description for the status"
+                      },
+                      "order": {
+                        "type": "number",
+                        "description": "Order status appears when listing"
                       }
                     }
                   }
@@ -7700,7 +11726,10 @@ Fetch Batch
                       "deprecated": true,
                       "x-patternProperties": {
                         "^[A-Za-z][A-Za-z0-9_]*$": {
-                          "type": "string"
+                          "type": [
+                            "string",
+                            "null"
+                          ]
                         }
                       }
                     },
@@ -7733,6 +11762,15 @@ Fetch Batch
                               "CANCELLED",
                               "BLOCKED"
                             ]
+                          },
+                          "description": {
+                            "type": "string",
+                            "nullable": true,
+                            "description": "A description for the status"
+                          },
+                          "order": {
+                            "type": "number",
+                            "description": "Order status appears when listing"
                           }
                         }
                       }
@@ -7776,6 +11814,15 @@ Fetch Batch
                           "CANCELLED",
                           "BLOCKED"
                         ]
+                      },
+                      "description": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "A description for the status"
+                      },
+                      "order": {
+                        "type": "number",
+                        "description": "Order status appears when listing"
                       }
                     }
                   }
@@ -7811,6 +11858,15 @@ Fetch Batch
                       "CANCELLED",
                       "BLOCKED"
                     ]
+                  },
+                  "description": {
+                    "type": "string",
+                    "nullable": true,
+                    "description": "A description for the status"
+                  },
+                  "order": {
+                    "type": "number",
+                    "description": "Order status appears when listing"
                   }
                 }
               }
@@ -7869,20 +11925,57 @@ Fetch Batch
             }
           ]
         },
-        "work_flows": {
+        "cycles": {
           "type": "array",
-          "description": "Cycles of work flows needed to complete the work order",
+          "minimum": 1,
           "items": {
             "type": "object",
+            "additionalProperties": false,
             "required": [
-              "cycles_needed",
+              "needed",
+              "pending",
+              "in_progress",
+              "verifying",
+              "complete",
+              "blocked",
+              "cancelled",
               "work_flow"
             ],
             "properties": {
-              "cycles_needed": {
+              "needed": {
                 "type": "integer",
                 "description": "The number of cycles needed",
                 "minimum": 1
+              },
+              "pending": {
+                "type": "integer",
+                "description": "The number of cycles pending",
+                "readOnly": true
+              },
+              "in_progress": {
+                "type": "integer",
+                "description": "The number of cycles pending",
+                "readOnly": true
+              },
+              "verifying": {
+                "type": "integer",
+                "description": "The number of cycles pending",
+                "readOnly": true
+              },
+              "complete": {
+                "type": "integer",
+                "description": "The number of cycles pending",
+                "readOnly": true
+              },
+              "blocked": {
+                "type": "integer",
+                "description": "The number of cycles pending",
+                "readOnly": true
+              },
+              "cancelled": {
+                "type": "integer",
+                "description": "The number of cycles pending",
+                "readOnly": true
               },
               "work_flow": {
                 "type": "object",
@@ -7958,13 +12051,94 @@ Fetch Batch
                     "type": "string",
                     "description": "The entity type this work flow applies too",
                     "enum": [
-                      "unit",
-                      "part",
-                      "program",
-                      "project",
-                      "customer",
-                      "contact"
+                      "UNIT",
+                      "PART",
+                      "PGM",
+                      "PRJ",
+                      "CUS",
+                      "CON"
                     ]
+                  },
+                  "triggered_by": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "description": "Possible entity events",
+                      "enum": [
+                        "CON.attached",
+                        "CON.created",
+                        "CON.deleted",
+                        "CON.detached",
+                        "CON.removed",
+                        "CON.updated",
+                        "CUS.attached",
+                        "CUS.created",
+                        "CUS.deleted",
+                        "CUS.detached",
+                        "CUS.removed",
+                        "CUS.updated",
+                        "LOC.attached",
+                        "LOC.created",
+                        "LOC.deleted",
+                        "LOC.detached",
+                        "LOC.removed",
+                        "LOC.updated",
+                        "NOTE.attached",
+                        "NOTE.created",
+                        "NOTE.deleted",
+                        "NOTE.detached",
+                        "NOTE.removed",
+                        "NOTE.updated",
+                        "PART.attached",
+                        "PART.created",
+                        "PART.deleted",
+                        "PART.detached",
+                        "PART.removed",
+                        "PART.updated",
+                        "PGM.attached",
+                        "PGM.created",
+                        "PGM.deleted",
+                        "PGM.detached",
+                        "PGM.removed",
+                        "PGM.updated",
+                        "PRO.attached",
+                        "PRO.created",
+                        "PRO.deleted",
+                        "PRO.detached",
+                        "PRO.removed",
+                        "PRO.updated",
+                        "RES.attached",
+                        "RES.created",
+                        "RES.deleted",
+                        "RES.detached",
+                        "RES.removed",
+                        "RES.updated",
+                        "UNIT.attached",
+                        "UNIT.created",
+                        "UNIT.deleted",
+                        "UNIT.detached",
+                        "UNIT.removed",
+                        "UNIT.updated",
+                        "USER.attached",
+                        "USER.created",
+                        "USER.deleted",
+                        "USER.detached",
+                        "USER.removed",
+                        "USER.updated",
+                        "WKF.attached",
+                        "WKF.created",
+                        "WKF.deleted",
+                        "WKF.detached",
+                        "WKF.removed",
+                        "WKF.updated",
+                        "WOR.attached",
+                        "WOR.created",
+                        "WOR.deleted",
+                        "WOR.detached",
+                        "WOR.removed",
+                        "WOR.updated"
+                      ]
+                    }
                   },
                   "starts_at": {
                     "type": "string",
@@ -9470,10 +13644,30 @@ Fetch Batch
                         ]
                       }
                     }
+                  },
+                  "metadata": {
+                    "type": "object",
+                    "description": "Data for the resource as a key value pair",
+                    "additionalProperties": {
+                      "type": "string"
+                    },
+                    "propertyNames": {
+                      "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+                    }
                   }
                 }
               }
             }
+          }
+        },
+        "meta": {
+          "type": "object",
+          "description": "Data for the resource as a key value pair",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "propertyNames": {
+            "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
           }
         }
       }
@@ -9540,8 +13734,17 @@ Status Code **200**
 |»»»»» complete|integer|false|read-only|The number of cycles complete|
 |»»»»» blocked|integer|false|read-only|The number of cycles blocked|
 |»»»»» cancelled|integer|false|read-only|The number of cycles cancelled|
+|»»»» active_work_orders|number|false|read-only|Total of work orders in an active status|
 |»»»» total_batches|integer|false|read-only|Number of batches assigned to the queue|
-|»»» priority|integer|false|none|Priority order for the batch|
+|»»»» is_active|boolean|true|read-only|Toggle if the batch has active cycles or batches|
+|»»»» active_batches|number|true|read-only|Total of batches in the queue with active cycles|
+|»»»» active_cycles|number|true|read-only|Total of all active cycles across all batches|
+|»»» order|integer|false|none|Order to process the batch|
+|»»» current_status|object|false|none|Defines the properties for a status|
+|»»»» status|string|true|none|A Custom label for the status|
+|»»»» category|string|true|none|The classifier for the statues|
+|»»»» description|string\|null|false|none|A description for the status|
+|»»»» order|number|false|none|Order status appears when listing|
 |»»» number_cycles|integer|false|none|The number of cycles for this batch|
 |»»» cycles|object|false|read-only|none|
 |»»»» pending|integer|false|read-only|The number of cycles pending|
@@ -9560,81 +13763,141 @@ Status Code **200**
 |»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
 |»»»» start_date|string(date-time)\|null|false|none|Start date|
 |»»»» end_date|string(date-time)\|null|false|none|End date|
-|»»»» description|string|false|none|Detailed description for the work order|
-|»»»» work_order_type|string|true|none|Type of work order|
-|»»»» due_date|string(date-time)|false|none|End date|
-|»»»» current_status|object|false|none|Defines the properties for a status|
-|»»»»» status|string|true|none|A Custom label for the status|
-|»»»»» category|string|true|none|The classifier for the statues|
-|»»»» project|object|false|none|Defines the properties for a project|
-|»»»»» project_id|string|false|none|Unique identifier|
+|»»»» current_location|object|false|none|Defines the properties for a part unit|
+|»»»»» location_id|string|false|read-only|The identifier for the location|
 |»»»»» entity_id|string|true|read-only|Customer identifier|
 |»»»»» entity_type|string|true|none|none|
 |»»»»» label|string|true|none|Label for the entity|
 |»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
 |»»»»» created|string(date-time)|true|read-only|Date the entity was created|
 |»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»»»» customer|object|true|none|Customer|
-|»»»»»» customer_id|string|false|read-only|Customer identifier|
+|»»»»» location_type|string|true|none|The type of location|
+|»»»»» formatted_address|string|false|read-only|Address formatted for the where region the location exists in|
+|»»»»» address|object|true|none|xNAL address for the location|
+|»»»»»» country|string|true|none|Three Letter ISO country code|
+|»»»»»» administrative_area|string|true|none|State / Province / Region|
+|»»»»»» sub_administrative_area|string|false|none|County / District|
+|»»»»»» locality|string|true|none|City / Town|
+|»»»»»» postal_code|string|true|none|Postal Code / Zip Code|
+|»»»»»» thoroughfare|string|true|none|Street Address|
+|»»»»»» premise|string|false|none|Apartment / Suite / Box number etc|
+|»»»»»» sub_premise|string|false|none|Floor # / Room # / Building label etc|
+|»»»»» location|object|true|none|Defines the properties for a part unit|
+|»»»»»» location_id|string|false|read-only|The identifier for the location|
 |»»»»»» entity_id|string|true|read-only|Customer identifier|
 |»»»»»» entity_type|string|true|none|none|
 |»»»»»» label|string|true|none|Label for the entity|
 |»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
 |»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
 |»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»»»»» external_platform|object|false|none|External Identifiers for the customer|
-|»»»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
+|»»»»»» location_type|string|true|none|The type of location|
+|»»»»»» formatted_address|string|false|read-only|Address formatted for the where region the location exists in|
+|»»»»»» address|object|true|none|xNAL address for the location|
+|»»»»»»» country|string|true|none|Three Letter ISO country code|
+|»»»»»»» administrative_area|string|true|none|State / Province / Region|
+|»»»»»»» sub_administrative_area|string|false|none|County / District|
+|»»»»»»» locality|string|true|none|City / Town|
+|»»»»»»» postal_code|string|true|none|Postal Code / Zip Code|
+|»»»»»»» thoroughfare|string|true|none|Street Address|
+|»»»»»»» premise|string|false|none|Apartment / Suite / Box number etc|
+|»»»»»»» sub_premise|string|false|none|Floor # / Room # / Building label etc|
+|»»»»»» description|string\|null|false|none|Detailed description for the work order|
+|»»»»»» work_order_type|string|true|none|Type of work order|
+|»»»»»» due_date|string(date-time)|false|none|End date|
+|»»»»»» current_status|object|false|none|Defines the properties for a status|
 |»»»»»»» status|string|true|none|A Custom label for the status|
 |»»»»»»» category|string|true|none|The classifier for the statues|
-|»»»»»» total_programs|number|false|none|Total programs under the customer|
-|»»»»»» total_projects|number|false|none|Total projects under the customer|
-|»»»»» program|object|true|none|Defines the properties for a program|
-|»»»»»» program_id|string|false|read-only|Unique identifier|
-|»»»»»» entity_id|string|true|read-only|Customer identifier|
-|»»»»»» entity_type|string|true|none|none|
-|»»»»»» label|string|false|none|Label for the entity|
-|»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
-|»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»»»»» start_date|string(date-time)\|null|false|none|Start date|
-|»»»»»» end_date|string(date-time)\|null|false|none|End date|
-|»»»»»» customer|object|true|none|Customer|
-|»»»»»»» customer_id|string|false|read-only|Customer identifier|
+|»»»»»»» description|string\|null|false|none|A description for the status|
+|»»»»»»» order|number|false|none|Order status appears when listing|
+|»»»»»» project|object|false|none|Defines the properties for a project|
+|»»»»»»» project_id|string|false|none|Unique identifier|
 |»»»»»»» entity_id|string|true|read-only|Customer identifier|
 |»»»»»»» entity_type|string|true|none|none|
+|»»»»»»» description|string\|null|false|none|Project description|
 |»»»»»»» label|string|true|none|Label for the entity|
 |»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
 |»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
 |»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»»»»»» external_platform|object|false|none|External Identifiers for the customer|
-|»»»»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
-|»»»»»»»» status|string|true|none|A Custom label for the status|
-|»»»»»»»» category|string|true|none|The classifier for the statues|
-|»»»»»»» total_programs|number|false|none|Total programs under the customer|
-|»»»»»»» total_projects|number|false|none|Total projects under the customer|
-|»»»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
-|»»»»»»» status|string|true|none|A Custom label for the status|
-|»»»»»»» category|string|true|none|The classifier for the statues|
-|»»»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
-|»»»»»»» status|string|true|none|A Custom label for the status|
-|»»»»»»» category|string|true|none|The classifier for the statues|
-|»»»»»» start_date|string(date-time)\|null|false|none|Start date|
-|»»»»»» end_date|string(date-time)\|null|false|none|End date|
-|»»»»» work_flows|[object]|false|none|Cycles of work flows needed to complete the work order|
-|»»»»»» cycles_needed|integer|true|none|The number of cycles needed|
-|»»»»»» work_flow|object|true|none|Workflow|
-|»»»»»»» work_flow_id|string|false|read-only|Customer identifier|
-|»»»»»»» entity_id|string|true|read-only|Customer identifier|
-|»»»»»»» entity_type|string|true|none|none|
-|»»»»»»» label|string|true|none|Label for the entity|
-|»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
-|»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»»»»»» schema_version|string|true|none|Version of the workflow schema used|
-|»»»»»»» workflow_version|integer|false|read-only|Version number for the work flows (the number of times it has been changed|
-|»»»»»»» applies_to|string|true|none|The entity type this work flow applies too|
-|»»»»»»» starts_at|string|true|none|Starting step|
-|»»»»»»» steps|object|true|none|Steps for the workflow|
+|»»»»»»» customer|object|true|none|Customer|
+|»»»»»»»» customer_id|string|false|read-only|Customer identifier|
+|»»»»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»»»»» entity_type|string|true|none|none|
+|»»»»»»»» label|string|true|none|Label for the entity|
+|»»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»»»»»»» external_platform|object|false|none|External Identifiers for the customer|
+|»»»»»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
+|»»»»»»»»» status|string|true|none|A Custom label for the status|
+|»»»»»»»»» category|string|true|none|The classifier for the statues|
+|»»»»»»»»» description|string\|null|false|none|A description for the status|
+|»»»»»»»»» order|number|false|none|Order status appears when listing|
+|»»»»»»»» total_programs|number|false|none|Total programs under the customer|
+|»»»»»»»» total_projects|number|false|none|Total projects under the customer|
+|»»»»»»» program|object|true|none|Defines the properties for a program|
+|»»»»»»»» program_id|string|false|read-only|Unique identifier|
+|»»»»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»»»»» entity_type|string|true|none|none|
+|»»»»»»»» label|string|false|none|Label for the entity|
+|»»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»»»»»»» start_date|string(date-time)\|null|false|none|Start date|
+|»»»»»»»» end_date|string(date-time)\|null|false|none|End date|
+|»»»»»»»» customer|object|true|none|Customer|
+|»»»»»»»»» customer_id|string|false|read-only|Customer identifier|
+|»»»»»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»»»»»» entity_type|string|true|none|none|
+|»»»»»»»»» label|string|true|none|Label for the entity|
+|»»»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»»»»»»»» external_platform|object|false|none|External Identifiers for the customer|
+|»»»»»»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
+|»»»»»»»»»» status|string|true|none|A Custom label for the status|
+|»»»»»»»»»» category|string|true|none|The classifier for the statues|
+|»»»»»»»»»» description|string\|null|false|none|A description for the status|
+|»»»»»»»»»» order|number|false|none|Order status appears when listing|
+|»»»»»»»»» total_programs|number|false|none|Total programs under the customer|
+|»»»»»»»»» total_projects|number|false|none|Total projects under the customer|
+|»»»»»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
+|»»»»»»»»» status|string|true|none|A Custom label for the status|
+|»»»»»»»»» category|string|true|none|The classifier for the statues|
+|»»»»»»»»» description|string\|null|false|none|A description for the status|
+|»»»»»»»»» order|number|false|none|Order status appears when listing|
+|»»»»»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
+|»»»»»»»»» status|string|true|none|A Custom label for the status|
+|»»»»»»»»» category|string|true|none|The classifier for the statues|
+|»»»»»»»»» description|string\|null|false|none|A description for the status|
+|»»»»»»»»» order|number|false|none|Order status appears when listing|
+|»»»»»»»» start_date|string(date-time)\|null|false|none|Start date|
+|»»»»»»»» end_date|string(date-time)\|null|false|none|End date|
+|»»»»»»» cycles|[object]|true|none|none|
+|»»»»»»»» needed|integer|true|none|The number of cycles needed|
+|»»»»»»»» pending|integer|true|read-only|The number of cycles pending|
+|»»»»»»»» in_progress|integer|true|read-only|The number of cycles pending|
+|»»»»»»»» verifying|integer|true|read-only|The number of cycles pending|
+|»»»»»»»» complete|integer|true|read-only|The number of cycles pending|
+|»»»»»»»» blocked|integer|true|read-only|The number of cycles pending|
+|»»»»»»»» cancelled|integer|true|read-only|The number of cycles pending|
+|»»»»»»»» work_flow|object|true|none|Workflow|
+|»»»»»»»»» work_flow_id|string|false|read-only|Customer identifier|
+|»»»»»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»»»»»» entity_type|string|true|none|none|
+|»»»»»»»»» label|string|true|none|Label for the entity|
+|»»»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»»»»»»»» schema_version|string|true|none|Version of the workflow schema used|
+|»»»»»»»»» workflow_version|integer|false|read-only|Version number for the work flows (the number of times it has been changed|
+|»»»»»»»»» applies_to|string|true|none|The entity type this work flow applies too|
+|»»»»»»»»» triggered_by|[string]|false|none|none|
+|»»»»»»»»» starts_at|string|true|none|Starting step|
+|»»»»»»»»» steps|object|true|none|Steps for the workflow|
+|»»»»»»»»» metadata|object|false|none|Data for the resource as a key value pair|
+|»»»»»»»»»» **additionalProperties**|string|false|none|none|
+|»»»»»»»»» meta|object|false|none|Data for the resource as a key value pair|
+|»»»»»»»»»» **additionalProperties**|string|false|none|none|
 
 #### Enumerated Values
 
@@ -9894,7 +14157,519 @@ Status Code **200**
 |country|ZAF|
 |country|ZMB|
 |country|ZWE|
+|category|PENDING|
+|category|IN_PROGRESS|
+|category|VERIFYING|
+|category|COMPLETE|
+|category|CANCELLED|
+|category|BLOCKED|
 |entity_type|WOR|
+|entity_type|LOC|
+|location_type|warehouse|
+|location_type|facility|
+|location_type|other|
+|country|ABW|
+|country|AFG|
+|country|AGO|
+|country|AIA|
+|country|ALA|
+|country|ALB|
+|country|AND|
+|country|ARE|
+|country|ARG|
+|country|ARM|
+|country|ASM|
+|country|ATA|
+|country|ATF|
+|country|ATG|
+|country|AUS|
+|country|AUT|
+|country|AZE|
+|country|BDI|
+|country|BEL|
+|country|BEN|
+|country|BES|
+|country|BFA|
+|country|BGD|
+|country|BGR|
+|country|BHR|
+|country|BHS|
+|country|BIH|
+|country|BLM|
+|country|BLR|
+|country|BLZ|
+|country|BMU|
+|country|BOL|
+|country|BRA|
+|country|BRB|
+|country|BRN|
+|country|BTN|
+|country|BVT|
+|country|BWA|
+|country|CAF|
+|country|CAN|
+|country|CCK|
+|country|CHE|
+|country|CHL|
+|country|CHN|
+|country|CIV|
+|country|CMR|
+|country|COD|
+|country|COG|
+|country|COK|
+|country|COL|
+|country|COM|
+|country|CPV|
+|country|CRI|
+|country|CUB|
+|country|CUW|
+|country|CXR|
+|country|CYM|
+|country|CYP|
+|country|CZE|
+|country|DEU|
+|country|DJI|
+|country|DMA|
+|country|DNK|
+|country|DOM|
+|country|DZA|
+|country|ECU|
+|country|EGY|
+|country|ERI|
+|country|ESH|
+|country|ESP|
+|country|EST|
+|country|ETH|
+|country|FIN|
+|country|FJI|
+|country|FLK|
+|country|FRA|
+|country|FRO|
+|country|FSM|
+|country|GAB|
+|country|GBR|
+|country|GEO|
+|country|GGY|
+|country|GHA|
+|country|GIB|
+|country|GIN|
+|country|GLP|
+|country|GMB|
+|country|GNB|
+|country|GNQ|
+|country|GRC|
+|country|GRD|
+|country|GRL|
+|country|GTM|
+|country|GUF|
+|country|GUM|
+|country|GUY|
+|country|HKG|
+|country|HMD|
+|country|HND|
+|country|HRV|
+|country|HTI|
+|country|HUN|
+|country|IDN|
+|country|IMN|
+|country|IND|
+|country|IOT|
+|country|IRL|
+|country|IRN|
+|country|IRQ|
+|country|ISL|
+|country|ISR|
+|country|ITA|
+|country|JAM|
+|country|JEY|
+|country|JOR|
+|country|JPN|
+|country|KAZ|
+|country|KEN|
+|country|KGZ|
+|country|KHM|
+|country|KIR|
+|country|KNA|
+|country|KOR|
+|country|KWT|
+|country|LAO|
+|country|LBN|
+|country|LBR|
+|country|LBY|
+|country|LCA|
+|country|LIE|
+|country|LKA|
+|country|LSO|
+|country|LTU|
+|country|LUX|
+|country|LVA|
+|country|MAC|
+|country|MAF|
+|country|MAR|
+|country|MCO|
+|country|MDA|
+|country|MDG|
+|country|MDV|
+|country|MEX|
+|country|MHL|
+|country|MKD|
+|country|MLI|
+|country|MLT|
+|country|MMR|
+|country|MNE|
+|country|MNG|
+|country|MNP|
+|country|MOZ|
+|country|MRT|
+|country|MSR|
+|country|MTQ|
+|country|MUS|
+|country|MWI|
+|country|MYS|
+|country|MYT|
+|country|NAM|
+|country|NCL|
+|country|NER|
+|country|NFK|
+|country|NGA|
+|country|NIC|
+|country|NIU|
+|country|NLD|
+|country|NOR|
+|country|NPL|
+|country|NRU|
+|country|NZL|
+|country|OMN|
+|country|PAK|
+|country|PAN|
+|country|PCN|
+|country|PER|
+|country|PHL|
+|country|PLW|
+|country|PNG|
+|country|POL|
+|country|PRI|
+|country|PRK|
+|country|PRT|
+|country|PRY|
+|country|PSE|
+|country|PYF|
+|country|QAT|
+|country|REU|
+|country|ROU|
+|country|RUS|
+|country|RWA|
+|country|SAU|
+|country|SDN|
+|country|SEN|
+|country|SGP|
+|country|SGS|
+|country|SHN|
+|country|SJM|
+|country|SLB|
+|country|SLE|
+|country|SLV|
+|country|SMR|
+|country|SOM|
+|country|SPM|
+|country|SRB|
+|country|SSD|
+|country|STP|
+|country|SUR|
+|country|SVK|
+|country|SVN|
+|country|SWE|
+|country|SWZ|
+|country|SXM|
+|country|SYC|
+|country|SYR|
+|country|TCA|
+|country|TCD|
+|country|TGO|
+|country|THA|
+|country|TJK|
+|country|TKL|
+|country|TKM|
+|country|TLS|
+|country|TON|
+|country|TTO|
+|country|TUN|
+|country|TUR|
+|country|TUV|
+|country|TWN|
+|country|TZA|
+|country|UGA|
+|country|UKR|
+|country|UMI|
+|country|URY|
+|country|USA|
+|country|UZB|
+|country|VAT|
+|country|VCT|
+|country|VEN|
+|country|VGB|
+|country|VIR|
+|country|VNM|
+|country|VUT|
+|country|WLF|
+|country|WSM|
+|country|YEM|
+|country|ZAF|
+|country|ZMB|
+|country|ZWE|
+|entity_type|LOC|
+|location_type|warehouse|
+|location_type|facility|
+|location_type|other|
+|country|ABW|
+|country|AFG|
+|country|AGO|
+|country|AIA|
+|country|ALA|
+|country|ALB|
+|country|AND|
+|country|ARE|
+|country|ARG|
+|country|ARM|
+|country|ASM|
+|country|ATA|
+|country|ATF|
+|country|ATG|
+|country|AUS|
+|country|AUT|
+|country|AZE|
+|country|BDI|
+|country|BEL|
+|country|BEN|
+|country|BES|
+|country|BFA|
+|country|BGD|
+|country|BGR|
+|country|BHR|
+|country|BHS|
+|country|BIH|
+|country|BLM|
+|country|BLR|
+|country|BLZ|
+|country|BMU|
+|country|BOL|
+|country|BRA|
+|country|BRB|
+|country|BRN|
+|country|BTN|
+|country|BVT|
+|country|BWA|
+|country|CAF|
+|country|CAN|
+|country|CCK|
+|country|CHE|
+|country|CHL|
+|country|CHN|
+|country|CIV|
+|country|CMR|
+|country|COD|
+|country|COG|
+|country|COK|
+|country|COL|
+|country|COM|
+|country|CPV|
+|country|CRI|
+|country|CUB|
+|country|CUW|
+|country|CXR|
+|country|CYM|
+|country|CYP|
+|country|CZE|
+|country|DEU|
+|country|DJI|
+|country|DMA|
+|country|DNK|
+|country|DOM|
+|country|DZA|
+|country|ECU|
+|country|EGY|
+|country|ERI|
+|country|ESH|
+|country|ESP|
+|country|EST|
+|country|ETH|
+|country|FIN|
+|country|FJI|
+|country|FLK|
+|country|FRA|
+|country|FRO|
+|country|FSM|
+|country|GAB|
+|country|GBR|
+|country|GEO|
+|country|GGY|
+|country|GHA|
+|country|GIB|
+|country|GIN|
+|country|GLP|
+|country|GMB|
+|country|GNB|
+|country|GNQ|
+|country|GRC|
+|country|GRD|
+|country|GRL|
+|country|GTM|
+|country|GUF|
+|country|GUM|
+|country|GUY|
+|country|HKG|
+|country|HMD|
+|country|HND|
+|country|HRV|
+|country|HTI|
+|country|HUN|
+|country|IDN|
+|country|IMN|
+|country|IND|
+|country|IOT|
+|country|IRL|
+|country|IRN|
+|country|IRQ|
+|country|ISL|
+|country|ISR|
+|country|ITA|
+|country|JAM|
+|country|JEY|
+|country|JOR|
+|country|JPN|
+|country|KAZ|
+|country|KEN|
+|country|KGZ|
+|country|KHM|
+|country|KIR|
+|country|KNA|
+|country|KOR|
+|country|KWT|
+|country|LAO|
+|country|LBN|
+|country|LBR|
+|country|LBY|
+|country|LCA|
+|country|LIE|
+|country|LKA|
+|country|LSO|
+|country|LTU|
+|country|LUX|
+|country|LVA|
+|country|MAC|
+|country|MAF|
+|country|MAR|
+|country|MCO|
+|country|MDA|
+|country|MDG|
+|country|MDV|
+|country|MEX|
+|country|MHL|
+|country|MKD|
+|country|MLI|
+|country|MLT|
+|country|MMR|
+|country|MNE|
+|country|MNG|
+|country|MNP|
+|country|MOZ|
+|country|MRT|
+|country|MSR|
+|country|MTQ|
+|country|MUS|
+|country|MWI|
+|country|MYS|
+|country|MYT|
+|country|NAM|
+|country|NCL|
+|country|NER|
+|country|NFK|
+|country|NGA|
+|country|NIC|
+|country|NIU|
+|country|NLD|
+|country|NOR|
+|country|NPL|
+|country|NRU|
+|country|NZL|
+|country|OMN|
+|country|PAK|
+|country|PAN|
+|country|PCN|
+|country|PER|
+|country|PHL|
+|country|PLW|
+|country|PNG|
+|country|POL|
+|country|PRI|
+|country|PRK|
+|country|PRT|
+|country|PRY|
+|country|PSE|
+|country|PYF|
+|country|QAT|
+|country|REU|
+|country|ROU|
+|country|RUS|
+|country|RWA|
+|country|SAU|
+|country|SDN|
+|country|SEN|
+|country|SGP|
+|country|SGS|
+|country|SHN|
+|country|SJM|
+|country|SLB|
+|country|SLE|
+|country|SLV|
+|country|SMR|
+|country|SOM|
+|country|SPM|
+|country|SRB|
+|country|SSD|
+|country|STP|
+|country|SUR|
+|country|SVK|
+|country|SVN|
+|country|SWE|
+|country|SWZ|
+|country|SXM|
+|country|SYC|
+|country|SYR|
+|country|TCA|
+|country|TCD|
+|country|TGO|
+|country|THA|
+|country|TJK|
+|country|TKL|
+|country|TKM|
+|country|TLS|
+|country|TON|
+|country|TTO|
+|country|TUN|
+|country|TUR|
+|country|TUV|
+|country|TWN|
+|country|TZA|
+|country|UGA|
+|country|UKR|
+|country|UMI|
+|country|URY|
+|country|USA|
+|country|UZB|
+|country|VAT|
+|country|VCT|
+|country|VEN|
+|country|VGB|
+|country|VIR|
+|country|VNM|
+|country|VUT|
+|country|WLF|
+|country|WSM|
+|country|YEM|
+|country|ZAF|
+|country|ZMB|
+|country|ZWE|
 |work_order_type|device|
 |category|PENDING|
 |category|IN_PROGRESS|
@@ -9932,12 +14707,12 @@ Status Code **200**
 |category|BLOCKED|
 |entity_type|WKF|
 |schema_version|1.0|
-|applies_to|unit|
-|applies_to|part|
-|applies_to|program|
-|applies_to|project|
-|applies_to|customer|
-|applies_to|contact|
+|applies_to|UNIT|
+|applies_to|PART|
+|applies_to|PGM|
+|applies_to|PRJ|
+|applies_to|CUS|
+|applies_to|CON|
 
 Status Code **401**
 
@@ -10148,6 +14923,9 @@ required:
   - entity_type
   - created
   - updated
+  - number_cycles
+  - cycles
+  - work_order
 properties:
   batch_id:
     description: The identifier for the batch
@@ -10173,6 +14951,35 @@ properties:
     readOnly: true
     deprecated: true
     pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+  current_status:
+    type: object
+    description: Defines the properties for a status
+    additionalProperties: false
+    required:
+      - status
+      - category
+    properties:
+      status:
+        type: string
+        description: A Custom label for the status
+        pattern: '^[A-Za-z][0-9a-zA-Z-_ ]+$'
+      category:
+        type: string
+        description: The classifier for the statues
+        enum:
+          - PENDING
+          - IN_PROGRESS
+          - VERIFYING
+          - COMPLETE
+          - CANCELLED
+          - BLOCKED
+      description:
+        type: string
+        nullable: true
+        description: A description for the status
+      order:
+        type: number
+        description: Order status appears when listing
   created:
     description: Date the entity was created
     type: string
@@ -10194,6 +15001,9 @@ properties:
       - created
       - updated
       - location
+      - is_active
+      - active_batches
+      - active_cycles
     properties:
       queue_id:
         type: string
@@ -10603,13 +15413,29 @@ properties:
             type: integer
             description: The number of cycles cancelled
             readOnly: true
+      active_work_orders:
+        type: number
+        description: Total of work orders in an active status
+        readOnly: true
       total_batches:
         type: integer
         description: Number of batches assigned to the queue
         readOnly: true
-  priority:
+      is_active:
+        type: boolean
+        description: Toggle if the batch has active cycles or batches
+        readOnly: true
+      active_batches:
+        type: number
+        description: Total of batches in the queue with active cycles
+        readOnly: true
+      active_cycles:
+        type: number
+        description: Total of all active cycles across all batches
+        readOnly: true
+  order:
     type: integer
-    description: Priority order for the batch
+    description: Order to process the batch
     minimum: 0
   number_cycles:
     type: integer
@@ -10654,8 +15480,9 @@ properties:
       - entity_type
       - created
       - updated
-      - part
       - work_order_type
+      - location
+      - cycles
     properties:
       work_order_id:
         type: string
@@ -10700,8 +15527,694 @@ properties:
         nullable: true
         format: date-time
         description: End date
+      current_location:
+        deprecated: true
+        type: object
+        description: Defines the properties for a part unit
+        additionalProperties: false
+        required:
+          - label
+          - entity_id
+          - entity_type
+          - created
+          - updated
+          - location_type
+          - address
+        properties:
+          location_id:
+            description: The identifier for the location
+            type: string
+            readOnly: true
+            pattern: '^[0-9a-zA-Z-_]+$'
+          entity_id:
+            x-no-api-doc: true
+            type: string
+            description: Customer identifier
+            readOnly: true
+            pattern: '^[0-9a-zA-Z-_]+$'
+          entity_type:
+            x-no-api-doc: true
+            enum:
+              - LOC
+          label:
+            type: string
+            description: Label for the entity
+          slug:
+            type: string
+            description: Slug for the entity (Auto-generated from the label)
+            readOnly: true
+            deprecated: true
+            pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+          created:
+            description: Date the entity was created
+            type: string
+            format: date-time
+            readOnly: true
+          updated:
+            description: Last date the entity was updated
+            type: string
+            format: date-time
+            readOnly: true
+          location_type:
+            type: string
+            description: The type of location
+            enum:
+              - warehouse
+              - facility
+              - other
+          formatted_address:
+            type: string
+            readOnly: true
+            description: Address formatted for the where region the location exists in
+          address:
+            type: object
+            required:
+              - country
+              - administrative_area
+              - locality
+              - postal_code
+              - thoroughfare
+            description: 'xNAL address for the location '
+            properties:
+              country:
+                type: string
+                description: Three Letter ISO country code
+                enum:
+                  - ABW
+                  - AFG
+                  - AGO
+                  - AIA
+                  - ALA
+                  - ALB
+                  - AND
+                  - ARE
+                  - ARG
+                  - ARM
+                  - ASM
+                  - ATA
+                  - ATF
+                  - ATG
+                  - AUS
+                  - AUT
+                  - AZE
+                  - BDI
+                  - BEL
+                  - BEN
+                  - BES
+                  - BFA
+                  - BGD
+                  - BGR
+                  - BHR
+                  - BHS
+                  - BIH
+                  - BLM
+                  - BLR
+                  - BLZ
+                  - BMU
+                  - BOL
+                  - BRA
+                  - BRB
+                  - BRN
+                  - BTN
+                  - BVT
+                  - BWA
+                  - CAF
+                  - CAN
+                  - CCK
+                  - CHE
+                  - CHL
+                  - CHN
+                  - CIV
+                  - CMR
+                  - COD
+                  - COG
+                  - COK
+                  - COL
+                  - COM
+                  - CPV
+                  - CRI
+                  - CUB
+                  - CUW
+                  - CXR
+                  - CYM
+                  - CYP
+                  - CZE
+                  - DEU
+                  - DJI
+                  - DMA
+                  - DNK
+                  - DOM
+                  - DZA
+                  - ECU
+                  - EGY
+                  - ERI
+                  - ESH
+                  - ESP
+                  - EST
+                  - ETH
+                  - FIN
+                  - FJI
+                  - FLK
+                  - FRA
+                  - FRO
+                  - FSM
+                  - GAB
+                  - GBR
+                  - GEO
+                  - GGY
+                  - GHA
+                  - GIB
+                  - GIN
+                  - GLP
+                  - GMB
+                  - GNB
+                  - GNQ
+                  - GRC
+                  - GRD
+                  - GRL
+                  - GTM
+                  - GUF
+                  - GUM
+                  - GUY
+                  - HKG
+                  - HMD
+                  - HND
+                  - HRV
+                  - HTI
+                  - HUN
+                  - IDN
+                  - IMN
+                  - IND
+                  - IOT
+                  - IRL
+                  - IRN
+                  - IRQ
+                  - ISL
+                  - ISR
+                  - ITA
+                  - JAM
+                  - JEY
+                  - JOR
+                  - JPN
+                  - KAZ
+                  - KEN
+                  - KGZ
+                  - KHM
+                  - KIR
+                  - KNA
+                  - KOR
+                  - KWT
+                  - LAO
+                  - LBN
+                  - LBR
+                  - LBY
+                  - LCA
+                  - LIE
+                  - LKA
+                  - LSO
+                  - LTU
+                  - LUX
+                  - LVA
+                  - MAC
+                  - MAF
+                  - MAR
+                  - MCO
+                  - MDA
+                  - MDG
+                  - MDV
+                  - MEX
+                  - MHL
+                  - MKD
+                  - MLI
+                  - MLT
+                  - MMR
+                  - MNE
+                  - MNG
+                  - MNP
+                  - MOZ
+                  - MRT
+                  - MSR
+                  - MTQ
+                  - MUS
+                  - MWI
+                  - MYS
+                  - MYT
+                  - NAM
+                  - NCL
+                  - NER
+                  - NFK
+                  - NGA
+                  - NIC
+                  - NIU
+                  - NLD
+                  - NOR
+                  - NPL
+                  - NRU
+                  - NZL
+                  - OMN
+                  - PAK
+                  - PAN
+                  - PCN
+                  - PER
+                  - PHL
+                  - PLW
+                  - PNG
+                  - POL
+                  - PRI
+                  - PRK
+                  - PRT
+                  - PRY
+                  - PSE
+                  - PYF
+                  - QAT
+                  - REU
+                  - ROU
+                  - RUS
+                  - RWA
+                  - SAU
+                  - SDN
+                  - SEN
+                  - SGP
+                  - SGS
+                  - SHN
+                  - SJM
+                  - SLB
+                  - SLE
+                  - SLV
+                  - SMR
+                  - SOM
+                  - SPM
+                  - SRB
+                  - SSD
+                  - STP
+                  - SUR
+                  - SVK
+                  - SVN
+                  - SWE
+                  - SWZ
+                  - SXM
+                  - SYC
+                  - SYR
+                  - TCA
+                  - TCD
+                  - TGO
+                  - THA
+                  - TJK
+                  - TKL
+                  - TKM
+                  - TLS
+                  - TON
+                  - TTO
+                  - TUN
+                  - TUR
+                  - TUV
+                  - TWN
+                  - TZA
+                  - UGA
+                  - UKR
+                  - UMI
+                  - URY
+                  - USA
+                  - UZB
+                  - VAT
+                  - VCT
+                  - VEN
+                  - VGB
+                  - VIR
+                  - VNM
+                  - VUT
+                  - WLF
+                  - WSM
+                  - YEM
+                  - ZAF
+                  - ZMB
+                  - ZWE
+              administrative_area:
+                type: string
+                description: State / Province / Region
+              sub_administrative_area:
+                type: string
+                description: County / District
+              locality:
+                type: string
+                description: City / Town
+              postal_code:
+                type: string
+                description: Postal Code / Zip Code
+              thoroughfare:
+                type: string
+                description: Street Address
+              premise:
+                type: string
+                description: Apartment / Suite / Box number etc
+              sub_premise:
+                type: string
+                description: 'Floor # / Room # / Building label etc'
+      location:
+        type: object
+        description: Defines the properties for a part unit
+        additionalProperties: false
+        required:
+          - label
+          - entity_id
+          - entity_type
+          - created
+          - updated
+          - location_type
+          - address
+        properties:
+          location_id:
+            description: The identifier for the location
+            type: string
+            readOnly: true
+            pattern: '^[0-9a-zA-Z-_]+$'
+          entity_id:
+            x-no-api-doc: true
+            type: string
+            description: Customer identifier
+            readOnly: true
+            pattern: '^[0-9a-zA-Z-_]+$'
+          entity_type:
+            x-no-api-doc: true
+            enum:
+              - LOC
+          label:
+            type: string
+            description: Label for the entity
+          slug:
+            type: string
+            description: Slug for the entity (Auto-generated from the label)
+            readOnly: true
+            deprecated: true
+            pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+          created:
+            description: Date the entity was created
+            type: string
+            format: date-time
+            readOnly: true
+          updated:
+            description: Last date the entity was updated
+            type: string
+            format: date-time
+            readOnly: true
+          location_type:
+            type: string
+            description: The type of location
+            enum:
+              - warehouse
+              - facility
+              - other
+          formatted_address:
+            type: string
+            readOnly: true
+            description: Address formatted for the where region the location exists in
+          address:
+            type: object
+            required:
+              - country
+              - administrative_area
+              - locality
+              - postal_code
+              - thoroughfare
+            description: 'xNAL address for the location '
+            properties:
+              country:
+                type: string
+                description: Three Letter ISO country code
+                enum:
+                  - ABW
+                  - AFG
+                  - AGO
+                  - AIA
+                  - ALA
+                  - ALB
+                  - AND
+                  - ARE
+                  - ARG
+                  - ARM
+                  - ASM
+                  - ATA
+                  - ATF
+                  - ATG
+                  - AUS
+                  - AUT
+                  - AZE
+                  - BDI
+                  - BEL
+                  - BEN
+                  - BES
+                  - BFA
+                  - BGD
+                  - BGR
+                  - BHR
+                  - BHS
+                  - BIH
+                  - BLM
+                  - BLR
+                  - BLZ
+                  - BMU
+                  - BOL
+                  - BRA
+                  - BRB
+                  - BRN
+                  - BTN
+                  - BVT
+                  - BWA
+                  - CAF
+                  - CAN
+                  - CCK
+                  - CHE
+                  - CHL
+                  - CHN
+                  - CIV
+                  - CMR
+                  - COD
+                  - COG
+                  - COK
+                  - COL
+                  - COM
+                  - CPV
+                  - CRI
+                  - CUB
+                  - CUW
+                  - CXR
+                  - CYM
+                  - CYP
+                  - CZE
+                  - DEU
+                  - DJI
+                  - DMA
+                  - DNK
+                  - DOM
+                  - DZA
+                  - ECU
+                  - EGY
+                  - ERI
+                  - ESH
+                  - ESP
+                  - EST
+                  - ETH
+                  - FIN
+                  - FJI
+                  - FLK
+                  - FRA
+                  - FRO
+                  - FSM
+                  - GAB
+                  - GBR
+                  - GEO
+                  - GGY
+                  - GHA
+                  - GIB
+                  - GIN
+                  - GLP
+                  - GMB
+                  - GNB
+                  - GNQ
+                  - GRC
+                  - GRD
+                  - GRL
+                  - GTM
+                  - GUF
+                  - GUM
+                  - GUY
+                  - HKG
+                  - HMD
+                  - HND
+                  - HRV
+                  - HTI
+                  - HUN
+                  - IDN
+                  - IMN
+                  - IND
+                  - IOT
+                  - IRL
+                  - IRN
+                  - IRQ
+                  - ISL
+                  - ISR
+                  - ITA
+                  - JAM
+                  - JEY
+                  - JOR
+                  - JPN
+                  - KAZ
+                  - KEN
+                  - KGZ
+                  - KHM
+                  - KIR
+                  - KNA
+                  - KOR
+                  - KWT
+                  - LAO
+                  - LBN
+                  - LBR
+                  - LBY
+                  - LCA
+                  - LIE
+                  - LKA
+                  - LSO
+                  - LTU
+                  - LUX
+                  - LVA
+                  - MAC
+                  - MAF
+                  - MAR
+                  - MCO
+                  - MDA
+                  - MDG
+                  - MDV
+                  - MEX
+                  - MHL
+                  - MKD
+                  - MLI
+                  - MLT
+                  - MMR
+                  - MNE
+                  - MNG
+                  - MNP
+                  - MOZ
+                  - MRT
+                  - MSR
+                  - MTQ
+                  - MUS
+                  - MWI
+                  - MYS
+                  - MYT
+                  - NAM
+                  - NCL
+                  - NER
+                  - NFK
+                  - NGA
+                  - NIC
+                  - NIU
+                  - NLD
+                  - NOR
+                  - NPL
+                  - NRU
+                  - NZL
+                  - OMN
+                  - PAK
+                  - PAN
+                  - PCN
+                  - PER
+                  - PHL
+                  - PLW
+                  - PNG
+                  - POL
+                  - PRI
+                  - PRK
+                  - PRT
+                  - PRY
+                  - PSE
+                  - PYF
+                  - QAT
+                  - REU
+                  - ROU
+                  - RUS
+                  - RWA
+                  - SAU
+                  - SDN
+                  - SEN
+                  - SGP
+                  - SGS
+                  - SHN
+                  - SJM
+                  - SLB
+                  - SLE
+                  - SLV
+                  - SMR
+                  - SOM
+                  - SPM
+                  - SRB
+                  - SSD
+                  - STP
+                  - SUR
+                  - SVK
+                  - SVN
+                  - SWE
+                  - SWZ
+                  - SXM
+                  - SYC
+                  - SYR
+                  - TCA
+                  - TCD
+                  - TGO
+                  - THA
+                  - TJK
+                  - TKL
+                  - TKM
+                  - TLS
+                  - TON
+                  - TTO
+                  - TUN
+                  - TUR
+                  - TUV
+                  - TWN
+                  - TZA
+                  - UGA
+                  - UKR
+                  - UMI
+                  - URY
+                  - USA
+                  - UZB
+                  - VAT
+                  - VCT
+                  - VEN
+                  - VGB
+                  - VIR
+                  - VNM
+                  - VUT
+                  - WLF
+                  - WSM
+                  - YEM
+                  - ZAF
+                  - ZMB
+                  - ZWE
+              administrative_area:
+                type: string
+                description: State / Province / Region
+              sub_administrative_area:
+                type: string
+                description: County / District
+              locality:
+                type: string
+                description: City / Town
+              postal_code:
+                type: string
+                description: Postal Code / Zip Code
+              thoroughfare:
+                type: string
+                description: Street Address
+              premise:
+                type: string
+                description: Apartment / Suite / Box number etc
+              sub_premise:
+                type: string
+                description: 'Floor # / Room # / Building label etc'
       description:
         type: string
+        nullable: true
         description: Detailed description for the work order
       work_order_type:
         type: string
@@ -10734,6 +16247,13 @@ properties:
               - COMPLETE
               - CANCELLED
               - BLOCKED
+          description:
+            type: string
+            nullable: true
+            description: A description for the status
+          order:
+            type: number
+            description: Order status appears when listing
       project:
         type: object
         description: Defines the properties for a project
@@ -10762,6 +16282,10 @@ properties:
             x-no-api-doc: true
             enum:
               - PRJ
+          description:
+            type: string
+            nullable: true
+            description: Project description
           label:
             type: string
             description: Label for the entity
@@ -10833,7 +16357,9 @@ properties:
                 deprecated: true
                 x-patternProperties: &ref_0
                   '^[A-Za-z][A-Za-z0-9_]*$':
-                    type: string
+                    type:
+                      - string
+                      - 'null'
               allowed_statuses:
                 type: array
                 description: List of allowed statuses
@@ -10860,6 +16386,13 @@ properties:
                         - COMPLETE
                         - CANCELLED
                         - BLOCKED
+                    description:
+                      type: string
+                      nullable: true
+                      description: A description for the status
+                    order:
+                      type: number
+                      description: Order status appears when listing
               total_programs:
                 type: number
                 description: Total programs under the customer
@@ -10999,6 +16532,13 @@ properties:
                             - COMPLETE
                             - CANCELLED
                             - BLOCKED
+                        description:
+                          type: string
+                          nullable: true
+                          description: A description for the status
+                        order:
+                          type: number
+                          description: Order status appears when listing
                   total_programs:
                     type: number
                     description: Total programs under the customer
@@ -11031,6 +16571,13 @@ properties:
                         - COMPLETE
                         - CANCELLED
                         - BLOCKED
+                    description:
+                      type: string
+                      nullable: true
+                      description: A description for the status
+                    order:
+                      type: number
+                      description: Order status appears when listing
           allowed_statuses:
             type: array
             description: List of allowed statuses
@@ -11057,6 +16604,13 @@ properties:
                     - COMPLETE
                     - CANCELLED
                     - BLOCKED
+                description:
+                  type: string
+                  nullable: true
+                  description: A description for the status
+                order:
+                  type: number
+                  description: Order status appears when listing
           start_date:
             type: string
             nullable: true
@@ -11097,19 +16651,50 @@ properties:
                 type: string
                 format: date-time
                 readOnly: true
-      work_flows:
+      cycles:
         type: array
-        description: Cycles of work flows needed to complete the work order
+        minimum: 1
         items:
           type: object
+          additionalProperties: false
           required:
-            - cycles_needed
+            - needed
+            - pending
+            - in_progress
+            - verifying
+            - complete
+            - blocked
+            - cancelled
             - work_flow
           properties:
-            cycles_needed:
+            needed:
               type: integer
               description: The number of cycles needed
               minimum: 1
+            pending:
+              type: integer
+              description: The number of cycles pending
+              readOnly: true
+            in_progress:
+              type: integer
+              description: The number of cycles pending
+              readOnly: true
+            verifying:
+              type: integer
+              description: The number of cycles pending
+              readOnly: true
+            complete:
+              type: integer
+              description: The number of cycles pending
+              readOnly: true
+            blocked:
+              type: integer
+              description: The number of cycles pending
+              readOnly: true
+            cancelled:
+              type: integer
+              description: The number of cycles pending
+              readOnly: true
             work_flow:
               type: object
               description: Workflow
@@ -11174,12 +16759,90 @@ properties:
                   type: string
                   description: The entity type this work flow applies too
                   enum:
-                    - unit
-                    - part
-                    - program
-                    - project
-                    - customer
-                    - contact
+                    - UNIT
+                    - PART
+                    - PGM
+                    - PRJ
+                    - CUS
+                    - CON
+                triggered_by:
+                  type: array
+                  items:
+                    type: string
+                    description: Possible entity events
+                    enum:
+                      - CON.attached
+                      - CON.created
+                      - CON.deleted
+                      - CON.detached
+                      - CON.removed
+                      - CON.updated
+                      - CUS.attached
+                      - CUS.created
+                      - CUS.deleted
+                      - CUS.detached
+                      - CUS.removed
+                      - CUS.updated
+                      - LOC.attached
+                      - LOC.created
+                      - LOC.deleted
+                      - LOC.detached
+                      - LOC.removed
+                      - LOC.updated
+                      - NOTE.attached
+                      - NOTE.created
+                      - NOTE.deleted
+                      - NOTE.detached
+                      - NOTE.removed
+                      - NOTE.updated
+                      - PART.attached
+                      - PART.created
+                      - PART.deleted
+                      - PART.detached
+                      - PART.removed
+                      - PART.updated
+                      - PGM.attached
+                      - PGM.created
+                      - PGM.deleted
+                      - PGM.detached
+                      - PGM.removed
+                      - PGM.updated
+                      - PRO.attached
+                      - PRO.created
+                      - PRO.deleted
+                      - PRO.detached
+                      - PRO.removed
+                      - PRO.updated
+                      - RES.attached
+                      - RES.created
+                      - RES.deleted
+                      - RES.detached
+                      - RES.removed
+                      - RES.updated
+                      - UNIT.attached
+                      - UNIT.created
+                      - UNIT.deleted
+                      - UNIT.detached
+                      - UNIT.removed
+                      - UNIT.updated
+                      - USER.attached
+                      - USER.created
+                      - USER.deleted
+                      - USER.detached
+                      - USER.removed
+                      - USER.updated
+                      - WKF.attached
+                      - WKF.created
+                      - WKF.deleted
+                      - WKF.detached
+                      - WKF.removed
+                      - WKF.updated
+                      - WOR.attached
+                      - WOR.created
+                      - WOR.deleted
+                      - WOR.detached
+                      - WOR.removed
+                      - WOR.updated
                 starts_at:
                   type: string
                   description: Starting step
@@ -11863,6 +17526,20 @@ properties:
                                       - *ref_8
                           allOf:
                             - *ref_7
+                metadata:
+                  type: object
+                  description: Data for the resource as a key value pair
+                  additionalProperties:
+                    type: string
+                  propertyNames:
+                    pattern: '^[A-Za-z][A-Za-z0-9_]*$'
+      meta:
+        type: object
+        description: Data for the resource as a key value pair
+        additionalProperties:
+          type: string
+        propertyNames:
+          pattern: '^[A-Za-z][A-Za-z0-9_]*$'
 
 ```
 
@@ -11877,6 +17554,11 @@ properties:
 |entity_type|string|true|none|none|
 |label|string|false|none|Label for the entity|
 |slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|current_status|object|false|none|Defines the properties for a status|
+|» status|string|true|none|A Custom label for the status|
+|» category|string|true|none|The classifier for the statues|
+|» description|string\|null|false|none|A description for the status|
+|» order|number|false|none|Order status appears when listing|
 |created|string(date-time)|true|read-only|Date the entity was created|
 |updated|string(date-time)|true|read-only|Last date the entity was updated|
 |queue|object|true|none|Defines the properties for a location queue|
@@ -11914,17 +17596,21 @@ properties:
 |»»» complete|integer|false|read-only|The number of cycles complete|
 |»»» blocked|integer|false|read-only|The number of cycles blocked|
 |»»» cancelled|integer|false|read-only|The number of cycles cancelled|
+|»» active_work_orders|number|false|read-only|Total of work orders in an active status|
 |»» total_batches|integer|false|read-only|Number of batches assigned to the queue|
-|» priority|integer|false|none|Priority order for the batch|
-|» number_cycles|integer|false|none|The number of cycles for this batch|
-|» cycles|object|false|read-only|none|
+|»» is_active|boolean|true|read-only|Toggle if the batch has active cycles or batches|
+|»» active_batches|number|true|read-only|Total of batches in the queue with active cycles|
+|»» active_cycles|number|true|read-only|Total of all active cycles across all batches|
+|» order|integer|false|none|Order to process the batch|
+|» number_cycles|integer|true|none|The number of cycles for this batch|
+|» cycles|object|true|read-only|none|
 |»» pending|integer|false|read-only|The number of cycles pending|
 |»» in_progress|integer|false|read-only|The number of cycles in progress|
 |»» verifying|integer|false|read-only|The number of cycles verifying|
 |»» complete|integer|false|read-only|The number of cycles complete|
 |»» blocked|integer|false|read-only|The number of cycles blocked|
 |»» cancelled|integer|false|read-only|The number of cycles cancelled|
-|» work_order|object|false|none|Defines the properties for a unit|
+|» work_order|object|true|none|Defines the properties for a unit|
 |»» work_order_id|string|false|none|The identifier for the unit|
 |»» entity_id|string|true|read-only|Customer identifier|
 |»» entity_type|string|true|none|none|
@@ -11934,87 +17620,153 @@ properties:
 |»» updated|string(date-time)|true|read-only|Last date the entity was updated|
 |»» start_date|string(date-time)\|null|false|none|Start date|
 |»» end_date|string(date-time)\|null|false|none|End date|
-|»» description|string|false|none|Detailed description for the work order|
-|»» work_order_type|string|true|none|Type of work order|
-|»» due_date|string(date-time)|false|none|End date|
-|»» current_status|object|false|none|Defines the properties for a status|
-|»»» status|string|true|none|A Custom label for the status|
-|»»» category|string|true|none|The classifier for the statues|
-|»» project|object|false|none|Defines the properties for a project|
-|»»» project_id|string|false|none|Unique identifier|
+|»» current_location|object|false|none|Defines the properties for a part unit|
+|»»» location_id|string|false|read-only|The identifier for the location|
 |»»» entity_id|string|true|read-only|Customer identifier|
 |»»» entity_type|string|true|none|none|
 |»»» label|string|true|none|Label for the entity|
 |»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
 |»»» created|string(date-time)|true|read-only|Date the entity was created|
 |»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»» customer|object|true|none|Customer|
-|»»»» customer_id|string|false|read-only|Customer identifier|
+|»»» location_type|string|true|none|The type of location|
+|»»» formatted_address|string|false|read-only|Address formatted for the where region the location exists in|
+|»»» address|object|true|none|xNAL address for the location|
+|»»»» country|string|true|none|Three Letter ISO country code|
+|»»»» administrative_area|string|true|none|State / Province / Region|
+|»»»» sub_administrative_area|string|false|none|County / District|
+|»»»» locality|string|true|none|City / Town|
+|»»»» postal_code|string|true|none|Postal Code / Zip Code|
+|»»»» thoroughfare|string|true|none|Street Address|
+|»»»» premise|string|false|none|Apartment / Suite / Box number etc|
+|»»»» sub_premise|string|false|none|Floor # / Room # / Building label etc|
+|»»» location|object|true|none|Defines the properties for a part unit|
+|»»»» location_id|string|false|read-only|The identifier for the location|
 |»»»» entity_id|string|true|read-only|Customer identifier|
 |»»»» entity_type|string|true|none|none|
 |»»»» label|string|true|none|Label for the entity|
 |»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
 |»»»» created|string(date-time)|true|read-only|Date the entity was created|
 |»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»»» external_platform|object|false|none|External Identifiers for the customer|
-|»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
+|»»»» location_type|string|true|none|The type of location|
+|»»»» formatted_address|string|false|read-only|Address formatted for the where region the location exists in|
+|»»»» address|object|true|none|xNAL address for the location|
+|»»»»» country|string|true|none|Three Letter ISO country code|
+|»»»»» administrative_area|string|true|none|State / Province / Region|
+|»»»»» sub_administrative_area|string|false|none|County / District|
+|»»»»» locality|string|true|none|City / Town|
+|»»»»» postal_code|string|true|none|Postal Code / Zip Code|
+|»»»»» thoroughfare|string|true|none|Street Address|
+|»»»»» premise|string|false|none|Apartment / Suite / Box number etc|
+|»»»»» sub_premise|string|false|none|Floor # / Room # / Building label etc|
+|»»»» description|string\|null|false|none|Detailed description for the work order|
+|»»»» work_order_type|string|true|none|Type of work order|
+|»»»» due_date|string(date-time)|false|none|End date|
+|»»»» current_status|object|false|none|Defines the properties for a status|
 |»»»»» status|string|true|none|A Custom label for the status|
 |»»»»» category|string|true|none|The classifier for the statues|
-|»»»» total_programs|number|false|none|Total programs under the customer|
-|»»»» total_projects|number|false|none|Total projects under the customer|
-|»»» program|object|true|none|Defines the properties for a program|
-|»»»» program_id|string|false|read-only|Unique identifier|
-|»»»» entity_id|string|true|read-only|Customer identifier|
-|»»»» entity_type|string|true|none|none|
-|»»»» label|string|false|none|Label for the entity|
-|»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»»»» created|string(date-time)|true|read-only|Date the entity was created|
-|»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»»» start_date|string(date-time)\|null|false|none|Start date|
-|»»»» end_date|string(date-time)\|null|false|none|End date|
-|»»»» customer|object|true|none|Customer|
-|»»»»» customer_id|string|false|read-only|Customer identifier|
+|»»»»» description|string\|null|false|none|A description for the status|
+|»»»»» order|number|false|none|Order status appears when listing|
+|»»»» project|object|false|none|Defines the properties for a project|
+|»»»»» project_id|string|false|none|Unique identifier|
 |»»»»» entity_id|string|true|read-only|Customer identifier|
 |»»»»» entity_type|string|true|none|none|
+|»»»»» description|string\|null|false|none|Project description|
 |»»»»» label|string|true|none|Label for the entity|
 |»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
 |»»»»» created|string(date-time)|true|read-only|Date the entity was created|
 |»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»»»» external_platform|object|false|none|External Identifiers for the customer|
-|»»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
-|»»»»»» status|string|true|none|A Custom label for the status|
-|»»»»»» category|string|true|none|The classifier for the statues|
-|»»»»» total_programs|number|false|none|Total programs under the customer|
-|»»»»» total_projects|number|false|none|Total projects under the customer|
-|»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
-|»»»»» status|string|true|none|A Custom label for the status|
-|»»»»» category|string|true|none|The classifier for the statues|
-|»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
-|»»»»» status|string|true|none|A Custom label for the status|
-|»»»»» category|string|true|none|The classifier for the statues|
-|»»»» start_date|string(date-time)\|null|false|none|Start date|
-|»»»» end_date|string(date-time)\|null|false|none|End date|
-|»»» work_flows|[object]|false|none|Cycles of work flows needed to complete the work order|
-|»»»» cycles_needed|integer|true|none|The number of cycles needed|
-|»»»» work_flow|object|true|none|Workflow|
-|»»»»» work_flow_id|string|false|read-only|Customer identifier|
-|»»»»» entity_id|string|true|read-only|Customer identifier|
-|»»»»» entity_type|string|true|none|none|
-|»»»»» label|string|true|none|Label for the entity|
-|»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»»»»» created|string(date-time)|true|read-only|Date the entity was created|
-|»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»»»» schema_version|string|true|none|Version of the workflow schema used|
-|»»»»» workflow_version|integer|false|read-only|Version number for the work flows (the number of times it has been changed|
-|»»»»» applies_to|string|true|none|The entity type this work flow applies too|
-|»»»»» starts_at|string|true|none|Starting step|
-|»»»»» steps|object|true|none|Steps for the workflow|
+|»»»»» customer|object|true|none|Customer|
+|»»»»»» customer_id|string|false|read-only|Customer identifier|
+|»»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»»» entity_type|string|true|none|none|
+|»»»»»» label|string|true|none|Label for the entity|
+|»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»»»»» external_platform|object|false|none|External Identifiers for the customer|
+|»»»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
+|»»»»»»» status|string|true|none|A Custom label for the status|
+|»»»»»»» category|string|true|none|The classifier for the statues|
+|»»»»»»» description|string\|null|false|none|A description for the status|
+|»»»»»»» order|number|false|none|Order status appears when listing|
+|»»»»»» total_programs|number|false|none|Total programs under the customer|
+|»»»»»» total_projects|number|false|none|Total projects under the customer|
+|»»»»» program|object|true|none|Defines the properties for a program|
+|»»»»»» program_id|string|false|read-only|Unique identifier|
+|»»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»»» entity_type|string|true|none|none|
+|»»»»»» label|string|false|none|Label for the entity|
+|»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»»»»» start_date|string(date-time)\|null|false|none|Start date|
+|»»»»»» end_date|string(date-time)\|null|false|none|End date|
+|»»»»»» customer|object|true|none|Customer|
+|»»»»»»» customer_id|string|false|read-only|Customer identifier|
+|»»»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»»»» entity_type|string|true|none|none|
+|»»»»»»» label|string|true|none|Label for the entity|
+|»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»»»»»» external_platform|object|false|none|External Identifiers for the customer|
+|»»»»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
+|»»»»»»»» status|string|true|none|A Custom label for the status|
+|»»»»»»»» category|string|true|none|The classifier for the statues|
+|»»»»»»»» description|string\|null|false|none|A description for the status|
+|»»»»»»»» order|number|false|none|Order status appears when listing|
+|»»»»»»» total_programs|number|false|none|Total programs under the customer|
+|»»»»»»» total_projects|number|false|none|Total projects under the customer|
+|»»»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
+|»»»»»»» status|string|true|none|A Custom label for the status|
+|»»»»»»» category|string|true|none|The classifier for the statues|
+|»»»»»»» description|string\|null|false|none|A description for the status|
+|»»»»»»» order|number|false|none|Order status appears when listing|
+|»»»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
+|»»»»»»» status|string|true|none|A Custom label for the status|
+|»»»»»»» category|string|true|none|The classifier for the statues|
+|»»»»»»» description|string\|null|false|none|A description for the status|
+|»»»»»»» order|number|false|none|Order status appears when listing|
+|»»»»»» start_date|string(date-time)\|null|false|none|Start date|
+|»»»»»» end_date|string(date-time)\|null|false|none|End date|
+|»»»»» cycles|[object]|true|none|none|
+|»»»»»» needed|integer|true|none|The number of cycles needed|
+|»»»»»» pending|integer|true|read-only|The number of cycles pending|
+|»»»»»» in_progress|integer|true|read-only|The number of cycles pending|
+|»»»»»» verifying|integer|true|read-only|The number of cycles pending|
+|»»»»»» complete|integer|true|read-only|The number of cycles pending|
+|»»»»»» blocked|integer|true|read-only|The number of cycles pending|
+|»»»»»» cancelled|integer|true|read-only|The number of cycles pending|
+|»»»»»» work_flow|object|true|none|Workflow|
+|»»»»»»» work_flow_id|string|false|read-only|Customer identifier|
+|»»»»»»» entity_id|string|true|read-only|Customer identifier|
+|»»»»»»» entity_type|string|true|none|none|
+|»»»»»»» label|string|true|none|Label for the entity|
+|»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
+|»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
+|»»»»»»» schema_version|string|true|none|Version of the workflow schema used|
+|»»»»»»» workflow_version|integer|false|read-only|Version number for the work flows (the number of times it has been changed|
+|»»»»»»» applies_to|string|true|none|The entity type this work flow applies too|
+|»»»»»»» triggered_by|[string]|false|none|none|
+|»»»»»»» starts_at|string|true|none|Starting step|
+|»»»»»»» steps|object|true|none|Steps for the workflow|
+|»»»»»»» metadata|object|false|none|Data for the resource as a key value pair|
+|»»»»»»»» **additionalProperties**|string|false|none|none|
+|»»»»»»» meta|object|false|none|Data for the resource as a key value pair|
+|»»»»»»»» **additionalProperties**|string|false|none|none|
 
 #### Enumerated Values
 
 |Property|Value|
 |---|---|
 |entity_type|BAT|
+|category|PENDING|
+|category|IN_PROGRESS|
+|category|VERIFYING|
+|category|COMPLETE|
+|category|CANCELLED|
+|category|BLOCKED|
 |entity_type|QUE|
 |entity_type|LOC|
 |location_type|warehouse|
@@ -12270,6 +18022,512 @@ properties:
 |country|ZMB|
 |country|ZWE|
 |entity_type|WOR|
+|entity_type|LOC|
+|location_type|warehouse|
+|location_type|facility|
+|location_type|other|
+|country|ABW|
+|country|AFG|
+|country|AGO|
+|country|AIA|
+|country|ALA|
+|country|ALB|
+|country|AND|
+|country|ARE|
+|country|ARG|
+|country|ARM|
+|country|ASM|
+|country|ATA|
+|country|ATF|
+|country|ATG|
+|country|AUS|
+|country|AUT|
+|country|AZE|
+|country|BDI|
+|country|BEL|
+|country|BEN|
+|country|BES|
+|country|BFA|
+|country|BGD|
+|country|BGR|
+|country|BHR|
+|country|BHS|
+|country|BIH|
+|country|BLM|
+|country|BLR|
+|country|BLZ|
+|country|BMU|
+|country|BOL|
+|country|BRA|
+|country|BRB|
+|country|BRN|
+|country|BTN|
+|country|BVT|
+|country|BWA|
+|country|CAF|
+|country|CAN|
+|country|CCK|
+|country|CHE|
+|country|CHL|
+|country|CHN|
+|country|CIV|
+|country|CMR|
+|country|COD|
+|country|COG|
+|country|COK|
+|country|COL|
+|country|COM|
+|country|CPV|
+|country|CRI|
+|country|CUB|
+|country|CUW|
+|country|CXR|
+|country|CYM|
+|country|CYP|
+|country|CZE|
+|country|DEU|
+|country|DJI|
+|country|DMA|
+|country|DNK|
+|country|DOM|
+|country|DZA|
+|country|ECU|
+|country|EGY|
+|country|ERI|
+|country|ESH|
+|country|ESP|
+|country|EST|
+|country|ETH|
+|country|FIN|
+|country|FJI|
+|country|FLK|
+|country|FRA|
+|country|FRO|
+|country|FSM|
+|country|GAB|
+|country|GBR|
+|country|GEO|
+|country|GGY|
+|country|GHA|
+|country|GIB|
+|country|GIN|
+|country|GLP|
+|country|GMB|
+|country|GNB|
+|country|GNQ|
+|country|GRC|
+|country|GRD|
+|country|GRL|
+|country|GTM|
+|country|GUF|
+|country|GUM|
+|country|GUY|
+|country|HKG|
+|country|HMD|
+|country|HND|
+|country|HRV|
+|country|HTI|
+|country|HUN|
+|country|IDN|
+|country|IMN|
+|country|IND|
+|country|IOT|
+|country|IRL|
+|country|IRN|
+|country|IRQ|
+|country|ISL|
+|country|ISR|
+|country|ITA|
+|country|JAM|
+|country|JEY|
+|country|JOR|
+|country|JPN|
+|country|KAZ|
+|country|KEN|
+|country|KGZ|
+|country|KHM|
+|country|KIR|
+|country|KNA|
+|country|KOR|
+|country|KWT|
+|country|LAO|
+|country|LBN|
+|country|LBR|
+|country|LBY|
+|country|LCA|
+|country|LIE|
+|country|LKA|
+|country|LSO|
+|country|LTU|
+|country|LUX|
+|country|LVA|
+|country|MAC|
+|country|MAF|
+|country|MAR|
+|country|MCO|
+|country|MDA|
+|country|MDG|
+|country|MDV|
+|country|MEX|
+|country|MHL|
+|country|MKD|
+|country|MLI|
+|country|MLT|
+|country|MMR|
+|country|MNE|
+|country|MNG|
+|country|MNP|
+|country|MOZ|
+|country|MRT|
+|country|MSR|
+|country|MTQ|
+|country|MUS|
+|country|MWI|
+|country|MYS|
+|country|MYT|
+|country|NAM|
+|country|NCL|
+|country|NER|
+|country|NFK|
+|country|NGA|
+|country|NIC|
+|country|NIU|
+|country|NLD|
+|country|NOR|
+|country|NPL|
+|country|NRU|
+|country|NZL|
+|country|OMN|
+|country|PAK|
+|country|PAN|
+|country|PCN|
+|country|PER|
+|country|PHL|
+|country|PLW|
+|country|PNG|
+|country|POL|
+|country|PRI|
+|country|PRK|
+|country|PRT|
+|country|PRY|
+|country|PSE|
+|country|PYF|
+|country|QAT|
+|country|REU|
+|country|ROU|
+|country|RUS|
+|country|RWA|
+|country|SAU|
+|country|SDN|
+|country|SEN|
+|country|SGP|
+|country|SGS|
+|country|SHN|
+|country|SJM|
+|country|SLB|
+|country|SLE|
+|country|SLV|
+|country|SMR|
+|country|SOM|
+|country|SPM|
+|country|SRB|
+|country|SSD|
+|country|STP|
+|country|SUR|
+|country|SVK|
+|country|SVN|
+|country|SWE|
+|country|SWZ|
+|country|SXM|
+|country|SYC|
+|country|SYR|
+|country|TCA|
+|country|TCD|
+|country|TGO|
+|country|THA|
+|country|TJK|
+|country|TKL|
+|country|TKM|
+|country|TLS|
+|country|TON|
+|country|TTO|
+|country|TUN|
+|country|TUR|
+|country|TUV|
+|country|TWN|
+|country|TZA|
+|country|UGA|
+|country|UKR|
+|country|UMI|
+|country|URY|
+|country|USA|
+|country|UZB|
+|country|VAT|
+|country|VCT|
+|country|VEN|
+|country|VGB|
+|country|VIR|
+|country|VNM|
+|country|VUT|
+|country|WLF|
+|country|WSM|
+|country|YEM|
+|country|ZAF|
+|country|ZMB|
+|country|ZWE|
+|entity_type|LOC|
+|location_type|warehouse|
+|location_type|facility|
+|location_type|other|
+|country|ABW|
+|country|AFG|
+|country|AGO|
+|country|AIA|
+|country|ALA|
+|country|ALB|
+|country|AND|
+|country|ARE|
+|country|ARG|
+|country|ARM|
+|country|ASM|
+|country|ATA|
+|country|ATF|
+|country|ATG|
+|country|AUS|
+|country|AUT|
+|country|AZE|
+|country|BDI|
+|country|BEL|
+|country|BEN|
+|country|BES|
+|country|BFA|
+|country|BGD|
+|country|BGR|
+|country|BHR|
+|country|BHS|
+|country|BIH|
+|country|BLM|
+|country|BLR|
+|country|BLZ|
+|country|BMU|
+|country|BOL|
+|country|BRA|
+|country|BRB|
+|country|BRN|
+|country|BTN|
+|country|BVT|
+|country|BWA|
+|country|CAF|
+|country|CAN|
+|country|CCK|
+|country|CHE|
+|country|CHL|
+|country|CHN|
+|country|CIV|
+|country|CMR|
+|country|COD|
+|country|COG|
+|country|COK|
+|country|COL|
+|country|COM|
+|country|CPV|
+|country|CRI|
+|country|CUB|
+|country|CUW|
+|country|CXR|
+|country|CYM|
+|country|CYP|
+|country|CZE|
+|country|DEU|
+|country|DJI|
+|country|DMA|
+|country|DNK|
+|country|DOM|
+|country|DZA|
+|country|ECU|
+|country|EGY|
+|country|ERI|
+|country|ESH|
+|country|ESP|
+|country|EST|
+|country|ETH|
+|country|FIN|
+|country|FJI|
+|country|FLK|
+|country|FRA|
+|country|FRO|
+|country|FSM|
+|country|GAB|
+|country|GBR|
+|country|GEO|
+|country|GGY|
+|country|GHA|
+|country|GIB|
+|country|GIN|
+|country|GLP|
+|country|GMB|
+|country|GNB|
+|country|GNQ|
+|country|GRC|
+|country|GRD|
+|country|GRL|
+|country|GTM|
+|country|GUF|
+|country|GUM|
+|country|GUY|
+|country|HKG|
+|country|HMD|
+|country|HND|
+|country|HRV|
+|country|HTI|
+|country|HUN|
+|country|IDN|
+|country|IMN|
+|country|IND|
+|country|IOT|
+|country|IRL|
+|country|IRN|
+|country|IRQ|
+|country|ISL|
+|country|ISR|
+|country|ITA|
+|country|JAM|
+|country|JEY|
+|country|JOR|
+|country|JPN|
+|country|KAZ|
+|country|KEN|
+|country|KGZ|
+|country|KHM|
+|country|KIR|
+|country|KNA|
+|country|KOR|
+|country|KWT|
+|country|LAO|
+|country|LBN|
+|country|LBR|
+|country|LBY|
+|country|LCA|
+|country|LIE|
+|country|LKA|
+|country|LSO|
+|country|LTU|
+|country|LUX|
+|country|LVA|
+|country|MAC|
+|country|MAF|
+|country|MAR|
+|country|MCO|
+|country|MDA|
+|country|MDG|
+|country|MDV|
+|country|MEX|
+|country|MHL|
+|country|MKD|
+|country|MLI|
+|country|MLT|
+|country|MMR|
+|country|MNE|
+|country|MNG|
+|country|MNP|
+|country|MOZ|
+|country|MRT|
+|country|MSR|
+|country|MTQ|
+|country|MUS|
+|country|MWI|
+|country|MYS|
+|country|MYT|
+|country|NAM|
+|country|NCL|
+|country|NER|
+|country|NFK|
+|country|NGA|
+|country|NIC|
+|country|NIU|
+|country|NLD|
+|country|NOR|
+|country|NPL|
+|country|NRU|
+|country|NZL|
+|country|OMN|
+|country|PAK|
+|country|PAN|
+|country|PCN|
+|country|PER|
+|country|PHL|
+|country|PLW|
+|country|PNG|
+|country|POL|
+|country|PRI|
+|country|PRK|
+|country|PRT|
+|country|PRY|
+|country|PSE|
+|country|PYF|
+|country|QAT|
+|country|REU|
+|country|ROU|
+|country|RUS|
+|country|RWA|
+|country|SAU|
+|country|SDN|
+|country|SEN|
+|country|SGP|
+|country|SGS|
+|country|SHN|
+|country|SJM|
+|country|SLB|
+|country|SLE|
+|country|SLV|
+|country|SMR|
+|country|SOM|
+|country|SPM|
+|country|SRB|
+|country|SSD|
+|country|STP|
+|country|SUR|
+|country|SVK|
+|country|SVN|
+|country|SWE|
+|country|SWZ|
+|country|SXM|
+|country|SYC|
+|country|SYR|
+|country|TCA|
+|country|TCD|
+|country|TGO|
+|country|THA|
+|country|TJK|
+|country|TKL|
+|country|TKM|
+|country|TLS|
+|country|TON|
+|country|TTO|
+|country|TUN|
+|country|TUR|
+|country|TUV|
+|country|TWN|
+|country|TZA|
+|country|UGA|
+|country|UKR|
+|country|UMI|
+|country|URY|
+|country|USA|
+|country|UZB|
+|country|VAT|
+|country|VCT|
+|country|VEN|
+|country|VGB|
+|country|VIR|
+|country|VNM|
+|country|VUT|
+|country|WLF|
+|country|WSM|
+|country|YEM|
+|country|ZAF|
+|country|ZMB|
+|country|ZWE|
 |work_order_type|device|
 |category|PENDING|
 |category|IN_PROGRESS|
@@ -12307,10 +18565,10 @@ properties:
 |category|BLOCKED|
 |entity_type|WKF|
 |schema_version|1.0|
-|applies_to|unit|
-|applies_to|part|
-|applies_to|program|
-|applies_to|project|
-|applies_to|customer|
-|applies_to|contact|
+|applies_to|UNIT|
+|applies_to|PART|
+|applies_to|PGM|
+|applies_to|PRJ|
+|applies_to|CUS|
+|applies_to|CON|
 
