@@ -44,7 +44,7 @@
       "$ref": "https://docs.nterprise.com/schemas/niagara/resource.json#/properties/meta"
     },
     "location": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/resource.json#/properties/location"
+      "$ref": "https://docs.nterprise.com/schemas/niagara/location.json"
     },
     "resource": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/resource.json"

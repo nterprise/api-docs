@@ -59,10 +59,5 @@
     "end_date": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/dateRange.json#/properties/end_date"
     }
-  },
-  "allOf": [
-    {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json"
-    }
-  ]
+  }
 }
