@@ -136,10 +136,15 @@ Fetch Work Order
                   "device"
                 ]
               },
+              "begin_date": {
+                "type": "string",
+                "format": "date-time",
+                "description": "Begin date"
+              },
               "due_date": {
                 "type": "string",
                 "format": "date-time",
-                "description": "End date"
+                "description": "Due date"
               },
               "current_status": {
                 "type": "object",
@@ -644,47 +649,7 @@ Fetch Work Order
                     "format": "date-time",
                     "description": "End date"
                   }
-                },
-                "allOf": [
-                  {
-                    "type": "object",
-                    "description": "Common Properties to all entities",
-                    "required": [
-                      "label"
-                    ],
-                    "properties": {
-                      "entity_id": {
-                        "type": "string",
-                        "description": "Customer identifier",
-                        "readOnly": true,
-                        "pattern": "^[0-9a-zA-Z-_]+$"
-                      },
-                      "label": {
-                        "type": "string",
-                        "description": "Label for the entity"
-                      },
-                      "slug": {
-                        "type": "string",
-                        "description": "Slug for the entity (Auto-generated from the label)",
-                        "readOnly": true,
-                        "deprecated": true,
-                        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-                      },
-                      "created": {
-                        "description": "Date the entity was created",
-                        "type": "string",
-                        "format": "date-time",
-                        "readOnly": true
-                      },
-                      "updated": {
-                        "description": "Last date the entity was updated",
-                        "type": "string",
-                        "format": "date-time",
-                        "readOnly": true
-                      }
-                    }
-                  }
-                ]
+                }
               },
               "cycles": {
                 "type": "array",
@@ -2487,7 +2452,8 @@ Status Code **200**
 |»»»» end_date|string(date-time)|false|read-only|Last date the entity was updated|
 |»»»» description|string\|null|false|none|Detailed description for the work order|
 |»»»» work_order_type|string|false|none|Type of work order|
-|»»»» due_date|string(date-time)|false|none|End date|
+|»»»» begin_date|string(date-time)|false|none|Begin date|
+|»»»» due_date|string(date-time)|false|none|Due date|
 |»»»» current_status|object|false|none|Defines the properties for a status|
 |»»»»» status|string|true|none|A Custom label for the status|
 |»»»»» category|string|true|none|The classifier for the statues|
@@ -2711,10 +2677,15 @@ Creates a new work order
         "device"
       ]
     },
+    "begin_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Begin date"
+    },
     "due_date": {
       "type": "string",
       "format": "date-time",
-      "description": "End date"
+      "description": "Due date"
     },
     "current_status": {
       "type": "object",
@@ -4521,7 +4492,8 @@ Creates a new work order
 |label|body|string|true|Label for the entity|
 |description|body|string\|null|false|Detailed description for the work order|
 |work_order_type|body|string|false|Type of work order|
-|due_date|body|string(date-time)|false|End date|
+|begin_date|body|string(date-time)|false|Begin date|
+|due_date|body|string(date-time)|false|Due date|
 |current_status|body|object|false|Defines the properties for a status|
 |» status|body|string|true|A Custom label for the status|
 |» category|body|string|true|The classifier for the statues|
@@ -4725,10 +4697,15 @@ Creates a new work order
         "device"
       ]
     },
+    "begin_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Begin date"
+    },
     "due_date": {
       "type": "string",
       "format": "date-time",
-      "description": "End date"
+      "description": "Due date"
     },
     "current_status": {
       "type": "object",
@@ -5233,47 +5210,7 @@ Creates a new work order
           "format": "date-time",
           "description": "End date"
         }
-      },
-      "allOf": [
-        {
-          "type": "object",
-          "description": "Common Properties to all entities",
-          "required": [
-            "label"
-          ],
-          "properties": {
-            "entity_id": {
-              "type": "string",
-              "description": "Customer identifier",
-              "readOnly": true,
-              "pattern": "^[0-9a-zA-Z-_]+$"
-            },
-            "label": {
-              "type": "string",
-              "description": "Label for the entity"
-            },
-            "slug": {
-              "type": "string",
-              "description": "Slug for the entity (Auto-generated from the label)",
-              "readOnly": true,
-              "deprecated": true,
-              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-            },
-            "created": {
-              "description": "Date the entity was created",
-              "type": "string",
-              "format": "date-time",
-              "readOnly": true
-            },
-            "updated": {
-              "description": "Last date the entity was updated",
-              "type": "string",
-              "format": "date-time",
-              "readOnly": true
-            }
-          }
-        }
-      ]
+      }
     },
     "cycles": {
       "type": "array",
@@ -7041,7 +6978,8 @@ Status Code **200**
 |»» end_date|string(date-time)|false|read-only|Last date the entity was updated|
 |»» description|string\|null|false|none|Detailed description for the work order|
 |»» work_order_type|string|false|none|Type of work order|
-|»» due_date|string(date-time)|false|none|End date|
+|»» begin_date|string(date-time)|false|none|Begin date|
+|»» due_date|string(date-time)|false|none|Due date|
 |»» current_status|object|false|none|Defines the properties for a status|
 |»»» status|string|true|none|A Custom label for the status|
 |»»» category|string|true|none|The classifier for the statues|
@@ -7334,10 +7272,15 @@ Fetch Work order
         "device"
       ]
     },
+    "begin_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Begin date"
+    },
     "due_date": {
       "type": "string",
       "format": "date-time",
-      "description": "End date"
+      "description": "Due date"
     },
     "current_status": {
       "type": "object",
@@ -7842,47 +7785,7 @@ Fetch Work order
           "format": "date-time",
           "description": "End date"
         }
-      },
-      "allOf": [
-        {
-          "type": "object",
-          "description": "Common Properties to all entities",
-          "required": [
-            "label"
-          ],
-          "properties": {
-            "entity_id": {
-              "type": "string",
-              "description": "Customer identifier",
-              "readOnly": true,
-              "pattern": "^[0-9a-zA-Z-_]+$"
-            },
-            "label": {
-              "type": "string",
-              "description": "Label for the entity"
-            },
-            "slug": {
-              "type": "string",
-              "description": "Slug for the entity (Auto-generated from the label)",
-              "readOnly": true,
-              "deprecated": true,
-              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-            },
-            "created": {
-              "description": "Date the entity was created",
-              "type": "string",
-              "format": "date-time",
-              "readOnly": true
-            },
-            "updated": {
-              "description": "Last date the entity was updated",
-              "type": "string",
-              "format": "date-time",
-              "readOnly": true
-            }
-          }
-        }
-      ]
+      }
     },
     "cycles": {
       "type": "array",
@@ -9650,7 +9553,8 @@ Status Code **200**
 |»» end_date|string(date-time)|false|read-only|Last date the entity was updated|
 |»» description|string\|null|false|none|Detailed description for the work order|
 |»» work_order_type|string|false|none|Type of work order|
-|»» due_date|string(date-time)|false|none|End date|
+|»» begin_date|string(date-time)|false|none|Begin date|
+|»» due_date|string(date-time)|false|none|Due date|
 |»» current_status|object|false|none|Defines the properties for a status|
 |»»» status|string|true|none|A Custom label for the status|
 |»»» category|string|true|none|The classifier for the statues|
@@ -9887,10 +9791,15 @@ Updates a work order
         "device"
       ]
     },
+    "begin_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Begin date"
+    },
     "due_date": {
       "type": "string",
       "format": "date-time",
-      "description": "End date"
+      "description": "Due date"
     },
     "current_status": {
       "type": "object",
@@ -11698,7 +11607,8 @@ Updates a work order
 |label|body|string|true|Label for the entity|
 |description|body|string\|null|false|Detailed description for the work order|
 |work_order_type|body|string|false|Type of work order|
-|due_date|body|string(date-time)|false|End date|
+|begin_date|body|string(date-time)|false|Begin date|
+|due_date|body|string(date-time)|false|Due date|
 |current_status|body|object|false|Defines the properties for a status|
 |» status|body|string|true|A Custom label for the status|
 |» category|body|string|true|The classifier for the statues|
@@ -11902,10 +11812,15 @@ Updates a work order
         "device"
       ]
     },
+    "begin_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Begin date"
+    },
     "due_date": {
       "type": "string",
       "format": "date-time",
-      "description": "End date"
+      "description": "Due date"
     },
     "current_status": {
       "type": "object",
@@ -12410,47 +12325,7 @@ Updates a work order
           "format": "date-time",
           "description": "End date"
         }
-      },
-      "allOf": [
-        {
-          "type": "object",
-          "description": "Common Properties to all entities",
-          "required": [
-            "label"
-          ],
-          "properties": {
-            "entity_id": {
-              "type": "string",
-              "description": "Customer identifier",
-              "readOnly": true,
-              "pattern": "^[0-9a-zA-Z-_]+$"
-            },
-            "label": {
-              "type": "string",
-              "description": "Label for the entity"
-            },
-            "slug": {
-              "type": "string",
-              "description": "Slug for the entity (Auto-generated from the label)",
-              "readOnly": true,
-              "deprecated": true,
-              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-            },
-            "created": {
-              "description": "Date the entity was created",
-              "type": "string",
-              "format": "date-time",
-              "readOnly": true
-            },
-            "updated": {
-              "description": "Last date the entity was updated",
-              "type": "string",
-              "format": "date-time",
-              "readOnly": true
-            }
-          }
-        }
-      ]
+      }
     },
     "cycles": {
       "type": "array",
@@ -14218,7 +14093,8 @@ Status Code **200**
 |»» end_date|string(date-time)|false|read-only|Last date the entity was updated|
 |»» description|string\|null|false|none|Detailed description for the work order|
 |»» work_order_type|string|false|none|Type of work order|
-|»» due_date|string(date-time)|false|none|End date|
+|»» begin_date|string(date-time)|false|none|Begin date|
+|»» due_date|string(date-time)|false|none|Due date|
 |»» current_status|object|false|none|Defines the properties for a status|
 |»»» status|string|true|none|A Custom label for the status|
 |»»» category|string|true|none|The classifier for the statues|
@@ -14561,7 +14437,7 @@ This operation does not require authentication
 
 ```yaml
 type: object
-description: Defines the properties for a unit
+description: Defines the properties for a work order
 additionalProperties: false
 required:
   - label
@@ -14572,6 +14448,8 @@ required:
   - work_order_type
   - location
   - cycles
+  - begin_date
+  - due_date
 properties:
   work_order_id:
     type: string
@@ -15310,10 +15188,14 @@ properties:
     description: Type of work order
     enum:
       - device
+  begin_date:
+    type: string
+    format: date-time
+    description: Begin date
   due_date:
     type: string
     format: date-time
-    description: End date
+    description: Due date
   current_status:
     type: object
     description: Defines the properties for a status
@@ -15710,36 +15592,6 @@ properties:
         nullable: true
         format: date-time
         description: End date
-    allOf:
-      - type: object
-        description: Common Properties to all entities
-        required:
-          - label
-        properties:
-          entity_id:
-            type: string
-            description: Customer identifier
-            readOnly: true
-            pattern: '^[0-9a-zA-Z-_]+$'
-          label:
-            type: string
-            description: Label for the entity
-          slug:
-            type: string
-            description: Slug for the entity (Auto-generated from the label)
-            readOnly: true
-            deprecated: true
-            pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
-          created:
-            description: Date the entity was created
-            type: string
-            format: date-time
-            readOnly: true
-          updated:
-            description: Last date the entity was updated
-            type: string
-            format: date-time
-            readOnly: true
   cycles:
     type: array
     minimum: 1
@@ -16624,7 +16476,7 @@ properties:
 
 ```
 
-*Defines the properties for a unit*
+*Defines the properties for a work order*
 
 ### Properties
 
@@ -16679,7 +16531,8 @@ properties:
 |»»» sub_premise|string|false|none|Floor # / Room # / Building label etc|
 |»» description|string\|null|false|none|Detailed description for the work order|
 |»» work_order_type|string|true|none|Type of work order|
-|»» due_date|string(date-time)|false|none|End date|
+|»» begin_date|string(date-time)|true|none|Begin date|
+|»» due_date|string(date-time)|true|none|Due date|
 |»» current_status|object|false|none|Defines the properties for a status|
 |»»» status|string|true|none|A Custom label for the status|
 |»»» category|string|true|none|The classifier for the statues|
