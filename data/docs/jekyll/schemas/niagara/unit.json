@@ -10,7 +10,9 @@
     "entity_type",
     "created",
     "updated",
-    "part"
+    "part",
+    "location",
+    "tenant_part_number"
   ],
   "properties": {
     "unit_id": {
@@ -38,60 +40,76 @@
       "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/updated"
     },
     "serial_number": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "description": "Serial number of the unit with prefix stripped",
       "readOnly": true
     },
     "raw_serial_number": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "description": "Serial number of the unit"
     },
     "tenant_part_number": {
-      "type": ["string", "null"],
+      "type": "string",
       "description": "Identifier set by the tenant"
     },
     "manufacturer": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/part.json#/properties/manufacturer"
     },
     "vendor": {
-      "type": "object",
-      "description": "The vendor that sold this unit",
-      "required": [
-        "label",
-        "entity_id",
-        "entity_type",
-        "created",
-        "updated"
-      ],
-      "properties": {
-        "vendor_id": {
-          "type": "string",
-          "description": "unique id",
-          "pattern": "^[0-9a-zA-Z-_]+$"
+      "anyOf": [
+        {
+          "type": "null"
         },
-        "entity_id": {
-          "$ref": "https://docs.nterprise.com/schemas/niagara/vendor.json#/properties/entity_id"
-        },
-        "entity_type": {
-          "const": "VEN"
-        },
-        "label": {
-          "$ref": "https://docs.nterprise.com/schemas/niagara/vendor.json#/properties/label"
-        },
-        "slug": {
-          "$ref": "https://docs.nterprise.com/schemas/niagara/vendor.json#/properties/slug"
-        },
-        "created": {
-          "$ref": "https://docs.nterprise.com/schemas/niagara/vendor.json#/properties/created"
-        },
-        "updated": {
-          "$ref": "https://docs.nterprise.com/schemas/niagara/vendor.json#/properties/updated"
-        },
-        "part_number": {
-          "type": ["string", "null"],
-          "description": "The part number supplied by the vendor"
+        {
+          "type": "object",
+          "description": "The vendor that sold this unit",
+          "required": [
+            "label",
+            "entity_id",
+            "entity_type",
+            "created",
+            "updated"
+          ],
+          "properties": {
+            "vendor_id": {
+              "type": "string",
+              "description": "unique id",
+              "pattern": "^[0-9a-zA-Z-_]+$"
+            },
+            "entity_id": {
+              "$ref": "https://docs.nterprise.com/schemas/niagara/vendor.json#/properties/entity_id"
+            },
+            "entity_type": {
+              "const": "VEN"
+            },
+            "label": {
+              "$ref": "https://docs.nterprise.com/schemas/niagara/vendor.json#/properties/label"
+            },
+            "slug": {
+              "$ref": "https://docs.nterprise.com/schemas/niagara/vendor.json#/properties/slug"
+            },
+            "created": {
+              "$ref": "https://docs.nterprise.com/schemas/niagara/vendor.json#/properties/created"
+            },
+            "updated": {
+              "$ref": "https://docs.nterprise.com/schemas/niagara/vendor.json#/properties/updated"
+            },
+            "part_number": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "The part number supplied by the vendor"
+            }
+          }
         }
-      }
+      ]
     },
     "part": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/part.json"

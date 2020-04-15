@@ -49,6 +49,9 @@
     "status": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/status.json"
     },
+    "subResource": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/subResource.json"
+    },
     "tenant": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/tenant.json"
     },

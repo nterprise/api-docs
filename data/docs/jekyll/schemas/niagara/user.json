@@ -4,6 +4,11 @@
   "type": "object",
   "description": "User Information",
   "additionalProperties": false,
+  "required": [
+    "entity_id",
+    "entity_type",
+    "email"
+  ],
   "properties": {
     "user_id": {
       "type": "string",
