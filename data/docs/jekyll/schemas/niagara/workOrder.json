@@ -130,6 +130,9 @@
     },
     "meta": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/entityHelper.json#/properties/meta"
+    },
+    "input_filter": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter.json"
     }
   }
 }
