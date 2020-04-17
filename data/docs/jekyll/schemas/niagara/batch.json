@@ -34,7 +34,14 @@
       "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/slug"
     },
     "current_status": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/status.json"
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/status.json"
+        }
+      ]
     },
     "created": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/created"
