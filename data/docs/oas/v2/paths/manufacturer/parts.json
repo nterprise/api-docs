@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchAllManufacturerParts",
-    "summary": "Fetches A Page of parts for the manufacturer",
-    "description": "Fetch manufacturer parts",
+    "summary": "Fetch manufacturer parts",
+    "description": "Fetches A Page of parts for the manufacturer",
     "tags": [
       "Manufacturer"
     ],

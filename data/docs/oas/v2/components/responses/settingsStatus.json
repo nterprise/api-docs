@@ -4,9 +4,15 @@
     "application/hal+json": {
       "schema": {
         "type": "object",
+        "required": [
+          "_embedded"
+        ],
         "properties": {
           "_embedded": {
             "type": "object",
+            "required": [
+              "nter:settings-statuses"
+            ],
             "properties": {
               "nter:settings-statuses": {
                 "type": "array",
@@ -16,6 +22,53 @@
                 }
               }
             }
+          }
+        }
+      },
+      "example": {
+        "_embedded": {
+          "nter:settings-statuses": [
+            {
+              "category": "PENDING",
+              "description": "For something that is Pending",
+              "status": "Pending",
+              "order": 3
+            },
+            {
+              "category": "IN_PROGRESS",
+              "description": "For something that is In Progress",
+              "status": "In Progress",
+              "order": 4
+            },
+            {
+              "category": "VERIFYING",
+              "description": "For something that is Verifying",
+              "status": "Verifying",
+              "order": 5
+            },
+            {
+              "category": "BLOCKED",
+              "description": "For something that is Blocked",
+              "status": "Blocked",
+              "order": 6
+            },
+            {
+              "category": "COMPLETE",
+              "description": "For something that is Complete",
+              "status": "Complete",
+              "order": 7
+            },
+            {
+              "category": "CANCELLED",
+              "description": "For something that is Cancelled",
+              "status": "Cancelled",
+              "order": 8
+            }
+          ]
+        },
+        "_links": {
+          "self": {
+            "href": "https://api.example.com/settings/statuses"
           }
         }
       }

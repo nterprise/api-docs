@@ -1,26 +1,14 @@
 {
-  "description": "Step to close or fail",
+  "description": "Fail or Complete step",
   "content": {
     "application/json": {
       "schema": {
-        "type": "object",
-        "description": "Close step",
-        "allOf": [
-          {
-            "$ref": "../../components/schemas/workflow/close/allCloseSteps.json"
-          }
-        ]
+        "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/close/allCloseSteps.json"
       }
     },
     "application/vnd.fail-step+json": {
       "schema": {
-        "type": "object",
-        "description": "Fail step",
-        "allOf": [
-          {
-            "$ref": "../../components/schemas/workflow/close/allCloseSteps.json"
-          }
-        ]
+        "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/close/failStep.json"
       }
     }
   }

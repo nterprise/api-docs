@@ -1,0 +1,45 @@
+{
+  "type": "object",
+  "required": [
+    "updated",
+    "label",
+    "created",
+    "location",
+    "priority",
+    "queue_id",
+    "total_batches",
+    "total_work_orders"
+  ],
+  "properties": {
+    "queue_id": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/queue.json#/properties/queue_id"
+    },
+    "label": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/queue.json#/properties/label"
+    },
+    "created": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/queue.json#/properties/created"
+    },
+    "updated": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/queue.json#/properties/updated"
+    },
+    "location": {
+      "type": "object",
+      "deprecated": true,
+      "allOf": [
+        {
+          "$ref": "./location.json"
+        }
+      ]
+    },
+    "priority": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/queue.json#/properties/priority"
+    },
+    "total_work_orders": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/queue.json#/properties/total_work_orders"
+    },
+    "total_batches": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/queue.json#/properties/total_batches"
+    }
+  }
+}

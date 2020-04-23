@@ -1,46 +1,24 @@
 {
   "type": "object",
-  "properties": {
-    "_links": {
+  "allOf": [
+    {
+      "$ref": "./project.json"
+    },
+    {
       "type": "object",
+      "required": [
+        "_links"
+      ],
       "properties": {
-        "self": {
-          "$ref": "./link.json",
-          "x-example": {
-            "href": "https://api.nterprise.com/projects/QEvVrVMMwVcJ6om"
+        "_links": {
+          "type": "object",
+          "properties": {
+            "self": {
+              "$ref": "./link.json"
+            }
           }
         }
       }
-    },
-    "project_id": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/project.json#/properties/project_id"
-    },
-    "label": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/project.json#/properties/label"
-    },
-    "slug": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/project.json#/properties/slug"
-    },
-    "created": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/project.json#/properties/created"
-    },
-    "updated": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/project.json#/properties/updated"
-    },
-    "start_date": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/project.json#/properties/start_date"
-    },
-    "end_date": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/project.json#/properties/end_date"
-    },
-    "customer": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/project.json#/properties/customer"
-    },
-    "program": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/project.json#/properties/program"
-    },
-    "allowed_statuses": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/project.json#/properties/allowed_statuses"
     }
-  }
+  ]
 }

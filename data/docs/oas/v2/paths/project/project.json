@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchProjectById",
-    "summary": "Fetches a project by Id",
-    "description": "Fetch Project",
+    "summary": "Fetch Project",
+    "description": "Fetches a project",
     "tags": [
       "Project"
     ],
@@ -28,7 +28,7 @@
   },
   "put": {
     "operationId": "updateProject",
-    "summary": "Updates a project",
+    "summary": "Update project",
     "description": "Updates a project",
     "tags": [
       "Project"
@@ -58,8 +58,8 @@
   },
   "delete": {
     "operationId": "deleteProject",
-    "summary": "Deletes a project",
-    "description": "This will soft delete the project",
+    "summary": "Delete project",
+    "description": "Deletes a project",
     "tags": [
       "Project"
     ],
@@ -70,7 +70,7 @@
     ],
     "responses": {
       "205": {
-        "description": "Project deleted"
+        "summary": "Project deleted"
       },
       "401": {
         "$ref": "../../components/responses/401unauthorized.json"

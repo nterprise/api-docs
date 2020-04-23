@@ -1,43 +1,27 @@
 {
   "type": "object",
-  "properties": {
-    "_links": {
+  "allOf": [
+    {
+      "$ref": "./user.json"
+    },
+    {
       "type": "object",
+      "required": [
+        "_links"
+      ],
       "properties": {
-        "self": {
-          "$ref": "./link.json",
-          "x-example": {
-            "href": "https://api.nterprise.com/users/QEvVrVMMwVcJ6om"
+        "_links": {
+          "type": "object",
+          "required": [
+            "self"
+          ],
+          "properties": {
+            "self": {
+              "$ref": "./link.json"
+            }
           }
         }
       }
-    },
-    "user_id": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/user.json#/properties/user_id"
-    },
-    "label": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/user.json#/properties/label"
-    },
-    "slug": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/user.json#/properties/slug"
-    },
-    "created": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/user.json#/properties/created"
-    },
-    "updated": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/user.json#/properties/updated"
-    },
-    "email": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/user.json#/properties/email"
-    },
-    "name": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/user.json#/properties/name"
-    },
-    "picture": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/user.json#/properties/picture"
-    },
-    "profile": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/user.json#/properties/profile"
     }
-  }
+  ]
 }

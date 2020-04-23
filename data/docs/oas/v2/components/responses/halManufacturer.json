@@ -4,6 +4,24 @@
     "application/hal+json": {
       "schema": {
         "$ref": "../schemas/halManufacturer.json"
+      },
+      "example": {
+        "manufacturer_id": "manufacturer",
+        "label": "Manchuck Inc",
+
+"created": "2019-08-19T00:01:02.000Z",
+        "updated": "2020-08-19T01:01:02.000Z",
+        "_links": {
+          "nter:manufacturer-units": {
+            "href": "https://api.example.com/manufacturers/manufacturer/units"
+          },
+          "nter:manufacturer-parts": {
+            "href": "https://api.example.com/manufacturers/manufacturer/parts"
+          },
+          "self": {
+            "href": "https://api.example.com/manufacturers/manufacturer"
+          }
+        }
       }
     }
   }

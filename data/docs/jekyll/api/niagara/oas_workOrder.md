@@ -1,47 +1,31 @@
 ---
 layout: page
 parent: Niagara API
-nav_order: 19
+nav_order: 21
+redirect_from:
+  - /rel/work-orders
+  - /rel/batch-work-order
 title: Work Orders
-language_tabs: ''
-toc_footers: []
-includes: []
-search: true
-highlight_theme: darkula
-headingLevel: 2
-
 ---
 
-<h1 id="work-orders">Work Orders v2.0.0</h1>
+<h1 id="work-orders">Work Orders</h1>
 
 * Do not remove this line (it will not be displayed)
 {:toc}
 
-> Scroll down for example requests and responses.
-
 API for the nterprise application
-
-Base URLs:
-
-* <a href="https://{environment}.nterprise.com">https://{environment}.nterprise.com</a>
-
-    * **environment** -  Default: api
-
-        * api
-
-        * api.dev
 
 <h1 id="work-orders-work-order">Work Order</h1>
 
-## fetchAllWorkOrders
+## Operations
+
+### GET /work-orders - *Fetch work-orders*
 
 <a id="opIdfetchAllWorkOrders"></a>
 
-`GET /work-orders`
+*Fetch work-orders*
 
-*Fetches A Page of work orders*
-
-Fetch Work Order
+Fetches A Page of work orders
 
 <h3 id="fetchallworkorders-parameters">Parameters</h3>
 
@@ -49,2380 +33,6 @@ Fetch Work Order
 |---|---|---|---|---|
 |limit|query|integer(int32)|false|How many items to return at one time (max 100)|
 |offset|query|string|false|Continue from last offset|
-
-> Example responses
-
-> 200 Response
-
-```json
-{
-  "type": "object",
-  "properties": {
-    "_embedded": {
-      "type": "object",
-      "properties": {
-        "nter:work-orders": {
-          "type": "array",
-          "maxItems": 100,
-          "items": {
-            "type": "object",
-            "properties": {
-              "_links": {
-                "type": "object",
-                "properties": {
-                  "self": {
-                    "x-example": {
-                      "href": "https://api.nterprise.com/work_orders/kk9z7zwvQYH5GKx"
-                    },
-                    "type": "object",
-                    "properties": {
-                      "href": {
-                        "type": "string",
-                        "format": "uri"
-                      }
-                    }
-                  }
-                }
-              },
-              "work_order_id": {
-                "type": "string",
-                "description": "The identifier for the unit",
-                "pattern": "^[0-9a-zA-Z-_]+$"
-              },
-              "label": {
-                "type": "string",
-                "description": "Label for the entity"
-              },
-              "slug": {
-                "type": "string",
-                "description": "Slug for the entity (Auto-generated from the label)",
-                "readOnly": true,
-                "deprecated": true,
-                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-              },
-              "created": {
-                "description": "Date the entity was created",
-                "type": "string",
-                "format": "date-time",
-                "readOnly": true
-              },
-              "updated": {
-                "description": "Last date the entity was updated",
-                "type": "string",
-                "format": "date-time",
-                "readOnly": true
-              },
-              "start_date": {
-                "description": "Last date the entity was updated",
-                "type": "string",
-                "format": "date-time",
-                "readOnly": true
-              },
-              "end_date": {
-                "description": "Last date the entity was updated",
-                "type": "string",
-                "format": "date-time",
-                "readOnly": true
-              },
-              "description": {
-                "type": "string",
-                "nullable": true,
-                "description": "Detailed description for the work order"
-              },
-              "work_order_type": {
-                "type": "string",
-                "description": "Type of work order",
-                "enum": [
-                  "device"
-                ]
-              },
-              "begin_date": {
-                "type": "string",
-                "format": "date-time",
-                "description": "Begin date"
-              },
-              "due_date": {
-                "type": "string",
-                "format": "date-time",
-                "description": "Due date"
-              },
-              "current_status": {
-                "type": "object",
-                "description": "Defines the properties for a status",
-                "additionalProperties": false,
-                "required": [
-                  "status",
-                  "category"
-                ],
-                "properties": {
-                  "status": {
-                    "type": "string",
-                    "description": "A Custom label for the status",
-                    "pattern": "^[A-Za-z][0-9a-zA-Z-_ ]+$"
-                  },
-                  "category": {
-                    "type": "string",
-                    "description": "The classifier for the statues",
-                    "enum": [
-                      "PENDING",
-                      "IN_PROGRESS",
-                      "VERIFYING",
-                      "COMPLETE",
-                      "CANCELLED",
-                      "BLOCKED"
-                    ]
-                  },
-                  "description": {
-                    "type": "string",
-                    "nullable": true,
-                    "description": "A description for the status"
-                  },
-                  "order": {
-                    "type": "number",
-                    "description": "Order status appears when listing"
-                  }
-                }
-              },
-              "project": {
-                "type": "object",
-                "description": "Defines the properties for a project",
-                "additionalProperties": false,
-                "required": [
-                  "label",
-                  "entity_id",
-                  "entity_type",
-                  "created",
-                  "updated",
-                  "customer",
-                  "program",
-                  "allowed_statuses"
-                ],
-                "properties": {
-                  "project_id": {
-                    "type": "string",
-                    "description": "Unique identifier",
-                    "pattern": "^[0-9a-zA-Z-_]+$"
-                  },
-                  "entity_id": {
-                    "x-no-api-doc": true,
-                    "type": "string",
-                    "description": "Customer identifier",
-                    "readOnly": true,
-                    "pattern": "^[0-9a-zA-Z-_]+$"
-                  },
-                  "entity_type": {
-                    "x-no-api-doc": true,
-                    "enum": [
-                      "PRJ"
-                    ]
-                  },
-                  "description": {
-                    "type": "string",
-                    "nullable": true,
-                    "description": "Project description"
-                  },
-                  "label": {
-                    "type": "string",
-                    "description": "Label for the entity"
-                  },
-                  "slug": {
-                    "type": "string",
-                    "description": "Slug for the entity (Auto-generated from the label)",
-                    "readOnly": true,
-                    "deprecated": true,
-                    "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-                  },
-                  "created": {
-                    "description": "Date the entity was created",
-                    "type": "string",
-                    "format": "date-time",
-                    "readOnly": true
-                  },
-                  "updated": {
-                    "description": "Last date the entity was updated",
-                    "type": "string",
-                    "format": "date-time",
-                    "readOnly": true
-                  },
-                  "customer": {
-                    "type": "object",
-                    "description": "Customer",
-                    "additionalProperties": false,
-                    "required": [
-                      "label",
-                      "entity_id",
-                      "entity_type",
-                      "created",
-                      "updated",
-                      "allowed_statuses"
-                    ],
-                    "properties": {
-                      "customer_id": {
-                        "description": "Customer identifier",
-                        "type": "string",
-                        "readOnly": true,
-                        "pattern": "^[0-9a-zA-Z-_]+$"
-                      },
-                      "entity_id": {
-                        "x-no-api-doc": true,
-                        "type": "string",
-                        "description": "Customer identifier",
-                        "readOnly": true,
-                        "pattern": "^[0-9a-zA-Z-_]+$"
-                      },
-                      "entity_type": {
-                        "x-no-api-doc": true,
-                        "enum": [
-                          "CUS"
-                        ]
-                      },
-                      "label": {
-                        "type": "string",
-                        "description": "Label for the entity"
-                      },
-                      "slug": {
-                        "type": "string",
-                        "description": "Slug for the entity (Auto-generated from the label)",
-                        "readOnly": true,
-                        "deprecated": true,
-                        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-                      },
-                      "created": {
-                        "description": "Date the entity was created",
-                        "type": "string",
-                        "format": "date-time",
-                        "readOnly": true
-                      },
-                      "updated": {
-                        "description": "Last date the entity was updated",
-                        "type": "string",
-                        "format": "date-time",
-                        "readOnly": true
-                      },
-                      "external_platform": {
-                        "type": "object",
-                        "description": "External Identifiers for the customer",
-                        "deprecated": true,
-                        "x-patternProperties": {
-                          "^[A-Za-z][A-Za-z0-9_]*$": {
-                            "type": [
-                              "string",
-                              "null"
-                            ]
-                          }
-                        }
-                      },
-                      "allowed_statuses": {
-                        "type": "array",
-                        "description": "List of allowed statuses",
-                        "uniqueItems": true,
-                        "items": {
-                          "type": "object",
-                          "description": "Defines the properties for a status",
-                          "additionalProperties": false,
-                          "required": [
-                            "status",
-                            "category"
-                          ],
-                          "properties": {
-                            "status": {
-                              "type": "string",
-                              "description": "A Custom label for the status",
-                              "pattern": "^[A-Za-z][0-9a-zA-Z-_ ]+$"
-                            },
-                            "category": {
-                              "type": "string",
-                              "description": "The classifier for the statues",
-                              "enum": [
-                                "PENDING",
-                                "IN_PROGRESS",
-                                "VERIFYING",
-                                "COMPLETE",
-                                "CANCELLED",
-                                "BLOCKED"
-                              ]
-                            },
-                            "description": {
-                              "type": "string",
-                              "nullable": true,
-                              "description": "A description for the status"
-                            },
-                            "order": {
-                              "type": "number",
-                              "description": "Order status appears when listing"
-                            }
-                          }
-                        }
-                      },
-                      "total_programs": {
-                        "type": "number",
-                        "description": "Total programs under the customer"
-                      },
-                      "total_projects": {
-                        "type": "number",
-                        "description": "Total projects under the customer"
-                      }
-                    }
-                  },
-                  "program": {
-                    "type": "object",
-                    "description": "Defines the properties for a program",
-                    "additionalProperties": false,
-                    "required": [
-                      "entity_id",
-                      "entity_type",
-                      "created",
-                      "updated",
-                      "customer",
-                      "allowed_statuses"
-                    ],
-                    "properties": {
-                      "program_id": {
-                        "description": "Unique identifier",
-                        "type": "string",
-                        "readOnly": true,
-                        "pattern": "^[0-9a-zA-Z-_]+$"
-                      },
-                      "entity_id": {
-                        "x-no-api-doc": true,
-                        "type": "string",
-                        "description": "Customer identifier",
-                        "readOnly": true,
-                        "pattern": "^[0-9a-zA-Z-_]+$"
-                      },
-                      "entity_type": {
-                        "x-no-api-doc": true,
-                        "enum": [
-                          "PGM"
-                        ]
-                      },
-                      "label": {
-                        "type": "string",
-                        "description": "Label for the entity"
-                      },
-                      "slug": {
-                        "type": "string",
-                        "description": "Slug for the entity (Auto-generated from the label)",
-                        "readOnly": true,
-                        "deprecated": true,
-                        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-                      },
-                      "created": {
-                        "description": "Date the entity was created",
-                        "type": "string",
-                        "format": "date-time",
-                        "readOnly": true
-                      },
-                      "updated": {
-                        "description": "Last date the entity was updated",
-                        "type": "string",
-                        "format": "date-time",
-                        "readOnly": true
-                      },
-                      "start_date": {
-                        "type": "string",
-                        "nullable": true,
-                        "format": "date-time",
-                        "description": "Start date"
-                      },
-                      "end_date": {
-                        "type": "string",
-                        "nullable": true,
-                        "format": "date-time",
-                        "description": "End date"
-                      },
-                      "customer": {
-                        "type": "object",
-                        "description": "Customer",
-                        "additionalProperties": false,
-                        "required": [
-                          "label",
-                          "entity_id",
-                          "entity_type",
-                          "created",
-                          "updated",
-                          "allowed_statuses"
-                        ],
-                        "properties": {
-                          "customer_id": {
-                            "description": "Customer identifier",
-                            "type": "string",
-                            "readOnly": true,
-                            "pattern": "^[0-9a-zA-Z-_]+$"
-                          },
-                          "entity_id": {
-                            "x-no-api-doc": true,
-                            "type": "string",
-                            "description": "Customer identifier",
-                            "readOnly": true,
-                            "pattern": "^[0-9a-zA-Z-_]+$"
-                          },
-                          "entity_type": {
-                            "x-no-api-doc": true,
-                            "enum": [
-                              "CUS"
-                            ]
-                          },
-                          "label": {
-                            "type": "string",
-                            "description": "Label for the entity"
-                          },
-                          "slug": {
-                            "type": "string",
-                            "description": "Slug for the entity (Auto-generated from the label)",
-                            "readOnly": true,
-                            "deprecated": true,
-                            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-                          },
-                          "created": {
-                            "description": "Date the entity was created",
-                            "type": "string",
-                            "format": "date-time",
-                            "readOnly": true
-                          },
-                          "updated": {
-                            "description": "Last date the entity was updated",
-                            "type": "string",
-                            "format": "date-time",
-                            "readOnly": true
-                          },
-                          "external_platform": {
-                            "type": "object",
-                            "description": "External Identifiers for the customer",
-                            "deprecated": true,
-                            "x-patternProperties": {
-                              "^[A-Za-z][A-Za-z0-9_]*$": {
-                                "type": [
-                                  "string",
-                                  "null"
-                                ]
-                              }
-                            }
-                          },
-                          "allowed_statuses": {
-                            "type": "array",
-                            "description": "List of allowed statuses",
-                            "uniqueItems": true,
-                            "items": {
-                              "type": "object",
-                              "description": "Defines the properties for a status",
-                              "additionalProperties": false,
-                              "required": [
-                                "status",
-                                "category"
-                              ],
-                              "properties": {
-                                "status": {
-                                  "type": "string",
-                                  "description": "A Custom label for the status",
-                                  "pattern": "^[A-Za-z][0-9a-zA-Z-_ ]+$"
-                                },
-                                "category": {
-                                  "type": "string",
-                                  "description": "The classifier for the statues",
-                                  "enum": [
-                                    "PENDING",
-                                    "IN_PROGRESS",
-                                    "VERIFYING",
-                                    "COMPLETE",
-                                    "CANCELLED",
-                                    "BLOCKED"
-                                  ]
-                                },
-                                "description": {
-                                  "type": "string",
-                                  "nullable": true,
-                                  "description": "A description for the status"
-                                },
-                                "order": {
-                                  "type": "number",
-                                  "description": "Order status appears when listing"
-                                }
-                              }
-                            }
-                          },
-                          "total_programs": {
-                            "type": "number",
-                            "description": "Total programs under the customer"
-                          },
-                          "total_projects": {
-                            "type": "number",
-                            "description": "Total projects under the customer"
-                          }
-                        }
-                      },
-                      "allowed_statuses": {
-                        "type": "array",
-                        "description": "List of allowed statuses",
-                        "uniqueItems": true,
-                        "items": {
-                          "type": "object",
-                          "description": "Defines the properties for a status",
-                          "additionalProperties": false,
-                          "required": [
-                            "status",
-                            "category"
-                          ],
-                          "properties": {
-                            "status": {
-                              "type": "string",
-                              "description": "A Custom label for the status",
-                              "pattern": "^[A-Za-z][0-9a-zA-Z-_ ]+$"
-                            },
-                            "category": {
-                              "type": "string",
-                              "description": "The classifier for the statues",
-                              "enum": [
-                                "PENDING",
-                                "IN_PROGRESS",
-                                "VERIFYING",
-                                "COMPLETE",
-                                "CANCELLED",
-                                "BLOCKED"
-                              ]
-                            },
-                            "description": {
-                              "type": "string",
-                              "nullable": true,
-                              "description": "A description for the status"
-                            },
-                            "order": {
-                              "type": "number",
-                              "description": "Order status appears when listing"
-                            }
-                          }
-                        }
-                      }
-                    }
-                  },
-                  "allowed_statuses": {
-                    "type": "array",
-                    "description": "List of allowed statuses",
-                    "uniqueItems": true,
-                    "items": {
-                      "type": "object",
-                      "description": "Defines the properties for a status",
-                      "additionalProperties": false,
-                      "required": [
-                        "status",
-                        "category"
-                      ],
-                      "properties": {
-                        "status": {
-                          "type": "string",
-                          "description": "A Custom label for the status",
-                          "pattern": "^[A-Za-z][0-9a-zA-Z-_ ]+$"
-                        },
-                        "category": {
-                          "type": "string",
-                          "description": "The classifier for the statues",
-                          "enum": [
-                            "PENDING",
-                            "IN_PROGRESS",
-                            "VERIFYING",
-                            "COMPLETE",
-                            "CANCELLED",
-                            "BLOCKED"
-                          ]
-                        },
-                        "description": {
-                          "type": "string",
-                          "nullable": true,
-                          "description": "A description for the status"
-                        },
-                        "order": {
-                          "type": "number",
-                          "description": "Order status appears when listing"
-                        }
-                      }
-                    }
-                  },
-                  "start_date": {
-                    "type": "string",
-                    "nullable": true,
-                    "format": "date-time",
-                    "description": "Start date"
-                  },
-                  "end_date": {
-                    "type": "string",
-                    "nullable": true,
-                    "format": "date-time",
-                    "description": "End date"
-                  }
-                }
-              },
-              "cycles": {
-                "type": "array",
-                "minimum": 1,
-                "items": {
-                  "type": "object",
-                  "additionalProperties": false,
-                  "required": [
-                    "needed",
-                    "pending",
-                    "in_progress",
-                    "verifying",
-                    "complete",
-                    "blocked",
-                    "cancelled",
-                    "work_flow"
-                  ],
-                  "properties": {
-                    "needed": {
-                      "type": "integer",
-                      "description": "The number of cycles needed",
-                      "minimum": 1
-                    },
-                    "pending": {
-                      "type": "integer",
-                      "description": "The number of cycles pending",
-                      "readOnly": true
-                    },
-                    "in_progress": {
-                      "type": "integer",
-                      "description": "The number of cycles pending",
-                      "readOnly": true
-                    },
-                    "verifying": {
-                      "type": "integer",
-                      "description": "The number of cycles pending",
-                      "readOnly": true
-                    },
-                    "complete": {
-                      "type": "integer",
-                      "description": "The number of cycles pending",
-                      "readOnly": true
-                    },
-                    "blocked": {
-                      "type": "integer",
-                      "description": "The number of cycles pending",
-                      "readOnly": true
-                    },
-                    "cancelled": {
-                      "type": "integer",
-                      "description": "The number of cycles pending",
-                      "readOnly": true
-                    },
-                    "work_flow": {
-                      "type": "object",
-                      "description": "Workflow",
-                      "additionalProperties": false,
-                      "required": [
-                        "label",
-                        "entity_id",
-                        "entity_type",
-                        "created",
-                        "updated",
-                        "steps",
-                        "starts_at",
-                        "applies_to",
-                        "schema_version"
-                      ],
-                      "properties": {
-                        "work_flow_id": {
-                          "type": "string",
-                          "description": "Customer identifier",
-                          "readOnly": true,
-                          "pattern": "^[0-9a-zA-Z-_]+$"
-                        },
-                        "entity_id": {
-                          "x-no-api-doc": true,
-                          "type": "string",
-                          "description": "Customer identifier",
-                          "readOnly": true,
-                          "pattern": "^[0-9a-zA-Z-_]+$"
-                        },
-                        "entity_type": {
-                          "x-no-api-doc": true,
-                          "enum": [
-                            "WKF"
-                          ]
-                        },
-                        "label": {
-                          "type": "string",
-                          "description": "Label for the entity"
-                        },
-                        "slug": {
-                          "type": "string",
-                          "description": "Slug for the entity (Auto-generated from the label)",
-                          "readOnly": true,
-                          "deprecated": true,
-                          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-                        },
-                        "created": {
-                          "description": "Date the entity was created",
-                          "type": "string",
-                          "format": "date-time",
-                          "readOnly": true
-                        },
-                        "updated": {
-                          "description": "Last date the entity was updated",
-                          "type": "string",
-                          "format": "date-time",
-                          "readOnly": true
-                        },
-                        "schema_version": {
-                          "type": "string",
-                          "description": "Version of the workflow schema used",
-                          "enum": [
-                            "1.0"
-                          ]
-                        },
-                        "workflow_version": {
-                          "type": "integer",
-                          "description": "Version number for the work flows (the number of times it has been changed",
-                          "readOnly": true
-                        },
-                        "applies_to": {
-                          "type": "string",
-                          "description": "The entity type this work flow applies too",
-                          "enum": [
-                            "UNIT",
-                            "PART",
-                            "PGM",
-                            "PRJ",
-                            "CUS",
-                            "CON"
-                          ]
-                        },
-                        "triggered_by": {
-                          "type": "array",
-                          "items": {
-                            "type": "string",
-                            "description": "Possible entity events",
-                            "enum": [
-                              "CON.attached",
-                              "CON.created",
-                              "CON.deleted",
-                              "CON.detached",
-                              "CON.removed",
-                              "CON.updated",
-                              "CUS.attached",
-                              "CUS.created",
-                              "CUS.deleted",
-                              "CUS.detached",
-                              "CUS.removed",
-                              "CUS.updated",
-                              "LOC.attached",
-                              "LOC.created",
-                              "LOC.deleted",
-                              "LOC.detached",
-                              "LOC.removed",
-                              "LOC.updated",
-                              "NOTE.attached",
-                              "NOTE.created",
-                              "NOTE.deleted",
-                              "NOTE.detached",
-                              "NOTE.removed",
-                              "NOTE.updated",
-                              "PART.attached",
-                              "PART.created",
-                              "PART.deleted",
-                              "PART.detached",
-                              "PART.removed",
-                              "PART.updated",
-                              "PGM.attached",
-                              "PGM.created",
-                              "PGM.deleted",
-                              "PGM.detached",
-                              "PGM.removed",
-                              "PGM.updated",
-                              "PRO.attached",
-                              "PRO.created",
-                              "PRO.deleted",
-                              "PRO.detached",
-                              "PRO.removed",
-                              "PRO.updated",
-                              "RES.attached",
-                              "RES.created",
-                              "RES.deleted",
-                              "RES.detached",
-                              "RES.removed",
-                              "RES.updated",
-                              "UNIT.attached",
-                              "UNIT.created",
-                              "UNIT.deleted",
-                              "UNIT.detached",
-                              "UNIT.removed",
-                              "UNIT.updated",
-                              "USER.attached",
-                              "USER.created",
-                              "USER.deleted",
-                              "USER.detached",
-                              "USER.removed",
-                              "USER.updated",
-                              "WKF.attached",
-                              "WKF.created",
-                              "WKF.deleted",
-                              "WKF.detached",
-                              "WKF.removed",
-                              "WKF.updated",
-                              "WOR.attached",
-                              "WOR.created",
-                              "WOR.deleted",
-                              "WOR.detached",
-                              "WOR.removed",
-                              "WOR.updated"
-                            ]
-                          }
-                        },
-                        "starts_at": {
-                          "type": "string",
-                          "description": "Starting step"
-                        },
-                        "steps": {
-                          "type": "object",
-                          "description": "Steps for the workflow",
-                          "uniqueItems": true,
-                          "additionalProperties": true,
-                          "x-patternProperties": {
-                            "^[A-Za-z][A-Za-z0-9_]*$": {
-                              "anyOf": [
-                                {
-                                  "$schema": "http://json-schema.org/draft-07/schema#",
-                                  "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/function/allocateUnitsToProject.json",
-                                  "type": "object",
-                                  "description": "Require the user confirm an action. This is normally used when Niagara cannot automatically detect that a task or action has been performed.",
-                                  "properties": {
-                                    "label": {
-                                      "type": "string",
-                                      "description": "Label for the entity"
-                                    },
-                                    "options": {
-                                      "type": "object",
-                                      "required": [
-                                        "function",
-                                        "payload"
-                                      ],
-                                      "properties": {
-                                        "function": {
-                                          "type": "string",
-                                          "enum": [
-                                            "allocate-units-to-project"
-                                          ]
-                                        },
-                                        "payload": {
-                                          "type": "object",
-                                          "required": [
-                                            "part_id",
-                                            "project_id",
-                                            "qty"
-                                          ],
-                                          "properties": {
-                                            "part_id": {
-                                              "type": "string",
-                                              "description": "Part ID of the to assign"
-                                            },
-                                            "program_id": {
-                                              "type": "string",
-                                              "description": "Program ID of the to assign"
-                                            },
-                                            "qty": {
-                                              "type": "number",
-                                              "minimum": 1,
-                                              "description": "Number of units to assign to the project"
-                                            },
-                                            "allow_scarcity": {
-                                              "type": "boolean",
-                                              "description": "Allow the workflow to continue even if there are not enough units"
-                                            },
-                                            "force": {
-                                              "type": "boolean",
-                                              "description": "Assign the units even if the project already has units allocated"
-                                            },
-                                            "status": {
-                                              "type": "string",
-                                              "description": "Only assign units which are in this status"
-                                            }
-                                          }
-                                        }
-                                      }
-                                    }
-                                  }
-                                },
-                                {
-                                  "$schema": "http://json-schema.org/draft-07/schema#",
-                                  "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/followPDFInstructions.json",
-                                  "type": "object",
-                                  "description": "Display a link or modal to a user which contains instructions from a PDF",
-                                  "required": [
-                                    "label",
-                                    "payload"
-                                  ],
-                                  "properties": {
-                                    "label": {
-                                      "type": "string",
-                                      "description": "Label for the step"
-                                    },
-                                    "options": {
-                                      "type": "object",
-                                      "required": [
-                                        "component",
-                                        "payload"
-                                      ],
-                                      "properties": {
-                                        "component": {
-                                          "enum": [
-                                            "follow-pds-instructions"
-                                          ]
-                                        },
-                                        "payload": {
-                                          "type": "object",
-                                          "required": [
-                                            "attachment_id"
-                                          ],
-                                          "properties": {
-                                            "attachment_id": {
-                                              "type": "string",
-                                              "description": "UUID for the attachment",
-                                              "format": "uuid"
-                                            }
-                                          }
-                                        }
-                                      }
-                                    }
-                                  },
-                                  "allOf": [
-                                    {
-                                      "$schema": "http://json-schema.org/draft-07/schema#",
-                                      "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepUser.json",
-                                      "type": "object",
-                                      "description": "A step which requires a user to complete",
-                                      "required": [
-                                        "type",
-                                        "options"
-                                      ],
-                                      "properties": {
-                                        "type": {
-                                          "type": "string",
-                                          "description": "Type of workflow step",
-                                          "enum": [
-                                            "load",
-                                            "choice",
-                                            "function",
-                                            "machine",
-                                            "pass",
-                                            "fail",
-                                            "success",
-                                            "user",
-                                            "wait"
-                                          ]
-                                        },
-                                        "options": {
-                                          "type": "object",
-                                          "required": [
-                                            "component",
-                                            "payload"
-                                          ],
-                                          "properties": {
-                                            "component": {
-                                              "type": "string",
-                                              "description": "Name of the function to invoke"
-                                            },
-                                            "payload": {
-                                              "type": "object"
-                                            }
-                                          }
-                                        }
-                                      },
-                                      "allOf": [
-                                        {
-                                          "$schema": "http://json-schema.org/draft-07/schema#",
-                                          "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepCommon.json",
-                                          "type": "object",
-                                          "required": [
-                                            "type",
-                                            "label",
-                                            "goto"
-                                          ],
-                                          "properties": {
-                                            "type": {
-                                              "type": "string",
-                                              "description": "Type of workflow step",
-                                              "enum": [
-                                                "load",
-                                                "choice",
-                                                "function",
-                                                "machine",
-                                                "pass",
-                                                "fail",
-                                                "success",
-                                                "user",
-                                                "wait"
-                                              ]
-                                            },
-                                            "label": {
-                                              "type": "string",
-                                              "description": "Label for the step"
-                                            },
-                                            "goto": {
-                                              "type": "string",
-                                              "description": "Step to move to",
-                                              "pattern": "^[a-z][a-z-]+[a-z]$"
-                                            },
-                                            "goto-fail": {
-                                              "type": "string",
-                                              "description": "Step to transition too if this step cannot be completed",
-                                              "pattern": "^[a-z][a-z-]+[a-z]$"
-                                            },
-                                            "onComplete": {
-                                              "$schema": "http://json-schema.org/draft-07/schema#",
-                                              "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                              "type": "object",
-                                              "required": [
-                                                "retry",
-                                                "finally"
-                                              ],
-                                              "properties": {
-                                                "actions": {
-                                                  "type": "array",
-                                                  "description": "Actions to take on failure",
-                                                  "maxItems": 10,
-                                                  "items": {
-                                                    "type": "object"
-                                                  }
-                                                }
-                                              }
-                                            }
-                                          }
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                },
-                                {
-                                  "$schema": "http://json-schema.org/draft-07/schema#",
-                                  "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/manualDataEntry.json",
-                                  "type": "object",
-                                  "description": "Ask the user to manually enter (or confirm) data for an entity",
-                                  "properties": {
-                                    "label": {
-                                      "type": "string",
-                                      "description": "Label for the step"
-                                    },
-                                    "options": {
-                                      "type": "object",
-                                      "required": [
-                                        "component",
-                                        "payload"
-                                      ],
-                                      "properties": {
-                                        "component": {
-                                          "enum": [
-                                            "manual-data-entry"
-                                          ]
-                                        },
-                                        "payload": {
-                                          "type": "object",
-                                          "required": [
-                                            "fields"
-                                          ],
-                                          "properties": {
-                                            "fields": {
-                                              "type": "array",
-                                              "description": "Configuration for each field",
-                                              "items": {
-                                                "type": "object",
-                                                "required": [
-                                                  "input_type",
-                                                  "label",
-                                                  "required",
-                                                  "entity_field"
-                                                ],
-                                                "properties": {
-                                                  "input_type": {
-                                                    "type": "string",
-                                                    "description": "The type of input field to display",
-                                                    "enum": [
-                                                      "textbox",
-                                                      "input"
-                                                    ]
-                                                  },
-                                                  "label": {
-                                                    "type": "string",
-                                                    "description": "Label to display for the field"
-                                                  },
-                                                  "required": {
-                                                    "type": "boolean",
-                                                    "description": "Display the field as required input. Note: this is a helper function. It singles that the user is required to input data at this step. If the field is required on the entity, the user will be presented with a validation message"
-                                                  },
-                                                  "entity_field": {
-                                                    "type": "string",
-                                                    "description": "JSON Path to the field on the entity. If the path does not start with '$' then the entity on the context is assumed. Otherwise the data will be set on the context path"
-                                                  }
-                                                }
-                                              }
-                                            }
-                                          }
-                                        }
-                                      }
-                                    }
-                                  },
-                                  "allOf": [
-                                    {
-                                      "$schema": "http://json-schema.org/draft-07/schema#",
-                                      "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepUser.json",
-                                      "type": "object",
-                                      "description": "A step which requires a user to complete",
-                                      "required": [
-                                        "type",
-                                        "options"
-                                      ],
-                                      "properties": {
-                                        "type": {
-                                          "type": "string",
-                                          "description": "Type of workflow step",
-                                          "enum": [
-                                            "load",
-                                            "choice",
-                                            "function",
-                                            "machine",
-                                            "pass",
-                                            "fail",
-                                            "success",
-                                            "user",
-                                            "wait"
-                                          ]
-                                        },
-                                        "options": {
-                                          "type": "object",
-                                          "required": [
-                                            "component",
-                                            "payload"
-                                          ],
-                                          "properties": {
-                                            "component": {
-                                              "type": "string",
-                                              "description": "Name of the function to invoke"
-                                            },
-                                            "payload": {
-                                              "type": "object"
-                                            }
-                                          }
-                                        }
-                                      },
-                                      "allOf": [
-                                        {
-                                          "$schema": "http://json-schema.org/draft-07/schema#",
-                                          "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepCommon.json",
-                                          "type": "object",
-                                          "required": [
-                                            "type",
-                                            "label",
-                                            "goto"
-                                          ],
-                                          "properties": {
-                                            "type": {
-                                              "type": "string",
-                                              "description": "Type of workflow step",
-                                              "enum": [
-                                                "load",
-                                                "choice",
-                                                "function",
-                                                "machine",
-                                                "pass",
-                                                "fail",
-                                                "success",
-                                                "user",
-                                                "wait"
-                                              ]
-                                            },
-                                            "label": {
-                                              "type": "string",
-                                              "description": "Label for the step"
-                                            },
-                                            "goto": {
-                                              "type": "string",
-                                              "description": "Step to move to",
-                                              "pattern": "^[a-z][a-z-]+[a-z]$"
-                                            },
-                                            "goto-fail": {
-                                              "type": "string",
-                                              "description": "Step to transition too if this step cannot be completed",
-                                              "pattern": "^[a-z][a-z-]+[a-z]$"
-                                            },
-                                            "onComplete": {
-                                              "$schema": "http://json-schema.org/draft-07/schema#",
-                                              "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                              "type": "object",
-                                              "required": [
-                                                "retry",
-                                                "finally"
-                                              ],
-                                              "properties": {
-                                                "actions": {
-                                                  "type": "array",
-                                                  "description": "Actions to take on failure",
-                                                  "maxItems": 10,
-                                                  "items": {
-                                                    "type": "object"
-                                                  }
-                                                }
-                                              }
-                                            }
-                                          }
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                },
-                                {
-                                  "$schema": "http://json-schema.org/draft-07/schema#",
-                                  "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/taskList.json",
-                                  "type": "object",
-                                  "description": "Ask the user to follow a list and check off boxes",
-                                  "properties": {
-                                    "label": {
-                                      "type": "string",
-                                      "description": "Label for the step"
-                                    },
-                                    "options": {
-                                      "type": "object",
-                                      "required": [
-                                        "component",
-                                        "payload"
-                                      ],
-                                      "properties": {
-                                        "component": {
-                                          "enum": [
-                                            "task-list"
-                                          ]
-                                        },
-                                        "payload": {
-                                          "type": "object",
-                                          "required": [
-                                            "items"
-                                          ],
-                                          "properties": {
-                                            "is_qc": {
-                                              "type": "boolean",
-                                              "description": "Flags this list as a QC task list. This means that a different user can close the task to one previously on the context"
-                                            },
-                                            "items": {
-                                              "type": "array",
-                                              "description": "Configuration for each task list item",
-                                              "items": {
-                                                "type": "object",
-                                                "required": [
-                                                  "label",
-                                                  "evaluated",
-                                                  "na_option"
-                                                ],
-                                                "properties": {
-                                                  "label": {
-                                                    "type": "string",
-                                                    "description": "Label to display for the field"
-                                                  },
-                                                  "slug": {
-                                                    "type": "string",
-                                                    "description": "Slug for the item (Auto-generated from the label)",
-                                                    "readOnly": true,
-                                                    "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-                                                  },
-                                                  "help": {
-                                                    "type": "string",
-                                                    "description": "Message describing what is needed to be checked"
-                                                  },
-                                                  "evaluated": {
-                                                    "type": "boolean",
-                                                    "description": "When set to true, this will fail the step if the value for the item is false or N/A"
-                                                  },
-                                                  "na_field": {
-                                                    "type": "boolean",
-                                                    "description": "Allow the user to select the N/A option when checking off the list"
-                                                  }
-                                                }
-                                              }
-                                            }
-                                          }
-                                        }
-                                      }
-                                    }
-                                  },
-                                  "allOf": [
-                                    {
-                                      "$schema": "http://json-schema.org/draft-07/schema#",
-                                      "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepUser.json",
-                                      "type": "object",
-                                      "description": "A step which requires a user to complete",
-                                      "required": [
-                                        "type",
-                                        "options"
-                                      ],
-                                      "properties": {
-                                        "type": {
-                                          "type": "string",
-                                          "description": "Type of workflow step",
-                                          "enum": [
-                                            "load",
-                                            "choice",
-                                            "function",
-                                            "machine",
-                                            "pass",
-                                            "fail",
-                                            "success",
-                                            "user",
-                                            "wait"
-                                          ]
-                                        },
-                                        "options": {
-                                          "type": "object",
-                                          "required": [
-                                            "component",
-                                            "payload"
-                                          ],
-                                          "properties": {
-                                            "component": {
-                                              "type": "string",
-                                              "description": "Name of the function to invoke"
-                                            },
-                                            "payload": {
-                                              "type": "object"
-                                            }
-                                          }
-                                        }
-                                      },
-                                      "allOf": [
-                                        {
-                                          "$schema": "http://json-schema.org/draft-07/schema#",
-                                          "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepCommon.json",
-                                          "type": "object",
-                                          "required": [
-                                            "type",
-                                            "label",
-                                            "goto"
-                                          ],
-                                          "properties": {
-                                            "type": {
-                                              "type": "string",
-                                              "description": "Type of workflow step",
-                                              "enum": [
-                                                "load",
-                                                "choice",
-                                                "function",
-                                                "machine",
-                                                "pass",
-                                                "fail",
-                                                "success",
-                                                "user",
-                                                "wait"
-                                              ]
-                                            },
-                                            "label": {
-                                              "type": "string",
-                                              "description": "Label for the step"
-                                            },
-                                            "goto": {
-                                              "type": "string",
-                                              "description": "Step to move to",
-                                              "pattern": "^[a-z][a-z-]+[a-z]$"
-                                            },
-                                            "goto-fail": {
-                                              "type": "string",
-                                              "description": "Step to transition too if this step cannot be completed",
-                                              "pattern": "^[a-z][a-z-]+[a-z]$"
-                                            },
-                                            "onComplete": {
-                                              "$schema": "http://json-schema.org/draft-07/schema#",
-                                              "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                              "type": "object",
-                                              "required": [
-                                                "retry",
-                                                "finally"
-                                              ],
-                                              "properties": {
-                                                "actions": {
-                                                  "type": "array",
-                                                  "description": "Actions to take on failure",
-                                                  "maxItems": 10,
-                                                  "items": {
-                                                    "type": "object"
-                                                  }
-                                                }
-                                              }
-                                            }
-                                          }
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                },
-                                {
-                                  "$schema": "http://json-schema.org/draft-07/schema#",
-                                  "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/machine/aceIos.json",
-                                  "type": "object",
-                                  "description": "Run the ACE-IOS application to provision iOS devices or ",
-                                  "properties": {
-                                    "type": {
-                                      "type": "string",
-                                      "enum": [
-                                        "machine"
-                                      ]
-                                    },
-                                    "label": {
-                                      "type": "string",
-                                      "description": "Label for the step"
-                                    },
-                                    "options": {
-                                      "type": "object",
-                                      "required": [
-                                        "application",
-                                        "configuration"
-                                      ],
-                                      "properties": {
-                                        "configuration": {
-                                          "type": "object",
-                                          "description": "ACE Configuration options",
-                                          "properties": {
-                                            "pairing_cert": {
-                                              "type": "string",
-                                              "description": "Contents of a *.crt file exported from Apple Configurator or MDM",
-                                              "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$"
-                                            },
-                                            "pairing_key": {
-                                              "type": "string",
-                                              "description": "Contents of a *.der file exported from Apple Configurator or MDM",
-                                              "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$"
-                                            },
-                                            "restore_device": {
-                                              "type": "boolean",
-                                              "description": "Restore device to factory defaults"
-                                            },
-                                            "automated_enrollment": {
-                                              "type": "boolean",
-                                              "description": "Automatically enroll the device to MDM"
-                                            },
-                                            "mdm": {
-                                              "type": "object",
-                                              "description": "The settings for the Customers MDM",
-                                              "properties": {
-                                                "vendor": {
-                                                  "type": "string",
-                                                  "description": "MDM vendor. Currently, supported values are AirWatch, JAMF, and Meraki.",
-                                                  "enum": [
-                                                    "AirWatch",
-                                                    "JAMF",
-                                                    "Meraki"
-                                                  ]
-                                                },
-                                                "console_url": {
-                                                  "type": "string",
-                                                  "format": "uri",
-                                                  "description": "Base URL for HTTP requests"
-                                                },
-                                                "user": {
-                                                  "type": "string",
-                                                  "description": "MDM User name"
-                                                },
-                                                "password": {
-                                                  "type": "string",
-                                                  "description": "MDM password"
-                                                },
-                                                "tenant_code": {
-                                                  "type": "string",
-                                                  "description": "MDM authentication key"
-                                                },
-                                                "set_asset_tag": {
-                                                  "type": "string",
-                                                  "description": "Sets the devices Asset tag based on a field from the unit"
-                                                }
-                                              }
-                                            },
-                                            "field_mappings": {
-                                              "type": "array",
-                                              "description": "List of fields to map to the device",
-                                              "items": {
-                                                "type": "object",
-                                                "properties": {
-                                                  "from": {
-                                                    "type": "string",
-                                                    "description": "The field reported from ACE",
-                                                    "enum": [
-                                                      "serial_number",
-                                                      "name",
-                                                      "ecid",
-                                                      "udid",
-                                                      "configurator_serial",
-                                                      "ios",
-                                                      "model",
-                                                      "storage",
-                                                      "wifi_mac",
-                                                      "bt_mac",
-                                                      "ethernet_mac",
-                                                      "thundersync_serial",
-                                                      "iccid",
-                                                      "iccid2",
-                                                      "imei",
-                                                      "imei2",
-                                                      "missed_profiles",
-                                                      "missed_apps",
-                                                      "icon_list_regex",
-                                                      "icon_layout",
-                                                      "bat_capacity"
-                                                    ]
-                                                  },
-                                                  "to": {
-                                                    "type": "string",
-                                                    "description": "Field to set on the entity"
-                                                  }
-                                                }
-                                              }
-                                            },
-                                            "wait_for_apps": {
-                                              "type": "array",
-                                              "description": "A list of applications needed to be installed on the device. This will cause the extension to poll the device for installed applications. Once all the applications have been installed, this step can be completed",
-                                              "items": {
-                                                "type": "string",
-                                                "format": "uri"
-                                              }
-                                            },
-                                            "wait_for_battery_charge": {
-                                              "type": "integer",
-                                              "description": "The required battery percentage needed before this step can move on",
-                                              "minimum": 0,
-                                              "maximum": 100
-                                            }
-                                          }
-                                        }
-                                      }
-                                    }
-                                  }
-                                },
-                                {
-                                  "$schema": "http://json-schema.org/draft-07/schema#",
-                                  "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepChoice.json",
-                                  "type": "object",
-                                  "description": "A Step choice",
-                                  "maxProperties": 2,
-                                  "minProperties": 2,
-                                  "required": [
-                                    "decision"
-                                  ],
-                                  "properties": {
-                                    "decision": {
-                                      "type": "array",
-                                      "description": "Context variable to check",
-                                      "items": {
-                                        "type": "object",
-                                        "properties": {
-                                          "variable": {
-                                            "type": "string",
-                                            "description": "Variable or value"
-                                          },
-                                          "operator": {
-                                            "type": "string",
-                                            "description": "Operator to perform",
-                                            "enum": [
-                                              "greater_than_equals",
-                                              "less_than_equals",
-                                              "greater_than",
-                                              "less_than",
-                                              "equals",
-                                              "not_equals"
-                                            ]
-                                          },
-                                          "operand": {
-                                            "type": "string",
-                                            "description": "operand to compare with"
-                                          }
-                                        }
-                                      }
-                                    }
-                                  },
-                                  "allOf": [
-                                    {
-                                      "$schema": "http://json-schema.org/draft-07/schema#",
-                                      "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepNext.json",
-                                      "type": "object",
-                                      "required": [
-                                        "type",
-                                        "label",
-                                        "goto"
-                                      ],
-                                      "properties": {
-                                        "goto": {
-                                          "type": "string",
-                                          "description": "Step to move to",
-                                          "pattern": "^[a-z][a-z-]+[a-z]$"
-                                        },
-                                        "goto-fail": {
-                                          "type": "string",
-                                          "description": "Step to transition too if this step cannot be completed",
-                                          "pattern": "^[a-z][a-z-]+[a-z]$"
-                                        },
-                                        "context": {
-                                          "type": "array",
-                                          "description": "Values to set on the context",
-                                          "items": {
-                                            "type": "object",
-                                            "required": [
-                                              "key",
-                                              "value"
-                                            ],
-                                            "properties": {
-                                              "key": {
-                                                "type": "string",
-                                                "description": "The context key to set"
-                                              },
-                                              "value": {
-                                                "type": "string",
-                                                "description": "Value to set"
-                                              },
-                                              "lock": {
-                                                "type": "boolean",
-                                                "description": "Prevents other steps from writing this value"
-                                              },
-                                              "ignore": {
-                                                "type": "boolean",
-                                                "description": "When trying to set a locked key, do not fail"
-                                              }
-                                            }
-                                          }
-                                        },
-                                        "onStart": {
-                                          "$schema": "http://json-schema.org/draft-07/schema#",
-                                          "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                          "type": "object",
-                                          "required": [
-                                            "retry",
-                                            "finally"
-                                          ],
-                                          "properties": {
-                                            "actions": {
-                                              "type": "array",
-                                              "description": "Actions to take on failure",
-                                              "maxItems": 10,
-                                              "items": {
-                                                "type": "object"
-                                              }
-                                            }
-                                          }
-                                        },
-                                        "onError": {
-                                          "$schema": "http://json-schema.org/draft-07/schema#",
-                                          "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepError.json",
-                                          "type": "object",
-                                          "required": [
-                                            "retry",
-                                            "finally"
-                                          ],
-                                          "properties": {
-                                            "retry": {
-                                              "type": "integer",
-                                              "description": "Number of times to retry this step. Note: retry will only occur on steps which automatically failed. If the step was transitioned using the 'goto-fail' step, the actions will be fired but the step WILL NOT be re-tried",
-                                              "minimum": 0,
-                                              "maximum": 10,
-                                              "default": 0
-                                            },
-                                            "finally": {
-                                              "type": "object",
-                                              "description": "What to do after all retries",
-                                              "properties": {
-                                                "actions": {
-                                                  "$schema": "http://json-schema.org/draft-07/schema#",
-                                                  "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                                  "type": "object",
-                                                  "required": [
-                                                    "retry",
-                                                    "finally"
-                                                  ],
-                                                  "properties": {
-                                                    "actions": {
-                                                      "type": "array",
-                                                      "description": "Actions to take on failure",
-                                                      "maxItems": 10,
-                                                      "items": {
-                                                        "type": "object"
-                                                      }
-                                                    }
-                                                  }
-                                                }
-                                              }
-                                            }
-                                          }
-                                        },
-                                        "onTimeout": {
-                                          "$schema": "http://json-schema.org/draft-07/schema#",
-                                          "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepError.json",
-                                          "type": "object",
-                                          "required": [
-                                            "retry",
-                                            "finally"
-                                          ],
-                                          "properties": {
-                                            "retry": {
-                                              "type": "integer",
-                                              "description": "Number of times to retry this step. Note: retry will only occur on steps which automatically failed. If the step was transitioned using the 'goto-fail' step, the actions will be fired but the step WILL NOT be re-tried",
-                                              "minimum": 0,
-                                              "maximum": 10,
-                                              "default": 0
-                                            },
-                                            "finally": {
-                                              "type": "object",
-                                              "description": "What to do after all retries",
-                                              "properties": {
-                                                "actions": {
-                                                  "$schema": "http://json-schema.org/draft-07/schema#",
-                                                  "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                                  "type": "object",
-                                                  "required": [
-                                                    "retry",
-                                                    "finally"
-                                                  ],
-                                                  "properties": {
-                                                    "actions": {
-                                                      "type": "array",
-                                                      "description": "Actions to take on failure",
-                                                      "maxItems": 10,
-                                                      "items": {
-                                                        "type": "object"
-                                                      }
-                                                    }
-                                                  }
-                                                }
-                                              }
-                                            }
-                                          }
-                                        }
-                                      }
-                                    }
-                                  ]
-                                },
-                                {
-                                  "$schema": "http://json-schema.org/draft-07/schema#",
-                                  "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepFail.json",
-                                  "type": "object",
-                                  "description": "Finial step which is marked as failed",
-                                  "properties": {
-                                    "label": {
-                                      "type": "string",
-                                      "description": "Label for the step"
-                                    },
-                                    "type": {
-                                      "type": "string",
-                                      "description": "Type of workflow step",
-                                      "enum": [
-                                        "load",
-                                        "choice",
-                                        "function",
-                                        "machine",
-                                        "pass",
-                                        "fail",
-                                        "success",
-                                        "user",
-                                        "wait"
-                                      ]
-                                    },
-                                    "onComplete": {
-                                      "$schema": "http://json-schema.org/draft-07/schema#",
-                                      "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                      "type": "object",
-                                      "required": [
-                                        "retry",
-                                        "finally"
-                                      ],
-                                      "properties": {
-                                        "actions": {
-                                          "type": "array",
-                                          "description": "Actions to take on failure",
-                                          "maxItems": 10,
-                                          "items": {
-                                            "type": "object"
-                                          }
-                                        }
-                                      }
-                                    }
-                                  }
-                                },
-                                {
-                                  "$schema": "http://json-schema.org/draft-07/schema#",
-                                  "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepPass.json",
-                                  "type": "object",
-                                  "description": "Allows executing actions with out performing any function",
-                                  "properties": {
-                                    "label": {
-                                      "type": "string",
-                                      "description": "Label for the entity"
-                                    },
-                                    "type": {
-                                      "type": "string",
-                                      "description": "Type of workflow step",
-                                      "enum": [
-                                        "load",
-                                        "choice",
-                                        "function",
-                                        "machine",
-                                        "pass",
-                                        "fail",
-                                        "success",
-                                        "user",
-                                        "wait"
-                                      ]
-                                    }
-                                  },
-                                  "allOf": [
-                                    {
-                                      "$schema": "http://json-schema.org/draft-07/schema#",
-                                      "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepCommon.json",
-                                      "type": "object",
-                                      "required": [
-                                        "type",
-                                        "label",
-                                        "goto"
-                                      ],
-                                      "properties": {
-                                        "type": {
-                                          "type": "string",
-                                          "description": "Type of workflow step",
-                                          "enum": [
-                                            "load",
-                                            "choice",
-                                            "function",
-                                            "machine",
-                                            "pass",
-                                            "fail",
-                                            "success",
-                                            "user",
-                                            "wait"
-                                          ]
-                                        },
-                                        "label": {
-                                          "type": "string",
-                                          "description": "Label for the step"
-                                        },
-                                        "goto": {
-                                          "type": "string",
-                                          "description": "Step to move to",
-                                          "pattern": "^[a-z][a-z-]+[a-z]$"
-                                        },
-                                        "goto-fail": {
-                                          "type": "string",
-                                          "description": "Step to transition too if this step cannot be completed",
-                                          "pattern": "^[a-z][a-z-]+[a-z]$"
-                                        },
-                                        "onComplete": {
-                                          "$schema": "http://json-schema.org/draft-07/schema#",
-                                          "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                          "type": "object",
-                                          "required": [
-                                            "retry",
-                                            "finally"
-                                          ],
-                                          "properties": {
-                                            "actions": {
-                                              "type": "array",
-                                              "description": "Actions to take on failure",
-                                              "maxItems": 10,
-                                              "items": {
-                                                "type": "object"
-                                              }
-                                            }
-                                          }
-                                        }
-                                      }
-                                    }
-                                  ]
-                                },
-                                {
-                                  "$schema": "http://json-schema.org/draft-07/schema#",
-                                  "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepSuccess.json",
-                                  "type": "object",
-                                  "description": "Finial step which is marked as completed successfully",
-                                  "properties": {
-                                    "label": {
-                                      "type": "string",
-                                      "description": "Label for the step"
-                                    },
-                                    "type": {
-                                      "type": "string",
-                                      "description": "Type of workflow step",
-                                      "enum": [
-                                        "load",
-                                        "choice",
-                                        "function",
-                                        "machine",
-                                        "pass",
-                                        "fail",
-                                        "success",
-                                        "user",
-                                        "wait"
-                                      ]
-                                    },
-                                    "onComplete": {
-                                      "$schema": "http://json-schema.org/draft-07/schema#",
-                                      "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                      "type": "object",
-                                      "required": [
-                                        "retry",
-                                        "finally"
-                                      ],
-                                      "properties": {
-                                        "actions": {
-                                          "type": "array",
-                                          "description": "Actions to take on failure",
-                                          "maxItems": 10,
-                                          "items": {
-                                            "type": "object"
-                                          }
-                                        }
-                                      }
-                                    }
-                                  }
-                                },
-                                {
-                                  "$schema": "http://json-schema.org/draft-07/schema#",
-                                  "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepWait.json",
-                                  "type": "object",
-                                  "description": "A step which run at certain times",
-                                  "required": [
-                                    "stop_at",
-                                    "time"
-                                  ],
-                                  "properties": {
-                                    "label": {
-                                      "type": "string",
-                                      "description": "Label for the step"
-                                    },
-                                    "type": {
-                                      "type": "string",
-                                      "enum": [
-                                        "wait"
-                                      ]
-                                    },
-                                    "stop_at": {
-                                      "type": "integer",
-                                      "description": "Time in seconds to stop this task",
-                                      "maximum": 900,
-                                      "minimum": 1
-                                    },
-                                    "time": {
-                                      "type": "integer",
-                                      "description": "Time to wait before checking this step",
-                                      "maximum": 900,
-                                      "minimum": 1
-                                    },
-                                    "listen_for": {
-                                      "type": "array",
-                                      "description": "List of events and conditions to listen for to trigger",
-                                      "items": {
-                                        "type": "object",
-                                        "required": [
-                                          "event"
-                                        ],
-                                        "properties": {
-                                          "event": {
-                                            "type": "string",
-                                            "description": "Name of the event to listen for",
-                                            "allOf": [
-                                              {
-                                                "type": "string",
-                                                "description": "Possible entity events",
-                                                "enum": [
-                                                  "CON.attached",
-                                                  "CON.created",
-                                                  "CON.deleted",
-                                                  "CON.detached",
-                                                  "CON.removed",
-                                                  "CON.updated",
-                                                  "CUS.attached",
-                                                  "CUS.created",
-                                                  "CUS.deleted",
-                                                  "CUS.detached",
-                                                  "CUS.removed",
-                                                  "CUS.updated",
-                                                  "LOC.attached",
-                                                  "LOC.created",
-                                                  "LOC.deleted",
-                                                  "LOC.detached",
-                                                  "LOC.removed",
-                                                  "LOC.updated",
-                                                  "NOTE.attached",
-                                                  "NOTE.created",
-                                                  "NOTE.deleted",
-                                                  "NOTE.detached",
-                                                  "NOTE.removed",
-                                                  "NOTE.updated",
-                                                  "PART.attached",
-                                                  "PART.created",
-                                                  "PART.deleted",
-                                                  "PART.detached",
-                                                  "PART.removed",
-                                                  "PART.updated",
-                                                  "PGM.attached",
-                                                  "PGM.created",
-                                                  "PGM.deleted",
-                                                  "PGM.detached",
-                                                  "PGM.removed",
-                                                  "PGM.updated",
-                                                  "PRO.attached",
-                                                  "PRO.created",
-                                                  "PRO.deleted",
-                                                  "PRO.detached",
-                                                  "PRO.removed",
-                                                  "PRO.updated",
-                                                  "RES.attached",
-                                                  "RES.created",
-                                                  "RES.deleted",
-                                                  "RES.detached",
-                                                  "RES.removed",
-                                                  "RES.updated",
-                                                  "UNIT.attached",
-                                                  "UNIT.created",
-                                                  "UNIT.deleted",
-                                                  "UNIT.detached",
-                                                  "UNIT.removed",
-                                                  "UNIT.updated",
-                                                  "USER.attached",
-                                                  "USER.created",
-                                                  "USER.deleted",
-                                                  "USER.detached",
-                                                  "USER.removed",
-                                                  "USER.updated",
-                                                  "WKF.attached",
-                                                  "WKF.created",
-                                                  "WKF.deleted",
-                                                  "WKF.detached",
-                                                  "WKF.removed",
-                                                  "WKF.updated",
-                                                  "WOR.attached",
-                                                  "WOR.created",
-                                                  "WOR.deleted",
-                                                  "WOR.detached",
-                                                  "WOR.removed",
-                                                  "WOR.updated"
-                                                ]
-                                              }
-                                            ]
-                                          },
-                                          "event_value": {
-                                            "type": "object",
-                                            "description": "The event conditions that have to be met",
-                                            "allOf": [
-                                              {
-                                                "$schema": "http://json-schema.org/draft-07/schema#",
-                                                "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepChoice.json",
-                                                "type": "object",
-                                                "description": "A Step choice",
-                                                "maxProperties": 2,
-                                                "minProperties": 2,
-                                                "required": [
-                                                  "decision"
-                                                ],
-                                                "properties": {
-                                                  "decision": {
-                                                    "type": "array",
-                                                    "description": "Context variable to check",
-                                                    "items": {
-                                                      "type": "object",
-                                                      "properties": {
-                                                        "variable": {
-                                                          "type": "string",
-                                                          "description": "Variable or value"
-                                                        },
-                                                        "operator": {
-                                                          "type": "string",
-                                                          "description": "Operator to perform",
-                                                          "enum": [
-                                                            "greater_than_equals",
-                                                            "less_than_equals",
-                                                            "greater_than",
-                                                            "less_than",
-                                                            "equals",
-                                                            "not_equals"
-                                                          ]
-                                                        },
-                                                        "operand": {
-                                                          "type": "string",
-                                                          "description": "operand to compare with"
-                                                        }
-                                                      }
-                                                    }
-                                                  }
-                                                },
-                                                "allOf": [
-                                                  {
-                                                    "$schema": "http://json-schema.org/draft-07/schema#",
-                                                    "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepNext.json",
-                                                    "type": "object",
-                                                    "required": [
-                                                      "type",
-                                                      "label",
-                                                      "goto"
-                                                    ],
-                                                    "properties": {
-                                                      "goto": {
-                                                        "type": "string",
-                                                        "description": "Step to move to",
-                                                        "pattern": "^[a-z][a-z-]+[a-z]$"
-                                                      },
-                                                      "goto-fail": {
-                                                        "type": "string",
-                                                        "description": "Step to transition too if this step cannot be completed",
-                                                        "pattern": "^[a-z][a-z-]+[a-z]$"
-                                                      },
-                                                      "context": {
-                                                        "type": "array",
-                                                        "description": "Values to set on the context",
-                                                        "items": {
-                                                          "type": "object",
-                                                          "required": [
-                                                            "key",
-                                                            "value"
-                                                          ],
-                                                          "properties": {
-                                                            "key": {
-                                                              "type": "string",
-                                                              "description": "The context key to set"
-                                                            },
-                                                            "value": {
-                                                              "type": "string",
-                                                              "description": "Value to set"
-                                                            },
-                                                            "lock": {
-                                                              "type": "boolean",
-                                                              "description": "Prevents other steps from writing this value"
-                                                            },
-                                                            "ignore": {
-                                                              "type": "boolean",
-                                                              "description": "When trying to set a locked key, do not fail"
-                                                            }
-                                                          }
-                                                        }
-                                                      },
-                                                      "onStart": {
-                                                        "$schema": "http://json-schema.org/draft-07/schema#",
-                                                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                                        "type": "object",
-                                                        "required": [
-                                                          "retry",
-                                                          "finally"
-                                                        ],
-                                                        "properties": {
-                                                          "actions": {
-                                                            "type": "array",
-                                                            "description": "Actions to take on failure",
-                                                            "maxItems": 10,
-                                                            "items": {
-                                                              "type": "object"
-                                                            }
-                                                          }
-                                                        }
-                                                      },
-                                                      "onError": {
-                                                        "$schema": "http://json-schema.org/draft-07/schema#",
-                                                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepError.json",
-                                                        "type": "object",
-                                                        "required": [
-                                                          "retry",
-                                                          "finally"
-                                                        ],
-                                                        "properties": {
-                                                          "retry": {
-                                                            "type": "integer",
-                                                            "description": "Number of times to retry this step. Note: retry will only occur on steps which automatically failed. If the step was transitioned using the 'goto-fail' step, the actions will be fired but the step WILL NOT be re-tried",
-                                                            "minimum": 0,
-                                                            "maximum": 10,
-                                                            "default": 0
-                                                          },
-                                                          "finally": {
-                                                            "type": "object",
-                                                            "description": "What to do after all retries",
-                                                            "properties": {
-                                                              "actions": {
-                                                                "$schema": "http://json-schema.org/draft-07/schema#",
-                                                                "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                                                "type": "object",
-                                                                "required": [
-                                                                  "retry",
-                                                                  "finally"
-                                                                ],
-                                                                "properties": {
-                                                                  "actions": {
-                                                                    "type": "array",
-                                                                    "description": "Actions to take on failure",
-                                                                    "maxItems": 10,
-                                                                    "items": {
-                                                                      "type": "object"
-                                                                    }
-                                                                  }
-                                                                }
-                                                              }
-                                                            }
-                                                          }
-                                                        }
-                                                      },
-                                                      "onTimeout": {
-                                                        "$schema": "http://json-schema.org/draft-07/schema#",
-                                                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepError.json",
-                                                        "type": "object",
-                                                        "required": [
-                                                          "retry",
-                                                          "finally"
-                                                        ],
-                                                        "properties": {
-                                                          "retry": {
-                                                            "type": "integer",
-                                                            "description": "Number of times to retry this step. Note: retry will only occur on steps which automatically failed. If the step was transitioned using the 'goto-fail' step, the actions will be fired but the step WILL NOT be re-tried",
-                                                            "minimum": 0,
-                                                            "maximum": 10,
-                                                            "default": 0
-                                                          },
-                                                          "finally": {
-                                                            "type": "object",
-                                                            "description": "What to do after all retries",
-                                                            "properties": {
-                                                              "actions": {
-                                                                "$schema": "http://json-schema.org/draft-07/schema#",
-                                                                "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                                                "type": "object",
-                                                                "required": [
-                                                                  "retry",
-                                                                  "finally"
-                                                                ],
-                                                                "properties": {
-                                                                  "actions": {
-                                                                    "type": "array",
-                                                                    "description": "Actions to take on failure",
-                                                                    "maxItems": 10,
-                                                                    "items": {
-                                                                      "type": "object"
-                                                                    }
-                                                                  }
-                                                                }
-                                                              }
-                                                            }
-                                                          }
-                                                        }
-                                                      }
-                                                    }
-                                                  }
-                                                ]
-                                              }
-                                            ]
-                                          }
-                                        }
-                                      }
-                                    }
-                                  },
-                                  "allOf": [
-                                    {
-                                      "$schema": "http://json-schema.org/draft-07/schema#",
-                                      "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepCommon.json",
-                                      "type": "object",
-                                      "required": [
-                                        "type",
-                                        "label",
-                                        "goto"
-                                      ],
-                                      "properties": {
-                                        "type": {
-                                          "type": "string",
-                                          "description": "Type of workflow step",
-                                          "enum": [
-                                            "load",
-                                            "choice",
-                                            "function",
-                                            "machine",
-                                            "pass",
-                                            "fail",
-                                            "success",
-                                            "user",
-                                            "wait"
-                                          ]
-                                        },
-                                        "label": {
-                                          "type": "string",
-                                          "description": "Label for the step"
-                                        },
-                                        "goto": {
-                                          "type": "string",
-                                          "description": "Step to move to",
-                                          "pattern": "^[a-z][a-z-]+[a-z]$"
-                                        },
-                                        "goto-fail": {
-                                          "type": "string",
-                                          "description": "Step to transition too if this step cannot be completed",
-                                          "pattern": "^[a-z][a-z-]+[a-z]$"
-                                        },
-                                        "onComplete": {
-                                          "$schema": "http://json-schema.org/draft-07/schema#",
-                                          "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                          "type": "object",
-                                          "required": [
-                                            "retry",
-                                            "finally"
-                                          ],
-                                          "properties": {
-                                            "actions": {
-                                              "type": "array",
-                                              "description": "Actions to take on failure",
-                                              "maxItems": 10,
-                                              "items": {
-                                                "type": "object"
-                                              }
-                                            }
-                                          }
-                                        }
-                                      }
-                                    }
-                                  ]
-                                }
-                              ]
-                            }
-                          }
-                        },
-                        "metadata": {
-                          "type": "object",
-                          "description": "Data for the resource as a key value pair",
-                          "additionalProperties": {
-                            "type": "string"
-                          },
-                          "propertyNames": {
-                            "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "_links": {
-      "type": "object",
-      "properties": {
-        "self": {
-          "x-example": {
-            "href": "https://api.nterprise.com/work-orders"
-          },
-          "type": "object",
-          "properties": {
-            "href": {
-              "type": "string",
-              "format": "uri"
-            }
-          }
-        },
-        "next": {
-          "x-example": {
-            "href": "https://api.nterprise.com/work-orders?offset=QVBrO2wm13iEyl&limit=100"
-          },
-          "type": "object",
-          "properties": {
-            "href": {
-              "type": "string",
-              "format": "uri"
-            }
-          }
-        }
-      }
-    }
-  }
-}
-```
 
 <h3 id="fetchallworkorders-responses">Responses</h3>
 
@@ -2432,4524 +42,479 @@ Fetch Work Order
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|Inline|
 |403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
 
-<h3 id="fetchallworkorders-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» _embedded|object|false|none|none|
-|»» nter:work-orders|[object]|false|none|none|
-|»»» _links|object|false|none|none|
-|»»»» self|object|false|none|none|
-|»»»»» href|string(uri)|false|none|none|
-|»»»» work_order_id|string|false|none|The identifier for the unit|
-|»»»» label|string|false|none|Label for the entity|
-|»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»»»» created|string(date-time)|false|read-only|Date the entity was created|
-|»»»» updated|string(date-time)|false|read-only|Last date the entity was updated|
-|»»»» start_date|string(date-time)|false|read-only|Last date the entity was updated|
-|»»»» end_date|string(date-time)|false|read-only|Last date the entity was updated|
-|»»»» description|string\|null|false|none|Detailed description for the work order|
-|»»»» work_order_type|string|false|none|Type of work order|
-|»»»» begin_date|string(date-time)|false|none|Begin date|
-|»»»» due_date|string(date-time)|false|none|Due date|
-|»»»» current_status|object|false|none|Defines the properties for a status|
-|»»»»» status|string|true|none|A Custom label for the status|
-|»»»»» category|string|true|none|The classifier for the statues|
-|»»»»» description|string\|null|false|none|A description for the status|
-|»»»»» order|number|false|none|Order status appears when listing|
-|»»»» project|object|false|none|Defines the properties for a project|
-|»»»»» project_id|string|false|none|Unique identifier|
-|»»»»» entity_id|string|true|read-only|Customer identifier|
-|»»»»» entity_type|string|true|none|none|
-|»»»»» description|string\|null|false|none|Project description|
-|»»»»» label|string|true|none|Label for the entity|
-|»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»»»»» created|string(date-time)|true|read-only|Date the entity was created|
-|»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»»»» customer|object|true|none|Customer|
-|»»»»»» customer_id|string|false|read-only|Customer identifier|
-|»»»»»» entity_id|string|true|read-only|Customer identifier|
-|»»»»»» entity_type|string|true|none|none|
-|»»»»»» label|string|true|none|Label for the entity|
-|»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
-|»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»»»»» external_platform|object|false|none|External Identifiers for the customer|
-|»»»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
-|»»»»»»» status|string|true|none|A Custom label for the status|
-|»»»»»»» category|string|true|none|The classifier for the statues|
-|»»»»»»» description|string\|null|false|none|A description for the status|
-|»»»»»»» order|number|false|none|Order status appears when listing|
-|»»»»»» total_programs|number|false|none|Total programs under the customer|
-|»»»»»» total_projects|number|false|none|Total projects under the customer|
-|»»»»» program|object|true|none|Defines the properties for a program|
-|»»»»»» program_id|string|false|read-only|Unique identifier|
-|»»»»»» entity_id|string|true|read-only|Customer identifier|
-|»»»»»» entity_type|string|true|none|none|
-|»»»»»» label|string|false|none|Label for the entity|
-|»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
-|»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»»»»» start_date|string(date-time)\|null|false|none|Start date|
-|»»»»»» end_date|string(date-time)\|null|false|none|End date|
-|»»»»»» customer|object|true|none|Customer|
-|»»»»»»» customer_id|string|false|read-only|Customer identifier|
-|»»»»»»» entity_id|string|true|read-only|Customer identifier|
-|»»»»»»» entity_type|string|true|none|none|
-|»»»»»»» label|string|true|none|Label for the entity|
-|»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
-|»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»»»»»» external_platform|object|false|none|External Identifiers for the customer|
-|»»»»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
-|»»»»»»»» status|string|true|none|A Custom label for the status|
-|»»»»»»»» category|string|true|none|The classifier for the statues|
-|»»»»»»»» description|string\|null|false|none|A description for the status|
-|»»»»»»»» order|number|false|none|Order status appears when listing|
-|»»»»»»» total_programs|number|false|none|Total programs under the customer|
-|»»»»»»» total_projects|number|false|none|Total projects under the customer|
-|»»»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
-|»»»»»»» status|string|true|none|A Custom label for the status|
-|»»»»»»» category|string|true|none|The classifier for the statues|
-|»»»»»»» description|string\|null|false|none|A description for the status|
-|»»»»»»» order|number|false|none|Order status appears when listing|
-|»»»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
-|»»»»»»» status|string|true|none|A Custom label for the status|
-|»»»»»»» category|string|true|none|The classifier for the statues|
-|»»»»»»» description|string\|null|false|none|A description for the status|
-|»»»»»»» order|number|false|none|Order status appears when listing|
-|»»»»»» start_date|string(date-time)\|null|false|none|Start date|
-|»»»»»» end_date|string(date-time)\|null|false|none|End date|
-|»»»»» cycles|[object]|false|none|none|
-|»»»»»» needed|integer|true|none|The number of cycles needed|
-|»»»»»» pending|integer|true|read-only|The number of cycles pending|
-|»»»»»» in_progress|integer|true|read-only|The number of cycles pending|
-|»»»»»» verifying|integer|true|read-only|The number of cycles pending|
-|»»»»»» complete|integer|true|read-only|The number of cycles pending|
-|»»»»»» blocked|integer|true|read-only|The number of cycles pending|
-|»»»»»» cancelled|integer|true|read-only|The number of cycles pending|
-|»»»»»» work_flow|object|true|none|Workflow|
-|»»»»»»» work_flow_id|string|false|read-only|Customer identifier|
-|»»»»»»» entity_id|string|true|read-only|Customer identifier|
-|»»»»»»» entity_type|string|true|none|none|
-|»»»»»»» label|string|true|none|Label for the entity|
-|»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
-|»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»»»»»» schema_version|string|true|none|Version of the workflow schema used|
-|»»»»»»» workflow_version|integer|false|read-only|Version number for the work flows (the number of times it has been changed|
-|»»»»»»» applies_to|string|true|none|The entity type this work flow applies too|
-|»»»»»»» triggered_by|[string]|false|none|none|
-|»»»»»»» starts_at|string|true|none|Starting step|
-|»»»»»»» steps|object|true|none|Steps for the workflow|
-|»»»»»»» metadata|object|false|none|Data for the resource as a key value pair|
-|»»»»»»»» **additionalProperties**|string|false|none|none|
-|»»»»»»» _links|object|false|none|none|
-|»»»»»»»» self|object|false|none|none|
-|»»»»»»»»» href|string(uri)|false|none|none|
-|»»»»»»»» next|object|false|none|none|
-|»»»»»»»»» href|string(uri)|false|none|none|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|work_order_type|device|
-|category|PENDING|
-|category|IN_PROGRESS|
-|category|VERIFYING|
-|category|COMPLETE|
-|category|CANCELLED|
-|category|BLOCKED|
-|entity_type|PRJ|
-|entity_type|CUS|
-|category|PENDING|
-|category|IN_PROGRESS|
-|category|VERIFYING|
-|category|COMPLETE|
-|category|CANCELLED|
-|category|BLOCKED|
-|entity_type|PGM|
-|entity_type|CUS|
-|category|PENDING|
-|category|IN_PROGRESS|
-|category|VERIFYING|
-|category|COMPLETE|
-|category|CANCELLED|
-|category|BLOCKED|
-|category|PENDING|
-|category|IN_PROGRESS|
-|category|VERIFYING|
-|category|COMPLETE|
-|category|CANCELLED|
-|category|BLOCKED|
-|category|PENDING|
-|category|IN_PROGRESS|
-|category|VERIFYING|
-|category|COMPLETE|
-|category|CANCELLED|
-|category|BLOCKED|
-|entity_type|WKF|
-|schema_version|1.0|
-|applies_to|UNIT|
-|applies_to|PART|
-|applies_to|PGM|
-|applies_to|PRJ|
-|applies_to|CUS|
-|applies_to|CON|
-
-Status Code **401**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» title|string|false|none|none|
-|» type|string|false|none|none|
-|» status|number|false|none|none|
-|» detail|string|false|none|none|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|title|Unauthorized|
-|type|https://docs.nterprise.com/api/problem/Unauthorized|
-|status|401|
-|detail|You are not authorized to access this resource|
-
-Status Code **403**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» title|string|false|none|none|
-|» type|string|false|none|none|
-|» status|number|false|none|none|
-|» detail|string|false|none|none|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|title|Forbidden|
-|type|https://docs.nterprise.com/api/problem/Forbidden|
-|status|403|
-|detail|You are forbidden to access this resource|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## createWorkOrder
-
-<a id="opIdcreateWorkOrder"></a>
-
-`POST /work-orders`
-
-*Creates a work order*
-
-Creates a new work order
-
-> Body parameter
-
-```json
-{
-  "type": "object",
-  "description": "Work order to create",
-  "required": [
-    "label",
-    "project"
-  ],
-  "properties": {
-    "label": {
-      "type": "string",
-      "description": "Label for the entity"
-    },
-    "description": {
-      "type": "string",
-      "nullable": true,
-      "description": "Detailed description for the work order"
-    },
-    "work_order_type": {
-      "type": "string",
-      "description": "Type of work order",
-      "enum": [
-        "device"
-      ]
-    },
-    "begin_date": {
-      "type": "string",
-      "format": "date-time",
-      "description": "Begin date"
-    },
-    "due_date": {
-      "type": "string",
-      "format": "date-time",
-      "description": "Due date"
-    },
-    "current_status": {
-      "type": "object",
-      "description": "Defines the properties for a status",
-      "additionalProperties": false,
-      "required": [
-        "status",
-        "category"
-      ],
-      "properties": {
-        "status": {
-          "type": "string",
-          "description": "A Custom label for the status",
-          "pattern": "^[A-Za-z][0-9a-zA-Z-_ ]+$"
-        },
-        "category": {
-          "type": "string",
-          "description": "The classifier for the statues",
-          "enum": [
-            "PENDING",
-            "IN_PROGRESS",
-            "VERIFYING",
-            "COMPLETE",
-            "CANCELLED",
-            "BLOCKED"
-          ]
-        },
-        "description": {
-          "type": "string",
-          "nullable": true,
-          "description": "A description for the status"
-        },
-        "order": {
-          "type": "number",
-          "description": "Order status appears when listing"
-        }
-      }
-    },
-    "project": {
-      "type": "object",
-      "properties": {
-        "project_id": {
-          "type": "string",
-          "description": "Unique identifier",
-          "pattern": "^[0-9a-zA-Z-_]+$"
-        }
-      }
-    },
-    "start_date": {
-      "type": "string",
-      "nullable": true,
-      "format": "date-time",
-      "description": "Start date"
-    },
-    "end_date": {
-      "type": "string",
-      "nullable": true,
-      "format": "date-time",
-      "description": "End date"
-    },
-    "cycles": {
-      "type": "array",
-      "minimum": 1,
-      "items": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-          "needed",
-          "pending",
-          "in_progress",
-          "verifying",
-          "complete",
-          "blocked",
-          "cancelled",
-          "work_flow"
-        ],
-        "properties": {
-          "needed": {
-            "type": "integer",
-            "description": "The number of cycles needed",
-            "minimum": 1
-          },
-          "pending": {
-            "type": "integer",
-            "description": "The number of cycles pending",
-            "readOnly": true
-          },
-          "in_progress": {
-            "type": "integer",
-            "description": "The number of cycles pending",
-            "readOnly": true
-          },
-          "verifying": {
-            "type": "integer",
-            "description": "The number of cycles pending",
-            "readOnly": true
-          },
-          "complete": {
-            "type": "integer",
-            "description": "The number of cycles pending",
-            "readOnly": true
-          },
-          "blocked": {
-            "type": "integer",
-            "description": "The number of cycles pending",
-            "readOnly": true
-          },
-          "cancelled": {
-            "type": "integer",
-            "description": "The number of cycles pending",
-            "readOnly": true
-          },
-          "work_flow": {
-            "type": "object",
-            "description": "Workflow",
-            "additionalProperties": false,
-            "required": [
-              "label",
-              "entity_id",
-              "entity_type",
-              "created",
-              "updated",
-              "steps",
-              "starts_at",
-              "applies_to",
-              "schema_version"
-            ],
-            "properties": {
-              "work_flow_id": {
-                "type": "string",
-                "description": "Customer identifier",
-                "readOnly": true,
-                "pattern": "^[0-9a-zA-Z-_]+$"
-              },
-              "entity_id": {
-                "x-no-api-doc": true,
-                "type": "string",
-                "description": "Customer identifier",
-                "readOnly": true,
-                "pattern": "^[0-9a-zA-Z-_]+$"
-              },
-              "entity_type": {
-                "x-no-api-doc": true,
-                "enum": [
-                  "WKF"
-                ]
-              },
-              "label": {
-                "type": "string",
-                "description": "Label for the entity"
-              },
-              "slug": {
-                "type": "string",
-                "description": "Slug for the entity (Auto-generated from the label)",
-                "readOnly": true,
-                "deprecated": true,
-                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-              },
-              "created": {
-                "description": "Date the entity was created",
-                "type": "string",
-                "format": "date-time",
-                "readOnly": true
-              },
-              "updated": {
-                "description": "Last date the entity was updated",
-                "type": "string",
-                "format": "date-time",
-                "readOnly": true
-              },
-              "schema_version": {
-                "type": "string",
-                "description": "Version of the workflow schema used",
-                "enum": [
-                  "1.0"
-                ]
-              },
-              "workflow_version": {
-                "type": "integer",
-                "description": "Version number for the work flows (the number of times it has been changed",
-                "readOnly": true
-              },
-              "applies_to": {
-                "type": "string",
-                "description": "The entity type this work flow applies too",
-                "enum": [
-                  "UNIT",
-                  "PART",
-                  "PGM",
-                  "PRJ",
-                  "CUS",
-                  "CON"
-                ]
-              },
-              "triggered_by": {
-                "type": "array",
-                "items": {
-                  "type": "string",
-                  "description": "Possible entity events",
-                  "enum": [
-                    "CON.attached",
-                    "CON.created",
-                    "CON.deleted",
-                    "CON.detached",
-                    "CON.removed",
-                    "CON.updated",
-                    "CUS.attached",
-                    "CUS.created",
-                    "CUS.deleted",
-                    "CUS.detached",
-                    "CUS.removed",
-                    "CUS.updated",
-                    "LOC.attached",
-                    "LOC.created",
-                    "LOC.deleted",
-                    "LOC.detached",
-                    "LOC.removed",
-                    "LOC.updated",
-                    "NOTE.attached",
-                    "NOTE.created",
-                    "NOTE.deleted",
-                    "NOTE.detached",
-                    "NOTE.removed",
-                    "NOTE.updated",
-                    "PART.attached",
-                    "PART.created",
-                    "PART.deleted",
-                    "PART.detached",
-                    "PART.removed",
-                    "PART.updated",
-                    "PGM.attached",
-                    "PGM.created",
-                    "PGM.deleted",
-                    "PGM.detached",
-                    "PGM.removed",
-                    "PGM.updated",
-                    "PRO.attached",
-                    "PRO.created",
-                    "PRO.deleted",
-                    "PRO.detached",
-                    "PRO.removed",
-                    "PRO.updated",
-                    "RES.attached",
-                    "RES.created",
-                    "RES.deleted",
-                    "RES.detached",
-                    "RES.removed",
-                    "RES.updated",
-                    "UNIT.attached",
-                    "UNIT.created",
-                    "UNIT.deleted",
-                    "UNIT.detached",
-                    "UNIT.removed",
-                    "UNIT.updated",
-                    "USER.attached",
-                    "USER.created",
-                    "USER.deleted",
-                    "USER.detached",
-                    "USER.removed",
-                    "USER.updated",
-                    "WKF.attached",
-                    "WKF.created",
-                    "WKF.deleted",
-                    "WKF.detached",
-                    "WKF.removed",
-                    "WKF.updated",
-                    "WOR.attached",
-                    "WOR.created",
-                    "WOR.deleted",
-                    "WOR.detached",
-                    "WOR.removed",
-                    "WOR.updated"
-                  ]
-                }
-              },
-              "starts_at": {
-                "type": "string",
-                "description": "Starting step"
-              },
-              "steps": {
-                "type": "object",
-                "description": "Steps for the workflow",
-                "uniqueItems": true,
-                "additionalProperties": true,
-                "x-patternProperties": {
-                  "^[A-Za-z][A-Za-z0-9_]*$": {
-                    "anyOf": [
-                      {
-                        "$schema": "http://json-schema.org/draft-07/schema#",
-                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/function/allocateUnitsToProject.json",
-                        "type": "object",
-                        "description": "Require the user confirm an action. This is normally used when Niagara cannot automatically detect that a task or action has been performed.",
-                        "properties": {
-                          "label": {
-                            "type": "string",
-                            "description": "Label for the entity"
-                          },
-                          "options": {
-                            "type": "object",
-                            "required": [
-                              "function",
-                              "payload"
-                            ],
-                            "properties": {
-                              "function": {
-                                "type": "string",
-                                "enum": [
-                                  "allocate-units-to-project"
-                                ]
-                              },
-                              "payload": {
-                                "type": "object",
-                                "required": [
-                                  "part_id",
-                                  "project_id",
-                                  "qty"
-                                ],
-                                "properties": {
-                                  "part_id": {
-                                    "type": "string",
-                                    "description": "Part ID of the to assign"
-                                  },
-                                  "program_id": {
-                                    "type": "string",
-                                    "description": "Program ID of the to assign"
-                                  },
-                                  "qty": {
-                                    "type": "number",
-                                    "minimum": 1,
-                                    "description": "Number of units to assign to the project"
-                                  },
-                                  "allow_scarcity": {
-                                    "type": "boolean",
-                                    "description": "Allow the workflow to continue even if there are not enough units"
-                                  },
-                                  "force": {
-                                    "type": "boolean",
-                                    "description": "Assign the units even if the project already has units allocated"
-                                  },
-                                  "status": {
-                                    "type": "string",
-                                    "description": "Only assign units which are in this status"
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      },
-                      {
-                        "$schema": "http://json-schema.org/draft-07/schema#",
-                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/followPDFInstructions.json",
-                        "type": "object",
-                        "description": "Display a link or modal to a user which contains instructions from a PDF",
-                        "required": [
-                          "label",
-                          "payload"
-                        ],
-                        "properties": {
-                          "label": {
-                            "type": "string",
-                            "description": "Label for the step"
-                          },
-                          "options": {
-                            "type": "object",
-                            "required": [
-                              "component",
-                              "payload"
-                            ],
-                            "properties": {
-                              "component": {
-                                "enum": [
-                                  "follow-pds-instructions"
-                                ]
-                              },
-                              "payload": {
-                                "type": "object",
-                                "required": [
-                                  "attachment_id"
-                                ],
-                                "properties": {
-                                  "attachment_id": {
-                                    "type": "string",
-                                    "description": "UUID for the attachment",
-                                    "format": "uuid"
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        },
-                        "allOf": [
-                          {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepUser.json",
-                            "type": "object",
-                            "description": "A step which requires a user to complete",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "description": "Type of workflow step",
-                                "enum": [
-                                  "load",
-                                  "choice",
-                                  "function",
-                                  "machine",
-                                  "pass",
-                                  "fail",
-                                  "success",
-                                  "user",
-                                  "wait"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "required": [
-                                  "component",
-                                  "payload"
-                                ],
-                                "properties": {
-                                  "component": {
-                                    "type": "string",
-                                    "description": "Name of the function to invoke"
-                                  },
-                                  "payload": {
-                                    "type": "object"
-                                  }
-                                }
-                              }
-                            },
-                            "allOf": [
-                              {
-                                "$schema": "http://json-schema.org/draft-07/schema#",
-                                "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepCommon.json",
-                                "type": "object",
-                                "required": [
-                                  "type",
-                                  "label",
-                                  "goto"
-                                ],
-                                "properties": {
-                                  "type": {
-                                    "type": "string",
-                                    "description": "Type of workflow step",
-                                    "enum": [
-                                      "load",
-                                      "choice",
-                                      "function",
-                                      "machine",
-                                      "pass",
-                                      "fail",
-                                      "success",
-                                      "user",
-                                      "wait"
-                                    ]
-                                  },
-                                  "label": {
-                                    "type": "string",
-                                    "description": "Label for the step"
-                                  },
-                                  "goto": {
-                                    "type": "string",
-                                    "description": "Step to move to",
-                                    "pattern": "^[a-z][a-z-]+[a-z]$"
-                                  },
-                                  "goto-fail": {
-                                    "type": "string",
-                                    "description": "Step to transition too if this step cannot be completed",
-                                    "pattern": "^[a-z][a-z-]+[a-z]$"
-                                  },
-                                  "onComplete": {
-                                    "$schema": "http://json-schema.org/draft-07/schema#",
-                                    "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                    "type": "object",
-                                    "required": [
-                                      "retry",
-                                      "finally"
-                                    ],
-                                    "properties": {
-                                      "actions": {
-                                        "type": "array",
-                                        "description": "Actions to take on failure",
-                                        "maxItems": 10,
-                                        "items": {
-                                          "type": "object"
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            ]
-                          }
-                        ]
-                      },
-                      {
-                        "$schema": "http://json-schema.org/draft-07/schema#",
-                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/manualDataEntry.json",
-                        "type": "object",
-                        "description": "Ask the user to manually enter (or confirm) data for an entity",
-                        "properties": {
-                          "label": {
-                            "type": "string",
-                            "description": "Label for the step"
-                          },
-                          "options": {
-                            "type": "object",
-                            "required": [
-                              "component",
-                              "payload"
-                            ],
-                            "properties": {
-                              "component": {
-                                "enum": [
-                                  "manual-data-entry"
-                                ]
-                              },
-                              "payload": {
-                                "type": "object",
-                                "required": [
-                                  "fields"
-                                ],
-                                "properties": {
-                                  "fields": {
-                                    "type": "array",
-                                    "description": "Configuration for each field",
-                                    "items": {
-                                      "type": "object",
-                                      "required": [
-                                        "input_type",
-                                        "label",
-                                        "required",
-                                        "entity_field"
-                                      ],
-                                      "properties": {
-                                        "input_type": {
-                                          "type": "string",
-                                          "description": "The type of input field to display",
-                                          "enum": [
-                                            "textbox",
-                                            "input"
-                                          ]
-                                        },
-                                        "label": {
-                                          "type": "string",
-                                          "description": "Label to display for the field"
-                                        },
-                                        "required": {
-                                          "type": "boolean",
-                                          "description": "Display the field as required input. Note: this is a helper function. It singles that the user is required to input data at this step. If the field is required on the entity, the user will be presented with a validation message"
-                                        },
-                                        "entity_field": {
-                                          "type": "string",
-                                          "description": "JSON Path to the field on the entity. If the path does not start with '$' then the entity on the context is assumed. Otherwise the data will be set on the context path"
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        },
-                        "allOf": [
-                          {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepUser.json",
-                            "type": "object",
-                            "description": "A step which requires a user to complete",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "description": "Type of workflow step",
-                                "enum": [
-                                  "load",
-                                  "choice",
-                                  "function",
-                                  "machine",
-                                  "pass",
-                                  "fail",
-                                  "success",
-                                  "user",
-                                  "wait"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "required": [
-                                  "component",
-                                  "payload"
-                                ],
-                                "properties": {
-                                  "component": {
-                                    "type": "string",
-                                    "description": "Name of the function to invoke"
-                                  },
-                                  "payload": {
-                                    "type": "object"
-                                  }
-                                }
-                              }
-                            },
-                            "allOf": [
-                              {
-                                "$schema": "http://json-schema.org/draft-07/schema#",
-                                "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepCommon.json",
-                                "type": "object",
-                                "required": [
-                                  "type",
-                                  "label",
-                                  "goto"
-                                ],
-                                "properties": {
-                                  "type": {
-                                    "type": "string",
-                                    "description": "Type of workflow step",
-                                    "enum": [
-                                      "load",
-                                      "choice",
-                                      "function",
-                                      "machine",
-                                      "pass",
-                                      "fail",
-                                      "success",
-                                      "user",
-                                      "wait"
-                                    ]
-                                  },
-                                  "label": {
-                                    "type": "string",
-                                    "description": "Label for the step"
-                                  },
-                                  "goto": {
-                                    "type": "string",
-                                    "description": "Step to move to",
-                                    "pattern": "^[a-z][a-z-]+[a-z]$"
-                                  },
-                                  "goto-fail": {
-                                    "type": "string",
-                                    "description": "Step to transition too if this step cannot be completed",
-                                    "pattern": "^[a-z][a-z-]+[a-z]$"
-                                  },
-                                  "onComplete": {
-                                    "$schema": "http://json-schema.org/draft-07/schema#",
-                                    "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                    "type": "object",
-                                    "required": [
-                                      "retry",
-                                      "finally"
-                                    ],
-                                    "properties": {
-                                      "actions": {
-                                        "type": "array",
-                                        "description": "Actions to take on failure",
-                                        "maxItems": 10,
-                                        "items": {
-                                          "type": "object"
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            ]
-                          }
-                        ]
-                      },
-                      {
-                        "$schema": "http://json-schema.org/draft-07/schema#",
-                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/taskList.json",
-                        "type": "object",
-                        "description": "Ask the user to follow a list and check off boxes",
-                        "properties": {
-                          "label": {
-                            "type": "string",
-                            "description": "Label for the step"
-                          },
-                          "options": {
-                            "type": "object",
-                            "required": [
-                              "component",
-                              "payload"
-                            ],
-                            "properties": {
-                              "component": {
-                                "enum": [
-                                  "task-list"
-                                ]
-                              },
-                              "payload": {
-                                "type": "object",
-                                "required": [
-                                  "items"
-                                ],
-                                "properties": {
-                                  "is_qc": {
-                                    "type": "boolean",
-                                    "description": "Flags this list as a QC task list. This means that a different user can close the task to one previously on the context"
-                                  },
-                                  "items": {
-                                    "type": "array",
-                                    "description": "Configuration for each task list item",
-                                    "items": {
-                                      "type": "object",
-                                      "required": [
-                                        "label",
-                                        "evaluated",
-                                        "na_option"
-                                      ],
-                                      "properties": {
-                                        "label": {
-                                          "type": "string",
-                                          "description": "Label to display for the field"
-                                        },
-                                        "slug": {
-                                          "type": "string",
-                                          "description": "Slug for the item (Auto-generated from the label)",
-                                          "readOnly": true,
-                                          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-                                        },
-                                        "help": {
-                                          "type": "string",
-                                          "description": "Message describing what is needed to be checked"
-                                        },
-                                        "evaluated": {
-                                          "type": "boolean",
-                                          "description": "When set to true, this will fail the step if the value for the item is false or N/A"
-                                        },
-                                        "na_field": {
-                                          "type": "boolean",
-                                          "description": "Allow the user to select the N/A option when checking off the list"
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        },
-                        "allOf": [
-                          {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepUser.json",
-                            "type": "object",
-                            "description": "A step which requires a user to complete",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "description": "Type of workflow step",
-                                "enum": [
-                                  "load",
-                                  "choice",
-                                  "function",
-                                  "machine",
-                                  "pass",
-                                  "fail",
-                                  "success",
-                                  "user",
-                                  "wait"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "required": [
-                                  "component",
-                                  "payload"
-                                ],
-                                "properties": {
-                                  "component": {
-                                    "type": "string",
-                                    "description": "Name of the function to invoke"
-                                  },
-                                  "payload": {
-                                    "type": "object"
-                                  }
-                                }
-                              }
-                            },
-                            "allOf": [
-                              {
-                                "$schema": "http://json-schema.org/draft-07/schema#",
-                                "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepCommon.json",
-                                "type": "object",
-                                "required": [
-                                  "type",
-                                  "label",
-                                  "goto"
-                                ],
-                                "properties": {
-                                  "type": {
-                                    "type": "string",
-                                    "description": "Type of workflow step",
-                                    "enum": [
-                                      "load",
-                                      "choice",
-                                      "function",
-                                      "machine",
-                                      "pass",
-                                      "fail",
-                                      "success",
-                                      "user",
-                                      "wait"
-                                    ]
-                                  },
-                                  "label": {
-                                    "type": "string",
-                                    "description": "Label for the step"
-                                  },
-                                  "goto": {
-                                    "type": "string",
-                                    "description": "Step to move to",
-                                    "pattern": "^[a-z][a-z-]+[a-z]$"
-                                  },
-                                  "goto-fail": {
-                                    "type": "string",
-                                    "description": "Step to transition too if this step cannot be completed",
-                                    "pattern": "^[a-z][a-z-]+[a-z]$"
-                                  },
-                                  "onComplete": {
-                                    "$schema": "http://json-schema.org/draft-07/schema#",
-                                    "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                    "type": "object",
-                                    "required": [
-                                      "retry",
-                                      "finally"
-                                    ],
-                                    "properties": {
-                                      "actions": {
-                                        "type": "array",
-                                        "description": "Actions to take on failure",
-                                        "maxItems": 10,
-                                        "items": {
-                                          "type": "object"
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            ]
-                          }
-                        ]
-                      },
-                      {
-                        "$schema": "http://json-schema.org/draft-07/schema#",
-                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/machine/aceIos.json",
-                        "type": "object",
-                        "description": "Run the ACE-IOS application to provision iOS devices or ",
-                        "properties": {
-                          "type": {
-                            "type": "string",
-                            "enum": [
-                              "machine"
-                            ]
-                          },
-                          "label": {
-                            "type": "string",
-                            "description": "Label for the step"
-                          },
-                          "options": {
-                            "type": "object",
-                            "required": [
-                              "application",
-                              "configuration"
-                            ],
-                            "properties": {
-                              "configuration": {
-                                "type": "object",
-                                "description": "ACE Configuration options",
-                                "properties": {
-                                  "pairing_cert": {
-                                    "type": "string",
-                                    "description": "Contents of a *.crt file exported from Apple Configurator or MDM",
-                                    "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$"
-                                  },
-                                  "pairing_key": {
-                                    "type": "string",
-                                    "description": "Contents of a *.der file exported from Apple Configurator or MDM",
-                                    "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$"
-                                  },
-                                  "restore_device": {
-                                    "type": "boolean",
-                                    "description": "Restore device to factory defaults"
-                                  },
-                                  "automated_enrollment": {
-                                    "type": "boolean",
-                                    "description": "Automatically enroll the device to MDM"
-                                  },
-                                  "mdm": {
-                                    "type": "object",
-                                    "description": "The settings for the Customers MDM",
-                                    "properties": {
-                                      "vendor": {
-                                        "type": "string",
-                                        "description": "MDM vendor. Currently, supported values are AirWatch, JAMF, and Meraki.",
-                                        "enum": [
-                                          "AirWatch",
-                                          "JAMF",
-                                          "Meraki"
-                                        ]
-                                      },
-                                      "console_url": {
-                                        "type": "string",
-                                        "format": "uri",
-                                        "description": "Base URL for HTTP requests"
-                                      },
-                                      "user": {
-                                        "type": "string",
-                                        "description": "MDM User name"
-                                      },
-                                      "password": {
-                                        "type": "string",
-                                        "description": "MDM password"
-                                      },
-                                      "tenant_code": {
-                                        "type": "string",
-                                        "description": "MDM authentication key"
-                                      },
-                                      "set_asset_tag": {
-                                        "type": "string",
-                                        "description": "Sets the devices Asset tag based on a field from the unit"
-                                      }
-                                    }
-                                  },
-                                  "field_mappings": {
-                                    "type": "array",
-                                    "description": "List of fields to map to the device",
-                                    "items": {
-                                      "type": "object",
-                                      "properties": {
-                                        "from": {
-                                          "type": "string",
-                                          "description": "The field reported from ACE",
-                                          "enum": [
-                                            "serial_number",
-                                            "name",
-                                            "ecid",
-                                            "udid",
-                                            "configurator_serial",
-                                            "ios",
-                                            "model",
-                                            "storage",
-                                            "wifi_mac",
-                                            "bt_mac",
-                                            "ethernet_mac",
-                                            "thundersync_serial",
-                                            "iccid",
-                                            "iccid2",
-                                            "imei",
-                                            "imei2",
-                                            "missed_profiles",
-                                            "missed_apps",
-                                            "icon_list_regex",
-                                            "icon_layout",
-                                            "bat_capacity"
-                                          ]
-                                        },
-                                        "to": {
-                                          "type": "string",
-                                          "description": "Field to set on the entity"
-                                        }
-                                      }
-                                    }
-                                  },
-                                  "wait_for_apps": {
-                                    "type": "array",
-                                    "description": "A list of applications needed to be installed on the device. This will cause the extension to poll the device for installed applications. Once all the applications have been installed, this step can be completed",
-                                    "items": {
-                                      "type": "string",
-                                      "format": "uri"
-                                    }
-                                  },
-                                  "wait_for_battery_charge": {
-                                    "type": "integer",
-                                    "description": "The required battery percentage needed before this step can move on",
-                                    "minimum": 0,
-                                    "maximum": 100
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      },
-                      {
-                        "$schema": "http://json-schema.org/draft-07/schema#",
-                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepChoice.json",
-                        "type": "object",
-                        "description": "A Step choice",
-                        "maxProperties": 2,
-                        "minProperties": 2,
-                        "required": [
-                          "decision"
-                        ],
-                        "properties": {
-                          "decision": {
-                            "type": "array",
-                            "description": "Context variable to check",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "variable": {
-                                  "type": "string",
-                                  "description": "Variable or value"
-                                },
-                                "operator": {
-                                  "type": "string",
-                                  "description": "Operator to perform",
-                                  "enum": [
-                                    "greater_than_equals",
-                                    "less_than_equals",
-                                    "greater_than",
-                                    "less_than",
-                                    "equals",
-                                    "not_equals"
-                                  ]
-                                },
-                                "operand": {
-                                  "type": "string",
-                                  "description": "operand to compare with"
-                                }
-                              }
-                            }
-                          }
-                        },
-                        "allOf": [
-                          {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepNext.json",
-                            "type": "object",
-                            "required": [
-                              "type",
-                              "label",
-                              "goto"
-                            ],
-                            "properties": {
-                              "goto": {
-                                "type": "string",
-                                "description": "Step to move to",
-                                "pattern": "^[a-z][a-z-]+[a-z]$"
-                              },
-                              "goto-fail": {
-                                "type": "string",
-                                "description": "Step to transition too if this step cannot be completed",
-                                "pattern": "^[a-z][a-z-]+[a-z]$"
-                              },
-                              "context": {
-                                "type": "array",
-                                "description": "Values to set on the context",
-                                "items": {
-                                  "type": "object",
-                                  "required": [
-                                    "key",
-                                    "value"
-                                  ],
-                                  "properties": {
-                                    "key": {
-                                      "type": "string",
-                                      "description": "The context key to set"
-                                    },
-                                    "value": {
-                                      "type": "string",
-                                      "description": "Value to set"
-                                    },
-                                    "lock": {
-                                      "type": "boolean",
-                                      "description": "Prevents other steps from writing this value"
-                                    },
-                                    "ignore": {
-                                      "type": "boolean",
-                                      "description": "When trying to set a locked key, do not fail"
-                                    }
-                                  }
-                                }
-                              },
-                              "onStart": {
-                                "$schema": "http://json-schema.org/draft-07/schema#",
-                                "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                "type": "object",
-                                "required": [
-                                  "retry",
-                                  "finally"
-                                ],
-                                "properties": {
-                                  "actions": {
-                                    "type": "array",
-                                    "description": "Actions to take on failure",
-                                    "maxItems": 10,
-                                    "items": {
-                                      "type": "object"
-                                    }
-                                  }
-                                }
-                              },
-                              "onError": {
-                                "$schema": "http://json-schema.org/draft-07/schema#",
-                                "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepError.json",
-                                "type": "object",
-                                "required": [
-                                  "retry",
-                                  "finally"
-                                ],
-                                "properties": {
-                                  "retry": {
-                                    "type": "integer",
-                                    "description": "Number of times to retry this step. Note: retry will only occur on steps which automatically failed. If the step was transitioned using the 'goto-fail' step, the actions will be fired but the step WILL NOT be re-tried",
-                                    "minimum": 0,
-                                    "maximum": 10,
-                                    "default": 0
-                                  },
-                                  "finally": {
-                                    "type": "object",
-                                    "description": "What to do after all retries",
-                                    "properties": {
-                                      "actions": {
-                                        "$schema": "http://json-schema.org/draft-07/schema#",
-                                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                        "type": "object",
-                                        "required": [
-                                          "retry",
-                                          "finally"
-                                        ],
-                                        "properties": {
-                                          "actions": {
-                                            "type": "array",
-                                            "description": "Actions to take on failure",
-                                            "maxItems": 10,
-                                            "items": {
-                                              "type": "object"
-                                            }
-                                          }
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              },
-                              "onTimeout": {
-                                "$schema": "http://json-schema.org/draft-07/schema#",
-                                "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepError.json",
-                                "type": "object",
-                                "required": [
-                                  "retry",
-                                  "finally"
-                                ],
-                                "properties": {
-                                  "retry": {
-                                    "type": "integer",
-                                    "description": "Number of times to retry this step. Note: retry will only occur on steps which automatically failed. If the step was transitioned using the 'goto-fail' step, the actions will be fired but the step WILL NOT be re-tried",
-                                    "minimum": 0,
-                                    "maximum": 10,
-                                    "default": 0
-                                  },
-                                  "finally": {
-                                    "type": "object",
-                                    "description": "What to do after all retries",
-                                    "properties": {
-                                      "actions": {
-                                        "$schema": "http://json-schema.org/draft-07/schema#",
-                                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                        "type": "object",
-                                        "required": [
-                                          "retry",
-                                          "finally"
-                                        ],
-                                        "properties": {
-                                          "actions": {
-                                            "type": "array",
-                                            "description": "Actions to take on failure",
-                                            "maxItems": 10,
-                                            "items": {
-                                              "type": "object"
-                                            }
-                                          }
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        ]
-                      },
-                      {
-                        "$schema": "http://json-schema.org/draft-07/schema#",
-                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepFail.json",
-                        "type": "object",
-                        "description": "Finial step which is marked as failed",
-                        "properties": {
-                          "label": {
-                            "type": "string",
-                            "description": "Label for the step"
-                          },
-                          "type": {
-                            "type": "string",
-                            "description": "Type of workflow step",
-                            "enum": [
-                              "load",
-                              "choice",
-                              "function",
-                              "machine",
-                              "pass",
-                              "fail",
-                              "success",
-                              "user",
-                              "wait"
-                            ]
-                          },
-                          "onComplete": {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                            "type": "object",
-                            "required": [
-                              "retry",
-                              "finally"
-                            ],
-                            "properties": {
-                              "actions": {
-                                "type": "array",
-                                "description": "Actions to take on failure",
-                                "maxItems": 10,
-                                "items": {
-                                  "type": "object"
-                                }
-                              }
-                            }
-                          }
-                        }
-                      },
-                      {
-                        "$schema": "http://json-schema.org/draft-07/schema#",
-                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepPass.json",
-                        "type": "object",
-                        "description": "Allows executing actions with out performing any function",
-                        "properties": {
-                          "label": {
-                            "type": "string",
-                            "description": "Label for the entity"
-                          },
-                          "type": {
-                            "type": "string",
-                            "description": "Type of workflow step",
-                            "enum": [
-                              "load",
-                              "choice",
-                              "function",
-                              "machine",
-                              "pass",
-                              "fail",
-                              "success",
-                              "user",
-                              "wait"
-                            ]
-                          }
-                        },
-                        "allOf": [
-                          {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepCommon.json",
-                            "type": "object",
-                            "required": [
-                              "type",
-                              "label",
-                              "goto"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "description": "Type of workflow step",
-                                "enum": [
-                                  "load",
-                                  "choice",
-                                  "function",
-                                  "machine",
-                                  "pass",
-                                  "fail",
-                                  "success",
-                                  "user",
-                                  "wait"
-                                ]
-                              },
-                              "label": {
-                                "type": "string",
-                                "description": "Label for the step"
-                              },
-                              "goto": {
-                                "type": "string",
-                                "description": "Step to move to",
-                                "pattern": "^[a-z][a-z-]+[a-z]$"
-                              },
-                              "goto-fail": {
-                                "type": "string",
-                                "description": "Step to transition too if this step cannot be completed",
-                                "pattern": "^[a-z][a-z-]+[a-z]$"
-                              },
-                              "onComplete": {
-                                "$schema": "http://json-schema.org/draft-07/schema#",
-                                "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                "type": "object",
-                                "required": [
-                                  "retry",
-                                  "finally"
-                                ],
-                                "properties": {
-                                  "actions": {
-                                    "type": "array",
-                                    "description": "Actions to take on failure",
-                                    "maxItems": 10,
-                                    "items": {
-                                      "type": "object"
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        ]
-                      },
-                      {
-                        "$schema": "http://json-schema.org/draft-07/schema#",
-                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepSuccess.json",
-                        "type": "object",
-                        "description": "Finial step which is marked as completed successfully",
-                        "properties": {
-                          "label": {
-                            "type": "string",
-                            "description": "Label for the step"
-                          },
-                          "type": {
-                            "type": "string",
-                            "description": "Type of workflow step",
-                            "enum": [
-                              "load",
-                              "choice",
-                              "function",
-                              "machine",
-                              "pass",
-                              "fail",
-                              "success",
-                              "user",
-                              "wait"
-                            ]
-                          },
-                          "onComplete": {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                            "type": "object",
-                            "required": [
-                              "retry",
-                              "finally"
-                            ],
-                            "properties": {
-                              "actions": {
-                                "type": "array",
-                                "description": "Actions to take on failure",
-                                "maxItems": 10,
-                                "items": {
-                                  "type": "object"
-                                }
-                              }
-                            }
-                          }
-                        }
-                      },
-                      {
-                        "$schema": "http://json-schema.org/draft-07/schema#",
-                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepWait.json",
-                        "type": "object",
-                        "description": "A step which run at certain times",
-                        "required": [
-                          "stop_at",
-                          "time"
-                        ],
-                        "properties": {
-                          "label": {
-                            "type": "string",
-                            "description": "Label for the step"
-                          },
-                          "type": {
-                            "type": "string",
-                            "enum": [
-                              "wait"
-                            ]
-                          },
-                          "stop_at": {
-                            "type": "integer",
-                            "description": "Time in seconds to stop this task",
-                            "maximum": 900,
-                            "minimum": 1
-                          },
-                          "time": {
-                            "type": "integer",
-                            "description": "Time to wait before checking this step",
-                            "maximum": 900,
-                            "minimum": 1
-                          },
-                          "listen_for": {
-                            "type": "array",
-                            "description": "List of events and conditions to listen for to trigger",
-                            "items": {
-                              "type": "object",
-                              "required": [
-                                "event"
-                              ],
-                              "properties": {
-                                "event": {
-                                  "type": "string",
-                                  "description": "Name of the event to listen for",
-                                  "allOf": [
-                                    {
-                                      "type": "string",
-                                      "description": "Possible entity events",
-                                      "enum": [
-                                        "CON.attached",
-                                        "CON.created",
-                                        "CON.deleted",
-                                        "CON.detached",
-                                        "CON.removed",
-                                        "CON.updated",
-                                        "CUS.attached",
-                                        "CUS.created",
-                                        "CUS.deleted",
-                                        "CUS.detached",
-                                        "CUS.removed",
-                                        "CUS.updated",
-                                        "LOC.attached",
-                                        "LOC.created",
-                                        "LOC.deleted",
-                                        "LOC.detached",
-                                        "LOC.removed",
-                                        "LOC.updated",
-                                        "NOTE.attached",
-                                        "NOTE.created",
-                                        "NOTE.deleted",
-                                        "NOTE.detached",
-                                        "NOTE.removed",
-                                        "NOTE.updated",
-                                        "PART.attached",
-                                        "PART.created",
-                                        "PART.deleted",
-                                        "PART.detached",
-                                        "PART.removed",
-                                        "PART.updated",
-                                        "PGM.attached",
-                                        "PGM.created",
-                                        "PGM.deleted",
-                                        "PGM.detached",
-                                        "PGM.removed",
-                                        "PGM.updated",
-                                        "PRO.attached",
-                                        "PRO.created",
-                                        "PRO.deleted",
-                                        "PRO.detached",
-                                        "PRO.removed",
-                                        "PRO.updated",
-                                        "RES.attached",
-                                        "RES.created",
-                                        "RES.deleted",
-                                        "RES.detached",
-                                        "RES.removed",
-                                        "RES.updated",
-                                        "UNIT.attached",
-                                        "UNIT.created",
-                                        "UNIT.deleted",
-                                        "UNIT.detached",
-                                        "UNIT.removed",
-                                        "UNIT.updated",
-                                        "USER.attached",
-                                        "USER.created",
-                                        "USER.deleted",
-                                        "USER.detached",
-                                        "USER.removed",
-                                        "USER.updated",
-                                        "WKF.attached",
-                                        "WKF.created",
-                                        "WKF.deleted",
-                                        "WKF.detached",
-                                        "WKF.removed",
-                                        "WKF.updated",
-                                        "WOR.attached",
-                                        "WOR.created",
-                                        "WOR.deleted",
-                                        "WOR.detached",
-                                        "WOR.removed",
-                                        "WOR.updated"
-                                      ]
-                                    }
-                                  ]
-                                },
-                                "event_value": {
-                                  "type": "object",
-                                  "description": "The event conditions that have to be met",
-                                  "allOf": [
-                                    {
-                                      "$schema": "http://json-schema.org/draft-07/schema#",
-                                      "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepChoice.json",
-                                      "type": "object",
-                                      "description": "A Step choice",
-                                      "maxProperties": 2,
-                                      "minProperties": 2,
-                                      "required": [
-                                        "decision"
-                                      ],
-                                      "properties": {
-                                        "decision": {
-                                          "type": "array",
-                                          "description": "Context variable to check",
-                                          "items": {
-                                            "type": "object",
-                                            "properties": {
-                                              "variable": {
-                                                "type": "string",
-                                                "description": "Variable or value"
-                                              },
-                                              "operator": {
-                                                "type": "string",
-                                                "description": "Operator to perform",
-                                                "enum": [
-                                                  "greater_than_equals",
-                                                  "less_than_equals",
-                                                  "greater_than",
-                                                  "less_than",
-                                                  "equals",
-                                                  "not_equals"
-                                                ]
-                                              },
-                                              "operand": {
-                                                "type": "string",
-                                                "description": "operand to compare with"
-                                              }
-                                            }
-                                          }
-                                        }
-                                      },
-                                      "allOf": [
-                                        {
-                                          "$schema": "http://json-schema.org/draft-07/schema#",
-                                          "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepNext.json",
-                                          "type": "object",
-                                          "required": [
-                                            "type",
-                                            "label",
-                                            "goto"
-                                          ],
-                                          "properties": {
-                                            "goto": {
-                                              "type": "string",
-                                              "description": "Step to move to",
-                                              "pattern": "^[a-z][a-z-]+[a-z]$"
-                                            },
-                                            "goto-fail": {
-                                              "type": "string",
-                                              "description": "Step to transition too if this step cannot be completed",
-                                              "pattern": "^[a-z][a-z-]+[a-z]$"
-                                            },
-                                            "context": {
-                                              "type": "array",
-                                              "description": "Values to set on the context",
-                                              "items": {
-                                                "type": "object",
-                                                "required": [
-                                                  "key",
-                                                  "value"
-                                                ],
-                                                "properties": {
-                                                  "key": {
-                                                    "type": "string",
-                                                    "description": "The context key to set"
-                                                  },
-                                                  "value": {
-                                                    "type": "string",
-                                                    "description": "Value to set"
-                                                  },
-                                                  "lock": {
-                                                    "type": "boolean",
-                                                    "description": "Prevents other steps from writing this value"
-                                                  },
-                                                  "ignore": {
-                                                    "type": "boolean",
-                                                    "description": "When trying to set a locked key, do not fail"
-                                                  }
-                                                }
-                                              }
-                                            },
-                                            "onStart": {
-                                              "$schema": "http://json-schema.org/draft-07/schema#",
-                                              "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                              "type": "object",
-                                              "required": [
-                                                "retry",
-                                                "finally"
-                                              ],
-                                              "properties": {
-                                                "actions": {
-                                                  "type": "array",
-                                                  "description": "Actions to take on failure",
-                                                  "maxItems": 10,
-                                                  "items": {
-                                                    "type": "object"
-                                                  }
-                                                }
-                                              }
-                                            },
-                                            "onError": {
-                                              "$schema": "http://json-schema.org/draft-07/schema#",
-                                              "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepError.json",
-                                              "type": "object",
-                                              "required": [
-                                                "retry",
-                                                "finally"
-                                              ],
-                                              "properties": {
-                                                "retry": {
-                                                  "type": "integer",
-                                                  "description": "Number of times to retry this step. Note: retry will only occur on steps which automatically failed. If the step was transitioned using the 'goto-fail' step, the actions will be fired but the step WILL NOT be re-tried",
-                                                  "minimum": 0,
-                                                  "maximum": 10,
-                                                  "default": 0
-                                                },
-                                                "finally": {
-                                                  "type": "object",
-                                                  "description": "What to do after all retries",
-                                                  "properties": {
-                                                    "actions": {
-                                                      "$schema": "http://json-schema.org/draft-07/schema#",
-                                                      "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                                      "type": "object",
-                                                      "required": [
-                                                        "retry",
-                                                        "finally"
-                                                      ],
-                                                      "properties": {
-                                                        "actions": {
-                                                          "type": "array",
-                                                          "description": "Actions to take on failure",
-                                                          "maxItems": 10,
-                                                          "items": {
-                                                            "type": "object"
-                                                          }
-                                                        }
-                                                      }
-                                                    }
-                                                  }
-                                                }
-                                              }
-                                            },
-                                            "onTimeout": {
-                                              "$schema": "http://json-schema.org/draft-07/schema#",
-                                              "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepError.json",
-                                              "type": "object",
-                                              "required": [
-                                                "retry",
-                                                "finally"
-                                              ],
-                                              "properties": {
-                                                "retry": {
-                                                  "type": "integer",
-                                                  "description": "Number of times to retry this step. Note: retry will only occur on steps which automatically failed. If the step was transitioned using the 'goto-fail' step, the actions will be fired but the step WILL NOT be re-tried",
-                                                  "minimum": 0,
-                                                  "maximum": 10,
-                                                  "default": 0
-                                                },
-                                                "finally": {
-                                                  "type": "object",
-                                                  "description": "What to do after all retries",
-                                                  "properties": {
-                                                    "actions": {
-                                                      "$schema": "http://json-schema.org/draft-07/schema#",
-                                                      "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                                      "type": "object",
-                                                      "required": [
-                                                        "retry",
-                                                        "finally"
-                                                      ],
-                                                      "properties": {
-                                                        "actions": {
-                                                          "type": "array",
-                                                          "description": "Actions to take on failure",
-                                                          "maxItems": 10,
-                                                          "items": {
-                                                            "type": "object"
-                                                          }
-                                                        }
-                                                      }
-                                                    }
-                                                  }
-                                                }
-                                              }
-                                            }
-                                          }
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              }
-                            }
-                          }
-                        },
-                        "allOf": [
-                          {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepCommon.json",
-                            "type": "object",
-                            "required": [
-                              "type",
-                              "label",
-                              "goto"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "description": "Type of workflow step",
-                                "enum": [
-                                  "load",
-                                  "choice",
-                                  "function",
-                                  "machine",
-                                  "pass",
-                                  "fail",
-                                  "success",
-                                  "user",
-                                  "wait"
-                                ]
-                              },
-                              "label": {
-                                "type": "string",
-                                "description": "Label for the step"
-                              },
-                              "goto": {
-                                "type": "string",
-                                "description": "Step to move to",
-                                "pattern": "^[a-z][a-z-]+[a-z]$"
-                              },
-                              "goto-fail": {
-                                "type": "string",
-                                "description": "Step to transition too if this step cannot be completed",
-                                "pattern": "^[a-z][a-z-]+[a-z]$"
-                              },
-                              "onComplete": {
-                                "$schema": "http://json-schema.org/draft-07/schema#",
-                                "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                "type": "object",
-                                "required": [
-                                  "retry",
-                                  "finally"
-                                ],
-                                "properties": {
-                                  "actions": {
-                                    "type": "array",
-                                    "description": "Actions to take on failure",
-                                    "maxItems": 10,
-                                    "items": {
-                                      "type": "object"
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        ]
-                      }
-                    ]
-                  }
-                }
-              },
-              "metadata": {
-                "type": "object",
-                "description": "Data for the resource as a key value pair",
-                "additionalProperties": {
-                  "type": "string"
-                },
-                "propertyNames": {
-                  "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
-```
-
-<h3 id="createworkorder-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|label|body|string|true|Label for the entity|
-|description|body|string\|null|false|Detailed description for the work order|
-|work_order_type|body|string|false|Type of work order|
-|begin_date|body|string(date-time)|false|Begin date|
-|due_date|body|string(date-time)|false|Due date|
-|current_status|body|object|false|Defines the properties for a status|
-|» status|body|string|true|A Custom label for the status|
-|» category|body|string|true|The classifier for the statues|
-|» description|body|string\|null|false|A description for the status|
-|» order|body|number|false|Order status appears when listing|
-|project|body|object|true|none|
-|» project_id|body|string|false|Unique identifier|
-|start_date|body|string(date-time)\|null|false|Start date|
-|end_date|body|string(date-time)\|null|false|End date|
-|cycles|body|[object]|false|none|
-|» needed|body|integer|true|The number of cycles needed|
-|» pending|body|integer|true|The number of cycles pending|
-|» in_progress|body|integer|true|The number of cycles pending|
-|» verifying|body|integer|true|The number of cycles pending|
-|» complete|body|integer|true|The number of cycles pending|
-|» blocked|body|integer|true|The number of cycles pending|
-|» cancelled|body|integer|true|The number of cycles pending|
-|» work_flow|body|object|true|Workflow|
-|»» work_flow_id|body|string|false|Customer identifier|
-|»» entity_id|body|string|true|Customer identifier|
-|»» entity_type|body|string|true|none|
-|»» label|body|string|true|Label for the entity|
-|»» slug|body|string|false|Slug for the entity (Auto-generated from the label)|
-|»» created|body|string(date-time)|true|Date the entity was created|
-|»» updated|body|string(date-time)|true|Last date the entity was updated|
-|»» schema_version|body|string|true|Version of the workflow schema used|
-|»» workflow_version|body|integer|false|Version number for the work flows (the number of times it has been changed|
-|»» applies_to|body|string|true|The entity type this work flow applies too|
-|»» triggered_by|body|[string]|false|none|
-|»» starts_at|body|string|true|Starting step|
-|»» steps|body|object|true|Steps for the workflow|
-|»» metadata|body|object|false|Data for the resource as a key value pair|
-|»»» **additionalProperties**|body|string|false|none|
-
-#### Enumerated Values
-
-|Parameter|Value|
-|---|---|
-|work_order_type|device|
-|» category|PENDING|
-|» category|IN_PROGRESS|
-|» category|VERIFYING|
-|» category|COMPLETE|
-|» category|CANCELLED|
-|» category|BLOCKED|
-|»» entity_type|WKF|
-|»» schema_version|1.0|
-|»» applies_to|UNIT|
-|»» applies_to|PART|
-|»» applies_to|PGM|
-|»» applies_to|PRJ|
-|»» applies_to|CUS|
-|»» applies_to|CON|
-|»» triggered_by|CON.attached|
-|»» triggered_by|CON.created|
-|»» triggered_by|CON.deleted|
-|»» triggered_by|CON.detached|
-|»» triggered_by|CON.removed|
-|»» triggered_by|CON.updated|
-|»» triggered_by|CUS.attached|
-|»» triggered_by|CUS.created|
-|»» triggered_by|CUS.deleted|
-|»» triggered_by|CUS.detached|
-|»» triggered_by|CUS.removed|
-|»» triggered_by|CUS.updated|
-|»» triggered_by|LOC.attached|
-|»» triggered_by|LOC.created|
-|»» triggered_by|LOC.deleted|
-|»» triggered_by|LOC.detached|
-|»» triggered_by|LOC.removed|
-|»» triggered_by|LOC.updated|
-|»» triggered_by|NOTE.attached|
-|»» triggered_by|NOTE.created|
-|»» triggered_by|NOTE.deleted|
-|»» triggered_by|NOTE.detached|
-|»» triggered_by|NOTE.removed|
-|»» triggered_by|NOTE.updated|
-|»» triggered_by|PART.attached|
-|»» triggered_by|PART.created|
-|»» triggered_by|PART.deleted|
-|»» triggered_by|PART.detached|
-|»» triggered_by|PART.removed|
-|»» triggered_by|PART.updated|
-|»» triggered_by|PGM.attached|
-|»» triggered_by|PGM.created|
-|»» triggered_by|PGM.deleted|
-|»» triggered_by|PGM.detached|
-|»» triggered_by|PGM.removed|
-|»» triggered_by|PGM.updated|
-|»» triggered_by|PRO.attached|
-|»» triggered_by|PRO.created|
-|»» triggered_by|PRO.deleted|
-|»» triggered_by|PRO.detached|
-|»» triggered_by|PRO.removed|
-|»» triggered_by|PRO.updated|
-|»» triggered_by|RES.attached|
-|»» triggered_by|RES.created|
-|»» triggered_by|RES.deleted|
-|»» triggered_by|RES.detached|
-|»» triggered_by|RES.removed|
-|»» triggered_by|RES.updated|
-|»» triggered_by|UNIT.attached|
-|»» triggered_by|UNIT.created|
-|»» triggered_by|UNIT.deleted|
-|»» triggered_by|UNIT.detached|
-|»» triggered_by|UNIT.removed|
-|»» triggered_by|UNIT.updated|
-|»» triggered_by|USER.attached|
-|»» triggered_by|USER.created|
-|»» triggered_by|USER.deleted|
-|»» triggered_by|USER.detached|
-|»» triggered_by|USER.removed|
-|»» triggered_by|USER.updated|
-|»» triggered_by|WKF.attached|
-|»» triggered_by|WKF.created|
-|»» triggered_by|WKF.deleted|
-|»» triggered_by|WKF.detached|
-|»» triggered_by|WKF.removed|
-|»» triggered_by|WKF.updated|
-|»» triggered_by|WOR.attached|
-|»» triggered_by|WOR.created|
-|»» triggered_by|WOR.deleted|
-|»» triggered_by|WOR.detached|
-|»» triggered_by|WOR.removed|
-|»» triggered_by|WOR.updated|
-
 > Example responses
 
 > 200 Response
 
 ```json
 {
-  "type": "object",
-  "properties": {
-    "_links": {
-      "type": "object",
-      "properties": {
-        "self": {
-          "x-example": {
-            "href": "https://api.nterprise.com/work_orders/kk9z7zwvQYH5GKx"
+  "total_count": 21,
+  "limit": 42,
+  "offset": "next-offset",
+  "_embedded": {
+    "nter:work-orders": [
+      {
+        "work_order_id": "work-order",
+        "label": "My workOrder",
+        "created": "2019-08-19T00:01:02.000Z",
+        "updated": "2020-08-19T01:01:02.000Z",
+        "description": "Workorder description",
+        "work_order_type": "device",
+        "begin_date": "2021-08-19T02:01:02.000Z",
+        "due_date": "2021-08-19T02:01:02.000Z",
+        "start_date": "2021-08-19T02:01:02.000Z",
+        "end_date": "2021-08-19T02:01:02.000Z",
+        "project": {
+          "project_id": "project",
+          "label": "New York Stores",
+          "description": "Project description",
+          "created": "2020-01-09T22:12:03.000Z",
+          "updated": "2020-01-09T22:12:03.000Z",
+          "customer": {
+            "customer_id": "customer",
+            "label": "manchuck",
+            "created": "2020-01-09T22:12:03.000Z",
+            "updated": "2020-01-09T22:12:03.000Z",
+            "external_platform": {},
+            "total_programs": 21,
+            "total_projects": 42,
+            "allowed_statuses": [
+              {
+                "category": "PENDING",
+                "description": "For something that is Pending",
+                "status": "Pending",
+                "order": 3
+              },
+              {
+                "category": "IN_PROGRESS",
+                "description": "For something that is In Progress",
+                "status": "In Progress",
+                "order": 4
+              },
+              {
+                "category": "VERIFYING",
+                "description": "For something that is Verifying",
+                "status": "Verifying",
+                "order": 5
+              },
+              {
+                "category": "BLOCKED",
+                "description": "For something that is Blocked",
+                "status": "Blocked",
+                "order": 6
+              },
+              {
+                "category": "COMPLETE",
+                "description": "For something that is Complete",
+                "status": "Complete",
+                "order": 7
+              },
+              {
+                "category": "CANCELLED",
+                "description": "For something that is Cancelled",
+                "status": "Cancelled",
+                "order": 8
+              }
+            ]
           },
-          "type": "object",
-          "properties": {
-            "href": {
-              "type": "string",
-              "format": "uri"
-            }
-          }
-        }
-      }
-    },
-    "work_order_id": {
-      "type": "string",
-      "description": "The identifier for the unit",
-      "pattern": "^[0-9a-zA-Z-_]+$"
-    },
-    "label": {
-      "type": "string",
-      "description": "Label for the entity"
-    },
-    "slug": {
-      "type": "string",
-      "description": "Slug for the entity (Auto-generated from the label)",
-      "readOnly": true,
-      "deprecated": true,
-      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-    },
-    "created": {
-      "description": "Date the entity was created",
-      "type": "string",
-      "format": "date-time",
-      "readOnly": true
-    },
-    "updated": {
-      "description": "Last date the entity was updated",
-      "type": "string",
-      "format": "date-time",
-      "readOnly": true
-    },
-    "start_date": {
-      "description": "Last date the entity was updated",
-      "type": "string",
-      "format": "date-time",
-      "readOnly": true
-    },
-    "end_date": {
-      "description": "Last date the entity was updated",
-      "type": "string",
-      "format": "date-time",
-      "readOnly": true
-    },
-    "description": {
-      "type": "string",
-      "nullable": true,
-      "description": "Detailed description for the work order"
-    },
-    "work_order_type": {
-      "type": "string",
-      "description": "Type of work order",
-      "enum": [
-        "device"
-      ]
-    },
-    "begin_date": {
-      "type": "string",
-      "format": "date-time",
-      "description": "Begin date"
-    },
-    "due_date": {
-      "type": "string",
-      "format": "date-time",
-      "description": "Due date"
-    },
-    "current_status": {
-      "type": "object",
-      "description": "Defines the properties for a status",
-      "additionalProperties": false,
-      "required": [
-        "status",
-        "category"
-      ],
-      "properties": {
-        "status": {
-          "type": "string",
-          "description": "A Custom label for the status",
-          "pattern": "^[A-Za-z][0-9a-zA-Z-_ ]+$"
-        },
-        "category": {
-          "type": "string",
-          "description": "The classifier for the statues",
-          "enum": [
-            "PENDING",
-            "IN_PROGRESS",
-            "VERIFYING",
-            "COMPLETE",
-            "CANCELLED",
-            "BLOCKED"
-          ]
-        },
-        "description": {
-          "type": "string",
-          "nullable": true,
-          "description": "A description for the status"
-        },
-        "order": {
-          "type": "number",
-          "description": "Order status appears when listing"
-        }
-      }
-    },
-    "project": {
-      "type": "object",
-      "description": "Defines the properties for a project",
-      "additionalProperties": false,
-      "required": [
-        "label",
-        "entity_id",
-        "entity_type",
-        "created",
-        "updated",
-        "customer",
-        "program",
-        "allowed_statuses"
-      ],
-      "properties": {
-        "project_id": {
-          "type": "string",
-          "description": "Unique identifier",
-          "pattern": "^[0-9a-zA-Z-_]+$"
-        },
-        "entity_id": {
-          "x-no-api-doc": true,
-          "type": "string",
-          "description": "Customer identifier",
-          "readOnly": true,
-          "pattern": "^[0-9a-zA-Z-_]+$"
-        },
-        "entity_type": {
-          "x-no-api-doc": true,
-          "enum": [
-            "PRJ"
-          ]
-        },
-        "description": {
-          "type": "string",
-          "nullable": true,
-          "description": "Project description"
-        },
-        "label": {
-          "type": "string",
-          "description": "Label for the entity"
-        },
-        "slug": {
-          "type": "string",
-          "description": "Slug for the entity (Auto-generated from the label)",
-          "readOnly": true,
-          "deprecated": true,
-          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-        },
-        "created": {
-          "description": "Date the entity was created",
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "updated": {
-          "description": "Last date the entity was updated",
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "customer": {
-          "type": "object",
-          "description": "Customer",
-          "additionalProperties": false,
-          "required": [
-            "label",
-            "entity_id",
-            "entity_type",
-            "created",
-            "updated",
-            "allowed_statuses"
-          ],
-          "properties": {
-            "customer_id": {
-              "description": "Customer identifier",
-              "type": "string",
-              "readOnly": true,
-              "pattern": "^[0-9a-zA-Z-_]+$"
-            },
-            "entity_id": {
-              "x-no-api-doc": true,
-              "type": "string",
-              "description": "Customer identifier",
-              "readOnly": true,
-              "pattern": "^[0-9a-zA-Z-_]+$"
-            },
-            "entity_type": {
-              "x-no-api-doc": true,
-              "enum": [
-                "CUS"
-              ]
-            },
-            "label": {
-              "type": "string",
-              "description": "Label for the entity"
-            },
-            "slug": {
-              "type": "string",
-              "description": "Slug for the entity (Auto-generated from the label)",
-              "readOnly": true,
-              "deprecated": true,
-              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-            },
-            "created": {
-              "description": "Date the entity was created",
-              "type": "string",
-              "format": "date-time",
-              "readOnly": true
-            },
-            "updated": {
-              "description": "Last date the entity was updated",
-              "type": "string",
-              "format": "date-time",
-              "readOnly": true
-            },
-            "external_platform": {
-              "type": "object",
-              "description": "External Identifiers for the customer",
-              "deprecated": true,
-              "x-patternProperties": {
-                "^[A-Za-z][A-Za-z0-9_]*$": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                }
-              }
-            },
-            "allowed_statuses": {
-              "type": "array",
-              "description": "List of allowed statuses",
-              "uniqueItems": true,
-              "items": {
-                "type": "object",
-                "description": "Defines the properties for a status",
-                "additionalProperties": false,
-                "required": [
-                  "status",
-                  "category"
-                ],
-                "properties": {
-                  "status": {
-                    "type": "string",
-                    "description": "A Custom label for the status",
-                    "pattern": "^[A-Za-z][0-9a-zA-Z-_ ]+$"
-                  },
-                  "category": {
-                    "type": "string",
-                    "description": "The classifier for the statues",
-                    "enum": [
-                      "PENDING",
-                      "IN_PROGRESS",
-                      "VERIFYING",
-                      "COMPLETE",
-                      "CANCELLED",
-                      "BLOCKED"
-                    ]
-                  },
-                  "description": {
-                    "type": "string",
-                    "nullable": true,
-                    "description": "A description for the status"
-                  },
-                  "order": {
-                    "type": "number",
-                    "description": "Order status appears when listing"
-                  }
-                }
-              }
-            },
-            "total_programs": {
-              "type": "number",
-              "description": "Total programs under the customer"
-            },
-            "total_projects": {
-              "type": "number",
-              "description": "Total projects under the customer"
-            }
-          }
-        },
-        "program": {
-          "type": "object",
-          "description": "Defines the properties for a program",
-          "additionalProperties": false,
-          "required": [
-            "entity_id",
-            "entity_type",
-            "created",
-            "updated",
-            "customer",
-            "allowed_statuses"
-          ],
-          "properties": {
-            "program_id": {
-              "description": "Unique identifier",
-              "type": "string",
-              "readOnly": true,
-              "pattern": "^[0-9a-zA-Z-_]+$"
-            },
-            "entity_id": {
-              "x-no-api-doc": true,
-              "type": "string",
-              "description": "Customer identifier",
-              "readOnly": true,
-              "pattern": "^[0-9a-zA-Z-_]+$"
-            },
-            "entity_type": {
-              "x-no-api-doc": true,
-              "enum": [
-                "PGM"
-              ]
-            },
-            "label": {
-              "type": "string",
-              "description": "Label for the entity"
-            },
-            "slug": {
-              "type": "string",
-              "description": "Slug for the entity (Auto-generated from the label)",
-              "readOnly": true,
-              "deprecated": true,
-              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-            },
-            "created": {
-              "description": "Date the entity was created",
-              "type": "string",
-              "format": "date-time",
-              "readOnly": true
-            },
-            "updated": {
-              "description": "Last date the entity was updated",
-              "type": "string",
-              "format": "date-time",
-              "readOnly": true
-            },
-            "start_date": {
-              "type": "string",
-              "nullable": true,
-              "format": "date-time",
-              "description": "Start date"
-            },
-            "end_date": {
-              "type": "string",
-              "nullable": true,
-              "format": "date-time",
-              "description": "End date"
-            },
+          "program": {
+            "program_id": "program",
+            "label": "North east stores",
+            "created": "2020-01-09T22:12:03.000Z",
+            "updated": "2020-01-09T22:12:03.000Z",
             "customer": {
-              "type": "object",
-              "description": "Customer",
-              "additionalProperties": false,
-              "required": [
-                "label",
-                "entity_id",
-                "entity_type",
-                "created",
-                "updated",
-                "allowed_statuses"
-              ],
-              "properties": {
-                "customer_id": {
-                  "description": "Customer identifier",
-                  "type": "string",
-                  "readOnly": true,
-                  "pattern": "^[0-9a-zA-Z-_]+$"
+              "customer_id": "customer",
+              "label": "manchuck",
+              "created": "2020-01-09T22:12:03.000Z",
+              "updated": "2020-01-09T22:12:03.000Z",
+              "external_platform": {},
+              "total_programs": 21,
+              "total_projects": 42,
+              "allowed_statuses": [
+                {
+                  "category": "PENDING",
+                  "description": "For something that is Pending",
+                  "status": "Pending",
+                  "order": 3
                 },
-                "entity_id": {
-                  "x-no-api-doc": true,
-                  "type": "string",
-                  "description": "Customer identifier",
-                  "readOnly": true,
-                  "pattern": "^[0-9a-zA-Z-_]+$"
+                {
+                  "category": "IN_PROGRESS",
+                  "description": "For something that is In Progress",
+                  "status": "In Progress",
+                  "order": 4
                 },
-                "entity_type": {
-                  "x-no-api-doc": true,
-                  "enum": [
-                    "CUS"
-                  ]
+                {
+                  "category": "VERIFYING",
+                  "description": "For something that is Verifying",
+                  "status": "Verifying",
+                  "order": 5
                 },
-                "label": {
-                  "type": "string",
-                  "description": "Label for the entity"
+                {
+                  "category": "BLOCKED",
+                  "description": "For something that is Blocked",
+                  "status": "Blocked",
+                  "order": 6
                 },
-                "slug": {
-                  "type": "string",
-                  "description": "Slug for the entity (Auto-generated from the label)",
-                  "readOnly": true,
-                  "deprecated": true,
-                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+                {
+                  "category": "COMPLETE",
+                  "description": "For something that is Complete",
+                  "status": "Complete",
+                  "order": 7
                 },
-                "created": {
-                  "description": "Date the entity was created",
-                  "type": "string",
-                  "format": "date-time",
-                  "readOnly": true
-                },
-                "updated": {
-                  "description": "Last date the entity was updated",
-                  "type": "string",
-                  "format": "date-time",
-                  "readOnly": true
-                },
-                "external_platform": {
-                  "type": "object",
-                  "description": "External Identifiers for the customer",
-                  "deprecated": true,
-                  "x-patternProperties": {
-                    "^[A-Za-z][A-Za-z0-9_]*$": {
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    }
-                  }
-                },
-                "allowed_statuses": {
-                  "type": "array",
-                  "description": "List of allowed statuses",
-                  "uniqueItems": true,
-                  "items": {
-                    "type": "object",
-                    "description": "Defines the properties for a status",
-                    "additionalProperties": false,
-                    "required": [
-                      "status",
-                      "category"
-                    ],
-                    "properties": {
-                      "status": {
-                        "type": "string",
-                        "description": "A Custom label for the status",
-                        "pattern": "^[A-Za-z][0-9a-zA-Z-_ ]+$"
-                      },
-                      "category": {
-                        "type": "string",
-                        "description": "The classifier for the statues",
-                        "enum": [
-                          "PENDING",
-                          "IN_PROGRESS",
-                          "VERIFYING",
-                          "COMPLETE",
-                          "CANCELLED",
-                          "BLOCKED"
-                        ]
-                      },
-                      "description": {
-                        "type": "string",
-                        "nullable": true,
-                        "description": "A description for the status"
-                      },
-                      "order": {
-                        "type": "number",
-                        "description": "Order status appears when listing"
-                      }
-                    }
-                  }
-                },
-                "total_programs": {
-                  "type": "number",
-                  "description": "Total programs under the customer"
-                },
-                "total_projects": {
-                  "type": "number",
-                  "description": "Total projects under the customer"
+                {
+                  "category": "CANCELLED",
+                  "description": "For something that is Cancelled",
+                  "status": "Cancelled",
+                  "order": 8
                 }
-              }
+              ]
             },
-            "allowed_statuses": {
-              "type": "array",
-              "description": "List of allowed statuses",
-              "uniqueItems": true,
-              "items": {
-                "type": "object",
-                "description": "Defines the properties for a status",
-                "additionalProperties": false,
-                "required": [
-                  "status",
-                  "category"
-                ],
-                "properties": {
-                  "status": {
-                    "type": "string",
-                    "description": "A Custom label for the status",
-                    "pattern": "^[A-Za-z][0-9a-zA-Z-_ ]+$"
-                  },
-                  "category": {
-                    "type": "string",
-                    "description": "The classifier for the statues",
-                    "enum": [
-                      "PENDING",
-                      "IN_PROGRESS",
-                      "VERIFYING",
-                      "COMPLETE",
-                      "CANCELLED",
-                      "BLOCKED"
-                    ]
-                  },
-                  "description": {
-                    "type": "string",
-                    "nullable": true,
-                    "description": "A description for the status"
-                  },
-                  "order": {
-                    "type": "number",
-                    "description": "Order status appears when listing"
-                  }
-                }
+            "end_date": "2020-02-10T22:12:03.000Z",
+            "start_date": "2020-02-10T22:12:03.000Z",
+            "allowed_statuses": [
+              {
+                "category": "PENDING",
+                "description": "For something that is Pending",
+                "status": "Pending",
+                "order": 3
+              },
+              {
+                "category": "VERIFYING",
+                "description": "For something that is Verifying",
+                "status": "Verifying",
+                "order": 5
               }
+            ]
+          },
+          "end_date": "2020-02-10T22:12:03.000Z",
+          "start_date": "2020-02-10T22:12:03.000Z",
+          "allowed_statuses": [
+            {
+              "category": "PENDING",
+              "description": "For something that is Pending",
+              "status": "Pending",
+              "order": 3
             }
+          ]
+        },
+        "location": {
+          "location_id": "location",
+          "label": "Test Label",
+          "created": "2019-08-19T00:01:02.000Z",
+          "updated": "2020-08-19T01:01:02.000Z",
+          "location_type": "warehouse",
+          "formatted_address": "Test Label\n431 Broadway Suite c\nMenands NY 12204 USA",
+          "address": {
+            "country": "USA",
+            "administrative_area": "NY",
+            "sub_administrative_area": "Albany",
+            "locality": "Menands",
+            "postal_code": "12204",
+            "thoroughfare": "431 Broadway",
+            "premise": "Suite c",
+            "sub_premise": "ZIC"
           }
         },
-        "allowed_statuses": {
-          "type": "array",
-          "description": "List of allowed statuses",
-          "uniqueItems": true,
-          "items": {
-            "type": "object",
-            "description": "Defines the properties for a status",
-            "additionalProperties": false,
-            "required": [
-              "status",
-              "category"
-            ],
-            "properties": {
-              "status": {
-                "type": "string",
-                "description": "A Custom label for the status",
-                "pattern": "^[A-Za-z][0-9a-zA-Z-_ ]+$"
-              },
-              "category": {
-                "type": "string",
-                "description": "The classifier for the statues",
-                "enum": [
-                  "PENDING",
-                  "IN_PROGRESS",
-                  "VERIFYING",
-                  "COMPLETE",
-                  "CANCELLED",
-                  "BLOCKED"
-                ]
-              },
-              "description": {
-                "type": "string",
-                "nullable": true,
-                "description": "A description for the status"
-              },
-              "order": {
-                "type": "number",
-                "description": "Order status appears when listing"
-              }
-            }
-          }
+        "current_status": {
+          "category": "IN_PROGRESS",
+          "description": "For something that is Reticulating Splines",
+          "status": "Reticulating Splines",
+          "order": 2
         },
-        "start_date": {
-          "type": "string",
-          "nullable": true,
-          "format": "date-time",
-          "description": "Start date"
-        },
-        "end_date": {
-          "type": "string",
-          "nullable": true,
-          "format": "date-time",
-          "description": "End date"
-        }
-      }
-    },
-    "cycles": {
-      "type": "array",
-      "minimum": 1,
-      "items": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-          "needed",
-          "pending",
-          "in_progress",
-          "verifying",
-          "complete",
-          "blocked",
-          "cancelled",
-          "work_flow"
-        ],
-        "properties": {
-          "needed": {
-            "type": "integer",
-            "description": "The number of cycles needed",
-            "minimum": 1
-          },
-          "pending": {
-            "type": "integer",
-            "description": "The number of cycles pending",
-            "readOnly": true
-          },
-          "in_progress": {
-            "type": "integer",
-            "description": "The number of cycles pending",
-            "readOnly": true
-          },
-          "verifying": {
-            "type": "integer",
-            "description": "The number of cycles pending",
-            "readOnly": true
-          },
-          "complete": {
-            "type": "integer",
-            "description": "The number of cycles pending",
-            "readOnly": true
-          },
-          "blocked": {
-            "type": "integer",
-            "description": "The number of cycles pending",
-            "readOnly": true
-          },
-          "cancelled": {
-            "type": "integer",
-            "description": "The number of cycles pending",
-            "readOnly": true
-          },
-          "work_flow": {
-            "type": "object",
-            "description": "Workflow",
-            "additionalProperties": false,
-            "required": [
-              "label",
-              "entity_id",
-              "entity_type",
-              "created",
-              "updated",
-              "steps",
-              "starts_at",
-              "applies_to",
-              "schema_version"
-            ],
-            "properties": {
-              "work_flow_id": {
-                "type": "string",
-                "description": "Customer identifier",
-                "readOnly": true,
-                "pattern": "^[0-9a-zA-Z-_]+$"
-              },
-              "entity_id": {
-                "x-no-api-doc": true,
-                "type": "string",
-                "description": "Customer identifier",
-                "readOnly": true,
-                "pattern": "^[0-9a-zA-Z-_]+$"
-              },
-              "entity_type": {
-                "x-no-api-doc": true,
-                "enum": [
-                  "WKF"
-                ]
-              },
-              "label": {
-                "type": "string",
-                "description": "Label for the entity"
-              },
-              "slug": {
-                "type": "string",
-                "description": "Slug for the entity (Auto-generated from the label)",
-                "readOnly": true,
-                "deprecated": true,
-                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-              },
-              "created": {
-                "description": "Date the entity was created",
-                "type": "string",
-                "format": "date-time",
-                "readOnly": true
-              },
-              "updated": {
-                "description": "Last date the entity was updated",
-                "type": "string",
-                "format": "date-time",
-                "readOnly": true
-              },
-              "schema_version": {
-                "type": "string",
-                "description": "Version of the workflow schema used",
-                "enum": [
-                  "1.0"
-                ]
-              },
-              "workflow_version": {
-                "type": "integer",
-                "description": "Version number for the work flows (the number of times it has been changed",
-                "readOnly": true
-              },
-              "applies_to": {
-                "type": "string",
-                "description": "The entity type this work flow applies too",
-                "enum": [
-                  "UNIT",
-                  "PART",
-                  "PGM",
-                  "PRJ",
-                  "CUS",
-                  "CON"
-                ]
-              },
-              "triggered_by": {
-                "type": "array",
-                "items": {
-                  "type": "string",
-                  "description": "Possible entity events",
-                  "enum": [
-                    "CON.attached",
-                    "CON.created",
-                    "CON.deleted",
-                    "CON.detached",
-                    "CON.removed",
-                    "CON.updated",
-                    "CUS.attached",
-                    "CUS.created",
-                    "CUS.deleted",
-                    "CUS.detached",
-                    "CUS.removed",
-                    "CUS.updated",
-                    "LOC.attached",
-                    "LOC.created",
-                    "LOC.deleted",
-                    "LOC.detached",
-                    "LOC.removed",
-                    "LOC.updated",
-                    "NOTE.attached",
-                    "NOTE.created",
-                    "NOTE.deleted",
-                    "NOTE.detached",
-                    "NOTE.removed",
-                    "NOTE.updated",
-                    "PART.attached",
-                    "PART.created",
-                    "PART.deleted",
-                    "PART.detached",
-                    "PART.removed",
-                    "PART.updated",
-                    "PGM.attached",
-                    "PGM.created",
-                    "PGM.deleted",
-                    "PGM.detached",
-                    "PGM.removed",
-                    "PGM.updated",
-                    "PRO.attached",
-                    "PRO.created",
-                    "PRO.deleted",
-                    "PRO.detached",
-                    "PRO.removed",
-                    "PRO.updated",
-                    "RES.attached",
-                    "RES.created",
-                    "RES.deleted",
-                    "RES.detached",
-                    "RES.removed",
-                    "RES.updated",
-                    "UNIT.attached",
-                    "UNIT.created",
-                    "UNIT.deleted",
-                    "UNIT.detached",
-                    "UNIT.removed",
-                    "UNIT.updated",
-                    "USER.attached",
-                    "USER.created",
-                    "USER.deleted",
-                    "USER.detached",
-                    "USER.removed",
-                    "USER.updated",
-                    "WKF.attached",
-                    "WKF.created",
-                    "WKF.deleted",
-                    "WKF.detached",
-                    "WKF.removed",
-                    "WKF.updated",
-                    "WOR.attached",
-                    "WOR.created",
-                    "WOR.deleted",
-                    "WOR.detached",
-                    "WOR.removed",
-                    "WOR.updated"
-                  ]
-                }
-              },
-              "starts_at": {
-                "type": "string",
-                "description": "Starting step"
+        "cycles": [
+          {
+            "needed": 1,
+            "pending": 1,
+            "in_progress": 0,
+            "verifying": 0,
+            "complete": 0,
+            "blocked": 0,
+            "cancelled": 0,
+            "work_flow": {
+              "entity_type": "WKF",
+              "entity_id": "work-flow",
+              "created": "2019-08-19T00:01:02.000Z",
+              "updated": "2020-08-19T01:01:02.000Z",
+              "label": "My workflow",
+              "schema_version": "1.0",
+              "workflow_version": 7,
+              "applies_to": "UNIT",
+              "starts_at": "work-complete",
+              "metadata": {
+                "meta": "data"
               },
               "steps": {
-                "type": "object",
-                "description": "Steps for the workflow",
-                "uniqueItems": true,
-                "additionalProperties": true,
-                "x-patternProperties": {
-                  "^[A-Za-z][A-Za-z0-9_]*$": {
-                    "anyOf": [
-                      {
-                        "$schema": "http://json-schema.org/draft-07/schema#",
-                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/function/allocateUnitsToProject.json",
-                        "type": "object",
-                        "description": "Require the user confirm an action. This is normally used when Niagara cannot automatically detect that a task or action has been performed.",
-                        "properties": {
-                          "label": {
-                            "type": "string",
-                            "description": "Label for the entity"
-                          },
-                          "options": {
-                            "type": "object",
-                            "required": [
-                              "function",
-                              "payload"
-                            ],
-                            "properties": {
-                              "function": {
-                                "type": "string",
-                                "enum": [
-                                  "allocate-units-to-project"
-                                ]
-                              },
-                              "payload": {
-                                "type": "object",
-                                "required": [
-                                  "part_id",
-                                  "project_id",
-                                  "qty"
-                                ],
-                                "properties": {
-                                  "part_id": {
-                                    "type": "string",
-                                    "description": "Part ID of the to assign"
-                                  },
-                                  "program_id": {
-                                    "type": "string",
-                                    "description": "Program ID of the to assign"
-                                  },
-                                  "qty": {
-                                    "type": "number",
-                                    "minimum": 1,
-                                    "description": "Number of units to assign to the project"
-                                  },
-                                  "allow_scarcity": {
-                                    "type": "boolean",
-                                    "description": "Allow the workflow to continue even if there are not enough units"
-                                  },
-                                  "force": {
-                                    "type": "boolean",
-                                    "description": "Assign the units even if the project already has units allocated"
-                                  },
-                                  "status": {
-                                    "type": "string",
-                                    "description": "Only assign units which are in this status"
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      },
-                      {
-                        "$schema": "http://json-schema.org/draft-07/schema#",
-                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/followPDFInstructions.json",
-                        "type": "object",
-                        "description": "Display a link or modal to a user which contains instructions from a PDF",
-                        "required": [
-                          "label",
-                          "payload"
-                        ],
-                        "properties": {
-                          "label": {
-                            "type": "string",
-                            "description": "Label for the step"
-                          },
-                          "options": {
-                            "type": "object",
-                            "required": [
-                              "component",
-                              "payload"
-                            ],
-                            "properties": {
-                              "component": {
-                                "enum": [
-                                  "follow-pds-instructions"
-                                ]
-                              },
-                              "payload": {
-                                "type": "object",
-                                "required": [
-                                  "attachment_id"
-                                ],
-                                "properties": {
-                                  "attachment_id": {
-                                    "type": "string",
-                                    "description": "UUID for the attachment",
-                                    "format": "uuid"
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        },
-                        "allOf": [
-                          {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepUser.json",
-                            "type": "object",
-                            "description": "A step which requires a user to complete",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "description": "Type of workflow step",
-                                "enum": [
-                                  "load",
-                                  "choice",
-                                  "function",
-                                  "machine",
-                                  "pass",
-                                  "fail",
-                                  "success",
-                                  "user",
-                                  "wait"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "required": [
-                                  "component",
-                                  "payload"
-                                ],
-                                "properties": {
-                                  "component": {
-                                    "type": "string",
-                                    "description": "Name of the function to invoke"
-                                  },
-                                  "payload": {
-                                    "type": "object"
-                                  }
-                                }
-                              }
-                            },
-                            "allOf": [
-                              {
-                                "$schema": "http://json-schema.org/draft-07/schema#",
-                                "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepCommon.json",
-                                "type": "object",
-                                "required": [
-                                  "type",
-                                  "label",
-                                  "goto"
-                                ],
-                                "properties": {
-                                  "type": {
-                                    "type": "string",
-                                    "description": "Type of workflow step",
-                                    "enum": [
-                                      "load",
-                                      "choice",
-                                      "function",
-                                      "machine",
-                                      "pass",
-                                      "fail",
-                                      "success",
-                                      "user",
-                                      "wait"
-                                    ]
-                                  },
-                                  "label": {
-                                    "type": "string",
-                                    "description": "Label for the step"
-                                  },
-                                  "goto": {
-                                    "type": "string",
-                                    "description": "Step to move to",
-                                    "pattern": "^[a-z][a-z-]+[a-z]$"
-                                  },
-                                  "goto-fail": {
-                                    "type": "string",
-                                    "description": "Step to transition too if this step cannot be completed",
-                                    "pattern": "^[a-z][a-z-]+[a-z]$"
-                                  },
-                                  "onComplete": {
-                                    "$schema": "http://json-schema.org/draft-07/schema#",
-                                    "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                    "type": "object",
-                                    "required": [
-                                      "retry",
-                                      "finally"
-                                    ],
-                                    "properties": {
-                                      "actions": {
-                                        "type": "array",
-                                        "description": "Actions to take on failure",
-                                        "maxItems": 10,
-                                        "items": {
-                                          "type": "object"
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            ]
-                          }
-                        ]
-                      },
-                      {
-                        "$schema": "http://json-schema.org/draft-07/schema#",
-                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/manualDataEntry.json",
-                        "type": "object",
-                        "description": "Ask the user to manually enter (or confirm) data for an entity",
-                        "properties": {
-                          "label": {
-                            "type": "string",
-                            "description": "Label for the step"
-                          },
-                          "options": {
-                            "type": "object",
-                            "required": [
-                              "component",
-                              "payload"
-                            ],
-                            "properties": {
-                              "component": {
-                                "enum": [
-                                  "manual-data-entry"
-                                ]
-                              },
-                              "payload": {
-                                "type": "object",
-                                "required": [
-                                  "fields"
-                                ],
-                                "properties": {
-                                  "fields": {
-                                    "type": "array",
-                                    "description": "Configuration for each field",
-                                    "items": {
-                                      "type": "object",
-                                      "required": [
-                                        "input_type",
-                                        "label",
-                                        "required",
-                                        "entity_field"
-                                      ],
-                                      "properties": {
-                                        "input_type": {
-                                          "type": "string",
-                                          "description": "The type of input field to display",
-                                          "enum": [
-                                            "textbox",
-                                            "input"
-                                          ]
-                                        },
-                                        "label": {
-                                          "type": "string",
-                                          "description": "Label to display for the field"
-                                        },
-                                        "required": {
-                                          "type": "boolean",
-                                          "description": "Display the field as required input. Note: this is a helper function. It singles that the user is required to input data at this step. If the field is required on the entity, the user will be presented with a validation message"
-                                        },
-                                        "entity_field": {
-                                          "type": "string",
-                                          "description": "JSON Path to the field on the entity. If the path does not start with '$' then the entity on the context is assumed. Otherwise the data will be set on the context path"
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        },
-                        "allOf": [
-                          {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepUser.json",
-                            "type": "object",
-                            "description": "A step which requires a user to complete",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "description": "Type of workflow step",
-                                "enum": [
-                                  "load",
-                                  "choice",
-                                  "function",
-                                  "machine",
-                                  "pass",
-                                  "fail",
-                                  "success",
-                                  "user",
-                                  "wait"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "required": [
-                                  "component",
-                                  "payload"
-                                ],
-                                "properties": {
-                                  "component": {
-                                    "type": "string",
-                                    "description": "Name of the function to invoke"
-                                  },
-                                  "payload": {
-                                    "type": "object"
-                                  }
-                                }
-                              }
-                            },
-                            "allOf": [
-                              {
-                                "$schema": "http://json-schema.org/draft-07/schema#",
-                                "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepCommon.json",
-                                "type": "object",
-                                "required": [
-                                  "type",
-                                  "label",
-                                  "goto"
-                                ],
-                                "properties": {
-                                  "type": {
-                                    "type": "string",
-                                    "description": "Type of workflow step",
-                                    "enum": [
-                                      "load",
-                                      "choice",
-                                      "function",
-                                      "machine",
-                                      "pass",
-                                      "fail",
-                                      "success",
-                                      "user",
-                                      "wait"
-                                    ]
-                                  },
-                                  "label": {
-                                    "type": "string",
-                                    "description": "Label for the step"
-                                  },
-                                  "goto": {
-                                    "type": "string",
-                                    "description": "Step to move to",
-                                    "pattern": "^[a-z][a-z-]+[a-z]$"
-                                  },
-                                  "goto-fail": {
-                                    "type": "string",
-                                    "description": "Step to transition too if this step cannot be completed",
-                                    "pattern": "^[a-z][a-z-]+[a-z]$"
-                                  },
-                                  "onComplete": {
-                                    "$schema": "http://json-schema.org/draft-07/schema#",
-                                    "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                    "type": "object",
-                                    "required": [
-                                      "retry",
-                                      "finally"
-                                    ],
-                                    "properties": {
-                                      "actions": {
-                                        "type": "array",
-                                        "description": "Actions to take on failure",
-                                        "maxItems": 10,
-                                        "items": {
-                                          "type": "object"
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            ]
-                          }
-                        ]
-                      },
-                      {
-                        "$schema": "http://json-schema.org/draft-07/schema#",
-                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/taskList.json",
-                        "type": "object",
-                        "description": "Ask the user to follow a list and check off boxes",
-                        "properties": {
-                          "label": {
-                            "type": "string",
-                            "description": "Label for the step"
-                          },
-                          "options": {
-                            "type": "object",
-                            "required": [
-                              "component",
-                              "payload"
-                            ],
-                            "properties": {
-                              "component": {
-                                "enum": [
-                                  "task-list"
-                                ]
-                              },
-                              "payload": {
-                                "type": "object",
-                                "required": [
-                                  "items"
-                                ],
-                                "properties": {
-                                  "is_qc": {
-                                    "type": "boolean",
-                                    "description": "Flags this list as a QC task list. This means that a different user can close the task to one previously on the context"
-                                  },
-                                  "items": {
-                                    "type": "array",
-                                    "description": "Configuration for each task list item",
-                                    "items": {
-                                      "type": "object",
-                                      "required": [
-                                        "label",
-                                        "evaluated",
-                                        "na_option"
-                                      ],
-                                      "properties": {
-                                        "label": {
-                                          "type": "string",
-                                          "description": "Label to display for the field"
-                                        },
-                                        "slug": {
-                                          "type": "string",
-                                          "description": "Slug for the item (Auto-generated from the label)",
-                                          "readOnly": true,
-                                          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-                                        },
-                                        "help": {
-                                          "type": "string",
-                                          "description": "Message describing what is needed to be checked"
-                                        },
-                                        "evaluated": {
-                                          "type": "boolean",
-                                          "description": "When set to true, this will fail the step if the value for the item is false or N/A"
-                                        },
-                                        "na_field": {
-                                          "type": "boolean",
-                                          "description": "Allow the user to select the N/A option when checking off the list"
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        },
-                        "allOf": [
-                          {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepUser.json",
-                            "type": "object",
-                            "description": "A step which requires a user to complete",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "description": "Type of workflow step",
-                                "enum": [
-                                  "load",
-                                  "choice",
-                                  "function",
-                                  "machine",
-                                  "pass",
-                                  "fail",
-                                  "success",
-                                  "user",
-                                  "wait"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "required": [
-                                  "component",
-                                  "payload"
-                                ],
-                                "properties": {
-                                  "component": {
-                                    "type": "string",
-                                    "description": "Name of the function to invoke"
-                                  },
-                                  "payload": {
-                                    "type": "object"
-                                  }
-                                }
-                              }
-                            },
-                            "allOf": [
-                              {
-                                "$schema": "http://json-schema.org/draft-07/schema#",
-                                "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepCommon.json",
-                                "type": "object",
-                                "required": [
-                                  "type",
-                                  "label",
-                                  "goto"
-                                ],
-                                "properties": {
-                                  "type": {
-                                    "type": "string",
-                                    "description": "Type of workflow step",
-                                    "enum": [
-                                      "load",
-                                      "choice",
-                                      "function",
-                                      "machine",
-                                      "pass",
-                                      "fail",
-                                      "success",
-                                      "user",
-                                      "wait"
-                                    ]
-                                  },
-                                  "label": {
-                                    "type": "string",
-                                    "description": "Label for the step"
-                                  },
-                                  "goto": {
-                                    "type": "string",
-                                    "description": "Step to move to",
-                                    "pattern": "^[a-z][a-z-]+[a-z]$"
-                                  },
-                                  "goto-fail": {
-                                    "type": "string",
-                                    "description": "Step to transition too if this step cannot be completed",
-                                    "pattern": "^[a-z][a-z-]+[a-z]$"
-                                  },
-                                  "onComplete": {
-                                    "$schema": "http://json-schema.org/draft-07/schema#",
-                                    "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                    "type": "object",
-                                    "required": [
-                                      "retry",
-                                      "finally"
-                                    ],
-                                    "properties": {
-                                      "actions": {
-                                        "type": "array",
-                                        "description": "Actions to take on failure",
-                                        "maxItems": 10,
-                                        "items": {
-                                          "type": "object"
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            ]
-                          }
-                        ]
-                      },
-                      {
-                        "$schema": "http://json-schema.org/draft-07/schema#",
-                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/machine/aceIos.json",
-                        "type": "object",
-                        "description": "Run the ACE-IOS application to provision iOS devices or ",
-                        "properties": {
-                          "type": {
-                            "type": "string",
-                            "enum": [
-                              "machine"
-                            ]
-                          },
-                          "label": {
-                            "type": "string",
-                            "description": "Label for the step"
-                          },
-                          "options": {
-                            "type": "object",
-                            "required": [
-                              "application",
-                              "configuration"
-                            ],
-                            "properties": {
-                              "configuration": {
-                                "type": "object",
-                                "description": "ACE Configuration options",
-                                "properties": {
-                                  "pairing_cert": {
-                                    "type": "string",
-                                    "description": "Contents of a *.crt file exported from Apple Configurator or MDM",
-                                    "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$"
-                                  },
-                                  "pairing_key": {
-                                    "type": "string",
-                                    "description": "Contents of a *.der file exported from Apple Configurator or MDM",
-                                    "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$"
-                                  },
-                                  "restore_device": {
-                                    "type": "boolean",
-                                    "description": "Restore device to factory defaults"
-                                  },
-                                  "automated_enrollment": {
-                                    "type": "boolean",
-                                    "description": "Automatically enroll the device to MDM"
-                                  },
-                                  "mdm": {
-                                    "type": "object",
-                                    "description": "The settings for the Customers MDM",
-                                    "properties": {
-                                      "vendor": {
-                                        "type": "string",
-                                        "description": "MDM vendor. Currently, supported values are AirWatch, JAMF, and Meraki.",
-                                        "enum": [
-                                          "AirWatch",
-                                          "JAMF",
-                                          "Meraki"
-                                        ]
-                                      },
-                                      "console_url": {
-                                        "type": "string",
-                                        "format": "uri",
-                                        "description": "Base URL for HTTP requests"
-                                      },
-                                      "user": {
-                                        "type": "string",
-                                        "description": "MDM User name"
-                                      },
-                                      "password": {
-                                        "type": "string",
-                                        "description": "MDM password"
-                                      },
-                                      "tenant_code": {
-                                        "type": "string",
-                                        "description": "MDM authentication key"
-                                      },
-                                      "set_asset_tag": {
-                                        "type": "string",
-                                        "description": "Sets the devices Asset tag based on a field from the unit"
-                                      }
-                                    }
-                                  },
-                                  "field_mappings": {
-                                    "type": "array",
-                                    "description": "List of fields to map to the device",
-                                    "items": {
-                                      "type": "object",
-                                      "properties": {
-                                        "from": {
-                                          "type": "string",
-                                          "description": "The field reported from ACE",
-                                          "enum": [
-                                            "serial_number",
-                                            "name",
-                                            "ecid",
-                                            "udid",
-                                            "configurator_serial",
-                                            "ios",
-                                            "model",
-                                            "storage",
-                                            "wifi_mac",
-                                            "bt_mac",
-                                            "ethernet_mac",
-                                            "thundersync_serial",
-                                            "iccid",
-                                            "iccid2",
-                                            "imei",
-                                            "imei2",
-                                            "missed_profiles",
-                                            "missed_apps",
-                                            "icon_list_regex",
-                                            "icon_layout",
-                                            "bat_capacity"
-                                          ]
-                                        },
-                                        "to": {
-                                          "type": "string",
-                                          "description": "Field to set on the entity"
-                                        }
-                                      }
-                                    }
-                                  },
-                                  "wait_for_apps": {
-                                    "type": "array",
-                                    "description": "A list of applications needed to be installed on the device. This will cause the extension to poll the device for installed applications. Once all the applications have been installed, this step can be completed",
-                                    "items": {
-                                      "type": "string",
-                                      "format": "uri"
-                                    }
-                                  },
-                                  "wait_for_battery_charge": {
-                                    "type": "integer",
-                                    "description": "The required battery percentage needed before this step can move on",
-                                    "minimum": 0,
-                                    "maximum": 100
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      },
-                      {
-                        "$schema": "http://json-schema.org/draft-07/schema#",
-                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepChoice.json",
-                        "type": "object",
-                        "description": "A Step choice",
-                        "maxProperties": 2,
-                        "minProperties": 2,
-                        "required": [
-                          "decision"
-                        ],
-                        "properties": {
-                          "decision": {
-                            "type": "array",
-                            "description": "Context variable to check",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "variable": {
-                                  "type": "string",
-                                  "description": "Variable or value"
-                                },
-                                "operator": {
-                                  "type": "string",
-                                  "description": "Operator to perform",
-                                  "enum": [
-                                    "greater_than_equals",
-                                    "less_than_equals",
-                                    "greater_than",
-                                    "less_than",
-                                    "equals",
-                                    "not_equals"
-                                  ]
-                                },
-                                "operand": {
-                                  "type": "string",
-                                  "description": "operand to compare with"
-                                }
-                              }
-                            }
-                          }
-                        },
-                        "allOf": [
-                          {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepNext.json",
-                            "type": "object",
-                            "required": [
-                              "type",
-                              "label",
-                              "goto"
-                            ],
-                            "properties": {
-                              "goto": {
-                                "type": "string",
-                                "description": "Step to move to",
-                                "pattern": "^[a-z][a-z-]+[a-z]$"
-                              },
-                              "goto-fail": {
-                                "type": "string",
-                                "description": "Step to transition too if this step cannot be completed",
-                                "pattern": "^[a-z][a-z-]+[a-z]$"
-                              },
-                              "context": {
-                                "type": "array",
-                                "description": "Values to set on the context",
-                                "items": {
-                                  "type": "object",
-                                  "required": [
-                                    "key",
-                                    "value"
-                                  ],
-                                  "properties": {
-                                    "key": {
-                                      "type": "string",
-                                      "description": "The context key to set"
-                                    },
-                                    "value": {
-                                      "type": "string",
-                                      "description": "Value to set"
-                                    },
-                                    "lock": {
-                                      "type": "boolean",
-                                      "description": "Prevents other steps from writing this value"
-                                    },
-                                    "ignore": {
-                                      "type": "boolean",
-                                      "description": "When trying to set a locked key, do not fail"
-                                    }
-                                  }
-                                }
-                              },
-                              "onStart": {
-                                "$schema": "http://json-schema.org/draft-07/schema#",
-                                "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                "type": "object",
-                                "required": [
-                                  "retry",
-                                  "finally"
-                                ],
-                                "properties": {
-                                  "actions": {
-                                    "type": "array",
-                                    "description": "Actions to take on failure",
-                                    "maxItems": 10,
-                                    "items": {
-                                      "type": "object"
-                                    }
-                                  }
-                                }
-                              },
-                              "onError": {
-                                "$schema": "http://json-schema.org/draft-07/schema#",
-                                "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepError.json",
-                                "type": "object",
-                                "required": [
-                                  "retry",
-                                  "finally"
-                                ],
-                                "properties": {
-                                  "retry": {
-                                    "type": "integer",
-                                    "description": "Number of times to retry this step. Note: retry will only occur on steps which automatically failed. If the step was transitioned using the 'goto-fail' step, the actions will be fired but the step WILL NOT be re-tried",
-                                    "minimum": 0,
-                                    "maximum": 10,
-                                    "default": 0
-                                  },
-                                  "finally": {
-                                    "type": "object",
-                                    "description": "What to do after all retries",
-                                    "properties": {
-                                      "actions": {
-                                        "$schema": "http://json-schema.org/draft-07/schema#",
-                                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                        "type": "object",
-                                        "required": [
-                                          "retry",
-                                          "finally"
-                                        ],
-                                        "properties": {
-                                          "actions": {
-                                            "type": "array",
-                                            "description": "Actions to take on failure",
-                                            "maxItems": 10,
-                                            "items": {
-                                              "type": "object"
-                                            }
-                                          }
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              },
-                              "onTimeout": {
-                                "$schema": "http://json-schema.org/draft-07/schema#",
-                                "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepError.json",
-                                "type": "object",
-                                "required": [
-                                  "retry",
-                                  "finally"
-                                ],
-                                "properties": {
-                                  "retry": {
-                                    "type": "integer",
-                                    "description": "Number of times to retry this step. Note: retry will only occur on steps which automatically failed. If the step was transitioned using the 'goto-fail' step, the actions will be fired but the step WILL NOT be re-tried",
-                                    "minimum": 0,
-                                    "maximum": 10,
-                                    "default": 0
-                                  },
-                                  "finally": {
-                                    "type": "object",
-                                    "description": "What to do after all retries",
-                                    "properties": {
-                                      "actions": {
-                                        "$schema": "http://json-schema.org/draft-07/schema#",
-                                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                        "type": "object",
-                                        "required": [
-                                          "retry",
-                                          "finally"
-                                        ],
-                                        "properties": {
-                                          "actions": {
-                                            "type": "array",
-                                            "description": "Actions to take on failure",
-                                            "maxItems": 10,
-                                            "items": {
-                                              "type": "object"
-                                            }
-                                          }
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        ]
-                      },
-                      {
-                        "$schema": "http://json-schema.org/draft-07/schema#",
-                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepFail.json",
-                        "type": "object",
-                        "description": "Finial step which is marked as failed",
-                        "properties": {
-                          "label": {
-                            "type": "string",
-                            "description": "Label for the step"
-                          },
-                          "type": {
-                            "type": "string",
-                            "description": "Type of workflow step",
-                            "enum": [
-                              "load",
-                              "choice",
-                              "function",
-                              "machine",
-                              "pass",
-                              "fail",
-                              "success",
-                              "user",
-                              "wait"
-                            ]
-                          },
-                          "onComplete": {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                            "type": "object",
-                            "required": [
-                              "retry",
-                              "finally"
-                            ],
-                            "properties": {
-                              "actions": {
-                                "type": "array",
-                                "description": "Actions to take on failure",
-                                "maxItems": 10,
-                                "items": {
-                                  "type": "object"
-                                }
-                              }
-                            }
-                          }
-                        }
-                      },
-                      {
-                        "$schema": "http://json-schema.org/draft-07/schema#",
-                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepPass.json",
-                        "type": "object",
-                        "description": "Allows executing actions with out performing any function",
-                        "properties": {
-                          "label": {
-                            "type": "string",
-                            "description": "Label for the entity"
-                          },
-                          "type": {
-                            "type": "string",
-                            "description": "Type of workflow step",
-                            "enum": [
-                              "load",
-                              "choice",
-                              "function",
-                              "machine",
-                              "pass",
-                              "fail",
-                              "success",
-                              "user",
-                              "wait"
-                            ]
-                          }
-                        },
-                        "allOf": [
-                          {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepCommon.json",
-                            "type": "object",
-                            "required": [
-                              "type",
-                              "label",
-                              "goto"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "description": "Type of workflow step",
-                                "enum": [
-                                  "load",
-                                  "choice",
-                                  "function",
-                                  "machine",
-                                  "pass",
-                                  "fail",
-                                  "success",
-                                  "user",
-                                  "wait"
-                                ]
-                              },
-                              "label": {
-                                "type": "string",
-                                "description": "Label for the step"
-                              },
-                              "goto": {
-                                "type": "string",
-                                "description": "Step to move to",
-                                "pattern": "^[a-z][a-z-]+[a-z]$"
-                              },
-                              "goto-fail": {
-                                "type": "string",
-                                "description": "Step to transition too if this step cannot be completed",
-                                "pattern": "^[a-z][a-z-]+[a-z]$"
-                              },
-                              "onComplete": {
-                                "$schema": "http://json-schema.org/draft-07/schema#",
-                                "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                "type": "object",
-                                "required": [
-                                  "retry",
-                                  "finally"
-                                ],
-                                "properties": {
-                                  "actions": {
-                                    "type": "array",
-                                    "description": "Actions to take on failure",
-                                    "maxItems": 10,
-                                    "items": {
-                                      "type": "object"
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        ]
-                      },
-                      {
-                        "$schema": "http://json-schema.org/draft-07/schema#",
-                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepSuccess.json",
-                        "type": "object",
-                        "description": "Finial step which is marked as completed successfully",
-                        "properties": {
-                          "label": {
-                            "type": "string",
-                            "description": "Label for the step"
-                          },
-                          "type": {
-                            "type": "string",
-                            "description": "Type of workflow step",
-                            "enum": [
-                              "load",
-                              "choice",
-                              "function",
-                              "machine",
-                              "pass",
-                              "fail",
-                              "success",
-                              "user",
-                              "wait"
-                            ]
-                          },
-                          "onComplete": {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                            "type": "object",
-                            "required": [
-                              "retry",
-                              "finally"
-                            ],
-                            "properties": {
-                              "actions": {
-                                "type": "array",
-                                "description": "Actions to take on failure",
-                                "maxItems": 10,
-                                "items": {
-                                  "type": "object"
-                                }
-                              }
-                            }
-                          }
-                        }
-                      },
-                      {
-                        "$schema": "http://json-schema.org/draft-07/schema#",
-                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepWait.json",
-                        "type": "object",
-                        "description": "A step which run at certain times",
-                        "required": [
-                          "stop_at",
-                          "time"
-                        ],
-                        "properties": {
-                          "label": {
-                            "type": "string",
-                            "description": "Label for the step"
-                          },
-                          "type": {
-                            "type": "string",
-                            "enum": [
-                              "wait"
-                            ]
-                          },
-                          "stop_at": {
-                            "type": "integer",
-                            "description": "Time in seconds to stop this task",
-                            "maximum": 900,
-                            "minimum": 1
-                          },
-                          "time": {
-                            "type": "integer",
-                            "description": "Time to wait before checking this step",
-                            "maximum": 900,
-                            "minimum": 1
-                          },
-                          "listen_for": {
-                            "type": "array",
-                            "description": "List of events and conditions to listen for to trigger",
-                            "items": {
-                              "type": "object",
-                              "required": [
-                                "event"
-                              ],
-                              "properties": {
-                                "event": {
-                                  "type": "string",
-                                  "description": "Name of the event to listen for",
-                                  "allOf": [
-                                    {
-                                      "type": "string",
-                                      "description": "Possible entity events",
-                                      "enum": [
-                                        "CON.attached",
-                                        "CON.created",
-                                        "CON.deleted",
-                                        "CON.detached",
-                                        "CON.removed",
-                                        "CON.updated",
-                                        "CUS.attached",
-                                        "CUS.created",
-                                        "CUS.deleted",
-                                        "CUS.detached",
-                                        "CUS.removed",
-                                        "CUS.updated",
-                                        "LOC.attached",
-                                        "LOC.created",
-                                        "LOC.deleted",
-                                        "LOC.detached",
-                                        "LOC.removed",
-                                        "LOC.updated",
-                                        "NOTE.attached",
-                                        "NOTE.created",
-                                        "NOTE.deleted",
-                                        "NOTE.detached",
-                                        "NOTE.removed",
-                                        "NOTE.updated",
-                                        "PART.attached",
-                                        "PART.created",
-                                        "PART.deleted",
-                                        "PART.detached",
-                                        "PART.removed",
-                                        "PART.updated",
-                                        "PGM.attached",
-                                        "PGM.created",
-                                        "PGM.deleted",
-                                        "PGM.detached",
-                                        "PGM.removed",
-                                        "PGM.updated",
-                                        "PRO.attached",
-                                        "PRO.created",
-                                        "PRO.deleted",
-                                        "PRO.detached",
-                                        "PRO.removed",
-                                        "PRO.updated",
-                                        "RES.attached",
-                                        "RES.created",
-                                        "RES.deleted",
-                                        "RES.detached",
-                                        "RES.removed",
-                                        "RES.updated",
-                                        "UNIT.attached",
-                                        "UNIT.created",
-                                        "UNIT.deleted",
-                                        "UNIT.detached",
-                                        "UNIT.removed",
-                                        "UNIT.updated",
-                                        "USER.attached",
-                                        "USER.created",
-                                        "USER.deleted",
-                                        "USER.detached",
-                                        "USER.removed",
-                                        "USER.updated",
-                                        "WKF.attached",
-                                        "WKF.created",
-                                        "WKF.deleted",
-                                        "WKF.detached",
-                                        "WKF.removed",
-                                        "WKF.updated",
-                                        "WOR.attached",
-                                        "WOR.created",
-                                        "WOR.deleted",
-                                        "WOR.detached",
-                                        "WOR.removed",
-                                        "WOR.updated"
-                                      ]
-                                    }
-                                  ]
-                                },
-                                "event_value": {
-                                  "type": "object",
-                                  "description": "The event conditions that have to be met",
-                                  "allOf": [
-                                    {
-                                      "$schema": "http://json-schema.org/draft-07/schema#",
-                                      "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepChoice.json",
-                                      "type": "object",
-                                      "description": "A Step choice",
-                                      "maxProperties": 2,
-                                      "minProperties": 2,
-                                      "required": [
-                                        "decision"
-                                      ],
-                                      "properties": {
-                                        "decision": {
-                                          "type": "array",
-                                          "description": "Context variable to check",
-                                          "items": {
-                                            "type": "object",
-                                            "properties": {
-                                              "variable": {
-                                                "type": "string",
-                                                "description": "Variable or value"
-                                              },
-                                              "operator": {
-                                                "type": "string",
-                                                "description": "Operator to perform",
-                                                "enum": [
-                                                  "greater_than_equals",
-                                                  "less_than_equals",
-                                                  "greater_than",
-                                                  "less_than",
-                                                  "equals",
-                                                  "not_equals"
-                                                ]
-                                              },
-                                              "operand": {
-                                                "type": "string",
-                                                "description": "operand to compare with"
-                                              }
-                                            }
-                                          }
-                                        }
-                                      },
-                                      "allOf": [
-                                        {
-                                          "$schema": "http://json-schema.org/draft-07/schema#",
-                                          "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepNext.json",
-                                          "type": "object",
-                                          "required": [
-                                            "type",
-                                            "label",
-                                            "goto"
-                                          ],
-                                          "properties": {
-                                            "goto": {
-                                              "type": "string",
-                                              "description": "Step to move to",
-                                              "pattern": "^[a-z][a-z-]+[a-z]$"
-                                            },
-                                            "goto-fail": {
-                                              "type": "string",
-                                              "description": "Step to transition too if this step cannot be completed",
-                                              "pattern": "^[a-z][a-z-]+[a-z]$"
-                                            },
-                                            "context": {
-                                              "type": "array",
-                                              "description": "Values to set on the context",
-                                              "items": {
-                                                "type": "object",
-                                                "required": [
-                                                  "key",
-                                                  "value"
-                                                ],
-                                                "properties": {
-                                                  "key": {
-                                                    "type": "string",
-                                                    "description": "The context key to set"
-                                                  },
-                                                  "value": {
-                                                    "type": "string",
-                                                    "description": "Value to set"
-                                                  },
-                                                  "lock": {
-                                                    "type": "boolean",
-                                                    "description": "Prevents other steps from writing this value"
-                                                  },
-                                                  "ignore": {
-                                                    "type": "boolean",
-                                                    "description": "When trying to set a locked key, do not fail"
-                                                  }
-                                                }
-                                              }
-                                            },
-                                            "onStart": {
-                                              "$schema": "http://json-schema.org/draft-07/schema#",
-                                              "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                              "type": "object",
-                                              "required": [
-                                                "retry",
-                                                "finally"
-                                              ],
-                                              "properties": {
-                                                "actions": {
-                                                  "type": "array",
-                                                  "description": "Actions to take on failure",
-                                                  "maxItems": 10,
-                                                  "items": {
-                                                    "type": "object"
-                                                  }
-                                                }
-                                              }
-                                            },
-                                            "onError": {
-                                              "$schema": "http://json-schema.org/draft-07/schema#",
-                                              "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepError.json",
-                                              "type": "object",
-                                              "required": [
-                                                "retry",
-                                                "finally"
-                                              ],
-                                              "properties": {
-                                                "retry": {
-                                                  "type": "integer",
-                                                  "description": "Number of times to retry this step. Note: retry will only occur on steps which automatically failed. If the step was transitioned using the 'goto-fail' step, the actions will be fired but the step WILL NOT be re-tried",
-                                                  "minimum": 0,
-                                                  "maximum": 10,
-                                                  "default": 0
-                                                },
-                                                "finally": {
-                                                  "type": "object",
-                                                  "description": "What to do after all retries",
-                                                  "properties": {
-                                                    "actions": {
-                                                      "$schema": "http://json-schema.org/draft-07/schema#",
-                                                      "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                                      "type": "object",
-                                                      "required": [
-                                                        "retry",
-                                                        "finally"
-                                                      ],
-                                                      "properties": {
-                                                        "actions": {
-                                                          "type": "array",
-                                                          "description": "Actions to take on failure",
-                                                          "maxItems": 10,
-                                                          "items": {
-                                                            "type": "object"
-                                                          }
-                                                        }
-                                                      }
-                                                    }
-                                                  }
-                                                }
-                                              }
-                                            },
-                                            "onTimeout": {
-                                              "$schema": "http://json-schema.org/draft-07/schema#",
-                                              "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepError.json",
-                                              "type": "object",
-                                              "required": [
-                                                "retry",
-                                                "finally"
-                                              ],
-                                              "properties": {
-                                                "retry": {
-                                                  "type": "integer",
-                                                  "description": "Number of times to retry this step. Note: retry will only occur on steps which automatically failed. If the step was transitioned using the 'goto-fail' step, the actions will be fired but the step WILL NOT be re-tried",
-                                                  "minimum": 0,
-                                                  "maximum": 10,
-                                                  "default": 0
-                                                },
-                                                "finally": {
-                                                  "type": "object",
-                                                  "description": "What to do after all retries",
-                                                  "properties": {
-                                                    "actions": {
-                                                      "$schema": "http://json-schema.org/draft-07/schema#",
-                                                      "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                                      "type": "object",
-                                                      "required": [
-                                                        "retry",
-                                                        "finally"
-                                                      ],
-                                                      "properties": {
-                                                        "actions": {
-                                                          "type": "array",
-                                                          "description": "Actions to take on failure",
-                                                          "maxItems": 10,
-                                                          "items": {
-                                                            "type": "object"
-                                                          }
-                                                        }
-                                                      }
-                                                    }
-                                                  }
-                                                }
-                                              }
-                                            }
-                                          }
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              }
-                            }
-                          }
-                        },
-                        "allOf": [
-                          {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepCommon.json",
-                            "type": "object",
-                            "required": [
-                              "type",
-                              "label",
-                              "goto"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "description": "Type of workflow step",
-                                "enum": [
-                                  "load",
-                                  "choice",
-                                  "function",
-                                  "machine",
-                                  "pass",
-                                  "fail",
-                                  "success",
-                                  "user",
-                                  "wait"
-                                ]
-                              },
-                              "label": {
-                                "type": "string",
-                                "description": "Label for the step"
-                              },
-                              "goto": {
-                                "type": "string",
-                                "description": "Step to move to",
-                                "pattern": "^[a-z][a-z-]+[a-z]$"
-                              },
-                              "goto-fail": {
-                                "type": "string",
-                                "description": "Step to transition too if this step cannot be completed",
-                                "pattern": "^[a-z][a-z-]+[a-z]$"
-                              },
-                              "onComplete": {
-                                "$schema": "http://json-schema.org/draft-07/schema#",
-                                "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                "type": "object",
-                                "required": [
-                                  "retry",
-                                  "finally"
-                                ],
-                                "properties": {
-                                  "actions": {
-                                    "type": "array",
-                                    "description": "Actions to take on failure",
-                                    "maxItems": 10,
-                                    "items": {
-                                      "type": "object"
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        ]
-                      }
-                    ]
-                  }
+                "work-complete": {
+                  "step_type": "success",
+                  "label": "work complete",
+                  "on_start": [],
+                  "on_complete": []
+                },
+                "stop-poking-me": {
+                  "step_type": "fail",
+                  "label": "stop poking me",
+                  "on_start": [],
+                  "on_complete": []
                 }
               },
-              "metadata": {
-                "type": "object",
-                "description": "Data for the resource as a key value pair",
-                "additionalProperties": {
-                  "type": "string"
-                },
-                "propertyNames": {
-                  "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-                }
-              }
+              "triggered_by": [
+                "UNIT.created"
+              ]
             }
+          }
+        ],
+        "input_filter": [
+          {
+            "label": "Serial Number Of part",
+            "key": "serial-number",
+            "filters": [],
+            "validators": [],
+            "value": null
+          }
+        ],
+        "_links": {
+          "nter:work-order-batches": {
+            "href": "https://api.example.com/work-orders/work-order/batches"
+          },
+          "nter:work-order-queues": {
+            "href": "https://api.example.com/work-orders/work-order/queues"
+          },
+          "self": {
+            "href": "https://api.example.com/work-orders/work-order"
           }
         }
       }
+    ]
+  },
+  "_links": {
+    "next": {
+      "href": "https://api.example.com/work-orders?limit=42&offset=next-offset"
+    },
+    "self": {
+      "href": "https://api.example.com/work-orders?limit=42"
     }
   }
 }
 ```
+
+> 401 Response
+
+```json
+{
+  "title": "Unauthorized",
+  "type": "https://docs.nterprise.com/api/problem/Unauthorized",
+  "status": 401,
+  "detail": "Invalid authorization token"
+}
+```
+
+> 403 Response
+
+```json
+{
+  "title": "Forbidden",
+  "type": "https://docs.nterprise.com/api/problem/Forbidden",
+  "status": 403,
+  "detail": "You are forbidden from accessing this resource"
+}
+```
+
+<h3 id="fetchallworkorders-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; total_count|number|true|read-only|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; limit|number|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; offset|string¦null|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; _embedded|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; nter:work-orders|[allOf]|false|none|none|
+
+*allOf*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; work_order_id|string|true|none|The identifier for the unit|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; label|string|true|none|Label for the entity|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; created|string(date-time)|true|read-only|Date the entity was created|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; updated|string(date-time)|true|read-only|Last date the entity was updated|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; start_date|string(date-time)|true|read-only|Last date the entity was updated|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end_date|string(date-time)|true|read-only|Last date the entity was updated|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; description|string¦null|true|none|Detailed description for the work order|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; work_order_type|string|true|none|Type of work order|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; begin_date|string(date-time)|true|none|Begin date|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; due_date|string(date-time)|true|none|Due date|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; current_status|object|true|none|Defines the properties for a status|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; status|string|true|none|A Custom label for the status|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; category|string|true|none|The classifier for the statues|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; description|string¦null|false|none|A description for the status|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; order|number|false|none|Order status appears when listing|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; project|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; project_id|string|true|none|Unique identifier|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; label|string|true|none|Label for the entity|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; created|string(date-time)|true|read-only|Date the entity was created|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; updated|string(date-time)|true|read-only|Last date the entity was updated|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; start_date|string(date-time)¦null|true|none|Start date|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end_date|string(date-time)¦null|true|none|End date|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; customer|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; customer_id|string|true|read-only|Customer identifier|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; label|string|true|none|Label for the entity|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; created|string(date-time)|true|read-only|Date the entity was created|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; updated|string(date-time)|true|read-only|Last date the entity was updated|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; external_platform|object|true|none|External Identifiers for the customer|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; allowed_statuses|[object]|true|none|List of allowed statuses|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; status|string|true|none|A Custom label for the status|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; category|string|true|none|The classifier for the statues|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; description|string¦null|false|none|A description for the status|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; order|number|false|none|Order status appears when listing|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; total_programs|number|true|none|Total programs under the customer|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; total_projects|number|true|none|Total projects under the customer|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; program|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; program_id|string|true|read-only|Unique identifier|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; label|string|true|none|Label for the entity|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; created|string(date-time)|true|read-only|Date the entity was created|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; updated|string(date-time)|true|read-only|Last date the entity was updated|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; start_date|string(date-time)¦null|true|none|Start date|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end_date|string(date-time)¦null|true|none|End date|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; customer|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; customer_id|string|true|read-only|Customer identifier|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; label|string|true|none|Label for the entity|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; created|string(date-time)|true|read-only|Date the entity was created|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; updated|string(date-time)|true|read-only|Last date the entity was updated|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; external_platform|object|true|none|External Identifiers for the customer|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; allowed_statuses|[object]|true|none|List of allowed statuses|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; status|string|true|none|A Custom label for the status|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; category|string|true|none|The classifier for the statues|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; description|string¦null|false|none|A description for the status|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; order|number|false|none|Order status appears when listing|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; total_programs|number|true|none|Total programs under the customer|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; total_projects|number|true|none|Total projects under the customer|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; allowed_statuses|[object]|true|none|List of allowed statuses|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; status|string|true|none|A Custom label for the status|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; category|string|true|none|The classifier for the statues|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; description|string¦null|false|none|A description for the status|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; order|number|false|none|Order status appears when listing|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; allowed_statuses|[object]|true|none|List of allowed statuses|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; status|string|true|none|A Custom label for the status|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; category|string|true|none|The classifier for the statues|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; description|string¦null|false|none|A description for the status|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; order|number|false|none|Order status appears when listing|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cycles|[object]|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; needed|integer|true|none|The number of cycles needed|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pending|integer|true|read-only|The number of cycles pending|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; in_progress|integer|true|read-only|The number of cycles pending|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; verifying|integer|true|read-only|The number of cycles pending|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; complete|integer|true|read-only|The number of cycles pending|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; blocked|integer|true|read-only|The number of cycles pending|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cancelled|integer|true|read-only|The number of cycles pending|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; work_flow|object|true|none|Workflow|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; work_flow_id|string|false|read-only|Customer identifier|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; entity_id|string|true|read-only|Customer identifier|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; entity_type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; label|string|true|none|Label for the entity|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; created|string(date-time)|true|read-only|Date the entity was created|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; updated|string(date-time)|true|read-only|Last date the entity was updated|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; schema_version|string|true|none|Version of the workflow schema used|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; workflow_version|integer|false|read-only|Version number for the work flows (the number of times it has been changed|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; applies_to|string|true|none|The entity type this work flow applies too|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; triggered_by|[string]|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; starts_at|string|true|none|Starting step|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; steps|object|true|none|Steps for the workflow|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; metadata|object|false|none|Data for the resource as a key value pair|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **additionalProperties**|string|false|none|none|
+
+*and*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _links|object|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self|object|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; href|string(uri)|false|none|none|
+
+*continued*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; _links|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self|object|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; href|string(uri)|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; next|object|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; href|string(uri)|false|none|none|
+
+Status Code **401**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
+
+Status Code **403**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
+
+### POST /work-orders - *Create work-order*
+
+<a id="opIdcreateWorkOrder"></a>
+
+*Create work-order*
+
+Creates a work-order
+
+> Body parameter
+
+<h3 id="createworkorder-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|label|body|string|true|Label for the entity|
+|description|body|string¦null|false|Detailed description for the work order|
+|work_order_type|body|string|false|Type of work order|
+|begin_date|body|string(date-time)|false|Begin date|
+|due_date|body|string(date-time)|false|Due date|
+|current_status|body|object|false|Defines the properties for a status|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|body|string|true|A Custom label for the status|
+|&nbsp;&nbsp;&nbsp;&nbsp; category|body|string|true|The classifier for the statues|
+|&nbsp;&nbsp;&nbsp;&nbsp; description|body|string¦null|false|A description for the status|
+|&nbsp;&nbsp;&nbsp;&nbsp; order|body|number|false|Order status appears when listing|
+|project|body|object|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; project_id|body|string|false|Unique identifier|
+|start_date|body|string(date-time)¦null|false|Start date|
+|end_date|body|string(date-time)¦null|false|End date|
+|cycles|body|[object]|false|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; needed|body|integer|true|The number of cycles needed|
+|&nbsp;&nbsp;&nbsp;&nbsp; pending|body|integer|true|The number of cycles pending|
+|&nbsp;&nbsp;&nbsp;&nbsp; in_progress|body|integer|true|The number of cycles pending|
+|&nbsp;&nbsp;&nbsp;&nbsp; verifying|body|integer|true|The number of cycles pending|
+|&nbsp;&nbsp;&nbsp;&nbsp; complete|body|integer|true|The number of cycles pending|
+|&nbsp;&nbsp;&nbsp;&nbsp; blocked|body|integer|true|The number of cycles pending|
+|&nbsp;&nbsp;&nbsp;&nbsp; cancelled|body|integer|true|The number of cycles pending|
+|&nbsp;&nbsp;&nbsp;&nbsp; work_flow|body|object|true|Workflow|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; work_flow_id|body|string|false|Customer identifier|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; entity_id|body|string|true|Customer identifier|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; entity_type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; label|body|string|true|Label for the entity|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; slug|body|string|false|Slug for the entity (Auto-generated from the label)|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; created|body|string(date-time)|true|Date the entity was created|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; updated|body|string(date-time)|true|Last date the entity was updated|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; schema_version|body|string|true|Version of the workflow schema used|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; workflow_version|body|integer|false|Version number for the work flows (the number of times it has been changed|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; applies_to|body|string|true|The entity type this work flow applies too|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; triggered_by|body|[string]|false|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; starts_at|body|string|true|Starting step|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; steps|body|object|true|Steps for the workflow|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; metadata|body|object|false|Data for the resource as a key value pair|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **additionalProperties**|body|string|false|none|
 
 <h3 id="createworkorder-responses">Responses</h3>
 
@@ -6960,2571 +525,337 @@ Creates a new work order
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|Inline|
 |403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
 
-<h3 id="createworkorder-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» _links|object|false|none|none|
-|»» self|object|false|none|none|
-|»»» href|string(uri)|false|none|none|
-|»» work_order_id|string|false|none|The identifier for the unit|
-|»» label|string|false|none|Label for the entity|
-|»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»» created|string(date-time)|false|read-only|Date the entity was created|
-|»» updated|string(date-time)|false|read-only|Last date the entity was updated|
-|»» start_date|string(date-time)|false|read-only|Last date the entity was updated|
-|»» end_date|string(date-time)|false|read-only|Last date the entity was updated|
-|»» description|string\|null|false|none|Detailed description for the work order|
-|»» work_order_type|string|false|none|Type of work order|
-|»» begin_date|string(date-time)|false|none|Begin date|
-|»» due_date|string(date-time)|false|none|Due date|
-|»» current_status|object|false|none|Defines the properties for a status|
-|»»» status|string|true|none|A Custom label for the status|
-|»»» category|string|true|none|The classifier for the statues|
-|»»» description|string\|null|false|none|A description for the status|
-|»»» order|number|false|none|Order status appears when listing|
-|»» project|object|false|none|Defines the properties for a project|
-|»»» project_id|string|false|none|Unique identifier|
-|»»» entity_id|string|true|read-only|Customer identifier|
-|»»» entity_type|string|true|none|none|
-|»»» description|string\|null|false|none|Project description|
-|»»» label|string|true|none|Label for the entity|
-|»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»»» created|string(date-time)|true|read-only|Date the entity was created|
-|»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»» customer|object|true|none|Customer|
-|»»»» customer_id|string|false|read-only|Customer identifier|
-|»»»» entity_id|string|true|read-only|Customer identifier|
-|»»»» entity_type|string|true|none|none|
-|»»»» label|string|true|none|Label for the entity|
-|»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»»»» created|string(date-time)|true|read-only|Date the entity was created|
-|»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»»» external_platform|object|false|none|External Identifiers for the customer|
-|»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
-|»»»»» status|string|true|none|A Custom label for the status|
-|»»»»» category|string|true|none|The classifier for the statues|
-|»»»»» description|string\|null|false|none|A description for the status|
-|»»»»» order|number|false|none|Order status appears when listing|
-|»»»» total_programs|number|false|none|Total programs under the customer|
-|»»»» total_projects|number|false|none|Total projects under the customer|
-|»»» program|object|true|none|Defines the properties for a program|
-|»»»» program_id|string|false|read-only|Unique identifier|
-|»»»» entity_id|string|true|read-only|Customer identifier|
-|»»»» entity_type|string|true|none|none|
-|»»»» label|string|false|none|Label for the entity|
-|»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»»»» created|string(date-time)|true|read-only|Date the entity was created|
-|»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»»» start_date|string(date-time)\|null|false|none|Start date|
-|»»»» end_date|string(date-time)\|null|false|none|End date|
-|»»»» customer|object|true|none|Customer|
-|»»»»» customer_id|string|false|read-only|Customer identifier|
-|»»»»» entity_id|string|true|read-only|Customer identifier|
-|»»»»» entity_type|string|true|none|none|
-|»»»»» label|string|true|none|Label for the entity|
-|»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»»»»» created|string(date-time)|true|read-only|Date the entity was created|
-|»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»»»» external_platform|object|false|none|External Identifiers for the customer|
-|»»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
-|»»»»»» status|string|true|none|A Custom label for the status|
-|»»»»»» category|string|true|none|The classifier for the statues|
-|»»»»»» description|string\|null|false|none|A description for the status|
-|»»»»»» order|number|false|none|Order status appears when listing|
-|»»»»» total_programs|number|false|none|Total programs under the customer|
-|»»»»» total_projects|number|false|none|Total projects under the customer|
-|»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
-|»»»»» status|string|true|none|A Custom label for the status|
-|»»»»» category|string|true|none|The classifier for the statues|
-|»»»»» description|string\|null|false|none|A description for the status|
-|»»»»» order|number|false|none|Order status appears when listing|
-|»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
-|»»»»» status|string|true|none|A Custom label for the status|
-|»»»»» category|string|true|none|The classifier for the statues|
-|»»»»» description|string\|null|false|none|A description for the status|
-|»»»»» order|number|false|none|Order status appears when listing|
-|»»»» start_date|string(date-time)\|null|false|none|Start date|
-|»»»» end_date|string(date-time)\|null|false|none|End date|
-|»»» cycles|[object]|false|none|none|
-|»»»» needed|integer|true|none|The number of cycles needed|
-|»»»» pending|integer|true|read-only|The number of cycles pending|
-|»»»» in_progress|integer|true|read-only|The number of cycles pending|
-|»»»» verifying|integer|true|read-only|The number of cycles pending|
-|»»»» complete|integer|true|read-only|The number of cycles pending|
-|»»»» blocked|integer|true|read-only|The number of cycles pending|
-|»»»» cancelled|integer|true|read-only|The number of cycles pending|
-|»»»» work_flow|object|true|none|Workflow|
-|»»»»» work_flow_id|string|false|read-only|Customer identifier|
-|»»»»» entity_id|string|true|read-only|Customer identifier|
-|»»»»» entity_type|string|true|none|none|
-|»»»»» label|string|true|none|Label for the entity|
-|»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»»»»» created|string(date-time)|true|read-only|Date the entity was created|
-|»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»»»» schema_version|string|true|none|Version of the workflow schema used|
-|»»»»» workflow_version|integer|false|read-only|Version number for the work flows (the number of times it has been changed|
-|»»»»» applies_to|string|true|none|The entity type this work flow applies too|
-|»»»»» triggered_by|[string]|false|none|none|
-|»»»»» starts_at|string|true|none|Starting step|
-|»»»»» steps|object|true|none|Steps for the workflow|
-|»»»»» metadata|object|false|none|Data for the resource as a key value pair|
-|»»»»»» **additionalProperties**|string|false|none|none|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|work_order_type|device|
-|category|PENDING|
-|category|IN_PROGRESS|
-|category|VERIFYING|
-|category|COMPLETE|
-|category|CANCELLED|
-|category|BLOCKED|
-|entity_type|PRJ|
-|entity_type|CUS|
-|category|PENDING|
-|category|IN_PROGRESS|
-|category|VERIFYING|
-|category|COMPLETE|
-|category|CANCELLED|
-|category|BLOCKED|
-|entity_type|PGM|
-|entity_type|CUS|
-|category|PENDING|
-|category|IN_PROGRESS|
-|category|VERIFYING|
-|category|COMPLETE|
-|category|CANCELLED|
-|category|BLOCKED|
-|category|PENDING|
-|category|IN_PROGRESS|
-|category|VERIFYING|
-|category|COMPLETE|
-|category|CANCELLED|
-|category|BLOCKED|
-|category|PENDING|
-|category|IN_PROGRESS|
-|category|VERIFYING|
-|category|COMPLETE|
-|category|CANCELLED|
-|category|BLOCKED|
-|entity_type|WKF|
-|schema_version|1.0|
-|applies_to|UNIT|
-|applies_to|PART|
-|applies_to|PGM|
-|applies_to|PRJ|
-|applies_to|CUS|
-|applies_to|CON|
-
-Status Code **400**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» title|string|false|none|none|
-|» type|string|false|none|none|
-|» status|number|false|none|none|
-|» detail|string|false|none|none|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|title|Bad Request|
-|type|https://docs.nterprise.com/api/problem/BadRequest|
-|status|400|
-|detail|Invalid request|
-
-Status Code **401**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» title|string|false|none|none|
-|» type|string|false|none|none|
-|» status|number|false|none|none|
-|» detail|string|false|none|none|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|title|Unauthorized|
-|type|https://docs.nterprise.com/api/problem/Unauthorized|
-|status|401|
-|detail|You are not authorized to access this resource|
-
-Status Code **403**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» title|string|false|none|none|
-|» type|string|false|none|none|
-|» status|number|false|none|none|
-|» detail|string|false|none|none|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|title|Forbidden|
-|type|https://docs.nterprise.com/api/problem/Forbidden|
-|status|403|
-|detail|You are forbidden to access this resource|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## fetchWorkOrderById
-
-<a id="opIdfetchWorkOrderById"></a>
-
-`GET /work-orders/{work_order_id}`
-
-*Fetches a work order by Id*
-
-Fetch Work order
-
-<h3 id="fetchworkorderbyid-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|work_order_id|path|string|true|Id for the work order|
-
 > Example responses
 
 > 200 Response
 
 ```json
 {
-  "type": "object",
-  "properties": {
-    "_links": {
-      "type": "object",
-      "properties": {
-        "self": {
-          "x-example": {
-            "href": "https://api.nterprise.com/work_orders/kk9z7zwvQYH5GKx"
-          },
-          "type": "object",
-          "properties": {
-            "href": {
-              "type": "string",
-              "format": "uri"
-            }
-          }
+  "work_order_id": "work-order",
+  "label": "My workOrder",
+  "created": "2019-08-19T00:01:02.000Z",
+  "updated": "2020-08-19T01:01:02.000Z",
+  "description": "Workorder description",
+  "work_order_type": "device",
+  "begin_date": "2021-08-19T02:01:02.000Z",
+  "due_date": "2021-08-19T02:01:02.000Z",
+  "start_date": "2021-08-19T02:01:02.000Z",
+  "end_date": "2021-08-19T02:01:02.000Z",
+  "project": {
+    "project_id": "project",
+    "label": "New York Stores",
+    "description": "Project description",
+    "created": "2020-01-09T22:12:03.000Z",
+    "updated": "2020-01-09T22:12:03.000Z",
+    "customer": {
+      "customer_id": "customer",
+      "label": "manchuck",
+      "created": "2020-01-09T22:12:03.000Z",
+      "updated": "2020-01-09T22:12:03.000Z",
+      "external_platform": {},
+      "total_programs": 21,
+      "total_projects": 42,
+      "allowed_statuses": [
+        {
+          "category": "PENDING",
+          "description": "For something that is Pending",
+          "status": "Pending",
+          "order": 3
+        },
+        {
+          "category": "IN_PROGRESS",
+          "description": "For something that is In Progress",
+          "status": "In Progress",
+          "order": 4
+        },
+        {
+          "category": "VERIFYING",
+          "description": "For something that is Verifying",
+          "status": "Verifying",
+          "order": 5
+        },
+        {
+          "category": "BLOCKED",
+          "description": "For something that is Blocked",
+          "status": "Blocked",
+          "order": 6
+        },
+        {
+          "category": "COMPLETE",
+          "description": "For something that is Complete",
+          "status": "Complete",
+          "order": 7
+        },
+        {
+          "category": "CANCELLED",
+          "description": "For something that is Cancelled",
+          "status": "Cancelled",
+          "order": 8
         }
-      }
-    },
-    "work_order_id": {
-      "type": "string",
-      "description": "The identifier for the unit",
-      "pattern": "^[0-9a-zA-Z-_]+$"
-    },
-    "label": {
-      "type": "string",
-      "description": "Label for the entity"
-    },
-    "slug": {
-      "type": "string",
-      "description": "Slug for the entity (Auto-generated from the label)",
-      "readOnly": true,
-      "deprecated": true,
-      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-    },
-    "created": {
-      "description": "Date the entity was created",
-      "type": "string",
-      "format": "date-time",
-      "readOnly": true
-    },
-    "updated": {
-      "description": "Last date the entity was updated",
-      "type": "string",
-      "format": "date-time",
-      "readOnly": true
-    },
-    "start_date": {
-      "description": "Last date the entity was updated",
-      "type": "string",
-      "format": "date-time",
-      "readOnly": true
-    },
-    "end_date": {
-      "description": "Last date the entity was updated",
-      "type": "string",
-      "format": "date-time",
-      "readOnly": true
-    },
-    "description": {
-      "type": "string",
-      "nullable": true,
-      "description": "Detailed description for the work order"
-    },
-    "work_order_type": {
-      "type": "string",
-      "description": "Type of work order",
-      "enum": [
-        "device"
       ]
     },
-    "begin_date": {
-      "type": "string",
-      "format": "date-time",
-      "description": "Begin date"
-    },
-    "due_date": {
-      "type": "string",
-      "format": "date-time",
-      "description": "Due date"
-    },
-    "current_status": {
-      "type": "object",
-      "description": "Defines the properties for a status",
-      "additionalProperties": false,
-      "required": [
-        "status",
-        "category"
-      ],
-      "properties": {
-        "status": {
-          "type": "string",
-          "description": "A Custom label for the status",
-          "pattern": "^[A-Za-z][0-9a-zA-Z-_ ]+$"
+    "program": {
+      "program_id": "program",
+      "label": "North east stores",
+      "created": "2020-01-09T22:12:03.000Z",
+      "updated": "2020-01-09T22:12:03.000Z",
+      "customer": {
+        "customer_id": "customer",
+        "label": "manchuck",
+        "created": "2020-01-09T22:12:03.000Z",
+        "updated": "2020-01-09T22:12:03.000Z",
+        "external_platform": {},
+        "total_programs": 21,
+        "total_projects": 42,
+        "allowed_statuses": [
+          {
+            "category": "PENDING",
+            "description": "For something that is Pending",
+            "status": "Pending",
+            "order": 3
+          },
+          {
+            "category": "IN_PROGRESS",
+            "description": "For something that is In Progress",
+            "status": "In Progress",
+            "order": 4
+          },
+          {
+            "category": "VERIFYING",
+            "description": "For something that is Verifying",
+            "status": "Verifying",
+            "order": 5
+          },
+          {
+            "category": "BLOCKED",
+            "description": "For something that is Blocked",
+            "status": "Blocked",
+            "order": 6
+          },
+          {
+            "category": "COMPLETE",
+            "description": "For something that is Complete",
+            "status": "Complete",
+            "order": 7
+          },
+          {
+            "category": "CANCELLED",
+            "description": "For something that is Cancelled",
+            "status": "Cancelled",
+            "order": 8
+          }
+        ]
+      },
+      "end_date": "2020-02-10T22:12:03.000Z",
+      "start_date": "2020-02-10T22:12:03.000Z",
+      "allowed_statuses": [
+        {
+          "category": "PENDING",
+          "description": "For something that is Pending",
+          "status": "Pending",
+          "order": 3
         },
-        "category": {
-          "type": "string",
-          "description": "The classifier for the statues",
-          "enum": [
-            "PENDING",
-            "IN_PROGRESS",
-            "VERIFYING",
-            "COMPLETE",
-            "CANCELLED",
-            "BLOCKED"
-          ]
-        },
-        "description": {
-          "type": "string",
-          "nullable": true,
-          "description": "A description for the status"
-        },
-        "order": {
-          "type": "number",
-          "description": "Order status appears when listing"
+        {
+          "category": "VERIFYING",
+          "description": "For something that is Verifying",
+          "status": "Verifying",
+          "order": 5
         }
-      }
+      ]
     },
-    "project": {
-      "type": "object",
-      "description": "Defines the properties for a project",
-      "additionalProperties": false,
-      "required": [
-        "label",
-        "entity_id",
-        "entity_type",
-        "created",
-        "updated",
-        "customer",
-        "program",
-        "allowed_statuses"
-      ],
-      "properties": {
-        "project_id": {
-          "type": "string",
-          "description": "Unique identifier",
-          "pattern": "^[0-9a-zA-Z-_]+$"
-        },
-        "entity_id": {
-          "x-no-api-doc": true,
-          "type": "string",
-          "description": "Customer identifier",
-          "readOnly": true,
-          "pattern": "^[0-9a-zA-Z-_]+$"
-        },
-        "entity_type": {
-          "x-no-api-doc": true,
-          "enum": [
-            "PRJ"
-          ]
-        },
-        "description": {
-          "type": "string",
-          "nullable": true,
-          "description": "Project description"
-        },
-        "label": {
-          "type": "string",
-          "description": "Label for the entity"
-        },
-        "slug": {
-          "type": "string",
-          "description": "Slug for the entity (Auto-generated from the label)",
-          "readOnly": true,
-          "deprecated": true,
-          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-        },
-        "created": {
-          "description": "Date the entity was created",
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "updated": {
-          "description": "Last date the entity was updated",
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "customer": {
-          "type": "object",
-          "description": "Customer",
-          "additionalProperties": false,
-          "required": [
-            "label",
-            "entity_id",
-            "entity_type",
-            "created",
-            "updated",
-            "allowed_statuses"
-          ],
-          "properties": {
-            "customer_id": {
-              "description": "Customer identifier",
-              "type": "string",
-              "readOnly": true,
-              "pattern": "^[0-9a-zA-Z-_]+$"
-            },
-            "entity_id": {
-              "x-no-api-doc": true,
-              "type": "string",
-              "description": "Customer identifier",
-              "readOnly": true,
-              "pattern": "^[0-9a-zA-Z-_]+$"
-            },
-            "entity_type": {
-              "x-no-api-doc": true,
-              "enum": [
-                "CUS"
-              ]
-            },
-            "label": {
-              "type": "string",
-              "description": "Label for the entity"
-            },
-            "slug": {
-              "type": "string",
-              "description": "Slug for the entity (Auto-generated from the label)",
-              "readOnly": true,
-              "deprecated": true,
-              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-            },
-            "created": {
-              "description": "Date the entity was created",
-              "type": "string",
-              "format": "date-time",
-              "readOnly": true
-            },
-            "updated": {
-              "description": "Last date the entity was updated",
-              "type": "string",
-              "format": "date-time",
-              "readOnly": true
-            },
-            "external_platform": {
-              "type": "object",
-              "description": "External Identifiers for the customer",
-              "deprecated": true,
-              "x-patternProperties": {
-                "^[A-Za-z][A-Za-z0-9_]*$": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                }
-              }
-            },
-            "allowed_statuses": {
-              "type": "array",
-              "description": "List of allowed statuses",
-              "uniqueItems": true,
-              "items": {
-                "type": "object",
-                "description": "Defines the properties for a status",
-                "additionalProperties": false,
-                "required": [
-                  "status",
-                  "category"
-                ],
-                "properties": {
-                  "status": {
-                    "type": "string",
-                    "description": "A Custom label for the status",
-                    "pattern": "^[A-Za-z][0-9a-zA-Z-_ ]+$"
-                  },
-                  "category": {
-                    "type": "string",
-                    "description": "The classifier for the statues",
-                    "enum": [
-                      "PENDING",
-                      "IN_PROGRESS",
-                      "VERIFYING",
-                      "COMPLETE",
-                      "CANCELLED",
-                      "BLOCKED"
-                    ]
-                  },
-                  "description": {
-                    "type": "string",
-                    "nullable": true,
-                    "description": "A description for the status"
-                  },
-                  "order": {
-                    "type": "number",
-                    "description": "Order status appears when listing"
-                  }
-                }
-              }
-            },
-            "total_programs": {
-              "type": "number",
-              "description": "Total programs under the customer"
-            },
-            "total_projects": {
-              "type": "number",
-              "description": "Total projects under the customer"
-            }
-          }
-        },
-        "program": {
-          "type": "object",
-          "description": "Defines the properties for a program",
-          "additionalProperties": false,
-          "required": [
-            "entity_id",
-            "entity_type",
-            "created",
-            "updated",
-            "customer",
-            "allowed_statuses"
-          ],
-          "properties": {
-            "program_id": {
-              "description": "Unique identifier",
-              "type": "string",
-              "readOnly": true,
-              "pattern": "^[0-9a-zA-Z-_]+$"
-            },
-            "entity_id": {
-              "x-no-api-doc": true,
-              "type": "string",
-              "description": "Customer identifier",
-              "readOnly": true,
-              "pattern": "^[0-9a-zA-Z-_]+$"
-            },
-            "entity_type": {
-              "x-no-api-doc": true,
-              "enum": [
-                "PGM"
-              ]
-            },
-            "label": {
-              "type": "string",
-              "description": "Label for the entity"
-            },
-            "slug": {
-              "type": "string",
-              "description": "Slug for the entity (Auto-generated from the label)",
-              "readOnly": true,
-              "deprecated": true,
-              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-            },
-            "created": {
-              "description": "Date the entity was created",
-              "type": "string",
-              "format": "date-time",
-              "readOnly": true
-            },
-            "updated": {
-              "description": "Last date the entity was updated",
-              "type": "string",
-              "format": "date-time",
-              "readOnly": true
-            },
-            "start_date": {
-              "type": "string",
-              "nullable": true,
-              "format": "date-time",
-              "description": "Start date"
-            },
-            "end_date": {
-              "type": "string",
-              "nullable": true,
-              "format": "date-time",
-              "description": "End date"
-            },
-            "customer": {
-              "type": "object",
-              "description": "Customer",
-              "additionalProperties": false,
-              "required": [
-                "label",
-                "entity_id",
-                "entity_type",
-                "created",
-                "updated",
-                "allowed_statuses"
-              ],
-              "properties": {
-                "customer_id": {
-                  "description": "Customer identifier",
-                  "type": "string",
-                  "readOnly": true,
-                  "pattern": "^[0-9a-zA-Z-_]+$"
-                },
-                "entity_id": {
-                  "x-no-api-doc": true,
-                  "type": "string",
-                  "description": "Customer identifier",
-                  "readOnly": true,
-                  "pattern": "^[0-9a-zA-Z-_]+$"
-                },
-                "entity_type": {
-                  "x-no-api-doc": true,
-                  "enum": [
-                    "CUS"
-                  ]
-                },
-                "label": {
-                  "type": "string",
-                  "description": "Label for the entity"
-                },
-                "slug": {
-                  "type": "string",
-                  "description": "Slug for the entity (Auto-generated from the label)",
-                  "readOnly": true,
-                  "deprecated": true,
-                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-                },
-                "created": {
-                  "description": "Date the entity was created",
-                  "type": "string",
-                  "format": "date-time",
-                  "readOnly": true
-                },
-                "updated": {
-                  "description": "Last date the entity was updated",
-                  "type": "string",
-                  "format": "date-time",
-                  "readOnly": true
-                },
-                "external_platform": {
-                  "type": "object",
-                  "description": "External Identifiers for the customer",
-                  "deprecated": true,
-                  "x-patternProperties": {
-                    "^[A-Za-z][A-Za-z0-9_]*$": {
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    }
-                  }
-                },
-                "allowed_statuses": {
-                  "type": "array",
-                  "description": "List of allowed statuses",
-                  "uniqueItems": true,
-                  "items": {
-                    "type": "object",
-                    "description": "Defines the properties for a status",
-                    "additionalProperties": false,
-                    "required": [
-                      "status",
-                      "category"
-                    ],
-                    "properties": {
-                      "status": {
-                        "type": "string",
-                        "description": "A Custom label for the status",
-                        "pattern": "^[A-Za-z][0-9a-zA-Z-_ ]+$"
-                      },
-                      "category": {
-                        "type": "string",
-                        "description": "The classifier for the statues",
-                        "enum": [
-                          "PENDING",
-                          "IN_PROGRESS",
-                          "VERIFYING",
-                          "COMPLETE",
-                          "CANCELLED",
-                          "BLOCKED"
-                        ]
-                      },
-                      "description": {
-                        "type": "string",
-                        "nullable": true,
-                        "description": "A description for the status"
-                      },
-                      "order": {
-                        "type": "number",
-                        "description": "Order status appears when listing"
-                      }
-                    }
-                  }
-                },
-                "total_programs": {
-                  "type": "number",
-                  "description": "Total programs under the customer"
-                },
-                "total_projects": {
-                  "type": "number",
-                  "description": "Total projects under the customer"
-                }
-              }
-            },
-            "allowed_statuses": {
-              "type": "array",
-              "description": "List of allowed statuses",
-              "uniqueItems": true,
-              "items": {
-                "type": "object",
-                "description": "Defines the properties for a status",
-                "additionalProperties": false,
-                "required": [
-                  "status",
-                  "category"
-                ],
-                "properties": {
-                  "status": {
-                    "type": "string",
-                    "description": "A Custom label for the status",
-                    "pattern": "^[A-Za-z][0-9a-zA-Z-_ ]+$"
-                  },
-                  "category": {
-                    "type": "string",
-                    "description": "The classifier for the statues",
-                    "enum": [
-                      "PENDING",
-                      "IN_PROGRESS",
-                      "VERIFYING",
-                      "COMPLETE",
-                      "CANCELLED",
-                      "BLOCKED"
-                    ]
-                  },
-                  "description": {
-                    "type": "string",
-                    "nullable": true,
-                    "description": "A description for the status"
-                  },
-                  "order": {
-                    "type": "number",
-                    "description": "Order status appears when listing"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "allowed_statuses": {
-          "type": "array",
-          "description": "List of allowed statuses",
-          "uniqueItems": true,
-          "items": {
-            "type": "object",
-            "description": "Defines the properties for a status",
-            "additionalProperties": false,
-            "required": [
-              "status",
-              "category"
-            ],
-            "properties": {
-              "status": {
-                "type": "string",
-                "description": "A Custom label for the status",
-                "pattern": "^[A-Za-z][0-9a-zA-Z-_ ]+$"
-              },
-              "category": {
-                "type": "string",
-                "description": "The classifier for the statues",
-                "enum": [
-                  "PENDING",
-                  "IN_PROGRESS",
-                  "VERIFYING",
-                  "COMPLETE",
-                  "CANCELLED",
-                  "BLOCKED"
-                ]
-              },
-              "description": {
-                "type": "string",
-                "nullable": true,
-                "description": "A description for the status"
-              },
-              "order": {
-                "type": "number",
-                "description": "Order status appears when listing"
-              }
-            }
-          }
-        },
-        "start_date": {
-          "type": "string",
-          "nullable": true,
-          "format": "date-time",
-          "description": "Start date"
-        },
-        "end_date": {
-          "type": "string",
-          "nullable": true,
-          "format": "date-time",
-          "description": "End date"
-        }
+    "end_date": "2020-02-10T22:12:03.000Z",
+    "start_date": "2020-02-10T22:12:03.000Z",
+    "allowed_statuses": [
+      {
+        "category": "PENDING",
+        "description": "For something that is Pending",
+        "status": "Pending",
+        "order": 3
       }
+    ]
+  },
+  "location": {
+    "location_id": "location",
+    "label": "Test Label",
+    "created": "2019-08-19T00:01:02.000Z",
+    "updated": "2020-08-19T01:01:02.000Z",
+    "location_type": "warehouse",
+    "formatted_address": "Test Label\n431 Broadway Suite c\nMenands NY 12204 USA",
+    "address": {
+      "country": "USA",
+      "administrative_area": "NY",
+      "sub_administrative_area": "Albany",
+      "locality": "Menands",
+      "postal_code": "12204",
+      "thoroughfare": "431 Broadway",
+      "premise": "Suite c",
+      "sub_premise": "ZIC"
+    }
+  },
+  "current_status": {
+    "category": "IN_PROGRESS",
+    "description": "For something that is Reticulating Splines",
+    "status": "Reticulating Splines",
+    "order": 2
+  },
+  "cycles": [
+    {
+      "needed": 1,
+      "pending": 1,
+      "in_progress": 0,
+      "verifying": 0,
+      "complete": 0,
+      "blocked": 0,
+      "cancelled": 0,
+      "work_flow": {
+        "entity_type": "WKF",
+        "entity_id": "work-flow",
+        "created": "2019-08-19T00:01:02.000Z",
+        "updated": "2020-08-19T01:01:02.000Z",
+        "label": "My workflow",
+        "schema_version": "1.0",
+        "workflow_version": 7,
+        "applies_to": "UNIT",
+        "starts_at": "work-complete",
+        "metadata": {
+          "meta": "data"
+        },
+        "steps": {
+          "work-complete": {
+            "step_type": "success",
+            "label": "work complete",
+            "on_start": [],
+            "on_complete": []
+          },
+          "stop-poking-me": {
+            "step_type": "fail",
+            "label": "stop poking me",
+            "on_start": [],
+            "on_complete": []
+          }
+        },
+        "triggered_by": [
+          "UNIT.created"
+        ]
+      }
+    }
+  ],
+  "input_filter": [
+    {
+      "label": "Serial Number Of part",
+      "key": "serial-number",
+      "filters": [],
+      "validators": [],
+      "value": null
+    }
+  ],
+  "_embedded": {
+    "nter:work-order-project": [],
+    "nter:work-order-location": [],
+    "nter:work-order-program": [],
+    "nter:work-order-customer": []
+  },
+  "_links": {
+    "nter:work-order-batches": {
+      "href": "https://api.example.com/work-orders/work-order/batches"
     },
-    "cycles": {
-      "type": "array",
-      "minimum": 1,
-      "items": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-          "needed",
-          "pending",
-          "in_progress",
-          "verifying",
-          "complete",
-          "blocked",
-          "cancelled",
-          "work_flow"
-        ],
-        "properties": {
-          "needed": {
-            "type": "integer",
-            "description": "The number of cycles needed",
-            "minimum": 1
-          },
-          "pending": {
-            "type": "integer",
-            "description": "The number of cycles pending",
-            "readOnly": true
-          },
-          "in_progress": {
-            "type": "integer",
-            "description": "The number of cycles pending",
-            "readOnly": true
-          },
-          "verifying": {
-            "type": "integer",
-            "description": "The number of cycles pending",
-            "readOnly": true
-          },
-          "complete": {
-            "type": "integer",
-            "description": "The number of cycles pending",
-            "readOnly": true
-          },
-          "blocked": {
-            "type": "integer",
-            "description": "The number of cycles pending",
-            "readOnly": true
-          },
-          "cancelled": {
-            "type": "integer",
-            "description": "The number of cycles pending",
-            "readOnly": true
-          },
-          "work_flow": {
-            "type": "object",
-            "description": "Workflow",
-            "additionalProperties": false,
-            "required": [
-              "label",
-              "entity_id",
-              "entity_type",
-              "created",
-              "updated",
-              "steps",
-              "starts_at",
-              "applies_to",
-              "schema_version"
-            ],
-            "properties": {
-              "work_flow_id": {
-                "type": "string",
-                "description": "Customer identifier",
-                "readOnly": true,
-                "pattern": "^[0-9a-zA-Z-_]+$"
-              },
-              "entity_id": {
-                "x-no-api-doc": true,
-                "type": "string",
-                "description": "Customer identifier",
-                "readOnly": true,
-                "pattern": "^[0-9a-zA-Z-_]+$"
-              },
-              "entity_type": {
-                "x-no-api-doc": true,
-                "enum": [
-                  "WKF"
-                ]
-              },
-              "label": {
-                "type": "string",
-                "description": "Label for the entity"
-              },
-              "slug": {
-                "type": "string",
-                "description": "Slug for the entity (Auto-generated from the label)",
-                "readOnly": true,
-                "deprecated": true,
-                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-              },
-              "created": {
-                "description": "Date the entity was created",
-                "type": "string",
-                "format": "date-time",
-                "readOnly": true
-              },
-              "updated": {
-                "description": "Last date the entity was updated",
-                "type": "string",
-                "format": "date-time",
-                "readOnly": true
-              },
-              "schema_version": {
-                "type": "string",
-                "description": "Version of the workflow schema used",
-                "enum": [
-                  "1.0"
-                ]
-              },
-              "workflow_version": {
-                "type": "integer",
-                "description": "Version number for the work flows (the number of times it has been changed",
-                "readOnly": true
-              },
-              "applies_to": {
-                "type": "string",
-                "description": "The entity type this work flow applies too",
-                "enum": [
-                  "UNIT",
-                  "PART",
-                  "PGM",
-                  "PRJ",
-                  "CUS",
-                  "CON"
-                ]
-              },
-              "triggered_by": {
-                "type": "array",
-                "items": {
-                  "type": "string",
-                  "description": "Possible entity events",
-                  "enum": [
-                    "CON.attached",
-                    "CON.created",
-                    "CON.deleted",
-                    "CON.detached",
-                    "CON.removed",
-                    "CON.updated",
-                    "CUS.attached",
-                    "CUS.created",
-                    "CUS.deleted",
-                    "CUS.detached",
-                    "CUS.removed",
-                    "CUS.updated",
-                    "LOC.attached",
-                    "LOC.created",
-                    "LOC.deleted",
-                    "LOC.detached",
-                    "LOC.removed",
-                    "LOC.updated",
-                    "NOTE.attached",
-                    "NOTE.created",
-                    "NOTE.deleted",
-                    "NOTE.detached",
-                    "NOTE.removed",
-                    "NOTE.updated",
-                    "PART.attached",
-                    "PART.created",
-                    "PART.deleted",
-                    "PART.detached",
-                    "PART.removed",
-                    "PART.updated",
-                    "PGM.attached",
-                    "PGM.created",
-                    "PGM.deleted",
-                    "PGM.detached",
-                    "PGM.removed",
-                    "PGM.updated",
-                    "PRO.attached",
-                    "PRO.created",
-                    "PRO.deleted",
-                    "PRO.detached",
-                    "PRO.removed",
-                    "PRO.updated",
-                    "RES.attached",
-                    "RES.created",
-                    "RES.deleted",
-                    "RES.detached",
-                    "RES.removed",
-                    "RES.updated",
-                    "UNIT.attached",
-                    "UNIT.created",
-                    "UNIT.deleted",
-                    "UNIT.detached",
-                    "UNIT.removed",
-                    "UNIT.updated",
-                    "USER.attached",
-                    "USER.created",
-                    "USER.deleted",
-                    "USER.detached",
-                    "USER.removed",
-                    "USER.updated",
-                    "WKF.attached",
-                    "WKF.created",
-                    "WKF.deleted",
-                    "WKF.detached",
-                    "WKF.removed",
-                    "WKF.updated",
-                    "WOR.attached",
-                    "WOR.created",
-                    "WOR.deleted",
-                    "WOR.detached",
-                    "WOR.removed",
-                    "WOR.updated"
-                  ]
-                }
-              },
-              "starts_at": {
-                "type": "string",
-                "description": "Starting step"
-              },
-              "steps": {
-                "type": "object",
-                "description": "Steps for the workflow",
-                "uniqueItems": true,
-                "additionalProperties": true,
-                "x-patternProperties": {
-                  "^[A-Za-z][A-Za-z0-9_]*$": {
-                    "anyOf": [
-                      {
-                        "$schema": "http://json-schema.org/draft-07/schema#",
-                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/function/allocateUnitsToProject.json",
-                        "type": "object",
-                        "description": "Require the user confirm an action. This is normally used when Niagara cannot automatically detect that a task or action has been performed.",
-                        "properties": {
-                          "label": {
-                            "type": "string",
-                            "description": "Label for the entity"
-                          },
-                          "options": {
-                            "type": "object",
-                            "required": [
-                              "function",
-                              "payload"
-                            ],
-                            "properties": {
-                              "function": {
-                                "type": "string",
-                                "enum": [
-                                  "allocate-units-to-project"
-                                ]
-                              },
-                              "payload": {
-                                "type": "object",
-                                "required": [
-                                  "part_id",
-                                  "project_id",
-                                  "qty"
-                                ],
-                                "properties": {
-                                  "part_id": {
-                                    "type": "string",
-                                    "description": "Part ID of the to assign"
-                                  },
-                                  "program_id": {
-                                    "type": "string",
-                                    "description": "Program ID of the to assign"
-                                  },
-                                  "qty": {
-                                    "type": "number",
-                                    "minimum": 1,
-                                    "description": "Number of units to assign to the project"
-                                  },
-                                  "allow_scarcity": {
-                                    "type": "boolean",
-                                    "description": "Allow the workflow to continue even if there are not enough units"
-                                  },
-                                  "force": {
-                                    "type": "boolean",
-                                    "description": "Assign the units even if the project already has units allocated"
-                                  },
-                                  "status": {
-                                    "type": "string",
-                                    "description": "Only assign units which are in this status"
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      },
-                      {
-                        "$schema": "http://json-schema.org/draft-07/schema#",
-                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/followPDFInstructions.json",
-                        "type": "object",
-                        "description": "Display a link or modal to a user which contains instructions from a PDF",
-                        "required": [
-                          "label",
-                          "payload"
-                        ],
-                        "properties": {
-                          "label": {
-                            "type": "string",
-                            "description": "Label for the step"
-                          },
-                          "options": {
-                            "type": "object",
-                            "required": [
-                              "component",
-                              "payload"
-                            ],
-                            "properties": {
-                              "component": {
-                                "enum": [
-                                  "follow-pds-instructions"
-                                ]
-                              },
-                              "payload": {
-                                "type": "object",
-                                "required": [
-                                  "attachment_id"
-                                ],
-                                "properties": {
-                                  "attachment_id": {
-                                    "type": "string",
-                                    "description": "UUID for the attachment",
-                                    "format": "uuid"
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        },
-                        "allOf": [
-                          {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepUser.json",
-                            "type": "object",
-                            "description": "A step which requires a user to complete",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "description": "Type of workflow step",
-                                "enum": [
-                                  "load",
-                                  "choice",
-                                  "function",
-                                  "machine",
-                                  "pass",
-                                  "fail",
-                                  "success",
-                                  "user",
-                                  "wait"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "required": [
-                                  "component",
-                                  "payload"
-                                ],
-                                "properties": {
-                                  "component": {
-                                    "type": "string",
-                                    "description": "Name of the function to invoke"
-                                  },
-                                  "payload": {
-                                    "type": "object"
-                                  }
-                                }
-                              }
-                            },
-                            "allOf": [
-                              {
-                                "$schema": "http://json-schema.org/draft-07/schema#",
-                                "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepCommon.json",
-                                "type": "object",
-                                "required": [
-                                  "type",
-                                  "label",
-                                  "goto"
-                                ],
-                                "properties": {
-                                  "type": {
-                                    "type": "string",
-                                    "description": "Type of workflow step",
-                                    "enum": [
-                                      "load",
-                                      "choice",
-                                      "function",
-                                      "machine",
-                                      "pass",
-                                      "fail",
-                                      "success",
-                                      "user",
-                                      "wait"
-                                    ]
-                                  },
-                                  "label": {
-                                    "type": "string",
-                                    "description": "Label for the step"
-                                  },
-                                  "goto": {
-                                    "type": "string",
-                                    "description": "Step to move to",
-                                    "pattern": "^[a-z][a-z-]+[a-z]$"
-                                  },
-                                  "goto-fail": {
-                                    "type": "string",
-                                    "description": "Step to transition too if this step cannot be completed",
-                                    "pattern": "^[a-z][a-z-]+[a-z]$"
-                                  },
-                                  "onComplete": {
-                                    "$schema": "http://json-schema.org/draft-07/schema#",
-                                    "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                    "type": "object",
-                                    "required": [
-                                      "retry",
-                                      "finally"
-                                    ],
-                                    "properties": {
-                                      "actions": {
-                                        "type": "array",
-                                        "description": "Actions to take on failure",
-                                        "maxItems": 10,
-                                        "items": {
-                                          "type": "object"
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            ]
-                          }
-                        ]
-                      },
-                      {
-                        "$schema": "http://json-schema.org/draft-07/schema#",
-                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/manualDataEntry.json",
-                        "type": "object",
-                        "description": "Ask the user to manually enter (or confirm) data for an entity",
-                        "properties": {
-                          "label": {
-                            "type": "string",
-                            "description": "Label for the step"
-                          },
-                          "options": {
-                            "type": "object",
-                            "required": [
-                              "component",
-                              "payload"
-                            ],
-                            "properties": {
-                              "component": {
-                                "enum": [
-                                  "manual-data-entry"
-                                ]
-                              },
-                              "payload": {
-                                "type": "object",
-                                "required": [
-                                  "fields"
-                                ],
-                                "properties": {
-                                  "fields": {
-                                    "type": "array",
-                                    "description": "Configuration for each field",
-                                    "items": {
-                                      "type": "object",
-                                      "required": [
-                                        "input_type",
-                                        "label",
-                                        "required",
-                                        "entity_field"
-                                      ],
-                                      "properties": {
-                                        "input_type": {
-                                          "type": "string",
-                                          "description": "The type of input field to display",
-                                          "enum": [
-                                            "textbox",
-                                            "input"
-                                          ]
-                                        },
-                                        "label": {
-                                          "type": "string",
-                                          "description": "Label to display for the field"
-                                        },
-                                        "required": {
-                                          "type": "boolean",
-                                          "description": "Display the field as required input. Note: this is a helper function. It singles that the user is required to input data at this step. If the field is required on the entity, the user will be presented with a validation message"
-                                        },
-                                        "entity_field": {
-                                          "type": "string",
-                                          "description": "JSON Path to the field on the entity. If the path does not start with '$' then the entity on the context is assumed. Otherwise the data will be set on the context path"
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        },
-                        "allOf": [
-                          {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepUser.json",
-                            "type": "object",
-                            "description": "A step which requires a user to complete",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "description": "Type of workflow step",
-                                "enum": [
-                                  "load",
-                                  "choice",
-                                  "function",
-                                  "machine",
-                                  "pass",
-                                  "fail",
-                                  "success",
-                                  "user",
-                                  "wait"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "required": [
-                                  "component",
-                                  "payload"
-                                ],
-                                "properties": {
-                                  "component": {
-                                    "type": "string",
-                                    "description": "Name of the function to invoke"
-                                  },
-                                  "payload": {
-                                    "type": "object"
-                                  }
-                                }
-                              }
-                            },
-                            "allOf": [
-                              {
-                                "$schema": "http://json-schema.org/draft-07/schema#",
-                                "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepCommon.json",
-                                "type": "object",
-                                "required": [
-                                  "type",
-                                  "label",
-                                  "goto"
-                                ],
-                                "properties": {
-                                  "type": {
-                                    "type": "string",
-                                    "description": "Type of workflow step",
-                                    "enum": [
-                                      "load",
-                                      "choice",
-                                      "function",
-                                      "machine",
-                                      "pass",
-                                      "fail",
-                                      "success",
-                                      "user",
-                                      "wait"
-                                    ]
-                                  },
-                                  "label": {
-                                    "type": "string",
-                                    "description": "Label for the step"
-                                  },
-                                  "goto": {
-                                    "type": "string",
-                                    "description": "Step to move to",
-                                    "pattern": "^[a-z][a-z-]+[a-z]$"
-                                  },
-                                  "goto-fail": {
-                                    "type": "string",
-                                    "description": "Step to transition too if this step cannot be completed",
-                                    "pattern": "^[a-z][a-z-]+[a-z]$"
-                                  },
-                                  "onComplete": {
-                                    "$schema": "http://json-schema.org/draft-07/schema#",
-                                    "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                    "type": "object",
-                                    "required": [
-                                      "retry",
-                                      "finally"
-                                    ],
-                                    "properties": {
-                                      "actions": {
-                                        "type": "array",
-                                        "description": "Actions to take on failure",
-                                        "maxItems": 10,
-                                        "items": {
-                                          "type": "object"
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            ]
-                          }
-                        ]
-                      },
-                      {
-                        "$schema": "http://json-schema.org/draft-07/schema#",
-                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/taskList.json",
-                        "type": "object",
-                        "description": "Ask the user to follow a list and check off boxes",
-                        "properties": {
-                          "label": {
-                            "type": "string",
-                            "description": "Label for the step"
-                          },
-                          "options": {
-                            "type": "object",
-                            "required": [
-                              "component",
-                              "payload"
-                            ],
-                            "properties": {
-                              "component": {
-                                "enum": [
-                                  "task-list"
-                                ]
-                              },
-                              "payload": {
-                                "type": "object",
-                                "required": [
-                                  "items"
-                                ],
-                                "properties": {
-                                  "is_qc": {
-                                    "type": "boolean",
-                                    "description": "Flags this list as a QC task list. This means that a different user can close the task to one previously on the context"
-                                  },
-                                  "items": {
-                                    "type": "array",
-                                    "description": "Configuration for each task list item",
-                                    "items": {
-                                      "type": "object",
-                                      "required": [
-                                        "label",
-                                        "evaluated",
-                                        "na_option"
-                                      ],
-                                      "properties": {
-                                        "label": {
-                                          "type": "string",
-                                          "description": "Label to display for the field"
-                                        },
-                                        "slug": {
-                                          "type": "string",
-                                          "description": "Slug for the item (Auto-generated from the label)",
-                                          "readOnly": true,
-                                          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-                                        },
-                                        "help": {
-                                          "type": "string",
-                                          "description": "Message describing what is needed to be checked"
-                                        },
-                                        "evaluated": {
-                                          "type": "boolean",
-                                          "description": "When set to true, this will fail the step if the value for the item is false or N/A"
-                                        },
-                                        "na_field": {
-                                          "type": "boolean",
-                                          "description": "Allow the user to select the N/A option when checking off the list"
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        },
-                        "allOf": [
-                          {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepUser.json",
-                            "type": "object",
-                            "description": "A step which requires a user to complete",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "description": "Type of workflow step",
-                                "enum": [
-                                  "load",
-                                  "choice",
-                                  "function",
-                                  "machine",
-                                  "pass",
-                                  "fail",
-                                  "success",
-                                  "user",
-                                  "wait"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "required": [
-                                  "component",
-                                  "payload"
-                                ],
-                                "properties": {
-                                  "component": {
-                                    "type": "string",
-                                    "description": "Name of the function to invoke"
-                                  },
-                                  "payload": {
-                                    "type": "object"
-                                  }
-                                }
-                              }
-                            },
-                            "allOf": [
-                              {
-                                "$schema": "http://json-schema.org/draft-07/schema#",
-                                "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepCommon.json",
-                                "type": "object",
-                                "required": [
-                                  "type",
-                                  "label",
-                                  "goto"
-                                ],
-                                "properties": {
-                                  "type": {
-                                    "type": "string",
-                                    "description": "Type of workflow step",
-                                    "enum": [
-                                      "load",
-                                      "choice",
-                                      "function",
-                                      "machine",
-                                      "pass",
-                                      "fail",
-                                      "success",
-                                      "user",
-                                      "wait"
-                                    ]
-                                  },
-                                  "label": {
-                                    "type": "string",
-                                    "description": "Label for the step"
-                                  },
-                                  "goto": {
-                                    "type": "string",
-                                    "description": "Step to move to",
-                                    "pattern": "^[a-z][a-z-]+[a-z]$"
-                                  },
-                                  "goto-fail": {
-                                    "type": "string",
-                                    "description": "Step to transition too if this step cannot be completed",
-                                    "pattern": "^[a-z][a-z-]+[a-z]$"
-                                  },
-                                  "onComplete": {
-                                    "$schema": "http://json-schema.org/draft-07/schema#",
-                                    "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                    "type": "object",
-                                    "required": [
-                                      "retry",
-                                      "finally"
-                                    ],
-                                    "properties": {
-                                      "actions": {
-                                        "type": "array",
-                                        "description": "Actions to take on failure",
-                                        "maxItems": 10,
-                                        "items": {
-                                          "type": "object"
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            ]
-                          }
-                        ]
-                      },
-                      {
-                        "$schema": "http://json-schema.org/draft-07/schema#",
-                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/machine/aceIos.json",
-                        "type": "object",
-                        "description": "Run the ACE-IOS application to provision iOS devices or ",
-                        "properties": {
-                          "type": {
-                            "type": "string",
-                            "enum": [
-                              "machine"
-                            ]
-                          },
-                          "label": {
-                            "type": "string",
-                            "description": "Label for the step"
-                          },
-                          "options": {
-                            "type": "object",
-                            "required": [
-                              "application",
-                              "configuration"
-                            ],
-                            "properties": {
-                              "configuration": {
-                                "type": "object",
-                                "description": "ACE Configuration options",
-                                "properties": {
-                                  "pairing_cert": {
-                                    "type": "string",
-                                    "description": "Contents of a *.crt file exported from Apple Configurator or MDM",
-                                    "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$"
-                                  },
-                                  "pairing_key": {
-                                    "type": "string",
-                                    "description": "Contents of a *.der file exported from Apple Configurator or MDM",
-                                    "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$"
-                                  },
-                                  "restore_device": {
-                                    "type": "boolean",
-                                    "description": "Restore device to factory defaults"
-                                  },
-                                  "automated_enrollment": {
-                                    "type": "boolean",
-                                    "description": "Automatically enroll the device to MDM"
-                                  },
-                                  "mdm": {
-                                    "type": "object",
-                                    "description": "The settings for the Customers MDM",
-                                    "properties": {
-                                      "vendor": {
-                                        "type": "string",
-                                        "description": "MDM vendor. Currently, supported values are AirWatch, JAMF, and Meraki.",
-                                        "enum": [
-                                          "AirWatch",
-                                          "JAMF",
-                                          "Meraki"
-                                        ]
-                                      },
-                                      "console_url": {
-                                        "type": "string",
-                                        "format": "uri",
-                                        "description": "Base URL for HTTP requests"
-                                      },
-                                      "user": {
-                                        "type": "string",
-                                        "description": "MDM User name"
-                                      },
-                                      "password": {
-                                        "type": "string",
-                                        "description": "MDM password"
-                                      },
-                                      "tenant_code": {
-                                        "type": "string",
-                                        "description": "MDM authentication key"
-                                      },
-                                      "set_asset_tag": {
-                                        "type": "string",
-                                        "description": "Sets the devices Asset tag based on a field from the unit"
-                                      }
-                                    }
-                                  },
-                                  "field_mappings": {
-                                    "type": "array",
-                                    "description": "List of fields to map to the device",
-                                    "items": {
-                                      "type": "object",
-                                      "properties": {
-                                        "from": {
-                                          "type": "string",
-                                          "description": "The field reported from ACE",
-                                          "enum": [
-                                            "serial_number",
-                                            "name",
-                                            "ecid",
-                                            "udid",
-                                            "configurator_serial",
-                                            "ios",
-                                            "model",
-                                            "storage",
-                                            "wifi_mac",
-                                            "bt_mac",
-                                            "ethernet_mac",
-                                            "thundersync_serial",
-                                            "iccid",
-                                            "iccid2",
-                                            "imei",
-                                            "imei2",
-                                            "missed_profiles",
-                                            "missed_apps",
-                                            "icon_list_regex",
-                                            "icon_layout",
-                                            "bat_capacity"
-                                          ]
-                                        },
-                                        "to": {
-                                          "type": "string",
-                                          "description": "Field to set on the entity"
-                                        }
-                                      }
-                                    }
-                                  },
-                                  "wait_for_apps": {
-                                    "type": "array",
-                                    "description": "A list of applications needed to be installed on the device. This will cause the extension to poll the device for installed applications. Once all the applications have been installed, this step can be completed",
-                                    "items": {
-                                      "type": "string",
-                                      "format": "uri"
-                                    }
-                                  },
-                                  "wait_for_battery_charge": {
-                                    "type": "integer",
-                                    "description": "The required battery percentage needed before this step can move on",
-                                    "minimum": 0,
-                                    "maximum": 100
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      },
-                      {
-                        "$schema": "http://json-schema.org/draft-07/schema#",
-                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepChoice.json",
-                        "type": "object",
-                        "description": "A Step choice",
-                        "maxProperties": 2,
-                        "minProperties": 2,
-                        "required": [
-                          "decision"
-                        ],
-                        "properties": {
-                          "decision": {
-                            "type": "array",
-                            "description": "Context variable to check",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "variable": {
-                                  "type": "string",
-                                  "description": "Variable or value"
-                                },
-                                "operator": {
-                                  "type": "string",
-                                  "description": "Operator to perform",
-                                  "enum": [
-                                    "greater_than_equals",
-                                    "less_than_equals",
-                                    "greater_than",
-                                    "less_than",
-                                    "equals",
-                                    "not_equals"
-                                  ]
-                                },
-                                "operand": {
-                                  "type": "string",
-                                  "description": "operand to compare with"
-                                }
-                              }
-                            }
-                          }
-                        },
-                        "allOf": [
-                          {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepNext.json",
-                            "type": "object",
-                            "required": [
-                              "type",
-                              "label",
-                              "goto"
-                            ],
-                            "properties": {
-                              "goto": {
-                                "type": "string",
-                                "description": "Step to move to",
-                                "pattern": "^[a-z][a-z-]+[a-z]$"
-                              },
-                              "goto-fail": {
-                                "type": "string",
-                                "description": "Step to transition too if this step cannot be completed",
-                                "pattern": "^[a-z][a-z-]+[a-z]$"
-                              },
-                              "context": {
-                                "type": "array",
-                                "description": "Values to set on the context",
-                                "items": {
-                                  "type": "object",
-                                  "required": [
-                                    "key",
-                                    "value"
-                                  ],
-                                  "properties": {
-                                    "key": {
-                                      "type": "string",
-                                      "description": "The context key to set"
-                                    },
-                                    "value": {
-                                      "type": "string",
-                                      "description": "Value to set"
-                                    },
-                                    "lock": {
-                                      "type": "boolean",
-                                      "description": "Prevents other steps from writing this value"
-                                    },
-                                    "ignore": {
-                                      "type": "boolean",
-                                      "description": "When trying to set a locked key, do not fail"
-                                    }
-                                  }
-                                }
-                              },
-                              "onStart": {
-                                "$schema": "http://json-schema.org/draft-07/schema#",
-                                "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                "type": "object",
-                                "required": [
-                                  "retry",
-                                  "finally"
-                                ],
-                                "properties": {
-                                  "actions": {
-                                    "type": "array",
-                                    "description": "Actions to take on failure",
-                                    "maxItems": 10,
-                                    "items": {
-                                      "type": "object"
-                                    }
-                                  }
-                                }
-                              },
-                              "onError": {
-                                "$schema": "http://json-schema.org/draft-07/schema#",
-                                "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepError.json",
-                                "type": "object",
-                                "required": [
-                                  "retry",
-                                  "finally"
-                                ],
-                                "properties": {
-                                  "retry": {
-                                    "type": "integer",
-                                    "description": "Number of times to retry this step. Note: retry will only occur on steps which automatically failed. If the step was transitioned using the 'goto-fail' step, the actions will be fired but the step WILL NOT be re-tried",
-                                    "minimum": 0,
-                                    "maximum": 10,
-                                    "default": 0
-                                  },
-                                  "finally": {
-                                    "type": "object",
-                                    "description": "What to do after all retries",
-                                    "properties": {
-                                      "actions": {
-                                        "$schema": "http://json-schema.org/draft-07/schema#",
-                                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                        "type": "object",
-                                        "required": [
-                                          "retry",
-                                          "finally"
-                                        ],
-                                        "properties": {
-                                          "actions": {
-                                            "type": "array",
-                                            "description": "Actions to take on failure",
-                                            "maxItems": 10,
-                                            "items": {
-                                              "type": "object"
-                                            }
-                                          }
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              },
-                              "onTimeout": {
-                                "$schema": "http://json-schema.org/draft-07/schema#",
-                                "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepError.json",
-                                "type": "object",
-                                "required": [
-                                  "retry",
-                                  "finally"
-                                ],
-                                "properties": {
-                                  "retry": {
-                                    "type": "integer",
-                                    "description": "Number of times to retry this step. Note: retry will only occur on steps which automatically failed. If the step was transitioned using the 'goto-fail' step, the actions will be fired but the step WILL NOT be re-tried",
-                                    "minimum": 0,
-                                    "maximum": 10,
-                                    "default": 0
-                                  },
-                                  "finally": {
-                                    "type": "object",
-                                    "description": "What to do after all retries",
-                                    "properties": {
-                                      "actions": {
-                                        "$schema": "http://json-schema.org/draft-07/schema#",
-                                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                        "type": "object",
-                                        "required": [
-                                          "retry",
-                                          "finally"
-                                        ],
-                                        "properties": {
-                                          "actions": {
-                                            "type": "array",
-                                            "description": "Actions to take on failure",
-                                            "maxItems": 10,
-                                            "items": {
-                                              "type": "object"
-                                            }
-                                          }
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        ]
-                      },
-                      {
-                        "$schema": "http://json-schema.org/draft-07/schema#",
-                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepFail.json",
-                        "type": "object",
-                        "description": "Finial step which is marked as failed",
-                        "properties": {
-                          "label": {
-                            "type": "string",
-                            "description": "Label for the step"
-                          },
-                          "type": {
-                            "type": "string",
-                            "description": "Type of workflow step",
-                            "enum": [
-                              "load",
-                              "choice",
-                              "function",
-                              "machine",
-                              "pass",
-                              "fail",
-                              "success",
-                              "user",
-                              "wait"
-                            ]
-                          },
-                          "onComplete": {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                            "type": "object",
-                            "required": [
-                              "retry",
-                              "finally"
-                            ],
-                            "properties": {
-                              "actions": {
-                                "type": "array",
-                                "description": "Actions to take on failure",
-                                "maxItems": 10,
-                                "items": {
-                                  "type": "object"
-                                }
-                              }
-                            }
-                          }
-                        }
-                      },
-                      {
-                        "$schema": "http://json-schema.org/draft-07/schema#",
-                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepPass.json",
-                        "type": "object",
-                        "description": "Allows executing actions with out performing any function",
-                        "properties": {
-                          "label": {
-                            "type": "string",
-                            "description": "Label for the entity"
-                          },
-                          "type": {
-                            "type": "string",
-                            "description": "Type of workflow step",
-                            "enum": [
-                              "load",
-                              "choice",
-                              "function",
-                              "machine",
-                              "pass",
-                              "fail",
-                              "success",
-                              "user",
-                              "wait"
-                            ]
-                          }
-                        },
-                        "allOf": [
-                          {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepCommon.json",
-                            "type": "object",
-                            "required": [
-                              "type",
-                              "label",
-                              "goto"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "description": "Type of workflow step",
-                                "enum": [
-                                  "load",
-                                  "choice",
-                                  "function",
-                                  "machine",
-                                  "pass",
-                                  "fail",
-                                  "success",
-                                  "user",
-                                  "wait"
-                                ]
-                              },
-                              "label": {
-                                "type": "string",
-                                "description": "Label for the step"
-                              },
-                              "goto": {
-                                "type": "string",
-                                "description": "Step to move to",
-                                "pattern": "^[a-z][a-z-]+[a-z]$"
-                              },
-                              "goto-fail": {
-                                "type": "string",
-                                "description": "Step to transition too if this step cannot be completed",
-                                "pattern": "^[a-z][a-z-]+[a-z]$"
-                              },
-                              "onComplete": {
-                                "$schema": "http://json-schema.org/draft-07/schema#",
-                                "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                "type": "object",
-                                "required": [
-                                  "retry",
-                                  "finally"
-                                ],
-                                "properties": {
-                                  "actions": {
-                                    "type": "array",
-                                    "description": "Actions to take on failure",
-                                    "maxItems": 10,
-                                    "items": {
-                                      "type": "object"
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        ]
-                      },
-                      {
-                        "$schema": "http://json-schema.org/draft-07/schema#",
-                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepSuccess.json",
-                        "type": "object",
-                        "description": "Finial step which is marked as completed successfully",
-                        "properties": {
-                          "label": {
-                            "type": "string",
-                            "description": "Label for the step"
-                          },
-                          "type": {
-                            "type": "string",
-                            "description": "Type of workflow step",
-                            "enum": [
-                              "load",
-                              "choice",
-                              "function",
-                              "machine",
-                              "pass",
-                              "fail",
-                              "success",
-                              "user",
-                              "wait"
-                            ]
-                          },
-                          "onComplete": {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                            "type": "object",
-                            "required": [
-                              "retry",
-                              "finally"
-                            ],
-                            "properties": {
-                              "actions": {
-                                "type": "array",
-                                "description": "Actions to take on failure",
-                                "maxItems": 10,
-                                "items": {
-                                  "type": "object"
-                                }
-                              }
-                            }
-                          }
-                        }
-                      },
-                      {
-                        "$schema": "http://json-schema.org/draft-07/schema#",
-                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepWait.json",
-                        "type": "object",
-                        "description": "A step which run at certain times",
-                        "required": [
-                          "stop_at",
-                          "time"
-                        ],
-                        "properties": {
-                          "label": {
-                            "type": "string",
-                            "description": "Label for the step"
-                          },
-                          "type": {
-                            "type": "string",
-                            "enum": [
-                              "wait"
-                            ]
-                          },
-                          "stop_at": {
-                            "type": "integer",
-                            "description": "Time in seconds to stop this task",
-                            "maximum": 900,
-                            "minimum": 1
-                          },
-                          "time": {
-                            "type": "integer",
-                            "description": "Time to wait before checking this step",
-                            "maximum": 900,
-                            "minimum": 1
-                          },
-                          "listen_for": {
-                            "type": "array",
-                            "description": "List of events and conditions to listen for to trigger",
-                            "items": {
-                              "type": "object",
-                              "required": [
-                                "event"
-                              ],
-                              "properties": {
-                                "event": {
-                                  "type": "string",
-                                  "description": "Name of the event to listen for",
-                                  "allOf": [
-                                    {
-                                      "type": "string",
-                                      "description": "Possible entity events",
-                                      "enum": [
-                                        "CON.attached",
-                                        "CON.created",
-                                        "CON.deleted",
-                                        "CON.detached",
-                                        "CON.removed",
-                                        "CON.updated",
-                                        "CUS.attached",
-                                        "CUS.created",
-                                        "CUS.deleted",
-                                        "CUS.detached",
-                                        "CUS.removed",
-                                        "CUS.updated",
-                                        "LOC.attached",
-                                        "LOC.created",
-                                        "LOC.deleted",
-                                        "LOC.detached",
-                                        "LOC.removed",
-                                        "LOC.updated",
-                                        "NOTE.attached",
-                                        "NOTE.created",
-                                        "NOTE.deleted",
-                                        "NOTE.detached",
-                                        "NOTE.removed",
-                                        "NOTE.updated",
-                                        "PART.attached",
-                                        "PART.created",
-                                        "PART.deleted",
-                                        "PART.detached",
-                                        "PART.removed",
-                                        "PART.updated",
-                                        "PGM.attached",
-                                        "PGM.created",
-                                        "PGM.deleted",
-                                        "PGM.detached",
-                                        "PGM.removed",
-                                        "PGM.updated",
-                                        "PRO.attached",
-                                        "PRO.created",
-                                        "PRO.deleted",
-                                        "PRO.detached",
-                                        "PRO.removed",
-                                        "PRO.updated",
-                                        "RES.attached",
-                                        "RES.created",
-                                        "RES.deleted",
-                                        "RES.detached",
-                                        "RES.removed",
-                                        "RES.updated",
-                                        "UNIT.attached",
-                                        "UNIT.created",
-                                        "UNIT.deleted",
-                                        "UNIT.detached",
-                                        "UNIT.removed",
-                                        "UNIT.updated",
-                                        "USER.attached",
-                                        "USER.created",
-                                        "USER.deleted",
-                                        "USER.detached",
-                                        "USER.removed",
-                                        "USER.updated",
-                                        "WKF.attached",
-                                        "WKF.created",
-                                        "WKF.deleted",
-                                        "WKF.detached",
-                                        "WKF.removed",
-                                        "WKF.updated",
-                                        "WOR.attached",
-                                        "WOR.created",
-                                        "WOR.deleted",
-                                        "WOR.detached",
-                                        "WOR.removed",
-                                        "WOR.updated"
-                                      ]
-                                    }
-                                  ]
-                                },
-                                "event_value": {
-                                  "type": "object",
-                                  "description": "The event conditions that have to be met",
-                                  "allOf": [
-                                    {
-                                      "$schema": "http://json-schema.org/draft-07/schema#",
-                                      "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepChoice.json",
-                                      "type": "object",
-                                      "description": "A Step choice",
-                                      "maxProperties": 2,
-                                      "minProperties": 2,
-                                      "required": [
-                                        "decision"
-                                      ],
-                                      "properties": {
-                                        "decision": {
-                                          "type": "array",
-                                          "description": "Context variable to check",
-                                          "items": {
-                                            "type": "object",
-                                            "properties": {
-                                              "variable": {
-                                                "type": "string",
-                                                "description": "Variable or value"
-                                              },
-                                              "operator": {
-                                                "type": "string",
-                                                "description": "Operator to perform",
-                                                "enum": [
-                                                  "greater_than_equals",
-                                                  "less_than_equals",
-                                                  "greater_than",
-                                                  "less_than",
-                                                  "equals",
-                                                  "not_equals"
-                                                ]
-                                              },
-                                              "operand": {
-                                                "type": "string",
-                                                "description": "operand to compare with"
-                                              }
-                                            }
-                                          }
-                                        }
-                                      },
-                                      "allOf": [
-                                        {
-                                          "$schema": "http://json-schema.org/draft-07/schema#",
-                                          "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepNext.json",
-                                          "type": "object",
-                                          "required": [
-                                            "type",
-                                            "label",
-                                            "goto"
-                                          ],
-                                          "properties": {
-                                            "goto": {
-                                              "type": "string",
-                                              "description": "Step to move to",
-                                              "pattern": "^[a-z][a-z-]+[a-z]$"
-                                            },
-                                            "goto-fail": {
-                                              "type": "string",
-                                              "description": "Step to transition too if this step cannot be completed",
-                                              "pattern": "^[a-z][a-z-]+[a-z]$"
-                                            },
-                                            "context": {
-                                              "type": "array",
-                                              "description": "Values to set on the context",
-                                              "items": {
-                                                "type": "object",
-                                                "required": [
-                                                  "key",
-                                                  "value"
-                                                ],
-                                                "properties": {
-                                                  "key": {
-                                                    "type": "string",
-                                                    "description": "The context key to set"
-                                                  },
-                                                  "value": {
-                                                    "type": "string",
-                                                    "description": "Value to set"
-                                                  },
-                                                  "lock": {
-                                                    "type": "boolean",
-                                                    "description": "Prevents other steps from writing this value"
-                                                  },
-                                                  "ignore": {
-                                                    "type": "boolean",
-                                                    "description": "When trying to set a locked key, do not fail"
-                                                  }
-                                                }
-                                              }
-                                            },
-                                            "onStart": {
-                                              "$schema": "http://json-schema.org/draft-07/schema#",
-                                              "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                              "type": "object",
-                                              "required": [
-                                                "retry",
-                                                "finally"
-                                              ],
-                                              "properties": {
-                                                "actions": {
-                                                  "type": "array",
-                                                  "description": "Actions to take on failure",
-                                                  "maxItems": 10,
-                                                  "items": {
-                                                    "type": "object"
-                                                  }
-                                                }
-                                              }
-                                            },
-                                            "onError": {
-                                              "$schema": "http://json-schema.org/draft-07/schema#",
-                                              "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepError.json",
-                                              "type": "object",
-                                              "required": [
-                                                "retry",
-                                                "finally"
-                                              ],
-                                              "properties": {
-                                                "retry": {
-                                                  "type": "integer",
-                                                  "description": "Number of times to retry this step. Note: retry will only occur on steps which automatically failed. If the step was transitioned using the 'goto-fail' step, the actions will be fired but the step WILL NOT be re-tried",
-                                                  "minimum": 0,
-                                                  "maximum": 10,
-                                                  "default": 0
-                                                },
-                                                "finally": {
-                                                  "type": "object",
-                                                  "description": "What to do after all retries",
-                                                  "properties": {
-                                                    "actions": {
-                                                      "$schema": "http://json-schema.org/draft-07/schema#",
-                                                      "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                                      "type": "object",
-                                                      "required": [
-                                                        "retry",
-                                                        "finally"
-                                                      ],
-                                                      "properties": {
-                                                        "actions": {
-                                                          "type": "array",
-                                                          "description": "Actions to take on failure",
-                                                          "maxItems": 10,
-                                                          "items": {
-                                                            "type": "object"
-                                                          }
-                                                        }
-                                                      }
-                                                    }
-                                                  }
-                                                }
-                                              }
-                                            },
-                                            "onTimeout": {
-                                              "$schema": "http://json-schema.org/draft-07/schema#",
-                                              "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepError.json",
-                                              "type": "object",
-                                              "required": [
-                                                "retry",
-                                                "finally"
-                                              ],
-                                              "properties": {
-                                                "retry": {
-                                                  "type": "integer",
-                                                  "description": "Number of times to retry this step. Note: retry will only occur on steps which automatically failed. If the step was transitioned using the 'goto-fail' step, the actions will be fired but the step WILL NOT be re-tried",
-                                                  "minimum": 0,
-                                                  "maximum": 10,
-                                                  "default": 0
-                                                },
-                                                "finally": {
-                                                  "type": "object",
-                                                  "description": "What to do after all retries",
-                                                  "properties": {
-                                                    "actions": {
-                                                      "$schema": "http://json-schema.org/draft-07/schema#",
-                                                      "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                                      "type": "object",
-                                                      "required": [
-                                                        "retry",
-                                                        "finally"
-                                                      ],
-                                                      "properties": {
-                                                        "actions": {
-                                                          "type": "array",
-                                                          "description": "Actions to take on failure",
-                                                          "maxItems": 10,
-                                                          "items": {
-                                                            "type": "object"
-                                                          }
-                                                        }
-                                                      }
-                                                    }
-                                                  }
-                                                }
-                                              }
-                                            }
-                                          }
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              }
-                            }
-                          }
-                        },
-                        "allOf": [
-                          {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepCommon.json",
-                            "type": "object",
-                            "required": [
-                              "type",
-                              "label",
-                              "goto"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "description": "Type of workflow step",
-                                "enum": [
-                                  "load",
-                                  "choice",
-                                  "function",
-                                  "machine",
-                                  "pass",
-                                  "fail",
-                                  "success",
-                                  "user",
-                                  "wait"
-                                ]
-                              },
-                              "label": {
-                                "type": "string",
-                                "description": "Label for the step"
-                              },
-                              "goto": {
-                                "type": "string",
-                                "description": "Step to move to",
-                                "pattern": "^[a-z][a-z-]+[a-z]$"
-                              },
-                              "goto-fail": {
-                                "type": "string",
-                                "description": "Step to transition too if this step cannot be completed",
-                                "pattern": "^[a-z][a-z-]+[a-z]$"
-                              },
-                              "onComplete": {
-                                "$schema": "http://json-schema.org/draft-07/schema#",
-                                "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                "type": "object",
-                                "required": [
-                                  "retry",
-                                  "finally"
-                                ],
-                                "properties": {
-                                  "actions": {
-                                    "type": "array",
-                                    "description": "Actions to take on failure",
-                                    "maxItems": 10,
-                                    "items": {
-                                      "type": "object"
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        ]
-                      }
-                    ]
-                  }
-                }
-              },
-              "metadata": {
-                "type": "object",
-                "description": "Data for the resource as a key value pair",
-                "additionalProperties": {
-                  "type": "string"
-                },
-                "propertyNames": {
-                  "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-                }
-              }
-            }
-          }
-        }
-      }
+    "nter:work-order-queues": {
+      "href": "https://api.example.com/work-orders/work-order/queues"
+    },
+    "self": {
+      "href": "https://api.example.com/work-orders/work-order"
     }
   }
 }
 ```
+
+> 400 Response
+
+```json
+{
+  "title": "Bad Request",
+  "type": "https://docs.nterprise.com/api/problem/BadRequest",
+  "status": 400,
+  "detail": "Invalid Data",
+  "validation_messages": [
+    {
+      "keyword": "field",
+      "dataPath": ".field",
+      "schemaPath": "https://docs.nterprise.com/schemas/niagara/foo.json#/properties/field",
+      "params": {
+        "type": "string"
+      },
+      "message": "should be string"
+    }
+  ]
+}
+```
+
+> 401 Response
+
+```json
+{
+  "title": "Unauthorized",
+  "type": "https://docs.nterprise.com/api/problem/Unauthorized",
+  "status": 401,
+  "detail": "Invalid authorization token"
+}
+```
+
+> 403 Response
+
+```json
+{
+  "title": "Forbidden",
+  "type": "https://docs.nterprise.com/api/problem/Forbidden",
+  "status": 403,
+  "detail": "You are forbidden from accessing this resource"
+}
+```
+
+<h3 id="createworkorder-responseschema">Response Schema</h3>
+
+Status Code **400**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; validation_messages|[object]|true|none|List of errors detailing the failures|
+
+Status Code **401**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
+
+Status Code **403**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
+
+### GET /work-orders/{work_order_id} - *Fetch work0order*
+
+<a id="opIdfetchWorkOrderById"></a>
+
+*Fetch work0order*
+
+Fetches a work-order
+
+<h3 id="fetchworkorderbyid-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|work_order_id|path|string|true|Id for the work order|
 
 <h3 id="fetchworkorderbyid-responses">Responses</h3>
 
@@ -9535,2069 +866,321 @@ Fetch Work order
 |403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
 |404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Resource not found|Inline|
 
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "work_order_id": "work-order",
+  "label": "My workOrder",
+  "created": "2019-08-19T00:01:02.000Z",
+  "updated": "2020-08-19T01:01:02.000Z",
+  "description": "Workorder description",
+  "work_order_type": "device",
+  "begin_date": "2021-08-19T02:01:02.000Z",
+  "due_date": "2021-08-19T02:01:02.000Z",
+  "start_date": "2021-08-19T02:01:02.000Z",
+  "end_date": "2021-08-19T02:01:02.000Z",
+  "project": {
+    "project_id": "project",
+    "label": "New York Stores",
+    "description": "Project description",
+    "created": "2020-01-09T22:12:03.000Z",
+    "updated": "2020-01-09T22:12:03.000Z",
+    "customer": {
+      "customer_id": "customer",
+      "label": "manchuck",
+      "created": "2020-01-09T22:12:03.000Z",
+      "updated": "2020-01-09T22:12:03.000Z",
+      "external_platform": {},
+      "total_programs": 21,
+      "total_projects": 42,
+      "allowed_statuses": [
+        {
+          "category": "PENDING",
+          "description": "For something that is Pending",
+          "status": "Pending",
+          "order": 3
+        },
+        {
+          "category": "IN_PROGRESS",
+          "description": "For something that is In Progress",
+          "status": "In Progress",
+          "order": 4
+        },
+        {
+          "category": "VERIFYING",
+          "description": "For something that is Verifying",
+          "status": "Verifying",
+          "order": 5
+        },
+        {
+          "category": "BLOCKED",
+          "description": "For something that is Blocked",
+          "status": "Blocked",
+          "order": 6
+        },
+        {
+          "category": "COMPLETE",
+          "description": "For something that is Complete",
+          "status": "Complete",
+          "order": 7
+        },
+        {
+          "category": "CANCELLED",
+          "description": "For something that is Cancelled",
+          "status": "Cancelled",
+          "order": 8
+        }
+      ]
+    },
+    "program": {
+      "program_id": "program",
+      "label": "North east stores",
+      "created": "2020-01-09T22:12:03.000Z",
+      "updated": "2020-01-09T22:12:03.000Z",
+      "customer": {
+        "customer_id": "customer",
+        "label": "manchuck",
+        "created": "2020-01-09T22:12:03.000Z",
+        "updated": "2020-01-09T22:12:03.000Z",
+        "external_platform": {},
+        "total_programs": 21,
+        "total_projects": 42,
+        "allowed_statuses": [
+          {
+            "category": "PENDING",
+            "description": "For something that is Pending",
+            "status": "Pending",
+            "order": 3
+          },
+          {
+            "category": "IN_PROGRESS",
+            "description": "For something that is In Progress",
+            "status": "In Progress",
+            "order": 4
+          },
+          {
+            "category": "VERIFYING",
+            "description": "For something that is Verifying",
+            "status": "Verifying",
+            "order": 5
+          },
+          {
+            "category": "BLOCKED",
+            "description": "For something that is Blocked",
+            "status": "Blocked",
+            "order": 6
+          },
+          {
+            "category": "COMPLETE",
+            "description": "For something that is Complete",
+            "status": "Complete",
+            "order": 7
+          },
+          {
+            "category": "CANCELLED",
+            "description": "For something that is Cancelled",
+            "status": "Cancelled",
+            "order": 8
+          }
+        ]
+      },
+      "end_date": "2020-02-10T22:12:03.000Z",
+      "start_date": "2020-02-10T22:12:03.000Z",
+      "allowed_statuses": [
+        {
+          "category": "PENDING",
+          "description": "For something that is Pending",
+          "status": "Pending",
+          "order": 3
+        },
+        {
+          "category": "VERIFYING",
+          "description": "For something that is Verifying",
+          "status": "Verifying",
+          "order": 5
+        }
+      ]
+    },
+    "end_date": "2020-02-10T22:12:03.000Z",
+    "start_date": "2020-02-10T22:12:03.000Z",
+    "allowed_statuses": [
+      {
+        "category": "PENDING",
+        "description": "For something that is Pending",
+        "status": "Pending",
+        "order": 3
+      }
+    ]
+  },
+  "location": {
+    "location_id": "location",
+    "label": "Test Label",
+    "created": "2019-08-19T00:01:02.000Z",
+    "updated": "2020-08-19T01:01:02.000Z",
+    "location_type": "warehouse",
+    "formatted_address": "Test Label\n431 Broadway Suite c\nMenands NY 12204 USA",
+    "address": {
+      "country": "USA",
+      "administrative_area": "NY",
+      "sub_administrative_area": "Albany",
+      "locality": "Menands",
+      "postal_code": "12204",
+      "thoroughfare": "431 Broadway",
+      "premise": "Suite c",
+      "sub_premise": "ZIC"
+    }
+  },
+  "current_status": {
+    "category": "IN_PROGRESS",
+    "description": "For something that is Reticulating Splines",
+    "status": "Reticulating Splines",
+    "order": 2
+  },
+  "cycles": [
+    {
+      "needed": 1,
+      "pending": 1,
+      "in_progress": 0,
+      "verifying": 0,
+      "complete": 0,
+      "blocked": 0,
+      "cancelled": 0,
+      "work_flow": {
+        "entity_type": "WKF",
+        "entity_id": "work-flow",
+        "created": "2019-08-19T00:01:02.000Z",
+        "updated": "2020-08-19T01:01:02.000Z",
+        "label": "My workflow",
+        "schema_version": "1.0",
+        "workflow_version": 7,
+        "applies_to": "UNIT",
+        "starts_at": "work-complete",
+        "metadata": {
+          "meta": "data"
+        },
+        "steps": {
+          "work-complete": {
+            "step_type": "success",
+            "label": "work complete",
+            "on_start": [],
+            "on_complete": []
+          },
+          "stop-poking-me": {
+            "step_type": "fail",
+            "label": "stop poking me",
+            "on_start": [],
+            "on_complete": []
+          }
+        },
+        "triggered_by": [
+          "UNIT.created"
+        ]
+      }
+    }
+  ],
+  "input_filter": [
+    {
+      "label": "Serial Number Of part",
+      "key": "serial-number",
+      "filters": [],
+      "validators": [],
+      "value": null
+    }
+  ],
+  "_embedded": {
+    "nter:work-order-project": [],
+    "nter:work-order-location": [],
+    "nter:work-order-program": [],
+    "nter:work-order-customer": []
+  },
+  "_links": {
+    "nter:work-order-batches": {
+      "href": "https://api.example.com/work-orders/work-order/batches"
+    },
+    "nter:work-order-queues": {
+      "href": "https://api.example.com/work-orders/work-order/queues"
+    },
+    "self": {
+      "href": "https://api.example.com/work-orders/work-order"
+    }
+  }
+}
+```
+
+> 401 Response
+
+```json
+{
+  "title": "Unauthorized",
+  "type": "https://docs.nterprise.com/api/problem/Unauthorized",
+  "status": 401,
+  "detail": "Invalid authorization token"
+}
+```
+
+> 403 Response
+
+```json
+{
+  "title": "Forbidden",
+  "type": "https://docs.nterprise.com/api/problem/Forbidden",
+  "status": 403,
+  "detail": "You are forbidden from accessing this resource"
+}
+```
+
+> 404 Response
+
+```json
+{
+  "title": "Not Found",
+  "type": "https://docs.nterprise.com/api/problem/NotFound",
+  "status": 404,
+  "detail": "A Resource with the id \"foo\" was not found"
+}
+```
+
 <h3 id="fetchworkorderbyid-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» _links|object|false|none|none|
-|»» self|object|false|none|none|
-|»»» href|string(uri)|false|none|none|
-|»» work_order_id|string|false|none|The identifier for the unit|
-|»» label|string|false|none|Label for the entity|
-|»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»» created|string(date-time)|false|read-only|Date the entity was created|
-|»» updated|string(date-time)|false|read-only|Last date the entity was updated|
-|»» start_date|string(date-time)|false|read-only|Last date the entity was updated|
-|»» end_date|string(date-time)|false|read-only|Last date the entity was updated|
-|»» description|string\|null|false|none|Detailed description for the work order|
-|»» work_order_type|string|false|none|Type of work order|
-|»» begin_date|string(date-time)|false|none|Begin date|
-|»» due_date|string(date-time)|false|none|Due date|
-|»» current_status|object|false|none|Defines the properties for a status|
-|»»» status|string|true|none|A Custom label for the status|
-|»»» category|string|true|none|The classifier for the statues|
-|»»» description|string\|null|false|none|A description for the status|
-|»»» order|number|false|none|Order status appears when listing|
-|»» project|object|false|none|Defines the properties for a project|
-|»»» project_id|string|false|none|Unique identifier|
-|»»» entity_id|string|true|read-only|Customer identifier|
-|»»» entity_type|string|true|none|none|
-|»»» description|string\|null|false|none|Project description|
-|»»» label|string|true|none|Label for the entity|
-|»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»»» created|string(date-time)|true|read-only|Date the entity was created|
-|»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»» customer|object|true|none|Customer|
-|»»»» customer_id|string|false|read-only|Customer identifier|
-|»»»» entity_id|string|true|read-only|Customer identifier|
-|»»»» entity_type|string|true|none|none|
-|»»»» label|string|true|none|Label for the entity|
-|»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»»»» created|string(date-time)|true|read-only|Date the entity was created|
-|»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»»» external_platform|object|false|none|External Identifiers for the customer|
-|»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
-|»»»»» status|string|true|none|A Custom label for the status|
-|»»»»» category|string|true|none|The classifier for the statues|
-|»»»»» description|string\|null|false|none|A description for the status|
-|»»»»» order|number|false|none|Order status appears when listing|
-|»»»» total_programs|number|false|none|Total programs under the customer|
-|»»»» total_projects|number|false|none|Total projects under the customer|
-|»»» program|object|true|none|Defines the properties for a program|
-|»»»» program_id|string|false|read-only|Unique identifier|
-|»»»» entity_id|string|true|read-only|Customer identifier|
-|»»»» entity_type|string|true|none|none|
-|»»»» label|string|false|none|Label for the entity|
-|»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»»»» created|string(date-time)|true|read-only|Date the entity was created|
-|»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»»» start_date|string(date-time)\|null|false|none|Start date|
-|»»»» end_date|string(date-time)\|null|false|none|End date|
-|»»»» customer|object|true|none|Customer|
-|»»»»» customer_id|string|false|read-only|Customer identifier|
-|»»»»» entity_id|string|true|read-only|Customer identifier|
-|»»»»» entity_type|string|true|none|none|
-|»»»»» label|string|true|none|Label for the entity|
-|»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»»»»» created|string(date-time)|true|read-only|Date the entity was created|
-|»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»»»» external_platform|object|false|none|External Identifiers for the customer|
-|»»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
-|»»»»»» status|string|true|none|A Custom label for the status|
-|»»»»»» category|string|true|none|The classifier for the statues|
-|»»»»»» description|string\|null|false|none|A description for the status|
-|»»»»»» order|number|false|none|Order status appears when listing|
-|»»»»» total_programs|number|false|none|Total programs under the customer|
-|»»»»» total_projects|number|false|none|Total projects under the customer|
-|»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
-|»»»»» status|string|true|none|A Custom label for the status|
-|»»»»» category|string|true|none|The classifier for the statues|
-|»»»»» description|string\|null|false|none|A description for the status|
-|»»»»» order|number|false|none|Order status appears when listing|
-|»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
-|»»»»» status|string|true|none|A Custom label for the status|
-|»»»»» category|string|true|none|The classifier for the statues|
-|»»»»» description|string\|null|false|none|A description for the status|
-|»»»»» order|number|false|none|Order status appears when listing|
-|»»»» start_date|string(date-time)\|null|false|none|Start date|
-|»»»» end_date|string(date-time)\|null|false|none|End date|
-|»»» cycles|[object]|false|none|none|
-|»»»» needed|integer|true|none|The number of cycles needed|
-|»»»» pending|integer|true|read-only|The number of cycles pending|
-|»»»» in_progress|integer|true|read-only|The number of cycles pending|
-|»»»» verifying|integer|true|read-only|The number of cycles pending|
-|»»»» complete|integer|true|read-only|The number of cycles pending|
-|»»»» blocked|integer|true|read-only|The number of cycles pending|
-|»»»» cancelled|integer|true|read-only|The number of cycles pending|
-|»»»» work_flow|object|true|none|Workflow|
-|»»»»» work_flow_id|string|false|read-only|Customer identifier|
-|»»»»» entity_id|string|true|read-only|Customer identifier|
-|»»»»» entity_type|string|true|none|none|
-|»»»»» label|string|true|none|Label for the entity|
-|»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»»»»» created|string(date-time)|true|read-only|Date the entity was created|
-|»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»»»» schema_version|string|true|none|Version of the workflow schema used|
-|»»»»» workflow_version|integer|false|read-only|Version number for the work flows (the number of times it has been changed|
-|»»»»» applies_to|string|true|none|The entity type this work flow applies too|
-|»»»»» triggered_by|[string]|false|none|none|
-|»»»»» starts_at|string|true|none|Starting step|
-|»»»»» steps|object|true|none|Steps for the workflow|
-|»»»»» metadata|object|false|none|Data for the resource as a key value pair|
-|»»»»»» **additionalProperties**|string|false|none|none|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|work_order_type|device|
-|category|PENDING|
-|category|IN_PROGRESS|
-|category|VERIFYING|
-|category|COMPLETE|
-|category|CANCELLED|
-|category|BLOCKED|
-|entity_type|PRJ|
-|entity_type|CUS|
-|category|PENDING|
-|category|IN_PROGRESS|
-|category|VERIFYING|
-|category|COMPLETE|
-|category|CANCELLED|
-|category|BLOCKED|
-|entity_type|PGM|
-|entity_type|CUS|
-|category|PENDING|
-|category|IN_PROGRESS|
-|category|VERIFYING|
-|category|COMPLETE|
-|category|CANCELLED|
-|category|BLOCKED|
-|category|PENDING|
-|category|IN_PROGRESS|
-|category|VERIFYING|
-|category|COMPLETE|
-|category|CANCELLED|
-|category|BLOCKED|
-|category|PENDING|
-|category|IN_PROGRESS|
-|category|VERIFYING|
-|category|COMPLETE|
-|category|CANCELLED|
-|category|BLOCKED|
-|entity_type|WKF|
-|schema_version|1.0|
-|applies_to|UNIT|
-|applies_to|PART|
-|applies_to|PGM|
-|applies_to|PRJ|
-|applies_to|CUS|
-|applies_to|CON|
 
 Status Code **401**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|string|false|none|none|
-|» type|string|false|none|none|
-|» status|number|false|none|none|
-|» detail|string|false|none|none|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|title|Unauthorized|
-|type|https://docs.nterprise.com/api/problem/Unauthorized|
-|status|401|
-|detail|You are not authorized to access this resource|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
 
 Status Code **403**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|string|false|none|none|
-|» type|string|false|none|none|
-|» status|number|false|none|none|
-|» detail|string|false|none|none|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|title|Forbidden|
-|type|https://docs.nterprise.com/api/problem/Forbidden|
-|status|403|
-|detail|You are forbidden to access this resource|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
 
 Status Code **404**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|string|false|none|none|
-|» type|string|false|none|none|
-|» status|number|false|none|none|
-|» detail|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
 
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|title|Not Found|
-|type|https://docs.nterprise.com/api/problem/NotFound|
-|status|404|
-|detail|Resource not found|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## updateWorkOrder
+### PUT /work-orders/{work_order_id} - *Update work-order*
 
 <a id="opIdupdateWorkOrder"></a>
 
-`PUT /work-orders/{work_order_id}`
+*Update work-order*
 
-*Updates a work order*
-
-Updates a work order
+Updates a work-order
 
 > Body parameter
-
-```json
-{
-  "type": "object",
-  "description": "Work order to create",
-  "required": [
-    "label",
-    "project"
-  ],
-  "properties": {
-    "label": {
-      "type": "string",
-      "description": "Label for the entity"
-    },
-    "description": {
-      "type": "string",
-      "nullable": true,
-      "description": "Detailed description for the work order"
-    },
-    "work_order_type": {
-      "type": "string",
-      "description": "Type of work order",
-      "enum": [
-        "device"
-      ]
-    },
-    "begin_date": {
-      "type": "string",
-      "format": "date-time",
-      "description": "Begin date"
-    },
-    "due_date": {
-      "type": "string",
-      "format": "date-time",
-      "description": "Due date"
-    },
-    "current_status": {
-      "type": "object",
-      "description": "Defines the properties for a status",
-      "additionalProperties": false,
-      "required": [
-        "status",
-        "category"
-      ],
-      "properties": {
-        "status": {
-          "type": "string",
-          "description": "A Custom label for the status",
-          "pattern": "^[A-Za-z][0-9a-zA-Z-_ ]+$"
-        },
-        "category": {
-          "type": "string",
-          "description": "The classifier for the statues",
-          "enum": [
-            "PENDING",
-            "IN_PROGRESS",
-            "VERIFYING",
-            "COMPLETE",
-            "CANCELLED",
-            "BLOCKED"
-          ]
-        },
-        "description": {
-          "type": "string",
-          "nullable": true,
-          "description": "A description for the status"
-        },
-        "order": {
-          "type": "number",
-          "description": "Order status appears when listing"
-        }
-      }
-    },
-    "project": {
-      "type": "object",
-      "properties": {
-        "project_id": {
-          "type": "string",
-          "description": "Unique identifier",
-          "pattern": "^[0-9a-zA-Z-_]+$"
-        }
-      }
-    },
-    "start_date": {
-      "type": "string",
-      "nullable": true,
-      "format": "date-time",
-      "description": "Start date"
-    },
-    "end_date": {
-      "type": "string",
-      "nullable": true,
-      "format": "date-time",
-      "description": "End date"
-    },
-    "cycles": {
-      "type": "array",
-      "minimum": 1,
-      "items": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-          "needed",
-          "pending",
-          "in_progress",
-          "verifying",
-          "complete",
-          "blocked",
-          "cancelled",
-          "work_flow"
-        ],
-        "properties": {
-          "needed": {
-            "type": "integer",
-            "description": "The number of cycles needed",
-            "minimum": 1
-          },
-          "pending": {
-            "type": "integer",
-            "description": "The number of cycles pending",
-            "readOnly": true
-          },
-          "in_progress": {
-            "type": "integer",
-            "description": "The number of cycles pending",
-            "readOnly": true
-          },
-          "verifying": {
-            "type": "integer",
-            "description": "The number of cycles pending",
-            "readOnly": true
-          },
-          "complete": {
-            "type": "integer",
-            "description": "The number of cycles pending",
-            "readOnly": true
-          },
-          "blocked": {
-            "type": "integer",
-            "description": "The number of cycles pending",
-            "readOnly": true
-          },
-          "cancelled": {
-            "type": "integer",
-            "description": "The number of cycles pending",
-            "readOnly": true
-          },
-          "work_flow": {
-            "type": "object",
-            "description": "Workflow",
-            "additionalProperties": false,
-            "required": [
-              "label",
-              "entity_id",
-              "entity_type",
-              "created",
-              "updated",
-              "steps",
-              "starts_at",
-              "applies_to",
-              "schema_version"
-            ],
-            "properties": {
-              "work_flow_id": {
-                "type": "string",
-                "description": "Customer identifier",
-                "readOnly": true,
-                "pattern": "^[0-9a-zA-Z-_]+$"
-              },
-              "entity_id": {
-                "x-no-api-doc": true,
-                "type": "string",
-                "description": "Customer identifier",
-                "readOnly": true,
-                "pattern": "^[0-9a-zA-Z-_]+$"
-              },
-              "entity_type": {
-                "x-no-api-doc": true,
-                "enum": [
-                  "WKF"
-                ]
-              },
-              "label": {
-                "type": "string",
-                "description": "Label for the entity"
-              },
-              "slug": {
-                "type": "string",
-                "description": "Slug for the entity (Auto-generated from the label)",
-                "readOnly": true,
-                "deprecated": true,
-                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-              },
-              "created": {
-                "description": "Date the entity was created",
-                "type": "string",
-                "format": "date-time",
-                "readOnly": true
-              },
-              "updated": {
-                "description": "Last date the entity was updated",
-                "type": "string",
-                "format": "date-time",
-                "readOnly": true
-              },
-              "schema_version": {
-                "type": "string",
-                "description": "Version of the workflow schema used",
-                "enum": [
-                  "1.0"
-                ]
-              },
-              "workflow_version": {
-                "type": "integer",
-                "description": "Version number for the work flows (the number of times it has been changed",
-                "readOnly": true
-              },
-              "applies_to": {
-                "type": "string",
-                "description": "The entity type this work flow applies too",
-                "enum": [
-                  "UNIT",
-                  "PART",
-                  "PGM",
-                  "PRJ",
-                  "CUS",
-                  "CON"
-                ]
-              },
-              "triggered_by": {
-                "type": "array",
-                "items": {
-                  "type": "string",
-                  "description": "Possible entity events",
-                  "enum": [
-                    "CON.attached",
-                    "CON.created",
-                    "CON.deleted",
-                    "CON.detached",
-                    "CON.removed",
-                    "CON.updated",
-                    "CUS.attached",
-                    "CUS.created",
-                    "CUS.deleted",
-                    "CUS.detached",
-                    "CUS.removed",
-                    "CUS.updated",
-                    "LOC.attached",
-                    "LOC.created",
-                    "LOC.deleted",
-                    "LOC.detached",
-                    "LOC.removed",
-                    "LOC.updated",
-                    "NOTE.attached",
-                    "NOTE.created",
-                    "NOTE.deleted",
-                    "NOTE.detached",
-                    "NOTE.removed",
-                    "NOTE.updated",
-                    "PART.attached",
-                    "PART.created",
-                    "PART.deleted",
-                    "PART.detached",
-                    "PART.removed",
-                    "PART.updated",
-                    "PGM.attached",
-                    "PGM.created",
-                    "PGM.deleted",
-                    "PGM.detached",
-                    "PGM.removed",
-                    "PGM.updated",
-                    "PRO.attached",
-                    "PRO.created",
-                    "PRO.deleted",
-                    "PRO.detached",
-                    "PRO.removed",
-                    "PRO.updated",
-                    "RES.attached",
-                    "RES.created",
-                    "RES.deleted",
-                    "RES.detached",
-                    "RES.removed",
-                    "RES.updated",
-                    "UNIT.attached",
-                    "UNIT.created",
-                    "UNIT.deleted",
-                    "UNIT.detached",
-                    "UNIT.removed",
-                    "UNIT.updated",
-                    "USER.attached",
-                    "USER.created",
-                    "USER.deleted",
-                    "USER.detached",
-                    "USER.removed",
-                    "USER.updated",
-                    "WKF.attached",
-                    "WKF.created",
-                    "WKF.deleted",
-                    "WKF.detached",
-                    "WKF.removed",
-                    "WKF.updated",
-                    "WOR.attached",
-                    "WOR.created",
-                    "WOR.deleted",
-                    "WOR.detached",
-                    "WOR.removed",
-                    "WOR.updated"
-                  ]
-                }
-              },
-              "starts_at": {
-                "type": "string",
-                "description": "Starting step"
-              },
-              "steps": {
-                "type": "object",
-                "description": "Steps for the workflow",
-                "uniqueItems": true,
-                "additionalProperties": true,
-                "x-patternProperties": {
-                  "^[A-Za-z][A-Za-z0-9_]*$": {
-                    "anyOf": [
-                      {
-                        "$schema": "http://json-schema.org/draft-07/schema#",
-                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/function/allocateUnitsToProject.json",
-                        "type": "object",
-                        "description": "Require the user confirm an action. This is normally used when Niagara cannot automatically detect that a task or action has been performed.",
-                        "properties": {
-                          "label": {
-                            "type": "string",
-                            "description": "Label for the entity"
-                          },
-                          "options": {
-                            "type": "object",
-                            "required": [
-                              "function",
-                              "payload"
-                            ],
-                            "properties": {
-                              "function": {
-                                "type": "string",
-                                "enum": [
-                                  "allocate-units-to-project"
-                                ]
-                              },
-                              "payload": {
-                                "type": "object",
-                                "required": [
-                                  "part_id",
-                                  "project_id",
-                                  "qty"
-                                ],
-                                "properties": {
-                                  "part_id": {
-                                    "type": "string",
-                                    "description": "Part ID of the to assign"
-                                  },
-                                  "program_id": {
-                                    "type": "string",
-                                    "description": "Program ID of the to assign"
-                                  },
-                                  "qty": {
-                                    "type": "number",
-                                    "minimum": 1,
-                                    "description": "Number of units to assign to the project"
-                                  },
-                                  "allow_scarcity": {
-                                    "type": "boolean",
-                                    "description": "Allow the workflow to continue even if there are not enough units"
-                                  },
-                                  "force": {
-                                    "type": "boolean",
-                                    "description": "Assign the units even if the project already has units allocated"
-                                  },
-                                  "status": {
-                                    "type": "string",
-                                    "description": "Only assign units which are in this status"
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      },
-                      {
-                        "$schema": "http://json-schema.org/draft-07/schema#",
-                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/followPDFInstructions.json",
-                        "type": "object",
-                        "description": "Display a link or modal to a user which contains instructions from a PDF",
-                        "required": [
-                          "label",
-                          "payload"
-                        ],
-                        "properties": {
-                          "label": {
-                            "type": "string",
-                            "description": "Label for the step"
-                          },
-                          "options": {
-                            "type": "object",
-                            "required": [
-                              "component",
-                              "payload"
-                            ],
-                            "properties": {
-                              "component": {
-                                "enum": [
-                                  "follow-pds-instructions"
-                                ]
-                              },
-                              "payload": {
-                                "type": "object",
-                                "required": [
-                                  "attachment_id"
-                                ],
-                                "properties": {
-                                  "attachment_id": {
-                                    "type": "string",
-                                    "description": "UUID for the attachment",
-                                    "format": "uuid"
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        },
-                        "allOf": [
-                          {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepUser.json",
-                            "type": "object",
-                            "description": "A step which requires a user to complete",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "description": "Type of workflow step",
-                                "enum": [
-                                  "load",
-                                  "choice",
-                                  "function",
-                                  "machine",
-                                  "pass",
-                                  "fail",
-                                  "success",
-                                  "user",
-                                  "wait"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "required": [
-                                  "component",
-                                  "payload"
-                                ],
-                                "properties": {
-                                  "component": {
-                                    "type": "string",
-                                    "description": "Name of the function to invoke"
-                                  },
-                                  "payload": {
-                                    "type": "object"
-                                  }
-                                }
-                              }
-                            },
-                            "allOf": [
-                              {
-                                "$schema": "http://json-schema.org/draft-07/schema#",
-                                "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepCommon.json",
-                                "type": "object",
-                                "required": [
-                                  "type",
-                                  "label",
-                                  "goto"
-                                ],
-                                "properties": {
-                                  "type": {
-                                    "type": "string",
-                                    "description": "Type of workflow step",
-                                    "enum": [
-                                      "load",
-                                      "choice",
-                                      "function",
-                                      "machine",
-                                      "pass",
-                                      "fail",
-                                      "success",
-                                      "user",
-                                      "wait"
-                                    ]
-                                  },
-                                  "label": {
-                                    "type": "string",
-                                    "description": "Label for the step"
-                                  },
-                                  "goto": {
-                                    "type": "string",
-                                    "description": "Step to move to",
-                                    "pattern": "^[a-z][a-z-]+[a-z]$"
-                                  },
-                                  "goto-fail": {
-                                    "type": "string",
-                                    "description": "Step to transition too if this step cannot be completed",
-                                    "pattern": "^[a-z][a-z-]+[a-z]$"
-                                  },
-                                  "onComplete": {
-                                    "$schema": "http://json-schema.org/draft-07/schema#",
-                                    "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                    "type": "object",
-                                    "required": [
-                                      "retry",
-                                      "finally"
-                                    ],
-                                    "properties": {
-                                      "actions": {
-                                        "type": "array",
-                                        "description": "Actions to take on failure",
-                                        "maxItems": 10,
-                                        "items": {
-                                          "type": "object"
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            ]
-                          }
-                        ]
-                      },
-                      {
-                        "$schema": "http://json-schema.org/draft-07/schema#",
-                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/manualDataEntry.json",
-                        "type": "object",
-                        "description": "Ask the user to manually enter (or confirm) data for an entity",
-                        "properties": {
-                          "label": {
-                            "type": "string",
-                            "description": "Label for the step"
-                          },
-                          "options": {
-                            "type": "object",
-                            "required": [
-                              "component",
-                              "payload"
-                            ],
-                            "properties": {
-                              "component": {
-                                "enum": [
-                                  "manual-data-entry"
-                                ]
-                              },
-                              "payload": {
-                                "type": "object",
-                                "required": [
-                                  "fields"
-                                ],
-                                "properties": {
-                                  "fields": {
-                                    "type": "array",
-                                    "description": "Configuration for each field",
-                                    "items": {
-                                      "type": "object",
-                                      "required": [
-                                        "input_type",
-                                        "label",
-                                        "required",
-                                        "entity_field"
-                                      ],
-                                      "properties": {
-                                        "input_type": {
-                                          "type": "string",
-                                          "description": "The type of input field to display",
-                                          "enum": [
-                                            "textbox",
-                                            "input"
-                                          ]
-                                        },
-                                        "label": {
-                                          "type": "string",
-                                          "description": "Label to display for the field"
-                                        },
-                                        "required": {
-                                          "type": "boolean",
-                                          "description": "Display the field as required input. Note: this is a helper function. It singles that the user is required to input data at this step. If the field is required on the entity, the user will be presented with a validation message"
-                                        },
-                                        "entity_field": {
-                                          "type": "string",
-                                          "description": "JSON Path to the field on the entity. If the path does not start with '$' then the entity on the context is assumed. Otherwise the data will be set on the context path"
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        },
-                        "allOf": [
-                          {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepUser.json",
-                            "type": "object",
-                            "description": "A step which requires a user to complete",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "description": "Type of workflow step",
-                                "enum": [
-                                  "load",
-                                  "choice",
-                                  "function",
-                                  "machine",
-                                  "pass",
-                                  "fail",
-                                  "success",
-                                  "user",
-                                  "wait"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "required": [
-                                  "component",
-                                  "payload"
-                                ],
-                                "properties": {
-                                  "component": {
-                                    "type": "string",
-                                    "description": "Name of the function to invoke"
-                                  },
-                                  "payload": {
-                                    "type": "object"
-                                  }
-                                }
-                              }
-                            },
-                            "allOf": [
-                              {
-                                "$schema": "http://json-schema.org/draft-07/schema#",
-                                "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepCommon.json",
-                                "type": "object",
-                                "required": [
-                                  "type",
-                                  "label",
-                                  "goto"
-                                ],
-                                "properties": {
-                                  "type": {
-                                    "type": "string",
-                                    "description": "Type of workflow step",
-                                    "enum": [
-                                      "load",
-                                      "choice",
-                                      "function",
-                                      "machine",
-                                      "pass",
-                                      "fail",
-                                      "success",
-                                      "user",
-                                      "wait"
-                                    ]
-                                  },
-                                  "label": {
-                                    "type": "string",
-                                    "description": "Label for the step"
-                                  },
-                                  "goto": {
-                                    "type": "string",
-                                    "description": "Step to move to",
-                                    "pattern": "^[a-z][a-z-]+[a-z]$"
-                                  },
-                                  "goto-fail": {
-                                    "type": "string",
-                                    "description": "Step to transition too if this step cannot be completed",
-                                    "pattern": "^[a-z][a-z-]+[a-z]$"
-                                  },
-                                  "onComplete": {
-                                    "$schema": "http://json-schema.org/draft-07/schema#",
-                                    "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                    "type": "object",
-                                    "required": [
-                                      "retry",
-                                      "finally"
-                                    ],
-                                    "properties": {
-                                      "actions": {
-                                        "type": "array",
-                                        "description": "Actions to take on failure",
-                                        "maxItems": 10,
-                                        "items": {
-                                          "type": "object"
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            ]
-                          }
-                        ]
-                      },
-                      {
-                        "$schema": "http://json-schema.org/draft-07/schema#",
-                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/taskList.json",
-                        "type": "object",
-                        "description": "Ask the user to follow a list and check off boxes",
-                        "properties": {
-                          "label": {
-                            "type": "string",
-                            "description": "Label for the step"
-                          },
-                          "options": {
-                            "type": "object",
-                            "required": [
-                              "component",
-                              "payload"
-                            ],
-                            "properties": {
-                              "component": {
-                                "enum": [
-                                  "task-list"
-                                ]
-                              },
-                              "payload": {
-                                "type": "object",
-                                "required": [
-                                  "items"
-                                ],
-                                "properties": {
-                                  "is_qc": {
-                                    "type": "boolean",
-                                    "description": "Flags this list as a QC task list. This means that a different user can close the task to one previously on the context"
-                                  },
-                                  "items": {
-                                    "type": "array",
-                                    "description": "Configuration for each task list item",
-                                    "items": {
-                                      "type": "object",
-                                      "required": [
-                                        "label",
-                                        "evaluated",
-                                        "na_option"
-                                      ],
-                                      "properties": {
-                                        "label": {
-                                          "type": "string",
-                                          "description": "Label to display for the field"
-                                        },
-                                        "slug": {
-                                          "type": "string",
-                                          "description": "Slug for the item (Auto-generated from the label)",
-                                          "readOnly": true,
-                                          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-                                        },
-                                        "help": {
-                                          "type": "string",
-                                          "description": "Message describing what is needed to be checked"
-                                        },
-                                        "evaluated": {
-                                          "type": "boolean",
-                                          "description": "When set to true, this will fail the step if the value for the item is false or N/A"
-                                        },
-                                        "na_field": {
-                                          "type": "boolean",
-                                          "description": "Allow the user to select the N/A option when checking off the list"
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        },
-                        "allOf": [
-                          {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepUser.json",
-                            "type": "object",
-                            "description": "A step which requires a user to complete",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "description": "Type of workflow step",
-                                "enum": [
-                                  "load",
-                                  "choice",
-                                  "function",
-                                  "machine",
-                                  "pass",
-                                  "fail",
-                                  "success",
-                                  "user",
-                                  "wait"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "required": [
-                                  "component",
-                                  "payload"
-                                ],
-                                "properties": {
-                                  "component": {
-                                    "type": "string",
-                                    "description": "Name of the function to invoke"
-                                  },
-                                  "payload": {
-                                    "type": "object"
-                                  }
-                                }
-                              }
-                            },
-                            "allOf": [
-                              {
-                                "$schema": "http://json-schema.org/draft-07/schema#",
-                                "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepCommon.json",
-                                "type": "object",
-                                "required": [
-                                  "type",
-                                  "label",
-                                  "goto"
-                                ],
-                                "properties": {
-                                  "type": {
-                                    "type": "string",
-                                    "description": "Type of workflow step",
-                                    "enum": [
-                                      "load",
-                                      "choice",
-                                      "function",
-                                      "machine",
-                                      "pass",
-                                      "fail",
-                                      "success",
-                                      "user",
-                                      "wait"
-                                    ]
-                                  },
-                                  "label": {
-                                    "type": "string",
-                                    "description": "Label for the step"
-                                  },
-                                  "goto": {
-                                    "type": "string",
-                                    "description": "Step to move to",
-                                    "pattern": "^[a-z][a-z-]+[a-z]$"
-                                  },
-                                  "goto-fail": {
-                                    "type": "string",
-                                    "description": "Step to transition too if this step cannot be completed",
-                                    "pattern": "^[a-z][a-z-]+[a-z]$"
-                                  },
-                                  "onComplete": {
-                                    "$schema": "http://json-schema.org/draft-07/schema#",
-                                    "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                    "type": "object",
-                                    "required": [
-                                      "retry",
-                                      "finally"
-                                    ],
-                                    "properties": {
-                                      "actions": {
-                                        "type": "array",
-                                        "description": "Actions to take on failure",
-                                        "maxItems": 10,
-                                        "items": {
-                                          "type": "object"
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            ]
-                          }
-                        ]
-                      },
-                      {
-                        "$schema": "http://json-schema.org/draft-07/schema#",
-                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/machine/aceIos.json",
-                        "type": "object",
-                        "description": "Run the ACE-IOS application to provision iOS devices or ",
-                        "properties": {
-                          "type": {
-                            "type": "string",
-                            "enum": [
-                              "machine"
-                            ]
-                          },
-                          "label": {
-                            "type": "string",
-                            "description": "Label for the step"
-                          },
-                          "options": {
-                            "type": "object",
-                            "required": [
-                              "application",
-                              "configuration"
-                            ],
-                            "properties": {
-                              "configuration": {
-                                "type": "object",
-                                "description": "ACE Configuration options",
-                                "properties": {
-                                  "pairing_cert": {
-                                    "type": "string",
-                                    "description": "Contents of a *.crt file exported from Apple Configurator or MDM",
-                                    "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$"
-                                  },
-                                  "pairing_key": {
-                                    "type": "string",
-                                    "description": "Contents of a *.der file exported from Apple Configurator or MDM",
-                                    "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$"
-                                  },
-                                  "restore_device": {
-                                    "type": "boolean",
-                                    "description": "Restore device to factory defaults"
-                                  },
-                                  "automated_enrollment": {
-                                    "type": "boolean",
-                                    "description": "Automatically enroll the device to MDM"
-                                  },
-                                  "mdm": {
-                                    "type": "object",
-                                    "description": "The settings for the Customers MDM",
-                                    "properties": {
-                                      "vendor": {
-                                        "type": "string",
-                                        "description": "MDM vendor. Currently, supported values are AirWatch, JAMF, and Meraki.",
-                                        "enum": [
-                                          "AirWatch",
-                                          "JAMF",
-                                          "Meraki"
-                                        ]
-                                      },
-                                      "console_url": {
-                                        "type": "string",
-                                        "format": "uri",
-                                        "description": "Base URL for HTTP requests"
-                                      },
-                                      "user": {
-                                        "type": "string",
-                                        "description": "MDM User name"
-                                      },
-                                      "password": {
-                                        "type": "string",
-                                        "description": "MDM password"
-                                      },
-                                      "tenant_code": {
-                                        "type": "string",
-                                        "description": "MDM authentication key"
-                                      },
-                                      "set_asset_tag": {
-                                        "type": "string",
-                                        "description": "Sets the devices Asset tag based on a field from the unit"
-                                      }
-                                    }
-                                  },
-                                  "field_mappings": {
-                                    "type": "array",
-                                    "description": "List of fields to map to the device",
-                                    "items": {
-                                      "type": "object",
-                                      "properties": {
-                                        "from": {
-                                          "type": "string",
-                                          "description": "The field reported from ACE",
-                                          "enum": [
-                                            "serial_number",
-                                            "name",
-                                            "ecid",
-                                            "udid",
-                                            "configurator_serial",
-                                            "ios",
-                                            "model",
-                                            "storage",
-                                            "wifi_mac",
-                                            "bt_mac",
-                                            "ethernet_mac",
-                                            "thundersync_serial",
-                                            "iccid",
-                                            "iccid2",
-                                            "imei",
-                                            "imei2",
-                                            "missed_profiles",
-                                            "missed_apps",
-                                            "icon_list_regex",
-                                            "icon_layout",
-                                            "bat_capacity"
-                                          ]
-                                        },
-                                        "to": {
-                                          "type": "string",
-                                          "description": "Field to set on the entity"
-                                        }
-                                      }
-                                    }
-                                  },
-                                  "wait_for_apps": {
-                                    "type": "array",
-                                    "description": "A list of applications needed to be installed on the device. This will cause the extension to poll the device for installed applications. Once all the applications have been installed, this step can be completed",
-                                    "items": {
-                                      "type": "string",
-                                      "format": "uri"
-                                    }
-                                  },
-                                  "wait_for_battery_charge": {
-                                    "type": "integer",
-                                    "description": "The required battery percentage needed before this step can move on",
-                                    "minimum": 0,
-                                    "maximum": 100
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      },
-                      {
-                        "$schema": "http://json-schema.org/draft-07/schema#",
-                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepChoice.json",
-                        "type": "object",
-                        "description": "A Step choice",
-                        "maxProperties": 2,
-                        "minProperties": 2,
-                        "required": [
-                          "decision"
-                        ],
-                        "properties": {
-                          "decision": {
-                            "type": "array",
-                            "description": "Context variable to check",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "variable": {
-                                  "type": "string",
-                                  "description": "Variable or value"
-                                },
-                                "operator": {
-                                  "type": "string",
-                                  "description": "Operator to perform",
-                                  "enum": [
-                                    "greater_than_equals",
-                                    "less_than_equals",
-                                    "greater_than",
-                                    "less_than",
-                                    "equals",
-                                    "not_equals"
-                                  ]
-                                },
-                                "operand": {
-                                  "type": "string",
-                                  "description": "operand to compare with"
-                                }
-                              }
-                            }
-                          }
-                        },
-                        "allOf": [
-                          {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepNext.json",
-                            "type": "object",
-                            "required": [
-                              "type",
-                              "label",
-                              "goto"
-                            ],
-                            "properties": {
-                              "goto": {
-                                "type": "string",
-                                "description": "Step to move to",
-                                "pattern": "^[a-z][a-z-]+[a-z]$"
-                              },
-                              "goto-fail": {
-                                "type": "string",
-                                "description": "Step to transition too if this step cannot be completed",
-                                "pattern": "^[a-z][a-z-]+[a-z]$"
-                              },
-                              "context": {
-                                "type": "array",
-                                "description": "Values to set on the context",
-                                "items": {
-                                  "type": "object",
-                                  "required": [
-                                    "key",
-                                    "value"
-                                  ],
-                                  "properties": {
-                                    "key": {
-                                      "type": "string",
-                                      "description": "The context key to set"
-                                    },
-                                    "value": {
-                                      "type": "string",
-                                      "description": "Value to set"
-                                    },
-                                    "lock": {
-                                      "type": "boolean",
-                                      "description": "Prevents other steps from writing this value"
-                                    },
-                                    "ignore": {
-                                      "type": "boolean",
-                                      "description": "When trying to set a locked key, do not fail"
-                                    }
-                                  }
-                                }
-                              },
-                              "onStart": {
-                                "$schema": "http://json-schema.org/draft-07/schema#",
-                                "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                "type": "object",
-                                "required": [
-                                  "retry",
-                                  "finally"
-                                ],
-                                "properties": {
-                                  "actions": {
-                                    "type": "array",
-                                    "description": "Actions to take on failure",
-                                    "maxItems": 10,
-                                    "items": {
-                                      "type": "object"
-                                    }
-                                  }
-                                }
-                              },
-                              "onError": {
-                                "$schema": "http://json-schema.org/draft-07/schema#",
-                                "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepError.json",
-                                "type": "object",
-                                "required": [
-                                  "retry",
-                                  "finally"
-                                ],
-                                "properties": {
-                                  "retry": {
-                                    "type": "integer",
-                                    "description": "Number of times to retry this step. Note: retry will only occur on steps which automatically failed. If the step was transitioned using the 'goto-fail' step, the actions will be fired but the step WILL NOT be re-tried",
-                                    "minimum": 0,
-                                    "maximum": 10,
-                                    "default": 0
-                                  },
-                                  "finally": {
-                                    "type": "object",
-                                    "description": "What to do after all retries",
-                                    "properties": {
-                                      "actions": {
-                                        "$schema": "http://json-schema.org/draft-07/schema#",
-                                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                        "type": "object",
-                                        "required": [
-                                          "retry",
-                                          "finally"
-                                        ],
-                                        "properties": {
-                                          "actions": {
-                                            "type": "array",
-                                            "description": "Actions to take on failure",
-                                            "maxItems": 10,
-                                            "items": {
-                                              "type": "object"
-                                            }
-                                          }
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              },
-                              "onTimeout": {
-                                "$schema": "http://json-schema.org/draft-07/schema#",
-                                "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepError.json",
-                                "type": "object",
-                                "required": [
-                                  "retry",
-                                  "finally"
-                                ],
-                                "properties": {
-                                  "retry": {
-                                    "type": "integer",
-                                    "description": "Number of times to retry this step. Note: retry will only occur on steps which automatically failed. If the step was transitioned using the 'goto-fail' step, the actions will be fired but the step WILL NOT be re-tried",
-                                    "minimum": 0,
-                                    "maximum": 10,
-                                    "default": 0
-                                  },
-                                  "finally": {
-                                    "type": "object",
-                                    "description": "What to do after all retries",
-                                    "properties": {
-                                      "actions": {
-                                        "$schema": "http://json-schema.org/draft-07/schema#",
-                                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                        "type": "object",
-                                        "required": [
-                                          "retry",
-                                          "finally"
-                                        ],
-                                        "properties": {
-                                          "actions": {
-                                            "type": "array",
-                                            "description": "Actions to take on failure",
-                                            "maxItems": 10,
-                                            "items": {
-                                              "type": "object"
-                                            }
-                                          }
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        ]
-                      },
-                      {
-                        "$schema": "http://json-schema.org/draft-07/schema#",
-                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepFail.json",
-                        "type": "object",
-                        "description": "Finial step which is marked as failed",
-                        "properties": {
-                          "label": {
-                            "type": "string",
-                            "description": "Label for the step"
-                          },
-                          "type": {
-                            "type": "string",
-                            "description": "Type of workflow step",
-                            "enum": [
-                              "load",
-                              "choice",
-                              "function",
-                              "machine",
-                              "pass",
-                              "fail",
-                              "success",
-                              "user",
-                              "wait"
-                            ]
-                          },
-                          "onComplete": {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                            "type": "object",
-                            "required": [
-                              "retry",
-                              "finally"
-                            ],
-                            "properties": {
-                              "actions": {
-                                "type": "array",
-                                "description": "Actions to take on failure",
-                                "maxItems": 10,
-                                "items": {
-                                  "type": "object"
-                                }
-                              }
-                            }
-                          }
-                        }
-                      },
-                      {
-                        "$schema": "http://json-schema.org/draft-07/schema#",
-                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepPass.json",
-                        "type": "object",
-                        "description": "Allows executing actions with out performing any function",
-                        "properties": {
-                          "label": {
-                            "type": "string",
-                            "description": "Label for the entity"
-                          },
-                          "type": {
-                            "type": "string",
-                            "description": "Type of workflow step",
-                            "enum": [
-                              "load",
-                              "choice",
-                              "function",
-                              "machine",
-                              "pass",
-                              "fail",
-                              "success",
-                              "user",
-                              "wait"
-                            ]
-                          }
-                        },
-                        "allOf": [
-                          {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepCommon.json",
-                            "type": "object",
-                            "required": [
-                              "type",
-                              "label",
-                              "goto"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "description": "Type of workflow step",
-                                "enum": [
-                                  "load",
-                                  "choice",
-                                  "function",
-                                  "machine",
-                                  "pass",
-                                  "fail",
-                                  "success",
-                                  "user",
-                                  "wait"
-                                ]
-                              },
-                              "label": {
-                                "type": "string",
-                                "description": "Label for the step"
-                              },
-                              "goto": {
-                                "type": "string",
-                                "description": "Step to move to",
-                                "pattern": "^[a-z][a-z-]+[a-z]$"
-                              },
-                              "goto-fail": {
-                                "type": "string",
-                                "description": "Step to transition too if this step cannot be completed",
-                                "pattern": "^[a-z][a-z-]+[a-z]$"
-                              },
-                              "onComplete": {
-                                "$schema": "http://json-schema.org/draft-07/schema#",
-                                "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                "type": "object",
-                                "required": [
-                                  "retry",
-                                  "finally"
-                                ],
-                                "properties": {
-                                  "actions": {
-                                    "type": "array",
-                                    "description": "Actions to take on failure",
-                                    "maxItems": 10,
-                                    "items": {
-                                      "type": "object"
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        ]
-                      },
-                      {
-                        "$schema": "http://json-schema.org/draft-07/schema#",
-                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepSuccess.json",
-                        "type": "object",
-                        "description": "Finial step which is marked as completed successfully",
-                        "properties": {
-                          "label": {
-                            "type": "string",
-                            "description": "Label for the step"
-                          },
-                          "type": {
-                            "type": "string",
-                            "description": "Type of workflow step",
-                            "enum": [
-                              "load",
-                              "choice",
-                              "function",
-                              "machine",
-                              "pass",
-                              "fail",
-                              "success",
-                              "user",
-                              "wait"
-                            ]
-                          },
-                          "onComplete": {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                            "type": "object",
-                            "required": [
-                              "retry",
-                              "finally"
-                            ],
-                            "properties": {
-                              "actions": {
-                                "type": "array",
-                                "description": "Actions to take on failure",
-                                "maxItems": 10,
-                                "items": {
-                                  "type": "object"
-                                }
-                              }
-                            }
-                          }
-                        }
-                      },
-                      {
-                        "$schema": "http://json-schema.org/draft-07/schema#",
-                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepWait.json",
-                        "type": "object",
-                        "description": "A step which run at certain times",
-                        "required": [
-                          "stop_at",
-                          "time"
-                        ],
-                        "properties": {
-                          "label": {
-                            "type": "string",
-                            "description": "Label for the step"
-                          },
-                          "type": {
-                            "type": "string",
-                            "enum": [
-                              "wait"
-                            ]
-                          },
-                          "stop_at": {
-                            "type": "integer",
-                            "description": "Time in seconds to stop this task",
-                            "maximum": 900,
-                            "minimum": 1
-                          },
-                          "time": {
-                            "type": "integer",
-                            "description": "Time to wait before checking this step",
-                            "maximum": 900,
-                            "minimum": 1
-                          },
-                          "listen_for": {
-                            "type": "array",
-                            "description": "List of events and conditions to listen for to trigger",
-                            "items": {
-                              "type": "object",
-                              "required": [
-                                "event"
-                              ],
-                              "properties": {
-                                "event": {
-                                  "type": "string",
-                                  "description": "Name of the event to listen for",
-                                  "allOf": [
-                                    {
-                                      "type": "string",
-                                      "description": "Possible entity events",
-                                      "enum": [
-                                        "CON.attached",
-                                        "CON.created",
-                                        "CON.deleted",
-                                        "CON.detached",
-                                        "CON.removed",
-                                        "CON.updated",
-                                        "CUS.attached",
-                                        "CUS.created",
-                                        "CUS.deleted",
-                                        "CUS.detached",
-                                        "CUS.removed",
-                                        "CUS.updated",
-                                        "LOC.attached",
-                                        "LOC.created",
-                                        "LOC.deleted",
-                                        "LOC.detached",
-                                        "LOC.removed",
-                                        "LOC.updated",
-                                        "NOTE.attached",
-                                        "NOTE.created",
-                                        "NOTE.deleted",
-                                        "NOTE.detached",
-                                        "NOTE.removed",
-                                        "NOTE.updated",
-                                        "PART.attached",
-                                        "PART.created",
-                                        "PART.deleted",
-                                        "PART.detached",
-                                        "PART.removed",
-                                        "PART.updated",
-                                        "PGM.attached",
-                                        "PGM.created",
-                                        "PGM.deleted",
-                                        "PGM.detached",
-                                        "PGM.removed",
-                                        "PGM.updated",
-                                        "PRO.attached",
-                                        "PRO.created",
-                                        "PRO.deleted",
-                                        "PRO.detached",
-                                        "PRO.removed",
-                                        "PRO.updated",
-                                        "RES.attached",
-                                        "RES.created",
-                                        "RES.deleted",
-                                        "RES.detached",
-                                        "RES.removed",
-                                        "RES.updated",
-                                        "UNIT.attached",
-                                        "UNIT.created",
-                                        "UNIT.deleted",
-                                        "UNIT.detached",
-                                        "UNIT.removed",
-                                        "UNIT.updated",
-                                        "USER.attached",
-                                        "USER.created",
-                                        "USER.deleted",
-                                        "USER.detached",
-                                        "USER.removed",
-                                        "USER.updated",
-                                        "WKF.attached",
-                                        "WKF.created",
-                                        "WKF.deleted",
-                                        "WKF.detached",
-                                        "WKF.removed",
-                                        "WKF.updated",
-                                        "WOR.attached",
-                                        "WOR.created",
-                                        "WOR.deleted",
-                                        "WOR.detached",
-                                        "WOR.removed",
-                                        "WOR.updated"
-                                      ]
-                                    }
-                                  ]
-                                },
-                                "event_value": {
-                                  "type": "object",
-                                  "description": "The event conditions that have to be met",
-                                  "allOf": [
-                                    {
-                                      "$schema": "http://json-schema.org/draft-07/schema#",
-                                      "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepChoice.json",
-                                      "type": "object",
-                                      "description": "A Step choice",
-                                      "maxProperties": 2,
-                                      "minProperties": 2,
-                                      "required": [
-                                        "decision"
-                                      ],
-                                      "properties": {
-                                        "decision": {
-                                          "type": "array",
-                                          "description": "Context variable to check",
-                                          "items": {
-                                            "type": "object",
-                                            "properties": {
-                                              "variable": {
-                                                "type": "string",
-                                                "description": "Variable or value"
-                                              },
-                                              "operator": {
-                                                "type": "string",
-                                                "description": "Operator to perform",
-                                                "enum": [
-                                                  "greater_than_equals",
-                                                  "less_than_equals",
-                                                  "greater_than",
-                                                  "less_than",
-                                                  "equals",
-                                                  "not_equals"
-                                                ]
-                                              },
-                                              "operand": {
-                                                "type": "string",
-                                                "description": "operand to compare with"
-                                              }
-                                            }
-                                          }
-                                        }
-                                      },
-                                      "allOf": [
-                                        {
-                                          "$schema": "http://json-schema.org/draft-07/schema#",
-                                          "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepNext.json",
-                                          "type": "object",
-                                          "required": [
-                                            "type",
-                                            "label",
-                                            "goto"
-                                          ],
-                                          "properties": {
-                                            "goto": {
-                                              "type": "string",
-                                              "description": "Step to move to",
-                                              "pattern": "^[a-z][a-z-]+[a-z]$"
-                                            },
-                                            "goto-fail": {
-                                              "type": "string",
-                                              "description": "Step to transition too if this step cannot be completed",
-                                              "pattern": "^[a-z][a-z-]+[a-z]$"
-                                            },
-                                            "context": {
-                                              "type": "array",
-                                              "description": "Values to set on the context",
-                                              "items": {
-                                                "type": "object",
-                                                "required": [
-                                                  "key",
-                                                  "value"
-                                                ],
-                                                "properties": {
-                                                  "key": {
-                                                    "type": "string",
-                                                    "description": "The context key to set"
-                                                  },
-                                                  "value": {
-                                                    "type": "string",
-                                                    "description": "Value to set"
-                                                  },
-                                                  "lock": {
-                                                    "type": "boolean",
-                                                    "description": "Prevents other steps from writing this value"
-                                                  },
-                                                  "ignore": {
-                                                    "type": "boolean",
-                                                    "description": "When trying to set a locked key, do not fail"
-                                                  }
-                                                }
-                                              }
-                                            },
-                                            "onStart": {
-                                              "$schema": "http://json-schema.org/draft-07/schema#",
-                                              "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                              "type": "object",
-                                              "required": [
-                                                "retry",
-                                                "finally"
-                                              ],
-                                              "properties": {
-                                                "actions": {
-                                                  "type": "array",
-                                                  "description": "Actions to take on failure",
-                                                  "maxItems": 10,
-                                                  "items": {
-                                                    "type": "object"
-                                                  }
-                                                }
-                                              }
-                                            },
-                                            "onError": {
-                                              "$schema": "http://json-schema.org/draft-07/schema#",
-                                              "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepError.json",
-                                              "type": "object",
-                                              "required": [
-                                                "retry",
-                                                "finally"
-                                              ],
-                                              "properties": {
-                                                "retry": {
-                                                  "type": "integer",
-                                                  "description": "Number of times to retry this step. Note: retry will only occur on steps which automatically failed. If the step was transitioned using the 'goto-fail' step, the actions will be fired but the step WILL NOT be re-tried",
-                                                  "minimum": 0,
-                                                  "maximum": 10,
-                                                  "default": 0
-                                                },
-                                                "finally": {
-                                                  "type": "object",
-                                                  "description": "What to do after all retries",
-                                                  "properties": {
-                                                    "actions": {
-                                                      "$schema": "http://json-schema.org/draft-07/schema#",
-                                                      "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                                      "type": "object",
-                                                      "required": [
-                                                        "retry",
-                                                        "finally"
-                                                      ],
-                                                      "properties": {
-                                                        "actions": {
-                                                          "type": "array",
-                                                          "description": "Actions to take on failure",
-                                                          "maxItems": 10,
-                                                          "items": {
-                                                            "type": "object"
-                                                          }
-                                                        }
-                                                      }
-                                                    }
-                                                  }
-                                                }
-                                              }
-                                            },
-                                            "onTimeout": {
-                                              "$schema": "http://json-schema.org/draft-07/schema#",
-                                              "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepError.json",
-                                              "type": "object",
-                                              "required": [
-                                                "retry",
-                                                "finally"
-                                              ],
-                                              "properties": {
-                                                "retry": {
-                                                  "type": "integer",
-                                                  "description": "Number of times to retry this step. Note: retry will only occur on steps which automatically failed. If the step was transitioned using the 'goto-fail' step, the actions will be fired but the step WILL NOT be re-tried",
-                                                  "minimum": 0,
-                                                  "maximum": 10,
-                                                  "default": 0
-                                                },
-                                                "finally": {
-                                                  "type": "object",
-                                                  "description": "What to do after all retries",
-                                                  "properties": {
-                                                    "actions": {
-                                                      "$schema": "http://json-schema.org/draft-07/schema#",
-                                                      "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                                      "type": "object",
-                                                      "required": [
-                                                        "retry",
-                                                        "finally"
-                                                      ],
-                                                      "properties": {
-                                                        "actions": {
-                                                          "type": "array",
-                                                          "description": "Actions to take on failure",
-                                                          "maxItems": 10,
-                                                          "items": {
-                                                            "type": "object"
-                                                          }
-                                                        }
-                                                      }
-                                                    }
-                                                  }
-                                                }
-                                              }
-                                            }
-                                          }
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              }
-                            }
-                          }
-                        },
-                        "allOf": [
-                          {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepCommon.json",
-                            "type": "object",
-                            "required": [
-                              "type",
-                              "label",
-                              "goto"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "description": "Type of workflow step",
-                                "enum": [
-                                  "load",
-                                  "choice",
-                                  "function",
-                                  "machine",
-                                  "pass",
-                                  "fail",
-                                  "success",
-                                  "user",
-                                  "wait"
-                                ]
-                              },
-                              "label": {
-                                "type": "string",
-                                "description": "Label for the step"
-                              },
-                              "goto": {
-                                "type": "string",
-                                "description": "Step to move to",
-                                "pattern": "^[a-z][a-z-]+[a-z]$"
-                              },
-                              "goto-fail": {
-                                "type": "string",
-                                "description": "Step to transition too if this step cannot be completed",
-                                "pattern": "^[a-z][a-z-]+[a-z]$"
-                              },
-                              "onComplete": {
-                                "$schema": "http://json-schema.org/draft-07/schema#",
-                                "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                "type": "object",
-                                "required": [
-                                  "retry",
-                                  "finally"
-                                ],
-                                "properties": {
-                                  "actions": {
-                                    "type": "array",
-                                    "description": "Actions to take on failure",
-                                    "maxItems": 10,
-                                    "items": {
-                                      "type": "object"
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        ]
-                      }
-                    ]
-                  }
-                }
-              },
-              "metadata": {
-                "type": "object",
-                "description": "Data for the resource as a key value pair",
-                "additionalProperties": {
-                  "type": "string"
-                },
-                "propertyNames": {
-                  "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
-```
 
 <h3 id="updateworkorder-parameters">Parameters</h3>
 
@@ -11605,2466 +1188,43 @@ Updates a work order
 |---|---|---|---|---|
 |work_order_id|path|string|true|Id for the work order|
 |label|body|string|true|Label for the entity|
-|description|body|string\|null|false|Detailed description for the work order|
+|description|body|string¦null|false|Detailed description for the work order|
 |work_order_type|body|string|false|Type of work order|
 |begin_date|body|string(date-time)|false|Begin date|
 |due_date|body|string(date-time)|false|Due date|
 |current_status|body|object|false|Defines the properties for a status|
-|» status|body|string|true|A Custom label for the status|
-|» category|body|string|true|The classifier for the statues|
-|» description|body|string\|null|false|A description for the status|
-|» order|body|number|false|Order status appears when listing|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|body|string|true|A Custom label for the status|
+|&nbsp;&nbsp;&nbsp;&nbsp; category|body|string|true|The classifier for the statues|
+|&nbsp;&nbsp;&nbsp;&nbsp; description|body|string¦null|false|A description for the status|
+|&nbsp;&nbsp;&nbsp;&nbsp; order|body|number|false|Order status appears when listing|
 |project|body|object|true|none|
-|» project_id|body|string|false|Unique identifier|
-|start_date|body|string(date-time)\|null|false|Start date|
-|end_date|body|string(date-time)\|null|false|End date|
+|&nbsp;&nbsp;&nbsp;&nbsp; project_id|body|string|false|Unique identifier|
+|start_date|body|string(date-time)¦null|false|Start date|
+|end_date|body|string(date-time)¦null|false|End date|
 |cycles|body|[object]|false|none|
-|» needed|body|integer|true|The number of cycles needed|
-|» pending|body|integer|true|The number of cycles pending|
-|» in_progress|body|integer|true|The number of cycles pending|
-|» verifying|body|integer|true|The number of cycles pending|
-|» complete|body|integer|true|The number of cycles pending|
-|» blocked|body|integer|true|The number of cycles pending|
-|» cancelled|body|integer|true|The number of cycles pending|
-|» work_flow|body|object|true|Workflow|
-|»» work_flow_id|body|string|false|Customer identifier|
-|»» entity_id|body|string|true|Customer identifier|
-|»» entity_type|body|string|true|none|
-|»» label|body|string|true|Label for the entity|
-|»» slug|body|string|false|Slug for the entity (Auto-generated from the label)|
-|»» created|body|string(date-time)|true|Date the entity was created|
-|»» updated|body|string(date-time)|true|Last date the entity was updated|
-|»» schema_version|body|string|true|Version of the workflow schema used|
-|»» workflow_version|body|integer|false|Version number for the work flows (the number of times it has been changed|
-|»» applies_to|body|string|true|The entity type this work flow applies too|
-|»» triggered_by|body|[string]|false|none|
-|»» starts_at|body|string|true|Starting step|
-|»» steps|body|object|true|Steps for the workflow|
-|»» metadata|body|object|false|Data for the resource as a key value pair|
-|»»» **additionalProperties**|body|string|false|none|
-
-#### Enumerated Values
-
-|Parameter|Value|
-|---|---|
-|work_order_type|device|
-|» category|PENDING|
-|» category|IN_PROGRESS|
-|» category|VERIFYING|
-|» category|COMPLETE|
-|» category|CANCELLED|
-|» category|BLOCKED|
-|»» entity_type|WKF|
-|»» schema_version|1.0|
-|»» applies_to|UNIT|
-|»» applies_to|PART|
-|»» applies_to|PGM|
-|»» applies_to|PRJ|
-|»» applies_to|CUS|
-|»» applies_to|CON|
-|»» triggered_by|CON.attached|
-|»» triggered_by|CON.created|
-|»» triggered_by|CON.deleted|
-|»» triggered_by|CON.detached|
-|»» triggered_by|CON.removed|
-|»» triggered_by|CON.updated|
-|»» triggered_by|CUS.attached|
-|»» triggered_by|CUS.created|
-|»» triggered_by|CUS.deleted|
-|»» triggered_by|CUS.detached|
-|»» triggered_by|CUS.removed|
-|»» triggered_by|CUS.updated|
-|»» triggered_by|LOC.attached|
-|»» triggered_by|LOC.created|
-|»» triggered_by|LOC.deleted|
-|»» triggered_by|LOC.detached|
-|»» triggered_by|LOC.removed|
-|»» triggered_by|LOC.updated|
-|»» triggered_by|NOTE.attached|
-|»» triggered_by|NOTE.created|
-|»» triggered_by|NOTE.deleted|
-|»» triggered_by|NOTE.detached|
-|»» triggered_by|NOTE.removed|
-|»» triggered_by|NOTE.updated|
-|»» triggered_by|PART.attached|
-|»» triggered_by|PART.created|
-|»» triggered_by|PART.deleted|
-|»» triggered_by|PART.detached|
-|»» triggered_by|PART.removed|
-|»» triggered_by|PART.updated|
-|»» triggered_by|PGM.attached|
-|»» triggered_by|PGM.created|
-|»» triggered_by|PGM.deleted|
-|»» triggered_by|PGM.detached|
-|»» triggered_by|PGM.removed|
-|»» triggered_by|PGM.updated|
-|»» triggered_by|PRO.attached|
-|»» triggered_by|PRO.created|
-|»» triggered_by|PRO.deleted|
-|»» triggered_by|PRO.detached|
-|»» triggered_by|PRO.removed|
-|»» triggered_by|PRO.updated|
-|»» triggered_by|RES.attached|
-|»» triggered_by|RES.created|
-|»» triggered_by|RES.deleted|
-|»» triggered_by|RES.detached|
-|»» triggered_by|RES.removed|
-|»» triggered_by|RES.updated|
-|»» triggered_by|UNIT.attached|
-|»» triggered_by|UNIT.created|
-|»» triggered_by|UNIT.deleted|
-|»» triggered_by|UNIT.detached|
-|»» triggered_by|UNIT.removed|
-|»» triggered_by|UNIT.updated|
-|»» triggered_by|USER.attached|
-|»» triggered_by|USER.created|
-|»» triggered_by|USER.deleted|
-|»» triggered_by|USER.detached|
-|»» triggered_by|USER.removed|
-|»» triggered_by|USER.updated|
-|»» triggered_by|WKF.attached|
-|»» triggered_by|WKF.created|
-|»» triggered_by|WKF.deleted|
-|»» triggered_by|WKF.detached|
-|»» triggered_by|WKF.removed|
-|»» triggered_by|WKF.updated|
-|»» triggered_by|WOR.attached|
-|»» triggered_by|WOR.created|
-|»» triggered_by|WOR.deleted|
-|»» triggered_by|WOR.detached|
-|»» triggered_by|WOR.removed|
-|»» triggered_by|WOR.updated|
-
-> Example responses
-
-> 200 Response
-
-```json
-{
-  "type": "object",
-  "properties": {
-    "_links": {
-      "type": "object",
-      "properties": {
-        "self": {
-          "x-example": {
-            "href": "https://api.nterprise.com/work_orders/kk9z7zwvQYH5GKx"
-          },
-          "type": "object",
-          "properties": {
-            "href": {
-              "type": "string",
-              "format": "uri"
-            }
-          }
-        }
-      }
-    },
-    "work_order_id": {
-      "type": "string",
-      "description": "The identifier for the unit",
-      "pattern": "^[0-9a-zA-Z-_]+$"
-    },
-    "label": {
-      "type": "string",
-      "description": "Label for the entity"
-    },
-    "slug": {
-      "type": "string",
-      "description": "Slug for the entity (Auto-generated from the label)",
-      "readOnly": true,
-      "deprecated": true,
-      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-    },
-    "created": {
-      "description": "Date the entity was created",
-      "type": "string",
-      "format": "date-time",
-      "readOnly": true
-    },
-    "updated": {
-      "description": "Last date the entity was updated",
-      "type": "string",
-      "format": "date-time",
-      "readOnly": true
-    },
-    "start_date": {
-      "description": "Last date the entity was updated",
-      "type": "string",
-      "format": "date-time",
-      "readOnly": true
-    },
-    "end_date": {
-      "description": "Last date the entity was updated",
-      "type": "string",
-      "format": "date-time",
-      "readOnly": true
-    },
-    "description": {
-      "type": "string",
-      "nullable": true,
-      "description": "Detailed description for the work order"
-    },
-    "work_order_type": {
-      "type": "string",
-      "description": "Type of work order",
-      "enum": [
-        "device"
-      ]
-    },
-    "begin_date": {
-      "type": "string",
-      "format": "date-time",
-      "description": "Begin date"
-    },
-    "due_date": {
-      "type": "string",
-      "format": "date-time",
-      "description": "Due date"
-    },
-    "current_status": {
-      "type": "object",
-      "description": "Defines the properties for a status",
-      "additionalProperties": false,
-      "required": [
-        "status",
-        "category"
-      ],
-      "properties": {
-        "status": {
-          "type": "string",
-          "description": "A Custom label for the status",
-          "pattern": "^[A-Za-z][0-9a-zA-Z-_ ]+$"
-        },
-        "category": {
-          "type": "string",
-          "description": "The classifier for the statues",
-          "enum": [
-            "PENDING",
-            "IN_PROGRESS",
-            "VERIFYING",
-            "COMPLETE",
-            "CANCELLED",
-            "BLOCKED"
-          ]
-        },
-        "description": {
-          "type": "string",
-          "nullable": true,
-          "description": "A description for the status"
-        },
-        "order": {
-          "type": "number",
-          "description": "Order status appears when listing"
-        }
-      }
-    },
-    "project": {
-      "type": "object",
-      "description": "Defines the properties for a project",
-      "additionalProperties": false,
-      "required": [
-        "label",
-        "entity_id",
-        "entity_type",
-        "created",
-        "updated",
-        "customer",
-        "program",
-        "allowed_statuses"
-      ],
-      "properties": {
-        "project_id": {
-          "type": "string",
-          "description": "Unique identifier",
-          "pattern": "^[0-9a-zA-Z-_]+$"
-        },
-        "entity_id": {
-          "x-no-api-doc": true,
-          "type": "string",
-          "description": "Customer identifier",
-          "readOnly": true,
-          "pattern": "^[0-9a-zA-Z-_]+$"
-        },
-        "entity_type": {
-          "x-no-api-doc": true,
-          "enum": [
-            "PRJ"
-          ]
-        },
-        "description": {
-          "type": "string",
-          "nullable": true,
-          "description": "Project description"
-        },
-        "label": {
-          "type": "string",
-          "description": "Label for the entity"
-        },
-        "slug": {
-          "type": "string",
-          "description": "Slug for the entity (Auto-generated from the label)",
-          "readOnly": true,
-          "deprecated": true,
-          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-        },
-        "created": {
-          "description": "Date the entity was created",
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "updated": {
-          "description": "Last date the entity was updated",
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "customer": {
-          "type": "object",
-          "description": "Customer",
-          "additionalProperties": false,
-          "required": [
-            "label",
-            "entity_id",
-            "entity_type",
-            "created",
-            "updated",
-            "allowed_statuses"
-          ],
-          "properties": {
-            "customer_id": {
-              "description": "Customer identifier",
-              "type": "string",
-              "readOnly": true,
-              "pattern": "^[0-9a-zA-Z-_]+$"
-            },
-            "entity_id": {
-              "x-no-api-doc": true,
-              "type": "string",
-              "description": "Customer identifier",
-              "readOnly": true,
-              "pattern": "^[0-9a-zA-Z-_]+$"
-            },
-            "entity_type": {
-              "x-no-api-doc": true,
-              "enum": [
-                "CUS"
-              ]
-            },
-            "label": {
-              "type": "string",
-              "description": "Label for the entity"
-            },
-            "slug": {
-              "type": "string",
-              "description": "Slug for the entity (Auto-generated from the label)",
-              "readOnly": true,
-              "deprecated": true,
-              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-            },
-            "created": {
-              "description": "Date the entity was created",
-              "type": "string",
-              "format": "date-time",
-              "readOnly": true
-            },
-            "updated": {
-              "description": "Last date the entity was updated",
-              "type": "string",
-              "format": "date-time",
-              "readOnly": true
-            },
-            "external_platform": {
-              "type": "object",
-              "description": "External Identifiers for the customer",
-              "deprecated": true,
-              "x-patternProperties": {
-                "^[A-Za-z][A-Za-z0-9_]*$": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                }
-              }
-            },
-            "allowed_statuses": {
-              "type": "array",
-              "description": "List of allowed statuses",
-              "uniqueItems": true,
-              "items": {
-                "type": "object",
-                "description": "Defines the properties for a status",
-                "additionalProperties": false,
-                "required": [
-                  "status",
-                  "category"
-                ],
-                "properties": {
-                  "status": {
-                    "type": "string",
-                    "description": "A Custom label for the status",
-                    "pattern": "^[A-Za-z][0-9a-zA-Z-_ ]+$"
-                  },
-                  "category": {
-                    "type": "string",
-                    "description": "The classifier for the statues",
-                    "enum": [
-                      "PENDING",
-                      "IN_PROGRESS",
-                      "VERIFYING",
-                      "COMPLETE",
-                      "CANCELLED",
-                      "BLOCKED"
-                    ]
-                  },
-                  "description": {
-                    "type": "string",
-                    "nullable": true,
-                    "description": "A description for the status"
-                  },
-                  "order": {
-                    "type": "number",
-                    "description": "Order status appears when listing"
-                  }
-                }
-              }
-            },
-            "total_programs": {
-              "type": "number",
-              "description": "Total programs under the customer"
-            },
-            "total_projects": {
-              "type": "number",
-              "description": "Total projects under the customer"
-            }
-          }
-        },
-        "program": {
-          "type": "object",
-          "description": "Defines the properties for a program",
-          "additionalProperties": false,
-          "required": [
-            "entity_id",
-            "entity_type",
-            "created",
-            "updated",
-            "customer",
-            "allowed_statuses"
-          ],
-          "properties": {
-            "program_id": {
-              "description": "Unique identifier",
-              "type": "string",
-              "readOnly": true,
-              "pattern": "^[0-9a-zA-Z-_]+$"
-            },
-            "entity_id": {
-              "x-no-api-doc": true,
-              "type": "string",
-              "description": "Customer identifier",
-              "readOnly": true,
-              "pattern": "^[0-9a-zA-Z-_]+$"
-            },
-            "entity_type": {
-              "x-no-api-doc": true,
-              "enum": [
-                "PGM"
-              ]
-            },
-            "label": {
-              "type": "string",
-              "description": "Label for the entity"
-            },
-            "slug": {
-              "type": "string",
-              "description": "Slug for the entity (Auto-generated from the label)",
-              "readOnly": true,
-              "deprecated": true,
-              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-            },
-            "created": {
-              "description": "Date the entity was created",
-              "type": "string",
-              "format": "date-time",
-              "readOnly": true
-            },
-            "updated": {
-              "description": "Last date the entity was updated",
-              "type": "string",
-              "format": "date-time",
-              "readOnly": true
-            },
-            "start_date": {
-              "type": "string",
-              "nullable": true,
-              "format": "date-time",
-              "description": "Start date"
-            },
-            "end_date": {
-              "type": "string",
-              "nullable": true,
-              "format": "date-time",
-              "description": "End date"
-            },
-            "customer": {
-              "type": "object",
-              "description": "Customer",
-              "additionalProperties": false,
-              "required": [
-                "label",
-                "entity_id",
-                "entity_type",
-                "created",
-                "updated",
-                "allowed_statuses"
-              ],
-              "properties": {
-                "customer_id": {
-                  "description": "Customer identifier",
-                  "type": "string",
-                  "readOnly": true,
-                  "pattern": "^[0-9a-zA-Z-_]+$"
-                },
-                "entity_id": {
-                  "x-no-api-doc": true,
-                  "type": "string",
-                  "description": "Customer identifier",
-                  "readOnly": true,
-                  "pattern": "^[0-9a-zA-Z-_]+$"
-                },
-                "entity_type": {
-                  "x-no-api-doc": true,
-                  "enum": [
-                    "CUS"
-                  ]
-                },
-                "label": {
-                  "type": "string",
-                  "description": "Label for the entity"
-                },
-                "slug": {
-                  "type": "string",
-                  "description": "Slug for the entity (Auto-generated from the label)",
-                  "readOnly": true,
-                  "deprecated": true,
-                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-                },
-                "created": {
-                  "description": "Date the entity was created",
-                  "type": "string",
-                  "format": "date-time",
-                  "readOnly": true
-                },
-                "updated": {
-                  "description": "Last date the entity was updated",
-                  "type": "string",
-                  "format": "date-time",
-                  "readOnly": true
-                },
-                "external_platform": {
-                  "type": "object",
-                  "description": "External Identifiers for the customer",
-                  "deprecated": true,
-                  "x-patternProperties": {
-                    "^[A-Za-z][A-Za-z0-9_]*$": {
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    }
-                  }
-                },
-                "allowed_statuses": {
-                  "type": "array",
-                  "description": "List of allowed statuses",
-                  "uniqueItems": true,
-                  "items": {
-                    "type": "object",
-                    "description": "Defines the properties for a status",
-                    "additionalProperties": false,
-                    "required": [
-                      "status",
-                      "category"
-                    ],
-                    "properties": {
-                      "status": {
-                        "type": "string",
-                        "description": "A Custom label for the status",
-                        "pattern": "^[A-Za-z][0-9a-zA-Z-_ ]+$"
-                      },
-                      "category": {
-                        "type": "string",
-                        "description": "The classifier for the statues",
-                        "enum": [
-                          "PENDING",
-                          "IN_PROGRESS",
-                          "VERIFYING",
-                          "COMPLETE",
-                          "CANCELLED",
-                          "BLOCKED"
-                        ]
-                      },
-                      "description": {
-                        "type": "string",
-                        "nullable": true,
-                        "description": "A description for the status"
-                      },
-                      "order": {
-                        "type": "number",
-                        "description": "Order status appears when listing"
-                      }
-                    }
-                  }
-                },
-                "total_programs": {
-                  "type": "number",
-                  "description": "Total programs under the customer"
-                },
-                "total_projects": {
-                  "type": "number",
-                  "description": "Total projects under the customer"
-                }
-              }
-            },
-            "allowed_statuses": {
-              "type": "array",
-              "description": "List of allowed statuses",
-              "uniqueItems": true,
-              "items": {
-                "type": "object",
-                "description": "Defines the properties for a status",
-                "additionalProperties": false,
-                "required": [
-                  "status",
-                  "category"
-                ],
-                "properties": {
-                  "status": {
-                    "type": "string",
-                    "description": "A Custom label for the status",
-                    "pattern": "^[A-Za-z][0-9a-zA-Z-_ ]+$"
-                  },
-                  "category": {
-                    "type": "string",
-                    "description": "The classifier for the statues",
-                    "enum": [
-                      "PENDING",
-                      "IN_PROGRESS",
-                      "VERIFYING",
-                      "COMPLETE",
-                      "CANCELLED",
-                      "BLOCKED"
-                    ]
-                  },
-                  "description": {
-                    "type": "string",
-                    "nullable": true,
-                    "description": "A description for the status"
-                  },
-                  "order": {
-                    "type": "number",
-                    "description": "Order status appears when listing"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "allowed_statuses": {
-          "type": "array",
-          "description": "List of allowed statuses",
-          "uniqueItems": true,
-          "items": {
-            "type": "object",
-            "description": "Defines the properties for a status",
-            "additionalProperties": false,
-            "required": [
-              "status",
-              "category"
-            ],
-            "properties": {
-              "status": {
-                "type": "string",
-                "description": "A Custom label for the status",
-                "pattern": "^[A-Za-z][0-9a-zA-Z-_ ]+$"
-              },
-              "category": {
-                "type": "string",
-                "description": "The classifier for the statues",
-                "enum": [
-                  "PENDING",
-                  "IN_PROGRESS",
-                  "VERIFYING",
-                  "COMPLETE",
-                  "CANCELLED",
-                  "BLOCKED"
-                ]
-              },
-              "description": {
-                "type": "string",
-                "nullable": true,
-                "description": "A description for the status"
-              },
-              "order": {
-                "type": "number",
-                "description": "Order status appears when listing"
-              }
-            }
-          }
-        },
-        "start_date": {
-          "type": "string",
-          "nullable": true,
-          "format": "date-time",
-          "description": "Start date"
-        },
-        "end_date": {
-          "type": "string",
-          "nullable": true,
-          "format": "date-time",
-          "description": "End date"
-        }
-      }
-    },
-    "cycles": {
-      "type": "array",
-      "minimum": 1,
-      "items": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-          "needed",
-          "pending",
-          "in_progress",
-          "verifying",
-          "complete",
-          "blocked",
-          "cancelled",
-          "work_flow"
-        ],
-        "properties": {
-          "needed": {
-            "type": "integer",
-            "description": "The number of cycles needed",
-            "minimum": 1
-          },
-          "pending": {
-            "type": "integer",
-            "description": "The number of cycles pending",
-            "readOnly": true
-          },
-          "in_progress": {
-            "type": "integer",
-            "description": "The number of cycles pending",
-            "readOnly": true
-          },
-          "verifying": {
-            "type": "integer",
-            "description": "The number of cycles pending",
-            "readOnly": true
-          },
-          "complete": {
-            "type": "integer",
-            "description": "The number of cycles pending",
-            "readOnly": true
-          },
-          "blocked": {
-            "type": "integer",
-            "description": "The number of cycles pending",
-            "readOnly": true
-          },
-          "cancelled": {
-            "type": "integer",
-            "description": "The number of cycles pending",
-            "readOnly": true
-          },
-          "work_flow": {
-            "type": "object",
-            "description": "Workflow",
-            "additionalProperties": false,
-            "required": [
-              "label",
-              "entity_id",
-              "entity_type",
-              "created",
-              "updated",
-              "steps",
-              "starts_at",
-              "applies_to",
-              "schema_version"
-            ],
-            "properties": {
-              "work_flow_id": {
-                "type": "string",
-                "description": "Customer identifier",
-                "readOnly": true,
-                "pattern": "^[0-9a-zA-Z-_]+$"
-              },
-              "entity_id": {
-                "x-no-api-doc": true,
-                "type": "string",
-                "description": "Customer identifier",
-                "readOnly": true,
-                "pattern": "^[0-9a-zA-Z-_]+$"
-              },
-              "entity_type": {
-                "x-no-api-doc": true,
-                "enum": [
-                  "WKF"
-                ]
-              },
-              "label": {
-                "type": "string",
-                "description": "Label for the entity"
-              },
-              "slug": {
-                "type": "string",
-                "description": "Slug for the entity (Auto-generated from the label)",
-                "readOnly": true,
-                "deprecated": true,
-                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-              },
-              "created": {
-                "description": "Date the entity was created",
-                "type": "string",
-                "format": "date-time",
-                "readOnly": true
-              },
-              "updated": {
-                "description": "Last date the entity was updated",
-                "type": "string",
-                "format": "date-time",
-                "readOnly": true
-              },
-              "schema_version": {
-                "type": "string",
-                "description": "Version of the workflow schema used",
-                "enum": [
-                  "1.0"
-                ]
-              },
-              "workflow_version": {
-                "type": "integer",
-                "description": "Version number for the work flows (the number of times it has been changed",
-                "readOnly": true
-              },
-              "applies_to": {
-                "type": "string",
-                "description": "The entity type this work flow applies too",
-                "enum": [
-                  "UNIT",
-                  "PART",
-                  "PGM",
-                  "PRJ",
-                  "CUS",
-                  "CON"
-                ]
-              },
-              "triggered_by": {
-                "type": "array",
-                "items": {
-                  "type": "string",
-                  "description": "Possible entity events",
-                  "enum": [
-                    "CON.attached",
-                    "CON.created",
-                    "CON.deleted",
-                    "CON.detached",
-                    "CON.removed",
-                    "CON.updated",
-                    "CUS.attached",
-                    "CUS.created",
-                    "CUS.deleted",
-                    "CUS.detached",
-                    "CUS.removed",
-                    "CUS.updated",
-                    "LOC.attached",
-                    "LOC.created",
-                    "LOC.deleted",
-                    "LOC.detached",
-                    "LOC.removed",
-                    "LOC.updated",
-                    "NOTE.attached",
-                    "NOTE.created",
-                    "NOTE.deleted",
-                    "NOTE.detached",
-                    "NOTE.removed",
-                    "NOTE.updated",
-                    "PART.attached",
-                    "PART.created",
-                    "PART.deleted",
-                    "PART.detached",
-                    "PART.removed",
-                    "PART.updated",
-                    "PGM.attached",
-                    "PGM.created",
-                    "PGM.deleted",
-                    "PGM.detached",
-                    "PGM.removed",
-                    "PGM.updated",
-                    "PRO.attached",
-                    "PRO.created",
-                    "PRO.deleted",
-                    "PRO.detached",
-                    "PRO.removed",
-                    "PRO.updated",
-                    "RES.attached",
-                    "RES.created",
-                    "RES.deleted",
-                    "RES.detached",
-                    "RES.removed",
-                    "RES.updated",
-                    "UNIT.attached",
-                    "UNIT.created",
-                    "UNIT.deleted",
-                    "UNIT.detached",
-                    "UNIT.removed",
-                    "UNIT.updated",
-                    "USER.attached",
-                    "USER.created",
-                    "USER.deleted",
-                    "USER.detached",
-                    "USER.removed",
-                    "USER.updated",
-                    "WKF.attached",
-                    "WKF.created",
-                    "WKF.deleted",
-                    "WKF.detached",
-                    "WKF.removed",
-                    "WKF.updated",
-                    "WOR.attached",
-                    "WOR.created",
-                    "WOR.deleted",
-                    "WOR.detached",
-                    "WOR.removed",
-                    "WOR.updated"
-                  ]
-                }
-              },
-              "starts_at": {
-                "type": "string",
-                "description": "Starting step"
-              },
-              "steps": {
-                "type": "object",
-                "description": "Steps for the workflow",
-                "uniqueItems": true,
-                "additionalProperties": true,
-                "x-patternProperties": {
-                  "^[A-Za-z][A-Za-z0-9_]*$": {
-                    "anyOf": [
-                      {
-                        "$schema": "http://json-schema.org/draft-07/schema#",
-                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/function/allocateUnitsToProject.json",
-                        "type": "object",
-                        "description": "Require the user confirm an action. This is normally used when Niagara cannot automatically detect that a task or action has been performed.",
-                        "properties": {
-                          "label": {
-                            "type": "string",
-                            "description": "Label for the entity"
-                          },
-                          "options": {
-                            "type": "object",
-                            "required": [
-                              "function",
-                              "payload"
-                            ],
-                            "properties": {
-                              "function": {
-                                "type": "string",
-                                "enum": [
-                                  "allocate-units-to-project"
-                                ]
-                              },
-                              "payload": {
-                                "type": "object",
-                                "required": [
-                                  "part_id",
-                                  "project_id",
-                                  "qty"
-                                ],
-                                "properties": {
-                                  "part_id": {
-                                    "type": "string",
-                                    "description": "Part ID of the to assign"
-                                  },
-                                  "program_id": {
-                                    "type": "string",
-                                    "description": "Program ID of the to assign"
-                                  },
-                                  "qty": {
-                                    "type": "number",
-                                    "minimum": 1,
-                                    "description": "Number of units to assign to the project"
-                                  },
-                                  "allow_scarcity": {
-                                    "type": "boolean",
-                                    "description": "Allow the workflow to continue even if there are not enough units"
-                                  },
-                                  "force": {
-                                    "type": "boolean",
-                                    "description": "Assign the units even if the project already has units allocated"
-                                  },
-                                  "status": {
-                                    "type": "string",
-                                    "description": "Only assign units which are in this status"
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      },
-                      {
-                        "$schema": "http://json-schema.org/draft-07/schema#",
-                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/followPDFInstructions.json",
-                        "type": "object",
-                        "description": "Display a link or modal to a user which contains instructions from a PDF",
-                        "required": [
-                          "label",
-                          "payload"
-                        ],
-                        "properties": {
-                          "label": {
-                            "type": "string",
-                            "description": "Label for the step"
-                          },
-                          "options": {
-                            "type": "object",
-                            "required": [
-                              "component",
-                              "payload"
-                            ],
-                            "properties": {
-                              "component": {
-                                "enum": [
-                                  "follow-pds-instructions"
-                                ]
-                              },
-                              "payload": {
-                                "type": "object",
-                                "required": [
-                                  "attachment_id"
-                                ],
-                                "properties": {
-                                  "attachment_id": {
-                                    "type": "string",
-                                    "description": "UUID for the attachment",
-                                    "format": "uuid"
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        },
-                        "allOf": [
-                          {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepUser.json",
-                            "type": "object",
-                            "description": "A step which requires a user to complete",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "description": "Type of workflow step",
-                                "enum": [
-                                  "load",
-                                  "choice",
-                                  "function",
-                                  "machine",
-                                  "pass",
-                                  "fail",
-                                  "success",
-                                  "user",
-                                  "wait"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "required": [
-                                  "component",
-                                  "payload"
-                                ],
-                                "properties": {
-                                  "component": {
-                                    "type": "string",
-                                    "description": "Name of the function to invoke"
-                                  },
-                                  "payload": {
-                                    "type": "object"
-                                  }
-                                }
-                              }
-                            },
-                            "allOf": [
-                              {
-                                "$schema": "http://json-schema.org/draft-07/schema#",
-                                "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepCommon.json",
-                                "type": "object",
-                                "required": [
-                                  "type",
-                                  "label",
-                                  "goto"
-                                ],
-                                "properties": {
-                                  "type": {
-                                    "type": "string",
-                                    "description": "Type of workflow step",
-                                    "enum": [
-                                      "load",
-                                      "choice",
-                                      "function",
-                                      "machine",
-                                      "pass",
-                                      "fail",
-                                      "success",
-                                      "user",
-                                      "wait"
-                                    ]
-                                  },
-                                  "label": {
-                                    "type": "string",
-                                    "description": "Label for the step"
-                                  },
-                                  "goto": {
-                                    "type": "string",
-                                    "description": "Step to move to",
-                                    "pattern": "^[a-z][a-z-]+[a-z]$"
-                                  },
-                                  "goto-fail": {
-                                    "type": "string",
-                                    "description": "Step to transition too if this step cannot be completed",
-                                    "pattern": "^[a-z][a-z-]+[a-z]$"
-                                  },
-                                  "onComplete": {
-                                    "$schema": "http://json-schema.org/draft-07/schema#",
-                                    "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                    "type": "object",
-                                    "required": [
-                                      "retry",
-                                      "finally"
-                                    ],
-                                    "properties": {
-                                      "actions": {
-                                        "type": "array",
-                                        "description": "Actions to take on failure",
-                                        "maxItems": 10,
-                                        "items": {
-                                          "type": "object"
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            ]
-                          }
-                        ]
-                      },
-                      {
-                        "$schema": "http://json-schema.org/draft-07/schema#",
-                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/manualDataEntry.json",
-                        "type": "object",
-                        "description": "Ask the user to manually enter (or confirm) data for an entity",
-                        "properties": {
-                          "label": {
-                            "type": "string",
-                            "description": "Label for the step"
-                          },
-                          "options": {
-                            "type": "object",
-                            "required": [
-                              "component",
-                              "payload"
-                            ],
-                            "properties": {
-                              "component": {
-                                "enum": [
-                                  "manual-data-entry"
-                                ]
-                              },
-                              "payload": {
-                                "type": "object",
-                                "required": [
-                                  "fields"
-                                ],
-                                "properties": {
-                                  "fields": {
-                                    "type": "array",
-                                    "description": "Configuration for each field",
-                                    "items": {
-                                      "type": "object",
-                                      "required": [
-                                        "input_type",
-                                        "label",
-                                        "required",
-                                        "entity_field"
-                                      ],
-                                      "properties": {
-                                        "input_type": {
-                                          "type": "string",
-                                          "description": "The type of input field to display",
-                                          "enum": [
-                                            "textbox",
-                                            "input"
-                                          ]
-                                        },
-                                        "label": {
-                                          "type": "string",
-                                          "description": "Label to display for the field"
-                                        },
-                                        "required": {
-                                          "type": "boolean",
-                                          "description": "Display the field as required input. Note: this is a helper function. It singles that the user is required to input data at this step. If the field is required on the entity, the user will be presented with a validation message"
-                                        },
-                                        "entity_field": {
-                                          "type": "string",
-                                          "description": "JSON Path to the field on the entity. If the path does not start with '$' then the entity on the context is assumed. Otherwise the data will be set on the context path"
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        },
-                        "allOf": [
-                          {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepUser.json",
-                            "type": "object",
-                            "description": "A step which requires a user to complete",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "description": "Type of workflow step",
-                                "enum": [
-                                  "load",
-                                  "choice",
-                                  "function",
-                                  "machine",
-                                  "pass",
-                                  "fail",
-                                  "success",
-                                  "user",
-                                  "wait"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "required": [
-                                  "component",
-                                  "payload"
-                                ],
-                                "properties": {
-                                  "component": {
-                                    "type": "string",
-                                    "description": "Name of the function to invoke"
-                                  },
-                                  "payload": {
-                                    "type": "object"
-                                  }
-                                }
-                              }
-                            },
-                            "allOf": [
-                              {
-                                "$schema": "http://json-schema.org/draft-07/schema#",
-                                "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepCommon.json",
-                                "type": "object",
-                                "required": [
-                                  "type",
-                                  "label",
-                                  "goto"
-                                ],
-                                "properties": {
-                                  "type": {
-                                    "type": "string",
-                                    "description": "Type of workflow step",
-                                    "enum": [
-                                      "load",
-                                      "choice",
-                                      "function",
-                                      "machine",
-                                      "pass",
-                                      "fail",
-                                      "success",
-                                      "user",
-                                      "wait"
-                                    ]
-                                  },
-                                  "label": {
-                                    "type": "string",
-                                    "description": "Label for the step"
-                                  },
-                                  "goto": {
-                                    "type": "string",
-                                    "description": "Step to move to",
-                                    "pattern": "^[a-z][a-z-]+[a-z]$"
-                                  },
-                                  "goto-fail": {
-                                    "type": "string",
-                                    "description": "Step to transition too if this step cannot be completed",
-                                    "pattern": "^[a-z][a-z-]+[a-z]$"
-                                  },
-                                  "onComplete": {
-                                    "$schema": "http://json-schema.org/draft-07/schema#",
-                                    "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                    "type": "object",
-                                    "required": [
-                                      "retry",
-                                      "finally"
-                                    ],
-                                    "properties": {
-                                      "actions": {
-                                        "type": "array",
-                                        "description": "Actions to take on failure",
-                                        "maxItems": 10,
-                                        "items": {
-                                          "type": "object"
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            ]
-                          }
-                        ]
-                      },
-                      {
-                        "$schema": "http://json-schema.org/draft-07/schema#",
-                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/taskList.json",
-                        "type": "object",
-                        "description": "Ask the user to follow a list and check off boxes",
-                        "properties": {
-                          "label": {
-                            "type": "string",
-                            "description": "Label for the step"
-                          },
-                          "options": {
-                            "type": "object",
-                            "required": [
-                              "component",
-                              "payload"
-                            ],
-                            "properties": {
-                              "component": {
-                                "enum": [
-                                  "task-list"
-                                ]
-                              },
-                              "payload": {
-                                "type": "object",
-                                "required": [
-                                  "items"
-                                ],
-                                "properties": {
-                                  "is_qc": {
-                                    "type": "boolean",
-                                    "description": "Flags this list as a QC task list. This means that a different user can close the task to one previously on the context"
-                                  },
-                                  "items": {
-                                    "type": "array",
-                                    "description": "Configuration for each task list item",
-                                    "items": {
-                                      "type": "object",
-                                      "required": [
-                                        "label",
-                                        "evaluated",
-                                        "na_option"
-                                      ],
-                                      "properties": {
-                                        "label": {
-                                          "type": "string",
-                                          "description": "Label to display for the field"
-                                        },
-                                        "slug": {
-                                          "type": "string",
-                                          "description": "Slug for the item (Auto-generated from the label)",
-                                          "readOnly": true,
-                                          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-                                        },
-                                        "help": {
-                                          "type": "string",
-                                          "description": "Message describing what is needed to be checked"
-                                        },
-                                        "evaluated": {
-                                          "type": "boolean",
-                                          "description": "When set to true, this will fail the step if the value for the item is false or N/A"
-                                        },
-                                        "na_field": {
-                                          "type": "boolean",
-                                          "description": "Allow the user to select the N/A option when checking off the list"
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        },
-                        "allOf": [
-                          {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepUser.json",
-                            "type": "object",
-                            "description": "A step which requires a user to complete",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "description": "Type of workflow step",
-                                "enum": [
-                                  "load",
-                                  "choice",
-                                  "function",
-                                  "machine",
-                                  "pass",
-                                  "fail",
-                                  "success",
-                                  "user",
-                                  "wait"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "required": [
-                                  "component",
-                                  "payload"
-                                ],
-                                "properties": {
-                                  "component": {
-                                    "type": "string",
-                                    "description": "Name of the function to invoke"
-                                  },
-                                  "payload": {
-                                    "type": "object"
-                                  }
-                                }
-                              }
-                            },
-                            "allOf": [
-                              {
-                                "$schema": "http://json-schema.org/draft-07/schema#",
-                                "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepCommon.json",
-                                "type": "object",
-                                "required": [
-                                  "type",
-                                  "label",
-                                  "goto"
-                                ],
-                                "properties": {
-                                  "type": {
-                                    "type": "string",
-                                    "description": "Type of workflow step",
-                                    "enum": [
-                                      "load",
-                                      "choice",
-                                      "function",
-                                      "machine",
-                                      "pass",
-                                      "fail",
-                                      "success",
-                                      "user",
-                                      "wait"
-                                    ]
-                                  },
-                                  "label": {
-                                    "type": "string",
-                                    "description": "Label for the step"
-                                  },
-                                  "goto": {
-                                    "type": "string",
-                                    "description": "Step to move to",
-                                    "pattern": "^[a-z][a-z-]+[a-z]$"
-                                  },
-                                  "goto-fail": {
-                                    "type": "string",
-                                    "description": "Step to transition too if this step cannot be completed",
-                                    "pattern": "^[a-z][a-z-]+[a-z]$"
-                                  },
-                                  "onComplete": {
-                                    "$schema": "http://json-schema.org/draft-07/schema#",
-                                    "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                    "type": "object",
-                                    "required": [
-                                      "retry",
-                                      "finally"
-                                    ],
-                                    "properties": {
-                                      "actions": {
-                                        "type": "array",
-                                        "description": "Actions to take on failure",
-                                        "maxItems": 10,
-                                        "items": {
-                                          "type": "object"
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            ]
-                          }
-                        ]
-                      },
-                      {
-                        "$schema": "http://json-schema.org/draft-07/schema#",
-                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/machine/aceIos.json",
-                        "type": "object",
-                        "description": "Run the ACE-IOS application to provision iOS devices or ",
-                        "properties": {
-                          "type": {
-                            "type": "string",
-                            "enum": [
-                              "machine"
-                            ]
-                          },
-                          "label": {
-                            "type": "string",
-                            "description": "Label for the step"
-                          },
-                          "options": {
-                            "type": "object",
-                            "required": [
-                              "application",
-                              "configuration"
-                            ],
-                            "properties": {
-                              "configuration": {
-                                "type": "object",
-                                "description": "ACE Configuration options",
-                                "properties": {
-                                  "pairing_cert": {
-                                    "type": "string",
-                                    "description": "Contents of a *.crt file exported from Apple Configurator or MDM",
-                                    "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$"
-                                  },
-                                  "pairing_key": {
-                                    "type": "string",
-                                    "description": "Contents of a *.der file exported from Apple Configurator or MDM",
-                                    "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$"
-                                  },
-                                  "restore_device": {
-                                    "type": "boolean",
-                                    "description": "Restore device to factory defaults"
-                                  },
-                                  "automated_enrollment": {
-                                    "type": "boolean",
-                                    "description": "Automatically enroll the device to MDM"
-                                  },
-                                  "mdm": {
-                                    "type": "object",
-                                    "description": "The settings for the Customers MDM",
-                                    "properties": {
-                                      "vendor": {
-                                        "type": "string",
-                                        "description": "MDM vendor. Currently, supported values are AirWatch, JAMF, and Meraki.",
-                                        "enum": [
-                                          "AirWatch",
-                                          "JAMF",
-                                          "Meraki"
-                                        ]
-                                      },
-                                      "console_url": {
-                                        "type": "string",
-                                        "format": "uri",
-                                        "description": "Base URL for HTTP requests"
-                                      },
-                                      "user": {
-                                        "type": "string",
-                                        "description": "MDM User name"
-                                      },
-                                      "password": {
-                                        "type": "string",
-                                        "description": "MDM password"
-                                      },
-                                      "tenant_code": {
-                                        "type": "string",
-                                        "description": "MDM authentication key"
-                                      },
-                                      "set_asset_tag": {
-                                        "type": "string",
-                                        "description": "Sets the devices Asset tag based on a field from the unit"
-                                      }
-                                    }
-                                  },
-                                  "field_mappings": {
-                                    "type": "array",
-                                    "description": "List of fields to map to the device",
-                                    "items": {
-                                      "type": "object",
-                                      "properties": {
-                                        "from": {
-                                          "type": "string",
-                                          "description": "The field reported from ACE",
-                                          "enum": [
-                                            "serial_number",
-                                            "name",
-                                            "ecid",
-                                            "udid",
-                                            "configurator_serial",
-                                            "ios",
-                                            "model",
-                                            "storage",
-                                            "wifi_mac",
-                                            "bt_mac",
-                                            "ethernet_mac",
-                                            "thundersync_serial",
-                                            "iccid",
-                                            "iccid2",
-                                            "imei",
-                                            "imei2",
-                                            "missed_profiles",
-                                            "missed_apps",
-                                            "icon_list_regex",
-                                            "icon_layout",
-                                            "bat_capacity"
-                                          ]
-                                        },
-                                        "to": {
-                                          "type": "string",
-                                          "description": "Field to set on the entity"
-                                        }
-                                      }
-                                    }
-                                  },
-                                  "wait_for_apps": {
-                                    "type": "array",
-                                    "description": "A list of applications needed to be installed on the device. This will cause the extension to poll the device for installed applications. Once all the applications have been installed, this step can be completed",
-                                    "items": {
-                                      "type": "string",
-                                      "format": "uri"
-                                    }
-                                  },
-                                  "wait_for_battery_charge": {
-                                    "type": "integer",
-                                    "description": "The required battery percentage needed before this step can move on",
-                                    "minimum": 0,
-                                    "maximum": 100
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      },
-                      {
-                        "$schema": "http://json-schema.org/draft-07/schema#",
-                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepChoice.json",
-                        "type": "object",
-                        "description": "A Step choice",
-                        "maxProperties": 2,
-                        "minProperties": 2,
-                        "required": [
-                          "decision"
-                        ],
-                        "properties": {
-                          "decision": {
-                            "type": "array",
-                            "description": "Context variable to check",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "variable": {
-                                  "type": "string",
-                                  "description": "Variable or value"
-                                },
-                                "operator": {
-                                  "type": "string",
-                                  "description": "Operator to perform",
-                                  "enum": [
-                                    "greater_than_equals",
-                                    "less_than_equals",
-                                    "greater_than",
-                                    "less_than",
-                                    "equals",
-                                    "not_equals"
-                                  ]
-                                },
-                                "operand": {
-                                  "type": "string",
-                                  "description": "operand to compare with"
-                                }
-                              }
-                            }
-                          }
-                        },
-                        "allOf": [
-                          {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepNext.json",
-                            "type": "object",
-                            "required": [
-                              "type",
-                              "label",
-                              "goto"
-                            ],
-                            "properties": {
-                              "goto": {
-                                "type": "string",
-                                "description": "Step to move to",
-                                "pattern": "^[a-z][a-z-]+[a-z]$"
-                              },
-                              "goto-fail": {
-                                "type": "string",
-                                "description": "Step to transition too if this step cannot be completed",
-                                "pattern": "^[a-z][a-z-]+[a-z]$"
-                              },
-                              "context": {
-                                "type": "array",
-                                "description": "Values to set on the context",
-                                "items": {
-                                  "type": "object",
-                                  "required": [
-                                    "key",
-                                    "value"
-                                  ],
-                                  "properties": {
-                                    "key": {
-                                      "type": "string",
-                                      "description": "The context key to set"
-                                    },
-                                    "value": {
-                                      "type": "string",
-                                      "description": "Value to set"
-                                    },
-                                    "lock": {
-                                      "type": "boolean",
-                                      "description": "Prevents other steps from writing this value"
-                                    },
-                                    "ignore": {
-                                      "type": "boolean",
-                                      "description": "When trying to set a locked key, do not fail"
-                                    }
-                                  }
-                                }
-                              },
-                              "onStart": {
-                                "$schema": "http://json-schema.org/draft-07/schema#",
-                                "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                "type": "object",
-                                "required": [
-                                  "retry",
-                                  "finally"
-                                ],
-                                "properties": {
-                                  "actions": {
-                                    "type": "array",
-                                    "description": "Actions to take on failure",
-                                    "maxItems": 10,
-                                    "items": {
-                                      "type": "object"
-                                    }
-                                  }
-                                }
-                              },
-                              "onError": {
-                                "$schema": "http://json-schema.org/draft-07/schema#",
-                                "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepError.json",
-                                "type": "object",
-                                "required": [
-                                  "retry",
-                                  "finally"
-                                ],
-                                "properties": {
-                                  "retry": {
-                                    "type": "integer",
-                                    "description": "Number of times to retry this step. Note: retry will only occur on steps which automatically failed. If the step was transitioned using the 'goto-fail' step, the actions will be fired but the step WILL NOT be re-tried",
-                                    "minimum": 0,
-                                    "maximum": 10,
-                                    "default": 0
-                                  },
-                                  "finally": {
-                                    "type": "object",
-                                    "description": "What to do after all retries",
-                                    "properties": {
-                                      "actions": {
-                                        "$schema": "http://json-schema.org/draft-07/schema#",
-                                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                        "type": "object",
-                                        "required": [
-                                          "retry",
-                                          "finally"
-                                        ],
-                                        "properties": {
-                                          "actions": {
-                                            "type": "array",
-                                            "description": "Actions to take on failure",
-                                            "maxItems": 10,
-                                            "items": {
-                                              "type": "object"
-                                            }
-                                          }
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              },
-                              "onTimeout": {
-                                "$schema": "http://json-schema.org/draft-07/schema#",
-                                "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepError.json",
-                                "type": "object",
-                                "required": [
-                                  "retry",
-                                  "finally"
-                                ],
-                                "properties": {
-                                  "retry": {
-                                    "type": "integer",
-                                    "description": "Number of times to retry this step. Note: retry will only occur on steps which automatically failed. If the step was transitioned using the 'goto-fail' step, the actions will be fired but the step WILL NOT be re-tried",
-                                    "minimum": 0,
-                                    "maximum": 10,
-                                    "default": 0
-                                  },
-                                  "finally": {
-                                    "type": "object",
-                                    "description": "What to do after all retries",
-                                    "properties": {
-                                      "actions": {
-                                        "$schema": "http://json-schema.org/draft-07/schema#",
-                                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                        "type": "object",
-                                        "required": [
-                                          "retry",
-                                          "finally"
-                                        ],
-                                        "properties": {
-                                          "actions": {
-                                            "type": "array",
-                                            "description": "Actions to take on failure",
-                                            "maxItems": 10,
-                                            "items": {
-                                              "type": "object"
-                                            }
-                                          }
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        ]
-                      },
-                      {
-                        "$schema": "http://json-schema.org/draft-07/schema#",
-                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepFail.json",
-                        "type": "object",
-                        "description": "Finial step which is marked as failed",
-                        "properties": {
-                          "label": {
-                            "type": "string",
-                            "description": "Label for the step"
-                          },
-                          "type": {
-                            "type": "string",
-                            "description": "Type of workflow step",
-                            "enum": [
-                              "load",
-                              "choice",
-                              "function",
-                              "machine",
-                              "pass",
-                              "fail",
-                              "success",
-                              "user",
-                              "wait"
-                            ]
-                          },
-                          "onComplete": {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                            "type": "object",
-                            "required": [
-                              "retry",
-                              "finally"
-                            ],
-                            "properties": {
-                              "actions": {
-                                "type": "array",
-                                "description": "Actions to take on failure",
-                                "maxItems": 10,
-                                "items": {
-                                  "type": "object"
-                                }
-                              }
-                            }
-                          }
-                        }
-                      },
-                      {
-                        "$schema": "http://json-schema.org/draft-07/schema#",
-                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepPass.json",
-                        "type": "object",
-                        "description": "Allows executing actions with out performing any function",
-                        "properties": {
-                          "label": {
-                            "type": "string",
-                            "description": "Label for the entity"
-                          },
-                          "type": {
-                            "type": "string",
-                            "description": "Type of workflow step",
-                            "enum": [
-                              "load",
-                              "choice",
-                              "function",
-                              "machine",
-                              "pass",
-                              "fail",
-                              "success",
-                              "user",
-                              "wait"
-                            ]
-                          }
-                        },
-                        "allOf": [
-                          {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepCommon.json",
-                            "type": "object",
-                            "required": [
-                              "type",
-                              "label",
-                              "goto"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "description": "Type of workflow step",
-                                "enum": [
-                                  "load",
-                                  "choice",
-                                  "function",
-                                  "machine",
-                                  "pass",
-                                  "fail",
-                                  "success",
-                                  "user",
-                                  "wait"
-                                ]
-                              },
-                              "label": {
-                                "type": "string",
-                                "description": "Label for the step"
-                              },
-                              "goto": {
-                                "type": "string",
-                                "description": "Step to move to",
-                                "pattern": "^[a-z][a-z-]+[a-z]$"
-                              },
-                              "goto-fail": {
-                                "type": "string",
-                                "description": "Step to transition too if this step cannot be completed",
-                                "pattern": "^[a-z][a-z-]+[a-z]$"
-                              },
-                              "onComplete": {
-                                "$schema": "http://json-schema.org/draft-07/schema#",
-                                "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                "type": "object",
-                                "required": [
-                                  "retry",
-                                  "finally"
-                                ],
-                                "properties": {
-                                  "actions": {
-                                    "type": "array",
-                                    "description": "Actions to take on failure",
-                                    "maxItems": 10,
-                                    "items": {
-                                      "type": "object"
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        ]
-                      },
-                      {
-                        "$schema": "http://json-schema.org/draft-07/schema#",
-                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepSuccess.json",
-                        "type": "object",
-                        "description": "Finial step which is marked as completed successfully",
-                        "properties": {
-                          "label": {
-                            "type": "string",
-                            "description": "Label for the step"
-                          },
-                          "type": {
-                            "type": "string",
-                            "description": "Type of workflow step",
-                            "enum": [
-                              "load",
-                              "choice",
-                              "function",
-                              "machine",
-                              "pass",
-                              "fail",
-                              "success",
-                              "user",
-                              "wait"
-                            ]
-                          },
-                          "onComplete": {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                            "type": "object",
-                            "required": [
-                              "retry",
-                              "finally"
-                            ],
-                            "properties": {
-                              "actions": {
-                                "type": "array",
-                                "description": "Actions to take on failure",
-                                "maxItems": 10,
-                                "items": {
-                                  "type": "object"
-                                }
-                              }
-                            }
-                          }
-                        }
-                      },
-                      {
-                        "$schema": "http://json-schema.org/draft-07/schema#",
-                        "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepWait.json",
-                        "type": "object",
-                        "description": "A step which run at certain times",
-                        "required": [
-                          "stop_at",
-                          "time"
-                        ],
-                        "properties": {
-                          "label": {
-                            "type": "string",
-                            "description": "Label for the step"
-                          },
-                          "type": {
-                            "type": "string",
-                            "enum": [
-                              "wait"
-                            ]
-                          },
-                          "stop_at": {
-                            "type": "integer",
-                            "description": "Time in seconds to stop this task",
-                            "maximum": 900,
-                            "minimum": 1
-                          },
-                          "time": {
-                            "type": "integer",
-                            "description": "Time to wait before checking this step",
-                            "maximum": 900,
-                            "minimum": 1
-                          },
-                          "listen_for": {
-                            "type": "array",
-                            "description": "List of events and conditions to listen for to trigger",
-                            "items": {
-                              "type": "object",
-                              "required": [
-                                "event"
-                              ],
-                              "properties": {
-                                "event": {
-                                  "type": "string",
-                                  "description": "Name of the event to listen for",
-                                  "allOf": [
-                                    {
-                                      "type": "string",
-                                      "description": "Possible entity events",
-                                      "enum": [
-                                        "CON.attached",
-                                        "CON.created",
-                                        "CON.deleted",
-                                        "CON.detached",
-                                        "CON.removed",
-                                        "CON.updated",
-                                        "CUS.attached",
-                                        "CUS.created",
-                                        "CUS.deleted",
-                                        "CUS.detached",
-                                        "CUS.removed",
-                                        "CUS.updated",
-                                        "LOC.attached",
-                                        "LOC.created",
-                                        "LOC.deleted",
-                                        "LOC.detached",
-                                        "LOC.removed",
-                                        "LOC.updated",
-                                        "NOTE.attached",
-                                        "NOTE.created",
-                                        "NOTE.deleted",
-                                        "NOTE.detached",
-                                        "NOTE.removed",
-                                        "NOTE.updated",
-                                        "PART.attached",
-                                        "PART.created",
-                                        "PART.deleted",
-                                        "PART.detached",
-                                        "PART.removed",
-                                        "PART.updated",
-                                        "PGM.attached",
-                                        "PGM.created",
-                                        "PGM.deleted",
-                                        "PGM.detached",
-                                        "PGM.removed",
-                                        "PGM.updated",
-                                        "PRO.attached",
-                                        "PRO.created",
-                                        "PRO.deleted",
-                                        "PRO.detached",
-                                        "PRO.removed",
-                                        "PRO.updated",
-                                        "RES.attached",
-                                        "RES.created",
-                                        "RES.deleted",
-                                        "RES.detached",
-                                        "RES.removed",
-                                        "RES.updated",
-                                        "UNIT.attached",
-                                        "UNIT.created",
-                                        "UNIT.deleted",
-                                        "UNIT.detached",
-                                        "UNIT.removed",
-                                        "UNIT.updated",
-                                        "USER.attached",
-                                        "USER.created",
-                                        "USER.deleted",
-                                        "USER.detached",
-                                        "USER.removed",
-                                        "USER.updated",
-                                        "WKF.attached",
-                                        "WKF.created",
-                                        "WKF.deleted",
-                                        "WKF.detached",
-                                        "WKF.removed",
-                                        "WKF.updated",
-                                        "WOR.attached",
-                                        "WOR.created",
-                                        "WOR.deleted",
-                                        "WOR.detached",
-                                        "WOR.removed",
-                                        "WOR.updated"
-                                      ]
-                                    }
-                                  ]
-                                },
-                                "event_value": {
-                                  "type": "object",
-                                  "description": "The event conditions that have to be met",
-                                  "allOf": [
-                                    {
-                                      "$schema": "http://json-schema.org/draft-07/schema#",
-                                      "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepChoice.json",
-                                      "type": "object",
-                                      "description": "A Step choice",
-                                      "maxProperties": 2,
-                                      "minProperties": 2,
-                                      "required": [
-                                        "decision"
-                                      ],
-                                      "properties": {
-                                        "decision": {
-                                          "type": "array",
-                                          "description": "Context variable to check",
-                                          "items": {
-                                            "type": "object",
-                                            "properties": {
-                                              "variable": {
-                                                "type": "string",
-                                                "description": "Variable or value"
-                                              },
-                                              "operator": {
-                                                "type": "string",
-                                                "description": "Operator to perform",
-                                                "enum": [
-                                                  "greater_than_equals",
-                                                  "less_than_equals",
-                                                  "greater_than",
-                                                  "less_than",
-                                                  "equals",
-                                                  "not_equals"
-                                                ]
-                                              },
-                                              "operand": {
-                                                "type": "string",
-                                                "description": "operand to compare with"
-                                              }
-                                            }
-                                          }
-                                        }
-                                      },
-                                      "allOf": [
-                                        {
-                                          "$schema": "http://json-schema.org/draft-07/schema#",
-                                          "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepNext.json",
-                                          "type": "object",
-                                          "required": [
-                                            "type",
-                                            "label",
-                                            "goto"
-                                          ],
-                                          "properties": {
-                                            "goto": {
-                                              "type": "string",
-                                              "description": "Step to move to",
-                                              "pattern": "^[a-z][a-z-]+[a-z]$"
-                                            },
-                                            "goto-fail": {
-                                              "type": "string",
-                                              "description": "Step to transition too if this step cannot be completed",
-                                              "pattern": "^[a-z][a-z-]+[a-z]$"
-                                            },
-                                            "context": {
-                                              "type": "array",
-                                              "description": "Values to set on the context",
-                                              "items": {
-                                                "type": "object",
-                                                "required": [
-                                                  "key",
-                                                  "value"
-                                                ],
-                                                "properties": {
-                                                  "key": {
-                                                    "type": "string",
-                                                    "description": "The context key to set"
-                                                  },
-                                                  "value": {
-                                                    "type": "string",
-                                                    "description": "Value to set"
-                                                  },
-                                                  "lock": {
-                                                    "type": "boolean",
-                                                    "description": "Prevents other steps from writing this value"
-                                                  },
-                                                  "ignore": {
-                                                    "type": "boolean",
-                                                    "description": "When trying to set a locked key, do not fail"
-                                                  }
-                                                }
-                                              }
-                                            },
-                                            "onStart": {
-                                              "$schema": "http://json-schema.org/draft-07/schema#",
-                                              "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                              "type": "object",
-                                              "required": [
-                                                "retry",
-                                                "finally"
-                                              ],
-                                              "properties": {
-                                                "actions": {
-                                                  "type": "array",
-                                                  "description": "Actions to take on failure",
-                                                  "maxItems": 10,
-                                                  "items": {
-                                                    "type": "object"
-                                                  }
-                                                }
-                                              }
-                                            },
-                                            "onError": {
-                                              "$schema": "http://json-schema.org/draft-07/schema#",
-                                              "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepError.json",
-                                              "type": "object",
-                                              "required": [
-                                                "retry",
-                                                "finally"
-                                              ],
-                                              "properties": {
-                                                "retry": {
-                                                  "type": "integer",
-                                                  "description": "Number of times to retry this step. Note: retry will only occur on steps which automatically failed. If the step was transitioned using the 'goto-fail' step, the actions will be fired but the step WILL NOT be re-tried",
-                                                  "minimum": 0,
-                                                  "maximum": 10,
-                                                  "default": 0
-                                                },
-                                                "finally": {
-                                                  "type": "object",
-                                                  "description": "What to do after all retries",
-                                                  "properties": {
-                                                    "actions": {
-                                                      "$schema": "http://json-schema.org/draft-07/schema#",
-                                                      "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                                      "type": "object",
-                                                      "required": [
-                                                        "retry",
-                                                        "finally"
-                                                      ],
-                                                      "properties": {
-                                                        "actions": {
-                                                          "type": "array",
-                                                          "description": "Actions to take on failure",
-                                                          "maxItems": 10,
-                                                          "items": {
-                                                            "type": "object"
-                                                          }
-                                                        }
-                                                      }
-                                                    }
-                                                  }
-                                                }
-                                              }
-                                            },
-                                            "onTimeout": {
-                                              "$schema": "http://json-schema.org/draft-07/schema#",
-                                              "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepError.json",
-                                              "type": "object",
-                                              "required": [
-                                                "retry",
-                                                "finally"
-                                              ],
-                                              "properties": {
-                                                "retry": {
-                                                  "type": "integer",
-                                                  "description": "Number of times to retry this step. Note: retry will only occur on steps which automatically failed. If the step was transitioned using the 'goto-fail' step, the actions will be fired but the step WILL NOT be re-tried",
-                                                  "minimum": 0,
-                                                  "maximum": 10,
-                                                  "default": 0
-                                                },
-                                                "finally": {
-                                                  "type": "object",
-                                                  "description": "What to do after all retries",
-                                                  "properties": {
-                                                    "actions": {
-                                                      "$schema": "http://json-schema.org/draft-07/schema#",
-                                                      "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                                      "type": "object",
-                                                      "required": [
-                                                        "retry",
-                                                        "finally"
-                                                      ],
-                                                      "properties": {
-                                                        "actions": {
-                                                          "type": "array",
-                                                          "description": "Actions to take on failure",
-                                                          "maxItems": 10,
-                                                          "items": {
-                                                            "type": "object"
-                                                          }
-                                                        }
-                                                      }
-                                                    }
-                                                  }
-                                                }
-                                              }
-                                            }
-                                          }
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              }
-                            }
-                          }
-                        },
-                        "allOf": [
-                          {
-                            "$schema": "http://json-schema.org/draft-07/schema#",
-                            "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepCommon.json",
-                            "type": "object",
-                            "required": [
-                              "type",
-                              "label",
-                              "goto"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "description": "Type of workflow step",
-                                "enum": [
-                                  "load",
-                                  "choice",
-                                  "function",
-                                  "machine",
-                                  "pass",
-                                  "fail",
-                                  "success",
-                                  "user",
-                                  "wait"
-                                ]
-                              },
-                              "label": {
-                                "type": "string",
-                                "description": "Label for the step"
-                              },
-                              "goto": {
-                                "type": "string",
-                                "description": "Step to move to",
-                                "pattern": "^[a-z][a-z-]+[a-z]$"
-                              },
-                              "goto-fail": {
-                                "type": "string",
-                                "description": "Step to transition too if this step cannot be completed",
-                                "pattern": "^[a-z][a-z-]+[a-z]$"
-                              },
-                              "onComplete": {
-                                "$schema": "http://json-schema.org/draft-07/schema#",
-                                "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-                                "type": "object",
-                                "required": [
-                                  "retry",
-                                  "finally"
-                                ],
-                                "properties": {
-                                  "actions": {
-                                    "type": "array",
-                                    "description": "Actions to take on failure",
-                                    "maxItems": 10,
-                                    "items": {
-                                      "type": "object"
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        ]
-                      }
-                    ]
-                  }
-                }
-              },
-              "metadata": {
-                "type": "object",
-                "description": "Data for the resource as a key value pair",
-                "additionalProperties": {
-                  "type": "string"
-                },
-                "propertyNames": {
-                  "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
-```
+|&nbsp;&nbsp;&nbsp;&nbsp; needed|body|integer|true|The number of cycles needed|
+|&nbsp;&nbsp;&nbsp;&nbsp; pending|body|integer|true|The number of cycles pending|
+|&nbsp;&nbsp;&nbsp;&nbsp; in_progress|body|integer|true|The number of cycles pending|
+|&nbsp;&nbsp;&nbsp;&nbsp; verifying|body|integer|true|The number of cycles pending|
+|&nbsp;&nbsp;&nbsp;&nbsp; complete|body|integer|true|The number of cycles pending|
+|&nbsp;&nbsp;&nbsp;&nbsp; blocked|body|integer|true|The number of cycles pending|
+|&nbsp;&nbsp;&nbsp;&nbsp; cancelled|body|integer|true|The number of cycles pending|
+|&nbsp;&nbsp;&nbsp;&nbsp; work_flow|body|object|true|Workflow|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; work_flow_id|body|string|false|Customer identifier|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; entity_id|body|string|true|Customer identifier|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; entity_type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; label|body|string|true|Label for the entity|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; slug|body|string|false|Slug for the entity (Auto-generated from the label)|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; created|body|string(date-time)|true|Date the entity was created|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; updated|body|string(date-time)|true|Last date the entity was updated|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; schema_version|body|string|true|Version of the workflow schema used|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; workflow_version|body|integer|false|Version number for the work flows (the number of times it has been changed|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; applies_to|body|string|true|The entity type this work flow applies too|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; triggered_by|body|[string]|false|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; starts_at|body|string|true|Starting step|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; steps|body|object|true|Steps for the workflow|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; metadata|body|object|false|Data for the resource as a key value pair|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **additionalProperties**|body|string|false|none|
 
 <h3 id="updateworkorder-responses">Responses</h3>
 
@@ -14075,234 +1235,331 @@ Updates a work order
 |403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
 |423|[Locked](https://tools.ietf.org/html/rfc2518#section-10.4)|Forbidden|Inline|
 
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "work_order_id": "work-order",
+  "label": "My workOrder",
+  "created": "2019-08-19T00:01:02.000Z",
+  "updated": "2020-08-19T01:01:02.000Z",
+  "description": "Workorder description",
+  "work_order_type": "device",
+  "begin_date": "2021-08-19T02:01:02.000Z",
+  "due_date": "2021-08-19T02:01:02.000Z",
+  "start_date": "2021-08-19T02:01:02.000Z",
+  "end_date": "2021-08-19T02:01:02.000Z",
+  "project": {
+    "project_id": "project",
+    "label": "New York Stores",
+    "description": "Project description",
+    "created": "2020-01-09T22:12:03.000Z",
+    "updated": "2020-01-09T22:12:03.000Z",
+    "customer": {
+      "customer_id": "customer",
+      "label": "manchuck",
+      "created": "2020-01-09T22:12:03.000Z",
+      "updated": "2020-01-09T22:12:03.000Z",
+      "external_platform": {},
+      "total_programs": 21,
+      "total_projects": 42,
+      "allowed_statuses": [
+        {
+          "category": "PENDING",
+          "description": "For something that is Pending",
+          "status": "Pending",
+          "order": 3
+        },
+        {
+          "category": "IN_PROGRESS",
+          "description": "For something that is In Progress",
+          "status": "In Progress",
+          "order": 4
+        },
+        {
+          "category": "VERIFYING",
+          "description": "For something that is Verifying",
+          "status": "Verifying",
+          "order": 5
+        },
+        {
+          "category": "BLOCKED",
+          "description": "For something that is Blocked",
+          "status": "Blocked",
+          "order": 6
+        },
+        {
+          "category": "COMPLETE",
+          "description": "For something that is Complete",
+          "status": "Complete",
+          "order": 7
+        },
+        {
+          "category": "CANCELLED",
+          "description": "For something that is Cancelled",
+          "status": "Cancelled",
+          "order": 8
+        }
+      ]
+    },
+    "program": {
+      "program_id": "program",
+      "label": "North east stores",
+      "created": "2020-01-09T22:12:03.000Z",
+      "updated": "2020-01-09T22:12:03.000Z",
+      "customer": {
+        "customer_id": "customer",
+        "label": "manchuck",
+        "created": "2020-01-09T22:12:03.000Z",
+        "updated": "2020-01-09T22:12:03.000Z",
+        "external_platform": {},
+        "total_programs": 21,
+        "total_projects": 42,
+        "allowed_statuses": [
+          {
+            "category": "PENDING",
+            "description": "For something that is Pending",
+            "status": "Pending",
+            "order": 3
+          },
+          {
+            "category": "IN_PROGRESS",
+            "description": "For something that is In Progress",
+            "status": "In Progress",
+            "order": 4
+          },
+          {
+            "category": "VERIFYING",
+            "description": "For something that is Verifying",
+            "status": "Verifying",
+            "order": 5
+          },
+          {
+            "category": "BLOCKED",
+            "description": "For something that is Blocked",
+            "status": "Blocked",
+            "order": 6
+          },
+          {
+            "category": "COMPLETE",
+            "description": "For something that is Complete",
+            "status": "Complete",
+            "order": 7
+          },
+          {
+            "category": "CANCELLED",
+            "description": "For something that is Cancelled",
+            "status": "Cancelled",
+            "order": 8
+          }
+        ]
+      },
+      "end_date": "2020-02-10T22:12:03.000Z",
+      "start_date": "2020-02-10T22:12:03.000Z",
+      "allowed_statuses": [
+        {
+          "category": "PENDING",
+          "description": "For something that is Pending",
+          "status": "Pending",
+          "order": 3
+        },
+        {
+          "category": "VERIFYING",
+          "description": "For something that is Verifying",
+          "status": "Verifying",
+          "order": 5
+        }
+      ]
+    },
+    "end_date": "2020-02-10T22:12:03.000Z",
+    "start_date": "2020-02-10T22:12:03.000Z",
+    "allowed_statuses": [
+      {
+        "category": "PENDING",
+        "description": "For something that is Pending",
+        "status": "Pending",
+        "order": 3
+      }
+    ]
+  },
+  "location": {
+    "location_id": "location",
+    "label": "Test Label",
+    "created": "2019-08-19T00:01:02.000Z",
+    "updated": "2020-08-19T01:01:02.000Z",
+    "location_type": "warehouse",
+    "formatted_address": "Test Label\n431 Broadway Suite c\nMenands NY 12204 USA",
+    "address": {
+      "country": "USA",
+      "administrative_area": "NY",
+      "sub_administrative_area": "Albany",
+      "locality": "Menands",
+      "postal_code": "12204",
+      "thoroughfare": "431 Broadway",
+      "premise": "Suite c",
+      "sub_premise": "ZIC"
+    }
+  },
+  "current_status": {
+    "category": "IN_PROGRESS",
+    "description": "For something that is Reticulating Splines",
+    "status": "Reticulating Splines",
+    "order": 2
+  },
+  "cycles": [
+    {
+      "needed": 1,
+      "pending": 1,
+      "in_progress": 0,
+      "verifying": 0,
+      "complete": 0,
+      "blocked": 0,
+      "cancelled": 0,
+      "work_flow": {
+        "entity_type": "WKF",
+        "entity_id": "work-flow",
+        "created": "2019-08-19T00:01:02.000Z",
+        "updated": "2020-08-19T01:01:02.000Z",
+        "label": "My workflow",
+        "schema_version": "1.0",
+        "workflow_version": 7,
+        "applies_to": "UNIT",
+        "starts_at": "work-complete",
+        "metadata": {
+          "meta": "data"
+        },
+        "steps": {
+          "work-complete": {
+            "step_type": "success",
+            "label": "work complete",
+            "on_start": [],
+            "on_complete": []
+          },
+          "stop-poking-me": {
+            "step_type": "fail",
+            "label": "stop poking me",
+            "on_start": [],
+            "on_complete": []
+          }
+        },
+        "triggered_by": [
+          "UNIT.created"
+        ]
+      }
+    }
+  ],
+  "input_filter": [
+    {
+      "label": "Serial Number Of part",
+      "key": "serial-number",
+      "filters": [],
+      "validators": [],
+      "value": null
+    }
+  ],
+  "_embedded": {
+    "nter:work-order-project": [],
+    "nter:work-order-location": [],
+    "nter:work-order-program": [],
+    "nter:work-order-customer": []
+  },
+  "_links": {
+    "nter:work-order-batches": {
+      "href": "https://api.example.com/work-orders/work-order/batches"
+    },
+    "nter:work-order-queues": {
+      "href": "https://api.example.com/work-orders/work-order/queues"
+    },
+    "self": {
+      "href": "https://api.example.com/work-orders/work-order"
+    }
+  }
+}
+```
+
+> 400 Response
+
+```json
+{
+  "title": "Bad Request",
+  "type": "https://docs.nterprise.com/api/problem/BadRequest",
+  "status": 400,
+  "detail": "Invalid Data",
+  "validation_messages": [
+    {
+      "keyword": "field",
+      "dataPath": ".field",
+      "schemaPath": "https://docs.nterprise.com/schemas/niagara/foo.json#/properties/field",
+      "params": {
+        "type": "string"
+      },
+      "message": "should be string"
+    }
+  ]
+}
+```
+
+> 403 Response
+
+```json
+{
+  "title": "Forbidden",
+  "type": "https://docs.nterprise.com/api/problem/Forbidden",
+  "status": 403,
+  "detail": "You are forbidden from accessing this resource"
+}
+```
+
+> 423 Response
+
+```json
+{
+  "title": "Locked",
+  "type": "https://docs.nterprise.com/api/problem/Locked",
+  "status": 423,
+  "detail": "This resource is currently locked from editing"
+}
+```
+
 <h3 id="updateworkorder-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» _links|object|false|none|none|
-|»» self|object|false|none|none|
-|»»» href|string(uri)|false|none|none|
-|»» work_order_id|string|false|none|The identifier for the unit|
-|»» label|string|false|none|Label for the entity|
-|»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»» created|string(date-time)|false|read-only|Date the entity was created|
-|»» updated|string(date-time)|false|read-only|Last date the entity was updated|
-|»» start_date|string(date-time)|false|read-only|Last date the entity was updated|
-|»» end_date|string(date-time)|false|read-only|Last date the entity was updated|
-|»» description|string\|null|false|none|Detailed description for the work order|
-|»» work_order_type|string|false|none|Type of work order|
-|»» begin_date|string(date-time)|false|none|Begin date|
-|»» due_date|string(date-time)|false|none|Due date|
-|»» current_status|object|false|none|Defines the properties for a status|
-|»»» status|string|true|none|A Custom label for the status|
-|»»» category|string|true|none|The classifier for the statues|
-|»»» description|string\|null|false|none|A description for the status|
-|»»» order|number|false|none|Order status appears when listing|
-|»» project|object|false|none|Defines the properties for a project|
-|»»» project_id|string|false|none|Unique identifier|
-|»»» entity_id|string|true|read-only|Customer identifier|
-|»»» entity_type|string|true|none|none|
-|»»» description|string\|null|false|none|Project description|
-|»»» label|string|true|none|Label for the entity|
-|»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»»» created|string(date-time)|true|read-only|Date the entity was created|
-|»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»» customer|object|true|none|Customer|
-|»»»» customer_id|string|false|read-only|Customer identifier|
-|»»»» entity_id|string|true|read-only|Customer identifier|
-|»»»» entity_type|string|true|none|none|
-|»»»» label|string|true|none|Label for the entity|
-|»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»»»» created|string(date-time)|true|read-only|Date the entity was created|
-|»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»»» external_platform|object|false|none|External Identifiers for the customer|
-|»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
-|»»»»» status|string|true|none|A Custom label for the status|
-|»»»»» category|string|true|none|The classifier for the statues|
-|»»»»» description|string\|null|false|none|A description for the status|
-|»»»»» order|number|false|none|Order status appears when listing|
-|»»»» total_programs|number|false|none|Total programs under the customer|
-|»»»» total_projects|number|false|none|Total projects under the customer|
-|»»» program|object|true|none|Defines the properties for a program|
-|»»»» program_id|string|false|read-only|Unique identifier|
-|»»»» entity_id|string|true|read-only|Customer identifier|
-|»»»» entity_type|string|true|none|none|
-|»»»» label|string|false|none|Label for the entity|
-|»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»»»» created|string(date-time)|true|read-only|Date the entity was created|
-|»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»»» start_date|string(date-time)\|null|false|none|Start date|
-|»»»» end_date|string(date-time)\|null|false|none|End date|
-|»»»» customer|object|true|none|Customer|
-|»»»»» customer_id|string|false|read-only|Customer identifier|
-|»»»»» entity_id|string|true|read-only|Customer identifier|
-|»»»»» entity_type|string|true|none|none|
-|»»»»» label|string|true|none|Label for the entity|
-|»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»»»»» created|string(date-time)|true|read-only|Date the entity was created|
-|»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»»»» external_platform|object|false|none|External Identifiers for the customer|
-|»»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
-|»»»»»» status|string|true|none|A Custom label for the status|
-|»»»»»» category|string|true|none|The classifier for the statues|
-|»»»»»» description|string\|null|false|none|A description for the status|
-|»»»»»» order|number|false|none|Order status appears when listing|
-|»»»»» total_programs|number|false|none|Total programs under the customer|
-|»»»»» total_projects|number|false|none|Total projects under the customer|
-|»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
-|»»»»» status|string|true|none|A Custom label for the status|
-|»»»»» category|string|true|none|The classifier for the statues|
-|»»»»» description|string\|null|false|none|A description for the status|
-|»»»»» order|number|false|none|Order status appears when listing|
-|»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
-|»»»»» status|string|true|none|A Custom label for the status|
-|»»»»» category|string|true|none|The classifier for the statues|
-|»»»»» description|string\|null|false|none|A description for the status|
-|»»»»» order|number|false|none|Order status appears when listing|
-|»»»» start_date|string(date-time)\|null|false|none|Start date|
-|»»»» end_date|string(date-time)\|null|false|none|End date|
-|»»» cycles|[object]|false|none|none|
-|»»»» needed|integer|true|none|The number of cycles needed|
-|»»»» pending|integer|true|read-only|The number of cycles pending|
-|»»»» in_progress|integer|true|read-only|The number of cycles pending|
-|»»»» verifying|integer|true|read-only|The number of cycles pending|
-|»»»» complete|integer|true|read-only|The number of cycles pending|
-|»»»» blocked|integer|true|read-only|The number of cycles pending|
-|»»»» cancelled|integer|true|read-only|The number of cycles pending|
-|»»»» work_flow|object|true|none|Workflow|
-|»»»»» work_flow_id|string|false|read-only|Customer identifier|
-|»»»»» entity_id|string|true|read-only|Customer identifier|
-|»»»»» entity_type|string|true|none|none|
-|»»»»» label|string|true|none|Label for the entity|
-|»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»»»»» created|string(date-time)|true|read-only|Date the entity was created|
-|»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»»»» schema_version|string|true|none|Version of the workflow schema used|
-|»»»»» workflow_version|integer|false|read-only|Version number for the work flows (the number of times it has been changed|
-|»»»»» applies_to|string|true|none|The entity type this work flow applies too|
-|»»»»» triggered_by|[string]|false|none|none|
-|»»»»» starts_at|string|true|none|Starting step|
-|»»»»» steps|object|true|none|Steps for the workflow|
-|»»»»» metadata|object|false|none|Data for the resource as a key value pair|
-|»»»»»» **additionalProperties**|string|false|none|none|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|work_order_type|device|
-|category|PENDING|
-|category|IN_PROGRESS|
-|category|VERIFYING|
-|category|COMPLETE|
-|category|CANCELLED|
-|category|BLOCKED|
-|entity_type|PRJ|
-|entity_type|CUS|
-|category|PENDING|
-|category|IN_PROGRESS|
-|category|VERIFYING|
-|category|COMPLETE|
-|category|CANCELLED|
-|category|BLOCKED|
-|entity_type|PGM|
-|entity_type|CUS|
-|category|PENDING|
-|category|IN_PROGRESS|
-|category|VERIFYING|
-|category|COMPLETE|
-|category|CANCELLED|
-|category|BLOCKED|
-|category|PENDING|
-|category|IN_PROGRESS|
-|category|VERIFYING|
-|category|COMPLETE|
-|category|CANCELLED|
-|category|BLOCKED|
-|category|PENDING|
-|category|IN_PROGRESS|
-|category|VERIFYING|
-|category|COMPLETE|
-|category|CANCELLED|
-|category|BLOCKED|
-|entity_type|WKF|
-|schema_version|1.0|
-|applies_to|UNIT|
-|applies_to|PART|
-|applies_to|PGM|
-|applies_to|PRJ|
-|applies_to|CUS|
-|applies_to|CON|
 
 Status Code **400**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|string|false|none|none|
-|» type|string|false|none|none|
-|» status|number|false|none|none|
-|» detail|string|false|none|none|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|title|Bad Request|
-|type|https://docs.nterprise.com/api/problem/BadRequest|
-|status|400|
-|detail|Invalid request|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; validation_messages|[object]|true|none|List of errors detailing the failures|
 
 Status Code **403**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|string|false|none|none|
-|» type|string|false|none|none|
-|» status|number|false|none|none|
-|» detail|string|false|none|none|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|title|Forbidden|
-|type|https://docs.nterprise.com/api/problem/Forbidden|
-|status|403|
-|detail|You are forbidden to access this resource|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
 
 Status Code **423**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|string|false|none|none|
-|» type|string|false|none|none|
-|» status|number|false|none|none|
-|» detail|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
 
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|title|Locked|
-|type|https://docs.nterprise.com/api/problem/Locked|
-|status|423|
-|detail|The current resource is locked and cannot be modified|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## deleteWorkOrder
+### DELETE /work-orders/{work_order_id} - *Delete work-order*
 
 <a id="opIddeleteWorkOrder"></a>
 
-`DELETE /work-orders/{work_order_id}`
+*Delete work-order*
 
-*Deletes a work order*
-
-This will soft delete the work order
+Deletes a work-order
 
 <h3 id="deleteworkorder-parameters">Parameters</h3>
 
@@ -14310,46 +1567,61 @@ This will soft delete the work order
 |---|---|---|---|---|
 |work_order_id|path|string|true|Id for the work order|
 
+<h3 id="deleteworkorder-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|205|[Reset Content](https://tools.ietf.org/html/rfc7231#section-6.3.6)|Work-order deleted|None|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|Inline|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Resource not found|Inline|
+|423|[Locked](https://tools.ietf.org/html/rfc2518#section-10.4)|Forbidden|Inline|
+
 > Example responses
 
 > 401 Response
 
 ```json
 {
-  "properties": {
-    "title": {
-      "enum": [
-        "Unauthorized"
-      ]
-    },
-    "type": {
-      "enum": [
-        "https://docs.nterprise.com/api/problem/Unauthorized"
-      ]
-    },
-    "status": {
-      "enum": [
-        401
-      ]
-    },
-    "detail": {
-      "enum": [
-        "You are not authorized to access this resource"
-      ]
-    }
-  }
+  "title": "Unauthorized",
+  "type": "https://docs.nterprise.com/api/problem/Unauthorized",
+  "status": 401,
+  "detail": "Invalid authorization token"
 }
 ```
 
-<h3 id="deleteworkorder-responses">Responses</h3>
+> 403 Response
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|205|[Reset Content](https://tools.ietf.org/html/rfc7231#section-6.3.6)|WorkOrder deleted|None|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|Inline|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Resource not found|Inline|
-|423|[Locked](https://tools.ietf.org/html/rfc2518#section-10.4)|Forbidden|Inline|
+```json
+{
+  "title": "Forbidden",
+  "type": "https://docs.nterprise.com/api/problem/Forbidden",
+  "status": 403,
+  "detail": "You are forbidden from accessing this resource"
+}
+```
+
+> 404 Response
+
+```json
+{
+  "title": "Not Found",
+  "type": "https://docs.nterprise.com/api/problem/NotFound",
+  "status": 404,
+  "detail": "A Resource with the id \"foo\" was not found"
+}
+```
+
+> 423 Response
+
+```json
+{
+  "title": "Locked",
+  "type": "https://docs.nterprise.com/api/problem/Locked",
+  "status": 423,
+  "detail": "This resource is currently locked from editing"
+}
+```
 
 <h3 id="deleteworkorder-responseschema">Response Schema</h3>
 
@@ -14357,123 +1629,167 @@ Status Code **401**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|string|false|none|none|
-|» type|string|false|none|none|
-|» status|number|false|none|none|
-|» detail|string|false|none|none|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|title|Unauthorized|
-|type|https://docs.nterprise.com/api/problem/Unauthorized|
-|status|401|
-|detail|You are not authorized to access this resource|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
 
 Status Code **403**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|string|false|none|none|
-|» type|string|false|none|none|
-|» status|number|false|none|none|
-|» detail|string|false|none|none|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|title|Forbidden|
-|type|https://docs.nterprise.com/api/problem/Forbidden|
-|status|403|
-|detail|You are forbidden to access this resource|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
 
 Status Code **404**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|string|false|none|none|
-|» type|string|false|none|none|
-|» status|number|false|none|none|
-|» detail|string|false|none|none|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|title|Not Found|
-|type|https://docs.nterprise.com/api/problem/NotFound|
-|status|404|
-|detail|Resource not found|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
 
 Status Code **423**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|string|false|none|none|
-|» type|string|false|none|none|
-|» status|number|false|none|none|
-|» detail|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
 
-#### Enumerated Values
+# Embedded Schemas
 
-|Property|Value|
-|---|---|
-|title|Locked|
-|type|https://docs.nterprise.com/api/problem/Locked|
-|status|423|
-|detail|The current resource is locked and cannot be modified|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-# Schemas
-
-<h2 id="tocSworkorder">WorkOrder</h2>
-
+## WorkOrder
+<!-- backwards compatibility -->
 <a id="schemaworkorder"></a>
+<a id="schema_WorkOrder"></a>
+<a id="tocSworkorder"></a>
+<a id="tocsworkorder"></a>
+
+#### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|work_order_id|string|true|none|The identifier for the unit|
+|label|string|true|none|Label for the entity|
+|created|string(date-time)|true|read-only|Date the entity was created|
+|updated|string(date-time)|true|read-only|Last date the entity was updated|
+|start_date|string(date-time)|true|read-only|Last date the entity was updated|
+|end_date|string(date-time)|true|read-only|Last date the entity was updated|
+|description|string¦null|true|none|Detailed description for the work order|
+|work_order_type|string|true|none|Type of work order|
+|begin_date|string(date-time)|true|none|Begin date|
+|due_date|string(date-time)|true|none|Due date|
+|current_status|object|true|none|Defines the properties for a status|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|string|true|none|A Custom label for the status|
+|&nbsp;&nbsp;&nbsp;&nbsp; category|string|true|none|The classifier for the statues|
+|&nbsp;&nbsp;&nbsp;&nbsp; description|string¦null|false|none|A description for the status|
+|&nbsp;&nbsp;&nbsp;&nbsp; order|number|false|none|Order status appears when listing|
+|project|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; project_id|string|true|none|Unique identifier|
+|&nbsp;&nbsp;&nbsp;&nbsp; label|string|true|none|Label for the entity|
+|&nbsp;&nbsp;&nbsp;&nbsp; created|string(date-time)|true|read-only|Date the entity was created|
+|&nbsp;&nbsp;&nbsp;&nbsp; updated|string(date-time)|true|read-only|Last date the entity was updated|
+|&nbsp;&nbsp;&nbsp;&nbsp; start_date|string(date-time)¦null|true|none|Start date|
+|&nbsp;&nbsp;&nbsp;&nbsp; end_date|string(date-time)¦null|true|none|End date|
+|&nbsp;&nbsp;&nbsp;&nbsp; customer|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; customer_id|string|true|read-only|Customer identifier|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; label|string|true|none|Label for the entity|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; created|string(date-time)|true|read-only|Date the entity was created|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; updated|string(date-time)|true|read-only|Last date the entity was updated|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; external_platform|object|true|none|External Identifiers for the customer|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; allowed_statuses|[object]|true|none|List of allowed statuses|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; status|string|true|none|A Custom label for the status|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; category|string|true|none|The classifier for the statues|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; description|string¦null|false|none|A description for the status|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; order|number|false|none|Order status appears when listing|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; total_programs|number|true|none|Total programs under the customer|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; total_projects|number|true|none|Total projects under the customer|
+|&nbsp;&nbsp;&nbsp;&nbsp; program|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; program_id|string|true|read-only|Unique identifier|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; label|string|true|none|Label for the entity|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; created|string(date-time)|true|read-only|Date the entity was created|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; updated|string(date-time)|true|read-only|Last date the entity was updated|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; start_date|string(date-time)¦null|true|none|Start date|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end_date|string(date-time)¦null|true|none|End date|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; customer|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; customer_id|string|true|read-only|Customer identifier|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; label|string|true|none|Label for the entity|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; created|string(date-time)|true|read-only|Date the entity was created|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; updated|string(date-time)|true|read-only|Last date the entity was updated|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; external_platform|object|true|none|External Identifiers for the customer|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; allowed_statuses|[object]|true|none|List of allowed statuses|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; status|string|true|none|A Custom label for the status|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; category|string|true|none|The classifier for the statues|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; description|string¦null|false|none|A description for the status|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; order|number|false|none|Order status appears when listing|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; total_programs|number|true|none|Total programs under the customer|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; total_projects|number|true|none|Total projects under the customer|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; allowed_statuses|[object]|true|none|List of allowed statuses|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; status|string|true|none|A Custom label for the status|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; category|string|true|none|The classifier for the statues|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; description|string¦null|false|none|A description for the status|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; order|number|false|none|Order status appears when listing|
+|&nbsp;&nbsp;&nbsp;&nbsp; allowed_statuses|[object]|true|none|List of allowed statuses|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; status|string|true|none|A Custom label for the status|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; category|string|true|none|The classifier for the statues|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; description|string¦null|false|none|A description for the status|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; order|number|false|none|Order status appears when listing|
+|cycles|[object]|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; needed|integer|true|none|The number of cycles needed|
+|&nbsp;&nbsp;&nbsp;&nbsp; pending|integer|true|read-only|The number of cycles pending|
+|&nbsp;&nbsp;&nbsp;&nbsp; in_progress|integer|true|read-only|The number of cycles pending|
+|&nbsp;&nbsp;&nbsp;&nbsp; verifying|integer|true|read-only|The number of cycles pending|
+|&nbsp;&nbsp;&nbsp;&nbsp; complete|integer|true|read-only|The number of cycles pending|
+|&nbsp;&nbsp;&nbsp;&nbsp; blocked|integer|true|read-only|The number of cycles pending|
+|&nbsp;&nbsp;&nbsp;&nbsp; cancelled|integer|true|read-only|The number of cycles pending|
+|&nbsp;&nbsp;&nbsp;&nbsp; work_flow|object|true|none|Workflow|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; work_flow_id|string|false|read-only|Customer identifier|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; entity_id|string|true|read-only|Customer identifier|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; entity_type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; label|string|true|none|Label for the entity|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; created|string(date-time)|true|read-only|Date the entity was created|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; updated|string(date-time)|true|read-only|Last date the entity was updated|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; schema_version|string|true|none|Version of the workflow schema used|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; workflow_version|integer|false|read-only|Version number for the work flows (the number of times it has been changed|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; applies_to|string|true|none|The entity type this work flow applies too|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; triggered_by|[string]|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; starts_at|string|true|none|Starting step|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; steps|object|true|none|Steps for the workflow|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; metadata|object|false|none|Data for the resource as a key value pair|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **additionalProperties**|string|false|none|none|
+
+#### Specification
 
 ```yaml
 type: object
-description: Defines the properties for a work order
-additionalProperties: false
 required:
+  - work_order_id
   - label
-  - entity_id
-  - entity_type
   - created
   - updated
+  - start_date
+  - end_date
+  - description
   - work_order_type
-  - location
-  - cycles
   - begin_date
   - due_date
+  - current_status
+  - project
+  - cycles
 properties:
   work_order_id:
     type: string
     description: The identifier for the unit
-    pattern: '^[0-9a-zA-Z-_]+$'
-  entity_id:
-    x-no-api-doc: true
-    type: string
-    description: Customer identifier
-    readOnly: true
-    pattern: '^[0-9a-zA-Z-_]+$'
-  entity_type:
-    x-no-api-doc: true
-    enum:
-      - WOR
+    pattern: ^[0-9a-zA-Z-_]+$
   label:
     type: string
     description: Label for the entity
-  slug:
-    type: string
-    description: Slug for the entity (Auto-generated from the label)
-    readOnly: true
-    deprecated: true
-    pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
   created:
     description: Date the entity was created
     type: string
@@ -14485,700 +1801,15 @@ properties:
     format: date-time
     readOnly: true
   start_date:
+    description: Last date the entity was updated
     type: string
-    nullable: true
     format: date-time
-    description: Start date
+    readOnly: true
   end_date:
+    description: Last date the entity was updated
     type: string
-    nullable: true
     format: date-time
-    description: End date
-  current_location:
-    deprecated: true
-    type: object
-    description: Defines the properties for a part unit
-    additionalProperties: false
-    required:
-      - label
-      - entity_id
-      - entity_type
-      - created
-      - updated
-      - location_type
-      - address
-    properties:
-      location_id:
-        description: The identifier for the location
-        type: string
-        readOnly: true
-        pattern: '^[0-9a-zA-Z-_]+$'
-      entity_id:
-        x-no-api-doc: true
-        type: string
-        description: Customer identifier
-        readOnly: true
-        pattern: '^[0-9a-zA-Z-_]+$'
-      entity_type:
-        x-no-api-doc: true
-        enum:
-          - LOC
-      label:
-        type: string
-        description: Label for the entity
-      slug:
-        type: string
-        description: Slug for the entity (Auto-generated from the label)
-        readOnly: true
-        deprecated: true
-        pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
-      created:
-        description: Date the entity was created
-        type: string
-        format: date-time
-        readOnly: true
-      updated:
-        description: Last date the entity was updated
-        type: string
-        format: date-time
-        readOnly: true
-      location_type:
-        type: string
-        description: The type of location
-        enum:
-          - warehouse
-          - facility
-          - other
-      formatted_address:
-        type: string
-        readOnly: true
-        description: Address formatted for the where region the location exists in
-      address:
-        type: object
-        required:
-          - country
-          - administrative_area
-          - locality
-          - postal_code
-          - thoroughfare
-        description: 'xNAL address for the location '
-        properties:
-          country:
-            type: string
-            description: Three Letter ISO country code
-            enum:
-              - ABW
-              - AFG
-              - AGO
-              - AIA
-              - ALA
-              - ALB
-              - AND
-              - ARE
-              - ARG
-              - ARM
-              - ASM
-              - ATA
-              - ATF
-              - ATG
-              - AUS
-              - AUT
-              - AZE
-              - BDI
-              - BEL
-              - BEN
-              - BES
-              - BFA
-              - BGD
-              - BGR
-              - BHR
-              - BHS
-              - BIH
-              - BLM
-              - BLR
-              - BLZ
-              - BMU
-              - BOL
-              - BRA
-              - BRB
-              - BRN
-              - BTN
-              - BVT
-              - BWA
-              - CAF
-              - CAN
-              - CCK
-              - CHE
-              - CHL
-              - CHN
-              - CIV
-              - CMR
-              - COD
-              - COG
-              - COK
-              - COL
-              - COM
-              - CPV
-              - CRI
-              - CUB
-              - CUW
-              - CXR
-              - CYM
-              - CYP
-              - CZE
-              - DEU
-              - DJI
-              - DMA
-              - DNK
-              - DOM
-              - DZA
-              - ECU
-              - EGY
-              - ERI
-              - ESH
-              - ESP
-              - EST
-              - ETH
-              - FIN
-              - FJI
-              - FLK
-              - FRA
-              - FRO
-              - FSM
-              - GAB
-              - GBR
-              - GEO
-              - GGY
-              - GHA
-              - GIB
-              - GIN
-              - GLP
-              - GMB
-              - GNB
-              - GNQ
-              - GRC
-              - GRD
-              - GRL
-              - GTM
-              - GUF
-              - GUM
-              - GUY
-              - HKG
-              - HMD
-              - HND
-              - HRV
-              - HTI
-              - HUN
-              - IDN
-              - IMN
-              - IND
-              - IOT
-              - IRL
-              - IRN
-              - IRQ
-              - ISL
-              - ISR
-              - ITA
-              - JAM
-              - JEY
-              - JOR
-              - JPN
-              - KAZ
-              - KEN
-              - KGZ
-              - KHM
-              - KIR
-              - KNA
-              - KOR
-              - KWT
-              - LAO
-              - LBN
-              - LBR
-              - LBY
-              - LCA
-              - LIE
-              - LKA
-              - LSO
-              - LTU
-              - LUX
-              - LVA
-              - MAC
-              - MAF
-              - MAR
-              - MCO
-              - MDA
-              - MDG
-              - MDV
-              - MEX
-              - MHL
-              - MKD
-              - MLI
-              - MLT
-              - MMR
-              - MNE
-              - MNG
-              - MNP
-              - MOZ
-              - MRT
-              - MSR
-              - MTQ
-              - MUS
-              - MWI
-              - MYS
-              - MYT
-              - NAM
-              - NCL
-              - NER
-              - NFK
-              - NGA
-              - NIC
-              - NIU
-              - NLD
-              - NOR
-              - NPL
-              - NRU
-              - NZL
-              - OMN
-              - PAK
-              - PAN
-              - PCN
-              - PER
-              - PHL
-              - PLW
-              - PNG
-              - POL
-              - PRI
-              - PRK
-              - PRT
-              - PRY
-              - PSE
-              - PYF
-              - QAT
-              - REU
-              - ROU
-              - RUS
-              - RWA
-              - SAU
-              - SDN
-              - SEN
-              - SGP
-              - SGS
-              - SHN
-              - SJM
-              - SLB
-              - SLE
-              - SLV
-              - SMR
-              - SOM
-              - SPM
-              - SRB
-              - SSD
-              - STP
-              - SUR
-              - SVK
-              - SVN
-              - SWE
-              - SWZ
-              - SXM
-              - SYC
-              - SYR
-              - TCA
-              - TCD
-              - TGO
-              - THA
-              - TJK
-              - TKL
-              - TKM
-              - TLS
-              - TON
-              - TTO
-              - TUN
-              - TUR
-              - TUV
-              - TWN
-              - TZA
-              - UGA
-              - UKR
-              - UMI
-              - URY
-              - USA
-              - UZB
-              - VAT
-              - VCT
-              - VEN
-              - VGB
-              - VIR
-              - VNM
-              - VUT
-              - WLF
-              - WSM
-              - YEM
-              - ZAF
-              - ZMB
-              - ZWE
-          administrative_area:
-            type: string
-            description: State / Province / Region
-          sub_administrative_area:
-            type: string
-            description: County / District
-          locality:
-            type: string
-            description: City / Town
-          postal_code:
-            type: string
-            description: Postal Code / Zip Code
-          thoroughfare:
-            type: string
-            description: Street Address
-          premise:
-            type: string
-            description: Apartment / Suite / Box number etc
-          sub_premise:
-            type: string
-            description: 'Floor # / Room # / Building label etc'
-  location:
-    type: object
-    description: Defines the properties for a part unit
-    additionalProperties: false
-    required:
-      - label
-      - entity_id
-      - entity_type
-      - created
-      - updated
-      - location_type
-      - address
-    properties:
-      location_id:
-        description: The identifier for the location
-        type: string
-        readOnly: true
-        pattern: '^[0-9a-zA-Z-_]+$'
-      entity_id:
-        x-no-api-doc: true
-        type: string
-        description: Customer identifier
-        readOnly: true
-        pattern: '^[0-9a-zA-Z-_]+$'
-      entity_type:
-        x-no-api-doc: true
-        enum:
-          - LOC
-      label:
-        type: string
-        description: Label for the entity
-      slug:
-        type: string
-        description: Slug for the entity (Auto-generated from the label)
-        readOnly: true
-        deprecated: true
-        pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
-      created:
-        description: Date the entity was created
-        type: string
-        format: date-time
-        readOnly: true
-      updated:
-        description: Last date the entity was updated
-        type: string
-        format: date-time
-        readOnly: true
-      location_type:
-        type: string
-        description: The type of location
-        enum:
-          - warehouse
-          - facility
-          - other
-      formatted_address:
-        type: string
-        readOnly: true
-        description: Address formatted for the where region the location exists in
-      address:
-        type: object
-        required:
-          - country
-          - administrative_area
-          - locality
-          - postal_code
-          - thoroughfare
-        description: 'xNAL address for the location '
-        properties:
-          country:
-            type: string
-            description: Three Letter ISO country code
-            enum:
-              - ABW
-              - AFG
-              - AGO
-              - AIA
-              - ALA
-              - ALB
-              - AND
-              - ARE
-              - ARG
-              - ARM
-              - ASM
-              - ATA
-              - ATF
-              - ATG
-              - AUS
-              - AUT
-              - AZE
-              - BDI
-              - BEL
-              - BEN
-              - BES
-              - BFA
-              - BGD
-              - BGR
-              - BHR
-              - BHS
-              - BIH
-              - BLM
-              - BLR
-              - BLZ
-              - BMU
-              - BOL
-              - BRA
-              - BRB
-              - BRN
-              - BTN
-              - BVT
-              - BWA
-              - CAF
-              - CAN
-              - CCK
-              - CHE
-              - CHL
-              - CHN
-              - CIV
-              - CMR
-              - COD
-              - COG
-              - COK
-              - COL
-              - COM
-              - CPV
-              - CRI
-              - CUB
-              - CUW
-              - CXR
-              - CYM
-              - CYP
-              - CZE
-              - DEU
-              - DJI
-              - DMA
-              - DNK
-              - DOM
-              - DZA
-              - ECU
-              - EGY
-              - ERI
-              - ESH
-              - ESP
-              - EST
-              - ETH
-              - FIN
-              - FJI
-              - FLK
-              - FRA
-              - FRO
-              - FSM
-              - GAB
-              - GBR
-              - GEO
-              - GGY
-              - GHA
-              - GIB
-              - GIN
-              - GLP
-              - GMB
-              - GNB
-              - GNQ
-              - GRC
-              - GRD
-              - GRL
-              - GTM
-              - GUF
-              - GUM
-              - GUY
-              - HKG
-              - HMD
-              - HND
-              - HRV
-              - HTI
-              - HUN
-              - IDN
-              - IMN
-              - IND
-              - IOT
-              - IRL
-              - IRN
-              - IRQ
-              - ISL
-              - ISR
-              - ITA
-              - JAM
-              - JEY
-              - JOR
-              - JPN
-              - KAZ
-              - KEN
-              - KGZ
-              - KHM
-              - KIR
-              - KNA
-              - KOR
-              - KWT
-              - LAO
-              - LBN
-              - LBR
-              - LBY
-              - LCA
-              - LIE
-              - LKA
-              - LSO
-              - LTU
-              - LUX
-              - LVA
-              - MAC
-              - MAF
-              - MAR
-              - MCO
-              - MDA
-              - MDG
-              - MDV
-              - MEX
-              - MHL
-              - MKD
-              - MLI
-              - MLT
-              - MMR
-              - MNE
-              - MNG
-              - MNP
-              - MOZ
-              - MRT
-              - MSR
-              - MTQ
-              - MUS
-              - MWI
-              - MYS
-              - MYT
-              - NAM
-              - NCL
-              - NER
-              - NFK
-              - NGA
-              - NIC
-              - NIU
-              - NLD
-              - NOR
-              - NPL
-              - NRU
-              - NZL
-              - OMN
-              - PAK
-              - PAN
-              - PCN
-              - PER
-              - PHL
-              - PLW
-              - PNG
-              - POL
-              - PRI
-              - PRK
-              - PRT
-              - PRY
-              - PSE
-              - PYF
-              - QAT
-              - REU
-              - ROU
-              - RUS
-              - RWA
-              - SAU
-              - SDN
-              - SEN
-              - SGP
-              - SGS
-              - SHN
-              - SJM
-              - SLB
-              - SLE
-              - SLV
-              - SMR
-              - SOM
-              - SPM
-              - SRB
-              - SSD
-              - STP
-              - SUR
-              - SVK
-              - SVN
-              - SWE
-              - SWZ
-              - SXM
-              - SYC
-              - SYR
-              - TCA
-              - TCD
-              - TGO
-              - THA
-              - TJK
-              - TKL
-              - TKM
-              - TLS
-              - TON
-              - TTO
-              - TUN
-              - TUR
-              - TUV
-              - TWN
-              - TZA
-              - UGA
-              - UKR
-              - UMI
-              - URY
-              - USA
-              - UZB
-              - VAT
-              - VCT
-              - VEN
-              - VGB
-              - VIR
-              - VNM
-              - VUT
-              - WLF
-              - WSM
-              - YEM
-              - ZAF
-              - ZMB
-              - ZWE
-          administrative_area:
-            type: string
-            description: State / Province / Region
-          sub_administrative_area:
-            type: string
-            description: County / District
-          locality:
-            type: string
-            description: City / Town
-          postal_code:
-            type: string
-            description: Postal Code / Zip Code
-          thoroughfare:
-            type: string
-            description: Street Address
-          premise:
-            type: string
-            description: Apartment / Suite / Box number etc
-          sub_premise:
-            type: string
-            description: 'Floor # / Room # / Building label etc'
+    readOnly: true
   description:
     type: string
     nullable: true
@@ -15207,7 +1838,7 @@ properties:
       status:
         type: string
         description: A Custom label for the status
-        pattern: '^[A-Za-z][0-9a-zA-Z-_ ]+$'
+        pattern: ^[A-Za-z][0-9a-zA-Z-_ ]+$
       category:
         type: string
         description: The classifier for the statues
@@ -15225,187 +1856,34 @@ properties:
       order:
         type: number
         description: Order status appears when listing
+    example:
+      category: COMPLETE
+      description: For something that is Complete
+      status: Complete
+      order: 7
   project:
     type: object
-    description: Defines the properties for a project
-    additionalProperties: false
-    required:
-      - label
-      - entity_id
-      - entity_type
-      - created
-      - updated
-      - customer
-      - program
-      - allowed_statuses
-    properties:
-      project_id:
-        type: string
-        description: Unique identifier
-        pattern: '^[0-9a-zA-Z-_]+$'
-      entity_id:
-        x-no-api-doc: true
-        type: string
-        description: Customer identifier
-        readOnly: true
-        pattern: '^[0-9a-zA-Z-_]+$'
-      entity_type:
-        x-no-api-doc: true
-        enum:
-          - PRJ
-      description:
-        type: string
-        nullable: true
-        description: Project description
-      label:
-        type: string
-        description: Label for the entity
-      slug:
-        type: string
-        description: Slug for the entity (Auto-generated from the label)
-        readOnly: true
-        deprecated: true
-        pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
-      created:
-        description: Date the entity was created
-        type: string
-        format: date-time
-        readOnly: true
-      updated:
-        description: Last date the entity was updated
-        type: string
-        format: date-time
-        readOnly: true
-      customer:
-        type: object
-        description: Customer
-        additionalProperties: false
+    deprecated: true
+    allOf:
+      - type: object
         required:
-          - label
-          - entity_id
-          - entity_type
-          - created
-          - updated
-          - allowed_statuses
-        properties:
-          customer_id:
-            description: Customer identifier
-            type: string
-            readOnly: true
-            pattern: '^[0-9a-zA-Z-_]+$'
-          entity_id:
-            x-no-api-doc: true
-            type: string
-            description: Customer identifier
-            readOnly: true
-            pattern: '^[0-9a-zA-Z-_]+$'
-          entity_type:
-            x-no-api-doc: true
-            enum:
-              - CUS
-          label:
-            type: string
-            description: Label for the entity
-          slug:
-            type: string
-            description: Slug for the entity (Auto-generated from the label)
-            readOnly: true
-            deprecated: true
-            pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
-          created:
-            description: Date the entity was created
-            type: string
-            format: date-time
-            readOnly: true
-          updated:
-            description: Last date the entity was updated
-            type: string
-            format: date-time
-            readOnly: true
-          external_platform:
-            type: object
-            description: External Identifiers for the customer
-            deprecated: true
-            x-patternProperties: &ref_0
-              '^[A-Za-z][A-Za-z0-9_]*$':
-                type:
-                  - string
-                  - 'null'
-          allowed_statuses:
-            type: array
-            description: List of allowed statuses
-            uniqueItems: true
-            items:
-              type: object
-              description: Defines the properties for a status
-              additionalProperties: false
-              required:
-                - status
-                - category
-              properties:
-                status:
-                  type: string
-                  description: A Custom label for the status
-                  pattern: '^[A-Za-z][0-9a-zA-Z-_ ]+$'
-                category:
-                  type: string
-                  description: The classifier for the statues
-                  enum:
-                    - PENDING
-                    - IN_PROGRESS
-                    - VERIFYING
-                    - COMPLETE
-                    - CANCELLED
-                    - BLOCKED
-                description:
-                  type: string
-                  nullable: true
-                  description: A description for the status
-                order:
-                  type: number
-                  description: Order status appears when listing
-          total_programs:
-            type: number
-            description: Total programs under the customer
-          total_projects:
-            type: number
-            description: Total projects under the customer
-      program:
-        type: object
-        description: Defines the properties for a program
-        additionalProperties: false
-        required:
-          - entity_id
-          - entity_type
-          - created
-          - updated
+          - start_date
+          - end_date
           - customer
           - allowed_statuses
+          - updated
+          - label
+          - created
+          - program
+          - project_id
         properties:
-          program_id:
+          project_id:
+            type: string
             description: Unique identifier
-            type: string
-            readOnly: true
-            pattern: '^[0-9a-zA-Z-_]+$'
-          entity_id:
-            x-no-api-doc: true
-            type: string
-            description: Customer identifier
-            readOnly: true
-            pattern: '^[0-9a-zA-Z-_]+$'
-          entity_type:
-            x-no-api-doc: true
-            enum:
-              - PGM
+            pattern: ^[0-9a-zA-Z-_]+$
           label:
             type: string
             description: Label for the entity
-          slug:
-            type: string
-            description: Slug for the entity (Auto-generated from the label)
-            readOnly: true
-            deprecated: true
-            pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
           created:
             description: Date the entity was created
             type: string
@@ -15428,40 +1906,24 @@ properties:
             description: End date
           customer:
             type: object
-            description: Customer
-            additionalProperties: false
             required:
-              - label
-              - entity_id
-              - entity_type
-              - created
               - updated
+              - label
+              - created
               - allowed_statuses
+              - customer_id
+              - external_platform
+              - total_programs
+              - total_projects
             properties:
               customer_id:
                 description: Customer identifier
                 type: string
                 readOnly: true
-                pattern: '^[0-9a-zA-Z-_]+$'
-              entity_id:
-                x-no-api-doc: true
-                type: string
-                description: Customer identifier
-                readOnly: true
-                pattern: '^[0-9a-zA-Z-_]+$'
-              entity_type:
-                x-no-api-doc: true
-                enum:
-                  - CUS
+                pattern: ^[0-9a-zA-Z-_]+$
               label:
                 type: string
                 description: Label for the entity
-              slug:
-                type: string
-                description: Slug for the entity (Auto-generated from the label)
-                readOnly: true
-                deprecated: true
-                pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
               created:
                 description: Date the entity was created
                 type: string
@@ -15476,7 +1938,12 @@ properties:
                 type: object
                 description: External Identifiers for the customer
                 deprecated: true
-                x-patternProperties: *ref_0
+                x-patternProperties:
+                  &a1
+                  "^[A-Za-z][A-Za-z0-9_]*$":
+                    type:
+                      - string
+                      - "null"
               allowed_statuses:
                 type: array
                 description: List of allowed statuses
@@ -15492,7 +1959,7 @@ properties:
                     status:
                       type: string
                       description: A Custom label for the status
-                      pattern: '^[A-Za-z][0-9a-zA-Z-_ ]+$'
+                      pattern: ^[A-Za-z][0-9a-zA-Z-_ ]+$
                     category:
                       type: string
                       description: The classifier for the statues
@@ -15510,12 +1977,177 @@ properties:
                     order:
                       type: number
                       description: Order status appears when listing
+                  example:
+                    category: COMPLETE
+                    description: For something that is Complete
+                    status: Complete
+                    order: 7
               total_programs:
                 type: number
                 description: Total programs under the customer
               total_projects:
                 type: number
                 description: Total projects under the customer
+          program:
+            type: object
+            required:
+              - created
+              - label
+              - updated
+              - allowed_statuses
+              - customer
+              - end_date
+              - program_id
+              - start_date
+            properties:
+              program_id:
+                description: Unique identifier
+                type: string
+                readOnly: true
+                pattern: ^[0-9a-zA-Z-_]+$
+              label:
+                type: string
+                description: Label for the entity
+              created:
+                description: Date the entity was created
+                type: string
+                format: date-time
+                readOnly: true
+              updated:
+                description: Last date the entity was updated
+                type: string
+                format: date-time
+                readOnly: true
+              start_date:
+                type: string
+                nullable: true
+                format: date-time
+                description: Start date
+              end_date:
+                type: string
+                nullable: true
+                format: date-time
+                description: End date
+              customer:
+                type: object
+                deprecated: true
+                allOf:
+                  - type: object
+                    required:
+                      - updated
+                      - label
+                      - created
+                      - allowed_statuses
+                      - customer_id
+                      - external_platform
+                      - total_programs
+                      - total_projects
+                    properties:
+                      customer_id:
+                        description: Customer identifier
+                        type: string
+                        readOnly: true
+                        pattern: ^[0-9a-zA-Z-_]+$
+                      label:
+                        type: string
+                        description: Label for the entity
+                      created:
+                        description: Date the entity was created
+                        type: string
+                        format: date-time
+                        readOnly: true
+                      updated:
+                        description: Last date the entity was updated
+                        type: string
+                        format: date-time
+                        readOnly: true
+                      external_platform:
+                        type: object
+                        description: External Identifiers for the customer
+                        deprecated: true
+                        x-patternProperties: *a1
+                      allowed_statuses:
+                        type: array
+                        description: List of allowed statuses
+                        uniqueItems: true
+                        items:
+                          type: object
+                          description: Defines the properties for a status
+                          additionalProperties: false
+                          required:
+                            - status
+                            - category
+                          properties:
+                            status:
+                              type: string
+                              description: A Custom label for the status
+                              pattern: ^[A-Za-z][0-9a-zA-Z-_ ]+$
+                            category:
+                              type: string
+                              description: The classifier for the statues
+                              enum:
+                                - PENDING
+                                - IN_PROGRESS
+                                - VERIFYING
+                                - COMPLETE
+                                - CANCELLED
+                                - BLOCKED
+                            description:
+                              type: string
+                              nullable: true
+                              description: A description for the status
+                            order:
+                              type: number
+                              description: Order status appears when listing
+                          example:
+                            category: COMPLETE
+                            description: For something that is Complete
+                            status: Complete
+                            order: 7
+                      total_programs:
+                        type: number
+                        description: Total programs under the customer
+                      total_projects:
+                        type: number
+                        description: Total projects under the customer
+              allowed_statuses:
+                type: array
+                description: List of allowed statuses
+                uniqueItems: true
+                items:
+                  type: object
+                  description: Defines the properties for a status
+                  additionalProperties: false
+                  required:
+                    - status
+                    - category
+                  properties:
+                    status:
+                      type: string
+                      description: A Custom label for the status
+                      pattern: ^[A-Za-z][0-9a-zA-Z-_ ]+$
+                    category:
+                      type: string
+                      description: The classifier for the statues
+                      enum:
+                        - PENDING
+                        - IN_PROGRESS
+                        - VERIFYING
+                        - COMPLETE
+                        - CANCELLED
+                        - BLOCKED
+                    description:
+                      type: string
+                      nullable: true
+                      description: A description for the status
+                    order:
+                      type: number
+                      description: Order status appears when listing
+                  example:
+                    category: COMPLETE
+                    description: For something that is Complete
+                    status: Complete
+                    order: 7
           allowed_statuses:
             type: array
             description: List of allowed statuses
@@ -15531,7 +2163,7 @@ properties:
                 status:
                   type: string
                   description: A Custom label for the status
-                  pattern: '^[A-Za-z][0-9a-zA-Z-_ ]+$'
+                  pattern: ^[A-Za-z][0-9a-zA-Z-_ ]+$
                 category:
                   type: string
                   description: The classifier for the statues
@@ -15549,49 +2181,11 @@ properties:
                 order:
                   type: number
                   description: Order status appears when listing
-      allowed_statuses:
-        type: array
-        description: List of allowed statuses
-        uniqueItems: true
-        items:
-          type: object
-          description: Defines the properties for a status
-          additionalProperties: false
-          required:
-            - status
-            - category
-          properties:
-            status:
-              type: string
-              description: A Custom label for the status
-              pattern: '^[A-Za-z][0-9a-zA-Z-_ ]+$'
-            category:
-              type: string
-              description: The classifier for the statues
-              enum:
-                - PENDING
-                - IN_PROGRESS
-                - VERIFYING
-                - COMPLETE
-                - CANCELLED
-                - BLOCKED
-            description:
-              type: string
-              nullable: true
-              description: A description for the status
-            order:
-              type: number
-              description: Order status appears when listing
-      start_date:
-        type: string
-        nullable: true
-        format: date-time
-        description: Start date
-      end_date:
-        type: string
-        nullable: true
-        format: date-time
-        description: End date
+              example:
+                category: COMPLETE
+                description: For something that is Complete
+                status: Complete
+                order: 7
   cycles:
     type: array
     minimum: 1
@@ -15655,13 +2249,13 @@ properties:
               type: string
               description: Customer identifier
               readOnly: true
-              pattern: '^[0-9a-zA-Z-_]+$'
+              pattern: ^[0-9a-zA-Z-_]+$
             entity_id:
               x-no-api-doc: true
               type: string
               description: Customer identifier
               readOnly: true
-              pattern: '^[0-9a-zA-Z-_]+$'
+              pattern: ^[0-9a-zA-Z-_]+$
             entity_type:
               x-no-api-doc: true
               enum:
@@ -15674,7 +2268,7 @@ properties:
               description: Slug for the entity (Auto-generated from the label)
               readOnly: true
               deprecated: true
-              pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+              pattern: ^[a-z0-9]+(?:-[a-z0-9]+)*$
             created:
               description: Date the entity was created
               type: string
@@ -15689,12 +2283,11 @@ properties:
               type: string
               description: Version of the workflow schema used
               enum:
-                - '1.0'
+                - "1.0"
             workflow_version:
               type: integer
-              description: >-
-                Version number for the work flows (the number of times it has
-                been changed
+              description: Version number for the work flows (the number of times it has been
+                changed
               readOnly: true
             applies_to:
               type: string
@@ -15793,18 +2386,17 @@ properties:
               uniqueItems: true
               additionalProperties: true
               x-patternProperties:
-                '^[A-Za-z][A-Za-z0-9_]*$':
+                "^[A-Za-z][A-Za-z0-9_]*$":
                   anyOf:
-                    - $schema: 'http://json-schema.org/draft-07/schema#'
-                      $id: >-
-                        https://docs.nterprise.com/schemas/niagara/workFlow/steps/function/allocateUnitsToProject.json
+                    - $schema: http://json-schema.org/draft-07/schema#
+                      $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/function/allocateUnitsToProject.json
                       type: object
-                      description: >-
-                        Require the user confirm an action. This is normally
-                        used when Niagara cannot automatically detect that a
-                        task or action has been performed.
+                      description: Require the user confirm an action. This is normally used when
+                        Niagara cannot automatically detect that a task or
+                        action has been performed.
                       properties:
-                        label: &ref_6
+                        label:
+                          &a7
                           type: string
                           description: Label for the entity
                         options:
@@ -15836,29 +2428,24 @@ properties:
                                   description: Number of units to assign to the project
                                 allow_scarcity:
                                   type: boolean
-                                  description: >-
-                                    Allow the workflow to continue even if there
-                                    are not enough units
+                                  description: Allow the workflow to continue even if there are not enough units
                                 force:
                                   type: boolean
-                                  description: >-
-                                    Assign the units even if the project already
-                                    has units allocated
+                                  description: Assign the units even if the project already has units allocated
                                 status:
                                   type: string
                                   description: Only assign units which are in this status
-                    - $schema: 'http://json-schema.org/draft-07/schema#'
-                      $id: >-
-                        https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/followPDFInstructions.json
+                    - $schema: http://json-schema.org/draft-07/schema#
+                      $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/followPDFInstructions.json
                       type: object
-                      description: >-
-                        Display a link or modal to a user which contains
-                        instructions from a PDF
+                      description: Display a link or modal to a user which contains instructions from
+                        a PDF
                       required:
                         - label
                         - payload
                       properties:
-                        label: &ref_2
+                        label:
+                          &a3
                           type: string
                           description: Label for the step
                         options:
@@ -15880,17 +2467,17 @@ properties:
                                   description: UUID for the attachment
                                   format: uuid
                       allOf:
-                        - &ref_3
-                          $schema: 'http://json-schema.org/draft-07/schema#'
-                          $id: >-
-                            https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepUser.json
+                        - &a4
+                          $schema: http://json-schema.org/draft-07/schema#
+                          $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepUser.json
                           type: object
                           description: A step which requires a user to complete
                           required:
                             - type
                             - options
                           properties:
-                            type: &ref_1
+                            type:
+                              &a2
                               type: string
                               description: Type of workflow step
                               enum:
@@ -15915,32 +2502,29 @@ properties:
                                 payload:
                                   type: object
                           allOf:
-                            - &ref_7
-                              $schema: 'http://json-schema.org/draft-07/schema#'
-                              $id: >-
-                                https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepCommon.json
+                            - &a8
+                              $schema: http://json-schema.org/draft-07/schema#
+                              $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepCommon.json
                               type: object
                               required:
                                 - type
                                 - label
                                 - goto
                               properties:
-                                type: *ref_1
-                                label: *ref_2
+                                type: *a2
+                                label: *a3
                                 goto:
                                   type: string
                                   description: Step to move to
-                                  pattern: '^[a-z][a-z-]+[a-z]$'
+                                  pattern: ^[a-z][a-z-]+[a-z]$
                                 goto-fail:
                                   type: string
-                                  description: >-
-                                    Step to transition too if this step cannot
-                                    be completed
-                                  pattern: '^[a-z][a-z-]+[a-z]$'
-                                onComplete: &ref_4
-                                  $schema: 'http://json-schema.org/draft-07/schema#'
-                                  $id: >-
-                                    https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json
+                                  description: Step to transition too if this step cannot be completed
+                                  pattern: ^[a-z][a-z-]+[a-z]$
+                                onComplete:
+                                  &a5
+                                  $schema: http://json-schema.org/draft-07/schema#
+                                  $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json
                                   type: object
                                   required:
                                     - retry
@@ -15952,15 +2536,12 @@ properties:
                                       maxItems: 10
                                       items:
                                         type: object
-                    - $schema: 'http://json-schema.org/draft-07/schema#'
-                      $id: >-
-                        https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/manualDataEntry.json
+                    - $schema: http://json-schema.org/draft-07/schema#
+                      $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/manualDataEntry.json
                       type: object
-                      description: >-
-                        Ask the user to manually enter (or confirm) data for an
-                        entity
+                      description: Ask the user to manually enter (or confirm) data for an entity
                       properties:
-                        label: *ref_2
+                        label: *a3
                         options:
                           type: object
                           required:
@@ -15997,30 +2578,26 @@ properties:
                                         description: Label to display for the field
                                       required:
                                         type: boolean
-                                        description: >-
-                                          Display the field as required input.
-                                          Note: this is a helper function. It
-                                          singles that the user is required to
-                                          input data at this step. If the field is
-                                          required on the entity, the user will be
-                                          presented with a validation message
+                                        description: "Display the field as required input. Note: this is a helper
+                                          function. It singles that the user is
+                                          required to input data at this step.
+                                          If the field is required on the
+                                          entity, the user will be presented
+                                          with a validation message"
                                       entity_field:
                                         type: string
-                                        description: >-
-                                          JSON Path to the field on the entity. If
-                                          the path does not start with '$' then
-                                          the entity on the context is assumed.
-                                          Otherwise the data will be set on the
-                                          context path
+                                        description: JSON Path to the field on the entity. If the path does not start
+                                          with '$' then the entity on the
+                                          context is assumed. Otherwise the data
+                                          will be set on the context path
                       allOf:
-                        - *ref_3
-                    - $schema: 'http://json-schema.org/draft-07/schema#'
-                      $id: >-
-                        https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/taskList.json
+                        - *a4
+                    - $schema: http://json-schema.org/draft-07/schema#
+                      $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/taskList.json
                       type: object
                       description: Ask the user to follow a list and check off boxes
                       properties:
-                        label: *ref_2
+                        label: *a3
                         options:
                           type: object
                           required:
@@ -16037,10 +2614,9 @@ properties:
                               properties:
                                 is_qc:
                                   type: boolean
-                                  description: >-
-                                    Flags this list as a QC task list. This
-                                    means that a different user can close the
-                                    task to one previously on the context
+                                  description: Flags this list as a QC task list. This means that a different user
+                                    can close the task to one previously on the
+                                    context
                                 items:
                                   type: array
                                   description: Configuration for each task list item
@@ -16056,40 +2632,31 @@ properties:
                                         description: Label to display for the field
                                       slug:
                                         type: string
-                                        description: >-
-                                          Slug for the item (Auto-generated from
-                                          the label)
+                                        description: Slug for the item (Auto-generated from the label)
                                         readOnly: true
-                                        pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+                                        pattern: ^[a-z0-9]+(?:-[a-z0-9]+)*$
                                       help:
                                         type: string
-                                        description: >-
-                                          Message describing what is needed to be
-                                          checked
+                                        description: Message describing what is needed to be checked
                                       evaluated:
                                         type: boolean
-                                        description: >-
-                                          When set to true, this will fail the
-                                          step if the value for the item is false
-                                          or N/A
+                                        description: When set to true, this will fail the step if the value for the item
+                                          is false or N/A
                                       na_field:
                                         type: boolean
-                                        description: >-
-                                          Allow the user to select the N/A option
-                                          when checking off the list
+                                        description: Allow the user to select the N/A option when checking off the list
                       allOf:
-                        - *ref_3
-                    - $schema: 'http://json-schema.org/draft-07/schema#'
-                      $id: >-
-                        https://docs.nterprise.com/schemas/niagara/workFlow/steps/machine/aceIos.json
+                        - *a4
+                    - $schema: http://json-schema.org/draft-07/schema#
+                      $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/machine/aceIos.json
                       type: object
-                      description: 'Run the ACE-IOS application to provision iOS devices or '
+                      description: "Run the ACE-IOS application to provision iOS devices or "
                       properties:
                         type:
                           type: string
                           enum:
                             - machine
-                        label: *ref_2
+                        label: *a3
                         options:
                           type: object
                           required:
@@ -16102,18 +2669,12 @@ properties:
                               properties:
                                 pairing_cert:
                                   type: string
-                                  description: >-
-                                    Contents of a *.crt file exported from Apple
-                                    Configurator or MDM
-                                  pattern: >-
-                                    ^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$
+                                  description: Contents of a *.crt file exported from Apple Configurator or MDM
+                                  pattern: ^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$
                                 pairing_key:
                                   type: string
-                                  description: >-
-                                    Contents of a *.der file exported from Apple
-                                    Configurator or MDM
-                                  pattern: >-
-                                    ^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$
+                                  description: Contents of a *.der file exported from Apple Configurator or MDM
+                                  pattern: ^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$
                                 restore_device:
                                   type: boolean
                                   description: Restore device to factory defaults
@@ -16126,9 +2687,8 @@ properties:
                                   properties:
                                     vendor:
                                       type: string
-                                      description: >-
-                                        MDM vendor. Currently, supported values
-                                        are AirWatch, JAMF, and Meraki.
+                                      description: MDM vendor. Currently, supported values are AirWatch, JAMF, and
+                                        Meraki.
                                       enum:
                                         - AirWatch
                                         - JAMF
@@ -16148,9 +2708,7 @@ properties:
                                       description: MDM authentication key
                                     set_asset_tag:
                                       type: string
-                                      description: >-
-                                        Sets the devices Asset tag based on a
-                                        field from the unit
+                                      description: Sets the devices Asset tag based on a field from the unit
                                 field_mappings:
                                   type: array
                                   description: List of fields to map to the device
@@ -16187,26 +2745,22 @@ properties:
                                         description: Field to set on the entity
                                 wait_for_apps:
                                   type: array
-                                  description: >-
-                                    A list of applications needed to be
-                                    installed on the device. This will cause the
-                                    extension to poll the device for installed
-                                    applications. Once all the applications have
-                                    been installed, this step can be completed
+                                  description: A list of applications needed to be installed on the device. This
+                                    will cause the extension to poll the device
+                                    for installed applications. Once all the
+                                    applications have been installed, this step
+                                    can be completed
                                   items:
                                     type: string
                                     format: uri
                                 wait_for_battery_charge:
                                   type: integer
-                                  description: >-
-                                    The required battery percentage needed
-                                    before this step can move on
+                                  description: The required battery percentage needed before this step can move on
                                   minimum: 0
                                   maximum: 100
-                    - &ref_8
-                      $schema: 'http://json-schema.org/draft-07/schema#'
-                      $id: >-
-                        https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepChoice.json
+                    - &a9
+                      $schema: http://json-schema.org/draft-07/schema#
+                      $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepChoice.json
                       type: object
                       description: A Step choice
                       maxProperties: 2
@@ -16237,9 +2791,8 @@ properties:
                                 type: string
                                 description: operand to compare with
                       allOf:
-                        - $schema: 'http://json-schema.org/draft-07/schema#'
-                          $id: >-
-                            https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepNext.json
+                        - $schema: http://json-schema.org/draft-07/schema#
+                          $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepNext.json
                           type: object
                           required:
                             - type
@@ -16249,13 +2802,11 @@ properties:
                             goto:
                               type: string
                               description: Step to move to
-                              pattern: '^[a-z][a-z-]+[a-z]$'
+                              pattern: ^[a-z][a-z-]+[a-z]$
                             goto-fail:
                               type: string
-                              description: >-
-                                Step to transition too if this step cannot be
-                                completed
-                              pattern: '^[a-z][a-z-]+[a-z]$'
+                              description: Step to transition too if this step cannot be completed
+                              pattern: ^[a-z][a-z-]+[a-z]$
                             context:
                               type: array
                               description: Values to set on the context
@@ -16273,19 +2824,15 @@ properties:
                                     description: Value to set
                                   lock:
                                     type: boolean
-                                    description: >-
-                                      Prevents other steps from writing this
-                                      value
+                                    description: Prevents other steps from writing this value
                                   ignore:
                                     type: boolean
-                                    description: >-
-                                      When trying to set a locked key, do not
-                                      fail
-                            onStart: *ref_4
-                            onError: &ref_5
-                              $schema: 'http://json-schema.org/draft-07/schema#'
-                              $id: >-
-                                https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepError.json
+                                    description: When trying to set a locked key, do not fail
+                            onStart: *a5
+                            onError:
+                              &a6
+                              $schema: http://json-schema.org/draft-07/schema#
+                              $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepError.json
                               type: object
                               required:
                                 - retry
@@ -16293,13 +2840,11 @@ properties:
                               properties:
                                 retry:
                                   type: integer
-                                  description: >-
-                                    Number of times to retry this step. Note:
-                                    retry will only occur on steps which
-                                    automatically failed. If the step was
-                                    transitioned using the 'goto-fail' step, the
-                                    actions will be fired but the step WILL NOT
-                                    be re-tried
+                                  description: "Number of times to retry this step. Note: retry will only occur on
+                                    steps which automatically failed. If the
+                                    step was transitioned using the 'goto-fail'
+                                    step, the actions will be fired but the step
+                                    WILL NOT be re-tried"
                                   minimum: 0
                                   maximum: 10
                                   default: 0
@@ -16307,48 +2852,42 @@ properties:
                                   type: object
                                   description: What to do after all retries
                                   properties:
-                                    actions: *ref_4
-                            onTimeout: *ref_5
-                    - $schema: 'http://json-schema.org/draft-07/schema#'
-                      $id: >-
-                        https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepFail.json
+                                    actions: *a5
+                            onTimeout: *a6
+                    - $schema: http://json-schema.org/draft-07/schema#
+                      $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepFail.json
                       type: object
                       description: Finial step which is marked as failed
                       properties:
-                        label: *ref_2
-                        type: *ref_1
-                        onComplete: *ref_4
-                    - $schema: 'http://json-schema.org/draft-07/schema#'
-                      $id: >-
-                        https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepPass.json
+                        label: *a3
+                        type: *a2
+                        onComplete: *a5
+                    - $schema: http://json-schema.org/draft-07/schema#
+                      $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepPass.json
                       type: object
-                      description: >-
-                        Allows executing actions with out performing any
-                        function
+                      description: Allows executing actions with out performing any function
                       properties:
-                        label: *ref_6
-                        type: *ref_1
+                        label: *a7
+                        type: *a2
                       allOf:
-                        - *ref_7
-                    - $schema: 'http://json-schema.org/draft-07/schema#'
-                      $id: >-
-                        https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepSuccess.json
+                        - *a8
+                    - $schema: http://json-schema.org/draft-07/schema#
+                      $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepSuccess.json
                       type: object
                       description: Finial step which is marked as completed successfully
                       properties:
-                        label: *ref_2
-                        type: *ref_1
-                        onComplete: *ref_4
-                    - $schema: 'http://json-schema.org/draft-07/schema#'
-                      $id: >-
-                        https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepWait.json
+                        label: *a3
+                        type: *a2
+                        onComplete: *a5
+                    - $schema: http://json-schema.org/draft-07/schema#
+                      $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepWait.json
                       type: object
                       description: A step which run at certain times
                       required:
                         - stop_at
                         - time
                       properties:
-                        label: *ref_2
+                        label: *a3
                         type:
                           type: string
                           enum:
@@ -16365,9 +2904,7 @@ properties:
                           minimum: 1
                         listen_for:
                           type: array
-                          description: >-
-                            List of events and conditions to listen for to
-                            trigger
+                          description: List of events and conditions to listen for to trigger
                           items:
                             type: object
                             required:
@@ -16456,730 +2993,16 @@ properties:
                                 type: object
                                 description: The event conditions that have to be met
                                 allOf:
-                                  - *ref_8
+                                  - *a9
                       allOf:
-                        - *ref_7
+                        - *a8
             metadata:
               type: object
               description: Data for the resource as a key value pair
               additionalProperties:
                 type: string
               propertyNames:
-                pattern: '^[A-Za-z][A-Za-z0-9_]*$'
-  meta:
-    type: object
-    description: Data for the resource as a key value pair
-    additionalProperties:
-      type: string
-    propertyNames:
-      pattern: '^[A-Za-z][A-Za-z0-9_]*$'
+                pattern: ^[A-Za-z][A-Za-z0-9_]*$
 
 ```
-
-*Defines the properties for a work order*
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|work_order_id|string|false|none|The identifier for the unit|
-|entity_id|string|true|read-only|Customer identifier|
-|entity_type|string|true|none|none|
-|label|string|true|none|Label for the entity|
-|slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|created|string(date-time)|true|read-only|Date the entity was created|
-|updated|string(date-time)|true|read-only|Last date the entity was updated|
-|start_date|string(date-time)\|null|false|none|Start date|
-|end_date|string(date-time)\|null|false|none|End date|
-|current_location|object|false|none|Defines the properties for a part unit|
-|» location_id|string|false|read-only|The identifier for the location|
-|» entity_id|string|true|read-only|Customer identifier|
-|» entity_type|string|true|none|none|
-|» label|string|true|none|Label for the entity|
-|» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|» created|string(date-time)|true|read-only|Date the entity was created|
-|» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|» location_type|string|true|none|The type of location|
-|» formatted_address|string|false|read-only|Address formatted for the where region the location exists in|
-|» address|object|true|none|xNAL address for the location|
-|»» country|string|true|none|Three Letter ISO country code|
-|»» administrative_area|string|true|none|State / Province / Region|
-|»» sub_administrative_area|string|false|none|County / District|
-|»» locality|string|true|none|City / Town|
-|»» postal_code|string|true|none|Postal Code / Zip Code|
-|»» thoroughfare|string|true|none|Street Address|
-|»» premise|string|false|none|Apartment / Suite / Box number etc|
-|»» sub_premise|string|false|none|Floor # / Room # / Building label etc|
-|» location|object|true|none|Defines the properties for a part unit|
-|»» location_id|string|false|read-only|The identifier for the location|
-|»» entity_id|string|true|read-only|Customer identifier|
-|»» entity_type|string|true|none|none|
-|»» label|string|true|none|Label for the entity|
-|»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»» created|string(date-time)|true|read-only|Date the entity was created|
-|»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»» location_type|string|true|none|The type of location|
-|»» formatted_address|string|false|read-only|Address formatted for the where region the location exists in|
-|»» address|object|true|none|xNAL address for the location|
-|»»» country|string|true|none|Three Letter ISO country code|
-|»»» administrative_area|string|true|none|State / Province / Region|
-|»»» sub_administrative_area|string|false|none|County / District|
-|»»» locality|string|true|none|City / Town|
-|»»» postal_code|string|true|none|Postal Code / Zip Code|
-|»»» thoroughfare|string|true|none|Street Address|
-|»»» premise|string|false|none|Apartment / Suite / Box number etc|
-|»»» sub_premise|string|false|none|Floor # / Room # / Building label etc|
-|»» description|string\|null|false|none|Detailed description for the work order|
-|»» work_order_type|string|true|none|Type of work order|
-|»» begin_date|string(date-time)|true|none|Begin date|
-|»» due_date|string(date-time)|true|none|Due date|
-|»» current_status|object|false|none|Defines the properties for a status|
-|»»» status|string|true|none|A Custom label for the status|
-|»»» category|string|true|none|The classifier for the statues|
-|»»» description|string\|null|false|none|A description for the status|
-|»»» order|number|false|none|Order status appears when listing|
-|»» project|object|false|none|Defines the properties for a project|
-|»»» project_id|string|false|none|Unique identifier|
-|»»» entity_id|string|true|read-only|Customer identifier|
-|»»» entity_type|string|true|none|none|
-|»»» description|string\|null|false|none|Project description|
-|»»» label|string|true|none|Label for the entity|
-|»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»»» created|string(date-time)|true|read-only|Date the entity was created|
-|»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»» customer|object|true|none|Customer|
-|»»»» customer_id|string|false|read-only|Customer identifier|
-|»»»» entity_id|string|true|read-only|Customer identifier|
-|»»»» entity_type|string|true|none|none|
-|»»»» label|string|true|none|Label for the entity|
-|»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»»»» created|string(date-time)|true|read-only|Date the entity was created|
-|»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»»» external_platform|object|false|none|External Identifiers for the customer|
-|»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
-|»»»»» status|string|true|none|A Custom label for the status|
-|»»»»» category|string|true|none|The classifier for the statues|
-|»»»»» description|string\|null|false|none|A description for the status|
-|»»»»» order|number|false|none|Order status appears when listing|
-|»»»» total_programs|number|false|none|Total programs under the customer|
-|»»»» total_projects|number|false|none|Total projects under the customer|
-|»»» program|object|true|none|Defines the properties for a program|
-|»»»» program_id|string|false|read-only|Unique identifier|
-|»»»» entity_id|string|true|read-only|Customer identifier|
-|»»»» entity_type|string|true|none|none|
-|»»»» label|string|false|none|Label for the entity|
-|»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»»»» created|string(date-time)|true|read-only|Date the entity was created|
-|»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»»» start_date|string(date-time)\|null|false|none|Start date|
-|»»»» end_date|string(date-time)\|null|false|none|End date|
-|»»»» customer|object|true|none|Customer|
-|»»»»» customer_id|string|false|read-only|Customer identifier|
-|»»»»» entity_id|string|true|read-only|Customer identifier|
-|»»»»» entity_type|string|true|none|none|
-|»»»»» label|string|true|none|Label for the entity|
-|»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»»»»» created|string(date-time)|true|read-only|Date the entity was created|
-|»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»»»» external_platform|object|false|none|External Identifiers for the customer|
-|»»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
-|»»»»»» status|string|true|none|A Custom label for the status|
-|»»»»»» category|string|true|none|The classifier for the statues|
-|»»»»»» description|string\|null|false|none|A description for the status|
-|»»»»»» order|number|false|none|Order status appears when listing|
-|»»»»» total_programs|number|false|none|Total programs under the customer|
-|»»»»» total_projects|number|false|none|Total projects under the customer|
-|»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
-|»»»»» status|string|true|none|A Custom label for the status|
-|»»»»» category|string|true|none|The classifier for the statues|
-|»»»»» description|string\|null|false|none|A description for the status|
-|»»»»» order|number|false|none|Order status appears when listing|
-|»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
-|»»»»» status|string|true|none|A Custom label for the status|
-|»»»»» category|string|true|none|The classifier for the statues|
-|»»»»» description|string\|null|false|none|A description for the status|
-|»»»»» order|number|false|none|Order status appears when listing|
-|»»»» start_date|string(date-time)\|null|false|none|Start date|
-|»»»» end_date|string(date-time)\|null|false|none|End date|
-|»»» cycles|[object]|true|none|none|
-|»»»» needed|integer|true|none|The number of cycles needed|
-|»»»» pending|integer|true|read-only|The number of cycles pending|
-|»»»» in_progress|integer|true|read-only|The number of cycles pending|
-|»»»» verifying|integer|true|read-only|The number of cycles pending|
-|»»»» complete|integer|true|read-only|The number of cycles pending|
-|»»»» blocked|integer|true|read-only|The number of cycles pending|
-|»»»» cancelled|integer|true|read-only|The number of cycles pending|
-|»»»» work_flow|object|true|none|Workflow|
-|»»»»» work_flow_id|string|false|read-only|Customer identifier|
-|»»»»» entity_id|string|true|read-only|Customer identifier|
-|»»»»» entity_type|string|true|none|none|
-|»»»»» label|string|true|none|Label for the entity|
-|»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»»»»» created|string(date-time)|true|read-only|Date the entity was created|
-|»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»»»» schema_version|string|true|none|Version of the workflow schema used|
-|»»»»» workflow_version|integer|false|read-only|Version number for the work flows (the number of times it has been changed|
-|»»»»» applies_to|string|true|none|The entity type this work flow applies too|
-|»»»»» triggered_by|[string]|false|none|none|
-|»»»»» starts_at|string|true|none|Starting step|
-|»»»»» steps|object|true|none|Steps for the workflow|
-|»»»»» metadata|object|false|none|Data for the resource as a key value pair|
-|»»»»»» **additionalProperties**|string|false|none|none|
-|»»»»» meta|object|false|none|Data for the resource as a key value pair|
-|»»»»»» **additionalProperties**|string|false|none|none|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|entity_type|WOR|
-|entity_type|LOC|
-|location_type|warehouse|
-|location_type|facility|
-|location_type|other|
-|country|ABW|
-|country|AFG|
-|country|AGO|
-|country|AIA|
-|country|ALA|
-|country|ALB|
-|country|AND|
-|country|ARE|
-|country|ARG|
-|country|ARM|
-|country|ASM|
-|country|ATA|
-|country|ATF|
-|country|ATG|
-|country|AUS|
-|country|AUT|
-|country|AZE|
-|country|BDI|
-|country|BEL|
-|country|BEN|
-|country|BES|
-|country|BFA|
-|country|BGD|
-|country|BGR|
-|country|BHR|
-|country|BHS|
-|country|BIH|
-|country|BLM|
-|country|BLR|
-|country|BLZ|
-|country|BMU|
-|country|BOL|
-|country|BRA|
-|country|BRB|
-|country|BRN|
-|country|BTN|
-|country|BVT|
-|country|BWA|
-|country|CAF|
-|country|CAN|
-|country|CCK|
-|country|CHE|
-|country|CHL|
-|country|CHN|
-|country|CIV|
-|country|CMR|
-|country|COD|
-|country|COG|
-|country|COK|
-|country|COL|
-|country|COM|
-|country|CPV|
-|country|CRI|
-|country|CUB|
-|country|CUW|
-|country|CXR|
-|country|CYM|
-|country|CYP|
-|country|CZE|
-|country|DEU|
-|country|DJI|
-|country|DMA|
-|country|DNK|
-|country|DOM|
-|country|DZA|
-|country|ECU|
-|country|EGY|
-|country|ERI|
-|country|ESH|
-|country|ESP|
-|country|EST|
-|country|ETH|
-|country|FIN|
-|country|FJI|
-|country|FLK|
-|country|FRA|
-|country|FRO|
-|country|FSM|
-|country|GAB|
-|country|GBR|
-|country|GEO|
-|country|GGY|
-|country|GHA|
-|country|GIB|
-|country|GIN|
-|country|GLP|
-|country|GMB|
-|country|GNB|
-|country|GNQ|
-|country|GRC|
-|country|GRD|
-|country|GRL|
-|country|GTM|
-|country|GUF|
-|country|GUM|
-|country|GUY|
-|country|HKG|
-|country|HMD|
-|country|HND|
-|country|HRV|
-|country|HTI|
-|country|HUN|
-|country|IDN|
-|country|IMN|
-|country|IND|
-|country|IOT|
-|country|IRL|
-|country|IRN|
-|country|IRQ|
-|country|ISL|
-|country|ISR|
-|country|ITA|
-|country|JAM|
-|country|JEY|
-|country|JOR|
-|country|JPN|
-|country|KAZ|
-|country|KEN|
-|country|KGZ|
-|country|KHM|
-|country|KIR|
-|country|KNA|
-|country|KOR|
-|country|KWT|
-|country|LAO|
-|country|LBN|
-|country|LBR|
-|country|LBY|
-|country|LCA|
-|country|LIE|
-|country|LKA|
-|country|LSO|
-|country|LTU|
-|country|LUX|
-|country|LVA|
-|country|MAC|
-|country|MAF|
-|country|MAR|
-|country|MCO|
-|country|MDA|
-|country|MDG|
-|country|MDV|
-|country|MEX|
-|country|MHL|
-|country|MKD|
-|country|MLI|
-|country|MLT|
-|country|MMR|
-|country|MNE|
-|country|MNG|
-|country|MNP|
-|country|MOZ|
-|country|MRT|
-|country|MSR|
-|country|MTQ|
-|country|MUS|
-|country|MWI|
-|country|MYS|
-|country|MYT|
-|country|NAM|
-|country|NCL|
-|country|NER|
-|country|NFK|
-|country|NGA|
-|country|NIC|
-|country|NIU|
-|country|NLD|
-|country|NOR|
-|country|NPL|
-|country|NRU|
-|country|NZL|
-|country|OMN|
-|country|PAK|
-|country|PAN|
-|country|PCN|
-|country|PER|
-|country|PHL|
-|country|PLW|
-|country|PNG|
-|country|POL|
-|country|PRI|
-|country|PRK|
-|country|PRT|
-|country|PRY|
-|country|PSE|
-|country|PYF|
-|country|QAT|
-|country|REU|
-|country|ROU|
-|country|RUS|
-|country|RWA|
-|country|SAU|
-|country|SDN|
-|country|SEN|
-|country|SGP|
-|country|SGS|
-|country|SHN|
-|country|SJM|
-|country|SLB|
-|country|SLE|
-|country|SLV|
-|country|SMR|
-|country|SOM|
-|country|SPM|
-|country|SRB|
-|country|SSD|
-|country|STP|
-|country|SUR|
-|country|SVK|
-|country|SVN|
-|country|SWE|
-|country|SWZ|
-|country|SXM|
-|country|SYC|
-|country|SYR|
-|country|TCA|
-|country|TCD|
-|country|TGO|
-|country|THA|
-|country|TJK|
-|country|TKL|
-|country|TKM|
-|country|TLS|
-|country|TON|
-|country|TTO|
-|country|TUN|
-|country|TUR|
-|country|TUV|
-|country|TWN|
-|country|TZA|
-|country|UGA|
-|country|UKR|
-|country|UMI|
-|country|URY|
-|country|USA|
-|country|UZB|
-|country|VAT|
-|country|VCT|
-|country|VEN|
-|country|VGB|
-|country|VIR|
-|country|VNM|
-|country|VUT|
-|country|WLF|
-|country|WSM|
-|country|YEM|
-|country|ZAF|
-|country|ZMB|
-|country|ZWE|
-|entity_type|LOC|
-|location_type|warehouse|
-|location_type|facility|
-|location_type|other|
-|country|ABW|
-|country|AFG|
-|country|AGO|
-|country|AIA|
-|country|ALA|
-|country|ALB|
-|country|AND|
-|country|ARE|
-|country|ARG|
-|country|ARM|
-|country|ASM|
-|country|ATA|
-|country|ATF|
-|country|ATG|
-|country|AUS|
-|country|AUT|
-|country|AZE|
-|country|BDI|
-|country|BEL|
-|country|BEN|
-|country|BES|
-|country|BFA|
-|country|BGD|
-|country|BGR|
-|country|BHR|
-|country|BHS|
-|country|BIH|
-|country|BLM|
-|country|BLR|
-|country|BLZ|
-|country|BMU|
-|country|BOL|
-|country|BRA|
-|country|BRB|
-|country|BRN|
-|country|BTN|
-|country|BVT|
-|country|BWA|
-|country|CAF|
-|country|CAN|
-|country|CCK|
-|country|CHE|
-|country|CHL|
-|country|CHN|
-|country|CIV|
-|country|CMR|
-|country|COD|
-|country|COG|
-|country|COK|
-|country|COL|
-|country|COM|
-|country|CPV|
-|country|CRI|
-|country|CUB|
-|country|CUW|
-|country|CXR|
-|country|CYM|
-|country|CYP|
-|country|CZE|
-|country|DEU|
-|country|DJI|
-|country|DMA|
-|country|DNK|
-|country|DOM|
-|country|DZA|
-|country|ECU|
-|country|EGY|
-|country|ERI|
-|country|ESH|
-|country|ESP|
-|country|EST|
-|country|ETH|
-|country|FIN|
-|country|FJI|
-|country|FLK|
-|country|FRA|
-|country|FRO|
-|country|FSM|
-|country|GAB|
-|country|GBR|
-|country|GEO|
-|country|GGY|
-|country|GHA|
-|country|GIB|
-|country|GIN|
-|country|GLP|
-|country|GMB|
-|country|GNB|
-|country|GNQ|
-|country|GRC|
-|country|GRD|
-|country|GRL|
-|country|GTM|
-|country|GUF|
-|country|GUM|
-|country|GUY|
-|country|HKG|
-|country|HMD|
-|country|HND|
-|country|HRV|
-|country|HTI|
-|country|HUN|
-|country|IDN|
-|country|IMN|
-|country|IND|
-|country|IOT|
-|country|IRL|
-|country|IRN|
-|country|IRQ|
-|country|ISL|
-|country|ISR|
-|country|ITA|
-|country|JAM|
-|country|JEY|
-|country|JOR|
-|country|JPN|
-|country|KAZ|
-|country|KEN|
-|country|KGZ|
-|country|KHM|
-|country|KIR|
-|country|KNA|
-|country|KOR|
-|country|KWT|
-|country|LAO|
-|country|LBN|
-|country|LBR|
-|country|LBY|
-|country|LCA|
-|country|LIE|
-|country|LKA|
-|country|LSO|
-|country|LTU|
-|country|LUX|
-|country|LVA|
-|country|MAC|
-|country|MAF|
-|country|MAR|
-|country|MCO|
-|country|MDA|
-|country|MDG|
-|country|MDV|
-|country|MEX|
-|country|MHL|
-|country|MKD|
-|country|MLI|
-|country|MLT|
-|country|MMR|
-|country|MNE|
-|country|MNG|
-|country|MNP|
-|country|MOZ|
-|country|MRT|
-|country|MSR|
-|country|MTQ|
-|country|MUS|
-|country|MWI|
-|country|MYS|
-|country|MYT|
-|country|NAM|
-|country|NCL|
-|country|NER|
-|country|NFK|
-|country|NGA|
-|country|NIC|
-|country|NIU|
-|country|NLD|
-|country|NOR|
-|country|NPL|
-|country|NRU|
-|country|NZL|
-|country|OMN|
-|country|PAK|
-|country|PAN|
-|country|PCN|
-|country|PER|
-|country|PHL|
-|country|PLW|
-|country|PNG|
-|country|POL|
-|country|PRI|
-|country|PRK|
-|country|PRT|
-|country|PRY|
-|country|PSE|
-|country|PYF|
-|country|QAT|
-|country|REU|
-|country|ROU|
-|country|RUS|
-|country|RWA|
-|country|SAU|
-|country|SDN|
-|country|SEN|
-|country|SGP|
-|country|SGS|
-|country|SHN|
-|country|SJM|
-|country|SLB|
-|country|SLE|
-|country|SLV|
-|country|SMR|
-|country|SOM|
-|country|SPM|
-|country|SRB|
-|country|SSD|
-|country|STP|
-|country|SUR|
-|country|SVK|
-|country|SVN|
-|country|SWE|
-|country|SWZ|
-|country|SXM|
-|country|SYC|
-|country|SYR|
-|country|TCA|
-|country|TCD|
-|country|TGO|
-|country|THA|
-|country|TJK|
-|country|TKL|
-|country|TKM|
-|country|TLS|
-|country|TON|
-|country|TTO|
-|country|TUN|
-|country|TUR|
-|country|TUV|
-|country|TWN|
-|country|TZA|
-|country|UGA|
-|country|UKR|
-|country|UMI|
-|country|URY|
-|country|USA|
-|country|UZB|
-|country|VAT|
-|country|VCT|
-|country|VEN|
-|country|VGB|
-|country|VIR|
-|country|VNM|
-|country|VUT|
-|country|WLF|
-|country|WSM|
-|country|YEM|
-|country|ZAF|
-|country|ZMB|
-|country|ZWE|
-|work_order_type|device|
-|category|PENDING|
-|category|IN_PROGRESS|
-|category|VERIFYING|
-|category|COMPLETE|
-|category|CANCELLED|
-|category|BLOCKED|
-|entity_type|PRJ|
-|entity_type|CUS|
-|category|PENDING|
-|category|IN_PROGRESS|
-|category|VERIFYING|
-|category|COMPLETE|
-|category|CANCELLED|
-|category|BLOCKED|
-|entity_type|PGM|
-|entity_type|CUS|
-|category|PENDING|
-|category|IN_PROGRESS|
-|category|VERIFYING|
-|category|COMPLETE|
-|category|CANCELLED|
-|category|BLOCKED|
-|category|PENDING|
-|category|IN_PROGRESS|
-|category|VERIFYING|
-|category|COMPLETE|
-|category|CANCELLED|
-|category|BLOCKED|
-|category|PENDING|
-|category|IN_PROGRESS|
-|category|VERIFYING|
-|category|COMPLETE|
-|category|CANCELLED|
-|category|BLOCKED|
-|entity_type|WKF|
-|schema_version|1.0|
-|applies_to|UNIT|
-|applies_to|PART|
-|applies_to|PGM|
-|applies_to|PRJ|
-|applies_to|CUS|
-|applies_to|CON|
 

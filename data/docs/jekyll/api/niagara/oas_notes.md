@@ -1,180 +1,37 @@
 ---
 layout: page
 parent: Niagara API
-nav_order: 9
+nav_order: 10
+redirect_from:
+  - /rel/notes
+  - /rel/note
 title: Notes
-language_tabs: ''
-toc_footers: []
-includes: []
-search: true
-highlight_theme: darkula
-headingLevel: 2
-
 ---
 
-<h1 id="notes">Notes v2.0.0</h1>
+<h1 id="notes">Notes</h1>
 
 * Do not remove this line (it will not be displayed)
 {:toc}
 
-> Scroll down for example requests and responses.
-
 API for the nterprise application
-
-Base URLs:
-
-* <a href="https://{environment}.nterprise.com">https://{environment}.nterprise.com</a>
-
-    * **environment** -  Default: api
-
-        * api
-
-        * api.dev
 
 <h1 id="notes-note">Note</h1>
 
-## fetchNoteById
+## Operations
+
+### GET /notes/{note_id} - *Fetch Note*
 
 <a id="opIdfetchNoteById"></a>
 
-`GET /notes/{note_id}`
+*Fetch Note*
 
-*Fetches a note by Id*
-
-Fetch Note
+Fetches a note
 
 <h3 id="fetchnotebyid-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |note_id|path|string|true|Id of the note|
-
-> Example responses
-
-> 200 Response
-
-```json
-{
-  "type": "object",
-  "properties": {
-    "_links": {
-      "type": "object",
-      "properties": {
-        "self": {
-          "x-example": {
-            "href": "https://api.nterprise.com/notes/kk9z7zwvQYH5GKx"
-          },
-          "type": "object",
-          "properties": {
-            "href": {
-              "type": "string",
-              "format": "uri"
-            }
-          }
-        }
-      }
-    },
-    "note_id": {
-      "description": "The identifier for the note",
-      "type": "string",
-      "readOnly": true,
-      "pattern": "^[0-9a-zA-Z-_]+$"
-    },
-    "label": {
-      "type": "string",
-      "description": "Label for the entity"
-    },
-    "slug": {
-      "type": "string",
-      "description": "Slug for the entity (Auto-generated from the label)",
-      "readOnly": true,
-      "deprecated": true,
-      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-    },
-    "created": {
-      "description": "Date the entity was created",
-      "type": "string",
-      "format": "date-time",
-      "readOnly": true
-    },
-    "updated": {
-      "description": "Last date the entity was updated",
-      "type": "string",
-      "format": "date-time",
-      "readOnly": true
-    },
-    "text": {
-      "type": "string",
-      "description": "Text for the note"
-    },
-    "created_by": {
-      "type": "object",
-      "description": "User Information",
-      "additionalProperties": false,
-      "properties": {
-        "user_id": {
-          "type": "string",
-          "description": "The identifier for the user",
-          "pattern": "^[0-9a-zA-Z-_]+$"
-        },
-        "entity_id": {
-          "x-no-api-doc": true,
-          "type": "string",
-          "description": "Customer identifier",
-          "readOnly": true,
-          "pattern": "^[0-9a-zA-Z-_]+$"
-        },
-        "entity_type": {
-          "x-no-api-doc": true,
-          "enum": [
-            "USER"
-          ]
-        },
-        "label": {
-          "type": "string",
-          "description": "Label for the entity"
-        },
-        "slug": {
-          "type": "string",
-          "description": "Slug for the entity (Auto-generated from the label)",
-          "readOnly": true,
-          "deprecated": true,
-          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-        },
-        "created": {
-          "description": "Date the entity was created",
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "updated": {
-          "description": "Last date the entity was updated",
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "email": {
-          "type": "string",
-          "format": "email",
-          "description": "Email address"
-        },
-        "name": {
-          "type": "string",
-          "description": "Human readable name"
-        },
-        "picture": {
-          "type": "string",
-          "description": "Image for the user"
-        },
-        "profile": {
-          "type": "string",
-          "description": "Link to the users profile"
-        }
-      }
-    }
-  }
-}
-```
 
 <h3 id="fetchnotebyid-responses">Responses</h3>
 
@@ -185,144 +42,130 @@ Fetch Note
 |403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
 |404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Resource not found|Inline|
 
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "note_id": "note",
+  "label": "A Note",
+  "created": "2019-10-09T19:30:35.639Z",
+  "updated": "2019-10-09T20:30:35.639Z",
+  "text": "Lorem ipsum dolor sit amet",
+  "created_by": {
+    "user_id": "3dddba3e-6122-46a8-ae26-8c7c95bd82d7",
+    "created": "2019-08-19T00:01:02.639Z",
+    "updated": "2019-08-19T00:01:02.639Z",
+    "name": "Chuck Reeves",
+    "email": "chuck.reeves@zones.com",
+    "profile": "https://bit.ly/18gECvy",
+    "picture": "https://bit.ly/18gECvy"
+  },
+  "_embedded": {
+    "nter:note-created-by": [
+      {
+        "user_id": "3dddba3e-6122-46a8-ae26-8c7c95bd82d7",
+        "created": "2019-08-19T00:01:02.639Z",
+        "updated": "2019-08-19T00:01:02.639Z",
+        "name": "Chuck Reeves",
+        "email": "chuck.reeves@zones.com",
+        "profile": "https://bit.ly/18gECvy",
+        "picture": "https://bit.ly/18gECvy",
+        "_links": {
+          "self": {
+            "href": "https://api.example.com/users/3dddba3e-6122-46a8-ae26-8c7c95bd82d7"
+          }
+        }
+      }
+    ]
+  },
+  "_links": {
+    "nter:note-created-by": {
+      "href": "https://api.example.com/users/3dddba3e-6122-46a8-ae26-8c7c95bd82d7"
+    },
+    "self": {
+      "href": "https://api.example.com/notes/note"
+    }
+  }
+}
+```
+
+> 401 Response
+
+```json
+{
+  "title": "Unauthorized",
+  "type": "https://docs.nterprise.com/api/problem/Unauthorized",
+  "status": 401,
+  "detail": "Invalid authorization token"
+}
+```
+
+> 403 Response
+
+```json
+{
+  "title": "Forbidden",
+  "type": "https://docs.nterprise.com/api/problem/Forbidden",
+  "status": 403,
+  "detail": "You are forbidden from accessing this resource"
+}
+```
+
+> 404 Response
+
+```json
+{
+  "title": "Not Found",
+  "type": "https://docs.nterprise.com/api/problem/NotFound",
+  "status": 404,
+  "detail": "A Resource with the id \"foo\" was not found"
+}
+```
+
 <h3 id="fetchnotebyid-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» _links|object|false|none|none|
-|»» self|object|false|none|none|
-|»»» href|string(uri)|false|none|none|
-|»» note_id|string|false|read-only|The identifier for the note|
-|»» label|string|false|none|Label for the entity|
-|»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»» created|string(date-time)|false|read-only|Date the entity was created|
-|»» updated|string(date-time)|false|read-only|Last date the entity was updated|
-|»» text|string|false|none|Text for the note|
-|»» created_by|object|false|none|User Information|
-|»»» user_id|string|false|none|The identifier for the user|
-|»»» entity_id|string|false|read-only|Customer identifier|
-|»»» entity_type|string|false|none|none|
-|»»» label|string|false|none|Label for the entity|
-|»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»»» created|string(date-time)|false|read-only|Date the entity was created|
-|»»» updated|string(date-time)|false|read-only|Last date the entity was updated|
-|»»» email|string(email)|false|none|Email address|
-|»»» name|string|false|none|Human readable name|
-|»»» picture|string|false|none|Image for the user|
-|»»» profile|string|false|none|Link to the users profile|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|entity_type|USER|
 
 Status Code **401**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|string|false|none|none|
-|» type|string|false|none|none|
-|» status|number|false|none|none|
-|» detail|string|false|none|none|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|title|Unauthorized|
-|type|https://docs.nterprise.com/api/problem/Unauthorized|
-|status|401|
-|detail|You are not authorized to access this resource|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
 
 Status Code **403**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|string|false|none|none|
-|» type|string|false|none|none|
-|» status|number|false|none|none|
-|» detail|string|false|none|none|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|title|Forbidden|
-|type|https://docs.nterprise.com/api/problem/Forbidden|
-|status|403|
-|detail|You are forbidden to access this resource|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
 
 Status Code **404**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|string|false|none|none|
-|» type|string|false|none|none|
-|» status|number|false|none|none|
-|» detail|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
 
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|title|Not Found|
-|type|https://docs.nterprise.com/api/problem/NotFound|
-|status|404|
-|detail|Resource not found|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## deleteNote
+### DELETE /notes/{note_id} - *Delete note*
 
 <a id="opIddeleteNote"></a>
 
-`DELETE /notes/{note_id}`
+*Delete note*
 
-*Deletes a note*
-
-This will soft delete the note
+Deletes a note
 
 <h3 id="deletenote-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |note_id|path|string|true|Id of the note|
-
-> Example responses
-
-> 401 Response
-
-```json
-{
-  "properties": {
-    "title": {
-      "enum": [
-        "Unauthorized"
-      ]
-    },
-    "type": {
-      "enum": [
-        "https://docs.nterprise.com/api/problem/Unauthorized"
-      ]
-    },
-    "status": {
-      "enum": [
-        401
-      ]
-    },
-    "detail": {
-      "enum": [
-        "You are not authorized to access this resource"
-      ]
-    }
-  }
-}
-```
 
 <h3 id="deletenote-responses">Responses</h3>
 
@@ -334,126 +177,130 @@ This will soft delete the note
 |404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Resource not found|Inline|
 |423|[Locked](https://tools.ietf.org/html/rfc2518#section-10.4)|Forbidden|Inline|
 
+> Example responses
+
+> 401 Response
+
+```json
+{
+  "title": "Unauthorized",
+  "type": "https://docs.nterprise.com/api/problem/Unauthorized",
+  "status": 401,
+  "detail": "Invalid authorization token"
+}
+```
+
+> 403 Response
+
+```json
+{
+  "title": "Forbidden",
+  "type": "https://docs.nterprise.com/api/problem/Forbidden",
+  "status": 403,
+  "detail": "You are forbidden from accessing this resource"
+}
+```
+
+> 404 Response
+
+```json
+{
+  "title": "Not Found",
+  "type": "https://docs.nterprise.com/api/problem/NotFound",
+  "status": 404,
+  "detail": "A Resource with the id \"foo\" was not found"
+}
+```
+
+> 423 Response
+
+```json
+{
+  "title": "Locked",
+  "type": "https://docs.nterprise.com/api/problem/Locked",
+  "status": 423,
+  "detail": "This resource is currently locked from editing"
+}
+```
+
 <h3 id="deletenote-responseschema">Response Schema</h3>
 
 Status Code **401**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|string|false|none|none|
-|» type|string|false|none|none|
-|» status|number|false|none|none|
-|» detail|string|false|none|none|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|title|Unauthorized|
-|type|https://docs.nterprise.com/api/problem/Unauthorized|
-|status|401|
-|detail|You are not authorized to access this resource|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
 
 Status Code **403**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|string|false|none|none|
-|» type|string|false|none|none|
-|» status|number|false|none|none|
-|» detail|string|false|none|none|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|title|Forbidden|
-|type|https://docs.nterprise.com/api/problem/Forbidden|
-|status|403|
-|detail|You are forbidden to access this resource|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
 
 Status Code **404**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|string|false|none|none|
-|» type|string|false|none|none|
-|» status|number|false|none|none|
-|» detail|string|false|none|none|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|title|Not Found|
-|type|https://docs.nterprise.com/api/problem/NotFound|
-|status|404|
-|detail|Resource not found|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
 
 Status Code **423**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|string|false|none|none|
-|» type|string|false|none|none|
-|» status|number|false|none|none|
-|» detail|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
 
-#### Enumerated Values
+# Embedded Schemas
 
-|Property|Value|
-|---|---|
-|title|Locked|
-|type|https://docs.nterprise.com/api/problem/Locked|
-|status|423|
-|detail|The current resource is locked and cannot be modified|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-# Schemas
-
-<h2 id="tocSnote">Note</h2>
-
+## Note
+<!-- backwards compatibility -->
 <a id="schemanote"></a>
+<a id="schema_Note"></a>
+<a id="tocSnote"></a>
+<a id="tocsnote"></a>
+
+#### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|note_id|string|false|read-only|The identifier for the note|
+|label|string|false|none|Label for the entity|
+|created|string(date-time)|false|read-only|Date the entity was created|
+|updated|string(date-time)|false|read-only|Last date the entity was updated|
+|text|string|false|none|Text for the note|
+|created_by|object|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; user_id|string|true|none|The identifier for the user|
+|&nbsp;&nbsp;&nbsp;&nbsp; created|string(date-time)|true|read-only|Date the entity was created|
+|&nbsp;&nbsp;&nbsp;&nbsp; updated|string(date-time)|true|read-only|Last date the entity was updated|
+|&nbsp;&nbsp;&nbsp;&nbsp; email|string(email)|true|none|Email address|
+|&nbsp;&nbsp;&nbsp;&nbsp; name|string|true|none|Human readable name|
+|&nbsp;&nbsp;&nbsp;&nbsp; picture|string¦null|false|none|Image for the user|
+|&nbsp;&nbsp;&nbsp;&nbsp; profile|string¦null|false|none|Link to the users profile|
+
+#### Specification
 
 ```yaml
 type: object
-description: Defines the properties for a note
-additionalProperties: false
-required:
-  - label
-  - entity_id
-  - entity_type
-  - created
-  - updated
-  - text
 properties:
   note_id:
     description: The identifier for the note
     type: string
     readOnly: true
-    pattern: '^[0-9a-zA-Z-_]+$'
-  entity_id:
-    x-no-api-doc: true
-    type: string
-    description: Customer identifier
-    readOnly: true
-    pattern: '^[0-9a-zA-Z-_]+$'
-  entity_type:
-    x-no-api-doc: true
-    enum:
-      - NOTE
+    pattern: ^[0-9a-zA-Z-_]+$
   label:
     type: string
     description: Label for the entity
-  slug:
-    type: string
-    description: Slug for the entity (Auto-generated from the label)
-    readOnly: true
-    deprecated: true
-    pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
   created:
     description: Date the entity was created
     type: string
@@ -469,32 +316,17 @@ properties:
     description: Text for the note
   created_by:
     type: object
-    description: User Information
-    additionalProperties: false
+    required:
+      - updated
+      - created
+      - email
+      - name
+      - user_id
     properties:
       user_id:
         type: string
         description: The identifier for the user
-        pattern: '^[0-9a-zA-Z-_]+$'
-      entity_id:
-        x-no-api-doc: true
-        type: string
-        description: Customer identifier
-        readOnly: true
-        pattern: '^[0-9a-zA-Z-_]+$'
-      entity_type:
-        x-no-api-doc: true
-        enum:
-          - USER
-      label:
-        type: string
-        description: Label for the entity
-      slug:
-        type: string
-        description: Slug for the entity (Auto-generated from the label)
-        readOnly: true
-        deprecated: true
-        pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+        pattern: ^[0-9a-zA-Z-_]+$
       created:
         description: Date the entity was created
         type: string
@@ -514,44 +346,12 @@ properties:
         description: Human readable name
       picture:
         type: string
+        nullable: true
         description: Image for the user
       profile:
         type: string
+        nullable: true
         description: Link to the users profile
 
 ```
-
-*Defines the properties for a note*
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|note_id|string|false|read-only|The identifier for the note|
-|entity_id|string|true|read-only|Customer identifier|
-|entity_type|string|true|none|none|
-|label|string|true|none|Label for the entity|
-|slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|created|string(date-time)|true|read-only|Date the entity was created|
-|updated|string(date-time)|true|read-only|Last date the entity was updated|
-|text|string|true|none|Text for the note|
-|created_by|object|false|none|User Information|
-|» user_id|string|false|none|The identifier for the user|
-|» entity_id|string|false|read-only|Customer identifier|
-|» entity_type|string|false|none|none|
-|» label|string|false|none|Label for the entity|
-|» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|» created|string(date-time)|false|read-only|Date the entity was created|
-|» updated|string(date-time)|false|read-only|Last date the entity was updated|
-|» email|string(email)|false|none|Email address|
-|» name|string|false|none|Human readable name|
-|» picture|string|false|none|Image for the user|
-|» profile|string|false|none|Link to the users profile|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|entity_type|NOTE|
-|entity_type|USER|
 

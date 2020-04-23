@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchUnitById",
-    "summary": "Fetches a unit by Id",
-    "description": "Fetch Unit",
+    "summary": "Fetch Unit",
+    "description": "Fetches a unit",
     "tags": [
       "Unit"
     ],
@@ -28,7 +28,7 @@
   },
   "put": {
     "operationId": "updateUnit",
-    "summary": "Updates a unit",
+    "summary": "Update unit",
     "description": "Updates a unit",
     "tags": [
       "Unit"
@@ -58,7 +58,7 @@
   },
   "patch": {
     "operationId": "partialUpdateUnit",
-    "summary": "Updates part of unit",
+    "summary": "Update field on unit",
     "description": "Update the current status or current location for a unit",
     "tags": [
       "Unit"
@@ -85,8 +85,8 @@
   },
   "delete": {
     "operationId": "deleteUnit",
-    "summary": "Deletes a unit",
-    "description": "This will soft delete the unit",
+    "summary": "Delete unit",
+    "description": "Deletes a unit",
     "tags": [
       "Unit"
     ],

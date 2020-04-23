@@ -1,67 +1,40 @@
 {
   "type": "object",
-  "properties": {
-    "_links": {
+  "allOf": [
+    {
+      "$ref": "./unit.json"
+    },
+    {
       "type": "object",
       "properties": {
-        "self": {
-          "$ref": "./link.json",
-          "x-example": {
-            "href": "https://api.nterprise.com/units/QEvVrVMMwVcJ6om"
+        "_links": {
+          "type": "object",
+          "required": [
+            "nter:unit-vendor",
+            "nter:unit-part",
+            "self",
+            "nter:unit-last-known-location",
+            "nter:unit-manufacturer"
+          ],
+          "properties": {
+            "self": {
+              "$ref": "./link.json"
+            },
+            "nter:unit-vendor": {
+              "$ref": "./link.json"
+            },
+            "nter:unit-part": {
+              "$ref": "./link.json"
+            },
+            "nter:unit-manufacturer": {
+              "$ref": "./link.json"
+            },
+            "nter:unit-last-known-location": {
+              "$ref": "./link.json"
+            }
           }
         }
       }
-    },
-    "unit_id": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/unit.json#/properties/unit_id"
-    },
-    "label": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/unit.json#/properties/label"
-    },
-    "slug": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/unit.json#/properties/slug"
-    },
-    "created": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/unit.json#/properties/created"
-    },
-    "updated": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/unit.json#/properties/updated"
-    },
-    "serial_number": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/unit.json#/properties/serial_number"
-    },
-    "raw_serial_number": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/unit.json#/properties/raw_serial_number"
-    },
-    "tenant_part_number": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/unit.json#/properties/tenant_part_number"
-    },
-    "manufacturer": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/unit.json#/properties/manufacturer"
-    },
-    "vendor": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/unit.json#/properties/vendor"
-    },
-    "part": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/unit.json#/properties/part"
-    },
-    "customer": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/unit.json#/properties/customer"
-    },
-    "current_location": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/unit.json#/properties/current_location"
-    },
-    "location": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/unit.json#/properties/location"
-    },
-    "resource": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/unit.json#/properties/resource"
-    },
-    "input_filter": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/unit.json#/properties/input_filter"
-    },
-    "current_status": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/unit.json#/properties/current_status"
     }
-  }
+  ]
 }

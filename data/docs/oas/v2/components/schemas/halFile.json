@@ -1,37 +1,21 @@
 {
   "type": "object",
-  "properties": {
-    "_links": {
+  "allOf": [
+    {
+      "$ref": "./file.json"
+    },
+    {
       "type": "object",
       "properties": {
-        "self": {
-          "$ref": "./link.json",
-          "x-example": {
-            "href": "https://api.nterprise.com/files/QVBrO2wm13iEyl"
+        "_links": {
+          "type": "object",
+          "properties": {
+            "self": {
+              "$ref": "./link.json"
+            }
           }
         }
       }
-    },
-    "file_id": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/file.json#/properties/file_id"
-    },
-    "label": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/file.json#/properties/label"
-    },
-    "slug": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/file.json#/properties/slug"
-    },
-    "created": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/file.json#/properties/created"
-    },
-    "updated": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/file.json#/properties/updated"
-    },
-    "content_type": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/file.json#/properties/content_type"
-    },
-    "content_length": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/file.json#/properties/content_length"
     }
-  }
+  ]
 }

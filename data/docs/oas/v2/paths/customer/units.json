@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchAllCustomerUnits",
-    "summary": "Fetches A Page of units for the customer",
-    "description": "Fetch customer units",
+    "summary": "Fetch customer units",
+    "description": "Fetches A Page of units for the customer",
     "tags": [
       "Customer"
     ],

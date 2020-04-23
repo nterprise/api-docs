@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchAllResources",
-    "summary": "Fetches A Page of resources",
-    "description": "Fetch resources",
+    "summary": "Fetch resources",
+    "description": "Fetches A Page of resources",
     "tags": [
       "Resource"
     ],
@@ -16,7 +16,7 @@
     ],
     "responses": {
       "200": {
-        "$ref": "../../components/responses/halResourcePage.json"
+        "$ref": "../../components/responses/halSubResourcePage.json"
       },
       "401": {
         "$ref": "../../components/responses/401unauthorized.json"
@@ -28,8 +28,8 @@
   },
   "post": {
     "operationId": "createResource",
-    "summary": "Creates a resource",
-    "description": "Creates a new resource",
+    "summary": "Create resource",
+    "description": "Creates a resource",
     "tags": [
       "Resource"
     ],

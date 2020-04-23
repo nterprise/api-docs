@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchBatchById",
-    "summary": "Fetches a batch by Id",
-    "description": "Fetch Batch",
+    "summary": "Fetch Batch",
+    "description": "Fetches a batch",
     "tags": [
       "Batch"
     ],
@@ -28,7 +28,7 @@
   },
   "delete": {
     "operationId": "deleteBatch",
-    "summary": "Deletes a batch",
+    "summary": "Delete batch",
     "description": "This will delete the batch",
     "tags": [
       "Batch"

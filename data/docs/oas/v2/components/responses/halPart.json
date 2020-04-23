@@ -3,7 +3,133 @@
   "content": {
     "application/hal+json": {
       "schema": {
-        "$ref": "../schemas/halPart.json"
+        "allOf": [
+          {
+            "$ref": "../schemas/halPart.json"
+          },
+          {
+            "type": "object",
+            "required": [
+              "_embedded"
+            ],
+            "properties": {
+              "_embedded": {
+                "type": "object",
+                "required": [
+                  "nter:part-customer",
+                  "nter:part-manufacturer"
+                ],
+                "properties": {
+                  "nter:part-customer": {
+                    "type": "array",
+                    "maxItems": 1,
+                    "items": {
+                      "$ref": "../schemas/halCustomer.json"
+                    }
+                  },
+                  "nter:part-manufacturer": {
+                    "type": "array",
+                    "maxItems": 1,
+                    "items": {
+                      "$ref": "../schemas/halManufacturer.json"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "example": {
+        "part_id": "part",
+        "label": "Widget",
+        "created": "2019-08-19T00:01:02.000Z",
+        "updated": "2020-08-19T01:01:02.000Z",
+        "serial_prefix": "ABC",
+        "total_units": 5,
+        "total_units_allocated": 2,
+        "total_units_unallocated": 3,
+        "customer": {
+          "customer_id": "customer",
+          "label": "manchuck",
+          "created": "2020-01-09T22:12:03.000Z",
+          "updated": "2020-01-09T22:12:03.000Z",
+          "external_platform": {},
+          "total_programs": 21,
+          "total_projects": 42,
+          "allowed_statuses": [
+            {
+              "category": "PENDING",
+              "description": "For something that is Pending",
+              "status": "Pending",
+              "order": 3
+            },
+            {
+              "category": "IN_PROGRESS",
+              "description": "For something that is In Progress",
+              "status": "In Progress",
+              "order": 4
+            },
+            {
+              "category": "VERIFYING",
+              "description": "For something that is Verifying",
+              "status": "Verifying",
+              "order": 5
+            },
+            {
+              "category": "BLOCKED",
+              "description": "For something that is Blocked",
+              "status": "Blocked",
+              "order": 6
+            },
+            {
+              "category": "COMPLETE",
+              "description": "For something that is Complete",
+              "status": "Complete",
+              "order": 7
+            },
+            {
+              "category": "CANCELLED",
+              "description": "For something that is Cancelled",
+              "status": "Cancelled",
+              "order": 8
+            }
+          ]
+        },
+        "manufacturer": {
+          "manufacturer_id": "manufacturer",
+          "label": "Manchuck Inc",
+          "created": "2019-08-19T00:01:02.000Z",
+          "updated": "2020-08-19T01:01:02.000Z",
+          "part_number": "1-888-482-858-832"
+        },
+        "input_filter": [
+          {
+            "label": "Serial Number Of part",
+            "key": "serial-number",
+            "filters": [],
+            "validators": [],
+            "value": null
+          }
+        ],
+        "_embedded": {
+          "nter:part-manufacturer": [],
+          "nter:part-customer": []
+        },
+        "_links": {
+          "nter:part-manufacturer": {
+            "href": "https://api.example.com/manufacturers/manufacturer"
+          },
+          "nter:part-customer": {
+            "href": "https://api.example.com/customers/customer"
+          },
+          "nter:part-units": {
+            "href": "https://api.example.com/parts/part/units"
+          },
+          "self": {
+            "href": "https://api.example.com/parts/part"
+          }
+        }
       }
     }
   }

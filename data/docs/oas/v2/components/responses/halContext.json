@@ -4,6 +4,114 @@
     "application/hal+json": {
       "schema": {
         "$ref": "../schemas/halContext.json"
+      },
+      "example": {
+        "context_id": "context",
+        "label": "context 44jjiue33 for customer: customer",
+        "created": "2019-08-19T00:01:02.000Z",
+        "updated": "2020-08-19T01:01:02.000Z",
+        "workflow": {
+          "work_flow_id": "work-flow",
+          "label": "My workflow",
+          "created": "2019-08-19T00:01:02.000Z",
+          "updated": "2020-08-19T01:01:02.000Z",
+          "workflow_version": 7,
+          "schema_version": "1.0",
+          "applies_to": "UNIT",
+          "starts_at": "work-complete",
+          "triggered_by": [
+            "UNIT.created"
+          ],
+          "metadata": {
+            "meta": "data"
+          },
+          "steps": {
+            "work-complete": {
+              "label": "work complete",
+              "on_complete": [],
+              "on_start": [],
+              "step_type": "success"
+            },
+            "stop-poking-me": {
+              "label": "stop poking me",
+              "on_complete": [],
+              "on_start": [],
+              "step_type": "fail"
+            }
+          }
+        },
+        "current_step": "work-complete",
+        "last_steps": [
+          {
+            "step_name": "work-complete",
+            "started_at": "2020-08-19T01:01:02.000Z",
+            "ended_at": "2020-08-19T01:01:02.000Z",
+            "time_to_run": "42",
+            "did_error": false,
+            "did_timeout": false
+          }
+        ],
+        "started_at": "2019-08-19T00:01:02.000Z",
+        "ended_at": "2019-08-19T00:01:02.000Z",
+        "time_to_run": 2,
+        "active": false,
+        "waiting_for_user": false,
+        "data": {
+          "fizz": "buzz"
+        },
+        "entity": {
+          "entity_id": "customer",
+          "entity_type": "CUS",
+          "label": "Niagara Customer",
+          "created": "2020-01-09T22:12:03.000Z",
+          "updated": "2020-01-09T22:12:03.000Z",
+          "external_platform": {},
+          "total_programs": 21,
+          "total_projects": 42,
+          "allowed_statuses": [
+            {
+              "category": "PENDING",
+              "description": "For something that is Pending",
+              "status": "Pending",
+              "order": 3
+            },
+            {
+              "category": "IN_PROGRESS",
+              "description": "For something that is In Progress",
+              "status": "In Progress",
+              "order": 4
+            },
+            {
+              "category": "VERIFYING",
+              "description": "For something that is Verifying",
+              "status": "Verifying",
+              "order": 5
+            },
+            {
+              "category": "BLOCKED",
+              "description": "For something that is Blocked",
+              "status": "Blocked",
+              "order": 6
+            },
+            {
+              "category": "COMPLETE",
+              "description": "For something that is Complete",
+              "status": "Complete",
+              "order": 7
+            },
+            {
+              "category": "CANCELLED",
+              "description": "For something that is Cancelled",
+              "status": "Cancelled",
+              "order": 8
+            }
+          ]
+        },
+        "_links": {
+          "self": {
+            "href": "https://api.nterprise.com/contexts/context"
+          }
+        }
       }
     }
   }

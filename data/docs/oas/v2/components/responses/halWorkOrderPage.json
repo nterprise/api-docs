@@ -4,7 +4,28 @@
     "application/hal+json": {
       "schema": {
         "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "_embedded",
+          "_links",
+          "total_count",
+          "limit",
+          "offset"
+        ],
         "properties": {
+          "total_count": {
+            "type": "number",
+            "readOnly": true
+          },
+          "limit": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 100
+          },
+          "offset": {
+            "type": "string",
+            "nullable": true
+          },
           "_embedded": {
             "type": "object",
             "properties": {
@@ -33,6 +54,255 @@
                 "$ref": "../schemas/link.json"
               }
             }
+          }
+        }
+      },
+      "example":  {
+        "total_count": 21,
+        "limit": 42,
+        "offset": "next-offset",
+        "_embedded": {
+          "nter:work-orders": [
+            {
+              "work_order_id": "work-order",
+              "label": "My workOrder",
+              "created": "2019-08-19T00:01:02.000Z",
+              "updated": "2020-08-19T01:01:02.000Z",
+              "description": "Workorder description",
+              "work_order_type": "device",
+              "begin_date": "2021-08-19T02:01:02.000Z",
+              "due_date": "2021-08-19T02:01:02.000Z",
+              "start_date": "2021-08-19T02:01:02.000Z",
+              "end_date": "2021-08-19T02:01:02.000Z",
+              "project": {
+                "project_id": "project",
+                "label": "New York Stores",
+                "description": "Project description",
+                "created": "2020-01-09T22:12:03.000Z",
+                "updated": "2020-01-09T22:12:03.000Z",
+                "customer": {
+                  "customer_id": "customer",
+                  "label": "manchuck",
+                  "created": "2020-01-09T22:12:03.000Z",
+                  "updated": "2020-01-09T22:12:03.000Z",
+                  "external_platform": {},
+                  "total_programs": 21,
+                  "total_projects": 42,
+                  "allowed_statuses": [
+                    {
+                      "category": "PENDING",
+                      "description": "For something that is Pending",
+                      "status": "Pending",
+                      "order": 3
+                    },
+                    {
+                      "category": "IN_PROGRESS",
+                      "description": "For something that is In Progress",
+                      "status": "In Progress",
+                      "order": 4
+                    },
+                    {
+                      "category": "VERIFYING",
+                      "description": "For something that is Verifying",
+                      "status": "Verifying",
+                      "order": 5
+                    },
+                    {
+                      "category": "BLOCKED",
+                      "description": "For something that is Blocked",
+                      "status": "Blocked",
+                      "order": 6
+                    },
+                    {
+                      "category": "COMPLETE",
+                      "description": "For something that is Complete",
+                      "status": "Complete",
+                      "order": 7
+                    },
+                    {
+                      "category": "CANCELLED",
+                      "description": "For something that is Cancelled",
+                      "status": "Cancelled",
+                      "order": 8
+                    }
+                  ]
+                },
+                "program": {
+                  "program_id": "program",
+                  "label": "North east stores",
+                  "created": "2020-01-09T22:12:03.000Z",
+                  "updated": "2020-01-09T22:12:03.000Z",
+                  "customer": {
+                    "customer_id": "customer",
+                    "label": "manchuck",
+                    "created": "2020-01-09T22:12:03.000Z",
+                    "updated": "2020-01-09T22:12:03.000Z",
+                    "external_platform": {},
+                    "total_programs": 21,
+                    "total_projects": 42,
+                    "allowed_statuses": [
+                      {
+                        "category": "PENDING",
+                        "description": "For something that is Pending",
+                        "status": "Pending",
+                        "order": 3
+                      },
+                      {
+                        "category": "IN_PROGRESS",
+                        "description": "For something that is In Progress",
+                        "status": "In Progress",
+                        "order": 4
+                      },
+                      {
+                        "category": "VERIFYING",
+                        "description": "For something that is Verifying",
+                        "status": "Verifying",
+                        "order": 5
+                      },
+                      {
+                        "category": "BLOCKED",
+                        "description": "For something that is Blocked",
+                        "status": "Blocked",
+                        "order": 6
+                      },
+                      {
+                        "category": "COMPLETE",
+                        "description": "For something that is Complete",
+                        "status": "Complete",
+                        "order": 7
+                      },
+                      {
+                        "category": "CANCELLED",
+                        "description": "For something that is Cancelled",
+                        "status": "Cancelled",
+                        "order": 8
+                      }
+                    ]
+                  },
+                  "end_date": "2020-02-10T22:12:03.000Z",
+                  "start_date": "2020-02-10T22:12:03.000Z",
+                  "allowed_statuses": [
+                    {
+                      "category": "PENDING",
+                      "description": "For something that is Pending",
+                      "status": "Pending",
+                      "order": 3
+                    },
+                    {
+                      "category": "VERIFYING",
+                      "description": "For something that is Verifying",
+                      "status": "Verifying",
+                      "order": 5
+                    }
+                  ]
+                },
+                "end_date": "2020-02-10T22:12:03.000Z",
+                "start_date": "2020-02-10T22:12:03.000Z",
+                "allowed_statuses": [
+                  {
+                    "category": "PENDING",
+                    "description": "For something that is Pending",
+                    "status": "Pending",
+                    "order": 3
+                  }
+                ]
+              },
+              "location": {
+                "location_id": "location",
+                "label": "Test Label",
+                "created": "2019-08-19T00:01:02.000Z",
+                "updated": "2020-08-19T01:01:02.000Z",
+                "location_type": "warehouse",
+                "formatted_address": "Test Label\n431 Broadway Suite c\nMenands NY 12204 USA",
+                "address": {
+                  "country": "USA",
+                  "administrative_area": "NY",
+                  "sub_administrative_area": "Albany",
+                  "locality": "Menands",
+                  "postal_code": "12204",
+                  "thoroughfare": "431 Broadway",
+                  "premise": "Suite c",
+                  "sub_premise": "ZIC"
+                }
+              },
+              "current_status": {
+                "category": "IN_PROGRESS",
+                "description": "For something that is Reticulating Splines",
+                "status": "Reticulating Splines",
+                "order": 2
+              },
+              "cycles": [
+                {
+                  "needed": 1,
+                  "pending": 1,
+                  "in_progress": 0,
+                  "verifying": 0,
+                  "complete": 0,
+                  "blocked": 0,
+                  "cancelled": 0,
+                  "work_flow": {
+                    "entity_type": "WKF",
+                    "entity_id": "work-flow",
+                    "created": "2019-08-19T00:01:02.000Z",
+                    "updated": "2020-08-19T01:01:02.000Z",
+                    "label": "My workflow",
+
+"schema_version": "1.0",
+                    "workflow_version": 7,
+                    "applies_to": "UNIT",
+                    "starts_at": "work-complete",
+                    "metadata": {
+                      "meta": "data"
+                    },
+                    "steps": {
+                      "work-complete": {
+                        "step_type": "success",
+                        "label": "work complete",
+                        "on_start": [],
+                        "on_complete": []
+                      },
+                      "stop-poking-me": {
+                        "step_type": "fail",
+                        "label": "stop poking me",
+                        "on_start": [],
+                        "on_complete": []
+                      }
+                    },
+                    "triggered_by": [
+                      "UNIT.created"
+                    ]
+                  }
+                }
+              ],
+              "input_filter": [
+                {
+                  "label": "Serial Number Of part",
+                  "key": "serial-number",
+                  "filters": [],
+                  "validators": [],
+                  "value": null
+                }
+              ],
+              "_links": {
+                "nter:work-order-batches": {
+                  "href": "https://api.example.com/work-orders/work-order/batches"
+                },
+                "nter:work-order-queues": {
+                  "href": "https://api.example.com/work-orders/work-order/queues"
+                },
+                "self": {
+                  "href": "https://api.example.com/work-orders/work-order"
+                }
+              }
+            }
+          ]
+        },
+        "_links": {
+          "next": {
+            "href": "https://api.example.com/work-orders?limit=42&offset=next-offset"
+          },
+          "self": {
+            "href": "https://api.example.com/work-orders?limit=42"
           }
         }
       }

@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchAllFacilities",
-    "summary": "Fetches A Page of facilities",
-    "description": "Fetch facilities",
+    "summary": "Fetch facilities",
+    "description": "Fetches A Page of facilities",
     "tags": [
       "Location"
     ],

@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchAllWarehouses",
-    "summary": "Fetches A Page of warehouses",
-    "description": "Fetch warehouses",
+    "summary": "Fetch warehouses",
+    "description": "Fetches A Page of warehouses",
     "tags": [
       "Location"
     ],

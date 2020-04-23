@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchAllParts",
-    "summary": "Fetches A Page of parts",
-    "description": "Fetch Part",
+    "summary": "Fetch Part",
+    "description": "Fetches A Page of parts",
     "tags": [
       "Part"
     ],
@@ -28,8 +28,8 @@
   },
   "post": {
     "operationId": "createPart",
-    "summary": "Creates a part ",
-    "description": "Creates a new part  following the part  schema",
+    "summary": "Create part ",
+    "description": "Creates a part ",
     "tags": [
       "Part"
     ],

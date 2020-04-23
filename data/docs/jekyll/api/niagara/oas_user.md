@@ -1,47 +1,32 @@
 ---
 layout: page
 parent: Niagara API
-nav_order: 17
+nav_order: 18
+redirect_from:
+  - /rel/users
+  - /rel/user
+  - /rel/note-created-by
 title: Users
-language_tabs: ''
-toc_footers: []
-includes: []
-search: true
-highlight_theme: darkula
-headingLevel: 2
-
 ---
 
-<h1 id="users">Users v2.0.0</h1>
+<h1 id="users">Users</h1>
 
 * Do not remove this line (it will not be displayed)
 {:toc}
 
-> Scroll down for example requests and responses.
-
 API for the nterprise application
-
-Base URLs:
-
-* <a href="https://{environment}.nterprise.com">https://{environment}.nterprise.com</a>
-
-    * **environment** -  Default: api
-
-        * api
-
-        * api.dev
 
 <h1 id="users-user">User</h1>
 
-## fetchAllUsers
+## Operations
+
+### GET /users - *Fetch Users*
 
 <a id="opIdfetchAllUsers"></a>
 
-`GET /users`
+*Fetch Users*
 
-*Fetches A Page of users*
-
-Fetch Users
+Fetches A Page of users
 
 <h3 id="fetchallusers-parameters">Parameters</h3>
 
@@ -49,123 +34,6 @@ Fetch Users
 |---|---|---|---|---|
 |limit|query|integer(int32)|false|How many items to return at one time (max 100)|
 |offset|query|string|false|Continue from last offset|
-
-> Example responses
-
-> 200 Response
-
-```json
-{
-  "type": "object",
-  "properties": {
-    "_embedded": {
-      "type": "object",
-      "properties": {
-        "nter:users": {
-          "type": "array",
-          "maxItems": 100,
-          "items": {
-            "type": "object",
-            "properties": {
-              "_links": {
-                "type": "object",
-                "properties": {
-                  "self": {
-                    "x-example": {
-                      "href": "https://api.nterprise.com/users/QEvVrVMMwVcJ6om"
-                    },
-                    "type": "object",
-                    "properties": {
-                      "href": {
-                        "type": "string",
-                        "format": "uri"
-                      }
-                    }
-                  }
-                }
-              },
-              "user_id": {
-                "type": "string",
-                "description": "The identifier for the user",
-                "pattern": "^[0-9a-zA-Z-_]+$"
-              },
-              "label": {
-                "type": "string",
-                "description": "Label for the entity"
-              },
-              "slug": {
-                "type": "string",
-                "description": "Slug for the entity (Auto-generated from the label)",
-                "readOnly": true,
-                "deprecated": true,
-                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-              },
-              "created": {
-                "description": "Date the entity was created",
-                "type": "string",
-                "format": "date-time",
-                "readOnly": true
-              },
-              "updated": {
-                "description": "Last date the entity was updated",
-                "type": "string",
-                "format": "date-time",
-                "readOnly": true
-              },
-              "email": {
-                "type": "string",
-                "format": "email",
-                "description": "Email address"
-              },
-              "name": {
-                "type": "string",
-                "description": "Human readable name"
-              },
-              "picture": {
-                "type": "string",
-                "description": "Image for the user"
-              },
-              "profile": {
-                "type": "string",
-                "description": "Link to the users profile"
-              }
-            }
-          }
-        }
-      }
-    },
-    "_links": {
-      "type": "object",
-      "properties": {
-        "self": {
-          "x-example": {
-            "href": "https://api.nterprise.com/users"
-          },
-          "type": "object",
-          "properties": {
-            "href": {
-              "type": "string",
-              "format": "uri"
-            }
-          }
-        },
-        "next": {
-          "x-example": {
-            "href": "https://api.nterprise.com/users?offset=QVBrO2wm13iEyl&limit=100"
-          },
-          "type": "object",
-          "properties": {
-            "href": {
-              "type": "string",
-              "format": "uri"
-            }
-          }
-        }
-      }
-    }
-  }
-}
-```
 
 <h3 id="fetchallusers-responses">Responses</h3>
 
@@ -175,161 +43,141 @@ Fetch Users
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|Inline|
 |403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
 
-<h3 id="fetchallusers-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» _embedded|object|false|none|none|
-|»» nter:users|[object]|false|none|none|
-|»»» _links|object|false|none|none|
-|»»»» self|object|false|none|none|
-|»»»»» href|string(uri)|false|none|none|
-|»»»» user_id|string|false|none|The identifier for the user|
-|»»»» label|string|false|none|Label for the entity|
-|»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»»»» created|string(date-time)|false|read-only|Date the entity was created|
-|»»»» updated|string(date-time)|false|read-only|Last date the entity was updated|
-|»»»» email|string(email)|false|none|Email address|
-|»»»» name|string|false|none|Human readable name|
-|»»»» picture|string|false|none|Image for the user|
-|»»»» profile|string|false|none|Link to the users profile|
-|»»» _links|object|false|none|none|
-|»»»» self|object|false|none|none|
-|»»»»» href|string(uri)|false|none|none|
-|»»»» next|object|false|none|none|
-|»»»»» href|string(uri)|false|none|none|
-
-Status Code **401**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» title|string|false|none|none|
-|» type|string|false|none|none|
-|» status|number|false|none|none|
-|» detail|string|false|none|none|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|title|Unauthorized|
-|type|https://docs.nterprise.com/api/problem/Unauthorized|
-|status|401|
-|detail|You are not authorized to access this resource|
-
-Status Code **403**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» title|string|false|none|none|
-|» type|string|false|none|none|
-|» status|number|false|none|none|
-|» detail|string|false|none|none|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|title|Forbidden|
-|type|https://docs.nterprise.com/api/problem/Forbidden|
-|status|403|
-|detail|You are forbidden to access this resource|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## fetchUserById
-
-<a id="opIdfetchUserById"></a>
-
-`GET /users/{user_id}`
-
-*Fetches a user by Id*
-
-Fetch User
-
-<h3 id="fetchuserbyid-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|user_id|path|string|true|Id of the user|
-
 > Example responses
 
 > 200 Response
 
 ```json
 {
-  "type": "object",
-  "properties": {
-    "_links": {
-      "type": "object",
-      "properties": {
-        "self": {
-          "x-example": {
-            "href": "https://api.nterprise.com/users/QEvVrVMMwVcJ6om"
-          },
-          "type": "object",
-          "properties": {
-            "href": {
-              "type": "string",
-              "format": "uri"
-            }
+  "total_count": 21,
+  "limit": 42,
+  "offset": "next-offset",
+  "_embedded": {
+    "nter:users": [
+      {
+        "user_id": "3dddba3e-6122-46a8-ae26-8c7c95bd82d7",
+        "created": "2019-08-19T00:01:02.639Z",
+        "updated": "2019-08-19T00:01:02.639Z",
+        "name": "Chuck Reeves",
+        "email": "chuck.reeves@zones.com",
+        "profile": "https://bit.ly/18gECvy",
+        "picture": "https://bit.ly/18gECvy",
+        "_links": {
+          "self": {
+            "href": "https://api.example.com/users/3dddba3e-6122-46a8-ae26-8c7c95bd82d7"
           }
         }
       }
+    ]
+  },
+  "_links": {
+    "next": {
+      "href": "https://api.example.com/users?limit=42&offset=next-offset"
     },
-    "user_id": {
-      "type": "string",
-      "description": "The identifier for the user",
-      "pattern": "^[0-9a-zA-Z-_]+$"
-    },
-    "label": {
-      "type": "string",
-      "description": "Label for the entity"
-    },
-    "slug": {
-      "type": "string",
-      "description": "Slug for the entity (Auto-generated from the label)",
-      "readOnly": true,
-      "deprecated": true,
-      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-    },
-    "created": {
-      "description": "Date the entity was created",
-      "type": "string",
-      "format": "date-time",
-      "readOnly": true
-    },
-    "updated": {
-      "description": "Last date the entity was updated",
-      "type": "string",
-      "format": "date-time",
-      "readOnly": true
-    },
-    "email": {
-      "type": "string",
-      "format": "email",
-      "description": "Email address"
-    },
-    "name": {
-      "type": "string",
-      "description": "Human readable name"
-    },
-    "picture": {
-      "type": "string",
-      "description": "Image for the user"
-    },
-    "profile": {
-      "type": "string",
-      "description": "Link to the users profile"
+    "self": {
+      "href": "https://api.example.com/users?limit=42"
     }
   }
 }
 ```
+
+> 401 Response
+
+```json
+{
+  "title": "Unauthorized",
+  "type": "https://docs.nterprise.com/api/problem/Unauthorized",
+  "status": 401,
+  "detail": "Invalid authorization token"
+}
+```
+
+> 403 Response
+
+```json
+{
+  "title": "Forbidden",
+  "type": "https://docs.nterprise.com/api/problem/Forbidden",
+  "status": 403,
+  "detail": "You are forbidden from accessing this resource"
+}
+```
+
+<h3 id="fetchallusers-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; total_count|number|true|read-only|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; limit|number|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; offset|string¦null|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; _embedded|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; nter:users|[allOf]|false|none|none|
+
+*allOf*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; user_id|string|true|none|The identifier for the user|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; created|string(date-time)|true|read-only|Date the entity was created|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; updated|string(date-time)|true|read-only|Last date the entity was updated|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; email|string(email)|true|none|Email address|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; name|string|true|none|Human readable name|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; picture|string¦null|false|none|Image for the user|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; profile|string¦null|false|none|Link to the users profile|
+
+*and*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _links|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; href|string(uri)|false|none|none|
+
+*continued*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; _links|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self|object|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; href|string(uri)|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; next|object|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; href|string(uri)|false|none|none|
+
+Status Code **401**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
+
+Status Code **403**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
+
+### GET /users/{user_id} - *Fetch User*
+
+<a id="opIdfetchUserById"></a>
+
+*Fetch User*
+
+Fetches a user
+
+<h3 id="fetchuserbyid-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|user_id|path|string|true|Id of the user|
 
 <h3 id="fetchuserbyid-responses">Responses</h3>
 
@@ -340,117 +188,125 @@ Fetch User
 |403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
 |404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Resource not found|Inline|
 
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "user_id": "3dddba3e-6122-46a8-ae26-8c7c95bd82d7",
+  "created": "2019-08-19T00:01:02.639Z",
+  "updated": "2019-08-19T00:01:02.639Z",
+  "name": "Chuck Reeves",
+  "email": "chuck.reeves@zones.com",
+  "profile": "https://bit.ly/18gECvy",
+  "picture": "https://bit.ly/18gECvy",
+  "_links": {
+    "self": {
+      "href": "https://api.example.com/users/3dddba3e-6122-46a8-ae26-8c7c95bd82d7"
+    }
+  }
+}
+```
+
+> 401 Response
+
+```json
+{
+  "title": "Unauthorized",
+  "type": "https://docs.nterprise.com/api/problem/Unauthorized",
+  "status": 401,
+  "detail": "Invalid authorization token"
+}
+```
+
+> 403 Response
+
+```json
+{
+  "title": "Forbidden",
+  "type": "https://docs.nterprise.com/api/problem/Forbidden",
+  "status": 403,
+  "detail": "You are forbidden from accessing this resource"
+}
+```
+
+> 404 Response
+
+```json
+{
+  "title": "Not Found",
+  "type": "https://docs.nterprise.com/api/problem/NotFound",
+  "status": 404,
+  "detail": "A Resource with the id \"foo\" was not found"
+}
+```
+
 <h3 id="fetchuserbyid-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» _links|object|false|none|none|
-|»» self|object|false|none|none|
-|»»» href|string(uri)|false|none|none|
-|»» user_id|string|false|none|The identifier for the user|
-|»» label|string|false|none|Label for the entity|
-|»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»» created|string(date-time)|false|read-only|Date the entity was created|
-|»» updated|string(date-time)|false|read-only|Last date the entity was updated|
-|»» email|string(email)|false|none|Email address|
-|»» name|string|false|none|Human readable name|
-|»» picture|string|false|none|Image for the user|
-|»» profile|string|false|none|Link to the users profile|
 
 Status Code **401**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|string|false|none|none|
-|» type|string|false|none|none|
-|» status|number|false|none|none|
-|» detail|string|false|none|none|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|title|Unauthorized|
-|type|https://docs.nterprise.com/api/problem/Unauthorized|
-|status|401|
-|detail|You are not authorized to access this resource|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
 
 Status Code **403**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|string|false|none|none|
-|» type|string|false|none|none|
-|» status|number|false|none|none|
-|» detail|string|false|none|none|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|title|Forbidden|
-|type|https://docs.nterprise.com/api/problem/Forbidden|
-|status|403|
-|detail|You are forbidden to access this resource|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
 
 Status Code **404**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|string|false|none|none|
-|» type|string|false|none|none|
-|» status|number|false|none|none|
-|» detail|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
 
-#### Enumerated Values
+# Embedded Schemas
 
-|Property|Value|
-|---|---|
-|title|Not Found|
-|type|https://docs.nterprise.com/api/problem/NotFound|
-|status|404|
-|detail|Resource not found|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-# Schemas
-
-<h2 id="tocSuser">User</h2>
-
+## User
+<!-- backwards compatibility -->
 <a id="schemauser"></a>
+<a id="schema_User"></a>
+<a id="tocSuser"></a>
+<a id="tocsuser"></a>
+
+#### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|user_id|string|true|none|The identifier for the user|
+|created|string(date-time)|true|read-only|Date the entity was created|
+|updated|string(date-time)|true|read-only|Last date the entity was updated|
+|email|string(email)|true|none|Email address|
+|name|string|true|none|Human readable name|
+|picture|string¦null|false|none|Image for the user|
+|profile|string¦null|false|none|Link to the users profile|
+
+#### Specification
 
 ```yaml
 type: object
-description: User Information
-additionalProperties: false
+required:
+  - updated
+  - created
+  - email
+  - name
+  - user_id
 properties:
   user_id:
     type: string
     description: The identifier for the user
-    pattern: '^[0-9a-zA-Z-_]+$'
-  entity_id:
-    x-no-api-doc: true
-    type: string
-    description: Customer identifier
-    readOnly: true
-    pattern: '^[0-9a-zA-Z-_]+$'
-  entity_type:
-    x-no-api-doc: true
-    enum:
-      - USER
-  label:
-    type: string
-    description: Label for the entity
-  slug:
-    type: string
-    description: Slug for the entity (Auto-generated from the label)
-    readOnly: true
-    deprecated: true
-    pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+    pattern: ^[0-9a-zA-Z-_]+$
   created:
     description: Date the entity was created
     type: string
@@ -470,34 +326,12 @@ properties:
     description: Human readable name
   picture:
     type: string
+    nullable: true
     description: Image for the user
   profile:
     type: string
+    nullable: true
     description: Link to the users profile
 
 ```
-
-*User Information*
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|user_id|string|false|none|The identifier for the user|
-|entity_id|string|false|read-only|Customer identifier|
-|entity_type|string|false|none|none|
-|label|string|false|none|Label for the entity|
-|slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|created|string(date-time)|false|read-only|Date the entity was created|
-|updated|string(date-time)|false|read-only|Last date the entity was updated|
-|email|string(email)|false|none|Email address|
-|name|string|false|none|Human readable name|
-|picture|string|false|none|Image for the user|
-|profile|string|false|none|Link to the users profile|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|entity_type|USER|
 

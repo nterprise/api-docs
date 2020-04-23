@@ -11,7 +11,7 @@
     },
     "responses": {
       "200": {
-        "$ref": "../../components/responses/signedAttachment.json"
+        "$ref": "../../components/responses/halAttachment.json"
       },
       "400": {
         "$ref": "../../components/responses/400badRequest.json"

@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchAllUsers",
-    "summary": "Fetches A Page of users",
-    "description": "Fetch Users",
+    "summary": "Fetch Users",
+    "description": "Fetches A Page of users",
     "tags": [
       "User"
     ],

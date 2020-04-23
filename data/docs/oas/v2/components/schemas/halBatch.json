@@ -1,49 +1,51 @@
 {
   "type": "object",
-  "properties": {
-    "_links": {
+  "allOf": [
+    {
+      "$ref": "./batch.json"
+    },
+    {
       "type": "object",
+      "required": [
+        "_links"
+      ],
       "properties": {
-        "self": {
-          "$ref": "./link.json",
-          "x-example": {
-            "href": "https://api.nterprise.com/batchs/JwlLkLBBm2IVWG"
+        "_links": {
+          "type": "object",
+          "required": [
+            "self",
+            "nter:batch-queue",
+            "nter:batch-work-order",
+            "nter:batch-customer",
+            "nter:batch-location",
+            "nter:batch-program",
+            "nter:batch-project"
+          ],
+          "properties": {
+            "self": {
+              "$ref": "./link.json"
+            },
+            "nter:batch-work-order": {
+              "$ref": "./link.json"
+            },
+            "nter:batch-project": {
+              "$ref": "./link.json"
+            },
+            "nter:batch-program": {
+              "$ref": "./link.json"
+            },
+            "nter:batch-location": {
+              "$ref": "./link.json"
+            },
+            "nter:batch-customer": {
+              "$ref": "./link.json"
+            },
+            "nter:batch-queue": {
+              "$ref": "./link.json"
+            }
           }
         }
       }
-    },
-    "batch_id": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/batch.json#/properties/batch_id"
-    },
-    "label": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/batch.json#/properties/label"
-    },
-    "slug": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/batch.json#/properties/slug"
-    },
-    "created": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/batch.json#/properties/created"
-    },
-    "updated": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/batch.json#/properties/updated"
-    },
-    "queue": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/batch.json#/properties/queue"
-    },
-    "order": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/batch.json#/properties/order"
-    },
-    "current_status": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/batch.json#/properties/current_status"
-    },
-    "number_cycles": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/batch.json#/properties/number_cycles"
-    },
-    "cycles": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/batch.json#/properties/cycles"
-    },
-    "work_order": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/batch.json#/properties/work_order"
     }
-  }
+  ]
 }

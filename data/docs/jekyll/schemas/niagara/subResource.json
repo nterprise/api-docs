@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://docs.nterprise.com/schemas/niagara/subResource.json",
   "type": "object",
-  "description": "Defines the properties for a resource",
+  "description": "Defines the properties for a sub resource",
   "additionalProperties": false,
   "required": [
     "label",

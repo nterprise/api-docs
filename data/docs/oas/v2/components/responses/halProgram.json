@@ -3,7 +3,117 @@
   "content": {
     "application/hal+json": {
       "schema": {
-        "$ref": "../schemas/halProgram.json"
+        "allOf": [
+          {
+            "$ref": "../schemas/halProgram.json"
+          },
+          {
+            "type": "object",
+            "required": [
+              "_embedded"
+            ],
+            "properties": {
+              "_embedded": {
+                "type": "object",
+                "required": [
+                  "nter:program-customer"
+                ],
+                "properties": {
+                  "nter:program-customer": {
+                    "type": "array",
+                    "maxItems": 1,
+                    "items": {
+                      "$ref": "../schemas/halCustomer.json"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "example": {
+        "program_id": "program",
+        "label": "North east stores",
+        "created": "2020-01-09T22:12:03.000Z",
+        "updated": "2020-01-09T22:12:03.000Z",
+        "customer": {
+          "customer_id": "customer",
+          "label": "manchuck",
+          "created": "2020-01-09T22:12:03.000Z",
+          "updated": "2020-01-09T22:12:03.000Z",
+          "external_platform": {},
+          "total_programs": 21,
+          "total_projects": 42,
+          "allowed_statuses": [
+            {
+              "category": "PENDING",
+              "description": "For something that is Pending",
+              "status": "Pending",
+              "order": 3
+            },
+            {
+              "category": "IN_PROGRESS",
+              "description": "For something that is In Progress",
+              "status": "In Progress",
+              "order": 4
+            },
+            {
+              "category": "VERIFYING",
+              "description": "For something that is Verifying",
+              "status": "Verifying",
+              "order": 5
+            },
+            {
+              "category": "BLOCKED",
+              "description": "For something that is Blocked",
+              "status": "Blocked",
+              "order": 6
+            },
+            {
+              "category": "COMPLETE",
+              "description": "For something that is Complete",
+              "status": "Complete",
+              "order": 7
+            },
+            {
+              "category": "CANCELLED",
+              "description": "For something that is Cancelled",
+              "status": "Cancelled",
+              "order": 8
+            }
+          ]
+        },
+        "end_date": "2020-02-10T22:12:03.000Z",
+        "start_date": "2020-02-10T22:12:03.000Z",
+        "allowed_statuses": [
+          {
+            "category": "PENDING",
+            "description": "For something that is Pending",
+            "status": "Pending",
+            "order": 3
+          },
+          {
+            "category": "VERIFYING",
+            "description": "For something that is Verifying",
+            "status": "Verifying",
+            "order": 5
+          }
+        ],
+        "_embedded": {
+          "nter:program-customer": []
+        },
+        "_links": {
+          "nter:program-customer": {
+            "href": "https://api.example.com/customers/customer"
+          },
+          "nter:program-projects": {
+            "href": "https://api.example.com/programs/program/projects"
+          },
+          "self": {
+            "href": "https://api.example.com/programs/program"
+          }
+        }
       }
     }
   }

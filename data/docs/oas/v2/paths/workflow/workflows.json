@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchAllWorkflows",
-    "summary": "Fetches A Page of workflows",
-    "description": "Fetch Workflow",
+    "summary": "Fetch Workflows",
+    "description": "Fetches A Page of workflows",
     "tags": [
       "Workflow"
     ],
@@ -28,7 +28,7 @@
   },
   "post": {
     "operationId": "createWorkflow",
-    "summary": "Creates a workflow",
+    "summary": "Create workflow",
     "description": "Creates a new workflow",
     "tags": [
       "Workflow"

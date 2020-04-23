@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchWorkflowById",
-    "summary": "Fetches a workflow by Id",
-    "description": "Fetch Workflow",
+    "summary": "Fetch Workflow",
+    "description": "Fetches a workflow",
     "tags": [
       "Workflow"
     ],
@@ -28,6 +28,8 @@
   },
   "put": {
     "operationId": "updateWorkflow",
+    "summary": "Update Workflow",
+    "description": "Updates a workflow",
     "tags": [
       "Workflow"
     ],
@@ -56,8 +58,8 @@
   },
   "delete": {
     "operationId": "deleteWorkflow",
-    "summary": "Deletes a workflow",
-    "description": "This will soft delete the workflow",
+    "summary": "Delete workflow",
+    "description": "Deletes a workflow",
     "tags": [
       "Workflow"
     ],

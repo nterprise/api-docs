@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchWorkOrderById",
-    "summary": "Fetches a work order by Id",
-    "description": "Fetch Work order",
+    "summary": "Fetch work0order",
+    "description": "Fetches a work-order",
     "tags": [
       "Work Order"
     ],
@@ -28,8 +28,8 @@
   },
   "put": {
     "operationId": "updateWorkOrder",
-    "summary": "Updates a work order",
-    "description": "Updates a work order",
+    "summary": "Update work-order",
+    "description": "Updates a work-order",
     "tags": [
       "Work Order"
     ],
@@ -58,8 +58,8 @@
   },
   "delete": {
     "operationId": "deleteWorkOrder",
-    "summary": "Deletes a work order",
-    "description": "This will soft delete the work order",
+    "summary": "Delete work-order",
+    "description": "Deletes a work-order",
     "tags": [
       "Work Order"
     ],
@@ -70,7 +70,7 @@
     ],
     "responses": {
       "205": {
-        "description": "WorkOrder deleted"
+        "description": "Work-order deleted"
       },
       "401": {
         "$ref": "../../components/responses/401unauthorized.json"

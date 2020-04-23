@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchAllWorkOrders",
-    "summary": "Fetches A Page of work orders",
-    "description": "Fetch Work Order",
+    "summary": "Fetch work-orders",
+    "description": "Fetches A Page of work orders",
     "tags": [
       "Work Order"
     ],
@@ -28,8 +28,8 @@
   },
   "post": {
     "operationId": "createWorkOrder",
-    "summary": "Creates a work order",
-    "description": "Creates a new work order",
+    "summary": "Create work-order",
+    "description": "Creates a work-order",
     "tags": [
       "Work Order"
     ],

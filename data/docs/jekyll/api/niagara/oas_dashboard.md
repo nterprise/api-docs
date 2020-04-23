@@ -1,111 +1,31 @@
 ---
 layout: page
 parent: Niagara API
-nav_order: 4
+nav_order: 6
+redirect_from:
+  - /rel/dashboards
+  - /rel/dashboard
 title: Dashboards
-language_tabs: ''
-toc_footers: []
-includes: []
-search: true
-highlight_theme: darkula
-headingLevel: 2
-
 ---
 
-<h1 id="dashboards">Dashboards v2.0.0</h1>
+<h1 id="dashboards">Dashboards</h1>
 
 * Do not remove this line (it will not be displayed)
 {:toc}
 
-> Scroll down for example requests and responses.
-
 API for the nterprise application
-
-Base URLs:
-
-* <a href="https://{environment}.nterprise.com">https://{environment}.nterprise.com</a>
-
-    * **environment** -  Default: api
-
-        * api
-
-        * api.dev
 
 <h1 id="dashboards-dashboard">Dashboard</h1>
 
-## fetchDashboard
+## Operations
+
+### GET /dashboard - *Fetch dashboards*
 
 <a id="opIdfetchDashboard"></a>
 
-`GET /dashboard`
+*Fetch dashboards*
 
-*Dashboard page*
-
-Fetches the dashboard
-
-> Example responses
-
-> 200 Response
-
-```json
-{
-  "type": "object",
-  "allOf": [
-    {
-      "type": "object",
-      "properties": {
-        "_links": {
-          "type": "object",
-          "properties": {
-            "self": {
-              "x-example": {
-                "href": "https://api.nterprise.com/dashboards"
-              },
-              "type": "object",
-              "properties": {
-                "href": {
-                  "type": "string",
-                  "format": "uri"
-                }
-              }
-            }
-          }
-        },
-        "dashboards": {
-          "description": "A List of all dashboards configured",
-          "type": "array",
-          "items": {
-            "type": "object",
-            "description": "Quick Sight dashboard",
-            "x-ui-hide": true,
-            "properties": {
-              "type": {
-                "description": "Describes type of dashboard. Embedded link to",
-                "type": "string",
-                "readOnly": true,
-                "enum": [
-                  "quickSight"
-                ]
-              },
-              "embed_url": {
-                "description": "The link to the embedded dashboard from quick sight",
-                "type": "string",
-                "format": "url",
-                "readOnly": true
-              },
-              "expires_in": {
-                "description": "How long until the embedded link expires. Calling the endpoint will generate a fresh embed url",
-                "readOnly": true,
-                "type": "integer"
-              }
-            }
-          }
-        }
-      }
-    }
-  ]
-}
-```
+Dashboard page
 
 <h3 id="fetchdashboard-responses">Responses</h3>
 
@@ -114,111 +34,92 @@ Fetches the dashboard
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|A dashboard response|Inline|
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|Inline|
 
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "dashboards": [
+    {
+      "type": "quickSight",
+      "embed_url": "https://api.dev.nterprise.com/dashboard/_embed",
+      "expires_in": 60
+    }
+  ],
+  "_links": {
+    "self": {
+      "href": "https://api.dev.nterprise.com/dashboard"
+    }
+  }
+}
+```
+
+> 401 Response
+
+```json
+{
+  "title": "Unauthorized",
+  "type": "https://docs.nterprise.com/api/problem/Unauthorized",
+  "status": 401,
+  "detail": "Invalid authorization token"
+}
+```
+
 <h3 id="fetchdashboard-responseschema">Response Schema</h3>
 
 Status Code **200**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» _links|object|false|none|none|
-|»» self|object|false|none|none|
-|»»» href|string(uri)|false|none|none|
-|»» dashboards|[object]|false|none|A List of all dashboards configured|
-|»»» type|string|false|read-only|Describes type of dashboard. Embedded link to|
-|»»» embed_url|string(url)|false|read-only|The link to the embedded dashboard from quick sight|
-|»»» expires_in|integer|false|read-only|How long until the embedded link expires. Calling the endpoint will generate a fresh embed url|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|type|quickSight|
+|&nbsp;&nbsp;&nbsp;&nbsp; _links|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self|object|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; href|string(uri)|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; dashboards|[object]|false|none|A List of all dashboards configured|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|read-only|Describes type of dashboard. Embedded link to|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; embed_url|string(url)|false|read-only|The link to the embedded dashboard from quick sight|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; expires_in|integer|false|read-only|How long until the embedded link expires. Calling the endpoint will generate a fresh embed url|
 
 Status Code **401**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|string|false|none|none|
-|» type|string|false|none|none|
-|» status|number|false|none|none|
-|» detail|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
 
-#### Enumerated Values
+# Embedded Schemas
 
-|Property|Value|
-|---|---|
-|title|Unauthorized|
-|type|https://docs.nterprise.com/api/problem/Unauthorized|
-|status|401|
-|detail|You are not authorized to access this resource|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-# Schemas
-
-<h2 id="tocSdashboard">Dashboard</h2>
-
+## Dashboard
+<!-- backwards compatibility -->
 <a id="schemadashboard"></a>
+<a id="schema_Dashboard"></a>
+<a id="tocSdashboard"></a>
+<a id="tocsdashboard"></a>
 
-```yaml
-type: object
-properties:
-  _links:
-    type: object
-    properties:
-      self:
-        x-example:
-          href: 'https://api.nterprise.com/dashboards'
-        type: object
-        properties:
-          href:
-            type: string
-            format: uri
-  dashboards:
-    description: A List of all dashboards configured
-    type: array
-    items:
-      type: object
-      description: Quick Sight dashboard
-      x-ui-hide: true
-      properties:
-        type:
-          description: Describes type of dashboard. Embedded link to
-          type: string
-          readOnly: true
-          enum:
-            - quickSight
-        embed_url:
-          description: The link to the embedded dashboard from quick sight
-          type: string
-          format: url
-          readOnly: true
-        expires_in:
-          description: >-
-            How long until the embedded link expires. Calling the endpoint will
-            generate a fresh embed url
-          readOnly: true
-          type: integer
-
-```
-
-### Properties
+#### Properties
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |_links|object|false|none|none|
-|» self|object|false|none|none|
-|»» href|string(uri)|false|none|none|
-|» dashboards|[object]|false|none|A List of all dashboards configured|
-|»» type|string|false|read-only|Describes type of dashboard. Embedded link to|
-|»» embed_url|string(url)|false|read-only|The link to the embedded dashboard from quick sight|
-|»» expires_in|integer|false|read-only|How long until the embedded link expires. Calling the endpoint will generate a fresh embed url|
+|&nbsp;&nbsp;&nbsp;&nbsp; self|object|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; href|string(uri)|false|none|none|
+|dashboards|[object]|false|none|A List of all dashboards configured|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|read-only|Describes type of dashboard. Embedded link to|
+|&nbsp;&nbsp;&nbsp;&nbsp; embed_url|string(url)|false|read-only|The link to the embedded dashboard from quick sight|
+|&nbsp;&nbsp;&nbsp;&nbsp; expires_in|integer|false|read-only|How long until the embedded link expires. Calling the endpoint will generate a fresh embed url|
 
-#### Enumerated Values
+#### Specification
 
-|Property|Value|
-|---|---|
-|type|quickSight|
+```yaml
+dashboards:
+  - type: quickSight
+    embed_url: https://api.dev.nterprise.com/dashboard/_embed
+    expires_in: 60
+_links:
+  self:
+    href: https://api.dev.nterprise.com/dashboard
+
+```
 

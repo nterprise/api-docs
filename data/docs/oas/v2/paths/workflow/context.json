@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchContextsForWorkflow",
-    "summary": "Fetches A Page of active contexts for a workflow",
-    "description": "Fetch Workflow Contexts",
+    "summary": "Fetch contexts for workflow",
+    "description": "Fetches A Page of active contexts for a workflow",
     "tags": [
       "Workflow"
     ],

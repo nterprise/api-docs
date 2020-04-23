@@ -1,0 +1,59 @@
+{
+  "type": "object",
+  "required": [
+    "batch_id",
+    "created",
+    "current_status",
+    "cycles",
+    "label",
+    "number_cycles",
+    "order",
+    "queue",
+    "updated",
+    "work_order"
+  ],
+  "properties": {
+    "batch_id": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/batch.json#/properties/batch_id"
+    },
+    "label": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/batch.json#/properties/label"
+    },
+    "created": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/batch.json#/properties/created"
+    },
+    "updated": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/batch.json#/properties/updated"
+    },
+    "queue": {
+      "type": "object",
+      "deprecated": true,
+      "allOf": [
+        {
+          "$ref": "./queue.json"
+        }
+      ]
+    },
+    "order": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/batch.json#/properties/order"
+    },
+    "current_status": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/batch.json#/properties/current_status"
+    },
+    "number_cycles": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/batch.json#/properties/number_cycles"
+    },
+    "cycles": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/batch.json#/properties/cycles"
+    },
+    "work_order": {
+      "type": "object",
+      "deprecated": true,
+      "allOf": [
+        {
+          "$ref": "./workOrder.json"
+        }
+      ]
+    }
+  }
+}

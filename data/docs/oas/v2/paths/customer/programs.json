@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchAllCustomerPrograms",
-    "summary": "Fetches A Page of programs for the customer",
-    "description": "Fetch customer programs",
+    "summary": "Fetch customer programs",
+    "description": "Fetches A Page of programs for the customer",
     "tags": [
       "Customer"
     ],

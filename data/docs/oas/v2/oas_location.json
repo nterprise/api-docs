@@ -1,7 +1,18 @@
 {
   "openapi": "3.0.3",
   "x-api": "niagara",
-  "x-parent": "Niagara API",
+  "x-nter-docs-parent": "Niagara API",
+  "x-nter-docs-nav-order": 7,
+  "x-nter-docs-redirect-from": [
+    "/rel/locations",
+    "/rel/location",
+    "/rel/resource-location",
+    "/rel/sub-resource-location",
+    "/rel/batch-location",
+    "/rel/unit-last-known-location",
+    "/rel/queue-location",
+    "/rel/work-order-location"
+  ],
   "info": {
     "version": "2.0.0",
     "description": "API for the nterprise application",
@@ -34,8 +45,8 @@
     "/locations/{location_id}/resources": {
       "$ref": "./paths/location/resources.json"
     },
-    "/locations/{location_id}/resources/{resource_id}": {
-      "$ref": "./paths/location/resource.json"
+    "/locations/{location_id}/queues": {
+      "$ref": "./paths/location/resources.json"
     },
     "/ware-houses": {
       "$ref": "./paths/location/warehouses.json"
@@ -44,7 +55,7 @@
   "components": {
     "schemas": {
       "Location": {
-        "$ref": "https://docs.nterprise.com/schemas/niagara/location.json"
+        "$ref": "components/schemas/location.json"
       }
     }
   }

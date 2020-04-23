@@ -1,7 +1,11 @@
 {
   "openapi": "3.0.3",
   "x-api": "niagara",
-  "x-parent": "Niagara API",
+  "x-nter-docs-parent": "Niagara API",
+  "x-nter-docs-nav-order": 3,
+  "x-nter-docs-redirect-from": [
+    "/rel/contacts"
+  ],
   "info": {
     "version": "2.0.0",
     "description": "Contacts contain email and phone number information for a non-user entity which allows sending notification information without the need to create a user login\n\n## Security Restrictions\n\nContacts are considered a top-level `entity.` `Users` must be granted the `create` permission on the Contact entity to be able to create contacts. Grant the `create` or `update` permissions to the user for the linked `entity` for the relationship operation to be approved.\n\n\n",
@@ -32,7 +36,7 @@
   "components": {
     "schemas": {
       "Contact": {
-        "$ref": "https://docs.nterprise.com/schemas/niagara/contact.json"
+        "$ref": "components/schemas/contact.json"
       }
     }
   }

@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchAllCustomerContacts",
-    "summary": "Fetches A Page of contacts for the customer",
-    "description": "Fetch customer contacts",
+    "summary": "Fetch customer contacts",
+    "description": "Fetches A Page of contacts for the customer",
     "tags": [
       "Customer"
     ],
@@ -34,8 +34,8 @@
   },
   "post": {
     "operationId": "attachCustomerContact",
-    "summary": "Creates a contact for a customer",
-    "description": "Creates a new contact for the customer",
+    "summary": "Create customer contact",
+    "description": "This will create the contact along with linking it to the customer. If a contact is found based on the email address, this will just link the contact to the customer",
     "tags": [
       "Customer"
     ],

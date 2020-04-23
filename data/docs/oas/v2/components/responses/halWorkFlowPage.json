@@ -4,7 +4,28 @@
     "application/hal+json": {
       "schema": {
         "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "_embedded",
+          "_links",
+          "total_count",
+          "limit",
+          "offset"
+        ],
         "properties": {
+          "total_count": {
+            "type": "number",
+            "readOnly": true
+          },
+          "limit": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 100
+          },
+          "offset": {
+            "type": "string",
+            "nullable": true
+          },
           "_embedded": {
             "type": "object",
             "properties": {
@@ -33,6 +54,61 @@
                 "$ref": "../schemas/link.json"
               }
             }
+          }
+        }
+      },
+      "example":  {
+        "total_count": 21,
+        "limit": 42,
+        "offset": "next-offset",
+        "_embedded": {
+          "nter:work-flows": [
+            {
+              "work_flow_id": "work-flow",
+              "label": "My workflow",
+              "created": "2019-08-19T00:01:02.000Z",
+              "updated": "2020-08-19T01:01:02.000Z",
+              "workflow_version": 7,
+              "schema_version": "1.0",
+              "applies_to": "UNIT",
+              "starts_at": "work-complete",
+              "triggered_by": [
+                "UNIT.created"
+              ],
+              "metadata": {
+                "meta": "data"
+              },
+              "steps": {
+                "work-complete": {
+                  "label": "work complete",
+                  "on_complete": [],
+                  "on_start": [],
+                  "step_type": "success"
+                },
+                "stop-poking-me": {
+                  "label": "stop poking me",
+                  "on_complete": [],
+                  "on_start": [],
+                  "step_type": "fail"
+                }
+              },
+              "_links": {
+                "nter:work-flow-contexts": {
+                  "href": "https://api.example.com/work-flows/work-flow/contexts"
+                },
+                "self": {
+                  "href": "https://api.example.com/work-flows/work-flow"
+                }
+              }
+            }
+          ]
+        },
+        "_links": {
+          "next": {
+            "href": "https://api.example.com/work-flows?limit=42&offset=next-offset"
+          },
+          "self": {
+            "href": "https://api.example.com/work-flows?limit=42"
           }
         }
       }

@@ -4,6 +4,14 @@
     "application/problem+json": {
       "schema": {
         "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "type",
+          "detail",
+          "status",
+          "title",
+          "validation_messages"
+        ],
         "properties": {
           "title": {
             "const": "Bad Request"
@@ -15,9 +23,33 @@
             "const": 400
           },
           "detail": {
-            "const": "Invalid request"
+            "type": "string"
+          },
+          "validation_messages": {
+            "type": "array",
+            "description": "List of errors detailing the failures",
+            "items": {
+              "type": "object"
+            }
           }
         }
+      },
+      "example": {
+        "title": "Bad Request",
+        "type": "https://docs.nterprise.com/api/problem/BadRequest",
+        "status": 400,
+        "detail": "Invalid Data",
+        "validation_messages": [
+          {
+            "keyword": "field",
+            "dataPath": ".field",
+            "schemaPath": "https://docs.nterprise.com/schemas/niagara/foo.json#/properties/field",
+            "params": {
+              "type": "string"
+            },
+            "message": "should be string"
+          }
+        ]
       }
     }
   }

@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchCustomerById",
-    "summary": "Fetches a customer by the customer Id",
-    "description": "Fetch Customer",
+    "summary": "Fetch Customer",
+    "description": "Fetches a customer by the customer Id",
     "tags": [
       "Customer"
     ],
@@ -28,7 +28,7 @@
   },
   "put": {
     "operationId": "updateCustomer",
-    "summary": "Updates a customer",
+    "summary": "Update customer",
     "description": "Updates a new customer following the customer schema",
     "parameters": [
       {
@@ -64,7 +64,7 @@
   },
   "delete": {
     "operationId": "deleteCustomer",
-    "summary": "Deletes a customer",
+    "summary": "Delete customer",
     "description": "This will remove the customer from the system",
     "tags": [
       "Customer"

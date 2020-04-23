@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchAllContacts",
-    "summary": "Fetches A Page of contacts",
-    "description": "Fetch Contact",
+    "summary": "Fetch Contacts",
+    "description": "Fetches A Page of contacts",
     "tags": [
       "Contact"
     ],
@@ -28,8 +28,8 @@
   },
   "post": {
     "operationId": "createContact",
-    "summary": "Creates a contact",
-    "description": "Creates a new contact following the contact schema",
+    "summary": "Create  contact",
+    "description": "Creates a new contact",
     "tags": [
       "Contact"
     ],

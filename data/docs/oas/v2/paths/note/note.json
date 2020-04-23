@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchNoteById",
-    "summary": "Fetches a note by Id",
-    "description": "Fetch Note",
+    "summary": "Fetch Note",
+    "description": "Fetches a note",
     "tags": [
       "Note"
     ],
@@ -28,8 +28,8 @@
   },
   "delete": {
     "operationId": "deleteNote",
-    "summary": "Deletes a note",
-    "description": "This will soft delete the note",
+    "summary": "Delete note",
+    "description": "Deletes a note",
     "tags": [
       "Note"
     ],

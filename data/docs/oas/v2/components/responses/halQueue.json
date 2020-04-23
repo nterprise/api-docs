@@ -3,7 +3,85 @@
   "content": {
     "application/hal+json": {
       "schema": {
-        "$ref": "../schemas/halQueue.json"
+        "allOf": [
+          {
+            "$ref": "../schemas/halQueue.json"
+          },
+          {
+            "type": "object",
+            "required": [
+              "_embedded"
+            ],
+            "properties": {
+              "_embedded": {
+                "type": "object",
+                "required": [
+                  "nter:queue-location"
+                ],
+                "properties": {
+                  "nter:queue-location": {
+                    "type": "array",
+                    "maxItems": 1,
+                    "items": {
+                      "$ref": "../schemas/halQueue.json"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "example": {
+        "queue_id": "queue",
+        "label": "Fast Lane",
+        "created": "2019-10-09T19:30:35.639Z",
+        "updated": "2019-10-09T19:30:35.639Z",
+        "priority": 42,
+        "active_work_orders": 40,
+        "active_batches": 60,
+        "active_cycles": 1,
+        "total_work_orders": {
+          "pending": 0,
+          "in_progress": 0,
+          "verifying": 0,
+          "complete": 0,
+          "blocked": 0,
+          "cancelled": 0
+        },
+        "total_batches": 60,
+        "location": {
+          "location_id": "location",
+          "label": "Test Label",
+          "created": "2019-08-19T00:01:02.000Z",
+          "updated": "2020-08-19T01:01:02.000Z",
+          "location_type": "warehouse",
+          "formatted_address": "Test Label\n431 Broadway Suite c\nMenands NY 12204 USA",
+          "address": {
+            "country": "USA",
+            "administrative_area": "NY",
+            "sub_administrative_area": "Albany",
+            "locality": "Menands",
+            "postal_code": "12204",
+            "thoroughfare": "431 Broadway",
+            "premise": "Suite c",
+            "sub_premise": "ZIC"
+          }
+        },
+        "_embedded": {
+          "nter:queue-location": []
+        },
+        "_links": {
+          "nter:queue-location": {
+            "href": "https://api.example.com/locations/location"
+          },
+          "nter:queue-batches": {
+            "href": "https://api.example.com/queues/queue/batches"
+          },
+          "self": {
+            "href": "https://api.example.com/queues/queue"
+          }
+        }
       }
     }
   }

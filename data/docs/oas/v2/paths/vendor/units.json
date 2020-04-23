@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchAllVendorUnits",
-    "summary": "Fetches A Page of units for the vendor",
-    "description": "Fetch vendor units",
+    "summary": "Fetch units for vendor",
+    "description": "Fetches A Page of units for the vendor",
     "tags": [
       "Vendor"
     ],

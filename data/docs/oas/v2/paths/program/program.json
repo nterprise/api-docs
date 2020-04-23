@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchProgramById",
-    "summary": "Fetches a program by Id",
-    "description": "Fetch Program",
+    "summary": "Fetch Program",
+    "description": "Fetches a program",
     "tags": [
       "Program"
     ],
@@ -28,7 +28,7 @@
   },
   "put": {
     "operationId": "updateProgram",
-    "summary": "Updates a program",
+    "summary": "Update program",
     "description": "Updates a program",
     "tags": [
       "Program"
@@ -58,8 +58,8 @@
   },
   "delete": {
     "operationId": "deleteProgram",
-    "summary": "Deletes a program",
-    "description": "This will soft delete the program",
+    "summary": "Delete program",
+    "description": "Deletes a program",
     "tags": [
       "Program"
     ],

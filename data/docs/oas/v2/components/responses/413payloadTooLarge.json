@@ -3,6 +3,8 @@
   "content": {
     "application/problem+json": {
       "schema": {
+        "type": "object",
+        "additionalProperties": false,
         "properties": {
           "title": {
             "const": "Payload too Large"
@@ -14,9 +16,15 @@
             "const": 413
           },
           "detail": {
-            "const": "The resource you are trying to upload is too large"
+            "type": "string"
           }
         }
+      },
+      "example": {
+        "title": "Payload too Large",
+        "type": "https://docs.nterprise.com/api/problem/PayloadTooLarge",
+        "status": 413,
+        "detail": "The request payload exceeded 10 MB"
       }
     }
   }

@@ -1,8 +1,4 @@
-## {{= data.operationUniqueName}}
-
-{{? data.operation.operationId}}
-<a id="opId{{=data.operation.operationId}}"></a>
-{{?}}
+{{= data.tags.section }}
 
 {{ data.methodUpper = data.method.verb.toUpperCase(); }}
 {{ data.url = data.utils.slashes(data.baseUrl + data.method.path); }}
@@ -13,13 +9,11 @@
 {{ data.utils.mergePathParameters(data); }}
 {{ data.utils.getParameters(data); }}
 
-{{? data.options.codeSamples || data.operation["x-code-samples"] }}
-> Code samples
+### {{= data.methodUpper}} {{=data.method.path}} - {{? data.operation.summary && !data.options.tocSummary}}*{{= data.operation.summary }}*{{?}}
 
-{{= data.utils.getCodeSamples(data) }}
+{{? data.operation.operationId}}
+<a id="opId{{=data.operation.operationId}}"></a>
 {{?}}
-
-`{{= data.methodUpper}} {{=data.method.path}}`
 
 {{? data.operation.summary && !data.options.tocSummary}}*{{= data.operation.summary }}*{{?}}
 
@@ -32,7 +26,6 @@
 > {{= data.bodyParameter.exampleValues.description }}
 {{?}}
 
-{{= data.utils.getBodyParameterExamples(data) }}
 {{?}}
 
 {{? data.parameters && data.parameters.length }}
@@ -43,9 +36,4 @@
 
 {{#def.callbacks}}
 
-{{ data.security = data.operation.security ? data.operation.security : data.api.security; }}
-{{? data.security && data.security.length }}
-{{#def.authentication}}
-{{??}}
-{{#def.authentication_none}}
-{{?}}
+{{= data.tags.endSection }}

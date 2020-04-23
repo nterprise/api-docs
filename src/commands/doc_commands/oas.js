@@ -6,6 +6,12 @@ const fs = require('fs');
 const path = require('path');
 const RefParser = require('json-schema-ref-parser');
 const converter = require('widdershins');
+const jp = require('jsonpath');
+const Ajv = require('ajv');
+const ajv = new Ajv({
+    allErrors: true,
+});
+const yaml = require('yaml');
 
 const widdershinsOptions = {
     user_templates: `${folders.templatePath}/openapi3`,
@@ -14,6 +20,9 @@ const widdershinsOptions = {
     yaml: true,
     lang: false,
     omitBody: true,
+    omitHeader: true,
+    expandBody: true,
+    shallowSchemas: true,
     verbose: false,
     debug: false,
     language_tabs: '',
@@ -23,6 +32,29 @@ const removeKeys = [
     '$schema',
     '$id',
     '$comment',
+];
+
+const fontMatterMapping = [
+    {
+        apiKey: 'x-nter-docs-parent',
+        fontMatterKey: 'parent',
+    },
+    {
+        apiKey: 'x-nter-docs-nav-order',
+        fontMatterKey: 'nav_order',
+    },
+    {
+        apiKey: 'x-nter-docs-has-children',
+        fontMatterKey: 'has_children',
+    },
+    {
+        apiKey: 'x-nter-docs-grand-parent',
+        fontMatterKey: 'grand_parent',
+    },
+    {
+        apiKey: 'x-nter-docs-redirect-from',
+        fontMatterKey: 'redirect_from',
+    },
 ];
 
 /**
@@ -46,6 +78,11 @@ const fixType = (type) => {
 const jsonSchemaToOas = (spec) => _.reduce(
     spec,
     (fixed, value, key) => {
+        if (_.startsWith(key, 'x-nter-docs')) {
+            _.set(fixed, key, value);
+            return fixed;
+        }
+
         if (key === 'patternProperties') {
             _.set(fixed, 'x-patternProperties', value);
             return fixed;
@@ -57,6 +94,11 @@ const jsonSchemaToOas = (spec) => _.reduce(
                 ...fixType(value),
             };
             return fixed;
+        }
+
+        if (key === 'examples') {
+            key = 'example';
+            value = value[0];
         }
 
         if (_.isArray(value)) {
@@ -96,16 +138,112 @@ const jsonSchemaToOas = (spec) => _.reduce(
     {},
 );
 
+const buildFontMatter = (oas) => _.reduce(
+    fontMatterMapping,
+    (fontMatter, {apiKey, fontMatterKey}) => {
+        if (_.has(oas, apiKey)) {
+            _.set(fontMatter, fontMatterKey, _.get(oas, apiKey));
+        }
+        return fontMatter;
+    },
+    {layout: 'page'},
+);
+
+const processFile = async (file) => {
+    const result = {
+        fileName: file,
+        error: false,
+        errorMessage: null,
+        oas: null,
+        markdown: null,
+    };
+
+    logger.info(`Converting OAS ${file} to markdown`);
+    logger.debug(`setting CWD to ${path.dirname(file)}`);
+    process.chdir(path.dirname(file));
+    logger.debug('De-referencing file');
+    try {
+        result.oas = jsonSchemaToOas(
+            await RefParser.dereference(require(file)),
+        );
+    } catch (error) {
+        logger.error(`Failed to de-reference file ${file}`, error);
+        result.error = true;
+        result.errorMessage = error.message;
+        return result;
+    }
+
+    logger.debug('Running widdershins on schema');
+
+    // now that we have a de-reference OAS schema,
+    // check that the request schemas have valid examples
+    const schemas = [
+        ...jp.nodes(
+            result.oas,
+            '$..responses.*.content.*',
+        ),
+    ];
+
+    const schemasOk = _.omitBy(
+        _.map(
+            schemas,
+            ({path, value}) => {
+                if (!_.has(value, 'example')) {
+                    result.error = true;
+                    // eslint-disable-next-line max-len
+                    result.errorMessage = `Path: ${path.join('.')} is missing example`;
+                }
+
+                const contentType = path[path.length - 1];
+                if (contentType === 'application/hal+json') {
+                    _.set(
+                        value,
+                        'schema.required',
+                        _.uniq([
+                            '_links',
+                            ..._.get(value, 'schema.required', []),
+                        ]),
+                    );
+                }
+
+                // Validate the example matches the schema
+                const validate = ajv.compile(value.schema);
+                const valid = validate(value.example);
+
+                if (!valid) {
+                    result.error = true;
+                    result.errorMessage = `Example at Path: ${path.join('.')} `
+                        + `is not valid: `
+                        + JSON.stringify(validate.errors, null, 2);
+                }
+            },
+        ),
+        _.isNil,
+    );
+
+    if (_.keys(schemasOk).length) {
+        result.error = true;
+        throw new Error(_.reduce(
+            schemasOk,
+            (result, value) => '' + result + '\n' + value,
+            `There are error(s) processing ${file}: \n`,
+        ));
+    }
+
+    logger.debug(`Converting to markdown`);
+    const markdown = await converter.convert(result.oas, widdershinsOptions);
+
+    logger.debug(`Creating font matter`);
+    const fontMatter = buildFontMatter(result.oas);
+
+    _.set(fontMatter, 'title', _.get(result.oas, 'info.title'));
+
+    result.markdown = `---\n${yaml.stringify(fontMatter)}---\n${markdown}`;
+    logger.debug('File processed');
+    return result;
+};
+
 exports.builder = (yargs) => yargs.
-    option(
-        'merge',
-        {
-            describe: 'Merge all OAS files',
-            default: false,
-            global: true,
-            boolean: true,
-        },
-    ).
     defaults('overwrite', true);
 
 exports.command = 'oas [file]';
@@ -132,7 +270,6 @@ exports.handler = async (argv) => {
     logger.debug(`${widdershinsOptions.user_templates}`);
 
     const apis = _.flatten([argv.api]);
-    let masterSchema = {};
     logger.debug('API to process', apis);
     const files = _.reduce(
         [argv.file],
@@ -154,6 +291,11 @@ exports.handler = async (argv) => {
                 return files;
             }
 
+            if (_.endsWith('oas_niagara.json')) {
+                logger.debug('Skipping Niagara');
+                return files;
+            }
+
             files.push(path.resolve(file));
             return files;
         },
@@ -166,76 +308,41 @@ exports.handler = async (argv) => {
         process.exit(1);
     }
 
-    await Promise.all(_.map(
-        files,
-        async (file, index) => {
-            if (path.basename(file) === 'oas_niagara.json') {
-                logger.debug('Skipping Niagara');
-                return;
-            }
-            logger.info(`Converting OAS ${file} to markdown`);
-            logger.debug(`setting CWD to ${path.dirname(file)}`);
-            process.chdir(path.dirname(file));
-            logger.debug('Dereferencing file');
-            let oas;
-            try {
-                oas = jsonSchemaToOas(
-                    await RefParser.dereference(require(file)),
-                );
-                masterSchema = {
-                    ...masterSchema,
-                    ...oas,
-                };
-            } catch (error) {
-                logger.error(`Failed to process file ${file}`, error);
-                return;
-            }
+    const processedFiles = await Promise.all(_.map(files, processFile));
 
-            logger.debug('Running widdershins on schema');
+    const errors = _.filter(processedFiles, {error: true});
 
-            const schemaFile = path.join(
-                folders.jekyllPath,
-                'api',
-                _.get(oas, 'x-api'),
-                path.basename(file),
-            );
-
-            argv._writeFile(
-                schemaFile,
-                JSON.stringify(oas, null, 2),
-            );
-
-            logger.debug(`Saving markdown to ${schemaFile}`);
-            converter.convert(oas, widdershinsOptions, (err, str) => {
-                if (err) {
-                    logger.error('Failed to convert file', err);
-                    return;
-                }
-                const parts = [
-                    '---',
-                    'layout: page',
-                    `parent: ${_.get(oas, 'x-parent')}`,
-                    `nav_order: ${index}`,
-                    ...str.split('\n').slice(1),
-                ];
-
-                argv._writeFile(
-                    schemaFile.replace('.json', '.md'),
-                    parts.join('\n'),
-                );
-                logger.debug('File converted');
-            });
-        },
-        [],
-    ));
-
-    if (argv.merge) {
-        logger.info('Writing merged OAS file');
-        argv._writeFile(
-            `${folders.v2Path}/oas_niagara.json`,
-            JSON.stringify(masterSchema, null, 2),
+    if (errors.length) {
+        _.map(
+            errors,
+            (error) => logger.error(
+                `File ${error.fileName} contained Error: ${error.errorMessage}`,
+            ),
         );
+        process.exit(5);
+        return;
     }
+
+    _.forEach(processedFiles, (result) => {
+        const schemaFile = path.join(
+            folders.jekyllPath,
+            'api',
+            _.get(result.oas, 'x-api'),
+            path.basename(result.fileName),
+        );
+
+        // Copy the de-referenced OAS File
+        argv._writeFile(
+            schemaFile,
+            JSON.stringify(result.oas, null, 2),
+        );
+
+        // Write the markdown
+        argv._writeFile(
+            schemaFile.replace('.json', '.md'),
+            result.markdown,
+        );
+    });
 
     logger.info('Converted OAS files to markdown');
 };

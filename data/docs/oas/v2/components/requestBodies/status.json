@@ -4,6 +4,12 @@
     "application/json": {
       "schema": {
         "$ref": "https://docs.nterprise.com/schemas/niagara/status.json"
+      },
+      "example": {
+        "category": "COMPLETE",
+        "description": "For something that is Complete",
+        "status": "Complete",
+        "order": 7
       }
     }
   }

@@ -1,7 +1,15 @@
 {
   "openapi": "3.0.3",
   "x-api": "niagara",
-  "x-parent": "Niagara API",
+  "x-nter-docs-parent": "Niagara API",
+  "x-nter-docs-nav-order": 11,
+  "x-nter-docs-redirect-from": [
+    "/rel/parts",
+    "/rel/part",
+    "/rel/customer-parts",
+    "/rel/unit-part",
+    "/rel/manufacturer-parts"
+  ],
   "info": {
     "version": "2.0.0",
     "description": "API for the nterprise application",
@@ -35,7 +43,7 @@
   "components": {
     "schemas": {
       "Part": {
-        "$ref": "https://docs.nterprise.com/schemas/niagara/part.json"
+        "$ref": "components/schemas/part.json"
       }
     }
   }

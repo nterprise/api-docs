@@ -1,7 +1,11 @@
 {
   "openapi": "3.0.3",
   "x-api": "niagara",
-  "x-parent": "Niagara API",
+  "x-nter-docs-parent": "Niagara API",
+  "x-nter-docs-nav-order": 9,
+  "x-nter-docs-redirect-from": [
+    "/rel/me"
+  ],
   "info": {
     "version": "2.0.0",
     "description": "API for the nterprise application",

@@ -1,0 +1,23 @@
+{
+  "type": "object",
+  "properties": {
+    "note_id": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/note.json#/properties/note_id"
+    },
+    "label": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/note.json#/properties/label"
+    },
+    "created": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/note.json#/properties/created"
+    },
+    "updated": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/note.json#/properties/updated"
+    },
+    "text": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/note.json#/properties/text"
+    },
+    "created_by": {
+      "$ref": "./user.json"
+    }
+  }
+}

@@ -4,6 +4,20 @@
     "application/hal+json": {
       "schema": {
         "$ref": "../schemas/halContact.json"
+      },
+      "example":  {
+        "contact_id": "contact",
+        "label": "Major",
+        "created": "2019-08-19T00:01:02.000Z",
+        "updated": "2020-08-19T01:01:02.000Z",
+        "name": "Major Samantha Carter",
+        "email": "s.carter@sg1.com",
+        "phone": "518-867-5309",
+        "_links": {
+          "self": {
+            "href": "https://api.example.com/contacts/contact"
+          }
+        }
       }
     }
   }

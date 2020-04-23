@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchAllProjectWorkOrders",
-    "summary": "Fetches work orders for a project",
-    "description": "Fetch project work orders",
+    "summary": "Fetch project work-orders",
+    "description": "Fetches work-orders for a project",
     "tags": [
       "Project"
     ],

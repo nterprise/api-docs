@@ -1,0 +1,43 @@
+{
+  "type": "object",
+  "required": [
+    "start_date",
+    "end_date",
+    "customer",
+    "allowed_statuses",
+    "updated",
+    "label",
+    "created",
+    "program",
+    "project_id"
+  ],
+  "properties": {
+    "project_id": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/project.json#/properties/project_id"
+    },
+    "label": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/project.json#/properties/label"
+    },
+    "created": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/project.json#/properties/created"
+    },
+    "updated": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/project.json#/properties/updated"
+    },
+    "start_date": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/project.json#/properties/start_date"
+    },
+    "end_date": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/project.json#/properties/end_date"
+    },
+    "customer": {
+      "$ref": "./customer.json"
+    },
+    "program": {
+      "$ref": "./program.json"
+    },
+    "allowed_statuses": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/project.json#/properties/allowed_statuses"
+    }
+  }
+}

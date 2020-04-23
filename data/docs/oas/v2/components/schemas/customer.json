@@ -1,0 +1,39 @@
+{
+  "type": "object",
+  "required": [
+    "updated",
+    "label",
+    "created",
+    "allowed_statuses",
+    "customer_id",
+    "external_platform",
+    "total_programs",
+    "total_projects"
+  ],
+  "properties": {
+    "customer_id": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/customer.json#/properties/customer_id"
+    },
+    "label": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/customer.json#/properties/label"
+    },
+    "created": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/customer.json#/properties/created"
+    },
+    "updated": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/customer.json#/properties/updated"
+    },
+    "external_platform": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/customer.json#/properties/external_platform"
+    },
+    "allowed_statuses": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/customer.json#/properties/allowed_statuses"
+    },
+    "total_programs": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/customer.json#/properties/total_programs"
+    },
+    "total_projects": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/customer.json#/properties/total_projects"
+    }
+  }
+}

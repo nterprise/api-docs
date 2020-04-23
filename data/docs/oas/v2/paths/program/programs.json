@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchAllPrograms",
-    "summary": "Fetches A Page of programs",
-    "description": "Fetch Program",
+    "summary": "Fetch Programs",
+    "description": "Fetches A Page of programs",
     "tags": [
       "Program"
     ],
@@ -28,8 +28,8 @@
   },
   "post": {
     "operationId": "createProgram",
-    "summary": "Creates a program",
-    "description": "Creates a new program",
+    "summary": "Create program",
+    "description": "Creates a program",
     "tags": [
       "Program"
     ],
