@@ -1,0 +1,31 @@
+{
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "./role.json"
+    },
+    {
+      "type": "object",
+      "required": [
+        "_links"
+      ],
+      "properties": {
+        "_links": {
+          "type": "object",
+          "required": [
+            "self",
+            "nter:role-users"
+          ],
+          "properties": {
+            "self": {
+              "$ref": "./link.json"
+            },
+            "nter:role-users": {
+              "$ref": "./link.json"
+            }
+          }
+        }
+      }
+    }
+  ]
+}

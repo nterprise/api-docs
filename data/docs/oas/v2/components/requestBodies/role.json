@@ -1,0 +1,25 @@
+{
+  "description": "A Role request body",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "required": [
+          "label",
+          "allowed_statuses"
+        ],
+        "properties": {
+          "label": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/role.json#/properties/label"
+          },
+          "description": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/role.json#/properties/description"
+          },
+          "grants": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/role.json#/properties/grants"
+          }
+        }
+      }
+    }
+  }
+}

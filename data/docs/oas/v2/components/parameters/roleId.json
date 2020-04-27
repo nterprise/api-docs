@@ -1,0 +1,9 @@
+{
+  "name": "role_id",
+  "in": "path",
+  "description": "Id of the role",
+  "required": true,
+  "schema": {
+    "$ref": "https://docs.nterprise.com/schemas/niagara/role.json#/properties/role_id"
+  }
+}

@@ -2341,18 +2341,24 @@ properties:
                   - PGM.detached
                   - PGM.removed
                   - PGM.updated
-                  - PRO.attached
-                  - PRO.created
-                  - PRO.deleted
-                  - PRO.detached
-                  - PRO.removed
-                  - PRO.updated
+                  - PRJ.attached
+                  - PRJ.created
+                  - PRJ.deleted
+                  - PRJ.detached
+                  - PRJ.removed
+                  - PRJ.updated
                   - RES.attached
                   - RES.created
                   - RES.deleted
                   - RES.detached
                   - RES.removed
                   - RES.updated
+                  - SRES.attached
+                  - SRES.created
+                  - SRES.deleted
+                  - SRES.detached
+                  - SRES.removed
+                  - SRES.updated
                   - UNIT.attached
                   - UNIT.created
                   - UNIT.deleted
@@ -2953,18 +2959,24 @@ properties:
                                       - PGM.detached
                                       - PGM.removed
                                       - PGM.updated
-                                      - PRO.attached
-                                      - PRO.created
-                                      - PRO.deleted
-                                      - PRO.detached
-                                      - PRO.removed
-                                      - PRO.updated
+                                      - PRJ.attached
+                                      - PRJ.created
+                                      - PRJ.deleted
+                                      - PRJ.detached
+                                      - PRJ.removed
+                                      - PRJ.updated
                                       - RES.attached
                                       - RES.created
                                       - RES.deleted
                                       - RES.detached
                                       - RES.removed
                                       - RES.updated
+                                      - SRES.attached
+                                      - SRES.created
+                                      - SRES.deleted
+                                      - SRES.detached
+                                      - SRES.removed
+                                      - SRES.updated
                                       - UNIT.attached
                                       - UNIT.created
                                       - UNIT.deleted

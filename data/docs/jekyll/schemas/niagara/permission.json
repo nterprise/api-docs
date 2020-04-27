@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/permission.json",
+  "type": "object",
+  "description": "Permission",
+  "additionalProperties": false,
+  "required": [
+    "permission",
+    "label",
+    "match_location"
+  ],
+  "properties": {
+    "permission": {
+      "description": "The granted permission",
+      "type": "string",
+      "pattern": "^(create|update|delete|read):(CON|CUS|LOC|NOTE|PART|PGM|PRJ|RES|SRES|UNIT|USER|WKF|WOR)$"
+    },
+    "label": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/label"
+    },
+    "match_location": {
+      "type": "boolean",
+      "description": "The user must be located at this location to access this entity"
+    }
+  }
+}
