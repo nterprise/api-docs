@@ -3,7 +3,384 @@
   "content": {
     "application/hal+json": {
       "schema": {
-        "$ref": "../schemas/halBatch.json"
+        "allOf": [
+          {
+            "$ref": "../schemas/halBatch.json"
+          },
+          {
+            "type": "object",
+            "required": [
+              "_embedded"
+            ],
+            "properties": {
+              "_embedded": {
+                "type": "object",
+                "required": [
+                  "nter:batch-project",
+                  "nter:batch-program",
+                  "nter:batch-location",
+                  "nter:batch-customer",
+                  "nter:batch-work-order",
+                  "nter:batch-queue"
+                ],
+                "properties": {
+                  "nter:batch-queue": {
+                    "type": "array",
+                    "maxItems": 1,
+                    "items": {
+                      "$ref": "../schemas/halQueue.json"
+                    }
+                  },
+                  "nter:batch-customer": {
+                    "type": "array",
+                    "maxItems": 1,
+                    "items": {
+                      "$ref": "../schemas/halCustomer.json"
+                    }
+                  },
+                  "nter:batch-program": {
+                    "type": "array",
+                    "maxItems": 1,
+                    "items": {
+                      "$ref": "../schemas/halProgram.json"
+                    }
+                  },
+                  "nter:batch-project": {
+                    "type": "array",
+                    "maxItems": 1,
+                    "items": {
+                      "$ref": "../schemas/halProject.json"
+                    }
+                  },
+                  "nter:batch-location": {
+                    "type": "array",
+                    "maxItems": 1,
+                    "items": {
+                      "$ref": "../schemas/halLocation.json"
+                    }
+                  },
+                  "nter:batch-work-order": {
+                    "type": "array",
+                    "maxItems": 1,
+                    "items": {
+                      "$ref": "../schemas/halWorkOrder.json"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "example": {
+        "batch_id": "batch",
+        "label": "Batch A",
+        "created": "2019-08-19T00:01:02.000Z",
+        "updated": "2020-08-19T01:01:02.000Z",
+        "queue": {
+          "queue_id": "queue",
+          "label": "Fast Lane",
+          "created": "2019-10-09T19:30:35.639Z",
+          "updated": "2019-10-09T19:30:35.639Z",
+          "priority": 42,
+          "active_work_orders": 40,
+          "active_batches": 60,
+          "active_cycles": 1,
+          "total_work_orders": {
+            "pending": 0,
+            "in_progress": 0,
+            "verifying": 0,
+            "complete": 0,
+            "blocked": 0,
+            "cancelled": 0
+          },
+          "total_batches": 60,
+          "location": {
+            "location_id": "location",
+            "label": "Test Label",
+            "created": "2019-08-19T00:01:02.000Z",
+            "updated": "2020-08-19T01:01:02.000Z",
+            "location_type": "warehouse",
+            "formatted_address": "Test Label\n431 Broadway Suite c\nMenands NY 12204 USA",
+            "address": {
+              "country": "USA",
+              "administrative_area": "NY",
+              "sub_administrative_area": "Albany",
+              "locality": "Menands",
+              "postal_code": "12204",
+              "thoroughfare": "431 Broadway",
+              "premise": "Suite c",
+              "sub_premise": "ZIC"
+            }
+          }
+        },
+        "order": 2,
+        "number_cycles": 4,
+        "cycles": {
+          "pending": 0,
+          "in_progress": 0,
+          "verifying": 0,
+          "complete": 0,
+          "blocked": 0,
+          "cancelled": 0
+        },
+        "work_order": {
+          "work_order_id": "work-order",
+          "label": "My workOrder",
+          "created": "2019-08-19T00:01:02.000Z",
+          "updated": "2020-08-19T01:01:02.000Z",
+          "description": "Workorder description",
+          "work_order_type": "device",
+          "begin_date": "2021-08-19T02:01:02.000Z",
+          "due_date": "2021-08-19T02:01:02.000Z",
+          "start_date": "2021-08-19T02:01:02.000Z",
+          "end_date": "2021-08-19T02:01:02.000Z",
+          "project": {
+            "project_id": "project",
+            "label": "New York Stores",
+            "description": "Project description",
+            "created": "2020-01-09T22:12:03.000Z",
+            "updated": "2020-01-09T22:12:03.000Z",
+            "customer": {
+              "customer_id": "customer",
+              "label": "manchuck",
+              "created": "2020-01-09T22:12:03.000Z",
+              "updated": "2020-01-09T22:12:03.000Z",
+              "external_platform": {},
+              "total_programs": 21,
+              "total_projects": 42,
+              "allowed_statuses": [
+                {
+                  "category": "PENDING",
+                  "description": "For something that is Pending",
+                  "status": "Pending",
+                  "order": 3
+                },
+                {
+                  "category": "IN_PROGRESS",
+                  "description": "For something that is In Progress",
+                  "status": "In Progress",
+                  "order": 4
+                },
+                {
+                  "category": "VERIFYING",
+                  "description": "For something that is Verifying",
+                  "status": "Verifying",
+                  "order": 5
+                },
+                {
+                  "category": "BLOCKED",
+                  "description": "For something that is Blocked",
+                  "status": "Blocked",
+                  "order": 6
+                },
+                {
+                  "category": "COMPLETE",
+                  "description": "For something that is Complete",
+                  "status": "Complete",
+                  "order": 7
+                },
+                {
+                  "category": "CANCELLED",
+                  "description": "For something that is Cancelled",
+                  "status": "Cancelled",
+                  "order": 8
+                }
+              ]
+            },
+            "program": {
+              "program_id": "program",
+              "label": "North east stores",
+              "created": "2020-01-09T22:12:03.000Z",
+              "updated": "2020-01-09T22:12:03.000Z",
+              "customer": {
+                "customer_id": "customer",
+                "label": "manchuck",
+                "created": "2020-01-09T22:12:03.000Z",
+                "updated": "2020-01-09T22:12:03.000Z",
+                "external_platform": {},
+                "total_programs": 21,
+                "total_projects": 42,
+                "allowed_statuses": [
+                  {
+                    "category": "PENDING",
+                    "description": "For something that is Pending",
+                    "status": "Pending",
+                    "order": 3
+                  },
+                  {
+                    "category": "IN_PROGRESS",
+                    "description": "For something that is In Progress",
+                    "status": "In Progress",
+                    "order": 4
+                  },
+                  {
+                    "category": "VERIFYING",
+                    "description": "For something that is Verifying",
+                    "status": "Verifying",
+                    "order": 5
+                  },
+                  {
+                    "category": "BLOCKED",
+                    "description": "For something that is Blocked",
+                    "status": "Blocked",
+                    "order": 6
+                  },
+                  {
+                    "category": "COMPLETE",
+                    "description": "For something that is Complete",
+                    "status": "Complete",
+                    "order": 7
+                  },
+                  {
+                    "category": "CANCELLED",
+                    "description": "For something that is Cancelled",
+                    "status": "Cancelled",
+                    "order": 8
+                  }
+                ]
+              },
+              "end_date": "2020-02-10T22:12:03.000Z",
+              "start_date": "2020-02-10T22:12:03.000Z",
+              "allowed_statuses": [
+                {
+                  "category": "PENDING",
+                  "description": "For something that is Pending",
+                  "status": "Pending",
+                  "order": 3
+                },
+                {
+                  "category": "VERIFYING",
+                  "description": "For something that is Verifying",
+                  "status": "Verifying",
+                  "order": 5
+                }
+              ]
+            },
+            "end_date": "2020-02-10T22:12:03.000Z",
+            "start_date": "2020-02-10T22:12:03.000Z",
+            "allowed_statuses": [
+              {
+                "category": "PENDING",
+                "description": "For something that is Pending",
+                "status": "Pending",
+                "order": 3
+              }
+            ]
+          },
+          "location": {
+            "location_id": "location",
+            "label": "Test Label",
+            "created": "2019-08-19T00:01:02.000Z",
+            "updated": "2020-08-19T01:01:02.000Z",
+            "location_type": "warehouse",
+            "formatted_address": "Test Label\n431 Broadway Suite c\nMenands NY 12204 USA",
+            "address": {
+              "country": "USA",
+              "administrative_area": "NY",
+              "sub_administrative_area": "Albany",
+              "locality": "Menands",
+              "postal_code": "12204",
+              "thoroughfare": "431 Broadway",
+              "premise": "Suite c",
+              "sub_premise": "ZIC"
+            }
+          },
+          "current_status": {
+            "category": "IN_PROGRESS",
+            "description": "For something that is Reticulating Splines",
+            "status": "Reticulating Splines",
+            "order": 2
+          },
+          "cycles": [
+            {
+              "needed": 1,
+              "pending": 0,
+              "in_progress": 0,
+              "verifying": 0,
+              "complete": 0,
+              "blocked": 0,
+              "cancelled": 0,
+              "work_flow": {
+                "entity_type": "WKF",
+                "entity_id": "work-flow",
+                "created": "2019-08-19T00:01:02.000Z",
+                "updated": "2020-08-19T01:01:02.000Z",
+                "label": "My workflow",
+                "schema_version": "1.0",
+                "workflow_version": 7,
+                "applies_to": "UNIT",
+                "starts_at": "work-complete",
+                "metadata": {
+                  "meta": "data"
+                },
+                "steps": {
+                  "work-complete": {
+                    "step_type": "success",
+                    "label": "work complete",
+                    "on_start": [],
+                    "on_complete": []
+                  },
+                  "stop-poking-me": {
+                    "step_type": "fail",
+                    "label": "stop poking me",
+                    "on_start": [],
+                    "on_complete": []
+                  }
+                },
+                "triggered_by": [
+                  "UNIT.created"
+                ]
+              }
+            }
+          ],
+          "input_filter": [
+            {
+              "label": "Serial Number Of part",
+              "key": "serial-number",
+              "filters": [],
+              "validators": [],
+              "value": null
+            }
+          ]
+        },
+        "current_status": {
+          "status": "Reticulating Splines",
+          "description": "For something that is Reticulating Splines",
+          "category": "IN_PROGRESS",
+          "order": 2
+        },
+        "_embedded": {
+          "nter:batch-queue": [],
+          "nter:batch-work-order": [],
+          "nter:batch-customer": [],
+          "nter:batch-program": [],
+          "nter:batch-project": [],
+          "nter:batch-location": []
+        },
+        "_links": {
+          "nter:batch-work-order": {
+            "href": "https://api.example.com/work-orders/work-order"
+          },
+          "nter:batch-queue": {
+            "href": "https://api.example.com/queues/queue"
+          },
+          "nter:batch-project": {
+            "href": "https://api.example.com/projects/project"
+          },
+          "nter:batch-program": {
+            "href": "https://api.example.com/programs/program"
+          },
+          "nter:batch-customer": {
+            "href": "https://api.example.com/customers/customer"
+          },
+          "nter:batch-location": {
+            "href": "https://api.example.com/locations/location"
+          },
+          "self": {
+            "href": "https://api.example.com/batches/batch"
+          }
+        }
       }
     }
   }

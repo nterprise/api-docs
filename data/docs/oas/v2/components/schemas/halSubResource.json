@@ -1,0 +1,35 @@
+{
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "./subResource.json"
+    },
+    {
+      "type": "object",
+      "required": [
+        "_links"
+      ],
+      "properties": {
+        "_links": {
+          "type": "object",
+          "required": [
+            "self",
+            "nter:sub-resource-location",
+            "nter:sub-resource-parent"
+          ],
+          "properties": {
+            "nter:sub-resource-location": {
+              "$ref": "./link.json"
+            },
+            "nter:sub-resource-parent": {
+              "$ref": "./link.json"
+            },
+            "self": {
+              "$ref": "./link.json"
+            }
+          }
+        }
+      }
+    }
+  ]
+}

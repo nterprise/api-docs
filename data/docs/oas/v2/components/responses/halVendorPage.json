@@ -4,7 +4,28 @@
     "application/hal+json": {
       "schema": {
         "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "_embedded",
+          "_links",
+          "total_count",
+          "limit",
+          "offset"
+        ],
         "properties": {
+          "total_count": {
+            "type": "number",
+            "readOnly": true
+          },
+          "limit": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 100
+          },
+          "offset": {
+            "type": "string",
+            "nullable": true
+          },
           "_embedded": {
             "type": "object",
             "properties": {
@@ -33,6 +54,38 @@
                 "$ref": "../schemas/link.json"
               }
             }
+          }
+        }
+      },
+      "example": {
+        "total_count": 21,
+        "limit": 42,
+        "offset": "next-offset",
+        "_embedded": {
+          "nter:vendors": [
+            {
+              "vendor_id": "vendor",
+              "label": "Manchuck Inc",
+
+"created": "2019-08-19T00:01:02.000Z",
+              "updated": "2020-08-19T01:01:02.000Z",
+              "_links": {
+                "nter:vendor-units": {
+                  "href": "https://api.example.com/vendors/vendor/units"
+                },
+                "self": {
+                  "href": "https://api.example.com/vendors/vendor"
+                }
+              }
+            }
+          ]
+        },
+        "_links": {
+          "next": {
+            "href": "https://api.example.com/vendors?limit=42&offset=next-offset"
+          },
+          "self": {
+            "href": "https://api.example.com/vendors?limit=42"
           }
         }
       }

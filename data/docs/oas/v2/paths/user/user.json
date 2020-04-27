@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchUserById",
-    "summary": "Fetches a user by Id",
-    "description": "Fetch User",
+    "summary": "Fetch User",
+    "description": "Fetches a user",
     "tags": [
       "User"
     ],

@@ -1,0 +1,9 @@
+{
+  "name": "sub_resource_id",
+  "in": "path",
+  "description": "Id for the sub resource",
+  "required": true,
+  "schema": {
+    "$ref": "https://docs.nterprise.com/schemas/niagara/subResource.json#/properties/resource_id"
+  }
+}

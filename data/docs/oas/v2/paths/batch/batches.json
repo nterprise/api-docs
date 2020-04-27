@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchAllBatches",
-    "summary": "Fetches A Page of batches",
-    "description": "Fetch Batches",
+    "summary": "Fetch Batches",
+    "description": "Fetches A Page of batches",
     "tags": [
       "Batch"
     ],
@@ -28,7 +28,7 @@
   },
   "post": {
     "operationId": "createBatch",
-    "summary": "Create a batch",
+    "summary": "Create batch",
     "description": "Creates a new batch for a queue",
     "tags": [
       "Batch"
@@ -38,6 +38,43 @@
     },
     "responses": {
       "200": {
+        "$ref": "../../components/responses/halBatch.json"
+      },
+      "400": {
+        "$ref": "../../components/responses/400badRequest.json"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      }
+    }
+  },
+  "patch": {
+    "operationId": "createMultipleBatches",
+    "summary": "Create multiple batches",
+    "description": "Create multiple batches",
+    "tags": [
+      "Batch"
+    ],
+    "parameters": [
+      {
+        "name": "Accept-Patch",
+        "in": "header",
+        "schema": {
+          "type": "string",
+          "enum": [
+            "application/vnd.nter.multi-batch+json"
+          ]
+        }
+      }
+    ],
+    "requestBody": {
+      "$ref": "../../components/requestBodies/multiBatch.json"
+    },
+    "responses": {
+      "204": {
         "$ref": "../../components/responses/halBatch.json"
       },
       "400": {

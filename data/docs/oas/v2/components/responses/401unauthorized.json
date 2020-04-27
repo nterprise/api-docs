@@ -3,6 +3,8 @@
   "content": {
     "application/problem+json": {
       "schema": {
+        "type": "object",
+        "additionalProperties": false,
         "properties": {
           "title": {
             "const": "Unauthorized"
@@ -14,9 +16,15 @@
             "const": 401
           },
           "detail": {
-            "const": "You are not authorized to access this resource"
+            "type": "string"
           }
         }
+      },
+      "example": {
+        "title": "Unauthorized",
+        "type": "https://docs.nterprise.com/api/problem/Unauthorized",
+        "status": 401,
+        "detail": "Invalid authorization token"
       }
     }
   }

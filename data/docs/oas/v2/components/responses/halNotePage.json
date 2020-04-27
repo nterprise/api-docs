@@ -4,7 +4,28 @@
     "application/hal+json": {
       "schema": {
         "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "_embedded",
+          "_links",
+          "total_count",
+          "limit",
+          "offset"
+        ],
         "properties": {
+          "total_count": {
+            "type": "number",
+            "readOnly": true
+          },
+          "limit": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 100
+          },
+          "offset": {
+            "type": "string",
+            "nullable": true
+          },
           "_embedded": {
             "type": "object",
             "properties": {
@@ -33,6 +54,47 @@
                 "$ref": "../schemas/link.json"
               }
             }
+          }
+        }
+      },
+      "example": {
+        "total_count": 21,
+        "limit": 42,
+        "offset": "next-offset",
+        "_embedded": {
+          "nter:notes": [
+            {
+              "note_id": "note",
+              "label": "A Note",
+              "created": "2019-10-09T19:30:35.639Z",
+              "updated": "2019-10-09T20:30:35.639Z",
+              "text": "Lorem ipsum dolor sit amet",
+              "created_by": {
+                "user_id": "3dddba3e-6122-46a8-ae26-8c7c95bd82d7",
+                "created": "2019-08-19T00:01:02.639Z",
+                "updated": "2019-08-19T00:01:02.639Z",
+                "name": "Chuck Reeves",
+                "email": "chuck.reeves@zones.com",
+                "profile": "https://bit.ly/18gECvy",
+                "picture": "https://bit.ly/18gECvy"
+              },
+              "_links": {
+                "nter:note-created-by": {
+                  "href": "https://api.example.com/users/3dddba3e-6122-46a8-ae26-8c7c95bd82d7"
+                },
+                "self": {
+                  "href": "https://api.example.com/notes/note"
+                }
+              }
+            }
+          ]
+        },
+        "_links": {
+          "next": {
+            "href": "https://api.example.com/notes?limit=42&offset=next-offset"
+          },
+          "self": {
+            "href": "https://api.example.com/notes?limit=42"
           }
         }
       }

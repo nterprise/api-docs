@@ -4,6 +4,33 @@
     "application/hal+json": {
       "schema": {
         "$ref": "../schemas/halLocation.json"
+      },
+      "example": {
+        "location_id": "location",
+        "label": "Test Label",
+
+"created": "2019-08-19T00:01:02.000Z",
+        "updated": "2020-08-19T01:01:02.000Z",
+        "location_type": "warehouse",
+        "formatted_address": "Test Label\n431 Broadway Suite c\nMenands NY 12204 USA",
+        "address": {
+          "country": "USA",
+          "administrative_area": "NY",
+          "sub_administrative_area": "Albany",
+          "locality": "Menands",
+          "postal_code": "12204",
+          "thoroughfare": "431 Broadway",
+          "premise": "Suite c",
+          "sub_premise": "ZIC"
+        },
+        "_links": {
+          "nter:location-resources": {
+            "href": "https://api.example.com/locations/location/resources"
+          },
+          "self": {
+            "href": "https://api.example.com/locations/location"
+          }
+        }
       }
     }
   }

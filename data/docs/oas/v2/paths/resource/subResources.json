@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchAllChildResources",
-    "summary": "Fetches A Page of child resources",
-    "description": "Fetch child resources",
+    "summary": "Fetch sub resources",
+    "description": "Fetches A Page of sub resources",
     "tags": [
       "Resource"
     ],
@@ -19,7 +19,7 @@
     ],
     "responses": {
       "200": {
-        "$ref": "../../components/responses/halResourcePage.json"
+        "$ref": "../../components/responses/halSubResourcePage.json"
       },
       "401": {
         "$ref": "../../components/responses/401unauthorized.json"

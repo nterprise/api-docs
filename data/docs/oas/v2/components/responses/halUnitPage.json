@@ -4,7 +4,28 @@
     "application/hal+json": {
       "schema": {
         "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "_embedded",
+          "_links",
+          "total_count",
+          "limit",
+          "offset"
+        ],
         "properties": {
+          "total_count": {
+            "type": "number",
+            "readOnly": true
+          },
+          "limit": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 100
+          },
+          "offset": {
+            "type": "string",
+            "nullable": true
+          },
           "_embedded": {
             "type": "object",
             "properties": {
@@ -33,6 +54,268 @@
                 "$ref": "../schemas/link.json"
               }
             }
+          }
+        }
+      },
+      "example": {
+        "total_count": 21,
+        "limit": 42,
+        "offset": "next-offset",
+        "_embedded": {
+          "nter:units": [
+            {
+              "unit_id": "unit",
+              "label": "My widget",
+              "created": "2019-08-19T00:01:02.000Z",
+              "updated": "2020-08-19T01:01:02.000Z",
+              "serial_number": "DEF123456",
+              "raw_serial_number": "ABCDEF123456",
+              "current_status": {
+                "status": "Reticulating Splines",
+                "description": "For something that is Reticulating Splines",
+                "category": "IN_PROGRESS",
+                "order": 2
+              },
+              "tenant_part_number": "UNIT-number",
+              "part": {
+                "part_id": "part",
+                "label": "Widget",
+                "created": "2019-08-19T00:01:02.000Z",
+                "updated": "2020-08-19T01:01:02.000Z",
+                "serial_prefix": "ABC",
+                "total_units": 5,
+                "total_units_allocated": 2,
+                "total_units_unallocated": 3,
+                "customer": {
+                  "customer_id": "customer",
+                  "label": "manchuck",
+                  "created": "2020-01-09T22:12:03.000Z",
+                  "updated": "2020-01-09T22:12:03.000Z",
+                  "external_platform": {},
+                  "total_programs": 21,
+                  "total_projects": 42,
+                  "allowed_statuses": [
+                    {
+                      "category": "PENDING",
+                      "description": "For something that is Pending",
+                      "status": "Pending",
+                      "order": 3
+                    },
+                    {
+                      "category": "IN_PROGRESS",
+                      "description": "For something that is In Progress",
+                      "status": "In Progress",
+                      "order": 4
+                    },
+                    {
+                      "category": "VERIFYING",
+                      "description": "For something that is Verifying",
+                      "status": "Verifying",
+                      "order": 5
+                    },
+                    {
+                      "category": "BLOCKED",
+                      "description": "For something that is Blocked",
+                      "status": "Blocked",
+                      "order": 6
+                    },
+                    {
+                      "category": "COMPLETE",
+                      "description": "For something that is Complete",
+                      "status": "Complete",
+                      "order": 7
+                    },
+                    {
+                      "category": "CANCELLED",
+                      "description": "For something that is Cancelled",
+                      "status": "Cancelled",
+                      "order": 8
+                    }
+                  ]
+                },
+                "manufacturer": {
+                  "manufacturer_id": "manufacturer",
+                  "label": "Manchuck Inc",
+                  "created": "2019-08-19T00:01:02.000Z",
+                  "updated": "2020-08-19T01:01:02.000Z",
+                  "part_number": "1-888-482-858-832"
+                },
+                "input_filter": [
+                  {
+                    "label": "Serial Number Of part",
+                    "key": "serial-number",
+                    "filters": [],
+                    "validators": [],
+                    "value": null
+                  }
+                ]
+              },
+              "vendor": {
+                "vendor_id": "vendor",
+                "label": "Manchuck Inc",
+                "created": "2019-08-19T00:01:02.000Z",
+                "updated": "2020-08-19T01:01:02.000Z",
+                "part_number": "VEN-number"
+              },
+              "customer": {
+                "customer_id": "customer",
+                "label": "manchuck",
+                "created": "2020-01-09T22:12:03.000Z",
+                "updated": "2020-01-09T22:12:03.000Z",
+                "external_platform": {},
+                "total_programs": 21,
+                "total_projects": 42,
+                "allowed_statuses": [
+                  {
+                    "category": "PENDING",
+                    "description": "For something that is Pending",
+                    "status": "Pending",
+                    "order": 3
+                  },
+                  {
+                    "category": "IN_PROGRESS",
+                    "description": "For something that is In Progress",
+                    "status": "In Progress",
+                    "order": 4
+                  },
+                  {
+                    "category": "VERIFYING",
+                    "description": "For something that is Verifying",
+                    "status": "Verifying",
+                    "order": 5
+                  },
+                  {
+                    "category": "BLOCKED",
+                    "description": "For something that is Blocked",
+                    "status": "Blocked",
+                    "order": 6
+                  },
+                  {
+                    "category": "COMPLETE",
+                    "description": "For something that is Complete",
+                    "status": "Complete",
+                    "order": 7
+                  },
+                  {
+                    "category": "CANCELLED",
+                    "description": "For something that is Cancelled",
+                    "status": "Cancelled",
+                    "order": 8
+                  }
+                ]
+              },
+              "manufacturer": {
+                "manufacturer_id": "manufacturer",
+                "label": "Manchuck Inc",
+                "created": "2019-08-19T00:01:02.000Z",
+                "updated": "2020-08-19T01:01:02.000Z",
+                "part_number": "1-888-482-858-832"
+              },
+              "location": {
+                "location_id": "location",
+                "label": "Test Label",
+                "created": "2019-08-19T00:01:02.000Z",
+                "updated": "2020-08-19T01:01:02.000Z",
+                "location_type": "warehouse",
+                "formatted_address": "Test Label\n431 Broadway Suite c\nMenands NY 12204 USA",
+                "address": {
+                  "country": "USA",
+                  "administrative_area": "NY",
+                  "sub_administrative_area": "Albany",
+                  "locality": "Menands",
+                  "postal_code": "12204",
+                  "thoroughfare": "431 Broadway",
+                  "premise": "Suite c",
+                  "sub_premise": "ZIC"
+                }
+              },
+              "current_location": {
+                "location_id": "location",
+                "label": "Test Label",
+                "created": "2019-08-19T00:01:02.000Z",
+                "updated": "2020-08-19T01:01:02.000Z",
+                "location_type": "warehouse",
+                "formatted_address": "Test Label\n431 Broadway Suite c\nMenands NY 12204 USA",
+                "address": {
+                  "country": "USA",
+                  "administrative_area": "NY",
+                  "sub_administrative_area": "Albany",
+                  "locality": "Menands",
+                  "postal_code": "12204",
+                  "thoroughfare": "431 Broadway",
+                  "premise": "Suite c",
+                  "sub_premise": "ZIC"
+                }
+              },
+              "resource": {
+                "resource_id": "parent-resource",
+                "label": "parent resource",
+                "created": "2020-01-09T22:12:03.000Z",
+                "updated": "2020-01-09T22:12:03.000Z",
+                "location": {
+                  "location_id": "location",
+                  "label": "Test Label",
+                  "created": "2019-08-19T00:01:02.000Z",
+                  "updated": "2020-08-19T01:01:02.000Z",
+                  "location_type": "warehouse",
+                  "formatted_address": "Test Label\n431 Broadway Suite c\nMenands NY 12204 USA",
+                  "address": {
+                    "country": "USA",
+                    "administrative_area": "NY",
+                    "sub_administrative_area": "Albany",
+                    "locality": "Menands",
+                    "postal_code": "12204",
+                    "thoroughfare": "431 Broadway",
+                    "premise": "Suite c",
+                    "sub_premise": "ZIC"
+                  }
+                },
+                "resource_type": "station",
+                "meta": {
+                  "power": "50w"
+                }
+              },
+              "input_filter": [
+                {
+                  "label": "Serial Number Of part",
+                  "key": "serial-number",
+                  "filters": [],
+                  "validators": [],
+                  "value": null
+                }
+              ],
+              "_links": {
+                "nter:unit-manufacturer": {
+                  "href": "https://api.example.com/manufacturers/manufacturer"
+                },
+                "nter:unit-customer": {
+                  "href": "https://api.example.com/customers/customer"
+                },
+                "nter:unit-part": {
+                  "href": "https://api.example.com/parts/part"
+                },
+                "nter:unit-vendor": {
+                  "href": "https://api.example.com/vendors/vendor"
+                },
+                "nter:unit-last-known-location": {
+                  "href": "https://api.example.com/locations/location"
+                },
+                "nter:unit-resource": {
+                  "href": "https://api.example.com/resources/parent-resource"
+                },
+                "self": {
+                  "href": "https://api.example.com/units/unit"
+                }
+              }
+            }
+          ]
+        },
+        "_links": {
+          "next": {
+            "href": "https://api.example.com/units?limit=42&offset=next-offset"
+          },
+          "self": {
+            "href": "https://api.example.com/units?limit=42"
           }
         }
       }

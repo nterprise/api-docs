@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchAllVendor",
-    "summary": "Fetches A Page of vendor",
-    "description": "Fetch Part",
+    "summary": "Fetch vendors",
+    "description": "Fetches A Page of vendor",
     "tags": [
       "Vendor"
     ],
@@ -28,8 +28,8 @@
   },
   "post": {
     "operationId": "createVendor",
-    "summary": "Creates a vendor",
-    "description": "Creates a new vendor",
+    "summary": "Create vendor",
+    "description": "Creates a vendor",
     "tags": [
       "Vendor"
     ],

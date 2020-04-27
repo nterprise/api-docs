@@ -3,7 +3,196 @@
   "content": {
     "application/hal+json": {
       "schema": {
-        "$ref": "../schemas/halProject.json"
+        "allOf": [
+          {
+            "$ref": "../schemas/halProject.json"
+          },
+          {
+            "type": "object",
+            "required": [
+              "_embedded"
+            ],
+            "properties": {
+              "_embedded": {
+                "type": "object",
+                "required": [
+                  "nter:project-customer",
+                  "nter:project-program"
+                ],
+                "properties": {
+                  "nter:project-customer": {
+                    "type": "array",
+                    "maxItems": 1,
+                    "items": {
+                      "$ref": "../schemas/halCustomer.json"
+                    }
+                  },
+                  "nter:project-program": {
+                    "type": "array",
+                    "maxItems": 1,
+                    "items": {
+                      "$ref": "../schemas/halProgram.json"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "example": {
+        "project_id": "project",
+        "label": "New York Stores",
+        "description": "Project description",
+        "created": "2020-01-09T22:12:03.000Z",
+        "updated": "2020-01-09T22:12:03.000Z",
+        "customer": {
+          "customer_id": "customer",
+          "label": "manchuck",
+          "created": "2020-01-09T22:12:03.000Z",
+          "updated": "2020-01-09T22:12:03.000Z",
+          "external_platform": {},
+          "total_programs": 21,
+          "total_projects": 42,
+          "allowed_statuses": [
+            {
+              "category": "PENDING",
+              "description": "For something that is Pending",
+              "status": "Pending",
+              "order": 3
+            },
+            {
+              "category": "IN_PROGRESS",
+              "description": "For something that is In Progress",
+              "status": "In Progress",
+              "order": 4
+            },
+            {
+              "category": "VERIFYING",
+              "description": "For something that is Verifying",
+              "status": "Verifying",
+              "order": 5
+            },
+            {
+              "category": "BLOCKED",
+              "description": "For something that is Blocked",
+              "status": "Blocked",
+              "order": 6
+            },
+            {
+              "category": "COMPLETE",
+              "description": "For something that is Complete",
+              "status": "Complete",
+              "order": 7
+            },
+            {
+              "category": "CANCELLED",
+              "description": "For something that is Cancelled",
+              "status": "Cancelled",
+              "order": 8
+            }
+          ]
+        },
+        "program": {
+          "program_id": "program",
+          "label": "North east stores",
+          "created": "2020-01-09T22:12:03.000Z",
+          "updated": "2020-01-09T22:12:03.000Z",
+          "customer": {
+            "customer_id": "customer",
+            "label": "manchuck",
+            "created": "2020-01-09T22:12:03.000Z",
+            "updated": "2020-01-09T22:12:03.000Z",
+            "external_platform": {},
+            "total_programs": 21,
+            "total_projects": 42,
+            "allowed_statuses": [
+              {
+                "category": "PENDING",
+                "description": "For something that is Pending",
+                "status": "Pending",
+                "order": 3
+              },
+              {
+                "category": "IN_PROGRESS",
+                "description": "For something that is In Progress",
+                "status": "In Progress",
+                "order": 4
+              },
+              {
+                "category": "VERIFYING",
+                "description": "For something that is Verifying",
+                "status": "Verifying",
+                "order": 5
+              },
+              {
+                "category": "BLOCKED",
+                "description": "For something that is Blocked",
+                "status": "Blocked",
+                "order": 6
+              },
+              {
+                "category": "COMPLETE",
+                "description": "For something that is Complete",
+                "status": "Complete",
+                "order": 7
+              },
+              {
+                "category": "CANCELLED",
+                "description": "For something that is Cancelled",
+                "status": "Cancelled",
+                "order": 8
+              }
+            ]
+          },
+          "end_date": "2020-02-10T22:12:03.000Z",
+          "start_date": "2020-02-10T22:12:03.000Z",
+          "allowed_statuses": [
+            {
+              "category": "PENDING",
+              "description": "For something that is Pending",
+              "status": "Pending",
+              "order": 3
+            },
+            {
+              "category": "VERIFYING",
+              "description": "For something that is Verifying",
+              "status": "Verifying",
+              "order": 5
+            }
+          ]
+        },
+        "end_date": "2020-02-10T22:12:03.000Z",
+        "start_date": "2020-02-10T22:12:03.000Z",
+        "allowed_statuses": [
+          {
+            "category": "PENDING",
+            "description": "For something that is Pending",
+            "status": "Pending",
+            "order": 3
+          }
+        ],
+        "_embedded": {
+          "nter:project-customer": [],
+          "nter:project-program": []
+        },
+        "_links": {
+          "nter:project-work-orders": {
+            "href": "https://api.example.com/projects/project/work-orders"
+          },
+          "nter:project-program": {
+            "href": "https://api.example.com/programs/program"
+          },
+          "nter:project-customer": {
+            "href": "https://api.example.com/customers/customer"
+          },
+          "nter:project-units": {
+            "href": "https://api.example.com/projects/project/units"
+          },
+          "self": {
+            "href": "https://api.example.com/projects/project"
+          }
+        }
       }
     }
   }

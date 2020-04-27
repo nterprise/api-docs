@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchAllLocations",
-    "summary": "Fetches A Page of locations",
-    "description": "Fetch Location",
+    "summary": "Fetch Location",
+    "description": "Fetches A Page of locations",
     "tags": [
       "Location"
     ],
@@ -28,8 +28,8 @@
   },
   "post": {
     "operationId": "createLocation",
-    "summary": "Creates a location",
-    "description": "Creates a new location",
+    "summary": "Create location",
+    "description": "Creates a location",
     "tags": [
       "Location"
     ],

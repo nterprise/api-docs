@@ -1,0 +1,116 @@
+{
+  "description": "A sub resource response",
+  "content": {
+    "application/hal+json": {
+      "schema": {
+        "allOf": [
+          {
+            "$ref": "../schemas/halSubResource.json"
+          },
+          {
+            "type": "object",
+            "required": [
+              "_embedded"
+            ],
+            "properties": {
+              "_embedded": {
+                "type": "object",
+                "required": [
+                  "nter:sub-resource-parent",
+                  "nter:sub-resource-location"
+                ],
+                "properties": {
+                  "nter:sub-resource-parent": {
+                    "type": "array",
+                    "maxItems": 1,
+                    "items": {
+                      "$ref": "../schemas/halResource.json"
+                    }
+                  },
+                  "nter:sub-resource-location": {
+                    "type": "array",
+                    "maxItems": 1,
+                    "items": {
+                      "$ref": "../schemas/halLocation.json"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "example": {
+        "sub_resource_id": "sub-resource",
+        "label": "sub resource",
+        "created": "2020-01-13T22:12:13.000Z",
+        "updated": "2020-01-13T22:12:13.000Z",
+        "location": {
+          "location_id": "location",
+          "label": "Test Label",
+          "created": "2019-08-19T00:01:02.000Z",
+          "updated": "2020-08-19T01:01:02.000Z",
+          "location_type": "warehouse",
+          "formatted_address": "Test Label\n431 Broadway Suite c\nMenands NY 12204 USA",
+          "address": {
+            "country": "USA",
+            "administrative_area": "NY",
+            "sub_administrative_area": "Albany",
+            "locality": "Menands",
+            "postal_code": "12204",
+            "thoroughfare": "431 Broadway",
+            "premise": "Suite c",
+            "sub_premise": "ZIC"
+          }
+        },
+        "resource": {
+          "resource_id": "parent-resource",
+          "label": "parent resource",
+          "created": "2020-01-09T22:12:03.000Z",
+          "updated": "2020-01-09T22:12:03.000Z",
+          "location": {
+            "location_id": "location",
+            "label": "Test Label",
+            "created": "2019-08-19T00:01:02.000Z",
+            "updated": "2020-08-19T01:01:02.000Z",
+            "location_type": "warehouse",
+            "formatted_address": "Test Label\n431 Broadway Suite c\nMenands NY 12204 USA",
+            "address": {
+              "country": "USA",
+              "administrative_area": "NY",
+              "sub_administrative_area": "Albany",
+              "locality": "Menands",
+              "postal_code": "12204",
+              "thoroughfare": "431 Broadway",
+              "premise": "Suite c",
+              "sub_premise": "ZIC"
+            }
+          },
+          "resource_type": "station",
+          "meta": {
+            "power": "50w"
+          }
+        },
+        "resource_type": "slot",
+        "meta": {
+          "power": "5w"
+        },
+        "_embedded": {
+          "nter:sub-resource-parent": [],
+          "nter:sub-resource-location": []
+        },
+        "_links": {
+          "nter:sub-resource-parent": {
+            "href": "https://api.example.com/resources/parent-resource"
+          },
+          "nter:sub-resource-location": {
+            "href": "https://api.example.com/locations/location"
+          },
+          "self": {
+            "href": "https://api.example.com/sub-resources/sub-resource"
+          }
+        }
+      }
+    }
+  }
+}

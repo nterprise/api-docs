@@ -9,6 +9,20 @@
             "$ref": "../schemas/halDashboard.json"
           }
         ]
+      },
+      "example": {
+        "dashboards": [
+          {
+            "type": "quickSight",
+            "embed_url": "https://api.dev.nterprise.com/dashboard/_embed",
+            "expires_in": 60
+          }
+        ],
+        "_links": {
+          "self": {
+            "href": "https://api.dev.nterprise.com/dashboard"
+          }
+        }
       }
     }
   }

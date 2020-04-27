@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchPartById",
-    "summary": "Fetches a part  by Id",
-    "description": "Fetch Part ",
+    "summary": "Fetch Part",
+    "description": "Fetches a part ",
     "tags": [
       "Part"
     ],
@@ -28,7 +28,7 @@
   },
   "put": {
     "operationId": "updatePart",
-    "summary": "Updates a part ",
+    "summary": "Update part ",
     "description": "Updates a part ",
     "tags": [
       "Part"
@@ -61,8 +61,8 @@
   },
   "delete": {
     "operationId": "deletePart",
-    "summary": "Deletes a part ",
-    "description": "This will remove the part  from the system",
+    "summary": "Delete part ",
+    "description": "Deletes a part ",
     "tags": [
       "Part"
     ],
@@ -73,7 +73,7 @@
     ],
     "responses": {
       "205": {
-        "description": "Part  deleted"
+        "description": "Part deleted"
       },
       "401": {
         "$ref": "../../components/responses/401unauthorized.json"

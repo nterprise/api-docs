@@ -3,6 +3,8 @@
   "content": {
     "application/problem+json": {
       "schema": {
+        "type": "object",
+        "additionalProperties": false,
         "properties": {
           "title": {
             "const": "Forbidden"
@@ -14,9 +16,15 @@
             "const": 403
           },
           "detail": {
-            "const": "You are forbidden to access this resource"
+            "type": "string"
           }
         }
+      },
+      "example": {
+        "title": "Forbidden",
+        "type": "https://docs.nterprise.com/api/problem/Forbidden",
+        "status": 403,
+        "detail": "You are forbidden from accessing this resource"
       }
     }
   }

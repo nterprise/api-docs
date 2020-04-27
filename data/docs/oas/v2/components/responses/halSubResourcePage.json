@@ -1,0 +1,149 @@
+{
+  "description": "A paged response for resources",
+  "content": {
+    "application/hal+json": {
+      "schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "_embedded",
+          "_links",
+          "total_count",
+          "limit",
+          "offset"
+        ],
+        "properties": {
+          "total_count": {
+            "type": "number",
+            "readOnly": true
+          },
+          "limit": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 100
+          },
+          "offset": {
+            "type": "string",
+            "nullable": true
+          },
+          "_embedded": {
+            "type": "object",
+            "properties": {
+              "nter:resources": {
+                "type": "array",
+                "maxItems": 100,
+                "items": {
+                  "$ref": "../schemas/halResource.json"
+                }
+              }
+            }
+          },
+          "_links": {
+            "type": "object",
+            "properties": {
+              "self": {
+                "x-example": {
+                  "href": "https://api.nterprise.com/resources"
+                },
+                "$ref": "../schemas/link.json"
+              },
+              "next": {
+                "x-example": {
+                  "href": "https://api.nterprise.com/resources?offset=QVBrO2wm13iEyl&limit=100"
+                },
+                "$ref": "../schemas/link.json"
+              }
+            }
+          }
+        }
+      },
+      "example": {
+        "total_count": 21,
+        "limit": 42,
+        "offset": "next-offset",
+        "_embedded": {
+          "nter:sub-resources": [
+            {
+              "sub_resource_id": "sub-resource",
+              "label": "sub resource",
+              "created": "2020-01-13T22:12:13.000Z",
+              "updated": "2020-01-13T22:12:13.000Z",
+              "location": {
+                "location_id": "location",
+                "label": "Test Label",
+
+"created": "2019-08-19T00:01:02.000Z",
+                "updated": "2020-08-19T01:01:02.000Z",
+                "location_type": "warehouse",
+                "formatted_address": "Test Label\n431 Broadway Suite c\nMenands NY 12204 USA",
+                "address": {
+                  "country": "USA",
+                  "administrative_area": "NY",
+                  "sub_administrative_area": "Albany",
+                  "locality": "Menands",
+                  "postal_code": "12204",
+                  "thoroughfare": "431 Broadway",
+                  "premise": "Suite c",
+                  "sub_premise": "ZIC"
+                }
+              },
+              "resource": {
+                "resource_id": "parent-resource",
+                "label": "parent resource",
+
+"created": "2020-01-09T22:12:03.000Z",
+                "updated": "2020-01-09T22:12:03.000Z",
+                "location": {
+                  "location_id": "location",
+                  "label": "Test Label",
+
+"created": "2019-08-19T00:01:02.000Z",
+                  "updated": "2020-08-19T01:01:02.000Z",
+                  "location_type": "warehouse",
+                  "formatted_address": "Test Label\n431 Broadway Suite c\nMenands NY 12204 USA",
+                  "address": {
+                    "country": "USA",
+                    "administrative_area": "NY",
+                    "sub_administrative_area": "Albany",
+                    "locality": "Menands",
+                    "postal_code": "12204",
+                    "thoroughfare": "431 Broadway",
+                    "premise": "Suite c",
+                    "sub_premise": "ZIC"
+                  }
+                },
+                "resource_type": "station",
+                "meta": {
+                  "power": "50w"
+                }
+              },
+              "resource_type": "slot",
+              "meta": {
+                "power": "5w"
+              },
+              "_links": {
+                "nter:resources": {
+                  "href": "https://api.example.com/resources/parent-resource"
+                },
+                "nter:resource-location": {
+                  "href": "https://api.example.com/locations/location"
+                },
+                "self": {
+                  "href": "https://api.example.com/sub-resources/sub-resource"
+                }
+              }
+            }
+          ]
+        },
+        "_links": {
+          "next": {
+            "href": "https://api.example.com/sub-resources?limit=42&offset=next-offset"
+          },
+          "self": {
+            "href": "https://api.example.com/sub-resources?limit=42"
+          }
+        }
+      }
+    }
+  }
+}

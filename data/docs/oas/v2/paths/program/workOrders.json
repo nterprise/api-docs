@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchAllProgramWorkOrders",
-    "summary": "Fetches work orders for a program",
-    "description": "Fetch program work orders",
+    "summary": "Fetch program work-orders",
+    "description": "Fetches work-orders for a program",
     "tags": [
       "Program"
     ],

@@ -29,17 +29,6 @@
           },
           "meta": {
             "$ref": "https://docs.nterprise.com/schemas/niagara/resource.json#/properties/meta"
-          },
-          "resource": {
-            "type": "object",
-            "required": [
-              "resource_id"
-            ],
-            "properties": {
-              "resource_id": {
-                "$ref": "https://docs.nterprise.com/schemas/niagara/resource.json#/properties/resource_id"
-              }
-            }
           }
         }
       }

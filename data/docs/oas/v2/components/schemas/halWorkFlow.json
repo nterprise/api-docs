@@ -1,46 +1,27 @@
 {
   "type": "object",
-  "properties": {
-    "_links": {
+  "allOf": [
+    {
+      "$ref": "./workFlow.json"
+    },
+    {
       "type": "object",
+      "required": [
+        "_links"
+      ],
       "properties": {
-        "self": {
-          "$ref": "./link.json",
-          "x-example": {
-            "href": "https://api.nterprise.com/work_flows/kk9z7zwvQYH5GKx"
+        "_links": {
+          "type": "object",
+          "required": [
+            "self"
+          ],
+          "properties": {
+            "self": {
+              "$ref": "./link.json"
+            }
           }
         }
       }
-    },
-    "work_flow_id": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow.json#/properties/work_flow_id"
-    },
-    "label": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow.json#/properties/label"
-    },
-    "slug": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow.json#/properties/slug"
-    },
-    "created": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow.json#/properties/created"
-    },
-    "updated": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow.json#/properties/updated"
-    },
-    "schema_version": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow.json#/properties/schema_version"
-    },
-    "workflow_version": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow.json#/properties/workflow_version"
-    },
-    "applies_to": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow.json#/properties/applies_to"
-    },
-    "starts_at": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow.json#/properties/starts_at"
-    },
-    "steps": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow.json#/properties/steps"
     }
-  }
+  ]
 }

@@ -1,52 +1,47 @@
 {
   "type": "object",
-  "properties": {
-    "_links": {
+  "allOf": [
+    {
+      "$ref": "./customer.json"
+    },
+    {
       "type": "object",
+      "required": [
+        "_links"
+      ],
       "properties": {
-        "self": {
-          "$ref": "./link.json"
-        },
-        "nter:customer-programs": {
-          "$ref": "./link.json"
-        },
-        "nter:customer-projects": {
-          "$ref": "./link.json"
-        },
-        "nter:customer-units": {
-          "$ref": "./link.json"
-        },
-        "nter:customer-work-orders": {
-          "$ref": "./link.json"
+        "_links": {
+          "type": "object",
+          "required": [
+            "self",
+            "nter:customer-programs",
+            "nter:customer-projects",
+            "nter:customer-parts",
+            "nter:customer-units",
+            "nter:customer-work-orders"
+          ],
+          "properties": {
+            "self": {
+              "$ref": "./link.json"
+            },
+            "nter:customer-programs": {
+              "$ref": "./link.json"
+            },
+            "nter:customer-projects": {
+              "$ref": "./link.json"
+            },
+            "nter:customer-parts": {
+              "$ref": "./link.json"
+            },
+            "nter:customer-units": {
+              "$ref": "./link.json"
+            },
+            "nter:customer-work-orders": {
+              "$ref": "./link.json"
+            }
+          }
         }
       }
-    },
-    "customer_id": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/customer.json#/properties/customer_id"
-    },
-    "label": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/customer.json#/properties/label"
-    },
-    "slug": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/customer.json#/properties/slug"
-    },
-    "created": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/customer.json#/properties/created"
-    },
-    "updated": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/customer.json#/properties/updated"
-    },
-    "external_platform": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/customer.json#/properties/external_platform"
-    },
-    "allowed_statuses": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/customer.json#/properties/allowed_statuses"
-    },
-    "total_programs": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/customer.json#/properties/total_programs"
-    },
-    "total_projects": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/customer.json#/properties/total_projects"
     }
-  }
+  ]
 }

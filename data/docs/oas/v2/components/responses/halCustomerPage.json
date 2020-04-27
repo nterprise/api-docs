@@ -4,9 +4,33 @@
     "application/hal+json": {
       "schema": {
         "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "_embedded",
+          "_links",
+          "total_count",
+          "limit",
+          "offset"
+        ],
         "properties": {
+          "total_count": {
+            "type": "number",
+            "readOnly": true
+          },
+          "limit": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 100
+          },
+          "offset": {
+            "type": "string",
+            "nullable": true
+          },
           "_embedded": {
             "type": "object",
+            "required": [
+              "nter:customers"
+            ],
             "properties": {
               "nter:customers": {
                 "type": "array",
@@ -19,20 +43,98 @@
           },
           "_links": {
             "type": "object",
+            "required": [
+              "self"
+            ],
             "properties": {
               "self": {
-                "x-example": {
-                  "href": "https://api.nterprise.com/customers"
-                },
                 "$ref": "../schemas/link.json"
               },
               "next": {
-                "x-example": {
-                  "href": "https://api.nterprise.com/customers?offset=QVBrO2wm13iEyl&limit=100"
-                },
                 "$ref": "../schemas/link.json"
               }
             }
+          }
+        }
+      },
+      "example": {
+        "total_count": 21,
+        "limit": 42,
+        "offset": "next-offset",
+        "_embedded": {
+          "nter:customers": [
+            {
+              "customer_id": "customer",
+              "label": "manchuck",
+              "created": "2020-01-09T22:12:03.000Z",
+              "updated": "2020-01-09T22:12:03.000Z",
+              "external_platform": {},
+              "total_programs": 21,
+              "total_projects": 42,
+              "allowed_statuses": [
+                {
+                  "category": "PENDING",
+                  "description": "For something that is Pending",
+                  "status": "Pending",
+                  "order": 3
+                },
+                {
+                  "category": "IN_PROGRESS",
+                  "description": "For something that is In Progress",
+                  "status": "In Progress",
+                  "order": 4
+                },
+                {
+                  "category": "VERIFYING",
+                  "description": "For something that is Verifying",
+                  "status": "Verifying",
+                  "order": 5
+                },
+                {
+                  "category": "BLOCKED",
+                  "description": "For something that is Blocked",
+                  "status": "Blocked",
+                  "order": 6
+                },
+                {
+                  "category": "COMPLETE",
+                  "description": "For something that is Complete",
+                  "status": "Complete",
+                  "order": 7
+                },
+                {
+                  "category": "CANCELLED",
+                  "description": "For something that is Cancelled",
+                  "status": "Cancelled",
+                  "order": 8
+                }
+              ],
+              "_links": {
+                "nter:customer-parts": {
+                  "href": "https://api.example.com/customers/customer/parts"
+                },
+                "nter:customer-units": {
+                  "href": "https://api.example.com/customers/customer/units"
+                },
+                "nter:customer-programs": {
+                  "href": "https://api.example.com/customers/customer/programs"
+                },
+                "nter:customer-projects": {
+                  "href": "https://api.example.com/customers/customer/projects"
+                },
+                "self": {
+                  "href": "https://api.example.com/customers/customer"
+                }
+              }
+            }
+          ]
+        },
+        "_links": {
+          "next": {
+            "href": "https://api.example.com/customers?limit=42&offset=next-offset"
+          },
+          "self": {
+            "href": "https://api.example.com/customers?limit=42"
           }
         }
       }

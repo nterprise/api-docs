@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchAllResources",
-    "summary": "Fetches A Page of resources for the location",
-    "description": "Fetch location resources",
+    "summary": "Fetch location resources",
+    "description": "Fetches A Page of resources for the location",
     "tags": [
       "Location"
     ],
@@ -19,7 +19,7 @@
     ],
     "responses": {
       "200": {
-        "$ref": "../../components/responses/halResourcePage.json"
+        "$ref": "../../components/responses/halSubResourcePage.json"
       },
       "401": {
         "$ref": "../../components/responses/401unauthorized.json"

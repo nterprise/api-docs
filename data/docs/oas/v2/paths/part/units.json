@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchAllUnits",
-    "summary": "Fetches A Page of units",
-    "description": "Fetch Unit",
+    "summary": "Fetch units for part",
+    "description": "Fetches A Page of units using a part",
     "tags": [
       "Unit"
     ],

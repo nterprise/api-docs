@@ -4,9 +4,33 @@
     "application/hal+json": {
       "schema": {
         "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "_embedded",
+          "_links",
+          "total_count",
+          "limit",
+          "offset"
+        ],
         "properties": {
+          "total_count": {
+            "type": "number",
+            "readOnly": true
+          },
+          "limit": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 100
+          },
+          "offset": {
+            "type": "string",
+            "nullable": true
+          },
           "_embedded": {
             "type": "object",
+            "required": [
+              "nter:contacts"
+            ],
             "properties": {
               "nter:contacts": {
                 "type": "array",
@@ -19,20 +43,45 @@
           },
           "_links": {
             "type": "object",
+            "required": [
+              "self"
+            ],
             "properties": {
               "self": {
-                "x-example": {
-                  "href": "https://api.nterprise.com/contacts"
-                },
                 "$ref": "../schemas/link.json"
               },
               "next": {
-                "x-example": {
-                  "href": "https://api.nterprise.com/contacts?offset=QVBrO2wm13iEyl&limit=100"
-                },
                 "$ref": "../schemas/link.json"
               }
             }
+          }
+        }
+      },
+      "example": {
+        "total_count": 21,
+        "limit": 42,
+        "offset": "next-offset",
+        "_embedded": {
+          "nter:contacts": [
+            {
+              "contact_id": "contact",
+              "label": "Major",
+              "created": "2019-08-19T00:01:02.000Z",
+              "updated": "2020-08-19T01:01:02.000Z",
+              "name": "Major Samantha Carter",
+              "email": "s.carter@sg1.com",
+              "phone": "518-867-5309",
+              "_links": {
+                "self": {
+                  "href": "https://api.example.com/contacts/contact"
+                }
+              }
+            }
+          ]
+        },
+        "_links": {
+          "self": {
+            "href": "https://api.example.com/contacts?limit=42"
           }
         }
       }

@@ -1,31 +1,31 @@
 {
   "type": "object",
-  "properties": {
-    "_links": {
+  "allOf": [
+    {
+      "$ref": "./vendor.json"
+    },
+    {
       "type": "object",
+      "required": [
+        "_links"
+      ],
       "properties": {
-        "self": {
-          "$ref": "./link.json",
-          "x-example": {
-            "href": "https://api.nterprise.com/vendors/kk9z7zwvQYH5GKx"
+        "_links": {
+          "type": "object",
+          "required": [
+            "self",
+            "nter:vendor-units"
+          ],
+          "properties": {
+            "nter:vendor-units": {
+              "$ref": "./link.json"
+            },
+            "self": {
+              "$ref": "./link.json"
+            }
           }
         }
       }
-    },
-    "vendor_id": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/vendor.json#/properties/vendor_id"
-    },
-    "label": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/vendor.json#/properties/label"
-    },
-    "slug": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/vendor.json#/properties/slug"
-    },
-    "created": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/vendor.json#/properties/created"
-    },
-    "updated": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/vendor.json#/properties/updated"
     }
-  }
+  ]
 }

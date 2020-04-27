@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchAllNotesForUnit",
-    "summary": "Fetches the notes for a unit",
-    "description": "Fetch unit notes",
+    "summary": "Fetch unit notes",
+    "description": "Fetches the notes for a unit",
     "tags": [
       "Unit"
     ],
@@ -28,8 +28,8 @@
   },
   "post": {
     "operationId": "createNoteForUnit",
-    "summary": "Creates a note for a unit",
-    "description": "Creates a note for a unit",
+    "summary": "Create note for unit",
+    "description": "This will always create a new note for the unit",
     "tags": [
       "Unit"
     ],
@@ -55,6 +55,5 @@
         "$ref": "../../components/responses/403forbidden.json"
       }
     }
-
   }
 }

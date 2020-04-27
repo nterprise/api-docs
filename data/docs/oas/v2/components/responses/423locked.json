@@ -3,6 +3,8 @@
   "content": {
     "application/problem+json": {
       "schema": {
+        "type": "object",
+        "additionalProperties": false,
         "properties": {
           "title": {
             "const": "Locked"
@@ -14,9 +16,15 @@
             "const": 423
           },
           "detail": {
-            "const": "The current resource is locked and cannot be modified"
+            "type": "string"
           }
         }
+      },
+      "example": {
+        "title": "Locked",
+        "type": "https://docs.nterprise.com/api/problem/Locked",
+        "status": 423,
+        "detail": "This resource is currently locked from editing"
       }
     }
   }

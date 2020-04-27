@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchManufacturerById",
-    "summary": "Fetches a manufacturer by Id",
-    "description": "Fetch Manufacturer",
+    "summary": "Fetch Manufacturer",
+    "description": "Fetches a manufacturer",
     "tags": [
       "Manufacturer"
     ],
@@ -28,7 +28,7 @@
   },
   "put": {
     "operationId": "updateManufacturer",
-    "summary": "Updates a manufacturer",
+    "summary": "Update manufacturer",
     "description": "Updates a manufacturer",
     "tags": [
       "Manufacturer"
@@ -61,7 +61,7 @@
   },
   "delete": {
     "operationId": "deleteManufacturer",
-    "summary": "Deletes a manufacturer",
+    "summary": "Delete manufacturer",
     "description": "This will remove the manufacturer from the system",
     "tags": [
       "Manufacturer"

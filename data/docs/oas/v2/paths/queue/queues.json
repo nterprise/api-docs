@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchAllQueues",
-    "summary": "Fetches A Page of queues",
-    "description": "Fetch Queue",
+    "summary": "Fetch Queues",
+    "description": "Fetches A Page of queues",
     "tags": [
       "Queue"
     ],
@@ -28,8 +28,8 @@
   },
   "post": {
     "operationId": "createQueue",
-    "summary": "Creates a queue",
-    "description": "Creates a new queue",
+    "summary": "Create queue",
+    "description": "Creates a queue",
     "tags": [
       "Queue"
     ],

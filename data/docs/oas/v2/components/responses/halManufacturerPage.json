@@ -4,7 +4,28 @@
     "application/hal+json": {
       "schema": {
         "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "_embedded",
+          "_links",
+          "total_count",
+          "limit",
+          "offset"
+        ],
         "properties": {
+          "total_count": {
+            "type": "number",
+            "readOnly": true
+          },
+          "limit": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 100
+          },
+          "offset": {
+            "type": "string",
+            "nullable": true
+          },
           "_embedded": {
             "type": "object",
             "properties": {
@@ -33,6 +54,41 @@
                 "$ref": "../schemas/link.json"
               }
             }
+          }
+        }
+      },
+      "example": {
+        "total_count": 21,
+        "limit": 42,
+        "offset": "next-offset",
+        "_embedded": {
+          "nter:manufacturers": [
+            {
+              "manufacturer_id": "manufacturer",
+              "label": "Manchuck Inc",
+
+"created": "2019-08-19T00:01:02.000Z",
+              "updated": "2020-08-19T01:01:02.000Z",
+              "_links": {
+                "nter:manufacturer-units": {
+                  "href": "https://api.example.com/manufacturers/manufacturer/units"
+                },
+                "nter:manufacturer-parts": {
+                  "href": "https://api.example.com/manufacturers/manufacturer/parts"
+                },
+                "self": {
+                  "href": "https://api.example.com/manufacturers/manufacturer"
+                }
+              }
+            }
+          ]
+        },
+        "_links": {
+          "next": {
+            "href": "https://api.example.com/manufacturers?limit=42&offset=next-offset"
+          },
+          "self": {
+            "href": "https://api.example.com/manufacturers?limit=42"
           }
         }
       }

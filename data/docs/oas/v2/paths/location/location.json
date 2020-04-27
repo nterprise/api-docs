@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchLocationById",
-    "summary": "Fetches a location by Id",
-    "description": "Fetch Location",
+    "summary": "Fetch Location",
+    "description": "Fetches a location",
     "tags": [
       "Location"
     ],
@@ -29,7 +29,7 @@
   },
   "put": {
     "operationId": "updateLocation",
-    "summary": "Updates a location",
+    "summary": "Update location",
     "description": "Updates a location",
     "tags": [
       "Location"
@@ -60,8 +60,8 @@
   },
   "delete": {
     "operationId": "deleteLocation",
-    "summary": "Deletes a location",
-    "description": "This will soft delete the location",
+    "summary": "Delete location",
+    "description": "This will remove the location",
     "tags": [
       "Location"
     ],
@@ -72,7 +72,7 @@
     ],
     "responses": {
       "205": {
-        "description": "Location deleted"
+        "summary": "Location deleted"
       },
       "401": {
         "$ref": "../../components/responses/401unauthorized.json"

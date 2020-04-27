@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchAllCustomerParts",
-    "summary": "Fetches A Page of parts for the customer",
-    "description": "Fetch customer parts",
+    "summary": "Fetch customer parts",
+    "description": "Fetches A Page of parts for the customer",
     "tags": [
       "Customer"
     ],

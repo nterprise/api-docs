@@ -1,7 +1,15 @@
 {
   "openapi": "3.0.3",
   "x-api": "niagara",
-  "x-parent": "Niagara API",
+  "x-nter-docs-parent": "Niagara API",
+  "x-nter-docs-nav-order": 12,
+  "x-nter-docs-redirect-from": [
+    "/rel/programs",
+    "/rel/program",
+    "/rel/project-program",
+    "/rel/batch-program",
+    "/rel/customer-programs"
+  ],
   "info": {
     "version": "2.0.0",
     "description": "API for the nterprise application",
@@ -38,7 +46,7 @@
   "components": {
     "schemas": {
       "Program": {
-        "$ref": "https://docs.nterprise.com/schemas/niagara/program.json"
+        "$ref": "components/schemas/program.json"
       }
     }
   }

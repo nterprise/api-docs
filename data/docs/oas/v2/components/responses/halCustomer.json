@@ -4,6 +4,73 @@
     "application/hal+json": {
       "schema": {
         "$ref": "../schemas/halCustomer.json"
+      },
+      "example": {
+        "customer_id": "customer",
+        "label": "Niagara Customer",
+        "created": "2020-01-09T22:12:03.000Z",
+        "updated": "2020-01-09T22:12:03.000Z",
+        "external_platform": {},
+        "total_programs": 21,
+        "total_projects": 42,
+        "allowed_statuses": [
+          {
+            "category": "PENDING",
+            "description": "For something that is Pending",
+            "status": "Pending",
+            "order": 3
+          },
+          {
+            "category": "IN_PROGRESS",
+            "description": "For something that is In Progress",
+            "status": "In Progress",
+            "order": 4
+          },
+          {
+            "category": "VERIFYING",
+            "description": "For something that is Verifying",
+            "status": "Verifying",
+            "order": 5
+          },
+          {
+            "category": "BLOCKED",
+            "description": "For something that is Blocked",
+            "status": "Blocked",
+            "order": 6
+          },
+          {
+            "category": "COMPLETE",
+            "description": "For something that is Complete",
+            "status": "Complete",
+            "order": 7
+          },
+          {
+            "category": "CANCELLED",
+            "description": "For something that is Cancelled",
+            "status": "Cancelled",
+            "order": 8
+          }
+        ],
+        "_links": {
+          "nter:customer-parts": {
+            "href": "https://api.example.com/customers/customer/parts"
+          },
+          "nter:customer-units": {
+            "href": "https://api.example.com/customers/customer/units"
+          },
+          "nter:customer-programs": {
+            "href": "https://api.example.com/customers/customer/programs"
+          },
+          "nter:customer-projects": {
+            "href": "https://api.example.com/customers/customer/projects"
+          },
+          "nter:customer-work-orders": {
+            "href": "https://api.example.com/customers/customer/work-orders"
+          },
+          "self": {
+            "href": "https://api.example.com/customers/customer"
+          }
+        }
       }
     }
   }

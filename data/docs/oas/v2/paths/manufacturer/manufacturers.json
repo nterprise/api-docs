@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchAllManufacturer",
-    "summary": "Fetches A Page of manufacturer",
-    "description": "Fetch Part",
+    "summary": "Fetch manufacturers",
+    "description": "Fetches A Page of manufacturers",
     "tags": [
       "Manufacturer"
     ],
@@ -25,12 +25,11 @@
         "$ref": "../../components/responses/403forbidden.json"
       }
     }
-
   },
   "post": {
     "operationId": "createManufacturer",
-    "summary": "Creates a manufacturer",
-    "description": "Creates a new manufacturer",
+    "summary": "Create manufacturer",
+    "description": "Creates a manufacturer",
     "tags": [
       "Manufacturer"
     ],
@@ -54,6 +53,5 @@
         "$ref": "../../components/responses/409conflict.json"
       }
     }
-
   }
 }

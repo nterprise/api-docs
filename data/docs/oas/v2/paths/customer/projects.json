@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchAllCustomerProjects",
-    "summary": "Fetches A Page of projects for the customer",
-    "description": "Fetch customer projects",
+    "summary": "Fetch customer projects",
+    "description": "Fetches A Page of projects for the customer",
     "tags": [
       "Customer"
     ],

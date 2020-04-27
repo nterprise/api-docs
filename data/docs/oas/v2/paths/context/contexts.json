@@ -1,5 +1,30 @@
 {
-  "get": {
-    "$ref": "./operations/context/fetchAllContexts.json"
+  "get":
+  {
+    "operationId": "fetchAllContexts",
+    "summary": "Fetches A Page of contexts",
+    "description": "Fetch Context",
+    "tags": [
+      "Context"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/limit.json"
+      },
+      {
+        "$ref": "../../components/parameters/offset.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halContextPage.json"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      }
+    }
   }
 }

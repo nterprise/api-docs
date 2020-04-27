@@ -1,31 +1,32 @@
 {
   "type": "object",
-  "properties": {
-    "_links": {
+  "allOf": [
+    {
+      "$ref": "./manufacturer.json"
+    },
+    {
       "type": "object",
       "properties": {
-        "self": {
-          "$ref": "./link.json",
-          "x-example": {
-            "href": "https://api.nterprise.com/manufacturers/23Y1rNJ6zyiRzqN"
+        "_links": {
+          "type": "object",
+          "required": [
+            "self",
+            "nter:manufacturer-parts",
+            "nter:manufacturer-units"
+          ],
+          "properties": {
+            "nter:manufacturer-parts": {
+              "$ref": "./link.json"
+            },
+            "nter:manufacturer-units": {
+              "$ref": "./link.json"
+            },
+            "self": {
+              "$ref": "./link.json"
+            }
           }
         }
       }
-    },
-    "manufacturer_id": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/manufacturer.json#/properties/manufacturer_id"
-    },
-    "label": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/manufacturer.json#/properties/label"
-    },
-    "slug": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/manufacturer.json#/properties/slug"
-    },
-    "created": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/manufacturer.json#/properties/created"
-    },
-    "updated": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/manufacturer.json#/properties/updated"
     }
-  }
+  ]
 }

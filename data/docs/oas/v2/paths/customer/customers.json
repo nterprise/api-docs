@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchAllCustomers",
-    "summary": "Fetches A Page of customers",
-    "description": "Fetch Customer",
+    "summary": "Fetch Customers",
+    "description": "Fetches A Page of customers",
     "tags": [
       "Customer"
     ],
@@ -28,8 +28,8 @@
   },
   "post": {
     "operationId": "createCustomer",
-    "summary": "Creates a customer",
-    "description": "Creates a new customer following the customer schema",
+    "summary": "Create customer",
+    "description": "Creates a new customer",
     "tags": [
       "Customer"
     ],

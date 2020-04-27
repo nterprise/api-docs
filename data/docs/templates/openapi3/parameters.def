@@ -1,3 +1,4 @@
+{{= data.tags.section }}
 <h3 id="{{=data.operationUniqueSlug}}-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
@@ -28,11 +29,4 @@
 
 {{~}}
 
-{{? data.enums && data.enums.length }}
-#### Enumerated Values
-
-|Parameter|Value|
-|---|---|
-{{~ data.enums :e}}|{{=e.name}}|{{=data.utils.toPrimitive(e.value)}}|
-{{~}}
-{{?}}
+{{= data.tags.endSection }}

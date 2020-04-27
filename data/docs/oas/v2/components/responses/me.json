@@ -3,12 +3,21 @@
   "content": {
     "application/hal+json": {
       "schema": {
-        "type": "object",
-        "allOf": [
-          {
-            "$ref": "../schemas/halUser.json"
+        "$ref": "../schemas/halUser.json"
+      },
+      "example": {
+        "user_id": "3dddba3e-6122-46a8-ae26-8c7c95bd82d7",
+        "created": "2019-08-19T00:01:02.639Z",
+        "updated": "2019-08-19T00:01:02.639Z",
+        "name": "Chuck Reeves",
+        "email": "chuck.reeves@zones.com",
+        "profile": "https://bit.ly/18gECvy",
+        "picture": "https://bit.ly/18gECvy",
+        "_links": {
+          "self": {
+            "href": "https://api.example.com/users/3dddba3e-6122-46a8-ae26-8c7c95bd82d7"
           }
-        ]
+        }
       }
     }
   }

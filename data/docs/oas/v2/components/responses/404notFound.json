@@ -3,6 +3,8 @@
   "content": {
     "application/problem+json": {
       "schema": {
+        "type": "object",
+        "additionalProperties": false,
         "properties": {
           "title": {
             "const": "Not Found"
@@ -14,9 +16,15 @@
             "const": 404
           },
           "detail": {
-            "const": "Resource not found"
+            "type": "string"
           }
         }
+      },
+      "example": {
+        "title": "Not Found",
+        "type": "https://docs.nterprise.com/api/problem/NotFound",
+        "status": 404,
+        "detail": "A Resource with the id \"foo\" was not found"
       }
     }
   }

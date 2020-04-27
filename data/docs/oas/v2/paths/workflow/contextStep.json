@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchCurrentStepForContext",
-    "summary": "Returns the current step for the context",
-    "description": "Fetch Workflow Contexts",
+    "summary": "Fetch current step",
+    "description": "Returns the current step for the context",
     "tags": [
       "Context"
     ],

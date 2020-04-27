@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchDashboard",
-    "summary": "Dashboard page",
-    "description": "Fetches the dashboard",
+    "summary": "Fetch dashboards",
+    "description": "Dashboard page",
     "tags": [
       "Dashboard"
     ],

@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchAllProjects",
-    "summary": "Fetches A Page of projects",
-    "description": "Fetch Project",
+    "summary": "Fetch Project",
+    "description": "Fetches A Page of projects",
     "tags": [
       "Project"
     ],
@@ -28,7 +28,7 @@
   },
   "post": {
     "operationId": "createProject",
-    "summary": "Creates a project",
+    "summary": "Create project",
     "description": "Creates a new project",
     "tags": [
       "Project"

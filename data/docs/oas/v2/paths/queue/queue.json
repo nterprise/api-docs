@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchQueueById",
-    "summary": "Fetches a queue by Id",
-    "description": "Fetch Queue",
+    "summary": "Fetch queue",
+    "description": "Fetches a queue",
     "tags": [
       "Queue"
     ],
@@ -28,7 +28,7 @@
   },
   "put": {
     "operationId": "updateQueue",
-    "summary": "Updates a queue",
+    "summary": "Update queue",
     "description": "Updates a queue",
     "tags": [
       "Queue"
@@ -58,8 +58,8 @@
   },
   "delete": {
     "operationId": "deleteQueue",
-    "summary": "Deletes a queue",
-    "description": "This will soft delete the queue",
+    "summary": "Delete queue",
+    "description": "Deletes a queue",
     "tags": [
       "Queue"
     ],

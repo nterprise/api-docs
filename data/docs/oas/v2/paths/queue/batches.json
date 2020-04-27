@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchAllBatchesForQueue",
-    "summary": "Fetches A Page of batches for a queue",
-    "description": "Fetch Queue Batches",
+    "summary": "Fetch Queue Batches",
+    "description": "Fetches A Page of batches for a queue",
     "tags": [
       "Queue"
     ],

@@ -4,6 +4,44 @@
     "application/hal+json": {
       "schema": {
         "$ref": "../schemas/halWorkFlow.json"
+      },
+      "example": {
+        "work_flow_id": "work-flow",
+        "label": "My workflow",
+        "created": "2019-08-19T00:01:02.000Z",
+        "updated": "2020-08-19T01:01:02.000Z",
+        "workflow_version": 7,
+        "applies_to": "UNIT",
+        "starts_at": "work-complete",
+        "schema_version": "1.0",
+        "triggered_by": [
+          "UNIT.created"
+        ],
+        "metadata": {
+          "meta": "data"
+        },
+        "steps": {
+          "work-complete": {
+            "label": "work complete",
+            "on_complete": [],
+            "on_start": [],
+            "step_type": "success"
+          },
+          "stop-poking-me": {
+            "label": "stop poking me",
+            "on_complete": [],
+            "on_start": [],
+            "step_type": "fail"
+          }
+        },
+        "_links": {
+          "nter:work-flow-contexts": {
+            "href": "https://api.example.com/work-flows/work-flow/contexts"
+          },
+          "self": {
+            "href": "https://api.example.com/work-flows/work-flow"
+          }
+        }
       }
     }
   }

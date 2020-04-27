@@ -1,7 +1,15 @@
 {
   "openapi": "3.0.3",
   "x-api": "niagara",
-  "x-parent": "Niagara API",
+  "x-nter-docs-parent": "Niagara API",
+  "x-nter-docs-nav-order": 5,
+  "x-nter-docs-redirect-from": [
+    "/rel/customers",
+    "/rel/batch-customer",
+    "/rel/program-customer",
+    "/rel/project-customer",
+    "/rel/part-customer"
+  ],
   "info": {
     "version": "2.0.0",
     "description": "Customers may have multiple Programs, Projects, and Locations, as well as device Parts and individual Units.",
@@ -31,9 +39,6 @@
     "/customers/{customer_id}/contacts": {
       "$ref": "./paths/customer/contacts.json"
     },
-    "/customers/{customer_id}/parts": {
-      "$ref": "./paths/customer/parts.json"
-    },
     "/customers/{customer_id}/programs": {
       "$ref": "./paths/customer/programs.json"
     }
@@ -41,7 +46,7 @@
   "components": {
     "schemas": {
       "Customer": {
-        "$ref": "https://docs.nterprise.com/schemas/niagara/customer.json"
+        "$ref": "components/schemas/customer.json"
       }
     }
   }

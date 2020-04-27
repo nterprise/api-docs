@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchAllUnits",
-    "summary": "Fetches A Page of units",
-    "description": "Fetch Unit",
+    "summary": "Fetch Units",
+    "description": "Fetches A Page of units",
     "tags": [
       "Unit"
     ],
@@ -28,8 +28,8 @@
   },
   "post": {
     "operationId": "createUnit",
-    "summary": "Creates a unit",
-    "description": "Creates a new unit",
+    "summary": "Create unit",
+    "description": "Creates a unit",
     "tags": [
       "Unit"
     ],

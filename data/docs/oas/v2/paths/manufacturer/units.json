@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchAllManufacturerUnits",
-    "summary": "Fetches A Page of units for the manufacturer",
-    "description": "Fetch manufacturer units",
+    "summary": "Fetch manufacturer units",
+    "description": "Fetches A Page of units for the manufacturer",
     "tags": [
       "Manufacturer"
     ],

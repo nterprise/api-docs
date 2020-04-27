@@ -1,47 +1,34 @@
 ---
 layout: page
 parent: Niagara API
-nav_order: 10
+nav_order: 11
+redirect_from:
+  - /rel/parts
+  - /rel/part
+  - /rel/customer-parts
+  - /rel/unit-part
+  - /rel/manufacturer-parts
 title: Parts
-language_tabs: ''
-toc_footers: []
-includes: []
-search: true
-highlight_theme: darkula
-headingLevel: 2
-
 ---
 
-<h1 id="parts">Parts v2.0.0</h1>
+<h1 id="parts">Parts</h1>
 
 * Do not remove this line (it will not be displayed)
 {:toc}
 
-> Scroll down for example requests and responses.
-
 API for the nterprise application
-
-Base URLs:
-
-* <a href="https://{environment}.nterprise.com">https://{environment}.nterprise.com</a>
-
-    * **environment** -  Default: api
-
-        * api
-
-        * api.dev
 
 <h1 id="parts-part">Part</h1>
 
-## fetchAllParts
+## Operations
+
+### GET /parts - *Fetch Part*
 
 <a id="opIdfetchAllParts"></a>
 
-`GET /parts`
+*Fetch Part*
 
-*Fetches A Page of parts*
-
-Fetch Part
+Fetches A Page of parts
 
 <h3 id="fetchallparts-parameters">Parameters</h3>
 
@@ -49,1296 +36,6 @@ Fetch Part
 |---|---|---|---|---|
 |limit|query|integer(int32)|false|How many items to return at one time (max 100)|
 |offset|query|string|false|Continue from last offset|
-
-> Example responses
-
-> 200 Response
-
-```json
-{
-  "type": "object",
-  "properties": {
-    "_embedded": {
-      "type": "object",
-      "properties": {
-        "nter:parts": {
-          "type": "array",
-          "maxItems": 100,
-          "items": {
-            "type": "object",
-            "properties": {
-              "_links": {
-                "type": "object",
-                "properties": {
-                  "self": {
-                    "x-example": {
-                      "href": "https://api.nterprise.com/parts/23Y1rNJ6zyiRzqN"
-                    },
-                    "type": "object",
-                    "properties": {
-                      "href": {
-                        "type": "string",
-                        "format": "uri"
-                      }
-                    }
-                  }
-                }
-              },
-              "part_id": {
-                "description": "Unique identifier",
-                "type": "string",
-                "readOnly": true,
-                "pattern": "^[0-9a-zA-Z-_]+$"
-              },
-              "label": {
-                "type": "string",
-                "description": "Label for the entity"
-              },
-              "slug": {
-                "type": "string",
-                "description": "Slug for the entity (Auto-generated from the label)",
-                "readOnly": true,
-                "deprecated": true,
-                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-              },
-              "created": {
-                "description": "Date the entity was created",
-                "type": "string",
-                "format": "date-time",
-                "readOnly": true
-              },
-              "updated": {
-                "description": "Last date the entity was updated",
-                "type": "string",
-                "format": "date-time",
-                "readOnly": true
-              },
-              "customer": {
-                "type": "object",
-                "description": "Customer",
-                "additionalProperties": false,
-                "required": [
-                  "label",
-                  "entity_id",
-                  "entity_type",
-                  "created",
-                  "updated",
-                  "allowed_statuses"
-                ],
-                "properties": {
-                  "customer_id": {
-                    "description": "Customer identifier",
-                    "type": "string",
-                    "readOnly": true,
-                    "pattern": "^[0-9a-zA-Z-_]+$"
-                  },
-                  "entity_id": {
-                    "x-no-api-doc": true,
-                    "type": "string",
-                    "description": "Customer identifier",
-                    "readOnly": true,
-                    "pattern": "^[0-9a-zA-Z-_]+$"
-                  },
-                  "entity_type": {
-                    "x-no-api-doc": true,
-                    "enum": [
-                      "CUS"
-                    ]
-                  },
-                  "label": {
-                    "type": "string",
-                    "description": "Label for the entity"
-                  },
-                  "slug": {
-                    "type": "string",
-                    "description": "Slug for the entity (Auto-generated from the label)",
-                    "readOnly": true,
-                    "deprecated": true,
-                    "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-                  },
-                  "created": {
-                    "description": "Date the entity was created",
-                    "type": "string",
-                    "format": "date-time",
-                    "readOnly": true
-                  },
-                  "updated": {
-                    "description": "Last date the entity was updated",
-                    "type": "string",
-                    "format": "date-time",
-                    "readOnly": true
-                  },
-                  "external_platform": {
-                    "type": "object",
-                    "description": "External Identifiers for the customer",
-                    "deprecated": true,
-                    "x-patternProperties": {
-                      "^[A-Za-z][A-Za-z0-9_]*$": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "allowed_statuses": {
-                    "type": "array",
-                    "description": "List of allowed statuses",
-                    "uniqueItems": true,
-                    "items": {
-                      "type": "object",
-                      "description": "Defines the properties for a status",
-                      "additionalProperties": false,
-                      "required": [
-                        "status",
-                        "category"
-                      ],
-                      "properties": {
-                        "status": {
-                          "type": "string",
-                          "description": "A Custom label for the status",
-                          "pattern": "^[A-Za-z][0-9a-zA-Z-_ ]+$"
-                        },
-                        "category": {
-                          "type": "string",
-                          "description": "The classifier for the statues",
-                          "enum": [
-                            "PENDING",
-                            "IN_PROGRESS",
-                            "VERIFYING",
-                            "COMPLETE",
-                            "CANCELLED",
-                            "BLOCKED"
-                          ]
-                        }
-                      }
-                    }
-                  },
-                  "total_programs": {
-                    "type": "number",
-                    "description": "Total programs under the customer"
-                  },
-                  "total_projects": {
-                    "type": "number",
-                    "description": "Total projects under the customer"
-                  }
-                }
-              },
-              "manufacturer": {
-                "type": "object",
-                "description": "Manufacturer information for the part",
-                "required": [
-                  "label",
-                  "entity_id",
-                  "entity_type",
-                  "created",
-                  "updated",
-                  "part_number"
-                ],
-                "properties": {
-                  "part_number": {
-                    "type": "string",
-                    "description": "Part number the manufacturer uses. If this is not set, then the part number is used"
-                  },
-                  "manufacturer_id": {
-                    "x-no-api-doc": true,
-                    "type": "string",
-                    "description": "Customer identifier",
-                    "readOnly": true,
-                    "pattern": "^[0-9a-zA-Z-_]+$"
-                  },
-                  "entity_id": {
-                    "x-no-api-doc": true,
-                    "type": "string",
-                    "description": "Customer identifier",
-                    "readOnly": true,
-                    "pattern": "^[0-9a-zA-Z-_]+$"
-                  },
-                  "entity_type": {
-                    "enum": [
-                      "MFR"
-                    ]
-                  },
-                  "label": {
-                    "type": "string",
-                    "description": "Label for the entity"
-                  },
-                  "slug": {
-                    "type": "string",
-                    "description": "Slug for the entity (Auto-generated from the label)",
-                    "readOnly": true,
-                    "deprecated": true,
-                    "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-                  },
-                  "created": {
-                    "description": "Date the entity was created",
-                    "type": "string",
-                    "format": "date-time",
-                    "readOnly": true
-                  },
-                  "updated": {
-                    "description": "Last date the entity was updated",
-                    "type": "string",
-                    "format": "date-time",
-                    "readOnly": true
-                  }
-                }
-              },
-              "serial_prefix": {
-                "type": "string",
-                "nullable": true,
-                "description": "A serial number prefix for the part"
-              },
-              "input_filter": {
-                "type": "array",
-                "description": "Input Filters allow custom fields to be defined for entities",
-                "items": {
-                  "type": "object",
-                  "description": "Input filter specification",
-                  "required": [
-                    "label",
-                    "key",
-                    "filters",
-                    "validators"
-                  ],
-                  "properties": {
-                    "label": {
-                      "type": "string",
-                      "description": "Human readable name"
-                    },
-                    "key": {
-                      "type": "string",
-                      "description": "Slug used to store the property",
-                      "readOnly": true,
-                      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-                    },
-                    "filters": {
-                      "type": "array",
-                      "description": "A Collection of filters applied to the field",
-                      "maxItems": 100,
-                      "items": {
-                        "anyOf": [
-                          {
-                            "type": "object",
-                            "description": "This filter will set the value based on a list of approved values. If the value is not in the list, it will then be set to empty unless the default option is set",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "allowed_list"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "required": [
-                                  "approved_values"
-                                ],
-                                "properties": {
-                                  "approved_values": {
-                                    "type": "array",
-                                    "minimum": 1,
-                                    "maximum": 100,
-                                    "description": "The list of approved values",
-                                    "items": {
-                                      "type": "string"
-                                    }
-                                  },
-                                  "check_case": {
-                                    "type": "boolean",
-                                    "description": "Perform a case sensitive match. By default will not match case",
-                                    "default": false
-                                  },
-                                  "default": {
-                                    "type": "string",
-                                    "nullable": true,
-                                    "description": "If this is set and the value is not in the approved_list, set the value to this"
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          {
-                            "type": "object",
-                            "description": "Make the value camelCase",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "camel"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "description": "This filter has no options"
-                              }
-                            }
-                          },
-                          {
-                            "type": "object",
-                            "description": "Filter to transform a value into a date",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "date"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "description": "Date filter has no options"
-                              }
-                            }
-                          },
-                          {
-                            "type": "object",
-                            "description": "Filter to transform values into null. This is helpful when trying to make a value required. The following are considered empty:\n# The number 0 or 0.0\n# empty string ''\n# A boolean false\n# The word 'false'\n# ",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "empty"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "description": "empty filter has no options"
-                              }
-                            }
-                          },
-                          {
-                            "type": "object",
-                            "description": "Filter to transform a value into a float. Non numeric characters (including comma) will be removed",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "float"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "properties": {
-                                  "precision": {
-                                    "type": "integer",
-                                    "minimum": 1,
-                                    "maximum": 8,
-                                    "default": 3,
-                                    "description": "How many decimal places to preserve"
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          {
-                            "type": "object",
-                            "description": "Make the value kebab-case",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "kebab"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "description": "This filter has no options"
-                              }
-                            }
-                          },
-                          {
-                            "type": "object",
-                            "description": "Make the value lowercase",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "lower"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "description": "This filter has no options"
-                              }
-                            }
-                          },
-                          {
-                            "type": "object",
-                            "description": "Filter to transform a value into a number. Non numeric characters (including comma and decimal points) will be removed",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "number"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "description": "Number filter has no options"
-                              }
-                            }
-                          },
-                          {
-                            "type": "object",
-                            "description": "Add a prefix to the start of a string. If the string already start with the prefix, it will not prepend.",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "prefix"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "required": [
-                                  "prefix"
-                                ],
-                                "properties": {
-                                  "prefix": {
-                                    "type": "string",
-                                    "description": "The prefix to add"
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          {
-                            "type": "object",
-                            "description": "Make the value snake_case",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "snake"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "description": "This filter has no options"
-                              }
-                            }
-                          },
-                          {
-                            "type": "object",
-                            "description": "Filter to transform a value into a string",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "string"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "description": "String filter has no options"
-                              }
-                            }
-                          },
-                          {
-                            "description": "Add a suffix to the start of a string. If the string already start with the suffix, it will not append.",
-                            "type": "object",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "suffix"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "required": [
-                                  "suffix"
-                                ],
-                                "properties": {
-                                  "suffix": {
-                                    "type": "string",
-                                    "description": "The suffix to add"
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          {
-                            "type": "object",
-                            "description": "Filter to trim whitespace from a value",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "trim"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "description": "By default will trim from the start and end",
-                                "properties": {
-                                  "start": {
-                                    "type": "boolean",
-                                    "description": "Remove white space from the start of the string",
-                                    "default": true
-                                  },
-                                  "end": {
-                                    "type": "boolean",
-                                    "description": "Remove white space from the end of the string",
-                                    "default": true
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          {
-                            "type": "object",
-                            "description": "Make the value UPPERCASE",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "upper"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "description": "This filter has no options"
-                              }
-                            }
-                          }
-                        ]
-                      }
-                    },
-                    "validators": {
-                      "type": "array",
-                      "description": "A set of validators to use for this field",
-                      "maxItems": 100,
-                      "items": {
-                        "anyOf": [
-                          {
-                            "type": "object",
-                            "description": "Validate number is between two values. By default, min and max are included",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "greater_than"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "required": [
-                                  "min",
-                                  "max"
-                                ],
-                                "properties": {
-                                  "min": {
-                                    "type": "number",
-                                    "description": "Minimum value to check"
-                                  },
-                                  "max": {
-                                    "type": "number",
-                                    "description": "The maximum value to check"
-                                  },
-                                  "precision": {
-                                    "type": "integer",
-                                    "description": "When number is a float, this will set the decimal precision",
-                                    "minimum": 1,
-                                    "maximum": 8,
-                                    "default": 3
-                                  },
-                                  "include": {
-                                    "type": "boolean",
-                                    "description": "Include the value in the check",
-                                    "default": true
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          {
-                            "type": "object",
-                            "description": "Validate value does not match a list (black list)",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "white_list"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "required": [
-                                  "list"
-                                ],
-                                "properties": {
-                                  "list": {
-                                    "type": "array",
-                                    "minimum": 1,
-                                    "maximum": 100,
-                                    "description": "The list of approved values",
-                                    "items": {
-                                      "type": "string"
-                                    }
-                                  },
-                                  "check_case": {
-                                    "type": "boolean",
-                                    "description": "Perform a case sensitive match. By default will not match case",
-                                    "default": false
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          {
-                            "type": "object",
-                            "description": "Validate string contains a value",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "contains"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "required": [
-                                  "contains"
-                                ],
-                                "properties": {
-                                  "contains": {
-                                    "type": "string",
-                                    "description": "String must contain with this value"
-                                  },
-                                  "check_case": {
-                                    "type": "boolean",
-                                    "description": "Perform a case sensitive match. By default will not match case",
-                                    "default": false
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          {
-                            "type": "object",
-                            "description": "Validate string is a correct email address",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "email_address"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "properties": {
-                                  "strict": {
-                                    "type": "boolean",
-                                    "description": "Enforce strict standards from ARPA. This will enforce the length of the string",
-                                    "default": true
-                                  },
-                                  "lookup": {
-                                    "type": "boolean",
-                                    "description": "Look up the host name and check if it has a valid MX record",
-                                    "default": false
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          {
-                            "type": "object",
-                            "description": "Validate string ends with a value",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "ends_with"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "required": [
-                                  "ends_with"
-                                ],
-                                "properties": {
-                                  "ends_with": {
-                                    "type": "string",
-                                    "description": "String must end with this value"
-                                  },
-                                  "check_case": {
-                                    "type": "boolean",
-                                    "description": "Perform a case sensitive match. By default will not match case",
-                                    "default": false
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          {
-                            "type": "object",
-                            "description": "Validate number equals a value",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "equals"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "required": [
-                                  "value"
-                                ],
-                                "properties": {
-                                  "value": {
-                                    "type": "number",
-                                    "description": "The value to compare against"
-                                  },
-                                  "precision": {
-                                    "type": "integer",
-                                    "description": "When value is a float, this will set the decimal precision",
-                                    "minimum": 1,
-                                    "maximum": 8,
-                                    "default": 3
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          {
-                            "type": "object",
-                            "description": "Validate number is greater than a value. By default, this will check if value is greater than or equals to",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "greater_than"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "required": [
-                                  "value"
-                                ],
-                                "properties": {
-                                  "value": {
-                                    "type": "number",
-                                    "description": "The value to compare against"
-                                  },
-                                  "precision": {
-                                    "type": "integer",
-                                    "description": "When number is a float, this will set the decimal precision",
-                                    "minimum": 1,
-                                    "maximum": 8,
-                                    "default": 3
-                                  },
-                                  "include": {
-                                    "type": "boolean",
-                                    "description": "Include the value in the check",
-                                    "default": true
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          {
-                            "type": "object",
-                            "description": "Validate string has a correct DNS records",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "hostname"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "properties": {
-                                  "record_type": {
-                                    "type": "string",
-                                    "description": "DNS record type to validate",
-                                    "default": "A",
-                                    "enum": [
-                                      "A",
-                                      "AAAA",
-                                      "AFSDB",
-                                      "APL",
-                                      "CAA",
-                                      "CDNSKEY",
-                                      "CDS",
-                                      "CERT",
-                                      "CNAME",
-                                      "CSYNC",
-                                      "DHCID",
-                                      "DLV",
-                                      "DNAME",
-                                      "DNSKEY",
-                                      "DS",
-                                      "HIP",
-                                      "IPSECKEY",
-                                      "KEY",
-                                      "KX",
-                                      "LOC",
-                                      "MX",
-                                      "NAPTR",
-                                      "NS",
-                                      "NSEC",
-                                      "NSEC3",
-                                      "NSEC3PARAM",
-                                      "OPENPGPKEY",
-                                      "PTR",
-                                      "RRSIG",
-                                      "RP",
-                                      "SIG",
-                                      "SMIMEA",
-                                      "SOA",
-                                      "SRV",
-                                      "SSHFP",
-                                      "TA",
-                                      "TKEY",
-                                      "TLSA",
-                                      "TSIG",
-                                      "TXT",
-                                      "URI"
-                                    ]
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          {
-                            "type": "object",
-                            "description": "Validate string matches an IP address format. Defaults to matching IPv4",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "ipAddress"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "properties": {
-                                  "versions": {
-                                    "type": "array",
-                                    "description": "IP Version to match against",
-                                    "items": {
-                                      "type": "string",
-                                      "enum": [
-                                        "IPv4",
-                                        "IPv6"
-                                      ]
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          {
-                            "type": "object",
-                            "description": "Validate string is a certain length",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "length"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "required": [
-                                  "length"
-                                ],
-                                "properties": {
-                                  "length": {
-                                    "type": "string",
-                                    "description": "String must contain with this value"
-                                  },
-                                  "operator": {
-                                    "type": "string",
-                                    "description": "Which type of length comparision to make",
-                                    "default": "equals",
-                                    "enum": [
-                                      "equals",
-                                      "less_than",
-                                      "less_than_equals",
-                                      "greater_than",
-                                      "greater_than_equals"
-                                    ]
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          {
-                            "type": "object",
-                            "description": "Validate number is less than a value. By default, this will check if value is less than or equals to",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "lessThan"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "required": [
-                                  "value"
-                                ],
-                                "properties": {
-                                  "value": {
-                                    "type": "number",
-                                    "description": "The value to compare against"
-                                  },
-                                  "precision": {
-                                    "type": "integer",
-                                    "description": "When number is a float, this will set the decimal precision",
-                                    "minimum": 1,
-                                    "maximum": 8,
-                                    "default": 3
-                                  },
-                                  "include": {
-                                    "type": "boolean",
-                                    "description": "Include the value in the check",
-                                    "default": true
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          {
-                            "type": "object",
-                            "description": "Validate string matches an MAC address format",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "macAddress"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "description": "This validator has no options"
-                              }
-                            }
-                          },
-                          {
-                            "type": "object",
-                            "description": "Validate string matches a regular expression",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "mask"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "required": [
-                                  "mask"
-                                ],
-                                "properties": {
-                                  "mask": {
-                                    "type": "string",
-                                    "description": "Mask to validate against"
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          {
-                            "type": "object",
-                            "description": "Validate string starts with a value",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "startsWith"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "required": [
-                                  "starts_with"
-                                ],
-                                "properties": {
-                                  "starts_with": {
-                                    "type": "string",
-                                    "description": "String must start with this value"
-                                  },
-                                  "check_case": {
-                                    "type": "boolean",
-                                    "description": "Perform a case sensitive match. By default will not match case",
-                                    "default": false
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          {
-                            "type": "object",
-                            "description": "Validates that a value follows a step. Both start and end options do not have to sync with the step. If they do not sync then find the nearest step.",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "step"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "required": [
-                                  "step"
-                                ],
-                                "properties": {
-                                  "step": {
-                                    "type": "number",
-                                    "description": "The step value"
-                                  },
-                                  "start": {
-                                    "type": "integer",
-                                    "description": "Start stepping at this value"
-                                  },
-                                  "end": {
-                                    "type": "integer",
-                                    "description": "End stepping at this value"
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          {
-                            "type": "object",
-                            "description": "Validate string matches an URI",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "uri"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "properties": {
-                                  "schemes": {
-                                    "type": "array",
-                                    "description": "Schemes to match. By default all are matched",
-                                    "items": {
-                                      "type": "string",
-                                      "enum": [
-                                        "http",
-                                        "https",
-                                        "sip",
-                                        "sips",
-                                        "ftp",
-                                        "ftps",
-                                        "ldap",
-                                        "ldaps",
-                                        "file",
-                                        "udp",
-                                        "tcp",
-                                        "urn"
-                                      ]
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          {
-                            "type": "object",
-                            "description": "Validate value matches a list (white list)",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "whiteList"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "required": [
-                                  "list"
-                                ],
-                                "properties": {
-                                  "list": {
-                                    "type": "array",
-                                    "minimum": 1,
-                                    "maximum": 100,
-                                    "description": "The list of approved values",
-                                    "items": {
-                                      "type": "string"
-                                    }
-                                  },
-                                  "check_case": {
-                                    "type": "boolean",
-                                    "description": "Perform a case sensitive match. By default will not match case",
-                                    "default": false
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        ]
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "_links": {
-      "type": "object",
-      "properties": {
-        "self": {
-          "x-example": {
-            "href": "https://api.nterprise.com/parts"
-          },
-          "type": "object",
-          "properties": {
-            "href": {
-              "type": "string",
-              "format": "uri"
-            }
-          }
-        },
-        "next": {
-          "x-example": {
-            "href": "https://api.nterprise.com/parts?offset=QVBrO2wm13iEyl&limit=100"
-          },
-          "type": "object",
-          "properties": {
-            "href": {
-              "type": "string",
-              "format": "uri"
-            }
-          }
-        }
-      }
-    }
-  }
-}
-```
 
 <h3 id="fetchallparts-responses">Responses</h3>
 
@@ -1348,1570 +45,529 @@ Fetch Part
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|Inline|
 |403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
 
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "total_count": 21,
+  "limit": 42,
+  "offset": "next-offset",
+  "_embedded": {
+    "nter:parts": [
+      {
+        "part_id": "part",
+        "label": "Widget",
+        "created": "2019-08-19T00:01:02.000Z",
+        "updated": "2020-08-19T01:01:02.000Z",
+        "serial_prefix": "ABC",
+        "total_units": 5,
+        "total_units_allocated": 2,
+        "total_units_unallocated": 3,
+        "customer": {
+          "customer_id": "customer",
+          "label": "manchuck",
+          "created": "2020-01-09T22:12:03.000Z",
+          "updated": "2020-01-09T22:12:03.000Z",
+          "external_platform": {},
+          "total_programs": 21,
+          "total_projects": 42,
+          "allowed_statuses": [
+            {
+              "category": "PENDING",
+              "description": "For something that is Pending",
+              "status": "Pending",
+              "order": 3
+            },
+            {
+              "category": "IN_PROGRESS",
+              "description": "For something that is In Progress",
+              "status": "In Progress",
+              "order": 4
+            },
+            {
+              "category": "VERIFYING",
+              "description": "For something that is Verifying",
+              "status": "Verifying",
+              "order": 5
+            },
+            {
+              "category": "BLOCKED",
+              "description": "For something that is Blocked",
+              "status": "Blocked",
+              "order": 6
+            },
+            {
+              "category": "COMPLETE",
+              "description": "For something that is Complete",
+              "status": "Complete",
+              "order": 7
+            },
+            {
+              "category": "CANCELLED",
+              "description": "For something that is Cancelled",
+              "status": "Cancelled",
+              "order": 8
+            }
+          ]
+        },
+        "manufacturer": {
+          "manufacturer_id": "manufacturer",
+          "label": "Manchuck Inc",
+          "created": "2019-08-19T00:01:02.000Z",
+          "updated": "2020-08-19T01:01:02.000Z",
+          "part_number": "1-888-482-858-832"
+        },
+        "input_filter": [
+          {
+            "label": "Serial Number Of part",
+            "key": "serial-number",
+            "filters": [],
+            "validators": [],
+            "value": null
+          }
+        ],
+        "_links": {
+          "nter:part-manufacturer": {
+            "href": "https://api.example.com/manufacturers/manufacturer"
+          },
+          "nter:part-customer": {
+            "href": "https://api.example.com/customers/customer"
+          },
+          "nter:part-units": {
+            "href": "https://api.example.com/parts/part/units"
+          },
+          "self": {
+            "href": "https://api.example.com/parts/part"
+          }
+        }
+      }
+    ]
+  },
+  "_links": {
+    "next": {
+      "href": "https://api.example.com/parts?limit=42&offset=next-offset"
+    },
+    "self": {
+      "href": "https://api.example.com/parts?limit=42"
+    }
+  }
+}
+```
+
+> 401 Response
+
+```json
+{
+  "title": "Unauthorized",
+  "type": "https://docs.nterprise.com/api/problem/Unauthorized",
+  "status": 401,
+  "detail": "Invalid authorization token"
+}
+```
+
+> 403 Response
+
+```json
+{
+  "title": "Forbidden",
+  "type": "https://docs.nterprise.com/api/problem/Forbidden",
+  "status": 403,
+  "detail": "You are forbidden from accessing this resource"
+}
+```
+
 <h3 id="fetchallparts-responseschema">Response Schema</h3>
 
 Status Code **200**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» _embedded|object|false|none|none|
-|»» nter:parts|[object]|false|none|none|
-|»»» _links|object|false|none|none|
-|»»»» self|object|false|none|none|
-|»»»»» href|string(uri)|false|none|none|
-|»»»» part_id|string|false|read-only|Unique identifier|
-|»»»» label|string|false|none|Label for the entity|
-|»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»»»» created|string(date-time)|false|read-only|Date the entity was created|
-|»»»» updated|string(date-time)|false|read-only|Last date the entity was updated|
-|»»»» customer|object|false|none|Customer|
-|»»»»» customer_id|string|false|read-only|Customer identifier|
-|»»»»» entity_id|string|true|read-only|Customer identifier|
-|»»»»» entity_type|string|true|none|none|
-|»»»»» label|string|true|none|Label for the entity|
-|»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»»»»» created|string(date-time)|true|read-only|Date the entity was created|
-|»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»»»» external_platform|object|false|none|External Identifiers for the customer|
-|»»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
-|»»»»»» status|string|true|none|A Custom label for the status|
-|»»»»»» category|string|true|none|The classifier for the statues|
-|»»»»» total_programs|number|false|none|Total programs under the customer|
-|»»»»» total_projects|number|false|none|Total projects under the customer|
-|»»»» manufacturer|object|false|none|Manufacturer information for the part|
-|»»»»» part_number|string|true|none|Part number the manufacturer uses. If this is not set, then the part number is used|
-|»»»»» manufacturer_id|string|false|read-only|Customer identifier|
-|»»»»» entity_id|string|true|read-only|Customer identifier|
-|»»»»» entity_type|string|true|none|none|
-|»»»»» label|string|true|none|Label for the entity|
-|»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»»»»» created|string(date-time)|true|read-only|Date the entity was created|
-|»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»»» serial_prefix|string\|null|false|none|A serial number prefix for the part|
-|»»»» input_filter|[object]|false|none|Input Filters allow custom fields to be defined for entities|
-|»»»»» label|string|true|none|Human readable name|
-|»»»»» key|string|true|read-only|Slug used to store the property|
-|»»»»» filters|[anyOf]|true|none|A Collection of filters applied to the field|
+|&nbsp;&nbsp;&nbsp;&nbsp; total_count|number|true|read-only|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; limit|number|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; offset|string¦null|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; _embedded|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; nter:parts|[allOf]|false|none|none|
+
+*allOf*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; part_id|string|true|read-only|Unique identifier|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; label|string|true|none|Label for the entity|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; created|string(date-time)|true|read-only|Date the entity was created|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; updated|string(date-time)|true|read-only|Last date the entity was updated|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; customer|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; customer_id|string|true|read-only|Customer identifier|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; label|string|true|none|Label for the entity|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; created|string(date-time)|true|read-only|Date the entity was created|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; updated|string(date-time)|true|read-only|Last date the entity was updated|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; external_platform|object|true|none|External Identifiers for the customer|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; allowed_statuses|[object]|true|none|List of allowed statuses|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; status|string|true|none|A Custom label for the status|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; category|string|true|none|The classifier for the statues|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; description|string¦null|false|none|A description for the status|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; order|number|false|none|Order status appears when listing|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; total_programs|number|true|none|Total programs under the customer|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; total_projects|number|true|none|Total projects under the customer|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; manufacturer|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; manufacturer_id|string|true|read-only|Manufacturer identifier|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; label|string|true|none|Label for the entity|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; created|string(date-time)|true|read-only|Date the entity was created|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; updated|string(date-time)|true|read-only|Last date the entity was updated|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; serial_prefix|string¦null|true|none|A serial number prefix for the part|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; input_filter|[object]|true|none|Input Filters allow custom fields to be defined for entities|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; label|string|true|none|Human readable name|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; key|string|true|read-only|Slug used to store the property|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; filters|[anyOf]|true|none|A Collection of filters applied to the field|
 
 *anyOf*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»» *anonymous*|object|false|none|This filter will set the value based on a list of approved values. If the value is not in the list, it will then be set to empty unless the default option is set|
-|»»»»»»» type|string|true|none|none|
-|»»»»»»» options|object|true|none|none|
-|»»»»»»»» approved_values|[string]|true|none|The list of approved values|
-|»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
-|»»»»»»»» default|string\|null|false|none|If this is set and the value is not in the approved_list, set the value to this|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|This filter will set the value based on a list of approved values. If the value is not in the list, it will then be set to empty unless the default option is set|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; approved_values|[string]|true|none|The list of approved values|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; default|string¦null|false|none|If this is set and the value is not in the approved_list, set the value to this|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»» *anonymous*|object|false|none|Make the value camelCase|
-|»»»»»»»» type|string|true|none|none|
-|»»»»»»»» options|object|true|none|This filter has no options|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Make the value camelCase|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|This filter has no options|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a date|
-|»»»»»»»» type|string|true|none|none|
-|»»»»»»»» options|object|true|none|Date filter has no options|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Filter to transform a value into a date|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|Date filter has no options|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»» *anonymous*|object|false|none|Filter to transform values into null. This is helpful when trying to make a value required. The following are considered empty: # The number 0 or 0.0 # empty string '' # A boolean false # The word 'false' #|
-|»»»»»»»» type|string|true|none|none|
-|»»»»»»»» options|object|true|none|empty filter has no options|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Filter to transform values into null. This is helpful when trying to make a value required. The following are considered empty:<br># The number 0 or 0.0<br># empty string ''<br># A boolean false<br># The word 'false'<br>#|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|empty filter has no options|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a float. Non numeric characters (including comma) will be removed|
-|»»»»»»»» type|string|true|none|none|
-|»»»»»»»» options|object|true|none|none|
-|»»»»»»»»» precision|integer|false|none|How many decimal places to preserve|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Filter to transform a value into a float. Non numeric characters (including comma) will be removed|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; precision|integer|false|none|How many decimal places to preserve|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»» *anonymous*|object|false|none|Make the value kebab-case|
-|»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»» options|object|true|none|This filter has no options|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Make the value kebab-case|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|This filter has no options|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»» *anonymous*|object|false|none|Make the value lowercase|
-|»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»» options|object|true|none|This filter has no options|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Make the value lowercase|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|This filter has no options|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a number. Non numeric characters (including comma and decimal points) will be removed|
-|»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»» options|object|true|none|Number filter has no options|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Filter to transform a value into a number. Non numeric characters (including comma and decimal points) will be removed|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|Number filter has no options|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»» *anonymous*|object|false|none|Add a prefix to the start of a string. If the string already start with the prefix, it will not prepend.|
-|»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»» prefix|string|true|none|The prefix to add|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Add a prefix to the start of a string. If the string already start with the prefix, it will not prepend.|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; prefix|string|true|none|The prefix to add|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»» *anonymous*|object|false|none|Make the value snake_case|
-|»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»» options|object|true|none|This filter has no options|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Make the value snake_case|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|This filter has no options|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a string|
-|»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»» options|object|true|none|String filter has no options|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Filter to transform a value into a string|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|String filter has no options|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»» *anonymous*|object|false|none|Add a suffix to the start of a string. If the string already start with the suffix, it will not append.|
-|»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»» suffix|string|true|none|The suffix to add|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Add a suffix to the start of a string. If the string already start with the suffix, it will not append.|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; suffix|string|true|none|The suffix to add|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»» *anonymous*|object|false|none|Filter to trim whitespace from a value|
-|»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»» options|object|true|none|By default will trim from the start and end|
-|»»»»»»»»»»»» start|boolean|false|none|Remove white space from the start of the string|
-|»»»»»»»»»»»» end|boolean|false|none|Remove white space from the end of the string|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Filter to trim whitespace from a value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|By default will trim from the start and end|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; start|boolean|false|none|Remove white space from the start of the string|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end|boolean|false|none|Remove white space from the end of the string|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»» *anonymous*|object|false|none|Make the value UPPERCASE|
-|»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»» options|object|true|none|This filter has no options|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Make the value UPPERCASE|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|This filter has no options|
 
 *continued*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»» validators|[anyOf]|true|none|A set of validators to use for this field|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; validators|[anyOf]|true|none|A set of validators to use for this field|
 
 *anyOf*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»» *anonymous*|object|false|none|Validate number is between two values. By default, min and max are included|
-|»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»» min|number|true|none|Minimum value to check|
-|»»»»»»»»»»»»»» max|number|true|none|The maximum value to check|
-|»»»»»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
-|»»»»»»»»»»»»»» include|boolean|false|none|Include the value in the check|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate number is between two values. By default, min and max are included|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; min|number|true|none|Minimum value to check|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; max|number|true|none|The maximum value to check|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; precision|integer|false|none|When number is a float, this will set the decimal precision|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; include|boolean|false|none|Include the value in the check|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»» *anonymous*|object|false|none|Validate value does not match a list (black list)|
-|»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»» list|[string]|true|none|The list of approved values|
-|»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate value does not match a list (black list)|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; list|[string]|true|none|The list of approved values|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string contains a value|
-|»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»» contains|string|true|none|String must contain with this value|
-|»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate string contains a value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; contains|string|true|none|String must contain with this value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string is a correct email address|
-|»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»» strict|boolean|false|none|Enforce strict standards from ARPA. This will enforce the length of the string|
-|»»»»»»»»»»»»»»»»» lookup|boolean|false|none|Look up the host name and check if it has a valid MX record|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate string is a correct email address|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; strict|boolean|false|none|Enforce strict standards from ARPA. This will enforce the length of the string|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; lookup|boolean|false|none|Look up the host name and check if it has a valid MX record|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string ends with a value|
-|»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»» ends_with|string|true|none|String must end with this value|
-|»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate string ends with a value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ends_with|string|true|none|String must end with this value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number equals a value|
-|»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»» value|number|true|none|The value to compare against|
-|»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When value is a float, this will set the decimal precision|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate number equals a value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; value|number|true|none|The value to compare against|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; precision|integer|false|none|When value is a float, this will set the decimal precision|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number is greater than a value. By default, this will check if value is greater than or equals to|
-|»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»» value|number|true|none|The value to compare against|
-|»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
-|»»»»»»»»»»»»»»»»»»»» include|boolean|false|none|Include the value in the check|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate number is greater than a value. By default, this will check if value is greater than or equals to|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; value|number|true|none|The value to compare against|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; precision|integer|false|none|When number is a float, this will set the decimal precision|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; include|boolean|false|none|Include the value in the check|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string has a correct DNS records|
-|»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»» record_type|string|false|none|DNS record type to validate|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate string has a correct DNS records|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; record_type|string|false|none|DNS record type to validate|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an IP address format. Defaults to matching IPv4|
-|»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»» versions|[string]|false|none|IP Version to match against|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate string matches an IP address format. Defaults to matching IPv4|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; versions|[string]|false|none|IP Version to match against|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string is a certain length|
-|»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»» length|string|true|none|String must contain with this value|
-|»»»»»»»»»»»»»»»»»»»»»»» operator|string|false|none|Which type of length comparision to make|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate string is a certain length|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; length|string|true|none|String must contain with this value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; operator|string|false|none|Which type of length comparision to make|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number is less than a value. By default, this will check if value is less than or equals to|
-|»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»» value|number|true|none|The value to compare against|
-|»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
-|»»»»»»»»»»»»»»»»»»»»»»»» include|boolean|false|none|Include the value in the check|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate number is less than a value. By default, this will check if value is less than or equals to|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; value|number|true|none|The value to compare against|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; precision|integer|false|none|When number is a float, this will set the decimal precision|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; include|boolean|false|none|Include the value in the check|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an MAC address format|
-|»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This validator has no options|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate string matches an MAC address format|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|This validator has no options|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches a regular expression|
-|»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»» mask|string|true|none|Mask to validate against|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate string matches a regular expression|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mask|string|true|none|Mask to validate against|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string starts with a value|
-|»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»» starts_with|string|true|none|String must start with this value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate string starts with a value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; starts_with|string|true|none|String must start with this value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validates that a value follows a step. Both start and end options do not have to sync with the step. If they do not sync then find the nearest step.|
-|»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»» step|number|true|none|The step value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»» start|integer|false|none|Start stepping at this value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»» end|integer|false|none|End stepping at this value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validates that a value follows a step. Both start and end options do not have to sync with the step. If they do not sync then find the nearest step.|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; step|number|true|none|The step value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; start|integer|false|none|Start stepping at this value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end|integer|false|none|End stepping at this value|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an URI|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»» schemes|[string]|false|none|Schemes to match. By default all are matched|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate string matches an URI|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; schemes|[string]|false|none|Schemes to match. By default all are matched|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate value matches a list (white list)|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» list|[string]|true|none|The list of approved values|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate value matches a list (white list)|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; list|[string]|true|none|The list of approved values|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+
+*and*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _links|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; nter:part-customer|object|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; href|string(uri)|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; nter:part-manufacturer|object|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; href|string(uri)|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self|object|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; href|string(uri)|false|none|none|
 
 *continued*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»» _links|object|false|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» self|object|false|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» href|string(uri)|false|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» next|object|false|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» href|string(uri)|false|none|none|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|entity_type|CUS|
-|category|PENDING|
-|category|IN_PROGRESS|
-|category|VERIFYING|
-|category|COMPLETE|
-|category|CANCELLED|
-|category|BLOCKED|
-|entity_type|MFR|
-|type|allowed_list|
-|type|camel|
-|type|date|
-|type|empty|
-|type|float|
-|type|kebab|
-|type|lower|
-|type|number|
-|type|prefix|
-|type|snake|
-|type|string|
-|type|suffix|
-|type|trim|
-|type|upper|
-|type|greater_than|
-|type|white_list|
-|type|contains|
-|type|email_address|
-|type|ends_with|
-|type|equals|
-|type|greater_than|
-|type|hostname|
-|record_type|A|
-|record_type|AAAA|
-|record_type|AFSDB|
-|record_type|APL|
-|record_type|CAA|
-|record_type|CDNSKEY|
-|record_type|CDS|
-|record_type|CERT|
-|record_type|CNAME|
-|record_type|CSYNC|
-|record_type|DHCID|
-|record_type|DLV|
-|record_type|DNAME|
-|record_type|DNSKEY|
-|record_type|DS|
-|record_type|HIP|
-|record_type|IPSECKEY|
-|record_type|KEY|
-|record_type|KX|
-|record_type|LOC|
-|record_type|MX|
-|record_type|NAPTR|
-|record_type|NS|
-|record_type|NSEC|
-|record_type|NSEC3|
-|record_type|NSEC3PARAM|
-|record_type|OPENPGPKEY|
-|record_type|PTR|
-|record_type|RRSIG|
-|record_type|RP|
-|record_type|SIG|
-|record_type|SMIMEA|
-|record_type|SOA|
-|record_type|SRV|
-|record_type|SSHFP|
-|record_type|TA|
-|record_type|TKEY|
-|record_type|TLSA|
-|record_type|TSIG|
-|record_type|TXT|
-|record_type|URI|
-|type|ipAddress|
-|type|length|
-|operator|equals|
-|operator|less_than|
-|operator|less_than_equals|
-|operator|greater_than|
-|operator|greater_than_equals|
-|type|lessThan|
-|type|macAddress|
-|type|mask|
-|type|startsWith|
-|type|step|
-|type|uri|
-|type|whiteList|
+|&nbsp;&nbsp;&nbsp;&nbsp; _links|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self|object|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; href|string(uri)|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; next|object|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; href|string(uri)|false|none|none|
 
 Status Code **401**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|string|false|none|none|
-|» type|string|false|none|none|
-|» status|number|false|none|none|
-|» detail|string|false|none|none|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|title|Unauthorized|
-|type|https://docs.nterprise.com/api/problem/Unauthorized|
-|status|401|
-|detail|You are not authorized to access this resource|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
 
 Status Code **403**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|string|false|none|none|
-|» type|string|false|none|none|
-|» status|number|false|none|none|
-|» detail|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
 
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|title|Forbidden|
-|type|https://docs.nterprise.com/api/problem/Forbidden|
-|status|403|
-|detail|You are forbidden to access this resource|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## createPart
+### POST /parts - *Create part *
 
 <a id="opIdcreatePart"></a>
 
-`POST /parts`
+*Create part *
 
-*Creates a part *
-
-Creates a new part  following the part  schema
+Creates a part 
 
 > Body parameter
-
-```json
-{
-  "type": "object",
-  "required": [
-    "label",
-    "customer",
-    "manufacturer",
-    "input_filter",
-    "serial_prefix"
-  ],
-  "properties": {
-    "label": {
-      "type": "string",
-      "description": "Label for the entity"
-    },
-    "customer": {
-      "type": "object",
-      "required": [
-        "customer_id"
-      ],
-      "properties": {
-        "customer_id": {
-          "description": "Customer identifier",
-          "type": "string",
-          "readOnly": true,
-          "pattern": "^[0-9a-zA-Z-_]+$"
-        }
-      }
-    },
-    "manufacturer": {
-      "type": "object",
-      "required": [
-        "manufacturer_id",
-        "part_number"
-      ],
-      "properties": {
-        "manufacturer_id": {
-          "description": "Manufacturer identifier",
-          "type": "string",
-          "readOnly": true,
-          "pattern": "^[0-9a-zA-Z-_]+$"
-        },
-        "part_number": {
-          "type": "string",
-          "description": "Part number the manufacturer uses. If this is not set, then the part number is used"
-        }
-      }
-    },
-    "serial_prefix": {
-      "type": "string",
-      "nullable": true,
-      "description": "A serial number prefix for the part"
-    },
-    "input_filter": {
-      "type": "array",
-      "description": "Input Filters allow custom fields to be defined for entities",
-      "items": {
-        "type": "object",
-        "description": "Input filter specification",
-        "required": [
-          "label",
-          "key",
-          "filters",
-          "validators"
-        ],
-        "properties": {
-          "label": {
-            "type": "string",
-            "description": "Human readable name"
-          },
-          "key": {
-            "type": "string",
-            "description": "Slug used to store the property",
-            "readOnly": true,
-            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-          },
-          "filters": {
-            "type": "array",
-            "description": "A Collection of filters applied to the field",
-            "maxItems": 100,
-            "items": {
-              "anyOf": [
-                {
-                  "type": "object",
-                  "description": "This filter will set the value based on a list of approved values. If the value is not in the list, it will then be set to empty unless the default option is set",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "allowed_list"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "approved_values"
-                      ],
-                      "properties": {
-                        "approved_values": {
-                          "type": "array",
-                          "minimum": 1,
-                          "maximum": 100,
-                          "description": "The list of approved values",
-                          "items": {
-                            "type": "string"
-                          }
-                        },
-                        "check_case": {
-                          "type": "boolean",
-                          "description": "Perform a case sensitive match. By default will not match case",
-                          "default": false
-                        },
-                        "default": {
-                          "type": "string",
-                          "nullable": true,
-                          "description": "If this is set and the value is not in the approved_list, set the value to this"
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Make the value camelCase",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "camel"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "description": "This filter has no options"
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Filter to transform a value into a date",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "date"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "description": "Date filter has no options"
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Filter to transform values into null. This is helpful when trying to make a value required. The following are considered empty:\n# The number 0 or 0.0\n# empty string ''\n# A boolean false\n# The word 'false'\n# ",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "empty"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "description": "empty filter has no options"
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Filter to transform a value into a float. Non numeric characters (including comma) will be removed",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "float"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "properties": {
-                        "precision": {
-                          "type": "integer",
-                          "minimum": 1,
-                          "maximum": 8,
-                          "default": 3,
-                          "description": "How many decimal places to preserve"
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Make the value kebab-case",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "kebab"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "description": "This filter has no options"
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Make the value lowercase",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "lower"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "description": "This filter has no options"
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Filter to transform a value into a number. Non numeric characters (including comma and decimal points) will be removed",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "number"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "description": "Number filter has no options"
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Add a prefix to the start of a string. If the string already start with the prefix, it will not prepend.",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "prefix"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "prefix"
-                      ],
-                      "properties": {
-                        "prefix": {
-                          "type": "string",
-                          "description": "The prefix to add"
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Make the value snake_case",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "snake"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "description": "This filter has no options"
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Filter to transform a value into a string",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "string"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "description": "String filter has no options"
-                    }
-                  }
-                },
-                {
-                  "description": "Add a suffix to the start of a string. If the string already start with the suffix, it will not append.",
-                  "type": "object",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "suffix"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "suffix"
-                      ],
-                      "properties": {
-                        "suffix": {
-                          "type": "string",
-                          "description": "The suffix to add"
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Filter to trim whitespace from a value",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "trim"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "description": "By default will trim from the start and end",
-                      "properties": {
-                        "start": {
-                          "type": "boolean",
-                          "description": "Remove white space from the start of the string",
-                          "default": true
-                        },
-                        "end": {
-                          "type": "boolean",
-                          "description": "Remove white space from the end of the string",
-                          "default": true
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Make the value UPPERCASE",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "upper"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "description": "This filter has no options"
-                    }
-                  }
-                }
-              ]
-            }
-          },
-          "validators": {
-            "type": "array",
-            "description": "A set of validators to use for this field",
-            "maxItems": 100,
-            "items": {
-              "anyOf": [
-                {
-                  "type": "object",
-                  "description": "Validate number is between two values. By default, min and max are included",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "greater_than"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "min",
-                        "max"
-                      ],
-                      "properties": {
-                        "min": {
-                          "type": "number",
-                          "description": "Minimum value to check"
-                        },
-                        "max": {
-                          "type": "number",
-                          "description": "The maximum value to check"
-                        },
-                        "precision": {
-                          "type": "integer",
-                          "description": "When number is a float, this will set the decimal precision",
-                          "minimum": 1,
-                          "maximum": 8,
-                          "default": 3
-                        },
-                        "include": {
-                          "type": "boolean",
-                          "description": "Include the value in the check",
-                          "default": true
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate value does not match a list (black list)",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "white_list"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "list"
-                      ],
-                      "properties": {
-                        "list": {
-                          "type": "array",
-                          "minimum": 1,
-                          "maximum": 100,
-                          "description": "The list of approved values",
-                          "items": {
-                            "type": "string"
-                          }
-                        },
-                        "check_case": {
-                          "type": "boolean",
-                          "description": "Perform a case sensitive match. By default will not match case",
-                          "default": false
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate string contains a value",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "contains"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "contains"
-                      ],
-                      "properties": {
-                        "contains": {
-                          "type": "string",
-                          "description": "String must contain with this value"
-                        },
-                        "check_case": {
-                          "type": "boolean",
-                          "description": "Perform a case sensitive match. By default will not match case",
-                          "default": false
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate string is a correct email address",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "email_address"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "properties": {
-                        "strict": {
-                          "type": "boolean",
-                          "description": "Enforce strict standards from ARPA. This will enforce the length of the string",
-                          "default": true
-                        },
-                        "lookup": {
-                          "type": "boolean",
-                          "description": "Look up the host name and check if it has a valid MX record",
-                          "default": false
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate string ends with a value",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "ends_with"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "ends_with"
-                      ],
-                      "properties": {
-                        "ends_with": {
-                          "type": "string",
-                          "description": "String must end with this value"
-                        },
-                        "check_case": {
-                          "type": "boolean",
-                          "description": "Perform a case sensitive match. By default will not match case",
-                          "default": false
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate number equals a value",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "equals"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "value"
-                      ],
-                      "properties": {
-                        "value": {
-                          "type": "number",
-                          "description": "The value to compare against"
-                        },
-                        "precision": {
-                          "type": "integer",
-                          "description": "When value is a float, this will set the decimal precision",
-                          "minimum": 1,
-                          "maximum": 8,
-                          "default": 3
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate number is greater than a value. By default, this will check if value is greater than or equals to",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "greater_than"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "value"
-                      ],
-                      "properties": {
-                        "value": {
-                          "type": "number",
-                          "description": "The value to compare against"
-                        },
-                        "precision": {
-                          "type": "integer",
-                          "description": "When number is a float, this will set the decimal precision",
-                          "minimum": 1,
-                          "maximum": 8,
-                          "default": 3
-                        },
-                        "include": {
-                          "type": "boolean",
-                          "description": "Include the value in the check",
-                          "default": true
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate string has a correct DNS records",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "hostname"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "properties": {
-                        "record_type": {
-                          "type": "string",
-                          "description": "DNS record type to validate",
-                          "default": "A",
-                          "enum": [
-                            "A",
-                            "AAAA",
-                            "AFSDB",
-                            "APL",
-                            "CAA",
-                            "CDNSKEY",
-                            "CDS",
-                            "CERT",
-                            "CNAME",
-                            "CSYNC",
-                            "DHCID",
-                            "DLV",
-                            "DNAME",
-                            "DNSKEY",
-                            "DS",
-                            "HIP",
-                            "IPSECKEY",
-                            "KEY",
-                            "KX",
-                            "LOC",
-                            "MX",
-                            "NAPTR",
-                            "NS",
-                            "NSEC",
-                            "NSEC3",
-                            "NSEC3PARAM",
-                            "OPENPGPKEY",
-                            "PTR",
-                            "RRSIG",
-                            "RP",
-                            "SIG",
-                            "SMIMEA",
-                            "SOA",
-                            "SRV",
-                            "SSHFP",
-                            "TA",
-                            "TKEY",
-                            "TLSA",
-                            "TSIG",
-                            "TXT",
-                            "URI"
-                          ]
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate string matches an IP address format. Defaults to matching IPv4",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "ipAddress"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "properties": {
-                        "versions": {
-                          "type": "array",
-                          "description": "IP Version to match against",
-                          "items": {
-                            "type": "string",
-                            "enum": [
-                              "IPv4",
-                              "IPv6"
-                            ]
-                          }
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate string is a certain length",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "length"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "length"
-                      ],
-                      "properties": {
-                        "length": {
-                          "type": "string",
-                          "description": "String must contain with this value"
-                        },
-                        "operator": {
-                          "type": "string",
-                          "description": "Which type of length comparision to make",
-                          "default": "equals",
-                          "enum": [
-                            "equals",
-                            "less_than",
-                            "less_than_equals",
-                            "greater_than",
-                            "greater_than_equals"
-                          ]
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate number is less than a value. By default, this will check if value is less than or equals to",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "lessThan"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "value"
-                      ],
-                      "properties": {
-                        "value": {
-                          "type": "number",
-                          "description": "The value to compare against"
-                        },
-                        "precision": {
-                          "type": "integer",
-                          "description": "When number is a float, this will set the decimal precision",
-                          "minimum": 1,
-                          "maximum": 8,
-                          "default": 3
-                        },
-                        "include": {
-                          "type": "boolean",
-                          "description": "Include the value in the check",
-                          "default": true
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate string matches an MAC address format",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "macAddress"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "description": "This validator has no options"
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate string matches a regular expression",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "mask"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "mask"
-                      ],
-                      "properties": {
-                        "mask": {
-                          "type": "string",
-                          "description": "Mask to validate against"
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate string starts with a value",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "startsWith"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "starts_with"
-                      ],
-                      "properties": {
-                        "starts_with": {
-                          "type": "string",
-                          "description": "String must start with this value"
-                        },
-                        "check_case": {
-                          "type": "boolean",
-                          "description": "Perform a case sensitive match. By default will not match case",
-                          "default": false
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validates that a value follows a step. Both start and end options do not have to sync with the step. If they do not sync then find the nearest step.",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "step"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "step"
-                      ],
-                      "properties": {
-                        "step": {
-                          "type": "number",
-                          "description": "The step value"
-                        },
-                        "start": {
-                          "type": "integer",
-                          "description": "Start stepping at this value"
-                        },
-                        "end": {
-                          "type": "integer",
-                          "description": "End stepping at this value"
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate string matches an URI",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "uri"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "properties": {
-                        "schemes": {
-                          "type": "array",
-                          "description": "Schemes to match. By default all are matched",
-                          "items": {
-                            "type": "string",
-                            "enum": [
-                              "http",
-                              "https",
-                              "sip",
-                              "sips",
-                              "ftp",
-                              "ftps",
-                              "ldap",
-                              "ldaps",
-                              "file",
-                              "udp",
-                              "tcp",
-                              "urn"
-                            ]
-                          }
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate value matches a list (white list)",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "whiteList"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "list"
-                      ],
-                      "properties": {
-                        "list": {
-                          "type": "array",
-                          "minimum": 1,
-                          "maximum": 100,
-                          "description": "The list of approved values",
-                          "items": {
-                            "type": "string"
-                          }
-                        },
-                        "check_case": {
-                          "type": "boolean",
-                          "description": "Perform a case sensitive match. By default will not match case",
-                          "default": false
-                        }
-                      }
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        }
-      }
-    }
-  }
-}
-```
 
 <h3 id="createpart-parameters">Parameters</h3>
 
@@ -2919,1502 +575,159 @@ Creates a new part  following the part  schema
 |---|---|---|---|---|
 |label|body|string|true|Label for the entity|
 |customer|body|object|true|none|
-|» customer_id|body|string|true|Customer identifier|
+|&nbsp;&nbsp;&nbsp;&nbsp; customer_id|body|string|true|Customer identifier|
 |manufacturer|body|object|true|none|
-|» manufacturer_id|body|string|true|Manufacturer identifier|
-|» part_number|body|string|true|Part number the manufacturer uses. If this is not set, then the part number is used|
-|serial_prefix|body|string\|null|true|A serial number prefix for the part|
+|&nbsp;&nbsp;&nbsp;&nbsp; manufacturer_id|body|string|true|Manufacturer identifier|
+|&nbsp;&nbsp;&nbsp;&nbsp; part_number|body|string|true|Part number the manufacturer uses. If this is not set, then the part number is used|
+|serial_prefix|body|string¦null|true|A serial number prefix for the part|
 |input_filter|body|[object]|true|Input Filters allow custom fields to be defined for entities|
-|» label|body|string|true|Human readable name|
-|» key|body|string|true|Slug used to store the property|
-|» filters|body|[anyOf]|true|A Collection of filters applied to the field|
-|»» *anonymous*|body|object|false|This filter will set the value based on a list of approved values. If the value is not in the list, it will then be set to empty unless the default option is set|
-|»»» type|body|string|true|none|
-|»»» options|body|object|true|none|
-|»»»» approved_values|body|[string]|true|The list of approved values|
-|»»»» check_case|body|boolean|false|Perform a case sensitive match. By default will not match case|
-|»»»» default|body|string\|null|false|If this is set and the value is not in the approved_list, set the value to this|
-|»»» *anonymous*|body|object|false|Make the value camelCase|
-|»»»» type|body|string|true|none|
-|»»»» options|body|object|true|This filter has no options|
-|»»» *anonymous*|body|object|false|Filter to transform a value into a date|
-|»»»» type|body|string|true|none|
-|»»»» options|body|object|true|Date filter has no options|
-|»»» *anonymous*|body|object|false|Filter to transform values into null. This is helpful when trying to make a value required. The following are considered empty:|
-|»»»» type|body|string|true|none|
-|»»»» options|body|object|true|empty filter has no options|
-|»»» *anonymous*|body|object|false|Filter to transform a value into a float. Non numeric characters (including comma) will be removed|
-|»»»» type|body|string|true|none|
-|»»»» options|body|object|true|none|
-|»»»»» precision|body|integer|false|How many decimal places to preserve|
-|»»»» *anonymous*|body|object|false|Make the value kebab-case|
-|»»»»» type|body|string|true|none|
-|»»»»» options|body|object|true|This filter has no options|
-|»»»» *anonymous*|body|object|false|Make the value lowercase|
-|»»»»» type|body|string|true|none|
-|»»»»» options|body|object|true|This filter has no options|
-|»»»» *anonymous*|body|object|false|Filter to transform a value into a number. Non numeric characters (including comma and decimal points) will be removed|
-|»»»»» type|body|string|true|none|
-|»»»»» options|body|object|true|Number filter has no options|
-|»»»» *anonymous*|body|object|false|Add a prefix to the start of a string. If the string already start with the prefix, it will not prepend.|
-|»»»»» type|body|string|true|none|
-|»»»»» options|body|object|true|none|
-|»»»»»» prefix|body|string|true|The prefix to add|
-|»»»»» *anonymous*|body|object|false|Make the value snake_case|
-|»»»»»» type|body|string|true|none|
-|»»»»»» options|body|object|true|This filter has no options|
-|»»»»» *anonymous*|body|object|false|Filter to transform a value into a string|
-|»»»»»» type|body|string|true|none|
-|»»»»»» options|body|object|true|String filter has no options|
-|»»»»» *anonymous*|body|object|false|Add a suffix to the start of a string. If the string already start with the suffix, it will not append.|
-|»»»»»» type|body|string|true|none|
-|»»»»»» options|body|object|true|none|
-|»»»»»»» suffix|body|string|true|The suffix to add|
-|»»»»»» *anonymous*|body|object|false|Filter to trim whitespace from a value|
-|»»»»»»» type|body|string|true|none|
-|»»»»»»» options|body|object|true|By default will trim from the start and end|
-|»»»»»»»» start|body|boolean|false|Remove white space from the start of the string|
-|»»»»»»»» end|body|boolean|false|Remove white space from the end of the string|
-|»»»»»»» *anonymous*|body|object|false|Make the value UPPERCASE|
-|»»»»»»»» type|body|string|true|none|
-|»»»»»»»» options|body|object|true|This filter has no options|
-|»»»»»»» validators|body|[anyOf]|true|A set of validators to use for this field|
-|»»»»»»»» *anonymous*|body|object|false|Validate number is between two values. By default, min and max are included|
-|»»»»»»»»» type|body|string|true|none|
-|»»»»»»»»» options|body|object|true|none|
-|»»»»»»»»»» min|body|number|true|Minimum value to check|
-|»»»»»»»»»» max|body|number|true|The maximum value to check|
-|»»»»»»»»»» precision|body|integer|false|When number is a float, this will set the decimal precision|
-|»»»»»»»»»» include|body|boolean|false|Include the value in the check|
-|»»»»»»»»» *anonymous*|body|object|false|Validate value does not match a list (black list)|
-|»»»»»»»»»» type|body|string|true|none|
-|»»»»»»»»»» options|body|object|true|none|
-|»»»»»»»»»»» list|body|[string]|true|The list of approved values|
-|»»»»»»»»»»» check_case|body|boolean|false|Perform a case sensitive match. By default will not match case|
-|»»»»»»»»»» *anonymous*|body|object|false|Validate string contains a value|
-|»»»»»»»»»»» type|body|string|true|none|
-|»»»»»»»»»»» options|body|object|true|none|
-|»»»»»»»»»»»» contains|body|string|true|String must contain with this value|
-|»»»»»»»»»»»» check_case|body|boolean|false|Perform a case sensitive match. By default will not match case|
-|»»»»»»»»»»» *anonymous*|body|object|false|Validate string is a correct email address|
-|»»»»»»»»»»»» type|body|string|true|none|
-|»»»»»»»»»»»» options|body|object|true|none|
-|»»»»»»»»»»»»» strict|body|boolean|false|Enforce strict standards from ARPA. This will enforce the length of the string|
-|»»»»»»»»»»»»» lookup|body|boolean|false|Look up the host name and check if it has a valid MX record|
-|»»»»»»»»»»»» *anonymous*|body|object|false|Validate string ends with a value|
-|»»»»»»»»»»»»» type|body|string|true|none|
-|»»»»»»»»»»»»» options|body|object|true|none|
-|»»»»»»»»»»»»»» ends_with|body|string|true|String must end with this value|
-|»»»»»»»»»»»»»» check_case|body|boolean|false|Perform a case sensitive match. By default will not match case|
-|»»»»»»»»»»»»» *anonymous*|body|object|false|Validate number equals a value|
-|»»»»»»»»»»»»»» type|body|string|true|none|
-|»»»»»»»»»»»»»» options|body|object|true|none|
-|»»»»»»»»»»»»»»» value|body|number|true|The value to compare against|
-|»»»»»»»»»»»»»»» precision|body|integer|false|When value is a float, this will set the decimal precision|
-|»»»»»»»»»»»»»» *anonymous*|body|object|false|Validate number is greater than a value. By default, this will check if value is greater than or equals to|
-|»»»»»»»»»»»»»»» type|body|string|true|none|
-|»»»»»»»»»»»»»»» options|body|object|true|none|
-|»»»»»»»»»»»»»»»» value|body|number|true|The value to compare against|
-|»»»»»»»»»»»»»»»» precision|body|integer|false|When number is a float, this will set the decimal precision|
-|»»»»»»»»»»»»»»»» include|body|boolean|false|Include the value in the check|
-|»»»»»»»»»»»»»»» *anonymous*|body|object|false|Validate string has a correct DNS records|
-|»»»»»»»»»»»»»»»» type|body|string|true|none|
-|»»»»»»»»»»»»»»»» options|body|object|true|none|
-|»»»»»»»»»»»»»»»»» record_type|body|string|false|DNS record type to validate|
-|»»»»»»»»»»»»»»»» *anonymous*|body|object|false|Validate string matches an IP address format. Defaults to matching IPv4|
-|»»»»»»»»»»»»»»»»» type|body|string|true|none|
-|»»»»»»»»»»»»»»»»» options|body|object|true|none|
-|»»»»»»»»»»»»»»»»»» versions|body|[string]|false|IP Version to match against|
-|»»»»»»»»»»»»»»»»» *anonymous*|body|object|false|Validate string is a certain length|
-|»»»»»»»»»»»»»»»»»» type|body|string|true|none|
-|»»»»»»»»»»»»»»»»»» options|body|object|true|none|
-|»»»»»»»»»»»»»»»»»»» length|body|string|true|String must contain with this value|
-|»»»»»»»»»»»»»»»»»»» operator|body|string|false|Which type of length comparision to make|
-|»»»»»»»»»»»»»»»»»» *anonymous*|body|object|false|Validate number is less than a value. By default, this will check if value is less than or equals to|
-|»»»»»»»»»»»»»»»»»»» type|body|string|true|none|
-|»»»»»»»»»»»»»»»»»»» options|body|object|true|none|
-|»»»»»»»»»»»»»»»»»»»» value|body|number|true|The value to compare against|
-|»»»»»»»»»»»»»»»»»»»» precision|body|integer|false|When number is a float, this will set the decimal precision|
-|»»»»»»»»»»»»»»»»»»»» include|body|boolean|false|Include the value in the check|
-|»»»»»»»»»»»»»»»»»»» *anonymous*|body|object|false|Validate string matches an MAC address format|
-|»»»»»»»»»»»»»»»»»»»» type|body|string|true|none|
-|»»»»»»»»»»»»»»»»»»»» options|body|object|true|This validator has no options|
-|»»»»»»»»»»»»»»»»»»» *anonymous*|body|object|false|Validate string matches a regular expression|
-|»»»»»»»»»»»»»»»»»»»» type|body|string|true|none|
-|»»»»»»»»»»»»»»»»»»»» options|body|object|true|none|
-|»»»»»»»»»»»»»»»»»»»»» mask|body|string|true|Mask to validate against|
-|»»»»»»»»»»»»»»»»»»»» *anonymous*|body|object|false|Validate string starts with a value|
-|»»»»»»»»»»»»»»»»»»»»» type|body|string|true|none|
-|»»»»»»»»»»»»»»»»»»»»» options|body|object|true|none|
-|»»»»»»»»»»»»»»»»»»»»»» starts_with|body|string|true|String must start with this value|
-|»»»»»»»»»»»»»»»»»»»»»» check_case|body|boolean|false|Perform a case sensitive match. By default will not match case|
-|»»»»»»»»»»»»»»»»»»»»» *anonymous*|body|object|false|Validates that a value follows a step. Both start and end options do not have to sync with the step. If they do not sync then find the nearest step.|
-|»»»»»»»»»»»»»»»»»»»»»» type|body|string|true|none|
-|»»»»»»»»»»»»»»»»»»»»»» options|body|object|true|none|
-|»»»»»»»»»»»»»»»»»»»»»»» step|body|number|true|The step value|
-|»»»»»»»»»»»»»»»»»»»»»»» start|body|integer|false|Start stepping at this value|
-|»»»»»»»»»»»»»»»»»»»»»»» end|body|integer|false|End stepping at this value|
-|»»»»»»»»»»»»»»»»»»»»»» *anonymous*|body|object|false|Validate string matches an URI|
-|»»»»»»»»»»»»»»»»»»»»»»» type|body|string|true|none|
-|»»»»»»»»»»»»»»»»»»»»»»» options|body|object|true|none|
-|»»»»»»»»»»»»»»»»»»»»»»»» schemes|body|[string]|false|Schemes to match. By default all are matched|
-|»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|body|object|false|Validate value matches a list (white list)|
-|»»»»»»»»»»»»»»»»»»»»»»»» type|body|string|true|none|
-|»»»»»»»»»»»»»»»»»»»»»»»» options|body|object|true|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»» list|body|[string]|true|The list of approved values|
-|»»»»»»»»»»»»»»»»»»»»»»»»» check_case|body|boolean|false|Perform a case sensitive match. By default will not match case|
+|&nbsp;&nbsp;&nbsp;&nbsp; label|body|string|true|Human readable name|
+|&nbsp;&nbsp;&nbsp;&nbsp; key|body|string|true|Slug used to store the property|
+|&nbsp;&nbsp;&nbsp;&nbsp; filters|body|[anyOf]|true|A Collection of filters applied to the field|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|This filter will set the value based on a list of approved values. If the value is not in the list, it will then be set to empty unless the default option is set|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; approved_values|body|[string]|true|The list of approved values|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; check_case|body|boolean|false|Perform a case sensitive match. By default will not match case|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; default|body|string¦null|false|If this is set and the value is not in the approved_list, set the value to this|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Make the value camelCase|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|This filter has no options|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Filter to transform a value into a date|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|Date filter has no options|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Filter to transform values into null. This is helpful when trying to make a value required. The following are considered empty:|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|empty filter has no options|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Filter to transform a value into a float. Non numeric characters (including comma) will be removed|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; precision|body|integer|false|How many decimal places to preserve|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Make the value kebab-case|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|This filter has no options|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Make the value lowercase|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|This filter has no options|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Filter to transform a value into a number. Non numeric characters (including comma and decimal points) will be removed|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|Number filter has no options|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Add a prefix to the start of a string. If the string already start with the prefix, it will not prepend.|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; prefix|body|string|true|The prefix to add|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Make the value snake_case|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|This filter has no options|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Filter to transform a value into a string|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|String filter has no options|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Add a suffix to the start of a string. If the string already start with the suffix, it will not append.|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; suffix|body|string|true|The suffix to add|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Filter to trim whitespace from a value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|By default will trim from the start and end|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; start|body|boolean|false|Remove white space from the start of the string|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end|body|boolean|false|Remove white space from the end of the string|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Make the value UPPERCASE|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|This filter has no options|
+|&nbsp;&nbsp;&nbsp;&nbsp; validators|body|[anyOf]|true|A set of validators to use for this field|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Validate number is between two values. By default, min and max are included|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; min|body|number|true|Minimum value to check|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; max|body|number|true|The maximum value to check|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; precision|body|integer|false|When number is a float, this will set the decimal precision|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; include|body|boolean|false|Include the value in the check|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Validate value does not match a list (black list)|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; list|body|[string]|true|The list of approved values|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; check_case|body|boolean|false|Perform a case sensitive match. By default will not match case|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Validate string contains a value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; contains|body|string|true|String must contain with this value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; check_case|body|boolean|false|Perform a case sensitive match. By default will not match case|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Validate string is a correct email address|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; strict|body|boolean|false|Enforce strict standards from ARPA. This will enforce the length of the string|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; lookup|body|boolean|false|Look up the host name and check if it has a valid MX record|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Validate string ends with a value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ends_with|body|string|true|String must end with this value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; check_case|body|boolean|false|Perform a case sensitive match. By default will not match case|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Validate number equals a value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; value|body|number|true|The value to compare against|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; precision|body|integer|false|When value is a float, this will set the decimal precision|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Validate number is greater than a value. By default, this will check if value is greater than or equals to|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; value|body|number|true|The value to compare against|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; precision|body|integer|false|When number is a float, this will set the decimal precision|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; include|body|boolean|false|Include the value in the check|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Validate string has a correct DNS records|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; record_type|body|string|false|DNS record type to validate|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Validate string matches an IP address format. Defaults to matching IPv4|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; versions|body|[string]|false|IP Version to match against|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Validate string is a certain length|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; length|body|string|true|String must contain with this value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; operator|body|string|false|Which type of length comparision to make|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Validate number is less than a value. By default, this will check if value is less than or equals to|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; value|body|number|true|The value to compare against|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; precision|body|integer|false|When number is a float, this will set the decimal precision|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; include|body|boolean|false|Include the value in the check|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Validate string matches an MAC address format|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|This validator has no options|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Validate string matches a regular expression|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mask|body|string|true|Mask to validate against|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Validate string starts with a value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; starts_with|body|string|true|String must start with this value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; check_case|body|boolean|false|Perform a case sensitive match. By default will not match case|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Validates that a value follows a step. Both start and end options do not have to sync with the step. If they do not sync then find the nearest step.|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; step|body|number|true|The step value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; start|body|integer|false|Start stepping at this value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end|body|integer|false|End stepping at this value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Validate string matches an URI|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; schemes|body|[string]|false|Schemes to match. By default all are matched|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Validate value matches a list (white list)|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; list|body|[string]|true|The list of approved values|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; check_case|body|boolean|false|Perform a case sensitive match. By default will not match case|
 
 #### Detailed descriptions
 
-**»»» *anonymous***: Filter to transform values into null. This is helpful when trying to make a value required. The following are considered empty:
+**&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous***: Filter to transform values into null. This is helpful when trying to make a value required. The following are considered empty:
 # The number 0 or 0.0
 # empty string ''
 # A boolean false
 # The word 'false'
 #
-
-#### Enumerated Values
-
-|Parameter|Value|
-|---|---|
-|»»» type|allowed_list|
-|»»»» type|camel|
-|»»»» type|date|
-|»»»» type|empty|
-|»»»» type|float|
-|»»»»» type|kebab|
-|»»»»» type|lower|
-|»»»»» type|number|
-|»»»»» type|prefix|
-|»»»»»» type|snake|
-|»»»»»» type|string|
-|»»»»»» type|suffix|
-|»»»»»»» type|trim|
-|»»»»»»»» type|upper|
-|»»»»»»»»» type|greater_than|
-|»»»»»»»»»» type|white_list|
-|»»»»»»»»»»» type|contains|
-|»»»»»»»»»»»» type|email_address|
-|»»»»»»»»»»»»» type|ends_with|
-|»»»»»»»»»»»»»» type|equals|
-|»»»»»»»»»»»»»»» type|greater_than|
-|»»»»»»»»»»»»»»»» type|hostname|
-|»»»»»»»»»»»»»»»»» record_type|A|
-|»»»»»»»»»»»»»»»»» record_type|AAAA|
-|»»»»»»»»»»»»»»»»» record_type|AFSDB|
-|»»»»»»»»»»»»»»»»» record_type|APL|
-|»»»»»»»»»»»»»»»»» record_type|CAA|
-|»»»»»»»»»»»»»»»»» record_type|CDNSKEY|
-|»»»»»»»»»»»»»»»»» record_type|CDS|
-|»»»»»»»»»»»»»»»»» record_type|CERT|
-|»»»»»»»»»»»»»»»»» record_type|CNAME|
-|»»»»»»»»»»»»»»»»» record_type|CSYNC|
-|»»»»»»»»»»»»»»»»» record_type|DHCID|
-|»»»»»»»»»»»»»»»»» record_type|DLV|
-|»»»»»»»»»»»»»»»»» record_type|DNAME|
-|»»»»»»»»»»»»»»»»» record_type|DNSKEY|
-|»»»»»»»»»»»»»»»»» record_type|DS|
-|»»»»»»»»»»»»»»»»» record_type|HIP|
-|»»»»»»»»»»»»»»»»» record_type|IPSECKEY|
-|»»»»»»»»»»»»»»»»» record_type|KEY|
-|»»»»»»»»»»»»»»»»» record_type|KX|
-|»»»»»»»»»»»»»»»»» record_type|LOC|
-|»»»»»»»»»»»»»»»»» record_type|MX|
-|»»»»»»»»»»»»»»»»» record_type|NAPTR|
-|»»»»»»»»»»»»»»»»» record_type|NS|
-|»»»»»»»»»»»»»»»»» record_type|NSEC|
-|»»»»»»»»»»»»»»»»» record_type|NSEC3|
-|»»»»»»»»»»»»»»»»» record_type|NSEC3PARAM|
-|»»»»»»»»»»»»»»»»» record_type|OPENPGPKEY|
-|»»»»»»»»»»»»»»»»» record_type|PTR|
-|»»»»»»»»»»»»»»»»» record_type|RRSIG|
-|»»»»»»»»»»»»»»»»» record_type|RP|
-|»»»»»»»»»»»»»»»»» record_type|SIG|
-|»»»»»»»»»»»»»»»»» record_type|SMIMEA|
-|»»»»»»»»»»»»»»»»» record_type|SOA|
-|»»»»»»»»»»»»»»»»» record_type|SRV|
-|»»»»»»»»»»»»»»»»» record_type|SSHFP|
-|»»»»»»»»»»»»»»»»» record_type|TA|
-|»»»»»»»»»»»»»»»»» record_type|TKEY|
-|»»»»»»»»»»»»»»»»» record_type|TLSA|
-|»»»»»»»»»»»»»»»»» record_type|TSIG|
-|»»»»»»»»»»»»»»»»» record_type|TXT|
-|»»»»»»»»»»»»»»»»» record_type|URI|
-|»»»»»»»»»»»»»»»»» type|ipAddress|
-|»»»»»»»»»»»»»»»»»» versions|IPv4|
-|»»»»»»»»»»»»»»»»»» versions|IPv6|
-|»»»»»»»»»»»»»»»»»» type|length|
-|»»»»»»»»»»»»»»»»»»» operator|equals|
-|»»»»»»»»»»»»»»»»»»» operator|less_than|
-|»»»»»»»»»»»»»»»»»»» operator|less_than_equals|
-|»»»»»»»»»»»»»»»»»»» operator|greater_than|
-|»»»»»»»»»»»»»»»»»»» operator|greater_than_equals|
-|»»»»»»»»»»»»»»»»»»» type|lessThan|
-|»»»»»»»»»»»»»»»»»»»» type|macAddress|
-|»»»»»»»»»»»»»»»»»»»» type|mask|
-|»»»»»»»»»»»»»»»»»»»»» type|startsWith|
-|»»»»»»»»»»»»»»»»»»»»»» type|step|
-|»»»»»»»»»»»»»»»»»»»»»»» type|uri|
-|»»»»»»»»»»»»»»»»»»»»»»»» schemes|http|
-|»»»»»»»»»»»»»»»»»»»»»»»» schemes|https|
-|»»»»»»»»»»»»»»»»»»»»»»»» schemes|sip|
-|»»»»»»»»»»»»»»»»»»»»»»»» schemes|sips|
-|»»»»»»»»»»»»»»»»»»»»»»»» schemes|ftp|
-|»»»»»»»»»»»»»»»»»»»»»»»» schemes|ftps|
-|»»»»»»»»»»»»»»»»»»»»»»»» schemes|ldap|
-|»»»»»»»»»»»»»»»»»»»»»»»» schemes|ldaps|
-|»»»»»»»»»»»»»»»»»»»»»»»» schemes|file|
-|»»»»»»»»»»»»»»»»»»»»»»»» schemes|udp|
-|»»»»»»»»»»»»»»»»»»»»»»»» schemes|tcp|
-|»»»»»»»»»»»»»»»»»»»»»»»» schemes|urn|
-|»»»»»»»»»»»»»»»»»»»»»»»» type|whiteList|
-
-> Example responses
-
-> 200 Response
-
-```json
-{
-  "type": "object",
-  "properties": {
-    "_links": {
-      "type": "object",
-      "properties": {
-        "self": {
-          "x-example": {
-            "href": "https://api.nterprise.com/parts/23Y1rNJ6zyiRzqN"
-          },
-          "type": "object",
-          "properties": {
-            "href": {
-              "type": "string",
-              "format": "uri"
-            }
-          }
-        }
-      }
-    },
-    "part_id": {
-      "description": "Unique identifier",
-      "type": "string",
-      "readOnly": true,
-      "pattern": "^[0-9a-zA-Z-_]+$"
-    },
-    "label": {
-      "type": "string",
-      "description": "Label for the entity"
-    },
-    "slug": {
-      "type": "string",
-      "description": "Slug for the entity (Auto-generated from the label)",
-      "readOnly": true,
-      "deprecated": true,
-      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-    },
-    "created": {
-      "description": "Date the entity was created",
-      "type": "string",
-      "format": "date-time",
-      "readOnly": true
-    },
-    "updated": {
-      "description": "Last date the entity was updated",
-      "type": "string",
-      "format": "date-time",
-      "readOnly": true
-    },
-    "customer": {
-      "type": "object",
-      "description": "Customer",
-      "additionalProperties": false,
-      "required": [
-        "label",
-        "entity_id",
-        "entity_type",
-        "created",
-        "updated",
-        "allowed_statuses"
-      ],
-      "properties": {
-        "customer_id": {
-          "description": "Customer identifier",
-          "type": "string",
-          "readOnly": true,
-          "pattern": "^[0-9a-zA-Z-_]+$"
-        },
-        "entity_id": {
-          "x-no-api-doc": true,
-          "type": "string",
-          "description": "Customer identifier",
-          "readOnly": true,
-          "pattern": "^[0-9a-zA-Z-_]+$"
-        },
-        "entity_type": {
-          "x-no-api-doc": true,
-          "enum": [
-            "CUS"
-          ]
-        },
-        "label": {
-          "type": "string",
-          "description": "Label for the entity"
-        },
-        "slug": {
-          "type": "string",
-          "description": "Slug for the entity (Auto-generated from the label)",
-          "readOnly": true,
-          "deprecated": true,
-          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-        },
-        "created": {
-          "description": "Date the entity was created",
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "updated": {
-          "description": "Last date the entity was updated",
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "external_platform": {
-          "type": "object",
-          "description": "External Identifiers for the customer",
-          "deprecated": true,
-          "x-patternProperties": {
-            "^[A-Za-z][A-Za-z0-9_]*$": {
-              "type": "string"
-            }
-          }
-        },
-        "allowed_statuses": {
-          "type": "array",
-          "description": "List of allowed statuses",
-          "uniqueItems": true,
-          "items": {
-            "type": "object",
-            "description": "Defines the properties for a status",
-            "additionalProperties": false,
-            "required": [
-              "status",
-              "category"
-            ],
-            "properties": {
-              "status": {
-                "type": "string",
-                "description": "A Custom label for the status",
-                "pattern": "^[A-Za-z][0-9a-zA-Z-_ ]+$"
-              },
-              "category": {
-                "type": "string",
-                "description": "The classifier for the statues",
-                "enum": [
-                  "PENDING",
-                  "IN_PROGRESS",
-                  "VERIFYING",
-                  "COMPLETE",
-                  "CANCELLED",
-                  "BLOCKED"
-                ]
-              }
-            }
-          }
-        },
-        "total_programs": {
-          "type": "number",
-          "description": "Total programs under the customer"
-        },
-        "total_projects": {
-          "type": "number",
-          "description": "Total projects under the customer"
-        }
-      }
-    },
-    "manufacturer": {
-      "type": "object",
-      "description": "Manufacturer information for the part",
-      "required": [
-        "label",
-        "entity_id",
-        "entity_type",
-        "created",
-        "updated",
-        "part_number"
-      ],
-      "properties": {
-        "part_number": {
-          "type": "string",
-          "description": "Part number the manufacturer uses. If this is not set, then the part number is used"
-        },
-        "manufacturer_id": {
-          "x-no-api-doc": true,
-          "type": "string",
-          "description": "Customer identifier",
-          "readOnly": true,
-          "pattern": "^[0-9a-zA-Z-_]+$"
-        },
-        "entity_id": {
-          "x-no-api-doc": true,
-          "type": "string",
-          "description": "Customer identifier",
-          "readOnly": true,
-          "pattern": "^[0-9a-zA-Z-_]+$"
-        },
-        "entity_type": {
-          "enum": [
-            "MFR"
-          ]
-        },
-        "label": {
-          "type": "string",
-          "description": "Label for the entity"
-        },
-        "slug": {
-          "type": "string",
-          "description": "Slug for the entity (Auto-generated from the label)",
-          "readOnly": true,
-          "deprecated": true,
-          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-        },
-        "created": {
-          "description": "Date the entity was created",
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "updated": {
-          "description": "Last date the entity was updated",
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        }
-      }
-    },
-    "serial_prefix": {
-      "type": "string",
-      "nullable": true,
-      "description": "A serial number prefix for the part"
-    },
-    "input_filter": {
-      "type": "array",
-      "description": "Input Filters allow custom fields to be defined for entities",
-      "items": {
-        "type": "object",
-        "description": "Input filter specification",
-        "required": [
-          "label",
-          "key",
-          "filters",
-          "validators"
-        ],
-        "properties": {
-          "label": {
-            "type": "string",
-            "description": "Human readable name"
-          },
-          "key": {
-            "type": "string",
-            "description": "Slug used to store the property",
-            "readOnly": true,
-            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-          },
-          "filters": {
-            "type": "array",
-            "description": "A Collection of filters applied to the field",
-            "maxItems": 100,
-            "items": {
-              "anyOf": [
-                {
-                  "type": "object",
-                  "description": "This filter will set the value based on a list of approved values. If the value is not in the list, it will then be set to empty unless the default option is set",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "allowed_list"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "approved_values"
-                      ],
-                      "properties": {
-                        "approved_values": {
-                          "type": "array",
-                          "minimum": 1,
-                          "maximum": 100,
-                          "description": "The list of approved values",
-                          "items": {
-                            "type": "string"
-                          }
-                        },
-                        "check_case": {
-                          "type": "boolean",
-                          "description": "Perform a case sensitive match. By default will not match case",
-                          "default": false
-                        },
-                        "default": {
-                          "type": "string",
-                          "nullable": true,
-                          "description": "If this is set and the value is not in the approved_list, set the value to this"
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Make the value camelCase",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "camel"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "description": "This filter has no options"
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Filter to transform a value into a date",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "date"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "description": "Date filter has no options"
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Filter to transform values into null. This is helpful when trying to make a value required. The following are considered empty:\n# The number 0 or 0.0\n# empty string ''\n# A boolean false\n# The word 'false'\n# ",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "empty"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "description": "empty filter has no options"
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Filter to transform a value into a float. Non numeric characters (including comma) will be removed",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "float"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "properties": {
-                        "precision": {
-                          "type": "integer",
-                          "minimum": 1,
-                          "maximum": 8,
-                          "default": 3,
-                          "description": "How many decimal places to preserve"
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Make the value kebab-case",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "kebab"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "description": "This filter has no options"
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Make the value lowercase",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "lower"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "description": "This filter has no options"
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Filter to transform a value into a number. Non numeric characters (including comma and decimal points) will be removed",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "number"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "description": "Number filter has no options"
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Add a prefix to the start of a string. If the string already start with the prefix, it will not prepend.",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "prefix"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "prefix"
-                      ],
-                      "properties": {
-                        "prefix": {
-                          "type": "string",
-                          "description": "The prefix to add"
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Make the value snake_case",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "snake"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "description": "This filter has no options"
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Filter to transform a value into a string",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "string"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "description": "String filter has no options"
-                    }
-                  }
-                },
-                {
-                  "description": "Add a suffix to the start of a string. If the string already start with the suffix, it will not append.",
-                  "type": "object",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "suffix"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "suffix"
-                      ],
-                      "properties": {
-                        "suffix": {
-                          "type": "string",
-                          "description": "The suffix to add"
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Filter to trim whitespace from a value",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "trim"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "description": "By default will trim from the start and end",
-                      "properties": {
-                        "start": {
-                          "type": "boolean",
-                          "description": "Remove white space from the start of the string",
-                          "default": true
-                        },
-                        "end": {
-                          "type": "boolean",
-                          "description": "Remove white space from the end of the string",
-                          "default": true
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Make the value UPPERCASE",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "upper"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "description": "This filter has no options"
-                    }
-                  }
-                }
-              ]
-            }
-          },
-          "validators": {
-            "type": "array",
-            "description": "A set of validators to use for this field",
-            "maxItems": 100,
-            "items": {
-              "anyOf": [
-                {
-                  "type": "object",
-                  "description": "Validate number is between two values. By default, min and max are included",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "greater_than"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "min",
-                        "max"
-                      ],
-                      "properties": {
-                        "min": {
-                          "type": "number",
-                          "description": "Minimum value to check"
-                        },
-                        "max": {
-                          "type": "number",
-                          "description": "The maximum value to check"
-                        },
-                        "precision": {
-                          "type": "integer",
-                          "description": "When number is a float, this will set the decimal precision",
-                          "minimum": 1,
-                          "maximum": 8,
-                          "default": 3
-                        },
-                        "include": {
-                          "type": "boolean",
-                          "description": "Include the value in the check",
-                          "default": true
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate value does not match a list (black list)",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "white_list"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "list"
-                      ],
-                      "properties": {
-                        "list": {
-                          "type": "array",
-                          "minimum": 1,
-                          "maximum": 100,
-                          "description": "The list of approved values",
-                          "items": {
-                            "type": "string"
-                          }
-                        },
-                        "check_case": {
-                          "type": "boolean",
-                          "description": "Perform a case sensitive match. By default will not match case",
-                          "default": false
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate string contains a value",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "contains"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "contains"
-                      ],
-                      "properties": {
-                        "contains": {
-                          "type": "string",
-                          "description": "String must contain with this value"
-                        },
-                        "check_case": {
-                          "type": "boolean",
-                          "description": "Perform a case sensitive match. By default will not match case",
-                          "default": false
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate string is a correct email address",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "email_address"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "properties": {
-                        "strict": {
-                          "type": "boolean",
-                          "description": "Enforce strict standards from ARPA. This will enforce the length of the string",
-                          "default": true
-                        },
-                        "lookup": {
-                          "type": "boolean",
-                          "description": "Look up the host name and check if it has a valid MX record",
-                          "default": false
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate string ends with a value",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "ends_with"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "ends_with"
-                      ],
-                      "properties": {
-                        "ends_with": {
-                          "type": "string",
-                          "description": "String must end with this value"
-                        },
-                        "check_case": {
-                          "type": "boolean",
-                          "description": "Perform a case sensitive match. By default will not match case",
-                          "default": false
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate number equals a value",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "equals"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "value"
-                      ],
-                      "properties": {
-                        "value": {
-                          "type": "number",
-                          "description": "The value to compare against"
-                        },
-                        "precision": {
-                          "type": "integer",
-                          "description": "When value is a float, this will set the decimal precision",
-                          "minimum": 1,
-                          "maximum": 8,
-                          "default": 3
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate number is greater than a value. By default, this will check if value is greater than or equals to",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "greater_than"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "value"
-                      ],
-                      "properties": {
-                        "value": {
-                          "type": "number",
-                          "description": "The value to compare against"
-                        },
-                        "precision": {
-                          "type": "integer",
-                          "description": "When number is a float, this will set the decimal precision",
-                          "minimum": 1,
-                          "maximum": 8,
-                          "default": 3
-                        },
-                        "include": {
-                          "type": "boolean",
-                          "description": "Include the value in the check",
-                          "default": true
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate string has a correct DNS records",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "hostname"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "properties": {
-                        "record_type": {
-                          "type": "string",
-                          "description": "DNS record type to validate",
-                          "default": "A",
-                          "enum": [
-                            "A",
-                            "AAAA",
-                            "AFSDB",
-                            "APL",
-                            "CAA",
-                            "CDNSKEY",
-                            "CDS",
-                            "CERT",
-                            "CNAME",
-                            "CSYNC",
-                            "DHCID",
-                            "DLV",
-                            "DNAME",
-                            "DNSKEY",
-                            "DS",
-                            "HIP",
-                            "IPSECKEY",
-                            "KEY",
-                            "KX",
-                            "LOC",
-                            "MX",
-                            "NAPTR",
-                            "NS",
-                            "NSEC",
-                            "NSEC3",
-                            "NSEC3PARAM",
-                            "OPENPGPKEY",
-                            "PTR",
-                            "RRSIG",
-                            "RP",
-                            "SIG",
-                            "SMIMEA",
-                            "SOA",
-                            "SRV",
-                            "SSHFP",
-                            "TA",
-                            "TKEY",
-                            "TLSA",
-                            "TSIG",
-                            "TXT",
-                            "URI"
-                          ]
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate string matches an IP address format. Defaults to matching IPv4",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "ipAddress"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "properties": {
-                        "versions": {
-                          "type": "array",
-                          "description": "IP Version to match against",
-                          "items": {
-                            "type": "string",
-                            "enum": [
-                              "IPv4",
-                              "IPv6"
-                            ]
-                          }
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate string is a certain length",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "length"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "length"
-                      ],
-                      "properties": {
-                        "length": {
-                          "type": "string",
-                          "description": "String must contain with this value"
-                        },
-                        "operator": {
-                          "type": "string",
-                          "description": "Which type of length comparision to make",
-                          "default": "equals",
-                          "enum": [
-                            "equals",
-                            "less_than",
-                            "less_than_equals",
-                            "greater_than",
-                            "greater_than_equals"
-                          ]
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate number is less than a value. By default, this will check if value is less than or equals to",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "lessThan"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "value"
-                      ],
-                      "properties": {
-                        "value": {
-                          "type": "number",
-                          "description": "The value to compare against"
-                        },
-                        "precision": {
-                          "type": "integer",
-                          "description": "When number is a float, this will set the decimal precision",
-                          "minimum": 1,
-                          "maximum": 8,
-                          "default": 3
-                        },
-                        "include": {
-                          "type": "boolean",
-                          "description": "Include the value in the check",
-                          "default": true
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate string matches an MAC address format",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "macAddress"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "description": "This validator has no options"
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate string matches a regular expression",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "mask"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "mask"
-                      ],
-                      "properties": {
-                        "mask": {
-                          "type": "string",
-                          "description": "Mask to validate against"
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate string starts with a value",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "startsWith"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "starts_with"
-                      ],
-                      "properties": {
-                        "starts_with": {
-                          "type": "string",
-                          "description": "String must start with this value"
-                        },
-                        "check_case": {
-                          "type": "boolean",
-                          "description": "Perform a case sensitive match. By default will not match case",
-                          "default": false
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validates that a value follows a step. Both start and end options do not have to sync with the step. If they do not sync then find the nearest step.",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "step"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "step"
-                      ],
-                      "properties": {
-                        "step": {
-                          "type": "number",
-                          "description": "The step value"
-                        },
-                        "start": {
-                          "type": "integer",
-                          "description": "Start stepping at this value"
-                        },
-                        "end": {
-                          "type": "integer",
-                          "description": "End stepping at this value"
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate string matches an URI",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "uri"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "properties": {
-                        "schemes": {
-                          "type": "array",
-                          "description": "Schemes to match. By default all are matched",
-                          "items": {
-                            "type": "string",
-                            "enum": [
-                              "http",
-                              "https",
-                              "sip",
-                              "sips",
-                              "ftp",
-                              "ftps",
-                              "ldap",
-                              "ldaps",
-                              "file",
-                              "udp",
-                              "tcp",
-                              "urn"
-                            ]
-                          }
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate value matches a list (white list)",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "whiteList"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "list"
-                      ],
-                      "properties": {
-                        "list": {
-                          "type": "array",
-                          "minimum": 1,
-                          "maximum": 100,
-                          "description": "The list of approved values",
-                          "items": {
-                            "type": "string"
-                          }
-                        },
-                        "check_case": {
-                          "type": "boolean",
-                          "description": "Perform a case sensitive match. By default will not match case",
-                          "default": false
-                        }
-                      }
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        }
-      }
-    }
-  }
-}
-```
 
 <h3 id="createpart-responses">Responses</h3>
 
@@ -4426,1772 +739,211 @@ Creates a new part  following the part  schema
 |403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
 |409|[Conflict](https://tools.ietf.org/html/rfc7231#section-6.5.8)|Conflict|Inline|
 
-<h3 id="createpart-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» _links|object|false|none|none|
-|»» self|object|false|none|none|
-|»»» href|string(uri)|false|none|none|
-|»» part_id|string|false|read-only|Unique identifier|
-|»» label|string|false|none|Label for the entity|
-|»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»» created|string(date-time)|false|read-only|Date the entity was created|
-|»» updated|string(date-time)|false|read-only|Last date the entity was updated|
-|»» customer|object|false|none|Customer|
-|»»» customer_id|string|false|read-only|Customer identifier|
-|»»» entity_id|string|true|read-only|Customer identifier|
-|»»» entity_type|string|true|none|none|
-|»»» label|string|true|none|Label for the entity|
-|»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»»» created|string(date-time)|true|read-only|Date the entity was created|
-|»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»» external_platform|object|false|none|External Identifiers for the customer|
-|»»» allowed_statuses|[object]|true|none|List of allowed statuses|
-|»»»» status|string|true|none|A Custom label for the status|
-|»»»» category|string|true|none|The classifier for the statues|
-|»»» total_programs|number|false|none|Total programs under the customer|
-|»»» total_projects|number|false|none|Total projects under the customer|
-|»» manufacturer|object|false|none|Manufacturer information for the part|
-|»»» part_number|string|true|none|Part number the manufacturer uses. If this is not set, then the part number is used|
-|»»» manufacturer_id|string|false|read-only|Customer identifier|
-|»»» entity_id|string|true|read-only|Customer identifier|
-|»»» entity_type|string|true|none|none|
-|»»» label|string|true|none|Label for the entity|
-|»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»»» created|string(date-time)|true|read-only|Date the entity was created|
-|»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»» serial_prefix|string\|null|false|none|A serial number prefix for the part|
-|»» input_filter|[object]|false|none|Input Filters allow custom fields to be defined for entities|
-|»»» label|string|true|none|Human readable name|
-|»»» key|string|true|read-only|Slug used to store the property|
-|»»» filters|[anyOf]|true|none|A Collection of filters applied to the field|
-
-*anyOf*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»» *anonymous*|object|false|none|This filter will set the value based on a list of approved values. If the value is not in the list, it will then be set to empty unless the default option is set|
-|»»»»» type|string|true|none|none|
-|»»»»» options|object|true|none|none|
-|»»»»»» approved_values|[string]|true|none|The list of approved values|
-|»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
-|»»»»»» default|string\|null|false|none|If this is set and the value is not in the approved_list, set the value to this|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»» *anonymous*|object|false|none|Make the value camelCase|
-|»»»»»» type|string|true|none|none|
-|»»»»»» options|object|true|none|This filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»» *anonymous*|object|false|none|Filter to transform a value into a date|
-|»»»»»» type|string|true|none|none|
-|»»»»»» options|object|true|none|Date filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»» *anonymous*|object|false|none|Filter to transform values into null. This is helpful when trying to make a value required. The following are considered empty: # The number 0 or 0.0 # empty string '' # A boolean false # The word 'false' #|
-|»»»»»» type|string|true|none|none|
-|»»»»»» options|object|true|none|empty filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»» *anonymous*|object|false|none|Filter to transform a value into a float. Non numeric characters (including comma) will be removed|
-|»»»»»» type|string|true|none|none|
-|»»»»»» options|object|true|none|none|
-|»»»»»»» precision|integer|false|none|How many decimal places to preserve|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»» *anonymous*|object|false|none|Make the value kebab-case|
-|»»»»»»» type|string|true|none|none|
-|»»»»»»» options|object|true|none|This filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»» *anonymous*|object|false|none|Make the value lowercase|
-|»»»»»»» type|string|true|none|none|
-|»»»»»»» options|object|true|none|This filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»» *anonymous*|object|false|none|Filter to transform a value into a number. Non numeric characters (including comma and decimal points) will be removed|
-|»»»»»»» type|string|true|none|none|
-|»»»»»»» options|object|true|none|Number filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»» *anonymous*|object|false|none|Add a prefix to the start of a string. If the string already start with the prefix, it will not prepend.|
-|»»»»»»» type|string|true|none|none|
-|»»»»»»» options|object|true|none|none|
-|»»»»»»»» prefix|string|true|none|The prefix to add|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»» *anonymous*|object|false|none|Make the value snake_case|
-|»»»»»»»» type|string|true|none|none|
-|»»»»»»»» options|object|true|none|This filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a string|
-|»»»»»»»» type|string|true|none|none|
-|»»»»»»»» options|object|true|none|String filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»» *anonymous*|object|false|none|Add a suffix to the start of a string. If the string already start with the suffix, it will not append.|
-|»»»»»»»» type|string|true|none|none|
-|»»»»»»»» options|object|true|none|none|
-|»»»»»»»»» suffix|string|true|none|The suffix to add|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»» *anonymous*|object|false|none|Filter to trim whitespace from a value|
-|»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»» options|object|true|none|By default will trim from the start and end|
-|»»»»»»»»»» start|boolean|false|none|Remove white space from the start of the string|
-|»»»»»»»»»» end|boolean|false|none|Remove white space from the end of the string|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»» *anonymous*|object|false|none|Make the value UPPERCASE|
-|»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»» options|object|true|none|This filter has no options|
-
-*continued*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»» validators|[anyOf]|true|none|A set of validators to use for this field|
-
-*anyOf*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»» *anonymous*|object|false|none|Validate number is between two values. By default, min and max are included|
-|»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»» min|number|true|none|Minimum value to check|
-|»»»»»»»»»»»» max|number|true|none|The maximum value to check|
-|»»»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
-|»»»»»»»»»»»» include|boolean|false|none|Include the value in the check|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»» *anonymous*|object|false|none|Validate value does not match a list (black list)|
-|»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»» list|[string]|true|none|The list of approved values|
-|»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»» *anonymous*|object|false|none|Validate string contains a value|
-|»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»» contains|string|true|none|String must contain with this value|
-|»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string is a correct email address|
-|»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»» strict|boolean|false|none|Enforce strict standards from ARPA. This will enforce the length of the string|
-|»»»»»»»»»»»»»»» lookup|boolean|false|none|Look up the host name and check if it has a valid MX record|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string ends with a value|
-|»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»» ends_with|string|true|none|String must end with this value|
-|»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number equals a value|
-|»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»» value|number|true|none|The value to compare against|
-|»»»»»»»»»»»»»»»»» precision|integer|false|none|When value is a float, this will set the decimal precision|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number is greater than a value. By default, this will check if value is greater than or equals to|
-|»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»» value|number|true|none|The value to compare against|
-|»»»»»»»»»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
-|»»»»»»»»»»»»»»»»»» include|boolean|false|none|Include the value in the check|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string has a correct DNS records|
-|»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»» record_type|string|false|none|DNS record type to validate|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an IP address format. Defaults to matching IPv4|
-|»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»» versions|[string]|false|none|IP Version to match against|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string is a certain length|
-|»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»» length|string|true|none|String must contain with this value|
-|»»»»»»»»»»»»»»»»»»»»» operator|string|false|none|Which type of length comparision to make|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number is less than a value. By default, this will check if value is less than or equals to|
-|»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»» value|number|true|none|The value to compare against|
-|»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
-|»»»»»»»»»»»»»»»»»»»»»» include|boolean|false|none|Include the value in the check|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an MAC address format|
-|»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This validator has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches a regular expression|
-|»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»» mask|string|true|none|Mask to validate against|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string starts with a value|
-|»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»» starts_with|string|true|none|String must start with this value|
-|»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validates that a value follows a step. Both start and end options do not have to sync with the step. If they do not sync then find the nearest step.|
-|»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»» step|number|true|none|The step value|
-|»»»»»»»»»»»»»»»»»»»»»»»»» start|integer|false|none|Start stepping at this value|
-|»»»»»»»»»»»»»»»»»»»»»»»»» end|integer|false|none|End stepping at this value|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an URI|
-|»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»» schemes|[string]|false|none|Schemes to match. By default all are matched|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate value matches a list (white list)|
-|»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»» list|[string]|true|none|The list of approved values|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|entity_type|CUS|
-|category|PENDING|
-|category|IN_PROGRESS|
-|category|VERIFYING|
-|category|COMPLETE|
-|category|CANCELLED|
-|category|BLOCKED|
-|entity_type|MFR|
-|type|allowed_list|
-|type|camel|
-|type|date|
-|type|empty|
-|type|float|
-|type|kebab|
-|type|lower|
-|type|number|
-|type|prefix|
-|type|snake|
-|type|string|
-|type|suffix|
-|type|trim|
-|type|upper|
-|type|greater_than|
-|type|white_list|
-|type|contains|
-|type|email_address|
-|type|ends_with|
-|type|equals|
-|type|greater_than|
-|type|hostname|
-|record_type|A|
-|record_type|AAAA|
-|record_type|AFSDB|
-|record_type|APL|
-|record_type|CAA|
-|record_type|CDNSKEY|
-|record_type|CDS|
-|record_type|CERT|
-|record_type|CNAME|
-|record_type|CSYNC|
-|record_type|DHCID|
-|record_type|DLV|
-|record_type|DNAME|
-|record_type|DNSKEY|
-|record_type|DS|
-|record_type|HIP|
-|record_type|IPSECKEY|
-|record_type|KEY|
-|record_type|KX|
-|record_type|LOC|
-|record_type|MX|
-|record_type|NAPTR|
-|record_type|NS|
-|record_type|NSEC|
-|record_type|NSEC3|
-|record_type|NSEC3PARAM|
-|record_type|OPENPGPKEY|
-|record_type|PTR|
-|record_type|RRSIG|
-|record_type|RP|
-|record_type|SIG|
-|record_type|SMIMEA|
-|record_type|SOA|
-|record_type|SRV|
-|record_type|SSHFP|
-|record_type|TA|
-|record_type|TKEY|
-|record_type|TLSA|
-|record_type|TSIG|
-|record_type|TXT|
-|record_type|URI|
-|type|ipAddress|
-|type|length|
-|operator|equals|
-|operator|less_than|
-|operator|less_than_equals|
-|operator|greater_than|
-|operator|greater_than_equals|
-|type|lessThan|
-|type|macAddress|
-|type|mask|
-|type|startsWith|
-|type|step|
-|type|uri|
-|type|whiteList|
-
-Status Code **400**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» title|string|false|none|none|
-|» type|string|false|none|none|
-|» status|number|false|none|none|
-|» detail|string|false|none|none|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|title|Bad Request|
-|type|https://docs.nterprise.com/api/problem/BadRequest|
-|status|400|
-|detail|Invalid request|
-
-Status Code **401**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» title|string|false|none|none|
-|» type|string|false|none|none|
-|» status|number|false|none|none|
-|» detail|string|false|none|none|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|title|Unauthorized|
-|type|https://docs.nterprise.com/api/problem/Unauthorized|
-|status|401|
-|detail|You are not authorized to access this resource|
-
-Status Code **403**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» title|string|false|none|none|
-|» type|string|false|none|none|
-|» status|number|false|none|none|
-|» detail|string|false|none|none|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|title|Forbidden|
-|type|https://docs.nterprise.com/api/problem/Forbidden|
-|status|403|
-|detail|You are forbidden to access this resource|
-
-Status Code **409**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» title|string|false|none|none|
-|» type|string|false|none|none|
-|» status|number|false|none|none|
-|» detail|string|false|none|none|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|title|Conflict|
-|type|https://docs.nterprise.com/api/problem/Conflict|
-|status|409|
-|detail|This request contains a conflict to another resource|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## fetchPartById
-
-<a id="opIdfetchPartById"></a>
-
-`GET /parts/{part_id}`
-
-*Fetches a part  by Id*
-
-Fetch Part 
-
-<h3 id="fetchpartbyid-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|part_id|path|string|true|Id for the part|
-
 > Example responses
 
 > 200 Response
 
 ```json
 {
-  "type": "object",
-  "properties": {
-    "_links": {
-      "type": "object",
-      "properties": {
-        "self": {
-          "x-example": {
-            "href": "https://api.nterprise.com/parts/23Y1rNJ6zyiRzqN"
-          },
-          "type": "object",
-          "properties": {
-            "href": {
-              "type": "string",
-              "format": "uri"
-            }
-          }
-        }
+  "part_id": "part",
+  "label": "Widget",
+  "created": "2019-08-19T00:01:02.000Z",
+  "updated": "2020-08-19T01:01:02.000Z",
+  "serial_prefix": "ABC",
+  "total_units": 5,
+  "total_units_allocated": 2,
+  "total_units_unallocated": 3,
+  "customer": {
+    "customer_id": "customer",
+    "label": "manchuck",
+    "created": "2020-01-09T22:12:03.000Z",
+    "updated": "2020-01-09T22:12:03.000Z",
+    "external_platform": {},
+    "total_programs": 21,
+    "total_projects": 42,
+    "allowed_statuses": [
+      {
+        "category": "PENDING",
+        "description": "For something that is Pending",
+        "status": "Pending",
+        "order": 3
+      },
+      {
+        "category": "IN_PROGRESS",
+        "description": "For something that is In Progress",
+        "status": "In Progress",
+        "order": 4
+      },
+      {
+        "category": "VERIFYING",
+        "description": "For something that is Verifying",
+        "status": "Verifying",
+        "order": 5
+      },
+      {
+        "category": "BLOCKED",
+        "description": "For something that is Blocked",
+        "status": "Blocked",
+        "order": 6
+      },
+      {
+        "category": "COMPLETE",
+        "description": "For something that is Complete",
+        "status": "Complete",
+        "order": 7
+      },
+      {
+        "category": "CANCELLED",
+        "description": "For something that is Cancelled",
+        "status": "Cancelled",
+        "order": 8
       }
+    ]
+  },
+  "manufacturer": {
+    "manufacturer_id": "manufacturer",
+    "label": "Manchuck Inc",
+    "created": "2019-08-19T00:01:02.000Z",
+    "updated": "2020-08-19T01:01:02.000Z",
+    "part_number": "1-888-482-858-832"
+  },
+  "input_filter": [
+    {
+      "label": "Serial Number Of part",
+      "key": "serial-number",
+      "filters": [],
+      "validators": [],
+      "value": null
+    }
+  ],
+  "_embedded": {
+    "nter:part-manufacturer": [],
+    "nter:part-customer": []
+  },
+  "_links": {
+    "nter:part-manufacturer": {
+      "href": "https://api.example.com/manufacturers/manufacturer"
     },
-    "part_id": {
-      "description": "Unique identifier",
-      "type": "string",
-      "readOnly": true,
-      "pattern": "^[0-9a-zA-Z-_]+$"
+    "nter:part-customer": {
+      "href": "https://api.example.com/customers/customer"
     },
-    "label": {
-      "type": "string",
-      "description": "Label for the entity"
+    "nter:part-units": {
+      "href": "https://api.example.com/parts/part/units"
     },
-    "slug": {
-      "type": "string",
-      "description": "Slug for the entity (Auto-generated from the label)",
-      "readOnly": true,
-      "deprecated": true,
-      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-    },
-    "created": {
-      "description": "Date the entity was created",
-      "type": "string",
-      "format": "date-time",
-      "readOnly": true
-    },
-    "updated": {
-      "description": "Last date the entity was updated",
-      "type": "string",
-      "format": "date-time",
-      "readOnly": true
-    },
-    "customer": {
-      "type": "object",
-      "description": "Customer",
-      "additionalProperties": false,
-      "required": [
-        "label",
-        "entity_id",
-        "entity_type",
-        "created",
-        "updated",
-        "allowed_statuses"
-      ],
-      "properties": {
-        "customer_id": {
-          "description": "Customer identifier",
-          "type": "string",
-          "readOnly": true,
-          "pattern": "^[0-9a-zA-Z-_]+$"
-        },
-        "entity_id": {
-          "x-no-api-doc": true,
-          "type": "string",
-          "description": "Customer identifier",
-          "readOnly": true,
-          "pattern": "^[0-9a-zA-Z-_]+$"
-        },
-        "entity_type": {
-          "x-no-api-doc": true,
-          "enum": [
-            "CUS"
-          ]
-        },
-        "label": {
-          "type": "string",
-          "description": "Label for the entity"
-        },
-        "slug": {
-          "type": "string",
-          "description": "Slug for the entity (Auto-generated from the label)",
-          "readOnly": true,
-          "deprecated": true,
-          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-        },
-        "created": {
-          "description": "Date the entity was created",
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "updated": {
-          "description": "Last date the entity was updated",
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "external_platform": {
-          "type": "object",
-          "description": "External Identifiers for the customer",
-          "deprecated": true,
-          "x-patternProperties": {
-            "^[A-Za-z][A-Za-z0-9_]*$": {
-              "type": "string"
-            }
-          }
-        },
-        "allowed_statuses": {
-          "type": "array",
-          "description": "List of allowed statuses",
-          "uniqueItems": true,
-          "items": {
-            "type": "object",
-            "description": "Defines the properties for a status",
-            "additionalProperties": false,
-            "required": [
-              "status",
-              "category"
-            ],
-            "properties": {
-              "status": {
-                "type": "string",
-                "description": "A Custom label for the status",
-                "pattern": "^[A-Za-z][0-9a-zA-Z-_ ]+$"
-              },
-              "category": {
-                "type": "string",
-                "description": "The classifier for the statues",
-                "enum": [
-                  "PENDING",
-                  "IN_PROGRESS",
-                  "VERIFYING",
-                  "COMPLETE",
-                  "CANCELLED",
-                  "BLOCKED"
-                ]
-              }
-            }
-          }
-        },
-        "total_programs": {
-          "type": "number",
-          "description": "Total programs under the customer"
-        },
-        "total_projects": {
-          "type": "number",
-          "description": "Total projects under the customer"
-        }
-      }
-    },
-    "manufacturer": {
-      "type": "object",
-      "description": "Manufacturer information for the part",
-      "required": [
-        "label",
-        "entity_id",
-        "entity_type",
-        "created",
-        "updated",
-        "part_number"
-      ],
-      "properties": {
-        "part_number": {
-          "type": "string",
-          "description": "Part number the manufacturer uses. If this is not set, then the part number is used"
-        },
-        "manufacturer_id": {
-          "x-no-api-doc": true,
-          "type": "string",
-          "description": "Customer identifier",
-          "readOnly": true,
-          "pattern": "^[0-9a-zA-Z-_]+$"
-        },
-        "entity_id": {
-          "x-no-api-doc": true,
-          "type": "string",
-          "description": "Customer identifier",
-          "readOnly": true,
-          "pattern": "^[0-9a-zA-Z-_]+$"
-        },
-        "entity_type": {
-          "enum": [
-            "MFR"
-          ]
-        },
-        "label": {
-          "type": "string",
-          "description": "Label for the entity"
-        },
-        "slug": {
-          "type": "string",
-          "description": "Slug for the entity (Auto-generated from the label)",
-          "readOnly": true,
-          "deprecated": true,
-          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-        },
-        "created": {
-          "description": "Date the entity was created",
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "updated": {
-          "description": "Last date the entity was updated",
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        }
-      }
-    },
-    "serial_prefix": {
-      "type": "string",
-      "nullable": true,
-      "description": "A serial number prefix for the part"
-    },
-    "input_filter": {
-      "type": "array",
-      "description": "Input Filters allow custom fields to be defined for entities",
-      "items": {
-        "type": "object",
-        "description": "Input filter specification",
-        "required": [
-          "label",
-          "key",
-          "filters",
-          "validators"
-        ],
-        "properties": {
-          "label": {
-            "type": "string",
-            "description": "Human readable name"
-          },
-          "key": {
-            "type": "string",
-            "description": "Slug used to store the property",
-            "readOnly": true,
-            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-          },
-          "filters": {
-            "type": "array",
-            "description": "A Collection of filters applied to the field",
-            "maxItems": 100,
-            "items": {
-              "anyOf": [
-                {
-                  "type": "object",
-                  "description": "This filter will set the value based on a list of approved values. If the value is not in the list, it will then be set to empty unless the default option is set",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "allowed_list"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "approved_values"
-                      ],
-                      "properties": {
-                        "approved_values": {
-                          "type": "array",
-                          "minimum": 1,
-                          "maximum": 100,
-                          "description": "The list of approved values",
-                          "items": {
-                            "type": "string"
-                          }
-                        },
-                        "check_case": {
-                          "type": "boolean",
-                          "description": "Perform a case sensitive match. By default will not match case",
-                          "default": false
-                        },
-                        "default": {
-                          "type": "string",
-                          "nullable": true,
-                          "description": "If this is set and the value is not in the approved_list, set the value to this"
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Make the value camelCase",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "camel"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "description": "This filter has no options"
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Filter to transform a value into a date",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "date"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "description": "Date filter has no options"
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Filter to transform values into null. This is helpful when trying to make a value required. The following are considered empty:\n# The number 0 or 0.0\n# empty string ''\n# A boolean false\n# The word 'false'\n# ",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "empty"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "description": "empty filter has no options"
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Filter to transform a value into a float. Non numeric characters (including comma) will be removed",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "float"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "properties": {
-                        "precision": {
-                          "type": "integer",
-                          "minimum": 1,
-                          "maximum": 8,
-                          "default": 3,
-                          "description": "How many decimal places to preserve"
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Make the value kebab-case",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "kebab"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "description": "This filter has no options"
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Make the value lowercase",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "lower"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "description": "This filter has no options"
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Filter to transform a value into a number. Non numeric characters (including comma and decimal points) will be removed",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "number"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "description": "Number filter has no options"
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Add a prefix to the start of a string. If the string already start with the prefix, it will not prepend.",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "prefix"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "prefix"
-                      ],
-                      "properties": {
-                        "prefix": {
-                          "type": "string",
-                          "description": "The prefix to add"
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Make the value snake_case",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "snake"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "description": "This filter has no options"
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Filter to transform a value into a string",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "string"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "description": "String filter has no options"
-                    }
-                  }
-                },
-                {
-                  "description": "Add a suffix to the start of a string. If the string already start with the suffix, it will not append.",
-                  "type": "object",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "suffix"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "suffix"
-                      ],
-                      "properties": {
-                        "suffix": {
-                          "type": "string",
-                          "description": "The suffix to add"
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Filter to trim whitespace from a value",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "trim"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "description": "By default will trim from the start and end",
-                      "properties": {
-                        "start": {
-                          "type": "boolean",
-                          "description": "Remove white space from the start of the string",
-                          "default": true
-                        },
-                        "end": {
-                          "type": "boolean",
-                          "description": "Remove white space from the end of the string",
-                          "default": true
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Make the value UPPERCASE",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "upper"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "description": "This filter has no options"
-                    }
-                  }
-                }
-              ]
-            }
-          },
-          "validators": {
-            "type": "array",
-            "description": "A set of validators to use for this field",
-            "maxItems": 100,
-            "items": {
-              "anyOf": [
-                {
-                  "type": "object",
-                  "description": "Validate number is between two values. By default, min and max are included",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "greater_than"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "min",
-                        "max"
-                      ],
-                      "properties": {
-                        "min": {
-                          "type": "number",
-                          "description": "Minimum value to check"
-                        },
-                        "max": {
-                          "type": "number",
-                          "description": "The maximum value to check"
-                        },
-                        "precision": {
-                          "type": "integer",
-                          "description": "When number is a float, this will set the decimal precision",
-                          "minimum": 1,
-                          "maximum": 8,
-                          "default": 3
-                        },
-                        "include": {
-                          "type": "boolean",
-                          "description": "Include the value in the check",
-                          "default": true
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate value does not match a list (black list)",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "white_list"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "list"
-                      ],
-                      "properties": {
-                        "list": {
-                          "type": "array",
-                          "minimum": 1,
-                          "maximum": 100,
-                          "description": "The list of approved values",
-                          "items": {
-                            "type": "string"
-                          }
-                        },
-                        "check_case": {
-                          "type": "boolean",
-                          "description": "Perform a case sensitive match. By default will not match case",
-                          "default": false
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate string contains a value",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "contains"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "contains"
-                      ],
-                      "properties": {
-                        "contains": {
-                          "type": "string",
-                          "description": "String must contain with this value"
-                        },
-                        "check_case": {
-                          "type": "boolean",
-                          "description": "Perform a case sensitive match. By default will not match case",
-                          "default": false
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate string is a correct email address",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "email_address"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "properties": {
-                        "strict": {
-                          "type": "boolean",
-                          "description": "Enforce strict standards from ARPA. This will enforce the length of the string",
-                          "default": true
-                        },
-                        "lookup": {
-                          "type": "boolean",
-                          "description": "Look up the host name and check if it has a valid MX record",
-                          "default": false
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate string ends with a value",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "ends_with"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "ends_with"
-                      ],
-                      "properties": {
-                        "ends_with": {
-                          "type": "string",
-                          "description": "String must end with this value"
-                        },
-                        "check_case": {
-                          "type": "boolean",
-                          "description": "Perform a case sensitive match. By default will not match case",
-                          "default": false
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate number equals a value",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "equals"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "value"
-                      ],
-                      "properties": {
-                        "value": {
-                          "type": "number",
-                          "description": "The value to compare against"
-                        },
-                        "precision": {
-                          "type": "integer",
-                          "description": "When value is a float, this will set the decimal precision",
-                          "minimum": 1,
-                          "maximum": 8,
-                          "default": 3
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate number is greater than a value. By default, this will check if value is greater than or equals to",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "greater_than"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "value"
-                      ],
-                      "properties": {
-                        "value": {
-                          "type": "number",
-                          "description": "The value to compare against"
-                        },
-                        "precision": {
-                          "type": "integer",
-                          "description": "When number is a float, this will set the decimal precision",
-                          "minimum": 1,
-                          "maximum": 8,
-                          "default": 3
-                        },
-                        "include": {
-                          "type": "boolean",
-                          "description": "Include the value in the check",
-                          "default": true
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate string has a correct DNS records",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "hostname"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "properties": {
-                        "record_type": {
-                          "type": "string",
-                          "description": "DNS record type to validate",
-                          "default": "A",
-                          "enum": [
-                            "A",
-                            "AAAA",
-                            "AFSDB",
-                            "APL",
-                            "CAA",
-                            "CDNSKEY",
-                            "CDS",
-                            "CERT",
-                            "CNAME",
-                            "CSYNC",
-                            "DHCID",
-                            "DLV",
-                            "DNAME",
-                            "DNSKEY",
-                            "DS",
-                            "HIP",
-                            "IPSECKEY",
-                            "KEY",
-                            "KX",
-                            "LOC",
-                            "MX",
-                            "NAPTR",
-                            "NS",
-                            "NSEC",
-                            "NSEC3",
-                            "NSEC3PARAM",
-                            "OPENPGPKEY",
-                            "PTR",
-                            "RRSIG",
-                            "RP",
-                            "SIG",
-                            "SMIMEA",
-                            "SOA",
-                            "SRV",
-                            "SSHFP",
-                            "TA",
-                            "TKEY",
-                            "TLSA",
-                            "TSIG",
-                            "TXT",
-                            "URI"
-                          ]
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate string matches an IP address format. Defaults to matching IPv4",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "ipAddress"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "properties": {
-                        "versions": {
-                          "type": "array",
-                          "description": "IP Version to match against",
-                          "items": {
-                            "type": "string",
-                            "enum": [
-                              "IPv4",
-                              "IPv6"
-                            ]
-                          }
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate string is a certain length",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "length"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "length"
-                      ],
-                      "properties": {
-                        "length": {
-                          "type": "string",
-                          "description": "String must contain with this value"
-                        },
-                        "operator": {
-                          "type": "string",
-                          "description": "Which type of length comparision to make",
-                          "default": "equals",
-                          "enum": [
-                            "equals",
-                            "less_than",
-                            "less_than_equals",
-                            "greater_than",
-                            "greater_than_equals"
-                          ]
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate number is less than a value. By default, this will check if value is less than or equals to",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "lessThan"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "value"
-                      ],
-                      "properties": {
-                        "value": {
-                          "type": "number",
-                          "description": "The value to compare against"
-                        },
-                        "precision": {
-                          "type": "integer",
-                          "description": "When number is a float, this will set the decimal precision",
-                          "minimum": 1,
-                          "maximum": 8,
-                          "default": 3
-                        },
-                        "include": {
-                          "type": "boolean",
-                          "description": "Include the value in the check",
-                          "default": true
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate string matches an MAC address format",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "macAddress"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "description": "This validator has no options"
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate string matches a regular expression",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "mask"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "mask"
-                      ],
-                      "properties": {
-                        "mask": {
-                          "type": "string",
-                          "description": "Mask to validate against"
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate string starts with a value",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "startsWith"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "starts_with"
-                      ],
-                      "properties": {
-                        "starts_with": {
-                          "type": "string",
-                          "description": "String must start with this value"
-                        },
-                        "check_case": {
-                          "type": "boolean",
-                          "description": "Perform a case sensitive match. By default will not match case",
-                          "default": false
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validates that a value follows a step. Both start and end options do not have to sync with the step. If they do not sync then find the nearest step.",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "step"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "step"
-                      ],
-                      "properties": {
-                        "step": {
-                          "type": "number",
-                          "description": "The step value"
-                        },
-                        "start": {
-                          "type": "integer",
-                          "description": "Start stepping at this value"
-                        },
-                        "end": {
-                          "type": "integer",
-                          "description": "End stepping at this value"
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate string matches an URI",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "uri"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "properties": {
-                        "schemes": {
-                          "type": "array",
-                          "description": "Schemes to match. By default all are matched",
-                          "items": {
-                            "type": "string",
-                            "enum": [
-                              "http",
-                              "https",
-                              "sip",
-                              "sips",
-                              "ftp",
-                              "ftps",
-                              "ldap",
-                              "ldaps",
-                              "file",
-                              "udp",
-                              "tcp",
-                              "urn"
-                            ]
-                          }
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate value matches a list (white list)",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "whiteList"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "list"
-                      ],
-                      "properties": {
-                        "list": {
-                          "type": "array",
-                          "minimum": 1,
-                          "maximum": 100,
-                          "description": "The list of approved values",
-                          "items": {
-                            "type": "string"
-                          }
-                        },
-                        "check_case": {
-                          "type": "boolean",
-                          "description": "Perform a case sensitive match. By default will not match case",
-                          "default": false
-                        }
-                      }
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        }
-      }
+    "self": {
+      "href": "https://api.example.com/parts/part"
     }
   }
 }
 ```
+
+> 400 Response
+
+```json
+{
+  "title": "Bad Request",
+  "type": "https://docs.nterprise.com/api/problem/BadRequest",
+  "status": 400,
+  "detail": "Invalid Data",
+  "validation_messages": [
+    {
+      "keyword": "field",
+      "dataPath": ".field",
+      "schemaPath": "https://docs.nterprise.com/schemas/niagara/foo.json#/properties/field",
+      "params": {
+        "type": "string"
+      },
+      "message": "should be string"
+    }
+  ]
+}
+```
+
+> 401 Response
+
+```json
+{
+  "title": "Unauthorized",
+  "type": "https://docs.nterprise.com/api/problem/Unauthorized",
+  "status": 401,
+  "detail": "Invalid authorization token"
+}
+```
+
+> 403 Response
+
+```json
+{
+  "title": "Forbidden",
+  "type": "https://docs.nterprise.com/api/problem/Forbidden",
+  "status": 403,
+  "detail": "You are forbidden from accessing this resource"
+}
+```
+
+> 409 Response
+
+```json
+{
+  "title": "Conflict",
+  "type": "https://docs.nterprise.com/api/problem/Conflict",
+  "status": 409,
+  "detail": "A similar resource exists"
+}
+```
+
+<h3 id="createpart-responseschema">Response Schema</h3>
+
+Status Code **400**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; validation_messages|[object]|true|none|List of errors detailing the failures|
+
+Status Code **401**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
+
+Status Code **403**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
+
+Status Code **409**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
+
+### GET /parts/{part_id} - *Fetch Part*
+
+<a id="opIdfetchPartById"></a>
+
+*Fetch Part*
+
+Fetches a part 
+
+<h3 id="fetchpartbyid-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|part_id|path|string|true|Id for the part|
 
 <h3 id="fetchpartbyid-responses">Responses</h3>
 
@@ -6202,1576 +954,175 @@ Fetch Part
 |403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
 |404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Resource not found|Inline|
 
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "part_id": "part",
+  "label": "Widget",
+  "created": "2019-08-19T00:01:02.000Z",
+  "updated": "2020-08-19T01:01:02.000Z",
+  "serial_prefix": "ABC",
+  "total_units": 5,
+  "total_units_allocated": 2,
+  "total_units_unallocated": 3,
+  "customer": {
+    "customer_id": "customer",
+    "label": "manchuck",
+    "created": "2020-01-09T22:12:03.000Z",
+    "updated": "2020-01-09T22:12:03.000Z",
+    "external_platform": {},
+    "total_programs": 21,
+    "total_projects": 42,
+    "allowed_statuses": [
+      {
+        "category": "PENDING",
+        "description": "For something that is Pending",
+        "status": "Pending",
+        "order": 3
+      },
+      {
+        "category": "IN_PROGRESS",
+        "description": "For something that is In Progress",
+        "status": "In Progress",
+        "order": 4
+      },
+      {
+        "category": "VERIFYING",
+        "description": "For something that is Verifying",
+        "status": "Verifying",
+        "order": 5
+      },
+      {
+        "category": "BLOCKED",
+        "description": "For something that is Blocked",
+        "status": "Blocked",
+        "order": 6
+      },
+      {
+        "category": "COMPLETE",
+        "description": "For something that is Complete",
+        "status": "Complete",
+        "order": 7
+      },
+      {
+        "category": "CANCELLED",
+        "description": "For something that is Cancelled",
+        "status": "Cancelled",
+        "order": 8
+      }
+    ]
+  },
+  "manufacturer": {
+    "manufacturer_id": "manufacturer",
+    "label": "Manchuck Inc",
+    "created": "2019-08-19T00:01:02.000Z",
+    "updated": "2020-08-19T01:01:02.000Z",
+    "part_number": "1-888-482-858-832"
+  },
+  "input_filter": [
+    {
+      "label": "Serial Number Of part",
+      "key": "serial-number",
+      "filters": [],
+      "validators": [],
+      "value": null
+    }
+  ],
+  "_embedded": {
+    "nter:part-manufacturer": [],
+    "nter:part-customer": []
+  },
+  "_links": {
+    "nter:part-manufacturer": {
+      "href": "https://api.example.com/manufacturers/manufacturer"
+    },
+    "nter:part-customer": {
+      "href": "https://api.example.com/customers/customer"
+    },
+    "nter:part-units": {
+      "href": "https://api.example.com/parts/part/units"
+    },
+    "self": {
+      "href": "https://api.example.com/parts/part"
+    }
+  }
+}
+```
+
+> 401 Response
+
+```json
+{
+  "title": "Unauthorized",
+  "type": "https://docs.nterprise.com/api/problem/Unauthorized",
+  "status": 401,
+  "detail": "Invalid authorization token"
+}
+```
+
+> 403 Response
+
+```json
+{
+  "title": "Forbidden",
+  "type": "https://docs.nterprise.com/api/problem/Forbidden",
+  "status": 403,
+  "detail": "You are forbidden from accessing this resource"
+}
+```
+
+> 404 Response
+
+```json
+{
+  "title": "Not Found",
+  "type": "https://docs.nterprise.com/api/problem/NotFound",
+  "status": 404,
+  "detail": "A Resource with the id \"foo\" was not found"
+}
+```
+
 <h3 id="fetchpartbyid-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» _links|object|false|none|none|
-|»» self|object|false|none|none|
-|»»» href|string(uri)|false|none|none|
-|»» part_id|string|false|read-only|Unique identifier|
-|»» label|string|false|none|Label for the entity|
-|»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»» created|string(date-time)|false|read-only|Date the entity was created|
-|»» updated|string(date-time)|false|read-only|Last date the entity was updated|
-|»» customer|object|false|none|Customer|
-|»»» customer_id|string|false|read-only|Customer identifier|
-|»»» entity_id|string|true|read-only|Customer identifier|
-|»»» entity_type|string|true|none|none|
-|»»» label|string|true|none|Label for the entity|
-|»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»»» created|string(date-time)|true|read-only|Date the entity was created|
-|»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»» external_platform|object|false|none|External Identifiers for the customer|
-|»»» allowed_statuses|[object]|true|none|List of allowed statuses|
-|»»»» status|string|true|none|A Custom label for the status|
-|»»»» category|string|true|none|The classifier for the statues|
-|»»» total_programs|number|false|none|Total programs under the customer|
-|»»» total_projects|number|false|none|Total projects under the customer|
-|»» manufacturer|object|false|none|Manufacturer information for the part|
-|»»» part_number|string|true|none|Part number the manufacturer uses. If this is not set, then the part number is used|
-|»»» manufacturer_id|string|false|read-only|Customer identifier|
-|»»» entity_id|string|true|read-only|Customer identifier|
-|»»» entity_type|string|true|none|none|
-|»»» label|string|true|none|Label for the entity|
-|»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»»» created|string(date-time)|true|read-only|Date the entity was created|
-|»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»» serial_prefix|string\|null|false|none|A serial number prefix for the part|
-|»» input_filter|[object]|false|none|Input Filters allow custom fields to be defined for entities|
-|»»» label|string|true|none|Human readable name|
-|»»» key|string|true|read-only|Slug used to store the property|
-|»»» filters|[anyOf]|true|none|A Collection of filters applied to the field|
-
-*anyOf*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»» *anonymous*|object|false|none|This filter will set the value based on a list of approved values. If the value is not in the list, it will then be set to empty unless the default option is set|
-|»»»»» type|string|true|none|none|
-|»»»»» options|object|true|none|none|
-|»»»»»» approved_values|[string]|true|none|The list of approved values|
-|»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
-|»»»»»» default|string\|null|false|none|If this is set and the value is not in the approved_list, set the value to this|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»» *anonymous*|object|false|none|Make the value camelCase|
-|»»»»»» type|string|true|none|none|
-|»»»»»» options|object|true|none|This filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»» *anonymous*|object|false|none|Filter to transform a value into a date|
-|»»»»»» type|string|true|none|none|
-|»»»»»» options|object|true|none|Date filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»» *anonymous*|object|false|none|Filter to transform values into null. This is helpful when trying to make a value required. The following are considered empty: # The number 0 or 0.0 # empty string '' # A boolean false # The word 'false' #|
-|»»»»»» type|string|true|none|none|
-|»»»»»» options|object|true|none|empty filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»» *anonymous*|object|false|none|Filter to transform a value into a float. Non numeric characters (including comma) will be removed|
-|»»»»»» type|string|true|none|none|
-|»»»»»» options|object|true|none|none|
-|»»»»»»» precision|integer|false|none|How many decimal places to preserve|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»» *anonymous*|object|false|none|Make the value kebab-case|
-|»»»»»»» type|string|true|none|none|
-|»»»»»»» options|object|true|none|This filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»» *anonymous*|object|false|none|Make the value lowercase|
-|»»»»»»» type|string|true|none|none|
-|»»»»»»» options|object|true|none|This filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»» *anonymous*|object|false|none|Filter to transform a value into a number. Non numeric characters (including comma and decimal points) will be removed|
-|»»»»»»» type|string|true|none|none|
-|»»»»»»» options|object|true|none|Number filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»» *anonymous*|object|false|none|Add a prefix to the start of a string. If the string already start with the prefix, it will not prepend.|
-|»»»»»»» type|string|true|none|none|
-|»»»»»»» options|object|true|none|none|
-|»»»»»»»» prefix|string|true|none|The prefix to add|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»» *anonymous*|object|false|none|Make the value snake_case|
-|»»»»»»»» type|string|true|none|none|
-|»»»»»»»» options|object|true|none|This filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a string|
-|»»»»»»»» type|string|true|none|none|
-|»»»»»»»» options|object|true|none|String filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»» *anonymous*|object|false|none|Add a suffix to the start of a string. If the string already start with the suffix, it will not append.|
-|»»»»»»»» type|string|true|none|none|
-|»»»»»»»» options|object|true|none|none|
-|»»»»»»»»» suffix|string|true|none|The suffix to add|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»» *anonymous*|object|false|none|Filter to trim whitespace from a value|
-|»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»» options|object|true|none|By default will trim from the start and end|
-|»»»»»»»»»» start|boolean|false|none|Remove white space from the start of the string|
-|»»»»»»»»»» end|boolean|false|none|Remove white space from the end of the string|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»» *anonymous*|object|false|none|Make the value UPPERCASE|
-|»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»» options|object|true|none|This filter has no options|
-
-*continued*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»» validators|[anyOf]|true|none|A set of validators to use for this field|
-
-*anyOf*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»» *anonymous*|object|false|none|Validate number is between two values. By default, min and max are included|
-|»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»» min|number|true|none|Minimum value to check|
-|»»»»»»»»»»»» max|number|true|none|The maximum value to check|
-|»»»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
-|»»»»»»»»»»»» include|boolean|false|none|Include the value in the check|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»» *anonymous*|object|false|none|Validate value does not match a list (black list)|
-|»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»» list|[string]|true|none|The list of approved values|
-|»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»» *anonymous*|object|false|none|Validate string contains a value|
-|»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»» contains|string|true|none|String must contain with this value|
-|»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string is a correct email address|
-|»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»» strict|boolean|false|none|Enforce strict standards from ARPA. This will enforce the length of the string|
-|»»»»»»»»»»»»»»» lookup|boolean|false|none|Look up the host name and check if it has a valid MX record|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string ends with a value|
-|»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»» ends_with|string|true|none|String must end with this value|
-|»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number equals a value|
-|»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»» value|number|true|none|The value to compare against|
-|»»»»»»»»»»»»»»»»» precision|integer|false|none|When value is a float, this will set the decimal precision|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number is greater than a value. By default, this will check if value is greater than or equals to|
-|»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»» value|number|true|none|The value to compare against|
-|»»»»»»»»»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
-|»»»»»»»»»»»»»»»»»» include|boolean|false|none|Include the value in the check|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string has a correct DNS records|
-|»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»» record_type|string|false|none|DNS record type to validate|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an IP address format. Defaults to matching IPv4|
-|»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»» versions|[string]|false|none|IP Version to match against|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string is a certain length|
-|»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»» length|string|true|none|String must contain with this value|
-|»»»»»»»»»»»»»»»»»»»»» operator|string|false|none|Which type of length comparision to make|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number is less than a value. By default, this will check if value is less than or equals to|
-|»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»» value|number|true|none|The value to compare against|
-|»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
-|»»»»»»»»»»»»»»»»»»»»»» include|boolean|false|none|Include the value in the check|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an MAC address format|
-|»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This validator has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches a regular expression|
-|»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»» mask|string|true|none|Mask to validate against|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string starts with a value|
-|»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»» starts_with|string|true|none|String must start with this value|
-|»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validates that a value follows a step. Both start and end options do not have to sync with the step. If they do not sync then find the nearest step.|
-|»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»» step|number|true|none|The step value|
-|»»»»»»»»»»»»»»»»»»»»»»»»» start|integer|false|none|Start stepping at this value|
-|»»»»»»»»»»»»»»»»»»»»»»»»» end|integer|false|none|End stepping at this value|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an URI|
-|»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»» schemes|[string]|false|none|Schemes to match. By default all are matched|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate value matches a list (white list)|
-|»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»» list|[string]|true|none|The list of approved values|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|entity_type|CUS|
-|category|PENDING|
-|category|IN_PROGRESS|
-|category|VERIFYING|
-|category|COMPLETE|
-|category|CANCELLED|
-|category|BLOCKED|
-|entity_type|MFR|
-|type|allowed_list|
-|type|camel|
-|type|date|
-|type|empty|
-|type|float|
-|type|kebab|
-|type|lower|
-|type|number|
-|type|prefix|
-|type|snake|
-|type|string|
-|type|suffix|
-|type|trim|
-|type|upper|
-|type|greater_than|
-|type|white_list|
-|type|contains|
-|type|email_address|
-|type|ends_with|
-|type|equals|
-|type|greater_than|
-|type|hostname|
-|record_type|A|
-|record_type|AAAA|
-|record_type|AFSDB|
-|record_type|APL|
-|record_type|CAA|
-|record_type|CDNSKEY|
-|record_type|CDS|
-|record_type|CERT|
-|record_type|CNAME|
-|record_type|CSYNC|
-|record_type|DHCID|
-|record_type|DLV|
-|record_type|DNAME|
-|record_type|DNSKEY|
-|record_type|DS|
-|record_type|HIP|
-|record_type|IPSECKEY|
-|record_type|KEY|
-|record_type|KX|
-|record_type|LOC|
-|record_type|MX|
-|record_type|NAPTR|
-|record_type|NS|
-|record_type|NSEC|
-|record_type|NSEC3|
-|record_type|NSEC3PARAM|
-|record_type|OPENPGPKEY|
-|record_type|PTR|
-|record_type|RRSIG|
-|record_type|RP|
-|record_type|SIG|
-|record_type|SMIMEA|
-|record_type|SOA|
-|record_type|SRV|
-|record_type|SSHFP|
-|record_type|TA|
-|record_type|TKEY|
-|record_type|TLSA|
-|record_type|TSIG|
-|record_type|TXT|
-|record_type|URI|
-|type|ipAddress|
-|type|length|
-|operator|equals|
-|operator|less_than|
-|operator|less_than_equals|
-|operator|greater_than|
-|operator|greater_than_equals|
-|type|lessThan|
-|type|macAddress|
-|type|mask|
-|type|startsWith|
-|type|step|
-|type|uri|
-|type|whiteList|
 
 Status Code **401**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|string|false|none|none|
-|» type|string|false|none|none|
-|» status|number|false|none|none|
-|» detail|string|false|none|none|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|title|Unauthorized|
-|type|https://docs.nterprise.com/api/problem/Unauthorized|
-|status|401|
-|detail|You are not authorized to access this resource|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
 
 Status Code **403**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|string|false|none|none|
-|» type|string|false|none|none|
-|» status|number|false|none|none|
-|» detail|string|false|none|none|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|title|Forbidden|
-|type|https://docs.nterprise.com/api/problem/Forbidden|
-|status|403|
-|detail|You are forbidden to access this resource|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
 
 Status Code **404**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|string|false|none|none|
-|» type|string|false|none|none|
-|» status|number|false|none|none|
-|» detail|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
 
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|title|Not Found|
-|type|https://docs.nterprise.com/api/problem/NotFound|
-|status|404|
-|detail|Resource not found|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## updatePart
+### PUT /parts/{part_id} - *Update part *
 
 <a id="opIdupdatePart"></a>
 
-`PUT /parts/{part_id}`
-
-*Updates a part *
+*Update part *
 
 Updates a part 
 
 > Body parameter
-
-```json
-{
-  "type": "object",
-  "required": [
-    "label",
-    "customer",
-    "manufacturer",
-    "input_filter",
-    "serial_prefix"
-  ],
-  "properties": {
-    "label": {
-      "type": "string",
-      "description": "Label for the entity"
-    },
-    "customer": {
-      "type": "object",
-      "required": [
-        "customer_id"
-      ],
-      "properties": {
-        "customer_id": {
-          "description": "Customer identifier",
-          "type": "string",
-          "readOnly": true,
-          "pattern": "^[0-9a-zA-Z-_]+$"
-        }
-      }
-    },
-    "manufacturer": {
-      "type": "object",
-      "required": [
-        "manufacturer_id",
-        "part_number"
-      ],
-      "properties": {
-        "manufacturer_id": {
-          "description": "Manufacturer identifier",
-          "type": "string",
-          "readOnly": true,
-          "pattern": "^[0-9a-zA-Z-_]+$"
-        },
-        "part_number": {
-          "type": "string",
-          "description": "Part number the manufacturer uses. If this is not set, then the part number is used"
-        }
-      }
-    },
-    "serial_prefix": {
-      "type": "string",
-      "nullable": true,
-      "description": "A serial number prefix for the part"
-    },
-    "input_filter": {
-      "type": "array",
-      "description": "Input Filters allow custom fields to be defined for entities",
-      "items": {
-        "type": "object",
-        "description": "Input filter specification",
-        "required": [
-          "label",
-          "key",
-          "filters",
-          "validators"
-        ],
-        "properties": {
-          "label": {
-            "type": "string",
-            "description": "Human readable name"
-          },
-          "key": {
-            "type": "string",
-            "description": "Slug used to store the property",
-            "readOnly": true,
-            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-          },
-          "filters": {
-            "type": "array",
-            "description": "A Collection of filters applied to the field",
-            "maxItems": 100,
-            "items": {
-              "anyOf": [
-                {
-                  "type": "object",
-                  "description": "This filter will set the value based on a list of approved values. If the value is not in the list, it will then be set to empty unless the default option is set",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "allowed_list"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "approved_values"
-                      ],
-                      "properties": {
-                        "approved_values": {
-                          "type": "array",
-                          "minimum": 1,
-                          "maximum": 100,
-                          "description": "The list of approved values",
-                          "items": {
-                            "type": "string"
-                          }
-                        },
-                        "check_case": {
-                          "type": "boolean",
-                          "description": "Perform a case sensitive match. By default will not match case",
-                          "default": false
-                        },
-                        "default": {
-                          "type": "string",
-                          "nullable": true,
-                          "description": "If this is set and the value is not in the approved_list, set the value to this"
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Make the value camelCase",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "camel"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "description": "This filter has no options"
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Filter to transform a value into a date",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "date"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "description": "Date filter has no options"
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Filter to transform values into null. This is helpful when trying to make a value required. The following are considered empty:\n# The number 0 or 0.0\n# empty string ''\n# A boolean false\n# The word 'false'\n# ",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "empty"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "description": "empty filter has no options"
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Filter to transform a value into a float. Non numeric characters (including comma) will be removed",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "float"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "properties": {
-                        "precision": {
-                          "type": "integer",
-                          "minimum": 1,
-                          "maximum": 8,
-                          "default": 3,
-                          "description": "How many decimal places to preserve"
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Make the value kebab-case",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "kebab"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "description": "This filter has no options"
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Make the value lowercase",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "lower"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "description": "This filter has no options"
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Filter to transform a value into a number. Non numeric characters (including comma and decimal points) will be removed",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "number"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "description": "Number filter has no options"
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Add a prefix to the start of a string. If the string already start with the prefix, it will not prepend.",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "prefix"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "prefix"
-                      ],
-                      "properties": {
-                        "prefix": {
-                          "type": "string",
-                          "description": "The prefix to add"
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Make the value snake_case",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "snake"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "description": "This filter has no options"
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Filter to transform a value into a string",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "string"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "description": "String filter has no options"
-                    }
-                  }
-                },
-                {
-                  "description": "Add a suffix to the start of a string. If the string already start with the suffix, it will not append.",
-                  "type": "object",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "suffix"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "suffix"
-                      ],
-                      "properties": {
-                        "suffix": {
-                          "type": "string",
-                          "description": "The suffix to add"
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Filter to trim whitespace from a value",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "trim"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "description": "By default will trim from the start and end",
-                      "properties": {
-                        "start": {
-                          "type": "boolean",
-                          "description": "Remove white space from the start of the string",
-                          "default": true
-                        },
-                        "end": {
-                          "type": "boolean",
-                          "description": "Remove white space from the end of the string",
-                          "default": true
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Make the value UPPERCASE",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "upper"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "description": "This filter has no options"
-                    }
-                  }
-                }
-              ]
-            }
-          },
-          "validators": {
-            "type": "array",
-            "description": "A set of validators to use for this field",
-            "maxItems": 100,
-            "items": {
-              "anyOf": [
-                {
-                  "type": "object",
-                  "description": "Validate number is between two values. By default, min and max are included",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "greater_than"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "min",
-                        "max"
-                      ],
-                      "properties": {
-                        "min": {
-                          "type": "number",
-                          "description": "Minimum value to check"
-                        },
-                        "max": {
-                          "type": "number",
-                          "description": "The maximum value to check"
-                        },
-                        "precision": {
-                          "type": "integer",
-                          "description": "When number is a float, this will set the decimal precision",
-                          "minimum": 1,
-                          "maximum": 8,
-                          "default": 3
-                        },
-                        "include": {
-                          "type": "boolean",
-                          "description": "Include the value in the check",
-                          "default": true
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate value does not match a list (black list)",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "white_list"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "list"
-                      ],
-                      "properties": {
-                        "list": {
-                          "type": "array",
-                          "minimum": 1,
-                          "maximum": 100,
-                          "description": "The list of approved values",
-                          "items": {
-                            "type": "string"
-                          }
-                        },
-                        "check_case": {
-                          "type": "boolean",
-                          "description": "Perform a case sensitive match. By default will not match case",
-                          "default": false
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate string contains a value",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "contains"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "contains"
-                      ],
-                      "properties": {
-                        "contains": {
-                          "type": "string",
-                          "description": "String must contain with this value"
-                        },
-                        "check_case": {
-                          "type": "boolean",
-                          "description": "Perform a case sensitive match. By default will not match case",
-                          "default": false
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate string is a correct email address",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "email_address"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "properties": {
-                        "strict": {
-                          "type": "boolean",
-                          "description": "Enforce strict standards from ARPA. This will enforce the length of the string",
-                          "default": true
-                        },
-                        "lookup": {
-                          "type": "boolean",
-                          "description": "Look up the host name and check if it has a valid MX record",
-                          "default": false
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate string ends with a value",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "ends_with"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "ends_with"
-                      ],
-                      "properties": {
-                        "ends_with": {
-                          "type": "string",
-                          "description": "String must end with this value"
-                        },
-                        "check_case": {
-                          "type": "boolean",
-                          "description": "Perform a case sensitive match. By default will not match case",
-                          "default": false
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate number equals a value",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "equals"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "value"
-                      ],
-                      "properties": {
-                        "value": {
-                          "type": "number",
-                          "description": "The value to compare against"
-                        },
-                        "precision": {
-                          "type": "integer",
-                          "description": "When value is a float, this will set the decimal precision",
-                          "minimum": 1,
-                          "maximum": 8,
-                          "default": 3
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate number is greater than a value. By default, this will check if value is greater than or equals to",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "greater_than"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "value"
-                      ],
-                      "properties": {
-                        "value": {
-                          "type": "number",
-                          "description": "The value to compare against"
-                        },
-                        "precision": {
-                          "type": "integer",
-                          "description": "When number is a float, this will set the decimal precision",
-                          "minimum": 1,
-                          "maximum": 8,
-                          "default": 3
-                        },
-                        "include": {
-                          "type": "boolean",
-                          "description": "Include the value in the check",
-                          "default": true
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate string has a correct DNS records",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "hostname"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "properties": {
-                        "record_type": {
-                          "type": "string",
-                          "description": "DNS record type to validate",
-                          "default": "A",
-                          "enum": [
-                            "A",
-                            "AAAA",
-                            "AFSDB",
-                            "APL",
-                            "CAA",
-                            "CDNSKEY",
-                            "CDS",
-                            "CERT",
-                            "CNAME",
-                            "CSYNC",
-                            "DHCID",
-                            "DLV",
-                            "DNAME",
-                            "DNSKEY",
-                            "DS",
-                            "HIP",
-                            "IPSECKEY",
-                            "KEY",
-                            "KX",
-                            "LOC",
-                            "MX",
-                            "NAPTR",
-                            "NS",
-                            "NSEC",
-                            "NSEC3",
-                            "NSEC3PARAM",
-                            "OPENPGPKEY",
-                            "PTR",
-                            "RRSIG",
-                            "RP",
-                            "SIG",
-                            "SMIMEA",
-                            "SOA",
-                            "SRV",
-                            "SSHFP",
-                            "TA",
-                            "TKEY",
-                            "TLSA",
-                            "TSIG",
-                            "TXT",
-                            "URI"
-                          ]
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate string matches an IP address format. Defaults to matching IPv4",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "ipAddress"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "properties": {
-                        "versions": {
-                          "type": "array",
-                          "description": "IP Version to match against",
-                          "items": {
-                            "type": "string",
-                            "enum": [
-                              "IPv4",
-                              "IPv6"
-                            ]
-                          }
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate string is a certain length",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "length"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "length"
-                      ],
-                      "properties": {
-                        "length": {
-                          "type": "string",
-                          "description": "String must contain with this value"
-                        },
-                        "operator": {
-                          "type": "string",
-                          "description": "Which type of length comparision to make",
-                          "default": "equals",
-                          "enum": [
-                            "equals",
-                            "less_than",
-                            "less_than_equals",
-                            "greater_than",
-                            "greater_than_equals"
-                          ]
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate number is less than a value. By default, this will check if value is less than or equals to",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "lessThan"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "value"
-                      ],
-                      "properties": {
-                        "value": {
-                          "type": "number",
-                          "description": "The value to compare against"
-                        },
-                        "precision": {
-                          "type": "integer",
-                          "description": "When number is a float, this will set the decimal precision",
-                          "minimum": 1,
-                          "maximum": 8,
-                          "default": 3
-                        },
-                        "include": {
-                          "type": "boolean",
-                          "description": "Include the value in the check",
-                          "default": true
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate string matches an MAC address format",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "macAddress"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "description": "This validator has no options"
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate string matches a regular expression",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "mask"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "mask"
-                      ],
-                      "properties": {
-                        "mask": {
-                          "type": "string",
-                          "description": "Mask to validate against"
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate string starts with a value",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "startsWith"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "starts_with"
-                      ],
-                      "properties": {
-                        "starts_with": {
-                          "type": "string",
-                          "description": "String must start with this value"
-                        },
-                        "check_case": {
-                          "type": "boolean",
-                          "description": "Perform a case sensitive match. By default will not match case",
-                          "default": false
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validates that a value follows a step. Both start and end options do not have to sync with the step. If they do not sync then find the nearest step.",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "step"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "step"
-                      ],
-                      "properties": {
-                        "step": {
-                          "type": "number",
-                          "description": "The step value"
-                        },
-                        "start": {
-                          "type": "integer",
-                          "description": "Start stepping at this value"
-                        },
-                        "end": {
-                          "type": "integer",
-                          "description": "End stepping at this value"
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate string matches an URI",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "uri"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "properties": {
-                        "schemes": {
-                          "type": "array",
-                          "description": "Schemes to match. By default all are matched",
-                          "items": {
-                            "type": "string",
-                            "enum": [
-                              "http",
-                              "https",
-                              "sip",
-                              "sips",
-                              "ftp",
-                              "ftps",
-                              "ldap",
-                              "ldaps",
-                              "file",
-                              "udp",
-                              "tcp",
-                              "urn"
-                            ]
-                          }
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate value matches a list (white list)",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "whiteList"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "list"
-                      ],
-                      "properties": {
-                        "list": {
-                          "type": "array",
-                          "minimum": 1,
-                          "maximum": 100,
-                          "description": "The list of approved values",
-                          "items": {
-                            "type": "string"
-                          }
-                        },
-                        "check_case": {
-                          "type": "boolean",
-                          "description": "Perform a case sensitive match. By default will not match case",
-                          "default": false
-                        }
-                      }
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        }
-      }
-    }
-  }
-}
-```
 
 <h3 id="updatepart-parameters">Parameters</h3>
 
@@ -7780,1502 +1131,159 @@ Updates a part
 |part_id|path|string|true|Id for the part|
 |label|body|string|true|Label for the entity|
 |customer|body|object|true|none|
-|» customer_id|body|string|true|Customer identifier|
+|&nbsp;&nbsp;&nbsp;&nbsp; customer_id|body|string|true|Customer identifier|
 |manufacturer|body|object|true|none|
-|» manufacturer_id|body|string|true|Manufacturer identifier|
-|» part_number|body|string|true|Part number the manufacturer uses. If this is not set, then the part number is used|
-|serial_prefix|body|string\|null|true|A serial number prefix for the part|
+|&nbsp;&nbsp;&nbsp;&nbsp; manufacturer_id|body|string|true|Manufacturer identifier|
+|&nbsp;&nbsp;&nbsp;&nbsp; part_number|body|string|true|Part number the manufacturer uses. If this is not set, then the part number is used|
+|serial_prefix|body|string¦null|true|A serial number prefix for the part|
 |input_filter|body|[object]|true|Input Filters allow custom fields to be defined for entities|
-|» label|body|string|true|Human readable name|
-|» key|body|string|true|Slug used to store the property|
-|» filters|body|[anyOf]|true|A Collection of filters applied to the field|
-|»» *anonymous*|body|object|false|This filter will set the value based on a list of approved values. If the value is not in the list, it will then be set to empty unless the default option is set|
-|»»» type|body|string|true|none|
-|»»» options|body|object|true|none|
-|»»»» approved_values|body|[string]|true|The list of approved values|
-|»»»» check_case|body|boolean|false|Perform a case sensitive match. By default will not match case|
-|»»»» default|body|string\|null|false|If this is set and the value is not in the approved_list, set the value to this|
-|»»» *anonymous*|body|object|false|Make the value camelCase|
-|»»»» type|body|string|true|none|
-|»»»» options|body|object|true|This filter has no options|
-|»»» *anonymous*|body|object|false|Filter to transform a value into a date|
-|»»»» type|body|string|true|none|
-|»»»» options|body|object|true|Date filter has no options|
-|»»» *anonymous*|body|object|false|Filter to transform values into null. This is helpful when trying to make a value required. The following are considered empty:|
-|»»»» type|body|string|true|none|
-|»»»» options|body|object|true|empty filter has no options|
-|»»» *anonymous*|body|object|false|Filter to transform a value into a float. Non numeric characters (including comma) will be removed|
-|»»»» type|body|string|true|none|
-|»»»» options|body|object|true|none|
-|»»»»» precision|body|integer|false|How many decimal places to preserve|
-|»»»» *anonymous*|body|object|false|Make the value kebab-case|
-|»»»»» type|body|string|true|none|
-|»»»»» options|body|object|true|This filter has no options|
-|»»»» *anonymous*|body|object|false|Make the value lowercase|
-|»»»»» type|body|string|true|none|
-|»»»»» options|body|object|true|This filter has no options|
-|»»»» *anonymous*|body|object|false|Filter to transform a value into a number. Non numeric characters (including comma and decimal points) will be removed|
-|»»»»» type|body|string|true|none|
-|»»»»» options|body|object|true|Number filter has no options|
-|»»»» *anonymous*|body|object|false|Add a prefix to the start of a string. If the string already start with the prefix, it will not prepend.|
-|»»»»» type|body|string|true|none|
-|»»»»» options|body|object|true|none|
-|»»»»»» prefix|body|string|true|The prefix to add|
-|»»»»» *anonymous*|body|object|false|Make the value snake_case|
-|»»»»»» type|body|string|true|none|
-|»»»»»» options|body|object|true|This filter has no options|
-|»»»»» *anonymous*|body|object|false|Filter to transform a value into a string|
-|»»»»»» type|body|string|true|none|
-|»»»»»» options|body|object|true|String filter has no options|
-|»»»»» *anonymous*|body|object|false|Add a suffix to the start of a string. If the string already start with the suffix, it will not append.|
-|»»»»»» type|body|string|true|none|
-|»»»»»» options|body|object|true|none|
-|»»»»»»» suffix|body|string|true|The suffix to add|
-|»»»»»» *anonymous*|body|object|false|Filter to trim whitespace from a value|
-|»»»»»»» type|body|string|true|none|
-|»»»»»»» options|body|object|true|By default will trim from the start and end|
-|»»»»»»»» start|body|boolean|false|Remove white space from the start of the string|
-|»»»»»»»» end|body|boolean|false|Remove white space from the end of the string|
-|»»»»»»» *anonymous*|body|object|false|Make the value UPPERCASE|
-|»»»»»»»» type|body|string|true|none|
-|»»»»»»»» options|body|object|true|This filter has no options|
-|»»»»»»» validators|body|[anyOf]|true|A set of validators to use for this field|
-|»»»»»»»» *anonymous*|body|object|false|Validate number is between two values. By default, min and max are included|
-|»»»»»»»»» type|body|string|true|none|
-|»»»»»»»»» options|body|object|true|none|
-|»»»»»»»»»» min|body|number|true|Minimum value to check|
-|»»»»»»»»»» max|body|number|true|The maximum value to check|
-|»»»»»»»»»» precision|body|integer|false|When number is a float, this will set the decimal precision|
-|»»»»»»»»»» include|body|boolean|false|Include the value in the check|
-|»»»»»»»»» *anonymous*|body|object|false|Validate value does not match a list (black list)|
-|»»»»»»»»»» type|body|string|true|none|
-|»»»»»»»»»» options|body|object|true|none|
-|»»»»»»»»»»» list|body|[string]|true|The list of approved values|
-|»»»»»»»»»»» check_case|body|boolean|false|Perform a case sensitive match. By default will not match case|
-|»»»»»»»»»» *anonymous*|body|object|false|Validate string contains a value|
-|»»»»»»»»»»» type|body|string|true|none|
-|»»»»»»»»»»» options|body|object|true|none|
-|»»»»»»»»»»»» contains|body|string|true|String must contain with this value|
-|»»»»»»»»»»»» check_case|body|boolean|false|Perform a case sensitive match. By default will not match case|
-|»»»»»»»»»»» *anonymous*|body|object|false|Validate string is a correct email address|
-|»»»»»»»»»»»» type|body|string|true|none|
-|»»»»»»»»»»»» options|body|object|true|none|
-|»»»»»»»»»»»»» strict|body|boolean|false|Enforce strict standards from ARPA. This will enforce the length of the string|
-|»»»»»»»»»»»»» lookup|body|boolean|false|Look up the host name and check if it has a valid MX record|
-|»»»»»»»»»»»» *anonymous*|body|object|false|Validate string ends with a value|
-|»»»»»»»»»»»»» type|body|string|true|none|
-|»»»»»»»»»»»»» options|body|object|true|none|
-|»»»»»»»»»»»»»» ends_with|body|string|true|String must end with this value|
-|»»»»»»»»»»»»»» check_case|body|boolean|false|Perform a case sensitive match. By default will not match case|
-|»»»»»»»»»»»»» *anonymous*|body|object|false|Validate number equals a value|
-|»»»»»»»»»»»»»» type|body|string|true|none|
-|»»»»»»»»»»»»»» options|body|object|true|none|
-|»»»»»»»»»»»»»»» value|body|number|true|The value to compare against|
-|»»»»»»»»»»»»»»» precision|body|integer|false|When value is a float, this will set the decimal precision|
-|»»»»»»»»»»»»»» *anonymous*|body|object|false|Validate number is greater than a value. By default, this will check if value is greater than or equals to|
-|»»»»»»»»»»»»»»» type|body|string|true|none|
-|»»»»»»»»»»»»»»» options|body|object|true|none|
-|»»»»»»»»»»»»»»»» value|body|number|true|The value to compare against|
-|»»»»»»»»»»»»»»»» precision|body|integer|false|When number is a float, this will set the decimal precision|
-|»»»»»»»»»»»»»»»» include|body|boolean|false|Include the value in the check|
-|»»»»»»»»»»»»»»» *anonymous*|body|object|false|Validate string has a correct DNS records|
-|»»»»»»»»»»»»»»»» type|body|string|true|none|
-|»»»»»»»»»»»»»»»» options|body|object|true|none|
-|»»»»»»»»»»»»»»»»» record_type|body|string|false|DNS record type to validate|
-|»»»»»»»»»»»»»»»» *anonymous*|body|object|false|Validate string matches an IP address format. Defaults to matching IPv4|
-|»»»»»»»»»»»»»»»»» type|body|string|true|none|
-|»»»»»»»»»»»»»»»»» options|body|object|true|none|
-|»»»»»»»»»»»»»»»»»» versions|body|[string]|false|IP Version to match against|
-|»»»»»»»»»»»»»»»»» *anonymous*|body|object|false|Validate string is a certain length|
-|»»»»»»»»»»»»»»»»»» type|body|string|true|none|
-|»»»»»»»»»»»»»»»»»» options|body|object|true|none|
-|»»»»»»»»»»»»»»»»»»» length|body|string|true|String must contain with this value|
-|»»»»»»»»»»»»»»»»»»» operator|body|string|false|Which type of length comparision to make|
-|»»»»»»»»»»»»»»»»»» *anonymous*|body|object|false|Validate number is less than a value. By default, this will check if value is less than or equals to|
-|»»»»»»»»»»»»»»»»»»» type|body|string|true|none|
-|»»»»»»»»»»»»»»»»»»» options|body|object|true|none|
-|»»»»»»»»»»»»»»»»»»»» value|body|number|true|The value to compare against|
-|»»»»»»»»»»»»»»»»»»»» precision|body|integer|false|When number is a float, this will set the decimal precision|
-|»»»»»»»»»»»»»»»»»»»» include|body|boolean|false|Include the value in the check|
-|»»»»»»»»»»»»»»»»»»» *anonymous*|body|object|false|Validate string matches an MAC address format|
-|»»»»»»»»»»»»»»»»»»»» type|body|string|true|none|
-|»»»»»»»»»»»»»»»»»»»» options|body|object|true|This validator has no options|
-|»»»»»»»»»»»»»»»»»»» *anonymous*|body|object|false|Validate string matches a regular expression|
-|»»»»»»»»»»»»»»»»»»»» type|body|string|true|none|
-|»»»»»»»»»»»»»»»»»»»» options|body|object|true|none|
-|»»»»»»»»»»»»»»»»»»»»» mask|body|string|true|Mask to validate against|
-|»»»»»»»»»»»»»»»»»»»» *anonymous*|body|object|false|Validate string starts with a value|
-|»»»»»»»»»»»»»»»»»»»»» type|body|string|true|none|
-|»»»»»»»»»»»»»»»»»»»»» options|body|object|true|none|
-|»»»»»»»»»»»»»»»»»»»»»» starts_with|body|string|true|String must start with this value|
-|»»»»»»»»»»»»»»»»»»»»»» check_case|body|boolean|false|Perform a case sensitive match. By default will not match case|
-|»»»»»»»»»»»»»»»»»»»»» *anonymous*|body|object|false|Validates that a value follows a step. Both start and end options do not have to sync with the step. If they do not sync then find the nearest step.|
-|»»»»»»»»»»»»»»»»»»»»»» type|body|string|true|none|
-|»»»»»»»»»»»»»»»»»»»»»» options|body|object|true|none|
-|»»»»»»»»»»»»»»»»»»»»»»» step|body|number|true|The step value|
-|»»»»»»»»»»»»»»»»»»»»»»» start|body|integer|false|Start stepping at this value|
-|»»»»»»»»»»»»»»»»»»»»»»» end|body|integer|false|End stepping at this value|
-|»»»»»»»»»»»»»»»»»»»»»» *anonymous*|body|object|false|Validate string matches an URI|
-|»»»»»»»»»»»»»»»»»»»»»»» type|body|string|true|none|
-|»»»»»»»»»»»»»»»»»»»»»»» options|body|object|true|none|
-|»»»»»»»»»»»»»»»»»»»»»»»» schemes|body|[string]|false|Schemes to match. By default all are matched|
-|»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|body|object|false|Validate value matches a list (white list)|
-|»»»»»»»»»»»»»»»»»»»»»»»» type|body|string|true|none|
-|»»»»»»»»»»»»»»»»»»»»»»»» options|body|object|true|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»» list|body|[string]|true|The list of approved values|
-|»»»»»»»»»»»»»»»»»»»»»»»»» check_case|body|boolean|false|Perform a case sensitive match. By default will not match case|
+|&nbsp;&nbsp;&nbsp;&nbsp; label|body|string|true|Human readable name|
+|&nbsp;&nbsp;&nbsp;&nbsp; key|body|string|true|Slug used to store the property|
+|&nbsp;&nbsp;&nbsp;&nbsp; filters|body|[anyOf]|true|A Collection of filters applied to the field|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|This filter will set the value based on a list of approved values. If the value is not in the list, it will then be set to empty unless the default option is set|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; approved_values|body|[string]|true|The list of approved values|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; check_case|body|boolean|false|Perform a case sensitive match. By default will not match case|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; default|body|string¦null|false|If this is set and the value is not in the approved_list, set the value to this|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Make the value camelCase|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|This filter has no options|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Filter to transform a value into a date|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|Date filter has no options|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Filter to transform values into null. This is helpful when trying to make a value required. The following are considered empty:|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|empty filter has no options|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Filter to transform a value into a float. Non numeric characters (including comma) will be removed|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; precision|body|integer|false|How many decimal places to preserve|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Make the value kebab-case|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|This filter has no options|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Make the value lowercase|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|This filter has no options|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Filter to transform a value into a number. Non numeric characters (including comma and decimal points) will be removed|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|Number filter has no options|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Add a prefix to the start of a string. If the string already start with the prefix, it will not prepend.|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; prefix|body|string|true|The prefix to add|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Make the value snake_case|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|This filter has no options|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Filter to transform a value into a string|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|String filter has no options|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Add a suffix to the start of a string. If the string already start with the suffix, it will not append.|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; suffix|body|string|true|The suffix to add|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Filter to trim whitespace from a value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|By default will trim from the start and end|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; start|body|boolean|false|Remove white space from the start of the string|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end|body|boolean|false|Remove white space from the end of the string|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Make the value UPPERCASE|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|This filter has no options|
+|&nbsp;&nbsp;&nbsp;&nbsp; validators|body|[anyOf]|true|A set of validators to use for this field|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Validate number is between two values. By default, min and max are included|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; min|body|number|true|Minimum value to check|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; max|body|number|true|The maximum value to check|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; precision|body|integer|false|When number is a float, this will set the decimal precision|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; include|body|boolean|false|Include the value in the check|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Validate value does not match a list (black list)|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; list|body|[string]|true|The list of approved values|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; check_case|body|boolean|false|Perform a case sensitive match. By default will not match case|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Validate string contains a value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; contains|body|string|true|String must contain with this value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; check_case|body|boolean|false|Perform a case sensitive match. By default will not match case|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Validate string is a correct email address|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; strict|body|boolean|false|Enforce strict standards from ARPA. This will enforce the length of the string|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; lookup|body|boolean|false|Look up the host name and check if it has a valid MX record|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Validate string ends with a value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ends_with|body|string|true|String must end with this value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; check_case|body|boolean|false|Perform a case sensitive match. By default will not match case|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Validate number equals a value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; value|body|number|true|The value to compare against|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; precision|body|integer|false|When value is a float, this will set the decimal precision|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Validate number is greater than a value. By default, this will check if value is greater than or equals to|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; value|body|number|true|The value to compare against|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; precision|body|integer|false|When number is a float, this will set the decimal precision|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; include|body|boolean|false|Include the value in the check|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Validate string has a correct DNS records|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; record_type|body|string|false|DNS record type to validate|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Validate string matches an IP address format. Defaults to matching IPv4|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; versions|body|[string]|false|IP Version to match against|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Validate string is a certain length|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; length|body|string|true|String must contain with this value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; operator|body|string|false|Which type of length comparision to make|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Validate number is less than a value. By default, this will check if value is less than or equals to|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; value|body|number|true|The value to compare against|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; precision|body|integer|false|When number is a float, this will set the decimal precision|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; include|body|boolean|false|Include the value in the check|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Validate string matches an MAC address format|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|This validator has no options|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Validate string matches a regular expression|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mask|body|string|true|Mask to validate against|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Validate string starts with a value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; starts_with|body|string|true|String must start with this value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; check_case|body|boolean|false|Perform a case sensitive match. By default will not match case|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Validates that a value follows a step. Both start and end options do not have to sync with the step. If they do not sync then find the nearest step.|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; step|body|number|true|The step value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; start|body|integer|false|Start stepping at this value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end|body|integer|false|End stepping at this value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Validate string matches an URI|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; schemes|body|[string]|false|Schemes to match. By default all are matched|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Validate value matches a list (white list)|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; list|body|[string]|true|The list of approved values|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; check_case|body|boolean|false|Perform a case sensitive match. By default will not match case|
 
 #### Detailed descriptions
 
-**»»» *anonymous***: Filter to transform values into null. This is helpful when trying to make a value required. The following are considered empty:
+**&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous***: Filter to transform values into null. This is helpful when trying to make a value required. The following are considered empty:
 # The number 0 or 0.0
 # empty string ''
 # A boolean false
 # The word 'false'
 #
-
-#### Enumerated Values
-
-|Parameter|Value|
-|---|---|
-|»»» type|allowed_list|
-|»»»» type|camel|
-|»»»» type|date|
-|»»»» type|empty|
-|»»»» type|float|
-|»»»»» type|kebab|
-|»»»»» type|lower|
-|»»»»» type|number|
-|»»»»» type|prefix|
-|»»»»»» type|snake|
-|»»»»»» type|string|
-|»»»»»» type|suffix|
-|»»»»»»» type|trim|
-|»»»»»»»» type|upper|
-|»»»»»»»»» type|greater_than|
-|»»»»»»»»»» type|white_list|
-|»»»»»»»»»»» type|contains|
-|»»»»»»»»»»»» type|email_address|
-|»»»»»»»»»»»»» type|ends_with|
-|»»»»»»»»»»»»»» type|equals|
-|»»»»»»»»»»»»»»» type|greater_than|
-|»»»»»»»»»»»»»»»» type|hostname|
-|»»»»»»»»»»»»»»»»» record_type|A|
-|»»»»»»»»»»»»»»»»» record_type|AAAA|
-|»»»»»»»»»»»»»»»»» record_type|AFSDB|
-|»»»»»»»»»»»»»»»»» record_type|APL|
-|»»»»»»»»»»»»»»»»» record_type|CAA|
-|»»»»»»»»»»»»»»»»» record_type|CDNSKEY|
-|»»»»»»»»»»»»»»»»» record_type|CDS|
-|»»»»»»»»»»»»»»»»» record_type|CERT|
-|»»»»»»»»»»»»»»»»» record_type|CNAME|
-|»»»»»»»»»»»»»»»»» record_type|CSYNC|
-|»»»»»»»»»»»»»»»»» record_type|DHCID|
-|»»»»»»»»»»»»»»»»» record_type|DLV|
-|»»»»»»»»»»»»»»»»» record_type|DNAME|
-|»»»»»»»»»»»»»»»»» record_type|DNSKEY|
-|»»»»»»»»»»»»»»»»» record_type|DS|
-|»»»»»»»»»»»»»»»»» record_type|HIP|
-|»»»»»»»»»»»»»»»»» record_type|IPSECKEY|
-|»»»»»»»»»»»»»»»»» record_type|KEY|
-|»»»»»»»»»»»»»»»»» record_type|KX|
-|»»»»»»»»»»»»»»»»» record_type|LOC|
-|»»»»»»»»»»»»»»»»» record_type|MX|
-|»»»»»»»»»»»»»»»»» record_type|NAPTR|
-|»»»»»»»»»»»»»»»»» record_type|NS|
-|»»»»»»»»»»»»»»»»» record_type|NSEC|
-|»»»»»»»»»»»»»»»»» record_type|NSEC3|
-|»»»»»»»»»»»»»»»»» record_type|NSEC3PARAM|
-|»»»»»»»»»»»»»»»»» record_type|OPENPGPKEY|
-|»»»»»»»»»»»»»»»»» record_type|PTR|
-|»»»»»»»»»»»»»»»»» record_type|RRSIG|
-|»»»»»»»»»»»»»»»»» record_type|RP|
-|»»»»»»»»»»»»»»»»» record_type|SIG|
-|»»»»»»»»»»»»»»»»» record_type|SMIMEA|
-|»»»»»»»»»»»»»»»»» record_type|SOA|
-|»»»»»»»»»»»»»»»»» record_type|SRV|
-|»»»»»»»»»»»»»»»»» record_type|SSHFP|
-|»»»»»»»»»»»»»»»»» record_type|TA|
-|»»»»»»»»»»»»»»»»» record_type|TKEY|
-|»»»»»»»»»»»»»»»»» record_type|TLSA|
-|»»»»»»»»»»»»»»»»» record_type|TSIG|
-|»»»»»»»»»»»»»»»»» record_type|TXT|
-|»»»»»»»»»»»»»»»»» record_type|URI|
-|»»»»»»»»»»»»»»»»» type|ipAddress|
-|»»»»»»»»»»»»»»»»»» versions|IPv4|
-|»»»»»»»»»»»»»»»»»» versions|IPv6|
-|»»»»»»»»»»»»»»»»»» type|length|
-|»»»»»»»»»»»»»»»»»»» operator|equals|
-|»»»»»»»»»»»»»»»»»»» operator|less_than|
-|»»»»»»»»»»»»»»»»»»» operator|less_than_equals|
-|»»»»»»»»»»»»»»»»»»» operator|greater_than|
-|»»»»»»»»»»»»»»»»»»» operator|greater_than_equals|
-|»»»»»»»»»»»»»»»»»»» type|lessThan|
-|»»»»»»»»»»»»»»»»»»»» type|macAddress|
-|»»»»»»»»»»»»»»»»»»»» type|mask|
-|»»»»»»»»»»»»»»»»»»»»» type|startsWith|
-|»»»»»»»»»»»»»»»»»»»»»» type|step|
-|»»»»»»»»»»»»»»»»»»»»»»» type|uri|
-|»»»»»»»»»»»»»»»»»»»»»»»» schemes|http|
-|»»»»»»»»»»»»»»»»»»»»»»»» schemes|https|
-|»»»»»»»»»»»»»»»»»»»»»»»» schemes|sip|
-|»»»»»»»»»»»»»»»»»»»»»»»» schemes|sips|
-|»»»»»»»»»»»»»»»»»»»»»»»» schemes|ftp|
-|»»»»»»»»»»»»»»»»»»»»»»»» schemes|ftps|
-|»»»»»»»»»»»»»»»»»»»»»»»» schemes|ldap|
-|»»»»»»»»»»»»»»»»»»»»»»»» schemes|ldaps|
-|»»»»»»»»»»»»»»»»»»»»»»»» schemes|file|
-|»»»»»»»»»»»»»»»»»»»»»»»» schemes|udp|
-|»»»»»»»»»»»»»»»»»»»»»»»» schemes|tcp|
-|»»»»»»»»»»»»»»»»»»»»»»»» schemes|urn|
-|»»»»»»»»»»»»»»»»»»»»»»»» type|whiteList|
-
-> Example responses
-
-> 200 Response
-
-```json
-{
-  "type": "object",
-  "properties": {
-    "_links": {
-      "type": "object",
-      "properties": {
-        "self": {
-          "x-example": {
-            "href": "https://api.nterprise.com/parts/23Y1rNJ6zyiRzqN"
-          },
-          "type": "object",
-          "properties": {
-            "href": {
-              "type": "string",
-              "format": "uri"
-            }
-          }
-        }
-      }
-    },
-    "part_id": {
-      "description": "Unique identifier",
-      "type": "string",
-      "readOnly": true,
-      "pattern": "^[0-9a-zA-Z-_]+$"
-    },
-    "label": {
-      "type": "string",
-      "description": "Label for the entity"
-    },
-    "slug": {
-      "type": "string",
-      "description": "Slug for the entity (Auto-generated from the label)",
-      "readOnly": true,
-      "deprecated": true,
-      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-    },
-    "created": {
-      "description": "Date the entity was created",
-      "type": "string",
-      "format": "date-time",
-      "readOnly": true
-    },
-    "updated": {
-      "description": "Last date the entity was updated",
-      "type": "string",
-      "format": "date-time",
-      "readOnly": true
-    },
-    "customer": {
-      "type": "object",
-      "description": "Customer",
-      "additionalProperties": false,
-      "required": [
-        "label",
-        "entity_id",
-        "entity_type",
-        "created",
-        "updated",
-        "allowed_statuses"
-      ],
-      "properties": {
-        "customer_id": {
-          "description": "Customer identifier",
-          "type": "string",
-          "readOnly": true,
-          "pattern": "^[0-9a-zA-Z-_]+$"
-        },
-        "entity_id": {
-          "x-no-api-doc": true,
-          "type": "string",
-          "description": "Customer identifier",
-          "readOnly": true,
-          "pattern": "^[0-9a-zA-Z-_]+$"
-        },
-        "entity_type": {
-          "x-no-api-doc": true,
-          "enum": [
-            "CUS"
-          ]
-        },
-        "label": {
-          "type": "string",
-          "description": "Label for the entity"
-        },
-        "slug": {
-          "type": "string",
-          "description": "Slug for the entity (Auto-generated from the label)",
-          "readOnly": true,
-          "deprecated": true,
-          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-        },
-        "created": {
-          "description": "Date the entity was created",
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "updated": {
-          "description": "Last date the entity was updated",
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "external_platform": {
-          "type": "object",
-          "description": "External Identifiers for the customer",
-          "deprecated": true,
-          "x-patternProperties": {
-            "^[A-Za-z][A-Za-z0-9_]*$": {
-              "type": "string"
-            }
-          }
-        },
-        "allowed_statuses": {
-          "type": "array",
-          "description": "List of allowed statuses",
-          "uniqueItems": true,
-          "items": {
-            "type": "object",
-            "description": "Defines the properties for a status",
-            "additionalProperties": false,
-            "required": [
-              "status",
-              "category"
-            ],
-            "properties": {
-              "status": {
-                "type": "string",
-                "description": "A Custom label for the status",
-                "pattern": "^[A-Za-z][0-9a-zA-Z-_ ]+$"
-              },
-              "category": {
-                "type": "string",
-                "description": "The classifier for the statues",
-                "enum": [
-                  "PENDING",
-                  "IN_PROGRESS",
-                  "VERIFYING",
-                  "COMPLETE",
-                  "CANCELLED",
-                  "BLOCKED"
-                ]
-              }
-            }
-          }
-        },
-        "total_programs": {
-          "type": "number",
-          "description": "Total programs under the customer"
-        },
-        "total_projects": {
-          "type": "number",
-          "description": "Total projects under the customer"
-        }
-      }
-    },
-    "manufacturer": {
-      "type": "object",
-      "description": "Manufacturer information for the part",
-      "required": [
-        "label",
-        "entity_id",
-        "entity_type",
-        "created",
-        "updated",
-        "part_number"
-      ],
-      "properties": {
-        "part_number": {
-          "type": "string",
-          "description": "Part number the manufacturer uses. If this is not set, then the part number is used"
-        },
-        "manufacturer_id": {
-          "x-no-api-doc": true,
-          "type": "string",
-          "description": "Customer identifier",
-          "readOnly": true,
-          "pattern": "^[0-9a-zA-Z-_]+$"
-        },
-        "entity_id": {
-          "x-no-api-doc": true,
-          "type": "string",
-          "description": "Customer identifier",
-          "readOnly": true,
-          "pattern": "^[0-9a-zA-Z-_]+$"
-        },
-        "entity_type": {
-          "enum": [
-            "MFR"
-          ]
-        },
-        "label": {
-          "type": "string",
-          "description": "Label for the entity"
-        },
-        "slug": {
-          "type": "string",
-          "description": "Slug for the entity (Auto-generated from the label)",
-          "readOnly": true,
-          "deprecated": true,
-          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-        },
-        "created": {
-          "description": "Date the entity was created",
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "updated": {
-          "description": "Last date the entity was updated",
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        }
-      }
-    },
-    "serial_prefix": {
-      "type": "string",
-      "nullable": true,
-      "description": "A serial number prefix for the part"
-    },
-    "input_filter": {
-      "type": "array",
-      "description": "Input Filters allow custom fields to be defined for entities",
-      "items": {
-        "type": "object",
-        "description": "Input filter specification",
-        "required": [
-          "label",
-          "key",
-          "filters",
-          "validators"
-        ],
-        "properties": {
-          "label": {
-            "type": "string",
-            "description": "Human readable name"
-          },
-          "key": {
-            "type": "string",
-            "description": "Slug used to store the property",
-            "readOnly": true,
-            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-          },
-          "filters": {
-            "type": "array",
-            "description": "A Collection of filters applied to the field",
-            "maxItems": 100,
-            "items": {
-              "anyOf": [
-                {
-                  "type": "object",
-                  "description": "This filter will set the value based on a list of approved values. If the value is not in the list, it will then be set to empty unless the default option is set",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "allowed_list"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "approved_values"
-                      ],
-                      "properties": {
-                        "approved_values": {
-                          "type": "array",
-                          "minimum": 1,
-                          "maximum": 100,
-                          "description": "The list of approved values",
-                          "items": {
-                            "type": "string"
-                          }
-                        },
-                        "check_case": {
-                          "type": "boolean",
-                          "description": "Perform a case sensitive match. By default will not match case",
-                          "default": false
-                        },
-                        "default": {
-                          "type": "string",
-                          "nullable": true,
-                          "description": "If this is set and the value is not in the approved_list, set the value to this"
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Make the value camelCase",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "camel"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "description": "This filter has no options"
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Filter to transform a value into a date",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "date"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "description": "Date filter has no options"
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Filter to transform values into null. This is helpful when trying to make a value required. The following are considered empty:\n# The number 0 or 0.0\n# empty string ''\n# A boolean false\n# The word 'false'\n# ",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "empty"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "description": "empty filter has no options"
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Filter to transform a value into a float. Non numeric characters (including comma) will be removed",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "float"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "properties": {
-                        "precision": {
-                          "type": "integer",
-                          "minimum": 1,
-                          "maximum": 8,
-                          "default": 3,
-                          "description": "How many decimal places to preserve"
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Make the value kebab-case",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "kebab"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "description": "This filter has no options"
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Make the value lowercase",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "lower"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "description": "This filter has no options"
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Filter to transform a value into a number. Non numeric characters (including comma and decimal points) will be removed",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "number"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "description": "Number filter has no options"
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Add a prefix to the start of a string. If the string already start with the prefix, it will not prepend.",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "prefix"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "prefix"
-                      ],
-                      "properties": {
-                        "prefix": {
-                          "type": "string",
-                          "description": "The prefix to add"
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Make the value snake_case",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "snake"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "description": "This filter has no options"
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Filter to transform a value into a string",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "string"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "description": "String filter has no options"
-                    }
-                  }
-                },
-                {
-                  "description": "Add a suffix to the start of a string. If the string already start with the suffix, it will not append.",
-                  "type": "object",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "suffix"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "suffix"
-                      ],
-                      "properties": {
-                        "suffix": {
-                          "type": "string",
-                          "description": "The suffix to add"
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Filter to trim whitespace from a value",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "trim"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "description": "By default will trim from the start and end",
-                      "properties": {
-                        "start": {
-                          "type": "boolean",
-                          "description": "Remove white space from the start of the string",
-                          "default": true
-                        },
-                        "end": {
-                          "type": "boolean",
-                          "description": "Remove white space from the end of the string",
-                          "default": true
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Make the value UPPERCASE",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "upper"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "description": "This filter has no options"
-                    }
-                  }
-                }
-              ]
-            }
-          },
-          "validators": {
-            "type": "array",
-            "description": "A set of validators to use for this field",
-            "maxItems": 100,
-            "items": {
-              "anyOf": [
-                {
-                  "type": "object",
-                  "description": "Validate number is between two values. By default, min and max are included",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "greater_than"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "min",
-                        "max"
-                      ],
-                      "properties": {
-                        "min": {
-                          "type": "number",
-                          "description": "Minimum value to check"
-                        },
-                        "max": {
-                          "type": "number",
-                          "description": "The maximum value to check"
-                        },
-                        "precision": {
-                          "type": "integer",
-                          "description": "When number is a float, this will set the decimal precision",
-                          "minimum": 1,
-                          "maximum": 8,
-                          "default": 3
-                        },
-                        "include": {
-                          "type": "boolean",
-                          "description": "Include the value in the check",
-                          "default": true
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate value does not match a list (black list)",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "white_list"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "list"
-                      ],
-                      "properties": {
-                        "list": {
-                          "type": "array",
-                          "minimum": 1,
-                          "maximum": 100,
-                          "description": "The list of approved values",
-                          "items": {
-                            "type": "string"
-                          }
-                        },
-                        "check_case": {
-                          "type": "boolean",
-                          "description": "Perform a case sensitive match. By default will not match case",
-                          "default": false
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate string contains a value",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "contains"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "contains"
-                      ],
-                      "properties": {
-                        "contains": {
-                          "type": "string",
-                          "description": "String must contain with this value"
-                        },
-                        "check_case": {
-                          "type": "boolean",
-                          "description": "Perform a case sensitive match. By default will not match case",
-                          "default": false
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate string is a correct email address",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "email_address"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "properties": {
-                        "strict": {
-                          "type": "boolean",
-                          "description": "Enforce strict standards from ARPA. This will enforce the length of the string",
-                          "default": true
-                        },
-                        "lookup": {
-                          "type": "boolean",
-                          "description": "Look up the host name and check if it has a valid MX record",
-                          "default": false
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate string ends with a value",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "ends_with"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "ends_with"
-                      ],
-                      "properties": {
-                        "ends_with": {
-                          "type": "string",
-                          "description": "String must end with this value"
-                        },
-                        "check_case": {
-                          "type": "boolean",
-                          "description": "Perform a case sensitive match. By default will not match case",
-                          "default": false
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate number equals a value",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "equals"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "value"
-                      ],
-                      "properties": {
-                        "value": {
-                          "type": "number",
-                          "description": "The value to compare against"
-                        },
-                        "precision": {
-                          "type": "integer",
-                          "description": "When value is a float, this will set the decimal precision",
-                          "minimum": 1,
-                          "maximum": 8,
-                          "default": 3
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate number is greater than a value. By default, this will check if value is greater than or equals to",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "greater_than"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "value"
-                      ],
-                      "properties": {
-                        "value": {
-                          "type": "number",
-                          "description": "The value to compare against"
-                        },
-                        "precision": {
-                          "type": "integer",
-                          "description": "When number is a float, this will set the decimal precision",
-                          "minimum": 1,
-                          "maximum": 8,
-                          "default": 3
-                        },
-                        "include": {
-                          "type": "boolean",
-                          "description": "Include the value in the check",
-                          "default": true
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate string has a correct DNS records",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "hostname"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "properties": {
-                        "record_type": {
-                          "type": "string",
-                          "description": "DNS record type to validate",
-                          "default": "A",
-                          "enum": [
-                            "A",
-                            "AAAA",
-                            "AFSDB",
-                            "APL",
-                            "CAA",
-                            "CDNSKEY",
-                            "CDS",
-                            "CERT",
-                            "CNAME",
-                            "CSYNC",
-                            "DHCID",
-                            "DLV",
-                            "DNAME",
-                            "DNSKEY",
-                            "DS",
-                            "HIP",
-                            "IPSECKEY",
-                            "KEY",
-                            "KX",
-                            "LOC",
-                            "MX",
-                            "NAPTR",
-                            "NS",
-                            "NSEC",
-                            "NSEC3",
-                            "NSEC3PARAM",
-                            "OPENPGPKEY",
-                            "PTR",
-                            "RRSIG",
-                            "RP",
-                            "SIG",
-                            "SMIMEA",
-                            "SOA",
-                            "SRV",
-                            "SSHFP",
-                            "TA",
-                            "TKEY",
-                            "TLSA",
-                            "TSIG",
-                            "TXT",
-                            "URI"
-                          ]
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate string matches an IP address format. Defaults to matching IPv4",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "ipAddress"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "properties": {
-                        "versions": {
-                          "type": "array",
-                          "description": "IP Version to match against",
-                          "items": {
-                            "type": "string",
-                            "enum": [
-                              "IPv4",
-                              "IPv6"
-                            ]
-                          }
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate string is a certain length",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "length"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "length"
-                      ],
-                      "properties": {
-                        "length": {
-                          "type": "string",
-                          "description": "String must contain with this value"
-                        },
-                        "operator": {
-                          "type": "string",
-                          "description": "Which type of length comparision to make",
-                          "default": "equals",
-                          "enum": [
-                            "equals",
-                            "less_than",
-                            "less_than_equals",
-                            "greater_than",
-                            "greater_than_equals"
-                          ]
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate number is less than a value. By default, this will check if value is less than or equals to",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "lessThan"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "value"
-                      ],
-                      "properties": {
-                        "value": {
-                          "type": "number",
-                          "description": "The value to compare against"
-                        },
-                        "precision": {
-                          "type": "integer",
-                          "description": "When number is a float, this will set the decimal precision",
-                          "minimum": 1,
-                          "maximum": 8,
-                          "default": 3
-                        },
-                        "include": {
-                          "type": "boolean",
-                          "description": "Include the value in the check",
-                          "default": true
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate string matches an MAC address format",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "macAddress"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "description": "This validator has no options"
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate string matches a regular expression",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "mask"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "mask"
-                      ],
-                      "properties": {
-                        "mask": {
-                          "type": "string",
-                          "description": "Mask to validate against"
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate string starts with a value",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "startsWith"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "starts_with"
-                      ],
-                      "properties": {
-                        "starts_with": {
-                          "type": "string",
-                          "description": "String must start with this value"
-                        },
-                        "check_case": {
-                          "type": "boolean",
-                          "description": "Perform a case sensitive match. By default will not match case",
-                          "default": false
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validates that a value follows a step. Both start and end options do not have to sync with the step. If they do not sync then find the nearest step.",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "step"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "step"
-                      ],
-                      "properties": {
-                        "step": {
-                          "type": "number",
-                          "description": "The step value"
-                        },
-                        "start": {
-                          "type": "integer",
-                          "description": "Start stepping at this value"
-                        },
-                        "end": {
-                          "type": "integer",
-                          "description": "End stepping at this value"
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate string matches an URI",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "uri"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "properties": {
-                        "schemes": {
-                          "type": "array",
-                          "description": "Schemes to match. By default all are matched",
-                          "items": {
-                            "type": "string",
-                            "enum": [
-                              "http",
-                              "https",
-                              "sip",
-                              "sips",
-                              "ftp",
-                              "ftps",
-                              "ldap",
-                              "ldaps",
-                              "file",
-                              "udp",
-                              "tcp",
-                              "urn"
-                            ]
-                          }
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "object",
-                  "description": "Validate value matches a list (white list)",
-                  "required": [
-                    "type",
-                    "options"
-                  ],
-                  "properties": {
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "whiteList"
-                      ]
-                    },
-                    "options": {
-                      "type": "object",
-                      "required": [
-                        "list"
-                      ],
-                      "properties": {
-                        "list": {
-                          "type": "array",
-                          "minimum": 1,
-                          "maximum": 100,
-                          "description": "The list of approved values",
-                          "items": {
-                            "type": "string"
-                          }
-                        },
-                        "check_case": {
-                          "type": "boolean",
-                          "description": "Perform a case sensitive match. By default will not match case",
-                          "default": false
-                        }
-                      }
-                    }
-                  }
-                }
-              ]
-            }
-          }
-        }
-      }
-    }
-  }
-}
-```
 
 <h3 id="updatepart-responses">Responses</h3>
 
@@ -9287,519 +1295,205 @@ Updates a part
 |409|[Conflict](https://tools.ietf.org/html/rfc7231#section-6.5.8)|Conflict|Inline|
 |423|[Locked](https://tools.ietf.org/html/rfc2518#section-10.4)|Forbidden|Inline|
 
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "part_id": "part",
+  "label": "Widget",
+  "created": "2019-08-19T00:01:02.000Z",
+  "updated": "2020-08-19T01:01:02.000Z",
+  "serial_prefix": "ABC",
+  "total_units": 5,
+  "total_units_allocated": 2,
+  "total_units_unallocated": 3,
+  "customer": {
+    "customer_id": "customer",
+    "label": "manchuck",
+    "created": "2020-01-09T22:12:03.000Z",
+    "updated": "2020-01-09T22:12:03.000Z",
+    "external_platform": {},
+    "total_programs": 21,
+    "total_projects": 42,
+    "allowed_statuses": [
+      {
+        "category": "PENDING",
+        "description": "For something that is Pending",
+        "status": "Pending",
+        "order": 3
+      },
+      {
+        "category": "IN_PROGRESS",
+        "description": "For something that is In Progress",
+        "status": "In Progress",
+        "order": 4
+      },
+      {
+        "category": "VERIFYING",
+        "description": "For something that is Verifying",
+        "status": "Verifying",
+        "order": 5
+      },
+      {
+        "category": "BLOCKED",
+        "description": "For something that is Blocked",
+        "status": "Blocked",
+        "order": 6
+      },
+      {
+        "category": "COMPLETE",
+        "description": "For something that is Complete",
+        "status": "Complete",
+        "order": 7
+      },
+      {
+        "category": "CANCELLED",
+        "description": "For something that is Cancelled",
+        "status": "Cancelled",
+        "order": 8
+      }
+    ]
+  },
+  "manufacturer": {
+    "manufacturer_id": "manufacturer",
+    "label": "Manchuck Inc",
+    "created": "2019-08-19T00:01:02.000Z",
+    "updated": "2020-08-19T01:01:02.000Z",
+    "part_number": "1-888-482-858-832"
+  },
+  "input_filter": [
+    {
+      "label": "Serial Number Of part",
+      "key": "serial-number",
+      "filters": [],
+      "validators": [],
+      "value": null
+    }
+  ],
+  "_embedded": {
+    "nter:part-manufacturer": [],
+    "nter:part-customer": []
+  },
+  "_links": {
+    "nter:part-manufacturer": {
+      "href": "https://api.example.com/manufacturers/manufacturer"
+    },
+    "nter:part-customer": {
+      "href": "https://api.example.com/customers/customer"
+    },
+    "nter:part-units": {
+      "href": "https://api.example.com/parts/part/units"
+    },
+    "self": {
+      "href": "https://api.example.com/parts/part"
+    }
+  }
+}
+```
+
+> 400 Response
+
+```json
+{
+  "title": "Bad Request",
+  "type": "https://docs.nterprise.com/api/problem/BadRequest",
+  "status": 400,
+  "detail": "Invalid Data",
+  "validation_messages": [
+    {
+      "keyword": "field",
+      "dataPath": ".field",
+      "schemaPath": "https://docs.nterprise.com/schemas/niagara/foo.json#/properties/field",
+      "params": {
+        "type": "string"
+      },
+      "message": "should be string"
+    }
+  ]
+}
+```
+
+> 403 Response
+
+```json
+{
+  "title": "Forbidden",
+  "type": "https://docs.nterprise.com/api/problem/Forbidden",
+  "status": 403,
+  "detail": "You are forbidden from accessing this resource"
+}
+```
+
+> 409 Response
+
+```json
+{
+  "title": "Conflict",
+  "type": "https://docs.nterprise.com/api/problem/Conflict",
+  "status": 409,
+  "detail": "A similar resource exists"
+}
+```
+
+> 423 Response
+
+```json
+{
+  "title": "Locked",
+  "type": "https://docs.nterprise.com/api/problem/Locked",
+  "status": 423,
+  "detail": "This resource is currently locked from editing"
+}
+```
+
 <h3 id="updatepart-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» _links|object|false|none|none|
-|»» self|object|false|none|none|
-|»»» href|string(uri)|false|none|none|
-|»» part_id|string|false|read-only|Unique identifier|
-|»» label|string|false|none|Label for the entity|
-|»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»» created|string(date-time)|false|read-only|Date the entity was created|
-|»» updated|string(date-time)|false|read-only|Last date the entity was updated|
-|»» customer|object|false|none|Customer|
-|»»» customer_id|string|false|read-only|Customer identifier|
-|»»» entity_id|string|true|read-only|Customer identifier|
-|»»» entity_type|string|true|none|none|
-|»»» label|string|true|none|Label for the entity|
-|»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»»» created|string(date-time)|true|read-only|Date the entity was created|
-|»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»» external_platform|object|false|none|External Identifiers for the customer|
-|»»» allowed_statuses|[object]|true|none|List of allowed statuses|
-|»»»» status|string|true|none|A Custom label for the status|
-|»»»» category|string|true|none|The classifier for the statues|
-|»»» total_programs|number|false|none|Total programs under the customer|
-|»»» total_projects|number|false|none|Total projects under the customer|
-|»» manufacturer|object|false|none|Manufacturer information for the part|
-|»»» part_number|string|true|none|Part number the manufacturer uses. If this is not set, then the part number is used|
-|»»» manufacturer_id|string|false|read-only|Customer identifier|
-|»»» entity_id|string|true|read-only|Customer identifier|
-|»»» entity_type|string|true|none|none|
-|»»» label|string|true|none|Label for the entity|
-|»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»»» created|string(date-time)|true|read-only|Date the entity was created|
-|»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»» serial_prefix|string\|null|false|none|A serial number prefix for the part|
-|»» input_filter|[object]|false|none|Input Filters allow custom fields to be defined for entities|
-|»»» label|string|true|none|Human readable name|
-|»»» key|string|true|read-only|Slug used to store the property|
-|»»» filters|[anyOf]|true|none|A Collection of filters applied to the field|
-
-*anyOf*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»» *anonymous*|object|false|none|This filter will set the value based on a list of approved values. If the value is not in the list, it will then be set to empty unless the default option is set|
-|»»»»» type|string|true|none|none|
-|»»»»» options|object|true|none|none|
-|»»»»»» approved_values|[string]|true|none|The list of approved values|
-|»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
-|»»»»»» default|string\|null|false|none|If this is set and the value is not in the approved_list, set the value to this|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»» *anonymous*|object|false|none|Make the value camelCase|
-|»»»»»» type|string|true|none|none|
-|»»»»»» options|object|true|none|This filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»» *anonymous*|object|false|none|Filter to transform a value into a date|
-|»»»»»» type|string|true|none|none|
-|»»»»»» options|object|true|none|Date filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»» *anonymous*|object|false|none|Filter to transform values into null. This is helpful when trying to make a value required. The following are considered empty: # The number 0 or 0.0 # empty string '' # A boolean false # The word 'false' #|
-|»»»»»» type|string|true|none|none|
-|»»»»»» options|object|true|none|empty filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»» *anonymous*|object|false|none|Filter to transform a value into a float. Non numeric characters (including comma) will be removed|
-|»»»»»» type|string|true|none|none|
-|»»»»»» options|object|true|none|none|
-|»»»»»»» precision|integer|false|none|How many decimal places to preserve|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»» *anonymous*|object|false|none|Make the value kebab-case|
-|»»»»»»» type|string|true|none|none|
-|»»»»»»» options|object|true|none|This filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»» *anonymous*|object|false|none|Make the value lowercase|
-|»»»»»»» type|string|true|none|none|
-|»»»»»»» options|object|true|none|This filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»» *anonymous*|object|false|none|Filter to transform a value into a number. Non numeric characters (including comma and decimal points) will be removed|
-|»»»»»»» type|string|true|none|none|
-|»»»»»»» options|object|true|none|Number filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»» *anonymous*|object|false|none|Add a prefix to the start of a string. If the string already start with the prefix, it will not prepend.|
-|»»»»»»» type|string|true|none|none|
-|»»»»»»» options|object|true|none|none|
-|»»»»»»»» prefix|string|true|none|The prefix to add|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»» *anonymous*|object|false|none|Make the value snake_case|
-|»»»»»»»» type|string|true|none|none|
-|»»»»»»»» options|object|true|none|This filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a string|
-|»»»»»»»» type|string|true|none|none|
-|»»»»»»»» options|object|true|none|String filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»» *anonymous*|object|false|none|Add a suffix to the start of a string. If the string already start with the suffix, it will not append.|
-|»»»»»»»» type|string|true|none|none|
-|»»»»»»»» options|object|true|none|none|
-|»»»»»»»»» suffix|string|true|none|The suffix to add|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»» *anonymous*|object|false|none|Filter to trim whitespace from a value|
-|»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»» options|object|true|none|By default will trim from the start and end|
-|»»»»»»»»»» start|boolean|false|none|Remove white space from the start of the string|
-|»»»»»»»»»» end|boolean|false|none|Remove white space from the end of the string|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»» *anonymous*|object|false|none|Make the value UPPERCASE|
-|»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»» options|object|true|none|This filter has no options|
-
-*continued*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»» validators|[anyOf]|true|none|A set of validators to use for this field|
-
-*anyOf*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»» *anonymous*|object|false|none|Validate number is between two values. By default, min and max are included|
-|»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»» min|number|true|none|Minimum value to check|
-|»»»»»»»»»»»» max|number|true|none|The maximum value to check|
-|»»»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
-|»»»»»»»»»»»» include|boolean|false|none|Include the value in the check|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»» *anonymous*|object|false|none|Validate value does not match a list (black list)|
-|»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»» list|[string]|true|none|The list of approved values|
-|»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»» *anonymous*|object|false|none|Validate string contains a value|
-|»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»» contains|string|true|none|String must contain with this value|
-|»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string is a correct email address|
-|»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»» strict|boolean|false|none|Enforce strict standards from ARPA. This will enforce the length of the string|
-|»»»»»»»»»»»»»»» lookup|boolean|false|none|Look up the host name and check if it has a valid MX record|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string ends with a value|
-|»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»» ends_with|string|true|none|String must end with this value|
-|»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number equals a value|
-|»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»» value|number|true|none|The value to compare against|
-|»»»»»»»»»»»»»»»»» precision|integer|false|none|When value is a float, this will set the decimal precision|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number is greater than a value. By default, this will check if value is greater than or equals to|
-|»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»» value|number|true|none|The value to compare against|
-|»»»»»»»»»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
-|»»»»»»»»»»»»»»»»»» include|boolean|false|none|Include the value in the check|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string has a correct DNS records|
-|»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»» record_type|string|false|none|DNS record type to validate|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an IP address format. Defaults to matching IPv4|
-|»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»» versions|[string]|false|none|IP Version to match against|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string is a certain length|
-|»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»» length|string|true|none|String must contain with this value|
-|»»»»»»»»»»»»»»»»»»»»» operator|string|false|none|Which type of length comparision to make|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number is less than a value. By default, this will check if value is less than or equals to|
-|»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»» value|number|true|none|The value to compare against|
-|»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
-|»»»»»»»»»»»»»»»»»»»»»» include|boolean|false|none|Include the value in the check|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an MAC address format|
-|»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This validator has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches a regular expression|
-|»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»» mask|string|true|none|Mask to validate against|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string starts with a value|
-|»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»» starts_with|string|true|none|String must start with this value|
-|»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validates that a value follows a step. Both start and end options do not have to sync with the step. If they do not sync then find the nearest step.|
-|»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»» step|number|true|none|The step value|
-|»»»»»»»»»»»»»»»»»»»»»»»»» start|integer|false|none|Start stepping at this value|
-|»»»»»»»»»»»»»»»»»»»»»»»»» end|integer|false|none|End stepping at this value|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an URI|
-|»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»» schemes|[string]|false|none|Schemes to match. By default all are matched|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate value matches a list (white list)|
-|»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»» list|[string]|true|none|The list of approved values|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|entity_type|CUS|
-|category|PENDING|
-|category|IN_PROGRESS|
-|category|VERIFYING|
-|category|COMPLETE|
-|category|CANCELLED|
-|category|BLOCKED|
-|entity_type|MFR|
-|type|allowed_list|
-|type|camel|
-|type|date|
-|type|empty|
-|type|float|
-|type|kebab|
-|type|lower|
-|type|number|
-|type|prefix|
-|type|snake|
-|type|string|
-|type|suffix|
-|type|trim|
-|type|upper|
-|type|greater_than|
-|type|white_list|
-|type|contains|
-|type|email_address|
-|type|ends_with|
-|type|equals|
-|type|greater_than|
-|type|hostname|
-|record_type|A|
-|record_type|AAAA|
-|record_type|AFSDB|
-|record_type|APL|
-|record_type|CAA|
-|record_type|CDNSKEY|
-|record_type|CDS|
-|record_type|CERT|
-|record_type|CNAME|
-|record_type|CSYNC|
-|record_type|DHCID|
-|record_type|DLV|
-|record_type|DNAME|
-|record_type|DNSKEY|
-|record_type|DS|
-|record_type|HIP|
-|record_type|IPSECKEY|
-|record_type|KEY|
-|record_type|KX|
-|record_type|LOC|
-|record_type|MX|
-|record_type|NAPTR|
-|record_type|NS|
-|record_type|NSEC|
-|record_type|NSEC3|
-|record_type|NSEC3PARAM|
-|record_type|OPENPGPKEY|
-|record_type|PTR|
-|record_type|RRSIG|
-|record_type|RP|
-|record_type|SIG|
-|record_type|SMIMEA|
-|record_type|SOA|
-|record_type|SRV|
-|record_type|SSHFP|
-|record_type|TA|
-|record_type|TKEY|
-|record_type|TLSA|
-|record_type|TSIG|
-|record_type|TXT|
-|record_type|URI|
-|type|ipAddress|
-|type|length|
-|operator|equals|
-|operator|less_than|
-|operator|less_than_equals|
-|operator|greater_than|
-|operator|greater_than_equals|
-|type|lessThan|
-|type|macAddress|
-|type|mask|
-|type|startsWith|
-|type|step|
-|type|uri|
-|type|whiteList|
 
 Status Code **400**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|string|false|none|none|
-|» type|string|false|none|none|
-|» status|number|false|none|none|
-|» detail|string|false|none|none|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|title|Bad Request|
-|type|https://docs.nterprise.com/api/problem/BadRequest|
-|status|400|
-|detail|Invalid request|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; validation_messages|[object]|true|none|List of errors detailing the failures|
 
 Status Code **403**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|string|false|none|none|
-|» type|string|false|none|none|
-|» status|number|false|none|none|
-|» detail|string|false|none|none|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|title|Forbidden|
-|type|https://docs.nterprise.com/api/problem/Forbidden|
-|status|403|
-|detail|You are forbidden to access this resource|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
 
 Status Code **409**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|string|false|none|none|
-|» type|string|false|none|none|
-|» status|number|false|none|none|
-|» detail|string|false|none|none|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|title|Conflict|
-|type|https://docs.nterprise.com/api/problem/Conflict|
-|status|409|
-|detail|This request contains a conflict to another resource|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
 
 Status Code **423**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|string|false|none|none|
-|» type|string|false|none|none|
-|» status|number|false|none|none|
-|» detail|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
 
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|title|Locked|
-|type|https://docs.nterprise.com/api/problem/Locked|
-|status|423|
-|detail|The current resource is locked and cannot be modified|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## deletePart
+### DELETE /parts/{part_id} - *Delete part *
 
 <a id="opIddeletePart"></a>
 
-`DELETE /parts/{part_id}`
+*Delete part *
 
-*Deletes a part *
-
-This will remove the part  from the system
+Deletes a part 
 
 <h3 id="deletepart-parameters">Parameters</h3>
 
@@ -9807,46 +1501,61 @@ This will remove the part  from the system
 |---|---|---|---|---|
 |part_id|path|string|true|Id for the part|
 
+<h3 id="deletepart-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|205|[Reset Content](https://tools.ietf.org/html/rfc7231#section-6.3.6)|Part deleted|None|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|Inline|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Resource not found|Inline|
+|423|[Locked](https://tools.ietf.org/html/rfc2518#section-10.4)|Forbidden|Inline|
+
 > Example responses
 
 > 401 Response
 
 ```json
 {
-  "properties": {
-    "title": {
-      "enum": [
-        "Unauthorized"
-      ]
-    },
-    "type": {
-      "enum": [
-        "https://docs.nterprise.com/api/problem/Unauthorized"
-      ]
-    },
-    "status": {
-      "enum": [
-        401
-      ]
-    },
-    "detail": {
-      "enum": [
-        "You are not authorized to access this resource"
-      ]
-    }
-  }
+  "title": "Unauthorized",
+  "type": "https://docs.nterprise.com/api/problem/Unauthorized",
+  "status": 401,
+  "detail": "Invalid authorization token"
 }
 ```
 
-<h3 id="deletepart-responses">Responses</h3>
+> 403 Response
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|205|[Reset Content](https://tools.ietf.org/html/rfc7231#section-6.3.6)|Part  deleted|None|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|Inline|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Resource not found|Inline|
-|423|[Locked](https://tools.ietf.org/html/rfc2518#section-10.4)|Forbidden|Inline|
+```json
+{
+  "title": "Forbidden",
+  "type": "https://docs.nterprise.com/api/problem/Forbidden",
+  "status": 403,
+  "detail": "You are forbidden from accessing this resource"
+}
+```
+
+> 404 Response
+
+```json
+{
+  "title": "Not Found",
+  "type": "https://docs.nterprise.com/api/problem/NotFound",
+  "status": 404,
+  "detail": "A Resource with the id \"foo\" was not found"
+}
+```
+
+> 423 Response
+
+```json
+{
+  "title": "Locked",
+  "type": "https://docs.nterprise.com/api/problem/Locked",
+  "status": 423,
+  "detail": "This resource is currently locked from editing"
+}
+```
 
 <h3 id="deletepart-responseschema">Response Schema</h3>
 
@@ -9854,89 +1563,49 @@ Status Code **401**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|string|false|none|none|
-|» type|string|false|none|none|
-|» status|number|false|none|none|
-|» detail|string|false|none|none|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|title|Unauthorized|
-|type|https://docs.nterprise.com/api/problem/Unauthorized|
-|status|401|
-|detail|You are not authorized to access this resource|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
 
 Status Code **403**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|string|false|none|none|
-|» type|string|false|none|none|
-|» status|number|false|none|none|
-|» detail|string|false|none|none|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|title|Forbidden|
-|type|https://docs.nterprise.com/api/problem/Forbidden|
-|status|403|
-|detail|You are forbidden to access this resource|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
 
 Status Code **404**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|string|false|none|none|
-|» type|string|false|none|none|
-|» status|number|false|none|none|
-|» detail|string|false|none|none|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|title|Not Found|
-|type|https://docs.nterprise.com/api/problem/NotFound|
-|status|404|
-|detail|Resource not found|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
 
 Status Code **423**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|string|false|none|none|
-|» type|string|false|none|none|
-|» status|number|false|none|none|
-|» detail|string|false|none|none|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|title|Locked|
-|type|https://docs.nterprise.com/api/problem/Locked|
-|status|423|
-|detail|The current resource is locked and cannot be modified|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
 
 <h1 id="parts-unit">Unit</h1>
 
-## fetchAllUnits
+## Operations
+
+### GET /parts/{part_id}/units - *Fetch units for part*
 
 <a id="opIdfetchAllUnits"></a>
 
-`GET /parts/{part_id}/units`
+*Fetch units for part*
 
-*Fetches A Page of units*
-
-Fetch Unit
+Fetches A Page of units using a part
 
 <h3 id="fetchallunits-parameters">Parameters</h3>
 
@@ -9946,3388 +1615,6 @@ Fetch Unit
 |limit|query|integer(int32)|false|How many items to return at one time (max 100)|
 |offset|query|string|false|Continue from last offset|
 
-> Example responses
-
-> 200 Response
-
-```json
-{
-  "type": "object",
-  "properties": {
-    "_embedded": {
-      "type": "object",
-      "properties": {
-        "nter:units": {
-          "type": "array",
-          "maxItems": 100,
-          "items": {
-            "type": "object",
-            "properties": {
-              "_links": {
-                "type": "object",
-                "properties": {
-                  "self": {
-                    "x-example": {
-                      "href": "https://api.nterprise.com/units/QEvVrVMMwVcJ6om"
-                    },
-                    "type": "object",
-                    "properties": {
-                      "href": {
-                        "type": "string",
-                        "format": "uri"
-                      }
-                    }
-                  }
-                }
-              },
-              "unit_id": {
-                "type": "string",
-                "pattern": "^[0-9a-zA-Z-_]+$"
-              },
-              "label": {
-                "type": "string",
-                "description": "Label for the entity"
-              },
-              "slug": {
-                "type": "string",
-                "description": "Slug for the entity (Auto-generated from the label)",
-                "readOnly": true,
-                "deprecated": true,
-                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-              },
-              "created": {
-                "description": "Date the entity was created",
-                "type": "string",
-                "format": "date-time",
-                "readOnly": true
-              },
-              "updated": {
-                "description": "Last date the entity was updated",
-                "type": "string",
-                "format": "date-time",
-                "readOnly": true
-              },
-              "serial_number": {
-                "type": "string",
-                "description": "Serial number of the unit with prefix stripped",
-                "readOnly": true
-              },
-              "raw_serial_number": {
-                "type": "string",
-                "description": "Serial number of the unit"
-              },
-              "tenant_part_number": {
-                "type": "string",
-                "description": "Identifier set by the tenant"
-              },
-              "manufacturer": {
-                "type": "object",
-                "description": "Manufacturer information for the part",
-                "required": [
-                  "label",
-                  "entity_id",
-                  "entity_type",
-                  "created",
-                  "updated",
-                  "part_number"
-                ],
-                "properties": {
-                  "part_number": {
-                    "type": "string",
-                    "description": "Part number the manufacturer uses. If this is not set, then the part number is used"
-                  },
-                  "manufacturer_id": {
-                    "x-no-api-doc": true,
-                    "type": "string",
-                    "description": "Customer identifier",
-                    "readOnly": true,
-                    "pattern": "^[0-9a-zA-Z-_]+$"
-                  },
-                  "entity_id": {
-                    "x-no-api-doc": true,
-                    "type": "string",
-                    "description": "Customer identifier",
-                    "readOnly": true,
-                    "pattern": "^[0-9a-zA-Z-_]+$"
-                  },
-                  "entity_type": {
-                    "enum": [
-                      "MFR"
-                    ]
-                  },
-                  "label": {
-                    "type": "string",
-                    "description": "Label for the entity"
-                  },
-                  "slug": {
-                    "type": "string",
-                    "description": "Slug for the entity (Auto-generated from the label)",
-                    "readOnly": true,
-                    "deprecated": true,
-                    "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-                  },
-                  "created": {
-                    "description": "Date the entity was created",
-                    "type": "string",
-                    "format": "date-time",
-                    "readOnly": true
-                  },
-                  "updated": {
-                    "description": "Last date the entity was updated",
-                    "type": "string",
-                    "format": "date-time",
-                    "readOnly": true
-                  }
-                }
-              },
-              "vendor": {
-                "type": "object",
-                "description": "The vendor that sold this unit",
-                "required": [
-                  "label",
-                  "entity_id",
-                  "entity_type",
-                  "created",
-                  "updated"
-                ],
-                "properties": {
-                  "vendor_id": {
-                    "type": "string",
-                    "description": "unique id",
-                    "pattern": "^[0-9a-zA-Z-_]+$"
-                  },
-                  "entity_id": {
-                    "x-no-api-doc": true,
-                    "type": "string",
-                    "description": "Customer identifier",
-                    "readOnly": true,
-                    "pattern": "^[0-9a-zA-Z-_]+$"
-                  },
-                  "entity_type": {
-                    "enum": [
-                      "VEN"
-                    ]
-                  },
-                  "label": {
-                    "type": "string",
-                    "description": "Label for the entity"
-                  },
-                  "slug": {
-                    "type": "string",
-                    "description": "Slug for the entity (Auto-generated from the label)",
-                    "readOnly": true,
-                    "deprecated": true,
-                    "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-                  },
-                  "created": {
-                    "description": "Date the entity was created",
-                    "type": "string",
-                    "format": "date-time",
-                    "readOnly": true
-                  },
-                  "updated": {
-                    "description": "Last date the entity was updated",
-                    "type": "string",
-                    "format": "date-time",
-                    "readOnly": true
-                  },
-                  "part_number": {
-                    "type": "string",
-                    "nullable": true,
-                    "description": "The part number supplied by the vendor"
-                  }
-                }
-              },
-              "part": {
-                "type": "object",
-                "description": "Defines the properties for a part",
-                "additionalProperties": false,
-                "required": [
-                  "label",
-                  "entity_id",
-                  "entity_type",
-                  "created",
-                  "updated",
-                  "customer",
-                  "manufacturer",
-                  "serial_prefix"
-                ],
-                "properties": {
-                  "part_id": {
-                    "description": "Unique identifier",
-                    "type": "string",
-                    "readOnly": true,
-                    "pattern": "^[0-9a-zA-Z-_]+$"
-                  },
-                  "entity_id": {
-                    "x-no-api-doc": true,
-                    "type": "string",
-                    "description": "Customer identifier",
-                    "readOnly": true,
-                    "pattern": "^[0-9a-zA-Z-_]+$"
-                  },
-                  "entity_type": {
-                    "x-no-api-doc": true,
-                    "enum": [
-                      "PART"
-                    ]
-                  },
-                  "label": {
-                    "type": "string",
-                    "description": "Label for the entity"
-                  },
-                  "slug": {
-                    "type": "string",
-                    "description": "Slug for the entity (Auto-generated from the label)",
-                    "readOnly": true,
-                    "deprecated": true,
-                    "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-                  },
-                  "created": {
-                    "description": "Date the entity was created",
-                    "type": "string",
-                    "format": "date-time",
-                    "readOnly": true
-                  },
-                  "updated": {
-                    "description": "Last date the entity was updated",
-                    "type": "string",
-                    "format": "date-time",
-                    "readOnly": true
-                  },
-                  "customer": {
-                    "type": "object",
-                    "description": "Customer",
-                    "additionalProperties": false,
-                    "required": [
-                      "label",
-                      "entity_id",
-                      "entity_type",
-                      "created",
-                      "updated",
-                      "allowed_statuses"
-                    ],
-                    "properties": {
-                      "customer_id": {
-                        "description": "Customer identifier",
-                        "type": "string",
-                        "readOnly": true,
-                        "pattern": "^[0-9a-zA-Z-_]+$"
-                      },
-                      "entity_id": {
-                        "x-no-api-doc": true,
-                        "type": "string",
-                        "description": "Customer identifier",
-                        "readOnly": true,
-                        "pattern": "^[0-9a-zA-Z-_]+$"
-                      },
-                      "entity_type": {
-                        "x-no-api-doc": true,
-                        "enum": [
-                          "CUS"
-                        ]
-                      },
-                      "label": {
-                        "type": "string",
-                        "description": "Label for the entity"
-                      },
-                      "slug": {
-                        "type": "string",
-                        "description": "Slug for the entity (Auto-generated from the label)",
-                        "readOnly": true,
-                        "deprecated": true,
-                        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-                      },
-                      "created": {
-                        "description": "Date the entity was created",
-                        "type": "string",
-                        "format": "date-time",
-                        "readOnly": true
-                      },
-                      "updated": {
-                        "description": "Last date the entity was updated",
-                        "type": "string",
-                        "format": "date-time",
-                        "readOnly": true
-                      },
-                      "external_platform": {
-                        "type": "object",
-                        "description": "External Identifiers for the customer",
-                        "deprecated": true,
-                        "x-patternProperties": {
-                          "^[A-Za-z][A-Za-z0-9_]*$": {
-                            "type": "string"
-                          }
-                        }
-                      },
-                      "allowed_statuses": {
-                        "type": "array",
-                        "description": "List of allowed statuses",
-                        "uniqueItems": true,
-                        "items": {
-                          "type": "object",
-                          "description": "Defines the properties for a status",
-                          "additionalProperties": false,
-                          "required": [
-                            "status",
-                            "category"
-                          ],
-                          "properties": {
-                            "status": {
-                              "type": "string",
-                              "description": "A Custom label for the status",
-                              "pattern": "^[A-Za-z][0-9a-zA-Z-_ ]+$"
-                            },
-                            "category": {
-                              "type": "string",
-                              "description": "The classifier for the statues",
-                              "enum": [
-                                "PENDING",
-                                "IN_PROGRESS",
-                                "VERIFYING",
-                                "COMPLETE",
-                                "CANCELLED",
-                                "BLOCKED"
-                              ]
-                            }
-                          }
-                        }
-                      },
-                      "total_programs": {
-                        "type": "number",
-                        "description": "Total programs under the customer"
-                      },
-                      "total_projects": {
-                        "type": "number",
-                        "description": "Total projects under the customer"
-                      }
-                    }
-                  },
-                  "manufacturer": {
-                    "type": "object",
-                    "description": "Manufacturer information for the part",
-                    "required": [
-                      "label",
-                      "entity_id",
-                      "entity_type",
-                      "created",
-                      "updated",
-                      "part_number"
-                    ],
-                    "properties": {
-                      "part_number": {
-                        "type": "string",
-                        "description": "Part number the manufacturer uses. If this is not set, then the part number is used"
-                      },
-                      "manufacturer_id": {
-                        "x-no-api-doc": true,
-                        "type": "string",
-                        "description": "Customer identifier",
-                        "readOnly": true,
-                        "pattern": "^[0-9a-zA-Z-_]+$"
-                      },
-                      "entity_id": {
-                        "x-no-api-doc": true,
-                        "type": "string",
-                        "description": "Customer identifier",
-                        "readOnly": true,
-                        "pattern": "^[0-9a-zA-Z-_]+$"
-                      },
-                      "entity_type": {
-                        "enum": [
-                          "MFR"
-                        ]
-                      },
-                      "label": {
-                        "type": "string",
-                        "description": "Label for the entity"
-                      },
-                      "slug": {
-                        "type": "string",
-                        "description": "Slug for the entity (Auto-generated from the label)",
-                        "readOnly": true,
-                        "deprecated": true,
-                        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-                      },
-                      "created": {
-                        "description": "Date the entity was created",
-                        "type": "string",
-                        "format": "date-time",
-                        "readOnly": true
-                      },
-                      "updated": {
-                        "description": "Last date the entity was updated",
-                        "type": "string",
-                        "format": "date-time",
-                        "readOnly": true
-                      }
-                    }
-                  },
-                  "serial_prefix": {
-                    "type": "string",
-                    "nullable": true,
-                    "description": "A serial number prefix for the part"
-                  },
-                  "input_filter": {
-                    "type": "array",
-                    "description": "Input Filters allow custom fields to be defined for entities",
-                    "items": {
-                      "type": "object",
-                      "description": "Input filter specification",
-                      "required": [
-                        "label",
-                        "key",
-                        "filters",
-                        "validators"
-                      ],
-                      "properties": {
-                        "label": {
-                          "type": "string",
-                          "description": "Human readable name"
-                        },
-                        "key": {
-                          "type": "string",
-                          "description": "Slug used to store the property",
-                          "readOnly": true,
-                          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-                        },
-                        "filters": {
-                          "type": "array",
-                          "description": "A Collection of filters applied to the field",
-                          "maxItems": 100,
-                          "items": {
-                            "anyOf": [
-                              {
-                                "type": "object",
-                                "description": "This filter will set the value based on a list of approved values. If the value is not in the list, it will then be set to empty unless the default option is set",
-                                "required": [
-                                  "type",
-                                  "options"
-                                ],
-                                "properties": {
-                                  "type": {
-                                    "type": "string",
-                                    "enum": [
-                                      "allowed_list"
-                                    ]
-                                  },
-                                  "options": {
-                                    "type": "object",
-                                    "required": [
-                                      "approved_values"
-                                    ],
-                                    "properties": {
-                                      "approved_values": {
-                                        "type": "array",
-                                        "minimum": 1,
-                                        "maximum": 100,
-                                        "description": "The list of approved values",
-                                        "items": {
-                                          "type": "string"
-                                        }
-                                      },
-                                      "check_case": {
-                                        "type": "boolean",
-                                        "description": "Perform a case sensitive match. By default will not match case",
-                                        "default": false
-                                      },
-                                      "default": {
-                                        "type": "string",
-                                        "nullable": true,
-                                        "description": "If this is set and the value is not in the approved_list, set the value to this"
-                                      }
-                                    }
-                                  }
-                                }
-                              },
-                              {
-                                "type": "object",
-                                "description": "Make the value camelCase",
-                                "required": [
-                                  "type",
-                                  "options"
-                                ],
-                                "properties": {
-                                  "type": {
-                                    "type": "string",
-                                    "enum": [
-                                      "camel"
-                                    ]
-                                  },
-                                  "options": {
-                                    "type": "object",
-                                    "description": "This filter has no options"
-                                  }
-                                }
-                              },
-                              {
-                                "type": "object",
-                                "description": "Filter to transform a value into a date",
-                                "required": [
-                                  "type",
-                                  "options"
-                                ],
-                                "properties": {
-                                  "type": {
-                                    "type": "string",
-                                    "enum": [
-                                      "date"
-                                    ]
-                                  },
-                                  "options": {
-                                    "type": "object",
-                                    "description": "Date filter has no options"
-                                  }
-                                }
-                              },
-                              {
-                                "type": "object",
-                                "description": "Filter to transform values into null. This is helpful when trying to make a value required. The following are considered empty:\n# The number 0 or 0.0\n# empty string ''\n# A boolean false\n# The word 'false'\n# ",
-                                "required": [
-                                  "type",
-                                  "options"
-                                ],
-                                "properties": {
-                                  "type": {
-                                    "type": "string",
-                                    "enum": [
-                                      "empty"
-                                    ]
-                                  },
-                                  "options": {
-                                    "type": "object",
-                                    "description": "empty filter has no options"
-                                  }
-                                }
-                              },
-                              {
-                                "type": "object",
-                                "description": "Filter to transform a value into a float. Non numeric characters (including comma) will be removed",
-                                "required": [
-                                  "type",
-                                  "options"
-                                ],
-                                "properties": {
-                                  "type": {
-                                    "type": "string",
-                                    "enum": [
-                                      "float"
-                                    ]
-                                  },
-                                  "options": {
-                                    "type": "object",
-                                    "properties": {
-                                      "precision": {
-                                        "type": "integer",
-                                        "minimum": 1,
-                                        "maximum": 8,
-                                        "default": 3,
-                                        "description": "How many decimal places to preserve"
-                                      }
-                                    }
-                                  }
-                                }
-                              },
-                              {
-                                "type": "object",
-                                "description": "Make the value kebab-case",
-                                "required": [
-                                  "type",
-                                  "options"
-                                ],
-                                "properties": {
-                                  "type": {
-                                    "type": "string",
-                                    "enum": [
-                                      "kebab"
-                                    ]
-                                  },
-                                  "options": {
-                                    "type": "object",
-                                    "description": "This filter has no options"
-                                  }
-                                }
-                              },
-                              {
-                                "type": "object",
-                                "description": "Make the value lowercase",
-                                "required": [
-                                  "type",
-                                  "options"
-                                ],
-                                "properties": {
-                                  "type": {
-                                    "type": "string",
-                                    "enum": [
-                                      "lower"
-                                    ]
-                                  },
-                                  "options": {
-                                    "type": "object",
-                                    "description": "This filter has no options"
-                                  }
-                                }
-                              },
-                              {
-                                "type": "object",
-                                "description": "Filter to transform a value into a number. Non numeric characters (including comma and decimal points) will be removed",
-                                "required": [
-                                  "type",
-                                  "options"
-                                ],
-                                "properties": {
-                                  "type": {
-                                    "type": "string",
-                                    "enum": [
-                                      "number"
-                                    ]
-                                  },
-                                  "options": {
-                                    "type": "object",
-                                    "description": "Number filter has no options"
-                                  }
-                                }
-                              },
-                              {
-                                "type": "object",
-                                "description": "Add a prefix to the start of a string. If the string already start with the prefix, it will not prepend.",
-                                "required": [
-                                  "type",
-                                  "options"
-                                ],
-                                "properties": {
-                                  "type": {
-                                    "type": "string",
-                                    "enum": [
-                                      "prefix"
-                                    ]
-                                  },
-                                  "options": {
-                                    "type": "object",
-                                    "required": [
-                                      "prefix"
-                                    ],
-                                    "properties": {
-                                      "prefix": {
-                                        "type": "string",
-                                        "description": "The prefix to add"
-                                      }
-                                    }
-                                  }
-                                }
-                              },
-                              {
-                                "type": "object",
-                                "description": "Make the value snake_case",
-                                "required": [
-                                  "type",
-                                  "options"
-                                ],
-                                "properties": {
-                                  "type": {
-                                    "type": "string",
-                                    "enum": [
-                                      "snake"
-                                    ]
-                                  },
-                                  "options": {
-                                    "type": "object",
-                                    "description": "This filter has no options"
-                                  }
-                                }
-                              },
-                              {
-                                "type": "object",
-                                "description": "Filter to transform a value into a string",
-                                "required": [
-                                  "type",
-                                  "options"
-                                ],
-                                "properties": {
-                                  "type": {
-                                    "type": "string",
-                                    "enum": [
-                                      "string"
-                                    ]
-                                  },
-                                  "options": {
-                                    "type": "object",
-                                    "description": "String filter has no options"
-                                  }
-                                }
-                              },
-                              {
-                                "description": "Add a suffix to the start of a string. If the string already start with the suffix, it will not append.",
-                                "type": "object",
-                                "required": [
-                                  "type",
-                                  "options"
-                                ],
-                                "properties": {
-                                  "type": {
-                                    "type": "string",
-                                    "enum": [
-                                      "suffix"
-                                    ]
-                                  },
-                                  "options": {
-                                    "type": "object",
-                                    "required": [
-                                      "suffix"
-                                    ],
-                                    "properties": {
-                                      "suffix": {
-                                        "type": "string",
-                                        "description": "The suffix to add"
-                                      }
-                                    }
-                                  }
-                                }
-                              },
-                              {
-                                "type": "object",
-                                "description": "Filter to trim whitespace from a value",
-                                "required": [
-                                  "type",
-                                  "options"
-                                ],
-                                "properties": {
-                                  "type": {
-                                    "type": "string",
-                                    "enum": [
-                                      "trim"
-                                    ]
-                                  },
-                                  "options": {
-                                    "type": "object",
-                                    "description": "By default will trim from the start and end",
-                                    "properties": {
-                                      "start": {
-                                        "type": "boolean",
-                                        "description": "Remove white space from the start of the string",
-                                        "default": true
-                                      },
-                                      "end": {
-                                        "type": "boolean",
-                                        "description": "Remove white space from the end of the string",
-                                        "default": true
-                                      }
-                                    }
-                                  }
-                                }
-                              },
-                              {
-                                "type": "object",
-                                "description": "Make the value UPPERCASE",
-                                "required": [
-                                  "type",
-                                  "options"
-                                ],
-                                "properties": {
-                                  "type": {
-                                    "type": "string",
-                                    "enum": [
-                                      "upper"
-                                    ]
-                                  },
-                                  "options": {
-                                    "type": "object",
-                                    "description": "This filter has no options"
-                                  }
-                                }
-                              }
-                            ]
-                          }
-                        },
-                        "validators": {
-                          "type": "array",
-                          "description": "A set of validators to use for this field",
-                          "maxItems": 100,
-                          "items": {
-                            "anyOf": [
-                              {
-                                "type": "object",
-                                "description": "Validate number is between two values. By default, min and max are included",
-                                "required": [
-                                  "type",
-                                  "options"
-                                ],
-                                "properties": {
-                                  "type": {
-                                    "type": "string",
-                                    "enum": [
-                                      "greater_than"
-                                    ]
-                                  },
-                                  "options": {
-                                    "type": "object",
-                                    "required": [
-                                      "min",
-                                      "max"
-                                    ],
-                                    "properties": {
-                                      "min": {
-                                        "type": "number",
-                                        "description": "Minimum value to check"
-                                      },
-                                      "max": {
-                                        "type": "number",
-                                        "description": "The maximum value to check"
-                                      },
-                                      "precision": {
-                                        "type": "integer",
-                                        "description": "When number is a float, this will set the decimal precision",
-                                        "minimum": 1,
-                                        "maximum": 8,
-                                        "default": 3
-                                      },
-                                      "include": {
-                                        "type": "boolean",
-                                        "description": "Include the value in the check",
-                                        "default": true
-                                      }
-                                    }
-                                  }
-                                }
-                              },
-                              {
-                                "type": "object",
-                                "description": "Validate value does not match a list (black list)",
-                                "required": [
-                                  "type",
-                                  "options"
-                                ],
-                                "properties": {
-                                  "type": {
-                                    "type": "string",
-                                    "enum": [
-                                      "white_list"
-                                    ]
-                                  },
-                                  "options": {
-                                    "type": "object",
-                                    "required": [
-                                      "list"
-                                    ],
-                                    "properties": {
-                                      "list": {
-                                        "type": "array",
-                                        "minimum": 1,
-                                        "maximum": 100,
-                                        "description": "The list of approved values",
-                                        "items": {
-                                          "type": "string"
-                                        }
-                                      },
-                                      "check_case": {
-                                        "type": "boolean",
-                                        "description": "Perform a case sensitive match. By default will not match case",
-                                        "default": false
-                                      }
-                                    }
-                                  }
-                                }
-                              },
-                              {
-                                "type": "object",
-                                "description": "Validate string contains a value",
-                                "required": [
-                                  "type",
-                                  "options"
-                                ],
-                                "properties": {
-                                  "type": {
-                                    "type": "string",
-                                    "enum": [
-                                      "contains"
-                                    ]
-                                  },
-                                  "options": {
-                                    "type": "object",
-                                    "required": [
-                                      "contains"
-                                    ],
-                                    "properties": {
-                                      "contains": {
-                                        "type": "string",
-                                        "description": "String must contain with this value"
-                                      },
-                                      "check_case": {
-                                        "type": "boolean",
-                                        "description": "Perform a case sensitive match. By default will not match case",
-                                        "default": false
-                                      }
-                                    }
-                                  }
-                                }
-                              },
-                              {
-                                "type": "object",
-                                "description": "Validate string is a correct email address",
-                                "required": [
-                                  "type",
-                                  "options"
-                                ],
-                                "properties": {
-                                  "type": {
-                                    "type": "string",
-                                    "enum": [
-                                      "email_address"
-                                    ]
-                                  },
-                                  "options": {
-                                    "type": "object",
-                                    "properties": {
-                                      "strict": {
-                                        "type": "boolean",
-                                        "description": "Enforce strict standards from ARPA. This will enforce the length of the string",
-                                        "default": true
-                                      },
-                                      "lookup": {
-                                        "type": "boolean",
-                                        "description": "Look up the host name and check if it has a valid MX record",
-                                        "default": false
-                                      }
-                                    }
-                                  }
-                                }
-                              },
-                              {
-                                "type": "object",
-                                "description": "Validate string ends with a value",
-                                "required": [
-                                  "type",
-                                  "options"
-                                ],
-                                "properties": {
-                                  "type": {
-                                    "type": "string",
-                                    "enum": [
-                                      "ends_with"
-                                    ]
-                                  },
-                                  "options": {
-                                    "type": "object",
-                                    "required": [
-                                      "ends_with"
-                                    ],
-                                    "properties": {
-                                      "ends_with": {
-                                        "type": "string",
-                                        "description": "String must end with this value"
-                                      },
-                                      "check_case": {
-                                        "type": "boolean",
-                                        "description": "Perform a case sensitive match. By default will not match case",
-                                        "default": false
-                                      }
-                                    }
-                                  }
-                                }
-                              },
-                              {
-                                "type": "object",
-                                "description": "Validate number equals a value",
-                                "required": [
-                                  "type",
-                                  "options"
-                                ],
-                                "properties": {
-                                  "type": {
-                                    "type": "string",
-                                    "enum": [
-                                      "equals"
-                                    ]
-                                  },
-                                  "options": {
-                                    "type": "object",
-                                    "required": [
-                                      "value"
-                                    ],
-                                    "properties": {
-                                      "value": {
-                                        "type": "number",
-                                        "description": "The value to compare against"
-                                      },
-                                      "precision": {
-                                        "type": "integer",
-                                        "description": "When value is a float, this will set the decimal precision",
-                                        "minimum": 1,
-                                        "maximum": 8,
-                                        "default": 3
-                                      }
-                                    }
-                                  }
-                                }
-                              },
-                              {
-                                "type": "object",
-                                "description": "Validate number is greater than a value. By default, this will check if value is greater than or equals to",
-                                "required": [
-                                  "type",
-                                  "options"
-                                ],
-                                "properties": {
-                                  "type": {
-                                    "type": "string",
-                                    "enum": [
-                                      "greater_than"
-                                    ]
-                                  },
-                                  "options": {
-                                    "type": "object",
-                                    "required": [
-                                      "value"
-                                    ],
-                                    "properties": {
-                                      "value": {
-                                        "type": "number",
-                                        "description": "The value to compare against"
-                                      },
-                                      "precision": {
-                                        "type": "integer",
-                                        "description": "When number is a float, this will set the decimal precision",
-                                        "minimum": 1,
-                                        "maximum": 8,
-                                        "default": 3
-                                      },
-                                      "include": {
-                                        "type": "boolean",
-                                        "description": "Include the value in the check",
-                                        "default": true
-                                      }
-                                    }
-                                  }
-                                }
-                              },
-                              {
-                                "type": "object",
-                                "description": "Validate string has a correct DNS records",
-                                "required": [
-                                  "type",
-                                  "options"
-                                ],
-                                "properties": {
-                                  "type": {
-                                    "type": "string",
-                                    "enum": [
-                                      "hostname"
-                                    ]
-                                  },
-                                  "options": {
-                                    "type": "object",
-                                    "properties": {
-                                      "record_type": {
-                                        "type": "string",
-                                        "description": "DNS record type to validate",
-                                        "default": "A",
-                                        "enum": [
-                                          "A",
-                                          "AAAA",
-                                          "AFSDB",
-                                          "APL",
-                                          "CAA",
-                                          "CDNSKEY",
-                                          "CDS",
-                                          "CERT",
-                                          "CNAME",
-                                          "CSYNC",
-                                          "DHCID",
-                                          "DLV",
-                                          "DNAME",
-                                          "DNSKEY",
-                                          "DS",
-                                          "HIP",
-                                          "IPSECKEY",
-                                          "KEY",
-                                          "KX",
-                                          "LOC",
-                                          "MX",
-                                          "NAPTR",
-                                          "NS",
-                                          "NSEC",
-                                          "NSEC3",
-                                          "NSEC3PARAM",
-                                          "OPENPGPKEY",
-                                          "PTR",
-                                          "RRSIG",
-                                          "RP",
-                                          "SIG",
-                                          "SMIMEA",
-                                          "SOA",
-                                          "SRV",
-                                          "SSHFP",
-                                          "TA",
-                                          "TKEY",
-                                          "TLSA",
-                                          "TSIG",
-                                          "TXT",
-                                          "URI"
-                                        ]
-                                      }
-                                    }
-                                  }
-                                }
-                              },
-                              {
-                                "type": "object",
-                                "description": "Validate string matches an IP address format. Defaults to matching IPv4",
-                                "required": [
-                                  "type",
-                                  "options"
-                                ],
-                                "properties": {
-                                  "type": {
-                                    "type": "string",
-                                    "enum": [
-                                      "ipAddress"
-                                    ]
-                                  },
-                                  "options": {
-                                    "type": "object",
-                                    "properties": {
-                                      "versions": {
-                                        "type": "array",
-                                        "description": "IP Version to match against",
-                                        "items": {
-                                          "type": "string",
-                                          "enum": [
-                                            "IPv4",
-                                            "IPv6"
-                                          ]
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              },
-                              {
-                                "type": "object",
-                                "description": "Validate string is a certain length",
-                                "required": [
-                                  "type",
-                                  "options"
-                                ],
-                                "properties": {
-                                  "type": {
-                                    "type": "string",
-                                    "enum": [
-                                      "length"
-                                    ]
-                                  },
-                                  "options": {
-                                    "type": "object",
-                                    "required": [
-                                      "length"
-                                    ],
-                                    "properties": {
-                                      "length": {
-                                        "type": "string",
-                                        "description": "String must contain with this value"
-                                      },
-                                      "operator": {
-                                        "type": "string",
-                                        "description": "Which type of length comparision to make",
-                                        "default": "equals",
-                                        "enum": [
-                                          "equals",
-                                          "less_than",
-                                          "less_than_equals",
-                                          "greater_than",
-                                          "greater_than_equals"
-                                        ]
-                                      }
-                                    }
-                                  }
-                                }
-                              },
-                              {
-                                "type": "object",
-                                "description": "Validate number is less than a value. By default, this will check if value is less than or equals to",
-                                "required": [
-                                  "type",
-                                  "options"
-                                ],
-                                "properties": {
-                                  "type": {
-                                    "type": "string",
-                                    "enum": [
-                                      "lessThan"
-                                    ]
-                                  },
-                                  "options": {
-                                    "type": "object",
-                                    "required": [
-                                      "value"
-                                    ],
-                                    "properties": {
-                                      "value": {
-                                        "type": "number",
-                                        "description": "The value to compare against"
-                                      },
-                                      "precision": {
-                                        "type": "integer",
-                                        "description": "When number is a float, this will set the decimal precision",
-                                        "minimum": 1,
-                                        "maximum": 8,
-                                        "default": 3
-                                      },
-                                      "include": {
-                                        "type": "boolean",
-                                        "description": "Include the value in the check",
-                                        "default": true
-                                      }
-                                    }
-                                  }
-                                }
-                              },
-                              {
-                                "type": "object",
-                                "description": "Validate string matches an MAC address format",
-                                "required": [
-                                  "type",
-                                  "options"
-                                ],
-                                "properties": {
-                                  "type": {
-                                    "type": "string",
-                                    "enum": [
-                                      "macAddress"
-                                    ]
-                                  },
-                                  "options": {
-                                    "type": "object",
-                                    "description": "This validator has no options"
-                                  }
-                                }
-                              },
-                              {
-                                "type": "object",
-                                "description": "Validate string matches a regular expression",
-                                "required": [
-                                  "type",
-                                  "options"
-                                ],
-                                "properties": {
-                                  "type": {
-                                    "type": "string",
-                                    "enum": [
-                                      "mask"
-                                    ]
-                                  },
-                                  "options": {
-                                    "type": "object",
-                                    "required": [
-                                      "mask"
-                                    ],
-                                    "properties": {
-                                      "mask": {
-                                        "type": "string",
-                                        "description": "Mask to validate against"
-                                      }
-                                    }
-                                  }
-                                }
-                              },
-                              {
-                                "type": "object",
-                                "description": "Validate string starts with a value",
-                                "required": [
-                                  "type",
-                                  "options"
-                                ],
-                                "properties": {
-                                  "type": {
-                                    "type": "string",
-                                    "enum": [
-                                      "startsWith"
-                                    ]
-                                  },
-                                  "options": {
-                                    "type": "object",
-                                    "required": [
-                                      "starts_with"
-                                    ],
-                                    "properties": {
-                                      "starts_with": {
-                                        "type": "string",
-                                        "description": "String must start with this value"
-                                      },
-                                      "check_case": {
-                                        "type": "boolean",
-                                        "description": "Perform a case sensitive match. By default will not match case",
-                                        "default": false
-                                      }
-                                    }
-                                  }
-                                }
-                              },
-                              {
-                                "type": "object",
-                                "description": "Validates that a value follows a step. Both start and end options do not have to sync with the step. If they do not sync then find the nearest step.",
-                                "required": [
-                                  "type",
-                                  "options"
-                                ],
-                                "properties": {
-                                  "type": {
-                                    "type": "string",
-                                    "enum": [
-                                      "step"
-                                    ]
-                                  },
-                                  "options": {
-                                    "type": "object",
-                                    "required": [
-                                      "step"
-                                    ],
-                                    "properties": {
-                                      "step": {
-                                        "type": "number",
-                                        "description": "The step value"
-                                      },
-                                      "start": {
-                                        "type": "integer",
-                                        "description": "Start stepping at this value"
-                                      },
-                                      "end": {
-                                        "type": "integer",
-                                        "description": "End stepping at this value"
-                                      }
-                                    }
-                                  }
-                                }
-                              },
-                              {
-                                "type": "object",
-                                "description": "Validate string matches an URI",
-                                "required": [
-                                  "type",
-                                  "options"
-                                ],
-                                "properties": {
-                                  "type": {
-                                    "type": "string",
-                                    "enum": [
-                                      "uri"
-                                    ]
-                                  },
-                                  "options": {
-                                    "type": "object",
-                                    "properties": {
-                                      "schemes": {
-                                        "type": "array",
-                                        "description": "Schemes to match. By default all are matched",
-                                        "items": {
-                                          "type": "string",
-                                          "enum": [
-                                            "http",
-                                            "https",
-                                            "sip",
-                                            "sips",
-                                            "ftp",
-                                            "ftps",
-                                            "ldap",
-                                            "ldaps",
-                                            "file",
-                                            "udp",
-                                            "tcp",
-                                            "urn"
-                                          ]
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              },
-                              {
-                                "type": "object",
-                                "description": "Validate value matches a list (white list)",
-                                "required": [
-                                  "type",
-                                  "options"
-                                ],
-                                "properties": {
-                                  "type": {
-                                    "type": "string",
-                                    "enum": [
-                                      "whiteList"
-                                    ]
-                                  },
-                                  "options": {
-                                    "type": "object",
-                                    "required": [
-                                      "list"
-                                    ],
-                                    "properties": {
-                                      "list": {
-                                        "type": "array",
-                                        "minimum": 1,
-                                        "maximum": 100,
-                                        "description": "The list of approved values",
-                                        "items": {
-                                          "type": "string"
-                                        }
-                                      },
-                                      "check_case": {
-                                        "type": "boolean",
-                                        "description": "Perform a case sensitive match. By default will not match case",
-                                        "default": false
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            ]
-                          }
-                        }
-                      }
-                    }
-                  },
-                  "total_units": {
-                    "type": "integer",
-                    "description": "Number of units of this part",
-                    "readOnly": true
-                  },
-                  "total_units_allocated": {
-                    "type": "integer",
-                    "description": "Number of allocated units",
-                    "readOnly": true
-                  },
-                  "total_units_unallocated": {
-                    "type": "integer",
-                    "description": "Number of free units",
-                    "readOnly": true
-                  }
-                }
-              },
-              "customer": {
-                "type": "object",
-                "description": "Customer",
-                "additionalProperties": false,
-                "required": [
-                  "label",
-                  "entity_id",
-                  "entity_type",
-                  "created",
-                  "updated",
-                  "allowed_statuses"
-                ],
-                "properties": {
-                  "customer_id": {
-                    "description": "Customer identifier",
-                    "type": "string",
-                    "readOnly": true,
-                    "pattern": "^[0-9a-zA-Z-_]+$"
-                  },
-                  "entity_id": {
-                    "x-no-api-doc": true,
-                    "type": "string",
-                    "description": "Customer identifier",
-                    "readOnly": true,
-                    "pattern": "^[0-9a-zA-Z-_]+$"
-                  },
-                  "entity_type": {
-                    "x-no-api-doc": true,
-                    "enum": [
-                      "CUS"
-                    ]
-                  },
-                  "label": {
-                    "type": "string",
-                    "description": "Label for the entity"
-                  },
-                  "slug": {
-                    "type": "string",
-                    "description": "Slug for the entity (Auto-generated from the label)",
-                    "readOnly": true,
-                    "deprecated": true,
-                    "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-                  },
-                  "created": {
-                    "description": "Date the entity was created",
-                    "type": "string",
-                    "format": "date-time",
-                    "readOnly": true
-                  },
-                  "updated": {
-                    "description": "Last date the entity was updated",
-                    "type": "string",
-                    "format": "date-time",
-                    "readOnly": true
-                  },
-                  "external_platform": {
-                    "type": "object",
-                    "description": "External Identifiers for the customer",
-                    "deprecated": true,
-                    "x-patternProperties": {
-                      "^[A-Za-z][A-Za-z0-9_]*$": {
-                        "type": "string"
-                      }
-                    }
-                  },
-                  "allowed_statuses": {
-                    "type": "array",
-                    "description": "List of allowed statuses",
-                    "uniqueItems": true,
-                    "items": {
-                      "type": "object",
-                      "description": "Defines the properties for a status",
-                      "additionalProperties": false,
-                      "required": [
-                        "status",
-                        "category"
-                      ],
-                      "properties": {
-                        "status": {
-                          "type": "string",
-                          "description": "A Custom label for the status",
-                          "pattern": "^[A-Za-z][0-9a-zA-Z-_ ]+$"
-                        },
-                        "category": {
-                          "type": "string",
-                          "description": "The classifier for the statues",
-                          "enum": [
-                            "PENDING",
-                            "IN_PROGRESS",
-                            "VERIFYING",
-                            "COMPLETE",
-                            "CANCELLED",
-                            "BLOCKED"
-                          ]
-                        }
-                      }
-                    }
-                  },
-                  "total_programs": {
-                    "type": "number",
-                    "description": "Total programs under the customer"
-                  },
-                  "total_projects": {
-                    "type": "number",
-                    "description": "Total projects under the customer"
-                  }
-                }
-              },
-              "current_location": {
-                "deprecated": true,
-                "type": "object",
-                "description": "Defines the properties for a part unit",
-                "additionalProperties": false,
-                "required": [
-                  "label",
-                  "entity_id",
-                  "entity_type",
-                  "created",
-                  "updated",
-                  "location_type",
-                  "address"
-                ],
-                "properties": {
-                  "location_id": {
-                    "description": "The identifier for the location",
-                    "type": "string",
-                    "readOnly": true,
-                    "pattern": "^[0-9a-zA-Z-_]+$"
-                  },
-                  "entity_id": {
-                    "x-no-api-doc": true,
-                    "type": "string",
-                    "description": "Customer identifier",
-                    "readOnly": true,
-                    "pattern": "^[0-9a-zA-Z-_]+$"
-                  },
-                  "entity_type": {
-                    "x-no-api-doc": true,
-                    "enum": [
-                      "LOC"
-                    ]
-                  },
-                  "label": {
-                    "type": "string",
-                    "description": "Label for the entity"
-                  },
-                  "slug": {
-                    "type": "string",
-                    "description": "Slug for the entity (Auto-generated from the label)",
-                    "readOnly": true,
-                    "deprecated": true,
-                    "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-                  },
-                  "created": {
-                    "description": "Date the entity was created",
-                    "type": "string",
-                    "format": "date-time",
-                    "readOnly": true
-                  },
-                  "updated": {
-                    "description": "Last date the entity was updated",
-                    "type": "string",
-                    "format": "date-time",
-                    "readOnly": true
-                  },
-                  "location_type": {
-                    "type": "string",
-                    "description": "The type of location",
-                    "enum": [
-                      "warehouse",
-                      "facility",
-                      "other"
-                    ]
-                  },
-                  "formatted_address": {
-                    "type": "string",
-                    "readOnly": true,
-                    "description": "Address formatted for the where region the location exists in"
-                  },
-                  "address": {
-                    "type": "object",
-                    "required": [
-                      "country",
-                      "administrative_area",
-                      "locality",
-                      "postal_code",
-                      "thoroughfare"
-                    ],
-                    "description": "xNAL address for the location ",
-                    "properties": {
-                      "country": {
-                        "type": "string",
-                        "description": "Three Letter ISO country code",
-                        "enum": [
-                          "ABW",
-                          "AFG",
-                          "AGO",
-                          "AIA",
-                          "ALA",
-                          "ALB",
-                          "AND",
-                          "ARE",
-                          "ARG",
-                          "ARM",
-                          "ASM",
-                          "ATA",
-                          "ATF",
-                          "ATG",
-                          "AUS",
-                          "AUT",
-                          "AZE",
-                          "BDI",
-                          "BEL",
-                          "BEN",
-                          "BES",
-                          "BFA",
-                          "BGD",
-                          "BGR",
-                          "BHR",
-                          "BHS",
-                          "BIH",
-                          "BLM",
-                          "BLR",
-                          "BLZ",
-                          "BMU",
-                          "BOL",
-                          "BRA",
-                          "BRB",
-                          "BRN",
-                          "BTN",
-                          "BVT",
-                          "BWA",
-                          "CAF",
-                          "CAN",
-                          "CCK",
-                          "CHE",
-                          "CHL",
-                          "CHN",
-                          "CIV",
-                          "CMR",
-                          "COD",
-                          "COG",
-                          "COK",
-                          "COL",
-                          "COM",
-                          "CPV",
-                          "CRI",
-                          "CUB",
-                          "CUW",
-                          "CXR",
-                          "CYM",
-                          "CYP",
-                          "CZE",
-                          "DEU",
-                          "DJI",
-                          "DMA",
-                          "DNK",
-                          "DOM",
-                          "DZA",
-                          "ECU",
-                          "EGY",
-                          "ERI",
-                          "ESH",
-                          "ESP",
-                          "EST",
-                          "ETH",
-                          "FIN",
-                          "FJI",
-                          "FLK",
-                          "FRA",
-                          "FRO",
-                          "FSM",
-                          "GAB",
-                          "GBR",
-                          "GEO",
-                          "GGY",
-                          "GHA",
-                          "GIB",
-                          "GIN",
-                          "GLP",
-                          "GMB",
-                          "GNB",
-                          "GNQ",
-                          "GRC",
-                          "GRD",
-                          "GRL",
-                          "GTM",
-                          "GUF",
-                          "GUM",
-                          "GUY",
-                          "HKG",
-                          "HMD",
-                          "HND",
-                          "HRV",
-                          "HTI",
-                          "HUN",
-                          "IDN",
-                          "IMN",
-                          "IND",
-                          "IOT",
-                          "IRL",
-                          "IRN",
-                          "IRQ",
-                          "ISL",
-                          "ISR",
-                          "ITA",
-                          "JAM",
-                          "JEY",
-                          "JOR",
-                          "JPN",
-                          "KAZ",
-                          "KEN",
-                          "KGZ",
-                          "KHM",
-                          "KIR",
-                          "KNA",
-                          "KOR",
-                          "KWT",
-                          "LAO",
-                          "LBN",
-                          "LBR",
-                          "LBY",
-                          "LCA",
-                          "LIE",
-                          "LKA",
-                          "LSO",
-                          "LTU",
-                          "LUX",
-                          "LVA",
-                          "MAC",
-                          "MAF",
-                          "MAR",
-                          "MCO",
-                          "MDA",
-                          "MDG",
-                          "MDV",
-                          "MEX",
-                          "MHL",
-                          "MKD",
-                          "MLI",
-                          "MLT",
-                          "MMR",
-                          "MNE",
-                          "MNG",
-                          "MNP",
-                          "MOZ",
-                          "MRT",
-                          "MSR",
-                          "MTQ",
-                          "MUS",
-                          "MWI",
-                          "MYS",
-                          "MYT",
-                          "NAM",
-                          "NCL",
-                          "NER",
-                          "NFK",
-                          "NGA",
-                          "NIC",
-                          "NIU",
-                          "NLD",
-                          "NOR",
-                          "NPL",
-                          "NRU",
-                          "NZL",
-                          "OMN",
-                          "PAK",
-                          "PAN",
-                          "PCN",
-                          "PER",
-                          "PHL",
-                          "PLW",
-                          "PNG",
-                          "POL",
-                          "PRI",
-                          "PRK",
-                          "PRT",
-                          "PRY",
-                          "PSE",
-                          "PYF",
-                          "QAT",
-                          "REU",
-                          "ROU",
-                          "RUS",
-                          "RWA",
-                          "SAU",
-                          "SDN",
-                          "SEN",
-                          "SGP",
-                          "SGS",
-                          "SHN",
-                          "SJM",
-                          "SLB",
-                          "SLE",
-                          "SLV",
-                          "SMR",
-                          "SOM",
-                          "SPM",
-                          "SRB",
-                          "SSD",
-                          "STP",
-                          "SUR",
-                          "SVK",
-                          "SVN",
-                          "SWE",
-                          "SWZ",
-                          "SXM",
-                          "SYC",
-                          "SYR",
-                          "TCA",
-                          "TCD",
-                          "TGO",
-                          "THA",
-                          "TJK",
-                          "TKL",
-                          "TKM",
-                          "TLS",
-                          "TON",
-                          "TTO",
-                          "TUN",
-                          "TUR",
-                          "TUV",
-                          "TWN",
-                          "TZA",
-                          "UGA",
-                          "UKR",
-                          "UMI",
-                          "URY",
-                          "USA",
-                          "UZB",
-                          "VAT",
-                          "VCT",
-                          "VEN",
-                          "VGB",
-                          "VIR",
-                          "VNM",
-                          "VUT",
-                          "WLF",
-                          "WSM",
-                          "YEM",
-                          "ZAF",
-                          "ZMB",
-                          "ZWE"
-                        ]
-                      },
-                      "administrative_area": {
-                        "type": "string",
-                        "description": "State / Province / Region"
-                      },
-                      "sub_administrative_area": {
-                        "type": "string",
-                        "description": "County / District"
-                      },
-                      "locality": {
-                        "type": "string",
-                        "description": "City / Town"
-                      },
-                      "postal_code": {
-                        "type": "string",
-                        "description": "Postal Code / Zip Code"
-                      },
-                      "thoroughfare": {
-                        "type": "string",
-                        "description": "Street Address"
-                      },
-                      "premise": {
-                        "type": "string",
-                        "description": "Apartment / Suite / Box number etc"
-                      },
-                      "sub_premise": {
-                        "type": "string",
-                        "description": "Floor # / Room # / Building label etc"
-                      }
-                    }
-                  }
-                }
-              },
-              "location": {
-                "type": "object",
-                "description": "Defines the properties for a part unit",
-                "additionalProperties": false,
-                "required": [
-                  "label",
-                  "entity_id",
-                  "entity_type",
-                  "created",
-                  "updated",
-                  "location_type",
-                  "address"
-                ],
-                "properties": {
-                  "location_id": {
-                    "description": "The identifier for the location",
-                    "type": "string",
-                    "readOnly": true,
-                    "pattern": "^[0-9a-zA-Z-_]+$"
-                  },
-                  "entity_id": {
-                    "x-no-api-doc": true,
-                    "type": "string",
-                    "description": "Customer identifier",
-                    "readOnly": true,
-                    "pattern": "^[0-9a-zA-Z-_]+$"
-                  },
-                  "entity_type": {
-                    "x-no-api-doc": true,
-                    "enum": [
-                      "LOC"
-                    ]
-                  },
-                  "label": {
-                    "type": "string",
-                    "description": "Label for the entity"
-                  },
-                  "slug": {
-                    "type": "string",
-                    "description": "Slug for the entity (Auto-generated from the label)",
-                    "readOnly": true,
-                    "deprecated": true,
-                    "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-                  },
-                  "created": {
-                    "description": "Date the entity was created",
-                    "type": "string",
-                    "format": "date-time",
-                    "readOnly": true
-                  },
-                  "updated": {
-                    "description": "Last date the entity was updated",
-                    "type": "string",
-                    "format": "date-time",
-                    "readOnly": true
-                  },
-                  "location_type": {
-                    "type": "string",
-                    "description": "The type of location",
-                    "enum": [
-                      "warehouse",
-                      "facility",
-                      "other"
-                    ]
-                  },
-                  "formatted_address": {
-                    "type": "string",
-                    "readOnly": true,
-                    "description": "Address formatted for the where region the location exists in"
-                  },
-                  "address": {
-                    "type": "object",
-                    "required": [
-                      "country",
-                      "administrative_area",
-                      "locality",
-                      "postal_code",
-                      "thoroughfare"
-                    ],
-                    "description": "xNAL address for the location ",
-                    "properties": {
-                      "country": {
-                        "type": "string",
-                        "description": "Three Letter ISO country code",
-                        "enum": [
-                          "ABW",
-                          "AFG",
-                          "AGO",
-                          "AIA",
-                          "ALA",
-                          "ALB",
-                          "AND",
-                          "ARE",
-                          "ARG",
-                          "ARM",
-                          "ASM",
-                          "ATA",
-                          "ATF",
-                          "ATG",
-                          "AUS",
-                          "AUT",
-                          "AZE",
-                          "BDI",
-                          "BEL",
-                          "BEN",
-                          "BES",
-                          "BFA",
-                          "BGD",
-                          "BGR",
-                          "BHR",
-                          "BHS",
-                          "BIH",
-                          "BLM",
-                          "BLR",
-                          "BLZ",
-                          "BMU",
-                          "BOL",
-                          "BRA",
-                          "BRB",
-                          "BRN",
-                          "BTN",
-                          "BVT",
-                          "BWA",
-                          "CAF",
-                          "CAN",
-                          "CCK",
-                          "CHE",
-                          "CHL",
-                          "CHN",
-                          "CIV",
-                          "CMR",
-                          "COD",
-                          "COG",
-                          "COK",
-                          "COL",
-                          "COM",
-                          "CPV",
-                          "CRI",
-                          "CUB",
-                          "CUW",
-                          "CXR",
-                          "CYM",
-                          "CYP",
-                          "CZE",
-                          "DEU",
-                          "DJI",
-                          "DMA",
-                          "DNK",
-                          "DOM",
-                          "DZA",
-                          "ECU",
-                          "EGY",
-                          "ERI",
-                          "ESH",
-                          "ESP",
-                          "EST",
-                          "ETH",
-                          "FIN",
-                          "FJI",
-                          "FLK",
-                          "FRA",
-                          "FRO",
-                          "FSM",
-                          "GAB",
-                          "GBR",
-                          "GEO",
-                          "GGY",
-                          "GHA",
-                          "GIB",
-                          "GIN",
-                          "GLP",
-                          "GMB",
-                          "GNB",
-                          "GNQ",
-                          "GRC",
-                          "GRD",
-                          "GRL",
-                          "GTM",
-                          "GUF",
-                          "GUM",
-                          "GUY",
-                          "HKG",
-                          "HMD",
-                          "HND",
-                          "HRV",
-                          "HTI",
-                          "HUN",
-                          "IDN",
-                          "IMN",
-                          "IND",
-                          "IOT",
-                          "IRL",
-                          "IRN",
-                          "IRQ",
-                          "ISL",
-                          "ISR",
-                          "ITA",
-                          "JAM",
-                          "JEY",
-                          "JOR",
-                          "JPN",
-                          "KAZ",
-                          "KEN",
-                          "KGZ",
-                          "KHM",
-                          "KIR",
-                          "KNA",
-                          "KOR",
-                          "KWT",
-                          "LAO",
-                          "LBN",
-                          "LBR",
-                          "LBY",
-                          "LCA",
-                          "LIE",
-                          "LKA",
-                          "LSO",
-                          "LTU",
-                          "LUX",
-                          "LVA",
-                          "MAC",
-                          "MAF",
-                          "MAR",
-                          "MCO",
-                          "MDA",
-                          "MDG",
-                          "MDV",
-                          "MEX",
-                          "MHL",
-                          "MKD",
-                          "MLI",
-                          "MLT",
-                          "MMR",
-                          "MNE",
-                          "MNG",
-                          "MNP",
-                          "MOZ",
-                          "MRT",
-                          "MSR",
-                          "MTQ",
-                          "MUS",
-                          "MWI",
-                          "MYS",
-                          "MYT",
-                          "NAM",
-                          "NCL",
-                          "NER",
-                          "NFK",
-                          "NGA",
-                          "NIC",
-                          "NIU",
-                          "NLD",
-                          "NOR",
-                          "NPL",
-                          "NRU",
-                          "NZL",
-                          "OMN",
-                          "PAK",
-                          "PAN",
-                          "PCN",
-                          "PER",
-                          "PHL",
-                          "PLW",
-                          "PNG",
-                          "POL",
-                          "PRI",
-                          "PRK",
-                          "PRT",
-                          "PRY",
-                          "PSE",
-                          "PYF",
-                          "QAT",
-                          "REU",
-                          "ROU",
-                          "RUS",
-                          "RWA",
-                          "SAU",
-                          "SDN",
-                          "SEN",
-                          "SGP",
-                          "SGS",
-                          "SHN",
-                          "SJM",
-                          "SLB",
-                          "SLE",
-                          "SLV",
-                          "SMR",
-                          "SOM",
-                          "SPM",
-                          "SRB",
-                          "SSD",
-                          "STP",
-                          "SUR",
-                          "SVK",
-                          "SVN",
-                          "SWE",
-                          "SWZ",
-                          "SXM",
-                          "SYC",
-                          "SYR",
-                          "TCA",
-                          "TCD",
-                          "TGO",
-                          "THA",
-                          "TJK",
-                          "TKL",
-                          "TKM",
-                          "TLS",
-                          "TON",
-                          "TTO",
-                          "TUN",
-                          "TUR",
-                          "TUV",
-                          "TWN",
-                          "TZA",
-                          "UGA",
-                          "UKR",
-                          "UMI",
-                          "URY",
-                          "USA",
-                          "UZB",
-                          "VAT",
-                          "VCT",
-                          "VEN",
-                          "VGB",
-                          "VIR",
-                          "VNM",
-                          "VUT",
-                          "WLF",
-                          "WSM",
-                          "YEM",
-                          "ZAF",
-                          "ZMB",
-                          "ZWE"
-                        ]
-                      },
-                      "administrative_area": {
-                        "type": "string",
-                        "description": "State / Province / Region"
-                      },
-                      "sub_administrative_area": {
-                        "type": "string",
-                        "description": "County / District"
-                      },
-                      "locality": {
-                        "type": "string",
-                        "description": "City / Town"
-                      },
-                      "postal_code": {
-                        "type": "string",
-                        "description": "Postal Code / Zip Code"
-                      },
-                      "thoroughfare": {
-                        "type": "string",
-                        "description": "Street Address"
-                      },
-                      "premise": {
-                        "type": "string",
-                        "description": "Apartment / Suite / Box number etc"
-                      },
-                      "sub_premise": {
-                        "type": "string",
-                        "description": "Floor # / Room # / Building label etc"
-                      }
-                    }
-                  }
-                }
-              },
-              "input_filter": {
-                "type": "array",
-                "description": "Input Filters allow custom fields to be defined for entities",
-                "items": {
-                  "type": "object",
-                  "description": "Input filter specification",
-                  "required": [
-                    "label",
-                    "key",
-                    "filters",
-                    "validators"
-                  ],
-                  "properties": {
-                    "label": {
-                      "type": "string",
-                      "description": "Human readable name"
-                    },
-                    "key": {
-                      "type": "string",
-                      "description": "Slug used to store the property",
-                      "readOnly": true,
-                      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-                    },
-                    "filters": {
-                      "type": "array",
-                      "description": "A Collection of filters applied to the field",
-                      "maxItems": 100,
-                      "items": {
-                        "anyOf": [
-                          {
-                            "type": "object",
-                            "description": "This filter will set the value based on a list of approved values. If the value is not in the list, it will then be set to empty unless the default option is set",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "allowed_list"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "required": [
-                                  "approved_values"
-                                ],
-                                "properties": {
-                                  "approved_values": {
-                                    "type": "array",
-                                    "minimum": 1,
-                                    "maximum": 100,
-                                    "description": "The list of approved values",
-                                    "items": {
-                                      "type": "string"
-                                    }
-                                  },
-                                  "check_case": {
-                                    "type": "boolean",
-                                    "description": "Perform a case sensitive match. By default will not match case",
-                                    "default": false
-                                  },
-                                  "default": {
-                                    "type": "string",
-                                    "nullable": true,
-                                    "description": "If this is set and the value is not in the approved_list, set the value to this"
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          {
-                            "type": "object",
-                            "description": "Make the value camelCase",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "camel"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "description": "This filter has no options"
-                              }
-                            }
-                          },
-                          {
-                            "type": "object",
-                            "description": "Filter to transform a value into a date",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "date"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "description": "Date filter has no options"
-                              }
-                            }
-                          },
-                          {
-                            "type": "object",
-                            "description": "Filter to transform values into null. This is helpful when trying to make a value required. The following are considered empty:\n# The number 0 or 0.0\n# empty string ''\n# A boolean false\n# The word 'false'\n# ",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "empty"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "description": "empty filter has no options"
-                              }
-                            }
-                          },
-                          {
-                            "type": "object",
-                            "description": "Filter to transform a value into a float. Non numeric characters (including comma) will be removed",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "float"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "properties": {
-                                  "precision": {
-                                    "type": "integer",
-                                    "minimum": 1,
-                                    "maximum": 8,
-                                    "default": 3,
-                                    "description": "How many decimal places to preserve"
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          {
-                            "type": "object",
-                            "description": "Make the value kebab-case",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "kebab"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "description": "This filter has no options"
-                              }
-                            }
-                          },
-                          {
-                            "type": "object",
-                            "description": "Make the value lowercase",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "lower"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "description": "This filter has no options"
-                              }
-                            }
-                          },
-                          {
-                            "type": "object",
-                            "description": "Filter to transform a value into a number. Non numeric characters (including comma and decimal points) will be removed",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "number"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "description": "Number filter has no options"
-                              }
-                            }
-                          },
-                          {
-                            "type": "object",
-                            "description": "Add a prefix to the start of a string. If the string already start with the prefix, it will not prepend.",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "prefix"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "required": [
-                                  "prefix"
-                                ],
-                                "properties": {
-                                  "prefix": {
-                                    "type": "string",
-                                    "description": "The prefix to add"
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          {
-                            "type": "object",
-                            "description": "Make the value snake_case",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "snake"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "description": "This filter has no options"
-                              }
-                            }
-                          },
-                          {
-                            "type": "object",
-                            "description": "Filter to transform a value into a string",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "string"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "description": "String filter has no options"
-                              }
-                            }
-                          },
-                          {
-                            "description": "Add a suffix to the start of a string. If the string already start with the suffix, it will not append.",
-                            "type": "object",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "suffix"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "required": [
-                                  "suffix"
-                                ],
-                                "properties": {
-                                  "suffix": {
-                                    "type": "string",
-                                    "description": "The suffix to add"
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          {
-                            "type": "object",
-                            "description": "Filter to trim whitespace from a value",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "trim"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "description": "By default will trim from the start and end",
-                                "properties": {
-                                  "start": {
-                                    "type": "boolean",
-                                    "description": "Remove white space from the start of the string",
-                                    "default": true
-                                  },
-                                  "end": {
-                                    "type": "boolean",
-                                    "description": "Remove white space from the end of the string",
-                                    "default": true
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          {
-                            "type": "object",
-                            "description": "Make the value UPPERCASE",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "upper"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "description": "This filter has no options"
-                              }
-                            }
-                          }
-                        ]
-                      }
-                    },
-                    "validators": {
-                      "type": "array",
-                      "description": "A set of validators to use for this field",
-                      "maxItems": 100,
-                      "items": {
-                        "anyOf": [
-                          {
-                            "type": "object",
-                            "description": "Validate number is between two values. By default, min and max are included",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "greater_than"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "required": [
-                                  "min",
-                                  "max"
-                                ],
-                                "properties": {
-                                  "min": {
-                                    "type": "number",
-                                    "description": "Minimum value to check"
-                                  },
-                                  "max": {
-                                    "type": "number",
-                                    "description": "The maximum value to check"
-                                  },
-                                  "precision": {
-                                    "type": "integer",
-                                    "description": "When number is a float, this will set the decimal precision",
-                                    "minimum": 1,
-                                    "maximum": 8,
-                                    "default": 3
-                                  },
-                                  "include": {
-                                    "type": "boolean",
-                                    "description": "Include the value in the check",
-                                    "default": true
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          {
-                            "type": "object",
-                            "description": "Validate value does not match a list (black list)",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "white_list"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "required": [
-                                  "list"
-                                ],
-                                "properties": {
-                                  "list": {
-                                    "type": "array",
-                                    "minimum": 1,
-                                    "maximum": 100,
-                                    "description": "The list of approved values",
-                                    "items": {
-                                      "type": "string"
-                                    }
-                                  },
-                                  "check_case": {
-                                    "type": "boolean",
-                                    "description": "Perform a case sensitive match. By default will not match case",
-                                    "default": false
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          {
-                            "type": "object",
-                            "description": "Validate string contains a value",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "contains"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "required": [
-                                  "contains"
-                                ],
-                                "properties": {
-                                  "contains": {
-                                    "type": "string",
-                                    "description": "String must contain with this value"
-                                  },
-                                  "check_case": {
-                                    "type": "boolean",
-                                    "description": "Perform a case sensitive match. By default will not match case",
-                                    "default": false
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          {
-                            "type": "object",
-                            "description": "Validate string is a correct email address",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "email_address"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "properties": {
-                                  "strict": {
-                                    "type": "boolean",
-                                    "description": "Enforce strict standards from ARPA. This will enforce the length of the string",
-                                    "default": true
-                                  },
-                                  "lookup": {
-                                    "type": "boolean",
-                                    "description": "Look up the host name and check if it has a valid MX record",
-                                    "default": false
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          {
-                            "type": "object",
-                            "description": "Validate string ends with a value",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "ends_with"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "required": [
-                                  "ends_with"
-                                ],
-                                "properties": {
-                                  "ends_with": {
-                                    "type": "string",
-                                    "description": "String must end with this value"
-                                  },
-                                  "check_case": {
-                                    "type": "boolean",
-                                    "description": "Perform a case sensitive match. By default will not match case",
-                                    "default": false
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          {
-                            "type": "object",
-                            "description": "Validate number equals a value",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "equals"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "required": [
-                                  "value"
-                                ],
-                                "properties": {
-                                  "value": {
-                                    "type": "number",
-                                    "description": "The value to compare against"
-                                  },
-                                  "precision": {
-                                    "type": "integer",
-                                    "description": "When value is a float, this will set the decimal precision",
-                                    "minimum": 1,
-                                    "maximum": 8,
-                                    "default": 3
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          {
-                            "type": "object",
-                            "description": "Validate number is greater than a value. By default, this will check if value is greater than or equals to",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "greater_than"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "required": [
-                                  "value"
-                                ],
-                                "properties": {
-                                  "value": {
-                                    "type": "number",
-                                    "description": "The value to compare against"
-                                  },
-                                  "precision": {
-                                    "type": "integer",
-                                    "description": "When number is a float, this will set the decimal precision",
-                                    "minimum": 1,
-                                    "maximum": 8,
-                                    "default": 3
-                                  },
-                                  "include": {
-                                    "type": "boolean",
-                                    "description": "Include the value in the check",
-                                    "default": true
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          {
-                            "type": "object",
-                            "description": "Validate string has a correct DNS records",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "hostname"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "properties": {
-                                  "record_type": {
-                                    "type": "string",
-                                    "description": "DNS record type to validate",
-                                    "default": "A",
-                                    "enum": [
-                                      "A",
-                                      "AAAA",
-                                      "AFSDB",
-                                      "APL",
-                                      "CAA",
-                                      "CDNSKEY",
-                                      "CDS",
-                                      "CERT",
-                                      "CNAME",
-                                      "CSYNC",
-                                      "DHCID",
-                                      "DLV",
-                                      "DNAME",
-                                      "DNSKEY",
-                                      "DS",
-                                      "HIP",
-                                      "IPSECKEY",
-                                      "KEY",
-                                      "KX",
-                                      "LOC",
-                                      "MX",
-                                      "NAPTR",
-                                      "NS",
-                                      "NSEC",
-                                      "NSEC3",
-                                      "NSEC3PARAM",
-                                      "OPENPGPKEY",
-                                      "PTR",
-                                      "RRSIG",
-                                      "RP",
-                                      "SIG",
-                                      "SMIMEA",
-                                      "SOA",
-                                      "SRV",
-                                      "SSHFP",
-                                      "TA",
-                                      "TKEY",
-                                      "TLSA",
-                                      "TSIG",
-                                      "TXT",
-                                      "URI"
-                                    ]
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          {
-                            "type": "object",
-                            "description": "Validate string matches an IP address format. Defaults to matching IPv4",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "ipAddress"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "properties": {
-                                  "versions": {
-                                    "type": "array",
-                                    "description": "IP Version to match against",
-                                    "items": {
-                                      "type": "string",
-                                      "enum": [
-                                        "IPv4",
-                                        "IPv6"
-                                      ]
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          {
-                            "type": "object",
-                            "description": "Validate string is a certain length",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "length"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "required": [
-                                  "length"
-                                ],
-                                "properties": {
-                                  "length": {
-                                    "type": "string",
-                                    "description": "String must contain with this value"
-                                  },
-                                  "operator": {
-                                    "type": "string",
-                                    "description": "Which type of length comparision to make",
-                                    "default": "equals",
-                                    "enum": [
-                                      "equals",
-                                      "less_than",
-                                      "less_than_equals",
-                                      "greater_than",
-                                      "greater_than_equals"
-                                    ]
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          {
-                            "type": "object",
-                            "description": "Validate number is less than a value. By default, this will check if value is less than or equals to",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "lessThan"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "required": [
-                                  "value"
-                                ],
-                                "properties": {
-                                  "value": {
-                                    "type": "number",
-                                    "description": "The value to compare against"
-                                  },
-                                  "precision": {
-                                    "type": "integer",
-                                    "description": "When number is a float, this will set the decimal precision",
-                                    "minimum": 1,
-                                    "maximum": 8,
-                                    "default": 3
-                                  },
-                                  "include": {
-                                    "type": "boolean",
-                                    "description": "Include the value in the check",
-                                    "default": true
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          {
-                            "type": "object",
-                            "description": "Validate string matches an MAC address format",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "macAddress"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "description": "This validator has no options"
-                              }
-                            }
-                          },
-                          {
-                            "type": "object",
-                            "description": "Validate string matches a regular expression",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "mask"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "required": [
-                                  "mask"
-                                ],
-                                "properties": {
-                                  "mask": {
-                                    "type": "string",
-                                    "description": "Mask to validate against"
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          {
-                            "type": "object",
-                            "description": "Validate string starts with a value",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "startsWith"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "required": [
-                                  "starts_with"
-                                ],
-                                "properties": {
-                                  "starts_with": {
-                                    "type": "string",
-                                    "description": "String must start with this value"
-                                  },
-                                  "check_case": {
-                                    "type": "boolean",
-                                    "description": "Perform a case sensitive match. By default will not match case",
-                                    "default": false
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          {
-                            "type": "object",
-                            "description": "Validates that a value follows a step. Both start and end options do not have to sync with the step. If they do not sync then find the nearest step.",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "step"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "required": [
-                                  "step"
-                                ],
-                                "properties": {
-                                  "step": {
-                                    "type": "number",
-                                    "description": "The step value"
-                                  },
-                                  "start": {
-                                    "type": "integer",
-                                    "description": "Start stepping at this value"
-                                  },
-                                  "end": {
-                                    "type": "integer",
-                                    "description": "End stepping at this value"
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          {
-                            "type": "object",
-                            "description": "Validate string matches an URI",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "uri"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "properties": {
-                                  "schemes": {
-                                    "type": "array",
-                                    "description": "Schemes to match. By default all are matched",
-                                    "items": {
-                                      "type": "string",
-                                      "enum": [
-                                        "http",
-                                        "https",
-                                        "sip",
-                                        "sips",
-                                        "ftp",
-                                        "ftps",
-                                        "ldap",
-                                        "ldaps",
-                                        "file",
-                                        "udp",
-                                        "tcp",
-                                        "urn"
-                                      ]
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          {
-                            "type": "object",
-                            "description": "Validate value matches a list (white list)",
-                            "required": [
-                              "type",
-                              "options"
-                            ],
-                            "properties": {
-                              "type": {
-                                "type": "string",
-                                "enum": [
-                                  "whiteList"
-                                ]
-                              },
-                              "options": {
-                                "type": "object",
-                                "required": [
-                                  "list"
-                                ],
-                                "properties": {
-                                  "list": {
-                                    "type": "array",
-                                    "minimum": 1,
-                                    "maximum": 100,
-                                    "description": "The list of approved values",
-                                    "items": {
-                                      "type": "string"
-                                    }
-                                  },
-                                  "check_case": {
-                                    "type": "boolean",
-                                    "description": "Perform a case sensitive match. By default will not match case",
-                                    "default": false
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        ]
-                      }
-                    }
-                  }
-                }
-              },
-              "current_status": {
-                "type": "object",
-                "description": "Defines the properties for a status",
-                "additionalProperties": false,
-                "required": [
-                  "status",
-                  "category"
-                ],
-                "properties": {
-                  "status": {
-                    "type": "string",
-                    "description": "A Custom label for the status",
-                    "pattern": "^[A-Za-z][0-9a-zA-Z-_ ]+$"
-                  },
-                  "category": {
-                    "type": "string",
-                    "description": "The classifier for the statues",
-                    "enum": [
-                      "PENDING",
-                      "IN_PROGRESS",
-                      "VERIFYING",
-                      "COMPLETE",
-                      "CANCELLED",
-                      "BLOCKED"
-                    ]
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "_links": {
-      "type": "object",
-      "properties": {
-        "self": {
-          "x-example": {
-            "href": "https://api.nterprise.com/units"
-          },
-          "type": "object",
-          "properties": {
-            "href": {
-              "type": "string",
-              "format": "uri"
-            }
-          }
-        },
-        "next": {
-          "x-example": {
-            "href": "https://api.nterprise.com/units?offset=QVBrO2wm13iEyl&limit=100"
-          },
-          "type": "object",
-          "properties": {
-            "href": {
-              "type": "string",
-              "format": "uri"
-            }
-          }
-        }
-      }
-    }
-  }
-}
-```
-
 <h3 id="fetchallunits-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -13336,1520 +1623,1475 @@ Fetch Unit
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|Inline|
 |403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
 
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "total_count": 21,
+  "limit": 42,
+  "offset": "next-offset",
+  "_embedded": {
+    "nter:units": [
+      {
+        "unit_id": "unit",
+        "label": "My widget",
+        "created": "2019-08-19T00:01:02.000Z",
+        "updated": "2020-08-19T01:01:02.000Z",
+        "serial_number": "DEF123456",
+        "raw_serial_number": "ABCDEF123456",
+        "current_status": {
+          "status": "Reticulating Splines",
+          "description": "For something that is Reticulating Splines",
+          "category": "IN_PROGRESS",
+          "order": 2
+        },
+        "tenant_part_number": "UNIT-number",
+        "part": {
+          "part_id": "part",
+          "label": "Widget",
+          "created": "2019-08-19T00:01:02.000Z",
+          "updated": "2020-08-19T01:01:02.000Z",
+          "serial_prefix": "ABC",
+          "total_units": 5,
+          "total_units_allocated": 2,
+          "total_units_unallocated": 3,
+          "customer": {
+            "customer_id": "customer",
+            "label": "manchuck",
+            "created": "2020-01-09T22:12:03.000Z",
+            "updated": "2020-01-09T22:12:03.000Z",
+            "external_platform": {},
+            "total_programs": 21,
+            "total_projects": 42,
+            "allowed_statuses": [
+              {
+                "category": "PENDING",
+                "description": "For something that is Pending",
+                "status": "Pending",
+                "order": 3
+              },
+              {
+                "category": "IN_PROGRESS",
+                "description": "For something that is In Progress",
+                "status": "In Progress",
+                "order": 4
+              },
+              {
+                "category": "VERIFYING",
+                "description": "For something that is Verifying",
+                "status": "Verifying",
+                "order": 5
+              },
+              {
+                "category": "BLOCKED",
+                "description": "For something that is Blocked",
+                "status": "Blocked",
+                "order": 6
+              },
+              {
+                "category": "COMPLETE",
+                "description": "For something that is Complete",
+                "status": "Complete",
+                "order": 7
+              },
+              {
+                "category": "CANCELLED",
+                "description": "For something that is Cancelled",
+                "status": "Cancelled",
+                "order": 8
+              }
+            ]
+          },
+          "manufacturer": {
+            "manufacturer_id": "manufacturer",
+            "label": "Manchuck Inc",
+            "created": "2019-08-19T00:01:02.000Z",
+            "updated": "2020-08-19T01:01:02.000Z",
+            "part_number": "1-888-482-858-832"
+          },
+          "input_filter": [
+            {
+              "label": "Serial Number Of part",
+              "key": "serial-number",
+              "filters": [],
+              "validators": [],
+              "value": null
+            }
+          ]
+        },
+        "vendor": {
+          "vendor_id": "vendor",
+          "label": "Manchuck Inc",
+          "created": "2019-08-19T00:01:02.000Z",
+          "updated": "2020-08-19T01:01:02.000Z",
+          "part_number": "VEN-number"
+        },
+        "customer": {
+          "customer_id": "customer",
+          "label": "manchuck",
+          "created": "2020-01-09T22:12:03.000Z",
+          "updated": "2020-01-09T22:12:03.000Z",
+          "external_platform": {},
+          "total_programs": 21,
+          "total_projects": 42,
+          "allowed_statuses": [
+            {
+              "category": "PENDING",
+              "description": "For something that is Pending",
+              "status": "Pending",
+              "order": 3
+            },
+            {
+              "category": "IN_PROGRESS",
+              "description": "For something that is In Progress",
+              "status": "In Progress",
+              "order": 4
+            },
+            {
+              "category": "VERIFYING",
+              "description": "For something that is Verifying",
+              "status": "Verifying",
+              "order": 5
+            },
+            {
+              "category": "BLOCKED",
+              "description": "For something that is Blocked",
+              "status": "Blocked",
+              "order": 6
+            },
+            {
+              "category": "COMPLETE",
+              "description": "For something that is Complete",
+              "status": "Complete",
+              "order": 7
+            },
+            {
+              "category": "CANCELLED",
+              "description": "For something that is Cancelled",
+              "status": "Cancelled",
+              "order": 8
+            }
+          ]
+        },
+        "manufacturer": {
+          "manufacturer_id": "manufacturer",
+          "label": "Manchuck Inc",
+          "created": "2019-08-19T00:01:02.000Z",
+          "updated": "2020-08-19T01:01:02.000Z",
+          "part_number": "1-888-482-858-832"
+        },
+        "location": {
+          "location_id": "location",
+          "label": "Test Label",
+          "created": "2019-08-19T00:01:02.000Z",
+          "updated": "2020-08-19T01:01:02.000Z",
+          "location_type": "warehouse",
+          "formatted_address": "Test Label\n431 Broadway Suite c\nMenands NY 12204 USA",
+          "address": {
+            "country": "USA",
+            "administrative_area": "NY",
+            "sub_administrative_area": "Albany",
+            "locality": "Menands",
+            "postal_code": "12204",
+            "thoroughfare": "431 Broadway",
+            "premise": "Suite c",
+            "sub_premise": "ZIC"
+          }
+        },
+        "current_location": {
+          "location_id": "location",
+          "label": "Test Label",
+          "created": "2019-08-19T00:01:02.000Z",
+          "updated": "2020-08-19T01:01:02.000Z",
+          "location_type": "warehouse",
+          "formatted_address": "Test Label\n431 Broadway Suite c\nMenands NY 12204 USA",
+          "address": {
+            "country": "USA",
+            "administrative_area": "NY",
+            "sub_administrative_area": "Albany",
+            "locality": "Menands",
+            "postal_code": "12204",
+            "thoroughfare": "431 Broadway",
+            "premise": "Suite c",
+            "sub_premise": "ZIC"
+          }
+        },
+        "resource": {
+          "resource_id": "parent-resource",
+          "label": "parent resource",
+          "created": "2020-01-09T22:12:03.000Z",
+          "updated": "2020-01-09T22:12:03.000Z",
+          "location": {
+            "location_id": "location",
+            "label": "Test Label",
+            "created": "2019-08-19T00:01:02.000Z",
+            "updated": "2020-08-19T01:01:02.000Z",
+            "location_type": "warehouse",
+            "formatted_address": "Test Label\n431 Broadway Suite c\nMenands NY 12204 USA",
+            "address": {
+              "country": "USA",
+              "administrative_area": "NY",
+              "sub_administrative_area": "Albany",
+              "locality": "Menands",
+              "postal_code": "12204",
+              "thoroughfare": "431 Broadway",
+              "premise": "Suite c",
+              "sub_premise": "ZIC"
+            }
+          },
+          "resource_type": "station",
+          "meta": {
+            "power": "50w"
+          }
+        },
+        "input_filter": [
+          {
+            "label": "Serial Number Of part",
+            "key": "serial-number",
+            "filters": [],
+            "validators": [],
+            "value": null
+          }
+        ],
+        "_links": {
+          "nter:unit-manufacturer": {
+            "href": "https://api.example.com/manufacturers/manufacturer"
+          },
+          "nter:unit-customer": {
+            "href": "https://api.example.com/customers/customer"
+          },
+          "nter:unit-part": {
+            "href": "https://api.example.com/parts/part"
+          },
+          "nter:unit-vendor": {
+            "href": "https://api.example.com/vendors/vendor"
+          },
+          "nter:unit-last-known-location": {
+            "href": "https://api.example.com/locations/location"
+          },
+          "nter:unit-resource": {
+            "href": "https://api.example.com/resources/parent-resource"
+          },
+          "self": {
+            "href": "https://api.example.com/units/unit"
+          }
+        }
+      }
+    ]
+  },
+  "_links": {
+    "next": {
+      "href": "https://api.example.com/units?limit=42&offset=next-offset"
+    },
+    "self": {
+      "href": "https://api.example.com/units?limit=42"
+    }
+  }
+}
+```
+
+> 401 Response
+
+```json
+{
+  "title": "Unauthorized",
+  "type": "https://docs.nterprise.com/api/problem/Unauthorized",
+  "status": 401,
+  "detail": "Invalid authorization token"
+}
+```
+
+> 403 Response
+
+```json
+{
+  "title": "Forbidden",
+  "type": "https://docs.nterprise.com/api/problem/Forbidden",
+  "status": 403,
+  "detail": "You are forbidden from accessing this resource"
+}
+```
+
 <h3 id="fetchallunits-responseschema">Response Schema</h3>
 
 Status Code **200**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» _embedded|object|false|none|none|
-|»» nter:units|[object]|false|none|none|
-|»»» _links|object|false|none|none|
-|»»»» self|object|false|none|none|
-|»»»»» href|string(uri)|false|none|none|
-|»»»» unit_id|string|false|none|none|
-|»»»» label|string|false|none|Label for the entity|
-|»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»»»» created|string(date-time)|false|read-only|Date the entity was created|
-|»»»» updated|string(date-time)|false|read-only|Last date the entity was updated|
-|»»»» serial_number|string|false|read-only|Serial number of the unit with prefix stripped|
-|»»»» raw_serial_number|string|false|none|Serial number of the unit|
-|»»»» tenant_part_number|string|false|none|Identifier set by the tenant|
-|»»»» manufacturer|object|false|none|Manufacturer information for the part|
-|»»»»» part_number|string|true|none|Part number the manufacturer uses. If this is not set, then the part number is used|
-|»»»»» manufacturer_id|string|false|read-only|Customer identifier|
-|»»»»» entity_id|string|true|read-only|Customer identifier|
-|»»»»» entity_type|string|true|none|none|
-|»»»»» label|string|true|none|Label for the entity|
-|»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»»»»» created|string(date-time)|true|read-only|Date the entity was created|
-|»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»»» vendor|object|false|none|The vendor that sold this unit|
-|»»»»» vendor_id|string|false|none|unique id|
-|»»»»» entity_id|string|true|read-only|Customer identifier|
-|»»»»» entity_type|string|true|none|none|
-|»»»»» label|string|true|none|Label for the entity|
-|»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»»»»» created|string(date-time)|true|read-only|Date the entity was created|
-|»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»»»» part_number|string\|null|false|none|The part number supplied by the vendor|
-|»»»» part|object|false|none|Defines the properties for a part|
-|»»»»» part_id|string|false|read-only|Unique identifier|
-|»»»»» entity_id|string|true|read-only|Customer identifier|
-|»»»»» entity_type|string|true|none|none|
-|»»»»» label|string|true|none|Label for the entity|
-|»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»»»»» created|string(date-time)|true|read-only|Date the entity was created|
-|»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»»»» customer|object|true|none|Customer|
-|»»»»»» customer_id|string|false|read-only|Customer identifier|
-|»»»»»» entity_id|string|true|read-only|Customer identifier|
-|»»»»»» entity_type|string|true|none|none|
-|»»»»»» label|string|true|none|Label for the entity|
-|»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
-|»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»»»»» external_platform|object|false|none|External Identifiers for the customer|
-|»»»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
-|»»»»»»» status|string|true|none|A Custom label for the status|
-|»»»»»»» category|string|true|none|The classifier for the statues|
-|»»»»»» total_programs|number|false|none|Total programs under the customer|
-|»»»»»» total_projects|number|false|none|Total projects under the customer|
-|»»»»» manufacturer|object|true|none|Manufacturer information for the part|
-|»»»»»» part_number|string|true|none|Part number the manufacturer uses. If this is not set, then the part number is used|
-|»»»»»» manufacturer_id|string|false|read-only|Customer identifier|
-|»»»»»» entity_id|string|true|read-only|Customer identifier|
-|»»»»»» entity_type|string|true|none|none|
-|»»»»»» label|string|true|none|Label for the entity|
-|»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
-|»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»»»» serial_prefix|string\|null|true|none|A serial number prefix for the part|
-|»»»»» input_filter|[object]|false|none|Input Filters allow custom fields to be defined for entities|
-|»»»»»» label|string|true|none|Human readable name|
-|»»»»»» key|string|true|read-only|Slug used to store the property|
-|»»»»»» filters|[anyOf]|true|none|A Collection of filters applied to the field|
+|&nbsp;&nbsp;&nbsp;&nbsp; total_count|number|true|read-only|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; limit|number|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; offset|string¦null|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; _embedded|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; nter:units|[allOf]|false|none|none|
+
+*allOf*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; unit_id|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; label|string|true|none|Label for the entity|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; created|string(date-time)|true|read-only|Date the entity was created|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; updated|string(date-time)|true|read-only|Last date the entity was updated|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; serial_number|string¦null|true|read-only|Serial number of the unit with prefix stripped|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; raw_serial_number|string¦null|true|none|Serial number of the unit|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; tenant_part_number|string|true|none|Identifier set by the tenant|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; manufacturer|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; manufacturer_id|string|true|read-only|Manufacturer identifier|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; label|string|true|none|Label for the entity|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; created|string(date-time)|true|read-only|Date the entity was created|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; updated|string(date-time)|true|read-only|Last date the entity was updated|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; vendor|any|true|none|none|
 
 *anyOf*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»» *anonymous*|object|false|none|This filter will set the value based on a list of approved values. If the value is not in the list, it will then be set to empty unless the default option is set|
-|»»»»»»»» type|string|true|none|none|
-|»»»»»»»» options|object|true|none|none|
-|»»»»»»»»» approved_values|[string]|true|none|The list of approved values|
-|»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
-|»»»»»»»»» default|string\|null|false|none|If this is set and the value is not in the approved_list, set the value to this|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|null|false|none|none|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»» *anonymous*|object|false|none|Make the value camelCase|
-|»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»» options|object|true|none|This filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a date|
-|»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»» options|object|true|none|Date filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»» *anonymous*|object|false|none|Filter to transform values into null. This is helpful when trying to make a value required. The following are considered empty: # The number 0 or 0.0 # empty string '' # A boolean false # The word 'false' #|
-|»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»» options|object|true|none|empty filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a float. Non numeric characters (including comma) will be removed|
-|»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»» precision|integer|false|none|How many decimal places to preserve|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»» *anonymous*|object|false|none|Make the value kebab-case|
-|»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»» options|object|true|none|This filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»» *anonymous*|object|false|none|Make the value lowercase|
-|»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»» options|object|true|none|This filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a number. Non numeric characters (including comma and decimal points) will be removed|
-|»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»» options|object|true|none|Number filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»» *anonymous*|object|false|none|Add a prefix to the start of a string. If the string already start with the prefix, it will not prepend.|
-|»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»» prefix|string|true|none|The prefix to add|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»» *anonymous*|object|false|none|Make the value snake_case|
-|»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»» options|object|true|none|This filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a string|
-|»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»» options|object|true|none|String filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»» *anonymous*|object|false|none|Add a suffix to the start of a string. If the string already start with the suffix, it will not append.|
-|»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»» suffix|string|true|none|The suffix to add|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»» *anonymous*|object|false|none|Filter to trim whitespace from a value|
-|»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»» options|object|true|none|By default will trim from the start and end|
-|»»»»»»»»»»»»» start|boolean|false|none|Remove white space from the start of the string|
-|»»»»»»»»»»»»» end|boolean|false|none|Remove white space from the end of the string|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»» *anonymous*|object|false|none|Make the value UPPERCASE|
-|»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»» options|object|true|none|This filter has no options|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; vendor_id|string|true|none|unique id|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; label|string|true|none|Label for the entity|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; created|string(date-time)|true|read-only|Date the entity was created|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; updated|string(date-time)|true|read-only|Last date the entity was updated|
 
 *continued*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»» validators|[anyOf]|true|none|A set of validators to use for this field|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; part|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; part_id|string|true|read-only|Unique identifier|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; label|string|true|none|Label for the entity|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; created|string(date-time)|true|read-only|Date the entity was created|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; updated|string(date-time)|true|read-only|Last date the entity was updated|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; customer|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; customer_id|string|true|read-only|Customer identifier|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; label|string|true|none|Label for the entity|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; created|string(date-time)|true|read-only|Date the entity was created|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; updated|string(date-time)|true|read-only|Last date the entity was updated|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; external_platform|object|true|none|External Identifiers for the customer|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; allowed_statuses|[object]|true|none|List of allowed statuses|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; status|string|true|none|A Custom label for the status|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; category|string|true|none|The classifier for the statues|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; description|string¦null|false|none|A description for the status|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; order|number|false|none|Order status appears when listing|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; total_programs|number|true|none|Total programs under the customer|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; total_projects|number|true|none|Total projects under the customer|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; manufacturer|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; manufacturer_id|string|true|read-only|Manufacturer identifier|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; label|string|true|none|Label for the entity|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; created|string(date-time)|true|read-only|Date the entity was created|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; updated|string(date-time)|true|read-only|Last date the entity was updated|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; serial_prefix|string¦null|true|none|A serial number prefix for the part|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; input_filter|[object]|true|none|Input Filters allow custom fields to be defined for entities|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; label|string|true|none|Human readable name|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; key|string|true|read-only|Slug used to store the property|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; filters|[anyOf]|true|none|A Collection of filters applied to the field|
 
 *anyOf*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number is between two values. By default, min and max are included|
-|»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»» min|number|true|none|Minimum value to check|
-|»»»»»»»»»»»»»»» max|number|true|none|The maximum value to check|
-|»»»»»»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
-|»»»»»»»»»»»»»»» include|boolean|false|none|Include the value in the check|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|This filter will set the value based on a list of approved values. If the value is not in the list, it will then be set to empty unless the default option is set|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; approved_values|[string]|true|none|The list of approved values|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; default|string¦null|false|none|If this is set and the value is not in the approved_list, set the value to this|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate value does not match a list (black list)|
-|»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»» list|[string]|true|none|The list of approved values|
-|»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Make the value camelCase|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|This filter has no options|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string contains a value|
-|»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»» contains|string|true|none|String must contain with this value|
-|»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Filter to transform a value into a date|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|Date filter has no options|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string is a correct email address|
-|»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»» strict|boolean|false|none|Enforce strict standards from ARPA. This will enforce the length of the string|
-|»»»»»»»»»»»»»»»»»» lookup|boolean|false|none|Look up the host name and check if it has a valid MX record|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Filter to transform values into null. This is helpful when trying to make a value required. The following are considered empty:<br># The number 0 or 0.0<br># empty string ''<br># A boolean false<br># The word 'false'<br>#|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|empty filter has no options|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string ends with a value|
-|»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»» ends_with|string|true|none|String must end with this value|
-|»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Filter to transform a value into a float. Non numeric characters (including comma) will be removed|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; precision|integer|false|none|How many decimal places to preserve|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number equals a value|
-|»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»» value|number|true|none|The value to compare against|
-|»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When value is a float, this will set the decimal precision|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Make the value kebab-case|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|This filter has no options|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number is greater than a value. By default, this will check if value is greater than or equals to|
-|»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»» value|number|true|none|The value to compare against|
-|»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
-|»»»»»»»»»»»»»»»»»»»»» include|boolean|false|none|Include the value in the check|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Make the value lowercase|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|This filter has no options|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string has a correct DNS records|
-|»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»» record_type|string|false|none|DNS record type to validate|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Filter to transform a value into a number. Non numeric characters (including comma and decimal points) will be removed|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|Number filter has no options|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an IP address format. Defaults to matching IPv4|
-|»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»» versions|[string]|false|none|IP Version to match against|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Add a prefix to the start of a string. If the string already start with the prefix, it will not prepend.|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; prefix|string|true|none|The prefix to add|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string is a certain length|
-|»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»» length|string|true|none|String must contain with this value|
-|»»»»»»»»»»»»»»»»»»»»»»»» operator|string|false|none|Which type of length comparision to make|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Make the value snake_case|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|This filter has no options|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number is less than a value. By default, this will check if value is less than or equals to|
-|»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»» value|number|true|none|The value to compare against|
-|»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
-|»»»»»»»»»»»»»»»»»»»»»»»»» include|boolean|false|none|Include the value in the check|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Filter to transform a value into a string|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|String filter has no options|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an MAC address format|
-|»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This validator has no options|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Add a suffix to the start of a string. If the string already start with the suffix, it will not append.|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; suffix|string|true|none|The suffix to add|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches a regular expression|
-|»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»» mask|string|true|none|Mask to validate against|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Filter to trim whitespace from a value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|By default will trim from the start and end|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; start|boolean|false|none|Remove white space from the start of the string|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end|boolean|false|none|Remove white space from the end of the string|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string starts with a value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»» starts_with|string|true|none|String must start with this value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validates that a value follows a step. Both start and end options do not have to sync with the step. If they do not sync then find the nearest step.|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»» step|number|true|none|The step value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»» start|integer|false|none|Start stepping at this value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»» end|integer|false|none|End stepping at this value|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an URI|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» schemes|[string]|false|none|Schemes to match. By default all are matched|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate value matches a list (white list)|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» list|[string]|true|none|The list of approved values|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Make the value UPPERCASE|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|This filter has no options|
 
 *continued*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» total_units|integer|false|read-only|Number of units of this part|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» total_units_allocated|integer|false|read-only|Number of allocated units|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» total_units_unallocated|integer|false|read-only|Number of free units|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»» customer|object|false|none|Customer|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» customer_id|string|false|read-only|Customer identifier|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_id|string|true|read-only|Customer identifier|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» label|string|true|none|Label for the entity|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» external_platform|object|false|none|External Identifiers for the customer|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» allowed_statuses|[object]|true|none|List of allowed statuses|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» status|string|true|none|A Custom label for the status|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» category|string|true|none|The classifier for the statues|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» total_programs|number|false|none|Total programs under the customer|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» total_projects|number|false|none|Total projects under the customer|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»» current_location|object|false|none|Defines the properties for a part unit|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location_id|string|false|read-only|The identifier for the location|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_id|string|true|read-only|Customer identifier|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» label|string|true|none|Label for the entity|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location_type|string|true|none|The type of location|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» formatted_address|string|false|read-only|Address formatted for the where region the location exists in|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» address|object|true|none|xNAL address for the location|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» country|string|true|none|Three Letter ISO country code|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» administrative_area|string|true|none|State / Province / Region|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» sub_administrative_area|string|false|none|County / District|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» locality|string|true|none|City / Town|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» postal_code|string|true|none|Postal Code / Zip Code|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» thoroughfare|string|true|none|Street Address|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» premise|string|false|none|Apartment / Suite / Box number etc|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» sub_premise|string|false|none|Floor # / Room # / Building label etc|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location|object|false|none|Defines the properties for a part unit|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location_id|string|false|read-only|The identifier for the location|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_id|string|true|read-only|Customer identifier|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» entity_type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» label|string|true|none|Label for the entity|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» created|string(date-time)|true|read-only|Date the entity was created|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» location_type|string|true|none|The type of location|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» formatted_address|string|false|read-only|Address formatted for the where region the location exists in|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» address|object|true|none|xNAL address for the location|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» country|string|true|none|Three Letter ISO country code|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» administrative_area|string|true|none|State / Province / Region|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» sub_administrative_area|string|false|none|County / District|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» locality|string|true|none|City / Town|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» postal_code|string|true|none|Postal Code / Zip Code|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» thoroughfare|string|true|none|Street Address|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» premise|string|false|none|Apartment / Suite / Box number etc|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» sub_premise|string|false|none|Floor # / Room # / Building label etc|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» input_filter|[object]|false|none|Input Filters allow custom fields to be defined for entities|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» label|string|true|none|Human readable name|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» key|string|true|read-only|Slug used to store the property|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» filters|[anyOf]|true|none|A Collection of filters applied to the field|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; validators|[anyOf]|true|none|A set of validators to use for this field|
 
 *anyOf*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|This filter will set the value based on a list of approved values. If the value is not in the list, it will then be set to empty unless the default option is set|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» approved_values|[string]|true|none|The list of approved values|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» default|string\|null|false|none|If this is set and the value is not in the approved_list, set the value to this|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate number is between two values. By default, min and max are included|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; min|number|true|none|Minimum value to check|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; max|number|true|none|The maximum value to check|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; precision|integer|false|none|When number is a float, this will set the decimal precision|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; include|boolean|false|none|Include the value in the check|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value camelCase|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate value does not match a list (black list)|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; list|[string]|true|none|The list of approved values|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a date|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|Date filter has no options|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate string contains a value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; contains|string|true|none|String must contain with this value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform values into null. This is helpful when trying to make a value required. The following are considered empty: # The number 0 or 0.0 # empty string '' # A boolean false # The word 'false' #|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|empty filter has no options|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate string is a correct email address|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; strict|boolean|false|none|Enforce strict standards from ARPA. This will enforce the length of the string|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; lookup|boolean|false|none|Look up the host name and check if it has a valid MX record|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a float. Non numeric characters (including comma) will be removed|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|How many decimal places to preserve|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate string ends with a value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ends_with|string|true|none|String must end with this value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value kebab-case|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate number equals a value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; value|number|true|none|The value to compare against|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; precision|integer|false|none|When value is a float, this will set the decimal precision|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value lowercase|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate number is greater than a value. By default, this will check if value is greater than or equals to|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; value|number|true|none|The value to compare against|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; precision|integer|false|none|When number is a float, this will set the decimal precision|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; include|boolean|false|none|Include the value in the check|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a number. Non numeric characters (including comma and decimal points) will be removed|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|Number filter has no options|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate string has a correct DNS records|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; record_type|string|false|none|DNS record type to validate|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Add a prefix to the start of a string. If the string already start with the prefix, it will not prepend.|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» prefix|string|true|none|The prefix to add|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate string matches an IP address format. Defaults to matching IPv4|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; versions|[string]|false|none|IP Version to match against|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value snake_case|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate string is a certain length|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; length|string|true|none|String must contain with this value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; operator|string|false|none|Which type of length comparision to make|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to transform a value into a string|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|String filter has no options|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate number is less than a value. By default, this will check if value is less than or equals to|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; value|number|true|none|The value to compare against|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; precision|integer|false|none|When number is a float, this will set the decimal precision|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; include|boolean|false|none|Include the value in the check|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Add a suffix to the start of a string. If the string already start with the suffix, it will not append.|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» suffix|string|true|none|The suffix to add|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate string matches an MAC address format|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|This validator has no options|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Filter to trim whitespace from a value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|By default will trim from the start and end|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» start|boolean|false|none|Remove white space from the start of the string|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» end|boolean|false|none|Remove white space from the end of the string|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate string matches a regular expression|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mask|string|true|none|Mask to validate against|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Make the value UPPERCASE|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This filter has no options|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate string starts with a value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; starts_with|string|true|none|String must start with this value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validates that a value follows a step. Both start and end options do not have to sync with the step. If they do not sync then find the nearest step.|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; step|number|true|none|The step value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; start|integer|false|none|Start stepping at this value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end|integer|false|none|End stepping at this value|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate string matches an URI|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; schemes|[string]|false|none|Schemes to match. By default all are matched|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate value matches a list (white list)|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; list|[string]|true|none|The list of approved values|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
 
 *continued*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» validators|[anyOf]|true|none|A set of validators to use for this field|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; customer|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; customer_id|string|true|read-only|Customer identifier|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; label|string|true|none|Label for the entity|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; created|string(date-time)|true|read-only|Date the entity was created|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; updated|string(date-time)|true|read-only|Last date the entity was updated|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; external_platform|object|true|none|External Identifiers for the customer|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; allowed_statuses|[object]|true|none|List of allowed statuses|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; status|string|true|none|A Custom label for the status|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; category|string|true|none|The classifier for the statues|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; description|string¦null|false|none|A description for the status|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; order|number|false|none|Order status appears when listing|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; total_programs|number|true|none|Total programs under the customer|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; total_projects|number|true|none|Total projects under the customer|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; current_location|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; location_id|string|true|read-only|The identifier for the location|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; label|string|true|none|Label for the entity|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; created|string(date-time)|true|read-only|Date the entity was created|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; updated|string(date-time)|true|read-only|Last date the entity was updated|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; location_type|string|true|none|The type of location|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; formatted_address|string|true|read-only|Address formatted for the where region the location exists in|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; address|object|true|none|xNAL address for the location|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; country|string|true|none|Three Letter ISO country code|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; administrative_area|string|true|none|State / Province / Region|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sub_administrative_area|string|false|none|County / District|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; locality|string|true|none|City / Town|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; postal_code|string|true|none|Postal Code / Zip Code|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; thoroughfare|string|true|none|Street Address|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; premise|string|false|none|Apartment / Suite / Box number etc|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sub_premise|string|false|none|Floor # / Room # / Building label etc|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; location|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; location_id|string|true|read-only|The identifier for the location|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; label|string|true|none|Label for the entity|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; created|string(date-time)|true|read-only|Date the entity was created|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; updated|string(date-time)|true|read-only|Last date the entity was updated|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; location_type|string|true|none|The type of location|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; formatted_address|string|true|read-only|Address formatted for the where region the location exists in|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; address|object|true|none|xNAL address for the location|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; country|string|true|none|Three Letter ISO country code|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; administrative_area|string|true|none|State / Province / Region|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sub_administrative_area|string|false|none|County / District|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; locality|string|true|none|City / Town|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; postal_code|string|true|none|Postal Code / Zip Code|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; thoroughfare|string|true|none|Street Address|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; premise|string|false|none|Apartment / Suite / Box number etc|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sub_premise|string|false|none|Floor # / Room # / Building label etc|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; resource|any|true|none|none|
 
 *anyOf*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number is between two values. By default, min and max are included|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» min|number|true|none|Minimum value to check|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» max|number|true|none|The maximum value to check|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» include|boolean|false|none|Include the value in the check|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|null|false|none|none|
 
 *or*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate value does not match a list (black list)|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» list|[string]|true|none|The list of approved values|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string contains a value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» contains|string|true|none|String must contain with this value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string is a correct email address|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» strict|boolean|false|none|Enforce strict standards from ARPA. This will enforce the length of the string|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» lookup|boolean|false|none|Look up the host name and check if it has a valid MX record|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string ends with a value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» ends_with|string|true|none|String must end with this value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number equals a value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» value|number|true|none|The value to compare against|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When value is a float, this will set the decimal precision|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number is greater than a value. By default, this will check if value is greater than or equals to|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» value|number|true|none|The value to compare against|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» include|boolean|false|none|Include the value in the check|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string has a correct DNS records|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» record_type|string|false|none|DNS record type to validate|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an IP address format. Defaults to matching IPv4|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» versions|[string]|false|none|IP Version to match against|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string is a certain length|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» length|string|true|none|String must contain with this value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» operator|string|false|none|Which type of length comparision to make|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number is less than a value. By default, this will check if value is less than or equals to|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» value|number|true|none|The value to compare against|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» include|boolean|false|none|Include the value in the check|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an MAC address format|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|This validator has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches a regular expression|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» mask|string|true|none|Mask to validate against|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string starts with a value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» starts_with|string|true|none|String must start with this value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validates that a value follows a step. Both start and end options do not have to sync with the step. If they do not sync then find the nearest step.|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» step|number|true|none|The step value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» start|integer|false|none|Start stepping at this value|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» end|integer|false|none|End stepping at this value|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an URI|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» schemes|[string]|false|none|Schemes to match. By default all are matched|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate value matches a list (white list)|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» list|[string]|true|none|The list of approved values|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; resource_id|string|true|read-only|The identifier for the resource|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; label|string|true|none|Label for the entity|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; created|string(date-time)|true|read-only|Date the entity was created|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; updated|string(date-time)|true|read-only|Last date the entity was updated|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; resource_type|string|true|none|Used to group resources together. Extensions or reports can then use the type for their needs. MUST be kebab-cased|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; meta|object|false|none|Data for the resource as a key value pair|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **additionalProperties**|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; location|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; location_id|string|true|read-only|The identifier for the location|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; label|string|true|none|Label for the entity|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; created|string(date-time)|true|read-only|Date the entity was created|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; updated|string(date-time)|true|read-only|Last date the entity was updated|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; location_type|string|true|none|The type of location|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; formatted_address|string|true|read-only|Address formatted for the where region the location exists in|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; address|object|true|none|xNAL address for the location|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; country|string|true|none|Three Letter ISO country code|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; administrative_area|string|true|none|State / Province / Region|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sub_administrative_area|string|false|none|County / District|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; locality|string|true|none|City / Town|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; postal_code|string|true|none|Postal Code / Zip Code|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; thoroughfare|string|true|none|Street Address|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; premise|string|false|none|Apartment / Suite / Box number etc|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sub_premise|string|false|none|Floor # / Room # / Building label etc|
 
 *continued*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» current_status|object|false|none|Defines the properties for a status|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» status|string|true|none|A Custom label for the status|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» category|string|true|none|The classifier for the statues|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» _links|object|false|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» self|object|false|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» href|string(uri)|false|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» next|object|false|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»»» href|string(uri)|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; input_filter|[object]|true|none|Input Filters allow custom fields to be defined for entities|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; label|string|true|none|Human readable name|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; key|string|true|read-only|Slug used to store the property|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; filters|[anyOf]|true|none|A Collection of filters applied to the field|
 
-#### Enumerated Values
+*anyOf*
 
-|Property|Value|
-|---|---|
-|entity_type|MFR|
-|entity_type|VEN|
-|entity_type|PART|
-|entity_type|CUS|
-|category|PENDING|
-|category|IN_PROGRESS|
-|category|VERIFYING|
-|category|COMPLETE|
-|category|CANCELLED|
-|category|BLOCKED|
-|entity_type|MFR|
-|type|allowed_list|
-|type|camel|
-|type|date|
-|type|empty|
-|type|float|
-|type|kebab|
-|type|lower|
-|type|number|
-|type|prefix|
-|type|snake|
-|type|string|
-|type|suffix|
-|type|trim|
-|type|upper|
-|type|greater_than|
-|type|white_list|
-|type|contains|
-|type|email_address|
-|type|ends_with|
-|type|equals|
-|type|greater_than|
-|type|hostname|
-|record_type|A|
-|record_type|AAAA|
-|record_type|AFSDB|
-|record_type|APL|
-|record_type|CAA|
-|record_type|CDNSKEY|
-|record_type|CDS|
-|record_type|CERT|
-|record_type|CNAME|
-|record_type|CSYNC|
-|record_type|DHCID|
-|record_type|DLV|
-|record_type|DNAME|
-|record_type|DNSKEY|
-|record_type|DS|
-|record_type|HIP|
-|record_type|IPSECKEY|
-|record_type|KEY|
-|record_type|KX|
-|record_type|LOC|
-|record_type|MX|
-|record_type|NAPTR|
-|record_type|NS|
-|record_type|NSEC|
-|record_type|NSEC3|
-|record_type|NSEC3PARAM|
-|record_type|OPENPGPKEY|
-|record_type|PTR|
-|record_type|RRSIG|
-|record_type|RP|
-|record_type|SIG|
-|record_type|SMIMEA|
-|record_type|SOA|
-|record_type|SRV|
-|record_type|SSHFP|
-|record_type|TA|
-|record_type|TKEY|
-|record_type|TLSA|
-|record_type|TSIG|
-|record_type|TXT|
-|record_type|URI|
-|type|ipAddress|
-|type|length|
-|operator|equals|
-|operator|less_than|
-|operator|less_than_equals|
-|operator|greater_than|
-|operator|greater_than_equals|
-|type|lessThan|
-|type|macAddress|
-|type|mask|
-|type|startsWith|
-|type|step|
-|type|uri|
-|type|whiteList|
-|entity_type|CUS|
-|category|PENDING|
-|category|IN_PROGRESS|
-|category|VERIFYING|
-|category|COMPLETE|
-|category|CANCELLED|
-|category|BLOCKED|
-|entity_type|LOC|
-|location_type|warehouse|
-|location_type|facility|
-|location_type|other|
-|country|ABW|
-|country|AFG|
-|country|AGO|
-|country|AIA|
-|country|ALA|
-|country|ALB|
-|country|AND|
-|country|ARE|
-|country|ARG|
-|country|ARM|
-|country|ASM|
-|country|ATA|
-|country|ATF|
-|country|ATG|
-|country|AUS|
-|country|AUT|
-|country|AZE|
-|country|BDI|
-|country|BEL|
-|country|BEN|
-|country|BES|
-|country|BFA|
-|country|BGD|
-|country|BGR|
-|country|BHR|
-|country|BHS|
-|country|BIH|
-|country|BLM|
-|country|BLR|
-|country|BLZ|
-|country|BMU|
-|country|BOL|
-|country|BRA|
-|country|BRB|
-|country|BRN|
-|country|BTN|
-|country|BVT|
-|country|BWA|
-|country|CAF|
-|country|CAN|
-|country|CCK|
-|country|CHE|
-|country|CHL|
-|country|CHN|
-|country|CIV|
-|country|CMR|
-|country|COD|
-|country|COG|
-|country|COK|
-|country|COL|
-|country|COM|
-|country|CPV|
-|country|CRI|
-|country|CUB|
-|country|CUW|
-|country|CXR|
-|country|CYM|
-|country|CYP|
-|country|CZE|
-|country|DEU|
-|country|DJI|
-|country|DMA|
-|country|DNK|
-|country|DOM|
-|country|DZA|
-|country|ECU|
-|country|EGY|
-|country|ERI|
-|country|ESH|
-|country|ESP|
-|country|EST|
-|country|ETH|
-|country|FIN|
-|country|FJI|
-|country|FLK|
-|country|FRA|
-|country|FRO|
-|country|FSM|
-|country|GAB|
-|country|GBR|
-|country|GEO|
-|country|GGY|
-|country|GHA|
-|country|GIB|
-|country|GIN|
-|country|GLP|
-|country|GMB|
-|country|GNB|
-|country|GNQ|
-|country|GRC|
-|country|GRD|
-|country|GRL|
-|country|GTM|
-|country|GUF|
-|country|GUM|
-|country|GUY|
-|country|HKG|
-|country|HMD|
-|country|HND|
-|country|HRV|
-|country|HTI|
-|country|HUN|
-|country|IDN|
-|country|IMN|
-|country|IND|
-|country|IOT|
-|country|IRL|
-|country|IRN|
-|country|IRQ|
-|country|ISL|
-|country|ISR|
-|country|ITA|
-|country|JAM|
-|country|JEY|
-|country|JOR|
-|country|JPN|
-|country|KAZ|
-|country|KEN|
-|country|KGZ|
-|country|KHM|
-|country|KIR|
-|country|KNA|
-|country|KOR|
-|country|KWT|
-|country|LAO|
-|country|LBN|
-|country|LBR|
-|country|LBY|
-|country|LCA|
-|country|LIE|
-|country|LKA|
-|country|LSO|
-|country|LTU|
-|country|LUX|
-|country|LVA|
-|country|MAC|
-|country|MAF|
-|country|MAR|
-|country|MCO|
-|country|MDA|
-|country|MDG|
-|country|MDV|
-|country|MEX|
-|country|MHL|
-|country|MKD|
-|country|MLI|
-|country|MLT|
-|country|MMR|
-|country|MNE|
-|country|MNG|
-|country|MNP|
-|country|MOZ|
-|country|MRT|
-|country|MSR|
-|country|MTQ|
-|country|MUS|
-|country|MWI|
-|country|MYS|
-|country|MYT|
-|country|NAM|
-|country|NCL|
-|country|NER|
-|country|NFK|
-|country|NGA|
-|country|NIC|
-|country|NIU|
-|country|NLD|
-|country|NOR|
-|country|NPL|
-|country|NRU|
-|country|NZL|
-|country|OMN|
-|country|PAK|
-|country|PAN|
-|country|PCN|
-|country|PER|
-|country|PHL|
-|country|PLW|
-|country|PNG|
-|country|POL|
-|country|PRI|
-|country|PRK|
-|country|PRT|
-|country|PRY|
-|country|PSE|
-|country|PYF|
-|country|QAT|
-|country|REU|
-|country|ROU|
-|country|RUS|
-|country|RWA|
-|country|SAU|
-|country|SDN|
-|country|SEN|
-|country|SGP|
-|country|SGS|
-|country|SHN|
-|country|SJM|
-|country|SLB|
-|country|SLE|
-|country|SLV|
-|country|SMR|
-|country|SOM|
-|country|SPM|
-|country|SRB|
-|country|SSD|
-|country|STP|
-|country|SUR|
-|country|SVK|
-|country|SVN|
-|country|SWE|
-|country|SWZ|
-|country|SXM|
-|country|SYC|
-|country|SYR|
-|country|TCA|
-|country|TCD|
-|country|TGO|
-|country|THA|
-|country|TJK|
-|country|TKL|
-|country|TKM|
-|country|TLS|
-|country|TON|
-|country|TTO|
-|country|TUN|
-|country|TUR|
-|country|TUV|
-|country|TWN|
-|country|TZA|
-|country|UGA|
-|country|UKR|
-|country|UMI|
-|country|URY|
-|country|USA|
-|country|UZB|
-|country|VAT|
-|country|VCT|
-|country|VEN|
-|country|VGB|
-|country|VIR|
-|country|VNM|
-|country|VUT|
-|country|WLF|
-|country|WSM|
-|country|YEM|
-|country|ZAF|
-|country|ZMB|
-|country|ZWE|
-|entity_type|LOC|
-|location_type|warehouse|
-|location_type|facility|
-|location_type|other|
-|country|ABW|
-|country|AFG|
-|country|AGO|
-|country|AIA|
-|country|ALA|
-|country|ALB|
-|country|AND|
-|country|ARE|
-|country|ARG|
-|country|ARM|
-|country|ASM|
-|country|ATA|
-|country|ATF|
-|country|ATG|
-|country|AUS|
-|country|AUT|
-|country|AZE|
-|country|BDI|
-|country|BEL|
-|country|BEN|
-|country|BES|
-|country|BFA|
-|country|BGD|
-|country|BGR|
-|country|BHR|
-|country|BHS|
-|country|BIH|
-|country|BLM|
-|country|BLR|
-|country|BLZ|
-|country|BMU|
-|country|BOL|
-|country|BRA|
-|country|BRB|
-|country|BRN|
-|country|BTN|
-|country|BVT|
-|country|BWA|
-|country|CAF|
-|country|CAN|
-|country|CCK|
-|country|CHE|
-|country|CHL|
-|country|CHN|
-|country|CIV|
-|country|CMR|
-|country|COD|
-|country|COG|
-|country|COK|
-|country|COL|
-|country|COM|
-|country|CPV|
-|country|CRI|
-|country|CUB|
-|country|CUW|
-|country|CXR|
-|country|CYM|
-|country|CYP|
-|country|CZE|
-|country|DEU|
-|country|DJI|
-|country|DMA|
-|country|DNK|
-|country|DOM|
-|country|DZA|
-|country|ECU|
-|country|EGY|
-|country|ERI|
-|country|ESH|
-|country|ESP|
-|country|EST|
-|country|ETH|
-|country|FIN|
-|country|FJI|
-|country|FLK|
-|country|FRA|
-|country|FRO|
-|country|FSM|
-|country|GAB|
-|country|GBR|
-|country|GEO|
-|country|GGY|
-|country|GHA|
-|country|GIB|
-|country|GIN|
-|country|GLP|
-|country|GMB|
-|country|GNB|
-|country|GNQ|
-|country|GRC|
-|country|GRD|
-|country|GRL|
-|country|GTM|
-|country|GUF|
-|country|GUM|
-|country|GUY|
-|country|HKG|
-|country|HMD|
-|country|HND|
-|country|HRV|
-|country|HTI|
-|country|HUN|
-|country|IDN|
-|country|IMN|
-|country|IND|
-|country|IOT|
-|country|IRL|
-|country|IRN|
-|country|IRQ|
-|country|ISL|
-|country|ISR|
-|country|ITA|
-|country|JAM|
-|country|JEY|
-|country|JOR|
-|country|JPN|
-|country|KAZ|
-|country|KEN|
-|country|KGZ|
-|country|KHM|
-|country|KIR|
-|country|KNA|
-|country|KOR|
-|country|KWT|
-|country|LAO|
-|country|LBN|
-|country|LBR|
-|country|LBY|
-|country|LCA|
-|country|LIE|
-|country|LKA|
-|country|LSO|
-|country|LTU|
-|country|LUX|
-|country|LVA|
-|country|MAC|
-|country|MAF|
-|country|MAR|
-|country|MCO|
-|country|MDA|
-|country|MDG|
-|country|MDV|
-|country|MEX|
-|country|MHL|
-|country|MKD|
-|country|MLI|
-|country|MLT|
-|country|MMR|
-|country|MNE|
-|country|MNG|
-|country|MNP|
-|country|MOZ|
-|country|MRT|
-|country|MSR|
-|country|MTQ|
-|country|MUS|
-|country|MWI|
-|country|MYS|
-|country|MYT|
-|country|NAM|
-|country|NCL|
-|country|NER|
-|country|NFK|
-|country|NGA|
-|country|NIC|
-|country|NIU|
-|country|NLD|
-|country|NOR|
-|country|NPL|
-|country|NRU|
-|country|NZL|
-|country|OMN|
-|country|PAK|
-|country|PAN|
-|country|PCN|
-|country|PER|
-|country|PHL|
-|country|PLW|
-|country|PNG|
-|country|POL|
-|country|PRI|
-|country|PRK|
-|country|PRT|
-|country|PRY|
-|country|PSE|
-|country|PYF|
-|country|QAT|
-|country|REU|
-|country|ROU|
-|country|RUS|
-|country|RWA|
-|country|SAU|
-|country|SDN|
-|country|SEN|
-|country|SGP|
-|country|SGS|
-|country|SHN|
-|country|SJM|
-|country|SLB|
-|country|SLE|
-|country|SLV|
-|country|SMR|
-|country|SOM|
-|country|SPM|
-|country|SRB|
-|country|SSD|
-|country|STP|
-|country|SUR|
-|country|SVK|
-|country|SVN|
-|country|SWE|
-|country|SWZ|
-|country|SXM|
-|country|SYC|
-|country|SYR|
-|country|TCA|
-|country|TCD|
-|country|TGO|
-|country|THA|
-|country|TJK|
-|country|TKL|
-|country|TKM|
-|country|TLS|
-|country|TON|
-|country|TTO|
-|country|TUN|
-|country|TUR|
-|country|TUV|
-|country|TWN|
-|country|TZA|
-|country|UGA|
-|country|UKR|
-|country|UMI|
-|country|URY|
-|country|USA|
-|country|UZB|
-|country|VAT|
-|country|VCT|
-|country|VEN|
-|country|VGB|
-|country|VIR|
-|country|VNM|
-|country|VUT|
-|country|WLF|
-|country|WSM|
-|country|YEM|
-|country|ZAF|
-|country|ZMB|
-|country|ZWE|
-|type|allowed_list|
-|type|camel|
-|type|date|
-|type|empty|
-|type|float|
-|type|kebab|
-|type|lower|
-|type|number|
-|type|prefix|
-|type|snake|
-|type|string|
-|type|suffix|
-|type|trim|
-|type|upper|
-|type|greater_than|
-|type|white_list|
-|type|contains|
-|type|email_address|
-|type|ends_with|
-|type|equals|
-|type|greater_than|
-|type|hostname|
-|record_type|A|
-|record_type|AAAA|
-|record_type|AFSDB|
-|record_type|APL|
-|record_type|CAA|
-|record_type|CDNSKEY|
-|record_type|CDS|
-|record_type|CERT|
-|record_type|CNAME|
-|record_type|CSYNC|
-|record_type|DHCID|
-|record_type|DLV|
-|record_type|DNAME|
-|record_type|DNSKEY|
-|record_type|DS|
-|record_type|HIP|
-|record_type|IPSECKEY|
-|record_type|KEY|
-|record_type|KX|
-|record_type|LOC|
-|record_type|MX|
-|record_type|NAPTR|
-|record_type|NS|
-|record_type|NSEC|
-|record_type|NSEC3|
-|record_type|NSEC3PARAM|
-|record_type|OPENPGPKEY|
-|record_type|PTR|
-|record_type|RRSIG|
-|record_type|RP|
-|record_type|SIG|
-|record_type|SMIMEA|
-|record_type|SOA|
-|record_type|SRV|
-|record_type|SSHFP|
-|record_type|TA|
-|record_type|TKEY|
-|record_type|TLSA|
-|record_type|TSIG|
-|record_type|TXT|
-|record_type|URI|
-|type|ipAddress|
-|type|length|
-|operator|equals|
-|operator|less_than|
-|operator|less_than_equals|
-|operator|greater_than|
-|operator|greater_than_equals|
-|type|lessThan|
-|type|macAddress|
-|type|mask|
-|type|startsWith|
-|type|step|
-|type|uri|
-|type|whiteList|
-|category|PENDING|
-|category|IN_PROGRESS|
-|category|VERIFYING|
-|category|COMPLETE|
-|category|CANCELLED|
-|category|BLOCKED|
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|This filter will set the value based on a list of approved values. If the value is not in the list, it will then be set to empty unless the default option is set|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; approved_values|[string]|true|none|The list of approved values|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; default|string¦null|false|none|If this is set and the value is not in the approved_list, set the value to this|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Make the value camelCase|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|This filter has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Filter to transform a value into a date|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|Date filter has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Filter to transform values into null. This is helpful when trying to make a value required. The following are considered empty:<br># The number 0 or 0.0<br># empty string ''<br># A boolean false<br># The word 'false'<br>#|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|empty filter has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Filter to transform a value into a float. Non numeric characters (including comma) will be removed|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; precision|integer|false|none|How many decimal places to preserve|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Make the value kebab-case|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|This filter has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Make the value lowercase|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|This filter has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Filter to transform a value into a number. Non numeric characters (including comma and decimal points) will be removed|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|Number filter has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Add a prefix to the start of a string. If the string already start with the prefix, it will not prepend.|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; prefix|string|true|none|The prefix to add|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Make the value snake_case|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|This filter has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Filter to transform a value into a string|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|String filter has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Add a suffix to the start of a string. If the string already start with the suffix, it will not append.|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; suffix|string|true|none|The suffix to add|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Filter to trim whitespace from a value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|By default will trim from the start and end|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; start|boolean|false|none|Remove white space from the start of the string|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end|boolean|false|none|Remove white space from the end of the string|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Make the value UPPERCASE|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|This filter has no options|
+
+*continued*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; validators|[anyOf]|true|none|A set of validators to use for this field|
+
+*anyOf*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate number is between two values. By default, min and max are included|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; min|number|true|none|Minimum value to check|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; max|number|true|none|The maximum value to check|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; precision|integer|false|none|When number is a float, this will set the decimal precision|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; include|boolean|false|none|Include the value in the check|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate value does not match a list (black list)|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; list|[string]|true|none|The list of approved values|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate string contains a value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; contains|string|true|none|String must contain with this value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate string is a correct email address|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; strict|boolean|false|none|Enforce strict standards from ARPA. This will enforce the length of the string|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; lookup|boolean|false|none|Look up the host name and check if it has a valid MX record|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate string ends with a value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ends_with|string|true|none|String must end with this value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate number equals a value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; value|number|true|none|The value to compare against|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; precision|integer|false|none|When value is a float, this will set the decimal precision|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate number is greater than a value. By default, this will check if value is greater than or equals to|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; value|number|true|none|The value to compare against|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; precision|integer|false|none|When number is a float, this will set the decimal precision|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; include|boolean|false|none|Include the value in the check|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate string has a correct DNS records|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; record_type|string|false|none|DNS record type to validate|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate string matches an IP address format. Defaults to matching IPv4|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; versions|[string]|false|none|IP Version to match against|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate string is a certain length|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; length|string|true|none|String must contain with this value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; operator|string|false|none|Which type of length comparision to make|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate number is less than a value. By default, this will check if value is less than or equals to|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; value|number|true|none|The value to compare against|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; precision|integer|false|none|When number is a float, this will set the decimal precision|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; include|boolean|false|none|Include the value in the check|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate string matches an MAC address format|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|This validator has no options|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate string matches a regular expression|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mask|string|true|none|Mask to validate against|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate string starts with a value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; starts_with|string|true|none|String must start with this value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validates that a value follows a step. Both start and end options do not have to sync with the step. If they do not sync then find the nearest step.|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; step|number|true|none|The step value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; start|integer|false|none|Start stepping at this value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end|integer|false|none|End stepping at this value|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate string matches an URI|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; schemes|[string]|false|none|Schemes to match. By default all are matched|
+
+*or*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate value matches a list (white list)|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; list|[string]|true|none|The list of approved values|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+
+*continued*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; current_status|object|true|none|Defines the properties for a status|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; status|string|true|none|A Custom label for the status|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; category|string|true|none|The classifier for the statues|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; description|string¦null|false|none|A description for the status|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; order|number|false|none|Order status appears when listing|
+
+*and*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _links|object|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; href|string(uri)|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; nter:unit-vendor|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; href|string(uri)|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; nter:unit-part|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; href|string(uri)|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; nter:unit-manufacturer|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; href|string(uri)|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; nter:unit-last-known-location|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; href|string(uri)|false|none|none|
+
+*continued*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; _links|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self|object|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; href|string(uri)|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; next|object|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; href|string(uri)|false|none|none|
 
 Status Code **401**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|string|false|none|none|
-|» type|string|false|none|none|
-|» status|number|false|none|none|
-|» detail|string|false|none|none|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|title|Unauthorized|
-|type|https://docs.nterprise.com/api/problem/Unauthorized|
-|status|401|
-|detail|You are not authorized to access this resource|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
 
 Status Code **403**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» title|string|false|none|none|
-|» type|string|false|none|none|
-|» status|number|false|none|none|
-|» detail|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
 
-#### Enumerated Values
+# Embedded Schemas
 
-|Property|Value|
-|---|---|
-|title|Forbidden|
-|type|https://docs.nterprise.com/api/problem/Forbidden|
-|status|403|
-|detail|You are forbidden to access this resource|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-# Schemas
-
-<h2 id="tocSpart">Part</h2>
-
+## Part
+<!-- backwards compatibility -->
 <a id="schemapart"></a>
+<a id="schema_Part"></a>
+<a id="tocSpart"></a>
+<a id="tocspart"></a>
+
+#### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|part_id|string|true|read-only|Unique identifier|
+|label|string|true|none|Label for the entity|
+|created|string(date-time)|true|read-only|Date the entity was created|
+|updated|string(date-time)|true|read-only|Last date the entity was updated|
+|customer|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; customer_id|string|true|read-only|Customer identifier|
+|&nbsp;&nbsp;&nbsp;&nbsp; label|string|true|none|Label for the entity|
+|&nbsp;&nbsp;&nbsp;&nbsp; created|string(date-time)|true|read-only|Date the entity was created|
+|&nbsp;&nbsp;&nbsp;&nbsp; updated|string(date-time)|true|read-only|Last date the entity was updated|
+|&nbsp;&nbsp;&nbsp;&nbsp; external_platform|object|true|none|External Identifiers for the customer|
+|&nbsp;&nbsp;&nbsp;&nbsp; allowed_statuses|[object]|true|none|List of allowed statuses|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; status|string|true|none|A Custom label for the status|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; category|string|true|none|The classifier for the statues|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; description|string¦null|false|none|A description for the status|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; order|number|false|none|Order status appears when listing|
+|&nbsp;&nbsp;&nbsp;&nbsp; total_programs|number|true|none|Total programs under the customer|
+|&nbsp;&nbsp;&nbsp;&nbsp; total_projects|number|true|none|Total projects under the customer|
+|manufacturer|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; manufacturer_id|string|true|read-only|Manufacturer identifier|
+|&nbsp;&nbsp;&nbsp;&nbsp; label|string|true|none|Label for the entity|
+|&nbsp;&nbsp;&nbsp;&nbsp; created|string(date-time)|true|read-only|Date the entity was created|
+|&nbsp;&nbsp;&nbsp;&nbsp; updated|string(date-time)|true|read-only|Last date the entity was updated|
+|serial_prefix|string¦null|true|none|A serial number prefix for the part|
+|input_filter|[object]|true|none|Input Filters allow custom fields to be defined for entities|
+|&nbsp;&nbsp;&nbsp;&nbsp; label|string|true|none|Human readable name|
+|&nbsp;&nbsp;&nbsp;&nbsp; key|string|true|read-only|Slug used to store the property|
+|&nbsp;&nbsp;&nbsp;&nbsp; filters|[anyOf]|true|none|A Collection of filters applied to the field|
+
+anyOf
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|This filter will set the value based on a list of approved values. If the value is not in the list, it will then be set to empty unless the default option is set|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; approved_values|[string]|true|none|The list of approved values|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; default|string¦null|false|none|If this is set and the value is not in the approved_list, set the value to this|
+
+or
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Make the value camelCase|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|This filter has no options|
+
+or
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Filter to transform a value into a date|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|Date filter has no options|
+
+or
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Filter to transform values into null. This is helpful when trying to make a value required. The following are considered empty:<br># The number 0 or 0.0<br># empty string ''<br># A boolean false<br># The word 'false'<br>#|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|empty filter has no options|
+
+or
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Filter to transform a value into a float. Non numeric characters (including comma) will be removed|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; precision|integer|false|none|How many decimal places to preserve|
+
+or
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Make the value kebab-case|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|This filter has no options|
+
+or
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Make the value lowercase|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|This filter has no options|
+
+or
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Filter to transform a value into a number. Non numeric characters (including comma and decimal points) will be removed|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|Number filter has no options|
+
+or
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Add a prefix to the start of a string. If the string already start with the prefix, it will not prepend.|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; prefix|string|true|none|The prefix to add|
+
+or
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Make the value snake_case|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|This filter has no options|
+
+or
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Filter to transform a value into a string|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|String filter has no options|
+
+or
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Add a suffix to the start of a string. If the string already start with the suffix, it will not append.|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; suffix|string|true|none|The suffix to add|
+
+or
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Filter to trim whitespace from a value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|By default will trim from the start and end|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; start|boolean|false|none|Remove white space from the start of the string|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end|boolean|false|none|Remove white space from the end of the string|
+
+or
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Make the value UPPERCASE|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|This filter has no options|
+
+continued
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; validators|[anyOf]|true|none|A set of validators to use for this field|
+
+anyOf
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate number is between two values. By default, min and max are included|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; min|number|true|none|Minimum value to check|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; max|number|true|none|The maximum value to check|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; precision|integer|false|none|When number is a float, this will set the decimal precision|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; include|boolean|false|none|Include the value in the check|
+
+or
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate value does not match a list (black list)|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; list|[string]|true|none|The list of approved values|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+
+or
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate string contains a value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; contains|string|true|none|String must contain with this value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+
+or
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate string is a correct email address|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; strict|boolean|false|none|Enforce strict standards from ARPA. This will enforce the length of the string|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; lookup|boolean|false|none|Look up the host name and check if it has a valid MX record|
+
+or
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate string ends with a value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ends_with|string|true|none|String must end with this value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+
+or
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate number equals a value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; value|number|true|none|The value to compare against|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; precision|integer|false|none|When value is a float, this will set the decimal precision|
+
+or
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate number is greater than a value. By default, this will check if value is greater than or equals to|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; value|number|true|none|The value to compare against|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; precision|integer|false|none|When number is a float, this will set the decimal precision|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; include|boolean|false|none|Include the value in the check|
+
+or
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate string has a correct DNS records|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; record_type|string|false|none|DNS record type to validate|
+
+or
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate string matches an IP address format. Defaults to matching IPv4|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; versions|[string]|false|none|IP Version to match against|
+
+or
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate string is a certain length|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; length|string|true|none|String must contain with this value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; operator|string|false|none|Which type of length comparision to make|
+
+or
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate number is less than a value. By default, this will check if value is less than or equals to|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; value|number|true|none|The value to compare against|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; precision|integer|false|none|When number is a float, this will set the decimal precision|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; include|boolean|false|none|Include the value in the check|
+
+or
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate string matches an MAC address format|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|This validator has no options|
+
+or
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate string matches a regular expression|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mask|string|true|none|Mask to validate against|
+
+or
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate string starts with a value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; starts_with|string|true|none|String must start with this value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+
+or
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validates that a value follows a step. Both start and end options do not have to sync with the step. If they do not sync then find the nearest step.|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; step|number|true|none|The step value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; start|integer|false|none|Start stepping at this value|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; end|integer|false|none|End stepping at this value|
+
+or
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate string matches an URI|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; schemes|[string]|false|none|Schemes to match. By default all are matched|
+
+or
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|Validate value matches a list (white list)|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; options|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; list|[string]|true|none|The list of approved values|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
+
+#### Specification
 
 ```yaml
 type: object
-description: Defines the properties for a part
-additionalProperties: false
 required:
-  - label
-  - entity_id
-  - entity_type
   - created
+  - label
   - updated
   - customer
+  - input_filter
   - manufacturer
+  - part_id
   - serial_prefix
 properties:
   part_id:
     description: Unique identifier
     type: string
     readOnly: true
-    pattern: '^[0-9a-zA-Z-_]+$'
-  entity_id:
-    x-no-api-doc: true
-    type: string
-    description: Customer identifier
-    readOnly: true
-    pattern: '^[0-9a-zA-Z-_]+$'
-  entity_type:
-    x-no-api-doc: true
-    enum:
-      - PART
+    pattern: ^[0-9a-zA-Z-_]+$
   label:
     type: string
     description: Label for the entity
-  slug:
-    type: string
-    description: Slug for the entity (Auto-generated from the label)
-    readOnly: true
-    deprecated: true
-    pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
   created:
     description: Date the entity was created
     type: string
@@ -14862,139 +3104,119 @@ properties:
     readOnly: true
   customer:
     type: object
-    description: Customer
-    additionalProperties: false
-    required:
-      - label
-      - entity_id
-      - entity_type
-      - created
-      - updated
-      - allowed_statuses
-    properties:
-      customer_id:
-        description: Customer identifier
-        type: string
-        readOnly: true
-        pattern: '^[0-9a-zA-Z-_]+$'
-      entity_id:
-        x-no-api-doc: true
-        type: string
-        description: Customer identifier
-        readOnly: true
-        pattern: '^[0-9a-zA-Z-_]+$'
-      entity_type:
-        x-no-api-doc: true
-        enum:
-          - CUS
-      label:
-        type: string
-        description: Label for the entity
-      slug:
-        type: string
-        description: Slug for the entity (Auto-generated from the label)
-        readOnly: true
-        deprecated: true
-        pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
-      created:
-        description: Date the entity was created
-        type: string
-        format: date-time
-        readOnly: true
-      updated:
-        description: Last date the entity was updated
-        type: string
-        format: date-time
-        readOnly: true
-      external_platform:
-        type: object
-        description: External Identifiers for the customer
-        deprecated: true
-        x-patternProperties:
-          '^[A-Za-z][A-Za-z0-9_]*$':
+    deprecated: true
+    allOf:
+      - type: object
+        required:
+          - updated
+          - label
+          - created
+          - allowed_statuses
+          - customer_id
+          - external_platform
+          - total_programs
+          - total_projects
+        properties:
+          customer_id:
+            description: Customer identifier
             type: string
-      allowed_statuses:
-        type: array
-        description: List of allowed statuses
-        uniqueItems: true
-        items:
-          type: object
-          description: Defines the properties for a status
-          additionalProperties: false
-          required:
-            - status
-            - category
-          properties:
-            status:
-              type: string
-              description: A Custom label for the status
-              pattern: '^[A-Za-z][0-9a-zA-Z-_ ]+$'
-            category:
-              type: string
-              description: The classifier for the statues
-              enum:
-                - PENDING
-                - IN_PROGRESS
-                - VERIFYING
-                - COMPLETE
-                - CANCELLED
-                - BLOCKED
-      total_programs:
-        type: number
-        description: Total programs under the customer
-      total_projects:
-        type: number
-        description: Total projects under the customer
+            readOnly: true
+            pattern: ^[0-9a-zA-Z-_]+$
+          label:
+            type: string
+            description: Label for the entity
+          created:
+            description: Date the entity was created
+            type: string
+            format: date-time
+            readOnly: true
+          updated:
+            description: Last date the entity was updated
+            type: string
+            format: date-time
+            readOnly: true
+          external_platform:
+            type: object
+            description: External Identifiers for the customer
+            deprecated: true
+            x-patternProperties:
+              "^[A-Za-z][A-Za-z0-9_]*$":
+                type:
+                  - string
+                  - "null"
+          allowed_statuses:
+            type: array
+            description: List of allowed statuses
+            uniqueItems: true
+            items:
+              type: object
+              description: Defines the properties for a status
+              additionalProperties: false
+              required:
+                - status
+                - category
+              properties:
+                status:
+                  type: string
+                  description: A Custom label for the status
+                  pattern: ^[A-Za-z][0-9a-zA-Z-_ ]+$
+                category:
+                  type: string
+                  description: The classifier for the statues
+                  enum:
+                    - PENDING
+                    - IN_PROGRESS
+                    - VERIFYING
+                    - COMPLETE
+                    - CANCELLED
+                    - BLOCKED
+                description:
+                  type: string
+                  nullable: true
+                  description: A description for the status
+                order:
+                  type: number
+                  description: Order status appears when listing
+              example:
+                category: COMPLETE
+                description: For something that is Complete
+                status: Complete
+                order: 7
+          total_programs:
+            type: number
+            description: Total programs under the customer
+          total_projects:
+            type: number
+            description: Total projects under the customer
   manufacturer:
     type: object
-    description: Manufacturer information for the part
-    required:
-      - label
-      - entity_id
-      - entity_type
-      - created
-      - updated
-      - part_number
-    properties:
-      part_number:
-        type: string
-        description: >-
-          Part number the manufacturer uses. If this is not set, then the part
-          number is used
-      manufacturer_id:
-        x-no-api-doc: true
-        type: string
-        description: Customer identifier
-        readOnly: true
-        pattern: '^[0-9a-zA-Z-_]+$'
-      entity_id:
-        x-no-api-doc: true
-        type: string
-        description: Customer identifier
-        readOnly: true
-        pattern: '^[0-9a-zA-Z-_]+$'
-      entity_type:
-        enum:
-          - MFR
-      label:
-        type: string
-        description: Label for the entity
-      slug:
-        type: string
-        description: Slug for the entity (Auto-generated from the label)
-        readOnly: true
-        deprecated: true
-        pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
-      created:
-        description: Date the entity was created
-        type: string
-        format: date-time
-        readOnly: true
-      updated:
-        description: Last date the entity was updated
-        type: string
-        format: date-time
-        readOnly: true
+    deprecated: true
+    allOf:
+      - type: object
+        required:
+          - updated
+          - label
+          - created
+          - manufacturer_id
+        properties:
+          manufacturer_id:
+            description: Manufacturer identifier
+            type: string
+            readOnly: true
+            pattern: ^[0-9a-zA-Z-_]+$
+          label:
+            type: string
+            description: Label for the entity
+          created:
+            description: Date the entity was created
+            type: string
+            format: date-time
+            readOnly: true
+          updated:
+            description: Last date the entity was updated
+            type: string
+            format: date-time
+            readOnly: true
   serial_prefix:
     type: string
     nullable: true
@@ -15018,7 +3240,7 @@ properties:
           type: string
           description: Slug used to store the property
           readOnly: true
-          pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+          pattern: ^[a-z0-9]+(?:-[a-z0-9]+)*$
         filters:
           type: array
           description: A Collection of filters applied to the field
@@ -15026,10 +3248,9 @@ properties:
           items:
             anyOf:
               - type: object
-                description: >-
-                  This filter will set the value based on a list of approved
-                  values. If the value is not in the list, it will then be set
-                  to empty unless the default option is set
+                description: This filter will set the value based on a list of approved values.
+                  If the value is not in the list, it will then be set to empty
+                  unless the default option is set
                 required:
                   - type
                   - options
@@ -15052,16 +3273,13 @@ properties:
                           type: string
                       check_case:
                         type: boolean
-                        description: >-
-                          Perform a case sensitive match. By default will not
-                          match case
+                        description: Perform a case sensitive match. By default will not match case
                         default: false
                       default:
                         type: string
                         nullable: true
-                        description: >-
-                          If this is set and the value is not in the
-                          approved_list, set the value to this
+                        description: If this is set and the value is not in the approved_list, set the
+                          value to this
               - type: object
                 description: Make the value camelCase
                 required:
@@ -15115,9 +3333,8 @@ properties:
                     type: object
                     description: empty filter has no options
               - type: object
-                description: >-
-                  Filter to transform a value into a float. Non numeric
-                  characters (including comma) will be removed
+                description: Filter to transform a value into a float. Non numeric characters
+                  (including comma) will be removed
                 required:
                   - type
                   - options
@@ -15162,10 +3379,8 @@ properties:
                     type: object
                     description: This filter has no options
               - type: object
-                description: >-
-                  Filter to transform a value into a number. Non numeric
-                  characters (including comma and decimal points) will be
-                  removed
+                description: Filter to transform a value into a number. Non numeric characters
+                  (including comma and decimal points) will be removed
                 required:
                   - type
                   - options
@@ -15178,9 +3393,8 @@ properties:
                     type: object
                     description: Number filter has no options
               - type: object
-                description: >-
-                  Add a prefix to the start of a string. If the string already
-                  start with the prefix, it will not prepend.
+                description: Add a prefix to the start of a string. If the string already start
+                  with the prefix, it will not prepend.
                 required:
                   - type
                   - options
@@ -15223,9 +3437,8 @@ properties:
                   options:
                     type: object
                     description: String filter has no options
-              - description: >-
-                  Add a suffix to the start of a string. If the string already
-                  start with the suffix, it will not append.
+              - description: Add a suffix to the start of a string. If the string already start
+                  with the suffix, it will not append.
                 type: object
                 required:
                   - type
@@ -15285,9 +3498,8 @@ properties:
           items:
             anyOf:
               - type: object
-                description: >-
-                  Validate number is between two values. By default, min and max
-                  are included
+                description: Validate number is between two values. By default, min and max are
+                  included
                 required:
                   - type
                   - options
@@ -15310,9 +3522,7 @@ properties:
                         description: The maximum value to check
                       precision:
                         type: integer
-                        description: >-
-                          When number is a float, this will set the decimal
-                          precision
+                        description: When number is a float, this will set the decimal precision
                         minimum: 1
                         maximum: 8
                         default: 3
@@ -15344,9 +3554,7 @@ properties:
                           type: string
                       check_case:
                         type: boolean
-                        description: >-
-                          Perform a case sensitive match. By default will not
-                          match case
+                        description: Perform a case sensitive match. By default will not match case
                         default: false
               - type: object
                 description: Validate string contains a value
@@ -15368,9 +3576,7 @@ properties:
                         description: String must contain with this value
                       check_case:
                         type: boolean
-                        description: >-
-                          Perform a case sensitive match. By default will not
-                          match case
+                        description: Perform a case sensitive match. By default will not match case
                         default: false
               - type: object
                 description: Validate string is a correct email address
@@ -15387,15 +3593,12 @@ properties:
                     properties:
                       strict:
                         type: boolean
-                        description: >-
-                          Enforce strict standards from ARPA. This will enforce
-                          the length of the string
+                        description: Enforce strict standards from ARPA. This will enforce the length of
+                          the string
                         default: true
                       lookup:
                         type: boolean
-                        description: >-
-                          Look up the host name and check if it has a valid MX
-                          record
+                        description: Look up the host name and check if it has a valid MX record
                         default: false
               - type: object
                 description: Validate string ends with a value
@@ -15417,9 +3620,7 @@ properties:
                         description: String must end with this value
                       check_case:
                         type: boolean
-                        description: >-
-                          Perform a case sensitive match. By default will not
-                          match case
+                        description: Perform a case sensitive match. By default will not match case
                         default: false
               - type: object
                 description: Validate number equals a value
@@ -15441,15 +3642,12 @@ properties:
                         description: The value to compare against
                       precision:
                         type: integer
-                        description: >-
-                          When value is a float, this will set the decimal
-                          precision
+                        description: When value is a float, this will set the decimal precision
                         minimum: 1
                         maximum: 8
                         default: 3
               - type: object
-                description: >-
-                  Validate number is greater than a value. By default, this will
+                description: Validate number is greater than a value. By default, this will
                   check if value is greater than or equals to
                 required:
                   - type
@@ -15469,9 +3667,7 @@ properties:
                         description: The value to compare against
                       precision:
                         type: integer
-                        description: >-
-                          When number is a float, this will set the decimal
-                          precision
+                        description: When number is a float, this will set the decimal precision
                         minimum: 1
                         maximum: 8
                         default: 3
@@ -15539,9 +3735,8 @@ properties:
                           - TXT
                           - URI
               - type: object
-                description: >-
-                  Validate string matches an IP address format. Defaults to
-                  matching IPv4
+                description: Validate string matches an IP address format. Defaults to matching
+                  IPv4
                 required:
                   - type
                   - options
@@ -15590,9 +3785,8 @@ properties:
                           - greater_than
                           - greater_than_equals
               - type: object
-                description: >-
-                  Validate number is less than a value. By default, this will
-                  check if value is less than or equals to
+                description: Validate number is less than a value. By default, this will check
+                  if value is less than or equals to
                 required:
                   - type
                   - options
@@ -15611,9 +3805,7 @@ properties:
                         description: The value to compare against
                       precision:
                         type: integer
-                        description: >-
-                          When number is a float, this will set the decimal
-                          precision
+                        description: When number is a float, this will set the decimal precision
                         minimum: 1
                         maximum: 8
                         default: 3
@@ -15672,15 +3864,12 @@ properties:
                         description: String must start with this value
                       check_case:
                         type: boolean
-                        description: >-
-                          Perform a case sensitive match. By default will not
-                          match case
+                        description: Perform a case sensitive match. By default will not match case
                         default: false
               - type: object
-                description: >-
-                  Validates that a value follows a step. Both start and end
-                  options do not have to sync with the step. If they do not sync
-                  then find the nearest step.
+                description: Validates that a value follows a step. Both start and end options
+                  do not have to sync with the step. If they do not sync then
+                  find the nearest step.
                 required:
                   - type
                   - options
@@ -15758,458 +3947,8 @@ properties:
                           type: string
                       check_case:
                         type: boolean
-                        description: >-
-                          Perform a case sensitive match. By default will not
-                          match case
+                        description: Perform a case sensitive match. By default will not match case
                         default: false
-  total_units:
-    type: integer
-    description: Number of units of this part
-    readOnly: true
-  total_units_allocated:
-    type: integer
-    description: Number of allocated units
-    readOnly: true
-  total_units_unallocated:
-    type: integer
-    description: Number of free units
-    readOnly: true
 
 ```
-
-*Defines the properties for a part*
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|part_id|string|false|read-only|Unique identifier|
-|entity_id|string|true|read-only|Customer identifier|
-|entity_type|string|true|none|none|
-|label|string|true|none|Label for the entity|
-|slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|created|string(date-time)|true|read-only|Date the entity was created|
-|updated|string(date-time)|true|read-only|Last date the entity was updated|
-|customer|object|true|none|Customer|
-|» customer_id|string|false|read-only|Customer identifier|
-|» entity_id|string|true|read-only|Customer identifier|
-|» entity_type|string|true|none|none|
-|» label|string|true|none|Label for the entity|
-|» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|» created|string(date-time)|true|read-only|Date the entity was created|
-|» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|» external_platform|object|false|none|External Identifiers for the customer|
-|» allowed_statuses|[object]|true|none|List of allowed statuses|
-|»» status|string|true|none|A Custom label for the status|
-|»» category|string|true|none|The classifier for the statues|
-|» total_programs|number|false|none|Total programs under the customer|
-|» total_projects|number|false|none|Total projects under the customer|
-|manufacturer|object|true|none|Manufacturer information for the part|
-|» part_number|string|true|none|Part number the manufacturer uses. If this is not set, then the part number is used|
-|» manufacturer_id|string|false|read-only|Customer identifier|
-|» entity_id|string|true|read-only|Customer identifier|
-|» entity_type|string|true|none|none|
-|» label|string|true|none|Label for the entity|
-|» slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
-|» created|string(date-time)|true|read-only|Date the entity was created|
-|» updated|string(date-time)|true|read-only|Last date the entity was updated|
-|serial_prefix|string\|null|true|none|A serial number prefix for the part|
-|input_filter|[object]|false|none|Input Filters allow custom fields to be defined for entities|
-|» label|string|true|none|Human readable name|
-|» key|string|true|read-only|Slug used to store the property|
-|» filters|[anyOf]|true|none|A Collection of filters applied to the field|
-
-*anyOf*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»» *anonymous*|object|false|none|This filter will set the value based on a list of approved values. If the value is not in the list, it will then be set to empty unless the default option is set|
-|»»» type|string|true|none|none|
-|»»» options|object|true|none|none|
-|»»»» approved_values|[string]|true|none|The list of approved values|
-|»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
-|»»»» default|string\|null|false|none|If this is set and the value is not in the approved_list, set the value to this|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»» *anonymous*|object|false|none|Make the value camelCase|
-|»»»» type|string|true|none|none|
-|»»»» options|object|true|none|This filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»» *anonymous*|object|false|none|Filter to transform a value into a date|
-|»»»» type|string|true|none|none|
-|»»»» options|object|true|none|Date filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»» *anonymous*|object|false|none|Filter to transform values into null. This is helpful when trying to make a value required. The following are considered empty: # The number 0 or 0.0 # empty string '' # A boolean false # The word 'false' #|
-|»»»» type|string|true|none|none|
-|»»»» options|object|true|none|empty filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»» *anonymous*|object|false|none|Filter to transform a value into a float. Non numeric characters (including comma) will be removed|
-|»»»» type|string|true|none|none|
-|»»»» options|object|true|none|none|
-|»»»»» precision|integer|false|none|How many decimal places to preserve|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»» *anonymous*|object|false|none|Make the value kebab-case|
-|»»»»» type|string|true|none|none|
-|»»»»» options|object|true|none|This filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»» *anonymous*|object|false|none|Make the value lowercase|
-|»»»»» type|string|true|none|none|
-|»»»»» options|object|true|none|This filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»» *anonymous*|object|false|none|Filter to transform a value into a number. Non numeric characters (including comma and decimal points) will be removed|
-|»»»»» type|string|true|none|none|
-|»»»»» options|object|true|none|Number filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»» *anonymous*|object|false|none|Add a prefix to the start of a string. If the string already start with the prefix, it will not prepend.|
-|»»»»» type|string|true|none|none|
-|»»»»» options|object|true|none|none|
-|»»»»»» prefix|string|true|none|The prefix to add|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»» *anonymous*|object|false|none|Make the value snake_case|
-|»»»»»» type|string|true|none|none|
-|»»»»»» options|object|true|none|This filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»» *anonymous*|object|false|none|Filter to transform a value into a string|
-|»»»»»» type|string|true|none|none|
-|»»»»»» options|object|true|none|String filter has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»» *anonymous*|object|false|none|Add a suffix to the start of a string. If the string already start with the suffix, it will not append.|
-|»»»»»» type|string|true|none|none|
-|»»»»»» options|object|true|none|none|
-|»»»»»»» suffix|string|true|none|The suffix to add|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»» *anonymous*|object|false|none|Filter to trim whitespace from a value|
-|»»»»»»» type|string|true|none|none|
-|»»»»»»» options|object|true|none|By default will trim from the start and end|
-|»»»»»»»» start|boolean|false|none|Remove white space from the start of the string|
-|»»»»»»»» end|boolean|false|none|Remove white space from the end of the string|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»» *anonymous*|object|false|none|Make the value UPPERCASE|
-|»»»»»»»» type|string|true|none|none|
-|»»»»»»»» options|object|true|none|This filter has no options|
-
-*continued*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»» validators|[anyOf]|true|none|A set of validators to use for this field|
-
-*anyOf*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»» *anonymous*|object|false|none|Validate number is between two values. By default, min and max are included|
-|»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»» min|number|true|none|Minimum value to check|
-|»»»»»»»»»» max|number|true|none|The maximum value to check|
-|»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
-|»»»»»»»»»» include|boolean|false|none|Include the value in the check|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»» *anonymous*|object|false|none|Validate value does not match a list (black list)|
-|»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»» list|[string]|true|none|The list of approved values|
-|»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»» *anonymous*|object|false|none|Validate string contains a value|
-|»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»» contains|string|true|none|String must contain with this value|
-|»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»» *anonymous*|object|false|none|Validate string is a correct email address|
-|»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»» strict|boolean|false|none|Enforce strict standards from ARPA. This will enforce the length of the string|
-|»»»»»»»»»»»»» lookup|boolean|false|none|Look up the host name and check if it has a valid MX record|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»» *anonymous*|object|false|none|Validate string ends with a value|
-|»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»» ends_with|string|true|none|String must end with this value|
-|»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number equals a value|
-|»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»» value|number|true|none|The value to compare against|
-|»»»»»»»»»»»»»»» precision|integer|false|none|When value is a float, this will set the decimal precision|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number is greater than a value. By default, this will check if value is greater than or equals to|
-|»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»» value|number|true|none|The value to compare against|
-|»»»»»»»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
-|»»»»»»»»»»»»»»»» include|boolean|false|none|Include the value in the check|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string has a correct DNS records|
-|»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»» record_type|string|false|none|DNS record type to validate|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an IP address format. Defaults to matching IPv4|
-|»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»» versions|[string]|false|none|IP Version to match against|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string is a certain length|
-|»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»» length|string|true|none|String must contain with this value|
-|»»»»»»»»»»»»»»»»»»» operator|string|false|none|Which type of length comparision to make|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate number is less than a value. By default, this will check if value is less than or equals to|
-|»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»» value|number|true|none|The value to compare against|
-|»»»»»»»»»»»»»»»»»»»» precision|integer|false|none|When number is a float, this will set the decimal precision|
-|»»»»»»»»»»»»»»»»»»»» include|boolean|false|none|Include the value in the check|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an MAC address format|
-|»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»» options|object|true|none|This validator has no options|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches a regular expression|
-|»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»» mask|string|true|none|Mask to validate against|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string starts with a value|
-|»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»» starts_with|string|true|none|String must start with this value|
-|»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validates that a value follows a step. Both start and end options do not have to sync with the step. If they do not sync then find the nearest step.|
-|»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»» step|number|true|none|The step value|
-|»»»»»»»»»»»»»»»»»»»»»»» start|integer|false|none|Start stepping at this value|
-|»»»»»»»»»»»»»»»»»»»»»»» end|integer|false|none|End stepping at this value|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate string matches an URI|
-|»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»» schemes|[string]|false|none|Schemes to match. By default all are matched|
-
-*or*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»» *anonymous*|object|false|none|Validate value matches a list (white list)|
-|»»»»»»»»»»»»»»»»»»»»»»»» type|string|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»» options|object|true|none|none|
-|»»»»»»»»»»»»»»»»»»»»»»»»» list|[string]|true|none|The list of approved values|
-|»»»»»»»»»»»»»»»»»»»»»»»»» check_case|boolean|false|none|Perform a case sensitive match. By default will not match case|
-
-*continued*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|»»»»»»»»»»»»»»»»»»»»»»»» total_units|integer|false|read-only|Number of units of this part|
-|»»»»»»»»»»»»»»»»»»»»»»»» total_units_allocated|integer|false|read-only|Number of allocated units|
-|»»»»»»»»»»»»»»»»»»»»»»»» total_units_unallocated|integer|false|read-only|Number of free units|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|entity_type|PART|
-|entity_type|CUS|
-|category|PENDING|
-|category|IN_PROGRESS|
-|category|VERIFYING|
-|category|COMPLETE|
-|category|CANCELLED|
-|category|BLOCKED|
-|entity_type|MFR|
-|type|allowed_list|
-|type|camel|
-|type|date|
-|type|empty|
-|type|float|
-|type|kebab|
-|type|lower|
-|type|number|
-|type|prefix|
-|type|snake|
-|type|string|
-|type|suffix|
-|type|trim|
-|type|upper|
-|type|greater_than|
-|type|white_list|
-|type|contains|
-|type|email_address|
-|type|ends_with|
-|type|equals|
-|type|greater_than|
-|type|hostname|
-|record_type|A|
-|record_type|AAAA|
-|record_type|AFSDB|
-|record_type|APL|
-|record_type|CAA|
-|record_type|CDNSKEY|
-|record_type|CDS|
-|record_type|CERT|
-|record_type|CNAME|
-|record_type|CSYNC|
-|record_type|DHCID|
-|record_type|DLV|
-|record_type|DNAME|
-|record_type|DNSKEY|
-|record_type|DS|
-|record_type|HIP|
-|record_type|IPSECKEY|
-|record_type|KEY|
-|record_type|KX|
-|record_type|LOC|
-|record_type|MX|
-|record_type|NAPTR|
-|record_type|NS|
-|record_type|NSEC|
-|record_type|NSEC3|
-|record_type|NSEC3PARAM|
-|record_type|OPENPGPKEY|
-|record_type|PTR|
-|record_type|RRSIG|
-|record_type|RP|
-|record_type|SIG|
-|record_type|SMIMEA|
-|record_type|SOA|
-|record_type|SRV|
-|record_type|SSHFP|
-|record_type|TA|
-|record_type|TKEY|
-|record_type|TLSA|
-|record_type|TSIG|
-|record_type|TXT|
-|record_type|URI|
-|type|ipAddress|
-|type|length|
-|operator|equals|
-|operator|less_than|
-|operator|less_than_equals|
-|operator|greater_than|
-|operator|greater_than_equals|
-|type|lessThan|
-|type|macAddress|
-|type|mask|
-|type|startsWith|
-|type|step|
-|type|uri|
-|type|whiteList|
 

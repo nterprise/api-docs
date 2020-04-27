@@ -1,0 +1,23 @@
+{
+  "type": "object",
+  "required": [
+    "created",
+    "label",
+    "updated",
+    "vendor_id"
+  ],
+  "properties": {
+    "vendor_id": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/vendor.json#/properties/vendor_id"
+    },
+    "label": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/vendor.json#/properties/label"
+    },
+    "created": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/vendor.json#/properties/created"
+    },
+    "updated": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/vendor.json#/properties/updated"
+    }
+  }
+}

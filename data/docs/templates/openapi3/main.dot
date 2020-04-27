@@ -1,38 +1,15 @@
-<h1 id="{{=data.title_prefix}}">{{=data.api.info && data.api.info.title}} {{=data.version}}</h1>
+{{= data.tags.section }}
+<h1 id="{{=data.title_prefix}}">{{=data.api.info && data.api.info.title}}</h1>
 
 * Do not remove this line (it will not be displayed)
 {:toc}
 
-> Scroll down for {{? data.header.language_tabs.length}}code samples, {{?}}example requests and responses.{{? data.header.language_tabs.length}} Select a language for code samples from the tabs above or the mobile navigation menu.{{?}}
-
 {{? data.api.info && data.api.info.description}}{{=data.api.info.description}}{{?}}
-
-{{? data.api.servers }}
-Base URLs:
-{{~data.api.servers :s}}
-* <a href="{{=s.url}}">{{=s.url}}</a>
-{{ for(var v in s.variables) { }}
-    * **{{=v}}** - {{=s.variables[v].description||''}} Default: {{=s.variables[v].default}}
-{{? s.variables[v].enum}}
-{{~ s.variables[v].enum :e}}
-        * {{= e}}
-{{~}}
-{{?}}
-{{ } }}
-{{~}}
-{{?}}
-
-{{? data.api.info && data.api.info.termsOfService}}<a href="{{=data.api.info.termsOfService}}">Terms of service</a>{{?}}
-{{? data.api.info && data.api.info.contact}}{{? data.api.info.contact.email}}Email: <a href="mailto:{{=data.api.info.contact.email}}">{{=data.api.info.contact.name || 'Support'}}</a> {{?}}{{? data.api.info.contact.url}}Web: <a href="{{=data.api.info.contact.url}}">{{= data.api.info.contact.name || 'Support'}}</a> {{?}}{{?}}
-{{? data.api.info && data.api.info.license}}{{? data.api.info.license.url}}License: <a href="{{=data.api.info.license.url}}">{{=data.api.info.license.name}}</a>{{??}} License: {{=data.api.info.license.name}}{{?}}{{?}}
-
-{{? data.api.components && data.api.components.securitySchemes }}
-{{#def.security}}
-{{?}}
 
 {{ for (var r in data.resources) { }}
 {{ data.resource = data.resources[r]; }}
 
+{{= data.tags.section }}
 <h1 id="{{=data.title_prefix+'-'+data.utils.slugify(r)}}">{{= r}}</h1>
 
 {{? data.resource.description }}{{= data.resource.description}}{{?}}
@@ -40,6 +17,8 @@ Base URLs:
 {{? data.resource.externalDocs}}
 <a href="{{=data.resource.externalDocs.url}}">{{=data.resource.externalDocs.description||'External documentation'}}</a>
 {{?}}
+
+## Operations
 
 {{ for (var m in data.resource.methods) { }}
 {{ data.operationUniqueName = m; }}
@@ -49,27 +28,24 @@ Base URLs:
 {{= data.templates.operation(data) }}
 {{ } /* of methods */ }}
 
+{{= data.tags.endSection }}
 {{ } /* of resources */ }}
 
 {{? data.api.components && data.api.components.schemas }}
-# Schemas
+{{= data.tags.section }}
+# Embedded Schemas
 
 {{ for (var s in data.components.schemas) { }}
 {{ var origSchema = data.components.schemas[s]; }}
 {{ var schema = data.api.components.schemas[s]; }}
 
-<h2 id="tocS{{=s.toLowerCase()}}">{{=s}}</h2>
-
+{{= data.tags.section }}
+## {{=s}}
+<!-- backwards compatibility -->
 <a id="schema{{=s.toLowerCase()}}"></a>
-
-{{? data.options.yaml }}
-```yaml
-{{=data.utils.yaml.safeDump(data.utils.getSample(schema,data.options,{},data.api))}}
-{{??}}
-```json
-{{=data.utils.safejson(data.utils.getSample(schema,data.options,{},data.api),null,2)}}
-{{?}}
-```
+<a id="schema_{{=s}}"></a>
+<a id="tocS{{=s.toLowerCase()}}"></a>
+<a id="tocs{{=s.toLowerCase()}}"></a>
 
 {{ var enums = []; }}
 {{ var blocks = data.utils.schemaToArray(origSchema,-1,{trim:true,join:true},data); }}
@@ -85,13 +61,15 @@ Base URLs:
 }}
 
 {{~ blocks :block}}
-{{? block.title }}*{{= block.title}}*{{= '\n\n'}}{{?}}
+{{? block.title }}{{= block.title}}{{= '\n\n'}}{{?}}
 {{? block.externalDocs}}
 <a href="{{=block.externalDocs.url}}">{{=block.externalDocs.description||'External documentation'}}</a>
 {{?}}
 
 {{? block===blocks[0] }}
-### Properties
+{{= data.tags.section }}
+
+#### Properties
 {{?}}
 
 {{? block.rows.length}}|Name|Type|Required|Restrictions|Description|
@@ -103,15 +81,19 @@ Base URLs:
 *None*
 {{?}}
 
-{{? enums.length > 0 }}
-#### Enumerated Values
+#### Specification
 
-|Property|Value|
-|---|---|
-{{~ enums :e}}|{{=e.name}}|{{=data.utils.toPrimitive(e.value)}}|
-{{~}}
-
+{{? data.options.yaml }}
+```yaml
+{{=data.utils.yaml.stringify(data.utils.getSample(schema,data.options,{quiet:true},data.api))}}
+{{??}}
+```json
+{{=data.utils.safejson(data.utils.getSample(schema,data.options,{quiet:true},data.api),null,2)}}
 {{?}}
+```
+
+{{= data.tags.endSection }}
+{{= data.tags.endSection }}
 
 {{ } /* of schemas */ }}
 

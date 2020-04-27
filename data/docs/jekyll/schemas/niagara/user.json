@@ -45,11 +45,11 @@
       "description": "Human readable name"
     },
     "picture": {
-      "type": "string",
+      "type": ["string", "null"],
       "description": "Image for the user"
     },
     "profile": {
-      "type": "string",
+      "type": ["string", "null"],
       "description": "Link to the users profile"
     }
   }

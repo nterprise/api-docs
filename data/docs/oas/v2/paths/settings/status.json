@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchAllStatuses",
-    "summary": "Fetches all the statuses",
-    "description": "Fetch Statuses",
+    "summary": "Fetch Statuses",
+    "description": "Fetches all the statuses configured for the tenant",
     "tags": [
       "Settings"
     ],
@@ -20,7 +20,7 @@
   },
   "post": {
     "operationId": "createStatus",
-    "summary": "Creates a new status",
+    "summary": "Create status",
     "description": "Creates a new status",
     "tags": [
       "Settings"
@@ -30,7 +30,7 @@
     },
     "responses": {
       "200": {
-        "$ref": "../../components/responses/status.json"
+        "$ref": "../../components/responses/settingsStatus.json"
       },
       "400": {
         "$ref": "../../components/responses/400badRequest.json"

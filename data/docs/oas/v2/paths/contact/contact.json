@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchContactById",
-    "summary": "Fetches a contact by the contact Id",
-    "description": "Fetch Contact",
+    "summary": "Fetch Contact",
+    "description": "Fetches a contact by the contact Id",
     "tags": [
       "Contact"
     ],
@@ -28,8 +28,8 @@
   },
   "put": {
     "operationId": "updateContact",
-    "summary": "Updates a contact",
-    "description": "Updates a new contact following the contact schema",
+    "summary": "Update contact",
+    "description": "Updates a contact",
     "parameters": [
       {
         "$ref": "../../components/parameters/contactId.json"
@@ -64,7 +64,7 @@
   },
   "delete": {
     "operationId": "deleteContact",
-    "summary": "Deletes a contact",
+    "summary": "Delete contact",
     "description": "This will remove the contact from the system",
     "tags": [
       "Contact"

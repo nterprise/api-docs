@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchAllProgramProjects",
-    "summary": "Fetches A Page of projects for a program",
-    "description": "Fetch Projects",
+    "summary": "Fetch program projects",
+    "description": "Fetches A Page of projects for a program",
     "tags": [
       "Program"
     ],

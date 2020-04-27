@@ -1,0 +1,23 @@
+{
+  "type": "object",
+  "required": [
+    "updated",
+    "label",
+    "created",
+    "manufacturer_id"
+  ],
+  "properties": {
+    "manufacturer_id": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/manufacturer.json#/properties/manufacturer_id"
+    },
+    "label": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/manufacturer.json#/properties/label"
+    },
+    "created": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/manufacturer.json#/properties/created"
+    },
+    "updated": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/manufacturer.json#/properties/updated"
+    }
+  }
+}

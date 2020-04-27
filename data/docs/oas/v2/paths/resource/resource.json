@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchResourceById",
-    "summary": "Fetches a resource by Id",
-    "description": "Fetch Resource",
+    "summary": "Fetch Resource",
+    "description": "Fetches a resource",
     "tags": [
       "Resource"
     ],
@@ -28,7 +28,7 @@
   },
   "put": {
     "operationId": "updateResource",
-    "summary": "Updates a resource",
+    "summary": "Update resource",
     "description": "Updates a resource",
     "tags": [
       "Resource"
@@ -58,8 +58,8 @@
   },
   "delete": {
     "operationId": "deleteResource",
-    "summary": "Deletes a resource",
-    "description": "This will soft delete the resource",
+    "summary": "Delete resource",
+    "description": "Deletes a resource",
     "tags": [
       "Resource"
     ],

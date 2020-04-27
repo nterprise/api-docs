@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchVendorById",
-    "summary": "Fetches a vendor by Id",
-    "description": "Fetch Vendor",
+    "summary": "Fetch Vendor",
+    "description": "Fetches a vendor",
     "tags": [
       "Vendor"
     ],
@@ -28,7 +28,7 @@
   },
   "put": {
     "operationId": "updateVendor",
-    "summary": "Updates a vendor",
+    "summary": "Update vendor",
     "description": "Updates a vendor",
     "tags": [
       "Vendor"
@@ -61,8 +61,8 @@
   },
   "delete": {
     "operationId": "deleteVendor",
-    "summary": "Deletes a vendor",
-    "description": "This will remove the vendor from the system",
+    "summary": "Delete vendor",
+    "description": "Deletes a vendor",
     "tags": [
       "Vendor"
     ],

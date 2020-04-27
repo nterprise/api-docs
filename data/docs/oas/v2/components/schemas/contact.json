@@ -1,0 +1,26 @@
+{
+  "type": "object",
+  "properties": {
+    "contact_id": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/contact.json#/properties/contact_id"
+    },
+    "label": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/contact.json#/properties/label"
+    },
+    "created": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/contact.json#/properties/created"
+    },
+    "updated": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/contact.json#/properties/updated"
+    },
+    "name": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/contact.json#/properties/name"
+    },
+    "email": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/contact.json#/properties/email"
+    },
+    "phone": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/contact.json#/properties/phone"
+    }
+  }
+}

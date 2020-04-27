@@ -16,16 +16,23 @@
           },
           "type": {
             "type": "string",
-            "description": "Mime type of the file"
+            "description": "Mime type of the file",
+            "enum": [
+              "application/pdf"
+            ]
           },
           "size": {
             "type": "integer",
-            "format": "int32",
             "description": "Size of the file in bytes max 10 MB",
             "maximum": 10485760,
             "minimum": 1
           }
         }
+      },
+      "example": {
+        "name": "configuration.pdf",
+        "type": "application/pdf",
+        "size": 42
       }
     }
   }

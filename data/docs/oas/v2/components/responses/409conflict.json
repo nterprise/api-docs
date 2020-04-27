@@ -3,6 +3,8 @@
   "content": {
     "application/problem+json": {
       "schema": {
+        "type": "object",
+        "additionalProperties": false,
         "properties": {
           "title": {
             "const": "Conflict"
@@ -14,9 +16,15 @@
             "const": 409
           },
           "detail": {
-            "const": "This request contains a conflict to another resource"
+            "type": "string"
           }
         }
+      },
+      "example": {
+        "title": "Conflict",
+        "type": "https://docs.nterprise.com/api/problem/Conflict",
+        "status": 409,
+        "detail": "A similar resource exists"
       }
     }
   }

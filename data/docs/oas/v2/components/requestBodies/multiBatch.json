@@ -1,0 +1,60 @@
+{
+  "description": "Multiple batches to create",
+  "content": {
+    "application/multi-batch+json": {
+      "schema": {
+        "type": "object",
+        "required": [
+          "queue",
+          "work_order",
+          "number_cycles"
+        ],
+        "properties": {
+          "total": {
+            "type": "number",
+            "description": "Total number of batches to create",
+            "minimum": 1,
+            "maximum": 100
+          },
+          "queue": {
+            "type": "object",
+            "required": [
+              "queue_id"
+            ],
+            "properties": {
+              "queue_id": {
+                "$ref": "https://docs.nterprise.com/schemas/niagara/queue.json#/properties/queue_id"
+              }
+            }
+          },
+          "work_order": {
+            "type": "object",
+            "required": [
+              "work_order_id"
+            ],
+            "properties": {
+              "work_order_id": {
+                "$ref": "https://docs.nterprise.com/schemas/niagara/workOrder.json#/properties/work_order_id"
+              }
+            }
+          },
+          "number_cycles": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/batch.json#/properties/number_cycles"
+          },
+          "users": {
+            "type": "array",
+            "description": "A List of users to assign as technicians to assign to the batches",
+            "items": {
+              "type": "object",
+              "properties": {
+                "user_id": {
+                  "$ref": "https://docs.nterprise.com/schemas/niagara/user.json#/properties/user_id"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchContextById",
-    "summary": "Fetches a context by Id",
-    "description": "Fetch Context",
+    "summary": "Fetch Context",
+    "description": "Fetches a context",
     "tags": [
       "Context"
     ],
@@ -25,12 +25,11 @@
         "$ref": "../../components/responses/404notFound.json"
       }
     }
-
   },
   "post": {
     "operationId": "completeStep",
-    "summary": "Completes a step for an active context",
-    "description": "Complete Step",
+    "summary": "Complete Step",
+    "description": "Completes a step for an active context",
     "tags": [
       "Context"
     ],
@@ -40,24 +39,11 @@
       }
     ],
     "requestBody": {
-      "description": "The batch to create",
+      "description": "The step to complete",
       "content": {
         "application/json": {
           "schema": {
-            "anyOf": [
-              {
-                "$ref": "../../components/schemas/workflow/close/user/confirmAction.json"
-              },
-              {
-                "$ref": "../../components/schemas/workflow/close/user/followPDFInstructions.json"
-              },
-              {
-                "$ref": "../../components/schemas/workflow/close/user/manualDataEntry.json"
-              },
-              {
-                "$ref": "../../components/schemas/workflow/close/machine/aceIos.json"
-              }
-            ]
+            "$ref": "../../components/requestBodies/closeStep.json"
           }
         }
       }
@@ -76,6 +62,5 @@
         "$ref": "../../components/responses/404notFound.json"
       }
     }
-
   }
 }
