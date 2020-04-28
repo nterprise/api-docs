@@ -1,0 +1,57 @@
+{
+  "get": {
+    "operationId": "fetchAllRoles",
+    "summary": "Fetch Roles",
+    "description": "Fetches A Page of roles",
+    "tags": [
+      "Role"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/limit.json"
+      },
+      {
+        "$ref": "../../components/parameters/offset.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halRole.json"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      }
+    }
+  },
+  "post": {
+    "operationId": "createRole",
+    "summary": "Create role",
+    "description": "Creates a new role",
+    "tags": [
+      "Role"
+    ],
+    "requestBody": {
+      "$ref": "../../components/requestBodies/role.json"
+    },
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halRole.json"
+      },
+      "400": {
+        "$ref": "../../components/responses/400badRequest.json"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      },
+      "409": {
+        "$ref": "../../components/responses/409conflict.json"
+      }
+    }
+  }
+}

@@ -27,8 +27,6 @@ heading_anchors: true
 destination: "public"
 source: "data/docs/jekyll"
 
-plugins:
- - jekyll-redirect-from
 # Build settings
 theme: "just-the-docs"
 # Exclude from processing.

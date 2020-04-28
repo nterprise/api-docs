@@ -1,0 +1,61 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/role.json",
+  "type": "object",
+  "description": "Role",
+  "additionalProperties": false,
+  "required": [
+    "entity_type",
+    "entity_id",
+    "label",
+    "description",
+    "created",
+    "updated",
+    "grants",
+    "total_users"
+  ],
+  "properties": {
+    "role_id": {
+      "description": "Role identifier",
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_id"
+    },
+    "entity_id": {
+      "x-no-api-doc": true,
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_id"
+    },
+    "entity_type": {
+      "x-no-api-doc": true,
+      "const": "ROLE"
+    },
+    "label": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/label"
+    },
+    "slug": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/slug"
+    },
+    "created": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/created"
+    },
+    "updated": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/updated"
+    },
+    "description": {
+      "type": ["string", "null"],
+      "description": "Custom description for the role"
+    },
+    "grants": {
+      "type": "array",
+      "description": "Permissions granted to this role",
+      "minItems": 1,
+      "uniqueItems": false,
+      "items": {
+        "$ref": "https://docs.nterprise.com/schemas/niagara/permission.json"
+      }
+    },
+    "total_users": {
+      "type": "number",
+      "description": "Number of users who have this role",
+      "minimum": 0
+    }
+  }
+}

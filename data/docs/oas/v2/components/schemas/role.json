@@ -1,0 +1,31 @@
+{
+  "type": "object",
+  "required": [
+    "updated",
+    "label",
+    "created",
+    "role_id",
+    "grants",
+    "total_users"
+  ],
+  "properties": {
+    "role_id": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/role.json#/properties/role_id"
+    },
+    "label": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/role.json#/properties/label"
+    },
+    "created": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/role.json#/properties/created"
+    },
+    "updated": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/role.json#/properties/updated"
+    },
+    "grants": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/role.json#/properties/grants"
+    },
+    "total_users": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/role.json#/properties/total_users"
+    }
+  }
+}

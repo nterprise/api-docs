@@ -1,0 +1,117 @@
+{
+  "description": "A paged response for roles",
+  "content": {
+    "application/hal+json": {
+      "schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "_embedded",
+          "_links",
+          "total_count",
+          "limit",
+          "offset"
+        ],
+        "properties": {
+          "total_count": {
+            "type": "number",
+            "readOnly": true
+          },
+          "limit": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 100
+          },
+          "offset": {
+            "type": "string",
+            "nullable": true
+          },
+          "_embedded": {
+            "type": "object",
+            "required": [
+              "nter:roles"
+            ],
+            "properties": {
+              "nter:roles": {
+                "type": "array",
+                "maxItems": 100,
+                "items": {
+                  "$ref": "../schemas/halRole.json"
+                }
+              }
+            }
+          },
+          "_links": {
+            "type": "object",
+            "required": [
+              "self"
+            ],
+            "properties": {
+              "self": {
+                "$ref": "../schemas/link.json"
+              },
+              "next": {
+                "$ref": "../schemas/link.json"
+              }
+            }
+          }
+        }
+      },
+      "example": {
+        "total_count": 21,
+        "limit": 42,
+        "offset": "next-offset",
+        "_embedded": {
+          "nter:roles": [
+            {
+              "role_id": "role",
+              "created": "2020-01-09T22:12:03.000Z",
+              "updated": "2020-01-09T22:12:03.000Z",
+              "label": "TSC Manager",
+              "description": "Manages technicians and production queues",
+              "total_users": 42,
+              "grants": [
+                {
+                  "permission": "create:USER",
+                  "label": "Create users",
+                  "match_location": true
+                },
+                {
+                  "permission": "delete:WOR",
+                  "label": "Delete work-orders",
+                  "match_location": true
+                },
+                {
+                  "permission": "update:WOR",
+                  "label": "Update work-orders",
+                  "match_location": false
+                },
+                {
+                  "permission": "create:PART",
+                  "label": "Create parts",
+                  "match_location": false
+                }
+              ],
+              "_links": {
+                "nter:role-users": {
+                  "href": "https://api.example.com/roles/role/users"
+                },
+                "self": {
+                  "href": "https://api.example.com/roles/role"
+                }
+              }
+            }
+          ]
+        },
+        "_links": {
+          "next": {
+            "href": "https://api.example.com/roles?limit=42&offset=next-offset"
+          },
+          "self": {
+            "href": "https://api.example.com/roles?limit=42"
+          }
+        }
+      }
+    }
+  }
+}

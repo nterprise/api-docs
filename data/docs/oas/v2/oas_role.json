@@ -1,0 +1,47 @@
+{
+  "openapi": "3.0.3",
+  "x-api": "niagara",
+  "x-nter-docs-parent": "Niagara API",
+  "x-nter-docs-nav-order": 15,
+  "x-nter-docs-redirect-from": [
+    "/rel/roles",
+    "/rel/role"
+  ],
+  "info": {
+    "version": "2.0.0",
+    "description": "Roles define access that a user has ",
+    "title": "Roles"
+  },
+  "servers": [
+    {
+      "url": "https://{environment}.nterprise.com",
+      "variables": {
+        "environment": {
+          "default": "api",
+          "enum": [
+            "api",
+            "api.dev"
+          ]
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/roles": {
+      "$ref": "./paths/role/roles.json"
+    },
+    "/roles/{role_id}": {
+      "$ref": "./paths/role/role.json"
+    },
+    "/roles/{role_id}/users": {
+      "$ref": "./paths/role/users.json"
+    }
+  },
+  "components": {
+    "schemas": {
+      "Role": {
+        "$ref": "components/schemas/role.json"
+      }
+    }
+  }
+}

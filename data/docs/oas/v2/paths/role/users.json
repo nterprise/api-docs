@@ -1,0 +1,88 @@
+{
+  "get": {
+    "operationId": "fetchAllRoleUsers",
+    "summary": "Fetch role users",
+    "description": "Fetches A Page of users for the role",
+    "tags": [
+      "Role"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/roleId.json"
+      },
+      {
+        "$ref": "../../components/parameters/limit.json"
+      },
+      {
+        "$ref": "../../components/parameters/offset.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halUserPage.json"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "404": {
+        "$ref": "../../components/responses/404notFound.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      }
+    }
+  },
+  "post": {
+    "operationId": "attachRoleUser",
+    "summary": "Assign user to role",
+    "description": "This will create the user along with linking it to the role. If a user is found based on the email address, this will just link the user to the role",
+    "tags": [
+      "Role"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/roleId.json"
+      }
+    ],
+    "requestBody": {
+      "description": "A Role request body",
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object",
+            "required": [
+              "user_id"
+            ],
+            "properties": {
+              "user_id": {
+                "$ref": "https://docs.nterprise.com/schemas/niagara/user.json#/properties/user_id"
+              }
+            }
+          }
+        }
+      }
+    }
+  ,
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halUser.json"
+      },
+      "400": {
+        "$ref": "../../components/responses/400badRequest.json"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      },
+      "404": {
+        "$ref": "../../components/responses/404notFound.json"
+      },
+      "409": {
+        "$ref": "../../components/responses/409conflict.json"
+      }
+    }
+
+  }
+}
