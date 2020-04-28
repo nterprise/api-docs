@@ -45,7 +45,7 @@
       "$ref": "https://docs.nterprise.com/schemas/niagara/location.json"
     },
     "priority": {
-      "type": "integer",
+      "type": "number",
       "description": "Priority level for queue",
       "minimum": 0
     },
