@@ -41,6 +41,12 @@
     },
     "/programs/{program_id}/work-orders": {
       "$ref": "./paths/program/workOrders.json"
+    },
+    "/programs/{program_id}/relations": {
+      "$ref": "./paths/program/relations.json"
+    },
+    "/programs/{program_id}/relations/{relation_id}": {
+      "$ref": "./paths/program/relation.json"
     }
   },
   "components": {

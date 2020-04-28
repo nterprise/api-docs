@@ -1,0 +1,8 @@
+{
+  "name": "filter[relation]",
+  "in": "query",
+  "description": "Filter on relation type",
+  "schema": {
+    "$ref": "../schemas/relation.json#/properties/relation"
+  }
+}

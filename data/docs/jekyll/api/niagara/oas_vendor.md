@@ -1817,6 +1817,439 @@ Status Code **404**
 |&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
 |&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
 
+### GET /vendors/{vendor_id}/relations - *Fetch Vendor relations*
+
+<a id="opIdfetchRelationsForVendor"></a>
+
+*Fetch Vendor relations*
+
+Fetches the relations for a vendor
+
+<h3 id="fetchrelationsforvendor-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|vendor_id|path|string|true|Id of the vendor|
+|filter[entity_type]|query|string|false|Filter on entity type|
+|filter[relation]|query|string|false|Filter on relation type|
+|filter[direction]|query|string|false|Filter on relation direction|
+
+<h3 id="fetchrelationsforvendor-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|A paged response for relations|Inline|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|Inline|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Resource not found|Inline|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "total_count": 21,
+  "limit": 42,
+  "offset": "next-offset",
+  "_embedded": {
+    "nter:relations": [
+      {
+        "relation_id": "VVNFUiNyZWw6Y3JlYXRlZCM3ZTg4OTMyMS0yZWNmLTQzMjctODYyOS0yMzNhNzU1NmRmMmI",
+        "relation": "created",
+        "label": "Created By",
+        "direction": "INWARD",
+        "created": "2020-01-09T22:12:03.000Z",
+        "updated": "2020-01-09T22:12:03.000Z",
+        "entity": {
+          "entity_type": "USER",
+          "entity_id": "b0a84f51-443e-4ff1-9667-73b66be7435a",
+          "label": "Bob Alice",
+          "created": "2020-01-09T22:12:03.000Z",
+          "updated": "2020-01-09T22:12:03.000Z"
+        },
+        "_links": {
+          "self": {
+            "href": "https://api.nterprise.com/{entity}/{entity_id}/relations/VVNFUiNyZWw6Y3JlYXRlZCM3ZTg4OTMyMS0yZWNmLTQzMjctODYyOS0yMzNhNzU1NmRmMmI"
+          },
+          "nter:user": {
+            "href": "https://api.nterprise.com/users/b0a84f51-443e-4ff1-9667-73b66be7435a"
+          }
+        }
+      }
+    ]
+  },
+  "_links": {
+    "next": {
+      "href": "https://api.example.com/{entity}/{entity_id}/relations?offset=next-offset"
+    },
+    "self": {
+      "href": "https://api.example.com/{entity}/{entity_id}/relations"
+    }
+  }
+}
+```
+
+> 401 Response
+
+```json
+{
+  "title": "Unauthorized",
+  "type": "https://docs.nterprise.com/api/problem/Unauthorized",
+  "status": 401,
+  "detail": "Invalid authorization token"
+}
+```
+
+> 403 Response
+
+```json
+{
+  "title": "Forbidden",
+  "type": "https://docs.nterprise.com/api/problem/Forbidden",
+  "status": 403,
+  "detail": "You are forbidden from accessing this resource"
+}
+```
+
+> 404 Response
+
+```json
+{
+  "title": "Not Found",
+  "type": "https://docs.nterprise.com/api/problem/NotFound",
+  "status": 404,
+  "detail": "A Resource with the id \"foo\" was not found"
+}
+```
+
+<h3 id="fetchrelationsforvendor-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; total_count|number|true|read-only|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; limit|number|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; offset|string¦null|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; _embedded|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; nter:relations|[allOf]|true|none|none|
+
+*allOf*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; relation_id|string|true|none|Custom identifier for the relation|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; relation|string|true|none|Type of relation|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; label|string|true|none|Label for the relation|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; direction|string|true|none|Direction of the relation. OUTWARD relations are entities this relates to while INWARD are entities related to this entity|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; created|string(date-time)|true|read-only|Date the entity was created|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; updated|string(date-time)|true|read-only|Last date the entity was updated|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; entity|object|false|none|Related entity information|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; entity_id|string|true|read-only|Customer identifier|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; entity_type|string|true|none|Entity type|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; label|string|true|none|Label for the entity|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; created|string(date-time)|true|read-only|Date the entity was created|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; updated|string(date-time)|true|read-only|Last date the entity was updated|
+
+*and*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _links|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **additionalProperties**|object|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; href|string(uri)|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; href|string(uri)|false|none|none|
+
+*continued*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; _links|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; href|string(uri)|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; next|object|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; href|string(uri)|false|none|none|
+
+Status Code **401**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
+
+Status Code **403**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
+
+Status Code **404**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
+
+### POST /vendors/{vendor_id}/relations - *Create relation*
+
+<a id="opIdcreateRelationForVendor"></a>
+
+*Create relation*
+
+Creates a relation for a vendor
+
+> Body parameter
+
+<h3 id="createrelationforvendor-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|vendor_id|path|string|true|Id of the vendor|
+|relation|body|string|true|Type of relation|
+|entity|body|object|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; entity_id|body|string|true|Customer identifier|
+|&nbsp;&nbsp;&nbsp;&nbsp; entity_type|body|string|true|Entity type|
+
+<h3 id="createrelationforvendor-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|A paged response for relations|Inline|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad Request|Inline|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|Inline|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
+
+> Example responses
+
+> 201 Response
+
+```json
+{
+  "relation_id": "VVNFUiNyZWw6Y3JlYXRlZCM3ZTg4OTMyMS0yZWNmLTQzMjctODYyOS0yMzNhNzU1NmRmMmI",
+  "relation": "created",
+  "label": "Created By",
+  "direction": "INWARD",
+  "created": "2020-01-09T22:12:03.000Z",
+  "updated": "2020-01-09T22:12:03.000Z",
+  "entity": {
+    "entity_type": "USER",
+    "entity_id": "b0a84f51-443e-4ff1-9667-73b66be7435a",
+    "label": "Bob Alice",
+    "created": "2020-01-09T22:12:03.000Z",
+    "updated": "2020-01-09T22:12:03.000Z"
+  },
+  "_links": {
+    "self": {
+      "href": "https://api.nterprise.com/{entity}/{entity_id}/relations/VVNFUiNyZWw6Y3JlYXRlZCM3ZTg4OTMyMS0yZWNmLTQzMjctODYyOS0yMzNhNzU1NmRmMmI"
+    },
+    "nter:user": {
+      "href": "https://api.nterprise.com/users/b0a84f51-443e-4ff1-9667-73b66be7435a"
+    }
+  }
+}
+```
+
+> 400 Response
+
+```json
+{
+  "title": "Bad Request",
+  "type": "https://docs.nterprise.com/api/problem/BadRequest",
+  "status": 400,
+  "detail": "Invalid Data",
+  "validation_messages": [
+    {
+      "keyword": "field",
+      "dataPath": ".field",
+      "schemaPath": "https://docs.nterprise.com/schemas/niagara/foo.json#/properties/field",
+      "params": {
+        "type": "string"
+      },
+      "message": "should be string"
+    }
+  ]
+}
+```
+
+> 401 Response
+
+```json
+{
+  "title": "Unauthorized",
+  "type": "https://docs.nterprise.com/api/problem/Unauthorized",
+  "status": 401,
+  "detail": "Invalid authorization token"
+}
+```
+
+> 403 Response
+
+```json
+{
+  "title": "Forbidden",
+  "type": "https://docs.nterprise.com/api/problem/Forbidden",
+  "status": 403,
+  "detail": "You are forbidden from accessing this resource"
+}
+```
+
+<h3 id="createrelationforvendor-responseschema">Response Schema</h3>
+
+Status Code **400**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; validation_messages|[object]|true|none|List of errors detailing the failures|
+
+Status Code **401**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
+
+Status Code **403**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
+
+### DELETE /vendors/{vendor_id}/relations/{relation_id} - *Delete relation for vendor*
+
+<a id="opIddeleteRelationForVendor"></a>
+
+*Delete relation for vendor*
+
+Deletes a relation for a vendor
+
+<h3 id="deleterelationforvendor-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|vendor_id|path|string|true|Id of the vendor|
+|relation_id|path|string|true|Id of the relation|
+
+<h3 id="deleterelationforvendor-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|A paged response for relations|Inline|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|Inline|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Resource not found|Inline|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "relation_id": "VVNFUiNyZWw6Y3JlYXRlZCM3ZTg4OTMyMS0yZWNmLTQzMjctODYyOS0yMzNhNzU1NmRmMmI",
+  "relation": "created",
+  "label": "Created By",
+  "direction": "INWARD",
+  "created": "2020-01-09T22:12:03.000Z",
+  "updated": "2020-01-09T22:12:03.000Z",
+  "entity": {
+    "entity_type": "USER",
+    "entity_id": "b0a84f51-443e-4ff1-9667-73b66be7435a",
+    "label": "Bob Alice",
+    "created": "2020-01-09T22:12:03.000Z",
+    "updated": "2020-01-09T22:12:03.000Z"
+  },
+  "_links": {
+    "self": {
+      "href": "https://api.nterprise.com/{entity}/{entity_id}/relations/VVNFUiNyZWw6Y3JlYXRlZCM3ZTg4OTMyMS0yZWNmLTQzMjctODYyOS0yMzNhNzU1NmRmMmI"
+    },
+    "nter:user": {
+      "href": "https://api.nterprise.com/users/b0a84f51-443e-4ff1-9667-73b66be7435a"
+    }
+  }
+}
+```
+
+> 401 Response
+
+```json
+{
+  "title": "Unauthorized",
+  "type": "https://docs.nterprise.com/api/problem/Unauthorized",
+  "status": 401,
+  "detail": "Invalid authorization token"
+}
+```
+
+> 403 Response
+
+```json
+{
+  "title": "Forbidden",
+  "type": "https://docs.nterprise.com/api/problem/Forbidden",
+  "status": 403,
+  "detail": "You are forbidden from accessing this resource"
+}
+```
+
+> 404 Response
+
+```json
+{
+  "title": "Not Found",
+  "type": "https://docs.nterprise.com/api/problem/NotFound",
+  "status": 404,
+  "detail": "A Resource with the id \"foo\" was not found"
+}
+```
+
+<h3 id="deleterelationforvendor-responseschema">Response Schema</h3>
+
+Status Code **401**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
+
+Status Code **403**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
+
+Status Code **404**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
+
 # Embedded Schemas
 
 ## Vendor

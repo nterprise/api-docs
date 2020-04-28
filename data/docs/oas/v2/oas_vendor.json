@@ -36,6 +36,12 @@
     },
     "/vendors/{vendor_id}/units": {
       "$ref": "./paths/vendor/units.json"
+    },
+    "/vendors/{vendor_id}/relations": {
+      "$ref": "./paths/vendor/relations.json"
+    },
+    "/vendors/{vendor_id}/relations/{relation_id}": {
+      "$ref": "./paths/vendor/relation.json"
     }
   },
   "components": {

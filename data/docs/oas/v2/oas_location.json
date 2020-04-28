@@ -50,6 +50,12 @@
     },
     "/ware-houses": {
       "$ref": "./paths/location/warehouses.json"
+    },
+    "/locations/{location_id}/relations": {
+      "$ref": "./paths/location/relations.json"
+    },
+    "/locations/{location_id}/relations/{relation_id}": {
+      "$ref": "./paths/location/relation.json"
     }
   },
   "components": {

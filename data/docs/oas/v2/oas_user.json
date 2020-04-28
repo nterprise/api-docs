@@ -33,6 +33,12 @@
     },
     "/users/{user_id}": {
       "$ref": "./paths/user/user.json"
+    },
+    "/users/{user_id}/relations": {
+      "$ref": "./paths/user/relations.json"
+    },
+    "/users/{user_id}/relations/{relation_id}": {
+      "$ref": "./paths/user/relation.json"
     }
   },
   "components": {

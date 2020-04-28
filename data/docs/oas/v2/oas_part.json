@@ -38,6 +38,12 @@
     },
     "/parts/{part_id}/units": {
       "$ref": "./paths/part/units.json"
+    },
+    "/parts/{part_id}/relations": {
+      "$ref": "./paths/part/relations.json"
+    },
+    "/parts/{part_id}/relations/{relation_id}": {
+      "$ref": "./paths/part/relation.json"
     }
   },
   "components": {

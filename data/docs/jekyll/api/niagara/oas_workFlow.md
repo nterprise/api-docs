@@ -15,7 +15,7 @@ title: Work Flows
 
 API for the nterprise application
 
-<h1 id="work-flows-workflow">Workflow</h1>
+<h1 id="work-flows-work-flow">Work Flow</h1>
 
 ## Operations
 
@@ -190,154 +190,6 @@ Status Code **403**
 |&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
 |&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
 
-### POST /work-flows - *Create workflow*
-
-<a id="opIdcreateWorkflow"></a>
-
-*Create workflow*
-
-Creates a new workflow
-
-> Body parameter
-
-<h3 id="createworkflow-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|label|body|string|true|Customer identifier|
-|schema_version|body|string|true|Version of the workflow schema used|
-|applies_to|body|string|true|The entity type this work flow applies too|
-|starts_at|body|string|true|Starting step|
-|steps|body|object|true|Steps for the workflow|
-
-<h3 id="createworkflow-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|A work flow response|Inline|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad Request|Inline|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|Inline|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
-
-> Example responses
-
-> 200 Response
-
-```json
-{
-  "work_flow_id": "work-flow",
-  "label": "My workflow",
-  "created": "2019-08-19T00:01:02.000Z",
-  "updated": "2020-08-19T01:01:02.000Z",
-  "workflow_version": 7,
-  "applies_to": "UNIT",
-  "starts_at": "work-complete",
-  "schema_version": "1.0",
-  "triggered_by": [
-    "UNIT.created"
-  ],
-  "metadata": {
-    "meta": "data"
-  },
-  "steps": {
-    "work-complete": {
-      "label": "work complete",
-      "on_complete": [],
-      "on_start": [],
-      "step_type": "success"
-    },
-    "stop-poking-me": {
-      "label": "stop poking me",
-      "on_complete": [],
-      "on_start": [],
-      "step_type": "fail"
-    }
-  },
-  "_links": {
-    "nter:work-flow-contexts": {
-      "href": "https://api.example.com/work-flows/work-flow/contexts"
-    },
-    "self": {
-      "href": "https://api.example.com/work-flows/work-flow"
-    }
-  }
-}
-```
-
-> 400 Response
-
-```json
-{
-  "title": "Bad Request",
-  "type": "https://docs.nterprise.com/api/problem/BadRequest",
-  "status": 400,
-  "detail": "Invalid Data",
-  "validation_messages": [
-    {
-      "keyword": "field",
-      "dataPath": ".field",
-      "schemaPath": "https://docs.nterprise.com/schemas/niagara/foo.json#/properties/field",
-      "params": {
-        "type": "string"
-      },
-      "message": "should be string"
-    }
-  ]
-}
-```
-
-> 401 Response
-
-```json
-{
-  "title": "Unauthorized",
-  "type": "https://docs.nterprise.com/api/problem/Unauthorized",
-  "status": 401,
-  "detail": "Invalid authorization token"
-}
-```
-
-> 403 Response
-
-```json
-{
-  "title": "Forbidden",
-  "type": "https://docs.nterprise.com/api/problem/Forbidden",
-  "status": 403,
-  "detail": "You are forbidden from accessing this resource"
-}
-```
-
-<h3 id="createworkflow-responseschema">Response Schema</h3>
-
-Status Code **400**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; validation_messages|[object]|true|none|List of errors detailing the failures|
-
-Status Code **401**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
-Status Code **403**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
 ### GET /work-flows/{workflow_id} - *Fetch Workflow*
 
 <a id="opIdfetchWorkflowById"></a>
@@ -460,263 +312,6 @@ Status Code **403**
 |&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
 
 Status Code **404**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
-### PUT /work-flows/{workflow_id} - *Update Workflow*
-
-<a id="opIdupdateWorkflow"></a>
-
-*Update Workflow*
-
-Updates a workflow
-
-> Body parameter
-
-<h3 id="updateworkflow-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|workflow_id|path|string|true|Id for the workflow|
-|label|body|string|true|Customer identifier|
-|schema_version|body|string|true|Version of the workflow schema used|
-|applies_to|body|string|true|The entity type this work flow applies too|
-|starts_at|body|string|true|Starting step|
-|steps|body|object|true|Steps for the workflow|
-
-<h3 id="updateworkflow-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|A work flow response|Inline|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad Request|Inline|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
-|423|[Locked](https://tools.ietf.org/html/rfc2518#section-10.4)|Forbidden|Inline|
-
-> Example responses
-
-> 200 Response
-
-```json
-{
-  "work_flow_id": "work-flow",
-  "label": "My workflow",
-  "created": "2019-08-19T00:01:02.000Z",
-  "updated": "2020-08-19T01:01:02.000Z",
-  "workflow_version": 7,
-  "applies_to": "UNIT",
-  "starts_at": "work-complete",
-  "schema_version": "1.0",
-  "triggered_by": [
-    "UNIT.created"
-  ],
-  "metadata": {
-    "meta": "data"
-  },
-  "steps": {
-    "work-complete": {
-      "label": "work complete",
-      "on_complete": [],
-      "on_start": [],
-      "step_type": "success"
-    },
-    "stop-poking-me": {
-      "label": "stop poking me",
-      "on_complete": [],
-      "on_start": [],
-      "step_type": "fail"
-    }
-  },
-  "_links": {
-    "nter:work-flow-contexts": {
-      "href": "https://api.example.com/work-flows/work-flow/contexts"
-    },
-    "self": {
-      "href": "https://api.example.com/work-flows/work-flow"
-    }
-  }
-}
-```
-
-> 400 Response
-
-```json
-{
-  "title": "Bad Request",
-  "type": "https://docs.nterprise.com/api/problem/BadRequest",
-  "status": 400,
-  "detail": "Invalid Data",
-  "validation_messages": [
-    {
-      "keyword": "field",
-      "dataPath": ".field",
-      "schemaPath": "https://docs.nterprise.com/schemas/niagara/foo.json#/properties/field",
-      "params": {
-        "type": "string"
-      },
-      "message": "should be string"
-    }
-  ]
-}
-```
-
-> 403 Response
-
-```json
-{
-  "title": "Forbidden",
-  "type": "https://docs.nterprise.com/api/problem/Forbidden",
-  "status": 403,
-  "detail": "You are forbidden from accessing this resource"
-}
-```
-
-> 423 Response
-
-```json
-{
-  "title": "Locked",
-  "type": "https://docs.nterprise.com/api/problem/Locked",
-  "status": 423,
-  "detail": "This resource is currently locked from editing"
-}
-```
-
-<h3 id="updateworkflow-responseschema">Response Schema</h3>
-
-Status Code **400**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; validation_messages|[object]|true|none|List of errors detailing the failures|
-
-Status Code **403**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
-Status Code **423**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
-### DELETE /work-flows/{workflow_id} - *Delete workflow*
-
-<a id="opIddeleteWorkflow"></a>
-
-*Delete workflow*
-
-Deletes a workflow
-
-<h3 id="deleteworkflow-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|workflow_id|path|string|true|Id for the workflow|
-
-<h3 id="deleteworkflow-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|205|[Reset Content](https://tools.ietf.org/html/rfc7231#section-6.3.6)|Workflow deleted|None|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|Inline|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Resource not found|Inline|
-|423|[Locked](https://tools.ietf.org/html/rfc2518#section-10.4)|Forbidden|Inline|
-
-> Example responses
-
-> 401 Response
-
-```json
-{
-  "title": "Unauthorized",
-  "type": "https://docs.nterprise.com/api/problem/Unauthorized",
-  "status": 401,
-  "detail": "Invalid authorization token"
-}
-```
-
-> 403 Response
-
-```json
-{
-  "title": "Forbidden",
-  "type": "https://docs.nterprise.com/api/problem/Forbidden",
-  "status": 403,
-  "detail": "You are forbidden from accessing this resource"
-}
-```
-
-> 404 Response
-
-```json
-{
-  "title": "Not Found",
-  "type": "https://docs.nterprise.com/api/problem/NotFound",
-  "status": 404,
-  "detail": "A Resource with the id \"foo\" was not found"
-}
-```
-
-> 423 Response
-
-```json
-{
-  "title": "Locked",
-  "type": "https://docs.nterprise.com/api/problem/Locked",
-  "status": 423,
-  "detail": "This resource is currently locked from editing"
-}
-```
-
-<h3 id="deleteworkflow-responseschema">Response Schema</h3>
-
-Status Code **401**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
-Status Code **403**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
-Status Code **404**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
-Status Code **423**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
@@ -2341,6 +1936,531 @@ Status Code **403**
 |&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
 |&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
 
+### DELETE /work-flows/{workflow_id}/relations/{relation_id} - *Delete relation for workFlow*
+
+<a id="opIddeleteRelationForWorkFlow"></a>
+
+*Delete relation for workFlow*
+
+Deletes a relation for a workFlow
+
+<h3 id="deleterelationforworkflow-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|workflow_id|path|string|true|Id for the workflow|
+|relation_id|path|string|true|Id of the relation|
+
+<h3 id="deleterelationforworkflow-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|A paged response for relations|Inline|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|Inline|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Resource not found|Inline|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "relation_id": "VVNFUiNyZWw6Y3JlYXRlZCM3ZTg4OTMyMS0yZWNmLTQzMjctODYyOS0yMzNhNzU1NmRmMmI",
+  "relation": "created",
+  "label": "Created By",
+  "direction": "INWARD",
+  "created": "2020-01-09T22:12:03.000Z",
+  "updated": "2020-01-09T22:12:03.000Z",
+  "entity": {
+    "entity_type": "USER",
+    "entity_id": "b0a84f51-443e-4ff1-9667-73b66be7435a",
+    "label": "Bob Alice",
+    "created": "2020-01-09T22:12:03.000Z",
+    "updated": "2020-01-09T22:12:03.000Z"
+  },
+  "_links": {
+    "self": {
+      "href": "https://api.nterprise.com/{entity}/{entity_id}/relations/VVNFUiNyZWw6Y3JlYXRlZCM3ZTg4OTMyMS0yZWNmLTQzMjctODYyOS0yMzNhNzU1NmRmMmI"
+    },
+    "nter:user": {
+      "href": "https://api.nterprise.com/users/b0a84f51-443e-4ff1-9667-73b66be7435a"
+    }
+  }
+}
+```
+
+> 401 Response
+
+```json
+{
+  "title": "Unauthorized",
+  "type": "https://docs.nterprise.com/api/problem/Unauthorized",
+  "status": 401,
+  "detail": "Invalid authorization token"
+}
+```
+
+> 403 Response
+
+```json
+{
+  "title": "Forbidden",
+  "type": "https://docs.nterprise.com/api/problem/Forbidden",
+  "status": 403,
+  "detail": "You are forbidden from accessing this resource"
+}
+```
+
+> 404 Response
+
+```json
+{
+  "title": "Not Found",
+  "type": "https://docs.nterprise.com/api/problem/NotFound",
+  "status": 404,
+  "detail": "A Resource with the id \"foo\" was not found"
+}
+```
+
+<h3 id="deleterelationforworkflow-responseschema">Response Schema</h3>
+
+Status Code **401**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
+
+Status Code **403**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
+
+Status Code **404**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
+
+<h1 id="work-flows-workflow">Workflow</h1>
+
+## Operations
+
+### POST /work-flows - *Create workflow*
+
+<a id="opIdcreateWorkflow"></a>
+
+*Create workflow*
+
+Creates a new workflow
+
+> Body parameter
+
+<h3 id="createworkflow-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|label|body|string|true|Customer identifier|
+|schema_version|body|string|true|Version of the workflow schema used|
+|applies_to|body|string|true|The entity type this work flow applies too|
+|starts_at|body|string|true|Starting step|
+|steps|body|object|true|Steps for the workflow|
+
+<h3 id="createworkflow-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|A work flow response|Inline|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad Request|Inline|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|Inline|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "work_flow_id": "work-flow",
+  "label": "My workflow",
+  "created": "2019-08-19T00:01:02.000Z",
+  "updated": "2020-08-19T01:01:02.000Z",
+  "workflow_version": 7,
+  "applies_to": "UNIT",
+  "starts_at": "work-complete",
+  "schema_version": "1.0",
+  "triggered_by": [
+    "UNIT.created"
+  ],
+  "metadata": {
+    "meta": "data"
+  },
+  "steps": {
+    "work-complete": {
+      "label": "work complete",
+      "on_complete": [],
+      "on_start": [],
+      "step_type": "success"
+    },
+    "stop-poking-me": {
+      "label": "stop poking me",
+      "on_complete": [],
+      "on_start": [],
+      "step_type": "fail"
+    }
+  },
+  "_links": {
+    "nter:work-flow-contexts": {
+      "href": "https://api.example.com/work-flows/work-flow/contexts"
+    },
+    "self": {
+      "href": "https://api.example.com/work-flows/work-flow"
+    }
+  }
+}
+```
+
+> 400 Response
+
+```json
+{
+  "title": "Bad Request",
+  "type": "https://docs.nterprise.com/api/problem/BadRequest",
+  "status": 400,
+  "detail": "Invalid Data",
+  "validation_messages": [
+    {
+      "keyword": "field",
+      "dataPath": ".field",
+      "schemaPath": "https://docs.nterprise.com/schemas/niagara/foo.json#/properties/field",
+      "params": {
+        "type": "string"
+      },
+      "message": "should be string"
+    }
+  ]
+}
+```
+
+> 401 Response
+
+```json
+{
+  "title": "Unauthorized",
+  "type": "https://docs.nterprise.com/api/problem/Unauthorized",
+  "status": 401,
+  "detail": "Invalid authorization token"
+}
+```
+
+> 403 Response
+
+```json
+{
+  "title": "Forbidden",
+  "type": "https://docs.nterprise.com/api/problem/Forbidden",
+  "status": 403,
+  "detail": "You are forbidden from accessing this resource"
+}
+```
+
+<h3 id="createworkflow-responseschema">Response Schema</h3>
+
+Status Code **400**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; validation_messages|[object]|true|none|List of errors detailing the failures|
+
+Status Code **401**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
+
+Status Code **403**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
+
+### PUT /work-flows/{workflow_id} - *Update Workflow*
+
+<a id="opIdupdateWorkflow"></a>
+
+*Update Workflow*
+
+Updates a workflow
+
+> Body parameter
+
+<h3 id="updateworkflow-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|workflow_id|path|string|true|Id for the workflow|
+|label|body|string|true|Customer identifier|
+|schema_version|body|string|true|Version of the workflow schema used|
+|applies_to|body|string|true|The entity type this work flow applies too|
+|starts_at|body|string|true|Starting step|
+|steps|body|object|true|Steps for the workflow|
+
+<h3 id="updateworkflow-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|A work flow response|Inline|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad Request|Inline|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
+|423|[Locked](https://tools.ietf.org/html/rfc2518#section-10.4)|Forbidden|Inline|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "work_flow_id": "work-flow",
+  "label": "My workflow",
+  "created": "2019-08-19T00:01:02.000Z",
+  "updated": "2020-08-19T01:01:02.000Z",
+  "workflow_version": 7,
+  "applies_to": "UNIT",
+  "starts_at": "work-complete",
+  "schema_version": "1.0",
+  "triggered_by": [
+    "UNIT.created"
+  ],
+  "metadata": {
+    "meta": "data"
+  },
+  "steps": {
+    "work-complete": {
+      "label": "work complete",
+      "on_complete": [],
+      "on_start": [],
+      "step_type": "success"
+    },
+    "stop-poking-me": {
+      "label": "stop poking me",
+      "on_complete": [],
+      "on_start": [],
+      "step_type": "fail"
+    }
+  },
+  "_links": {
+    "nter:work-flow-contexts": {
+      "href": "https://api.example.com/work-flows/work-flow/contexts"
+    },
+    "self": {
+      "href": "https://api.example.com/work-flows/work-flow"
+    }
+  }
+}
+```
+
+> 400 Response
+
+```json
+{
+  "title": "Bad Request",
+  "type": "https://docs.nterprise.com/api/problem/BadRequest",
+  "status": 400,
+  "detail": "Invalid Data",
+  "validation_messages": [
+    {
+      "keyword": "field",
+      "dataPath": ".field",
+      "schemaPath": "https://docs.nterprise.com/schemas/niagara/foo.json#/properties/field",
+      "params": {
+        "type": "string"
+      },
+      "message": "should be string"
+    }
+  ]
+}
+```
+
+> 403 Response
+
+```json
+{
+  "title": "Forbidden",
+  "type": "https://docs.nterprise.com/api/problem/Forbidden",
+  "status": 403,
+  "detail": "You are forbidden from accessing this resource"
+}
+```
+
+> 423 Response
+
+```json
+{
+  "title": "Locked",
+  "type": "https://docs.nterprise.com/api/problem/Locked",
+  "status": 423,
+  "detail": "This resource is currently locked from editing"
+}
+```
+
+<h3 id="updateworkflow-responseschema">Response Schema</h3>
+
+Status Code **400**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; validation_messages|[object]|true|none|List of errors detailing the failures|
+
+Status Code **403**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
+
+Status Code **423**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
+
+### DELETE /work-flows/{workflow_id} - *Delete workflow*
+
+<a id="opIddeleteWorkflow"></a>
+
+*Delete workflow*
+
+Deletes a workflow
+
+<h3 id="deleteworkflow-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|workflow_id|path|string|true|Id for the workflow|
+
+<h3 id="deleteworkflow-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|205|[Reset Content](https://tools.ietf.org/html/rfc7231#section-6.3.6)|Workflow deleted|None|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|Inline|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Resource not found|Inline|
+|423|[Locked](https://tools.ietf.org/html/rfc2518#section-10.4)|Forbidden|Inline|
+
+> Example responses
+
+> 401 Response
+
+```json
+{
+  "title": "Unauthorized",
+  "type": "https://docs.nterprise.com/api/problem/Unauthorized",
+  "status": 401,
+  "detail": "Invalid authorization token"
+}
+```
+
+> 403 Response
+
+```json
+{
+  "title": "Forbidden",
+  "type": "https://docs.nterprise.com/api/problem/Forbidden",
+  "status": 403,
+  "detail": "You are forbidden from accessing this resource"
+}
+```
+
+> 404 Response
+
+```json
+{
+  "title": "Not Found",
+  "type": "https://docs.nterprise.com/api/problem/NotFound",
+  "status": 404,
+  "detail": "A Resource with the id \"foo\" was not found"
+}
+```
+
+> 423 Response
+
+```json
+{
+  "title": "Locked",
+  "type": "https://docs.nterprise.com/api/problem/Locked",
+  "status": 423,
+  "detail": "This resource is currently locked from editing"
+}
+```
+
+<h3 id="deleteworkflow-responseschema">Response Schema</h3>
+
+Status Code **401**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
+
+Status Code **403**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
+
+Status Code **404**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
+
+Status Code **423**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
+
 ### POST /work-flows/{workflow_id}/contexts - *Start workflow*
 
 <a id="opIdstartWorkflow"></a>
@@ -2528,6 +2648,327 @@ Starts a workflow on an entity
 ```
 
 <h3 id="startworkflow-responseschema">Response Schema</h3>
+
+Status Code **400**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; validation_messages|[object]|true|none|List of errors detailing the failures|
+
+Status Code **401**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
+
+Status Code **403**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
+
+<h1 id="work-flows-workflow">WorkFlow</h1>
+
+## Operations
+
+### GET /work-flows/{workflow_id}/relations - *Fetch WorkFlow relations*
+
+<a id="opIdfetchRelationsForWorkFlow"></a>
+
+*Fetch WorkFlow relations*
+
+Fetches the relations for a workFlow
+
+<h3 id="fetchrelationsforworkflow-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|workflow_id|path|string|true|Id for the workflow|
+|filter[entity_type]|query|string|false|Filter on entity type|
+|filter[relation]|query|string|false|Filter on relation type|
+|filter[direction]|query|string|false|Filter on relation direction|
+
+<h3 id="fetchrelationsforworkflow-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|A paged response for relations|Inline|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|Inline|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Resource not found|Inline|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "total_count": 21,
+  "limit": 42,
+  "offset": "next-offset",
+  "_embedded": {
+    "nter:relations": [
+      {
+        "relation_id": "VVNFUiNyZWw6Y3JlYXRlZCM3ZTg4OTMyMS0yZWNmLTQzMjctODYyOS0yMzNhNzU1NmRmMmI",
+        "relation": "created",
+        "label": "Created By",
+        "direction": "INWARD",
+        "created": "2020-01-09T22:12:03.000Z",
+        "updated": "2020-01-09T22:12:03.000Z",
+        "entity": {
+          "entity_type": "USER",
+          "entity_id": "b0a84f51-443e-4ff1-9667-73b66be7435a",
+          "label": "Bob Alice",
+          "created": "2020-01-09T22:12:03.000Z",
+          "updated": "2020-01-09T22:12:03.000Z"
+        },
+        "_links": {
+          "self": {
+            "href": "https://api.nterprise.com/{entity}/{entity_id}/relations/VVNFUiNyZWw6Y3JlYXRlZCM3ZTg4OTMyMS0yZWNmLTQzMjctODYyOS0yMzNhNzU1NmRmMmI"
+          },
+          "nter:user": {
+            "href": "https://api.nterprise.com/users/b0a84f51-443e-4ff1-9667-73b66be7435a"
+          }
+        }
+      }
+    ]
+  },
+  "_links": {
+    "next": {
+      "href": "https://api.example.com/{entity}/{entity_id}/relations?offset=next-offset"
+    },
+    "self": {
+      "href": "https://api.example.com/{entity}/{entity_id}/relations"
+    }
+  }
+}
+```
+
+> 401 Response
+
+```json
+{
+  "title": "Unauthorized",
+  "type": "https://docs.nterprise.com/api/problem/Unauthorized",
+  "status": 401,
+  "detail": "Invalid authorization token"
+}
+```
+
+> 403 Response
+
+```json
+{
+  "title": "Forbidden",
+  "type": "https://docs.nterprise.com/api/problem/Forbidden",
+  "status": 403,
+  "detail": "You are forbidden from accessing this resource"
+}
+```
+
+> 404 Response
+
+```json
+{
+  "title": "Not Found",
+  "type": "https://docs.nterprise.com/api/problem/NotFound",
+  "status": 404,
+  "detail": "A Resource with the id \"foo\" was not found"
+}
+```
+
+<h3 id="fetchrelationsforworkflow-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; total_count|number|true|read-only|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; limit|number|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; offset|string¦null|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; _embedded|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; nter:relations|[allOf]|true|none|none|
+
+*allOf*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; relation_id|string|true|none|Custom identifier for the relation|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; relation|string|true|none|Type of relation|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; label|string|true|none|Label for the relation|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; direction|string|true|none|Direction of the relation. OUTWARD relations are entities this relates to while INWARD are entities related to this entity|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; created|string(date-time)|true|read-only|Date the entity was created|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; updated|string(date-time)|true|read-only|Last date the entity was updated|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; entity|object|false|none|Related entity information|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; entity_id|string|true|read-only|Customer identifier|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; entity_type|string|true|none|Entity type|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; label|string|true|none|Label for the entity|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; created|string(date-time)|true|read-only|Date the entity was created|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; updated|string(date-time)|true|read-only|Last date the entity was updated|
+
+*and*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _links|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **additionalProperties**|object|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; href|string(uri)|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; href|string(uri)|false|none|none|
+
+*continued*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; _links|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; href|string(uri)|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; next|object|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; href|string(uri)|false|none|none|
+
+Status Code **401**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
+
+Status Code **403**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
+
+Status Code **404**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
+
+### POST /work-flows/{workflow_id}/relations - *Create relation*
+
+<a id="opIdcreateRelationForWorkFlow"></a>
+
+*Create relation*
+
+Creates a relation for a workFlow
+
+> Body parameter
+
+<h3 id="createrelationforworkflow-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|workflow_id|path|string|true|Id for the workflow|
+|relation|body|string|true|Type of relation|
+|entity|body|object|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; entity_id|body|string|true|Customer identifier|
+|&nbsp;&nbsp;&nbsp;&nbsp; entity_type|body|string|true|Entity type|
+
+<h3 id="createrelationforworkflow-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|A paged response for relations|Inline|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad Request|Inline|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|Inline|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
+
+> Example responses
+
+> 201 Response
+
+```json
+{
+  "relation_id": "VVNFUiNyZWw6Y3JlYXRlZCM3ZTg4OTMyMS0yZWNmLTQzMjctODYyOS0yMzNhNzU1NmRmMmI",
+  "relation": "created",
+  "label": "Created By",
+  "direction": "INWARD",
+  "created": "2020-01-09T22:12:03.000Z",
+  "updated": "2020-01-09T22:12:03.000Z",
+  "entity": {
+    "entity_type": "USER",
+    "entity_id": "b0a84f51-443e-4ff1-9667-73b66be7435a",
+    "label": "Bob Alice",
+    "created": "2020-01-09T22:12:03.000Z",
+    "updated": "2020-01-09T22:12:03.000Z"
+  },
+  "_links": {
+    "self": {
+      "href": "https://api.nterprise.com/{entity}/{entity_id}/relations/VVNFUiNyZWw6Y3JlYXRlZCM3ZTg4OTMyMS0yZWNmLTQzMjctODYyOS0yMzNhNzU1NmRmMmI"
+    },
+    "nter:user": {
+      "href": "https://api.nterprise.com/users/b0a84f51-443e-4ff1-9667-73b66be7435a"
+    }
+  }
+}
+```
+
+> 400 Response
+
+```json
+{
+  "title": "Bad Request",
+  "type": "https://docs.nterprise.com/api/problem/BadRequest",
+  "status": 400,
+  "detail": "Invalid Data",
+  "validation_messages": [
+    {
+      "keyword": "field",
+      "dataPath": ".field",
+      "schemaPath": "https://docs.nterprise.com/schemas/niagara/foo.json#/properties/field",
+      "params": {
+        "type": "string"
+      },
+      "message": "should be string"
+    }
+  ]
+}
+```
+
+> 401 Response
+
+```json
+{
+  "title": "Unauthorized",
+  "type": "https://docs.nterprise.com/api/problem/Unauthorized",
+  "status": 401,
+  "detail": "Invalid authorization token"
+}
+```
+
+> 403 Response
+
+```json
+{
+  "title": "Forbidden",
+  "type": "https://docs.nterprise.com/api/problem/Forbidden",
+  "status": 403,
+  "detail": "You are forbidden from accessing this resource"
+}
+```
+
+<h3 id="createrelationforworkflow-responseschema">Response Schema</h3>
 
 Status Code **400**
 

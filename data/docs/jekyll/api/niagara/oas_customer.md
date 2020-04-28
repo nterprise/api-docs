@@ -22,7 +22,7 @@ Customers may have multiple Programs, Projects, and Locations, as well as device
 
 ## Operations
 
-### GET /customers - *Fetch Customers*
+### GET /customers/{customer_id}/customers - *Fetch Customers*
 
 <a id="opIdfetchAllCustomers"></a>
 
@@ -161,7 +161,7 @@ Status Code **403**
 |&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
 |&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
 
-### POST /customers - *Create customer*
+### POST /customers/{customer_id}/customers - *Create customer*
 
 <a id="opIdcreateCustomer"></a>
 
@@ -850,336 +850,6 @@ Status Code **423**
 |&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
 |&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
 
-### GET /customers/{customer_id}/contacts - *Fetch customer contacts*
-
-<a id="opIdfetchAllCustomerContacts"></a>
-
-*Fetch customer contacts*
-
-Fetches A Page of contacts for the customer
-
-<h3 id="fetchallcustomercontacts-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|customer_id|path|string|true|Id of the customer|
-|limit|query|integer(int32)|false|How many items to return at one time (max 100)|
-|offset|query|string|false|Continue from last offset|
-
-<h3 id="fetchallcustomercontacts-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|A paged response for contacts|Inline|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|Inline|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Resource not found|Inline|
-
-> Example responses
-
-> 200 Response
-
-```json
-{
-  "total_count": 21,
-  "limit": 42,
-  "offset": "next-offset",
-  "_embedded": {
-    "nter:contacts": [
-      {
-        "contact_id": "contact",
-        "label": "Major",
-        "created": "2019-08-19T00:01:02.000Z",
-        "updated": "2020-08-19T01:01:02.000Z",
-        "name": "Major Samantha Carter",
-        "email": "s.carter@sg1.com",
-        "phone": "518-867-5309",
-        "_links": {
-          "self": {
-            "href": "https://api.example.com/contacts/contact"
-          }
-        }
-      }
-    ]
-  },
-  "_links": {
-    "self": {
-      "href": "https://api.example.com/contacts?limit=42"
-    }
-  }
-}
-```
-
-> 401 Response
-
-```json
-{
-  "title": "Unauthorized",
-  "type": "https://docs.nterprise.com/api/problem/Unauthorized",
-  "status": 401,
-  "detail": "Invalid authorization token"
-}
-```
-
-> 403 Response
-
-```json
-{
-  "title": "Forbidden",
-  "type": "https://docs.nterprise.com/api/problem/Forbidden",
-  "status": 403,
-  "detail": "You are forbidden from accessing this resource"
-}
-```
-
-> 404 Response
-
-```json
-{
-  "title": "Not Found",
-  "type": "https://docs.nterprise.com/api/problem/NotFound",
-  "status": 404,
-  "detail": "A Resource with the id \"foo\" was not found"
-}
-```
-
-<h3 id="fetchallcustomercontacts-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; total_count|number|true|read-only|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; limit|number|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; offset|string¦null|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; _embedded|object|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; nter:contacts|[allOf]|true|none|none|
-
-*allOf*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; contact_id|string|false|read-only|Identifier for the contact|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; label|string|false|none|Label for the entity|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; created|string(date-time)|false|read-only|Date the entity was created|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; updated|string(date-time)|false|read-only|Last date the entity was updated|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; name|string|false|none|Contact name|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; email|string(email)|false|none|Email address|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; phone|string|false|none|Phone number|
-
-*and*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _links|object|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self|object|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; href|string(uri)|false|none|none|
-
-*continued*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; _links|object|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self|object|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; href|string(uri)|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; next|object|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; href|string(uri)|false|none|none|
-
-Status Code **401**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
-Status Code **403**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
-Status Code **404**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
-### POST /customers/{customer_id}/contacts - *Create customer contact*
-
-<a id="opIdattachCustomerContact"></a>
-
-*Create customer contact*
-
-This will create the contact along with linking it to the customer. If a contact is found based on the email address, this will just link the contact to the customer
-
-> Body parameter
-
-<h3 id="attachcustomercontact-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|customer_id|path|string|true|Id of the customer|
-|label|body|string|true|Label for the entity|
-|name|body|string|true|Contact name|
-|email|body|string(email)|true|Email address|
-|phone|body|string|false|Phone number|
-
-<h3 id="attachcustomercontact-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|A contact response|Inline|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad Request|Inline|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|Inline|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Resource not found|Inline|
-|409|[Conflict](https://tools.ietf.org/html/rfc7231#section-6.5.8)|Conflict|Inline|
-
-> Example responses
-
-> 200 Response
-
-```json
-{
-  "contact_id": "contact",
-  "label": "Major",
-  "created": "2019-08-19T00:01:02.000Z",
-  "updated": "2020-08-19T01:01:02.000Z",
-  "name": "Major Samantha Carter",
-  "email": "s.carter@sg1.com",
-  "phone": "518-867-5309",
-  "_links": {
-    "self": {
-      "href": "https://api.example.com/contacts/contact"
-    }
-  }
-}
-```
-
-> 400 Response
-
-```json
-{
-  "title": "Bad Request",
-  "type": "https://docs.nterprise.com/api/problem/BadRequest",
-  "status": 400,
-  "detail": "Invalid Data",
-  "validation_messages": [
-    {
-      "keyword": "field",
-      "dataPath": ".field",
-      "schemaPath": "https://docs.nterprise.com/schemas/niagara/foo.json#/properties/field",
-      "params": {
-        "type": "string"
-      },
-      "message": "should be string"
-    }
-  ]
-}
-```
-
-> 401 Response
-
-```json
-{
-  "title": "Unauthorized",
-  "type": "https://docs.nterprise.com/api/problem/Unauthorized",
-  "status": 401,
-  "detail": "Invalid authorization token"
-}
-```
-
-> 403 Response
-
-```json
-{
-  "title": "Forbidden",
-  "type": "https://docs.nterprise.com/api/problem/Forbidden",
-  "status": 403,
-  "detail": "You are forbidden from accessing this resource"
-}
-```
-
-> 404 Response
-
-```json
-{
-  "title": "Not Found",
-  "type": "https://docs.nterprise.com/api/problem/NotFound",
-  "status": 404,
-  "detail": "A Resource with the id \"foo\" was not found"
-}
-```
-
-> 409 Response
-
-```json
-{
-  "title": "Conflict",
-  "type": "https://docs.nterprise.com/api/problem/Conflict",
-  "status": 409,
-  "detail": "A similar resource exists"
-}
-```
-
-<h3 id="attachcustomercontact-responseschema">Response Schema</h3>
-
-Status Code **400**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; validation_messages|[object]|true|none|List of errors detailing the failures|
-
-Status Code **401**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
-Status Code **403**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
-Status Code **404**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
-Status Code **409**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
 ### GET /customers/{customer_id}/programs - *Fetch customer programs*
 
 <a id="opIdfetchAllCustomerPrograms"></a>
@@ -1406,6 +1076,439 @@ Status Code **200**
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; href|string(uri)|false|none|none|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; next|object|false|none|none|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; href|string(uri)|false|none|none|
+
+Status Code **401**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
+
+Status Code **403**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
+
+Status Code **404**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
+
+### GET /customers/{customer_id}/relations - *Fetch Customer relations*
+
+<a id="opIdfetchRelationsForCustomer"></a>
+
+*Fetch Customer relations*
+
+Fetches the relations for a customer
+
+<h3 id="fetchrelationsforcustomer-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|customer_id|path|string|true|Id of the customer|
+|filter[entity_type]|query|string|false|Filter on entity type|
+|filter[relation]|query|string|false|Filter on relation type|
+|filter[direction]|query|string|false|Filter on relation direction|
+
+<h3 id="fetchrelationsforcustomer-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|A paged response for relations|Inline|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|Inline|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Resource not found|Inline|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "total_count": 21,
+  "limit": 42,
+  "offset": "next-offset",
+  "_embedded": {
+    "nter:relations": [
+      {
+        "relation_id": "VVNFUiNyZWw6Y3JlYXRlZCM3ZTg4OTMyMS0yZWNmLTQzMjctODYyOS0yMzNhNzU1NmRmMmI",
+        "relation": "created",
+        "label": "Created By",
+        "direction": "INWARD",
+        "created": "2020-01-09T22:12:03.000Z",
+        "updated": "2020-01-09T22:12:03.000Z",
+        "entity": {
+          "entity_type": "USER",
+          "entity_id": "b0a84f51-443e-4ff1-9667-73b66be7435a",
+          "label": "Bob Alice",
+          "created": "2020-01-09T22:12:03.000Z",
+          "updated": "2020-01-09T22:12:03.000Z"
+        },
+        "_links": {
+          "self": {
+            "href": "https://api.nterprise.com/{entity}/{entity_id}/relations/VVNFUiNyZWw6Y3JlYXRlZCM3ZTg4OTMyMS0yZWNmLTQzMjctODYyOS0yMzNhNzU1NmRmMmI"
+          },
+          "nter:user": {
+            "href": "https://api.nterprise.com/users/b0a84f51-443e-4ff1-9667-73b66be7435a"
+          }
+        }
+      }
+    ]
+  },
+  "_links": {
+    "next": {
+      "href": "https://api.example.com/{entity}/{entity_id}/relations?offset=next-offset"
+    },
+    "self": {
+      "href": "https://api.example.com/{entity}/{entity_id}/relations"
+    }
+  }
+}
+```
+
+> 401 Response
+
+```json
+{
+  "title": "Unauthorized",
+  "type": "https://docs.nterprise.com/api/problem/Unauthorized",
+  "status": 401,
+  "detail": "Invalid authorization token"
+}
+```
+
+> 403 Response
+
+```json
+{
+  "title": "Forbidden",
+  "type": "https://docs.nterprise.com/api/problem/Forbidden",
+  "status": 403,
+  "detail": "You are forbidden from accessing this resource"
+}
+```
+
+> 404 Response
+
+```json
+{
+  "title": "Not Found",
+  "type": "https://docs.nterprise.com/api/problem/NotFound",
+  "status": 404,
+  "detail": "A Resource with the id \"foo\" was not found"
+}
+```
+
+<h3 id="fetchrelationsforcustomer-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; total_count|number|true|read-only|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; limit|number|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; offset|string¦null|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; _embedded|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; nter:relations|[allOf]|true|none|none|
+
+*allOf*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; relation_id|string|true|none|Custom identifier for the relation|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; relation|string|true|none|Type of relation|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; label|string|true|none|Label for the relation|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; direction|string|true|none|Direction of the relation. OUTWARD relations are entities this relates to while INWARD are entities related to this entity|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; created|string(date-time)|true|read-only|Date the entity was created|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; updated|string(date-time)|true|read-only|Last date the entity was updated|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; entity|object|false|none|Related entity information|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; entity_id|string|true|read-only|Customer identifier|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; entity_type|string|true|none|Entity type|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; label|string|true|none|Label for the entity|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; created|string(date-time)|true|read-only|Date the entity was created|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; updated|string(date-time)|true|read-only|Last date the entity was updated|
+
+*and*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _links|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **additionalProperties**|object|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; href|string(uri)|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; href|string(uri)|false|none|none|
+
+*continued*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; _links|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; href|string(uri)|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; next|object|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; href|string(uri)|false|none|none|
+
+Status Code **401**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
+
+Status Code **403**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
+
+Status Code **404**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
+
+### POST /customers/{customer_id}/relations - *Create relation*
+
+<a id="opIdcreateRelationForCustomer"></a>
+
+*Create relation*
+
+Creates a relation for a customer
+
+> Body parameter
+
+<h3 id="createrelationforcustomer-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|customer_id|path|string|true|Id of the customer|
+|relation|body|string|true|Type of relation|
+|entity|body|object|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; entity_id|body|string|true|Customer identifier|
+|&nbsp;&nbsp;&nbsp;&nbsp; entity_type|body|string|true|Entity type|
+
+<h3 id="createrelationforcustomer-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|A paged response for relations|Inline|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad Request|Inline|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|Inline|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
+
+> Example responses
+
+> 201 Response
+
+```json
+{
+  "relation_id": "VVNFUiNyZWw6Y3JlYXRlZCM3ZTg4OTMyMS0yZWNmLTQzMjctODYyOS0yMzNhNzU1NmRmMmI",
+  "relation": "created",
+  "label": "Created By",
+  "direction": "INWARD",
+  "created": "2020-01-09T22:12:03.000Z",
+  "updated": "2020-01-09T22:12:03.000Z",
+  "entity": {
+    "entity_type": "USER",
+    "entity_id": "b0a84f51-443e-4ff1-9667-73b66be7435a",
+    "label": "Bob Alice",
+    "created": "2020-01-09T22:12:03.000Z",
+    "updated": "2020-01-09T22:12:03.000Z"
+  },
+  "_links": {
+    "self": {
+      "href": "https://api.nterprise.com/{entity}/{entity_id}/relations/VVNFUiNyZWw6Y3JlYXRlZCM3ZTg4OTMyMS0yZWNmLTQzMjctODYyOS0yMzNhNzU1NmRmMmI"
+    },
+    "nter:user": {
+      "href": "https://api.nterprise.com/users/b0a84f51-443e-4ff1-9667-73b66be7435a"
+    }
+  }
+}
+```
+
+> 400 Response
+
+```json
+{
+  "title": "Bad Request",
+  "type": "https://docs.nterprise.com/api/problem/BadRequest",
+  "status": 400,
+  "detail": "Invalid Data",
+  "validation_messages": [
+    {
+      "keyword": "field",
+      "dataPath": ".field",
+      "schemaPath": "https://docs.nterprise.com/schemas/niagara/foo.json#/properties/field",
+      "params": {
+        "type": "string"
+      },
+      "message": "should be string"
+    }
+  ]
+}
+```
+
+> 401 Response
+
+```json
+{
+  "title": "Unauthorized",
+  "type": "https://docs.nterprise.com/api/problem/Unauthorized",
+  "status": 401,
+  "detail": "Invalid authorization token"
+}
+```
+
+> 403 Response
+
+```json
+{
+  "title": "Forbidden",
+  "type": "https://docs.nterprise.com/api/problem/Forbidden",
+  "status": 403,
+  "detail": "You are forbidden from accessing this resource"
+}
+```
+
+<h3 id="createrelationforcustomer-responseschema">Response Schema</h3>
+
+Status Code **400**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; validation_messages|[object]|true|none|List of errors detailing the failures|
+
+Status Code **401**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
+
+Status Code **403**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
+
+### DELETE /customers/{customer_id}/relations/{relation_id} - *Delete relation for customer*
+
+<a id="opIddeleteRelationForCustomer"></a>
+
+*Delete relation for customer*
+
+Deletes a relation for a customer
+
+<h3 id="deleterelationforcustomer-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|customer_id|path|string|true|Id of the customer|
+|relation_id|path|string|true|Id of the relation|
+
+<h3 id="deleterelationforcustomer-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|A paged response for relations|Inline|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|Inline|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Resource not found|Inline|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "relation_id": "VVNFUiNyZWw6Y3JlYXRlZCM3ZTg4OTMyMS0yZWNmLTQzMjctODYyOS0yMzNhNzU1NmRmMmI",
+  "relation": "created",
+  "label": "Created By",
+  "direction": "INWARD",
+  "created": "2020-01-09T22:12:03.000Z",
+  "updated": "2020-01-09T22:12:03.000Z",
+  "entity": {
+    "entity_type": "USER",
+    "entity_id": "b0a84f51-443e-4ff1-9667-73b66be7435a",
+    "label": "Bob Alice",
+    "created": "2020-01-09T22:12:03.000Z",
+    "updated": "2020-01-09T22:12:03.000Z"
+  },
+  "_links": {
+    "self": {
+      "href": "https://api.nterprise.com/{entity}/{entity_id}/relations/VVNFUiNyZWw6Y3JlYXRlZCM3ZTg4OTMyMS0yZWNmLTQzMjctODYyOS0yMzNhNzU1NmRmMmI"
+    },
+    "nter:user": {
+      "href": "https://api.nterprise.com/users/b0a84f51-443e-4ff1-9667-73b66be7435a"
+    }
+  }
+}
+```
+
+> 401 Response
+
+```json
+{
+  "title": "Unauthorized",
+  "type": "https://docs.nterprise.com/api/problem/Unauthorized",
+  "status": 401,
+  "detail": "Invalid authorization token"
+}
+```
+
+> 403 Response
+
+```json
+{
+  "title": "Forbidden",
+  "type": "https://docs.nterprise.com/api/problem/Forbidden",
+  "status": 403,
+  "detail": "You are forbidden from accessing this resource"
+}
+```
+
+> 404 Response
+
+```json
+{
+  "title": "Not Found",
+  "type": "https://docs.nterprise.com/api/problem/NotFound",
+  "status": 404,
+  "detail": "A Resource with the id \"foo\" was not found"
+}
+```
+
+<h3 id="deleterelationforcustomer-responseschema">Response Schema</h3>
 
 Status Code **401**
 

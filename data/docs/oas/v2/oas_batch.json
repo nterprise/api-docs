@@ -18,6 +18,12 @@
     },
     "/batches/{batch_id}": {
       "$ref": "./paths/batch/batch.json"
+    },
+    "/batches/{batch_id}/relations": {
+      "$ref": "./paths/batch/relations.json"
+    },
+    "/batches/{batch_id}/relations/{relation_id}": {
+      "$ref": "./paths/batch/relation.json"
     }
   },
   "components": {

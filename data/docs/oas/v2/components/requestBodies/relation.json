@@ -1,0 +1,34 @@
+{
+  "description": "Create a relation to an entity",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "required": [
+          "relation",
+          "entity"
+        ],
+        "properties": {
+          "relation": {
+            "$ref": "../schemas/relation.json#/properties/relation"
+          },
+          "entity": {
+            "type": "object",
+            "required": [
+              "entity_id",
+              "entity_type"
+            ],
+            "properties": {
+              "entity_id": {
+                "$ref": "../schemas/relation.json#/properties/entity/properties/entity_id"
+              },
+              "entity_type": {
+                "$ref": "../schemas/relation.json#/properties/entity/properties/entity_type"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "description": "A paged response for batchs",
+  "description": "A paged response for batches",
   "content": {
     "application/hal+json": {
       "schema": {

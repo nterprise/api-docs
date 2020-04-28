@@ -35,6 +35,12 @@
     },
     "/work-flows/{workflow_id}/contexts": {
       "$ref": "./paths/workflow/context.json"
+    },
+    "/work-flows/{workflow_id}/relations": {
+      "$ref": "./paths/workFlow/relations.json"
+    },
+    "/work-flows/{workflow_id}/relations/{relation_id}": {
+      "$ref": "./paths/workFlow/relation.json"
     }
   },
   "components": {

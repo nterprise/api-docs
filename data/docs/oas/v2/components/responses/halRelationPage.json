@@ -1,0 +1,102 @@
+{
+  "description": "A paged response for relations",
+  "content": {
+    "application/hal+json": {
+      "schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "_embedded",
+          "_links",
+          "total_count",
+          "limit",
+          "offset"
+        ],
+        "properties": {
+          "total_count": {
+            "type": "number",
+            "readOnly": true
+          },
+          "limit": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 100
+          },
+          "offset": {
+            "type": "string",
+            "nullable": true
+          },
+          "_embedded": {
+            "type": "object",
+            "required": [
+              "nter:relations"
+            ],
+            "properties": {
+              "nter:relations": {
+                "type": "array",
+                "maxItems": 100,
+                "items": {
+                  "$ref": "../schemas/halRelation.json"
+                }
+              }
+            }
+          },
+          "_links": {
+            "type": "object",
+            "required": [
+              "self"
+            ],
+            "properties": {
+              "self": {
+                "$ref": "../schemas/link.json"
+              },
+              "next": {
+                "$ref": "../schemas/link.json"
+              }
+            }
+          }
+        }
+      },
+      "example": {
+        "total_count": 21,
+        "limit": 42,
+        "offset": "next-offset",
+        "_embedded": {
+          "nter:relations": [
+            {
+              "relation_id": "VVNFUiNyZWw6Y3JlYXRlZCM3ZTg4OTMyMS0yZWNmLTQzMjctODYyOS0yMzNhNzU1NmRmMmI",
+              "relation": "created",
+              "label": "Created By",
+              "direction": "INWARD",
+              "created": "2020-01-09T22:12:03.000Z",
+              "updated": "2020-01-09T22:12:03.000Z",
+              "entity": {
+                "entity_type": "USER",
+                "entity_id": "b0a84f51-443e-4ff1-9667-73b66be7435a",
+                "label": "Bob Alice",
+                "created": "2020-01-09T22:12:03.000Z",
+                "updated": "2020-01-09T22:12:03.000Z"
+              },
+              "_links": {
+                "self": {
+                  "href": "https://api.nterprise.com/{entity}/{entity_id}/relations/VVNFUiNyZWw6Y3JlYXRlZCM3ZTg4OTMyMS0yZWNmLTQzMjctODYyOS0yMzNhNzU1NmRmMmI"
+                },
+                "nter:user": {
+                  "href": "https://api.nterprise.com/users/b0a84f51-443e-4ff1-9667-73b66be7435a"
+                }
+              }
+            }
+          ]
+        },
+        "_links": {
+          "next": {
+            "href": "https://api.example.com/{entity}/{entity_id}/relations?offset=next-offset"
+          },
+          "self": {
+            "href": "https://api.example.com/{entity}/{entity_id}/relations"
+          }
+        }
+      }
+    }
+  }
+}
