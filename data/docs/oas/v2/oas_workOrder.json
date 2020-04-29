@@ -32,6 +32,12 @@
     },
     "/work-orders/{work_order_id}": {
       "$ref": "./paths/workOrder/workOrder.json"
+    },
+    "/work-orders/{work_order_id}/relations": {
+      "$ref": "./paths/workOrder/relations.json"
+    },
+    "/work-orders/{work_order_id}/relations/{relation_id}": {
+      "$ref": "./paths/workOrder/relation.json"
     }
   },
   "components": {

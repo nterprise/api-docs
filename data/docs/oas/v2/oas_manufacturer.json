@@ -40,6 +40,12 @@
     },
     "/manufacturers/{manufacturer_id}/units": {
       "$ref": "./paths/manufacturer/units.json"
+    },
+    "/manufacturers/{manufacturer_id}/relations": {
+      "$ref": "./paths/manufacturer/relations.json"
+    },
+    "/manufacturers/{manufacturer_id}/relations/{relation_id}": {
+      "$ref": "./paths/manufacturer/relation.json"
     }
   },
   "components": {

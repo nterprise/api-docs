@@ -1,0 +1,32 @@
+{
+  "delete": {
+    "operationId": "deleteRelationForQueue",
+    "summary": "Delete relation for queue",
+    "description": "Deletes a relation for a queue",
+    "tags": [
+      "Queue"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/queueId.json"
+      },
+      {
+        "$ref": "../../components/parameters/relationId.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halRelation.json"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      },
+      "404": {
+        "$ref": "../../components/responses/404notFound.json"
+      }
+    }
+  }
+}

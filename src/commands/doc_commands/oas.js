@@ -138,6 +138,52 @@ const jsonSchemaToOas = (spec) => _.reduce(
     {},
 );
 
+const oasToJsonSchema = (spec) => _.reduce(
+    spec,
+    (fixed, value, key) => {
+        if (_.startsWith(key, 'x-nter')) {
+            _.unset(fixed, key);
+            return fixed;
+        }
+
+        if (_.startsWith(key, 'x-')) {
+            _.set(fixed, `${key.replace('x-', '')}`, value);
+            return fixed;
+        }
+
+        if (key === 'nullable' && value) {
+            _.set(fixed, 'type', [_.get(fixed, 'type'), 'null']);
+            _.unset(fixed, 'nullable');
+            return fixed;
+        }
+
+        if (_.isArray(value)) {
+            _.set(
+                fixed,
+                key,
+                _.map(
+                    value,
+                    (child) => _.isObject(child)
+                        ? oasToJsonSchema(child)
+                        // If this is an array then something is wrong
+                        : child,
+                ),
+            );
+            return fixed;
+        }
+
+        if (_.isObject(value)) {
+            value = oasToJsonSchema(value);
+            _.set(fixed, key, value);
+            return fixed;
+        }
+
+        _.set(fixed, key, value);
+        return fixed;
+    },
+    {},
+);
+
 const buildFontMatter = (oas) => _.reduce(
     fontMatterMapping,
     (fontMatter, {apiKey, fontMatterKey}) => {
@@ -207,7 +253,8 @@ const processFile = async (file) => {
                 }
 
                 // Validate the example matches the schema
-                const validate = ajv.compile(value.schema);
+                const jsonSchema = oasToJsonSchema(_.cloneDeep(value.schema));
+                const validate = ajv.compile(jsonSchema);
                 const valid = validate(value.example);
 
                 if (!valid) {

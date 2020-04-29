@@ -36,6 +36,12 @@
     },
     "/queues/{queue_id}/batches": {
       "$ref": "./paths/queue/batches.json"
+    },
+    "/queues/{queue_id}/relations": {
+      "$ref": "./paths/queue/relations.json"
+    },
+    "/queues/{queue_id}/relations/{relation_id}": {
+      "$ref": "./paths/queue/relation.json"
     }
   },
   "components": {

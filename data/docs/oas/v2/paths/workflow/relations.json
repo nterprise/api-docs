@@ -1,0 +1,68 @@
+{
+  "get": {
+    "operationId": "fetchRelationsForWorkFlow",
+    "summary": "Fetch WorkFlow relations",
+    "description": "Fetches the relations for a workFlow",
+    "tags": [
+      "WorkFlow"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/workFlowId.json"
+      },
+      {
+        "$ref": "../../components/parameters/filterEntity.json"
+      },
+      {
+        "$ref": "../../components/parameters/filterRelation.json"
+      },
+      {
+        "$ref": "../../components/parameters/filterRelationDirection.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halRelationPage.json"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      },
+      "404": {
+        "$ref": "../../components/responses/404notFound.json"
+      }
+    }
+  },
+  "post": {
+    "operationId": "createRelationForWorkFlow",
+    "summary": "Create relation",
+    "description": "Creates a relation for a workFlow",
+    "tags": [
+      "WorkFlow"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/workFlowId.json"
+      }
+    ],
+    "requestBody": {
+      "$ref": "../../components/requestBodies/relation.json"
+    },
+    "responses": {
+      "201": {
+        "$ref": "../../components/responses/halRelation.json"
+      },
+      "400": {
+        "$ref": "../../components/responses/400badRequest.json"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      }
+    }
+  }
+}

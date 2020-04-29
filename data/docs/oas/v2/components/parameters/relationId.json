@@ -1,0 +1,9 @@
+{
+  "name": "relation_id",
+  "in": "path",
+  "description": "Id of the relation",
+  "required": true,
+  "schema": {
+    "$ref": "../schemas/relation.json#/properties/relation_id"
+  }
+}

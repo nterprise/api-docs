@@ -1,0 +1,32 @@
+{
+  "delete": {
+    "operationId": "deleteRelationForResource",
+    "summary": "Delete relation for resource",
+    "description": "Deletes a relation for a resource",
+    "tags": [
+      "Resource"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/resourceId.json"
+      },
+      {
+        "$ref": "../../components/parameters/relationId.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halRelation.json"
+      },
+      "401": {
+        "$ref": "../../components/responses/401unauthorized.json"
+      },
+      "403": {
+        "$ref": "../../components/responses/403forbidden.json"
+      },
+      "404": {
+        "$ref": "../../components/responses/404notFound.json"
+      }
+    }
+  }
+}

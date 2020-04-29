@@ -9,7 +9,7 @@
   "properties": {
     "entity_id": {
       "type": "string",
-      "description": "Customer identifier",
+      "description": "Entity identifier",
       "readOnly": true,
       "pattern": "^[0-9a-zA-Z-_]+$"
     },

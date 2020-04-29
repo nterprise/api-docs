@@ -36,11 +36,17 @@
     "/customers/{customer_id}": {
       "$ref": "./paths/customer/customer.json"
     },
-    "/customers/{customer_id}/contacts": {
-      "$ref": "./paths/customer/contacts.json"
+    "/customers/{customer_id}/customers": {
+      "$ref": "./paths/customer/customers.json"
     },
     "/customers/{customer_id}/programs": {
       "$ref": "./paths/customer/programs.json"
+    },
+    "/customers/{customer_id}/relations": {
+      "$ref": "./paths/customer/relations.json"
+    },
+    "/customers/{customer_id}/relations/{relation_id}": {
+      "$ref": "./paths/customer/relation.json"
     }
   },
   "components": {

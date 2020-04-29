@@ -4,7 +4,7 @@
     "summary": "Fetch current step",
     "description": "Returns the current step for the context",
     "tags": [
-      "Context"
+      "Work Flow"
     ],
     "parameters": [
       {

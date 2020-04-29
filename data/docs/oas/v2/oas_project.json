@@ -35,6 +35,12 @@
     },
     "/projects/project_id": {
       "$ref": "./paths/project/project.json"
+    },
+    "/projects/{project_id}/relations": {
+      "$ref": "./paths/project/relations.json"
+    },
+    "/projects/{project_id}/relations/{relation_id}": {
+      "$ref": "./paths/project/relation.json"
     }
   },
   "components": {
