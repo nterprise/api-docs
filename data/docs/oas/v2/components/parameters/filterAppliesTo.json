@@ -1,0 +1,8 @@
+{
+  "name": "filter[applies_to]",
+  "in": "query",
+  "description": "Filter on work flow applies to",
+  "schema": {
+    "$ref": "../schemas/workFlow.json#/properties/applies_to"
+  }
+}

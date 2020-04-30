@@ -1,6 +1,12 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://docs.nterprise.com/schemas/niagara/batch.json",
+  "x-nter-permissions": [
+    "batch:create",
+    "batch:update",
+    "batch:delete",
+    "batch:read"
+  ],
   "type": "object",
   "description": "Defines the properties for a work order batch",
   "additionalProperties": false,

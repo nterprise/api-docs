@@ -117,12 +117,15 @@
         "order": 2,
         "number_cycles": 4,
         "cycles": {
+          "needed": 4,
           "pending": 0,
           "in_progress": 0,
           "verifying": 0,
           "complete": 0,
           "blocked": 0,
-          "cancelled": 0
+          "cancelled": 0,
+          "active": 0,
+          "in_active": 0
         },
         "work_order": {
           "work_order_id": "work-order",
@@ -301,9 +304,11 @@
               "complete": 0,
               "blocked": 0,
               "cancelled": 0,
+              "active": 0,
+              "in_active": 0,
+              "assigned": 0,
               "work_flow": {
-                "entity_type": "WKF",
-                "entity_id": "work-flow",
+                "work_flow_id": "work-flow",
                 "created": "2019-08-19T00:01:02.000Z",
                 "updated": "2020-08-19T01:01:02.000Z",
                 "label": "My workflow",

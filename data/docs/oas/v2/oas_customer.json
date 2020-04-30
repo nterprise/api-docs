@@ -36,7 +36,7 @@
     "/customers/{customer_id}": {
       "$ref": "./paths/customer/customer.json"
     },
-    "/customers/{customer_id}/customers": {
+    "/customers/{customer_id}/contacts": {
       "$ref": "./paths/customer/customers.json"
     },
     "/customers/{customer_id}/programs": {

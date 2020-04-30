@@ -230,9 +230,11 @@ Fetches A Page of work orders
             "complete": 0,
             "blocked": 0,
             "cancelled": 0,
+            "active": 1,
+            "in_active": 0,
+            "assigned": 0,
             "work_flow": {
-              "entity_type": "WKF",
-              "entity_id": "work-flow",
+              "work_flow_id": "work-flow",
               "created": "2019-08-19T00:01:02.000Z",
               "updated": "2020-08-19T01:01:02.000Z",
               "label": "My workflow",
@@ -401,30 +403,18 @@ Status Code **200**
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; category|string|true|none|The classifier for the statues|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; description|string¦null|false|none|A description for the status|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; order|number|false|none|Order status appears when listing|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cycles|[object]|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; needed|integer|true|none|The number of cycles needed|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pending|integer|true|read-only|The number of cycles pending|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; in_progress|integer|true|read-only|The number of cycles pending|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; verifying|integer|true|read-only|The number of cycles pending|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; complete|integer|true|read-only|The number of cycles pending|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; blocked|integer|true|read-only|The number of cycles pending|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cancelled|integer|true|read-only|The number of cycles pending|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; work_flow|object|true|none|Workflow|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; work_flow_id|string|false|read-only|Customer identifier|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; entity_id|string|true|read-only|Customer identifier|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; entity_type|string|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cycles|[allOf]|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; assigned|number|true|none|Number of assigned cycles|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; work_flow|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; work_flow_id|string|true|read-only|Entity identifier|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; label|string|true|none|Label for the entity|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; created|string(date-time)|true|read-only|Date the entity was created|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; updated|string(date-time)|true|read-only|Last date the entity was updated|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; schema_version|string|true|none|Version of the workflow schema used|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; workflow_version|integer|false|read-only|Version number for the work flows (the number of times it has been changed|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; workflow_version|integer|true|read-only|Version number for the work flows (the number of times it has been changed|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; applies_to|string|true|none|The entity type this work flow applies too|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; triggered_by|[string]|false|none|none|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; starts_at|string|true|none|Starting step|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; steps|object|true|none|Steps for the workflow|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; metadata|object|false|none|Data for the resource as a key value pair|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **additionalProperties**|string|false|none|none|
 
 *and*
 
@@ -491,17 +481,10 @@ Creates a work-order
 |&nbsp;&nbsp;&nbsp;&nbsp; project_id|body|string|false|Unique identifier|
 |start_date|body|string(date-time)¦null|false|Start date|
 |end_date|body|string(date-time)¦null|false|End date|
-|cycles|body|[object]|false|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; needed|body|integer|true|The number of cycles needed|
-|&nbsp;&nbsp;&nbsp;&nbsp; pending|body|integer|true|The number of cycles pending|
-|&nbsp;&nbsp;&nbsp;&nbsp; in_progress|body|integer|true|The number of cycles pending|
-|&nbsp;&nbsp;&nbsp;&nbsp; verifying|body|integer|true|The number of cycles pending|
-|&nbsp;&nbsp;&nbsp;&nbsp; complete|body|integer|true|The number of cycles pending|
-|&nbsp;&nbsp;&nbsp;&nbsp; blocked|body|integer|true|The number of cycles pending|
-|&nbsp;&nbsp;&nbsp;&nbsp; cancelled|body|integer|true|The number of cycles pending|
+|cycles|body|[allOf]|false|none|
 |&nbsp;&nbsp;&nbsp;&nbsp; work_flow|body|object|true|Workflow|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; work_flow_id|body|string|false|Customer identifier|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; entity_id|body|string|true|Customer identifier|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; work_flow_id|body|string|false|Entity identifier|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; entity_id|body|string|true|Entity identifier|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; entity_type|body|string|true|none|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; label|body|string|true|Label for the entity|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; slug|body|string|false|Slug for the entity (Auto-generated from the label)|
@@ -513,8 +496,9 @@ Creates a work-order
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; triggered_by|body|[string]|false|none|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; starts_at|body|string|true|Starting step|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; steps|body|object|true|Steps for the workflow|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; metadata|body|object|false|Data for the resource as a key value pair|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; metadata|body|object|false|Data for the entity as a key value pair|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **additionalProperties**|body|string|false|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; assigned|body|number|true|Number of assigned cycles|
 
 <h3 id="createworkorder-responses">Responses</h3>
 
@@ -707,9 +691,11 @@ Creates a work-order
       "complete": 0,
       "blocked": 0,
       "cancelled": 0,
+      "active": 1,
+      "in_active": 0,
+      "assigned": 0,
       "work_flow": {
-        "entity_type": "WKF",
-        "entity_id": "work-flow",
+        "work_flow_id": "work-flow",
         "created": "2019-08-19T00:01:02.000Z",
         "updated": "2020-08-19T01:01:02.000Z",
         "label": "My workflow",
@@ -1048,9 +1034,11 @@ Fetches a work-order
       "complete": 0,
       "blocked": 0,
       "cancelled": 0,
+      "active": 1,
+      "in_active": 0,
+      "assigned": 0,
       "work_flow": {
-        "entity_type": "WKF",
-        "entity_id": "work-flow",
+        "work_flow_id": "work-flow",
         "created": "2019-08-19T00:01:02.000Z",
         "updated": "2020-08-19T01:01:02.000Z",
         "label": "My workflow",
@@ -1201,17 +1189,10 @@ Updates a work-order
 |&nbsp;&nbsp;&nbsp;&nbsp; project_id|body|string|false|Unique identifier|
 |start_date|body|string(date-time)¦null|false|Start date|
 |end_date|body|string(date-time)¦null|false|End date|
-|cycles|body|[object]|false|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; needed|body|integer|true|The number of cycles needed|
-|&nbsp;&nbsp;&nbsp;&nbsp; pending|body|integer|true|The number of cycles pending|
-|&nbsp;&nbsp;&nbsp;&nbsp; in_progress|body|integer|true|The number of cycles pending|
-|&nbsp;&nbsp;&nbsp;&nbsp; verifying|body|integer|true|The number of cycles pending|
-|&nbsp;&nbsp;&nbsp;&nbsp; complete|body|integer|true|The number of cycles pending|
-|&nbsp;&nbsp;&nbsp;&nbsp; blocked|body|integer|true|The number of cycles pending|
-|&nbsp;&nbsp;&nbsp;&nbsp; cancelled|body|integer|true|The number of cycles pending|
+|cycles|body|[allOf]|false|none|
 |&nbsp;&nbsp;&nbsp;&nbsp; work_flow|body|object|true|Workflow|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; work_flow_id|body|string|false|Customer identifier|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; entity_id|body|string|true|Customer identifier|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; work_flow_id|body|string|false|Entity identifier|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; entity_id|body|string|true|Entity identifier|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; entity_type|body|string|true|none|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; label|body|string|true|Label for the entity|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; slug|body|string|false|Slug for the entity (Auto-generated from the label)|
@@ -1223,8 +1204,9 @@ Updates a work-order
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; triggered_by|body|[string]|false|none|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; starts_at|body|string|true|Starting step|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; steps|body|object|true|Steps for the workflow|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; metadata|body|object|false|Data for the resource as a key value pair|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; metadata|body|object|false|Data for the entity as a key value pair|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **additionalProperties**|body|string|false|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; assigned|body|number|true|Number of assigned cycles|
 
 <h3 id="updateworkorder-responses">Responses</h3>
 
@@ -1417,9 +1399,11 @@ Updates a work-order
       "complete": 0,
       "blocked": 0,
       "cancelled": 0,
+      "active": 1,
+      "in_active": 0,
+      "assigned": 0,
       "work_flow": {
-        "entity_type": "WKF",
-        "entity_id": "work-flow",
+        "work_flow_id": "work-flow",
         "created": "2019-08-19T00:01:02.000Z",
         "updated": "2020-08-19T01:01:02.000Z",
         "label": "My workflow",
@@ -1791,7 +1775,7 @@ Status Code **200**
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; created|string(date-time)|true|read-only|Date the entity was created|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; updated|string(date-time)|true|read-only|Last date the entity was updated|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; entity|object|false|none|Related entity information|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; entity_id|string|true|read-only|Customer identifier|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; entity_id|string|true|read-only|Entity identifier|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; entity_type|string|true|none|Entity type|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; label|string|true|none|Label for the entity|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; created|string(date-time)|true|read-only|Date the entity was created|
@@ -1982,7 +1966,7 @@ Creates a relation for a workOrder
 |work_order_id|path|string|true|Id for the work order|
 |relation|body|string|true|Type of relation|
 |entity|body|object|true|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; entity_id|body|string|true|Customer identifier|
+|&nbsp;&nbsp;&nbsp;&nbsp; entity_id|body|string|true|Entity identifier|
 |&nbsp;&nbsp;&nbsp;&nbsp; entity_type|body|string|true|Entity type|
 
 <h3 id="createrelationforworkorder-responses">Responses</h3>
@@ -2176,30 +2160,18 @@ Status Code **403**
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; category|string|true|none|The classifier for the statues|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; description|string¦null|false|none|A description for the status|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; order|number|false|none|Order status appears when listing|
-|cycles|[object]|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; needed|integer|true|none|The number of cycles needed|
-|&nbsp;&nbsp;&nbsp;&nbsp; pending|integer|true|read-only|The number of cycles pending|
-|&nbsp;&nbsp;&nbsp;&nbsp; in_progress|integer|true|read-only|The number of cycles pending|
-|&nbsp;&nbsp;&nbsp;&nbsp; verifying|integer|true|read-only|The number of cycles pending|
-|&nbsp;&nbsp;&nbsp;&nbsp; complete|integer|true|read-only|The number of cycles pending|
-|&nbsp;&nbsp;&nbsp;&nbsp; blocked|integer|true|read-only|The number of cycles pending|
-|&nbsp;&nbsp;&nbsp;&nbsp; cancelled|integer|true|read-only|The number of cycles pending|
-|&nbsp;&nbsp;&nbsp;&nbsp; work_flow|object|true|none|Workflow|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; work_flow_id|string|false|read-only|Customer identifier|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; entity_id|string|true|read-only|Customer identifier|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; entity_type|string|true|none|none|
+|cycles|[allOf]|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; assigned|number|true|none|Number of assigned cycles|
+|&nbsp;&nbsp;&nbsp;&nbsp; work_flow|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; work_flow_id|string|true|read-only|Entity identifier|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; label|string|true|none|Label for the entity|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; slug|string|false|read-only|Slug for the entity (Auto-generated from the label)|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; created|string(date-time)|true|read-only|Date the entity was created|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; updated|string(date-time)|true|read-only|Last date the entity was updated|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; schema_version|string|true|none|Version of the workflow schema used|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; workflow_version|integer|false|read-only|Version number for the work flows (the number of times it has been changed|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; workflow_version|integer|true|read-only|Version number for the work flows (the number of times it has been changed|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; applies_to|string|true|none|The entity type this work flow applies too|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; triggered_by|[string]|false|none|none|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; starts_at|string|true|none|Starting step|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; steps|object|true|none|Steps for the workflow|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; metadata|object|false|none|Data for the resource as a key value pair|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **additionalProperties**|string|false|none|none|
 
 #### Specification
 
@@ -2625,87 +2597,38 @@ properties:
                 order: 7
   cycles:
     type: array
-    minimum: 1
+    maxItems: 1
+    minItems: 1
     items:
       type: object
-      additionalProperties: false
       required:
-        - needed
-        - pending
-        - in_progress
-        - verifying
-        - complete
-        - blocked
-        - cancelled
+        - assigned
         - work_flow
       properties:
-        needed:
-          type: integer
-          description: The number of cycles needed
-          minimum: 1
-        pending:
-          type: integer
-          description: The number of cycles pending
-          readOnly: true
-        in_progress:
-          type: integer
-          description: The number of cycles pending
-          readOnly: true
-        verifying:
-          type: integer
-          description: The number of cycles pending
-          readOnly: true
-        complete:
-          type: integer
-          description: The number of cycles pending
-          readOnly: true
-        blocked:
-          type: integer
-          description: The number of cycles pending
-          readOnly: true
-        cancelled:
-          type: integer
-          description: The number of cycles pending
-          readOnly: true
+        assigned:
+          type: number
+          description: Number of assigned cycles
         work_flow:
           type: object
-          description: Workflow
-          additionalProperties: false
           required:
+            - work_flow_id
             - label
-            - entity_id
-            - entity_type
             - created
             - updated
-            - steps
-            - starts_at
-            - applies_to
             - schema_version
+            - workflow_version
+            - applies_to
+            - starts_at
+            - steps
           properties:
             work_flow_id:
               type: string
-              description: Customer identifier
+              description: Entity identifier
               readOnly: true
               pattern: ^[0-9a-zA-Z-_]+$
-            entity_id:
-              x-no-api-doc: true
-              type: string
-              description: Customer identifier
-              readOnly: true
-              pattern: ^[0-9a-zA-Z-_]+$
-            entity_type:
-              x-no-api-doc: true
-              enum:
-                - WKF
             label:
               type: string
               description: Label for the entity
-            slug:
-              type: string
-              description: Slug for the entity (Auto-generated from the label)
-              readOnly: true
-              deprecated: true
-              pattern: ^[a-z0-9]+(?:-[a-z0-9]+)*$
             created:
               description: Date the entity was created
               type: string
@@ -2736,90 +2659,6 @@ properties:
                 - PRJ
                 - CUS
                 - CON
-            triggered_by:
-              type: array
-              items:
-                type: string
-                description: Possible entity events
-                enum:
-                  - CON.attached
-                  - CON.created
-                  - CON.deleted
-                  - CON.detached
-                  - CON.removed
-                  - CON.updated
-                  - CUS.attached
-                  - CUS.created
-                  - CUS.deleted
-                  - CUS.detached
-                  - CUS.removed
-                  - CUS.updated
-                  - LOC.attached
-                  - LOC.created
-                  - LOC.deleted
-                  - LOC.detached
-                  - LOC.removed
-                  - LOC.updated
-                  - NOTE.attached
-                  - NOTE.created
-                  - NOTE.deleted
-                  - NOTE.detached
-                  - NOTE.removed
-                  - NOTE.updated
-                  - PART.attached
-                  - PART.created
-                  - PART.deleted
-                  - PART.detached
-                  - PART.removed
-                  - PART.updated
-                  - PGM.attached
-                  - PGM.created
-                  - PGM.deleted
-                  - PGM.detached
-                  - PGM.removed
-                  - PGM.updated
-                  - PRJ.attached
-                  - PRJ.created
-                  - PRJ.deleted
-                  - PRJ.detached
-                  - PRJ.removed
-                  - PRJ.updated
-                  - RES.attached
-                  - RES.created
-                  - RES.deleted
-                  - RES.detached
-                  - RES.removed
-                  - RES.updated
-                  - SRES.attached
-                  - SRES.created
-                  - SRES.deleted
-                  - SRES.detached
-                  - SRES.removed
-                  - SRES.updated
-                  - UNIT.attached
-                  - UNIT.created
-                  - UNIT.deleted
-                  - UNIT.detached
-                  - UNIT.removed
-                  - UNIT.updated
-                  - USER.attached
-                  - USER.created
-                  - USER.deleted
-                  - USER.detached
-                  - USER.removed
-                  - USER.updated
-                  - WKF.attached
-                  - WKF.created
-                  - WKF.deleted
-                  - WKF.detached
-                  - WKF.removed
-                  - WKF.updated
-                  - WOR.attached
-                  - WOR.created
-                  - WOR.deleted
-                  - WOR.detached
-                  - WOR.removed
-                  - WOR.updated
             starts_at:
               type: string
               description: Starting step
@@ -3360,84 +3199,107 @@ properties:
                                   - type: string
                                     description: Possible entity events
                                     enum:
-                                      - CON.attached
                                       - CON.created
+                                      - CON.changed
                                       - CON.deleted
-                                      - CON.detached
                                       - CON.removed
-                                      - CON.updated
-                                      - CUS.attached
+                                      - CON.relation-added
+                                      - CON.relation-removed
+                                      - CTX.created
+                                      - CTX.changed
+                                      - CTX.deleted
+                                      - CTX.removed
+                                      - CTX.relation-added
+                                      - CTX.relation-removed
+                                      - CTX.step-completed
+                                      - CTX.step-saved
                                       - CUS.created
+                                      - CUS.changed
                                       - CUS.deleted
-                                      - CUS.detached
                                       - CUS.removed
-                                      - CUS.updated
-                                      - LOC.attached
+                                      - CUS.relation-added
+                                      - CUS.relation-removed
                                       - LOC.created
+                                      - LOC.changed
                                       - LOC.deleted
-                                      - LOC.detached
                                       - LOC.removed
-                                      - LOC.updated
-                                      - NOTE.attached
+                                      - LOC.relation-added
+                                      - LOC.relation-removed
                                       - NOTE.created
                                       - NOTE.deleted
-                                      - NOTE.detached
                                       - NOTE.removed
-                                      - NOTE.updated
-                                      - PART.attached
+                                      - NOTE.changed
+                                      - NOTE.relation-added
+                                      - NOTE.relation-removed
                                       - PART.created
+                                      - PART.changed
                                       - PART.deleted
-                                      - PART.detached
                                       - PART.removed
-                                      - PART.updated
-                                      - PGM.attached
+                                      - PART.relation-added
+                                      - PART.relation-removed
                                       - PGM.created
+                                      - PGM.changed
                                       - PGM.deleted
-                                      - PGM.detached
                                       - PGM.removed
-                                      - PGM.updated
-                                      - PRJ.attached
+                                      - PGM.relation-added
+                                      - PGM.relation-removed
+                                      - PGM.moved-from
+                                      - PGM.moved-to
                                       - PRJ.created
+                                      - PRJ.changed
                                       - PRJ.deleted
-                                      - PRJ.detached
                                       - PRJ.removed
-                                      - PRJ.updated
-                                      - RES.attached
+                                      - PRJ.relation-added
+                                      - PRJ.relation-removed
+                                      - PRJ.moved-from
+                                      - PRJ.moved-to
                                       - RES.created
+                                      - RES.changed
                                       - RES.deleted
-                                      - RES.detached
                                       - RES.removed
-                                      - RES.updated
-                                      - SRES.attached
+                                      - RES.relation-added
+                                      - RES.relation-removed
+                                      - RES.moved-from
+                                      - RES.moved-to
                                       - SRES.created
+                                      - SRES.changed
                                       - SRES.deleted
-                                      - SRES.detached
                                       - SRES.removed
-                                      - SRES.updated
-                                      - UNIT.attached
+                                      - SRES.relation-added
+                                      - SRES.relation-removed
+                                      - SRES.moved-from
+                                      - SRES.moved-to
                                       - UNIT.created
+                                      - UNIT.changed
                                       - UNIT.deleted
-                                      - UNIT.detached
                                       - UNIT.removed
-                                      - UNIT.updated
-                                      - USER.attached
+                                      - UNIT.relation-added
+                                      - UNIT.relation-removed
+                                      - UNIT.location-changed
+                                      - UNIT.resource-changed
+                                      - UNIT.moved-from
+                                      - UNIT.moved-to
                                       - USER.created
+                                      - USER.changed
                                       - USER.deleted
-                                      - USER.detached
                                       - USER.removed
-                                      - USER.updated
-                                      - WKF.attached
+                                      - USER.relation-added
+                                      - USER.relation-removed
                                       - WKF.created
+                                      - WKF.changed
                                       - WKF.deleted
-                                      - WKF.detached
                                       - WKF.removed
-                                      - WKF.updated
-                                      - WOR.attached
+                                      - WKF.relation-added
+                                      - WKF.relation-removed
                                       - WOR.created
+                                      - WOR.changed
                                       - WOR.deleted
-                                      - WOR.detached
                                       - WOR.removed
-                                      - WOR.updated
+                                      - WOR.relation-added
+                                      - WOR.relation-removed
+                                      - WOR.location-changed
+                                      - WOR.moved-from
+                                      - WOR.moved-to
                               event_value:
                                 type: object
                                 description: The event conditions that have to be met
@@ -3445,13 +3307,51 @@ properties:
                                   - *a9
                       allOf:
                         - *a8
-            metadata:
-              type: object
-              description: Data for the resource as a key value pair
-              additionalProperties:
-                type: string
-              propertyNames:
-                pattern: ^[A-Za-z][A-Za-z0-9_]*$
+      allOf:
+        - type: object
+          required:
+            - pending
+            - needed
+            - in_progress
+            - verifying
+            - complete
+            - blocked
+            - cancelled
+            - active
+            - in_active
+          properties:
+            pending:
+              type: integer
+              description: The number of cycles pending
+            needed:
+              type: integer
+              description: The number of cycles needed
+              minimum: 1
+            in_progress:
+              type: integer
+              description: The number of cycles in progress
+            verifying:
+              type: integer
+              description: The number of cycles verifying
+            complete:
+              type: integer
+              description: The number of cycles complete
+            blocked:
+              type: integer
+              description: The number of cycles blocked
+            cancelled:
+              type: integer
+              description: The number of cycles cancelled
+            active:
+              type: integer
+              description: The number of active cycles. Active cycles is the sum of pending,
+                in_progress, verifying, and blocked
+              readOnly: true
+            in_active:
+              type: integer
+              description: The number of in_active cycles. Active cycles is the sum of
+                cancelled and complete
+              readOnly: true
 
 ```
 

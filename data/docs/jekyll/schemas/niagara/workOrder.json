@@ -84,48 +84,28 @@
     },
     "cycles": {
       "type": "array",
-      "minimum": 1,
+      "maxItems": 1,
+      "minItems": 1,
       "items": {
         "type": "object",
-        "additionalProperties": false,
         "required": [
-          "needed",
-          "pending",
-          "in_progress",
-          "verifying",
-          "complete",
-          "blocked",
-          "cancelled",
-          "work_flow"
+          "work_flow",
+          "assigned"
         ],
         "properties": {
-          "needed": {
-            "type": "integer",
-            "description": "The number of cycles needed",
-            "minimum": 1
-          },
-          "pending": {
-            "$ref": "https://docs.nterprise.com/schemas/niagara/cycle.json#/properties/pending"
-          },
-          "in_progress": {
-            "$ref": "https://docs.nterprise.com/schemas/niagara/cycle.json#/properties/pending"
-          },
-          "verifying": {
-            "$ref": "https://docs.nterprise.com/schemas/niagara/cycle.json#/properties/pending"
-          },
-          "complete": {
-            "$ref": "https://docs.nterprise.com/schemas/niagara/cycle.json#/properties/pending"
-          },
-          "blocked": {
-            "$ref": "https://docs.nterprise.com/schemas/niagara/cycle.json#/properties/pending"
-          },
-          "cancelled": {
-            "$ref": "https://docs.nterprise.com/schemas/niagara/cycle.json#/properties/pending"
-          },
           "work_flow": {
             "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow.json"
+          },
+          "assigned": {
+            "type": "number",
+            "description": "Number of assigned cycles"
           }
-        }
+        },
+        "allOf": [
+          {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/cycle.json"
+          }
+        ]
       }
     },
     "meta": {
