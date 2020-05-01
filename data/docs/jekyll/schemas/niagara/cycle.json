@@ -2,37 +2,55 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://docs.nterprise.com/schemas/niagara/cycle.json",
   "type": "object",
-  "readOnly": true,
-  "additionalProperties": false,
+  "required": [
+    "pending",
+    "needed",
+    "in_progress",
+    "verifying",
+    "complete",
+    "blocked",
+    "cancelled",
+    "active",
+    "in_active"
+  ],
   "properties": {
     "pending": {
       "type": "integer",
-      "description": "The number of cycles pending",
-      "readOnly": true
+      "description": "The number of cycles pending"
+    },
+    "needed": {
+      "type": "integer",
+      "description": "The number of cycles needed",
+      "minimum": 1
     },
     "in_progress": {
       "type": "integer",
-      "description": "The number of cycles in progress",
-      "readOnly": true
+      "description": "The number of cycles in progress"
     },
     "verifying": {
       "type": "integer",
-      "description": "The number of cycles verifying",
-      "readOnly": true
+      "description": "The number of cycles verifying"
     },
     "complete": {
       "type": "integer",
-      "description": "The number of cycles complete",
-      "readOnly": true
+      "description": "The number of cycles complete"
     },
     "blocked": {
       "type": "integer",
-      "description": "The number of cycles blocked",
-      "readOnly": true
+      "description": "The number of cycles blocked"
     },
     "cancelled": {
       "type": "integer",
-      "description": "The number of cycles cancelled",
+      "description": "The number of cycles cancelled"
+    },
+    "active": {
+      "type": "integer",
+      "description": "The number of active cycles. Active cycles is the sum of pending, in_progress, verifying, and blocked",
+      "readOnly": true
+    },
+    "in_active": {
+      "type": "integer",
+      "description": "The number of in_active cycles. Active cycles is the sum of cancelled and complete",
       "readOnly": true
     }
   }

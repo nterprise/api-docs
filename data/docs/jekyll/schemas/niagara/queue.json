@@ -50,7 +50,27 @@
       "minimum": 0
     },
     "total_work_orders": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/cycle.json"
+      "type": "object",
+      "properties": {
+        "pending": {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/cycle.json#/properties/pending"
+        },
+        "in_progress": {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/cycle.json#/properties/in_progress"
+        },
+        "verifying": {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/cycle.json#/properties/verifying"
+        },
+        "complete": {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/cycle.json#/properties/complete"
+        },
+        "blocked": {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/cycle.json#/properties/blocked"
+        },
+        "cancelled": {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/cycle.json#/properties/cancelled"
+        }
+      }
     },
     "active_work_orders": {
       "type": "number",

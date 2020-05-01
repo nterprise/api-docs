@@ -12,6 +12,9 @@
       },
       {
         "$ref": "../../components/parameters/offset.json"
+      },
+      {
+        "$ref": "../../components/parameters/filterAppliesTo.json"
       }
     ],
     "responses": {
