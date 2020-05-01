@@ -483,7 +483,7 @@ Status Code **200**
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; number_cycles|integer|true|none|The number of cycles for this batch|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cycles|object|true|none|none|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pending|integer|true|none|The number of cycles pending|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; needed|integer|true|none|The number of cycles needed|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; needed|integer|false|none|The number of cycles needed|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; in_progress|integer|true|none|The number of cycles in progress|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; verifying|integer|true|none|The number of cycles verifying|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; complete|integer|true|none|The number of cycles complete|
@@ -2494,7 +2494,7 @@ continued
 |number_cycles|integer|true|none|The number of cycles for this batch|
 |cycles|object|true|none|none|
 |&nbsp;&nbsp;&nbsp;&nbsp; pending|integer|true|none|The number of cycles pending|
-|&nbsp;&nbsp;&nbsp;&nbsp; needed|integer|true|none|The number of cycles needed|
+|&nbsp;&nbsp;&nbsp;&nbsp; needed|integer|false|none|The number of cycles needed|
 |&nbsp;&nbsp;&nbsp;&nbsp; in_progress|integer|true|none|The number of cycles in progress|
 |&nbsp;&nbsp;&nbsp;&nbsp; verifying|integer|true|none|The number of cycles verifying|
 |&nbsp;&nbsp;&nbsp;&nbsp; complete|integer|true|none|The number of cycles complete|
@@ -3051,7 +3051,6 @@ properties:
     type: object
     required:
       - pending
-      - needed
       - in_progress
       - verifying
       - complete
@@ -4235,7 +4234,6 @@ properties:
                 - type: object
                   required:
                     - pending
-                    - needed
                     - in_progress
                     - verifying
                     - complete

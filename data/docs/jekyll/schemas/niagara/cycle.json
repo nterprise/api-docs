@@ -4,7 +4,6 @@
   "type": "object",
   "required": [
     "pending",
-    "needed",
     "in_progress",
     "verifying",
     "complete",

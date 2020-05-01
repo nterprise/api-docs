@@ -498,7 +498,7 @@ Creates a work-order
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; steps|body|object|true|Steps for the workflow|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; metadata|body|object|false|Data for the entity as a key value pair|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **additionalProperties**|body|string|false|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; assigned|body|number|true|Number of assigned cycles|
+|&nbsp;&nbsp;&nbsp;&nbsp; assigned|body|number|false|Number of assigned cycles|
 
 <h3 id="createworkorder-responses">Responses</h3>
 
@@ -1206,7 +1206,7 @@ Updates a work-order
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; steps|body|object|true|Steps for the workflow|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; metadata|body|object|false|Data for the entity as a key value pair|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **additionalProperties**|body|string|false|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; assigned|body|number|true|Number of assigned cycles|
+|&nbsp;&nbsp;&nbsp;&nbsp; assigned|body|number|false|Number of assigned cycles|
 
 <h3 id="updateworkorder-responses">Responses</h3>
 
@@ -3311,7 +3311,6 @@ properties:
         - type: object
           required:
             - pending
-            - needed
             - in_progress
             - verifying
             - complete
