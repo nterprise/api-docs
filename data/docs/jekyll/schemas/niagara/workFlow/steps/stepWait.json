@@ -1,21 +1,47 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepWait.json",
-  "type": "object",
   "description": "A step which run at certain times",
+  "type": "object",
   "required": [
+    "step_type",
+    "label",
+    "goto",
+    "goto_fail",
     "stop_at",
     "time"
   ],
+  "additionalProperties": false,
   "properties": {
-    "label": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepCommon.json#/properties/label"
-    },
-    "type": {
+    "step_type": {
       "type": "string",
       "enum": [
         "wait"
       ]
+    },
+    "label": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepNext.json#/properties/label"
+    },
+    "on_start": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepNext.json#/properties/on_start"
+    },
+    "on_complete": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepNext.json#/properties/on_complete"
+    },
+    "goto": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepNext.json#/properties/goto"
+    },
+    "goto_fail": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepNext.json#/properties/goto_fail"
+    },
+    "context": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepNext.json#/properties/context"
+    },
+    "on_error": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepNext.json#/properties/on_error"
+    },
+    "on_timeout": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepNext.json#/properties/on_timeout"
     },
     "stop_at": {
       "type": "integer",
@@ -59,10 +85,5 @@
         }
       }
     }
-  },
-  "allOf": [
-    {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepCommon.json"
-    }
-  ]
+  }
 }

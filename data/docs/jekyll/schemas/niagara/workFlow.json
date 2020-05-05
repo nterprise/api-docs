@@ -77,9 +77,9 @@
       "type": "object",
       "description": "Steps for the workflow",
       "uniqueItems": true,
-      "additionalProperties": true,
+      "additionalProperties": false,
       "patternProperties": {
-        "^[A-Za-z][A-Za-z0-9_]*$": {
+        "^[A-Za-z][A-Za-z0-9-]*$": {
           "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/allSteps.json#/properties/step"
         }
       }
