@@ -43,7 +43,10 @@
       "deprecated": true,
       "patternProperties": {
         "^[A-Za-z][A-Za-z0-9_]*$": {
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         }
       }
     },
@@ -62,6 +65,9 @@
     "total_projects": {
       "type": "number",
       "description": "Total projects under the customer"
+    },
+    "input_filter": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter.json"
     }
   }
 }

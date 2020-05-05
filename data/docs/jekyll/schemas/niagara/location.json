@@ -347,6 +347,9 @@
           "description": "Floor # / Room # / Building label etc"
         }
       }
+    },
+    "input_filter": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter.json"
     }
   }
 }

@@ -4,7 +4,8 @@
     "updated",
     "label",
     "created",
-    "manufacturer_id"
+    "manufacturer_id",
+    "input_filter"
   ],
   "properties": {
     "manufacturer_id": {
@@ -18,6 +19,9 @@
     },
     "updated": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/manufacturer.json#/properties/updated"
+    },
+    "input_filter": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter.json"
     }
   }
 }

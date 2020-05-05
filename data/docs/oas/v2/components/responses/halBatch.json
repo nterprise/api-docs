@@ -111,7 +111,8 @@
               "thoroughfare": "431 Broadway",
               "premise": "Suite c",
               "sub_premise": "ZIC"
-            }
+            },
+            "input_filter": []
           }
         },
         "order": 2,
@@ -189,7 +190,8 @@
                   "status": "Cancelled",
                   "order": 8
                 }
-              ]
+              ],
+              "input_filter": []
             },
             "program": {
               "program_id": "program",
@@ -241,7 +243,8 @@
                     "status": "Cancelled",
                     "order": 8
                   }
-                ]
+                ],
+                "input_filter": []
               },
               "end_date": "2020-02-10T22:12:03.000Z",
               "start_date": "2020-02-10T22:12:03.000Z",
@@ -258,7 +261,8 @@
                   "status": "Verifying",
                   "order": 5
                 }
-              ]
+              ],
+              "input_filter": []
             },
             "end_date": "2020-02-10T22:12:03.000Z",
             "start_date": "2020-02-10T22:12:03.000Z",
@@ -269,7 +273,8 @@
                 "status": "Pending",
                 "order": 3
               }
-            ]
+            ],
+            "input_filter": []
           },
           "location": {
             "location_id": "location",

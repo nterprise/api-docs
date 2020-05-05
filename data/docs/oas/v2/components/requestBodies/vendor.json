@@ -10,6 +10,9 @@
         "properties": {
           "label": {
             "$ref": "https://docs.nterprise.com/schemas/niagara/vendor.json#/properties/label"
+          },
+          "input_filter": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter.json"
           }
         }
       }

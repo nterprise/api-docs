@@ -45,7 +45,7 @@
             "$ref": "https://docs.nterprise.com/schemas/niagara/part.json#/properties/serial_prefix"
           },
           "input_filter": {
-            "$ref": "https://docs.nterprise.com/schemas/niagara/part.json#/properties/input_filter"
+            "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter.json"
           }
         }
       }

@@ -131,14 +131,16 @@
                       "status": "Cancelled",
                       "order": 8
                     }
-                  ]
+                  ],
+                  "input_filter": []
                 },
                 "manufacturer": {
                   "manufacturer_id": "manufacturer",
                   "label": "Manchuck Inc",
                   "created": "2019-08-19T00:01:02.000Z",
                   "updated": "2020-08-19T01:01:02.000Z",
-                  "part_number": "1-888-482-858-832"
+                  "part_number": "1-888-482-858-832",
+                  "input_filter": []
                 },
                 "input_filter": [
                   {
@@ -155,7 +157,8 @@
                 "label": "Manchuck Inc",
                 "created": "2019-08-19T00:01:02.000Z",
                 "updated": "2020-08-19T01:01:02.000Z",
-                "part_number": "VEN-number"
+                "part_number": "VEN-number",
+                "input_filter": []
               },
               "customer": {
                 "customer_id": "customer",
@@ -202,14 +205,16 @@
                     "status": "Cancelled",
                     "order": 8
                   }
-                ]
+                ],
+                "input_filter": []
               },
               "manufacturer": {
                 "manufacturer_id": "manufacturer",
                 "label": "Manchuck Inc",
                 "created": "2019-08-19T00:01:02.000Z",
                 "updated": "2020-08-19T01:01:02.000Z",
-                "part_number": "1-888-482-858-832"
+                "part_number": "1-888-482-858-832",
+                "input_filter": []
               },
               "location": {
                 "location_id": "location",
@@ -227,7 +232,8 @@
                   "thoroughfare": "431 Broadway",
                   "premise": "Suite c",
                   "sub_premise": "ZIC"
-                }
+                },
+                "input_filter": []
               },
               "current_location": {
                 "location_id": "location",
@@ -245,36 +251,10 @@
                   "thoroughfare": "431 Broadway",
                   "premise": "Suite c",
                   "sub_premise": "ZIC"
-                }
-              },
-              "resource": {
-                "resource_id": "parent-resource",
-                "label": "parent resource",
-                "created": "2020-01-09T22:12:03.000Z",
-                "updated": "2020-01-09T22:12:03.000Z",
-                "location": {
-                  "location_id": "location",
-                  "label": "Test Label",
-                  "created": "2019-08-19T00:01:02.000Z",
-                  "updated": "2020-08-19T01:01:02.000Z",
-                  "location_type": "warehouse",
-                  "formatted_address": "Test Label\n431 Broadway Suite c\nMenands NY 12204 USA",
-                  "address": {
-                    "country": "USA",
-                    "administrative_area": "NY",
-                    "sub_administrative_area": "Albany",
-                    "locality": "Menands",
-                    "postal_code": "12204",
-                    "thoroughfare": "431 Broadway",
-                    "premise": "Suite c",
-                    "sub_premise": "ZIC"
-                  }
                 },
-                "resource_type": "station",
-                "meta": {
-                  "power": "50w"
-                }
+                "input_filter": []
               },
+              "resource": null,
               "input_filter": [
                 {
                   "label": "Serial Number Of part",

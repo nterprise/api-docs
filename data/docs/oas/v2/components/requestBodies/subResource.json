@@ -41,6 +41,9 @@
                 "$ref": "https://docs.nterprise.com/schemas/niagara/resource.json#/properties/resource_id"
               }
             }
+          },
+          "input_filter": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter.json"
           }
         }
       }

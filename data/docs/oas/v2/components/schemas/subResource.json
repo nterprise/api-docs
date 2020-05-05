@@ -8,7 +8,8 @@
     "location",
     "meta",
     "resource",
-    "sub_resource_id"
+    "sub_resource_id",
+    "input_filter"
   ],
   "properties": {
     "sub_resource_id": {
@@ -46,6 +47,9 @@
           "$ref": "./resource.json"
         }
       ]
+    },
+    "input_filter": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter.json"
     }
   }
 }

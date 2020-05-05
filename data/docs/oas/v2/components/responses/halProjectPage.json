@@ -114,7 +114,8 @@
                     "status": "Cancelled",
                     "order": 8
                   }
-                ]
+                ],
+                "input_filter": []
               },
               "program": {
                 "program_id": "program",
@@ -166,7 +167,8 @@
                       "status": "Cancelled",
                       "order": 8
                     }
-                  ]
+                  ],
+                  "input_filter": []
                 },
                 "end_date": "2020-02-10T22:12:03.000Z",
                 "start_date": "2020-02-10T22:12:03.000Z",
@@ -183,7 +185,8 @@
                     "status": "Verifying",
                     "order": 5
                   }
-                ]
+                ],
+                "input_filter": []
               },
               "end_date": "2020-02-10T22:12:03.000Z",
               "start_date": "2020-02-10T22:12:03.000Z",
@@ -195,6 +198,7 @@
                   "order": 3
                 }
               ],
+              "input_filter": [],
               "_links": {
                 "nter:project-work-orders": {
                   "href": "https://api.example.com/projects/project/work-orders"

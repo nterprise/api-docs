@@ -72,6 +72,7 @@
                 "external_platform": {},
                 "total_programs": 21,
                 "total_projects": 42,
+                "input_filter": [],
                 "allowed_statuses": [
                   {
                     "category": "PENDING",
@@ -127,6 +128,7 @@
                   "order": 5
                 }
               ],
+              "input_filter": [],
               "_links": {
                 "nter:program-customer": {
                   "href": "https://api.example.com/customers/customer"

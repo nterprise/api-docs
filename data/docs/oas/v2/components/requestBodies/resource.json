@@ -29,6 +29,9 @@
           },
           "meta": {
             "$ref": "https://docs.nterprise.com/schemas/niagara/resource.json#/properties/meta"
+          },
+          "input_filter": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter.json"
           }
         }
       }

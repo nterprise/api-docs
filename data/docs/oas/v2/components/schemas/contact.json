@@ -1,5 +1,15 @@
 {
   "type": "object",
+  "required": [
+    "updated",
+    "created",
+    "label",
+    "input_filter",
+    "name",
+    "email",
+    "contact_id",
+    "phone"
+  ],
   "properties": {
     "contact_id": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/contact.json#/properties/contact_id"
@@ -21,6 +31,9 @@
     },
     "phone": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/contact.json#/properties/phone"
+    },
+    "input_filter": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter.json"
     }
   }
 }

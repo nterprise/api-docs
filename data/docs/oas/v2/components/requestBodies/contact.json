@@ -21,6 +21,9 @@
           },
           "phone": {
             "$ref": "https://docs.nterprise.com/schemas/niagara/contact.json#/properties/phone"
+          },
+          "input_filter": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter.json"
           }
         }
       }

@@ -51,6 +51,7 @@
             "order": 8
           }
         ],
+        "input_filter": [],
         "_links": {
           "nter:customer-parts": {
             "href": "https://api.example.com/customers/customer/parts"

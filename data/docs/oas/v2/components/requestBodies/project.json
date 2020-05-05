@@ -31,6 +31,9 @@
           },
           "end_date": {
             "$ref": "https://docs.nterprise.com/schemas/niagara/project.json#/properties/end_date"
+          },
+          "input_filter": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter.json"
           }
         }
       }

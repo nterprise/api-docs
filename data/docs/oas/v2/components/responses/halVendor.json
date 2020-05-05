@@ -8,9 +8,9 @@
       "example": {
         "vendor_id": "vendor",
         "label": "Manchuck Inc",
-
-"created": "2019-08-19T00:01:02.000Z",
+        "created": "2019-08-19T00:01:02.000Z",
         "updated": "2020-08-19T01:01:02.000Z",
+        "input_filter": [],
         "_links": {
           "nter:vendor-units": {
             "href": "https://api.example.com/vendors/vendor/units"

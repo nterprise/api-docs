@@ -97,7 +97,8 @@
                   "thoroughfare": "431 Broadway",
                   "premise": "Suite c",
                   "sub_premise": "ZIC"
-                }
+                },
+                "input_filter": []
               },
               "_links": {
                 "nter:queue-location": {
