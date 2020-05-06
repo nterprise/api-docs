@@ -8,7 +8,8 @@
     "customer",
     "end_date",
     "program_id",
-    "start_date"
+    "start_date",
+    "input_filter"
   ],
   "properties": {
     "program_id": {
@@ -40,6 +41,9 @@
     },
     "allowed_statuses": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/program.json#/properties/allowed_statuses"
+    },
+    "input_filter": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter.json"
     }
   }
 }

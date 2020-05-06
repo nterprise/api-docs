@@ -61,7 +61,8 @@
             "thoroughfare": "431 Broadway",
             "premise": "Suite c",
             "sub_premise": "ZIC"
-          }
+          },
+          "input_filter": []
         },
         "resource": {
           "resource_id": "parent-resource",
@@ -84,17 +85,20 @@
               "thoroughfare": "431 Broadway",
               "premise": "Suite c",
               "sub_premise": "ZIC"
-            }
+            },
+            "input_filter": []
           },
           "resource_type": "station",
           "meta": {
             "power": "50w"
-          }
+          },
+          "input_filter": []
         },
         "resource_type": "slot",
         "meta": {
           "power": "5w"
         },
+        "input_filter": [],
         "_embedded": {
           "nter:sub-resource-parent": [],
           "nter:sub-resource-location": []

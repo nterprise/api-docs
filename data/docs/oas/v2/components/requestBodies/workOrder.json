@@ -44,6 +44,9 @@
           },
           "cycles": {
             "$ref": "https://docs.nterprise.com/schemas/niagara/workOrder.json#/properties/cycles"
+          },
+          "input_filter": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter.json"
           }
         }
       }

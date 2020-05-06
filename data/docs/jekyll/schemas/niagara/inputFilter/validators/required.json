@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/required.json",
+  "type": "object",
+  "description": "Validates that the value is present and not set to 'null', '0' or an empty string",
+  "required": [
+    "type",
+    "options"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "required"
+      ]
+    },
+    "options": {
+      "type": "object",
+      "description": "Required validator has no options"
+    }
+  }
+}

@@ -54,12 +54,14 @@
             "thoroughfare": "431 Broadway",
             "premise": "Suite c",
             "sub_premise": "ZIC"
-          }
+          },
+          "input_filter": []
         },
         "resource_type": "station",
         "meta": {
           "power": "50w"
         },
+        "input_filter": [],
         "_embedded": {
           "nter:resource-location": []
         },

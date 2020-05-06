@@ -13,7 +13,8 @@
     "due_date",
     "current_status",
     "project",
-    "cycles"
+    "cycles",
+    "input_filter"
   ],
   "properties": {
     "work_order_id": {
@@ -82,6 +83,9 @@
           }
         ]
       }
+    },
+    "input_filter": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter.json"
     }
   }
 }

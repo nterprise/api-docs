@@ -71,6 +71,7 @@
               "name": "Major Samantha Carter",
               "email": "s.carter@sg1.com",
               "phone": "518-867-5309",
+              "input_filter": [],
               "_links": {
                 "self": {
                   "href": "https://api.example.com/contacts/contact"

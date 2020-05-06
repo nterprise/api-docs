@@ -89,8 +89,7 @@
       "items": {
         "type": "object",
         "required": [
-          "work_flow",
-          "assigned"
+          "work_flow"
         ],
         "properties": {
           "work_flow": {

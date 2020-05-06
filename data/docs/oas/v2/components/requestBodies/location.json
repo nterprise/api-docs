@@ -18,6 +18,9 @@
           },
           "address": {
             "$ref": "https://docs.nterprise.com/schemas/niagara/location.json#/properties/address"
+          },
+          "input_filter": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter.json"
           }
         }
       }

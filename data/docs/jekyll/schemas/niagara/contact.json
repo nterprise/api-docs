@@ -48,11 +48,16 @@
     "phone": {
       "type": "string",
       "description": "Phone number"
+    },
+    "input_filter": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter.json"
+        }
+      ]
     }
-  },
-  "allOf": [
-    {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json"
-    }
-  ]
+  }
 }

@@ -35,6 +35,9 @@
     },
     "updated": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/updated"
+    },
+    "input_filter": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter.json"
     }
   }
 }

@@ -80,6 +80,7 @@
                 "external_platform": {},
                 "total_programs": 21,
                 "total_projects": 42,
+                "input_filter": [],
                 "allowed_statuses": [
                   {
                     "category": "PENDING",
@@ -124,7 +125,8 @@
                 "label": "Manchuck Inc",
                 "created": "2019-08-19T00:01:02.000Z",
                 "updated": "2020-08-19T01:01:02.000Z",
-                "part_number": "1-888-482-858-832"
+                "part_number": "1-888-482-858-832",
+                "input_filter": []
               },
               "input_filter": [
                 {

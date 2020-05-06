@@ -7,7 +7,8 @@
     "address",
     "formatted_address",
     "location_id",
-    "location_type"
+    "location_type",
+    "input_filter"
   ],
   "properties": {
     "location_id": {
@@ -30,6 +31,9 @@
     },
     "address": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/location.json#/properties/address"
+    },
+    "input_filter": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter.json"
     }
   }
 }

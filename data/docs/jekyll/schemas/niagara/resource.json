@@ -48,6 +48,9 @@
     },
     "location": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/location.json"
+    },
+    "input_filter": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter.json"
     }
   }
 }

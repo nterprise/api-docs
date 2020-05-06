@@ -9,7 +9,8 @@
     "label",
     "created",
     "program",
-    "project_id"
+    "project_id",
+    "input_filter"
   ],
   "properties": {
     "project_id": {
@@ -38,6 +39,9 @@
     },
     "allowed_statuses": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/project.json#/properties/allowed_statuses"
+    },
+    "input_filter": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter.json"
     }
   }
 }

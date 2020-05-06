@@ -71,8 +71,7 @@
               "location": {
                 "location_id": "location",
                 "label": "Test Label",
-
-"created": "2019-08-19T00:01:02.000Z",
+                "created": "2019-08-19T00:01:02.000Z",
                 "updated": "2020-08-19T01:01:02.000Z",
                 "location_type": "warehouse",
                 "formatted_address": "Test Label\n431 Broadway Suite c\nMenands NY 12204 USA",
@@ -85,12 +84,14 @@
                   "thoroughfare": "431 Broadway",
                   "premise": "Suite c",
                   "sub_premise": "ZIC"
-                }
+                },
+                "input_filter": []
               },
               "resource_type": "station",
               "meta": {
                 "power": "50w"
               },
+              "input_filter": [],
               "_links": {
                 "nter:resource-location": {
                   "href": "https://api.example.com/locations/location"

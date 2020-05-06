@@ -45,6 +45,7 @@
           "external_platform": {},
           "total_programs": 21,
           "total_projects": 42,
+          "input_filter": [],
           "allowed_statuses": [
             {
               "category": "PENDING",
@@ -100,6 +101,7 @@
             "order": 5
           }
         ],
+        "input_filter": [],
         "_embedded": {
           "nter:program-customer": []
         },

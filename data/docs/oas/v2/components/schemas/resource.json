@@ -6,7 +6,8 @@
     "updated",
     "location",
     "resource_id",
-    "resource_type"
+    "resource_type",
+    "input_filter"
   ],
   "properties": {
     "resource_id": {
@@ -35,6 +36,9 @@
           "$ref": "./location.json"
         }
       ]
+    },
+    "input_filter": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter.json"
     }
   }
 }
