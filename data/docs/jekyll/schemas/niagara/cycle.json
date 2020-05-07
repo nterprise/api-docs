@@ -8,9 +8,7 @@
     "verifying",
     "complete",
     "blocked",
-    "cancelled",
-    "active",
-    "in_active"
+    "cancelled"
   ],
   "properties": {
     "pending": {
