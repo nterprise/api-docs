@@ -127,7 +127,7 @@ Status Code **200**
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; name|string|true|none|Contact name|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; email|string(email)|true|none|Email address|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; phone|string|true|none|Phone number|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; input_filter|[object]¦null|true|none|Input Filters allow custom fields to be defined for entities|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; input_filter|[object]|true|none|Input Filters allow custom fields to be defined for entities|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; label|string|true|none|Human readable name|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; key|string|true|read-only|Slug used to store the property|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; filters|[anyOf]|true|none|A Collection of filters applied to the field|
@@ -499,7 +499,7 @@ Creates a new contact
 |name|body|string|true|Contact name|
 |email|body|string(email)|true|Email address|
 |phone|body|string|false|Phone number|
-|input_filter|body|[object]¦null|false|Input Filters allow custom fields to be defined for entities|
+|input_filter|body|[object]|false|Input Filters allow custom fields to be defined for entities|
 |&nbsp;&nbsp;&nbsp;&nbsp; label|body|string|true|Human readable name|
 |&nbsp;&nbsp;&nbsp;&nbsp; key|body|string|true|Slug used to store the property|
 |&nbsp;&nbsp;&nbsp;&nbsp; filters|body|[anyOf]|true|A Collection of filters applied to the field|
@@ -907,7 +907,7 @@ Updates a contact
 |name|body|string|true|Contact name|
 |email|body|string(email)|true|Email address|
 |phone|body|string|false|Phone number|
-|input_filter|body|[object]¦null|false|Input Filters allow custom fields to be defined for entities|
+|input_filter|body|[object]|false|Input Filters allow custom fields to be defined for entities|
 |&nbsp;&nbsp;&nbsp;&nbsp; label|body|string|true|Human readable name|
 |&nbsp;&nbsp;&nbsp;&nbsp; key|body|string|true|Slug used to store the property|
 |&nbsp;&nbsp;&nbsp;&nbsp; filters|body|[anyOf]|true|A Collection of filters applied to the field|
@@ -1771,7 +1771,7 @@ Status Code **404**
 |name|string|true|none|Contact name|
 |email|string(email)|true|none|Email address|
 |phone|string|true|none|Phone number|
-|input_filter|[object]¦null|true|none|Input Filters allow custom fields to be defined for entities|
+|input_filter|[object]|true|none|Input Filters allow custom fields to be defined for entities|
 |&nbsp;&nbsp;&nbsp;&nbsp; label|string|true|none|Human readable name|
 |&nbsp;&nbsp;&nbsp;&nbsp; key|string|true|read-only|Slug used to store the property|
 |&nbsp;&nbsp;&nbsp;&nbsp; filters|[anyOf]|true|none|A Collection of filters applied to the field|
@@ -2132,7 +2132,6 @@ properties:
     description: Phone number
   input_filter:
     type: array
-    nullable: true
     description: Input Filters allow custom fields to be defined for entities
     items:
       type: object
@@ -2155,7 +2154,6 @@ properties:
           type: array
           description: A Collection of filters applied to the field
           maxItems: 100
-          uniqueItems: true
           items:
             anyOf:
               - type: object
@@ -2406,7 +2404,6 @@ properties:
           type: array
           description: A set of validators to use for this field
           maxItems: 100
-          uniqueItems: true
           items:
             anyOf:
               - type: object
@@ -2894,6 +2891,7 @@ properties:
           description: The entities this field applies too. This means that higher up the
             inheritance tree can set properties on their child, grand children
             etc.
+          uniqueItems: true
           items:
             type: string
             description: Entity type
