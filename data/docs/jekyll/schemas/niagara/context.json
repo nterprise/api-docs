@@ -11,6 +11,7 @@
     "updated",
     "work_flow",
     "entity",
+    "using",
     "waiting_for_user",
     "current_step",
     "location",
@@ -154,6 +155,34 @@
     "entity": {
       "type": "object",
       "anyOf": [
+        {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/contact.json"
+        },
+        {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/customer.json"
+        },
+        {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/part.json"
+        },
+        {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/program.json"
+        },
+        {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/project.json"
+        },
+        {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/unit.json"
+        }
+      ]
+    },
+    "using": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/batch.json"
+        },
         {
           "$ref": "https://docs.nterprise.com/schemas/niagara/contact.json"
         },

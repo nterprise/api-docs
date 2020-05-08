@@ -48,6 +48,9 @@
     },
     "entity": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/context.json#/properties/entity"
+    },
+    "using": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/context.json#/properties/using"
     }
   }
 }
