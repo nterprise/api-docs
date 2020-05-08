@@ -21,8 +21,8 @@
       ],
       "properties": {
         "length": {
-          "type": "string",
-          "description": "String must contain with this value"
+          "type": "number",
+          "description": "Length to compare with"
         },
         "operator": {
           "type": "string",
