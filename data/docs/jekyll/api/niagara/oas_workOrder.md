@@ -9308,26 +9308,120 @@ properties:
               type: object
               description: Steps for the workflow
               uniqueItems: true
-              additionalProperties: true
+              additionalProperties: false
               x-patternProperties:
-                "^[A-Za-z][A-Za-z0-9_]*$":
-                  anyOf:
+                "^[A-Za-z][A-Za-z0-9-]*$":
+                  oneOf:
                     - $schema: http://json-schema.org/draft-07/schema#
                       $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/function/allocateUnitsToProject.json
+                      description: Allocates units to a project.
                       type: object
-                      description: Require the user confirm an action. This is normally used when
-                        Niagara cannot automatically detect that a task or
-                        action has been performed.
+                      required:
+                        - step_type
+                        - label
+                        - goto
+                        - goto_fail
+                        - options
+                      additionalProperties: false
                       properties:
+                        step_type:
+                          &a4
+                          type: string
+                          enum:
+                            - function
                         label:
+                          &a5
+                          type: string
+                          description: Label for the step
+                        on_start:
+                          &a2
+                          $schema: http://json-schema.org/draft-07/schema#
+                          $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json
+                          type: array
+                          items:
+                            type: object
+                            required:
+                              - function
+                              - options
+                            additionalProperties: false
+                            properties:
+                              function:
+                                type: string
+                              options:
+                                type: object
+                        on_complete: *a2
+                        goto:
+                          &a6
+                          type: string
+                          description: Step to move to
+                          pattern: ^[a-z][a-z-]+[a-z]$
+                        goto_fail:
                           &a7
                           type: string
-                          description: Label for the entity
+                          description: Step to transition too if this step cannot be completed
+                          pattern: ^[a-z][a-z-]+[a-z]$
+                        context:
+                          &a8
+                          type: array
+                          description: Values to set on the context
+                          items:
+                            type: object
+                            required:
+                              - key
+                              - value
+                            properties:
+                              key:
+                                type: string
+                                description: The context key to set
+                              value:
+                                type: string
+                                description: Value to set
+                              lock:
+                                type: boolean
+                                description: Prevents other steps from writing this value
+                              ignore:
+                                type: boolean
+                                description: When trying to set a locked key, do not fail
+                        on_error:
+                          &a9
+                          oneOf:
+                            - &a3
+                              $schema: http://json-schema.org/draft-07/schema#
+                              $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepError.json
+                              type: object
+                              required:
+                                - retry
+                                - finally
+                              properties:
+                                retry:
+                                  type: integer
+                                  description: "Number of times to retry this step. Note: retry will only occur on
+                                    steps which automatically failed. If the
+                                    step was transitioned using the 'goto-fail'
+                                    step, the actions will be fired but the step
+                                    WILL NOT be re-tried"
+                                  minimum: 0
+                                  maximum: 10
+                                  default: 0
+                                finally:
+                                  type: object
+                                  description: What to do after all retries
+                                  properties:
+                                    actions: *a2
+                            - type: object
+                              additionalProperties: false
+                        on_timeout:
+                          &a10
+                          oneOf:
+                            - *a3
+                            - type: object
+                              additionalProperties: false
                         options:
                           type: object
                           required:
                             - function
                             - payload
+                          additionalProperties: false
                           properties:
                             function:
                               type: string
@@ -9339,6 +9433,7 @@ properties:
                                 - part_id
                                 - project_id
                                 - qty
+                              additionalProperties: false
                               properties:
                                 part_id:
                                   type: string
@@ -9360,18 +9455,106 @@ properties:
                                   type: string
                                   description: Only assign units which are in this status
                     - $schema: http://json-schema.org/draft-07/schema#
-                      $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/followPDFInstructions.json
+                      $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/function/setEntityStatus.json
+                      description: Updates the status on the Work Flow entity.
                       type: object
+                      required:
+                        - step_type
+                        - label
+                        - goto
+                        - goto_fail
+                        - options
+                      additionalProperties: false
+                      properties:
+                        step_type: *a4
+                        label: *a5
+                        on_start: *a2
+                        on_complete: *a2
+                        goto: *a6
+                        goto_fail: *a7
+                        context: *a8
+                        on_error: *a9
+                        on_timeout: *a10
+                        options:
+                          type: object
+                          required:
+                            - function
+                            - payload
+                          additionalProperties: false
+                          properties:
+                            function:
+                              type: string
+                              enum:
+                                - set-entity-status
+                            payload:
+                              type: object
+                              required:
+                                - status
+                              additionalProperties: false
+                              properties:
+                                status:
+                                  $schema: http://json-schema.org/draft-07/schema#
+                                  $id: https://docs.nterprise.com/schemas/niagara/status.json
+                                  type: object
+                                  description: Defines the properties for a status
+                                  additionalProperties: false
+                                  required:
+                                    - status
+                                    - category
+                                  properties:
+                                    status:
+                                      type: string
+                                      description: A Custom label for the status
+                                      pattern: ^[A-Za-z][0-9a-zA-Z-_ ]+$
+                                    category:
+                                      type: string
+                                      description: The classifier for the statues
+                                      enum:
+                                        - PENDING
+                                        - IN_PROGRESS
+                                        - VERIFYING
+                                        - COMPLETE
+                                        - CANCELLED
+                                        - BLOCKED
+                                    description:
+                                      type:
+                                        - string
+                                        - "null"
+                                      description: A description for the status
+                                    order:
+                                      type: number
+                                      description: Order status appears when listing
+                                  examples:
+                                    - category: COMPLETE
+                                      description: For something that is Complete
+                                      status: Complete
+                                      order: 7
+                    - $schema: http://json-schema.org/draft-07/schema#
+                      $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/followPDFInstructions.json
                       description: Display a link or modal to a user which contains instructions from
                         a PDF
+                      type: object
                       required:
+                        - step_type
                         - label
-                        - payload
+                        - goto
+                        - goto_fail
+                        - options
+                      additionalProperties: false
                       properties:
-                        label:
-                          &a3
+                        step_type:
+                          &a11
                           type: string
-                          description: Label for the step
+                          enum:
+                            - user
+                        label: *a5
+                        on_start: *a2
+                        on_complete: *a2
+                        goto: *a6
+                        goto_fail: *a7
+                        context: *a8
+                        on_error: *a9
+                        on_timeout: *a10
                         options:
                           type: object
                           required:
@@ -9390,87 +9573,29 @@ properties:
                                   type: string
                                   description: UUID for the attachment
                                   format: uuid
-                      allOf:
-                        - &a4
-                          $schema: http://json-schema.org/draft-07/schema#
-                          $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepUser.json
-                          type: object
-                          description: A step which requires a user to complete
-                          required:
-                            - type
-                            - options
-                          properties:
-                            type:
-                              &a2
-                              type: string
-                              description: Type of workflow step
-                              enum:
-                                - load
-                                - choice
-                                - function
-                                - machine
-                                - pass
-                                - fail
-                                - success
-                                - user
-                                - wait
-                            options:
-                              type: object
-                              required:
-                                - component
-                                - payload
-                              properties:
-                                component:
-                                  type: string
-                                  description: Name of the function to invoke
-                                payload:
-                                  type: object
-                          allOf:
-                            - &a8
-                              $schema: http://json-schema.org/draft-07/schema#
-                              $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepCommon.json
-                              type: object
-                              required:
-                                - type
-                                - label
-                                - goto
-                              properties:
-                                type: *a2
-                                label: *a3
-                                goto:
-                                  type: string
-                                  description: Step to move to
-                                  pattern: ^[a-z][a-z-]+[a-z]$
-                                goto-fail:
-                                  type: string
-                                  description: Step to transition too if this step cannot be completed
-                                  pattern: ^[a-z][a-z-]+[a-z]$
-                                onComplete:
-                                  &a5
-                                  $schema: http://json-schema.org/draft-07/schema#
-                                  $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json
-                                  type: object
-                                  required:
-                                    - retry
-                                    - finally
-                                  properties:
-                                    actions:
-                                      type: array
-                                      description: Actions to take on failure
-                                      maxItems: 10
-                                      items:
-                                        type: object
                     - $schema: http://json-schema.org/draft-07/schema#
                       $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/manualDataEntry.json
-                      type: object
                       description: Ask the user to manually enter (or confirm) data for an entity
+                      type: object
+                      required:
+                        - step_type
+                        - label
+                        - goto
+                        - goto_fail
+                        - options
+                      additionalProperties: false
                       properties:
-                        label: *a3
+                        step_type: *a11
+                        label: *a5
+                        on_start: *a2
+                        on_complete: *a2
+                        goto: *a6
+                        goto_fail: *a7
+                        context: *a8
+                        on_error: *a9
+                        on_timeout: *a10
                         options:
                           type: object
-                          required:
-                            - component
-                            - payload
                           properties:
                             component:
                               enum:
@@ -9514,19 +9639,29 @@ properties:
                                           with '$' then the entity on the
                                           context is assumed. Otherwise the data
                                           will be set on the context path
-                      allOf:
-                        - *a4
                     - $schema: http://json-schema.org/draft-07/schema#
                       $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/taskList.json
-                      type: object
                       description: Ask the user to follow a list and check off boxes
+                      type: object
+                      required:
+                        - step_type
+                        - label
+                        - goto
+                        - goto_fail
+                        - options
+                      additionalProperties: false
                       properties:
-                        label: *a3
+                        step_type: *a11
+                        label: *a5
+                        on_start: *a2
+                        on_complete: *a2
+                        goto: *a6
+                        goto_fail: *a7
+                        context: *a8
+                        on_error: *a9
+                        on_timeout: *a10
                         options:
                           type: object
-                          required:
-                            - component
-                            - payload
                           properties:
                             component:
                               enum:
@@ -9569,27 +9704,54 @@ properties:
                                       na_field:
                                         type: boolean
                                         description: Allow the user to select the N/A option when checking off the list
-                      allOf:
-                        - *a4
                     - $schema: http://json-schema.org/draft-07/schema#
                       $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/machine/aceIos.json
+                      description: Run the ACE-IOS application to provision iOS devices
                       type: object
-                      description: "Run the ACE-IOS application to provision iOS devices or "
+                      required:
+                        - step_type
+                        - label
+                        - goto
+                        - goto_fail
+                        - options
                       properties:
-                        type:
+                        step_type:
                           type: string
                           enum:
                             - machine
-                        label: *a3
+                        label: *a5
+                        on_start: *a2
+                        on_complete: *a2
+                        goto: *a6
+                        goto_fail: *a7
+                        context: *a8
+                        on_error: *a9
+                        on_timeout: *a10
                         options:
                           type: object
                           required:
                             - application
                             - configuration
                           properties:
+                            application:
+                              type: object
+                              required:
+                                - application_id
+                                - platforms
+                              additionalProperties: false
+                              properties:
+                                application_id:
+                                  type: string
+                                  enum:
+                                    - ace-ios
+                                platforms:
+                                  type: array
+                                  items:
+                                    type: string
                             configuration:
                               type: object
                               description: ACE Configuration options
+                              additionalProperties: false
                               properties:
                                 pairing_cert:
                                   type: string
@@ -9682,21 +9844,38 @@ properties:
                                   description: The required battery percentage needed before this step can move on
                                   minimum: 0
                                   maximum: 100
-                    - &a9
+                    - &a12
                       $schema: http://json-schema.org/draft-07/schema#
                       $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepChoice.json
-                      type: object
                       description: A Step choice
-                      maxProperties: 2
-                      minProperties: 2
+                      type: object
                       required:
+                        - step_type
+                        - label
+                        - goto
+                        - goto_fail
                         - decision
+                      additionalProperties: false
                       properties:
+                        step_type:
+                          type: string
+                          enum:
+                            - decision
+                        label: *a5
+                        on_start: *a2
+                        on_complete: *a2
+                        goto: *a6
+                        goto_fail: *a7
+                        context: *a8
+                        on_error: *a9
+                        on_timeout: *a10
                         decision:
                           type: array
                           description: Context variable to check
                           items:
                             type: object
+                            maxProperties: 2
+                            minProperties: 2
                             properties:
                               variable:
                                 type: string
@@ -9714,108 +9893,86 @@ properties:
                               operand:
                                 type: string
                                 description: operand to compare with
-                      allOf:
-                        - $schema: http://json-schema.org/draft-07/schema#
-                          $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepNext.json
-                          type: object
-                          required:
-                            - type
-                            - label
-                            - goto
-                          properties:
-                            goto:
-                              type: string
-                              description: Step to move to
-                              pattern: ^[a-z][a-z-]+[a-z]$
-                            goto-fail:
-                              type: string
-                              description: Step to transition too if this step cannot be completed
-                              pattern: ^[a-z][a-z-]+[a-z]$
-                            context:
-                              type: array
-                              description: Values to set on the context
-                              items:
-                                type: object
-                                required:
-                                  - key
-                                  - value
-                                properties:
-                                  key:
-                                    type: string
-                                    description: The context key to set
-                                  value:
-                                    type: string
-                                    description: Value to set
-                                  lock:
-                                    type: boolean
-                                    description: Prevents other steps from writing this value
-                                  ignore:
-                                    type: boolean
-                                    description: When trying to set a locked key, do not fail
-                            onStart: *a5
-                            onError:
-                              &a6
-                              $schema: http://json-schema.org/draft-07/schema#
-                              $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepError.json
-                              type: object
-                              required:
-                                - retry
-                                - finally
-                              properties:
-                                retry:
-                                  type: integer
-                                  description: "Number of times to retry this step. Note: retry will only occur on
-                                    steps which automatically failed. If the
-                                    step was transitioned using the 'goto-fail'
-                                    step, the actions will be fired but the step
-                                    WILL NOT be re-tried"
-                                  minimum: 0
-                                  maximum: 10
-                                  default: 0
-                                finally:
-                                  type: object
-                                  description: What to do after all retries
-                                  properties:
-                                    actions: *a5
-                            onTimeout: *a6
                     - $schema: http://json-schema.org/draft-07/schema#
                       $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepFail.json
-                      type: object
                       description: Finial step which is marked as failed
+                      type: object
+                      required:
+                        - step_type
+                        - label
+                      additionalProperties: false
                       properties:
-                        label: *a3
-                        type: *a2
-                        onComplete: *a5
+                        step_type:
+                          type: string
+                          enum:
+                            - fail
+                        label: *a5
+                        on_start: *a2
+                        on_complete: *a2
                     - $schema: http://json-schema.org/draft-07/schema#
                       $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepPass.json
-                      type: object
                       description: Allows executing actions with out performing any function
+                      type: object
+                      required:
+                        - step_type
+                        - label
+                        - goto
+                        - goto_fail
+                      additionalProperties: false
                       properties:
-                        label: *a7
-                        type: *a2
-                      allOf:
-                        - *a8
+                        step_type:
+                          type: string
+                          enum:
+                            - pass
+                        label: *a5
+                        on_start: *a2
+                        on_complete: *a2
+                        goto: *a6
+                        goto_fail: *a7
+                        context: *a8
+                        on_error: *a9
+                        on_timeout: *a10
                     - $schema: http://json-schema.org/draft-07/schema#
                       $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepSuccess.json
-                      type: object
                       description: Finial step which is marked as completed successfully
+                      type: object
+                      required:
+                        - step_type
+                        - label
+                      additionalProperties: false
                       properties:
-                        label: *a3
-                        type: *a2
-                        onComplete: *a5
+                        step_type:
+                          type: string
+                          enum:
+                            - success
+                        label: *a5
+                        on_start: *a2
+                        on_complete: *a2
                     - $schema: http://json-schema.org/draft-07/schema#
                       $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepWait.json
-                      type: object
                       description: A step which run at certain times
+                      type: object
                       required:
+                        - step_type
+                        - label
+                        - goto
+                        - goto_fail
                         - stop_at
                         - time
+                      additionalProperties: false
                       properties:
-                        label: *a3
-                        type:
+                        step_type:
                           type: string
                           enum:
                             - wait
+                        label: *a5
+                        on_start: *a2
+                        on_complete: *a2
+                        goto: *a6
+                        goto_fail: *a7
+                        context: *a8
+                        on_error: *a9
+                        on_timeout: *a10
                         stop_at:
                           type: integer
                           description: Time in seconds to stop this task
@@ -9946,9 +10103,7 @@ properties:
                                 type: object
                                 description: The event conditions that have to be met
                                 allOf:
-                                  - *a9
-                      allOf:
-                        - *a8
+                                  - *a12
       allOf:
         - type: object
           required:

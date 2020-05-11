@@ -1,19 +1,45 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepPass.json",
-  "type": "object",
   "description": "Allows executing actions with out performing any function",
+  "type": "object",
+  "required": [
+    "step_type",
+    "label",
+    "goto",
+    "goto_fail"
+  ],
+  "additionalProperties": false,
   "properties": {
-    "label": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/label"
+    "step_type": {
+      "type": "string",
+      "enum": [
+        "pass"
+      ]
     },
-    "type": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepCommon.json#/properties/type"
+    "label": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepNext.json#/properties/label"
+    },
+    "on_start": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepNext.json#/properties/on_start"
+    },
+    "on_complete": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepNext.json#/properties/on_complete"
+    },
+    "goto": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepNext.json#/properties/goto"
+    },
+    "goto_fail": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepNext.json#/properties/goto_fail"
+    },
+    "context": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepNext.json#/properties/context"
+    },
+    "on_error": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepNext.json#/properties/on_error"
+    },
+    "on_timeout": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepNext.json#/properties/on_timeout"
     }
-  },
-  "allOf": [
-    {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepCommon.json"
-    }
-  ]
+  }
 }

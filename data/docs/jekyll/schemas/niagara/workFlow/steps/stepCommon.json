@@ -3,13 +3,13 @@
   "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepCommon.json",
   "type": "object",
   "required": [
-    "type",
-    "label",
-    "goto"
+    "step_type",
+    "label"
   ],
+  "additionalProperties": false,
   "properties": {
-    "type": {
-      "type": "string",
+    "step_type": {
+      "step_type": "string",
       "description": "Type of workflow step",
       "enum": [
         "load",
@@ -27,17 +27,10 @@
       "type": "string",
       "description": "Label for the step"
     },
-    "goto": {
-      "type": "string",
-      "description": "Step to move to",
-      "pattern": "^[a-z][a-z-]+[a-z]$"
+    "on_start": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json"
     },
-    "goto-fail": {
-      "type": "string",
-      "description": "Step to transition too if this step cannot be completed",
-      "pattern": "^[a-z][a-z-]+[a-z]$"
-    },
-    "onComplete": {
+    "on_complete": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json"
     }
   }

@@ -3,17 +3,25 @@
   "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepNext.json",
   "type": "object",
   "required": [
-    "type",
+    "step_type",
     "label",
-    "goto"
+    "goto",
+    "goto_fail"
   ],
+  "additionalProperties": false,
   "properties": {
+    "step_type": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepCommon.json#/properties/step_type"
+    },
+    "label": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepCommon.json#/properties/label"
+    },
     "goto": {
       "type": "string",
       "description": "Step to move to",
       "pattern": "^[a-z][a-z-]+[a-z]$"
     },
-    "goto-fail": {
+    "goto_fail": {
       "type": "string",
       "description": "Step to transition too if this step cannot be completed",
       "pattern": "^[a-z][a-z-]+[a-z]$"
@@ -47,14 +55,33 @@
         }
       }
     },
-    "onStart": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json"
+    "on_start": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepCommon.json#/properties/on_start"
     },
-    "onError": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepError.json"
+    "on_complete": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepCommon.json#/properties/on_complete"
     },
-    "onTimeout": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepError.json"
+    "on_error": {
+      "oneOf": [
+        {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepError.json"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
+    },
+    "on_timeout": {
+      "oneOf": [
+        {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepError.json"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false
+        }
+      ]
     }
   }
 }

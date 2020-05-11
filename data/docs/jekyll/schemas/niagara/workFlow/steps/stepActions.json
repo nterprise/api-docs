@@ -1,17 +1,19 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json",
-  "type": "object",
-  "required": [
-    "retry",
-    "finally"
-  ],
-  "properties": {
-    "actions": {
-      "type": "array",
-      "description": "Actions to take on failure",
-      "maxItems": 10,
-      "items": {
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": [
+      "function",
+      "options"
+    ],
+    "additionalProperties": false,
+    "properties": {
+      "function": {
+        "type": "string"
+      },
+      "options": {
         "type": "object"
       }
     }

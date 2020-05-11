@@ -4,9 +4,12 @@
   "type": "object",
   "properties": {
     "step": {
-      "anyOf": [
+      "oneOf": [
         {
           "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/function/allocateUnitsToProject.json"
+        },
+        {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/function/setEntityStatus.json"
         },
         {
           "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/followPDFInstructions.json"
