@@ -51,6 +51,10 @@
     "profile": {
       "type": ["string", "null"],
       "description": "Link to the users profile"
+    },
+    "userAttributes": {
+      "type": ["array", "null"],
+      "description": "Array of user attributes"
     }
   }
 }
