@@ -52,7 +52,7 @@
       "type": ["string", "null"],
       "description": "Link to the users profile"
     },
-    "userAttributes": {
+    "user_attributes": {
       "type": "array",
       "description": "Array of user attributes",
       "items": {
