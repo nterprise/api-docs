@@ -28,6 +28,9 @@
     },
     "profile": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/user.json#/properties/profile"
+    },
+    "user_attributes": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/user.json#/properties/user_attributes"
     }
   }
 }

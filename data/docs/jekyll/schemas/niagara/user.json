@@ -51,6 +51,28 @@
     "profile": {
       "type": ["string", "null"],
       "description": "Link to the users profile"
+    },
+    "user_attributes": {
+      "type": "array",
+      "description": "Array of user attributes",
+      "items": {
+        "type": "object",
+        "description": "User Attribute",
+        "required": [
+          "key",
+          "value"
+        ],
+        "properties": {
+          "key": {
+            "description": "Attribute Key",
+            "type": "string"
+          },
+          "value": {
+            "description": "Attribute value",
+            "type": "string"
+          }
+        }
+      }
     }
   }
 }
