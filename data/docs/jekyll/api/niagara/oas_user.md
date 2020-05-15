@@ -127,6 +127,9 @@ Status Code **200**
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; name|string|true|none|Human readable name|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; picture|string¦null|false|none|Image for the user|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; profile|string¦null|false|none|Link to the users profile|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; user_attributes|[object]|false|none|Array of user attributes|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; key|string|true|none|Attribute Key|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; value|string|true|none|Attribute value|
 
 *and*
 
@@ -201,6 +204,12 @@ Fetches a user
   "email": "chuck.reeves@zones.com",
   "profile": "https://bit.ly/18gECvy",
   "picture": "https://bit.ly/18gECvy",
+  "user_attributes": [
+    {
+      "key": "employement_status",
+      "value": "active"
+    }
+  ],
   "_links": {
     "self": {
       "href": "https://api.example.com/users/3dddba3e-6122-46a8-ae26-8c7c95bd82d7"
@@ -724,6 +733,9 @@ Status Code **404**
 |name|string|true|none|Human readable name|
 |picture|string¦null|false|none|Image for the user|
 |profile|string¦null|false|none|Link to the users profile|
+|user_attributes|[object]|false|none|Array of user attributes|
+|&nbsp;&nbsp;&nbsp;&nbsp; key|string|true|none|Attribute Key|
+|&nbsp;&nbsp;&nbsp;&nbsp; value|string|true|none|Attribute value|
 
 #### Specification
 
@@ -765,6 +777,22 @@ properties:
     type: string
     nullable: true
     description: Link to the users profile
+  user_attributes:
+    type: array
+    description: Array of user attributes
+    items:
+      type: object
+      description: User Attribute
+      required:
+        - key
+        - value
+      properties:
+        key:
+          description: Attribute Key
+          type: string
+        value:
+          description: Attribute value
+          type: string
 
 ```
 

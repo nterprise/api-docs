@@ -3685,50 +3685,48 @@ Fetches work-orders for a program
           "status": "Reticulating Splines",
           "order": 2
         },
-        "cycles": [
-          {
-            "needed": 1,
-            "pending": 1,
-            "in_progress": 0,
-            "verifying": 0,
-            "complete": 0,
-            "blocked": 0,
-            "cancelled": 0,
-            "active": 1,
-            "in_active": 0,
-            "assigned": 0,
-            "work_flow": {
-              "work_flow_id": "work-flow",
-              "created": "2019-08-19T00:01:02.000Z",
-              "updated": "2020-08-19T01:01:02.000Z",
-              "label": "My workflow",
-              "schema_version": "1.0",
-              "workflow_version": 7,
-              "applies_to": "UNIT",
-              "starts_at": "work-complete",
-              "metadata": {
-                "meta": "data"
+        "cycles": {
+          "needed": 1,
+          "pending": 1,
+          "in_progress": 0,
+          "verifying": 0,
+          "complete": 0,
+          "blocked": 0,
+          "cancelled": 0,
+          "active": 1,
+          "in_active": 0,
+          "assigned": 0,
+          "work_flow": {
+            "work_flow_id": "work-flow",
+            "created": "2019-08-19T00:01:02.000Z",
+            "updated": "2020-08-19T01:01:02.000Z",
+            "label": "My workflow",
+            "schema_version": "1.0",
+            "workflow_version": 7,
+            "applies_to": "UNIT",
+            "starts_at": "work-complete",
+            "metadata": {
+              "meta": "data"
+            },
+            "steps": {
+              "work-complete": {
+                "step_type": "success",
+                "label": "work complete",
+                "on_start": [],
+                "on_complete": []
               },
-              "steps": {
-                "work-complete": {
-                  "step_type": "success",
-                  "label": "work complete",
-                  "on_start": [],
-                  "on_complete": []
-                },
-                "stop-poking-me": {
-                  "step_type": "fail",
-                  "label": "stop poking me",
-                  "on_start": [],
-                  "on_complete": []
-                }
-              },
-              "triggered_by": [
-                "UNIT.created"
-              ]
-            }
+              "stop-poking-me": {
+                "step_type": "fail",
+                "label": "stop poking me",
+                "on_start": [],
+                "on_complete": []
+              }
+            },
+            "triggered_by": [
+              "UNIT.created"
+            ]
           }
-        ],
+        },
         "input_filter": [
           {
             "label": "Serial Number Of part",
@@ -5142,7 +5140,7 @@ Status Code **200**
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; description|string¦null|false|none|Provide a description for the field|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; value|string¦null|false|none|The validated and filtered value. This is always a string so consumers MUST extrapolate out type|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; applies_to|[string]|false|none|The entities this field applies too. This means that higher up the inheritance tree can set properties on their child, grand children etc.|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cycles|[allOf]|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cycles|object|true|none|none|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; assigned|number|true|none|Number of assigned cycles|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; work_flow|object|true|none|none|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; work_flow_id|string|true|read-only|Entity identifier|

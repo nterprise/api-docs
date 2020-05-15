@@ -83,29 +83,24 @@
       "$ref": "https://docs.nterprise.com/schemas/niagara/project.json"
     },
     "cycles": {
-      "type": "array",
-      "maxItems": 1,
-      "minItems": 1,
-      "items": {
-        "type": "object",
-        "required": [
-          "work_flow"
-        ],
-        "properties": {
-          "work_flow": {
-            "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow.json"
-          },
-          "assigned": {
-            "type": "number",
-            "description": "Number of assigned cycles"
-          }
+      "type": "object",
+      "required": [
+        "work_flow"
+      ],
+      "properties": {
+        "work_flow": {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow.json"
         },
-        "allOf": [
-          {
-            "$ref": "https://docs.nterprise.com/schemas/niagara/cycle.json"
-          }
-        ]
-      }
+        "assigned": {
+          "type": "number",
+          "description": "Number of assigned cycles"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/cycle.json"
+        }
+      ]
     },
     "meta": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/entityHelper.json#/properties/meta"
