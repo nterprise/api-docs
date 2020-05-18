@@ -293,50 +293,48 @@ Fetches A Page of batches
             "status": "Reticulating Splines",
             "order": 2
           },
-          "cycles": [
-            {
-              "needed": 1,
-              "pending": 0,
-              "in_progress": 0,
-              "verifying": 0,
-              "complete": 0,
-              "blocked": 0,
-              "cancelled": 0,
-              "active": 0,
-              "in_active": 0,
-              "assigned": 0,
-              "work_flow": {
-                "work_flow_id": "work-flow",
-                "created": "2019-08-19T00:01:02.000Z",
-                "updated": "2020-08-19T01:01:02.000Z",
-                "label": "My workflow",
-                "schema_version": "1.0",
-                "workflow_version": 7,
-                "applies_to": "UNIT",
-                "starts_at": "work-complete",
-                "metadata": {
-                  "meta": "data"
+          "cycles": {
+            "needed": 1,
+            "pending": 0,
+            "in_progress": 0,
+            "verifying": 0,
+            "complete": 0,
+            "blocked": 0,
+            "cancelled": 0,
+            "active": 0,
+            "in_active": 0,
+            "assigned": 0,
+            "work_flow": {
+              "work_flow_id": "work-flow",
+              "created": "2019-08-19T00:01:02.000Z",
+              "updated": "2020-08-19T01:01:02.000Z",
+              "label": "My workflow",
+              "schema_version": "1.0",
+              "workflow_version": 7,
+              "applies_to": "UNIT",
+              "starts_at": "work-complete",
+              "metadata": {
+                "meta": "data"
+              },
+              "steps": {
+                "work-complete": {
+                  "step_type": "success",
+                  "label": "work complete",
+                  "on_start": [],
+                  "on_complete": []
                 },
-                "steps": {
-                  "work-complete": {
-                    "step_type": "success",
-                    "label": "work complete",
-                    "on_start": [],
-                    "on_complete": []
-                  },
-                  "stop-poking-me": {
-                    "step_type": "fail",
-                    "label": "stop poking me",
-                    "on_start": [],
-                    "on_complete": []
-                  }
-                },
-                "triggered_by": [
-                  "UNIT.created"
-                ]
-              }
+                "stop-poking-me": {
+                  "step_type": "fail",
+                  "label": "stop poking me",
+                  "on_start": [],
+                  "on_complete": []
+                }
+              },
+              "triggered_by": [
+                "UNIT.created"
+              ]
             }
-          ],
+          },
           "input_filter": [
             {
               "label": "Serial Number Of part",
@@ -2143,7 +2141,7 @@ Status Code **200**
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; description|string¦null|false|none|Provide a description for the field|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; value|string¦null|false|none|The validated and filtered value. This is always a string so consumers MUST extrapolate out type|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; applies_to|[string]|false|none|The entities this field applies too. This means that higher up the inheritance tree can set properties on their child, grand children etc.|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cycles|[allOf]|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cycles|object|true|none|none|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; assigned|number|true|none|Number of assigned cycles|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; work_flow|object|true|none|none|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; work_flow_id|string|true|read-only|Entity identifier|
@@ -2791,50 +2789,48 @@ Creates a new batch for a queue
       "status": "Reticulating Splines",
       "order": 2
     },
-    "cycles": [
-      {
-        "needed": 1,
-        "pending": 0,
-        "in_progress": 0,
-        "verifying": 0,
-        "complete": 0,
-        "blocked": 0,
-        "cancelled": 0,
-        "active": 0,
-        "in_active": 0,
-        "assigned": 0,
-        "work_flow": {
-          "work_flow_id": "work-flow",
-          "created": "2019-08-19T00:01:02.000Z",
-          "updated": "2020-08-19T01:01:02.000Z",
-          "label": "My workflow",
-          "schema_version": "1.0",
-          "workflow_version": 7,
-          "applies_to": "UNIT",
-          "starts_at": "work-complete",
-          "metadata": {
-            "meta": "data"
+    "cycles": {
+      "needed": 1,
+      "pending": 0,
+      "in_progress": 0,
+      "verifying": 0,
+      "complete": 0,
+      "blocked": 0,
+      "cancelled": 0,
+      "active": 0,
+      "in_active": 0,
+      "assigned": 0,
+      "work_flow": {
+        "work_flow_id": "work-flow",
+        "created": "2019-08-19T00:01:02.000Z",
+        "updated": "2020-08-19T01:01:02.000Z",
+        "label": "My workflow",
+        "schema_version": "1.0",
+        "workflow_version": 7,
+        "applies_to": "UNIT",
+        "starts_at": "work-complete",
+        "metadata": {
+          "meta": "data"
+        },
+        "steps": {
+          "work-complete": {
+            "step_type": "success",
+            "label": "work complete",
+            "on_start": [],
+            "on_complete": []
           },
-          "steps": {
-            "work-complete": {
-              "step_type": "success",
-              "label": "work complete",
-              "on_start": [],
-              "on_complete": []
-            },
-            "stop-poking-me": {
-              "step_type": "fail",
-              "label": "stop poking me",
-              "on_start": [],
-              "on_complete": []
-            }
-          },
-          "triggered_by": [
-            "UNIT.created"
-          ]
-        }
+          "stop-poking-me": {
+            "step_type": "fail",
+            "label": "stop poking me",
+            "on_start": [],
+            "on_complete": []
+          }
+        },
+        "triggered_by": [
+          "UNIT.created"
+        ]
       }
-    ],
+    },
     "input_filter": [
       {
         "label": "Serial Number Of part",
@@ -3217,50 +3213,48 @@ Create multiple batches
       "status": "Reticulating Splines",
       "order": 2
     },
-    "cycles": [
-      {
-        "needed": 1,
-        "pending": 0,
-        "in_progress": 0,
-        "verifying": 0,
-        "complete": 0,
-        "blocked": 0,
-        "cancelled": 0,
-        "active": 0,
-        "in_active": 0,
-        "assigned": 0,
-        "work_flow": {
-          "work_flow_id": "work-flow",
-          "created": "2019-08-19T00:01:02.000Z",
-          "updated": "2020-08-19T01:01:02.000Z",
-          "label": "My workflow",
-          "schema_version": "1.0",
-          "workflow_version": 7,
-          "applies_to": "UNIT",
-          "starts_at": "work-complete",
-          "metadata": {
-            "meta": "data"
+    "cycles": {
+      "needed": 1,
+      "pending": 0,
+      "in_progress": 0,
+      "verifying": 0,
+      "complete": 0,
+      "blocked": 0,
+      "cancelled": 0,
+      "active": 0,
+      "in_active": 0,
+      "assigned": 0,
+      "work_flow": {
+        "work_flow_id": "work-flow",
+        "created": "2019-08-19T00:01:02.000Z",
+        "updated": "2020-08-19T01:01:02.000Z",
+        "label": "My workflow",
+        "schema_version": "1.0",
+        "workflow_version": 7,
+        "applies_to": "UNIT",
+        "starts_at": "work-complete",
+        "metadata": {
+          "meta": "data"
+        },
+        "steps": {
+          "work-complete": {
+            "step_type": "success",
+            "label": "work complete",
+            "on_start": [],
+            "on_complete": []
           },
-          "steps": {
-            "work-complete": {
-              "step_type": "success",
-              "label": "work complete",
-              "on_start": [],
-              "on_complete": []
-            },
-            "stop-poking-me": {
-              "step_type": "fail",
-              "label": "stop poking me",
-              "on_start": [],
-              "on_complete": []
-            }
-          },
-          "triggered_by": [
-            "UNIT.created"
-          ]
-        }
+          "stop-poking-me": {
+            "step_type": "fail",
+            "label": "stop poking me",
+            "on_start": [],
+            "on_complete": []
+          }
+        },
+        "triggered_by": [
+          "UNIT.created"
+        ]
       }
-    ],
+    },
     "input_filter": [
       {
         "label": "Serial Number Of part",
@@ -3641,50 +3635,48 @@ Fetches a batch
       "status": "Reticulating Splines",
       "order": 2
     },
-    "cycles": [
-      {
-        "needed": 1,
-        "pending": 0,
-        "in_progress": 0,
-        "verifying": 0,
-        "complete": 0,
-        "blocked": 0,
-        "cancelled": 0,
-        "active": 0,
-        "in_active": 0,
-        "assigned": 0,
-        "work_flow": {
-          "work_flow_id": "work-flow",
-          "created": "2019-08-19T00:01:02.000Z",
-          "updated": "2020-08-19T01:01:02.000Z",
-          "label": "My workflow",
-          "schema_version": "1.0",
-          "workflow_version": 7,
-          "applies_to": "UNIT",
-          "starts_at": "work-complete",
-          "metadata": {
-            "meta": "data"
+    "cycles": {
+      "needed": 1,
+      "pending": 0,
+      "in_progress": 0,
+      "verifying": 0,
+      "complete": 0,
+      "blocked": 0,
+      "cancelled": 0,
+      "active": 0,
+      "in_active": 0,
+      "assigned": 0,
+      "work_flow": {
+        "work_flow_id": "work-flow",
+        "created": "2019-08-19T00:01:02.000Z",
+        "updated": "2020-08-19T01:01:02.000Z",
+        "label": "My workflow",
+        "schema_version": "1.0",
+        "workflow_version": 7,
+        "applies_to": "UNIT",
+        "starts_at": "work-complete",
+        "metadata": {
+          "meta": "data"
+        },
+        "steps": {
+          "work-complete": {
+            "step_type": "success",
+            "label": "work complete",
+            "on_start": [],
+            "on_complete": []
           },
-          "steps": {
-            "work-complete": {
-              "step_type": "success",
-              "label": "work complete",
-              "on_start": [],
-              "on_complete": []
-            },
-            "stop-poking-me": {
-              "step_type": "fail",
-              "label": "stop poking me",
-              "on_start": [],
-              "on_complete": []
-            }
-          },
-          "triggered_by": [
-            "UNIT.created"
-          ]
-        }
+          "stop-poking-me": {
+            "step_type": "fail",
+            "label": "stop poking me",
+            "on_start": [],
+            "on_complete": []
+          }
+        },
+        "triggered_by": [
+          "UNIT.created"
+        ]
       }
-    ],
+    },
     "input_filter": [
       {
         "label": "Serial Number Of part",
@@ -6065,7 +6057,7 @@ continued
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; description|string¦null|false|none|Provide a description for the field|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; value|string¦null|false|none|The validated and filtered value. This is always a string so consumers MUST extrapolate out type|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; applies_to|[string]|false|none|The entities this field applies too. This means that higher up the inheritance tree can set properties on their child, grand children etc.|
-|&nbsp;&nbsp;&nbsp;&nbsp; cycles|[allOf]|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; cycles|object|true|none|none|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; assigned|number|true|none|Number of assigned cycles|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; work_flow|object|true|none|none|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; work_flow_id|string|true|read-only|Entity identifier|
@@ -11281,918 +11273,913 @@ properties:
                               - WKF
                               - WOR
           cycles:
-            type: array
-            maxItems: 1
-            minItems: 1
-            items:
-              type: object
-              required:
-                - assigned
-                - work_flow
-              properties:
-                assigned:
-                  type: number
-                  description: Number of assigned cycles
-                work_flow:
-                  type: object
-                  required:
-                    - work_flow_id
-                    - label
-                    - created
-                    - updated
-                    - schema_version
-                    - workflow_version
-                    - applies_to
-                    - starts_at
-                    - steps
-                  properties:
-                    work_flow_id:
-                      type: string
-                      description: Entity identifier
-                      readOnly: true
-                      pattern: ^[0-9a-zA-Z-_]+$
-                    label:
-                      type: string
-                      description: Label for the entity
-                    created:
-                      description: Date the entity was created
-                      type: string
-                      format: date-time
-                      readOnly: true
-                    updated:
-                      description: Last date the entity was updated
-                      type: string
-                      format: date-time
-                      readOnly: true
-                    schema_version:
-                      type: string
-                      description: Version of the workflow schema used
-                      enum:
-                        - "1.0"
-                    workflow_version:
-                      type: integer
-                      description: Version number for the work flows (the number of times it has been
-                        changed
-                      readOnly: true
-                    applies_to:
-                      type: string
-                      description: The entity type this work flow applies too
-                      enum:
-                        - UNIT
-                        - PART
-                        - PGM
-                        - PRJ
-                        - CUS
-                        - CON
-                    starts_at:
-                      type: string
-                      description: Starting step
-                    steps:
-                      type: object
-                      description: Steps for the workflow
-                      uniqueItems: true
-                      additionalProperties: false
-                      x-patternProperties:
-                        "^[A-Za-z][A-Za-z0-9-]*$":
-                          oneOf:
-                            - $schema: http://json-schema.org/draft-07/schema#
-                              $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/function/allocateUnitsToProject.json
-                              description: Allocates units to a project.
-                              type: object
-                              required:
-                                - step_type
-                                - label
-                                - goto
-                                - goto_fail
-                                - options
-                              additionalProperties: false
-                              properties:
-                                step_type:
-                                  &a4
-                                  type: string
-                                  enum:
+            type: object
+            required:
+              - assigned
+              - work_flow
+            properties:
+              assigned:
+                type: number
+                description: Number of assigned cycles
+              work_flow:
+                type: object
+                required:
+                  - work_flow_id
+                  - label
+                  - created
+                  - updated
+                  - schema_version
+                  - workflow_version
+                  - applies_to
+                  - starts_at
+                  - steps
+                properties:
+                  work_flow_id:
+                    type: string
+                    description: Entity identifier
+                    readOnly: true
+                    pattern: ^[0-9a-zA-Z-_]+$
+                  label:
+                    type: string
+                    description: Label for the entity
+                  created:
+                    description: Date the entity was created
+                    type: string
+                    format: date-time
+                    readOnly: true
+                  updated:
+                    description: Last date the entity was updated
+                    type: string
+                    format: date-time
+                    readOnly: true
+                  schema_version:
+                    type: string
+                    description: Version of the workflow schema used
+                    enum:
+                      - "1.0"
+                  workflow_version:
+                    type: integer
+                    description: Version number for the work flows (the number of times it has been
+                      changed
+                    readOnly: true
+                  applies_to:
+                    type: string
+                    description: The entity type this work flow applies too
+                    enum:
+                      - UNIT
+                      - PART
+                      - PGM
+                      - PRJ
+                      - CUS
+                      - CON
+                  starts_at:
+                    type: string
+                    description: Starting step
+                  steps:
+                    type: object
+                    description: Steps for the workflow
+                    uniqueItems: true
+                    additionalProperties: false
+                    x-patternProperties:
+                      "^[A-Za-z][A-Za-z0-9-]*$":
+                        oneOf:
+                          - $schema: http://json-schema.org/draft-07/schema#
+                            $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/function/allocateUnitsToProject.json
+                            description: Allocates units to a project.
+                            type: object
+                            required:
+                              - step_type
+                              - label
+                              - goto
+                              - goto_fail
+                              - options
+                            additionalProperties: false
+                            properties:
+                              step_type:
+                                &a4
+                                type: string
+                                enum:
+                                  - function
+                              label:
+                                &a5
+                                type: string
+                                description: Label for the step
+                              on_start:
+                                &a2
+                                $schema: http://json-schema.org/draft-07/schema#
+                                $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json
+                                type: array
+                                items:
+                                  type: object
+                                  required:
                                     - function
-                                label:
-                                  &a5
-                                  type: string
-                                  description: Label for the step
-                                on_start:
-                                  &a2
-                                  $schema: http://json-schema.org/draft-07/schema#
-                                  $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json
-                                  type: array
-                                  items:
+                                    - options
+                                  additionalProperties: false
+                                  properties:
+                                    function:
+                                      type: string
+                                    options:
+                                      type: object
+                              on_complete: *a2
+                              goto:
+                                &a6
+                                type: string
+                                description: Step to move to
+                                pattern: ^[a-z][a-z-]+[a-z]$
+                              goto_fail:
+                                &a7
+                                type: string
+                                description: Step to transition too if this step cannot be completed
+                                pattern: ^[a-z][a-z-]+[a-z]$
+                              context:
+                                &a8
+                                type: array
+                                description: Values to set on the context
+                                items:
+                                  type: object
+                                  required:
+                                    - key
+                                    - value
+                                  properties:
+                                    key:
+                                      type: string
+                                      description: The context key to set
+                                    value:
+                                      type: string
+                                      description: Value to set
+                                    lock:
+                                      type: boolean
+                                      description: Prevents other steps from writing this value
+                                    ignore:
+                                      type: boolean
+                                      description: When trying to set a locked key, do not fail
+                              on_error:
+                                &a9
+                                oneOf:
+                                  - &a3
+                                    $schema: http://json-schema.org/draft-07/schema#
+                                    $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepError.json
                                     type: object
                                     required:
-                                      - function
-                                      - options
+                                      - retry
+                                      - finally
+                                    properties:
+                                      retry:
+                                        type: integer
+                                        description: "Number of times to retry this step. Note: retry will only occur on
+                                          steps which automatically failed. If
+                                          the step was transitioned using the
+                                          'goto-fail' step, the actions will be
+                                          fired but the step WILL NOT be
+                                          re-tried"
+                                        minimum: 0
+                                        maximum: 10
+                                        default: 0
+                                      finally:
+                                        type: object
+                                        description: What to do after all retries
+                                        properties:
+                                          actions: *a2
+                                  - type: object
+                                    additionalProperties: false
+                              on_timeout:
+                                &a10
+                                oneOf:
+                                  - *a3
+                                  - type: object
+                                    additionalProperties: false
+                              options:
+                                type: object
+                                required:
+                                  - function
+                                  - payload
+                                additionalProperties: false
+                                properties:
+                                  function:
+                                    type: string
+                                    enum:
+                                      - allocate-units-to-project
+                                  payload:
+                                    type: object
+                                    required:
+                                      - part_id
+                                      - project_id
+                                      - qty
                                     additionalProperties: false
                                     properties:
-                                      function:
+                                      part_id:
                                         type: string
-                                      options:
-                                        type: object
-                                on_complete: *a2
-                                goto:
-                                  &a6
-                                  type: string
-                                  description: Step to move to
-                                  pattern: ^[a-z][a-z-]+[a-z]$
-                                goto_fail:
-                                  &a7
-                                  type: string
-                                  description: Step to transition too if this step cannot be completed
-                                  pattern: ^[a-z][a-z-]+[a-z]$
-                                context:
-                                  &a8
-                                  type: array
-                                  description: Values to set on the context
-                                  items:
+                                        description: Part ID of the to assign
+                                      program_id:
+                                        type: string
+                                        description: Program ID of the to assign
+                                      qty:
+                                        type: number
+                                        minimum: 1
+                                        description: Number of units to assign to the project
+                                      allow_scarcity:
+                                        type: boolean
+                                        description: Allow the workflow to continue even if there are not enough units
+                                      force:
+                                        type: boolean
+                                        description: Assign the units even if the project already has units allocated
+                                      status:
+                                        type: string
+                                        description: Only assign units which are in this status
+                          - $schema: http://json-schema.org/draft-07/schema#
+                            $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/function/setEntityStatus.json
+                            description: Updates the status on the Work Flow entity.
+                            type: object
+                            required:
+                              - step_type
+                              - label
+                              - goto
+                              - goto_fail
+                              - options
+                            additionalProperties: false
+                            properties:
+                              step_type: *a4
+                              label: *a5
+                              on_start: *a2
+                              on_complete: *a2
+                              goto: *a6
+                              goto_fail: *a7
+                              context: *a8
+                              on_error: *a9
+                              on_timeout: *a10
+                              options:
+                                type: object
+                                required:
+                                  - function
+                                  - payload
+                                additionalProperties: false
+                                properties:
+                                  function:
+                                    type: string
+                                    enum:
+                                      - set-entity-status
+                                  payload:
                                     type: object
                                     required:
-                                      - key
-                                      - value
+                                      - status
+                                    additionalProperties: false
                                     properties:
-                                      key:
-                                        type: string
-                                        description: The context key to set
-                                      value:
-                                        type: string
-                                        description: Value to set
-                                      lock:
-                                        type: boolean
-                                        description: Prevents other steps from writing this value
-                                      ignore:
-                                        type: boolean
-                                        description: When trying to set a locked key, do not fail
-                                on_error:
-                                  &a9
-                                  oneOf:
-                                    - &a3
-                                      $schema: http://json-schema.org/draft-07/schema#
-                                      $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepError.json
-                                      type: object
-                                      required:
-                                        - retry
-                                        - finally
-                                      properties:
-                                        retry:
-                                          type: integer
-                                          description: "Number of times to retry this step. Note: retry will only occur on
-                                            steps which automatically failed. If
-                                            the step was transitioned using the
-                                            'goto-fail' step, the actions will
-                                            be fired but the step WILL NOT be
-                                            re-tried"
-                                          minimum: 0
-                                          maximum: 10
-                                          default: 0
-                                        finally:
-                                          type: object
-                                          description: What to do after all retries
-                                          properties:
-                                            actions: *a2
-                                    - type: object
-                                      additionalProperties: false
-                                on_timeout:
-                                  &a10
-                                  oneOf:
-                                    - *a3
-                                    - type: object
-                                      additionalProperties: false
-                                options:
-                                  type: object
-                                  required:
-                                    - function
-                                    - payload
-                                  additionalProperties: false
-                                  properties:
-                                    function:
-                                      type: string
-                                      enum:
-                                        - allocate-units-to-project
-                                    payload:
-                                      type: object
-                                      required:
-                                        - part_id
-                                        - project_id
-                                        - qty
-                                      additionalProperties: false
-                                      properties:
-                                        part_id:
-                                          type: string
-                                          description: Part ID of the to assign
-                                        program_id:
-                                          type: string
-                                          description: Program ID of the to assign
-                                        qty:
-                                          type: number
-                                          minimum: 1
-                                          description: Number of units to assign to the project
-                                        allow_scarcity:
-                                          type: boolean
-                                          description: Allow the workflow to continue even if there are not enough units
-                                        force:
-                                          type: boolean
-                                          description: Assign the units even if the project already has units allocated
-                                        status:
-                                          type: string
-                                          description: Only assign units which are in this status
-                            - $schema: http://json-schema.org/draft-07/schema#
-                              $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/function/setEntityStatus.json
-                              description: Updates the status on the Work Flow entity.
-                              type: object
-                              required:
-                                - step_type
-                                - label
-                                - goto
-                                - goto_fail
-                                - options
-                              additionalProperties: false
-                              properties:
-                                step_type: *a4
-                                label: *a5
-                                on_start: *a2
-                                on_complete: *a2
-                                goto: *a6
-                                goto_fail: *a7
-                                context: *a8
-                                on_error: *a9
-                                on_timeout: *a10
-                                options:
-                                  type: object
-                                  required:
-                                    - function
-                                    - payload
-                                  additionalProperties: false
-                                  properties:
-                                    function:
-                                      type: string
-                                      enum:
-                                        - set-entity-status
-                                    payload:
-                                      type: object
-                                      required:
-                                        - status
-                                      additionalProperties: false
-                                      properties:
-                                        status:
-                                          $schema: http://json-schema.org/draft-07/schema#
-                                          $id: https://docs.nterprise.com/schemas/niagara/status.json
-                                          type: object
-                                          description: Defines the properties for a status
-                                          additionalProperties: false
-                                          required:
-                                            - status
-                                            - category
-                                          properties:
-                                            status:
-                                              type: string
-                                              description: A Custom label for the status
-                                              pattern: ^[A-Za-z][0-9a-zA-Z-_ ]+$
-                                            category:
-                                              type: string
-                                              description: The classifier for the statues
-                                              enum:
-                                                - PENDING
-                                                - IN_PROGRESS
-                                                - VERIFYING
-                                                - COMPLETE
-                                                - CANCELLED
-                                                - BLOCKED
-                                            description:
-                                              type:
-                                                - string
-                                                - "null"
-                                              description: A description for the status
-                                            order:
-                                              type: number
-                                              description: Order status appears when listing
-                                          examples:
-                                            - category: COMPLETE
-                                              description: For something that is Complete
-                                              status: Complete
-                                              order: 7
-                            - $schema: http://json-schema.org/draft-07/schema#
-                              $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/followPDFInstructions.json
-                              description: Display a link or modal to a user which contains instructions from
-                                a PDF
-                              type: object
-                              required:
-                                - step_type
-                                - label
-                                - goto
-                                - goto_fail
-                                - options
-                              additionalProperties: false
-                              properties:
-                                step_type:
-                                  &a11
-                                  type: string
-                                  enum:
-                                    - user
-                                label: *a5
-                                on_start: *a2
-                                on_complete: *a2
-                                goto: *a6
-                                goto_fail: *a7
-                                context: *a8
-                                on_error: *a9
-                                on_timeout: *a10
-                                options:
-                                  type: object
-                                  required:
-                                    - component
-                                    - payload
-                                  properties:
-                                    component:
-                                      enum:
-                                        - follow-pds-instructions
-                                    payload:
-                                      type: object
-                                      required:
-                                        - attachment_id
-                                      properties:
-                                        attachment_id:
-                                          type: string
-                                          description: UUID for the attachment
-                                          format: uuid
-                            - $schema: http://json-schema.org/draft-07/schema#
-                              $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/manualDataEntry.json
-                              description: Ask the user to manually enter (or confirm) data for an entity
-                              type: object
-                              required:
-                                - step_type
-                                - label
-                                - goto
-                                - goto_fail
-                                - options
-                              additionalProperties: false
-                              properties:
-                                step_type: *a11
-                                label: *a5
-                                on_start: *a2
-                                on_complete: *a2
-                                goto: *a6
-                                goto_fail: *a7
-                                context: *a8
-                                on_error: *a9
-                                on_timeout: *a10
-                                options:
-                                  type: object
-                                  properties:
-                                    component:
-                                      enum:
-                                        - manual-data-entry
-                                    payload:
-                                      type: object
-                                      required:
-                                        - fields
-                                      properties:
-                                        fields:
-                                          type: array
-                                          description: Configuration for each field
-                                          items:
-                                            type: object
-                                            required:
-                                              - input_type
-                                              - label
-                                              - required
-                                              - entity_field
-                                            properties:
-                                              input_type:
-                                                type: string
-                                                description: The type of input field to display
-                                                enum:
-                                                  - textbox
-                                                  - input
-                                              label:
-                                                type: string
-                                                description: Label to display for the field
-                                              required:
-                                                type: boolean
-                                                description: "Display the field as required input. Note: this is a helper
-                                                  function. It singles that the
-                                                  user is required to input data
-                                                  at this step. If the field is
-                                                  required on the entity, the
-                                                  user will be presented with a
-                                                  validation message"
-                                              entity_field:
-                                                type: string
-                                                description: JSON Path to the field on the entity. If the path does not start
-                                                  with '$' then the entity on
-                                                  the context is assumed.
-                                                  Otherwise the data will be set
-                                                  on the context path
-                            - $schema: http://json-schema.org/draft-07/schema#
-                              $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/taskList.json
-                              description: Ask the user to follow a list and check off boxes
-                              type: object
-                              required:
-                                - step_type
-                                - label
-                                - goto
-                                - goto_fail
-                                - options
-                              additionalProperties: false
-                              properties:
-                                step_type: *a11
-                                label: *a5
-                                on_start: *a2
-                                on_complete: *a2
-                                goto: *a6
-                                goto_fail: *a7
-                                context: *a8
-                                on_error: *a9
-                                on_timeout: *a10
-                                options:
-                                  type: object
-                                  properties:
-                                    component:
-                                      enum:
-                                        - task-list
-                                    payload:
-                                      type: object
-                                      required:
-                                        - items
-                                      properties:
-                                        is_qc:
-                                          type: boolean
-                                          description: Flags this list as a QC task list. This means that a different user
-                                            can close the task to one previously
-                                            on the context
-                                        items:
-                                          type: array
-                                          description: Configuration for each task list item
-                                          items:
-                                            type: object
-                                            required:
-                                              - label
-                                              - evaluated
-                                              - na_option
-                                            properties:
-                                              label:
-                                                type: string
-                                                description: Label to display for the field
-                                              slug:
-                                                type: string
-                                                description: Slug for the item (Auto-generated from the label)
-                                                readOnly: true
-                                                pattern: ^[a-z0-9]+(?:-[a-z0-9]+)*$
-                                              help:
-                                                type: string
-                                                description: Message describing what is needed to be checked
-                                              evaluated:
-                                                type: boolean
-                                                description: When set to true, this will fail the step if the value for the item
-                                                  is false or N/A
-                                              na_field:
-                                                type: boolean
-                                                description: Allow the user to select the N/A option when checking off the list
-                            - $schema: http://json-schema.org/draft-07/schema#
-                              $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/machine/aceIos.json
-                              description: Run the ACE-IOS application to provision iOS devices
-                              type: object
-                              required:
-                                - step_type
-                                - label
-                                - goto
-                                - goto_fail
-                                - options
-                              properties:
-                                step_type:
-                                  type: string
-                                  enum:
-                                    - machine
-                                label: *a5
-                                on_start: *a2
-                                on_complete: *a2
-                                goto: *a6
-                                goto_fail: *a7
-                                context: *a8
-                                on_error: *a9
-                                on_timeout: *a10
-                                options:
-                                  type: object
-                                  required:
-                                    - application
-                                    - configuration
-                                  properties:
-                                    application:
-                                      type: object
-                                      required:
-                                        - application_id
-                                        - platforms
-                                      additionalProperties: false
-                                      properties:
-                                        application_id:
-                                          type: string
-                                          enum:
-                                            - ace-ios
-                                        platforms:
-                                          type: array
-                                          items:
+                                      status:
+                                        $schema: http://json-schema.org/draft-07/schema#
+                                        $id: https://docs.nterprise.com/schemas/niagara/status.json
+                                        type: object
+                                        description: Defines the properties for a status
+                                        additionalProperties: false
+                                        required:
+                                          - status
+                                          - category
+                                        properties:
+                                          status:
                                             type: string
-                                    configuration:
-                                      type: object
-                                      description: ACE Configuration options
-                                      additionalProperties: false
-                                      properties:
-                                        pairing_cert:
-                                          type: string
-                                          description: Contents of a *.crt file exported from Apple Configurator or MDM
-                                          pattern: ^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$
-                                        pairing_key:
-                                          type: string
-                                          description: Contents of a *.der file exported from Apple Configurator or MDM
-                                          pattern: ^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$
-                                        restore_device:
-                                          type: boolean
-                                          description: Restore device to factory defaults
-                                        automated_enrollment:
-                                          type: boolean
-                                          description: Automatically enroll the device to MDM
-                                        mdm:
+                                            description: A Custom label for the status
+                                            pattern: ^[A-Za-z][0-9a-zA-Z-_ ]+$
+                                          category:
+                                            type: string
+                                            description: The classifier for the statues
+                                            enum:
+                                              - PENDING
+                                              - IN_PROGRESS
+                                              - VERIFYING
+                                              - COMPLETE
+                                              - CANCELLED
+                                              - BLOCKED
+                                          description:
+                                            type:
+                                              - string
+                                              - "null"
+                                            description: A description for the status
+                                          order:
+                                            type: number
+                                            description: Order status appears when listing
+                                        examples:
+                                          - category: COMPLETE
+                                            description: For something that is Complete
+                                            status: Complete
+                                            order: 7
+                          - $schema: http://json-schema.org/draft-07/schema#
+                            $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/followPDFInstructions.json
+                            description: Display a link or modal to a user which contains instructions from
+                              a PDF
+                            type: object
+                            required:
+                              - step_type
+                              - label
+                              - goto
+                              - goto_fail
+                              - options
+                            additionalProperties: false
+                            properties:
+                              step_type:
+                                &a11
+                                type: string
+                                enum:
+                                  - user
+                              label: *a5
+                              on_start: *a2
+                              on_complete: *a2
+                              goto: *a6
+                              goto_fail: *a7
+                              context: *a8
+                              on_error: *a9
+                              on_timeout: *a10
+                              options:
+                                type: object
+                                required:
+                                  - component
+                                  - payload
+                                properties:
+                                  component:
+                                    enum:
+                                      - follow-pds-instructions
+                                  payload:
+                                    type: object
+                                    required:
+                                      - attachment_id
+                                    properties:
+                                      attachment_id:
+                                        type: string
+                                        description: UUID for the attachment
+                                        format: uuid
+                          - $schema: http://json-schema.org/draft-07/schema#
+                            $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/manualDataEntry.json
+                            description: Ask the user to manually enter (or confirm) data for an entity
+                            type: object
+                            required:
+                              - step_type
+                              - label
+                              - goto
+                              - goto_fail
+                              - options
+                            additionalProperties: false
+                            properties:
+                              step_type: *a11
+                              label: *a5
+                              on_start: *a2
+                              on_complete: *a2
+                              goto: *a6
+                              goto_fail: *a7
+                              context: *a8
+                              on_error: *a9
+                              on_timeout: *a10
+                              options:
+                                type: object
+                                properties:
+                                  component:
+                                    enum:
+                                      - manual-data-entry
+                                  payload:
+                                    type: object
+                                    required:
+                                      - fields
+                                    properties:
+                                      fields:
+                                        type: array
+                                        description: Configuration for each field
+                                        items:
                                           type: object
-                                          description: The settings for the Customers MDM
+                                          required:
+                                            - input_type
+                                            - label
+                                            - required
+                                            - entity_field
                                           properties:
-                                            vendor:
+                                            input_type:
                                               type: string
-                                              description: MDM vendor. Currently, supported values are AirWatch, JAMF, and
-                                                Meraki.
+                                              description: The type of input field to display
                                               enum:
-                                                - AirWatch
-                                                - JAMF
-                                                - Meraki
-                                            console_url:
+                                                - textbox
+                                                - input
+                                            label:
                                               type: string
-                                              format: uri
-                                              description: Base URL for HTTP requests
-                                            user:
+                                              description: Label to display for the field
+                                            required:
+                                              type: boolean
+                                              description: "Display the field as required input. Note: this is a helper
+                                                function. It singles that the
+                                                user is required to input data
+                                                at this step. If the field is
+                                                required on the entity, the user
+                                                will be presented with a
+                                                validation message"
+                                            entity_field:
                                               type: string
-                                              description: MDM User name
-                                            password:
+                                              description: JSON Path to the field on the entity. If the path does not start
+                                                with '$' then the entity on the
+                                                context is assumed. Otherwise
+                                                the data will be set on the
+                                                context path
+                          - $schema: http://json-schema.org/draft-07/schema#
+                            $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/taskList.json
+                            description: Ask the user to follow a list and check off boxes
+                            type: object
+                            required:
+                              - step_type
+                              - label
+                              - goto
+                              - goto_fail
+                              - options
+                            additionalProperties: false
+                            properties:
+                              step_type: *a11
+                              label: *a5
+                              on_start: *a2
+                              on_complete: *a2
+                              goto: *a6
+                              goto_fail: *a7
+                              context: *a8
+                              on_error: *a9
+                              on_timeout: *a10
+                              options:
+                                type: object
+                                properties:
+                                  component:
+                                    enum:
+                                      - task-list
+                                  payload:
+                                    type: object
+                                    required:
+                                      - items
+                                    properties:
+                                      is_qc:
+                                        type: boolean
+                                        description: Flags this list as a QC task list. This means that a different user
+                                          can close the task to one previously
+                                          on the context
+                                      items:
+                                        type: array
+                                        description: Configuration for each task list item
+                                        items:
+                                          type: object
+                                          required:
+                                            - label
+                                            - evaluated
+                                            - na_option
+                                          properties:
+                                            label:
                                               type: string
-                                              description: MDM password
-                                            tenant_code:
+                                              description: Label to display for the field
+                                            slug:
                                               type: string
-                                              description: MDM authentication key
-                                            set_asset_tag:
+                                              description: Slug for the item (Auto-generated from the label)
+                                              readOnly: true
+                                              pattern: ^[a-z0-9]+(?:-[a-z0-9]+)*$
+                                            help:
                                               type: string
-                                              description: Sets the devices Asset tag based on a field from the unit
-                                        field_mappings:
-                                          type: array
-                                          description: List of fields to map to the device
-                                          items:
-                                            type: object
-                                            properties:
-                                              from:
-                                                type: string
-                                                description: The field reported from ACE
-                                                enum:
-                                                  - serial_number
-                                                  - name
-                                                  - ecid
-                                                  - udid
-                                                  - configurator_serial
-                                                  - ios
-                                                  - model
-                                                  - storage
-                                                  - wifi_mac
-                                                  - bt_mac
-                                                  - ethernet_mac
-                                                  - thundersync_serial
-                                                  - iccid
-                                                  - iccid2
-                                                  - imei
-                                                  - imei2
-                                                  - missed_profiles
-                                                  - missed_apps
-                                                  - icon_list_regex
-                                                  - icon_layout
-                                                  - bat_capacity
-                                              to:
-                                                type: string
-                                                description: Field to set on the entity
-                                        wait_for_apps:
-                                          type: array
-                                          description: A list of applications needed to be installed on the device. This
-                                            will cause the extension to poll the
-                                            device for installed applications.
-                                            Once all the applications have been
-                                            installed, this step can be
-                                            completed
-                                          items:
+                                              description: Message describing what is needed to be checked
+                                            evaluated:
+                                              type: boolean
+                                              description: When set to true, this will fail the step if the value for the item
+                                                is false or N/A
+                                            na_field:
+                                              type: boolean
+                                              description: Allow the user to select the N/A option when checking off the list
+                          - $schema: http://json-schema.org/draft-07/schema#
+                            $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/machine/aceIos.json
+                            description: Run the ACE-IOS application to provision iOS devices
+                            type: object
+                            required:
+                              - step_type
+                              - label
+                              - goto
+                              - goto_fail
+                              - options
+                            properties:
+                              step_type:
+                                type: string
+                                enum:
+                                  - machine
+                              label: *a5
+                              on_start: *a2
+                              on_complete: *a2
+                              goto: *a6
+                              goto_fail: *a7
+                              context: *a8
+                              on_error: *a9
+                              on_timeout: *a10
+                              options:
+                                type: object
+                                required:
+                                  - application
+                                  - configuration
+                                properties:
+                                  application:
+                                    type: object
+                                    required:
+                                      - application_id
+                                      - platforms
+                                    additionalProperties: false
+                                    properties:
+                                      application_id:
+                                        type: string
+                                        enum:
+                                          - ace-ios
+                                      platforms:
+                                        type: array
+                                        items:
+                                          type: string
+                                  configuration:
+                                    type: object
+                                    description: ACE Configuration options
+                                    additionalProperties: false
+                                    properties:
+                                      pairing_cert:
+                                        type: string
+                                        description: Contents of a *.crt file exported from Apple Configurator or MDM
+                                        pattern: ^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$
+                                      pairing_key:
+                                        type: string
+                                        description: Contents of a *.der file exported from Apple Configurator or MDM
+                                        pattern: ^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$
+                                      restore_device:
+                                        type: boolean
+                                        description: Restore device to factory defaults
+                                      automated_enrollment:
+                                        type: boolean
+                                        description: Automatically enroll the device to MDM
+                                      mdm:
+                                        type: object
+                                        description: The settings for the Customers MDM
+                                        properties:
+                                          vendor:
+                                            type: string
+                                            description: MDM vendor. Currently, supported values are AirWatch, JAMF, and
+                                              Meraki.
+                                            enum:
+                                              - AirWatch
+                                              - JAMF
+                                              - Meraki
+                                          console_url:
                                             type: string
                                             format: uri
-                                        wait_for_battery_charge:
-                                          type: integer
-                                          description: The required battery percentage needed before this step can move on
-                                          minimum: 0
-                                          maximum: 100
-                            - &a12
-                              $schema: http://json-schema.org/draft-07/schema#
-                              $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepChoice.json
-                              description: A Step choice
-                              type: object
-                              required:
-                                - step_type
-                                - label
-                                - goto
-                                - goto_fail
-                                - decision
-                              additionalProperties: false
-                              properties:
-                                step_type:
-                                  type: string
-                                  enum:
-                                    - decision
-                                label: *a5
-                                on_start: *a2
-                                on_complete: *a2
-                                goto: *a6
-                                goto_fail: *a7
-                                context: *a8
-                                on_error: *a9
-                                on_timeout: *a10
-                                decision:
-                                  type: array
-                                  description: Context variable to check
-                                  items:
-                                    type: object
-                                    maxProperties: 2
-                                    minProperties: 2
-                                    properties:
-                                      variable:
-                                        type: string
-                                        description: Variable or value
-                                      operator:
-                                        type: string
-                                        description: Operator to perform
-                                        enum:
-                                          - greater_than_equals
-                                          - less_than_equals
-                                          - greater_than
-                                          - less_than
-                                          - equals
-                                          - not_equals
-                                      operand:
-                                        type: string
-                                        description: operand to compare with
-                            - $schema: http://json-schema.org/draft-07/schema#
-                              $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepFail.json
-                              description: Finial step which is marked as failed
-                              type: object
-                              required:
-                                - step_type
-                                - label
-                              additionalProperties: false
-                              properties:
-                                step_type:
-                                  type: string
-                                  enum:
-                                    - fail
-                                label: *a5
-                                on_start: *a2
-                                on_complete: *a2
-                            - $schema: http://json-schema.org/draft-07/schema#
-                              $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepPass.json
-                              description: Allows executing actions with out performing any function
-                              type: object
-                              required:
-                                - step_type
-                                - label
-                                - goto
-                                - goto_fail
-                              additionalProperties: false
-                              properties:
-                                step_type:
-                                  type: string
-                                  enum:
-                                    - pass
-                                label: *a5
-                                on_start: *a2
-                                on_complete: *a2
-                                goto: *a6
-                                goto_fail: *a7
-                                context: *a8
-                                on_error: *a9
-                                on_timeout: *a10
-                            - $schema: http://json-schema.org/draft-07/schema#
-                              $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepSuccess.json
-                              description: Finial step which is marked as completed successfully
-                              type: object
-                              required:
-                                - step_type
-                                - label
-                              additionalProperties: false
-                              properties:
-                                step_type:
-                                  type: string
-                                  enum:
-                                    - success
-                                label: *a5
-                                on_start: *a2
-                                on_complete: *a2
-                            - $schema: http://json-schema.org/draft-07/schema#
-                              $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepWait.json
-                              description: A step which run at certain times
-                              type: object
-                              required:
-                                - step_type
-                                - label
-                                - goto
-                                - goto_fail
-                                - stop_at
-                                - time
-                              additionalProperties: false
-                              properties:
-                                step_type:
-                                  type: string
-                                  enum:
-                                    - wait
-                                label: *a5
-                                on_start: *a2
-                                on_complete: *a2
-                                goto: *a6
-                                goto_fail: *a7
-                                context: *a8
-                                on_error: *a9
-                                on_timeout: *a10
-                                stop_at:
-                                  type: integer
-                                  description: Time in seconds to stop this task
-                                  maximum: 900
-                                  minimum: 1
-                                time:
-                                  type: integer
-                                  description: Time to wait before checking this step
-                                  maximum: 900
-                                  minimum: 1
-                                listen_for:
-                                  type: array
-                                  description: List of events and conditions to listen for to trigger
-                                  items:
-                                    type: object
-                                    required:
-                                      - event
-                                    properties:
-                                      event:
-                                        type: string
-                                        description: Name of the event to listen for
-                                        allOf:
-                                          - type: string
-                                            description: Possible entity events
-                                            enum:
-                                              - CON.created
-                                              - CON.changed
-                                              - CON.deleted
-                                              - CON.removed
-                                              - CON.relation-added
-                                              - CON.relation-removed
-                                              - CTX.created
-                                              - CTX.changed
-                                              - CTX.deleted
-                                              - CTX.removed
-                                              - CTX.relation-added
-                                              - CTX.relation-removed
-                                              - CTX.step-completed
-                                              - CTX.step-saved
-                                              - CUS.created
-                                              - CUS.changed
-                                              - CUS.deleted
-                                              - CUS.removed
-                                              - CUS.relation-added
-                                              - CUS.relation-removed
-                                              - LOC.created
-                                              - LOC.changed
-                                              - LOC.deleted
-                                              - LOC.removed
-                                              - LOC.relation-added
-                                              - LOC.relation-removed
-                                              - NOTE.created
-                                              - NOTE.deleted
-                                              - NOTE.removed
-                                              - NOTE.changed
-                                              - NOTE.relation-added
-                                              - NOTE.relation-removed
-                                              - PART.created
-                                              - PART.changed
-                                              - PART.deleted
-                                              - PART.removed
-                                              - PART.relation-added
-                                              - PART.relation-removed
-                                              - PGM.created
-                                              - PGM.changed
-                                              - PGM.deleted
-                                              - PGM.removed
-                                              - PGM.relation-added
-                                              - PGM.relation-removed
-                                              - PGM.moved-from
-                                              - PGM.moved-to
-                                              - PRJ.created
-                                              - PRJ.changed
-                                              - PRJ.deleted
-                                              - PRJ.removed
-                                              - PRJ.relation-added
-                                              - PRJ.relation-removed
-                                              - PRJ.moved-from
-                                              - PRJ.moved-to
-                                              - RES.created
-                                              - RES.changed
-                                              - RES.deleted
-                                              - RES.removed
-                                              - RES.relation-added
-                                              - RES.relation-removed
-                                              - RES.moved-from
-                                              - RES.moved-to
-                                              - SRES.created
-                                              - SRES.changed
-                                              - SRES.deleted
-                                              - SRES.removed
-                                              - SRES.relation-added
-                                              - SRES.relation-removed
-                                              - SRES.moved-from
-                                              - SRES.moved-to
-                                              - UNIT.created
-                                              - UNIT.changed
-                                              - UNIT.deleted
-                                              - UNIT.removed
-                                              - UNIT.relation-added
-                                              - UNIT.relation-removed
-                                              - UNIT.location-changed
-                                              - UNIT.resource-changed
-                                              - UNIT.moved-from
-                                              - UNIT.moved-to
-                                              - USER.created
-                                              - USER.changed
-                                              - USER.deleted
-                                              - USER.removed
-                                              - USER.relation-added
-                                              - USER.relation-removed
-                                              - WKF.created
-                                              - WKF.changed
-                                              - WKF.deleted
-                                              - WKF.removed
-                                              - WKF.relation-added
-                                              - WKF.relation-removed
-                                              - WOR.created
-                                              - WOR.changed
-                                              - WOR.deleted
-                                              - WOR.removed
-                                              - WOR.relation-added
-                                              - WOR.relation-removed
-                                              - WOR.location-changed
-                                              - WOR.moved-from
-                                              - WOR.moved-to
-                                      event_value:
-                                        type: object
-                                        description: The event conditions that have to be met
-                                        allOf:
-                                          - *a12
-              allOf:
-                - type: object
-                  required:
-                    - pending
-                    - in_progress
-                    - verifying
-                    - complete
-                    - blocked
-                    - cancelled
-                  properties:
-                    pending:
-                      type: integer
-                      description: The number of cycles pending
-                    needed:
-                      type: integer
-                      description: The number of cycles needed
-                      minimum: 1
-                    in_progress:
-                      type: integer
-                      description: The number of cycles in progress
-                    verifying:
-                      type: integer
-                      description: The number of cycles verifying
-                    complete:
-                      type: integer
-                      description: The number of cycles complete
-                    blocked:
-                      type: integer
-                      description: The number of cycles blocked
-                    cancelled:
-                      type: integer
-                      description: The number of cycles cancelled
-                    active:
-                      type: integer
-                      description: The number of active cycles. Active cycles is the sum of pending,
-                        in_progress, verifying, and blocked
-                      readOnly: true
-                    in_active:
-                      type: integer
-                      description: The number of in_active cycles. Active cycles is the sum of
-                        cancelled and complete
-                      readOnly: true
+                                            description: Base URL for HTTP requests
+                                          user:
+                                            type: string
+                                            description: MDM User name
+                                          password:
+                                            type: string
+                                            description: MDM password
+                                          tenant_code:
+                                            type: string
+                                            description: MDM authentication key
+                                          set_asset_tag:
+                                            type: string
+                                            description: Sets the devices Asset tag based on a field from the unit
+                                      field_mappings:
+                                        type: array
+                                        description: List of fields to map to the device
+                                        items:
+                                          type: object
+                                          properties:
+                                            from:
+                                              type: string
+                                              description: The field reported from ACE
+                                              enum:
+                                                - serial_number
+                                                - name
+                                                - ecid
+                                                - udid
+                                                - configurator_serial
+                                                - ios
+                                                - model
+                                                - storage
+                                                - wifi_mac
+                                                - bt_mac
+                                                - ethernet_mac
+                                                - thundersync_serial
+                                                - iccid
+                                                - iccid2
+                                                - imei
+                                                - imei2
+                                                - missed_profiles
+                                                - missed_apps
+                                                - icon_list_regex
+                                                - icon_layout
+                                                - bat_capacity
+                                            to:
+                                              type: string
+                                              description: Field to set on the entity
+                                      wait_for_apps:
+                                        type: array
+                                        description: A list of applications needed to be installed on the device. This
+                                          will cause the extension to poll the
+                                          device for installed applications.
+                                          Once all the applications have been
+                                          installed, this step can be completed
+                                        items:
+                                          type: string
+                                          format: uri
+                                      wait_for_battery_charge:
+                                        type: integer
+                                        description: The required battery percentage needed before this step can move on
+                                        minimum: 0
+                                        maximum: 100
+                          - &a12
+                            $schema: http://json-schema.org/draft-07/schema#
+                            $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepChoice.json
+                            description: A Step choice
+                            type: object
+                            required:
+                              - step_type
+                              - label
+                              - goto
+                              - goto_fail
+                              - decision
+                            additionalProperties: false
+                            properties:
+                              step_type:
+                                type: string
+                                enum:
+                                  - decision
+                              label: *a5
+                              on_start: *a2
+                              on_complete: *a2
+                              goto: *a6
+                              goto_fail: *a7
+                              context: *a8
+                              on_error: *a9
+                              on_timeout: *a10
+                              decision:
+                                type: array
+                                description: Context variable to check
+                                items:
+                                  type: object
+                                  maxProperties: 2
+                                  minProperties: 2
+                                  properties:
+                                    variable:
+                                      type: string
+                                      description: Variable or value
+                                    operator:
+                                      type: string
+                                      description: Operator to perform
+                                      enum:
+                                        - greater_than_equals
+                                        - less_than_equals
+                                        - greater_than
+                                        - less_than
+                                        - equals
+                                        - not_equals
+                                    operand:
+                                      type: string
+                                      description: operand to compare with
+                          - $schema: http://json-schema.org/draft-07/schema#
+                            $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepFail.json
+                            description: Finial step which is marked as failed
+                            type: object
+                            required:
+                              - step_type
+                              - label
+                            additionalProperties: false
+                            properties:
+                              step_type:
+                                type: string
+                                enum:
+                                  - fail
+                              label: *a5
+                              on_start: *a2
+                              on_complete: *a2
+                          - $schema: http://json-schema.org/draft-07/schema#
+                            $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepPass.json
+                            description: Allows executing actions with out performing any function
+                            type: object
+                            required:
+                              - step_type
+                              - label
+                              - goto
+                              - goto_fail
+                            additionalProperties: false
+                            properties:
+                              step_type:
+                                type: string
+                                enum:
+                                  - pass
+                              label: *a5
+                              on_start: *a2
+                              on_complete: *a2
+                              goto: *a6
+                              goto_fail: *a7
+                              context: *a8
+                              on_error: *a9
+                              on_timeout: *a10
+                          - $schema: http://json-schema.org/draft-07/schema#
+                            $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepSuccess.json
+                            description: Finial step which is marked as completed successfully
+                            type: object
+                            required:
+                              - step_type
+                              - label
+                            additionalProperties: false
+                            properties:
+                              step_type:
+                                type: string
+                                enum:
+                                  - success
+                              label: *a5
+                              on_start: *a2
+                              on_complete: *a2
+                          - $schema: http://json-schema.org/draft-07/schema#
+                            $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepWait.json
+                            description: A step which run at certain times
+                            type: object
+                            required:
+                              - step_type
+                              - label
+                              - goto
+                              - goto_fail
+                              - stop_at
+                              - time
+                            additionalProperties: false
+                            properties:
+                              step_type:
+                                type: string
+                                enum:
+                                  - wait
+                              label: *a5
+                              on_start: *a2
+                              on_complete: *a2
+                              goto: *a6
+                              goto_fail: *a7
+                              context: *a8
+                              on_error: *a9
+                              on_timeout: *a10
+                              stop_at:
+                                type: integer
+                                description: Time in seconds to stop this task
+                                maximum: 900
+                                minimum: 1
+                              time:
+                                type: integer
+                                description: Time to wait before checking this step
+                                maximum: 900
+                                minimum: 1
+                              listen_for:
+                                type: array
+                                description: List of events and conditions to listen for to trigger
+                                items:
+                                  type: object
+                                  required:
+                                    - event
+                                  properties:
+                                    event:
+                                      type: string
+                                      description: Name of the event to listen for
+                                      allOf:
+                                        - type: string
+                                          description: Possible entity events
+                                          enum:
+                                            - CON.created
+                                            - CON.changed
+                                            - CON.deleted
+                                            - CON.removed
+                                            - CON.relation-added
+                                            - CON.relation-removed
+                                            - CTX.created
+                                            - CTX.changed
+                                            - CTX.deleted
+                                            - CTX.removed
+                                            - CTX.relation-added
+                                            - CTX.relation-removed
+                                            - CTX.step-completed
+                                            - CTX.step-saved
+                                            - CUS.created
+                                            - CUS.changed
+                                            - CUS.deleted
+                                            - CUS.removed
+                                            - CUS.relation-added
+                                            - CUS.relation-removed
+                                            - LOC.created
+                                            - LOC.changed
+                                            - LOC.deleted
+                                            - LOC.removed
+                                            - LOC.relation-added
+                                            - LOC.relation-removed
+                                            - NOTE.created
+                                            - NOTE.deleted
+                                            - NOTE.removed
+                                            - NOTE.changed
+                                            - NOTE.relation-added
+                                            - NOTE.relation-removed
+                                            - PART.created
+                                            - PART.changed
+                                            - PART.deleted
+                                            - PART.removed
+                                            - PART.relation-added
+                                            - PART.relation-removed
+                                            - PGM.created
+                                            - PGM.changed
+                                            - PGM.deleted
+                                            - PGM.removed
+                                            - PGM.relation-added
+                                            - PGM.relation-removed
+                                            - PGM.moved-from
+                                            - PGM.moved-to
+                                            - PRJ.created
+                                            - PRJ.changed
+                                            - PRJ.deleted
+                                            - PRJ.removed
+                                            - PRJ.relation-added
+                                            - PRJ.relation-removed
+                                            - PRJ.moved-from
+                                            - PRJ.moved-to
+                                            - RES.created
+                                            - RES.changed
+                                            - RES.deleted
+                                            - RES.removed
+                                            - RES.relation-added
+                                            - RES.relation-removed
+                                            - RES.moved-from
+                                            - RES.moved-to
+                                            - SRES.created
+                                            - SRES.changed
+                                            - SRES.deleted
+                                            - SRES.removed
+                                            - SRES.relation-added
+                                            - SRES.relation-removed
+                                            - SRES.moved-from
+                                            - SRES.moved-to
+                                            - UNIT.created
+                                            - UNIT.changed
+                                            - UNIT.deleted
+                                            - UNIT.removed
+                                            - UNIT.relation-added
+                                            - UNIT.relation-removed
+                                            - UNIT.location-changed
+                                            - UNIT.resource-changed
+                                            - UNIT.moved-from
+                                            - UNIT.moved-to
+                                            - USER.created
+                                            - USER.changed
+                                            - USER.deleted
+                                            - USER.removed
+                                            - USER.relation-added
+                                            - USER.relation-removed
+                                            - WKF.created
+                                            - WKF.changed
+                                            - WKF.deleted
+                                            - WKF.removed
+                                            - WKF.relation-added
+                                            - WKF.relation-removed
+                                            - WOR.created
+                                            - WOR.changed
+                                            - WOR.deleted
+                                            - WOR.removed
+                                            - WOR.relation-added
+                                            - WOR.relation-removed
+                                            - WOR.location-changed
+                                            - WOR.moved-from
+                                            - WOR.moved-to
+                                    event_value:
+                                      type: object
+                                      description: The event conditions that have to be met
+                                      allOf:
+                                        - *a12
+            allOf:
+              - type: object
+                required:
+                  - pending
+                  - in_progress
+                  - verifying
+                  - complete
+                  - blocked
+                  - cancelled
+                properties:
+                  pending:
+                    type: integer
+                    description: The number of cycles pending
+                  needed:
+                    type: integer
+                    description: The number of cycles needed
+                    minimum: 1
+                  in_progress:
+                    type: integer
+                    description: The number of cycles in progress
+                  verifying:
+                    type: integer
+                    description: The number of cycles verifying
+                  complete:
+                    type: integer
+                    description: The number of cycles complete
+                  blocked:
+                    type: integer
+                    description: The number of cycles blocked
+                  cancelled:
+                    type: integer
+                    description: The number of cycles cancelled
+                  active:
+                    type: integer
+                    description: The number of active cycles. Active cycles is the sum of pending,
+                      in_progress, verifying, and blocked
+                    readOnly: true
+                  in_active:
+                    type: integer
+                    description: The number of in_active cycles. Active cycles is the sum of
+                      cancelled and complete
+                    readOnly: true
           input_filter:
             type: array
             description: Input Filters allow custom fields to be defined for entities
