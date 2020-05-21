@@ -47,6 +47,9 @@
       ],
       "additionalProperties": false,
       "properties": {
+        "component": {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepFunction.json#/properties/options/properties/component"
+        },
         "function": {
           "type": "string",
           "enum": [
@@ -62,11 +65,15 @@
           ],
           "additionalProperties": false,
           "properties": {
+            "part_label": {
+              "type": "string",
+              "description": "Part label of the to assign"
+            },
             "part_id": {
               "type": "string",
               "description": "Part ID of the to assign"
             },
-            "program_id": {
+            "project_id": {
               "type": "string",
               "description": "Program ID of the to assign"
             },
