@@ -9556,19 +9556,21 @@ properties:
                         required:
                           - component
                           - payload
+                        additionalProperties: false
                         properties:
                           component:
                             enum:
-                              - follow-pds-instructions
+                              - follow-pdf-instructions
                           payload:
                             type: object
                             required:
                               - attachment_id
                             properties:
                               attachment_id:
+                                description: The identifier for the batch
                                 type: string
-                                description: UUID for the attachment
-                                format: uuid
+                                readOnly: true
+                                pattern: ^[0-9a-zA-Z-_]+$
                   - $schema: http://json-schema.org/draft-07/schema#
                     $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/manualDataEntry.json
                     description: Ask the user to manually enter (or confirm) data for an entity
@@ -9680,7 +9682,7 @@ properties:
                                   required:
                                     - label
                                     - evaluated
-                                    - na_option
+                                    - na_field
                                   properties:
                                     label:
                                       type: string
