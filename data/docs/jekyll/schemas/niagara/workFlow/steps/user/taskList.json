@@ -65,7 +65,7 @@
                 "required": [
                   "label",
                   "evaluated",
-                  "na_option"
+                  "na_field"
                 ],
                 "properties": {
                   "label": {

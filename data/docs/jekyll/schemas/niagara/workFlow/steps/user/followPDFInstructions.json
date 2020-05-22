@@ -45,10 +45,11 @@
         "component",
         "payload"
       ],
+      "additionalProperties": false,
       "properties": {
         "component": {
           "enum": [
-            "follow-pds-instructions"
+            "follow-pdf-instructions"
           ]
         },
         "payload": {
@@ -58,9 +59,7 @@
           ],
           "properties": {
             "attachment_id": {
-              "type": "string",
-              "description": "UUID for the attachment",
-              "format": "uuid"
+              "$ref": "https://docs.nterprise.com/schemas/niagara/file.json#/properties/file_id"
             }
           }
         }
