@@ -19,12 +19,12 @@
     "goto": {
       "type": "string",
       "description": "Step to move to",
-      "pattern": "^[a-z][a-z-]+[a-z]$"
+      "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
     },
     "goto_fail": {
       "type": "string",
       "description": "Step to transition too if this step cannot be completed",
-      "pattern": "^[a-z][a-z-]+[a-z]$"
+      "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
     },
     "context": {
       "type": "array",

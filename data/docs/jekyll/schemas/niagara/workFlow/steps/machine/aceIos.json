@@ -48,11 +48,14 @@
         "configuration"
       ],
       "properties": {
+        "component": {
+          "type": "string",
+          "description": "Name of the UI component"
+        },
         "application": {
           "type": "object",
           "required": [
-            "application_id",
-            "platforms"
+            "application_id"
           ],
           "additionalProperties": false,
           "properties": {

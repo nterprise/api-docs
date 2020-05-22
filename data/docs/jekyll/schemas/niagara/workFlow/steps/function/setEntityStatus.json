@@ -47,6 +47,9 @@
       ],
       "additionalProperties": false,
       "properties": {
+        "component": {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepFunction.json#/properties/options/properties/component"
+        },
         "function": {
           "type": "string",
           "enum": [

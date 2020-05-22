@@ -9342,12 +9342,12 @@ properties:
                         &a6
                         type: string
                         description: Step to move to
-                        pattern: ^[a-z][a-z-]+[a-z]$
+                        pattern: ^[A-Za-z][A-Za-z0-9-]*$
                       goto_fail:
                         &a7
                         type: string
                         description: Step to transition too if this step cannot be completed
-                        pattern: ^[a-z][a-z-]+[a-z]$
+                        pattern: ^[A-Za-z][A-Za-z0-9-]*$
                       context:
                         &a8
                         type: array
@@ -9411,6 +9411,10 @@ properties:
                           - payload
                         additionalProperties: false
                         properties:
+                          component:
+                            &a11
+                            type: string
+                            description: Name of the UI component
                           function:
                             type: string
                             enum:
@@ -9423,10 +9427,13 @@ properties:
                               - qty
                             additionalProperties: false
                             properties:
+                              part_label:
+                                type: string
+                                description: Part label of the to assign
                               part_id:
                                 type: string
                                 description: Part ID of the to assign
-                              program_id:
+                              project_id:
                                 type: string
                                 description: Program ID of the to assign
                               qty:
@@ -9470,6 +9477,7 @@ properties:
                           - payload
                         additionalProperties: false
                         properties:
+                          component: *a11
                           function:
                             type: string
                             enum:
@@ -9531,7 +9539,7 @@ properties:
                     additionalProperties: false
                     properties:
                       step_type:
-                        &a11
+                        &a12
                         type: string
                         enum:
                           - user
@@ -9573,7 +9581,7 @@ properties:
                       - options
                     additionalProperties: false
                     properties:
-                      step_type: *a11
+                      step_type: *a12
                       label: *a5
                       on_start: *a2
                       on_complete: *a2
@@ -9639,7 +9647,7 @@ properties:
                       - options
                     additionalProperties: false
                     properties:
-                      step_type: *a11
+                      step_type: *a12
                       label: *a5
                       on_start: *a2
                       on_complete: *a2
@@ -9721,11 +9729,13 @@ properties:
                           - application
                           - configuration
                         properties:
+                          component:
+                            type: string
+                            description: Name of the UI component
                           application:
                             type: object
                             required:
                               - application_id
-                              - platforms
                             additionalProperties: false
                             properties:
                               application_id:
@@ -9832,7 +9842,7 @@ properties:
                                 description: The required battery percentage needed before this step can move on
                                 minimum: 0
                                 maximum: 100
-                  - &a12
+                  - &a13
                     $schema: http://json-schema.org/draft-07/schema#
                     $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepChoice.json
                     description: A Step choice
@@ -10091,7 +10101,7 @@ properties:
                               type: object
                               description: The event conditions that have to be met
                               allOf:
-                                - *a12
+                                - *a13
     allOf:
       - type: object
         required:

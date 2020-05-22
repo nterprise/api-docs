@@ -19437,12 +19437,12 @@ properties:
                 &a5
                 type: string
                 description: Step to move to
-                pattern: ^[a-z][a-z-]+[a-z]$
+                pattern: ^[A-Za-z][A-Za-z0-9-]*$
               goto_fail:
                 &a6
                 type: string
                 description: Step to transition too if this step cannot be completed
-                pattern: ^[a-z][a-z-]+[a-z]$
+                pattern: ^[A-Za-z][A-Za-z0-9-]*$
               context:
                 &a7
                 type: array
@@ -19505,6 +19505,10 @@ properties:
                   - payload
                 additionalProperties: false
                 properties:
+                  component:
+                    &a10
+                    type: string
+                    description: Name of the UI component
                   function:
                     type: string
                     enum:
@@ -19517,10 +19521,13 @@ properties:
                       - qty
                     additionalProperties: false
                     properties:
+                      part_label:
+                        type: string
+                        description: Part label of the to assign
                       part_id:
                         type: string
                         description: Part ID of the to assign
-                      program_id:
+                      project_id:
                         type: string
                         description: Program ID of the to assign
                       qty:
@@ -19564,6 +19571,7 @@ properties:
                   - payload
                 additionalProperties: false
                 properties:
+                  component: *a10
                   function:
                     type: string
                     enum:
@@ -19625,7 +19633,7 @@ properties:
             additionalProperties: false
             properties:
               step_type:
-                &a10
+                &a11
                 type: string
                 enum:
                   - user
@@ -19667,7 +19675,7 @@ properties:
               - options
             additionalProperties: false
             properties:
-              step_type: *a10
+              step_type: *a11
               label: *a4
               on_start: *a1
               on_complete: *a1
@@ -19732,7 +19740,7 @@ properties:
               - options
             additionalProperties: false
             properties:
-              step_type: *a10
+              step_type: *a11
               label: *a4
               on_start: *a1
               on_complete: *a1
@@ -19813,11 +19821,13 @@ properties:
                   - application
                   - configuration
                 properties:
+                  component:
+                    type: string
+                    description: Name of the UI component
                   application:
                     type: object
                     required:
                       - application_id
-                      - platforms
                     additionalProperties: false
                     properties:
                       application_id:
@@ -19923,7 +19933,7 @@ properties:
                         description: The required battery percentage needed before this step can move on
                         minimum: 0
                         maximum: 100
-          - &a11
+          - &a12
             $schema: http://json-schema.org/draft-07/schema#
             $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepChoice.json
             description: A Step choice
@@ -20182,7 +20192,7 @@ properties:
                       type: object
                       description: The event conditions that have to be met
                       allOf:
-                        - *a11
+                        - *a12
 
 ```
 
