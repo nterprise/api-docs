@@ -47,6 +47,9 @@
     "content_length": {
       "type": "number",
       "description": "Length of file in bytes"
+    },
+    "input_filter": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter.json"
     }
   }
 }
