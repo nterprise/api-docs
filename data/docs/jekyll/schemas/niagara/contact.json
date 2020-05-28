@@ -50,14 +50,7 @@
       "description": "Phone number"
     },
     "input_filter": {
-      "oneOf": [
-        {
-          "type": "null"
-        },
-        {
-          "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter.json"
-        }
-      ]
+      "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter.json"
     }
   }
 }

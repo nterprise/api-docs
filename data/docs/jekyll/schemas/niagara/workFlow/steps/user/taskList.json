@@ -79,7 +79,7 @@
                     "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
                   },
                   "help": {
-                    "type": "string",
+                    "type": ["string", "null"],
                     "description": "Message describing what is needed to be checked"
                   },
                   "evaluated": {
