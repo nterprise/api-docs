@@ -1,8 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/string.json",
+  "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/always.json",
   "type": "object",
-  "description": "Filter to transform a value into a string",
+  "description": "This is always valid",
   "required": [
     "type",
     "options"
@@ -10,11 +10,11 @@
   "properties": {
     "type": {
       "type": "string",
-      "const": "string"
+      "const": "always"
     },
     "options": {
       "type": "object",
-      "description": "String filter has no options"
+      "description": "This validator has no options"
     }
   }
 }

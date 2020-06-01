@@ -195,6 +195,29 @@ const buildFontMatter = (oas) => _.reduce(
     {layout: 'page'},
 );
 
+const localResolver = {
+    order: 1,
+
+    canRead: true,
+
+    read(file, callback, $refs) {
+        try {
+            if (!_.startsWith(file.url, 'http')) {
+                callback(null, require(file.url));
+                return;
+            }
+
+            file = new URL(file.url);
+            callback(null, require(path.join(...[
+                folders.jekyllPath,
+                file.pathname,
+            ])));
+        } catch (error) {
+            logger.error('Error when loading local ref', error);
+        }
+    },
+};
+
 const processFile = async (file) => {
     const result = {
         fileName: file,
@@ -209,9 +232,11 @@ const processFile = async (file) => {
     process.chdir(path.dirname(file));
     logger.debug('De-referencing file');
     try {
-        result.oas = jsonSchemaToOas(
-            await RefParser.dereference(require(file)),
+        const deRefed = await RefParser.dereference(
+            require(file),
+            {resolve: {local: localResolver}},
         );
+        result.oas = jsonSchemaToOas(deRefed);
     } catch (error) {
         logger.error(`Failed to de-reference file ${file}`, error);
         result.error = true;
@@ -237,7 +262,8 @@ const processFile = async (file) => {
                 if (!_.has(value, 'example')) {
                     result.error = true;
                     // eslint-disable-next-line max-len
-                    result.errorMessage = `Path: ${path.join('.')} is missing example`;
+                    result.errorMessage = `Path: ${path.join(
+                        '.')} is missing example`;
                 }
 
                 const contentType = path[path.length - 1];

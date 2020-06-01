@@ -33,6 +33,8 @@ Fetches a note
 |---|---|---|---|---|
 |note_id|path|string|true|Id of the note|
 
+<!-- START responses.def -->
+
 <h3 id="fetchnotebyid-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -153,6 +155,8 @@ Status Code **404**
 |&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
 |&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
 
+<!-- END responses.def -->
+
 ### DELETE /notes/{note_id} - *Delete note*
 
 <a id="opIddeleteNote"></a>
@@ -166,6 +170,8 @@ Deletes a note
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |note_id|path|string|true|Id of the note|
+
+<!-- START responses.def -->
 
 <h3 id="deletenote-responses">Responses</h3>
 
@@ -260,6 +266,8 @@ Status Code **423**
 |&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
 |&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
 |&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
+
+<!-- END responses.def -->
 
 # Embedded Schemas
 

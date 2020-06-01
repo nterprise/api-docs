@@ -10,9 +10,7 @@
   "properties": {
     "type": {
       "type": "string",
-      "enum": [
-        "upper"
-      ]
+      "const": "upper"
     },
     "options": {
       "type": "object",

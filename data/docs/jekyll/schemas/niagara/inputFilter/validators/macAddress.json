@@ -10,9 +10,7 @@
   "properties": {
     "type": {
       "type": "string",
-      "enum": [
-        "macAddress"
-      ]
+      "const": "mac_address"
     },
     "options": {
       "type": "object",

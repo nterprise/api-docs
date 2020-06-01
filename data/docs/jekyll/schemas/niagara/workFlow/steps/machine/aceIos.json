@@ -57,7 +57,6 @@
           "required": [
             "application_id"
           ],
-          "additionalProperties": false,
           "properties": {
             "application_id": {
               "type": "string",
@@ -76,7 +75,6 @@
         "configuration": {
           "type": "object",
           "description": "ACE Configuration options",
-          "additionalProperties": false,
           "properties": {
             "pairing_cert": {
               "type": "string",

@@ -10,9 +10,7 @@
   "properties": {
     "type": {
       "type": "string",
-      "enum": [
-        "trim"
-      ]
+      "const": "trim"
     },
     "options": {
       "type": "object",

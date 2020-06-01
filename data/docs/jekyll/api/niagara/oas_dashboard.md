@@ -27,6 +27,8 @@ API for the nterprise application
 
 Dashboard page
 
+<!-- START responses.def -->
+
 <h3 id="fetchdashboard-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -88,6 +90,8 @@ Status Code **401**
 |&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
 |&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
 |&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
+
+<!-- END responses.def -->
 
 # Embedded Schemas
 

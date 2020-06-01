@@ -10,9 +10,7 @@
   "properties": {
     "type": {
       "type": "string",
-      "enum": [
-        "required"
-      ]
+      "const": "required"
     },
     "options": {
       "type": "object",

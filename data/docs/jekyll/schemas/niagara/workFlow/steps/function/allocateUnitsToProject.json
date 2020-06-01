@@ -10,7 +10,6 @@
     "goto_fail",
     "options"
   ],
-  "additionalProperties": false,
   "properties": {
     "step_type": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepFunction.json#/properties/step_type"
@@ -45,7 +44,6 @@
         "function",
         "payload"
       ],
-      "additionalProperties": false,
       "properties": {
         "component": {
           "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepFunction.json#/properties/options/properties/component"
@@ -63,7 +61,6 @@
             "project_id",
             "qty"
           ],
-          "additionalProperties": false,
           "properties": {
             "part_label": {
               "type": "string",

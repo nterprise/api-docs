@@ -24,6 +24,8 @@ API for the nterprise application
 
 Fetches all the statuses configured for the tenant
 
+<!-- START responses.def -->
+
 <h3 id="fetchallstatuses-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -139,6 +141,8 @@ Status Code **403**
 |&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
 |&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
 
+<!-- END responses.def -->
+
 ### POST /settings/statuses - *Create status*
 
 <a id="opIdcreateStatus"></a>
@@ -157,6 +161,8 @@ Creates a new status
 |category|body|string|true|The classifier for the statues|
 |description|body|string¦null|false|A description for the status|
 |order|body|number|false|Order status appears when listing|
+
+<!-- START responses.def -->
 
 <h3 id="createstatus-responses">Responses</h3>
 
@@ -305,6 +311,8 @@ Status Code **403**
 |&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
 |&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
 |&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
+
+<!-- END responses.def -->
 
 # Embedded Schemas
 

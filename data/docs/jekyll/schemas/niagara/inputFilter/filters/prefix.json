@@ -10,9 +10,7 @@
   "properties": {
     "type": {
       "type": "string",
-      "enum": [
-        "prefix"
-      ]
+      "const": "prefix"
     },
     "options": {
       "type": "object",

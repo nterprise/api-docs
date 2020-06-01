@@ -10,9 +10,7 @@
   "properties": {
     "type": {
       "type": "string",
-      "enum": [
-        "mask"
-      ]
+      "const": "mask"
     },
     "options": {
       "type": "object",

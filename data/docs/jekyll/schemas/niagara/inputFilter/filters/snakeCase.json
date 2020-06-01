@@ -10,9 +10,7 @@
   "properties": {
     "type": {
       "type": "string",
-      "enum": [
-        "snake"
-      ]
+      "const": "snake"
     },
     "options": {
       "type": "object",

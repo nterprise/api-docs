@@ -48,6 +48,8 @@ In order to upload files, a signed AWS URL is needed. This operation will create
 |type|body|string|true|Mime type of the file|
 |size|body|integer|true|Size of the file in bytes max 10 MB|
 
+<!-- START responses.def -->
+
 <h3 id="signattachment-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -171,4 +173,6 @@ Status Code **413**
 |&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
 |&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
 |&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
+
+<!-- END responses.def -->
 

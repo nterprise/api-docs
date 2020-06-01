@@ -10,9 +10,7 @@
   "properties": {
     "type": {
       "type": "string",
-      "enum": [
-        "ends_with"
-      ]
+      "const": "ends_with"
     },
     "options": {
       "type": "object",

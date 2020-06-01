@@ -10,9 +10,7 @@
   "properties": {
     "type": {
       "type": "string",
-      "enum": [
-        "hostname"
-      ]
+      "const": "hostname"
     },
     "options": {
       "type": "object",

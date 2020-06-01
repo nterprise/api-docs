@@ -159,15 +159,7 @@
             "part_number": "1-888-482-858-832",
             "input_filter": []
           },
-          "input_filter": [
-            {
-              "label": "Serial Number Of part",
-              "key": "serial-number",
-              "filters": [],
-              "validators": [],
-              "value": null
-            }
-          ]
+          "input_filter": []
         },
         "vendor": {
           "vendor_id": "vendor",
@@ -272,15 +264,7 @@
           "input_filter": []
         },
         "resource": null,
-        "input_filter": [
-          {
-            "label": "Serial Number Of part",
-            "key": "serial-number",
-            "filters": [],
-            "validators": [],
-            "value": null
-          }
-        ],
+        "input_filter": [],
         "_embedded": {
           "nter:unit-manufacturer": [],
           "nter:unit-part": [],
