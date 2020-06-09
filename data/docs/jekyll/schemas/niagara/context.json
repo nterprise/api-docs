@@ -63,6 +63,13 @@
         },
         {
           "$ref": "https://docs.nterprise.com/schemas/niagara/resource.json"
+        }
+      ]
+    },
+    "sub_resource": {
+      "oneOf": [
+        {
+          "type": "null"
         },
         {
           "$ref": "https://docs.nterprise.com/schemas/niagara/subResource.json"
