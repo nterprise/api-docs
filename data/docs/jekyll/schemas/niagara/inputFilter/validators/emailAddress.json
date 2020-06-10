@@ -10,9 +10,7 @@
   "properties": {
     "type": {
       "type": "string",
-      "enum": [
-        "email_address"
-      ]
+      "const": "email_address"
     },
     "options": {
       "type": "object",

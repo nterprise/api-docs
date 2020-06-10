@@ -10,7 +10,6 @@
     "goto_fail",
     "options"
   ],
-  "additionalProperties": false,
   "properties": {
     "step_type": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepUser.json#/properties/step_type"
@@ -45,7 +44,6 @@
         "component",
         "payload"
       ],
-      "additionalProperties": false,
       "properties": {
         "component": {
           "enum": [

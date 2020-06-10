@@ -10,9 +10,7 @@
   "properties": {
     "type": {
       "type": "string",
-      "enum": [
-        "kebab"
-      ]
+      "const": "kebab"
     },
     "options": {
       "type": "object",

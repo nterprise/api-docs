@@ -10,23 +10,18 @@
   "properties": {
     "type": {
       "type": "string",
-      "enum": [
-        "ipAddress"
-      ]
+      "const": "ip_address"
     },
     "options": {
       "type": "object",
       "properties": {
-        "versions": {
-          "type": "array",
+        "version": {
+          "type": "string",
           "description": "IP Version to match against",
-          "items": {
-            "type": "string",
-            "enum": [
-              "IPv4",
-              "IPv6"
-            ]
-          }
+          "enum": [
+            "IPv4",
+            "IPv6"
+          ]
         }
       }
     }

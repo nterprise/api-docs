@@ -44,6 +44,7 @@
           "users": {
             "type": "array",
             "description": "A List of users to assign as technicians to assign to the batches",
+            "maxItems": 100,
             "items": {
               "type": "object",
               "properties": {

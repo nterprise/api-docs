@@ -10,9 +10,7 @@
   "properties": {
     "type": {
       "type": "string",
-      "enum": [
-        "greater_than"
-      ]
+      "const": "between"
     },
     "options": {
       "type": "object",

@@ -342,15 +342,7 @@
               ]
             }
           },
-          "input_filter": [
-            {
-              "label": "Serial Number Of part",
-              "key": "serial-number",
-              "filters": [],
-              "validators": [],
-              "value": null
-            }
-          ]
+          "input_filter": []
         },
         "current_status": {
           "status": "Reticulating Splines",

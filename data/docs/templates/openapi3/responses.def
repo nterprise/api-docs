@@ -1,3 +1,4 @@
+<!-- START responses.def -->
 {{ data.responses = data.utils.getResponses(data); }}
 {{ data.responseSchemas = false; }}
 {{~ data.responses :response }}
@@ -77,3 +78,4 @@ Status Code **{{=response.status}}**
 
 {{?}}
 {{= data.tags.endSection }}
+<!-- END responses.def -->

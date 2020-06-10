@@ -10,9 +10,7 @@
   "properties": {
     "type": {
       "type": "string",
-      "enum": [
-        "allowed_list"
-      ]
+      "const": "allowed_list"
     },
     "options": {
       "type": "object",
@@ -24,10 +22,7 @@
           "type": "array",
           "minimum": 1,
           "maximum": 100,
-          "description": "The list of approved values",
-          "items": {
-            "type": "string"
-          }
+          "description": "The list of approved values"
         },
         "check_case": {
           "type": "boolean",

@@ -10,9 +10,7 @@
   "properties": {
     "type": {
       "type": "string",
-      "enum": [
-        "date"
-      ]
+      "const": "date"
     },
     "options": {
       "type": "object",

@@ -10,9 +10,7 @@
   "properties": {
     "type": {
       "type": "string",
-      "enum": [
-        "step"
-      ]
+      "const": "step"
     },
     "options": {
       "type": "object",
@@ -25,11 +23,11 @@
           "description": "The step value"
         },
         "start": {
-          "type": "integer",
+          "type": ["number", "null"],
           "description": "Start stepping at this value"
         },
         "end": {
-          "type": "integer",
+          "type": ["number", "null"],
           "description": "End stepping at this value"
         }
       }

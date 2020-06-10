@@ -41,7 +41,6 @@
             "description": "The context key to set"
           },
           "value": {
-            "type": "string",
             "description": "Value to set"
           },
           "lock": {

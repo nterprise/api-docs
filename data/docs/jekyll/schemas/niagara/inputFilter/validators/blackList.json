@@ -10,9 +10,7 @@
   "properties": {
     "type": {
       "type": "string",
-      "enum": [
-        "white_list"
-      ]
+      "const": "black_list"
     },
     "options": {
       "type": "object",
@@ -26,7 +24,7 @@
           "maximum": 100,
           "description": "The list of approved values",
           "items": {
-            "type": "string"
+            "type": ["string", "number", "boolean"]
           }
         },
         "check_case": {

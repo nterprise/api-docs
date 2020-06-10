@@ -35,6 +35,8 @@ Fetches A Page of users
 |limit|query|integer(int32)|false|How many items to return at one time (max 100)|
 |offset|query|string|false|Continue from last offset|
 
+<!-- START responses.def -->
+
 <h3 id="fetchallusers-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -168,6 +170,8 @@ Status Code **403**
 |&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
 |&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
 
+<!-- END responses.def -->
+
 ### GET /users/{user_id} - *Fetch User*
 
 <a id="opIdfetchUserById"></a>
@@ -181,6 +185,8 @@ Fetches a user
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |user_id|path|string|true|Id of the user|
+
+<!-- START responses.def -->
 
 <h3 id="fetchuserbyid-responses">Responses</h3>
 
@@ -280,6 +286,8 @@ Status Code **404**
 |&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
 |&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
 
+<!-- END responses.def -->
+
 ### GET /users/{user_id}/relations - *Fetch User relations*
 
 <a id="opIdfetchRelationsForUser"></a>
@@ -296,6 +304,8 @@ Fetches the relations for a user
 |filter[entity_type]|query|string|false|Filter on entity type|
 |filter[relation]|query|string|false|Filter on relation type|
 |filter[direction]|query|string|false|Filter on relation direction|
+
+<!-- START responses.def -->
 
 <h3 id="fetchrelationsforuser-responses">Responses</h3>
 
@@ -464,6 +474,8 @@ Status Code **404**
 |&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
 |&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
 
+<!-- END responses.def -->
+
 ### POST /users/{user_id}/relations - *Create relation*
 
 <a id="opIdcreateRelationForUser"></a>
@@ -483,6 +495,8 @@ Creates a relation for a user
 |entity|body|object|true|none|
 |&nbsp;&nbsp;&nbsp;&nbsp; entity_id|body|string|true|Entity identifier|
 |&nbsp;&nbsp;&nbsp;&nbsp; entity_type|body|string|true|Entity type|
+
+<!-- START responses.def -->
 
 <h3 id="createrelationforuser-responses">Responses</h3>
 
@@ -597,6 +611,8 @@ Status Code **403**
 |&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
 |&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
 
+<!-- END responses.def -->
+
 ### DELETE /users/{user_id}/relations/{relation_id} - *Delete relation for user*
 
 <a id="opIddeleteRelationForUser"></a>
@@ -611,6 +627,8 @@ Deletes a relation for a user
 |---|---|---|---|---|
 |user_id|path|string|true|Id of the user|
 |relation_id|path|string|true|Id of the relation|
+
+<!-- START responses.def -->
 
 <h3 id="deleterelationforuser-responses">Responses</h3>
 
@@ -712,6 +730,8 @@ Status Code **404**
 |&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
 |&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
 |&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
+
+<!-- END responses.def -->
 
 # Embedded Schemas
 

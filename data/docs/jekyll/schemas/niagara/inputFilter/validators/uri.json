@@ -10,9 +10,7 @@
   "properties": {
     "type": {
       "type": "string",
-      "enum": [
-        "uri"
-      ]
+      "const": "uri"
     },
     "options": {
       "type": "object",
@@ -23,18 +21,18 @@
           "items": {
             "type": "string",
             "enum": [
-              "http",
-              "https",
-              "sip",
-              "sips",
-              "ftp",
-              "ftps",
-              "ldap",
-              "ldaps",
-              "file",
-              "udp",
-              "tcp",
-              "urn"
+              "http:",
+              "https:",
+              "sip:",
+              "sips:",
+              "ftp:",
+              "ftps:",
+              "ldap:",
+              "ldaps:",
+              "file:",
+              "udp:",
+              "tcp:",
+              "urn:"
             ]
           }
         }

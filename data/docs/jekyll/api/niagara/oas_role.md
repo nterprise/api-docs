@@ -34,6 +34,8 @@ Fetches A Page of roles
 |limit|query|integer(int32)|false|How many items to return at one time (max 100)|
 |offset|query|string|false|Continue from last offset|
 
+<!-- START responses.def -->
+
 <h3 id="fetchallroles-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
@@ -129,6 +131,8 @@ Status Code **403**
 |&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
 |&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
 
+<!-- END responses.def -->
+
 ### POST /roles - *Create role*
 
 <a id="opIdcreateRole"></a>
@@ -149,6 +153,8 @@ Creates a new role
 |&nbsp;&nbsp;&nbsp;&nbsp; permission|body|string|true|The granted permission|
 |&nbsp;&nbsp;&nbsp;&nbsp; label|body|string|true|Label for the entity|
 |&nbsp;&nbsp;&nbsp;&nbsp; match_location|body|boolean|true|The user must be located at this location to access this entity|
+
+<!-- START responses.def -->
 
 <h3 id="createrole-responses">Responses</h3>
 
@@ -299,6 +305,8 @@ Status Code **409**
 |&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
 |&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
 
+<!-- END responses.def -->
+
 ### GET /roles/{role_id} - *Fetch Role*
 
 <a id="opIdfetchRoleById"></a>
@@ -312,6 +320,8 @@ Fetches a role by the role Id
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |role_id|path|string|true|Id of the role|
+
+<!-- START responses.def -->
 
 <h3 id="fetchrolebyid-responses">Responses</h3>
 
@@ -429,6 +439,8 @@ Status Code **404**
 |&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
 |&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
 
+<!-- END responses.def -->
+
 ### PUT /roles/{role_id} - *Update role*
 
 <a id="opIdupdateRole"></a>
@@ -450,6 +462,8 @@ Updates a new role following the role schema
 |&nbsp;&nbsp;&nbsp;&nbsp; permission|body|string|true|The granted permission|
 |&nbsp;&nbsp;&nbsp;&nbsp; label|body|string|true|Label for the entity|
 |&nbsp;&nbsp;&nbsp;&nbsp; match_location|body|boolean|true|The user must be located at this location to access this entity|
+
+<!-- START responses.def -->
 
 <h3 id="updaterole-responses">Responses</h3>
 
@@ -621,6 +635,8 @@ Status Code **423**
 |&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
 |&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
 
+<!-- END responses.def -->
+
 ### DELETE /roles/{role_id} - *Delete role*
 
 <a id="opIddeleteRole"></a>
@@ -634,6 +650,8 @@ This will remove the role from the system
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |role_id|path|string|true|Id of the role|
+
+<!-- START responses.def -->
 
 <h3 id="deleterole-responses">Responses</h3>
 
@@ -729,6 +747,8 @@ Status Code **423**
 |&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
 |&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
 
+<!-- END responses.def -->
+
 ### GET /roles/{role_id}/users - *Fetch role users*
 
 <a id="opIdfetchAllRoleUsers"></a>
@@ -744,6 +764,8 @@ Fetches A Page of users for the role
 |role_id|path|string|true|Id of the role|
 |limit|query|integer(int32)|false|How many items to return at one time (max 100)|
 |offset|query|string|false|Continue from last offset|
+
+<!-- START responses.def -->
 
 <h3 id="fetchallroleusers-responses">Responses</h3>
 
@@ -899,6 +921,8 @@ Status Code **404**
 |&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
 |&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
 
+<!-- END responses.def -->
+
 ### POST /roles/{role_id}/users - *Assign user to role*
 
 <a id="opIdattachRoleUser"></a>
@@ -915,6 +939,8 @@ This will create the user along with linking it to the role. If a user is found 
 |---|---|---|---|---|
 |role_id|path|string|true|Id of the role|
 |user_id|body|string|true|The identifier for the user|
+
+<!-- START responses.def -->
 
 <h3 id="attachroleuser-responses">Responses</h3>
 
@@ -1067,6 +1093,8 @@ Status Code **409**
 |&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
 |&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
 |&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
+
+<!-- END responses.def -->
 
 # Embedded Schemas
 

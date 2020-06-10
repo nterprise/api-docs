@@ -10,7 +10,6 @@
     "goto_fail",
     "options"
   ],
-  "additionalProperties": false,
   "properties": {
     "step_type": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepFunction.json#/properties/step_type"
@@ -45,7 +44,6 @@
         "function",
         "payload"
       ],
-      "additionalProperties": false,
       "properties": {
         "component": {
           "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepFunction.json#/properties/options/properties/component"
@@ -61,7 +59,6 @@
           "required": [
             "status"
           ],
-          "additionalProperties": false,
           "properties": {
             "status": {
               "$ref": "https://docs.nterprise.com/schemas/niagara/status.json"

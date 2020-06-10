@@ -278,15 +278,7 @@
                   ]
                 }
               },
-              "input_filter": [
-                {
-                  "label": "Serial Number Of part",
-                  "key": "serial-number",
-                  "filters": [],
-                  "validators": [],
-                  "value": null
-                }
-              ],
+              "input_filter": [],
               "_links": {
                 "nter:work-order-batches": {
                   "href": "https://api.example.com/work-orders/work-order/batches"

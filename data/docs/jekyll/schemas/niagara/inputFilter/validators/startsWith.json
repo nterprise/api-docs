@@ -10,9 +10,7 @@
   "properties": {
     "type": {
       "type": "string",
-      "enum": [
-        "startsWith"
-      ]
+      "const": "starts_with"
     },
     "options": {
       "type": "object",

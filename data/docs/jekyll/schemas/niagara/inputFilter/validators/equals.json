@@ -10,9 +10,7 @@
   "properties": {
     "type": {
       "type": "string",
-      "enum": [
-        "equals"
-      ]
+      "const": "equals"
     },
     "options": {
       "type": "object",
@@ -21,7 +19,7 @@
       ],
       "properties": {
         "value": {
-          "type": "number",
+          "type": ["number", "string", "boolean"],
           "description": "The value to compare against"
         },
         "precision": {
