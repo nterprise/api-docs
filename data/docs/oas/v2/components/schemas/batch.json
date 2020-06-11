@@ -54,6 +54,12 @@
           "$ref": "./workOrder.json"
         }
       ]
+    },
+    "total_assigned_users": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/batch.json#/properties/total_assigned_users"
+    },
+    "assigned_users": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/batch.json#/properties/assigned_users"
     }
   }
 }

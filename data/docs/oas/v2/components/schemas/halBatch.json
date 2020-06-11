@@ -19,7 +19,8 @@
             "nter:batch-customer",
             "nter:batch-location",
             "nter:batch-program",
-            "nter:batch-project"
+            "nter:batch-project",
+            "nter:batch-assigned-users"
           ],
           "properties": {
             "self": {
@@ -41,6 +42,9 @@
               "$ref": "./link.json"
             },
             "nter:batch-queue": {
+              "$ref": "./link.json"
+            },
+            "nter:batch-assigned-users": {
               "$ref": "./link.json"
             }
           }

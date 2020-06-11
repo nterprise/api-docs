@@ -65,6 +65,13 @@
                     "items": {
                       "$ref": "../schemas/halWorkOrder.json"
                     }
+                  },
+                  "nter:batch-assigned-users": {
+                    "type": "array",
+                    "maxItems": 5,
+                    "items": {
+                      "$ref": "../schemas/halUser.json"
+                    }
                   }
                 }
               }
@@ -376,6 +383,9 @@
           },
           "nter:batch-location": {
             "href": "https://api.example.com/locations/location"
+          },
+          "nter:batch-assigned-user": {
+            "href": "https://api.example.com/users/user"
           },
           "self": {
             "href": "https://api.example.com/batches/batch"
