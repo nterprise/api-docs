@@ -21,7 +21,8 @@
                   "nter:batch-location",
                   "nter:batch-customer",
                   "nter:batch-work-order",
-                  "nter:batch-queue"
+                  "nter:batch-queue",
+                  "nter:batch-assigned-users"
                 ],
                 "properties": {
                   "nter:batch-queue": {
@@ -357,13 +358,16 @@
           "category": "IN_PROGRESS",
           "order": 2
         },
+        "total_assigned_users": 0,
+        "assigned_users": [],
         "_embedded": {
           "nter:batch-queue": [],
           "nter:batch-work-order": [],
           "nter:batch-customer": [],
           "nter:batch-program": [],
           "nter:batch-project": [],
-          "nter:batch-location": []
+          "nter:batch-location": [],
+          "nter:batch-assigned-users": []
         },
         "_links": {
           "nter:batch-work-order": {
@@ -383,9 +387,6 @@
           },
           "nter:batch-location": {
             "href": "https://api.example.com/locations/location"
-          },
-          "nter:batch-assigned-user": {
-            "href": "https://api.example.com/users/user"
           },
           "self": {
             "href": "https://api.example.com/batches/batch"

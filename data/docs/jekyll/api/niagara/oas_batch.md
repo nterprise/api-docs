@@ -345,6 +345,8 @@ Fetches A Page of batches
           "category": "IN_PROGRESS",
           "order": 2
         },
+        "total_assigned_users": 0,
+        "assigned_users": [],
         "_links": {
           "nter:batch-work-order": {
             "href": "https://api.example.com/work-orders/work-order"
@@ -2463,6 +2465,8 @@ Status Code **200**
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; description|string¦null|false|none|Provide a description for the field|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; value|string|false|none|The validated and filtered value. This is always a string so consumers MUST extrapolate out type|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; applies_to|[string]|false|none|The entities this field applies too. This means that higher up the inheritance tree can set properties on their child, grand children etc.|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; total_assigned_users|number|false|none|Number of users assigned to the batch|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; assigned_users|[any]|false|none|Top five users assigned to the batch|
 
 *and*
 
@@ -2837,13 +2841,16 @@ Creates a new batch for a queue
     "category": "IN_PROGRESS",
     "order": 2
   },
+  "total_assigned_users": 0,
+  "assigned_users": [],
   "_embedded": {
     "nter:batch-queue": [],
     "nter:batch-work-order": [],
     "nter:batch-customer": [],
     "nter:batch-program": [],
     "nter:batch-project": [],
-    "nter:batch-location": []
+    "nter:batch-location": [],
+    "nter:batch-assigned-users": []
   },
   "_links": {
     "nter:batch-work-order": {
@@ -3257,13 +3264,16 @@ Create multiple batches
     "category": "IN_PROGRESS",
     "order": 2
   },
+  "total_assigned_users": 0,
+  "assigned_users": [],
   "_embedded": {
     "nter:batch-queue": [],
     "nter:batch-work-order": [],
     "nter:batch-customer": [],
     "nter:batch-program": [],
     "nter:batch-project": [],
-    "nter:batch-location": []
+    "nter:batch-location": [],
+    "nter:batch-assigned-users": []
   },
   "_links": {
     "nter:batch-work-order": {
@@ -3675,13 +3685,16 @@ Fetches a batch
     "category": "IN_PROGRESS",
     "order": 2
   },
+  "total_assigned_users": 0,
+  "assigned_users": [],
   "_embedded": {
     "nter:batch-queue": [],
     "nter:batch-work-order": [],
     "nter:batch-customer": [],
     "nter:batch-program": [],
     "nter:batch-project": [],
-    "nter:batch-location": []
+    "nter:batch-location": [],
+    "nter:batch-assigned-users": []
   },
   "_links": {
     "nter:batch-work-order": {
@@ -6385,6 +6398,8 @@ continued
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; description|string¦null|false|none|Provide a description for the field|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; value|string|false|none|The validated and filtered value. This is always a string so consumers MUST extrapolate out type|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; applies_to|[string]|false|none|The entities this field applies too. This means that higher up the inheritance tree can set properties on their child, grand children etc.|
+|total_assigned_users|number|false|none|Number of users assigned to the batch|
+|assigned_users|[any]|false|none|Top five users assigned to the batch|
 
 #### Specification
 
@@ -11381,13 +11396,12 @@ properties:
                                   function:
                                     type: string
                                     enum:
-                                      - allocate-units-to-project
+                                      - allocate-unit-to-project
                                   payload:
                                     type: object
                                     required:
                                       - part_id
                                       - project_id
-                                      - qty
                                     properties:
                                       part_label:
                                         type: string
@@ -11398,16 +11412,12 @@ properties:
                                       project_id:
                                         type: string
                                         description: Program ID of the to assign
-                                      qty:
-                                        type: number
-                                        minimum: 1
-                                        description: Number of units to assign to the project
-                                      allow_scarcity:
+                                      allow_replacement:
                                         type: boolean
-                                        description: Allow the workflow to continue even if there are not enough units
-                                      force:
+                                        description: Allow units of a replacement part
+                                      allow_substitution:
                                         type: boolean
-                                        description: Assign the units even if the project already has units allocated
+                                        description: Allow units of a substitute part
                                       status:
                                         type: string
                                         description: Only assign units which are in this status
@@ -12874,6 +12884,15 @@ properties:
                       - VEN
                       - WKF
                       - WOR
+  total_assigned_users:
+    type: number
+    description: Number of users assigned to the batch
+  assigned_users:
+    type: array
+    description: Top five users assigned to the batch
+    maxItems: 5
+    items:
+      $ret: https://docs.nterprise.com/schemas/niagara/user.json
 
 ```
 

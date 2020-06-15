@@ -107,6 +107,17 @@
         }
       ]
     },
+    "sub_resource": {
+      "deprecated": true,
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "./subResource.json"
+        }
+      ]
+    },
     "input_filter": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/unit.json#/properties/input_filter"
     },
