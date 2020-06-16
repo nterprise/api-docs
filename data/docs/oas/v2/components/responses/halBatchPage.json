@@ -342,6 +342,8 @@
                 "category": "IN_PROGRESS",
                 "order": 2
               },
+              "total_assigned_users": 0,
+              "assigned_users": [],
               "_links": {
                 "nter:batch-work-order": {
                   "href": "https://api.example.com/work-orders/work-order"

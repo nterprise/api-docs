@@ -48,6 +48,9 @@
           "resource": {
             "$ref": "https://docs.nterprise.com/schemas/niagara/unit.json#/properties/resource"
           },
+          "sub_resource": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/unit.json#/properties/sub_resource"
+          },
           "vendor": {
             "type": "object",
             "required": [

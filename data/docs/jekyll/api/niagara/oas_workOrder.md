@@ -9336,13 +9336,12 @@ properties:
                           function:
                             type: string
                             enum:
-                              - allocate-units-to-project
+                              - allocate-unit-to-project
                           payload:
                             type: object
                             required:
                               - part_id
                               - project_id
-                              - qty
                             properties:
                               part_label:
                                 type: string
@@ -9353,16 +9352,12 @@ properties:
                               project_id:
                                 type: string
                                 description: Program ID of the to assign
-                              qty:
-                                type: number
-                                minimum: 1
-                                description: Number of units to assign to the project
-                              allow_scarcity:
+                              allow_replacement:
                                 type: boolean
-                                description: Allow the workflow to continue even if there are not enough units
-                              force:
+                                description: Allow units of a replacement part
+                              allow_substitution:
                                 type: boolean
-                                description: Assign the units even if the project already has units allocated
+                                description: Allow units of a substitute part
                               status:
                                 type: string
                                 description: Only assign units which are in this status
