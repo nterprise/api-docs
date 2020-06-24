@@ -11732,8 +11732,28 @@ properties:
                                         type: boolean
                                         description: Restore device to factory defaults
                                       automated_enrollment:
-                                        type: boolean
                                         description: Automatically enroll the device to MDM
+                                        oneOf:
+                                          - type: object
+                                            required:
+                                              - should_mdm_enroll
+                                              - mdm_enroll_user
+                                              - mdm_enroll_password
+                                            additionalProperties: false
+                                            properties:
+                                              should_mdm_enroll:
+                                                const: true
+                                              mdm_enroll_user:
+                                                type: string
+                                              mdm_enroll_password:
+                                                type: string
+                                          - type: object
+                                            required:
+                                              - should_mdm_enroll
+                                            additionalProperties: false
+                                            properties:
+                                              should_mdm_enroll:
+                                                type: boolean
                                       mdm:
                                         type: object
                                         description: The settings for the Customers MDM
