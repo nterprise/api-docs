@@ -76,19 +76,6 @@ Fetches A Page of batches
           "label": "Fast Lane",
           "created": "2019-10-09T19:30:35.639Z",
           "updated": "2019-10-09T19:30:35.639Z",
-          "priority": 42,
-          "active_work_orders": 40,
-          "active_batches": 60,
-          "active_cycles": 1,
-          "total_work_orders": {
-            "pending": 0,
-            "in_progress": 0,
-            "verifying": 0,
-            "complete": 0,
-            "blocked": 0,
-            "cancelled": 0
-          },
-          "total_batches": 60,
           "location": {
             "location_id": "location",
             "label": "Test Label",
@@ -107,7 +94,14 @@ Fetches A Page of batches
               "sub_premise": "ZIC"
             },
             "input_filter": []
-          }
+          },
+          "priority": 42,
+          "active_work_orders": 40,
+          "active_batches": 60,
+          "active_cycles": 1,
+          "is_active": true,
+          "min_due_date": "2020-08-19T02:01:02.000Z",
+          "max_due_date": "2022-08-19T02:01:02.000Z"
         },
         "order": 2,
         "number_cycles": 4,
@@ -428,7 +422,7 @@ Status Code **200**
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; created|string(date-time)|true|read-only|Date the entity was created|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; updated|string(date-time)|true|read-only|Last date the entity was updated|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queue|object|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queue_id|string|true|none|The identifier for the queue|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; queue_id|string|false|none|The identifier for the queue|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; label|string|true|none|Label for the entity|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; created|string(date-time)|true|read-only|Date the entity was created|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; updated|string(date-time)|true|read-only|Last date the entity was updated|
@@ -765,14 +759,46 @@ Status Code **200**
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; value|string|false|none|The validated and filtered value. This is always a string so consumers MUST extrapolate out type|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; applies_to|[string]|false|none|The entities this field applies too. This means that higher up the inheritance tree can set properties on their child, grand children etc.|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; priority|number|true|none|Priority level for queue|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; total_work_orders|object|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pending|integer|false|none|The number of cycles pending|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; in_progress|integer|false|none|The number of cycles in progress|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; verifying|integer|false|none|The number of cycles verifying|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; complete|integer|false|none|The number of cycles complete|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; blocked|integer|false|none|The number of cycles blocked|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cancelled|integer|false|none|The number of cycles cancelled|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; total_batches|integer|true|read-only|Number of batches assigned to the queue|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; active_work_orders|number|true|read-only|Total of work orders in an active status|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; active_batches|number|true|read-only|Total of batches in the queue with active cycles|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; active_cycles|number|true|read-only|Total of all active cycles across all batches|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; is_active|boolean|true|read-only|Toggle if the batch has active cycles or batches|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; min_due_date|any|true|none|none|
+
+*oneOf*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|null|false|none|none|
+
+*xor*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|string(date-time)|false|none|Oldest work order due date in the queue|
+
+*continued*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; max_due_date|any|true|none|none|
+
+*oneOf*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|null|false|none|none|
+
+*xor*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|string(date-time)|false|none|Newest work order due date in the queue|
+
+*continued*
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; order|number|true|none|Order to process the batch|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; current_status|any|true|none|none|
 
@@ -2573,19 +2599,6 @@ Creates a new batch for a queue
     "label": "Fast Lane",
     "created": "2019-10-09T19:30:35.639Z",
     "updated": "2019-10-09T19:30:35.639Z",
-    "priority": 42,
-    "active_work_orders": 40,
-    "active_batches": 60,
-    "active_cycles": 1,
-    "total_work_orders": {
-      "pending": 0,
-      "in_progress": 0,
-      "verifying": 0,
-      "complete": 0,
-      "blocked": 0,
-      "cancelled": 0
-    },
-    "total_batches": 60,
     "location": {
       "location_id": "location",
       "label": "Test Label",
@@ -2604,7 +2617,14 @@ Creates a new batch for a queue
         "sub_premise": "ZIC"
       },
       "input_filter": []
-    }
+    },
+    "priority": 42,
+    "active_work_orders": 40,
+    "active_batches": 60,
+    "active_cycles": 1,
+    "is_active": true,
+    "min_due_date": "2020-08-19T02:01:02.000Z",
+    "max_due_date": "2022-08-19T02:01:02.000Z"
   },
   "order": 2,
   "number_cycles": 4,
@@ -2996,19 +3016,6 @@ Create multiple batches
     "label": "Fast Lane",
     "created": "2019-10-09T19:30:35.639Z",
     "updated": "2019-10-09T19:30:35.639Z",
-    "priority": 42,
-    "active_work_orders": 40,
-    "active_batches": 60,
-    "active_cycles": 1,
-    "total_work_orders": {
-      "pending": 0,
-      "in_progress": 0,
-      "verifying": 0,
-      "complete": 0,
-      "blocked": 0,
-      "cancelled": 0
-    },
-    "total_batches": 60,
     "location": {
       "location_id": "location",
       "label": "Test Label",
@@ -3027,7 +3034,14 @@ Create multiple batches
         "sub_premise": "ZIC"
       },
       "input_filter": []
-    }
+    },
+    "priority": 42,
+    "active_work_orders": 40,
+    "active_batches": 60,
+    "active_cycles": 1,
+    "is_active": true,
+    "min_due_date": "2020-08-19T02:01:02.000Z",
+    "max_due_date": "2022-08-19T02:01:02.000Z"
   },
   "order": 2,
   "number_cycles": 4,
@@ -3417,19 +3431,6 @@ Fetches a batch
     "label": "Fast Lane",
     "created": "2019-10-09T19:30:35.639Z",
     "updated": "2019-10-09T19:30:35.639Z",
-    "priority": 42,
-    "active_work_orders": 40,
-    "active_batches": 60,
-    "active_cycles": 1,
-    "total_work_orders": {
-      "pending": 0,
-      "in_progress": 0,
-      "verifying": 0,
-      "complete": 0,
-      "blocked": 0,
-      "cancelled": 0
-    },
-    "total_batches": 60,
     "location": {
       "location_id": "location",
       "label": "Test Label",
@@ -3448,7 +3449,14 @@ Fetches a batch
         "sub_premise": "ZIC"
       },
       "input_filter": []
-    }
+    },
+    "priority": 42,
+    "active_work_orders": 40,
+    "active_batches": 60,
+    "active_cycles": 1,
+    "is_active": true,
+    "min_due_date": "2020-08-19T02:01:02.000Z",
+    "max_due_date": "2022-08-19T02:01:02.000Z"
   },
   "order": 2,
   "number_cycles": 4,
@@ -4361,7 +4369,7 @@ Status Code **404**
 |created|string(date-time)|true|read-only|Date the entity was created|
 |updated|string(date-time)|true|read-only|Last date the entity was updated|
 |queue|object|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; queue_id|string|true|none|The identifier for the queue|
+|&nbsp;&nbsp;&nbsp;&nbsp; queue_id|string|false|none|The identifier for the queue|
 |&nbsp;&nbsp;&nbsp;&nbsp; label|string|true|none|Label for the entity|
 |&nbsp;&nbsp;&nbsp;&nbsp; created|string(date-time)|true|read-only|Date the entity was created|
 |&nbsp;&nbsp;&nbsp;&nbsp; updated|string(date-time)|true|read-only|Last date the entity was updated|
@@ -4698,14 +4706,46 @@ continued
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; value|string|false|none|The validated and filtered value. This is always a string so consumers MUST extrapolate out type|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; applies_to|[string]|false|none|The entities this field applies too. This means that higher up the inheritance tree can set properties on their child, grand children etc.|
 |&nbsp;&nbsp;&nbsp;&nbsp; priority|number|true|none|Priority level for queue|
-|&nbsp;&nbsp;&nbsp;&nbsp; total_work_orders|object|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pending|integer|false|none|The number of cycles pending|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; in_progress|integer|false|none|The number of cycles in progress|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; verifying|integer|false|none|The number of cycles verifying|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; complete|integer|false|none|The number of cycles complete|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; blocked|integer|false|none|The number of cycles blocked|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cancelled|integer|false|none|The number of cycles cancelled|
-|&nbsp;&nbsp;&nbsp;&nbsp; total_batches|integer|true|read-only|Number of batches assigned to the queue|
+|&nbsp;&nbsp;&nbsp;&nbsp; active_work_orders|number|true|read-only|Total of work orders in an active status|
+|&nbsp;&nbsp;&nbsp;&nbsp; active_batches|number|true|read-only|Total of batches in the queue with active cycles|
+|&nbsp;&nbsp;&nbsp;&nbsp; active_cycles|number|true|read-only|Total of all active cycles across all batches|
+|&nbsp;&nbsp;&nbsp;&nbsp; is_active|boolean|true|read-only|Toggle if the batch has active cycles or batches|
+|&nbsp;&nbsp;&nbsp;&nbsp; min_due_date|any|true|none|none|
+
+oneOf
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|null|false|none|none|
+
+xor
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|string(date-time)|false|none|Oldest work order due date in the queue|
+
+continued
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; max_due_date|any|true|none|none|
+
+oneOf
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|null|false|none|none|
+
+xor
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|string(date-time)|false|none|Newest work order due date in the queue|
+
+continued
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
 |order|number|true|none|Order to process the batch|
 |current_status|any|true|none|none|
 
@@ -6446,9 +6486,12 @@ properties:
           - created
           - location
           - priority
-          - queue_id
-          - total_batches
-          - total_work_orders
+          - active_work_orders
+          - active_batches
+          - active_cycles
+          - is_active
+          - min_due_date
+          - max_due_date
         properties:
           queue_id:
             type: string
@@ -7572,31 +7615,34 @@ properties:
             type: number
             description: Priority level for queue
             minimum: 0
-          total_work_orders:
-            type: object
-            properties:
-              pending:
-                type: integer
-                description: The number of cycles pending
-              in_progress:
-                type: integer
-                description: The number of cycles in progress
-              verifying:
-                type: integer
-                description: The number of cycles verifying
-              complete:
-                type: integer
-                description: The number of cycles complete
-              blocked:
-                type: integer
-                description: The number of cycles blocked
-              cancelled:
-                type: integer
-                description: The number of cycles cancelled
-          total_batches:
-            type: integer
-            description: Number of batches assigned to the queue
+          active_work_orders:
+            type: number
+            description: Total of work orders in an active status
             readOnly: true
+          active_batches:
+            type: number
+            description: Total of batches in the queue with active cycles
+            readOnly: true
+          active_cycles:
+            type: number
+            description: Total of all active cycles across all batches
+            readOnly: true
+          is_active:
+            type: boolean
+            description: Toggle if the batch has active cycles or batches
+            readOnly: true
+          min_due_date:
+            oneOf:
+              - type: "null"
+              - type: string
+                format: date-time
+                description: Oldest work order due date in the queue
+          max_due_date:
+            oneOf:
+              - type: "null"
+              - type: string
+                format: date-time
+                description: Newest work order due date in the queue
   order:
     type: number
     description: Order to process the batch
