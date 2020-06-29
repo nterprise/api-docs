@@ -6,9 +6,12 @@
     "created",
     "location",
     "priority",
-    "queue_id",
-    "total_batches",
-    "total_work_orders"
+    "active_work_orders",
+    "active_batches",
+    "active_cycles",
+    "is_active",
+    "min_due_date",
+    "max_due_date"
   ],
   "properties": {
     "queue_id": {
@@ -35,11 +38,23 @@
     "priority": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/queue.json#/properties/priority"
     },
-    "total_work_orders": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/queue.json#/properties/total_work_orders"
+    "active_work_orders": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/queue.json#/properties/active_work_orders"
     },
-    "total_batches": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/queue.json#/properties/total_batches"
+    "active_batches": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/queue.json#/properties/active_batches"
+    },
+    "active_cycles": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/queue.json#/properties/active_cycles"
+    },
+    "is_active": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/queue.json#/properties/is_active"
+    },
+    "min_due_date": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/queue.json#/properties/min_due_date"
+    },
+    "max_due_date": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/queue.json#/properties/max_due_date"
     }
   }
 }
