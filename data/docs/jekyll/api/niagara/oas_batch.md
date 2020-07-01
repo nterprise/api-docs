@@ -103,7 +103,7 @@ Fetches A Page of batches
           "min_due_date": "2020-08-19T02:01:02.000Z",
           "max_due_date": "2022-08-19T02:01:02.000Z"
         },
-        "order": 2,
+        "order": "a",
         "number_cycles": 4,
         "cycles": {
           "needed": 4,
@@ -799,7 +799,7 @@ Status Code **200**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; order|number|true|none|Order to process the batch|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; order|string|true|none|Order to process the batch|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; current_status|any|true|none|none|
 
 *anyOf*
@@ -2559,7 +2559,7 @@ Creates a new batch for a queue
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|order|body|number|false|Order to process the batch|
+|order|body|string|false|Order to process the batch|
 |current_status|body|any|false|none|
 |&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|null|false|none|
 |&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|Defines the properties for a status|
@@ -2626,7 +2626,7 @@ Creates a new batch for a queue
     "min_due_date": "2020-08-19T02:01:02.000Z",
     "max_due_date": "2022-08-19T02:01:02.000Z"
   },
-  "order": 2,
+  "order": "a",
   "number_cycles": 4,
   "cycles": {
     "needed": 4,
@@ -3043,7 +3043,7 @@ Create multiple batches
     "min_due_date": "2020-08-19T02:01:02.000Z",
     "max_due_date": "2022-08-19T02:01:02.000Z"
   },
-  "order": 2,
+  "order": "a",
   "number_cycles": 4,
   "cycles": {
     "needed": 4,
@@ -3458,7 +3458,7 @@ Fetches a batch
     "min_due_date": "2020-08-19T02:01:02.000Z",
     "max_due_date": "2022-08-19T02:01:02.000Z"
   },
-  "order": 2,
+  "order": "a",
   "number_cycles": 4,
   "cycles": {
     "needed": 4,
@@ -4746,7 +4746,7 @@ continued
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|order|number|true|none|Order to process the batch|
+|order|string|true|none|Order to process the batch|
 |current_status|any|true|none|none|
 
 anyOf
@@ -7644,9 +7644,8 @@ properties:
                 format: date-time
                 description: Newest work order due date in the queue
   order:
-    type: number
+    type: string
     description: Order to process the batch
-    minimum: 0
   current_status:
     anyOf:
       - type: "null"
