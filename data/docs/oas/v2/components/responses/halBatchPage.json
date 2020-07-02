@@ -100,7 +100,7 @@
                 "min_due_date": "2020-08-19T02:01:02.000Z",
                 "max_due_date": "2022-08-19T02:01:02.000Z"
               },
-              "order": 2,
+              "order": "a",
               "number_cycles": 4,
               "cycles": {
                 "needed": 4,

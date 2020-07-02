@@ -59,9 +59,8 @@
       "$ref": "https://docs.nterprise.com/schemas/niagara/queue.json"
     },
     "order": {
-      "type": "number",
-      "description": "Order to process the batch",
-      "minimum": 0
+      "type": "string",
+      "description": "Order to process the batch"
     },
     "number_cycles": {
       "type": "integer",
