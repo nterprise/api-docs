@@ -80,7 +80,7 @@ Fetches A Page of queues
           },
           "input_filter": []
         },
-        "priority": 42,
+        "priority": "b",
         "active_work_orders": 40,
         "active_batches": 60,
         "active_cycles": 1,
@@ -487,7 +487,7 @@ Status Code **200**
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; description|string¦null|false|none|Provide a description for the field|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; value|string|false|none|The validated and filtered value. This is always a string so consumers MUST extrapolate out type|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; applies_to|[string]|false|none|The entities this field applies too. This means that higher up the inheritance tree can set properties on their child, grand children etc.|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; priority|number|true|none|Priority level for queue|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; priority|string|true|none|Priority level for queue|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; active_work_orders|number|true|read-only|Total of work orders in an active status|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; active_batches|number|true|read-only|Total of batches in the queue with active cycles|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; active_cycles|number|true|read-only|Total of all active cycles across all batches|
@@ -582,7 +582,7 @@ Creates a queue
 |label|body|string|true|Label for the entity|
 |location|body|object|true|none|
 |&nbsp;&nbsp;&nbsp;&nbsp; location_id|body|string|true|The identifier for the location|
-|priority|body|number|true|Priority level for queue|
+|priority|body|string|true|Priority level for queue|
 
 <!-- START responses.def -->
 
@@ -624,7 +624,7 @@ Creates a queue
     },
     "input_filter": []
   },
-  "priority": 42,
+  "priority": "b",
   "active_work_orders": 40,
   "active_batches": 60,
   "active_cycles": 1,
@@ -778,7 +778,7 @@ Fetches a queue
     },
     "input_filter": []
   },
-  "priority": 42,
+  "priority": "b",
   "active_work_orders": 40,
   "active_batches": 60,
   "active_cycles": 1,
@@ -884,7 +884,7 @@ Updates a queue
 |label|body|string|true|Label for the entity|
 |location|body|object|true|none|
 |&nbsp;&nbsp;&nbsp;&nbsp; location_id|body|string|true|The identifier for the location|
-|priority|body|number|true|Priority level for queue|
+|priority|body|string|true|Priority level for queue|
 
 <!-- START responses.def -->
 
@@ -926,7 +926,7 @@ Updates a queue
     },
     "input_filter": []
   },
-  "priority": 42,
+  "priority": "b",
   "active_work_orders": 40,
   "active_batches": 60,
   "active_cycles": 1,
@@ -1204,7 +1204,7 @@ Fetches A Page of batches for a queue
             },
             "input_filter": []
           },
-          "priority": 42,
+          "priority": "b",
           "active_work_orders": 40,
           "active_batches": 60,
           "active_cycles": 1,
@@ -1867,7 +1867,7 @@ Status Code **200**
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; description|string¦null|false|none|Provide a description for the field|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; value|string|false|none|The validated and filtered value. This is always a string so consumers MUST extrapolate out type|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; applies_to|[string]|false|none|The entities this field applies too. This means that higher up the inheritance tree can set properties on their child, grand children etc.|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; priority|number|true|none|Priority level for queue|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; priority|string|true|none|Priority level for queue|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; active_work_orders|number|true|read-only|Total of work orders in an active status|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; active_batches|number|true|read-only|Total of batches in the queue with active cycles|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; active_cycles|number|true|read-only|Total of all active cycles across all batches|
@@ -4448,7 +4448,7 @@ continued
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; description|string¦null|false|none|Provide a description for the field|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; value|string|false|none|The validated and filtered value. This is always a string so consumers MUST extrapolate out type|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; applies_to|[string]|false|none|The entities this field applies too. This means that higher up the inheritance tree can set properties on their child, grand children etc.|
-|priority|number|true|none|Priority level for queue|
+|priority|string|true|none|Priority level for queue|
 |active_work_orders|number|true|read-only|Total of work orders in an active status|
 |active_batches|number|true|read-only|Total of batches in the queue with active cycles|
 |active_cycles|number|true|read-only|Total of all active cycles across all batches|
@@ -5619,9 +5619,8 @@ properties:
                       - WKF
                       - WOR
   priority:
-    type: number
+    type: string
     description: Priority level for queue
-    minimum: 0
   active_work_orders:
     type: number
     description: Total of work orders in an active status

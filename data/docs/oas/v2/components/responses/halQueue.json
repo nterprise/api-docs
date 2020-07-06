@@ -56,7 +56,7 @@
           },
           "input_filter": []
         },
-        "priority": 42,
+        "priority": "b",
         "active_work_orders": 40,
         "active_batches": 60,
         "active_cycles": 1,
