@@ -1,5 +1,20 @@
 {
   "get": {
-    "$ref": "./operations/customer/fetchCustomerById.json"
+    "operationId": "fetchCustomerById",
+    "summary": "Fetches information about a customer",
+    "description": "Fetches information about a customer the account has access too",
+    "tags": [
+      "Customer"
+    ],
+    "parameters": [
+      {
+        "$ref": "../components/parameters/customerId.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../components/responses/customer.json"
+      }
+    }
   }
 }

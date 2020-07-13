@@ -92,7 +92,6 @@
       "description": "Email of the site contact",
       "type": "string",
       "example": "(555) 555-5555 "
-    },
-
+    }
   }
 }

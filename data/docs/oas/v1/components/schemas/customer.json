@@ -19,7 +19,7 @@
     "total_projects": {
       "description": "Total Projects for the customer",
       "type": "number",
-      "format": "int32",
+
       "readOnly": true,
       "minimum": 0,
       "example": 42
@@ -27,7 +27,7 @@
     "total_sites": {
       "description": "Total Sites for the customer",
       "type": "number",
-      "format": "int32",
+
       "readOnly": true,
       "minimum": 0,
       "example": 84
