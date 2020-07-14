@@ -218,7 +218,7 @@ const localResolver = {
     },
 };
 
-const processFile = async (file) => {
+const processFile = async (file, {validateExample=false}) => {
     const result = {
         fileName: file,
         error: false,
@@ -259,6 +259,10 @@ const processFile = async (file) => {
         _.map(
             schemas,
             ({path, value}) => {
+                if (!validateExample) {
+                    return;
+                }
+
                 if (!_.has(value, 'example')) {
                     result.error = true;
                     // eslint-disable-next-line max-len
@@ -342,7 +346,7 @@ exports.handler = async (argv) => {
     logger.info('argv', argv);
     logger.debug(`${widdershinsOptions.user_templates}`);
 
-    const apis = _.flatten([argv.api]);
+    const apis = argv.api ? _.flatten([argv.api]) : ['auth', 'caapi', 'niagara'];
     logger.debug('API to process', apis);
     const files = _.reduce(
         [argv.file],
