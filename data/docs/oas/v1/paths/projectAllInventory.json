@@ -1,6 +1,39 @@
 {
   "get": {
-    "$ref": "./operations/project/fetchAllProjectInventory.json"
+    "operationId": "fetchAllProjectInventory",
+    "summary": "Fetch project inventory",
+    "description": "Fetches all the inventory for a project",
+    "tags": [
+      "Project"
+    ],
+    "parameters": [
+      {
+        "$ref": "../components/parameters/page.json"
+      },
+      {
+        "$ref": "../components/parameters/pageSize.json"
+      },
+      {
+        "$ref": "../components/parameters/projectId.json"
+      },
+      {
+        "$ref": "../components/parameters/filterSerialNumber.json"
+      },
+      {
+        "$ref": "../components/parameters/filterPartNumber.json"
+      },
+      {
+        "$ref": "../components/parameters/filterLocationCode.json"
+      },
+      {
+        "$ref": "../components/parameters/filterAssetTag.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../components/responses/inventoryCollection.json"
+      }
+    }
   }
 }
 

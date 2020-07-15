@@ -43,13 +43,13 @@
     "total_inventory": {
       "description": "Total Inventory",
       "type": "number",
-      "format": "int32",
+
       "minimum": 0
     },
     "total_inventory_status": {
       "description": "Total Inventory",
       "type": "string",
       "example": "Face down exit assembly"
-    },
+    }
   }
 }

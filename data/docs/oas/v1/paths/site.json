@@ -1,5 +1,20 @@
 {
   "get": {
-    "$ref": "./operations/site/fetchSiteById.json"
+    "operationId": "fetchSiteById",
+    "summary": "Fetch site",
+    "description": "Fetches information about a site the account has access too",
+    "tags": [
+      "Site"
+    ],
+    "parameters": [
+      {
+        "$ref": "../components/parameters/siteId.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../components/responses/site.json"
+      }
+    }
   }
 }

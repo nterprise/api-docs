@@ -1,5 +1,20 @@
 {
   "get": {
-    "$ref": "./operations/project/fetchProjectById.json"
+    "operationId": "fetchProjectById",
+    "summary": "Fetch Project",
+    "description": "Fetches information about a project the account has access too",
+    "tags": [
+      "Project"
+    ],
+    "parameters": [
+      {
+        "$ref": "../components/parameters/projectId.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../components/responses/project.json"
+      }
+    }
   }
 }

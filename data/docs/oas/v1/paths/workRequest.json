@@ -1,5 +1,20 @@
 {
   "get": {
-    "$ref": "./operations/workRequest/fetchWorkRequestById.json"
+    "operationId": "fetchWorkRequestById",
+    "summary": "fetch submission",
+    "description": "Fetches information about a work request the account has access too",
+    "tags": [
+      "Work Request"
+    ],
+    "parameters": [
+      {
+        "$ref": "../components/parameters/workRequestId.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../components/responses/workRequest.json"
+      }
+    }
   }
 }

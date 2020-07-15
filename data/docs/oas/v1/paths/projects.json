@@ -1,5 +1,29 @@
 {
   "get": {
-    "$ref": "./operations/project/fetchAllProjects.json"
+    "operationId": "fetchAllProjects",
+    "summary": "List all projects",
+    "description": "Fetches all the account has access too",
+    "tags": [
+      "Project"
+    ],
+    "parameters": [
+      {
+        "$ref": "../components/parameters/page.json"
+      },
+      {
+        "$ref": "../components/parameters/pageSize.json"
+      },
+      {
+        "$ref": "../components/parameters/filterCustomerId.json"
+      },
+      {
+        "$ref": "../components/parameters/projectSort.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../components/responses/projectCollection.json"
+      }
+    }
   }
 }

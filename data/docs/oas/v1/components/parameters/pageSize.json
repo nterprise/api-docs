@@ -5,7 +5,7 @@
   "required": false,
   "schema": {
     "type": "number",
-    "format": "int32",
+
     "maximum": 100,
     "minimum": 1
   }

@@ -1,6 +1,27 @@
 {
   "get": {
-    "$ref": "./operations/project/fetchProjectProducts.json"
+    "operationId": "fetchProjectProducts",
+    "summary": "Fetches projects products",
+    "description": "Fetches all the products for a project",
+    "tags": [
+      "Project"
+    ],
+    "parameters": [
+      {
+        "$ref": "../components/parameters/page.json"
+      },
+      {
+        "$ref": "../components/parameters/pageSize.json"
+      },
+      {
+        "$ref": "../components/parameters/projectId.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../components/responses/productCollection.json"
+      }
+    }
   }
 }
 
