@@ -12,6 +12,7 @@
       "filters",
       "validators"
     ],
+    "additionalProperties": false,
     "properties": {
       "label": {
         "type": "string",
@@ -149,13 +150,8 @@
         "type": ["string", "number", "boolean", "null"],
         "description": "The validated and filtered value. This is always a string so consumers MUST extrapolate out type"
       },
-      "applies_to": {
-        "type": "array",
-        "description": "The entities this field applies too. This means that higher up the inheritance tree can set properties on their child, grand children etc.",
-        "uniqueItems": true,
-        "items": {
-          "$ref": "https://docs.nterprise.com/schemas/niagara/entityHelper.json#/properties/entity_type"
-        }
+      "apply_to": {
+        "$ref": "https://docs.nterprise.com/schemas/niagara/entityHelper.json#/properties/entity_type"
       }
     }
   }
