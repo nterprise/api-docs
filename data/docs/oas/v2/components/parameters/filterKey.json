@@ -1,0 +1,8 @@
+{
+  "name": "filter[key]",
+  "in": "query",
+  "description": "Filter on field key",
+  "schema": {
+    "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter.json#/properties/entity_type"
+  }
+}

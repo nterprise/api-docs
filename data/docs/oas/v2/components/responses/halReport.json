@@ -1,0 +1,109 @@
+{
+  "description": "A paged response for batches",
+  "content": {
+    "application/hal+json": {
+      "schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "_links",
+          "header",
+          "report_id",
+          "data"
+        ],
+        "properties": {
+          "report_id": {
+            "type": "string",
+            "description": "Id of the report"
+          },
+          "header": {
+            "type": "array",
+            "description": "Key Value pair of header fields",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string",
+                  "description": "Label for the field"
+                },
+                "key": {
+                  "type": "string",
+                  "description": "Key of the field in the report"
+                }
+              }
+            }
+          },
+          "data": {
+            "type": "array",
+            "description": "Array of rows",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "key": {
+                    "type": "string"
+                  },
+                  "value": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "_links": {
+            "type": "object",
+            "required": [
+              "self"
+            ],
+            "properties": {
+              "self": {
+                "$ref": "../schemas/link.json"
+              }
+            }
+          }
+        }
+      },
+      "example": {
+        "report_id": "fe385753-8d50-49b5-b24f-25726bfbe357",
+        "header": [
+          {
+            "label": "Unit Id",
+            "key": "unit_id"
+          },
+          {
+            "label": "Unit Label",
+            "key": "unit_label"
+          }
+        ],
+        "data": [
+          [
+            {
+              "key": "unit_id",
+              "value": "unit_one"
+            },
+            {
+              "key": "unit_label",
+              "value": "Unit One"
+            }
+          ],
+          [
+            {
+              "key": "unit_id",
+              "value": "unit_two"
+            },
+            {
+              "key": "unit_label",
+              "value": "Unit Two"
+            }
+          ]
+        ],
+        "_links": {
+          "self": {
+            "href": "https://api.example.com/reports/fe385753-8d50-49b5-b24f-25726bfbe357"
+          }
+        }
+      }
+    }
+  }
+}

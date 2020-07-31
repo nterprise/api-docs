@@ -1,0 +1,58 @@
+{
+  "description": "A paged response for batches",
+  "content": {
+    "application/hal+json": {
+      "schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "_links",
+          "fields"
+        ],
+        "properties": {
+          "fields": {
+            "type": "array",
+            "maxItems": 100,
+            "items": {
+              "type": "object",
+              "properties": {
+                "field": {
+                  "type": "string",
+                  "description": "The field key"
+                },
+                "label": {
+                  "type": "string",
+                  "description": "Label of the field"
+                }
+              }
+            }
+          },
+          "_links": {
+            "type": "object",
+            "required": [
+              "self"
+            ],
+            "properties": {
+              "self": {
+                "$ref": "../schemas/link.json"
+              }
+            }
+          }
+        }
+      },
+      "example": {
+        "fields": [
+          {
+            "field": "fizz",
+            "label": "A Fizz id"
+          }
+        ],
+        "_links": {
+          "self": {
+            "href": "https://api.example.com/fields"
+          }
+        }
+      }
+    }
+  }
+}
