@@ -1,0 +1,9 @@
+{
+  "name": "entity_type",
+  "in": "path",
+  "description": "Entity Type",
+  "required": true,
+  "schema": {
+    "$ref": "https://docs.nterprise.com/schemas/niagara/entityHelper.json#/items/properties/key"
+  }
+}

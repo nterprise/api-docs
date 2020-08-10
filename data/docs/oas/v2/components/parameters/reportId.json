@@ -1,0 +1,11 @@
+{
+  "name": "report_id",
+  "in": "path",
+  "description": "Id of the report",
+  "required": true,
+  "schema": {
+    "type": "string",
+    "description": "The identifier for the report",
+    "pattern": "^[0-9a-zA-Z-_]+$"
+  }
+}

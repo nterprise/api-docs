@@ -1,0 +1,43 @@
+{
+  "openapi": "3.0.3",
+  "x-api": "niagara",
+  "x-nter-docs-parent": "Niagara API",
+  "x-nter-docs-nav-order": 14,
+  "info": {
+    "version": "2.0.0",
+    "description": "Reporting endpoints",
+    "title": "Reporting"
+  },
+  "servers": [
+    {
+      "url": "https://{environment}.nterprise.com",
+      "variables": {
+        "environment": {
+          "default": "api",
+          "enum": [
+            "api",
+            "api.dev"
+          ]
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/reports": {
+      "$ref": "./paths/report/reports.json"
+    },
+    "/reports/{report_id}": {
+      "$ref": "./paths/report/export.json"
+    },
+    "/reports/{report_id}/download": {
+      "$ref": "./paths/report/export.json"
+    }
+  },
+  "components": {
+    "schemas": {
+      "Role": {
+        "$ref": "components/schemas/role.json"
+      }
+    }
+  }
+}

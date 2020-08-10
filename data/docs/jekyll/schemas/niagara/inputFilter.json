@@ -34,10 +34,19 @@
               "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/allowed.json"
             },
             {
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/alpha.json"
+            },
+            {
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/boolean.json"
+            },
+            {
               "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/camelCase.json"
             },
             {
               "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/date.json"
+            },
+            {
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/digits.json"
             },
             {
               "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/empty.json"
@@ -82,6 +91,9 @@
         "items": {
           "anyOf": [
             {
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/always.json"
+            },
+            {
               "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/between.json"
             },
             {
@@ -121,6 +133,12 @@
               "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/mask.json"
             },
             {
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/never.json"
+            },
+            {
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/required.json"
+            },
+            {
               "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/startsWith.json"
             },
             {
@@ -131,9 +149,6 @@
             },
             {
               "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/whiteList.json"
-            },
-            {
-              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/required.json"
             }
           ]
         }
