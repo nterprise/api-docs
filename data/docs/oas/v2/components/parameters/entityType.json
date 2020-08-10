@@ -4,6 +4,6 @@
   "description": "Entity Type",
   "required": true,
   "schema": {
-    "$ref": "https://docs.nterprise.com/schemas/niagara/entityHelper.json#/items/properties/key"
+    "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter.json#/items/properties/key"
   }
 }

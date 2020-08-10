@@ -16,6 +16,127 @@ Reporting endpoints
 
 ## Operations
 
+### GET /fields - *Fetches custom fields*
+
+<a id="opIdfetchFieldsForEntity"></a>
+
+*Fetches custom fields*
+
+Fetches custom fields for an entity
+
+<h3 id="fetchfieldsforentity-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|entity_type|path|string|true|Entity Type|
+|filter[key]|query|string|false|Filter on field key|
+
+<!-- START responses.def -->
+
+<h3 id="fetchfieldsforentity-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|A paged response for batches|Inline|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|Inline|
+|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Resource not found|Inline|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "fields": [
+    {
+      "field": "fizz",
+      "label": "A Fizz id"
+    }
+  ],
+  "_links": {
+    "self": {
+      "href": "https://api.example.com/fields"
+    }
+  }
+}
+```
+
+> 401 Response
+
+```json
+{
+  "title": "Unauthorized",
+  "type": "https://docs.nterprise.com/api/problem/Unauthorized",
+  "status": 401,
+  "detail": "Invalid authorization token"
+}
+```
+
+> 403 Response
+
+```json
+{
+  "title": "Forbidden",
+  "type": "https://docs.nterprise.com/api/problem/Forbidden",
+  "status": 403,
+  "detail": "You are forbidden from accessing this resource"
+}
+```
+
+> 404 Response
+
+```json
+{
+  "title": "Not Found",
+  "type": "https://docs.nterprise.com/api/problem/NotFound",
+  "status": 404,
+  "detail": "A Resource with the id \"foo\" was not found"
+}
+```
+
+<h3 id="fetchfieldsforentity-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; fields|[object]|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; field|string|false|none|The field key|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; label|string|false|none|Label of the field|
+|&nbsp;&nbsp;&nbsp;&nbsp; _links|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self|object|true|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; href|string(uri)|false|none|none|
+
+Status Code **401**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
+
+Status Code **403**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
+
+Status Code **404**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
+
+<!-- END responses.def -->
+
 ### POST /reports - *Run report*
 
 <a id="opIdcreateReport"></a>
@@ -31,14 +152,24 @@ Runs a report for an entity
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |base_entity|body|string|false|Entity type|
-|custom_fields|body|[string]|false|List of custom filed keys to return|
-|query|body|[object]|false|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; field|body|string|false|The field to query|
-|&nbsp;&nbsp;&nbsp;&nbsp; operators|body|string|false|The operation|
-|&nbsp;&nbsp;&nbsp;&nbsp; operand|body|string¦null|false|The value for the operator|
-|aliases|body|[object]|false|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; key|body|string|false|The field to alias|
-|&nbsp;&nbsp;&nbsp;&nbsp; alias|body|string|false|The alias for the field. Note: this does not impact the query above.|
+|custom_fields|body|object|false|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; fields|body|[string]|false|List of custom filed keys to return|
+|&nbsp;&nbsp;&nbsp;&nbsp; query|body|[object]|false|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; field|body|string|false|The field to query|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; operators|body|string|false|The operation|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; operand|body|string¦null|false|The value for the operator|
+|&nbsp;&nbsp;&nbsp;&nbsp; aliases|body|[object]|false|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; key|body|string|false|The field to alias|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; alias|body|string|false|The alias for the field. Note: this does not impact the query above.|
+|core_fields|body|object|false|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; fields|body|[string]|false|List of custom filed keys to return|
+|&nbsp;&nbsp;&nbsp;&nbsp; query|body|[object]|false|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; field|body|string|false|The field to query|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; operators|body|string|false|The operation|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; operand|body|string¦null|false|The value for the operator|
+|&nbsp;&nbsp;&nbsp;&nbsp; aliases|body|[object]|false|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; key|body|string|false|The field to alias|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; alias|body|string|false|The alias for the field. Note: this does not impact the query above.|
 
 <!-- START responses.def -->
 

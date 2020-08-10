@@ -23,6 +23,9 @@
     }
   ],
   "paths": {
+    "/fields": {
+      "$ref": "./paths/report/fields.json"
+    },
     "/reports": {
       "$ref": "./paths/report/reports.json"
     },

@@ -10,61 +10,69 @@
             "$ref": "https://docs.nterprise.com/schemas/niagara/entityHelper.json#/properties/entity_type"
           },
           "custom_fields": {
-            "type": "array",
-            "description": "List of custom filed keys to return",
-            "unique": true,
-            "items": {
-              "type": "string",
-              "description": "The key of the custom field to return"
-            }
-          },
-          "query": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "field": {
+            "type": "object",
+            "properties": {
+              "fields": {
+                "type": "array",
+                "description": "List of custom filed keys to return",
+                "unique": true,
+                "items": {
                   "type": "string",
-                  "description": "The field to query"
-                },
-                "operators": {
-                  "type": "string",
-                  "description": "The operation",
-                  "enum": [
-                    "is_blank",
-                    "is_not_blank",
-                    "contains",
-                    "equals",
-                    "not_equals",
-                    "greater_than",
-                    "greater_than_equals",
-                    "less_than",
-                    "less_than_equals"
-                  ]
-                },
-                "operand": {
-                  "type": "string",
-                  "description": "The value for the operator",
-                  "nullable": true
+                  "description": "The key of the custom field to return"
+                }
+              },
+              "query": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "field": {
+                      "type": "string",
+                      "description": "The field to query"
+                    },
+                    "operators": {
+                      "type": "string",
+                      "description": "The operation",
+                      "enum": [
+                        "is_blank",
+                        "is_not_blank",
+                        "contains",
+                        "equals",
+                        "not_equals",
+                        "greater_than",
+                        "greater_than_equals",
+                        "less_than",
+                        "less_than_equals"
+                      ]
+                    },
+                    "operand": {
+                      "type": "string",
+                      "description": "The value for the operator",
+                      "nullable": true
+                    }
+                  }
+                }
+              },
+              "aliases": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "key": {
+                      "type": "string",
+                      "description": "The field to alias"
+                    },
+                    "alias": {
+                      "type": "string",
+                      "description": "The alias for the field. Note: this does not impact the query above."
+                    }
+                  }
                 }
               }
             }
           },
-          "aliases": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "key": {
-                  "type": "string",
-                  "description": "The field to alias"
-                },
-                "alias": {
-                  "type": "string",
-                  "description": "The alias for the field. Note: this does not impact the query above."
-                }
-              }
-            }
+          "core_fields": {
+            "$ref": "#/content/application~1json/schema/properties/custom_fields"
           }
         }
       }
