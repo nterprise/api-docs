@@ -2,7 +2,7 @@
   "openapi": "3.0.3",
   "x-api": "niagara",
   "x-nter-docs-parent": "Niagara API",
-  "x-nter-docs-nav-order": 17,
+  "x-nter-docs-nav-order": 18,
   "x-nter-docs-redirect-from": [
     "/rel/units",
     "/rel/unit",
@@ -13,7 +13,7 @@
   ],
   "info": {
     "version": "2.0.0",
-    "description": "API for the nterprise application",
+    "description": "In nterprise niagara, a Unit is an individual instance of a Part.  In many cases, a Unit is assigned a unique identifier (serial number) to distinguish it from all other examples of the same Part. For example, a network router would typically have a unique serial number stamped on the housing.  In other cases, such as cables, adapters, and general supplies, Units may have no identifying information.  Nterprise niagara is designed to handle both types of Units -- Serialized and Non-Serialized -- effectively and efficiently.",
     "title": "Units"
   },
   "servers": [
@@ -48,6 +48,26 @@
     "schemas": {
       "Unit": {
         "$ref": "components/schemas/unit.json"
+      }
+    },
+    "securitySchemes": {
+      "niagara": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "https://auth.nterprise.com/oauth/authorize",
+            "tokenUrl": "https://auth.nterprise.com/oauth/token",
+            "scopes": {
+              "unit:create": "Allows creating a unit",
+              "unit:update": "Allows editing a unit",
+              "unit:delete": "Allows deleting a unit",
+              "unit:read": "Allows access to a unit",
+              "unit:attach": "Allows attaching a relation from a unit",
+              "unit:detach": "Allows detaching a relation from a unit",
+              "unit:all": "Allows reading all units"
+            }
+          }
+        }
       }
     }
   }

@@ -1,0 +1,9 @@
+{
+  "name": "step_slug",
+  "in": "path",
+  "description": "Slug of the context step",
+  "required": true,
+  "schema": {
+    "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter.json#/items/properties/key"
+  }
+}

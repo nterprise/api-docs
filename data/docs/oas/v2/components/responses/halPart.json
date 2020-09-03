@@ -112,16 +112,16 @@
         },
         "_links": {
           "nter:part-manufacturer": {
-            "href": "https://api.example.com/manufacturers/manufacturer"
+            "href": "https://api.nterprise.com/manufacturers/manufacturer"
           },
           "nter:part-customer": {
-            "href": "https://api.example.com/customers/customer"
+            "href": "https://api.nterprise.com/customers/customer"
           },
           "nter:part-units": {
-            "href": "https://api.example.com/parts/part/units"
+            "href": "https://api.nterprise.com/parts/part/units"
           },
           "self": {
-            "href": "https://api.example.com/parts/part"
+            "href": "https://api.nterprise.com/parts/part"
           }
         }
       }

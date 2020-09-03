@@ -3,19 +3,51 @@
   "content": {
     "application/hal+json": {
       "schema": {
-        "$ref": "../schemas/halUser.json"
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "notifications": {
+                "type": "object",
+                "description": "Notification Counts",
+                "properties": {
+                  "un_read": {
+                    "type": "number",
+                    "description": "Unread messages"
+                  },
+                  "read": {
+                    "type": "number",
+                    "description": "Number of read messages"
+                  },
+                  "archived": {
+                    "type": "number",
+                    "description": "Number of archived messages"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "$ref": "../schemas/halUser.json"
+          }
+        ]
       },
       "example": {
         "user_id": "3dddba3e-6122-46a8-ae26-8c7c95bd82d7",
         "created": "2019-08-19T00:01:02.639Z",
         "updated": "2019-08-19T00:01:02.639Z",
-        "name": "Chuck Reeves",
-        "email": "chuck.reeves@zones.com",
+        "name": "Daniel Jackson",
+        "email": "daniel.jackson@niagara.com",
         "profile": "https://bit.ly/18gECvy",
         "picture": "https://bit.ly/18gECvy",
+        "notifications": {
+          "un_read": 42,
+          "read": 8,
+          "archived": 2
+        },
         "_links": {
           "self": {
-            "href": "https://api.example.com/users/3dddba3e-6122-46a8-ae26-8c7c95bd82d7"
+            "href": "https://api.nterprise.com/users/3dddba3e-6122-46a8-ae26-8c7c95bd82d7"
           }
         }
       }

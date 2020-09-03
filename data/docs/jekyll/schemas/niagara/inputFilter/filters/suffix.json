@@ -10,17 +10,20 @@
   "properties": {
     "type": {
       "type": "string",
-      "const": "suffix"
+      "const": "suffix",
+      "x-nter-skip-param": true
     },
     "options": {
       "type": "object",
+      "x-nter-skip-param": true,
       "required": [
         "suffix"
       ],
       "properties": {
         "suffix": {
           "type": "string",
-          "description": "The suffix to add"
+          "description": "The suffix to add",
+          "x-nter-skip-param": true
         }
       }
     }

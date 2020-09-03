@@ -14,18 +14,15 @@
     "responses": {
       "200": {
         "$ref": "../../components/responses/halLocation.json"
-      },
-      "401": {
-        "$ref": "../../components/responses/401unauthorized.json"
-      },
-      "403": {
-        "$ref": "../../components/responses/403forbidden.json"
-      },
-      "404": {
-        "$ref": "../../components/responses/404notFound.json"
       }
-    }
-
+    },
+    "security": [
+      {
+        "niagara": [
+          "location:read"
+        ]
+      }
+    ]
   },
   "put": {
     "operationId": "updateLocation",
@@ -45,18 +42,15 @@
     "responses": {
       "200": {
         "$ref": "../../components/responses/halLocation.json"
-      },
-      "400": {
-        "$ref": "../../components/responses/400badRequest.json"
-      },
-      "403": {
-        "$ref": "../../components/responses/403forbidden.json"
-      },
-      "423": {
-        "$ref": "../../components/responses/423locked.json"
       }
-    }
-
+    },
+    "security": [
+      {
+        "niagara": [
+          "location:update"
+        ]
+      }
+    ]
   },
   "delete": {
     "operationId": "deleteLocation",
@@ -72,21 +66,15 @@
     ],
     "responses": {
       "205": {
-        "summary": "Location deleted"
-      },
-      "401": {
-        "$ref": "../../components/responses/401unauthorized.json"
-      },
-      "403": {
-        "$ref": "../../components/responses/403forbidden.json"
-      },
-      "404": {
-        "$ref": "../../components/responses/404notFound.json"
-      },
-      "423": {
-        "$ref": "../../components/responses/423locked.json"
+        "description": "Location deleted"
       }
-    }
-
+    },
+    "security": [
+      {
+        "niagara": [
+          "location:delete"
+        ]
+      }
+    ]
   }
 }

@@ -250,25 +250,25 @@
               "input_filter": [],
               "_links": {
                 "nter:unit-manufacturer": {
-                  "href": "https://api.example.com/manufacturers/manufacturer"
+                  "href": "https://api.nterprise.com/manufacturers/manufacturer"
                 },
                 "nter:unit-customer": {
-                  "href": "https://api.example.com/customers/customer"
+                  "href": "https://api.nterprise.com/customers/customer"
                 },
                 "nter:unit-part": {
-                  "href": "https://api.example.com/parts/part"
+                  "href": "https://api.nterprise.com/parts/part"
                 },
                 "nter:unit-vendor": {
-                  "href": "https://api.example.com/vendors/vendor"
+                  "href": "https://api.nterprise.com/vendors/vendor"
                 },
                 "nter:unit-last-known-location": {
-                  "href": "https://api.example.com/locations/location"
+                  "href": "https://api.nterprise.com/locations/location"
                 },
                 "nter:unit-resource": {
-                  "href": "https://api.example.com/resources/parent-resource"
+                  "href": "https://api.nterprise.com/resources/parent-resource"
                 },
                 "self": {
-                  "href": "https://api.example.com/units/unit"
+                  "href": "https://api.nterprise.com/units/unit"
                 }
               }
             }
@@ -276,10 +276,10 @@
         },
         "_links": {
           "next": {
-            "href": "https://api.example.com/units?limit=42&offset=next-offset"
+            "href": "https://api.nterprise.com/units?limit=42&offset=next-offset"
           },
           "self": {
-            "href": "https://api.example.com/units?limit=42"
+            "href": "https://api.nterprise.com/units?limit=42"
           }
         }
       }

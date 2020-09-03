@@ -10,10 +10,12 @@
   "properties": {
     "type": {
       "type": "string",
-      "const": "ip_address"
+      "const": "ip_address",
+      "x-nter-skip-param": true
     },
     "options": {
       "type": "object",
+      "x-nter-skip-param": true,
       "properties": {
         "version": {
           "type": "string",
@@ -21,7 +23,8 @@
           "enum": [
             "IPv4",
             "IPv6"
-          ]
+          ],
+          "x-nter-skip-param": true
         }
       }
     }

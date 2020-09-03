@@ -2,13 +2,13 @@
   "openapi": "3.0.3",
   "x-api": "niagara",
   "x-nter-docs-parent": "Niagara API",
-  "x-nter-docs-nav-order": 9,
+  "x-nter-docs-nav-order": 8,
   "x-nter-docs-redirect-from": [
     "/rel/me"
   ],
   "info": {
     "version": "2.0.0",
-    "description": "API for the nterprise application",
+    "description": "Information about the current authenticated user.",
     "title": "Me"
   },
   "servers": [
@@ -28,6 +28,12 @@
   "paths": {
     "/me": {
       "$ref": "./paths/me/me.json"
+    },
+    "/me/notifications": {
+      "$ref": "./paths/me/notifications.json"
+    },
+    "/me/notifications/{notification_id}": {
+      "$ref": "./paths/me/notification.json"
     }
   }
 }

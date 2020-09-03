@@ -112,19 +112,19 @@
               "input_filter": [],
               "_links": {
                 "nter:customer-parts": {
-                  "href": "https://api.example.com/customers/customer/parts"
+                  "href": "https://api.nterprise.com/customers/customer/parts"
                 },
                 "nter:customer-units": {
-                  "href": "https://api.example.com/customers/customer/units"
+                  "href": "https://api.nterprise.com/customers/customer/units"
                 },
                 "nter:customer-programs": {
-                  "href": "https://api.example.com/customers/customer/programs"
+                  "href": "https://api.nterprise.com/customers/customer/programs"
                 },
                 "nter:customer-projects": {
-                  "href": "https://api.example.com/customers/customer/projects"
+                  "href": "https://api.nterprise.com/customers/customer/projects"
                 },
                 "self": {
-                  "href": "https://api.example.com/customers/customer"
+                  "href": "https://api.nterprise.com/customers/customer"
                 }
               }
             }
@@ -132,10 +132,10 @@
         },
         "_links": {
           "next": {
-            "href": "https://api.example.com/customers?limit=42&offset=next-offset"
+            "href": "https://api.nterprise.com/customers?limit=42&offset=next-offset"
           },
           "self": {
-            "href": "https://api.example.com/customers?limit=42"
+            "href": "https://api.nterprise.com/customers?limit=42"
           }
         }
       }

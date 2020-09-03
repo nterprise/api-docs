@@ -1,0 +1,18 @@
+{
+  "description": "Patch request for notifications",
+  "content": {
+    "application/json-patch+json": {
+      "schema": {
+        "x-allowed-paths": [
+          "/read",
+          "/archived"
+        ],
+        "allOf": [
+          {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/jsonPatch.json#/properties/operations"
+          }
+        ]
+      }
+    }
+  }
+}

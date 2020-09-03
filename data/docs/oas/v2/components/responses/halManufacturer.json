@@ -13,13 +13,13 @@
         "input_filter": [],
         "_links": {
           "nter:manufacturer-units": {
-            "href": "https://api.example.com/manufacturers/manufacturer/units"
+            "href": "https://api.nterprise.com/manufacturers/manufacturer/units"
           },
           "nter:manufacturer-parts": {
-            "href": "https://api.example.com/manufacturers/manufacturer/parts"
+            "href": "https://api.nterprise.com/manufacturers/manufacturer/parts"
           },
           "self": {
-            "href": "https://api.example.com/manufacturers/manufacturer"
+            "href": "https://api.nterprise.com/manufacturers/manufacturer"
           }
         }
       }

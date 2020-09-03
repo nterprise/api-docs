@@ -10,10 +10,12 @@
   "properties": {
     "type": {
       "type": "string",
-      "const": "between"
+      "const": "between",
+      "x-nter-skip-param": true
     },
     "options": {
       "type": "object",
+      "x-nter-skip-param": true,
       "required": [
         "min",
         "max"
@@ -21,23 +23,27 @@
       "properties": {
         "min": {
           "type": "number",
-          "description": "Minimum value to check"
+          "description": "Minimum value to check",
+          "x-nter-skip-param": true
         },
         "max": {
           "type": "number",
-          "description": "The maximum value to check"
+          "description": "The maximum value to check",
+          "x-nter-skip-param": true
         },
         "precision": {
           "type": "integer",
           "description": "When number is a float, this will set the decimal precision",
           "minimum": 1,
           "maximum": 8,
-          "default": 3
+          "default": 3,
+          "x-nter-skip-param": true
         },
         "include": {
           "type": "boolean",
           "description": "Include the value in the check",
-          "default": true
+          "default": true,
+          "x-nter-skip-param": true
         }
       }
     }

@@ -20,15 +20,6 @@
     "responses": {
       "200": {
         "$ref": "../../components/responses/halUserPage.json"
-      },
-      "401": {
-        "$ref": "../../components/responses/401unauthorized.json"
-      },
-      "404": {
-        "$ref": "../../components/responses/404notFound.json"
-      },
-      "403": {
-        "$ref": "../../components/responses/403forbidden.json"
       }
     }
   },
@@ -66,23 +57,7 @@
     "responses": {
       "200": {
         "$ref": "../../components/responses/halUser.json"
-      },
-      "400": {
-        "$ref": "../../components/responses/400badRequest.json"
-      },
-      "401": {
-        "$ref": "../../components/responses/401unauthorized.json"
-      },
-      "403": {
-        "$ref": "../../components/responses/403forbidden.json"
-      },
-      "404": {
-        "$ref": "../../components/responses/404notFound.json"
-      },
-      "409": {
-        "$ref": "../../components/responses/409conflict.json"
       }
     }
-
   }
 }

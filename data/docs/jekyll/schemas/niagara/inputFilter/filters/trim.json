@@ -10,21 +10,25 @@
   "properties": {
     "type": {
       "type": "string",
-      "const": "trim"
+      "const": "trim",
+      "x-nter-skip-param": true
     },
     "options": {
       "type": "object",
       "description": "By default will trim from the start and end",
+      "x-nter-skip-param": true,
       "properties": {
         "start": {
           "type": "boolean",
           "description": "Remove white space from the start of the string",
-          "default": true
+          "default": true,
+          "x-nter-skip-param": true
         },
         "end": {
           "type": "boolean",
           "description": "Remove white space from the end of the string",
-          "default": true
+          "default": true,
+          "x-nter-skip-param": true
         }
       }
     }

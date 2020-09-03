@@ -13,10 +13,10 @@
         "input_filter": [],
         "_links": {
           "nter:vendor-units": {
-            "href": "https://api.example.com/vendors/vendor/units"
+            "href": "https://api.nterprise.com/vendors/vendor/units"
           },
           "self": {
-            "href": "https://api.example.com/vendors/vendor"
+            "href": "https://api.nterprise.com/vendors/vendor"
           }
         }
       }

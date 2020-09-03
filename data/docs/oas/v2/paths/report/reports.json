@@ -12,15 +12,6 @@
     "responses": {
       "201": {
         "$ref": "../../components/responses/halReport.json"
-      },
-      "400": {
-        "$ref": "../../components/responses/400badRequest.json"
-      },
-      "401": {
-        "$ref": "../../components/responses/401unauthorized.json"
-      },
-      "403": {
-        "$ref": "../../components/responses/403forbidden.json"
       }
     }
   }

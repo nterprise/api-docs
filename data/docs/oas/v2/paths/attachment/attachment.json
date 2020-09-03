@@ -1,0 +1,27 @@
+{
+  "get": {
+    "operationId": "getAttachment",
+    "summary": "Fetch information regarding an attachment",
+    "description": "Fetches information about an uploaded attachment",
+    "tags": [
+      "Attachment"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/attachmentId.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halAttachment.json"
+      }
+    },
+    "security": [
+      {
+        "niagara": [
+          "file:read"
+        ]
+      }
+    ]
+  }
+}

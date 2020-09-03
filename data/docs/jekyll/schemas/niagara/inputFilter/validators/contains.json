@@ -10,22 +10,26 @@
   "properties": {
     "type": {
       "type": "string",
-      "const": "contains"
+      "const": "contains",
+      "x-nter-skip-param": true
     },
     "options": {
       "type": "object",
+      "x-nter-skip-param": true,
       "required": [
         "contains"
       ],
       "properties": {
         "contains": {
           "type": "string",
-          "description": "String must contain with this value"
+          "description": "String must contain with this value",
+          "x-nter-skip-param": true
         },
         "check_case": {
           "type": "boolean",
           "description": "Perform a case sensitive match. By default will not match case",
-          "default": false
+          "default": false,
+          "x-nter-skip-param": true
         }
       }
     }

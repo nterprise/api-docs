@@ -17,14 +17,15 @@
     "responses": {
       "200": {
         "$ref": "../../components/responses/halBatchPage.json"
-      },
-      "401": {
-        "$ref": "../../components/responses/401unauthorized.json"
-      },
-      "403": {
-        "$ref": "../../components/responses/403forbidden.json"
       }
-    }
+    },
+    "security": [
+      {
+        "niagara": [
+          "batch:all"
+        ]
+      }
+    ]
   },
   "post": {
     "operationId": "createBatch",
@@ -39,17 +40,15 @@
     "responses": {
       "200": {
         "$ref": "../../components/responses/halBatch.json"
-      },
-      "400": {
-        "$ref": "../../components/responses/400badRequest.json"
-      },
-      "401": {
-        "$ref": "../../components/responses/401unauthorized.json"
-      },
-      "403": {
-        "$ref": "../../components/responses/403forbidden.json"
       }
-    }
+    },
+    "security": [
+      {
+        "niagara": [
+          "batch:create"
+        ]
+      }
+    ]
   },
   "patch": {
     "operationId": "createMultipleBatches",
@@ -76,16 +75,14 @@
     "responses": {
       "204": {
         "$ref": "../../components/responses/halBatch.json"
-      },
-      "400": {
-        "$ref": "../../components/responses/400badRequest.json"
-      },
-      "401": {
-        "$ref": "../../components/responses/401unauthorized.json"
-      },
-      "403": {
-        "$ref": "../../components/responses/403forbidden.json"
       }
-    }
+    },
+    "security": [
+      {
+        "niagara": [
+          "batch:create"
+        ]
+      }
+    ]
   }
 }

@@ -94,10 +94,10 @@
               ],
               "_links": {
                 "nter:role-users": {
-                  "href": "https://api.example.com/roles/role/users"
+                  "href": "https://api.nterprise.com/roles/role/users"
                 },
                 "self": {
-                  "href": "https://api.example.com/roles/role"
+                  "href": "https://api.nterprise.com/roles/role"
                 }
               }
             }
@@ -105,10 +105,10 @@
         },
         "_links": {
           "next": {
-            "href": "https://api.example.com/roles?limit=42&offset=next-offset"
+            "href": "https://api.nterprise.com/roles?limit=42&offset=next-offset"
           },
           "self": {
-            "href": "https://api.example.com/roles?limit=42"
+            "href": "https://api.nterprise.com/roles?limit=42"
           }
         }
       }

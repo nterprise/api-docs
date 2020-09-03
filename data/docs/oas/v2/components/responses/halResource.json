@@ -67,13 +67,13 @@
         },
         "_links": {
           "nter:resource-location": {
-            "href": "https://api.example.com/locations/location"
+            "href": "https://api.nterprise.com/locations/location"
           },
           "nter:resource-sub-resources": {
-            "href": "https://api.example.com/resources/parent-resource/sub-resources"
+            "href": "https://api.nterprise.com/resources/parent-resource/sub-resources"
           },
           "self": {
-            "href": "https://api.example.com/resources/parent-resource"
+            "href": "https://api.nterprise.com/resources/parent-resource"
           }
         }
       }

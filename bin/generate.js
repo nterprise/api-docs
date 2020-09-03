@@ -2,12 +2,12 @@
 /**
  * @fileOverview Entry point for cli
  */
-const {logger} = require('@nterprise/common-js');
-const winston = require('winston');
 const _ = require('lodash');
 const yargs = require('yargs');
 const fs = require('fs');
 
+/* eslint-disable */
+// noinspection BadExpressionStatementJS
 yargs.
     option(
         'debug',
@@ -45,35 +45,28 @@ yargs.
     middleware((argv) => {
         const verbose = _.get(argv, 'verbose', false);
         const debug = _.get(argv, 'debug', false);
-        let level = 'warn';
 
+        process.env.CONSOLE_LOG = true;
         if (verbose) {
-            level = 'info';
+            process.env.LOG_LEVEL='info';
         }
 
         if (debug) {
-            level = 'debug';
+            process.env.LOG_LEVEL='debug';
         }
 
         const moduleName = _.get(argv, '_', []).join(':');
+        const logger = require('@nterprise/niagara-winston-logger')(
+            moduleName,
+        );
 
-        logger.transports.forEach((transport) => {
-            transport.level = level;
-
-            if (transport.name !== 'console') {
-                return;
-            }
-
-            transport.format = winston.format.combine(
-                winston.format.label({label: moduleName, message: true}),
-                winston.format.colorize(),
-                winston.format.simple(),
-            );
-        });
         logger.info('Verbose output');
         logger.debug('Debug output');
+
+        argv.logger = logger;
     }).
     middleware((argv) => {
+        const logger = argv.logger;
         const overwrite = _.get(argv, 'overwrite', false);
 
         argv._writeFile = (fileName, data) => {

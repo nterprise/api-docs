@@ -1,48 +1,40 @@
 ---
 layout: page
 parent: Niagara API
-nav_order: 10
+nav_order: 9
 redirect_from:
   - /rel/notes
   - /rel/note
 title: Notes
 ---
+<!-- Generator: Widdershins v4.0.1 -->
 
 <h1 id="notes">Notes</h1>
 
 * Do not remove this line (it will not be displayed)
 {:toc}
 
-API for the nterprise application
+Notes are information units for an entity
 
 <h1 id="notes-note">Note</h1>
 
 ## Operations
 
-### GET /notes/{note_id} - *Fetch Note*
+### GET /notes/{note_id}
 
 <a id="opIdfetchNoteById"></a>
 
-*Fetch Note*
-
 Fetches a note
+
+<aside class="success">
+This operation does not require authentication
+</aside>
 
 <h3 id="fetchnotebyid-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |note_id|path|string|true|Id of the note|
-
-<!-- START responses.def -->
-
-<h3 id="fetchnotebyid-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|A note response|Inline|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|Inline|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Resource not found|Inline|
 
 > Example responses
 
@@ -59,8 +51,8 @@ Fetches a note
     "user_id": "3dddba3e-6122-46a8-ae26-8c7c95bd82d7",
     "created": "2019-08-19T00:01:02.639Z",
     "updated": "2019-08-19T00:01:02.639Z",
-    "name": "Chuck Reeves",
-    "email": "chuck.reeves@zones.com",
+    "name": "Daniel Jackson",
+    "email": "daniel.jackson@niagara.com",
     "profile": "https://bit.ly/18gECvy",
     "picture": "https://bit.ly/18gECvy"
   },
@@ -70,13 +62,13 @@ Fetches a note
         "user_id": "3dddba3e-6122-46a8-ae26-8c7c95bd82d7",
         "created": "2019-08-19T00:01:02.639Z",
         "updated": "2019-08-19T00:01:02.639Z",
-        "name": "Chuck Reeves",
-        "email": "chuck.reeves@zones.com",
+        "name": "Daniel Jackson",
+        "email": "daniel.jackson@niagara.com",
         "profile": "https://bit.ly/18gECvy",
         "picture": "https://bit.ly/18gECvy",
         "_links": {
           "self": {
-            "href": "https://api.example.com/users/3dddba3e-6122-46a8-ae26-8c7c95bd82d7"
+            "href": "https://api.nterprise.com/users/3dddba3e-6122-46a8-ae26-8c7c95bd82d7"
           }
         }
       }
@@ -84,190 +76,30 @@ Fetches a note
   },
   "_links": {
     "nter:note-created-by": {
-      "href": "https://api.example.com/users/3dddba3e-6122-46a8-ae26-8c7c95bd82d7"
+      "href": "https://api.nterprise.com/users/3dddba3e-6122-46a8-ae26-8c7c95bd82d7"
     },
     "self": {
-      "href": "https://api.example.com/notes/note"
+      "href": "https://api.nterprise.com/notes/note"
     }
   }
 }
 ```
 
-> 401 Response
-
-```json
-{
-  "title": "Unauthorized",
-  "type": "https://docs.nterprise.com/api/problem/Unauthorized",
-  "status": 401,
-  "detail": "Invalid authorization token"
-}
-```
-
-> 403 Response
-
-```json
-{
-  "title": "Forbidden",
-  "type": "https://docs.nterprise.com/api/problem/Forbidden",
-  "status": 403,
-  "detail": "You are forbidden from accessing this resource"
-}
-```
-
-> 404 Response
-
-```json
-{
-  "title": "Not Found",
-  "type": "https://docs.nterprise.com/api/problem/NotFound",
-  "status": 404,
-  "detail": "A Resource with the id \"foo\" was not found"
-}
-```
-
-<h3 id="fetchnotebyid-responseschema">Response Schema</h3>
-
-Status Code **401**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
-Status Code **403**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
-Status Code **404**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
-<!-- END responses.def -->
-
-### DELETE /notes/{note_id} - *Delete note*
+### DELETE /notes/{note_id}
 
 <a id="opIddeleteNote"></a>
 
-*Delete note*
-
 Deletes a note
+
+<aside class="success">
+This operation does not require authentication
+</aside>
 
 <h3 id="deletenote-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |note_id|path|string|true|Id of the note|
-
-<!-- START responses.def -->
-
-<h3 id="deletenote-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|205|[Reset Content](https://tools.ietf.org/html/rfc7231#section-6.3.6)|Note deleted|None|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|Inline|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Resource not found|Inline|
-|423|[Locked](https://tools.ietf.org/html/rfc2518#section-10.4)|Forbidden|Inline|
-
-> Example responses
-
-> 401 Response
-
-```json
-{
-  "title": "Unauthorized",
-  "type": "https://docs.nterprise.com/api/problem/Unauthorized",
-  "status": 401,
-  "detail": "Invalid authorization token"
-}
-```
-
-> 403 Response
-
-```json
-{
-  "title": "Forbidden",
-  "type": "https://docs.nterprise.com/api/problem/Forbidden",
-  "status": 403,
-  "detail": "You are forbidden from accessing this resource"
-}
-```
-
-> 404 Response
-
-```json
-{
-  "title": "Not Found",
-  "type": "https://docs.nterprise.com/api/problem/NotFound",
-  "status": 404,
-  "detail": "A Resource with the id \"foo\" was not found"
-}
-```
-
-> 423 Response
-
-```json
-{
-  "title": "Locked",
-  "type": "https://docs.nterprise.com/api/problem/Locked",
-  "status": 423,
-  "detail": "This resource is currently locked from editing"
-}
-```
-
-<h3 id="deletenote-responseschema">Response Schema</h3>
-
-Status Code **401**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
-Status Code **403**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
-Status Code **404**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
-Status Code **423**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
-<!-- END responses.def -->
 
 # Embedded Schemas
 
@@ -288,16 +120,20 @@ Status Code **423**
 |updated|string(date-time)|false|read-only|Last date the entity was updated|
 |text|string|false|none|Text for the note|
 |created_by|object|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; user_id|string|true|none|The identifier for the user|
-|&nbsp;&nbsp;&nbsp;&nbsp; created|string(date-time)|true|read-only|Date the entity was created|
-|&nbsp;&nbsp;&nbsp;&nbsp; updated|string(date-time)|true|read-only|Last date the entity was updated|
-|&nbsp;&nbsp;&nbsp;&nbsp; email|string(email)|true|none|Email address|
-|&nbsp;&nbsp;&nbsp;&nbsp; name|string|true|none|Human readable name|
-|&nbsp;&nbsp;&nbsp;&nbsp; picture|string¦null|false|none|Image for the user|
-|&nbsp;&nbsp;&nbsp;&nbsp; profile|string¦null|false|none|Link to the users profile|
-|&nbsp;&nbsp;&nbsp;&nbsp; user_attributes|[object]|false|none|Array of user attributes|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; key|string|true|none|Attribute Key|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; value|string|true|none|Attribute value|
+|&nbsp;&nbsp; user_id|string|true|none|The identifier for the user|
+|&nbsp;&nbsp; created|string(date-time)|true|read-only|Date the entity was created|
+|&nbsp;&nbsp; updated|string(date-time)|true|read-only|Last date the entity was updated|
+|&nbsp;&nbsp; email|string(email)|true|none|Email address|
+|&nbsp;&nbsp; name|string|true|none|Human readable name|
+|&nbsp;&nbsp; picture|string¦null|false|none|Image for the user|
+|&nbsp;&nbsp; profile|string¦null|false|none|Link to the users profile|
+|&nbsp;&nbsp; user_attributes|[object]|false|none|Array of user attributes|
+|&nbsp;&nbsp;&nbsp;&nbsp; key|string|true|none|Attribute Key|
+|&nbsp;&nbsp;&nbsp;&nbsp; value|string|true|none|Attribute value|
+|&nbsp;&nbsp; notification|object|false|none|Count of notifications for the user|
+|&nbsp;&nbsp;&nbsp;&nbsp; read|number|false|none|Number of read messages|
+|&nbsp;&nbsp;&nbsp;&nbsp; unread|number|false|none|Number of un-read messages|
+|&nbsp;&nbsp;&nbsp;&nbsp; archived|number|false|none|Number of archived messages|
 
 #### Specification
 
@@ -369,6 +205,7 @@ properties:
         items:
           type: object
           description: User Attribute
+          maxItems: 15
           required:
             - key
             - value
@@ -379,6 +216,19 @@ properties:
             value:
               description: Attribute value
               type: string
+      notification:
+        type: object
+        description: Count of notifications for the user
+        properties:
+          read:
+            type: number
+            description: Number of read messages
+          unread:
+            type: number
+            description: Number of un-read messages
+          archived:
+            type: number
+            description: Number of archived messages
 
 ```
 

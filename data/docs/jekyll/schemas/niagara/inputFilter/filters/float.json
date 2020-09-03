@@ -10,17 +10,20 @@
   "properties": {
     "type": {
       "type": "string",
-      "const": "float"
+      "const": "float",
+      "x-nter-skip-param": true
     },
     "options": {
       "type": "object",
+      "x-nter-skip-param": true,
       "properties": {
         "precision": {
           "type": "integer",
           "minimum": 1,
           "maximum": 8,
           "default": 3,
-          "description": "How many decimal places to preserve"
+          "description": "How many decimal places to preserve",
+          "x-nter-skip-param": true
         }
       }
     }

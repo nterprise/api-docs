@@ -2,14 +2,14 @@
   "openapi": "3.0.3",
   "x-api": "niagara",
   "x-nter-docs-parent": "Niagara API",
-  "x-nter-docs-nav-order": 10,
+  "x-nter-docs-nav-order": 9,
   "x-nter-docs-redirect-from": [
     "/rel/notes",
     "/rel/note"
   ],
   "info": {
     "version": "2.0.0",
-    "description": "API for the nterprise application",
+    "description": "Notes are information units for an entity",
     "title": "Notes"
   },
   "servers": [

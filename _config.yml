@@ -50,4 +50,7 @@ exclude:
  - vendor/ruby/
  - src/
  - .idea/
+ - .github/
+ - .bundle/
+ - bin/
  - public/

@@ -10,10 +10,12 @@
   "properties": {
     "type": {
       "type": "string",
-      "const": "black_list"
+      "const": "black_list",
+      "x-nter-skip-param": true
     },
     "options": {
       "type": "object",
+      "x-nter-skip-param": true,
       "required": [
         "list"
       ],
@@ -25,12 +27,14 @@
           "description": "The list of approved values",
           "items": {
             "type": ["string", "number", "boolean"]
-          }
+          },
+          "x-nter-skip-param": true
         },
         "check_case": {
           "type": "boolean",
           "description": "Perform a case sensitive match. By default will not match case",
-          "default": false
+          "default": false,
+          "x-nter-skip-param": true
         }
       }
     }

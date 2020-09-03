@@ -1,10 +1,10 @@
 {
   "get": {
-    "operationId": "fetchAllUnits",
+    "operationId": "fetchAllPartUnits",
     "summary": "Fetch units for part",
     "description": "Fetches A Page of units using a part",
     "tags": [
-      "Unit"
+      "Part"
     ],
     "parameters": [
       {
@@ -20,14 +20,14 @@
     "responses": {
       "200": {
         "$ref": "../../components/responses/halUnitPage.json"
-      },
-      "401": {
-        "$ref": "../../components/responses/401unauthorized.json"
-      },
-      "403": {
-        "$ref": "../../components/responses/403forbidden.json"
       }
-    }
-
+    },
+    "security": [
+      {
+        "niagara": [
+          "part:read"
+        ]
+      }
+    ]
   }
 }

@@ -31,6 +31,9 @@
     },
     "/contexts/{context_id}": {
       "$ref": "./paths/context/context.json"
+    },
+    "/contexts/{context_id}/{step_slug}": {
+      "$ref": "./paths/context/step.json"
     }
   },
   "components": {

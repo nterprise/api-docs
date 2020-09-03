@@ -2,7 +2,7 @@
   "get": {
     "operationId": "fetchUserById",
     "summary": "Fetch User",
-    "description": "Fetches a user",
+    "description": "Fetches a user by the user Id",
     "tags": [
       "User"
     ],
@@ -14,16 +14,67 @@
     "responses": {
       "200": {
         "$ref": "../../components/responses/halUser.json"
-      },
-      "401": {
-        "$ref": "../../components/responses/401unauthorized.json"
-      },
-      "403": {
-        "$ref": "../../components/responses/403forbidden.json"
-      },
-      "404": {
-        "$ref": "../../components/responses/404notFound.json"
       }
-    }
+    },
+    "security": [
+      {
+        "user": [
+          "user:read"
+        ]
+      }
+    ]
+  },
+  "put": {
+    "operationId": "updateUser",
+    "summary": "Update user",
+    "description": "Updates a new user following the user schema",
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/userId.json"
+      }
+    ],
+    "tags": [
+      "User"
+    ],
+    "requestBody": {
+      "$ref": "../../components/requestBodies/user.json"
+    },
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halUser.json"
+      }
+    },
+    "security": [
+      {
+        "user": [
+          "user:update"
+        ]
+      }
+    ]
+  },
+  "delete": {
+    "operationId": "deleteUser",
+    "summary": "Delete user",
+    "description": "This will remove the user from the system",
+    "tags": [
+      "User"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/userId.json"
+      }
+    ],
+    "responses": {
+      "205": {
+        "description": "User deleted"
+      }
+    },
+    "security": [
+      {
+        "user": [
+          "user:delete"
+        ]
+      }
+    ]
   }
 }

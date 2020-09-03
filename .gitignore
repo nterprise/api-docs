@@ -74,3 +74,4 @@ vendor
 
 # SASS Cache
 .sass-cache
+.jekyll-metadata

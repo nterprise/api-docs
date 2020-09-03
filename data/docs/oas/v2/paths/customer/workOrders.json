@@ -15,37 +15,20 @@
       },
       {
         "$ref": "../../components/parameters/offset.json"
-      },
-      {
-        "$ref": "../../components/parameters/workOrderSort.json"
-      },
-      {
-        "$ref": "../../components/parameters/filterLabel.json"
-      },
-      {
-        "$ref": "../../components/parameters/filterProject.json"
-      },
-      {
-        "$ref": "../../components/parameters/filterProgram.json"
-      },
-      {
-        "$ref": "../../components/parameters/filterLocation.json"
       }
     ],
     "responses": {
       "200": {
-        "$ref": "../../components/responses/workOrderPage.json"
-      },
-      "401": {
-        "$ref": "../../components/responses/401unauthorized.json"
-      },
-      "404": {
-        "$ref": "../../components/responses/404notFound.json"
-      },
-      "403": {
-        "$ref": "../../components/responses/403forbidden.json"
+        "$ref": "../../components/responses/halWorkOrderPage.json"
       }
-    }
-
+    },
+    "security": [
+      {
+        "niagara": [
+          "customer:read",
+          "customer:read-work-orders"
+        ]
+      }
+    ]
   }
 }

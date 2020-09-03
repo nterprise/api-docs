@@ -281,13 +281,13 @@
               "input_filter": [],
               "_links": {
                 "nter:work-order-batches": {
-                  "href": "https://api.example.com/work-orders/work-order/batches"
+                  "href": "https://api.nterprise.com/work-orders/work-order/batches"
                 },
                 "nter:work-order-queues": {
-                  "href": "https://api.example.com/work-orders/work-order/queues"
+                  "href": "https://api.nterprise.com/work-orders/work-order/queues"
                 },
                 "self": {
-                  "href": "https://api.example.com/work-orders/work-order"
+                  "href": "https://api.nterprise.com/work-orders/work-order"
                 }
               }
             }
@@ -295,10 +295,10 @@
         },
         "_links": {
           "next": {
-            "href": "https://api.example.com/work-orders?limit=42&offset=next-offset"
+            "href": "https://api.nterprise.com/work-orders?limit=42&offset=next-offset"
           },
           "self": {
-            "href": "https://api.example.com/work-orders?limit=42"
+            "href": "https://api.nterprise.com/work-orders?limit=42"
           }
         }
       }

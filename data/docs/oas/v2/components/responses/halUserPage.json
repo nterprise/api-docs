@@ -61,13 +61,13 @@
               "user_id": "3dddba3e-6122-46a8-ae26-8c7c95bd82d7",
               "created": "2019-08-19T00:01:02.639Z",
               "updated": "2019-08-19T00:01:02.639Z",
-              "name": "Chuck Reeves",
-              "email": "chuck.reeves@zones.com",
+              "name": "Daniel Jackson",
+              "email": "daniel.jackson@niagara.com",
               "profile": "https://bit.ly/18gECvy",
               "picture": "https://bit.ly/18gECvy",
               "_links": {
                 "self": {
-                  "href": "https://api.example.com/users/3dddba3e-6122-46a8-ae26-8c7c95bd82d7"
+                  "href": "https://api.nterprise.com/users/3dddba3e-6122-46a8-ae26-8c7c95bd82d7"
                 }
               }
             }
@@ -75,10 +75,10 @@
         },
         "_links": {
           "next": {
-            "href": "https://api.example.com/users?limit=42&offset=next-offset"
+            "href": "https://api.nterprise.com/users?limit=42&offset=next-offset"
           },
           "self": {
-            "href": "https://api.example.com/users?limit=42"
+            "href": "https://api.nterprise.com/users?limit=42"
           }
         }
       }

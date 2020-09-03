@@ -1,3 +1,5 @@
+<!-- Generator: Widdershins v{{=data.widdershins.version}} -->
+
 {{= data.tags.section }}
 <h1 id="{{=data.title_prefix}}">{{=data.api.info && data.api.info.title}}</h1>
 
@@ -5,6 +7,10 @@
 {:toc}
 
 {{? data.api.info && data.api.info.description}}{{=data.api.info.description}}{{?}}
+
+{{? data.api.components && data.api.components.securitySchemes }}
+{{#def.security}}
+{{?}}
 
 {{ for (var r in data.resources) { }}
 {{ data.resource = data.resources[r]; }}
@@ -48,7 +54,7 @@
 <a id="tocs{{=s.toLowerCase()}}"></a>
 
 {{ var enums = []; }}
-{{ var blocks = data.utils.schemaToArray(origSchema,-1,{trim:true,join:true},data); }}
+{{ var blocks = data.utils.schemaToArray(origSchema,-1,{trim:true,join:true, mc: true},data); }}
 {{ for (var block of blocks) {
      for (var p of block.rows) {
        if (p.schema && p.schema.enum) {

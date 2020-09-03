@@ -68,7 +68,7 @@
         },
         "_links": {
           "self": {
-            "href": "https://api.example.com/settings/statuses"
+            "href": "https://api.nterprise.com/settings/statuses"
           }
         }
       }

@@ -100,7 +100,7 @@
         ],
         "_links": {
           "self": {
-            "href": "https://api.example.com/reports/fe385753-8d50-49b5-b24f-25726bfbe357"
+            "href": "https://api.nterprise.com/reports/fe385753-8d50-49b5-b24f-25726bfbe357"
           }
         }
       }

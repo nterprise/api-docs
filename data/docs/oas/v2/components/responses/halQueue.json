@@ -68,13 +68,13 @@
         },
         "_links": {
           "nter:queue-location": {
-            "href": "https://api.example.com/locations/location"
+            "href": "https://api.nterprise.com/locations/location"
           },
           "nter:queue-batches": {
-            "href": "https://api.example.com/queues/queue/batches"
+            "href": "https://api.nterprise.com/queues/queue/batches"
           },
           "self": {
-            "href": "https://api.example.com/queues/queue"
+            "href": "https://api.nterprise.com/queues/queue"
           }
         }
       }

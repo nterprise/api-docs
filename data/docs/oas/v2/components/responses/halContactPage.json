@@ -74,7 +74,7 @@
               "input_filter": [],
               "_links": {
                 "self": {
-                  "href": "https://api.example.com/contacts/contact"
+                  "href": "https://api.nterprise.com/contacts/contact"
                 }
               }
             }
@@ -82,7 +82,7 @@
         },
         "_links": {
           "self": {
-            "href": "https://api.example.com/contacts?limit=42"
+            "href": "https://api.nterprise.com/contacts?limit=42"
           }
         }
       }

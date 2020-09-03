@@ -23,17 +23,16 @@
     "responses": {
       "200": {
         "$ref": "../../components/responses/halRelationPage.json"
-      },
-      "401": {
-        "$ref": "../../components/responses/401unauthorized.json"
-      },
-      "403": {
-        "$ref": "../../components/responses/403forbidden.json"
-      },
-      "404": {
-        "$ref": "../../components/responses/404notFound.json"
       }
-    }
+    },
+    "security": [
+      {
+        "niagara": [
+          "customer:read",
+          "customer:read-relations"
+        ]
+      }
+    ]
   },
   "post": {
     "operationId": "createRelationForCustomer",
@@ -53,16 +52,15 @@
     "responses": {
       "201": {
         "$ref": "../../components/responses/halRelation.json"
-      },
-      "400": {
-        "$ref": "../../components/responses/400badRequest.json"
-      },
-      "401": {
-        "$ref": "../../components/responses/401unauthorized.json"
-      },
-      "403": {
-        "$ref": "../../components/responses/403forbidden.json"
       }
-    }
+    },
+    "security": [
+      {
+        "niagara": [
+          "customer:read",
+          "customer:attach"
+        ]
+      }
+    ]
   }
 }

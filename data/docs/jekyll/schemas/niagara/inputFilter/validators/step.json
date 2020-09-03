@@ -10,25 +10,30 @@
   "properties": {
     "type": {
       "type": "string",
-      "const": "step"
+      "const": "step",
+      "x-nter-skip-param": true
     },
     "options": {
       "type": "object",
+      "x-nter-skip-param": true,
       "required": [
         "step"
       ],
       "properties": {
         "step": {
           "type": "number",
-          "description": "The step value"
+          "description": "The step value",
+          "x-nter-skip-param": true
         },
         "start": {
           "type": ["number", "null"],
-          "description": "Start stepping at this value"
+          "description": "Start stepping at this value",
+          "x-nter-skip-param": true
         },
         "end": {
           "type": ["number", "null"],
-          "description": "End stepping at this value"
+          "description": "End stepping at this value",
+          "x-nter-skip-param": true
         }
       }
     }

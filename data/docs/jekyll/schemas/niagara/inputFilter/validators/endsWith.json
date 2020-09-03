@@ -10,22 +10,26 @@
   "properties": {
     "type": {
       "type": "string",
-      "const": "ends_with"
+      "const": "ends_with",
+      "x-nter-skip-param": true
     },
     "options": {
       "type": "object",
+      "x-nter-skip-param": true,
       "required": [
         "ends_with"
       ],
       "properties": {
         "ends_with": {
           "type": "string",
-          "description": "String must end with this value"
+          "description": "String must end with this value",
+          "x-nter-skip-param": true
         },
         "check_case": {
           "type": "boolean",
           "description": "Perform a case sensitive match. By default will not match case",
-          "default": false
+          "default": false,
+          "x-nter-skip-param": true
         }
       }
     }

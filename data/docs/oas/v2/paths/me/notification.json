@@ -1,0 +1,36 @@
+{
+  "get": {
+    "operationId": "fetchNotificationById",
+    "summary": "Fetch notification",
+    "description": "Fetch detail about a notification",
+    "tags": [
+      "Me"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/notificationId.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halNotification.json"
+      }
+    }
+  },
+  "patch": {
+    "operationId": "updateNotification",
+    "summary": "Update notification",
+    "description": "Updates a notification for a user",
+    "tags": [
+      "Me"
+    ],
+    "requestBody": {
+      "$ref": "../../components/requestBodies/patchNotification.json"
+    },
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halNotification.json"
+      }
+    }
+  }
+}

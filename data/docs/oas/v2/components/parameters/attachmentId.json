@@ -1,0 +1,9 @@
+{
+  "name": "attachment_id",
+  "in": "path",
+  "description": "Id of the batch",
+  "required": true,
+  "schema": {
+    "$ref": "https://docs.nterprise.com/schemas/niagara/file.json#/properties/file_id"
+  }
+}

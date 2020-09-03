@@ -1,0 +1,29 @@
+{
+  "get": {
+    "operationId": "fetchNotifications",
+    "summary": "Fetches notifications",
+    "description": "Fetches the notifications for a user",
+    "tags": [
+      "Me"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/limit.json"
+      },
+      {
+        "$ref": "../../components/parameters/offset.json"
+      },
+      {
+        "$ref": "../../components/parameters/filterRead.json"
+      },
+      {
+        "$ref": "../../components/parameters/filterArchived.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halNotificationPage.json"
+      }
+    }
+  }
+}

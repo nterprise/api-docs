@@ -18,12 +18,6 @@
     "responses": {
       "200": {
         "$ref": "../../components/responses/halContextPage.json"
-      },
-      "401": {
-        "$ref": "../../components/responses/401unauthorized.json"
-      },
-      "403": {
-        "$ref": "../../components/responses/403forbidden.json"
       }
     }
   }

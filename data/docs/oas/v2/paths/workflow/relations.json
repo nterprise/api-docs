@@ -4,7 +4,7 @@
     "summary": "Fetch WorkFlow relations",
     "description": "Fetches the relations for a workFlow",
     "tags": [
-      "WorkFlow"
+      "Work Flow"
     ],
     "parameters": [
       {
@@ -23,24 +23,22 @@
     "responses": {
       "200": {
         "$ref": "../../components/responses/halRelationPage.json"
-      },
-      "401": {
-        "$ref": "../../components/responses/401unauthorized.json"
-      },
-      "403": {
-        "$ref": "../../components/responses/403forbidden.json"
-      },
-      "404": {
-        "$ref": "../../components/responses/404notFound.json"
       }
-    }
+    },
+    "security": [
+      {
+        "niagara": [
+          "work-flow:read"
+        ]
+      }
+    ]
   },
   "post": {
     "operationId": "createRelationForWorkFlow",
     "summary": "Create relation",
     "description": "Creates a relation for a workFlow",
     "tags": [
-      "WorkFlow"
+      "Work Flow"
     ],
     "parameters": [
       {
@@ -53,16 +51,14 @@
     "responses": {
       "201": {
         "$ref": "../../components/responses/halRelation.json"
-      },
-      "400": {
-        "$ref": "../../components/responses/400badRequest.json"
-      },
-      "401": {
-        "$ref": "../../components/responses/401unauthorized.json"
-      },
-      "403": {
-        "$ref": "../../components/responses/403forbidden.json"
       }
-    }
+    },
+    "security": [
+      {
+        "niagara": [
+          "work-flow:attach"
+        ]
+      }
+    ]
   }
 }

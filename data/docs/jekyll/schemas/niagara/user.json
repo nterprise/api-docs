@@ -58,6 +58,7 @@
       "items": {
         "type": "object",
         "description": "User Attribute",
+        "maxItems": 15,
         "required": [
           "key",
           "value"

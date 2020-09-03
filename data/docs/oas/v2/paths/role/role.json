@@ -14,15 +14,6 @@
     "responses": {
       "200": {
         "$ref": "../../components/responses/halRole.json"
-      },
-      "401": {
-        "$ref": "../../components/responses/401unauthorized.json"
-      },
-      "403": {
-        "$ref": "../../components/responses/403forbidden.json"
-      },
-      "404": {
-        "$ref": "../../components/responses/404notFound.json"
       }
     }
   },
@@ -44,21 +35,6 @@
     "responses": {
       "200": {
         "$ref": "../../components/responses/halRole.json"
-      },
-      "400": {
-        "$ref": "../../components/responses/400badRequest.json"
-      },
-      "401": {
-        "$ref": "../../components/responses/401unauthorized.json"
-      },
-      "403": {
-        "$ref": "../../components/responses/403forbidden.json"
-      },
-      "409": {
-        "$ref": "../../components/responses/409conflict.json"
-      },
-      "423": {
-        "$ref": "../../components/responses/423locked.json"
       }
     }
   },
@@ -77,18 +53,6 @@
     "responses": {
       "205": {
         "description": "Role deleted"
-      },
-      "401": {
-        "$ref": "../../components/responses/401unauthorized.json"
-      },
-      "403": {
-        "$ref": "../../components/responses/403forbidden.json"
-      },
-      "404": {
-        "$ref": "../../components/responses/404notFound.json"
-      },
-      "423": {
-        "$ref": "../../components/responses/423locked.json"
       }
     }
   }

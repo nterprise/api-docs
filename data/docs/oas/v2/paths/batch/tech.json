@@ -1,0 +1,30 @@
+{
+  "delete": {
+    "operationId": "detachTechFromBatch",
+    "summary": "Detach tech",
+    "description": "Remove tech from batch",
+    "tags": [
+      "Batch"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/batchId.json"
+      },
+      {
+        "$ref": "../../components/parameters/techId.json"
+      }
+    ],
+    "responses": {
+      "205": {
+        "description": "Batch detached"
+      }
+    },
+    "security": [
+      {
+        "niagara": [
+          "batch:detach"
+        ]
+      }
+    ]
+  }
+}

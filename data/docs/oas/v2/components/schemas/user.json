@@ -31,6 +31,24 @@
     },
     "user_attributes": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/user.json#/properties/user_attributes"
+    },
+    "notification": {
+      "type": "object",
+      "description": "Count of notifications for the user",
+      "properties": {
+        "read": {
+          "type": "number",
+          "description": "Number of read messages"
+        },
+        "unread": {
+          "type": "number",
+          "description": "Number of un-read messages"
+        },
+        "archived": {
+          "type": "number",
+          "description": "Number of archived messages"
+        }
+      }
     }
   }
 }

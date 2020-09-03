@@ -10,17 +10,20 @@
   "properties": {
     "type": {
       "type": "string",
-      "const": "prefix"
+      "const": "prefix",
+      "x-nter-skip-param": true
     },
     "options": {
       "type": "object",
+      "x-nter-skip-param": true,
       "required": [
         "prefix"
       ],
       "properties": {
         "prefix": {
           "type": "string",
-          "description": "The prefix to add"
+          "description": "The prefix to add",
+          "x-nter-skip-param": true
         }
       }
     }

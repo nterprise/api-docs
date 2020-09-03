@@ -16,15 +16,16 @@
     ],
     "responses": {
       "200": {
-        "$ref": "../../components/responses/halCustomer.json"
-      },
-      "401": {
-        "$ref": "../../components/responses/401unauthorized.json"
-      },
-      "403": {
-        "$ref": "../../components/responses/403forbidden.json"
+        "$ref": "../../components/responses/halCustomerPage.json"
       }
-    }
+    },
+    "security": [
+      {
+        "niagara": [
+          "customer:all"
+        ]
+      }
+    ]
   },
   "post": {
     "operationId": "createCustomer",
@@ -39,19 +40,14 @@
     "responses": {
       "200": {
         "$ref": "../../components/responses/halCustomer.json"
-      },
-      "400": {
-        "$ref": "../../components/responses/400badRequest.json"
-      },
-      "401": {
-        "$ref": "../../components/responses/401unauthorized.json"
-      },
-      "403": {
-        "$ref": "../../components/responses/403forbidden.json"
-      },
-      "409": {
-        "$ref": "../../components/responses/409conflict.json"
       }
-    }
+    },
+    "security": [
+      {
+        "niagara": [
+          "customer:create"
+        ]
+      }
+    ]
   }
 }

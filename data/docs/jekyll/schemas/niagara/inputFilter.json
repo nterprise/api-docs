@@ -3,6 +3,8 @@
   "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter.json",
   "type": "array",
   "description": "Input Filters allow custom fields to be defined for entities",
+  "x-nter-see": "https://docs.nterprise.com/niagara/inputFilter.html",
+  "x-nter-no-example": true,
   "items": {
     "type": "object",
     "description": "Input filter specification",
@@ -16,70 +18,90 @@
     "properties": {
       "label": {
         "type": "string",
-        "description": "Human readable name"
+        "description": "Human readable name",
+        "x-nter-skip-param": true
       },
       "key": {
         "type": "string",
         "description": "Slug used to store the property",
         "readOnly": true,
-        "pattern": "^[a-z0-9]+(?:_[a-z0-9]+)*$"
+        "pattern": "^[a-z0-9]+(?:_[a-z0-9]+)*$",
+        "x-nter-skip-param": true
       },
       "filters": {
         "type": "array",
         "description": "A Collection of filters applied to the field",
         "maxItems": 100,
+        "x-nter-skip-param": true,
         "items": {
           "anyOf": [
             {
-              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/allowed.json"
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/allowed.json",
+              "x-nter-skip-param": true
             },
             {
-              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/alpha.json"
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/alpha.json",
+              "x-nter-skip-param": true
             },
             {
-              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/boolean.json"
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/boolean.json",
+              "x-nter-skip-param": true
             },
             {
-              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/camelCase.json"
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/camelCase.json",
+              "x-nter-skip-param": true
             },
             {
-              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/date.json"
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/date.json",
+              "x-nter-skip-param": true
             },
             {
-              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/digits.json"
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/digits.json",
+              "x-nter-skip-param": true
             },
             {
-              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/empty.json"
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/empty.json",
+              "x-nter-skip-param": true
             },
             {
-              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/float.json"
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/float.json",
+              "x-nter-skip-param": true
             },
             {
-              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/kebabCase.json"
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/kebabCase.json",
+              "x-nter-skip-param": true
             },
             {
-              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/lower.json"
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/lower.json",
+              "x-nter-skip-param": true
             },
             {
-              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/number.json"
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/number.json",
+              "x-nter-skip-param": true
             },
             {
-              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/prefix.json"
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/prefix.json",
+              "x-nter-skip-param": true
             },
             {
-              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/snakeCase.json"
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/snakeCase.json",
+              "x-nter-skip-param": true
             },
             {
-              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/string.json"
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/string.json",
+              "x-nter-skip-param": true
             },
             {
-              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/suffix.json"
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/suffix.json",
+              "x-nter-skip-param": true
             },
             {
-              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/trim.json"
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/trim.json",
+              "x-nter-skip-param": true
             },
             {
-              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/upper.json"
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/upper.json",
+              "x-nter-skip-param": true
             }
           ]
         }
@@ -88,94 +110,128 @@
         "type": "array",
         "description": "A set of validators to use for this field",
         "maxItems": 100,
+        "x-nter-skip-param": true,
         "items": {
           "anyOf": [
             {
-              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/always.json"
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/always.json",
+              "x-nter-skip-param": true
             },
             {
-              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/between.json"
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/between.json",
+              "x-nter-skip-param": true
             },
             {
-              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/blackList.json"
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/blackList.json",
+              "x-nter-skip-param": true
             },
             {
-              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/contains.json"
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/contains.json",
+              "x-nter-skip-param": true
             },
             {
-              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/emailAddress.json"
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/emailAddress.json",
+              "x-nter-skip-param": true
             },
             {
-              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/endsWith.json"
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/endsWith.json",
+              "x-nter-skip-param": true
             },
             {
-              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/equals.json"
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/equals.json",
+              "x-nter-skip-param": true
             },
             {
-              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/greaterThan.json"
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/greaterThan.json",
+              "x-nter-skip-param": true
             },
             {
-              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/hostName.json"
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/hostName.json",
+              "x-nter-skip-param": true
             },
             {
-              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/ipAddress.json"
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/ipAddress.json",
+              "x-nter-skip-param": true
             },
             {
-              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/length.json"
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/length.json",
+              "x-nter-skip-param": true
             },
             {
-              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/lessThan.json"
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/lessThan.json",
+              "x-nter-skip-param": true
             },
             {
-              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/macAddress.json"
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/macAddress.json",
+              "x-nter-skip-param": true
             },
             {
-              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/mask.json"
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/mask.json",
+              "x-nter-skip-param": true
             },
             {
-              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/never.json"
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/never.json",
+              "x-nter-skip-param": true
             },
             {
-              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/required.json"
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/required.json",
+              "x-nter-skip-param": true
             },
             {
-              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/startsWith.json"
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/startsWith.json",
+              "x-nter-skip-param": true
             },
             {
-              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/step.json"
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/step.json",
+              "x-nter-skip-param": true
             },
             {
-              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/uri.json"
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/uri.json",
+              "x-nter-skip-param": true
             },
             {
-              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/whiteList.json"
+              "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/whiteList.json",
+              "x-nter-skip-param": true
             }
           ]
         }
       },
       "locked": {
         "type": "boolean",
-        "description": "Defines the field as being locked higher up in the hierarchy. This prevents child entities from making changes to the filters or validators"
+        "description": "Defines the field as being locked higher up in the hierarchy. This prevents child entities from making changes to the filters or validators",
+        "x-nter-skip-param": true
       },
       "description": {
-        "type": ["string", "null"],
-        "description": "Provide a description for the field"
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Provide a description for the field",
+        "x-nter-skip-param": true
       },
       "value": {
-        "type": ["string", "number", "boolean", "null"],
-        "description": "The validated and filtered value. This is always a string so consumers MUST extrapolate out type"
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The validated and filtered value. This is always a string so consumers MUST extrapolate out type",
+        "x-nter-skip-param": true
       },
       "inherited_from": {
+        "x-nter-skip-param": true,
         "oneOf": [
           {
-            "type": "null"
+            "type": "null",
+            "x-nter-skip-param": true
           },
           {
-            "$ref": "https://docs.nterprise.com/schemas/niagara/entityHelper.json#/properties/entity_type"
+            "$ref": "https://docs.nterprise.com/schemas/niagara/entityHelper.json#/properties/entity_type",
+            "x-nter-skip-param": true
           }
         ]
       },
       "apply_to": {
+        "x-nter-skip-param": true,
         "$ref": "https://docs.nterprise.com/schemas/niagara/entityHelper.json#/properties/entity_type"
       }
     }

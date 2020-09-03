@@ -1,6 +1,5 @@
 const {folders} = require('../../folders');
 const glob = require('glob');
-const {logger} = require('@nterprise/common-js');
 const _ = require('lodash');
 const fs = require('fs');
 const path = require('path');
@@ -24,8 +23,95 @@ const widdershinsOptions = {
     expandBody: true,
     shallowSchemas: true,
     verbose: false,
-    debug: false,
     language_tabs: '',
+    templateCallback: (templateName, stage, data) => {
+        const skipRefs = ['or', 'anyOf', 'continued', 'xor', 'oneOf', 'not']
+        const ogParams = data.utils.getParameters;
+        const ogSchema = data.utils.schemaToArray;
+        data.utils.getParameters = (data) => {
+            ogParams(data);
+            data.parameters = _.compact(
+                _.map(
+                    data.parameters,
+                    (parameter) => {
+                        if (_.get(parameter, 'schema.x-nter-skip-param')) {
+                            return null;
+                        }
+
+                        if (_.get(parameter, 'schema.x-nter-no-example')) {
+                            _.set(parameter, 'exampleValues', {});
+                        }
+
+                        const see = _.get(parameter, 'schema.x-nter-see');
+
+                        if (!see) {
+                            return parameter;
+                        }
+                        _.set(
+                            parameter,
+                            'name',
+                            `<a href="${see}">${parameter.name}</a>`,
+                        );
+
+                        return parameter;
+                    },
+                ),
+            );
+            return data;
+        };
+
+        data.utils.schemaToArray = (...arguments) => {
+            const ogResult = ogSchema(...arguments)
+            const result = _.compact(
+                _.map(
+                    ogResult,
+                    (block) => {
+                        if (_.includes(skipRefs, block.title)) {
+                            return null
+                        }
+
+                        block.rows = _.compact(
+                            _.map(
+                                block.rows,
+                                (row) => {
+                                    if (_.get(row, 'schema.x-nter-skip-param')) {
+                                        return null;
+                                    }
+
+                                    if (_.get(row, 'schema.x-nter-no-example')) {
+                                        _.set(row, 'exampleValues', {});
+                                    }
+
+                                    const see = _.get(row, 'schema.x-nter-see');
+
+                                    if (!see) {
+                                        return row;
+                                    }
+                                    _.set(
+                                        row,
+                                        'name',
+                                        `<a href="${see}">${row.name}</a>`,
+                                    );
+
+                                    return row;
+                                }
+                            )
+                        )
+                        return block;
+                    }
+                )
+            );
+            return result;
+        };
+
+        data.utils.getAuthenticationStr = (data) => {
+            const permissions = _.get(data, 'security[0].niagara', []);
+            return permissions.length ?
+                `<ul><li>${permissions.join(`</li><li>`)}</li></ul>`
+                : '';
+        };
+        return data;
+    },
 };
 
 const removeKeys = [
@@ -75,7 +161,7 @@ const fixType = (type) => {
     return {type: _.omit(type, 'null')[0]};
 };
 
-const jsonSchemaToOas = (spec) => _.reduce(
+const jsonSchemaToOas = (logger, spec) => _.reduce(
     spec,
     (fixed, value, key) => {
         if (_.startsWith(key, 'x-nter-docs')) {
@@ -108,7 +194,7 @@ const jsonSchemaToOas = (spec) => _.reduce(
                 _.map(
                     value,
                     (child) => _.isObject(child)
-                        ? jsonSchemaToOas(child)
+                        ? jsonSchemaToOas(logger, child)
                         // If this is an array then something is wrong
                         : child,
                 ),
@@ -117,7 +203,7 @@ const jsonSchemaToOas = (spec) => _.reduce(
         }
 
         if (_.isObject(value)) {
-            value = jsonSchemaToOas(value);
+            value = jsonSchemaToOas(logger, value);
             _.set(fixed, key, value);
             return fixed;
         }
@@ -195,30 +281,34 @@ const buildFontMatter = (oas) => _.reduce(
     {layout: 'page'},
 );
 
-const localResolver = {
-    order: 1,
+const processFile = async (logger, file, {validateExample = false}) => {
+    const localResolver = {
+        order: 1,
 
-    canRead: true,
+        canRead: true,
 
-    read(file, callback, $refs) {
-        try {
+        read(file, callback, $refs) {
             if (!_.startsWith(file.url, 'http')) {
                 callback(null, require(file.url));
                 return;
             }
 
             file = new URL(file.url);
-            callback(null, require(path.join(...[
+            const localPath = path.join(...[
                 folders.jekyllPath,
                 file.pathname,
-            ])));
-        } catch (error) {
-            logger.error('Error when loading local ref', error);
-        }
-    },
-};
+            ]);
 
-const processFile = async (file, {validateExample=false}) => {
+            logger.debug(`Local path: ${localPath}`);
+            try {
+                callback(null, require(localPath));
+            } catch (error) {
+                logger.error(`Failed to load file ${localPath}`, error);
+                throw error;
+            }
+        },
+    };
+
     const result = {
         fileName: file,
         error: false,
@@ -236,7 +326,7 @@ const processFile = async (file, {validateExample=false}) => {
             require(file),
             {resolve: {local: localResolver}},
         );
-        result.oas = jsonSchemaToOas(deRefed);
+        result.oas = jsonSchemaToOas(logger, deRefed);
     } catch (error) {
         logger.error(`Failed to de-reference file ${file}`, error);
         result.error = true;
@@ -342,11 +432,14 @@ const apiToPath = {
 };
 
 exports.handler = async (argv) => {
+    const logger = argv.logger;
     logger.info('Generating pages from OAS');
     logger.info('argv', argv);
     logger.debug(`${widdershinsOptions.user_templates}`);
 
-    const apis = argv.api ? _.flatten([argv.api]) : ['auth', 'caapi', 'niagara'];
+    const apis = argv.api
+        ? _.flatten([argv.api])
+        : ['auth', 'caapi', 'niagara'];
     logger.debug('API to process', apis);
     const files = _.reduce(
         [argv.file],
@@ -385,7 +478,13 @@ exports.handler = async (argv) => {
         process.exit(1);
     }
 
-    const processedFiles = await Promise.all(_.map(files, processFile));
+    const processedFiles = await Promise.all(_.map(
+        files,
+        _.partial(
+            processFile,
+            logger,
+        ),
+    ));
 
     const errors = _.filter(processedFiles, {error: true});
 

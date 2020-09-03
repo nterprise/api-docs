@@ -14,52 +14,6 @@
     "responses": {
       "200": {
         "$ref": "../../components/responses/halContext.json"
-      },
-      "401": {
-        "$ref": "../../components/responses/401unauthorized.json"
-      },
-      "403": {
-        "$ref": "../../components/responses/403forbidden.json"
-      },
-      "404": {
-        "$ref": "../../components/responses/404notFound.json"
-      }
-    }
-  },
-  "post": {
-    "operationId": "completeStep",
-    "summary": "Complete Step",
-    "description": "Completes a step for an active context",
-    "tags": [
-      "Context"
-    ],
-    "parameters": [
-      {
-        "$ref": "../../components/parameters/contextId.json"
-      }
-    ],
-    "requestBody": {
-      "description": "The step to complete",
-      "content": {
-        "application/json": {
-          "schema": {
-            "$ref": "../../components/requestBodies/closeStep.json"
-          }
-        }
-      }
-    },
-    "responses": {
-      "200": {
-        "$ref": "../../components/responses/halContext.json"
-      },
-      "401": {
-        "$ref": "../../components/responses/401unauthorized.json"
-      },
-      "403": {
-        "$ref": "../../components/responses/403forbidden.json"
-      },
-      "404": {
-        "$ref": "../../components/responses/404notFound.json"
       }
     }
   }

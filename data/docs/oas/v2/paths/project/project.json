@@ -14,17 +14,15 @@
     "responses": {
       "200": {
         "$ref": "../../components/responses/halProject.json"
-      },
-      "401": {
-        "$ref": "../../components/responses/401unauthorized.json"
-      },
-      "403": {
-        "$ref": "../../components/responses/403forbidden.json"
-      },
-      "404": {
-        "$ref": "../../components/responses/404notFound.json"
       }
-    }
+    },
+    "security": [
+      {
+        "niagara": [
+          "project:read"
+        ]
+      }
+    ]
   },
   "put": {
     "operationId": "updateProject",
@@ -44,17 +42,15 @@
     "responses": {
       "200": {
         "$ref": "../../components/responses/halProject.json"
-      },
-      "400": {
-        "$ref": "../../components/responses/400badRequest.json"
-      },
-      "403": {
-        "$ref": "../../components/responses/403forbidden.json"
-      },
-      "423": {
-        "$ref": "../../components/responses/423locked.json"
       }
-    }
+    },
+    "security": [
+      {
+        "niagara": [
+          "project:update"
+        ]
+      }
+    ]
   },
   "delete": {
     "operationId": "deleteProject",
@@ -70,20 +66,15 @@
     ],
     "responses": {
       "205": {
-        "summary": "Project deleted"
-      },
-      "401": {
-        "$ref": "../../components/responses/401unauthorized.json"
-      },
-      "403": {
-        "$ref": "../../components/responses/403forbidden.json"
-      },
-      "404": {
-        "$ref": "../../components/responses/404notFound.json"
-      },
-      "423": {
-        "$ref": "../../components/responses/423locked.json"
+        "description": "Project deleted"
       }
-    }
+    },
+    "security": [
+      {
+        "niagara": [
+          "project:delete"
+        ]
+      }
+    ]
   }
 }

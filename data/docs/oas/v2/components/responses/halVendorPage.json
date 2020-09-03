@@ -71,10 +71,10 @@
               "input_filter": [],
               "_links": {
                 "nter:vendor-units": {
-                  "href": "https://api.example.com/vendors/vendor/units"
+                  "href": "https://api.nterprise.com/vendors/vendor/units"
                 },
                 "self": {
-                  "href": "https://api.example.com/vendors/vendor"
+                  "href": "https://api.nterprise.com/vendors/vendor"
                 }
               }
             }
@@ -82,10 +82,10 @@
         },
         "_links": {
           "next": {
-            "href": "https://api.example.com/vendors?limit=42&offset=next-offset"
+            "href": "https://api.nterprise.com/vendors?limit=42&offset=next-offset"
           },
           "self": {
-            "href": "https://api.example.com/vendors?limit=42"
+            "href": "https://api.nterprise.com/vendors?limit=42"
           }
         }
       }

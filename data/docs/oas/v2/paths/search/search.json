@@ -1,0 +1,22 @@
+{
+  "get": {
+    "operationId": "search",
+    "summary": "Search",
+    "description": "Search",
+    "tags": [
+      "Search"
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/settingsStatus.json"
+      }
+    },
+    "security": [
+      {
+        "niagara": [
+          "tenant:search"
+        ]
+      }
+    ]
+  }
+}

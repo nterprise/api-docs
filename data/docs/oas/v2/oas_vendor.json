@@ -2,7 +2,7 @@
   "openapi": "3.0.3",
   "x-api": "niagara",
   "x-nter-docs-parent": "Niagara API",
-  "x-nter-docs-nav-order": 19,
+  "x-nter-docs-nav-order": 20,
   "x-nter-docs-redirect-from": [
     "/rel/vendors",
     "/rel/vendor",
@@ -10,7 +10,7 @@
   ],
   "info": {
     "version": "2.0.0",
-    "description": "API for the nterprise application",
+    "description": "For our purposes in nterprise niagara, a Vendor is a third party from which Units are purchased or otherwise acquired.  A Vendor is not required for the creation of a Unit, but can be a helpful parameter when conducting a search or filter.  Vendor records must be created by an authorized User before they are available for selection on the Unit form. Because they are a permanent reference on the Units, Vendors cannot be deleted.",
     "title": "Vendors"
   },
   "servers": [
@@ -48,6 +48,24 @@
     "schemas": {
       "Vendor": {
         "$ref": "components/schemas/vendor.json"
+      }
+    },
+    "securitySchemes": {
+      "niagara": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "https://auth.nterprise.com/oauth/authorize",
+            "tokenUrl": "https://auth.nterprise.com/oauth/token",
+            "scopes": {
+              "vendor:create": "Allows creating a vendor",
+              "vendor:update": "Allows editing a vendor",
+              "vendor:delete": "Allows deleting a vendor",
+              "vendor:read": "Allows access to a vendor",
+              "vendor:all": "Allows reading all vendors"
+            }
+          }
+        }
       }
     }
   }

@@ -107,13 +107,13 @@
         },
         "_links": {
           "nter:program-customer": {
-            "href": "https://api.example.com/customers/customer"
+            "href": "https://api.nterprise.com/customers/customer"
           },
           "nter:program-projects": {
-            "href": "https://api.example.com/programs/program/projects"
+            "href": "https://api.nterprise.com/programs/program/projects"
           },
           "self": {
-            "href": "https://api.example.com/programs/program"
+            "href": "https://api.nterprise.com/programs/program"
           }
         }
       }

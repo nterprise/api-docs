@@ -14,21 +14,22 @@
     "responses": {
       "200": {
         "$ref": "../../components/responses/step.json"
-      },
-      "401": {
-        "$ref": "../../components/responses/401unauthorized.json"
-      },
-      "403": {
-        "$ref": "../../components/responses/403forbidden.json"
       }
-    }
+    },
+    "security": [
+      {
+        "niagara": [
+          "context:read"
+        ]
+      }
+    ]
   },
   "patch": {
     "operationId": "closeStep",
     "summary": "Closes a step",
     "description": "This will either complete or fail the step. To fail the step, change the content type when sending the PATCH request",
     "tags": [
-      "Context"
+      "Work Flow"
     ],
     "requestBody": {
       "$ref": "../../components/requestBodies/closeStep.json"
@@ -36,16 +37,14 @@
     "responses": {
       "200": {
         "$ref": "../../components/responses/halContext.json"
-      },
-      "400": {
-        "$ref": "../../components/responses/400badRequest.json"
-      },
-      "401": {
-        "$ref": "../../components/responses/401unauthorized.json"
-      },
-      "403": {
-        "$ref": "../../components/responses/403forbidden.json"
       }
-    }
+    },
+    "security": [
+      {
+        "niagara": [
+          "context:read"
+        ]
+      }
+    ]
   }
 }
