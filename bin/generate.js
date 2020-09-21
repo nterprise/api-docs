@@ -2,7 +2,8 @@
 /**
  * @fileOverview Entry point for cli
  */
-const {logger} = require('@nterprise/common-js');
+process.env.CONSOLE_LOG = 1;
+const logger = require('@nterprise/niagara-winston-logger')();
 const winston = require('winston');
 const _ = require('lodash');
 const yargs = require('yargs');

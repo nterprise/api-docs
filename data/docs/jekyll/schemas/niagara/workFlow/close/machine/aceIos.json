@@ -46,12 +46,15 @@
             }
           }
         },
+        "icon_layout": {
+          "type": "array",
+          "description": "An ordered nested list of icons on the home screen."
+        },
         "installed_apps": {
           "type": "array",
           "description": "A list of applications installed on the device.",
           "items": {
             "type": "string",
-            "format": "uri",
             "example": "com.apple.itunes",
             "x-examples": [
               "com.apple.itunes"

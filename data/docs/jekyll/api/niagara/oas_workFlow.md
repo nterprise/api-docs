@@ -22939,34 +22939,6 @@ properties:
                             properties:
                               should_mdm_enroll:
                                 type: boolean
-                      mdm:
-                        type: object
-                        description: The settings for the Customers MDM
-                        properties:
-                          vendor:
-                            type: string
-                            description: MDM vendor. Currently, supported values are AirWatch, JAMF, and
-                              Meraki.
-                            enum:
-                              - AirWatch
-                              - JAMF
-                              - Meraki
-                          console_url:
-                            type: string
-                            format: uri
-                            description: Base URL for HTTP requests
-                          user:
-                            type: string
-                            description: MDM User name
-                          password:
-                            type: string
-                            description: MDM password
-                          tenant_code:
-                            type: string
-                            description: MDM authentication key
-                          set_asset_tag:
-                            type: string
-                            description: Sets the devices Asset tag based on a field from the unit
                       field_mappings:
                         type: array
                         description: List of fields to map to the device
@@ -22981,22 +22953,16 @@ properties:
                                 - name
                                 - ecid
                                 - udid
-                                - configurator_serial
                                 - ios
                                 - model
                                 - storage
                                 - wifi_mac
                                 - bt_mac
                                 - ethernet_mac
-                                - thundersync_serial
                                 - iccid
                                 - iccid2
                                 - imei
                                 - imei2
-                                - missed_profiles
-                                - missed_apps
-                                - icon_list_regex
-                                - icon_layout
                                 - bat_capacity
                             to:
                               type: string
@@ -23009,7 +22975,12 @@ properties:
                           been installed, this step can be completed
                         items:
                           type: string
-                          format: uri
+                      wait_for_icon_layout:
+                        type: array
+                        description: Ordered nested list of icons representing the home screen layout on
+                          the device. This will cause the extension to poll the
+                          device for the desired icon layout. Once the icon
+                          layout matches, this step can be completed
                       wait_for_battery_charge:
                         type: integer
                         description: The required battery percentage needed before this step can move on
