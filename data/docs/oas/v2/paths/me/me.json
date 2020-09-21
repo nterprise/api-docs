@@ -10,6 +10,13 @@
       "200": {
         "$ref": "../../components/responses/me.json"
       }
-    }
+    },
+    "security": [
+      {
+        "niagara": [
+          "me:profile"
+        ]
+      }
+    ]
   }
 }

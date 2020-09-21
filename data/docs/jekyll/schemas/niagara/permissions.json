@@ -54,7 +54,6 @@
   },
   "batch:detach": {
     "grants": [
-
     ],
     "grants_child": [],
     "required": [
@@ -67,7 +66,6 @@
   },
   "batch:detach-tech": {
     "grants": [
-
     ],
     "grants_child": [],
     "required": [
@@ -1701,6 +1699,16 @@
     ],
     "location": false,
     "description": "Allows reading all relations to a work-order",
+    "hidden": false
+  },
+  "me:profile": {
+    "grants": [
+    ],
+    "grants_child": [],
+    "required": [
+    ],
+    "location": false,
+    "description": "Allows the user to access their profile",
     "hidden": false
   }
 }

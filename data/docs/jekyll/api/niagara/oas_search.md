@@ -2,11 +2,11 @@
 layout: page
 parent: Niagara API
 nav_order: 16
-title: Settings
+title: Search
 ---
 <!-- Generator: Widdershins v4.0.1 -->
 
-<h1 id="settings">Settings</h1>
+<h1 id="search">Search</h1>
 
 * Do not remove this line (it will not be displayed)
 {:toc}
@@ -23,10 +23,10 @@ Search for entities across the tenant
 
 |Scope|Scope Description|
 |---|---|
-|tenant:settings|Allows changing settings for the tenant|
+|search|Allows changing settings for the tenant|
 |tenant:read|Allows reading the tenant data|
 
-<h1 id="settings-search">Search</h1>
+<h1 id="search-search">Search</h1>
 
 ## Operations
 

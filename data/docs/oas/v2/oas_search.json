@@ -6,7 +6,7 @@
   "info": {
     "version": "2.0.0",
     "description": "Search for entities across the tenant",
-    "title": "Settings"
+    "title": "Search"
   },
   "servers": [
     {
@@ -41,7 +41,7 @@
             "authorizationUrl": "https://auth.nterprise.com/oauth/authorize",
             "tokenUrl": "https://auth.nterprise.com/oauth/token",
             "scopes": {
-              "tenant:settings": "Allows changing settings for the tenant",
+              "search": "Allows changing settings for the tenant",
               "tenant:read": "Allows reading the tenant data"
             }
           }

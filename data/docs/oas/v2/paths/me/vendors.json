@@ -1,0 +1,30 @@
+{
+  "get": {
+    "operationId": "fetchAllVendor",
+    "summary": "Fetch vendors",
+    "description": "Fetches A Page of vendor",
+    "tags": [
+      "Vendor"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/limit.json"
+      },
+      {
+        "$ref": "../../components/parameters/offset.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halVendorPage.json"
+      }
+    },
+    "security": [
+      {
+        "niagara": [
+          "me:profile"
+        ]
+      }
+    ]
+  }
+}

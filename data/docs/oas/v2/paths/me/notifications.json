@@ -24,6 +24,13 @@
       "200": {
         "$ref": "../../components/responses/halNotificationPage.json"
       }
-    }
+    },
+    "security": [
+      {
+        "niagara": [
+          "me:profile"
+        ]
+      }
+    ]
   }
 }

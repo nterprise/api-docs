@@ -1,7 +1,5 @@
 const {folders} = require('../../folders');
-// const logger = require('@nterprise/niagara-winston-logger')(
-//     'apiDocs',
-// );
+const logger = require('@nterprise/niagara-winston-logger')();
 const _ = require('lodash');
 const fs = require('fs');
 const path = require('path');

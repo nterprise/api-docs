@@ -15,7 +15,14 @@
       "200": {
         "$ref": "../../components/responses/halNotification.json"
       }
-    }
+    },
+    "security": [
+      {
+        "niagara": [
+          "me:profile"
+        ]
+      }
+    ]
   },
   "patch": {
     "operationId": "updateNotification",
@@ -31,6 +38,13 @@
       "200": {
         "$ref": "../../components/responses/halNotification.json"
       }
-    }
+    },
+    "security": [
+      {
+        "niagara": [
+          "me:profile"
+        ]
+      }
+    ]
   }
 }

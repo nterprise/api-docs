@@ -82,6 +82,12 @@
 |<span id="manufacturer:relations-read-user">manufacturer:relations-read-user</span>|Allows reading all users related to a manufacturer||<a href="#manufacturer:read">manufacturer:read</a>||
 |<span id="manufacturer:update">manufacturer:update</span>|Allows updating a manufacturer||<a href="#manufacturer:read">manufacturer:read</a>||
 
+### Me
+
+|Permission|Description|Grants|Required Permission(s)|Grants to Children|
+|---|---|
+|<span id="me:profile">me:profile</span>|Allows the user to access their profile||||
+
 ### Part
 
 |Permission|Description|Grants|Required Permission(s)|Grants to Children|
