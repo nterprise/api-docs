@@ -6,15 +6,20 @@
     "tags": [
       "Search"
     ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/search.json"
+      }
+    ],
     "responses": {
       "200": {
-        "$ref": "../../components/responses/settingsStatus.json"
+        "$ref": "../../components/responses/elasticSearchResults.json"
       }
     },
     "security": [
       {
         "niagara": [
-          "tenant:search"
+          "search"
         ]
       }
     ]

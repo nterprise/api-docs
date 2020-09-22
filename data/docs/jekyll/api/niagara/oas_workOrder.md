@@ -48,7 +48,7 @@ Fetches A Page of work orders
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>work-order:all</li></ul>
+<ul><li>work-order:read-all</li></ul>
 </aside>
 
 <h3 id="fetchallworkorders-parameters">Parameters</h3>

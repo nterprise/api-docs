@@ -51,6 +51,24 @@
     },
     "input_filter": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter.json"
+    },
+    "notifications": {
+      "type": "object",
+      "description": "Notification settings",
+      "properties": {
+        "in_app": {
+          "type": "boolean",
+          "description": "In app notifications allowed"
+        },
+        "email": {
+          "type": "boolean",
+          "description": "Email notifications allowed"
+        },
+        "sms": {
+          "type": "boolean",
+          "description": "SMS notifications allowed"
+        }
+      }
     }
   }
 }

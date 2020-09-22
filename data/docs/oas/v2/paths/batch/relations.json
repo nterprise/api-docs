@@ -28,7 +28,7 @@
     "security": [
       {
         "niagara": [
-          "batch:read"
+          "batch:relations-read-all"
         ]
       }
     ]
@@ -56,7 +56,6 @@
     "security": [
       {
         "niagara": [
-          "batch:read",
           "batch:attach"
         ]
       }

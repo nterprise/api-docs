@@ -57,7 +57,7 @@ Fetches A Page of resources
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>resource:all</li></ul>
+<ul><li>resource:read-all</li></ul>
 </aside>
 
 <h3 id="fetchallresources-parameters">Parameters</h3>
@@ -609,7 +609,7 @@ Fetches the relations for a resource
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>resource:read</li></ul>
+<ul><li>resource:relations-read-all</li></ul>
 </aside>
 
 <h3 id="fetchrelationsforresource-parameters">Parameters</h3>

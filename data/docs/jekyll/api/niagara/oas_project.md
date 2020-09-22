@@ -53,7 +53,7 @@ Fetches A Page of projects
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>project:all</li></ul>
+<ul><li>project:read-all</li></ul>
 </aside>
 
 <h3 id="fetchallprojects-parameters">Parameters</h3>
@@ -837,7 +837,7 @@ Fetches the relations for a project
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>project:read</li></ul>
+<ul><li>project:relations-read-all</li></ul>
 </aside>
 
 <h3 id="fetchrelationsforproject-parameters">Parameters</h3>

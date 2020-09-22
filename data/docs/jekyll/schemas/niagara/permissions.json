@@ -1710,5 +1710,36 @@
     "location": false,
     "description": "Allows the user to access their profile",
     "hidden": false
+  },
+  "tenant:search": {
+    "grants": [
+    ],
+    "grants_child": [],
+    "required": [
+    ],
+    "location": false,
+    "description": "Allows searching across the tenant data",
+    "hidden": false
+  },
+  "context:read": {
+    "grants": [
+    ],
+    "grants_child": [],
+    "required": [
+    ],
+    "location": false,
+    "description": "Allows access to a context",
+    "hidden": false
+  },
+  "context:step": {
+    "grants": [
+      "context:read"
+    ],
+    "grants_child": [],
+    "required": [
+    ],
+    "location": false,
+    "description": "Allows completing a context step",
+    "hidden": false
   }
 }

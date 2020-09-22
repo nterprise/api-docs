@@ -14,7 +14,7 @@
     "security": [
       {
         "niagara": [
-          "file:all"
+          "file:read-all"
         ]
       }
     ]

@@ -57,7 +57,7 @@ Fetches A Page of batches
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>batch:all</li></ul>
+<ul><li>batch:read-all</li></ul>
 </aside>
 
 <h3 id="fetchallbatches-parameters">Parameters</h3>
@@ -743,7 +743,7 @@ Create multiple batches
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>batch:create</li></ul>
+<ul><li>batch:update</li></ul>
 </aside>
 
 > Body parameter
@@ -1424,7 +1424,7 @@ Fetches the relations for a batch
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>batch:read</li></ul>
+<ul><li>batch:relations-read-all</li></ul>
 </aside>
 
 <h3 id="fetchrelationsforbatch-parameters">Parameters</h3>
@@ -1491,7 +1491,7 @@ Creates a relation for a batch
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>batch:read</li><li>batch:attach</li></ul>
+<ul><li>batch:attach</li></ul>
 </aside>
 
 > Body parameter
@@ -1544,7 +1544,7 @@ Deletes a relation for a batch
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>batch:read</li></ul>
+<ul><li>batch:detach</li></ul>
 </aside>
 
 <h3 id="deleterelationforbatch-parameters">Parameters</h3>
@@ -1592,7 +1592,7 @@ Fetches the techs for a batch
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>batch:read</li></ul>
+<ul><li>batch:relations-read-tech</li></ul>
 </aside>
 
 <h3 id="fetchtechsforbatch-parameters">Parameters</h3>

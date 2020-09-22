@@ -52,7 +52,7 @@ Fetches A Page of facilities
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>location:all</li></ul>
+<ul><li>location:read-all</li></ul>
 </aside>
 
 <h3 id="fetchallfacilities-parameters">Parameters</h3>
@@ -121,7 +121,7 @@ Fetches A Page of locations
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>location:all</li></ul>
+<ul><li>location:read-all</li></ul>
 </aside>
 
 <h3 id="fetchalllocations-parameters">Parameters</h3>
@@ -387,7 +387,7 @@ Fetches A Page of resources for the location
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>location:read</li><li>resource:read</li></ul>
+<ul><li>location:read</li></ul>
 </aside>
 
 <h3 id="fetchallresources-parameters">Parameters</h3>
@@ -501,7 +501,7 @@ Fetches A Page of warehouses
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>location:all</li></ul>
+<ul><li>location:read-all</li></ul>
 </aside>
 
 <h3 id="fetchallwarehouses-parameters">Parameters</h3>
@@ -570,7 +570,7 @@ Fetches the relations for a location
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>location:read</li></ul>
+<ul><li>location:relations-read-all</li></ul>
 </aside>
 
 <h3 id="fetchrelationsforlocation-parameters">Parameters</h3>
@@ -690,7 +690,7 @@ Deletes a relation for a location
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>location:read</li><li>location:detach</li></ul>
+<ul><li>location:detach</li></ul>
 </aside>
 
 <h3 id="deleterelationforlocation-parameters">Parameters</h3>
@@ -738,7 +738,7 @@ Fetches the techs for a location
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>location:read</li></ul>
+<ul><li>location:relations-read-all</li></ul>
 </aside>
 
 <h3 id="fetchtechsforlocation-parameters">Parameters</h3>

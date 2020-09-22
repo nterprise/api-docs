@@ -28,8 +28,7 @@
     "security": [
       {
         "niagara": [
-          "customer:read",
-          "customer:read-relations"
+          "customer:relations-read-all"
         ]
       }
     ]
@@ -57,7 +56,6 @@
     "security": [
       {
         "niagara": [
-          "customer:read",
           "customer:attach"
         ]
       }

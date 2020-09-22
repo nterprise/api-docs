@@ -1,0 +1,65 @@
+{
+  "openapi": "3.0.3",
+  "x-api": "niagara",
+  "x-nter-docs-parent": "Niagara API",
+  "x-nter-docs-nav-order": 9,
+  "x-nter-docs-redirect-from": [
+    "/rel/notes",
+    "/rel/note"
+  ],
+  "info": {
+    "version": "2.0.0",
+    "description": "Notes are information units for an entity",
+    "title": "Notes"
+  },
+  "servers": [
+    {
+      "url": "https://{environment}.nterprise.com",
+      "variables": {
+        "environment": {
+          "default": "api",
+          "enum": [
+            "api",
+            "api.dev"
+          ]
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/notes/{note_id}": {
+      "$ref": "./paths/note/note.json"
+    },
+    "/units/{unit_id}/notes": {
+      "$ref": "./paths/note/unit.json"
+    },
+    "/work-orders/{work_order_id}/notes": {
+      "$ref": "./paths/note/workOrder.json"
+    }
+  },
+  "components": {
+    "schemas": {
+      "Note": {
+        "$ref": "components/schemas/note.json"
+      }
+    },
+    "securitySchemes": {
+      "niagara": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "https://auth.nterprise.com/oauth/authorize",
+            "tokenUrl": "https://auth.nterprise.com/oauth/token",
+            "scopes": {
+              "note:create": "Allows creating a note",
+              "note:update": "Allows editing a note",
+              "note:delete": "Allows deleting a note",
+              "note:read": "Allows access to a note",
+              "note:all": "Allows reading all notes"
+            }
+          }
+        }
+      }
+    }
+  }
+}

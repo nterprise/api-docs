@@ -22,7 +22,7 @@
     "security": [
       {
         "niagara": [
-          "work-order:all"
+          "work-order:read-all"
         ]
       }
     ]

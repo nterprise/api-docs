@@ -22,7 +22,7 @@
     "security": [
       {
         "niagara": [
-          "batch:read"
+          "batch:detach"
         ]
       }
     ]

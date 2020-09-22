@@ -22,7 +22,6 @@
     "security": [
       {
         "niagara": [
-          "customer:read",
           "customer:detach"
         ]
       }

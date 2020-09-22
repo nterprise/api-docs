@@ -53,7 +53,7 @@ Fetch a page of attachments
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>file:all</li></ul>
+<ul><li>file:read-all</li></ul>
 </aside>
 
 > Example responses

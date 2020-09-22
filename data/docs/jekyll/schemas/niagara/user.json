@@ -74,6 +74,9 @@
           }
         }
       }
+    },
+    "notifications": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/contact.json#/properties/notifications"
     }
   }
 }

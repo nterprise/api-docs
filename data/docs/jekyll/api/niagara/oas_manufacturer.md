@@ -48,7 +48,7 @@ Fetches A Page of manufacturers
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>manufacturer:all</li></ul>
+<ul><li>manufacturer:read-all</li></ul>
 </aside>
 
 <h3 id="fetchallmanufacturer-parameters">Parameters</h3>
@@ -382,7 +382,7 @@ Fetches the relations for a manufacturer
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>manufacturer:read</li></ul>
+<ul><li>manufacturer:relations-read-all</li></ul>
 </aside>
 
 <h3 id="fetchrelationsformanufacturer-parameters">Parameters</h3>

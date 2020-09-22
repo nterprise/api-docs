@@ -28,7 +28,7 @@
     "security": [
       {
         "niagara": [
-          "manufacturer:read"
+          "manufacturer:relations-read-all"
         ]
       }
     ]

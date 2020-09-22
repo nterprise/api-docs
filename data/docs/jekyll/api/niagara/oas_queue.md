@@ -47,7 +47,7 @@ Fetches A Page of queues
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>queue:all</li></ul>
+<ul><li>queue:read-all</li></ul>
 </aside>
 
 <h3 id="fetchallqueues-parameters">Parameters</h3>
@@ -712,7 +712,7 @@ Fetches the relations for a queue
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>queue:read</li></ul>
+<ul><li>queue:relations-read-all</li></ul>
 </aside>
 
 <h3 id="fetchrelationsforqueue-parameters">Parameters</h3>

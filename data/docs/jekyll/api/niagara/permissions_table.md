@@ -179,6 +179,7 @@
 |---|---|
 |<span id="tenant:read">tenant:read</span>|Allows reading a tenant|<a href="#tenant:relations-read-user">tenant:relations-read-user</a>|||
 |<span id="tenant:relations-read-user">tenant:relations-read-user</span>|Allows reading users related to a batch tenant|<a href="#tenant:read">tenant:read</a>|||
+|<span id="tenant:search">tenant:search</span>|Allows searching across the tenant data||||
 |<span id="tenant:settings">tenant:settings</span>|Allows updating settings for a tenant|<a href="#tenant:read">tenant:read</a>|||
 
 ### Unit

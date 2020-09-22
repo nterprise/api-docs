@@ -38,8 +38,14 @@ Search
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>tenant:search</li></ul>
+<ul><li>search</li></ul>
 </aside>
+
+<h3 id="search-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|q|query|string|false|Simple Search term|
 
 > Example responses
 
@@ -47,81 +53,18 @@ Permissions required:<br>
 
 ```json
 {
-  "_embedded": {
-    "nter:settings-statuses": [
-      {
-        "category": "PENDING",
-        "description": "For something that is Pending",
-        "status": "Pending",
-        "order": 3
-      },
-      {
-        "category": "IN_PROGRESS",
-        "description": "For something that is In Progress",
-        "status": "In Progress",
-        "order": 4
-      },
-      {
-        "category": "VERIFYING",
-        "description": "For something that is Verifying",
-        "status": "Verifying",
-        "order": 5
-      },
-      {
-        "category": "BLOCKED",
-        "description": "For something that is Blocked",
-        "status": "Blocked",
-        "order": 6
-      },
-      {
-        "category": "COMPLETE",
-        "description": "For something that is Complete",
-        "status": "Complete",
-        "order": 7
-      },
-      {
-        "category": "CANCELLED",
-        "description": "For something that is Cancelled",
-        "status": "Cancelled",
-        "order": 8
-      }
-    ]
-  },
-  "_links": {
-    "self": {
-      "href": "https://api.nterprise.com/settings/statuses"
+  "data": {
+    "hits": {
+      "hits": [
+        {
+          "_source": {
+            "entity_type": "CUS",
+            "entity_id": "one"
+          }
+        }
+      ]
     }
   }
 }
-```
-
-# Embedded Schemas
-
-## Status
-<!-- backwards compatibility -->
-<a id="schemastatus"></a>
-<a id="schema_Status"></a>
-<a id="tocSstatus"></a>
-<a id="tocsstatus"></a>
-
-Defines the properties for a status
-
-#### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|status|string|true|none|A Custom label for the status|
-|category|string|true|none|The classifier for the statues|
-|description|string¦null|false|none|A description for the status|
-|order|number|false|none|Order status appears when listing|
-
-#### Specification
-
-```yaml
-category: COMPLETE
-description: For something that is Complete
-status: Complete
-order: 7
-
 ```
 

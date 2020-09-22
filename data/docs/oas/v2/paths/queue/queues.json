@@ -22,7 +22,7 @@
     "security": [
       {
         "niagara": [
-          "queue:all"
+          "queue:read-all"
         ]
       }
     ]

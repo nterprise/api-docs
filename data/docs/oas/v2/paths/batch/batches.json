@@ -22,7 +22,7 @@
     "security": [
       {
         "niagara": [
-          "batch:all"
+          "batch:read-all"
         ]
       }
     ]
@@ -80,7 +80,7 @@
     "security": [
       {
         "niagara": [
-          "batch:create"
+          "batch:update"
         ]
       }
     ]

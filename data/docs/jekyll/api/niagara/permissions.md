@@ -10,8 +10,6 @@ title: Permissions
 * Do not remove this line (it will not be displayed)
 {:toc}
 
-Every role will be granted a set of permissions.
-
 Users who have a relationship with an entity will automatically be granted read access to that entity. Any other action
 the user wishes to perform on that entity will be checked against the role. Permissions are granted explicitly with the
 role or implicitly through a parent or sibling.

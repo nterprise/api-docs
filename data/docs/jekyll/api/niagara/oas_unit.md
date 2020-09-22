@@ -50,7 +50,7 @@ Fetches A Page of units
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>unit:all</li></ul>
+<ul><li>unit:read-all</li></ul>
 </aside>
 
 <h3 id="fetchallunits-parameters">Parameters</h3>
@@ -1639,7 +1639,7 @@ Fetches the relations for a unit
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>unit:read</li></ul>
+<ul><li>unit:relations-read-all</li></ul>
 </aside>
 
 <h3 id="fetchrelationsforunit-parameters">Parameters</h3>

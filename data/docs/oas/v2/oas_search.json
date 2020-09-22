@@ -28,11 +28,6 @@
     }
   },
   "components": {
-    "schemas": {
-      "Status": {
-        "$ref": "https://docs.nterprise.com/schemas/niagara/status.json"
-      }
-    },
     "securitySchemes": {
       "niagara": {
         "type": "oauth2",

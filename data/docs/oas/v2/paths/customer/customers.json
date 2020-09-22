@@ -22,7 +22,7 @@
     "security": [
       {
         "niagara": [
-          "customer:all"
+          "customer:read-all"
         ]
       }
     ]
@@ -38,7 +38,7 @@
       "$ref": "../../components/requestBodies/customer.json"
     },
     "responses": {
-      "200": {
+      "201": {
         "$ref": "../../components/responses/halCustomer.json"
       }
     },

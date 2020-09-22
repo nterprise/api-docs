@@ -25,8 +25,7 @@
     "security": [
       {
         "niagara": [
-          "customer:read",
-          "customer:read-parts"
+          "customer:read"
         ]
       }
     ]

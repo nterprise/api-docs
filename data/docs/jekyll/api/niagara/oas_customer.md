@@ -53,7 +53,7 @@ Fetches A Page of customers
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>customer:all</li></ul>
+<ul><li>customer:read-all</li></ul>
 </aside>
 
 <h3 id="fetchallcustomers-parameters">Parameters</h3>
@@ -472,7 +472,7 @@ Fetches A Page of parts for the customer
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>customer:read</li><li>customer:read-parts</li></ul>
+<ul><li>customer:read</li></ul>
 </aside>
 
 <h3 id="fetchallcustomerparts-parameters">Parameters</h3>
@@ -596,7 +596,7 @@ Fetches A Page of programs for the customer
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>customer:read</li><li>customer:read-programs</li></ul>
+<ul><li>customer:read</li></ul>
 </aside>
 
 <h3 id="fetchallcustomerprograms-parameters">Parameters</h3>
@@ -721,7 +721,7 @@ Fetches A Page of projects for the customer
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>customer:read</li><li>customer:read-projects</li></ul>
+<ul><li>customer:read</li></ul>
 </aside>
 
 <h3 id="fetchallcustomerprojects-parameters">Parameters</h3>
@@ -918,7 +918,7 @@ Fetches the relations for a customer
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>customer:read</li><li>customer:read-relations</li></ul>
+<ul><li>customer:relations-read-all</li></ul>
 </aside>
 
 <h3 id="fetchrelationsforcustomer-parameters">Parameters</h3>
@@ -985,7 +985,7 @@ Creates a relation for a customer
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>customer:read</li><li>customer:attach</li></ul>
+<ul><li>customer:attach</li></ul>
 </aside>
 
 > Body parameter
@@ -1038,7 +1038,7 @@ Deletes a relation for a customer
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>customer:read</li><li>customer:detach</li></ul>
+<ul><li>customer:detach</li></ul>
 </aside>
 
 <h3 id="deleterelationforcustomer-parameters">Parameters</h3>
@@ -1086,7 +1086,7 @@ Fetches A Page of units for the customer
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>customer:read</li><li>customer:read-units</li></ul>
+<ul><li>customer:read</li></ul>
 </aside>
 
 <h3 id="fetchallcustomerunits-parameters">Parameters</h3>
@@ -1338,7 +1338,7 @@ Fetches work orders for a customer
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>customer:read</li><li>customer:read-work-orders</li></ul>
+<ul><li>customer:read</li></ul>
 </aside>
 
 <h3 id="fetchallcustomerworkorders-parameters">Parameters</h3>

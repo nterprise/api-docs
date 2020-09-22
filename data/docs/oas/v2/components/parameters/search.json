@@ -1,0 +1,8 @@
+{
+  "name": "q",
+  "in": "query",
+  "description": "Simple Search term",
+  "schema": {
+    "type": "string"
+  }
+}

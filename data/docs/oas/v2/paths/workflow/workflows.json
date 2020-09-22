@@ -25,7 +25,7 @@
     "security": [
       {
         "niagara": [
-          "work-flow:all"
+          "work-flow:read-all"
         ]
       }
     ]

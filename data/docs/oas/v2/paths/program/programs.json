@@ -22,7 +22,7 @@
     "security": [
       {
         "niagara": [
-          "program:all"
+          "program:read-all"
         ]
       }
     ]

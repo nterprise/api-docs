@@ -1,5 +1,5 @@
 {
-  "post": {
+  "patch": {
     "operationId": "completeStep",
     "summary": "Complete Step",
     "description": "Completes a step for an active context",
@@ -28,6 +28,13 @@
       "200": {
         "$ref": "../../components/responses/halContext.json"
       }
-    }
+    },
+    "security": [
+      {
+        "niagara": [
+          "context:step"
+        ]
+      }
+    ]
   }
 }

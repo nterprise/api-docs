@@ -52,7 +52,7 @@ Fetches A Page of parts
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>part:all</li></ul>
+<ul><li>part:read-all</li></ul>
 </aside>
 
 <h3 id="fetchallparts-parameters">Parameters</h3>
@@ -538,7 +538,7 @@ Fetches the relations for a part
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>part:read</li></ul>
+<ul><li>part:relations-read-all</li></ul>
 </aside>
 
 <h3 id="fetchrelationsforpart-parameters">Parameters</h3>

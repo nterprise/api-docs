@@ -15,6 +15,13 @@
       "200": {
         "$ref": "../../components/responses/halContext.json"
       }
-    }
+    },
+    "security": [
+      {
+        "niagara": [
+          "context:read"
+        ]
+      }
+    ]
   }
 }

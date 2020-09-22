@@ -16,6 +16,12 @@ title: Work Flows
 
 Workflows are a new feature of nterprise niagara.  Similar to a flow chart, the Workflow defines how the work is to be accomplished in a series of Steps, including all of the details. The goal is to help standardize repeatable processes, to make work more consistent and efficient.  A Workflow starts in the Designer.
 
+## Security Restrictions
+
+Contexts are a top level entity, however, contexts act upon an entity. In order to start a context the user must have read access to the entity being processed. This restriction applies to all entities the work-flow might interact with.
+
+For example: A work-flow starts processing for a unit. A step in that work flow updates a value for a customer. The user must also have read access to the customer.
+
 # Authentication
 
 - oAuth2 authentication. 
@@ -34,6 +40,376 @@ Workflows are a new feature of nterprise niagara.  Similar to a flow chart, the 
 |work-flow:detach|Allows detaching a relation from a work flow|
 |work-flow:all|Allows reading all work flow|
 
+<h1 id="work-flows-context">Context</h1>
+
+## Operations
+
+### GET /contexts/{context_id}
+
+<a id="opIdfetchContextById"></a>
+
+Fetches a context
+
+<aside class="warning">
+Permissions required:<br>
+<ul><li>context:read</li></ul>
+</aside>
+
+<h3 id="fetchcontextbyid-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|context_id|path|string|true|Id for the context|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "context_id": "context",
+  "label": "context 44jjiue33 for customer: customer",
+  "created": "2019-08-19T00:01:02.000Z",
+  "updated": "2020-08-19T01:01:02.000Z",
+  "workflow": {
+    "work_flow_id": "work-flow",
+    "label": "My workflow",
+    "created": "2019-08-19T00:01:02.000Z",
+    "updated": "2020-08-19T01:01:02.000Z",
+    "workflow_version": 7,
+    "schema_version": "1.0",
+    "applies_to": "UNIT",
+    "starts_at": "work-complete",
+    "triggered_by": [
+      "UNIT.created"
+    ],
+    "metadata": {
+      "meta": "data"
+    },
+    "steps": {
+      "work-complete": {
+        "label": "work complete",
+        "on_complete": [],
+        "on_start": [],
+        "step_type": "success"
+      },
+      "stop-poking-me": {
+        "label": "stop poking me",
+        "on_complete": [],
+        "on_start": [],
+        "step_type": "fail"
+      }
+    }
+  },
+  "current_step": "work-complete",
+  "last_steps": [
+    {
+      "step_name": "work-complete",
+      "started_at": "2020-08-19T01:01:02.000Z",
+      "ended_at": "2020-08-19T01:01:02.000Z",
+      "time_to_run": "42",
+      "did_error": false,
+      "did_timeout": false
+    }
+  ],
+  "started_at": "2019-08-19T00:01:02.000Z",
+  "ended_at": "2019-08-19T00:01:02.000Z",
+  "time_to_run": 2,
+  "active": false,
+  "waiting_for_user": false,
+  "data": {
+    "fizz": "buzz"
+  },
+  "entity": {
+    "entity_id": "customer",
+    "entity_type": "CUS",
+    "label": "Niagara Customer",
+    "created": "2020-01-09T22:12:03.000Z",
+    "updated": "2020-01-09T22:12:03.000Z",
+    "external_platform": {},
+    "total_programs": 21,
+    "total_projects": 42,
+    "allowed_statuses": [
+      {
+        "category": "PENDING",
+        "description": "For something that is Pending",
+        "status": "Pending",
+        "order": 3
+      },
+      {
+        "category": "IN_PROGRESS",
+        "description": "For something that is In Progress",
+        "status": "In Progress",
+        "order": 4
+      },
+      {
+        "category": "VERIFYING",
+        "description": "For something that is Verifying",
+        "status": "Verifying",
+        "order": 5
+      },
+      {
+        "category": "BLOCKED",
+        "description": "For something that is Blocked",
+        "status": "Blocked",
+        "order": 6
+      },
+      {
+        "category": "COMPLETE",
+        "description": "For something that is Complete",
+        "status": "Complete",
+        "order": 7
+      },
+      {
+        "category": "CANCELLED",
+        "description": "For something that is Cancelled",
+        "status": "Cancelled",
+        "order": 8
+      }
+    ],
+    "input_filter": []
+  },
+  "using": {
+    "entity_id": "customer",
+    "entity_type": "CUS",
+    "label": "Niagara Customer",
+    "created": "2020-01-09T22:12:03.000Z",
+    "updated": "2020-01-09T22:12:03.000Z",
+    "external_platform": {},
+    "total_programs": 21,
+    "total_projects": 42,
+    "allowed_statuses": [
+      {
+        "category": "PENDING",
+        "description": "For something that is Pending",
+        "status": "Pending",
+        "order": 3
+      },
+      {
+        "category": "IN_PROGRESS",
+        "description": "For something that is In Progress",
+        "status": "In Progress",
+        "order": 4
+      },
+      {
+        "category": "VERIFYING",
+        "description": "For something that is Verifying",
+        "status": "Verifying",
+        "order": 5
+      },
+      {
+        "category": "BLOCKED",
+        "description": "For something that is Blocked",
+        "status": "Blocked",
+        "order": 6
+      },
+      {
+        "category": "COMPLETE",
+        "description": "For something that is Complete",
+        "status": "Complete",
+        "order": 7
+      },
+      {
+        "category": "CANCELLED",
+        "description": "For something that is Cancelled",
+        "status": "Cancelled",
+        "order": 8
+      }
+    ],
+    "input_filter": []
+  },
+  "_links": {
+    "self": {
+      "href": "https://api.nterprise.com/contexts/context"
+    }
+  }
+}
+```
+
+### PATCH /contexts/{context_id}/{step_slug}
+
+<a id="opIdcompleteStep"></a>
+
+Completes a step for an active context
+
+<aside class="warning">
+Permissions required:<br>
+<ul><li>context:step</li></ul>
+</aside>
+
+> Body parameter
+
+<h3 id="completestep-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|context_id|path|string|true|Id for the context|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "context_id": "context",
+  "label": "context 44jjiue33 for customer: customer",
+  "created": "2019-08-19T00:01:02.000Z",
+  "updated": "2020-08-19T01:01:02.000Z",
+  "workflow": {
+    "work_flow_id": "work-flow",
+    "label": "My workflow",
+    "created": "2019-08-19T00:01:02.000Z",
+    "updated": "2020-08-19T01:01:02.000Z",
+    "workflow_version": 7,
+    "schema_version": "1.0",
+    "applies_to": "UNIT",
+    "starts_at": "work-complete",
+    "triggered_by": [
+      "UNIT.created"
+    ],
+    "metadata": {
+      "meta": "data"
+    },
+    "steps": {
+      "work-complete": {
+        "label": "work complete",
+        "on_complete": [],
+        "on_start": [],
+        "step_type": "success"
+      },
+      "stop-poking-me": {
+        "label": "stop poking me",
+        "on_complete": [],
+        "on_start": [],
+        "step_type": "fail"
+      }
+    }
+  },
+  "current_step": "work-complete",
+  "last_steps": [
+    {
+      "step_name": "work-complete",
+      "started_at": "2020-08-19T01:01:02.000Z",
+      "ended_at": "2020-08-19T01:01:02.000Z",
+      "time_to_run": "42",
+      "did_error": false,
+      "did_timeout": false
+    }
+  ],
+  "started_at": "2019-08-19T00:01:02.000Z",
+  "ended_at": "2019-08-19T00:01:02.000Z",
+  "time_to_run": 2,
+  "active": false,
+  "waiting_for_user": false,
+  "data": {
+    "fizz": "buzz"
+  },
+  "entity": {
+    "entity_id": "customer",
+    "entity_type": "CUS",
+    "label": "Niagara Customer",
+    "created": "2020-01-09T22:12:03.000Z",
+    "updated": "2020-01-09T22:12:03.000Z",
+    "external_platform": {},
+    "total_programs": 21,
+    "total_projects": 42,
+    "allowed_statuses": [
+      {
+        "category": "PENDING",
+        "description": "For something that is Pending",
+        "status": "Pending",
+        "order": 3
+      },
+      {
+        "category": "IN_PROGRESS",
+        "description": "For something that is In Progress",
+        "status": "In Progress",
+        "order": 4
+      },
+      {
+        "category": "VERIFYING",
+        "description": "For something that is Verifying",
+        "status": "Verifying",
+        "order": 5
+      },
+      {
+        "category": "BLOCKED",
+        "description": "For something that is Blocked",
+        "status": "Blocked",
+        "order": 6
+      },
+      {
+        "category": "COMPLETE",
+        "description": "For something that is Complete",
+        "status": "Complete",
+        "order": 7
+      },
+      {
+        "category": "CANCELLED",
+        "description": "For something that is Cancelled",
+        "status": "Cancelled",
+        "order": 8
+      }
+    ],
+    "input_filter": []
+  },
+  "using": {
+    "entity_id": "customer",
+    "entity_type": "CUS",
+    "label": "Niagara Customer",
+    "created": "2020-01-09T22:12:03.000Z",
+    "updated": "2020-01-09T22:12:03.000Z",
+    "external_platform": {},
+    "total_programs": 21,
+    "total_projects": 42,
+    "allowed_statuses": [
+      {
+        "category": "PENDING",
+        "description": "For something that is Pending",
+        "status": "Pending",
+        "order": 3
+      },
+      {
+        "category": "IN_PROGRESS",
+        "description": "For something that is In Progress",
+        "status": "In Progress",
+        "order": 4
+      },
+      {
+        "category": "VERIFYING",
+        "description": "For something that is Verifying",
+        "status": "Verifying",
+        "order": 5
+      },
+      {
+        "category": "BLOCKED",
+        "description": "For something that is Blocked",
+        "status": "Blocked",
+        "order": 6
+      },
+      {
+        "category": "COMPLETE",
+        "description": "For something that is Complete",
+        "status": "Complete",
+        "order": 7
+      },
+      {
+        "category": "CANCELLED",
+        "description": "For something that is Cancelled",
+        "status": "Cancelled",
+        "order": 8
+      }
+    ],
+    "input_filter": []
+  },
+  "_links": {
+    "self": {
+      "href": "https://api.nterprise.com/contexts/context"
+    }
+  }
+}
+```
+
 <h1 id="work-flows-work-flow">Work Flow</h1>
 
 ## Operations
@@ -46,7 +422,7 @@ Fetches A Page of workflows
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>work-flow:all</li></ul>
+<ul><li>work-flow:read-all</li></ul>
 </aside>
 
 <h3 id="fetchallworkflows-parameters">Parameters</h3>
@@ -662,7 +1038,7 @@ Fetches the relations for a workFlow
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>work-flow:read</li></ul>
+<ul><li>work-flow:relations-read-all</li></ul>
 </aside>
 
 <h3 id="fetchrelationsforworkflow-parameters">Parameters</h3>

@@ -47,7 +47,7 @@ Fetches A Page of contacts
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>contact:all</li></ul>
+<ul><li>contact:read-all</li></ul>
 </aside>
 
 <h3 id="fetchallcontacts-parameters">Parameters</h3>

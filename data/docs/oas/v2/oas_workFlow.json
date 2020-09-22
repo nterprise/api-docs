@@ -9,7 +9,7 @@
   ],
   "info": {
     "version": "2.0.0",
-    "description": "Workflows are a new feature of nterprise niagara.  Similar to a flow chart, the Workflow defines how the work is to be accomplished in a series of Steps, including all of the details. The goal is to help standardize repeatable processes, to make work more consistent and efficient.  A Workflow starts in the Designer.",
+    "description": "Workflows are a new feature of nterprise niagara.  Similar to a flow chart, the Workflow defines how the work is to be accomplished in a series of Steps, including all of the details. The goal is to help standardize repeatable processes, to make work more consistent and efficient.  A Workflow starts in the Designer.\n\n## Security Restrictions\n\nContexts are a top level entity, however, contexts act upon an entity. In order to start a context the user must have read access to the entity being processed. This restriction applies to all entities the work-flow might interact with.\n\nFor example: A work-flow starts processing for a unit. A step in that work flow updates a value for a customer. The user must also have read access to the customer.",
     "title": "Work Flows"
   },
   "servers": [
@@ -27,6 +27,12 @@
     }
   ],
   "paths": {
+    "/contexts/{context_id}": {
+      "$ref": "./paths/context/context.json"
+    },
+    "/contexts/{context_id}/{step_slug}": {
+      "$ref": "./paths/context/step.json"
+    },
     "/work-flows": {
       "$ref": "./paths/workflow/workflows.json"
     },

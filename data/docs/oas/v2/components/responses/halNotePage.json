@@ -69,15 +69,8 @@
               "created": "2019-10-09T19:30:35.639Z",
               "updated": "2019-10-09T20:30:35.639Z",
               "text": "Lorem ipsum dolor sit amet",
-              "created_by": {
-                "user_id": "3dddba3e-6122-46a8-ae26-8c7c95bd82d7",
-                "created": "2019-08-19T00:01:02.639Z",
-                "updated": "2019-08-19T00:01:02.639Z",
-                "name": "Daniel Jackson",
-                "email": "daniel.jackson@niagara.com",
-                "profile": "https://bit.ly/18gECvy",
-                "picture": "https://bit.ly/18gECvy"
-              },
+              "edited": null,
+              "thread_id": "parent_note",
               "_links": {
                 "nter:note-created-by": {
                   "href": "https://api.nterprise.com/users/3dddba3e-6122-46a8-ae26-8c7c95bd82d7"

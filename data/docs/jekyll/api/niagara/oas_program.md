@@ -49,7 +49,7 @@ Fetches A Page of programs
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>program:all</li></ul>
+<ul><li>program:read-all</li></ul>
 </aside>
 
 <h3 id="fetchallprograms-parameters">Parameters</h3>
@@ -1010,7 +1010,7 @@ Fetches the relations for a program
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>program:read</li></ul>
+<ul><li>program:relations-read-all</li></ul>
 </aside>
 
 <h3 id="fetchrelationsforprogram-parameters">Parameters</h3>
