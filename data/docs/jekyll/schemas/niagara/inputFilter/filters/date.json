@@ -10,11 +10,13 @@
   "properties": {
     "type": {
       "type": "string",
-      "const": "date"
+      "const": "date",
+      "x-nter-skip-param": true
     },
     "options": {
       "type": "object",
-      "description": "Date filter has no options"
+      "description": "Date filter has no options",
+      "x-nter-skip-param": true
     }
   }
 }

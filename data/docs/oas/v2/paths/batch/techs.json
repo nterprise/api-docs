@@ -1,0 +1,27 @@
+{
+  "get": {
+    "operationId": "fetchTechsForBatch",
+    "summary": "Fetch Batch techs",
+    "description": "Fetches the techs for a batch",
+    "tags": [
+      "Batch"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/batchId.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halUserPage.json"
+      }
+    },
+    "security": [
+      {
+        "niagara": [
+          "batch:relations-read-tech"
+        ]
+      }
+    ]
+  }
+}

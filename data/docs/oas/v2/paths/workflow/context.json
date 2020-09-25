@@ -20,21 +20,22 @@
     "responses": {
       "200": {
         "$ref": "../../components/responses/halContextPage.json"
-      },
-      "401": {
-        "$ref": "../../components/responses/401unauthorized.json"
-      },
-      "403": {
-        "$ref": "../../components/responses/403forbidden.json"
       }
-    }
+    },
+    "security": [
+      {
+        "niagara": [
+          "work-flow:read"
+        ]
+      }
+    ]
   },
   "post": {
     "operationId": "startWorkflow",
     "summary": "Start workflow",
     "description": "Starts a workflow on an entity",
     "tags": [
-      "Workflow"
+      "Work Flow"
     ],
     "parameters": [
       {
@@ -61,16 +62,15 @@
     "responses": {
       "200": {
         "$ref": "../../components/responses/halContext.json"
-      },
-      "400": {
-        "$ref": "../../components/responses/400badRequest.json"
-      },
-      "401": {
-        "$ref": "../../components/responses/401unauthorized.json"
-      },
-      "403": {
-        "$ref": "../../components/responses/403forbidden.json"
       }
-    }
+    },
+    "security": [
+      {
+        "niagara": [
+          "work-flow:read",
+          "context:create"
+        ]
+      }
+    ]
   }
 }

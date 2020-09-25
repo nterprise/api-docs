@@ -9,7 +9,7 @@
   ],
   "info": {
     "version": "2.0.0",
-    "description": "Roles define access that a user has ",
+    "description": "In FTM and CIMS, permissions were explicitly granted to individual users on specific projects.  Niagara takes a different approach; first assigning each user to a Role with inherent permissions, and then assigning users additional permissions on specific objects (customers, programs, projects, etc) on an as-needed basis.",
     "title": "Roles"
   },
   "servers": [

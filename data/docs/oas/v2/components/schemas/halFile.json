@@ -12,6 +12,9 @@
           "properties": {
             "self": {
               "$ref": "./link.json"
+            },
+            "nter:download-attachment": {
+              "$ref": "./link.json"
             }
           }
         }

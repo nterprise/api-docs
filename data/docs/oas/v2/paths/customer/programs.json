@@ -20,17 +20,14 @@
     "responses": {
       "200": {
         "$ref": "../../components/responses/halProgramPage.json"
-      },
-      "401": {
-        "$ref": "../../components/responses/401unauthorized.json"
-      },
-      "404": {
-        "$ref": "../../components/responses/404notFound.json"
-      },
-      "403": {
-        "$ref": "../../components/responses/403forbidden.json"
       }
-    }
-
+    },
+    "security": [
+      {
+        "niagara": [
+          "customer:read"
+        ]
+      }
+    ]
   }
 }

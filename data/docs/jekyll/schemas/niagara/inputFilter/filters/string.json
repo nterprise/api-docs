@@ -10,11 +10,13 @@
   "properties": {
     "type": {
       "type": "string",
-      "const": "string"
+      "const": "string",
+      "x-nter-skip-param": true
     },
     "options": {
       "type": "object",
-      "description": "String filter has no options"
+      "description": "String filter has no options",
+      "x-nter-skip-param": true
     }
   }
 }

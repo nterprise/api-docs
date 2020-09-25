@@ -40,7 +40,7 @@
       "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/slug"
     },
     "current_status": {
-      "anyOf": [
+      "oneOf": [
         {
           "type": "null"
         },

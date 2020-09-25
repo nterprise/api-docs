@@ -14,7 +14,10 @@
         "content_length": 13396,
         "_links": {
           "self": {
-            "href": "https://api.example.com/attachments/attachment"
+            "href": "https://api.nterprise.com/attachments/attachment"
+          },
+          "nter:download-attachment": {
+            "href": "https://api.nterprise.com/attachments/attachment/download"
           }
         }
       }

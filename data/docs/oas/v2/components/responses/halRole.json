@@ -36,10 +36,10 @@
         ],
         "_links": {
           "nter:role-users": {
-            "href": "https://api.example.com/roles/role/users"
+            "href": "https://api.nterprise.com/roles/role/users"
           },
           "self": {
-            "href": "https://api.example.com/roles/role"
+            "href": "https://api.nterprise.com/roles/role"
           }
         }
       }

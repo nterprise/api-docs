@@ -17,13 +17,37 @@
     "responses": {
       "200": {
         "$ref": "../../components/responses/halUserPage.json"
-      },
-      "401": {
-        "$ref": "../../components/responses/401unauthorized.json"
-      },
-      "403": {
-        "$ref": "../../components/responses/403forbidden.json"
       }
-    }
+    },
+    "security": [
+      {
+        "niagara": [
+          "user:read-all"
+        ]
+      }
+    ]
+  },
+  "post": {
+    "operationId": "createUser",
+    "summary": "Create user",
+    "description": "Creates a new user",
+    "tags": [
+      "User"
+    ],
+    "requestBody": {
+      "$ref": "../../components/requestBodies/user.json"
+    },
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halUserPage.json"
+      }
+    },
+    "security": [
+      {
+        "niagara": [
+          "user:read-all"
+        ]
+      }
+    ]
   }
 }

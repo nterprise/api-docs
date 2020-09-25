@@ -8,7 +8,7 @@
   ],
   "info": {
     "version": "2.0.0",
-    "description": "File attachments can be attached to other `entities` and providing simple document storage functionality.\n\n## File Restrictions\n\nThe maximum file size allowed is 10MB.\n\n### Restricted file types\n\n- Adobe PDF\n\n## Security Restrictions\n\nFiles are considered a top-level `entity.` `Users` must be granted the `create` permission on the File entity to be able to upload files. Files cannot be updated. Grant the `create` or `update` permissions to the user for the linked `entity` for the relationship operation to be approved.\n",
+    "description": "File attachments can be attached to other `entities` and providing simple document storage functionality.\n\n## File Restrictions\n\nThe maximum file size allowed is 10MB.\n\n### Restricted file types\n\n- Adobe PDF\n\n## Security Restrictions\n\nFiles are considered a top-level `entity.` `Users` must be granted the `create` permission on the File entity to be able to upload files. Files cannot be updated. Grant the `create` or `update` permissions to the user for the linked `entity` for the relationship operation to be approved",
     "title": "Attachments"
   },
   "servers": [
@@ -28,6 +28,35 @@
   "paths": {
     "/attachments": {
       "$ref": "./paths/attachment/attachments.json"
+    },
+    "/attachments/{attachment_id}": {
+      "$ref": "./paths/attachment/attachment.json"
+    },
+    "/attachments/{attachment_id}/download": {
+      "$ref": "./paths/attachment/download.json"
+    }
+  },
+  "components": {
+    "schemas": {
+      "Attachment": {
+        "$ref": "components/schemas/file.json"
+      }
+    },
+    "securitySchemes": {
+      "niagara": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "https://auth.nterprise.com/oauth/authorize",
+            "tokenUrl": "https://auth.nterprise.com/oauth/token",
+            "scopes": {
+              "file:create": "Allows creating a file",
+              "file:read": "Allows access to a file (along with downloading)",
+              "file:all": "Allows reading all file"
+            }
+          }
+        }
+      }
     }
   }
 }

@@ -24,6 +24,30 @@
       "deprecated": true,
       "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
     },
+    "entity_type": {
+      "enum": [
+        "BAT",
+        "CON",
+        "CTX",
+        "FILE",
+        "LOC",
+        "MFR",
+        "NOTE",
+        "PART",
+        "PGM",
+        "PRJ",
+        "PUSH",
+        "QUE",
+        "RES",
+        "SRES",
+        "ROLE",
+        "UNIT",
+        "USER",
+        "VEN",
+        "WKF",
+        "WOR"
+      ]
+    },
     "created": {
       "description": "Date the entity was created",
       "type": "string",

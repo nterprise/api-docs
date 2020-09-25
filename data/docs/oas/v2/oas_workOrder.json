@@ -2,14 +2,14 @@
   "openapi": "3.0.3",
   "x-api": "niagara",
   "x-nter-docs-parent": "Niagara API",
-  "x-nter-docs-nav-order": 21,
+  "x-nter-docs-nav-order": 22,
   "x-nter-docs-redirect-from": [
     "/rel/work-orders",
     "/rel/batch-work-order"
   ],
   "info": {
     "version": "2.0.0",
-    "description": "API for the nterprise application",
+    "description": "Contained inside of a Project, a Work Order is simply a request to do work.  That may be a configuration request (\"Provision 500 iPads for Lexington Middle School\") or a field services request (\"Install 2 POS systems at ABC Retail, Store 21\").\n\nA Work Order will typically reference a Workflow, which defines the specific steps (how) to complete the work, and how many \"cycles\" of the workflow need to be completed.",
     "title": "Work Orders"
   },
   "servers": [
@@ -44,6 +44,26 @@
     "schemas": {
       "WorkOrder": {
         "$ref": "components/schemas/workOrder.json"
+      }
+    },
+    "securitySchemes": {
+      "niagara": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "https://auth.nterprise.com/oauth/authorize",
+            "tokenUrl": "https://auth.nterprise.com/oauth/token",
+            "scopes": {
+              "work-order:create": "Allows creating a work order",
+              "work-order:update": "Allows editing a work order",
+              "work-order:delete": "Allows deleting a work order",
+              "work-order:read": "Allows access to a work order",
+              "work-order:attach": "Allows attaching a relation from a work order",
+              "work-order:detach": "Allows detaching a relation from a work order",
+              "work-order:all": "Allows reading all work order"
+            }
+          }
+        }
       }
     }
   }

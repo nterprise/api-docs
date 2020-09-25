@@ -1,0 +1,93 @@
+{
+  "description": "A paged response for notes",
+  "content": {
+    "application/hal+json": {
+      "schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "_embedded",
+          "_links",
+          "total_count",
+          "limit",
+          "offset"
+        ],
+        "properties": {
+          "total_count": {
+            "type": "number",
+            "readOnly": true
+          },
+          "limit": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 100
+          },
+          "offset": {
+            "type": "string",
+            "nullable": true
+          },
+          "_embedded": {
+            "type": "object",
+            "properties": {
+              "nter:notifications": {
+                "type": "array",
+                "maxItems": 100,
+                "items": {
+                  "$ref": "../schemas/halNotification.json"
+                }
+              }
+            }
+          },
+          "_links": {
+            "type": "object",
+            "properties": {
+              "self": {
+                "$ref": "../schemas/link.json"
+              },
+              "next": {
+                "$ref": "../schemas/link.json"
+              }
+            }
+          }
+        }
+      },
+      "example": {
+        "total_count": 21,
+        "limit": 42,
+        "offset": "next-offset",
+        "_embedded": {
+          "nter:notes": [
+            {
+              "notification_id": "notification",
+              "label": "A Note",
+              "created": "2019-10-09T19:30:35.639Z",
+              "updated": "2019-10-09T20:30:35.639Z",
+              "message": "Lorem ipsum dolor sit amet",
+              "read": false,
+              "archived": false,
+              "_links": {
+                "nter:note-sender": {
+                  "href": "https://api.nterprise.com/users/3dddba3e-6122-46a8-ae26-8c7c95bd82d7"
+                },
+                "nter:note-regarding": {
+                  "href": "https://api.nterprise.com/unit/unit"
+                },
+                "self": {
+                  "href": "https://api.nterprise.com/notifications/notification"
+                }
+              }
+            }
+          ]
+        },
+        "_links": {
+          "next": {
+            "href": "https://api.nterprise.com/notes?limit=42&offset=next-offset"
+          },
+          "self": {
+            "href": "https://api.nterprise.com/notes?limit=42"
+          }
+        }
+      }
+    }
+  }
+}

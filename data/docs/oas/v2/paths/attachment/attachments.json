@@ -1,4 +1,24 @@
 {
+  "get": {
+    "operationId": "fetchAttachments",
+    "summary": "Fetch Attachments",
+    "description": "Fetch a page of attachments",
+    "tags": [
+      "Attachment"
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halAttachmentPage.json"
+      }
+    },
+    "security": [
+      {
+        "niagara": [
+          "file:read-all"
+        ]
+      }
+    ]
+  },
   "post": {
     "operationId": "signAttachment",
     "summary": "Gets a signed URL for uploading files",
@@ -12,19 +32,14 @@
     "responses": {
       "200": {
         "$ref": "../../components/responses/halAttachment.json"
-      },
-      "400": {
-        "$ref": "../../components/responses/400badRequest.json"
-      },
-      "401": {
-        "$ref": "../../components/responses/401unauthorized.json"
-      },
-      "403": {
-        "$ref": "../../components/responses/403forbidden.json"
-      },
-      "413": {
-        "$ref": "../../components/responses/413payloadTooLarge.json"
       }
-    }
+    },
+    "security": [
+      {
+        "niagara": [
+          "file:create"
+        ]
+      }
+    ]
   }
 }

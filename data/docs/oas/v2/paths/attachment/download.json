@@ -1,0 +1,27 @@
+{
+  "get": {
+    "operationId": "downloadAttachment",
+    "summary": "Download attachment",
+    "description": "Downloads the attachment",
+    "tags": [
+      "Attachment"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/attachmentId.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "The file"
+      }
+    },
+    "security": [
+      {
+        "niagara": [
+          "file:read"
+        ]
+      }
+    ]
+  }
+}

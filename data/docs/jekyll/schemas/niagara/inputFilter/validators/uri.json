@@ -10,10 +10,12 @@
   "properties": {
     "type": {
       "type": "string",
-      "const": "uri"
+      "const": "uri",
+      "x-nter-skip-param": true
     },
     "options": {
       "type": "object",
+      "x-nter-skip-param": true,
       "properties": {
         "schemes": {
           "type": "array",
@@ -34,7 +36,8 @@
               "tcp:",
               "urn:"
             ]
-          }
+          },
+          "x-nter-skip-param": true
         }
       }
     }

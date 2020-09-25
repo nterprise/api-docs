@@ -16,7 +16,7 @@
         "input_filter": [],
         "_links": {
           "self": {
-            "href": "https://api.example.com/contacts/contact"
+            "href": "https://api.nterprise.com/contacts/contact"
           }
         }
       }

@@ -10,11 +10,13 @@
   "properties": {
     "type": {
       "type": "string",
-      "const": "required"
+      "const": "required",
+      "x-nter-skip-param": true
     },
     "options": {
       "type": "object",
-      "description": "Required validator has no options"
+      "description": "Required validator has no options",
+      "x-nter-skip-param": true
     }
   }
 }

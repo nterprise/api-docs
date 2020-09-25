@@ -1,0 +1,27 @@
+{
+  "get": {
+    "operationId": "search",
+    "summary": "Search",
+    "description": "Search",
+    "tags": [
+      "Search"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/search.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/elasticSearchResults.json"
+      }
+    },
+    "security": [
+      {
+        "niagara": [
+          "search"
+        ]
+      }
+    ]
+  }
+}

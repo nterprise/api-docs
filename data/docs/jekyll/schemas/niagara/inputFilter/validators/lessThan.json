@@ -10,29 +10,34 @@
   "properties": {
     "type": {
       "type": "string",
-      "const": "less_than"
+      "const": "less_than",
+      "x-nter-skip-param": true
     },
     "options": {
       "type": "object",
+      "x-nter-skip-param": true,
       "required": [
         "value"
       ],
       "properties": {
         "value": {
           "type": "number",
-          "description": "The value to compare against"
+          "description": "The value to compare against",
+          "x-nter-skip-param": true
         },
         "precision": {
           "type": "integer",
           "description": "When number is a float, this will set the decimal precision",
           "minimum": 1,
           "maximum": 8,
-          "default": 3
+          "default": 3,
+          "x-nter-skip-param": true
         },
         "include": {
           "type": "boolean",
           "description": "Include the value in the check",
-          "default": true
+          "default": true,
+          "x-nter-skip-param": true
         }
       }
     }

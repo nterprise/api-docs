@@ -1,0 +1,76 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/notification.json",
+  "type": "object",
+  "description": "Notification",
+  "additionalProperties": false,
+  "required": [
+    "entity_type",
+    "entity_id",
+    "created",
+    "label",
+    "severity",
+    "source_id",
+    "message",
+    "read",
+    "archived",
+    "sender"
+  ],
+  "properties": {
+    "notification_id": {
+      "description": "Notification Id",
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_id"
+    },
+    "entity_id": {
+      "x-no-api-doc": true,
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_id"
+    },
+    "entity_type": {
+      "x-no-api-doc": true,
+      "const": "PUSH"
+    },
+    "label": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/label"
+    },
+    "slug": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/slug"
+    },
+    "created": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/created"
+    },
+    "updated": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/updated"
+    },
+    "source_id": {
+      "type": "string",
+      "description": "ID of the event which triggered the notification"
+    },
+    "message": {
+      "type": "string",
+      "description": "The message"
+    },
+    "read": {
+      "type": "boolean",
+      "description": "Read flag for the notification"
+    },
+    "archived": {
+      "type": "boolean",
+      "description": "Read flag for the notification"
+    },
+    "severity": {
+      "type": "string",
+      "description": "Severity of the notification",
+      "enum": [
+        "normal",
+        "issue",
+        "resolved"
+      ]
+    },
+    "sender": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/user.json"
+    },
+    "recipient": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/user.json"
+    }
+  }
+}

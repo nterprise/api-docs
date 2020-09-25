@@ -14,17 +14,15 @@
     "responses": {
       "200": {
         "$ref": "../../components/responses/halBatch.json"
-      },
-      "401": {
-        "$ref": "../../components/responses/401unauthorized.json"
-      },
-      "403": {
-        "$ref": "../../components/responses/403forbidden.json"
-      },
-      "404": {
-        "$ref": "../../components/responses/404notFound.json"
       }
-    }
+    },
+    "security": [
+      {
+        "niagara": [
+          "batch:read"
+        ]
+      }
+    ]
   },
   "delete": {
     "operationId": "deleteBatch",
@@ -41,19 +39,14 @@
     "responses": {
       "205": {
         "description": "Batch deleted"
-      },
-      "401": {
-        "$ref": "../../components/responses/401unauthorized.json"
-      },
-      "403": {
-        "$ref": "../../components/responses/403forbidden.json"
-      },
-      "404": {
-        "$ref": "../../components/responses/404notFound.json"
-      },
-      "423": {
-        "$ref": "../../components/responses/423locked.json"
       }
-    }
+    },
+    "security": [
+      {
+        "niagara": [
+          "batch:delete"
+        ]
+      }
+    ]
   }
 }

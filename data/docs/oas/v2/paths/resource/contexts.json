@@ -1,0 +1,33 @@
+{
+  "get": {
+    "operationId": "fetchContextsForResource",
+    "summary": "Fetch contexts for resource",
+    "description": "Fetches A Page of active contexts for a resource",
+    "tags": [
+      "Resource"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/resourceId.json"
+      },
+      {
+        "$ref": "../../components/parameters/limit.json"
+      },
+      {
+         "$ref": "../../components/parameters/offset.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halContextPage.json"
+      }
+    },
+    "security": [
+      {
+        "niagara": [
+          "resource:read"
+        ]
+      }
+    ]
+  }
+}

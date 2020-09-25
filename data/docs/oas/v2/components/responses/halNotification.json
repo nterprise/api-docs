@@ -1,0 +1,93 @@
+{
+  "description": "A note response",
+  "content": {
+    "application/hal+json": {
+      "schema": {
+        "allOf": [
+          {
+            "$ref": "../schemas/halNotification.json"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "_embedded": {
+                "type": "object",
+                "properties": {
+                  "nter:notification-sender": {
+                    "type": "array",
+                    "maxItems": 1,
+                    "items": {
+                      "$ref": "./halUser.json"
+                    }
+                  },
+                  "nter:notification-regarding": {
+                    "type": "array",
+                    "maxItems": 1,
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "entity_type": {
+                          "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_type"
+                        },
+                        "entity_id": {
+                          "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_id"
+                        },
+                        "label": {
+                          "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/label"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "example": {
+        "notification_id": "notification",
+        "label": "A Note",
+        "created": "2019-10-09T19:30:35.639Z",
+        "updated": "2019-10-09T20:30:35.639Z",
+        "message": "Lorem ipsum dolor sit amet",
+        "read": false,
+        "archived": false,
+        "_embedded": {
+          "nter:notification-sender": [
+            {
+              "user_id": "3dddba3e-6122-46a8-ae26-8c7c95bd82d7",
+              "created": "2019-08-19T00:01:02.639Z",
+              "updated": "2019-08-19T00:01:02.639Z",
+              "name": "Daniel Jackson",
+              "email": "daniel.jackson@niagara.com",
+              "profile": "https://bit.ly/18gECvy",
+              "picture": "https://bit.ly/18gECvy",
+              "_links": {
+                "self": {
+                  "href": "https://api.nterprise.com/users/3dddba3e-6122-46a8-ae26-8c7c95bd82d7"
+                }
+              }
+            }
+          ],
+          "nter:notification-regarding": [
+            {
+              "entity_id": "entity",
+              "entity_type": "UNIT",
+              "label": "A unit",
+              "_links": {
+                "self": {
+                  "href": "https://api.nterprise.com/unit/unit"
+                }
+              }
+            }
+          ]
+        },
+        "_links": {
+          "self": {
+            "href": "https://api.nterprise.com/notes/note"
+          }
+        }
+      }
+    }
+  }
+}

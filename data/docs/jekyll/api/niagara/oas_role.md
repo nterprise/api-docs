@@ -7,42 +7,35 @@ redirect_from:
   - /rel/role
 title: Roles
 ---
+<!-- Generator: Widdershins v4.0.1 -->
 
 <h1 id="roles">Roles</h1>
 
 * Do not remove this line (it will not be displayed)
 {:toc}
 
-Roles define access that a user has 
+In FTM and CIMS, permissions were explicitly granted to individual users on specific projects.  Niagara takes a different approach; first assigning each user to a Role with inherent permissions, and then assigning users additional permissions on specific objects (customers, programs, projects, etc) on an as-needed basis.
 
 <h1 id="roles-role">Role</h1>
 
 ## Operations
 
-### GET /roles - *Fetch Roles*
+### GET /roles
 
 <a id="opIdfetchAllRoles"></a>
 
-*Fetch Roles*
-
 Fetches A Page of roles
+
+<aside class="success">
+This operation does not require authentication
+</aside>
 
 <h3 id="fetchallroles-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|limit|query|integer(int32)|false|How many items to return at one time (max 100)|
+|limit|query|integer|false|How many items to return at one time (max 100)|
 |offset|query|string|false|Continue from last offset|
-
-<!-- START responses.def -->
-
-<h3 id="fetchallroles-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|A Role HAL response|Inline|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|Inline|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
 
 > Example responses
 
@@ -80,66 +73,24 @@ Fetches A Page of roles
   ],
   "_links": {
     "nter:role-users": {
-      "href": "https://api.example.com/roles/role/users"
+      "href": "https://api.nterprise.com/roles/role/users"
     },
     "self": {
-      "href": "https://api.example.com/roles/role"
+      "href": "https://api.nterprise.com/roles/role"
     }
   }
 }
 ```
 
-> 401 Response
-
-```json
-{
-  "title": "Unauthorized",
-  "type": "https://docs.nterprise.com/api/problem/Unauthorized",
-  "status": 401,
-  "detail": "Invalid authorization token"
-}
-```
-
-> 403 Response
-
-```json
-{
-  "title": "Forbidden",
-  "type": "https://docs.nterprise.com/api/problem/Forbidden",
-  "status": 403,
-  "detail": "You are forbidden from accessing this resource"
-}
-```
-
-<h3 id="fetchallroles-responseschema">Response Schema</h3>
-
-Status Code **401**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
-Status Code **403**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
-<!-- END responses.def -->
-
-### POST /roles - *Create role*
+### POST /roles
 
 <a id="opIdcreateRole"></a>
 
-*Create role*
-
 Creates a new role
+
+<aside class="success">
+This operation does not require authentication
+</aside>
 
 > Body parameter
 
@@ -150,21 +101,9 @@ Creates a new role
 |label|body|string|true|Label for the entity|
 |description|body|string¦null|false|Custom description for the role|
 |grants|body|[object]|false|Permissions granted to this role|
-|&nbsp;&nbsp;&nbsp;&nbsp; permission|body|string|true|The granted permission|
-|&nbsp;&nbsp;&nbsp;&nbsp; label|body|string|true|Label for the entity|
-|&nbsp;&nbsp;&nbsp;&nbsp; match_location|body|boolean|true|The user must be located at this location to access this entity|
-
-<!-- START responses.def -->
-
-<h3 id="createrole-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|A Role HAL response|Inline|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad Request|Inline|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|Inline|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
-|409|[Conflict](https://tools.ietf.org/html/rfc7231#section-6.5.8)|Conflict|Inline|
+|&nbsp;&nbsp; permission|body|string|true|The granted permission|
+|&nbsp;&nbsp; label|body|string|true|Label for the entity|
+|&nbsp;&nbsp; match_location|body|boolean|true|The user must be located at this location to access this entity|
 
 > Example responses
 
@@ -202,118 +141,24 @@ Creates a new role
   ],
   "_links": {
     "nter:role-users": {
-      "href": "https://api.example.com/roles/role/users"
+      "href": "https://api.nterprise.com/roles/role/users"
     },
     "self": {
-      "href": "https://api.example.com/roles/role"
+      "href": "https://api.nterprise.com/roles/role"
     }
   }
 }
 ```
 
-> 400 Response
-
-```json
-{
-  "title": "Bad Request",
-  "type": "https://docs.nterprise.com/api/problem/BadRequest",
-  "status": 400,
-  "detail": "Invalid Data",
-  "validation_messages": [
-    {
-      "keyword": "field",
-      "dataPath": ".field",
-      "schemaPath": "https://docs.nterprise.com/schemas/niagara/foo.json#/properties/field",
-      "params": {
-        "type": "string"
-      },
-      "message": "should be string"
-    }
-  ]
-}
-```
-
-> 401 Response
-
-```json
-{
-  "title": "Unauthorized",
-  "type": "https://docs.nterprise.com/api/problem/Unauthorized",
-  "status": 401,
-  "detail": "Invalid authorization token"
-}
-```
-
-> 403 Response
-
-```json
-{
-  "title": "Forbidden",
-  "type": "https://docs.nterprise.com/api/problem/Forbidden",
-  "status": 403,
-  "detail": "You are forbidden from accessing this resource"
-}
-```
-
-> 409 Response
-
-```json
-{
-  "title": "Conflict",
-  "type": "https://docs.nterprise.com/api/problem/Conflict",
-  "status": 409,
-  "detail": "A similar resource exists"
-}
-```
-
-<h3 id="createrole-responseschema">Response Schema</h3>
-
-Status Code **400**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; validation_messages|[object]|true|none|List of errors detailing the failures|
-
-Status Code **401**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
-Status Code **403**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
-Status Code **409**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
-<!-- END responses.def -->
-
-### GET /roles/{role_id} - *Fetch Role*
+### GET /roles/{role_id}
 
 <a id="opIdfetchRoleById"></a>
 
-*Fetch Role*
-
 Fetches a role by the role Id
+
+<aside class="success">
+This operation does not require authentication
+</aside>
 
 <h3 id="fetchrolebyid-parameters">Parameters</h3>
 
@@ -321,17 +166,6 @@ Fetches a role by the role Id
 |---|---|---|---|---|
 |role_id|path|string|true|Id of the role|
 
-<!-- START responses.def -->
-
-<h3 id="fetchrolebyid-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|A Role HAL response|Inline|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|Inline|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Resource not found|Inline|
-
 > Example responses
 
 > 200 Response
@@ -368,86 +202,24 @@ Fetches a role by the role Id
   ],
   "_links": {
     "nter:role-users": {
-      "href": "https://api.example.com/roles/role/users"
+      "href": "https://api.nterprise.com/roles/role/users"
     },
     "self": {
-      "href": "https://api.example.com/roles/role"
+      "href": "https://api.nterprise.com/roles/role"
     }
   }
 }
 ```
 
-> 401 Response
-
-```json
-{
-  "title": "Unauthorized",
-  "type": "https://docs.nterprise.com/api/problem/Unauthorized",
-  "status": 401,
-  "detail": "Invalid authorization token"
-}
-```
-
-> 403 Response
-
-```json
-{
-  "title": "Forbidden",
-  "type": "https://docs.nterprise.com/api/problem/Forbidden",
-  "status": 403,
-  "detail": "You are forbidden from accessing this resource"
-}
-```
-
-> 404 Response
-
-```json
-{
-  "title": "Not Found",
-  "type": "https://docs.nterprise.com/api/problem/NotFound",
-  "status": 404,
-  "detail": "A Resource with the id \"foo\" was not found"
-}
-```
-
-<h3 id="fetchrolebyid-responseschema">Response Schema</h3>
-
-Status Code **401**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
-Status Code **403**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
-Status Code **404**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
-<!-- END responses.def -->
-
-### PUT /roles/{role_id} - *Update role*
+### PUT /roles/{role_id}
 
 <a id="opIdupdateRole"></a>
 
-*Update role*
-
 Updates a new role following the role schema
+
+<aside class="success">
+This operation does not require authentication
+</aside>
 
 > Body parameter
 
@@ -459,22 +231,9 @@ Updates a new role following the role schema
 |label|body|string|true|Label for the entity|
 |description|body|string¦null|false|Custom description for the role|
 |grants|body|[object]|false|Permissions granted to this role|
-|&nbsp;&nbsp;&nbsp;&nbsp; permission|body|string|true|The granted permission|
-|&nbsp;&nbsp;&nbsp;&nbsp; label|body|string|true|Label for the entity|
-|&nbsp;&nbsp;&nbsp;&nbsp; match_location|body|boolean|true|The user must be located at this location to access this entity|
-
-<!-- START responses.def -->
-
-<h3 id="updaterole-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|A Role HAL response|Inline|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad Request|Inline|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|Inline|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
-|409|[Conflict](https://tools.ietf.org/html/rfc7231#section-6.5.8)|Conflict|Inline|
-|423|[Locked](https://tools.ietf.org/html/rfc2518#section-10.4)|Forbidden|Inline|
+|&nbsp;&nbsp; permission|body|string|true|The granted permission|
+|&nbsp;&nbsp; label|body|string|true|Label for the entity|
+|&nbsp;&nbsp; match_location|body|boolean|true|The user must be located at this location to access this entity|
 
 > Example responses
 
@@ -512,138 +271,24 @@ Updates a new role following the role schema
   ],
   "_links": {
     "nter:role-users": {
-      "href": "https://api.example.com/roles/role/users"
+      "href": "https://api.nterprise.com/roles/role/users"
     },
     "self": {
-      "href": "https://api.example.com/roles/role"
+      "href": "https://api.nterprise.com/roles/role"
     }
   }
 }
 ```
 
-> 400 Response
-
-```json
-{
-  "title": "Bad Request",
-  "type": "https://docs.nterprise.com/api/problem/BadRequest",
-  "status": 400,
-  "detail": "Invalid Data",
-  "validation_messages": [
-    {
-      "keyword": "field",
-      "dataPath": ".field",
-      "schemaPath": "https://docs.nterprise.com/schemas/niagara/foo.json#/properties/field",
-      "params": {
-        "type": "string"
-      },
-      "message": "should be string"
-    }
-  ]
-}
-```
-
-> 401 Response
-
-```json
-{
-  "title": "Unauthorized",
-  "type": "https://docs.nterprise.com/api/problem/Unauthorized",
-  "status": 401,
-  "detail": "Invalid authorization token"
-}
-```
-
-> 403 Response
-
-```json
-{
-  "title": "Forbidden",
-  "type": "https://docs.nterprise.com/api/problem/Forbidden",
-  "status": 403,
-  "detail": "You are forbidden from accessing this resource"
-}
-```
-
-> 409 Response
-
-```json
-{
-  "title": "Conflict",
-  "type": "https://docs.nterprise.com/api/problem/Conflict",
-  "status": 409,
-  "detail": "A similar resource exists"
-}
-```
-
-> 423 Response
-
-```json
-{
-  "title": "Locked",
-  "type": "https://docs.nterprise.com/api/problem/Locked",
-  "status": 423,
-  "detail": "This resource is currently locked from editing"
-}
-```
-
-<h3 id="updaterole-responseschema">Response Schema</h3>
-
-Status Code **400**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; validation_messages|[object]|true|none|List of errors detailing the failures|
-
-Status Code **401**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
-Status Code **403**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
-Status Code **409**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
-Status Code **423**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
-<!-- END responses.def -->
-
-### DELETE /roles/{role_id} - *Delete role*
+### DELETE /roles/{role_id}
 
 <a id="opIddeleteRole"></a>
 
-*Delete role*
-
 This will remove the role from the system
+
+<aside class="success">
+This operation does not require authentication
+</aside>
 
 <h3 id="deleterole-parameters">Parameters</h3>
 
@@ -651,130 +296,23 @@ This will remove the role from the system
 |---|---|---|---|---|
 |role_id|path|string|true|Id of the role|
 
-<!-- START responses.def -->
-
-<h3 id="deleterole-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|205|[Reset Content](https://tools.ietf.org/html/rfc7231#section-6.3.6)|Role deleted|None|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|Inline|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Resource not found|Inline|
-|423|[Locked](https://tools.ietf.org/html/rfc2518#section-10.4)|Forbidden|Inline|
-
-> Example responses
-
-> 401 Response
-
-```json
-{
-  "title": "Unauthorized",
-  "type": "https://docs.nterprise.com/api/problem/Unauthorized",
-  "status": 401,
-  "detail": "Invalid authorization token"
-}
-```
-
-> 403 Response
-
-```json
-{
-  "title": "Forbidden",
-  "type": "https://docs.nterprise.com/api/problem/Forbidden",
-  "status": 403,
-  "detail": "You are forbidden from accessing this resource"
-}
-```
-
-> 404 Response
-
-```json
-{
-  "title": "Not Found",
-  "type": "https://docs.nterprise.com/api/problem/NotFound",
-  "status": 404,
-  "detail": "A Resource with the id \"foo\" was not found"
-}
-```
-
-> 423 Response
-
-```json
-{
-  "title": "Locked",
-  "type": "https://docs.nterprise.com/api/problem/Locked",
-  "status": 423,
-  "detail": "This resource is currently locked from editing"
-}
-```
-
-<h3 id="deleterole-responseschema">Response Schema</h3>
-
-Status Code **401**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
-Status Code **403**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
-Status Code **404**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
-Status Code **423**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
-<!-- END responses.def -->
-
-### GET /roles/{role_id}/users - *Fetch role users*
+### GET /roles/{role_id}/users
 
 <a id="opIdfetchAllRoleUsers"></a>
 
-*Fetch role users*
-
 Fetches A Page of users for the role
+
+<aside class="success">
+This operation does not require authentication
+</aside>
 
 <h3 id="fetchallroleusers-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |role_id|path|string|true|Id of the role|
-|limit|query|integer(int32)|false|How many items to return at one time (max 100)|
+|limit|query|integer|false|How many items to return at one time (max 100)|
 |offset|query|string|false|Continue from last offset|
-
-<!-- START responses.def -->
-
-<h3 id="fetchallroleusers-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|A paged response for users|Inline|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|Inline|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Resource not found|Inline|
 
 > Example responses
 
@@ -791,13 +329,13 @@ Fetches A Page of users for the role
         "user_id": "3dddba3e-6122-46a8-ae26-8c7c95bd82d7",
         "created": "2019-08-19T00:01:02.639Z",
         "updated": "2019-08-19T00:01:02.639Z",
-        "name": "Chuck Reeves",
-        "email": "chuck.reeves@zones.com",
+        "name": "Daniel Jackson",
+        "email": "daniel.jackson@niagara.com",
         "profile": "https://bit.ly/18gECvy",
         "picture": "https://bit.ly/18gECvy",
         "_links": {
           "self": {
-            "href": "https://api.example.com/users/3dddba3e-6122-46a8-ae26-8c7c95bd82d7"
+            "href": "https://api.nterprise.com/users/3dddba3e-6122-46a8-ae26-8c7c95bd82d7"
           }
         }
       }
@@ -805,131 +343,24 @@ Fetches A Page of users for the role
   },
   "_links": {
     "next": {
-      "href": "https://api.example.com/users?limit=42&offset=next-offset"
+      "href": "https://api.nterprise.com/users?limit=42&offset=next-offset"
     },
     "self": {
-      "href": "https://api.example.com/users?limit=42"
+      "href": "https://api.nterprise.com/users?limit=42"
     }
   }
 }
 ```
 
-> 401 Response
-
-```json
-{
-  "title": "Unauthorized",
-  "type": "https://docs.nterprise.com/api/problem/Unauthorized",
-  "status": 401,
-  "detail": "Invalid authorization token"
-}
-```
-
-> 403 Response
-
-```json
-{
-  "title": "Forbidden",
-  "type": "https://docs.nterprise.com/api/problem/Forbidden",
-  "status": 403,
-  "detail": "You are forbidden from accessing this resource"
-}
-```
-
-> 404 Response
-
-```json
-{
-  "title": "Not Found",
-  "type": "https://docs.nterprise.com/api/problem/NotFound",
-  "status": 404,
-  "detail": "A Resource with the id \"foo\" was not found"
-}
-```
-
-<h3 id="fetchallroleusers-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; total_count|number|true|read-only|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; limit|number|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; offset|string¦null|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; _embedded|object|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; nter:users|[allOf]|false|none|none|
-
-*allOf*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; user_id|string|true|none|The identifier for the user|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; created|string(date-time)|true|read-only|Date the entity was created|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; updated|string(date-time)|true|read-only|Last date the entity was updated|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; email|string(email)|true|none|Email address|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; name|string|true|none|Human readable name|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; picture|string¦null|false|none|Image for the user|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; profile|string¦null|false|none|Link to the users profile|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; user_attributes|[object]|false|none|Array of user attributes|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; key|string|true|none|Attribute Key|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; value|string|true|none|Attribute value|
-
-*and*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _links|object|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self|object|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; href|string(uri)|false|none|none|
-
-*continued*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; _links|object|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self|object|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; href|string(uri)|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; next|object|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; href|string(uri)|false|none|none|
-
-Status Code **401**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
-Status Code **403**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
-Status Code **404**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
-<!-- END responses.def -->
-
-### POST /roles/{role_id}/users - *Assign user to role*
+### POST /roles/{role_id}/users
 
 <a id="opIdattachRoleUser"></a>
 
-*Assign user to role*
-
 This will create the user along with linking it to the role. If a user is found based on the email address, this will just link the user to the role
+
+<aside class="success">
+This operation does not require authentication
+</aside>
 
 > Body parameter
 
@@ -940,19 +371,6 @@ This will create the user along with linking it to the role. If a user is found 
 |role_id|path|string|true|Id of the role|
 |user_id|body|string|true|The identifier for the user|
 
-<!-- START responses.def -->
-
-<h3 id="attachroleuser-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|A user response|Inline|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad Request|Inline|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|Inline|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Resource not found|Inline|
-|409|[Conflict](https://tools.ietf.org/html/rfc7231#section-6.5.8)|Conflict|Inline|
-
 > Example responses
 
 > 200 Response
@@ -962,8 +380,8 @@ This will create the user along with linking it to the role. If a user is found 
   "user_id": "3dddba3e-6122-46a8-ae26-8c7c95bd82d7",
   "created": "2019-08-19T00:01:02.639Z",
   "updated": "2019-08-19T00:01:02.639Z",
-  "name": "Chuck Reeves",
-  "email": "chuck.reeves@zones.com",
+  "name": "Daniel Jackson",
+  "email": "daniel.jackson@niagara.com",
   "profile": "https://bit.ly/18gECvy",
   "picture": "https://bit.ly/18gECvy",
   "user_attributes": [
@@ -974,127 +392,11 @@ This will create the user along with linking it to the role. If a user is found 
   ],
   "_links": {
     "self": {
-      "href": "https://api.example.com/users/3dddba3e-6122-46a8-ae26-8c7c95bd82d7"
+      "href": "https://api.nterprise.com/users/3dddba3e-6122-46a8-ae26-8c7c95bd82d7"
     }
   }
 }
 ```
-
-> 400 Response
-
-```json
-{
-  "title": "Bad Request",
-  "type": "https://docs.nterprise.com/api/problem/BadRequest",
-  "status": 400,
-  "detail": "Invalid Data",
-  "validation_messages": [
-    {
-      "keyword": "field",
-      "dataPath": ".field",
-      "schemaPath": "https://docs.nterprise.com/schemas/niagara/foo.json#/properties/field",
-      "params": {
-        "type": "string"
-      },
-      "message": "should be string"
-    }
-  ]
-}
-```
-
-> 401 Response
-
-```json
-{
-  "title": "Unauthorized",
-  "type": "https://docs.nterprise.com/api/problem/Unauthorized",
-  "status": 401,
-  "detail": "Invalid authorization token"
-}
-```
-
-> 403 Response
-
-```json
-{
-  "title": "Forbidden",
-  "type": "https://docs.nterprise.com/api/problem/Forbidden",
-  "status": 403,
-  "detail": "You are forbidden from accessing this resource"
-}
-```
-
-> 404 Response
-
-```json
-{
-  "title": "Not Found",
-  "type": "https://docs.nterprise.com/api/problem/NotFound",
-  "status": 404,
-  "detail": "A Resource with the id \"foo\" was not found"
-}
-```
-
-> 409 Response
-
-```json
-{
-  "title": "Conflict",
-  "type": "https://docs.nterprise.com/api/problem/Conflict",
-  "status": 409,
-  "detail": "A similar resource exists"
-}
-```
-
-<h3 id="attachroleuser-responseschema">Response Schema</h3>
-
-Status Code **400**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; validation_messages|[object]|true|none|List of errors detailing the failures|
-
-Status Code **401**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
-Status Code **403**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
-Status Code **404**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
-Status Code **409**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
-<!-- END responses.def -->
 
 # Embedded Schemas
 
@@ -1114,9 +416,9 @@ Status Code **409**
 |created|string(date-time)|true|read-only|Date the entity was created|
 |updated|string(date-time)|true|read-only|Last date the entity was updated|
 |grants|[object]|true|none|Permissions granted to this role|
-|&nbsp;&nbsp;&nbsp;&nbsp; permission|string|true|none|The granted permission|
-|&nbsp;&nbsp;&nbsp;&nbsp; label|string|true|none|Label for the entity|
-|&nbsp;&nbsp;&nbsp;&nbsp; match_location|boolean|true|none|The user must be located at this location to access this entity|
+|&nbsp;&nbsp; permission|string|true|none|The granted permission|
+|&nbsp;&nbsp; label|string|true|none|Label for the entity|
+|&nbsp;&nbsp; match_location|boolean|true|none|The user must be located at this location to access this entity|
 |total_users|number|true|none|Number of users who have this role|
 
 #### Specification

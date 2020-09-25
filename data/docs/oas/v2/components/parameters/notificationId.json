@@ -1,0 +1,9 @@
+{
+  "name": "notification_id",
+  "in": "path",
+  "description": "Id of the notification",
+  "required": true,
+  "schema": {
+    "$ref": "https://docs.nterprise.com/schemas/niagara/notification.json#/properties/notification_id"
+  }
+}

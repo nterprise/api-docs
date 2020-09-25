@@ -1,0 +1,9 @@
+{
+  "name": "filter[archive]",
+  "in": "query",
+  "description": "Filter on the archived flag",
+  "schema": {
+    "type": "boolean",
+    "description": "Value for the archived flag"
+  }
+}

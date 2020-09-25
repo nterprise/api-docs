@@ -1,0 +1,87 @@
+{
+  "description": "A attachment response",
+  "content": {
+    "application/hal+json": {
+      "schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "_embedded",
+          "_links",
+          "total_count",
+          "limit",
+          "offset"
+        ],
+        "properties": {
+          "total_count": {
+            "type": "number",
+            "readOnly": true
+          },
+          "limit": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 100
+          },
+          "offset": {
+            "type": "string",
+            "nullable": true
+          },
+          "_embedded": {
+            "type": "object",
+            "required": [
+              "nter:attachments"
+            ],
+            "properties": {
+              "nter:attachments": {
+                "type": "array",
+                "maxItems": 100,
+                "items": {
+                  "$ref": "../schemas/halFile.json"
+                }
+              }
+            }
+          },
+          "_links": {
+            "type": "object",
+            "required": [
+              "self"
+            ],
+            "properties": {
+              "self": {
+                "$ref": "../schemas/link.json"
+              },
+              "next": {
+                "$ref": "../schemas/link.json"
+              }
+            }
+          }
+        }
+      },
+      "example": {
+        "total_count": 21,
+        "limit": 42,
+        "offset": "next-offset",
+        "_embedded": {
+          "nter:attachments": [
+            {
+              "attachment_id": "attachment",
+              "label": "Test Attachment.pdf",
+              "created": "2019-09-16T21:26:14.000Z",
+              "updated": "2019-09-16T21:27:14.000Z",
+              "content_type": "application/pdf",
+              "content_length": 13396,
+              "_links": {
+                "self": {
+                  "href": "https://api.nterprise.com/attachments/attachment"
+                },
+                "nter:download-attachment": {
+                  "href": "https://api.nterprise.com/attachments/attachment/download"
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

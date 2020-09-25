@@ -1,0 +1,30 @@
+{
+  "delete": {
+    "operationId": "detachTechFromLocation",
+    "summary": "Detach tech",
+    "description": "Remove tech from a location",
+    "tags": [
+      "Location"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/locationId.json"
+      },
+      {
+        "$ref": "../../components/parameters/techId.json"
+      }
+    ],
+    "responses": {
+      "205": {
+        "description": "Tech detached"
+      }
+    },
+    "security": [
+      {
+        "niagara": [
+          "location:detach"
+        ]
+      }
+    ]
+  }
+}

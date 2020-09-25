@@ -17,14 +17,15 @@
     "responses": {
       "200": {
         "$ref": "../../components/responses/halManufacturerPage.json"
-      },
-      "401": {
-        "$ref": "../../components/responses/401unauthorized.json"
-      },
-      "403": {
-        "$ref": "../../components/responses/403forbidden.json"
       }
-    }
+    },
+    "security": [
+      {
+        "niagara": [
+          "manufacturer:read-all"
+        ]
+      }
+    ]
   },
   "post": {
     "operationId": "createManufacturer",
@@ -39,19 +40,14 @@
     "responses": {
       "200": {
         "$ref": "../../components/responses/halManufacturer.json"
-      },
-      "400": {
-        "$ref": "../../components/responses/400badRequest.json"
-      },
-      "401": {
-        "$ref": "../../components/responses/401unauthorized.json"
-      },
-      "403": {
-        "$ref": "../../components/responses/403forbidden.json"
-      },
-      "409": {
-        "$ref": "../../components/responses/409conflict.json"
       }
-    }
+    },
+    "security": [
+      {
+        "niagara": [
+          "manufacturer:create"
+        ]
+      }
+    ]
   }
 }

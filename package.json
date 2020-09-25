@@ -6,6 +6,9 @@
     "type": "git",
     "url": "git+https://github.com/nfrastructuredev/api-docs.git"
   },
+  "scripts": {
+    "precommit": "echo 'This is not the commit hook we are looking for'"
+  },
   "authors": [
     "Chuck \"MANCHUCK\" Reeves",
     "Michael Pepe"
@@ -71,22 +74,24 @@
     }
   },
   "dependencies": {
-    "@nterprise/common-js": "^4.0.0",
-    "ajv": "^6.12.2",
-    "chance": "^1.1.4",
-    "faker": "^4.1.0",
-    "json-schema-faker": "^0.5.0-rcv.24",
+    "@nterprise/niagara-winston-logger": "^1.0.3",
+    "ajv": "^6.12.5",
+    "chance": "^1.1.7",
+    "faker": "^5.1.0",
+    "json-schema-faker": "^0.5.0-rcv.29",
     "jsonpath": "^1.0.2",
     "lodash": "^4",
-    "winston": "^3.2.1",
-    "yaml": "^1.8.3",
-    "yargs": "^15.3.1"
+    "winston": "^3.3.3",
+    "yaml": "^1.10.0",
+    "yargs": "^15.4.1"
   },
   "devDependencies": {
-    "eslint": "^6.8.0",
+    "@nterprise/niagara-winston-logger": "^1.0.3",
+    "yargs": "^16.0.3",
+    "eslint": "^7.9.0",
     "eslint-config-google": "^0.14.0",
     "glob": "^7.1.6",
-    "json-schema-ref-parser": "^9.0.1",
+    "json-schema-ref-parser": "^9.0.6",
     "widdershins": "^4.0.1"
   }
 }

@@ -10,10 +10,12 @@
   "properties": {
     "type": {
       "type": "string",
-      "const": "hostname"
+      "const": "hostname",
+      "x-nter-skip-param": true
     },
     "options": {
       "type": "object",
+      "x-nter-skip-param": true,
       "properties": {
         "record_type": {
           "type": "string",
@@ -61,7 +63,8 @@
             "TSIG",
             "TXT",
             "URI"
-          ]
+          ],
+          "x-nter-skip-param": true
         }
       }
     }

@@ -80,10 +80,10 @@
               "input_filter": [],
               "_links": {
                 "nter:location-resources": {
-                  "href": "https://api.example.com/locations/location/resources"
+                  "href": "https://api.nterprise.com/locations/location/resources"
                 },
                 "self": {
-                  "href": "https://api.example.com/locations/location"
+                  "href": "https://api.nterprise.com/locations/location"
                 }
               }
             }
@@ -91,10 +91,10 @@
         },
         "_links": {
           "next": {
-            "href": "https://api.example.com/locations?limit=42&offset=next-offset"
+            "href": "https://api.nterprise.com/locations?limit=42&offset=next-offset"
           },
           "self": {
-            "href": "https://api.example.com/locations?limit=42"
+            "href": "https://api.nterprise.com/locations?limit=42"
           }
         }
       }

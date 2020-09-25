@@ -1,0 +1,57 @@
+{
+  "get": {
+    "operationId": "fetchNoteForUnit",
+    "summary": "Fetch units notes",
+    "description": "Fetches notes for a unit",
+    "tags": [
+      "Note"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/unitId.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halNotePage.json"
+      }
+    },
+    "security": [
+      {
+        "niagara": [
+          "unit:read",
+          "note:read"
+        ]
+      }
+    ]
+  },
+  "post": {
+    "operationId": "createNoteForUnit",
+    "summary": "Create unit note",
+    "description": "Create a note for a unit",
+    "tags": [
+      "Note"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/unitId.json"
+      }
+    ],
+    "requestBody": {
+      "$ref": "../../components/requestBodies/note.json"
+    },
+    "responses": {
+      "201": {
+        "$ref": "../../components/responses/halNote.json"
+      }
+    },
+    "security": [
+      {
+        "niagara": [
+          "unit:read",
+          "note:create"
+        ]
+      }
+    ]
+  }
+}

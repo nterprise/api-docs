@@ -182,19 +182,19 @@
         },
         "_links": {
           "nter:project-work-orders": {
-            "href": "https://api.example.com/projects/project/work-orders"
+            "href": "https://api.nterprise.com/projects/project/work-orders"
           },
           "nter:project-program": {
-            "href": "https://api.example.com/programs/program"
+            "href": "https://api.nterprise.com/programs/program"
           },
           "nter:project-customer": {
-            "href": "https://api.example.com/customers/customer"
+            "href": "https://api.nterprise.com/customers/customer"
           },
           "nter:project-units": {
-            "href": "https://api.example.com/projects/project/units"
+            "href": "https://api.nterprise.com/projects/project/units"
           },
           "self": {
-            "href": "https://api.example.com/projects/project"
+            "href": "https://api.nterprise.com/projects/project"
           }
         }
       }

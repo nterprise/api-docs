@@ -96,13 +96,13 @@
               "max_due_date": "2022-08-19T02:01:02.000Z",
               "_links": {
                 "nter:queue-location": {
-                  "href": "https://api.example.com/locations/location"
+                  "href": "https://api.nterprise.com/locations/location"
                 },
                 "nter:queue-batches": {
-                  "href": "https://api.example.com/queues/queue/batches"
+                  "href": "https://api.nterprise.com/queues/queue/batches"
                 },
                 "self": {
-                  "href": "https://api.example.com/queues/queue"
+                  "href": "https://api.nterprise.com/queues/queue"
                 }
               }
             }
@@ -110,10 +110,10 @@
         },
         "_links": {
           "next": {
-            "href": "https://api.example.com/queues?limit=42&offset=next-offset"
+            "href": "https://api.nterprise.com/queues?limit=42&offset=next-offset"
           },
           "self": {
-            "href": "https://api.example.com/queues?limit=42"
+            "href": "https://api.nterprise.com/queues?limit=42"
           }
         }
       }

@@ -1,0 +1,40 @@
+{
+  "patch": {
+    "operationId": "completeStep",
+    "summary": "Complete Step",
+    "description": "Completes a step for an active context",
+    "tags": [
+      "Context"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/contextId.json"
+      },
+      {
+        "$ref": "../../components/parameters/stepSlug.json"
+      }
+    ],
+    "requestBody": {
+      "description": "The step to complete",
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "../../components/requestBodies/closeStep.json"
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halContext.json"
+      }
+    },
+    "security": [
+      {
+        "niagara": [
+          "context:step"
+        ]
+      }
+    ]
+  }
+}

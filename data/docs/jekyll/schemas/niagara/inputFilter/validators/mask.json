@@ -10,17 +10,20 @@
   "properties": {
     "type": {
       "type": "string",
-      "const": "mask"
+      "const": "mask",
+      "x-nter-skip-param": true
     },
     "options": {
       "type": "object",
+      "x-nter-skip-param": true,
       "required": [
         "mask"
       ],
       "properties": {
         "mask": {
           "type": "string",
-          "description": "Mask to validate against"
+          "description": "Mask to validate against",
+          "x-nter-skip-param": true
         }
       }
     }

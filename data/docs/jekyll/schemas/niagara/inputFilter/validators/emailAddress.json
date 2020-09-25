@@ -10,20 +10,24 @@
   "properties": {
     "type": {
       "type": "string",
-      "const": "email_address"
+      "const": "email_address",
+      "x-nter-skip-param": true
     },
     "options": {
       "type": "object",
+      "x-nter-skip-param": true,
       "properties": {
         "strict": {
           "type": "boolean",
           "description": "Enforce strict standards from ARPA. This will enforce the length of the string",
-          "default": true
+          "default": true,
+          "x-nter-skip-param": true
         },
         "lookup": {
           "type": "boolean",
           "description": "Look up the host name and check if it has a valid MX record",
-          "default": false
+          "default": false,
+          "x-nter-skip-param": true
         }
       }
     }

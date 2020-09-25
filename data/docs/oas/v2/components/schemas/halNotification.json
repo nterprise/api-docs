@@ -1,0 +1,27 @@
+{
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "notification.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "_links": {
+          "type": "object",
+          "properties": {
+            "nter:notification-sender": {
+              "$ref": "./link.json"
+            },
+            "nter:notification-regarding": {
+              "$ref": "./link.json"
+            },
+            "self": {
+              "$ref": "./link.json"
+            }
+          }
+        }
+      }
+    }
+  ]
+}

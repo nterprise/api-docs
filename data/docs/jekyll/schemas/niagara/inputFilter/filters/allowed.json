@@ -10,10 +10,12 @@
   "properties": {
     "type": {
       "type": "string",
-      "const": "allowed_list"
+      "const": "allowed_list",
+      "x-nter-skip-param": true
     },
     "options": {
       "type": "object",
+      "x-nter-skip-param": true,
       "required": [
         "approved_values"
       ],
@@ -22,16 +24,19 @@
           "type": "array",
           "minimum": 1,
           "maximum": 100,
-          "description": "The list of approved values"
+          "description": "The list of approved values",
+          "x-nter-skip-param": true
         },
         "check_case": {
           "type": "boolean",
           "description": "Perform a case sensitive match. By default will not match case",
-          "default": false
+          "default": false,
+          "x-nter-skip-param": true
         },
         "default": {
           "type": ["string", "null"],
-          "description": "If this is set and the value is not in the approved_list, set the value to this"
+          "description": "If this is set and the value is not in the approved_list, set the value to this",
+          "x-nter-skip-param": true
         }
       }
     }

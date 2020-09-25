@@ -1,0 +1,29 @@
+{
+  "type": "object",
+  "properties": {
+    "notification_id": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/notification.json#/properties/notification_id"
+    },
+    "label": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/notification.json#/properties/label"
+    },
+    "created": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/notification.json#/properties/created"
+    },
+    "updated": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/notification.json#/properties/updated"
+    },
+    "message": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/notification.json#/properties/message"
+    },
+    "read": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/notification.json#/properties/read"
+    },
+    "archived": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/notification.json#/properties/archived"
+    },
+    "severity": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/notification.json#/properties/severity"
+    }
+  }
+}

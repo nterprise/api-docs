@@ -1,0 +1,27 @@
+{
+  "get": {
+    "operationId": "fetchTechsForLocation",
+    "summary": "Fetch Location techs",
+    "description": "Fetches the techs for a location",
+    "tags": [
+      "Location"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/locationId.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halUserPage.json"
+      }
+    },
+    "security": [
+      {
+        "niagara": [
+          "location:relations-read-all"
+        ]
+      }
+    ]
+  }
+}

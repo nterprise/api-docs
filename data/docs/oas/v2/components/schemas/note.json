@@ -16,8 +16,11 @@
     "text": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/note.json#/properties/text"
     },
-    "created_by": {
-      "$ref": "./user.json"
+    "issue": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/note.json#/properties/issue"
+    },
+    "edited": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/note.json#/properties/edited"
     }
   }
 }

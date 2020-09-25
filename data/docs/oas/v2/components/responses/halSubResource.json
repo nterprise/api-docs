@@ -105,13 +105,13 @@
         },
         "_links": {
           "nter:sub-resource-parent": {
-            "href": "https://api.example.com/resources/parent-resource"
+            "href": "https://api.nterprise.com/resources/parent-resource"
           },
           "nter:sub-resource-location": {
-            "href": "https://api.example.com/locations/location"
+            "href": "https://api.nterprise.com/locations/location"
           },
           "self": {
-            "href": "https://api.example.com/sub-resources/sub-resource"
+            "href": "https://api.nterprise.com/sub-resources/sub-resource"
           }
         }
       }

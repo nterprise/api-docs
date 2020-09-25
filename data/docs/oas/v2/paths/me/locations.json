@@ -1,0 +1,30 @@
+{
+  "get": {
+    "operationId": "fetchMeLocations",
+    "summary": "Fetch Location",
+    "description": "Fetches A Page of locations the user has access too",
+    "tags": [
+      "Me"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/limit.json"
+      },
+      {
+        "$ref": "../../components/parameters/offset.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halLocationPage.json"
+      }
+    },
+    "security": [
+      {
+        "niagara": [
+          "me:profile"
+        ]
+      }
+    ]
+  }
+}

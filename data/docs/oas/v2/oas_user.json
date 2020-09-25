@@ -2,7 +2,7 @@
   "openapi": "3.0.3",
   "x-api": "niagara",
   "x-nter-docs-parent": "Niagara API",
-  "x-nter-docs-nav-order": 18,
+  "x-nter-docs-nav-order": 19,
   "x-nter-docs-redirect-from": [
     "/rel/users",
     "/rel/user",
@@ -10,7 +10,7 @@
   ],
   "info": {
     "version": "2.0.0",
-    "description": "API for the nterprise application",
+    "description": "nterprise niagara is a multi-tenant project management application, and each tenant determines its own methods for authentication and authorization.  \n\nInternal users (employees) may be authenticated through their corporate directory (e.g. Active Directory) single sign-on.  On first sign-in, users may be asked to provide additional information to optimize their nterprise experience.\n\nExternal users, such as customer representatives, partner employees, and subcontractors need to be created in the application before they will be able to sign in.  The administrator creating the accounts may provide all relevant information, or elect to complete the minimum for sign-in, and leave the remainder to be completed by the user on first sign-in.  \n\nTenants that do not maintain a corporate directory, or cannot share the directory with nterpise, will need to create accounts for all users, internal as well as external.",
     "title": "Users"
   },
   "servers": [
@@ -33,18 +33,30 @@
     },
     "/users/{user_id}": {
       "$ref": "./paths/user/user.json"
-    },
-    "/users/{user_id}/relations": {
-      "$ref": "./paths/user/relations.json"
-    },
-    "/users/{user_id}/relations/{relation_id}": {
-      "$ref": "./paths/user/relation.json"
     }
   },
   "components": {
     "schemas": {
       "User": {
         "$ref": "components/schemas/user.json"
+      }
+    },
+    "securitySchemes": {
+      "niagara": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "https://auth.nterprise.com/oauth/authorize",
+            "tokenUrl": "https://auth.nterprise.com/oauth/token",
+            "scopes": {
+              "user:create": "Allows creating a user",
+              "user:update": "Allows editing a user",
+              "user:delete": "Allows deleting a user",
+              "user:read": "Allows access to a user",
+              "user:all": "Allows reading all users"
+            }
+          }
+        }
       }
     }
   }

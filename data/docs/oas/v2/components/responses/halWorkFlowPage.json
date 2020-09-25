@@ -94,10 +94,10 @@
               },
               "_links": {
                 "nter:work-flow-contexts": {
-                  "href": "https://api.example.com/work-flows/work-flow/contexts"
+                  "href": "https://api.nterprise.com/work-flows/work-flow/contexts"
                 },
                 "self": {
-                  "href": "https://api.example.com/work-flows/work-flow"
+                  "href": "https://api.nterprise.com/work-flows/work-flow"
                 }
               }
             }
@@ -105,10 +105,10 @@
         },
         "_links": {
           "next": {
-            "href": "https://api.example.com/work-flows?limit=42&offset=next-offset"
+            "href": "https://api.nterprise.com/work-flows?limit=42&offset=next-offset"
           },
           "self": {
-            "href": "https://api.example.com/work-flows?limit=42"
+            "href": "https://api.nterprise.com/work-flows?limit=42"
           }
         }
       }

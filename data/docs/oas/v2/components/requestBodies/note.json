@@ -14,6 +14,25 @@
           },
           "text": {
             "$ref": "https://docs.nterprise.com/schemas/niagara/note.json#/properties/label"
+          },
+          "thread_id": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/note.json#/properties/thread_id"
+          },
+          "issue": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/note.json#/properties/issue"
+          },
+          "notify": {
+            "type": "array",
+            "description": "List of contacts to notify about this note",
+            "maxItems": 100,
+            "items": {
+              "type": "object",
+              "properties": {
+                "contact_id": {
+                  "$ref": "https://docs.nterprise.com/schemas/niagara/contact.json#/properties/contact_id"
+                }
+              }
+            }
           }
         }
       }

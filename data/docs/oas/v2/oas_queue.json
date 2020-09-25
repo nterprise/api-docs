@@ -2,7 +2,7 @@
   "openapi": "3.0.3",
   "x-api": "niagara",
   "x-nter-docs-parent": "Niagara API",
-  "x-nter-docs-nav-order": 14,
+  "x-nter-docs-nav-order": 13,
   "x-nter-docs-redirect-from": [
     "/rel/queues",
     "/rel/queue",
@@ -10,7 +10,7 @@
   ],
   "info": {
     "version": "2.0.0",
-    "description": "API for the nterprise application",
+    "description": "Production Queues - user-configurable \"buckets\" in which to organize work.",
     "title": "Queues"
   },
   "servers": [
@@ -48,6 +48,26 @@
     "schemas": {
       "Queue": {
         "$ref": "components/schemas/queue.json"
+      }
+    },
+    "securitySchemes": {
+      "niagara": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "https://auth.nterprise.com/oauth/authorize",
+            "tokenUrl": "https://auth.nterprise.com/oauth/token",
+            "scopes": {
+              "queue:create": "Allows creating a queue",
+              "queue:update": "Allows editing a queue",
+              "queue:delete": "Allows deleting a queue",
+              "queue:read": "Allows access to a queue",
+              "queue:attach": "Allows attaching a relation from a queue",
+              "queue:detach": "Allows detaching a relation from a queue",
+              "queue:all": "Allows reading all queues"
+            }
+          }
+        }
       }
     }
   }

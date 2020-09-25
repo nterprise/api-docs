@@ -1,0 +1,30 @@
+{
+  "get": {
+    "operationId": "fetchMeCustomers",
+    "summary": "Fetch Customers",
+    "description": "Fetches A Page of customers the user has access to",
+    "tags": [
+      "Me"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/limit.json"
+      },
+      {
+        "$ref": "../../components/parameters/offset.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halCustomerPage.json"
+      }
+    },
+    "security": [
+      {
+        "niagara": [
+          "me:profile"
+        ]
+      }
+    ]
+  }
+}

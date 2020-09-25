@@ -2,7 +2,7 @@
   "openapi": "3.0.3",
   "x-api": "niagara",
   "x-nter-docs-parent": "Niagara API",
-  "x-nter-docs-nav-order": 11,
+  "x-nter-docs-nav-order": 10,
   "x-nter-docs-redirect-from": [
     "/rel/parts",
     "/rel/part",
@@ -12,7 +12,7 @@
   ],
   "info": {
     "version": "2.0.0",
-    "description": "API for the nterprise application",
+    "description": "In nterprise niagara, a Part is a type of product on which actions will be performed.  A Part is associated to one Manufacturer and is assigned a Part Number to uniquely identify it among all products from the same manufacturer.  Parts are defined within each Customer for use across all of that Customer's Projects.",
     "title": "Parts"
   },
   "servers": [
@@ -36,20 +36,43 @@
     "/parts/{part_id}": {
       "$ref": "./paths/part/part.json"
     },
-    "/parts/{part_id}/units": {
-      "$ref": "./paths/part/units.json"
-    },
     "/parts/{part_id}/relations": {
       "$ref": "./paths/part/relations.json"
     },
     "/parts/{part_id}/relations/{relation_id}": {
       "$ref": "./paths/part/relation.json"
+    },
+    "/parts/{part_id}/units": {
+      "$ref": "./paths/part/units.json"
     }
   },
   "components": {
     "schemas": {
       "Part": {
         "$ref": "components/schemas/part.json"
+      }
+    },
+    "securitySchemes": {
+      "niagara": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "https://auth.nterprise.com/oauth/authorize",
+            "tokenUrl": "https://auth.nterprise.com/oauth/token",
+            "scopes": {
+              "part:create": "Allows creating a part",
+              "part:update": "Allows editing a part",
+              "part:delete": "Allows deleting a part",
+              "part:read": "Allows access to a part",
+              "part:create-unit": "Allows access to create a unit for a part",
+              "part:update-unit": "Allows access to update a unit for a part",
+              "part:delete-unit": "Allows access to delete a unit for a part",
+              "part:attach": "Allows attaching a relation from a part",
+              "part:detach": "Allows detaching a relation from a part",
+              "part:all": "Allows reading all parts"
+            }
+          }
+        }
       }
     }
   }

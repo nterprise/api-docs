@@ -2,7 +2,7 @@
   "openapi": "3.0.3",
   "x-api": "niagara",
   "x-nter-docs-parent": "Niagara API",
-  "x-nter-docs-nav-order": 8,
+  "x-nter-docs-nav-order": 7,
   "x-nter-docs-redirect-from": [
     "/rel/manufacturers",
     "/rel/manufacturer",
@@ -11,7 +11,7 @@
   ],
   "info": {
     "version": "2.0.0",
-    "description": "API for the nterprise application",
+    "description": "In nterprise niagara, the Manufacturer refers to the company that produced a particular Part and its Units. Manufacturers need to be created by an authorized User before it can be selected on the Part form.",
     "title": "Manufacturers"
   },
   "servers": [
@@ -38,20 +38,40 @@
     "/manufacturers/{manufacturer_id}/parts": {
       "$ref": "./paths/manufacturer/parts.json"
     },
-    "/manufacturers/{manufacturer_id}/units": {
-      "$ref": "./paths/manufacturer/units.json"
-    },
     "/manufacturers/{manufacturer_id}/relations": {
       "$ref": "./paths/manufacturer/relations.json"
     },
     "/manufacturers/{manufacturer_id}/relations/{relation_id}": {
       "$ref": "./paths/manufacturer/relation.json"
+    },
+    "/manufacturers/{manufacturer_id}/units": {
+      "$ref": "./paths/manufacturer/units.json"
     }
   },
   "components": {
     "schemas": {
       "Manufacturer": {
         "$ref": "components/schemas/manufacturer.json"
+      }
+    },
+    "securitySchemes": {
+      "niagara": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "https://auth.nterprise.com/oauth/authorize",
+            "tokenUrl": "https://auth.nterprise.com/oauth/token",
+            "scopes": {
+              "manufacturer:create": "Allows creating a manufacturer",
+              "manufacturer:update": "Allows editing a manufacturer",
+              "manufacturer:delete": "Allows deleting a manufacturer",
+              "manufacturer:read": "Allows access to a manufacturer",
+              "manufacturer:attach": "Allows attaching a relation from a manufacturer",
+              "manufacturer:detach": "Allows detaching a relation from a manufacturer",
+              "manufacturer:all": "Allows reading all manufacturers"
+            }
+          }
+        }
       }
     }
   }

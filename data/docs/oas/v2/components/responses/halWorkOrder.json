@@ -279,13 +279,13 @@
         },
         "_links": {
           "nter:work-order-batches": {
-            "href": "https://api.example.com/work-orders/work-order/batches"
+            "href": "https://api.nterprise.com/work-orders/work-order/batches"
           },
           "nter:work-order-queues": {
-            "href": "https://api.example.com/work-orders/work-order/queues"
+            "href": "https://api.nterprise.com/work-orders/work-order/queues"
           },
           "self": {
-            "href": "https://api.example.com/work-orders/work-order"
+            "href": "https://api.nterprise.com/work-orders/work-order"
           }
         }
       }

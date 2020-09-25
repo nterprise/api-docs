@@ -1,0 +1,57 @@
+{
+  "get": {
+    "operationId": "fetchNotesForWorkOrder",
+    "summary": "Fetch work order notes",
+    "description": "Fetches notes for a work order",
+    "tags": [
+      "Note"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/workOrderId.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halNotePage.json"
+      }
+    },
+    "security": [
+      {
+        "niagara": [
+          "workOrder:read",
+          "note:read"
+        ]
+      }
+    ]
+  },
+  "post": {
+    "operationId": "createNoteForWorkOrder",
+    "summary": "Create workOrder note",
+    "description": "Create a note for a workOrder",
+    "tags": [
+      "Note"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/workOrderId.json"
+      }
+    ],
+    "requestBody": {
+      "$ref": "../../components/requestBodies/note.json"
+    },
+    "responses": {
+      "201": {
+        "$ref": "../../components/responses/halNote.json"
+      }
+    },
+    "security": [
+      {
+        "niagara": [
+          "workOrder:read",
+          "note:create"
+        ]
+      }
+    ]
+  }
+}

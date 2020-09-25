@@ -72,7 +72,7 @@
               "content_length": 13396,
               "_links": {
                 "self": {
-                  "href": "https://api.example.com/attachments/attachment"
+                  "href": "https://api.nterprise.com/attachments/attachment"
                 }
               }
             }
@@ -80,10 +80,10 @@
         },
         "_links": {
           "next": {
-            "href": "https://api.example.com/attachments?limit=42&offset=next-offset"
+            "href": "https://api.nterprise.com/attachments?limit=42&offset=next-offset"
           },
           "self": {
-            "href": "https://api.example.com/attachments?limit=42"
+            "href": "https://api.nterprise.com/attachments?limit=42"
           }
         }
       }

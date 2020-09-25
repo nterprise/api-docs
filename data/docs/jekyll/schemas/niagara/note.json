@@ -43,6 +43,18 @@
     },
     "created_by": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/user.json"
+    },
+    "thread_id": {
+      "$ref": "#/properties/note_id",
+      "description": "The id of the note which started a thread"
+    },
+    "issue": {
+      "type": "boolean",
+      "description": "Marks the note as an issue"
+    },
+    "edited": {
+      "type": ["null", "string"],
+      "description": "Date of the last edit for the note"
     }
   }
 }

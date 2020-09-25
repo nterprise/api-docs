@@ -225,10 +225,10 @@
         },
         "_links": {
           "next": {
-            "href": "https://api.example.com/contexts?limit=42&offset=next-offset"
+            "href": "https://api.nterprise.com/contexts?limit=42&offset=next-offset"
           },
           "self": {
-            "href": "https://api.example.com/contexts?limit=42"
+            "href": "https://api.nterprise.com/contexts?limit=42"
           }
         }
       }

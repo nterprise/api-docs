@@ -49,7 +49,7 @@
         ],
         "_links": {
           "self": {
-            "href": "https://api.example.com/fields"
+            "href": "https://api.nterprise.com/fields"
           }
         }
       }

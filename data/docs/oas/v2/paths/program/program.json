@@ -14,17 +14,15 @@
     "responses": {
       "200": {
         "$ref": "../../components/responses/halProgram.json"
-      },
-      "401": {
-        "$ref": "../../components/responses/401unauthorized.json"
-      },
-      "403": {
-        "$ref": "../../components/responses/403forbidden.json"
-      },
-      "404": {
-        "$ref": "../../components/responses/404notFound.json"
       }
-    }
+    },
+    "security": [
+      {
+        "niagara": [
+          "program:read"
+        ]
+      }
+    ]
   },
   "put": {
     "operationId": "updateProgram",
@@ -44,17 +42,15 @@
     "responses": {
       "200": {
         "$ref": "../../components/responses/halProgram.json"
-      },
-      "400": {
-        "$ref": "../../components/responses/400badRequest.json"
-      },
-      "403": {
-        "$ref": "../../components/responses/403forbidden.json"
-      },
-      "423": {
-        "$ref": "../../components/responses/423locked.json"
       }
-    }
+    },
+    "security": [
+      {
+        "niagara": [
+          "program:update"
+        ]
+      }
+    ]
   },
   "delete": {
     "operationId": "deleteProgram",
@@ -71,19 +67,14 @@
     "responses": {
       "205": {
         "description": "Program deleted"
-      },
-      "401": {
-        "$ref": "../../components/responses/401unauthorized.json"
-      },
-      "403": {
-        "$ref": "../../components/responses/403forbidden.json"
-      },
-      "404": {
-        "$ref": "../../components/responses/404notFound.json"
-      },
-      "423": {
-        "$ref": "../../components/responses/423locked.json"
       }
-    }
+    },
+    "security": [
+      {
+        "niagara": [
+          "program:delete"
+        ]
+      }
+    ]
   }
 }

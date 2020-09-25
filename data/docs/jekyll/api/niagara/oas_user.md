@@ -1,49 +1,65 @@
 ---
 layout: page
 parent: Niagara API
-nav_order: 18
+nav_order: 19
 redirect_from:
   - /rel/users
   - /rel/user
   - /rel/note-created-by
 title: Users
 ---
+<!-- Generator: Widdershins v4.0.1 -->
 
 <h1 id="users">Users</h1>
 
 * Do not remove this line (it will not be displayed)
 {:toc}
 
-API for the nterprise application
+nterprise niagara is a multi-tenant project management application, and each tenant determines its own methods for authentication and authorization.  
+
+Internal users (employees) may be authenticated through their corporate directory (e.g. Active Directory) single sign-on.  On first sign-in, users may be asked to provide additional information to optimize their nterprise experience.
+
+External users, such as customer representatives, partner employees, and subcontractors need to be created in the application before they will be able to sign in.  The administrator creating the accounts may provide all relevant information, or elect to complete the minimum for sign-in, and leave the remainder to be completed by the user on first sign-in.  
+
+Tenants that do not maintain a corporate directory, or cannot share the directory with nterpise, will need to create accounts for all users, internal as well as external.
+
+# Authentication
+
+- oAuth2 authentication. 
+
+    - Flow: authorizationCode
+    - Authorization URL = [https://auth.nterprise.com/oauth/authorize](https://auth.nterprise.com/oauth/authorize)
+    - Token URL = [https://auth.nterprise.com/oauth/token](https://auth.nterprise.com/oauth/token)
+
+|Scope|Scope Description|
+|---|---|
+|user:create|Allows creating a user|
+|user:update|Allows editing a user|
+|user:delete|Allows deleting a user|
+|user:read|Allows access to a user|
+|user:all|Allows reading all users|
 
 <h1 id="users-user">User</h1>
 
 ## Operations
 
-### GET /users - *Fetch Users*
+### GET /users
 
 <a id="opIdfetchAllUsers"></a>
 
-*Fetch Users*
-
 Fetches A Page of users
+
+<aside class="warning">
+Permissions required:<br>
+<ul><li>unit:read-all</li></ul>
+</aside>
 
 <h3 id="fetchallusers-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|limit|query|integer(int32)|false|How many items to return at one time (max 100)|
+|limit|query|integer|false|How many items to return at one time (max 100)|
 |offset|query|string|false|Continue from last offset|
-
-<!-- START responses.def -->
-
-<h3 id="fetchallusers-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|A paged response for users|Inline|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|Inline|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
 
 > Example responses
 
@@ -60,13 +76,13 @@ Fetches A Page of users
         "user_id": "3dddba3e-6122-46a8-ae26-8c7c95bd82d7",
         "created": "2019-08-19T00:01:02.639Z",
         "updated": "2019-08-19T00:01:02.639Z",
-        "name": "Chuck Reeves",
-        "email": "chuck.reeves@zones.com",
+        "name": "Daniel Jackson",
+        "email": "daniel.jackson@niagara.com",
         "profile": "https://bit.ly/18gECvy",
         "picture": "https://bit.ly/18gECvy",
         "_links": {
           "self": {
-            "href": "https://api.example.com/users/3dddba3e-6122-46a8-ae26-8c7c95bd82d7"
+            "href": "https://api.nterprise.com/users/3dddba3e-6122-46a8-ae26-8c7c95bd82d7"
           }
         }
       }
@@ -74,247 +90,39 @@ Fetches A Page of users
   },
   "_links": {
     "next": {
-      "href": "https://api.example.com/users?limit=42&offset=next-offset"
+      "href": "https://api.nterprise.com/users?limit=42&offset=next-offset"
     },
     "self": {
-      "href": "https://api.example.com/users?limit=42"
+      "href": "https://api.nterprise.com/users?limit=42"
     }
   }
 }
 ```
 
-> 401 Response
+### POST /users
 
-```json
-{
-  "title": "Unauthorized",
-  "type": "https://docs.nterprise.com/api/problem/Unauthorized",
-  "status": 401,
-  "detail": "Invalid authorization token"
-}
-```
+<a id="opIdcreateUser"></a>
 
-> 403 Response
+Creates a new user
 
-```json
-{
-  "title": "Forbidden",
-  "type": "https://docs.nterprise.com/api/problem/Forbidden",
-  "status": 403,
-  "detail": "You are forbidden from accessing this resource"
-}
-```
+<aside class="warning">
+Permissions required:<br>
+<ul><li>unit:read-all</li></ul>
+</aside>
 
-<h3 id="fetchallusers-responseschema">Response Schema</h3>
+> Body parameter
 
-Status Code **200**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; total_count|number|true|read-only|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; limit|number|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; offset|string¦null|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; _embedded|object|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; nter:users|[allOf]|false|none|none|
-
-*allOf*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; user_id|string|true|none|The identifier for the user|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; created|string(date-time)|true|read-only|Date the entity was created|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; updated|string(date-time)|true|read-only|Last date the entity was updated|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; email|string(email)|true|none|Email address|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; name|string|true|none|Human readable name|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; picture|string¦null|false|none|Image for the user|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; profile|string¦null|false|none|Link to the users profile|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; user_attributes|[object]|false|none|Array of user attributes|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; key|string|true|none|Attribute Key|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; value|string|true|none|Attribute value|
-
-*and*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _links|object|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self|object|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; href|string(uri)|false|none|none|
-
-*continued*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; _links|object|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self|object|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; href|string(uri)|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; next|object|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; href|string(uri)|false|none|none|
-
-Status Code **401**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
-Status Code **403**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
-<!-- END responses.def -->
-
-### GET /users/{user_id} - *Fetch User*
-
-<a id="opIdfetchUserById"></a>
-
-*Fetch User*
-
-Fetches a user
-
-<h3 id="fetchuserbyid-parameters">Parameters</h3>
+<h3 id="createuser-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|user_id|path|string|true|Id of the user|
-
-<!-- START responses.def -->
-
-<h3 id="fetchuserbyid-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|A user response|Inline|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|Inline|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Resource not found|Inline|
-
-> Example responses
-
-> 200 Response
-
-```json
-{
-  "user_id": "3dddba3e-6122-46a8-ae26-8c7c95bd82d7",
-  "created": "2019-08-19T00:01:02.639Z",
-  "updated": "2019-08-19T00:01:02.639Z",
-  "name": "Chuck Reeves",
-  "email": "chuck.reeves@zones.com",
-  "profile": "https://bit.ly/18gECvy",
-  "picture": "https://bit.ly/18gECvy",
-  "user_attributes": [
-    {
-      "key": "employement_status",
-      "value": "active"
-    }
-  ],
-  "_links": {
-    "self": {
-      "href": "https://api.example.com/users/3dddba3e-6122-46a8-ae26-8c7c95bd82d7"
-    }
-  }
-}
-```
-
-> 401 Response
-
-```json
-{
-  "title": "Unauthorized",
-  "type": "https://docs.nterprise.com/api/problem/Unauthorized",
-  "status": 401,
-  "detail": "Invalid authorization token"
-}
-```
-
-> 403 Response
-
-```json
-{
-  "title": "Forbidden",
-  "type": "https://docs.nterprise.com/api/problem/Forbidden",
-  "status": 403,
-  "detail": "You are forbidden from accessing this resource"
-}
-```
-
-> 404 Response
-
-```json
-{
-  "title": "Not Found",
-  "type": "https://docs.nterprise.com/api/problem/NotFound",
-  "status": 404,
-  "detail": "A Resource with the id \"foo\" was not found"
-}
-```
-
-<h3 id="fetchuserbyid-responseschema">Response Schema</h3>
-
-Status Code **401**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
-Status Code **403**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
-Status Code **404**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
-<!-- END responses.def -->
-
-### GET /users/{user_id}/relations - *Fetch User relations*
-
-<a id="opIdfetchRelationsForUser"></a>
-
-*Fetch User relations*
-
-Fetches the relations for a user
-
-<h3 id="fetchrelationsforuser-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|user_id|path|string|true|Id of the user|
-|filter[entity_type]|query|string|false|Filter on entity type|
-|filter[relation]|query|string|false|Filter on relation type|
-|filter[direction]|query|string|false|Filter on relation direction|
-
-<!-- START responses.def -->
-
-<h3 id="fetchrelationsforuser-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|A paged response for relations|Inline|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|Inline|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Resource not found|Inline|
+|email|body|string(email)|true|Email address|
+|name|body|string|false|Human readable name|
+|picture|body|string¦null|false|Image for the user|
+|profile|body|string¦null|false|Link to the users profile|
+|user_attributes|body|[object]|false|Array of user attributes|
+|&nbsp;&nbsp; key|body|string|true|Attribute Key|
+|&nbsp;&nbsp; value|body|string|true|Attribute value|
 
 > Example responses
 
@@ -326,27 +134,18 @@ Fetches the relations for a user
   "limit": 42,
   "offset": "next-offset",
   "_embedded": {
-    "nter:relations": [
+    "nter:users": [
       {
-        "relation_id": "VVNFUiNyZWw6Y3JlYXRlZCM3ZTg4OTMyMS0yZWNmLTQzMjctODYyOS0yMzNhNzU1NmRmMmI",
-        "relation": "created",
-        "label": "Created By",
-        "direction": "INWARD",
-        "created": "2020-01-09T22:12:03.000Z",
-        "updated": "2020-01-09T22:12:03.000Z",
-        "entity": {
-          "entity_type": "USER",
-          "entity_id": "b0a84f51-443e-4ff1-9667-73b66be7435a",
-          "label": "Bob Alice",
-          "created": "2020-01-09T22:12:03.000Z",
-          "updated": "2020-01-09T22:12:03.000Z"
-        },
+        "user_id": "3dddba3e-6122-46a8-ae26-8c7c95bd82d7",
+        "created": "2019-08-19T00:01:02.639Z",
+        "updated": "2019-08-19T00:01:02.639Z",
+        "name": "Daniel Jackson",
+        "email": "daniel.jackson@niagara.com",
+        "profile": "https://bit.ly/18gECvy",
+        "picture": "https://bit.ly/18gECvy",
         "_links": {
           "self": {
-            "href": "https://api.nterprise.com/{entity}/{entity_id}/relations/VVNFUiNyZWw6Y3JlYXRlZCM3ZTg4OTMyMS0yZWNmLTQzMjctODYyOS0yMzNhNzU1NmRmMmI"
-          },
-          "nter:user": {
-            "href": "https://api.nterprise.com/users/b0a84f51-443e-4ff1-9667-73b66be7435a"
+            "href": "https://api.nterprise.com/users/3dddba3e-6122-46a8-ae26-8c7c95bd82d7"
           }
         }
       }
@@ -354,290 +153,31 @@ Fetches the relations for a user
   },
   "_links": {
     "next": {
-      "href": "https://api.example.com/{entity}/{entity_id}/relations?offset=next-offset"
+      "href": "https://api.nterprise.com/users?limit=42&offset=next-offset"
     },
     "self": {
-      "href": "https://api.example.com/{entity}/{entity_id}/relations"
+      "href": "https://api.nterprise.com/users?limit=42"
     }
   }
 }
 ```
 
-> 401 Response
+### GET /users/{user_id}
 
-```json
-{
-  "title": "Unauthorized",
-  "type": "https://docs.nterprise.com/api/problem/Unauthorized",
-  "status": 401,
-  "detail": "Invalid authorization token"
-}
-```
+<a id="opIdfetchUserById"></a>
 
-> 403 Response
+Fetches a user by the user Id
 
-```json
-{
-  "title": "Forbidden",
-  "type": "https://docs.nterprise.com/api/problem/Forbidden",
-  "status": 403,
-  "detail": "You are forbidden from accessing this resource"
-}
-```
+<aside class="warning">
+Permissions required:<br>
 
-> 404 Response
+</aside>
 
-```json
-{
-  "title": "Not Found",
-  "type": "https://docs.nterprise.com/api/problem/NotFound",
-  "status": 404,
-  "detail": "A Resource with the id \"foo\" was not found"
-}
-```
-
-<h3 id="fetchrelationsforuser-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; total_count|number|true|read-only|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; limit|number|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; offset|string¦null|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; _embedded|object|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; nter:relations|[allOf]|true|none|none|
-
-*allOf*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; relation_id|string|true|none|Custom identifier for the relation|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; relation|string|true|none|Type of relation|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; label|string|true|none|Label for the relation|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; direction|string|true|none|Direction of the relation. OUTWARD relations are entities this relates to while INWARD are entities related to this entity|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; created|string(date-time)|true|read-only|Date the entity was created|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; updated|string(date-time)|true|read-only|Last date the entity was updated|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; entity|object|false|none|Related entity information|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; entity_id|string|true|read-only|Entity identifier|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; entity_type|string|true|none|Entity type|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; label|string|true|none|Label for the entity|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; created|string(date-time)|true|read-only|Date the entity was created|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; updated|string(date-time)|true|read-only|Last date the entity was updated|
-
-*and*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _links|object|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **additionalProperties**|object|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; href|string(uri)|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self|object|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; href|string(uri)|false|none|none|
-
-*continued*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; _links|object|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self|object|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; href|string(uri)|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; next|object|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; href|string(uri)|false|none|none|
-
-Status Code **401**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
-Status Code **403**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
-Status Code **404**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
-<!-- END responses.def -->
-
-### POST /users/{user_id}/relations - *Create relation*
-
-<a id="opIdcreateRelationForUser"></a>
-
-*Create relation*
-
-Creates a relation for a user
-
-> Body parameter
-
-<h3 id="createrelationforuser-parameters">Parameters</h3>
+<h3 id="fetchuserbyid-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |user_id|path|string|true|Id of the user|
-|relation|body|string|true|Type of relation|
-|entity|body|object|true|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; entity_id|body|string|true|Entity identifier|
-|&nbsp;&nbsp;&nbsp;&nbsp; entity_type|body|string|true|Entity type|
-
-<!-- START responses.def -->
-
-<h3 id="createrelationforuser-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|A paged response for relations|Inline|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad Request|Inline|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|Inline|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
-
-> Example responses
-
-> 201 Response
-
-```json
-{
-  "relation_id": "VVNFUiNyZWw6Y3JlYXRlZCM3ZTg4OTMyMS0yZWNmLTQzMjctODYyOS0yMzNhNzU1NmRmMmI",
-  "relation": "created",
-  "label": "Created By",
-  "direction": "INWARD",
-  "created": "2020-01-09T22:12:03.000Z",
-  "updated": "2020-01-09T22:12:03.000Z",
-  "entity": {
-    "entity_type": "USER",
-    "entity_id": "b0a84f51-443e-4ff1-9667-73b66be7435a",
-    "label": "Bob Alice",
-    "created": "2020-01-09T22:12:03.000Z",
-    "updated": "2020-01-09T22:12:03.000Z"
-  },
-  "_links": {
-    "self": {
-      "href": "https://api.nterprise.com/{entity}/{entity_id}/relations/VVNFUiNyZWw6Y3JlYXRlZCM3ZTg4OTMyMS0yZWNmLTQzMjctODYyOS0yMzNhNzU1NmRmMmI"
-    },
-    "nter:user": {
-      "href": "https://api.nterprise.com/users/b0a84f51-443e-4ff1-9667-73b66be7435a"
-    }
-  }
-}
-```
-
-> 400 Response
-
-```json
-{
-  "title": "Bad Request",
-  "type": "https://docs.nterprise.com/api/problem/BadRequest",
-  "status": 400,
-  "detail": "Invalid Data",
-  "validation_messages": [
-    {
-      "keyword": "field",
-      "dataPath": ".field",
-      "schemaPath": "https://docs.nterprise.com/schemas/niagara/foo.json#/properties/field",
-      "params": {
-        "type": "string"
-      },
-      "message": "should be string"
-    }
-  ]
-}
-```
-
-> 401 Response
-
-```json
-{
-  "title": "Unauthorized",
-  "type": "https://docs.nterprise.com/api/problem/Unauthorized",
-  "status": 401,
-  "detail": "Invalid authorization token"
-}
-```
-
-> 403 Response
-
-```json
-{
-  "title": "Forbidden",
-  "type": "https://docs.nterprise.com/api/problem/Forbidden",
-  "status": 403,
-  "detail": "You are forbidden from accessing this resource"
-}
-```
-
-<h3 id="createrelationforuser-responseschema">Response Schema</h3>
-
-Status Code **400**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|true|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; validation_messages|[object]|true|none|List of errors detailing the failures|
-
-Status Code **401**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
-Status Code **403**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
-<!-- END responses.def -->
-
-### DELETE /users/{user_id}/relations/{relation_id} - *Delete relation for user*
-
-<a id="opIddeleteRelationForUser"></a>
-
-*Delete relation for user*
-
-Deletes a relation for a user
-
-<h3 id="deleterelationforuser-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|user_id|path|string|true|Id of the user|
-|relation_id|path|string|true|Id of the relation|
-
-<!-- START responses.def -->
-
-<h3 id="deleterelationforuser-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|A paged response for relations|Inline|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|Inline|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Resource not found|Inline|
 
 > Example responses
 
@@ -645,93 +185,96 @@ Deletes a relation for a user
 
 ```json
 {
-  "relation_id": "VVNFUiNyZWw6Y3JlYXRlZCM3ZTg4OTMyMS0yZWNmLTQzMjctODYyOS0yMzNhNzU1NmRmMmI",
-  "relation": "created",
-  "label": "Created By",
-  "direction": "INWARD",
-  "created": "2020-01-09T22:12:03.000Z",
-  "updated": "2020-01-09T22:12:03.000Z",
-  "entity": {
-    "entity_type": "USER",
-    "entity_id": "b0a84f51-443e-4ff1-9667-73b66be7435a",
-    "label": "Bob Alice",
-    "created": "2020-01-09T22:12:03.000Z",
-    "updated": "2020-01-09T22:12:03.000Z"
-  },
+  "user_id": "3dddba3e-6122-46a8-ae26-8c7c95bd82d7",
+  "created": "2019-08-19T00:01:02.639Z",
+  "updated": "2019-08-19T00:01:02.639Z",
+  "name": "Daniel Jackson",
+  "email": "daniel.jackson@niagara.com",
+  "profile": "https://bit.ly/18gECvy",
+  "picture": "https://bit.ly/18gECvy",
+  "user_attributes": [
+    {
+      "key": "employement_status",
+      "value": "active"
+    }
+  ],
   "_links": {
     "self": {
-      "href": "https://api.nterprise.com/{entity}/{entity_id}/relations/VVNFUiNyZWw6Y3JlYXRlZCM3ZTg4OTMyMS0yZWNmLTQzMjctODYyOS0yMzNhNzU1NmRmMmI"
-    },
-    "nter:user": {
-      "href": "https://api.nterprise.com/users/b0a84f51-443e-4ff1-9667-73b66be7435a"
+      "href": "https://api.nterprise.com/users/3dddba3e-6122-46a8-ae26-8c7c95bd82d7"
     }
   }
 }
 ```
 
-> 401 Response
+### PUT /users/{user_id}
+
+<a id="opIdupdateUser"></a>
+
+Updates a new user following the user schema
+
+<aside class="warning">
+Permissions required:<br>
+
+</aside>
+
+> Body parameter
+
+<h3 id="updateuser-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|user_id|path|string|true|Id of the user|
+|email|body|string(email)|true|Email address|
+|name|body|string|false|Human readable name|
+|picture|body|string¦null|false|Image for the user|
+|profile|body|string¦null|false|Link to the users profile|
+|user_attributes|body|[object]|false|Array of user attributes|
+|&nbsp;&nbsp; key|body|string|true|Attribute Key|
+|&nbsp;&nbsp; value|body|string|true|Attribute value|
+
+> Example responses
+
+> 200 Response
 
 ```json
 {
-  "title": "Unauthorized",
-  "type": "https://docs.nterprise.com/api/problem/Unauthorized",
-  "status": 401,
-  "detail": "Invalid authorization token"
+  "user_id": "3dddba3e-6122-46a8-ae26-8c7c95bd82d7",
+  "created": "2019-08-19T00:01:02.639Z",
+  "updated": "2019-08-19T00:01:02.639Z",
+  "name": "Daniel Jackson",
+  "email": "daniel.jackson@niagara.com",
+  "profile": "https://bit.ly/18gECvy",
+  "picture": "https://bit.ly/18gECvy",
+  "user_attributes": [
+    {
+      "key": "employement_status",
+      "value": "active"
+    }
+  ],
+  "_links": {
+    "self": {
+      "href": "https://api.nterprise.com/users/3dddba3e-6122-46a8-ae26-8c7c95bd82d7"
+    }
+  }
 }
 ```
 
-> 403 Response
+### DELETE /users/{user_id}
 
-```json
-{
-  "title": "Forbidden",
-  "type": "https://docs.nterprise.com/api/problem/Forbidden",
-  "status": 403,
-  "detail": "You are forbidden from accessing this resource"
-}
-```
+<a id="opIddeleteUser"></a>
 
-> 404 Response
+This will remove the user from the system
 
-```json
-{
-  "title": "Not Found",
-  "type": "https://docs.nterprise.com/api/problem/NotFound",
-  "status": 404,
-  "detail": "A Resource with the id \"foo\" was not found"
-}
-```
+<aside class="warning">
+Permissions required:<br>
 
-<h3 id="deleterelationforuser-responseschema">Response Schema</h3>
+</aside>
 
-Status Code **401**
+<h3 id="deleteuser-parameters">Parameters</h3>
 
-|Name|Type|Required|Restrictions|Description|
+|Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
-Status Code **403**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
-Status Code **404**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; title|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; type|string|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; detail|string|false|none|none|
-
-<!-- END responses.def -->
+|user_id|path|string|true|Id of the user|
 
 # Embedded Schemas
 
@@ -754,8 +297,12 @@ Status Code **404**
 |picture|string¦null|false|none|Image for the user|
 |profile|string¦null|false|none|Link to the users profile|
 |user_attributes|[object]|false|none|Array of user attributes|
-|&nbsp;&nbsp;&nbsp;&nbsp; key|string|true|none|Attribute Key|
-|&nbsp;&nbsp;&nbsp;&nbsp; value|string|true|none|Attribute value|
+|&nbsp;&nbsp; key|string|true|none|Attribute Key|
+|&nbsp;&nbsp; value|string|true|none|Attribute value|
+|notification|object|false|none|Count of notifications for the user|
+|&nbsp;&nbsp; read|number|false|none|Number of read messages|
+|&nbsp;&nbsp; unread|number|false|none|Number of un-read messages|
+|&nbsp;&nbsp; archived|number|false|none|Number of archived messages|
 
 #### Specification
 
@@ -803,6 +350,7 @@ properties:
     items:
       type: object
       description: User Attribute
+      maxItems: 15
       required:
         - key
         - value
@@ -813,6 +361,19 @@ properties:
         value:
           description: Attribute value
           type: string
+  notification:
+    type: object
+    description: Count of notifications for the user
+    properties:
+      read:
+        type: number
+        description: Number of read messages
+      unread:
+        type: number
+        description: Number of un-read messages
+      archived:
+        type: number
+        description: Number of archived messages
 
 ```
 

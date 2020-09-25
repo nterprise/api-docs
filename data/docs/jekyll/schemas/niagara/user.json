@@ -58,6 +58,7 @@
       "items": {
         "type": "object",
         "description": "User Attribute",
+        "maxItems": 15,
         "required": [
           "key",
           "value"
@@ -73,6 +74,9 @@
           }
         }
       }
+    },
+    "notifications": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/contact.json#/properties/notifications"
     }
   }
 }

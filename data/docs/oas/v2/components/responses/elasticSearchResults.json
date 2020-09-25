@@ -1,0 +1,28 @@
+{
+  "description": "Me Response",
+  "content": {
+    "application/json": {
+      "schema": {
+        "allOf": [
+          {
+            "$ref": "../schemas/searchResults.json"
+          }
+        ]
+      },
+      "example": {
+        "data": {
+          "hits": {
+            "hits": [
+              {
+                "_source": {
+                  "entity_type": "CUS",
+                  "entity_id": "one"
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

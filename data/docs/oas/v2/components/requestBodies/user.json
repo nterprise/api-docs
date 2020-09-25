@@ -1,0 +1,30 @@
+{
+  "description": "A User request body",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "required": [
+          "email"
+        ],
+        "properties": {
+          "email": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/user.json#/properties/email"
+          },
+          "name": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/user.json#/properties/name"
+          },
+          "picture": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/user.json#/properties/picture"
+          },
+          "profile": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/user.json#/properties/profile"
+          },
+          "user_attributes": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/user.json#/properties/user_attributes"
+          }
+        }
+      }
+    }
+  }
+}

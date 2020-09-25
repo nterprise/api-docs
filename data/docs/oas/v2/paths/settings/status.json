@@ -9,14 +9,15 @@
     "responses": {
       "200": {
         "$ref": "../../components/responses/settingsStatus.json"
-      },
-      "401": {
-        "$ref": "../../components/responses/401unauthorized.json"
-      },
-      "403": {
-        "$ref": "../../components/responses/403forbidden.json"
       }
-    }
+    },
+    "security": [
+      {
+        "niagara": [
+          "tenant:read"
+        ]
+      }
+    ]
   },
   "post": {
     "operationId": "createStatus",
@@ -31,16 +32,14 @@
     "responses": {
       "200": {
         "$ref": "../../components/responses/settingsStatus.json"
-      },
-      "400": {
-        "$ref": "../../components/responses/400badRequest.json"
-      },
-      "401": {
-        "$ref": "../../components/responses/401unauthorized.json"
-      },
-      "403": {
-        "$ref": "../../components/responses/403forbidden.json"
       }
-    }
+    },
+    "security": [
+      {
+        "niagara": [
+          "tenant:settings"
+        ]
+      }
+    ]
   }
 }
