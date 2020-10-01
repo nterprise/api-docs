@@ -1,0 +1,55 @@
+{
+  "get": {
+    "operationId": "fetchActionsForLocation",
+    "summary": "Fetch Location Actions",
+    "description": "Fetch a page of actions for a location",
+    "tags": [
+      "Action"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/locationId.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halActionPage.json"
+      }
+    },
+    "security": [
+      {
+        "niagara": [
+          "action:read"
+        ]
+      }
+    ]
+  },
+  "post": {
+    "operationId": "createActionForLocation",
+    "summary": "Create an action for this location",
+    "description": "Creates a new action",
+    "tags": [
+      "Action"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/locationId.json"
+      }
+    ],
+    "requestBody": {
+      "$ref": "../../components/requestBodies/action.json"
+    },
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halAction.json"
+      }
+    },
+    "security": [
+      {
+        "niagara": [
+          "action:create"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "get": {
+    "operationId": "fetchActionsForProject",
+    "summary": "Fetch Project Actions",
+    "description": "Fetch a page of actions for a project",
+    "tags": [
+      "Action"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/projectId.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halActionPage.json"
+      }
+    },
+    "security": [
+      {
+        "niagara": [
+          "action:read"
+        ]
+      }
+    ]
+  },
+  "post": {
+    "operationId": "createActionForProject",
+    "summary": "Create an action for this project",
+    "description": "Creates a new action",
+    "tags": [
+      "Action"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/projectId.json"
+      }
+    ],
+    "requestBody": {
+      "$ref": "../../components/requestBodies/action.json"
+    },
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halAction.json"
+      }
+    },
+    "security": [
+      {
+        "niagara": [
+          "action:create"
+        ]
+      }
+    ]
+  }
+}

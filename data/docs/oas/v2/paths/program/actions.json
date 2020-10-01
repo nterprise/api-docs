@@ -1,0 +1,55 @@
+{
+  "get": {
+    "operationId": "fetchActionsForProgram",
+    "summary": "Fetch Program Actions",
+    "description": "Fetch a page of actions for a program",
+    "tags": [
+      "Action"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/programId.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halActionPage.json"
+      }
+    },
+    "security": [
+      {
+        "niagara": [
+          "action:read"
+        ]
+      }
+    ]
+  },
+  "post": {
+    "operationId": "createActionForProgram",
+    "summary": "Create an action for this program",
+    "description": "Creates a new action",
+    "tags": [
+      "Action"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/programId.json"
+      }
+    ],
+    "requestBody": {
+      "$ref": "../../components/requestBodies/action.json"
+    },
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halAction.json"
+      }
+    },
+    "security": [
+      {
+        "niagara": [
+          "action:create"
+        ]
+      }
+    ]
+  }
+}

@@ -33,6 +33,9 @@
     },
     "/users/{user_id}": {
       "$ref": "./paths/user/user.json"
+    },
+    "/users/{user_id}/actions": {
+      "$ref": "./paths/user/actions.json"
     }
   },
   "components": {

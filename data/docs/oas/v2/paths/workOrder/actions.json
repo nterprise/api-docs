@@ -1,0 +1,55 @@
+{
+  "get": {
+    "operationId": "fetchActionsForWorkOrder",
+    "summary": "Fetch Work Order Actions",
+    "description": "Fetch a page of actions for a work order",
+    "tags": [
+      "Action"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/workOrderId.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halActionPage.json"
+      }
+    },
+    "security": [
+      {
+        "niagara": [
+          "action:read"
+        ]
+      }
+    ]
+  },
+  "post": {
+    "operationId": "createActionForWorkOrder",
+    "summary": "Create an action for this workOrder",
+    "description": "Creates a new action",
+    "tags": [
+      "Action"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/workOrderId.json"
+      }
+    ],
+    "requestBody": {
+      "$ref": "../../components/requestBodies/action.json"
+    },
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halAction.json"
+      }
+    },
+    "security": [
+      {
+        "niagara": [
+          "action:create"
+        ]
+      }
+    ]
+  }
+}

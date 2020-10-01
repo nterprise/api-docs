@@ -1,0 +1,55 @@
+{
+  "get": {
+    "operationId": "fetchActionsForManufacturer",
+    "summary": "Fetch Manufacturer Actions",
+    "description": "Fetch a page of actions for a manufacturer",
+    "tags": [
+      "Action"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/manufacturerId.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halActionPage.json"
+      }
+    },
+    "security": [
+      {
+        "niagara": [
+          "action:read"
+        ]
+      }
+    ]
+  },
+  "post": {
+    "operationId": "createActionForManufacturer",
+    "summary": "Create an action for this manufacturer",
+    "description": "Creates a new action",
+    "tags": [
+      "Action"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/manufacturerId.json"
+      }
+    ],
+    "requestBody": {
+      "$ref": "../../components/requestBodies/action.json"
+    },
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halAction.json"
+      }
+    },
+    "security": [
+      {
+        "niagara": [
+          "action:create"
+        ]
+      }
+    ]
+  }
+}

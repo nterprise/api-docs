@@ -147,7 +147,7 @@ Permissions required:<br>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|attachment_id|path|string|true|Id of the batch|
+|attachment_id|path|string|true|Id of the attachment|
 
 > Example responses
 
@@ -187,7 +187,7 @@ Permissions required:<br>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|attachment_id|path|string|true|Id of the batch|
+|attachment_id|path|string|true|Id of the attachment|
 
 # Embedded Schemas
 

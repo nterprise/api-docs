@@ -1,6 +1,5 @@
 const {folders} = require('../../folders');
 const _ = require('lodash');
-const fs = require('fs');
 
 exports.command = 'permission';
 exports.describe = 'Generates the permission table';
@@ -142,5 +141,10 @@ exports.handler = async (argv) => {
         fileName,
         fileStr,
     );
-}
-;
+
+    // Sort the permissions file in the end
+    argv._writeFile(
+        permissionFile,
+        JSON.stringify(permissions, null, 2),
+    );
+};

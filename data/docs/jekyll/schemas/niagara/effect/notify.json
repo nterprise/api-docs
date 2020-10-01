@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/effect/notify.json",
+  "type": "object",
+  "description": "Effect which notifies a user",
+  "additionalProperties": false,
+  "required": [
+    "effect_type",
+    "contacts",
+    "label",
+    "message",
+    "severity"
+  ],
+  "properties": {
+    "effect_type": {
+      "type": "string",
+      "description": "Name of the effect type",
+      "const": "notify"
+    },
+    "contacts": {
+      "type": "array",
+      "description": "List of contacts to notify",
+      "maxItems": 10,
+      "items": {
+        "$ref": "https://docs.nterprise.com/schemas/niagara/contact.json#/properties/contact_id"
+      }
+    },
+    "label": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/notification.json#/properties/label"
+    },
+    "message": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/notification.json#/properties/message"
+    },
+    "severity": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/notification.json#/properties/severity"
+    }
+  }
+}

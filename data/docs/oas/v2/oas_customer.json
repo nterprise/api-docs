@@ -56,6 +56,9 @@
     },
     "/customers/{customer_id}/work-orders": {
       "$ref": "./paths/customer/workOrders.json"
+    },
+    "/customers/{customer_id}/actions": {
+      "$ref": "./paths/customer/actions.json"
     }
   },
   "components": {

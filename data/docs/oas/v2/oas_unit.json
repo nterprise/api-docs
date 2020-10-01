@@ -42,6 +42,9 @@
     },
     "/units/{unit_id}/relations/{relation_id}": {
       "$ref": "./paths/unit/relation.json"
+    },
+    "/units/{unit_id}/actions": {
+      "$ref": "./paths/unit/actions.json"
     }
   },
   "components": {

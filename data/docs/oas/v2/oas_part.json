@@ -44,6 +44,9 @@
     },
     "/parts/{part_id}/units": {
       "$ref": "./paths/part/units.json"
+    },
+    "/parts/{part_id}/actions": {
+      "$ref": "./paths/part/actions.json"
     }
   },
   "components": {

@@ -44,6 +44,9 @@
     },
     "/projects/{project_id}/work-orders": {
       "$ref": "./paths/project/workOrders.json"
+    },
+    "/projects/{project_id}/actions": {
+      "$ref": "./paths/project/actions.json"
     }
   },
   "components": {

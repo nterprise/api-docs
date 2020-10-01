@@ -47,6 +47,9 @@
     },
     "/programs/{program_id}/relations/{relation_id}": {
       "$ref": "./paths/program/relation.json"
+    },
+    "/programs/{program_id}/actions": {
+      "$ref": "./paths/program/actions.json"
     }
   },
   "components": {

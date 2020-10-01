@@ -46,6 +46,9 @@
     },
     "/manufacturers/{manufacturer_id}/units": {
       "$ref": "./paths/manufacturer/units.json"
+    },
+    "/manufacturers/{manufacturer_id}/actions": {
+      "$ref": "./paths/manufacturer/actions.json"
     }
   },
   "components": {

@@ -9,7 +9,8 @@
     "entity_id",
     "entity_type",
     "created",
-    "updated"
+    "updated",
+    "email"
   ],
   "properties": {
     "contact_id": {

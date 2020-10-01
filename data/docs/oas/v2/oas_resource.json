@@ -49,12 +49,18 @@
     },
     "/resources/{resource_id}/sub-resources": {
       "$ref": "./paths/resource/subResources.json"
+  },
+    "/resources/{resource_id}/actions": {
+      "$ref": "./paths/resource/actions.json"
     },
     "/sub-resources": {
       "$ref": "./paths/subResource/subResources.json"
     },
     "/sub-resources/{sub_resource_id}": {
       "$ref": "./paths/subResource/subResource.json"
+    },
+    "/sub-resources/{sub_resource_id}/actions": {
+      "$ref": "./paths/subResource/actions.json"
     }
   },
   "components": {
