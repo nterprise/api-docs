@@ -143,14 +143,17 @@ Permissions required:<br>
 |effect|body|[anyOf]|true|Effect to apply|
 |&nbsp;&nbsp; *anonymous*|body|object|false|Effect which notifies a user|
 |&nbsp;&nbsp;&nbsp;&nbsp; effect_type|body|string|true|Name of the effect type|
-|&nbsp;&nbsp;&nbsp;&nbsp; contacts|body|[string]|true|List of contacts to notify|
-|&nbsp;&nbsp;&nbsp;&nbsp; label|body|string|true|Label for the entity|
-|&nbsp;&nbsp;&nbsp;&nbsp; message|body|string|true|The message|
-|&nbsp;&nbsp;&nbsp;&nbsp; severity|body|string|true|Severity of the notification|
+|&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|Options for the effect|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; contacts|body|[string]|true|List of contacts to notify|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; label|body|string|true|Label for the entity|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; message|body|string|true|The message|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; severity|body|string|true|Severity of the notification|
 |&nbsp;&nbsp; *anonymous*|body|object|false|Effect which notifies a user|
-|&nbsp;&nbsp;&nbsp;&nbsp; entity|body|any|true|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; property|body|string|true|Entity property to update|
-|&nbsp;&nbsp;&nbsp;&nbsp; value|body|string|true|Value to set|
+|&nbsp;&nbsp;&nbsp;&nbsp; effect_type|body|string|true|Name of the effect type|
+|&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|Options for the effect|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; entity|body|any|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; property|body|string|true|Entity property to update|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; value|body|string|true|Value to set|
 
 > Example responses
 
@@ -521,74 +524,92 @@ properties:
           additionalProperties: false
           required:
             - effect_type
-            - contacts
-            - label
-            - message
-            - severity
+            - options
           properties:
             effect_type:
               type: string
               description: Name of the effect type
               enum:
                 - notify
-            contacts:
-              type: array
-              description: List of contacts to notify
-              maxItems: 10
-              items:
-                description: Identifier for the contact
-                type: string
-                readOnly: true
-                pattern: ^[0-9a-zA-Z-_]+$
-            label:
-              type: string
-              description: Label for the entity
-            message:
-              type: string
-              description: The message
-            severity:
-              type: string
-              description: Severity of the notification
-              enum:
-                - normal
-                - issue
-                - resolved
+            options:
+              type: object
+              description: Options for the effect
+              required:
+                - contacts
+                - label
+                - message
+                - severity
+              properties:
+                contacts:
+                  type: array
+                  description: List of contacts to notify
+                  maxItems: 10
+                  items:
+                    description: Identifier for the contact
+                    type: string
+                    readOnly: true
+                    pattern: ^[0-9a-zA-Z-_]+$
+                label:
+                  type: string
+                  description: Label for the entity
+                message:
+                  type: string
+                  description: The message
+                severity:
+                  type: string
+                  description: Severity of the notification
+                  enum:
+                    - normal
+                    - issue
+                    - resolved
         - type: object
           description: Effect which notifies a user
           additionalProperties: false
           required:
-            - entity
-            - property
-            - value
+            - effect_type
+            - options
           properties:
-            entity:
+            effect_type:
+              type: string
+              description: Name of the effect type
               enum:
-                - BAT
-                - CON
-                - CTX
-                - FILE
-                - LOC
-                - MFR
-                - NOTE
-                - PART
-                - PGM
-                - PRJ
-                - PUSH
-                - QUE
-                - RES
-                - SRES
-                - ROLE
-                - UNIT
-                - USER
-                - VEN
-                - WKF
-                - WOR
-            property:
-              type: string
-              description: Entity property to update
-            value:
-              type: string
-              description: Value to set
+                - notify
+            options:
+              type: object
+              description: Options for the effect
+              required:
+                - entity
+                - property
+                - value
+              properties:
+                entity:
+                  enum:
+                    - BAT
+                    - CON
+                    - CTX
+                    - FILE
+                    - LOC
+                    - MFR
+                    - NOTE
+                    - PART
+                    - PGM
+                    - PRJ
+                    - PUSH
+                    - QUE
+                    - RES
+                    - SRES
+                    - ROLE
+                    - UNIT
+                    - USER
+                    - VEN
+                    - WKF
+                    - WOR
+                property:
+                  type: string
+                  description: Entity property to update
+                value:
+                  type: string
+                  description: Value to set
 
 ```
 

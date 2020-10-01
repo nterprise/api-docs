@@ -1068,14 +1068,17 @@ Permissions required:<br>
 |effect|body|[anyOf]|true|Effect to apply|
 |&nbsp;&nbsp; *anonymous*|body|object|false|Effect which notifies a user|
 |&nbsp;&nbsp;&nbsp;&nbsp; effect_type|body|string|true|Name of the effect type|
-|&nbsp;&nbsp;&nbsp;&nbsp; contacts|body|[string]|true|List of contacts to notify|
-|&nbsp;&nbsp;&nbsp;&nbsp; label|body|string|true|Label for the entity|
-|&nbsp;&nbsp;&nbsp;&nbsp; message|body|string|true|The message|
-|&nbsp;&nbsp;&nbsp;&nbsp; severity|body|string|true|Severity of the notification|
+|&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|Options for the effect|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; contacts|body|[string]|true|List of contacts to notify|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; label|body|string|true|Label for the entity|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; message|body|string|true|The message|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; severity|body|string|true|Severity of the notification|
 |&nbsp;&nbsp; *anonymous*|body|object|false|Effect which notifies a user|
-|&nbsp;&nbsp;&nbsp;&nbsp; entity|body|any|true|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; property|body|string|true|Entity property to update|
-|&nbsp;&nbsp;&nbsp;&nbsp; value|body|string|true|Value to set|
+|&nbsp;&nbsp;&nbsp;&nbsp; effect_type|body|string|true|Name of the effect type|
+|&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|Options for the effect|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; entity|body|any|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; property|body|string|true|Entity property to update|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; value|body|string|true|Value to set|
 
 > Example responses
 

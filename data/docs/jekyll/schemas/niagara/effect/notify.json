@@ -6,10 +6,7 @@
   "additionalProperties": false,
   "required": [
     "effect_type",
-    "contacts",
-    "label",
-    "message",
-    "severity"
+    "options"
   ],
   "properties": {
     "effect_type": {
@@ -17,22 +14,35 @@
       "description": "Name of the effect type",
       "const": "notify"
     },
-    "contacts": {
-      "type": "array",
-      "description": "List of contacts to notify",
-      "maxItems": 10,
-      "items": {
-        "$ref": "https://docs.nterprise.com/schemas/niagara/contact.json#/properties/contact_id"
+    "options": {
+      "type": "object",
+      "description": "Options for the effect",
+      "required": [
+        "contacts",
+        "label",
+        "message",
+        "severity"
+      ],
+      "properties": {
+        "contacts": {
+          "type": "array",
+          "description": "List of contacts to notify",
+          "maxItems": 10,
+          "items": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/contact.json#/properties/contact_id"
+          }
+        },
+        "label": {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/notification.json#/properties/label"
+        },
+        "message": {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/notification.json#/properties/message"
+        },
+        "severity": {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/notification.json#/properties/severity"
+        }
       }
-    },
-    "label": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/notification.json#/properties/label"
-    },
-    "message": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/notification.json#/properties/message"
-    },
-    "severity": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/notification.json#/properties/severity"
     }
+
   }
 }

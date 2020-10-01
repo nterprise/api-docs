@@ -5,21 +5,36 @@
   "description": "Effect which notifies a user",
   "additionalProperties": false,
   "required": [
-    "entity",
-    "property",
-    "value"
+    "effect_type",
+    "options"
   ],
   "properties": {
-    "entity": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_type"
-    },
-    "property": {
+    "effect_type": {
       "type": "string",
-      "description": "Entity property to update"
+      "description": "Name of the effect type",
+      "const": "notify"
     },
-    "value": {
-      "type": "string",
-      "description": "Value to set"
+    "options": {
+      "type": "object",
+      "description": "Options for the effect",
+      "required": [
+        "entity",
+        "property",
+        "value"
+      ],
+      "properties": {
+        "entity": {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_type"
+        },
+        "property": {
+          "type": "string",
+          "description": "Entity property to update"
+        },
+        "value": {
+          "type": "string",
+          "description": "Value to set"
+        }
+      }
     }
   }
 }
