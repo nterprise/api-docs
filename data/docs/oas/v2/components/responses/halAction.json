@@ -1,0 +1,51 @@
+{
+  "description": "A batch response",
+  "content": {
+    "application/hal+json": {
+      "schema": {
+        "$ref": "../schemas/halAction.json"
+      },
+      "example": {
+        "action_id": "action",
+        "label": "Update status when workflow starts",
+        "created": "2019-08-19T00:01:02.000Z",
+        "updated": "2020-08-19T01:01:02.000Z",
+        "event": "WOR.status-changed",
+        "entity": {
+          "entity_type": "CUS",
+          "entity_id": "customer"
+        },
+        "order": "a",
+        "sequence": "after",
+        "criteria": [
+          {
+            "entity": "WOR",
+            "property": "current_status",
+            "operator": "equals",
+            "value": {
+              "status": "Completed",
+              "category": "COMPLETE"
+            }
+          }
+        ],
+        "effect": [
+          {
+            "effect_type": "notify",
+            "contacts": [
+              "contact_one",
+              "contact_two"
+            ],
+            "label": "Work order complete",
+            "message": "A work order has completed",
+            "severity": "normal"
+          }
+        ],
+        "_links": {
+          "self": {
+            "href": "https://api.nterprise.com/actions/action"
+          }
+        }
+      }
+    }
+  }
+}

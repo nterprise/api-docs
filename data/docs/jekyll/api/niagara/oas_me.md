@@ -321,7 +321,7 @@ Permissions required:<br>
 |---|---|---|---|---|
 |limit|query|integer|false|How many items to return at one time (max 100)|
 |offset|query|string|false|Continue from last offset|
-|q|query|string|false|Simple Search term|
+|filter[read]|query|boolean|false|Filter on the read flag|
 |filter[archive]|query|boolean|false|Filter on the archived flag|
 
 > Example responses

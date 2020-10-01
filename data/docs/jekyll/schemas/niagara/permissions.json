@@ -1,4 +1,67 @@
 {
+  "action:create": {
+    "grants": [
+      "action:read",
+      "action:update",
+      "action:delete"
+    ],
+    "grants_child": [],
+    "required": [],
+    "location": false,
+    "description": "Allows creating a action",
+    "hidden": false
+  },
+  "action:create-global": {
+    "grants": [
+      "action:update",
+      "action:delete"
+    ],
+    "grants_child": [],
+    "required": [
+      "action:read"
+    ],
+    "location": false,
+    "description": "Allows creating an action anywhere",
+    "hidden": false
+  },
+  "action:delete": {
+    "grants": [
+      "action:read"
+    ],
+    "grants_child": [],
+    "required": [],
+    "location": false,
+    "description": "Allows deleting a action",
+    "hidden": false
+  },
+  "action:read": {
+    "grants": [],
+    "grants_child": [],
+    "required": [],
+    "location": false,
+    "description": "Allows reading a action",
+    "hidden": false
+  },
+  "action:read-all": {
+    "grants": [
+      "action:read"
+    ],
+    "grants_child": [],
+    "required": [],
+    "location": false,
+    "description": "Allows reading all actions",
+    "hidden": false
+  },
+  "action:update": {
+    "grants": [
+      "action:read"
+    ],
+    "grants_child": [],
+    "required": [],
+    "location": false,
+    "description": "Allows updating a action",
+    "hidden": false
+  },
   "batch:attach": {
     "grants": [
       "batch:relations-read-all",
@@ -42,8 +105,7 @@
     "hidden": false
   },
   "batch:delete": {
-    "grants": [
-    ],
+    "grants": [],
     "grants_child": [],
     "required": [
       "batch:read"
@@ -53,8 +115,7 @@
     "hidden": false
   },
   "batch:detach": {
-    "grants": [
-    ],
+    "grants": [],
     "grants_child": [],
     "required": [
       "batch:read",
@@ -65,8 +126,7 @@
     "hidden": false
   },
   "batch:detach-tech": {
-    "grants": [
-    ],
+    "grants": [],
     "grants_child": [],
     "required": [
       "batch:read",
@@ -102,8 +162,7 @@
     "hidden": false
   },
   "batch:relations-read-all": {
-    "grants": [
-    ],
+    "grants": [],
     "grants_child": [],
     "required": [
       "batch:read"
@@ -112,9 +171,18 @@
     "description": "Allows reading all relations for a batch",
     "hidden": false
   },
-  "batch:relations-read-user": {
-    "grants": [
+  "batch:relations-read-tech": {
+    "grants": [],
+    "grants_child": [],
+    "required": [
+      "batch:read"
     ],
+    "location": false,
+    "description": "Allows reading techs related to a batch",
+    "hidden": false
+  },
+  "batch:relations-read-user": {
+    "grants": [],
     "grants_child": [],
     "required": [
       "batch:read"
@@ -124,25 +192,13 @@
     "hidden": false
   },
   "batch:update": {
-    "grants": [
-    ],
+    "grants": [],
     "grants_child": [],
     "required": [
       "batch:read"
     ],
     "location": false,
     "description": "Allows updating a batch",
-    "hidden": false
-  },
-  "batch:relations-read-tech": {
-    "grants": [
-    ],
-    "grants_child": [],
-    "required": [
-      "batch:read"
-    ],
-    "location": false,
-    "description": "Allows reading techs related to a batch",
     "hidden": false
   },
   "contact:create": {
@@ -191,6 +247,24 @@
     "required": [],
     "location": false,
     "description": "Allows updating a contact",
+    "hidden": false
+  },
+  "context:read": {
+    "grants": [],
+    "grants_child": [],
+    "required": [],
+    "location": false,
+    "description": "Allows access to a context",
+    "hidden": false
+  },
+  "context:step": {
+    "grants": [
+      "context:read"
+    ],
+    "grants_child": [],
+    "required": [],
+    "location": false,
+    "description": "Allows completing a context step",
     "hidden": false
   },
   "customer:attach": {
@@ -315,18 +389,6 @@
     "description": "Allows creating a relation to a file",
     "hidden": false
   },
-  "file:detach": {
-    "grants": [
-    ],
-    "grants_child": [],
-    "required": [
-      "file:read",
-      "file:relations-read-all"
-    ],
-    "location": false,
-    "description": "Allows deleting a relation to a file",
-    "hidden": false
-  },
   "file:create": {
     "grants": [
       "file:read",
@@ -336,6 +398,27 @@
     "required": [],
     "location": false,
     "description": "Allows uploading files",
+    "hidden": false
+  },
+  "file:delete": {
+    "grants": [],
+    "grants_child": [],
+    "required": [
+      "file:read"
+    ],
+    "location": false,
+    "description": "Allows deleting a file",
+    "hidden": false
+  },
+  "file:detach": {
+    "grants": [],
+    "grants_child": [],
+    "required": [
+      "file:read",
+      "file:relations-read-all"
+    ],
+    "location": false,
+    "description": "Allows deleting a relation to a file",
     "hidden": false
   },
   "file:read": {
@@ -348,17 +431,6 @@
     "description": "Allows the reading and downloading of a file",
     "hidden": false
   },
-  "file:delete": {
-    "grants": [
-    ],
-    "grants_child": [],
-    "required": [
-      "file:read"
-    ],
-    "location": false,
-    "description": "Allows deleting a file",
-    "hidden": false
-  },
   "file:read-all": {
     "grants": [
       "file:read"
@@ -369,9 +441,8 @@
     "description": "Allows reading all files",
     "hidden": false
   },
-  "file:relations-read-user": {
-    "grants": [
-    ],
+  "file:relations-read-all": {
+    "grants": [],
     "grants_child": [],
     "required": [
       "file:read"
@@ -380,9 +451,8 @@
     "description": "Allows reading user related to a file",
     "hidden": false
   },
-  "file:relations-read-all": {
-    "grants": [
-    ],
+  "file:relations-read-user": {
+    "grants": [],
     "grants_child": [],
     "required": [
       "file:read"
@@ -421,8 +491,7 @@
     "hidden": false
   },
   "location:delete": {
-    "grants": [
-    ],
+    "grants": [],
     "grants_child": [],
     "required": [
       "location:read"
@@ -432,8 +501,7 @@
     "hidden": false
   },
   "location:detach": {
-    "grants": [
-    ],
+    "grants": [],
     "grants_child": [],
     "required": [
       "location:read",
@@ -463,20 +531,8 @@
     "description": "Allows reading all files",
     "hidden": false
   },
-  "location:relations-read-user": {
-    "grants": [
-    ],
-    "grants_child": [],
-    "required": [
-      "location:read"
-    ],
-    "location": false,
-    "description": "Allows reading all users related to a location",
-    "hidden": false
-  },
   "location:relations-read-all": {
-    "grants": [
-    ],
+    "grants": [],
     "grants_child": [],
     "required": [
       "location:read"
@@ -485,9 +541,18 @@
     "description": "Allows reading all relations related to a location",
     "hidden": false
   },
-  "location:update": {
-    "grants": [
+  "location:relations-read-user": {
+    "grants": [],
+    "grants_child": [],
+    "required": [
+      "location:read"
     ],
+    "location": false,
+    "description": "Allows reading all users related to a location",
+    "hidden": false
+  },
+  "location:update": {
+    "grants": [],
     "grants_child": [],
     "required": [
       "location:read"
@@ -522,8 +587,7 @@
     "hidden": false
   },
   "manufacturer:delete": {
-    "grants": [
-    ],
+    "grants": [],
     "grants_child": [],
     "required": [
       "manufacturer:read"
@@ -533,8 +597,7 @@
     "hidden": false
   },
   "manufacturer:detach": {
-    "grants": [
-    ],
+    "grants": [],
     "grants_child": [],
     "required": [
       "manufacturer:read",
@@ -564,20 +627,8 @@
     "description": "Allows reading all man",
     "hidden": false
   },
-  "manufacturer:relations-read-user": {
-    "grants": [
-    ],
-    "grants_child": [],
-    "required": [
-      "manufacturer:read"
-    ],
-    "location": false,
-    "description": "Allows reading all users related to a manufacturer",
-    "hidden": false
-  },
   "manufacturer:relations-read-all": {
-    "grants": [
-    ],
+    "grants": [],
     "grants_child": [],
     "required": [
       "manufacturer:read"
@@ -586,15 +637,32 @@
     "description": "Allows reading all relations related to a manufacturer",
     "hidden": false
   },
-  "manufacturer:update": {
-    "grants": [
+  "manufacturer:relations-read-user": {
+    "grants": [],
+    "grants_child": [],
+    "required": [
+      "manufacturer:read"
     ],
+    "location": false,
+    "description": "Allows reading all users related to a manufacturer",
+    "hidden": false
+  },
+  "manufacturer:update": {
+    "grants": [],
     "grants_child": [],
     "required": [
       "manufacturer:read"
     ],
     "location": false,
     "description": "Allows updating a manufacturer",
+    "hidden": false
+  },
+  "me:profile": {
+    "grants": [],
+    "grants_child": [],
+    "required": [],
+    "location": false,
+    "description": "Allows the user to access their profile",
     "hidden": false
   },
   "part:attach": {
@@ -629,8 +697,7 @@
     "hidden": false
   },
   "part:delete": {
-    "grants": [
-    ],
+    "grants": [],
     "grants_child": [],
     "required": [
       "part:read"
@@ -640,8 +707,7 @@
     "hidden": false
   },
   "part:detach": {
-    "grants": [
-    ],
+    "grants": [],
     "grants_child": [],
     "required": [
       "part:read"
@@ -665,8 +731,7 @@
     "hidden": false
   },
   "part:read-all": {
-    "grants": [
-    ],
+    "grants": [],
     "grants_child": [],
     "required": [
       "customer:read-all",
@@ -676,31 +741,8 @@
     "description": "Allows reading all parts",
     "hidden": false
   },
-  "part:relations-read-user": {
-    "grants": [
-    ],
-    "grants_child": [],
-    "required": [
-      "part:read"
-    ],
-    "location": false,
-    "description": "Allows reading users related to a part",
-    "hidden": false
-  },
-  "part:relations-read-part": {
-    "grants": [
-    ],
-    "grants_child": [],
-    "required": [
-      "part:read"
-    ],
-    "location": false,
-    "description": "Allows reading parts related to a part",
-    "hidden": false
-  },
   "part:relations-read-all": {
-    "grants": [
-    ],
+    "grants": [],
     "grants_child": [],
     "required": [
       "part:read"
@@ -709,9 +751,28 @@
     "description": "Allows reading all relations related to a part",
     "hidden": false
   },
-  "part:update": {
-    "grants": [
+  "part:relations-read-part": {
+    "grants": [],
+    "grants_child": [],
+    "required": [
+      "part:read"
     ],
+    "location": false,
+    "description": "Allows reading parts related to a part",
+    "hidden": false
+  },
+  "part:relations-read-user": {
+    "grants": [],
+    "grants_child": [],
+    "required": [
+      "part:read"
+    ],
+    "location": false,
+    "description": "Allows reading users related to a part",
+    "hidden": false
+  },
+  "part:update": {
+    "grants": [],
     "grants_child": [],
     "required": [
       "part:read"
@@ -761,8 +822,7 @@
     "hidden": false
   },
   "program:detach": {
-    "grants": [
-    ],
+    "grants": [],
     "grants_child": [],
     "required": [
       "program:read",
@@ -795,8 +855,7 @@
     "hidden": false
   },
   "program:relations-read-all": {
-    "grants": [
-    ],
+    "grants": [],
     "grants_child": [],
     "required": [
       "program:read"
@@ -806,8 +865,7 @@
     "hidden": false
   },
   "program:relations-read-user": {
-    "grants": [
-    ],
+    "grants": [],
     "grants_child": [],
     "required": [
       "program:read"
@@ -962,8 +1020,7 @@
     "hidden": false
   },
   "queue:delete": {
-    "grants": [
-    ],
+    "grants": [],
     "grants_child": [],
     "required": [
       "queue:read"
@@ -1007,20 +1064,8 @@
     "description": "Allows reading all queues",
     "hidden": false
   },
-  "queue:relations-read-user": {
-    "grants": [
-    ],
-    "grants_child": [],
-    "required": [
-      "queue:read"
-    ],
-    "location": false,
-    "description": "Allows reading users related to a queue",
-    "hidden": false
-  },
   "queue:relations-read-all": {
-    "grants": [
-    ],
+    "grants": [],
     "grants_child": [],
     "required": [
       "queue:read"
@@ -1029,9 +1074,18 @@
     "description": "Allows reading all relations related to a queue",
     "hidden": false
   },
-  "queue:update": {
-    "grants": [
+  "queue:relations-read-user": {
+    "grants": [],
+    "grants_child": [],
+    "required": [
+      "queue:read"
     ],
+    "location": false,
+    "description": "Allows reading users related to a queue",
+    "hidden": false
+  },
+  "queue:update": {
+    "grants": [],
     "grants_child": [],
     "required": [
       "queue:read"
@@ -1071,8 +1125,7 @@
     "hidden": false
   },
   "resource:delete": {
-    "grants": [
-    ],
+    "grants": [],
     "grants_child": [],
     "required": [
       "resource:read"
@@ -1082,8 +1135,7 @@
     "hidden": false
   },
   "resource:detach": {
-    "grants": [
-    ],
+    "grants": [],
     "grants_child": [],
     "required": [
       "resource:read",
@@ -1117,20 +1169,8 @@
     "description": "Allows reading all resources",
     "hidden": false
   },
-  "resource:relations-read-user": {
-    "grants": [
-    ],
-    "grants_child": [],
-    "required": [
-      "resource:read"
-    ],
-    "location": false,
-    "description": "Allows reading users related to a resource",
-    "hidden": false
-  },
   "resource:relations-read-all": {
-    "grants": [
-    ],
+    "grants": [],
     "grants_child": [],
     "required": [
       "resource:read"
@@ -1139,9 +1179,18 @@
     "description": "Allows reading all relations related to a resource",
     "hidden": false
   },
-  "resource:update": {
-    "grants": [
+  "resource:relations-read-user": {
+    "grants": [],
+    "grants_child": [],
+    "required": [
+      "resource:read"
     ],
+    "location": false,
+    "description": "Allows reading users related to a resource",
+    "hidden": false
+  },
+  "resource:update": {
+    "grants": [],
     "grants_child": [],
     "required": [
       "resource:read"
@@ -1180,8 +1229,7 @@
     "hidden": false
   },
   "sub-resource:delete": {
-    "grants": [
-    ],
+    "grants": [],
     "grants_child": [],
     "required": [
       "sub-resource:read"
@@ -1191,8 +1239,7 @@
     "hidden": false
   },
   "sub-resource:detach": {
-    "grants": [
-    ],
+    "grants": [],
     "grants_child": [],
     "required": [
       "sub-resource:read",
@@ -1226,20 +1273,8 @@
     "description": "Allows reading all sub-resources",
     "hidden": false
   },
-  "sub-resource:relations-read-user": {
-    "grants": [
-    ],
-    "grants_child": [],
-    "required": [
-      "sub-resource:read"
-    ],
-    "location": false,
-    "description": "Allows reading users related to a sub-resource",
-    "hidden": false
-  },
   "sub-resource:relations-read-all": {
-    "grants": [
-    ],
+    "grants": [],
     "grants_child": [],
     "required": [
       "sub-resource:read"
@@ -1248,9 +1283,18 @@
     "description": "Allows reading all relations related to a sub-resource",
     "hidden": false
   },
-  "sub-resource:update": {
-    "grants": [
+  "sub-resource:relations-read-user": {
+    "grants": [],
+    "grants_child": [],
+    "required": [
+      "sub-resource:read"
     ],
+    "location": false,
+    "description": "Allows reading users related to a sub-resource",
+    "hidden": false
+  },
+  "sub-resource:update": {
+    "grants": [],
     "grants_child": [],
     "required": [
       "sub-resource:read"
@@ -1277,6 +1321,14 @@
     "required": [],
     "location": false,
     "description": "Allows reading users related to a batch tenant",
+    "hidden": false
+  },
+  "tenant:search": {
+    "grants": [],
+    "grants_child": [],
+    "required": [],
+    "location": false,
+    "description": "Allows searching across the tenant data",
     "hidden": false
   },
   "tenant:settings": {
@@ -1321,8 +1373,7 @@
     "hidden": false
   },
   "unit:delete": {
-    "grants": [
-    ],
+    "grants": [],
     "grants_child": [],
     "required": [
       "unit:read"
@@ -1332,8 +1383,7 @@
     "hidden": false
   },
   "unit:detach": {
-    "grants": [
-    ],
+    "grants": [],
     "grants_child": [],
     "required": [
       "unit:read",
@@ -1344,8 +1394,7 @@
     "hidden": false
   },
   "unit:read": {
-    "grants": [
-    ],
+    "grants": [],
     "grants_child": [],
     "required": [
       "part:read",
@@ -1357,20 +1406,8 @@
     "description": "Allows reading a unit",
     "hidden": false
   },
-  "unit:relations-read-user": {
-    "grants": [
-    ],
-    "grants_child": [],
-    "required": [
-      "unit:read"
-    ],
-    "location": false,
-    "description": "Allows reading users related to a batch unit",
-    "hidden": false
-  },
   "unit:relations-read-all": {
-    "grants": [
-    ],
+    "grants": [],
     "grants_child": [],
     "required": [
       "unit:read"
@@ -1379,9 +1416,18 @@
     "description": "Allows reading all relations related to a batch unit",
     "hidden": false
   },
-  "unit:update": {
-    "grants": [
+  "unit:relations-read-user": {
+    "grants": [],
+    "grants_child": [],
+    "required": [
+      "unit:read"
     ],
+    "location": false,
+    "description": "Allows reading users related to a batch unit",
+    "hidden": false
+  },
+  "unit:update": {
+    "grants": [],
     "grants_child": [],
     "required": [
       "unit:read",
@@ -1403,18 +1449,6 @@
     "description": "Allows creating relations for a vendor",
     "hidden": false
   },
-  "vendor:detach": {
-    "grants": [
-    ],
-    "grants_child": [],
-    "required": [
-      "vendor:relations-read-all",
-      "vendor:read"
-    ],
-    "location": false,
-    "description": "Allows removing relations for a vendor",
-    "hidden": false
-  },
   "vendor:create": {
     "grants": [
       "vendor:read",
@@ -1430,14 +1464,24 @@
     "hidden": false
   },
   "vendor:delete": {
-    "grants": [
-    ],
+    "grants": [],
     "grants_child": [],
     "required": [
       "vendor:read"
     ],
     "location": false,
     "description": "Allows deleting a vendor",
+    "hidden": false
+  },
+  "vendor:detach": {
+    "grants": [],
+    "grants_child": [],
+    "required": [
+      "vendor:relations-read-all",
+      "vendor:read"
+    ],
+    "location": false,
+    "description": "Allows removing relations for a vendor",
     "hidden": false
   },
   "vendor:read": {
@@ -1460,20 +1504,8 @@
     "description": "Allows reading all vendors",
     "hidden": false
   },
-  "vendor:relations-read-user": {
-    "grants": [
-    ],
-    "grants_child": [],
-    "required": [
-      "vendor:read"
-    ],
-    "location": false,
-    "description": "Allows reading users related to a batch vendor",
-    "hidden": false
-  },
   "vendor:relations-read-all": {
-    "grants": [
-    ],
+    "grants": [],
     "grants_child": [],
     "required": [
       "vendor:read"
@@ -1482,9 +1514,18 @@
     "description": "Allows reading all relations related to a batch vendor",
     "hidden": false
   },
-  "vendor:update": {
-    "grants": [
+  "vendor:relations-read-user": {
+    "grants": [],
+    "grants_child": [],
+    "required": [
+      "vendor:read"
     ],
+    "location": false,
+    "description": "Allows reading users related to a batch vendor",
+    "hidden": false
+  },
+  "vendor:update": {
+    "grants": [],
     "grants_child": [],
     "required": [
       "vendor:read"
@@ -1519,8 +1560,7 @@
     "hidden": false
   },
   "work-flow:delete": {
-    "grants": [
-    ],
+    "grants": [],
     "grants_child": [],
     "required": [
       "work-flow:read"
@@ -1530,8 +1570,7 @@
     "hidden": false
   },
   "work-flow:detach": {
-    "grants": [
-    ],
+    "grants": [],
     "grants_child": [],
     "required": [
       "work-flow:read",
@@ -1542,8 +1581,7 @@
     "hidden": false
   },
   "work-flow:read": {
-    "grants": [
-    ],
+    "grants": [],
     "grants_child": [],
     "required": [],
     "location": false,
@@ -1560,20 +1598,8 @@
     "description": "Allows reading all work-flows",
     "hidden": false
   },
-  "work-flow:relations-read-user": {
-    "grants": [
-    ],
-    "grants_child": [],
-    "required": [
-      "work-flow:read"
-    ],
-    "location": false,
-    "description": "Allows reading users related to a work-flow",
-    "hidden": false
-  },
   "work-flow:relations-read-all": {
-    "grants": [
-    ],
+    "grants": [],
     "grants_child": [],
     "required": [
       "work-flow:read"
@@ -1582,9 +1608,18 @@
     "description": "Allows reading all relations related to a work-flow",
     "hidden": false
   },
-  "work-flow:update": {
-    "grants": [
+  "work-flow:relations-read-user": {
+    "grants": [],
+    "grants_child": [],
+    "required": [
+      "work-flow:read"
     ],
+    "location": false,
+    "description": "Allows reading users related to a work-flow",
+    "hidden": false
+  },
+  "work-flow:update": {
+    "grants": [],
     "grants_child": [],
     "required": [
       "work-flow:read"
@@ -1622,8 +1657,7 @@
     "hidden": false
   },
   "work-order:delete": {
-    "grants": [
-    ],
+    "grants": [],
     "grants_child": [],
     "required": [
       "work-order:read"
@@ -1633,8 +1667,7 @@
     "hidden": false
   },
   "work-order:detach": {
-    "grants": [
-    ],
+    "grants": [],
     "grants_child": [],
     "required": [
       "work-order:relations-read-all",
@@ -1668,9 +1701,18 @@
     "description": "Allows reading all work-orders",
     "hidden": false
   },
-  "work-order:relations-read-user": {
-    "grants": [
+  "work-order:relations-read-all": {
+    "grants": [],
+    "grants_child": [],
+    "required": [
+      "work-order:read"
     ],
+    "location": false,
+    "description": "Allows reading all relations to a work-order",
+    "hidden": false
+  },
+  "work-order:relations-read-user": {
+    "grants": [],
     "grants_child": [],
     "required": [
       "work-order:read"
@@ -1680,66 +1722,13 @@
     "hidden": false
   },
   "work-order:update": {
-    "grants": [
-    ],
+    "grants": [],
     "grants_child": [],
     "required": [
       "work-order:read"
     ],
     "location": false,
     "description": "Allows updating a work-order",
-    "hidden": false
-  },
-  "work-order:relations-read-all": {
-    "grants": [
-    ],
-    "grants_child": [],
-    "required": [
-      "work-order:read"
-    ],
-    "location": false,
-    "description": "Allows reading all relations to a work-order",
-    "hidden": false
-  },
-  "me:profile": {
-    "grants": [
-    ],
-    "grants_child": [],
-    "required": [
-    ],
-    "location": false,
-    "description": "Allows the user to access their profile",
-    "hidden": false
-  },
-  "tenant:search": {
-    "grants": [
-    ],
-    "grants_child": [],
-    "required": [
-    ],
-    "location": false,
-    "description": "Allows searching across the tenant data",
-    "hidden": false
-  },
-  "context:read": {
-    "grants": [
-    ],
-    "grants_child": [],
-    "required": [
-    ],
-    "location": false,
-    "description": "Allows access to a context",
-    "hidden": false
-  },
-  "context:step": {
-    "grants": [
-      "context:read"
-    ],
-    "grants_child": [],
-    "required": [
-    ],
-    "location": false,
-    "description": "Allows completing a context step",
     "hidden": false
   }
 }

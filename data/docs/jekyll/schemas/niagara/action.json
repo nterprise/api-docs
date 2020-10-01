@@ -1,0 +1,123 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/action.json",
+  "type": "object",
+  "description": "Action",
+  "additionalProperties": false,
+  "required": [
+    "created",
+    "criteria",
+    "effect",
+    "entity",
+    "entity_id",
+    "entity_type",
+    "event",
+    "label",
+    "updated",
+    "when"
+  ],
+  "properties": {
+    "action_id": {
+      "description": "Identifier for the Action",
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_id"
+    },
+    "entity_id": {
+      "x-no-api-doc": true,
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_id"
+    },
+    "entity_type": {
+      "x-no-api-doc": true,
+      "const": "ACT"
+    },
+    "label": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/label"
+    },
+    "slug": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/slug"
+    },
+    "created": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/created"
+    },
+    "updated": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/updated"
+    },
+    "entity": {
+      "type": "object",
+      "description": "Entity the action is configured for",
+      "properties": {
+        "entity_id": {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_id"
+        },
+        "entity_type": {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_type"
+        }
+      }
+    },
+    "sequence": {
+      "type": "string",
+      "description": "When the action should fire",
+      "enum": [
+        "before",
+        "after"
+      ],
+      "default": "before"
+    },
+    "order": {
+      "type": "string",
+      "description": "Order to process the action"
+    },
+    "event": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityHelper.json#/properties/entity_events"
+    },
+    "criteria": {
+      "type": "array",
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "required": [
+          "entity",
+          "property",
+          "operator"
+        ],
+        "properties": {
+          "entity": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_type"
+          },
+          "property": {
+            "type": "string",
+            "description": "Property on entity"
+          },
+          "operator": {
+            "type": "string",
+            "description": "Operation to perform",
+            "enum": [
+              "equals",
+              "not_equals",
+              "is_null"
+            ]
+          },
+          "value": {
+            "type": ["string", "object", "null"],
+            "description": "The value to compare"
+          }
+        }
+      }
+    },
+    "effect": {
+      "type": "array",
+      "description": "Effect to apply",
+      "maxItems": 10,
+      "minItems": 1,
+      "items": {
+        "anyOf": [
+          {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/effect/notify.json"
+          },
+          {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/effect/update.json"
+          }
+        ]
+      }
+    }
+  }
+}

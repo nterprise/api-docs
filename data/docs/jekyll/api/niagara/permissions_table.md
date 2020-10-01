@@ -1,4 +1,15 @@
 
+### Action
+
+|Permission|Description|Grants|Required Permission(s)|Grants to Children|
+|---|---|
+|<span id="action:create">action:create</span>|Allows creating a action|<a href="#action:delete">action:delete</a><br><a href="#action:read">action:read</a><br><a href="#action:update">action:update</a>|||
+|<span id="action:create-global">action:create-global</span>|Allows creating an action anywhere|<a href="#action:delete">action:delete</a><br><a href="#action:update">action:update</a>|<a href="#action:read">action:read</a>||
+|<span id="action:delete">action:delete</span>|Allows deleting a action|<a href="#action:read">action:read</a>|||
+|<span id="action:read">action:read</span>|Allows reading a action||||
+|<span id="action:read-all">action:read-all</span>|Allows reading all actions|<a href="#action:read">action:read</a>|||
+|<span id="action:update">action:update</span>|Allows updating a action|<a href="#action:read">action:read</a>|||
+
 ### Batch
 
 |Permission|Description|Grants|Required Permission(s)|Grants to Children|
@@ -25,6 +36,13 @@
 |<span id="contact:read">contact:read</span>|Allows reading a contact||||
 |<span id="contact:read-all">contact:read-all</span>|Allows reading all contacts|<a href="#contact:read">contact:read</a>|||
 |<span id="contact:update">contact:update</span>|Allows updating a contact|<a href="#contact:read">contact:read</a>|||
+
+### Context
+
+|Permission|Description|Grants|Required Permission(s)|Grants to Children|
+|---|---|
+|<span id="context:read">context:read</span>|Allows access to a context||||
+|<span id="context:step">context:step</span>|Allows completing a context step|<a href="#context:read">context:read</a>|||
 
 ### Customer
 

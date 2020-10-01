@@ -31,6 +31,9 @@
     },
     "/contacts/{contact_id}": {
       "$ref": "./paths/contact/contact.json"
+    },
+    "/contacts/{contact_id}/actions": {
+      "$ref": "./paths/contact/actions.json"
     }
   },
   "components": {

@@ -1,0 +1,27 @@
+{
+  "get": {
+    "operationId": "getAction",
+    "summary": "Fetch action",
+    "description": "Fetch information regarding an action",
+    "tags": [
+      "Action"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/actionId.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halAction.json"
+      }
+    },
+    "security": [
+      {
+        "niagara": [
+          "action:read"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "./action.json"
+    },
+    {
+      "type": "object",
+      "required": [
+        "_links"
+      ],
+      "properties": {
+        "_links": {
+          "type": "object",
+          "required": [
+            "self"
+          ],
+          "properties": {
+            "self": {
+              "$ref": "./link.json"
+            }
+          }
+        }
+      }
+    }
+  ]
+}

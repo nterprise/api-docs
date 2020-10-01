@@ -1,0 +1,62 @@
+{
+  "openapi": "3.0.3",
+  "x-api": "niagara",
+  "x-nter-docs-parent": "Niagara API",
+  "x-nter-docs-nav-order": 0,
+  "x-nter-docs-redirect-from": [
+    "/rel/actions"
+  ],
+  "info": {
+    "version": "2.0.0",
+    "description": "Actions",
+    "title": "Actions"
+  },
+  "servers": [
+    {
+      "url": "https://{environment}.nterprise.com",
+      "variables": {
+        "environment": {
+          "default": "api",
+          "enum": [
+            "api",
+            "api.dev"
+          ]
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/actions": {
+      "$ref": "./paths/action/actions.json"
+    },
+    "/actions/{action_id}": {
+      "$ref": "./paths/action/action.json"
+    }
+  },
+  "components": {
+    "schemas": {
+      "Action": {
+        "$ref": "components/schemas/action.json"
+      }
+    },
+    "securitySchemes": {
+      "niagara": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "https://auth.nterprise.com/oauth/authorize",
+            "tokenUrl": "https://auth.nterprise.com/oauth/token",
+            "scopes": {
+              "action:create": "Allows creating a action (for an entity)",
+              "action:create-global": "Allows creating an action anywhere",
+              "action:update": "Allows editing a action",
+              "action:delete": "Allows deleting a action",
+              "action:read": "Allows access to a action (for an entity)",
+              "action:read-all": "Allows reading all actions"
+            }
+          }
+        }
+      }
+    }
+  }
+}

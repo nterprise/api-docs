@@ -1,0 +1,120 @@
+{
+  "description": "A batch response",
+  "content": {
+    "application/hal+json": {
+      "schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "_embedded",
+          "_links",
+          "total_count",
+          "limit",
+          "offset"
+        ],
+        "properties": {
+          "total_count": {
+            "type": "number",
+            "readOnly": true
+          },
+          "limit": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 100
+          },
+          "offset": {
+            "type": "string",
+            "nullable": true
+          },
+          "_embedded": {
+            "type": "object",
+            "required": [
+              "nter:actions"
+            ],
+            "properties": {
+              "nter:actions": {
+                "type": "array",
+                "maxItems": 100,
+                "items": {
+                  "$ref": "../schemas/halAction.json"
+                }
+              }
+            }
+          },
+          "_links": {
+            "type": "object",
+            "required": [
+              "self"
+            ],
+            "properties": {
+              "self": {
+                "$ref": "../schemas/link.json"
+              },
+              "next": {
+                "$ref": "../schemas/link.json"
+              }
+            }
+          }
+        }
+      },
+      "example": {
+        "total_count": 21,
+        "limit": 42,
+        "offset": "next-offset",
+        "_embedded": {
+          "nter:batches": [
+            {
+              "action_id": "action",
+              "label": "Update status when workflow starts",
+              "created": "2019-08-19T00:01:02.000Z",
+              "updated": "2020-08-19T01:01:02.000Z",
+              "event": "WOR.status-changed",
+              "entity": {
+                "entity_type": "CUS",
+                "entity_id": "customer"
+              },
+              "order": "a",
+              "sequence": "after",
+              "criteria": [
+                {
+                  "entity": "WOR",
+                  "property": "current_status",
+                  "operator": "equals",
+                  "value": {
+                    "status": "Completed",
+                    "category": "COMPLETE"
+                  }
+                }
+              ],
+              "effect": [
+                {
+                  "effect_type": "notify",
+                  "contacts": [
+                    "contact_one",
+                    "contact_two"
+                  ],
+                  "label": "Work order complete",
+                  "message": "A work order has completed",
+                  "severity": "normal"
+                }
+              ],
+              "_links": {
+                "self": {
+                  "href": "https://api.nterprise.com/actions/action"
+                }
+              }
+            }
+          ]
+        },
+        "_links": {
+          "next": {
+            "href": "https://api.nterprise.com/actions?limit=42&offset=next-offset"
+          },
+          "self": {
+            "href": "https://api.nterprise.com/actions?limit=42"
+          }
+        }
+      }
+    }
+  }
+}

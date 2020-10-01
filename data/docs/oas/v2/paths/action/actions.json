@@ -1,0 +1,45 @@
+{
+  "get": {
+    "operationId": "fetchActions",
+    "summary": "Fetch Actions",
+    "description": "Fetch a page of actions",
+    "tags": [
+      "Action"
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halActionPage.json"
+      }
+    },
+    "security": [
+      {
+        "niagara": [
+          "action:read-all"
+        ]
+      }
+    ]
+  },
+  "post": {
+    "operationId": "createAction",
+    "summary": "Create an action",
+    "description": "Creates a new action",
+    "tags": [
+      "Action"
+    ],
+    "requestBody": {
+      "$ref": "../../components/requestBodies/action.json"
+    },
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halAction.json"
+      }
+    },
+    "security": [
+      {
+        "niagara": [
+          "action:create-global"
+        ]
+      }
+    ]
+  }
+}

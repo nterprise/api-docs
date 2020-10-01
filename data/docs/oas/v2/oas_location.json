@@ -62,6 +62,9 @@
     },
     "/locations/{location_id}/techs/{tech_id}": {
       "$ref": "./paths/location/tech.json"
+    },
+    "/locations/{location_id}/actions": {
+      "$ref": "./paths/location/actions.json"
     }
   },
   "components": {
