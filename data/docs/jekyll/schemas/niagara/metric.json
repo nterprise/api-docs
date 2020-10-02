@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/metric.json",
+  "type": "object",
+  "description": "Defines the properties for a metric",
+  "additionalProperties": false,
+  "required": [],
+  "properties": {
+    "entity_type": {
+      "x-no-api-doc": true,
+      "const": "MET"
+    },
+    "metric": {
+      "type": "string",
+      "description": "Name of the metric to capture",
+      "pattern": "^[a-z][a-z0-9_]+$"
+    },
+    "value": {
+      "type": "number",
+      "description": "Metric value"
+    },
+    "date": {
+      "type": "string",
+      "description": "Date of recording the metric",
+      "format": "date-time"
+    },
+    "dimensions": {
+      "type": "array",
+      "description": "Additional clarifiers for the metric",
+      "maxItems": 10,
+      "additionalItems": false,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "key",
+          "value",
+          "label"
+        ],
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "Name of the dimension",
+            "pattern": "^[a-z][a-z0-9_:]+$"
+          },
+          "value": {
+            "type": ["string","number"],
+            "description": "Value for the dimension"
+          },
+          "label": {
+            "type": "string",
+            "description": "Label for the dimension"
+          }
+        }
+      }
+    }
+  }
+}

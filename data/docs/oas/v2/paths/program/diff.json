@@ -1,0 +1,33 @@
+{
+  "get": {
+    "operationId": "fetchDiffForProgram",
+    "summary": "Fetch program differences",
+    "description": "Fetches A Page diff records for a program",
+    "tags": [
+      "Program"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/programId.json"
+      },
+      {
+        "$ref": "../../components/parameters/limit.json"
+      },
+      {
+        "$ref": "../../components/parameters/offset.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halDiffPage.json"
+      }
+    },
+    "security": [
+      {
+        "niagara": [
+          "program:read"
+        ]
+      }
+    ]
+  }
+}

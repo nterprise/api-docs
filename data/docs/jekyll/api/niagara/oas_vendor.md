@@ -230,6 +230,60 @@ This operation does not require authentication
 |---|---|---|---|---|
 |vendor_id|path|string|true|Id of the vendor|
 
+### GET /vendors/{vendor_id}/diff
+
+<a id="opIdfetchDiffForVendor"></a>
+
+Fetches A Page diff records for a vendor
+
+<aside class="warning">
+Permissions required:<br>
+<ul><li>vendor:read</li></ul>
+</aside>
+
+<h3 id="fetchdiffforvendor-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|vendor_id|path|string|true|Id of the vendor|
+|limit|query|integer|false|How many items to return at one time (max 100)|
+|offset|query|string|false|Continue from last offset|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "total_count": 21,
+  "limit": 42,
+  "offset": "next-offset",
+  "_embedded": {
+    "nter:diffs": [
+      {
+        "diff_id": "diff_id",
+        "property": "label",
+        "old_value": "Zones Inc",
+        "new_value": "Zones",
+        "by_user": {
+          "user_id": "3dddba3e-6122-46a8-ae26-8c7c95bd82d7",
+          "name": "Daniel Jackson",
+          "email": "daniel.jackson@niagara.com",
+          "created": "2019-09-16T21:26:14.000Z",
+          "updated": "2019-09-16T21:27:14.000Z"
+        },
+        "date": "2019-09-16T21:27:14.000Z",
+        "_links": {
+          "self": {
+            "href": "https://api.nterprise.com/actions/action"
+          }
+        }
+      }
+    ]
+  }
+}
+```
+
 ### GET /vendors/{vendor_id}/units
 
 <a id="opIdfetchAllVendorUnits"></a>
@@ -646,10 +700,6 @@ This operation does not require authentication
 }
 ```
 
-<h1 id="vendors-action">Action</h1>
-
-## Operations
-
 ### GET /vendors/{vendor_id}/actions
 
 <a id="opIdfetchActionsForVendor"></a>
@@ -752,8 +802,8 @@ Permissions required:<br>
 |vendor_id|path|string|true|Id of the vendor|
 |label|body|string|true|Label for the entity|
 |entity|body|object|true|Entity the action is configured for|
-|&nbsp;&nbsp; entity_id|body|string|false|Entity identifier|
-|&nbsp;&nbsp; entity_type|body|any|false|none|
+|&nbsp;&nbsp; entity_id|body|string|true|Entity identifier|
+|&nbsp;&nbsp; entity_type|body|any|true|none|
 |sequence|body|string|true|When the action should fire|
 |event|body|string|true|Possible entity events|
 |criteria|body|[object]|true|none|

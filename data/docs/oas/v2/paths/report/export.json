@@ -20,6 +20,14 @@
           }
         }
       }
-    }
+    },
+    ,
+    "security": [
+      {
+        "niagara": [
+          "report:read"
+        ]
+      }
+    ]
   }
 }

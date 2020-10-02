@@ -42,6 +42,9 @@
     "/locations/{location_id}": {
       "$ref": "./paths/location/location.json"
     },
+    "/locations/{location_id}/diff": {
+      "$ref": "./paths/location/diff.json"
+    },
     "/locations/{location_id}/resources": {
       "$ref": "./paths/location/resources.json"
     },

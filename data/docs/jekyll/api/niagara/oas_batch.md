@@ -1416,6 +1416,76 @@ Permissions required:<br>
 |---|---|---|---|---|
 |batch_id|path|string|true|Id of the batch|
 
+### GET /batches/{batch_id}/cycles
+
+<a id="opIdfetchCyclesForBatch"></a>
+
+Fetch a page of cycles for a batch
+
+<aside class="warning">
+Permissions required:<br>
+<ul><li>batch:read</li></ul>
+</aside>
+
+<h3 id="fetchcyclesforbatch-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|batch_id|path|string|true|Id of the batch|
+|filter[status]|query|string|false|Filter on the status|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "total_count": 21,
+  "limit": 42,
+  "offset": "next-offset",
+  "_embedded": {
+    "nter:work-order-cycles": [
+      {
+        "action_id": "cycle",
+        "label": "Cycle 42 for work order: configure iPads",
+        "created": "2019-08-19T00:01:02.000Z",
+        "updated": "2020-08-19T01:01:02.000Z",
+        "current_status": {
+          "status": "In Progress",
+          "category": "IN_PROGRESS"
+        },
+        "work_order_id": "work-order",
+        "location_id": "location",
+        "resource_id": "resource",
+        "assigned_user": "user",
+        "is_retry": false,
+        "context_id": "context",
+        "_links": {
+          "self": {
+            "href": "https://api.nterprise.com/actions/action"
+          },
+          "nter:cycle-context": {
+            "href": "https://api.nterprise.com/contexts/context"
+          },
+          "nter:cycle-resource": {
+            "href": "https://api.nterprise.com/resources/resource"
+          },
+          "nter:cycle-location": {
+            "href": "https://api.nterprise.com/locations/location"
+          },
+          "nter:cycle-work-order": {
+            "href": "https://api.nterprise.com/work-orders/work-order"
+          },
+          "nter:cycle-assigned-user": {
+            "href": "https://api.nterprise.com/users/user"
+          }
+        }
+      }
+    ]
+  }
+}
+```
+
 ### GET /batches/{batch_id}/relations
 
 <a id="opIdfetchRelationsForBatch"></a>
@@ -3194,6 +3264,8 @@ properties:
     description: The number of cycles for this batch
     minimum: 1
   cycles:
+    description: A count of cycles needed for this entity broken down by status
+      category and active/in-active status
     type: object
     required:
       - pending
@@ -8625,7 +8697,9 @@ properties:
                                       allOf:
                                         - *a13
             allOf:
-              - type: object
+              - description: A count of cycles needed for this entity broken down by status
+                  category and active/in-active status
+                type: object
                 required:
                   - pending
                   - in_progress

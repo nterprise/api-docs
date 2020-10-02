@@ -4,7 +4,7 @@
     "summary": "Fetch Project Actions",
     "description": "Fetch a page of actions for a project",
     "tags": [
-      "Action"
+      "Project"
     ],
     "parameters": [
       {
@@ -29,7 +29,7 @@
     "summary": "Create an action for this project",
     "description": "Creates a new action",
     "tags": [
-      "Action"
+      "Project"
     ],
     "parameters": [
       {

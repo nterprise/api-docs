@@ -1,0 +1,46 @@
+{
+  "description": "Start a context on an entity for a work order",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "required": [
+          "using",
+          "entity"
+        ],
+        "properties": {
+          "entity": {
+            "type": "object",
+            "description": "Entity to start the context on",
+            "required": [
+              "entity_id",
+              "entity_type"
+            ],
+            "properties": {
+              "entity_id": {
+                "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_id"
+              },
+              "entity_type": {
+                "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_type"
+              }
+            }
+          },
+          "using": {
+            "description": "The ID of the cycle this context is using",
+            "$ref": "https://docs.nterprise.com/schemas/niagara/cycle.json#/properties/cycle_id"
+          },
+          "resource_id": {
+            "oneOf": [
+              {
+                "$ref": "https://docs.nterprise.com/schemas/niagara/subResource.json#/properties/sub_resource_id"
+              },
+              {
+                "$ref": "https://docs.nterprise.com/schemas/niagara/resource.json#/properties/resource_id"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

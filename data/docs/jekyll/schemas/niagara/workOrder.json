@@ -4,6 +4,7 @@
   "type": "object",
   "description": "Defines the properties for a work order",
   "additionalProperties": false,
+  "$comment": "Add input_from, output_to and input_filter as required when data normalized",
   "required": [
     "label",
     "entity_id",
@@ -56,7 +57,10 @@
       "$ref": "https://docs.nterprise.com/schemas/niagara/location.json"
     },
     "description": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "description": "Detailed description for the work order"
     },
     "work_order_type": {
@@ -98,7 +102,7 @@
       },
       "allOf": [
         {
-          "$ref": "https://docs.nterprise.com/schemas/niagara/cycle.json"
+          "$ref": "https://docs.nterprise.com/schemas/niagara/cycles.json"
         }
       ]
     },
@@ -107,6 +111,40 @@
     },
     "input_filter": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter.json"
+    },
+    "input_from": {
+      "description": "Resource or location where components arrive from",
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/resource.json"
+        },
+        {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/subResource.json"
+        },
+        {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/location.json"
+        }
+      ]
+    },
+    "output_to": {
+      "description": "Resource or location where the finial product winds up",
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/resource.json"
+        },
+        {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/subResource.json"
+        },
+        {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/location.json"
+        }
+      ]
     }
   }
 }

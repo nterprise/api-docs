@@ -183,6 +183,7 @@
       ]
     },
     "using": {
+      "$comment": "Remove all other entities and just make this a cycle after the cycle entity update has been deployed to production",
       "anyOf": [
         {
           "type": "null"
@@ -207,6 +208,9 @@
         },
         {
           "$ref": "https://docs.nterprise.com/schemas/niagara/unit.json"
+        },
+        {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/cycle.json"
         }
       ]
     }

@@ -26,6 +26,9 @@
     "/fields": {
       "$ref": "./paths/report/fields.json"
     },
+    "/metrics": {
+      "$ref": "./paths/report/metrics.json"
+    },
     "/reports": {
       "$ref": "./paths/report/reports.json"
     },
@@ -40,6 +43,20 @@
     "schemas": {
       "Role": {
         "$ref": "components/schemas/role.json"
+      }
+    },
+    "securitySchemes": {
+      "niagara": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "https://auth.nterprise.com/oauth/authorize",
+            "tokenUrl": "https://auth.nterprise.com/oauth/token",
+            "scopes": {
+              "report:read": "Allows access to a report"
+            }
+          }
+        }
       }
     }
   }

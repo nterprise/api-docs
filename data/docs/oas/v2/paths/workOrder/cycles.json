@@ -1,0 +1,55 @@
+{
+  "get": {
+    "operationId": "fetchCyclesForWorkOrder",
+    "summary": "Fetch Work Order Cycles",
+    "description": "Fetch a page of cycles for a work order",
+    "tags": [
+      "Work Order"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/workOrderId.json"
+      },
+      {
+        "$ref": "../../components/parameters/filterStatus.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halCyclePage.json"
+      }
+    },
+    "security": [
+      {
+        "niagara": [
+          "work-order:read"
+        ]
+      }
+    ]
+  },
+  "delete": {
+    "operationId": "cancelWorkOrderCycles",
+    "summary": "Cancel all cycles",
+    "description": "Cancels all cycles that are not in COMPLETED or CANCELLED status",
+    "tags": [
+      "Work Order"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/workOrderId.json"
+      }
+    ],
+    "responses": {
+      "202": {
+        "description": "Accepted"
+      }
+    },
+    "security": [
+      {
+        "niagara": [
+          "work-order:update"
+        ]
+      }
+    ]
+  }
+}

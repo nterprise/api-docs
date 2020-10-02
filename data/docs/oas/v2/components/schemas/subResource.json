@@ -13,7 +13,7 @@
   ],
   "properties": {
     "sub_resource_id": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/resource.json#/properties/resource_id"
+      "$ref": "https://docs.nterprise.com/schemas/niagara/subResource.json#/properties/sub_resource_id"
     },
     "label": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/resource.json#/properties/label"

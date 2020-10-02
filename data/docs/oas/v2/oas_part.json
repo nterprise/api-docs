@@ -36,6 +36,9 @@
     "/parts/{part_id}": {
       "$ref": "./paths/part/part.json"
     },
+    "/parts/{part_id}/diff": {
+      "$ref": "./paths/part/diff.json"
+    },
     "/parts/{part_id}/relations": {
       "$ref": "./paths/part/relations.json"
     },

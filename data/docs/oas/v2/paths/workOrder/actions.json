@@ -4,7 +4,7 @@
     "summary": "Fetch Work Order Actions",
     "description": "Fetch a page of actions for a work order",
     "tags": [
-      "Action"
+      "Work Order"
     ],
     "parameters": [
       {

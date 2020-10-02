@@ -1,0 +1,58 @@
+{
+  "get": {
+    "operationId": "fetchCycleById",
+    "summary": "Fetch Cycle",
+    "description": "Fetches a cycle",
+    "tags": [
+      "Work Order"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/workOrderId.json"
+      },
+      {
+        "$ref": "../../components/parameters/cycleId.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halCycle.json"
+      }
+    },
+    "security": [
+      {
+        "niagara": [
+          "work-order:read"
+        ]
+      }
+    ]
+  },
+  "delete": {
+    "operationId": "cancelCycle",
+    "summary": "Cancel a cycle",
+    "description": "Cancels a cycle",
+    "tags": [
+      "Work Order"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/workOrderId.json"
+      },
+      {
+        "$ref": "../../components/parameters/cycleId.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halCycle.json"
+      }
+    },
+    "security": [
+      {
+        "niagara": [
+          "work-order:read"
+        ]
+      }
+    ]
+  }
+}

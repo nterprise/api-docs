@@ -75,7 +75,7 @@
       },
       "allOf": [
         {
-          "$ref": "https://docs.nterprise.com/schemas/niagara/cycle.json"
+          "$ref": "https://docs.nterprise.com/schemas/niagara/cycles.json"
         }
       ]
     },

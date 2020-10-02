@@ -1,28 +1,11 @@
 {
   "type": "object",
-  "required": [
-    "updated",
-    "created",
-    "email",
-    "name",
-    "user_id"
+  "allOf": [
+    {
+      "$ref": "./userSummary.json"
+    }
   ],
   "properties": {
-    "user_id": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/user.json#/properties/user_id"
-    },
-    "created": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/user.json#/properties/created"
-    },
-    "updated": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/user.json#/properties/updated"
-    },
-    "email": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/user.json#/properties/email"
-    },
-    "name": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/user.json#/properties/name"
-    },
     "picture": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/user.json#/properties/picture"
     },

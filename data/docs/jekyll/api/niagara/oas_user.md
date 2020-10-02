@@ -276,10 +276,6 @@ Permissions required:<br>
 |---|---|---|---|---|
 |user_id|path|string|true|Id of the user|
 
-<h1 id="users-action">Action</h1>
-
-## Operations
-
 ### GET /users/{user_id}/actions
 
 <a id="opIdfetchActionsForUser"></a>
@@ -382,8 +378,8 @@ Permissions required:<br>
 |user_id|path|string|true|Id of the user|
 |label|body|string|true|Label for the entity|
 |entity|body|object|true|Entity the action is configured for|
-|&nbsp;&nbsp; entity_id|body|string|false|Entity identifier|
-|&nbsp;&nbsp; entity_type|body|any|false|none|
+|&nbsp;&nbsp; entity_id|body|string|true|Entity identifier|
+|&nbsp;&nbsp; entity_type|body|any|true|none|
 |sequence|body|string|true|When the action should fire|
 |event|body|string|true|Possible entity events|
 |criteria|body|[object]|true|none|
@@ -467,11 +463,6 @@ Permissions required:<br>
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|user_id|string|true|none|The identifier for the user|
-|created|string(date-time)|true|read-only|Date the entity was created|
-|updated|string(date-time)|true|read-only|Last date the entity was updated|
-|email|string(email)|true|none|Email address|
-|name|string|true|none|Human readable name|
 |picture|string¦null|false|none|Image for the user|
 |profile|string¦null|false|none|Link to the users profile|
 |user_attributes|[object]|false|none|Array of user attributes|
@@ -486,34 +477,37 @@ Permissions required:<br>
 
 ```yaml
 type: object
-required:
-  - updated
-  - created
-  - email
-  - name
-  - user_id
+allOf:
+  - type: object
+    required:
+      - updated
+      - created
+      - email
+      - name
+      - user_id
+    properties:
+      user_id:
+        type: string
+        description: The identifier for the user
+        pattern: ^[0-9a-zA-Z-_]+$
+      created:
+        description: Date the entity was created
+        type: string
+        format: date-time
+        readOnly: true
+      updated:
+        description: Last date the entity was updated
+        type: string
+        format: date-time
+        readOnly: true
+      email:
+        type: string
+        format: email
+        description: Email address
+      name:
+        type: string
+        description: Human readable name
 properties:
-  user_id:
-    type: string
-    description: The identifier for the user
-    pattern: ^[0-9a-zA-Z-_]+$
-  created:
-    description: Date the entity was created
-    type: string
-    format: date-time
-    readOnly: true
-  updated:
-    description: Last date the entity was updated
-    type: string
-    format: date-time
-    readOnly: true
-  email:
-    type: string
-    format: email
-    description: Email address
-  name:
-    type: string
-    description: Human readable name
   picture:
     type: string
     nullable: true

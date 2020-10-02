@@ -1,0 +1,33 @@
+{
+  "get": {
+    "operationId": "fetchDiffForSubResource",
+    "summary": "Fetch subResource differences",
+    "description": "Fetches A Page diff records for a subResource",
+    "tags": [
+      "SubResource"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/subResourceId.json"
+      },
+      {
+        "$ref": "../../components/parameters/limit.json"
+      },
+      {
+        "$ref": "../../components/parameters/offset.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halDiffPage.json"
+      }
+    },
+    "security": [
+      {
+        "niagara": [
+          "sub-resource:read"
+        ]
+      }
+    ]
+  }
+}

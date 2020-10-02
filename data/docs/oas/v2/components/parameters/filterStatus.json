@@ -1,0 +1,9 @@
+{
+  "name": "filter[status]",
+  "in": "query",
+  "description": "Filter on the status",
+  "schema": {
+    "$ref": "https://docs.nterprise.com/schemas/niagara/status.json#/properties/status"
+  }
+}
+

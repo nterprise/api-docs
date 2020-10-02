@@ -15,7 +15,7 @@
     "resource"
   ],
   "properties": {
-    "resource_id": {
+    "sub_resource_id": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/resource.json#/properties/resource_id"
     },
     "entity_id": {

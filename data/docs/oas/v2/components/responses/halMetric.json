@@ -1,0 +1,75 @@
+{
+  "description": "A paged response for batches",
+  "content": {
+    "application/hal+json": {
+      "schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "_links",
+          "metrics"
+        ],
+        "properties": {
+          "metrics": {
+            "type": "array",
+            "description": "Metrics requested",
+            "maxItems": 1000,
+            "items": {
+              "$ref": "https://docs.nterprise.com/schemas/niagara/metric.json"
+            }
+          },
+          "_links": {
+            "type": "object",
+            "required": [
+              "self"
+            ],
+            "properties": {
+              "self": {
+                "$ref": "../schemas/link.json"
+              }
+            }
+          }
+        }
+      },
+      "example": {
+        "report_id": "fe385753-8d50-49b5-b24f-25726bfbe357",
+        "metrics": [
+          {
+            "metric": "cycle_success",
+            "tenant_id": "Zones",
+            "entity_type": "MET",
+            "value": 1,
+            "date": "2020-09-09T17:24:32.477Z",
+            "dimensions": [
+              {
+                "key": "customer",
+                "value": "customer_id",
+                "label": "Zones"
+              },
+              {
+                "key": "customer:customer_id:program",
+                "value": "program_id",
+                "label": "Gap"
+              },
+              {
+                "key": "customer:customer_id:program:program_id:project",
+                "value": "project_id",
+                "label": "North east store"
+              },
+              {
+                "key": "user",
+                "value": "user_id",
+                "label": "Chuck Reeves"
+              }
+            ]
+          }
+        ],
+        "_links": {
+          "self": {
+            "href": "https://api.nterprise.com/reports/fe385753-8d50-49b5-b24f-25726bfbe357"
+          }
+        }
+      }
+    }
+  }
+}

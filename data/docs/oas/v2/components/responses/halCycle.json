@@ -1,0 +1,46 @@
+{
+  "description": "A batch response",
+  "content": {
+    "application/hal+json": {
+      "schema": {
+        "$ref": "../schemas/halCycle.json"
+      },
+      "example": {
+        "action_id": "cycle",
+        "label": "Cycle 42 for work order: configure iPads",
+        "created": "2019-08-19T00:01:02.000Z",
+        "updated": "2020-08-19T01:01:02.000Z",
+        "current_status": {
+          "status": "In Progress",
+          "category": "IN_PROGRESS"
+        },
+        "work_order_id": "work-order",
+        "location_id": "location",
+        "resource_id": "resource",
+        "assigned_user": "user",
+        "is_retry": false,
+        "context_id": "context",
+        "_links": {
+          "self": {
+            "href": "https://api.nterprise.com/actions/action"
+          },
+          "nter:cycle-context": {
+            "href": "https://api.nterprise.com/contexts/context"
+          },
+          "nter:cycle-resource": {
+            "href": "https://api.nterprise.com/resources/resource"
+          },
+          "nter:cycle-location": {
+            "href": "https://api.nterprise.com/locations/location"
+          },
+          "nter:cycle-work-order": {
+            "href": "https://api.nterprise.com/work-orders/work-order"
+          },
+          "nter:cycle-assigned-user": {
+            "href": "https://api.nterprise.com/users/user"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "cycle_id",
+  "in": "path",
+  "description": "Id of the cycle",
+  "required": true,
+  "schema": {
+    "$ref": "https://docs.nterprise.com/schemas/niagara/cycle.json#/properties/cycle_id"
+  }
+}

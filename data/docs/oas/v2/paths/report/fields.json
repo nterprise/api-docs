@@ -18,6 +18,14 @@
       "200": {
         "$ref": "../../components/responses/halField.json"
       }
-    }
+    },
+    ,
+    "security": [
+      {
+        "niagara": [
+          "report:read"
+        ]
+      }
+    ]
   }
 }

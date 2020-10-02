@@ -400,6 +400,60 @@ Permissions required:<br>
 |---|---|---|---|---|
 |resource_id|path|string|true|Id for the resource|
 
+### GET /resources/{resource_id}/diff
+
+<a id="opIdfetchDiffForResource"></a>
+
+Fetches A Page diff records for a resource
+
+<aside class="warning">
+Permissions required:<br>
+<ul><li>resource:read</li></ul>
+</aside>
+
+<h3 id="fetchdiffforresource-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|resource_id|path|string|true|Id for the resource|
+|limit|query|integer|false|How many items to return at one time (max 100)|
+|offset|query|string|false|Continue from last offset|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "total_count": 21,
+  "limit": 42,
+  "offset": "next-offset",
+  "_embedded": {
+    "nter:diffs": [
+      {
+        "diff_id": "diff_id",
+        "property": "label",
+        "old_value": "Zones Inc",
+        "new_value": "Zones",
+        "by_user": {
+          "user_id": "3dddba3e-6122-46a8-ae26-8c7c95bd82d7",
+          "name": "Daniel Jackson",
+          "email": "daniel.jackson@niagara.com",
+          "created": "2019-09-16T21:26:14.000Z",
+          "updated": "2019-09-16T21:27:14.000Z"
+        },
+        "date": "2019-09-16T21:27:14.000Z",
+        "_links": {
+          "self": {
+            "href": "https://api.nterprise.com/actions/action"
+          }
+        }
+      }
+    ]
+  }
+}
+```
+
 ### GET /resources/{resource_id}/contexts
 
 <a id="opIdfetchContextsForResource"></a>
@@ -883,6 +937,180 @@ Permissions required:<br>
 }
 ```
 
+### GET /resources/{resource_id}/actions
+
+<a id="opIdfetchActionsForResource"></a>
+
+Fetch a page of actions for a resource
+
+<aside class="warning">
+Permissions required:<br>
+<ul><li>action:read</li></ul>
+</aside>
+
+<h3 id="fetchactionsforresource-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|resource_id|path|string|true|Id for the resource|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "total_count": 21,
+  "limit": 42,
+  "offset": "next-offset",
+  "_embedded": {
+    "nter:batches": [
+      {
+        "action_id": "action",
+        "label": "Update status when workflow starts",
+        "created": "2019-08-19T00:01:02.000Z",
+        "updated": "2020-08-19T01:01:02.000Z",
+        "event": "WOR.status-changed",
+        "entity": {
+          "entity_type": "CUS",
+          "entity_id": "customer"
+        },
+        "order": "a",
+        "sequence": "after",
+        "criteria": [
+          {
+            "entity": "WOR",
+            "property": "current_status",
+            "operator": "equals",
+            "value": {
+              "status": "Completed",
+              "category": "COMPLETE"
+            }
+          }
+        ],
+        "effect": [
+          {
+            "effect_type": "notify",
+            "contacts": [
+              "contact_one",
+              "contact_two"
+            ],
+            "label": "Work order complete",
+            "message": "A work order has completed",
+            "severity": "normal"
+          }
+        ],
+        "_links": {
+          "self": {
+            "href": "https://api.nterprise.com/actions/action"
+          }
+        }
+      }
+    ]
+  },
+  "_links": {
+    "next": {
+      "href": "https://api.nterprise.com/actions?limit=42&offset=next-offset"
+    },
+    "self": {
+      "href": "https://api.nterprise.com/actions?limit=42"
+    }
+  }
+}
+```
+
+### POST /resources/{resource_id}/actions
+
+<a id="opIdcreateActionForResource"></a>
+
+Creates a new action
+
+<aside class="warning">
+Permissions required:<br>
+<ul><li>action:create</li></ul>
+</aside>
+
+> Body parameter
+
+<h3 id="createactionforresource-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|resource_id|path|string|true|Id for the resource|
+|label|body|string|true|Label for the entity|
+|entity|body|object|true|Entity the action is configured for|
+|&nbsp;&nbsp; entity_id|body|string|true|Entity identifier|
+|&nbsp;&nbsp; entity_type|body|any|true|none|
+|sequence|body|string|true|When the action should fire|
+|event|body|string|true|Possible entity events|
+|criteria|body|[object]|true|none|
+|&nbsp;&nbsp; entity|body|any|true|none|
+|&nbsp;&nbsp; property|body|string|true|Property on entity|
+|&nbsp;&nbsp; operator|body|string|true|Operation to perform|
+|&nbsp;&nbsp; value|body|string|false|The value to compare|
+|effect|body|[anyOf]|true|Effect to apply|
+|&nbsp;&nbsp; *anonymous*|body|object|false|Effect which notifies a user|
+|&nbsp;&nbsp;&nbsp;&nbsp; effect_type|body|string|true|Name of the effect type|
+|&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|Options for the effect|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; contacts|body|[string]|true|List of contacts to notify|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; label|body|string|true|Label for the entity|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; message|body|string|true|The message|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; severity|body|string|true|Severity of the notification|
+|&nbsp;&nbsp; *anonymous*|body|object|false|Effect which notifies a user|
+|&nbsp;&nbsp;&nbsp;&nbsp; effect_type|body|string|true|Name of the effect type|
+|&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|Options for the effect|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; entity|body|any|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; property|body|string|true|Entity property to update|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; value|body|string|true|Value to set|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "action_id": "action",
+  "label": "Update status when workflow starts",
+  "created": "2019-08-19T00:01:02.000Z",
+  "updated": "2020-08-19T01:01:02.000Z",
+  "event": "WOR.status-changed",
+  "entity": {
+    "entity_type": "CUS",
+    "entity_id": "customer"
+  },
+  "order": "a",
+  "sequence": "after",
+  "criteria": [
+    {
+      "entity": "WOR",
+      "property": "current_status",
+      "operator": "equals",
+      "value": {
+        "status": "Completed",
+        "category": "COMPLETE"
+      }
+    }
+  ],
+  "effect": [
+    {
+      "effect_type": "notify",
+      "contacts": [
+        "contact_one",
+        "contact_two"
+      ],
+      "label": "Work order complete",
+      "message": "A work order has completed",
+      "severity": "normal"
+    }
+  ],
+  "_links": {
+    "self": {
+      "href": "https://api.nterprise.com/actions/action"
+    }
+  }
+}
+```
+
 ### GET /sub-resources
 
 <a id="opIdfetchAllSubResources"></a>
@@ -1326,26 +1554,28 @@ This operation does not require authentication
 |---|---|---|---|---|
 |sub_resource_id|path|string|true|Id for the sub resource|
 
-<h1 id="resources-action">Action</h1>
+<h1 id="resources-subresource">SubResource</h1>
 
 ## Operations
 
-### GET /resources/{resource_id}/actions
+### GET /sub-resources/{sub_resource_id}/diff
 
-<a id="opIdfetchActionsForResource"></a>
+<a id="opIdfetchDiffForSubResource"></a>
 
-Fetch a page of actions for a resource
+Fetches A Page diff records for a subResource
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>action:read</li></ul>
+<ul><li>sub-resource:read</li></ul>
 </aside>
 
-<h3 id="fetchactionsforresource-parameters">Parameters</h3>
+<h3 id="fetchdiffforsubresource-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|resource_id|path|string|true|Id for the resource|
+|sub_resource_id|path|string|true|Id for the sub resource|
+|limit|query|integer|false|How many items to return at one time (max 100)|
+|offset|query|string|false|Continue from last offset|
 
 > Example responses
 
@@ -1357,42 +1587,20 @@ Permissions required:<br>
   "limit": 42,
   "offset": "next-offset",
   "_embedded": {
-    "nter:batches": [
+    "nter:diffs": [
       {
-        "action_id": "action",
-        "label": "Update status when workflow starts",
-        "created": "2019-08-19T00:01:02.000Z",
-        "updated": "2020-08-19T01:01:02.000Z",
-        "event": "WOR.status-changed",
-        "entity": {
-          "entity_type": "CUS",
-          "entity_id": "customer"
+        "diff_id": "diff_id",
+        "property": "label",
+        "old_value": "Zones Inc",
+        "new_value": "Zones",
+        "by_user": {
+          "user_id": "3dddba3e-6122-46a8-ae26-8c7c95bd82d7",
+          "name": "Daniel Jackson",
+          "email": "daniel.jackson@niagara.com",
+          "created": "2019-09-16T21:26:14.000Z",
+          "updated": "2019-09-16T21:27:14.000Z"
         },
-        "order": "a",
-        "sequence": "after",
-        "criteria": [
-          {
-            "entity": "WOR",
-            "property": "current_status",
-            "operator": "equals",
-            "value": {
-              "status": "Completed",
-              "category": "COMPLETE"
-            }
-          }
-        ],
-        "effect": [
-          {
-            "effect_type": "notify",
-            "contacts": [
-              "contact_one",
-              "contact_two"
-            ],
-            "label": "Work order complete",
-            "message": "A work order has completed",
-            "severity": "normal"
-          }
-        ],
+        "date": "2019-09-16T21:27:14.000Z",
         "_links": {
           "self": {
             "href": "https://api.nterprise.com/actions/action"
@@ -1400,109 +1608,13 @@ Permissions required:<br>
         }
       }
     ]
-  },
-  "_links": {
-    "next": {
-      "href": "https://api.nterprise.com/actions?limit=42&offset=next-offset"
-    },
-    "self": {
-      "href": "https://api.nterprise.com/actions?limit=42"
-    }
   }
 }
 ```
 
-### POST /resources/{resource_id}/actions
+<h1 id="resources-sub-resource">Sub Resource</h1>
 
-<a id="opIdcreateActionForResource"></a>
-
-Creates a new action
-
-<aside class="warning">
-Permissions required:<br>
-<ul><li>action:create</li></ul>
-</aside>
-
-> Body parameter
-
-<h3 id="createactionforresource-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|resource_id|path|string|true|Id for the resource|
-|label|body|string|true|Label for the entity|
-|entity|body|object|true|Entity the action is configured for|
-|&nbsp;&nbsp; entity_id|body|string|false|Entity identifier|
-|&nbsp;&nbsp; entity_type|body|any|false|none|
-|sequence|body|string|true|When the action should fire|
-|event|body|string|true|Possible entity events|
-|criteria|body|[object]|true|none|
-|&nbsp;&nbsp; entity|body|any|true|none|
-|&nbsp;&nbsp; property|body|string|true|Property on entity|
-|&nbsp;&nbsp; operator|body|string|true|Operation to perform|
-|&nbsp;&nbsp; value|body|string|false|The value to compare|
-|effect|body|[anyOf]|true|Effect to apply|
-|&nbsp;&nbsp; *anonymous*|body|object|false|Effect which notifies a user|
-|&nbsp;&nbsp;&nbsp;&nbsp; effect_type|body|string|true|Name of the effect type|
-|&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|Options for the effect|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; contacts|body|[string]|true|List of contacts to notify|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; label|body|string|true|Label for the entity|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; message|body|string|true|The message|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; severity|body|string|true|Severity of the notification|
-|&nbsp;&nbsp; *anonymous*|body|object|false|Effect which notifies a user|
-|&nbsp;&nbsp;&nbsp;&nbsp; effect_type|body|string|true|Name of the effect type|
-|&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|Options for the effect|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; entity|body|any|true|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; property|body|string|true|Entity property to update|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; value|body|string|true|Value to set|
-
-> Example responses
-
-> 200 Response
-
-```json
-{
-  "action_id": "action",
-  "label": "Update status when workflow starts",
-  "created": "2019-08-19T00:01:02.000Z",
-  "updated": "2020-08-19T01:01:02.000Z",
-  "event": "WOR.status-changed",
-  "entity": {
-    "entity_type": "CUS",
-    "entity_id": "customer"
-  },
-  "order": "a",
-  "sequence": "after",
-  "criteria": [
-    {
-      "entity": "WOR",
-      "property": "current_status",
-      "operator": "equals",
-      "value": {
-        "status": "Completed",
-        "category": "COMPLETE"
-      }
-    }
-  ],
-  "effect": [
-    {
-      "effect_type": "notify",
-      "contacts": [
-        "contact_one",
-        "contact_two"
-      ],
-      "label": "Work order complete",
-      "message": "A work order has completed",
-      "severity": "normal"
-    }
-  ],
-  "_links": {
-    "self": {
-      "href": "https://api.nterprise.com/actions/action"
-    }
-  }
-}
-```
+## Operations
 
 ### GET /sub-resources/{sub_resource_id}/actions
 
@@ -1606,8 +1718,8 @@ Permissions required:<br>
 |sub_resource_id|path|string|true|Id for the sub resource|
 |label|body|string|true|Label for the entity|
 |entity|body|object|true|Entity the action is configured for|
-|&nbsp;&nbsp; entity_id|body|string|false|Entity identifier|
-|&nbsp;&nbsp; entity_type|body|any|false|none|
+|&nbsp;&nbsp; entity_id|body|string|true|Entity identifier|
+|&nbsp;&nbsp; entity_type|body|any|true|none|
 |sequence|body|string|true|When the action should fire|
 |event|body|string|true|Possible entity events|
 |criteria|body|[object]|true|none|

@@ -1,0 +1,45 @@
+{
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "./cycle.json"
+    },
+    {
+      "type": "object",
+      "required": [
+        "_links"
+      ],
+      "properties": {
+        "_links": {
+          "type": "object",
+          "required": [
+            "self",
+            "nter:cycle-context",
+            "nter:cycle-work-order",
+            "nter:cycle-assigned-user"
+          ],
+          "properties": {
+            "self": {
+              "$ref": "./link.json"
+            },
+            "nter:cycle-context": {
+              "$ref": "./link.json"
+            },
+            "nter:cycle-resource": {
+              "$ref": "./link.json"
+            },
+            "nter:cycle-location": {
+              "$ref": "./link.json"
+            },
+            "nter:cycle-work-order": {
+              "$ref": "./link.json"
+            },
+            "nter:cycle-assigned-user": {
+              "$ref": "./link.json"
+            }
+          }
+        }
+      }
+    }
+  ]
+}

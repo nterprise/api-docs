@@ -4,7 +4,7 @@
     "summary": "Fetch Contact Actions",
     "description": "Fetch a page of actions for a contact",
     "tags": [
-      "Action"
+      "Contact"
     ],
     "parameters": [
       {
@@ -29,7 +29,7 @@
     "summary": "Create an action for this contact",
     "description": "Creates a new action",
     "tags": [
-      "Action"
+      "Contact"
     ],
     "parameters": [
       {

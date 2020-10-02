@@ -33,6 +33,18 @@
     "/work-orders/{work_order_id}": {
       "$ref": "./paths/workOrder/workOrder.json"
     },
+    "/work-orders/{work_order_id}/diff": {
+      "$ref": "./paths/workOrder/diff.json"
+    },
+    "/work-orders/{work_order_id}/contexts": {
+      "$ref": "./paths/workOrder/contexts.json"
+    },
+    "/work-orders/{work_order_id}/cycles": {
+      "$ref": "./paths/workOrder/cycles.json"
+    },
+    "/work-orders/{work_order_id}/cycles/{cycle_id}": {
+      "$ref": "./paths/workOrder/cycle.json"
+    },
     "/work-orders/{work_order_id}/relations": {
       "$ref": "./paths/workOrder/relations.json"
     },

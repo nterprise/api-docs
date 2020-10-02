@@ -1,0 +1,33 @@
+{
+  "get": {
+    "operationId": "fetchDiffForPart",
+    "summary": "Fetch part differences",
+    "description": "Fetches A Page diff records for a part",
+    "tags": [
+      "Part"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/partId.json"
+      },
+      {
+        "$ref": "../../components/parameters/limit.json"
+      },
+      {
+        "$ref": "../../components/parameters/offset.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halDiffPage.json"
+      }
+    },
+    "security": [
+      {
+        "niagara": [
+          "part:read"
+        ]
+      }
+    ]
+  }
+}

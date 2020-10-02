@@ -1,0 +1,33 @@
+{
+  "get": {
+    "operationId": "fetchDiffForContact",
+    "summary": "Fetch contact differences",
+    "description": "Fetches A Page diff records for a contact",
+    "tags": [
+      "Contact"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/contactId.json"
+      },
+      {
+        "$ref": "../../components/parameters/limit.json"
+      },
+      {
+        "$ref": "../../components/parameters/offset.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halDiffPage.json"
+      }
+    },
+    "security": [
+      {
+        "niagara": [
+          "contact:read"
+        ]
+      }
+    ]
+  }
+}

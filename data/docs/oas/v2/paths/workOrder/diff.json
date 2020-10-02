@@ -1,0 +1,33 @@
+{
+  "get": {
+    "operationId": "fetchDiffForWorkOrder",
+    "summary": "Fetch work order differences",
+    "description": "Fetches A Page diff records for a work order",
+    "tags": [
+      "Work Order"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/workOrderId.json"
+      },
+      {
+        "$ref": "../../components/parameters/limit.json"
+      },
+      {
+        "$ref": "../../components/parameters/offset.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halDiffPage.json"
+      }
+    },
+    "security": [
+      {
+        "niagara": [
+          "work-order:read"
+        ]
+      }
+    ]
+  }
+}

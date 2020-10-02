@@ -1,0 +1,23 @@
+{
+  "type": "object",
+  "properties": {
+    "diff_id": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/diff.json#/properties/diff_id"
+    },
+    "property": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/diff.json#/properties/property"
+    },
+    "old_value": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/diff.json#/properties/old_value"
+    },
+    "new_value": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/diff.json#/properties/new_value"
+    },
+    "by_user": {
+      "$ref": "./userSummary.json"
+    },
+    "date": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/diff.json#/properties/date"
+    }
+  }
+}

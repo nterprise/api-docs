@@ -4,7 +4,7 @@
     "summary": "Fetch Program Actions",
     "description": "Fetch a page of actions for a program",
     "tags": [
-      "Action"
+      "Program"
     ],
     "parameters": [
       {
@@ -29,7 +29,7 @@
     "summary": "Create an action for this program",
     "description": "Creates a new action",
     "tags": [
-      "Action"
+      "Program"
     ],
     "parameters": [
       {

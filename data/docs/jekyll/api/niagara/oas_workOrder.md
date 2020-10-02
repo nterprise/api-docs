@@ -341,7 +341,7 @@ Permissions required:<br>
 |&nbsp;&nbsp; project_id|body|string|false|Unique identifier|
 |start_date|body|string(date-time)¦null|false|Start date|
 |end_date|body|string(date-time)¦null|false|End date|
-|cycles|body|object|false|none|
+|cycles|body|object|false|A count of cycles needed for this entity broken down by status category and active/in-active status|
 |&nbsp;&nbsp; work_flow|body|object|true|Workflow|
 |&nbsp;&nbsp;&nbsp;&nbsp; work_flow_id|body|string|false|Entity identifier|
 |&nbsp;&nbsp;&nbsp;&nbsp; entity_id|body|string|true|Entity identifier|
@@ -890,7 +890,7 @@ Permissions required:<br>
 |&nbsp;&nbsp; project_id|body|string|false|Unique identifier|
 |start_date|body|string(date-time)¦null|false|Start date|
 |end_date|body|string(date-time)¦null|false|End date|
-|cycles|body|object|false|none|
+|cycles|body|object|false|A count of cycles needed for this entity broken down by status category and active/in-active status|
 |&nbsp;&nbsp; work_flow|body|object|true|Workflow|
 |&nbsp;&nbsp;&nbsp;&nbsp; work_flow_id|body|string|false|Entity identifier|
 |&nbsp;&nbsp;&nbsp;&nbsp; entity_id|body|string|true|Entity identifier|
@@ -1167,6 +1167,622 @@ Permissions required:<br>
 |---|---|---|---|---|
 |work_order_id|path|string|true|Id for the work order|
 
+### GET /work-orders/{work_order_id}/diff
+
+<a id="opIdfetchDiffForWorkOrder"></a>
+
+Fetches A Page diff records for a work order
+
+<aside class="warning">
+Permissions required:<br>
+<ul><li>work-order:read</li></ul>
+</aside>
+
+<h3 id="fetchdiffforworkorder-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|work_order_id|path|string|true|Id for the work order|
+|limit|query|integer|false|How many items to return at one time (max 100)|
+|offset|query|string|false|Continue from last offset|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "total_count": 21,
+  "limit": 42,
+  "offset": "next-offset",
+  "_embedded": {
+    "nter:diffs": [
+      {
+        "diff_id": "diff_id",
+        "property": "label",
+        "old_value": "Zones Inc",
+        "new_value": "Zones",
+        "by_user": {
+          "user_id": "3dddba3e-6122-46a8-ae26-8c7c95bd82d7",
+          "name": "Daniel Jackson",
+          "email": "daniel.jackson@niagara.com",
+          "created": "2019-09-16T21:26:14.000Z",
+          "updated": "2019-09-16T21:27:14.000Z"
+        },
+        "date": "2019-09-16T21:27:14.000Z",
+        "_links": {
+          "self": {
+            "href": "https://api.nterprise.com/actions/action"
+          }
+        }
+      }
+    ]
+  }
+}
+```
+
+### GET /work-orders/{work_order_id}/contexts
+
+<a id="opIdfetchContextsForWorkOrder"></a>
+
+Fetch a page of contexts for a work order
+
+<aside class="warning">
+Permissions required:<br>
+<ul><li>work-order:read</li></ul>
+</aside>
+
+<h3 id="fetchcontextsforworkorder-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|work_order_id|path|string|true|Id for the work order|
+|filter[status]|query|string|false|Filter on the status|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "total_count": 21,
+  "limit": 42,
+  "offset": "next-offset",
+  "_embedded": {
+    "nter:contexts": [
+      {
+        "context_id": "context",
+        "label": "context 44jjiue33 for customer: customer",
+        "created": "2019-08-19T00:01:02.000Z",
+        "updated": "2020-08-19T01:01:02.000Z",
+        "workflow": {
+          "work_flow_id": "work-flow",
+          "label": "My workflow",
+          "created": "2019-08-19T00:01:02.000Z",
+          "updated": "2020-08-19T01:01:02.000Z",
+          "workflow_version": 7,
+          "schema_version": "1.0",
+          "applies_to": "UNIT",
+          "starts_at": "work-complete",
+          "triggered_by": [
+            "UNIT.created"
+          ],
+          "metadata": {
+            "meta": "data"
+          },
+          "steps": {
+            "work-complete": {
+              "label": "work complete",
+              "on_complete": [],
+              "on_start": [],
+              "step_type": "success"
+            },
+            "stop-poking-me": {
+              "label": "stop poking me",
+              "on_complete": [],
+              "on_start": [],
+              "step_type": "fail"
+            }
+          }
+        },
+        "current_step": "work-complete",
+        "last_steps": [
+          {
+            "step_name": "work-complete",
+            "started_at": "2020-08-19T01:01:02.000Z",
+            "ended_at": "2020-08-19T01:01:02.000Z",
+            "time_to_run": "42",
+            "did_error": false,
+            "did_timeout": false
+          }
+        ],
+        "started_at": "2019-08-19T00:01:02.000Z",
+        "ended_at": "2019-08-19T00:01:02.000Z",
+        "time_to_run": 2,
+        "active": false,
+        "waiting_for_user": false,
+        "data": {
+          "fizz": "buzz"
+        },
+        "entity": {
+          "entity_id": "customer",
+          "entity_type": "CUS",
+          "label": "Niagara Customer",
+          "created": "2020-01-09T22:12:03.000Z",
+          "updated": "2020-01-09T22:12:03.000Z",
+          "external_platform": {},
+          "total_programs": 21,
+          "total_projects": 42,
+          "allowed_statuses": [
+            {
+              "category": "PENDING",
+              "description": "For something that is Pending",
+              "status": "Pending",
+              "order": 3
+            },
+            {
+              "category": "IN_PROGRESS",
+              "description": "For something that is In Progress",
+              "status": "In Progress",
+              "order": 4
+            },
+            {
+              "category": "VERIFYING",
+              "description": "For something that is Verifying",
+              "status": "Verifying",
+              "order": 5
+            },
+            {
+              "category": "BLOCKED",
+              "description": "For something that is Blocked",
+              "status": "Blocked",
+              "order": 6
+            },
+            {
+              "category": "COMPLETE",
+              "description": "For something that is Complete",
+              "status": "Complete",
+              "order": 7
+            },
+            {
+              "category": "CANCELLED",
+              "description": "For something that is Cancelled",
+              "status": "Cancelled",
+              "order": 8
+            }
+          ],
+          "input_filter": []
+        },
+        "using": {
+          "entity_id": "customer",
+          "entity_type": "CUS",
+          "label": "Niagara Customer",
+          "created": "2020-01-09T22:12:03.000Z",
+          "updated": "2020-01-09T22:12:03.000Z",
+          "external_platform": {},
+          "total_programs": 21,
+          "total_projects": 42,
+          "allowed_statuses": [
+            {
+              "category": "PENDING",
+              "description": "For something that is Pending",
+              "status": "Pending",
+              "order": 3
+            },
+            {
+              "category": "IN_PROGRESS",
+              "description": "For something that is In Progress",
+              "status": "In Progress",
+              "order": 4
+            },
+            {
+              "category": "VERIFYING",
+              "description": "For something that is Verifying",
+              "status": "Verifying",
+              "order": 5
+            },
+            {
+              "category": "BLOCKED",
+              "description": "For something that is Blocked",
+              "status": "Blocked",
+              "order": 6
+            },
+            {
+              "category": "COMPLETE",
+              "description": "For something that is Complete",
+              "status": "Complete",
+              "order": 7
+            },
+            {
+              "category": "CANCELLED",
+              "description": "For something that is Cancelled",
+              "status": "Cancelled",
+              "order": 8
+            }
+          ],
+          "input_filter": []
+        },
+        "_links": {
+          "self": {
+            "href": "https://api.nterprise.com/contexts/context"
+          }
+        }
+      }
+    ]
+  },
+  "_links": {
+    "next": {
+      "href": "https://api.nterprise.com/contexts?limit=42&offset=next-offset"
+    },
+    "self": {
+      "href": "https://api.nterprise.com/contexts?limit=42"
+    }
+  }
+}
+```
+
+### POST /work-orders/{work_order_id}/contexts
+
+<a id="opIdcreateContextForWorkOrder"></a>
+
+Starts a context for a work order
+
+<aside class="warning">
+Permissions required:<br>
+<ul><li>work-order:read</li></ul>
+</aside>
+
+> Body parameter
+
+<h3 id="createcontextforworkorder-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|entity|body|object|true|Entity to start the context on|
+|&nbsp;&nbsp; entity_id|body|string|true|Entity identifier|
+|&nbsp;&nbsp; entity_type|body|any|true|none|
+|using|body|string|true|The ID of the cycle this context is using|
+|resource_id|body|any|false|none|
+|&nbsp;&nbsp; *anonymous*|body|string|false|The identifier for the resource|
+|&nbsp;&nbsp; *anonymous*|body|string|false|The identifier for the resource|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "context_id": "context",
+  "label": "context 44jjiue33 for customer: customer",
+  "created": "2019-08-19T00:01:02.000Z",
+  "updated": "2020-08-19T01:01:02.000Z",
+  "workflow": {
+    "work_flow_id": "work-flow",
+    "label": "My workflow",
+    "created": "2019-08-19T00:01:02.000Z",
+    "updated": "2020-08-19T01:01:02.000Z",
+    "workflow_version": 7,
+    "schema_version": "1.0",
+    "applies_to": "UNIT",
+    "starts_at": "work-complete",
+    "triggered_by": [
+      "UNIT.created"
+    ],
+    "metadata": {
+      "meta": "data"
+    },
+    "steps": {
+      "work-complete": {
+        "label": "work complete",
+        "on_complete": [],
+        "on_start": [],
+        "step_type": "success"
+      },
+      "stop-poking-me": {
+        "label": "stop poking me",
+        "on_complete": [],
+        "on_start": [],
+        "step_type": "fail"
+      }
+    }
+  },
+  "current_step": "work-complete",
+  "last_steps": [
+    {
+      "step_name": "work-complete",
+      "started_at": "2020-08-19T01:01:02.000Z",
+      "ended_at": "2020-08-19T01:01:02.000Z",
+      "time_to_run": "42",
+      "did_error": false,
+      "did_timeout": false
+    }
+  ],
+  "started_at": "2019-08-19T00:01:02.000Z",
+  "ended_at": "2019-08-19T00:01:02.000Z",
+  "time_to_run": 2,
+  "active": false,
+  "waiting_for_user": false,
+  "data": {
+    "fizz": "buzz"
+  },
+  "entity": {
+    "entity_id": "customer",
+    "entity_type": "CUS",
+    "label": "Niagara Customer",
+    "created": "2020-01-09T22:12:03.000Z",
+    "updated": "2020-01-09T22:12:03.000Z",
+    "external_platform": {},
+    "total_programs": 21,
+    "total_projects": 42,
+    "allowed_statuses": [
+      {
+        "category": "PENDING",
+        "description": "For something that is Pending",
+        "status": "Pending",
+        "order": 3
+      },
+      {
+        "category": "IN_PROGRESS",
+        "description": "For something that is In Progress",
+        "status": "In Progress",
+        "order": 4
+      },
+      {
+        "category": "VERIFYING",
+        "description": "For something that is Verifying",
+        "status": "Verifying",
+        "order": 5
+      },
+      {
+        "category": "BLOCKED",
+        "description": "For something that is Blocked",
+        "status": "Blocked",
+        "order": 6
+      },
+      {
+        "category": "COMPLETE",
+        "description": "For something that is Complete",
+        "status": "Complete",
+        "order": 7
+      },
+      {
+        "category": "CANCELLED",
+        "description": "For something that is Cancelled",
+        "status": "Cancelled",
+        "order": 8
+      }
+    ],
+    "input_filter": []
+  },
+  "using": {
+    "entity_id": "customer",
+    "entity_type": "CUS",
+    "label": "Niagara Customer",
+    "created": "2020-01-09T22:12:03.000Z",
+    "updated": "2020-01-09T22:12:03.000Z",
+    "external_platform": {},
+    "total_programs": 21,
+    "total_projects": 42,
+    "allowed_statuses": [],
+    "input_filter": []
+  },
+  "_links": {
+    "self": {
+      "href": "https://api.nterprise.com/contexts/context"
+    }
+  }
+}
+```
+
+### GET /work-orders/{work_order_id}/cycles
+
+<a id="opIdfetchCyclesForWorkOrder"></a>
+
+Fetch a page of cycles for a work order
+
+<aside class="warning">
+Permissions required:<br>
+<ul><li>work-order:read</li></ul>
+</aside>
+
+<h3 id="fetchcyclesforworkorder-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|work_order_id|path|string|true|Id for the work order|
+|filter[status]|query|string|false|Filter on the status|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "total_count": 21,
+  "limit": 42,
+  "offset": "next-offset",
+  "_embedded": {
+    "nter:work-order-cycles": [
+      {
+        "action_id": "cycle",
+        "label": "Cycle 42 for work order: configure iPads",
+        "created": "2019-08-19T00:01:02.000Z",
+        "updated": "2020-08-19T01:01:02.000Z",
+        "current_status": {
+          "status": "In Progress",
+          "category": "IN_PROGRESS"
+        },
+        "work_order_id": "work-order",
+        "location_id": "location",
+        "resource_id": "resource",
+        "assigned_user": "user",
+        "is_retry": false,
+        "context_id": "context",
+        "_links": {
+          "self": {
+            "href": "https://api.nterprise.com/actions/action"
+          },
+          "nter:cycle-context": {
+            "href": "https://api.nterprise.com/contexts/context"
+          },
+          "nter:cycle-resource": {
+            "href": "https://api.nterprise.com/resources/resource"
+          },
+          "nter:cycle-location": {
+            "href": "https://api.nterprise.com/locations/location"
+          },
+          "nter:cycle-work-order": {
+            "href": "https://api.nterprise.com/work-orders/work-order"
+          },
+          "nter:cycle-assigned-user": {
+            "href": "https://api.nterprise.com/users/user"
+          }
+        }
+      }
+    ]
+  }
+}
+```
+
+### DELETE /work-orders/{work_order_id}/cycles
+
+<a id="opIdcancelWorkOrderCycles"></a>
+
+Cancels all cycles that are not in COMPLETED or CANCELLED status
+
+<aside class="warning">
+Permissions required:<br>
+<ul><li>work-order:update</li></ul>
+</aside>
+
+<h3 id="cancelworkordercycles-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|work_order_id|path|string|true|Id for the work order|
+
+### GET /work-orders/{work_order_id}/cycles/{cycle_id}
+
+<a id="opIdfetchCycleById"></a>
+
+Fetches a cycle
+
+<aside class="warning">
+Permissions required:<br>
+<ul><li>work-order:read</li></ul>
+</aside>
+
+<h3 id="fetchcyclebyid-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|work_order_id|path|string|true|Id for the work order|
+|cycle_id|path|string|true|Id of the cycle|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "action_id": "cycle",
+  "label": "Cycle 42 for work order: configure iPads",
+  "created": "2019-08-19T00:01:02.000Z",
+  "updated": "2020-08-19T01:01:02.000Z",
+  "current_status": {
+    "status": "In Progress",
+    "category": "IN_PROGRESS"
+  },
+  "work_order_id": "work-order",
+  "location_id": "location",
+  "resource_id": "resource",
+  "assigned_user": "user",
+  "is_retry": false,
+  "context_id": "context",
+  "_links": {
+    "self": {
+      "href": "https://api.nterprise.com/actions/action"
+    },
+    "nter:cycle-context": {
+      "href": "https://api.nterprise.com/contexts/context"
+    },
+    "nter:cycle-resource": {
+      "href": "https://api.nterprise.com/resources/resource"
+    },
+    "nter:cycle-location": {
+      "href": "https://api.nterprise.com/locations/location"
+    },
+    "nter:cycle-work-order": {
+      "href": "https://api.nterprise.com/work-orders/work-order"
+    },
+    "nter:cycle-assigned-user": {
+      "href": "https://api.nterprise.com/users/user"
+    }
+  }
+}
+```
+
+### DELETE /work-orders/{work_order_id}/cycles/{cycle_id}
+
+<a id="opIdcancelCycle"></a>
+
+Cancels a cycle
+
+<aside class="warning">
+Permissions required:<br>
+<ul><li>work-order:read</li></ul>
+</aside>
+
+<h3 id="cancelcycle-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|work_order_id|path|string|true|Id for the work order|
+|cycle_id|path|string|true|Id of the cycle|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "action_id": "cycle",
+  "label": "Cycle 42 for work order: configure iPads",
+  "created": "2019-08-19T00:01:02.000Z",
+  "updated": "2020-08-19T01:01:02.000Z",
+  "current_status": {
+    "status": "In Progress",
+    "category": "IN_PROGRESS"
+  },
+  "work_order_id": "work-order",
+  "location_id": "location",
+  "resource_id": "resource",
+  "assigned_user": "user",
+  "is_retry": false,
+  "context_id": "context",
+  "_links": {
+    "self": {
+      "href": "https://api.nterprise.com/actions/action"
+    },
+    "nter:cycle-context": {
+      "href": "https://api.nterprise.com/contexts/context"
+    },
+    "nter:cycle-resource": {
+      "href": "https://api.nterprise.com/resources/resource"
+    },
+    "nter:cycle-location": {
+      "href": "https://api.nterprise.com/locations/location"
+    },
+    "nter:cycle-work-order": {
+      "href": "https://api.nterprise.com/work-orders/work-order"
+    },
+    "nter:cycle-assigned-user": {
+      "href": "https://api.nterprise.com/users/user"
+    }
+  }
+}
+```
+
 ### GET /work-orders/{work_order_id}/relations
 
 <a id="opIdfetchRelationsForWorkOrder"></a>
@@ -1379,10 +1995,6 @@ Permissions required:<br>
 }
 ```
 
-<h1 id="work-orders-action">Action</h1>
-
-## Operations
-
 ### GET /work-orders/{work_order_id}/actions
 
 <a id="opIdfetchActionsForWorkOrder"></a>
@@ -1465,6 +2077,10 @@ Permissions required:<br>
 }
 ```
 
+<h1 id="work-orders-action">Action</h1>
+
+## Operations
+
 ### POST /work-orders/{work_order_id}/actions
 
 <a id="opIdcreateActionForWorkOrder"></a>
@@ -1485,8 +2101,8 @@ Permissions required:<br>
 |work_order_id|path|string|true|Id for the work order|
 |label|body|string|true|Label for the entity|
 |entity|body|object|true|Entity the action is configured for|
-|&nbsp;&nbsp; entity_id|body|string|false|Entity identifier|
-|&nbsp;&nbsp; entity_type|body|any|false|none|
+|&nbsp;&nbsp; entity_id|body|string|true|Entity identifier|
+|&nbsp;&nbsp; entity_type|body|any|true|none|
 |sequence|body|string|true|When the action should fire|
 |event|body|string|true|Possible entity events|
 |criteria|body|[object]|true|none|
@@ -6983,7 +7599,9 @@ properties:
                               allOf:
                                 - *a13
     allOf:
-      - type: object
+      - description: A count of cycles needed for this entity broken down by status
+          category and active/in-active status
+        type: object
         required:
           - pending
           - in_progress
