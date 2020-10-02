@@ -68,7 +68,7 @@
         "additionalProperties": false,
         "patternProperties": {
           "^[A-Za-z][A-Za-z0-9-]*$": {
-            "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/allSteps.json#/properties/step"
+            "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/branchSteps.json#/properties/step"
           }
         }
       }
