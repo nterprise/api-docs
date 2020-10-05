@@ -4,6 +4,6 @@
   "description": "Id for the sub resource",
   "required": true,
   "schema": {
-    "$ref": "https://docs.nterprise.com/schemas/niagara/subResource.json#/properties/resource_id"
+    "$ref": "https://docs.nterprise.com/schemas/niagara/subResource.json#/properties/sub_resource_id"
   }
 }

@@ -1,0 +1,33 @@
+{
+  "get": {
+    "operationId": "fetchDiffForUnit",
+    "summary": "Fetch unit differences",
+    "description": "Fetches A Page diff records for a unit",
+    "tags": [
+      "Unit"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/unitId.json"
+      },
+      {
+        "$ref": "../../components/parameters/limit.json"
+      },
+      {
+        "$ref": "../../components/parameters/offset.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halDiffPage.json"
+      }
+    },
+    "security": [
+      {
+        "niagara": [
+          "unit:read"
+        ]
+      }
+    ]
+  }
+}

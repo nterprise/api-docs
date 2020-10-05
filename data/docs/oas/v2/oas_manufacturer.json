@@ -35,6 +35,9 @@
     "/manufacturers/{manufacturer_id}": {
       "$ref": "./paths/manufacturer/manufacturer.json"
     },
+    "/manufacturers/{manufacturer_id}/diff": {
+      "$ref": "./paths/manufacturer/diff.json"
+    },
     "/manufacturers/{manufacturer_id}/parts": {
       "$ref": "./paths/manufacturer/parts.json"
     },

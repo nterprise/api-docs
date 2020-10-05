@@ -131,8 +131,8 @@ Permissions required:<br>
 |---|---|---|---|---|
 |label|body|string|true|Label for the entity|
 |entity|body|object|true|Entity the action is configured for|
-|&nbsp;&nbsp; entity_id|body|string|false|Entity identifier|
-|&nbsp;&nbsp; entity_type|body|any|false|none|
+|&nbsp;&nbsp; entity_id|body|string|true|Entity identifier|
+|&nbsp;&nbsp; entity_type|body|any|true|none|
 |sequence|body|string|true|When the action should fire|
 |event|body|string|true|Possible entity events|
 |criteria|body|[object]|true|none|
@@ -218,7 +218,7 @@ Permissions required:<br>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|action_id|path|string|true|Id of the attachment|
+|action_id|path|string|true|Id of the action|
 
 > Example responses
 
@@ -287,8 +287,8 @@ Permissions required:<br>
 |updated|string(date-time)|false|read-only|Last date the entity was updated|
 |order|string|false|none|Order to process the action|
 |entity|object|false|none|Entity the action is configured for|
-|&nbsp;&nbsp; entity_id|string|false|read-only|Entity identifier|
-|&nbsp;&nbsp; entity_type|any|false|none|none|
+|&nbsp;&nbsp; entity_id|string|true|read-only|Entity identifier|
+|&nbsp;&nbsp; entity_type|any|true|none|none|
 |sequence|string|false|none|When the action should fire|
 |event|string|false|none|Possible entity events|
 |criteria|[object]|false|none|none|
@@ -327,6 +327,9 @@ properties:
   entity:
     type: object
     description: Entity the action is configured for
+    required:
+      - entity_id
+      - entity_type
     properties:
       entity_id:
         type: string

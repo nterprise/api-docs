@@ -4,7 +4,7 @@
     "summary": "Fetch Sub Resource Actions",
     "description": "Fetch a page of actions for a sub resource",
     "tags": [
-      "Action"
+      "Sub Resource"
     ],
     "parameters": [
       {
@@ -29,7 +29,7 @@
     "summary": "Create an action for this subResource",
     "description": "Creates a new action",
     "tags": [
-      "Action"
+      "Sub Resource"
     ],
     "parameters": [
       {

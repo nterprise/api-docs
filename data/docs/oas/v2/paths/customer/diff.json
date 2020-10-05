@@ -1,0 +1,33 @@
+{
+  "get": {
+    "operationId": "fetchDiffForCustomer",
+    "summary": "Fetch customer differences",
+    "description": "Fetches A Page diff records for a customer",
+    "tags": [
+      "Customer"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/customerId.json"
+      },
+      {
+        "$ref": "../../components/parameters/limit.json"
+      },
+      {
+        "$ref": "../../components/parameters/offset.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halDiffPage.json"
+      }
+    },
+    "security": [
+      {
+        "niagara": [
+          "customer:read"
+        ]
+      }
+    ]
+  }
+}

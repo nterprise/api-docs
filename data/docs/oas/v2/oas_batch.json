@@ -33,6 +33,9 @@
     "/batches/{batch_id}": {
       "$ref": "./paths/batch/batch.json"
     },
+    "/batches/{batch_id}/cycles": {
+      "$ref": "./paths/batch/cycles.json"
+    },
     "/batches/{batch_id}/relations": {
       "$ref": "./paths/batch/relations.json"
     },

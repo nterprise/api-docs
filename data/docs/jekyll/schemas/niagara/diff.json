@@ -1,0 +1,66 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/diff.json",
+  "type": "object",
+  "description": "Defines the properties for a work order diff",
+  "additionalProperties": false,
+  "required": [
+    "entity_id",
+    "entity_type",
+    "label",
+    "created",
+    "updated",
+    "property",
+    "old_value",
+    "new_value",
+    "by_user",
+    "date"
+  ],
+  "properties": {
+    "diff_id": {
+      "description": "The identifier for the diff",
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_id"
+    },
+    "entity_id": {
+      "x-no-api-doc": true,
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_id"
+    },
+    "entity_type": {
+      "x-no-api-doc": true,
+      "const": "DIFF"
+    },
+    "label": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/label"
+    },
+    "slug": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/slug"
+    },
+    "created": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/created"
+    },
+    "updated": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/updated"
+    },
+    "property": {
+      "type": "string",
+      "description": "The property which has changed"
+    },
+    "old_value": {
+      "type": ["string", "null"],
+      "description": "The old value"
+    },
+    "new_value": {
+      "type": ["string", "null"],
+      "description": "The new value"
+    },
+    "by_user": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/user.json"
+    },
+    "date": {
+      "description": "Date the change occurred",
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    }
+  }
+}

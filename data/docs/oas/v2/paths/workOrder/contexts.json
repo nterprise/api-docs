@@ -1,0 +1,53 @@
+{
+  "get": {
+    "operationId": "fetchContextsForWorkOrder",
+    "summary": "Fetch Work Order Contexts",
+    "description": "Fetch a page of contexts for a work order",
+    "tags": [
+      "Work Order"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/workOrderId.json"
+      },
+      {
+        "$ref": "../../components/parameters/filterStatus.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halContextPage.json"
+      }
+    },
+    "security": [
+      {
+        "niagara": [
+          "work-order:read"
+        ]
+      }
+    ]
+  },
+  "post": {
+    "operationId": "createContextForWorkOrder",
+    "summary": "Create context for a work order",
+    "description": "Starts a context for a work order",
+    "tags": [
+      "Work Order"
+    ],
+    "requestBody": {
+      "$ref": "../../components/requestBodies/workOrderContext.json"
+    },
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halContext.json"
+      }
+    },
+    "security": [
+      {
+        "niagara": [
+          "work-order:read"
+        ]
+      }
+    ]
+  }
+}

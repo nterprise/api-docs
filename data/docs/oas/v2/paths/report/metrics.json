@@ -1,0 +1,25 @@
+{
+  "post": {
+    "operationId": "createMetricReport",
+    "summary": "Run metric report",
+    "description": "Runs a metric report. Note: this can return back at most 1000 items. There is no paging for this report",
+    "tags": [
+      "Report"
+    ],
+    "requestBody": {
+      "$ref": "../../components/requestBodies/metric.json"
+    },
+    "responses": {
+      "201": {
+        "$ref": "../../components/responses/halMetric.json"
+      }
+    },
+    "security": [
+      {
+        "niagara": [
+          "report:read"
+        ]
+      }
+    ]
+  }
+}

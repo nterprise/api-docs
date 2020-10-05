@@ -36,6 +36,9 @@
     "/programs/{program_id}": {
       "$ref": "./paths/program/program.json"
     },
+    "/programs/{program_id}/diff": {
+      "$ref": "./paths/program/diff.json"
+    },
     "/programs/{program_id}/projects": {
       "$ref": "./paths/program/projects.json"
     },

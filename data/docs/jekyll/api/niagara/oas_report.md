@@ -13,6 +13,18 @@ title: Reporting
 
 Reporting endpoints
 
+# Authentication
+
+- oAuth2 authentication. 
+
+    - Flow: authorizationCode
+    - Authorization URL = [https://auth.nterprise.com/oauth/authorize](https://auth.nterprise.com/oauth/authorize)
+    - Token URL = [https://auth.nterprise.com/oauth/token](https://auth.nterprise.com/oauth/token)
+
+|Scope|Scope Description|
+|---|---|
+|report:read|Allows access to a report|
+
 <h1 id="reporting-report">Report</h1>
 
 ## Operations
@@ -23,8 +35,9 @@ Reporting endpoints
 
 Fetches custom fields for an entity
 
-<aside class="success">
-This operation does not require authentication
+<aside class="warning">
+Permissions required:<br>
+<ul><li>report:read</li></ul>
 </aside>
 
 <h3 id="fetchfieldsforentity-parameters">Parameters</h3>
@@ -53,14 +66,84 @@ This operation does not require authentication
 }
 ```
 
+### POST /metrics
+
+<a id="opIdcreateMetricReport"></a>
+
+Runs a metric report. Note: this can return back at most 1000 items. There is no paging for this report
+
+<aside class="warning">
+Permissions required:<br>
+<ul><li>report:read</li></ul>
+</aside>
+
+> Body parameter
+
+<h3 id="createmetricreport-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|metrics|body|[object]|true|List of metrics to return|
+|&nbsp;&nbsp; metric|body|string|true|Name of the metric|
+|&nbsp;&nbsp; top|body|number|false|Return the top number of results|
+|date_start|body|string|true|Return metrics after this date|
+|date_end|body|string|true|Return metrics before this date|
+
+> Example responses
+
+> 201 Response
+
+```json
+{
+  "report_id": "fe385753-8d50-49b5-b24f-25726bfbe357",
+  "metrics": [
+    {
+      "metric": "cycle_success",
+      "tenant_id": "Zones",
+      "entity_type": "MET",
+      "value": 1,
+      "date": "2020-09-09T17:24:32.477Z",
+      "dimensions": [
+        {
+          "key": "customer",
+          "value": "customer_id",
+          "label": "Zones"
+        },
+        {
+          "key": "customer:customer_id:program",
+          "value": "program_id",
+          "label": "Gap"
+        },
+        {
+          "key": "customer:customer_id:program:program_id:project",
+          "value": "project_id",
+          "label": "North east store"
+        },
+        {
+          "key": "user",
+          "value": "user_id",
+          "label": "Chuck Reeves"
+        }
+      ]
+    }
+  ],
+  "_links": {
+    "self": {
+      "href": "https://api.nterprise.com/reports/fe385753-8d50-49b5-b24f-25726bfbe357"
+    }
+  }
+}
+```
+
 ### POST /reports
 
 <a id="opIdcreateReport"></a>
 
 Runs a report for an entity
 
-<aside class="success">
-This operation does not require authentication
+<aside class="warning">
+Permissions required:<br>
+<ul><li>report:read</li></ul>
 </aside>
 
 > Body parameter
@@ -142,8 +225,9 @@ This operation does not require authentication
 
 Download a report
 
-<aside class="success">
-This operation does not require authentication
+<aside class="warning">
+Permissions required:<br>
+<ul><li>report:read</li></ul>
 </aside>
 
 <h3 id="exportreport-parameters">Parameters</h3>

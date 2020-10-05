@@ -1,0 +1,33 @@
+{
+  "get": {
+    "operationId": "fetchDiffForResource",
+    "summary": "Fetch resource differences",
+    "description": "Fetches A Page diff records for a resource",
+    "tags": [
+      "Resource"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/resourceId.json"
+      },
+      {
+        "$ref": "../../components/parameters/limit.json"
+      },
+      {
+        "$ref": "../../components/parameters/offset.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halDiffPage.json"
+      }
+    },
+    "security": [
+      {
+        "niagara": [
+          "resource:read"
+        ]
+      }
+    ]
+  }
+}

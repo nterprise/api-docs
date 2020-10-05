@@ -34,6 +34,9 @@
     "/vendors/{vendor_id}": {
       "$ref": "./paths/vendor/vendor.json"
     },
+    "/vendors/{vendor_id}/diff": {
+      "$ref": "./paths/vendor/diff.json"
+    },
     "/vendors/{vendor_id}/units": {
       "$ref": "./paths/vendor/units.json"
     },

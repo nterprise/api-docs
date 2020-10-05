@@ -1,7 +1,7 @@
 {
   "name": "action_id",
   "in": "path",
-  "description": "Id of the attachment",
+  "description": "Id of the action",
   "required": true,
   "schema": {
     "$ref": "https://docs.nterprise.com/schemas/niagara/action.json#/properties/action_id"

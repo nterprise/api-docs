@@ -13,6 +13,13 @@
       "201": {
         "$ref": "../../components/responses/halReport.json"
       }
-    }
+    },
+    "security": [
+      {
+        "niagara": [
+          "report:read"
+        ]
+      }
+    ]
   }
 }

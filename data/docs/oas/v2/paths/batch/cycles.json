@@ -1,0 +1,30 @@
+{
+  "get": {
+    "operationId": "fetchCyclesForBatch",
+    "summary": "Fetch Batch Cycles",
+    "description": "Fetch a page of cycles for a batch",
+    "tags": [
+      "Batch"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/batchId.json"
+      },
+      {
+        "$ref": "../../components/parameters/filterStatus.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halCyclePage.json"
+      }
+    },
+    "security": [
+      {
+        "niagara": [
+          "batch:read"
+        ]
+      }
+    ]
+  }
+}

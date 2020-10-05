@@ -1416,6 +1416,76 @@ Permissions required:<br>
 |---|---|---|---|---|
 |batch_id|path|string|true|Id of the batch|
 
+### GET /batches/{batch_id}/cycles
+
+<a id="opIdfetchCyclesForBatch"></a>
+
+Fetch a page of cycles for a batch
+
+<aside class="warning">
+Permissions required:<br>
+<ul><li>batch:read</li></ul>
+</aside>
+
+<h3 id="fetchcyclesforbatch-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|batch_id|path|string|true|Id of the batch|
+|filter[status]|query|string|false|Filter on the status|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "total_count": 21,
+  "limit": 42,
+  "offset": "next-offset",
+  "_embedded": {
+    "nter:work-order-cycles": [
+      {
+        "action_id": "cycle",
+        "label": "Cycle 42 for work order: configure iPads",
+        "created": "2019-08-19T00:01:02.000Z",
+        "updated": "2020-08-19T01:01:02.000Z",
+        "current_status": {
+          "status": "In Progress",
+          "category": "IN_PROGRESS"
+        },
+        "work_order_id": "work-order",
+        "location_id": "location",
+        "resource_id": "resource",
+        "assigned_user": "user",
+        "is_retry": false,
+        "context_id": "context",
+        "_links": {
+          "self": {
+            "href": "https://api.nterprise.com/actions/action"
+          },
+          "nter:cycle-context": {
+            "href": "https://api.nterprise.com/contexts/context"
+          },
+          "nter:cycle-resource": {
+            "href": "https://api.nterprise.com/resources/resource"
+          },
+          "nter:cycle-location": {
+            "href": "https://api.nterprise.com/locations/location"
+          },
+          "nter:cycle-work-order": {
+            "href": "https://api.nterprise.com/work-orders/work-order"
+          },
+          "nter:cycle-assigned-user": {
+            "href": "https://api.nterprise.com/users/user"
+          }
+        }
+      }
+    ]
+  }
+}
+```
+
 ### GET /batches/{batch_id}/relations
 
 <a id="opIdfetchRelationsForBatch"></a>
@@ -3194,6 +3264,8 @@ properties:
     description: The number of cycles for this batch
     minimum: 1
   cycles:
+    description: A count of cycles needed for this entity broken down by status
+      category and active/in-active status
     type: object
     required:
       - pending
@@ -7840,7 +7912,8 @@ properties:
                     x-patternProperties:
                       "^[A-Za-z][A-Za-z0-9-]*$":
                         oneOf:
-                          - $schema: http://json-schema.org/draft-07/schema#
+                          - &a14
+                            $schema: http://json-schema.org/draft-07/schema#
                             $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/function/allocateUnitsToProject.json
                             description: Allocates units to a project.
                             type: object
@@ -7981,7 +8054,8 @@ properties:
                                       status:
                                         type: string
                                         description: Only assign units which are in this status
-                          - $schema: http://json-schema.org/draft-07/schema#
+                          - &a15
+                            $schema: http://json-schema.org/draft-07/schema#
                             $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/function/setEntityStatus.json
                             description: Updates the status on the Work Flow entity.
                             type: object
@@ -8054,7 +8128,8 @@ properties:
                                             description: For something that is Complete
                                             status: Complete
                                             order: 7
-                          - $schema: http://json-schema.org/draft-07/schema#
+                          - &a16
+                            $schema: http://json-schema.org/draft-07/schema#
                             $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/followPDFInstructions.json
                             description: Display a link or modal to a user which contains instructions from
                               a PDF
@@ -8098,7 +8173,8 @@ properties:
                                         type: string
                                         readOnly: true
                                         pattern: ^[0-9a-zA-Z-_]+$
-                          - $schema: http://json-schema.org/draft-07/schema#
+                          - &a17
+                            $schema: http://json-schema.org/draft-07/schema#
                             $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/manualDataEntry.json
                             description: Ask the user to manually enter (or confirm) data for an entity
                             type: object
@@ -8165,7 +8241,8 @@ properties:
                                                 context is assumed. Otherwise
                                                 the data will be set on the
                                                 context path
-                          - $schema: http://json-schema.org/draft-07/schema#
+                          - &a18
+                            $schema: http://json-schema.org/draft-07/schema#
                             $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/taskList.json
                             description: Ask the user to follow a list and check off boxes
                             type: object
@@ -8231,7 +8308,8 @@ properties:
                                             na_field:
                                               type: boolean
                                               description: Allow the user to select the N/A option when checking off the list
-                          - $schema: http://json-schema.org/draft-07/schema#
+                          - &a19
+                            $schema: http://json-schema.org/draft-07/schema#
                             $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/machine/aceIos.json
                             description: Run the ACE-IOS application to provision iOS devices
                             type: object
@@ -8624,8 +8702,68 @@ properties:
                                       description: The event conditions that have to be met
                                       allOf:
                                         - *a13
+                          - $schema: http://json-schema.org/draft-07/schema#
+                            $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepFunction.json
+                            description: A step which allows parallel execution
+                            type: object
+                            required:
+                              - step_type
+                              - label
+                              - goto
+                              - goto_fail
+                              - branches
+                            additionalProperties: false
+                            properties:
+                              step_type:
+                                type: string
+                                enum:
+                                  - parallel
+                              label: *a5
+                              on_start: *a2
+                              on_complete: *a2
+                              goto: *a6
+                              goto_fail: *a7
+                              context: *a8
+                              on_error: *a9
+                              on_timeout: *a10
+                              fail_condition:
+                                description: How to treat failures. For ALL, all branches must have failures to
+                                  be considered failed. ANY means at least one
+                                  failure will fail the step. NONE means allow
+                                  failures.
+                                type: string
+                                enum:
+                                  - ALL
+                                  - ANY
+                                  - NONE
+                              fail_fast:
+                                type: boolean
+                                description: Set the context to fail on the first branch to fail
+                                default: false
+                              branches:
+                                type: array
+                                description: Steps to execute in each path
+                                maximum: 5
+                                minimum: 2
+                                items:
+                                  type: object
+                                  description: Steps for the branch
+                                  uniqueItems: true
+                                  additionalProperties: false
+                                  patternProperties:
+                                    "^[A-Za-z][A-Za-z0-9-]*$":
+                                      oneOf:
+                                        - *a14
+                                        - *a15
+                                        - *a16
+                                        - *a17
+                                        - *a18
+                                        - *a19
+                                        - *a13
             allOf:
-              - type: object
+              - description: A count of cycles needed for this entity broken down by status
+                  category and active/in-active status
+                type: object
                 required:
                   - pending
                   - in_progress

@@ -1,0 +1,33 @@
+{
+  "get": {
+    "operationId": "fetchDiffForLocation",
+    "summary": "Fetch location differences",
+    "description": "Fetches A Page diff records for a location",
+    "tags": [
+      "Location"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/locationId.json"
+      },
+      {
+        "$ref": "../../components/parameters/limit.json"
+      },
+      {
+        "$ref": "../../components/parameters/offset.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halDiffPage.json"
+      }
+    },
+    "security": [
+      {
+        "niagara": [
+          "location:read"
+        ]
+      }
+    ]
+  }
+}

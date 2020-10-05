@@ -1,0 +1,47 @@
+{
+  "description": "The report to query",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "object",
+        "required": [
+          "metrics",
+          "date_start",
+          "date_end"
+        ],
+        "properties": {
+          "metrics": {
+            "type": "array",
+            "maxItems": 1000,
+            "description": "List of metrics to return",
+            "items": {
+              "type": "object",
+              "required": [
+                "metric"
+              ],
+              "properties": {
+                "metric": {
+                  "type": "string",
+                  "description": "Name of the metric"
+                },
+                "top": {
+                  "type": "number",
+                  "maximum": 50,
+                  "description": "Return the top number of results"
+                }
+              }
+            }
+          },
+          "date_start": {
+            "type": "string",
+            "description": "Return metrics after this date"
+          },
+          "date_end": {
+            "type": "string",
+            "description": "Return metrics before this date"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepFunction.json",
+  "description": "A step which allows parallel execution",
+  "type": "object",
+  "required": [
+    "step_type",
+    "label",
+    "goto",
+    "goto_fail",
+    "branches"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "step_type": {
+      "type": "string",
+      "enum": [
+        "parallel"
+      ]
+    },
+    "label": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepNext.json#/properties/label"
+    },
+    "on_start": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepNext.json#/properties/on_start"
+    },
+    "on_complete": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepNext.json#/properties/on_complete"
+    },
+    "goto": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepNext.json#/properties/goto"
+    },
+    "goto_fail": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepNext.json#/properties/goto_fail"
+    },
+    "context": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepNext.json#/properties/context"
+    },
+    "on_error": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepNext.json#/properties/on_error"
+    },
+    "on_timeout": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepNext.json#/properties/on_timeout"
+    },
+    "fail_condition": {
+      "description": "How to treat failures. For ALL, all branches must have failures to be considered failed. ANY means at least one failure will fail the step. NONE means allow failures.",
+      "type": "string",
+      "enum": [
+        "ALL",
+        "ANY",
+        "NONE"
+      ]
+    },
+    "fail_fast": {
+      "type": "boolean",
+      "description": "Set the context to fail on the first branch to fail",
+      "default": false
+    },
+    "branches": {
+      "type": "array",
+      "description": "Steps to execute in each path",
+      "maximum": 5,
+      "minimum": 2,
+      "items": {
+        "type": "object",
+        "description": "Steps for the branch",
+        "uniqueItems": true,
+        "additionalProperties": false,
+        "patternProperties": {
+          "^[A-Za-z][A-Za-z0-9-]*$": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/branchSteps.json#/properties/step"
+          }
+        }
+      }
+    }
+  }
+}

@@ -44,6 +44,10 @@
     "entity": {
       "type": "object",
       "description": "Entity the action is configured for",
+      "required": [
+        "entity_id",
+        "entity_type"
+      ],
       "properties": {
         "entity_id": {
           "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_id"

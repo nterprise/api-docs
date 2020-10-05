@@ -36,6 +36,9 @@
     "/projects/project_id": {
       "$ref": "./paths/project/project.json"
     },
+    "/projects/{project_id}/diff": {
+      "$ref": "./paths/project/diff.json"
+    },
     "/projects/{project_id}/relations": {
       "$ref": "./paths/project/relations.json"
     },

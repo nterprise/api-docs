@@ -38,6 +38,9 @@
     "/resources/{resource_id}": {
       "$ref": "./paths/resource/resource.json"
     },
+    "/resources/{resource_id}/diff": {
+      "$ref": "./paths/resource/diff.json"
+    },
     "/resources/{resource_id}/contexts": {
       "$ref": "./paths/resource/contexts.json"
     },
@@ -58,6 +61,9 @@
     },
     "/sub-resources/{sub_resource_id}": {
       "$ref": "./paths/subResource/subResource.json"
+    },
+    "/sub-resources/{sub_resource_id}/diff": {
+      "$ref": "./paths/subResource/diff.json"
     },
     "/sub-resources/{sub_resource_id}/actions": {
       "$ref": "./paths/subResource/actions.json"

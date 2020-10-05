@@ -4,7 +4,7 @@
     "summary": "Fetch Customer Actions",
     "description": "Fetch a page of actions for a customer",
     "tags": [
-      "Action"
+      "Customer"
     ],
     "parameters": [
       {
@@ -29,7 +29,7 @@
     "summary": "Create an action for this customer",
     "description": "Creates a new action",
     "tags": [
-      "Action"
+      "Customer"
     ],
     "parameters": [
       {

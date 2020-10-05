@@ -1,0 +1,90 @@
+{
+  "description": "A batch response",
+  "content": {
+    "application/hal+json": {
+      "schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "_embedded",
+          "_links",
+          "total_count",
+          "limit",
+          "offset"
+        ],
+        "properties": {
+          "total_count": {
+            "type": "number",
+            "readOnly": true
+          },
+          "limit": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 100
+          },
+          "offset": {
+            "type": "string",
+            "nullable": true
+          },
+          "_embedded": {
+            "type": "object",
+            "required": [
+              "nter:diffs"
+            ],
+            "properties": {
+              "nter:diffs": {
+                "type": "array",
+                "maxItems": 100,
+                "items": {
+                  "$ref": "../schemas/halDiff.json"
+                }
+              }
+            }
+          },
+          "_links": {
+            "type": "object",
+            "required": [
+              "self"
+            ],
+            "properties": {
+              "self": {
+                "$ref": "../schemas/link.json"
+              },
+              "next": {
+                "$ref": "../schemas/link.json"
+              }
+            }
+          }
+        }
+      },
+      "example": {
+        "total_count": 21,
+        "limit": 42,
+        "offset": "next-offset",
+        "_embedded": {
+          "nter:diffs": [
+            {
+              "diff_id": "diff_id",
+              "property": "label",
+              "old_value": "Zones Inc",
+              "new_value": "Zones",
+              "by_user": {
+                "user_id": "3dddba3e-6122-46a8-ae26-8c7c95bd82d7",
+                "name": "Daniel Jackson",
+                "email": "daniel.jackson@niagara.com",
+                "created": "2019-09-16T21:26:14.000Z",
+                "updated": "2019-09-16T21:27:14.000Z"
+              },
+              "date": "2019-09-16T21:27:14.000Z",
+              "_links": {
+                "self": {
+                  "href": "https://api.nterprise.com/actions/action"
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -2,53 +2,82 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://docs.nterprise.com/schemas/niagara/cycle.json",
   "type": "object",
+  "description": "Defines the properties for a work order cycle",
+  "additionalProperties": false,
   "required": [
-    "pending",
-    "in_progress",
-    "verifying",
-    "complete",
-    "blocked",
-    "cancelled"
+    "entity_id",
+    "entity_type",
+    "label",
+    "created",
+    "updated",
+    "current_status",
+    "work_order_id",
+    "location_id",
+    "resource_id",
+    "assigned_user",
+    "is_retry",
+    "context_id"
   ],
   "properties": {
-    "pending": {
-      "type": "integer",
-      "description": "The number of cycles pending"
+    "cycle_id": {
+      "description": "The identifier for the cycle",
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_id"
     },
-    "needed": {
-      "type": "integer",
-      "description": "The number of cycles needed",
-      "minimum": 1
+    "entity_id": {
+      "x-no-api-doc": true,
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_id"
     },
-    "in_progress": {
-      "type": "integer",
-      "description": "The number of cycles in progress"
+    "entity_type": {
+      "x-no-api-doc": true,
+      "const": "CYC"
     },
-    "verifying": {
-      "type": "integer",
-      "description": "The number of cycles verifying"
+    "label": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/label"
     },
-    "complete": {
-      "type": "integer",
-      "description": "The number of cycles complete"
+    "slug": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/slug"
     },
-    "blocked": {
-      "type": "integer",
-      "description": "The number of cycles blocked"
+    "current_status": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/status.json"
+        }
+      ]
     },
-    "cancelled": {
-      "type": "integer",
-      "description": "The number of cycles cancelled"
+    "created": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/created"
     },
-    "active": {
-      "type": "integer",
-      "description": "The number of active cycles. Active cycles is the sum of pending, in_progress, verifying, and blocked",
-      "readOnly": true
+    "updated": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/updated"
     },
-    "in_active": {
-      "type": "integer",
-      "description": "The number of in_active cycles. Active cycles is the sum of cancelled and complete",
-      "readOnly": true
+    "work_order_id": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workOrder.json#/properties/work_order_id"
+    },
+    "location_id": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/location.json#/properties/location_id"
+    },
+    "resource_id": {
+      "oneOf": [
+        {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/resource.json#/properties/resource_id"
+        },
+        {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/subResource.json#/properties/sub_resource_id"
+        }
+      ]
+    },
+    "assigned_user": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/user.json#/properties/user_id"
+    },
+    "is_retry": {
+      "type": "boolean",
+      "description": "Weather this is a retry cycle"
+    },
+    "context_id": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/context.json#/properties/context_id"
     }
   }
 }

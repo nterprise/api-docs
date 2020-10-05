@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/branchSteps.json",
+  "type": "object",
+  "properties": {
+    "step": {
+      "oneOf": [
+        {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/function/allocateUnitsToProject.json"
+        },
+        {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/function/setEntityStatus.json"
+        },
+        {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/followPDFInstructions.json"
+        },
+        {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/manualDataEntry.json"
+        },
+        {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/taskList.json"
+        },
+        {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/machine/aceIos.json"
+        },
+        {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepChoice.json"
+        }
+      ]
+    }
+  }
+}

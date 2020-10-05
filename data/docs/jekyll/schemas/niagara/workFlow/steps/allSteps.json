@@ -37,6 +37,9 @@
         },
         {
           "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepWait.json"
+        },
+        {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepFastTrack.json"
         }
       ]
     }

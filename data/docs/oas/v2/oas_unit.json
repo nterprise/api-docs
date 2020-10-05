@@ -37,6 +37,9 @@
     "/units/{unit_id}": {
       "$ref": "./paths/unit/unit.json"
     },
+    "/units/{unit_id}/diff": {
+      "$ref": "./paths/unit/diff.json"
+    },
     "/units/{unit_id}/relations": {
       "$ref": "./paths/unit/relations.json"
     },
