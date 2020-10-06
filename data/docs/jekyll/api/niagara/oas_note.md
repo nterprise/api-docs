@@ -63,6 +63,7 @@ Permissions required:<br>
   "label": "A Note",
   "created": "2019-10-09T19:30:35.639Z",
   "updated": "2019-10-09T20:30:35.639Z",
+  "edited": "2019-10-09T20:30:35.639Z",
   "text": "Lorem ipsum dolor sit amet",
   "_embedded": {
     "nter:note-created-by": [
@@ -144,7 +145,7 @@ Permissions required:<br>
         "created": "2019-10-09T19:30:35.639Z",
         "updated": "2019-10-09T20:30:35.639Z",
         "text": "Lorem ipsum dolor sit amet",
-        "edited": null,
+        "edited": "2019-10-09T20:30:35.639Z",
         "thread_id": "parent_note",
         "_links": {
           "nter:note-created-by": {
@@ -203,6 +204,7 @@ Permissions required:<br>
   "label": "A Note",
   "created": "2019-10-09T19:30:35.639Z",
   "updated": "2019-10-09T20:30:35.639Z",
+  "edited": "2019-10-09T20:30:35.639Z",
   "text": "Lorem ipsum dolor sit amet",
   "_embedded": {
     "nter:note-created-by": [
@@ -267,7 +269,7 @@ Permissions required:<br>
         "created": "2019-10-09T19:30:35.639Z",
         "updated": "2019-10-09T20:30:35.639Z",
         "text": "Lorem ipsum dolor sit amet",
-        "edited": null,
+        "edited": "2019-10-09T20:30:35.639Z",
         "thread_id": "parent_note",
         "_links": {
           "nter:note-created-by": {
@@ -326,6 +328,7 @@ Permissions required:<br>
   "label": "A Note",
   "created": "2019-10-09T19:30:35.639Z",
   "updated": "2019-10-09T20:30:35.639Z",
+  "edited": "2019-10-09T20:30:35.639Z",
   "text": "Lorem ipsum dolor sit amet",
   "_embedded": {
     "nter:note-created-by": [
@@ -375,7 +378,7 @@ Permissions required:<br>
 |updated|string(date-time)|false|read-only|Last date the entity was updated|
 |text|string|false|none|Text for the note|
 |issue|boolean|false|none|Marks the note as an issue|
-|edited|null¦null|false|none|Date of the last edit for the note|
+|edited|string|false|none|Date of the last edit for the note|
 
 #### Specification
 
@@ -407,8 +410,7 @@ properties:
     type: boolean
     description: Marks the note as an issue
   edited:
-    type: "null"
-    nullable: true
+    type: string
     description: Date of the last edit for the note
 
 ```

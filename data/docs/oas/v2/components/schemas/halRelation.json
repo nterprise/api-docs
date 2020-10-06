@@ -15,9 +15,6 @@
           "required": [
             "self"
           ],
-          "additionalProperties": {
-            "$ref": "./link.json"
-          },
           "x-propertyNames": {
             "pattern": "^(self|nter:batch|nter:contact|nter:customer|nter:file|nter:location|nter:manufacturer|nter:note|nter:part|nter:program|nter:project|nter:queue|nter:resource|nter:sub-resource|nter:unit|nter:user|nter:vendor|nter:work-flow|nter:work-order)$"
           },

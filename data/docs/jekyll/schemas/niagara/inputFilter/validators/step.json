@@ -2,6 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/step.json",
   "type": "object",
+  "additionalProperties": false,
   "description": "Validates that a value follows a step. Both start and end options do not have to sync with the step. If they do not sync then find the nearest step.",
   "required": [
     "type",
@@ -15,6 +16,7 @@
     },
     "options": {
       "type": "object",
+      "additionalProperties": false,
       "x-nter-skip-param": true,
       "required": [
         "step"
@@ -26,12 +28,18 @@
           "x-nter-skip-param": true
         },
         "start": {
-          "type": ["number", "null"],
+          "type": [
+            "number",
+            "null"
+          ],
           "description": "Start stepping at this value",
           "x-nter-skip-param": true
         },
         "end": {
-          "type": ["number", "null"],
+          "type": [
+            "number",
+            "null"
+          ],
           "description": "End stepping at this value",
           "x-nter-skip-param": true
         }

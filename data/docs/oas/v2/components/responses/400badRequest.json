@@ -4,7 +4,6 @@
     "application/problem+json": {
       "schema": {
         "type": "object",
-        "additionalProperties": false,
         "required": [
           "type",
           "detail",

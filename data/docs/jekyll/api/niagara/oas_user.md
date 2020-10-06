@@ -521,6 +521,7 @@ properties:
     description: Array of user attributes
     items:
       type: object
+      additionalProperties: false
       description: User Attribute
       maxItems: 15
       required:

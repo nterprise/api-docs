@@ -99,8 +99,8 @@ This operation does not require authentication
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |label|body|string|true|Label for the entity|
-|description|body|string¦null|false|Custom description for the role|
-|grants|body|[object]|false|Permissions granted to this role|
+|description|body|string¦null|true|Custom description for the role|
+|grants|body|[object]|true|Permissions granted to this role|
 |&nbsp;&nbsp; permission|body|string|true|The granted permission|
 |&nbsp;&nbsp; label|body|string|true|Label for the entity|
 |&nbsp;&nbsp; match_location|body|boolean|true|The user must be located at this location to access this entity|
@@ -229,8 +229,8 @@ This operation does not require authentication
 |---|---|---|---|---|
 |role_id|path|string|true|Id of the role|
 |label|body|string|true|Label for the entity|
-|description|body|string¦null|false|Custom description for the role|
-|grants|body|[object]|false|Permissions granted to this role|
+|description|body|string¦null|true|Custom description for the role|
+|grants|body|[object]|true|Permissions granted to this role|
 |&nbsp;&nbsp; permission|body|string|true|The granted permission|
 |&nbsp;&nbsp; label|body|string|true|Label for the entity|
 |&nbsp;&nbsp; match_location|body|boolean|true|The user must be located at this location to access this entity|

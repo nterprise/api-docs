@@ -2,6 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/close/user/manualDataEntry.json",
   "type": "object",
+  "additionalProperties": false,
   "description": "Close ",
   "required": [
     "fields",
@@ -13,6 +14,7 @@
       "description": "Configuration for each field",
       "items": {
         "type": "object",
+        "additionalProperties": false,
         "required": [
           "value",
           "label"

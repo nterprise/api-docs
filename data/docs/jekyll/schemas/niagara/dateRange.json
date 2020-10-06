@@ -2,6 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://docs.nterprise.com/schemas/niagara/dateRange.json",
   "type": "object",
+  "additionalProperties": false,
   "description": "Active date range for an entity",
   "properties": {
     "start_date": {

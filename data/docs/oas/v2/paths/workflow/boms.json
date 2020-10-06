@@ -1,0 +1,27 @@
+{
+  "get": {
+    "operationId": "fetchBomsForWorkFlow",
+    "summary": "Fetch BOM's for work flow",
+    "description": "Fetches all BOM's for a work flow",
+    "tags": [
+      "Work Flow"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/workFlowId.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halWorkFlowBomPage.json"
+      }
+    },
+    "security": [
+      {
+        "niagara": [
+          "work-flow:relations-read-all"
+        ]
+      }
+    ]
+  }
+}

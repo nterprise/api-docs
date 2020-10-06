@@ -61,7 +61,7 @@
         "flows": {
           "authorizationCode": {
             "authorizationUrl": "https://auth.nterprise.com/oauth/authorize",
-            "tokenUrl":  "https://auth.nterprise.com/oauth/token",
+            "tokenUrl": "https://auth.nterprise.com/oauth/token",
             "scopes": {
               "batch:create": "Allows creating a batch",
               "batch:update": "Allows editing a batch",

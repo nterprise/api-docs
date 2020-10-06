@@ -27,7 +27,10 @@
       ]
     },
     "description": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "description": "A description for the status"
     },
     "order": {

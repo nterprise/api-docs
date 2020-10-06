@@ -56,9 +56,7 @@
         "time_to_run": 2,
         "active": false,
         "waiting_for_user": false,
-        "data": {
-          "fizz": "buzz"
-        },
+        "data": {},
         "entity": {
           "entity_id": "customer",
           "entity_type": "CUS",

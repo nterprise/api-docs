@@ -44,7 +44,7 @@ Permissions required:<br>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|filter[key]|query|string|false|Filter on field key|
+|filter[key]|query|any|false|Filter on field key|
 
 > Example responses
 
@@ -152,7 +152,7 @@ Permissions required:<br>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|base_entity|body|string|false|Entity type|
+|base_entity|body|any|false|none|
 |custom_fields|body|object|false|none|
 |&nbsp;&nbsp; fields|body|[string]|false|List of custom filed keys to return|
 |&nbsp;&nbsp; query|body|[object]|false|none|

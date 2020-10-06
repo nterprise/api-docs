@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchAllWorkflows",
-    "summary": "Fetch Workflows",
-    "description": "Fetches A Page of workflows",
+    "summary": "Fetch Work flows",
+    "description": "Fetches A Page of work flows",
     "tags": [
       "Work Flow"
     ],
@@ -32,10 +32,10 @@
   },
   "post": {
     "operationId": "createWorkflow",
-    "summary": "Create workflow",
-    "description": "Creates a new workflow",
+    "summary": "Create work flow",
+    "description": "Creates a new work flow",
     "tags": [
-      "Workflow"
+      "Work Flow"
     ],
     "requestBody": {
       "$ref": "../../components/requestBodies/workflow.json"

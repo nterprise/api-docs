@@ -2,6 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/snakeCase.json",
   "type": "object",
+  "additionalProperties": false,
   "description": "Make the value snake_case",
   "required": [
     "type",
@@ -15,6 +16,7 @@
     },
     "options": {
       "type": "object",
+      "additionalProperties": false,
       "description": "This filter has no options",
       "x-nter-skip-param": true
     }

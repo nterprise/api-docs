@@ -29,7 +29,10 @@
       "const": "PRJ"
     },
     "description": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "description": "Project description"
     },
     "label": {

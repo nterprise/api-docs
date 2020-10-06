@@ -1,0 +1,84 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/workFlowBom.json",
+  "type": "object",
+  "description": "Workflow Bill of Materials",
+  "additionalProperties": false,
+  "required": [
+    "bom_id",
+    "work_flow",
+    "location",
+    "entity_id",
+    "entity_type",
+    "label",
+    "slug",
+    "created",
+    "updated",
+    "parts_available"
+  ],
+  "properties": {
+    "bom_id": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_id"
+    },
+    "entity_id": {
+      "x-no-api-doc": true,
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_id"
+    },
+    "entity_type": {
+      "x-no-api-doc": true,
+      "const": "BOM"
+    },
+    "label": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/label"
+    },
+    "slug": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/slug"
+    },
+    "created": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/created"
+    },
+    "updated": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/updated"
+    },
+    "work_flow": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow.json"
+    },
+    "location": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/location.json"
+    },
+    "parts_available": {
+      "type": "array",
+      "maxItems": 100,
+      "minItems": 1,
+      "description": "List of parts from the work flow that are at this location",
+      "additionalItems": false,
+      "additionalProperties": false,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "part_id",
+          "label",
+          "needed",
+          "available"
+        ],
+        "properties": {
+          "part_id": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/part.json#/properties/part_id"
+          },
+          "label": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/part.json#/properties/label"
+          },
+          "needed": {
+            "type": "number",
+            "description": "Number of units needed from this part"
+          },
+          "available": {
+            "type": "number",
+            "description": "Number of units available at this location"
+          }
+        }
+      }
+    }
+  }
+}

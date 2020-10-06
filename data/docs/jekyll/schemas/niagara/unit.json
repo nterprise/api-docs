@@ -68,6 +68,7 @@
         },
         {
           "type": "object",
+          "additionalProperties": false,
           "description": "The vendor that sold this unit",
           "required": [
             "label",

@@ -2,6 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/close/failStep.json",
   "type": "object",
+  "additionalProperties": false,
   "description": "How to mark a step as failed",
   "required": [
     "type"

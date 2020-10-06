@@ -14,7 +14,7 @@
         "$ref": "../../components/parameters/limit.json"
       },
       {
-         "$ref": "../../components/parameters/offset.json"
+        "$ref": "../../components/parameters/offset.json"
       }
     ],
     "responses": {

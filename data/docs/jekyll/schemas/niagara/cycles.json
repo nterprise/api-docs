@@ -3,6 +3,7 @@
   "$id": "https://docs.nterprise.com/schemas/niagara/cycles.json",
   "description": "A count of cycles needed for this entity broken down by status category and active/in-active status",
   "type": "object",
+  "additionalProperties": false,
   "required": [
     "pending",
     "in_progress",

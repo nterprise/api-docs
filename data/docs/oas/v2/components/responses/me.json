@@ -6,10 +6,18 @@
         "allOf": [
           {
             "type": "object",
+            "required": [
+              "notifications"
+            ],
             "properties": {
               "notifications": {
                 "type": "object",
                 "description": "Notification Counts",
+                "required": [
+                  "archived",
+                  "read",
+                  "un_read"
+                ],
                 "properties": {
                   "un_read": {
                     "type": "number",

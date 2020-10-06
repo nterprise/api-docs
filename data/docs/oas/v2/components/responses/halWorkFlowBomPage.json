@@ -1,0 +1,97 @@
+{
+  "description": "A Page of work flow BOM's",
+  "content": {
+    "application/hal+json": {
+      "schema": {
+        "type": "object",
+        "required": [
+          "_embedded",
+          "_links",
+          "total_count",
+          "limit",
+          "offset"
+        ],
+        "properties": {
+          "total_count": {
+            "type": "number",
+            "readOnly": true
+          },
+          "limit": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 100
+          },
+          "offset": {
+            "type": "string",
+            "nullable": true
+          },
+          "_embedded": {
+            "type": "object",
+            "required": [
+              "nter:boms"
+            ],
+            "properties": {
+              "nter:boms": {
+                "type": "array",
+                "maxItems": 100,
+                "items": {
+                  "$ref": "../schemas/halWorkFlowBom.json"
+                }
+              }
+            }
+          },
+          "_links": {
+            "type": "object",
+            "properties": {
+              "self": {
+                "$ref": "../schemas/link.json"
+              },
+              "next": {
+                "$ref": "../schemas/link.json"
+              }
+            }
+          }
+        }
+      },
+      "example": {
+        "total_count": 21,
+        "limit": 42,
+        "offset": "next-offset",
+        "_embedded": {
+          "nter:boms": [
+            {
+              "bom_id": "bom",
+              "label": "BOM for my work flow @ clifton part warehouse",
+              "created": "2019-08-19T00:01:02.000Z",
+              "updated": "2020-08-19T01:01:02.000Z",
+              "_links": {
+                "nter:bom-work-order": {
+                  "href": "https://api.nterprise.com/work-orders/work-order"
+                },
+                "nter:bom-work-flow": {
+                  "href": "https://api.nterprise.com/work-flows/work-flow"
+                },
+                "nter:bom-location": {
+                  "href": "https://api.nterprise.com/locations/location"
+                },
+                "self": {
+                  "href": "https://api.nterprise.com/boms/bom"
+                }
+              }
+            }
+          ]
+        },
+        "_links": {
+          "next": {
+            "href": "https://api.nterprise.com/notes?limit=42&offset=next-offset"
+          },
+          "self": {
+            "href": "https://api.nterprise.com/notes?limit=42"
+          }
+        }
+
+
+      }
+    }
+  }
+}

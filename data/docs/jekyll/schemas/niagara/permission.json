@@ -13,7 +13,7 @@
     "permission": {
       "description": "The granted permission",
       "type": "string",
-      "pattern": "^(create|update|delete|read):(CON|CUS|LOC|NOTE|PART|PGM|PRJ|RES|SRES|UNIT|USER|WKF|WOR)$"
+      "pattern": "^[a-z]+:[a-z\\-]+$"
     },
     "label": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/label"

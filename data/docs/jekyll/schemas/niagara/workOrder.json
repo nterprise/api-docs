@@ -88,6 +88,7 @@
     },
     "cycles": {
       "type": "object",
+      "additionalProperties": false,
       "required": [
         "work_flow"
       ],

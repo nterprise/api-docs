@@ -10,6 +10,7 @@
   "properties": {
     "authorization_code": {
       "type": "object",
+      "additionalProperties": false,
       "description": "Cognito application for authorization code flow",
       "required": [
         "client_id",

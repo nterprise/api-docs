@@ -2,37 +2,12 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://docs.nterprise.com/schemas/niagara/entityHelper.json",
   "type": "object",
+  "additionalProperties": false,
   "description": "Common Properties to all entities",
   "required": [
     "label"
   ],
   "properties": {
-    "entity_type": {
-      "type": "string",
-      "description": "Entity type",
-      "enum": [
-        "BAT",
-        "CON",
-        "CTX",
-        "CUS",
-        "FILE",
-        "LOC",
-        "MFR",
-        "NOTE",
-        "PART",
-        "PGM",
-        "PRJ",
-        "QUE",
-        "RES",
-        "SRES",
-        "TEN",
-        "UNIT",
-        "USER",
-        "VEN",
-        "WKF",
-        "WOR"
-      ]
-    },
     "entity_events": {
       "type": "string",
       "description": "Possible entity events",

@@ -2,8 +2,8 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://docs.nterprise.com/schemas/niagara/customer.json",
   "type": "object",
-  "description": "Customer",
   "additionalProperties": false,
+  "description": "Customer",
   "required": [
     "label",
     "entity_id",
@@ -39,6 +39,7 @@
     },
     "external_platform": {
       "type": "object",
+      "additionalProperties": false,
       "description": "External Identifiers for the customer",
       "deprecated": true,
       "patternProperties": {

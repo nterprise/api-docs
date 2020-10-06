@@ -12,6 +12,10 @@
             "properties": {
               "_embedded": {
                 "type": "object",
+                "required": [
+                  "nter:notification-regarding",
+                  "nter:notification-sender"
+                ],
                 "properties": {
                   "nter:notification-sender": {
                     "type": "array",

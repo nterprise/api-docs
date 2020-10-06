@@ -78,7 +78,7 @@
           "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_id"
         },
         "entity_type": {
-          "$ref": "https://docs.nterprise.com/schemas/niagara/entityHelper.json#/properties/entity_type"
+          "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_type"
         },
         "label": {
           "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/label"

@@ -2,6 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/close/stepCloseCommon.json",
   "type": "object",
+  "additionalProperties": false,
   "x-ui-hide": true,
   "required": [
     "step",

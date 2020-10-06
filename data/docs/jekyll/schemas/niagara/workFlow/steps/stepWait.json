@@ -60,6 +60,7 @@
       "description": "List of events and conditions to listen for to trigger",
       "items": {
         "type": "object",
+        "additionalProperties": false,
         "required": [
           "event"
         ],
@@ -75,6 +76,7 @@
           },
           "event_value": {
             "type": "object",
+            "additionalProperties": false,
             "description": "The event conditions that have to be met",
             "allOf": [
               {

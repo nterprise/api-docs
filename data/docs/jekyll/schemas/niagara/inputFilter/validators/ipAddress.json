@@ -2,6 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/ipAddress.json",
   "type": "object",
+  "additionalProperties": false,
   "description": "Validate string matches an IP address format. Defaults to matching IPv4",
   "required": [
     "type",
@@ -15,6 +16,7 @@
     },
     "options": {
       "type": "object",
+      "additionalProperties": false,
       "x-nter-skip-param": true,
       "properties": {
         "version": {

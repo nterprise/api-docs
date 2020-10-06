@@ -1574,7 +1574,7 @@ Permissions required:<br>
 |relation|body|string|true|Type of relation|
 |entity|body|object|true|none|
 |&nbsp;&nbsp; entity_id|body|string|true|Entity identifier|
-|&nbsp;&nbsp; entity_type|body|string|true|Entity type|
+|&nbsp;&nbsp; entity_type|body|any|true|none|
 
 > Example responses
 
@@ -1882,6 +1882,7 @@ properties:
                     description: Address formatted for the where region the location exists in
                   address:
                     type: object
+                    additionalProperties: false
                     required:
                       - country
                       - administrative_area
@@ -2198,6 +2199,7 @@ properties:
                             anyOf:
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: This filter will set the value based on a list of approved values.
                                   If the value is not in the list, it will then
                                   be set to empty unless the default option is
@@ -2213,6 +2215,7 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     x-nter-skip-param: true
                                     required:
                                       - approved_values
@@ -2236,6 +2239,7 @@ properties:
                                         x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: This filter will remove all non numbers from the value
                                 required:
                                   - type
@@ -2248,10 +2252,12 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     description: This filter has no options
                                     x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: This filter will make the value true or false
                                 required:
                                   - type
@@ -2264,10 +2270,12 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     description: This filter has no options
                                     x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Make the value camelCase
                                 required:
                                   - type
@@ -2280,10 +2288,12 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     description: This filter has no options
                                     x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Filter to transform a value into a date
                                 required:
                                   - type
@@ -2296,10 +2306,12 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     description: Date filter has no options
                                     x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: This filter will remove all numbers from the value
                                 required:
                                   - type
@@ -2312,10 +2324,12 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     description: This filter has no options
                                     x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Filter to transform values into null. This is helpful when trying
                                   to make a value required
                                 required:
@@ -2329,10 +2343,12 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     description: empty filter has no options
                                     x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Filter to transform a value into a float. Non numeric characters
                                   (including comma) will be removed
                                 required:
@@ -2346,6 +2362,7 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     x-nter-skip-param: true
                                     properties:
                                       precision:
@@ -2357,6 +2374,7 @@ properties:
                                         x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Make the value kebab-case
                                 required:
                                   - type
@@ -2369,10 +2387,12 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     description: This filter has no options
                                     x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Make the value lowercase
                                 required:
                                   - type
@@ -2385,10 +2405,12 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     description: This filter has no options
                                     x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Filter to transform a value into a number. Non numeric characters
                                   (including comma and decimal points) will be
                                   removed
@@ -2403,10 +2425,12 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     description: Number filter has no options
                                     x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Add a prefix to the start of a string. If the string already start
                                   with the prefix, it will not prepend.
                                 required:
@@ -2420,6 +2444,7 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     x-nter-skip-param: true
                                     required:
                                       - prefix
@@ -2430,6 +2455,7 @@ properties:
                                         x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Make the value snake_case
                                 required:
                                   - type
@@ -2442,10 +2468,12 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     description: This filter has no options
                                     x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Filter to transform a value into a string
                                 required:
                                   - type
@@ -2458,12 +2486,14 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     description: String filter has no options
                                     x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 description: Add a suffix to the start of a string. If the string already start
                                   with the suffix, it will not append.
                                 type: object
+                                additionalProperties: false
                                 required:
                                   - type
                                   - options
@@ -2475,6 +2505,7 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     x-nter-skip-param: true
                                     required:
                                       - suffix
@@ -2485,6 +2516,7 @@ properties:
                                         x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Filter to trim whitespace from a value
                                 required:
                                   - type
@@ -2497,6 +2529,7 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     description: By default will trim from the start and end
                                     x-nter-skip-param: true
                                     properties:
@@ -2512,6 +2545,7 @@ properties:
                                         x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Make the value UPPERCASE
                                 required:
                                   - type
@@ -2524,6 +2558,7 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     description: This filter has no options
                                     x-nter-skip-param: true
                         validators:
@@ -2535,6 +2570,7 @@ properties:
                             anyOf:
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: This is always valid
                                 required:
                                   - type
@@ -2547,10 +2583,12 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     description: This validator has no options
                                     x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Validate number is between two values. By default, min and max are
                                   included
                                 required:
@@ -2564,6 +2602,7 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     x-nter-skip-param: true
                                     required:
                                       - min
@@ -2591,6 +2630,7 @@ properties:
                                         x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Validate value does not match a list (black list)
                                 required:
                                   - type
@@ -2603,6 +2643,7 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     x-nter-skip-param: true
                                     required:
                                       - list
@@ -2622,6 +2663,7 @@ properties:
                                         x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Validate string contains a value
                                 required:
                                   - type
@@ -2634,6 +2676,7 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     x-nter-skip-param: true
                                     required:
                                       - contains
@@ -2649,6 +2692,7 @@ properties:
                                         x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Validate string is a correct email address
                                 required:
                                   - type
@@ -2661,6 +2705,7 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     x-nter-skip-param: true
                                     properties:
                                       strict:
@@ -2676,6 +2721,7 @@ properties:
                                         x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Validate string ends with a value
                                 required:
                                   - type
@@ -2688,6 +2734,7 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     x-nter-skip-param: true
                                     required:
                                       - ends_with
@@ -2703,6 +2750,7 @@ properties:
                                         x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Validate number equals a value
                                 required:
                                   - type
@@ -2715,6 +2763,7 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     x-nter-skip-param: true
                                     required:
                                       - value
@@ -2732,6 +2781,7 @@ properties:
                                         x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Validate number is greater than a value. By default, this will
                                   check if value is greater than or equals to
                                 required:
@@ -2745,6 +2795,7 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     x-nter-skip-param: true
                                     required:
                                       - value
@@ -2767,6 +2818,7 @@ properties:
                                         x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Validate string has a correct DNS records
                                 required:
                                   - type
@@ -2779,6 +2831,7 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     x-nter-skip-param: true
                                     properties:
                                       record_type:
@@ -2830,6 +2883,7 @@ properties:
                                         x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Validate string matches an IP address format. Defaults to matching
                                   IPv4
                                 required:
@@ -2843,6 +2897,7 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     x-nter-skip-param: true
                                     properties:
                                       version:
@@ -2854,6 +2909,7 @@ properties:
                                         x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Validate string is a certain length
                                 required:
                                   - type
@@ -2866,6 +2922,7 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     x-nter-skip-param: true
                                     required:
                                       - length
@@ -2887,6 +2944,7 @@ properties:
                                         x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Validate number is less than a value. By default, this will check
                                   if value is less than or equals to
                                 required:
@@ -2900,6 +2958,7 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     x-nter-skip-param: true
                                     required:
                                       - value
@@ -2922,6 +2981,7 @@ properties:
                                         x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Validate string matches an MAC address format
                                 required:
                                   - type
@@ -2934,10 +2994,12 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     description: This validator has no options
                                     x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Validate string matches a regular expression
                                 required:
                                   - type
@@ -2950,6 +3012,7 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     x-nter-skip-param: true
                                     required:
                                       - mask
@@ -2960,6 +3023,7 @@ properties:
                                         x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: This is never valid
                                 required:
                                   - type
@@ -2972,10 +3036,12 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     description: This validator has no options
                                     x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Validates that the value is present and not set to 'null', '0' or
                                   an empty string
                                 required:
@@ -2989,10 +3055,12 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     description: Required validator has no options
                                     x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Validate string starts with a value
                                 required:
                                   - type
@@ -3005,6 +3073,7 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     x-nter-skip-param: true
                                     required:
                                       - starts_with
@@ -3020,6 +3089,7 @@ properties:
                                         x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Validates that a value follows a step. Both start and end options
                                   do not have to sync with the step. If they do
                                   not sync then find the nearest step.
@@ -3034,6 +3104,7 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     x-nter-skip-param: true
                                     required:
                                       - step
@@ -3054,6 +3125,7 @@ properties:
                                         x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Validate string matches an URI
                                 required:
                                   - type
@@ -3066,6 +3138,7 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     x-nter-skip-param: true
                                     properties:
                                       schemes:
@@ -3089,6 +3162,7 @@ properties:
                                         x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Validate value matches a list (white list)
                                 required:
                                   - type
@@ -3101,6 +3175,7 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     x-nter-skip-param: true
                                     required:
                                       - list
@@ -3141,9 +3216,8 @@ properties:
                             - type: "null"
                               x-nter-skip-param: true
                             - x-nter-skip-param: true
-                              type: string
-                              description: Entity type
                               enum:
+                                - ACT
                                 - BAT
                                 - CON
                                 - CTX
@@ -3155,10 +3229,11 @@ properties:
                                 - PART
                                 - PGM
                                 - PRJ
+                                - PUSH
                                 - QUE
                                 - RES
+                                - ROLE
                                 - SRES
-                                - TEN
                                 - UNIT
                                 - USER
                                 - VEN
@@ -3166,9 +3241,8 @@ properties:
                                 - WOR
                         apply_to:
                           x-nter-skip-param: true
-                          type: string
-                          description: Entity type
                           enum:
+                            - ACT
                             - BAT
                             - CON
                             - CTX
@@ -3180,10 +3254,11 @@ properties:
                             - PART
                             - PGM
                             - PRJ
+                            - PUSH
                             - QUE
                             - RES
+                            - ROLE
                             - SRES
-                            - TEN
                             - UNIT
                             - USER
                             - VEN
@@ -3267,6 +3342,7 @@ properties:
     description: A count of cycles needed for this entity broken down by status
       category and active/in-active status
     type: object
+    additionalProperties: false
     required:
       - pending
       - in_progress
@@ -3483,6 +3559,7 @@ properties:
                         readOnly: true
                       external_platform:
                         type: object
+                        additionalProperties: false
                         description: External Identifiers for the customer
                         deprecated: true
                         x-patternProperties:
@@ -3569,6 +3646,7 @@ properties:
                                 anyOf:
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: This filter will set the value based on a list of approved values.
                                       If the value is not in the list, it will
                                       then be set to empty unless the default
@@ -3584,6 +3662,7 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         x-nter-skip-param: true
                                         required:
                                           - approved_values
@@ -3607,6 +3686,7 @@ properties:
                                             x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: This filter will remove all non numbers from the value
                                     required:
                                       - type
@@ -3619,10 +3699,12 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         description: This filter has no options
                                         x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: This filter will make the value true or false
                                     required:
                                       - type
@@ -3635,10 +3717,12 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         description: This filter has no options
                                         x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Make the value camelCase
                                     required:
                                       - type
@@ -3651,10 +3735,12 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         description: This filter has no options
                                         x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Filter to transform a value into a date
                                     required:
                                       - type
@@ -3667,10 +3753,12 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         description: Date filter has no options
                                         x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: This filter will remove all numbers from the value
                                     required:
                                       - type
@@ -3683,10 +3771,12 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         description: This filter has no options
                                         x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Filter to transform values into null. This is helpful when trying
                                       to make a value required
                                     required:
@@ -3700,10 +3790,12 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         description: empty filter has no options
                                         x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Filter to transform a value into a float. Non numeric characters
                                       (including comma) will be removed
                                     required:
@@ -3717,6 +3809,7 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         x-nter-skip-param: true
                                         properties:
                                           precision:
@@ -3728,6 +3821,7 @@ properties:
                                             x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Make the value kebab-case
                                     required:
                                       - type
@@ -3740,10 +3834,12 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         description: This filter has no options
                                         x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Make the value lowercase
                                     required:
                                       - type
@@ -3756,10 +3852,12 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         description: This filter has no options
                                         x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Filter to transform a value into a number. Non numeric characters
                                       (including comma and decimal points) will
                                       be removed
@@ -3774,10 +3872,12 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         description: Number filter has no options
                                         x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Add a prefix to the start of a string. If the string already start
                                       with the prefix, it will not prepend.
                                     required:
@@ -3791,6 +3891,7 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         x-nter-skip-param: true
                                         required:
                                           - prefix
@@ -3801,6 +3902,7 @@ properties:
                                             x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Make the value snake_case
                                     required:
                                       - type
@@ -3813,10 +3915,12 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         description: This filter has no options
                                         x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Filter to transform a value into a string
                                     required:
                                       - type
@@ -3829,12 +3933,14 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         description: String filter has no options
                                         x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     description: Add a suffix to the start of a string. If the string already start
                                       with the suffix, it will not append.
                                     type: object
+                                    additionalProperties: false
                                     required:
                                       - type
                                       - options
@@ -3846,6 +3952,7 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         x-nter-skip-param: true
                                         required:
                                           - suffix
@@ -3856,6 +3963,7 @@ properties:
                                             x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Filter to trim whitespace from a value
                                     required:
                                       - type
@@ -3868,6 +3976,7 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         description: By default will trim from the start and end
                                         x-nter-skip-param: true
                                         properties:
@@ -3883,6 +3992,7 @@ properties:
                                             x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Make the value UPPERCASE
                                     required:
                                       - type
@@ -3895,6 +4005,7 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         description: This filter has no options
                                         x-nter-skip-param: true
                             validators:
@@ -3906,6 +4017,7 @@ properties:
                                 anyOf:
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: This is always valid
                                     required:
                                       - type
@@ -3918,10 +4030,12 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         description: This validator has no options
                                         x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Validate number is between two values. By default, min and max are
                                       included
                                     required:
@@ -3935,6 +4049,7 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         x-nter-skip-param: true
                                         required:
                                           - min
@@ -3962,6 +4077,7 @@ properties:
                                             x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Validate value does not match a list (black list)
                                     required:
                                       - type
@@ -3974,6 +4090,7 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         x-nter-skip-param: true
                                         required:
                                           - list
@@ -3993,6 +4110,7 @@ properties:
                                             x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Validate string contains a value
                                     required:
                                       - type
@@ -4005,6 +4123,7 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         x-nter-skip-param: true
                                         required:
                                           - contains
@@ -4020,6 +4139,7 @@ properties:
                                             x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Validate string is a correct email address
                                     required:
                                       - type
@@ -4032,6 +4152,7 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         x-nter-skip-param: true
                                         properties:
                                           strict:
@@ -4047,6 +4168,7 @@ properties:
                                             x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Validate string ends with a value
                                     required:
                                       - type
@@ -4059,6 +4181,7 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         x-nter-skip-param: true
                                         required:
                                           - ends_with
@@ -4074,6 +4197,7 @@ properties:
                                             x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Validate number equals a value
                                     required:
                                       - type
@@ -4086,6 +4210,7 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         x-nter-skip-param: true
                                         required:
                                           - value
@@ -4103,6 +4228,7 @@ properties:
                                             x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Validate number is greater than a value. By default, this will
                                       check if value is greater than or equals
                                       to
@@ -4117,6 +4243,7 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         x-nter-skip-param: true
                                         required:
                                           - value
@@ -4139,6 +4266,7 @@ properties:
                                             x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Validate string has a correct DNS records
                                     required:
                                       - type
@@ -4151,6 +4279,7 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         x-nter-skip-param: true
                                         properties:
                                           record_type:
@@ -4202,6 +4331,7 @@ properties:
                                             x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Validate string matches an IP address format. Defaults to matching
                                       IPv4
                                     required:
@@ -4215,6 +4345,7 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         x-nter-skip-param: true
                                         properties:
                                           version:
@@ -4226,6 +4357,7 @@ properties:
                                             x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Validate string is a certain length
                                     required:
                                       - type
@@ -4238,6 +4370,7 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         x-nter-skip-param: true
                                         required:
                                           - length
@@ -4259,6 +4392,7 @@ properties:
                                             x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Validate number is less than a value. By default, this will check
                                       if value is less than or equals to
                                     required:
@@ -4272,6 +4406,7 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         x-nter-skip-param: true
                                         required:
                                           - value
@@ -4294,6 +4429,7 @@ properties:
                                             x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Validate string matches an MAC address format
                                     required:
                                       - type
@@ -4306,10 +4442,12 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         description: This validator has no options
                                         x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Validate string matches a regular expression
                                     required:
                                       - type
@@ -4322,6 +4460,7 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         x-nter-skip-param: true
                                         required:
                                           - mask
@@ -4332,6 +4471,7 @@ properties:
                                             x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: This is never valid
                                     required:
                                       - type
@@ -4344,10 +4484,12 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         description: This validator has no options
                                         x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Validates that the value is present and not set to 'null', '0' or
                                       an empty string
                                     required:
@@ -4361,10 +4503,12 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         description: Required validator has no options
                                         x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Validate string starts with a value
                                     required:
                                       - type
@@ -4377,6 +4521,7 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         x-nter-skip-param: true
                                         required:
                                           - starts_with
@@ -4392,6 +4537,7 @@ properties:
                                             x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Validates that a value follows a step. Both start and end options
                                       do not have to sync with the step. If they
                                       do not sync then find the nearest step.
@@ -4406,6 +4552,7 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         x-nter-skip-param: true
                                         required:
                                           - step
@@ -4426,6 +4573,7 @@ properties:
                                             x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Validate string matches an URI
                                     required:
                                       - type
@@ -4438,6 +4586,7 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         x-nter-skip-param: true
                                         properties:
                                           schemes:
@@ -4461,6 +4610,7 @@ properties:
                                             x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Validate value matches a list (white list)
                                     required:
                                       - type
@@ -4473,6 +4623,7 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         x-nter-skip-param: true
                                         required:
                                           - list
@@ -4513,9 +4664,8 @@ properties:
                                 - type: "null"
                                   x-nter-skip-param: true
                                 - x-nter-skip-param: true
-                                  type: string
-                                  description: Entity type
                                   enum:
+                                    - ACT
                                     - BAT
                                     - CON
                                     - CTX
@@ -4527,10 +4677,11 @@ properties:
                                     - PART
                                     - PGM
                                     - PRJ
+                                    - PUSH
                                     - QUE
                                     - RES
+                                    - ROLE
                                     - SRES
-                                    - TEN
                                     - UNIT
                                     - USER
                                     - VEN
@@ -4538,9 +4689,8 @@ properties:
                                     - WOR
                             apply_to:
                               x-nter-skip-param: true
-                              type: string
-                              description: Entity type
                               enum:
+                                - ACT
                                 - BAT
                                 - CON
                                 - CTX
@@ -4552,10 +4702,11 @@ properties:
                                 - PART
                                 - PGM
                                 - PRJ
+                                - PUSH
                                 - QUE
                                 - RES
+                                - ROLE
                                 - SRES
-                                - TEN
                                 - UNIT
                                 - USER
                                 - VEN
@@ -4638,6 +4789,7 @@ properties:
                                 readOnly: true
                               external_platform:
                                 type: object
+                                additionalProperties: false
                                 description: External Identifiers for the customer
                                 deprecated: true
                                 x-patternProperties: *a1
@@ -4719,6 +4871,7 @@ properties:
                                         anyOf:
                                           - x-nter-skip-param: true
                                             type: object
+                                            additionalProperties: false
                                             description: This filter will set the value based on a list of approved values.
                                               If the value is not in the list,
                                               it will then be set to empty
@@ -4734,6 +4887,7 @@ properties:
                                                 x-nter-skip-param: true
                                               options:
                                                 type: object
+                                                additionalProperties: false
                                                 x-nter-skip-param: true
                                                 required:
                                                   - approved_values
@@ -4757,6 +4911,7 @@ properties:
                                                     x-nter-skip-param: true
                                           - x-nter-skip-param: true
                                             type: object
+                                            additionalProperties: false
                                             description: This filter will remove all non numbers from the value
                                             required:
                                               - type
@@ -4769,10 +4924,12 @@ properties:
                                                 x-nter-skip-param: true
                                               options:
                                                 type: object
+                                                additionalProperties: false
                                                 description: This filter has no options
                                                 x-nter-skip-param: true
                                           - x-nter-skip-param: true
                                             type: object
+                                            additionalProperties: false
                                             description: This filter will make the value true or false
                                             required:
                                               - type
@@ -4785,10 +4942,12 @@ properties:
                                                 x-nter-skip-param: true
                                               options:
                                                 type: object
+                                                additionalProperties: false
                                                 description: This filter has no options
                                                 x-nter-skip-param: true
                                           - x-nter-skip-param: true
                                             type: object
+                                            additionalProperties: false
                                             description: Make the value camelCase
                                             required:
                                               - type
@@ -4801,10 +4960,12 @@ properties:
                                                 x-nter-skip-param: true
                                               options:
                                                 type: object
+                                                additionalProperties: false
                                                 description: This filter has no options
                                                 x-nter-skip-param: true
                                           - x-nter-skip-param: true
                                             type: object
+                                            additionalProperties: false
                                             description: Filter to transform a value into a date
                                             required:
                                               - type
@@ -4817,10 +4978,12 @@ properties:
                                                 x-nter-skip-param: true
                                               options:
                                                 type: object
+                                                additionalProperties: false
                                                 description: Date filter has no options
                                                 x-nter-skip-param: true
                                           - x-nter-skip-param: true
                                             type: object
+                                            additionalProperties: false
                                             description: This filter will remove all numbers from the value
                                             required:
                                               - type
@@ -4833,10 +4996,12 @@ properties:
                                                 x-nter-skip-param: true
                                               options:
                                                 type: object
+                                                additionalProperties: false
                                                 description: This filter has no options
                                                 x-nter-skip-param: true
                                           - x-nter-skip-param: true
                                             type: object
+                                            additionalProperties: false
                                             description: Filter to transform values into null. This is helpful when trying
                                               to make a value required
                                             required:
@@ -4850,10 +5015,12 @@ properties:
                                                 x-nter-skip-param: true
                                               options:
                                                 type: object
+                                                additionalProperties: false
                                                 description: empty filter has no options
                                                 x-nter-skip-param: true
                                           - x-nter-skip-param: true
                                             type: object
+                                            additionalProperties: false
                                             description: Filter to transform a value into a float. Non numeric characters
                                               (including comma) will be removed
                                             required:
@@ -4867,6 +5034,7 @@ properties:
                                                 x-nter-skip-param: true
                                               options:
                                                 type: object
+                                                additionalProperties: false
                                                 x-nter-skip-param: true
                                                 properties:
                                                   precision:
@@ -4878,6 +5046,7 @@ properties:
                                                     x-nter-skip-param: true
                                           - x-nter-skip-param: true
                                             type: object
+                                            additionalProperties: false
                                             description: Make the value kebab-case
                                             required:
                                               - type
@@ -4890,10 +5059,12 @@ properties:
                                                 x-nter-skip-param: true
                                               options:
                                                 type: object
+                                                additionalProperties: false
                                                 description: This filter has no options
                                                 x-nter-skip-param: true
                                           - x-nter-skip-param: true
                                             type: object
+                                            additionalProperties: false
                                             description: Make the value lowercase
                                             required:
                                               - type
@@ -4906,10 +5077,12 @@ properties:
                                                 x-nter-skip-param: true
                                               options:
                                                 type: object
+                                                additionalProperties: false
                                                 description: This filter has no options
                                                 x-nter-skip-param: true
                                           - x-nter-skip-param: true
                                             type: object
+                                            additionalProperties: false
                                             description: Filter to transform a value into a number. Non numeric characters
                                               (including comma and decimal
                                               points) will be removed
@@ -4924,10 +5097,12 @@ properties:
                                                 x-nter-skip-param: true
                                               options:
                                                 type: object
+                                                additionalProperties: false
                                                 description: Number filter has no options
                                                 x-nter-skip-param: true
                                           - x-nter-skip-param: true
                                             type: object
+                                            additionalProperties: false
                                             description: Add a prefix to the start of a string. If the string already start
                                               with the prefix, it will not
                                               prepend.
@@ -4942,6 +5117,7 @@ properties:
                                                 x-nter-skip-param: true
                                               options:
                                                 type: object
+                                                additionalProperties: false
                                                 x-nter-skip-param: true
                                                 required:
                                                   - prefix
@@ -4952,6 +5128,7 @@ properties:
                                                     x-nter-skip-param: true
                                           - x-nter-skip-param: true
                                             type: object
+                                            additionalProperties: false
                                             description: Make the value snake_case
                                             required:
                                               - type
@@ -4964,10 +5141,12 @@ properties:
                                                 x-nter-skip-param: true
                                               options:
                                                 type: object
+                                                additionalProperties: false
                                                 description: This filter has no options
                                                 x-nter-skip-param: true
                                           - x-nter-skip-param: true
                                             type: object
+                                            additionalProperties: false
                                             description: Filter to transform a value into a string
                                             required:
                                               - type
@@ -4980,6 +5159,7 @@ properties:
                                                 x-nter-skip-param: true
                                               options:
                                                 type: object
+                                                additionalProperties: false
                                                 description: String filter has no options
                                                 x-nter-skip-param: true
                                           - x-nter-skip-param: true
@@ -4987,6 +5167,7 @@ properties:
                                               with the suffix, it will not
                                               append.
                                             type: object
+                                            additionalProperties: false
                                             required:
                                               - type
                                               - options
@@ -4998,6 +5179,7 @@ properties:
                                                 x-nter-skip-param: true
                                               options:
                                                 type: object
+                                                additionalProperties: false
                                                 x-nter-skip-param: true
                                                 required:
                                                   - suffix
@@ -5008,6 +5190,7 @@ properties:
                                                     x-nter-skip-param: true
                                           - x-nter-skip-param: true
                                             type: object
+                                            additionalProperties: false
                                             description: Filter to trim whitespace from a value
                                             required:
                                               - type
@@ -5020,6 +5203,7 @@ properties:
                                                 x-nter-skip-param: true
                                               options:
                                                 type: object
+                                                additionalProperties: false
                                                 description: By default will trim from the start and end
                                                 x-nter-skip-param: true
                                                 properties:
@@ -5035,6 +5219,7 @@ properties:
                                                     x-nter-skip-param: true
                                           - x-nter-skip-param: true
                                             type: object
+                                            additionalProperties: false
                                             description: Make the value UPPERCASE
                                             required:
                                               - type
@@ -5047,6 +5232,7 @@ properties:
                                                 x-nter-skip-param: true
                                               options:
                                                 type: object
+                                                additionalProperties: false
                                                 description: This filter has no options
                                                 x-nter-skip-param: true
                                     validators:
@@ -5058,6 +5244,7 @@ properties:
                                         anyOf:
                                           - x-nter-skip-param: true
                                             type: object
+                                            additionalProperties: false
                                             description: This is always valid
                                             required:
                                               - type
@@ -5070,10 +5257,12 @@ properties:
                                                 x-nter-skip-param: true
                                               options:
                                                 type: object
+                                                additionalProperties: false
                                                 description: This validator has no options
                                                 x-nter-skip-param: true
                                           - x-nter-skip-param: true
                                             type: object
+                                            additionalProperties: false
                                             description: Validate number is between two values. By default, min and max are
                                               included
                                             required:
@@ -5087,6 +5276,7 @@ properties:
                                                 x-nter-skip-param: true
                                               options:
                                                 type: object
+                                                additionalProperties: false
                                                 x-nter-skip-param: true
                                                 required:
                                                   - min
@@ -5114,6 +5304,7 @@ properties:
                                                     x-nter-skip-param: true
                                           - x-nter-skip-param: true
                                             type: object
+                                            additionalProperties: false
                                             description: Validate value does not match a list (black list)
                                             required:
                                               - type
@@ -5126,6 +5317,7 @@ properties:
                                                 x-nter-skip-param: true
                                               options:
                                                 type: object
+                                                additionalProperties: false
                                                 x-nter-skip-param: true
                                                 required:
                                                   - list
@@ -5145,6 +5337,7 @@ properties:
                                                     x-nter-skip-param: true
                                           - x-nter-skip-param: true
                                             type: object
+                                            additionalProperties: false
                                             description: Validate string contains a value
                                             required:
                                               - type
@@ -5157,6 +5350,7 @@ properties:
                                                 x-nter-skip-param: true
                                               options:
                                                 type: object
+                                                additionalProperties: false
                                                 x-nter-skip-param: true
                                                 required:
                                                   - contains
@@ -5172,6 +5366,7 @@ properties:
                                                     x-nter-skip-param: true
                                           - x-nter-skip-param: true
                                             type: object
+                                            additionalProperties: false
                                             description: Validate string is a correct email address
                                             required:
                                               - type
@@ -5184,6 +5379,7 @@ properties:
                                                 x-nter-skip-param: true
                                               options:
                                                 type: object
+                                                additionalProperties: false
                                                 x-nter-skip-param: true
                                                 properties:
                                                   strict:
@@ -5199,6 +5395,7 @@ properties:
                                                     x-nter-skip-param: true
                                           - x-nter-skip-param: true
                                             type: object
+                                            additionalProperties: false
                                             description: Validate string ends with a value
                                             required:
                                               - type
@@ -5211,6 +5408,7 @@ properties:
                                                 x-nter-skip-param: true
                                               options:
                                                 type: object
+                                                additionalProperties: false
                                                 x-nter-skip-param: true
                                                 required:
                                                   - ends_with
@@ -5226,6 +5424,7 @@ properties:
                                                     x-nter-skip-param: true
                                           - x-nter-skip-param: true
                                             type: object
+                                            additionalProperties: false
                                             description: Validate number equals a value
                                             required:
                                               - type
@@ -5238,6 +5437,7 @@ properties:
                                                 x-nter-skip-param: true
                                               options:
                                                 type: object
+                                                additionalProperties: false
                                                 x-nter-skip-param: true
                                                 required:
                                                   - value
@@ -5255,6 +5455,7 @@ properties:
                                                     x-nter-skip-param: true
                                           - x-nter-skip-param: true
                                             type: object
+                                            additionalProperties: false
                                             description: Validate number is greater than a value. By default, this will
                                               check if value is greater than or
                                               equals to
@@ -5269,6 +5470,7 @@ properties:
                                                 x-nter-skip-param: true
                                               options:
                                                 type: object
+                                                additionalProperties: false
                                                 x-nter-skip-param: true
                                                 required:
                                                   - value
@@ -5291,6 +5493,7 @@ properties:
                                                     x-nter-skip-param: true
                                           - x-nter-skip-param: true
                                             type: object
+                                            additionalProperties: false
                                             description: Validate string has a correct DNS records
                                             required:
                                               - type
@@ -5303,6 +5506,7 @@ properties:
                                                 x-nter-skip-param: true
                                               options:
                                                 type: object
+                                                additionalProperties: false
                                                 x-nter-skip-param: true
                                                 properties:
                                                   record_type:
@@ -5354,6 +5558,7 @@ properties:
                                                     x-nter-skip-param: true
                                           - x-nter-skip-param: true
                                             type: object
+                                            additionalProperties: false
                                             description: Validate string matches an IP address format. Defaults to matching
                                               IPv4
                                             required:
@@ -5367,6 +5572,7 @@ properties:
                                                 x-nter-skip-param: true
                                               options:
                                                 type: object
+                                                additionalProperties: false
                                                 x-nter-skip-param: true
                                                 properties:
                                                   version:
@@ -5378,6 +5584,7 @@ properties:
                                                     x-nter-skip-param: true
                                           - x-nter-skip-param: true
                                             type: object
+                                            additionalProperties: false
                                             description: Validate string is a certain length
                                             required:
                                               - type
@@ -5390,6 +5597,7 @@ properties:
                                                 x-nter-skip-param: true
                                               options:
                                                 type: object
+                                                additionalProperties: false
                                                 x-nter-skip-param: true
                                                 required:
                                                   - length
@@ -5411,6 +5619,7 @@ properties:
                                                     x-nter-skip-param: true
                                           - x-nter-skip-param: true
                                             type: object
+                                            additionalProperties: false
                                             description: Validate number is less than a value. By default, this will check
                                               if value is less than or equals to
                                             required:
@@ -5424,6 +5633,7 @@ properties:
                                                 x-nter-skip-param: true
                                               options:
                                                 type: object
+                                                additionalProperties: false
                                                 x-nter-skip-param: true
                                                 required:
                                                   - value
@@ -5446,6 +5656,7 @@ properties:
                                                     x-nter-skip-param: true
                                           - x-nter-skip-param: true
                                             type: object
+                                            additionalProperties: false
                                             description: Validate string matches an MAC address format
                                             required:
                                               - type
@@ -5458,10 +5669,12 @@ properties:
                                                 x-nter-skip-param: true
                                               options:
                                                 type: object
+                                                additionalProperties: false
                                                 description: This validator has no options
                                                 x-nter-skip-param: true
                                           - x-nter-skip-param: true
                                             type: object
+                                            additionalProperties: false
                                             description: Validate string matches a regular expression
                                             required:
                                               - type
@@ -5474,6 +5687,7 @@ properties:
                                                 x-nter-skip-param: true
                                               options:
                                                 type: object
+                                                additionalProperties: false
                                                 x-nter-skip-param: true
                                                 required:
                                                   - mask
@@ -5484,6 +5698,7 @@ properties:
                                                     x-nter-skip-param: true
                                           - x-nter-skip-param: true
                                             type: object
+                                            additionalProperties: false
                                             description: This is never valid
                                             required:
                                               - type
@@ -5496,10 +5711,12 @@ properties:
                                                 x-nter-skip-param: true
                                               options:
                                                 type: object
+                                                additionalProperties: false
                                                 description: This validator has no options
                                                 x-nter-skip-param: true
                                           - x-nter-skip-param: true
                                             type: object
+                                            additionalProperties: false
                                             description: Validates that the value is present and not set to 'null', '0' or
                                               an empty string
                                             required:
@@ -5513,10 +5730,12 @@ properties:
                                                 x-nter-skip-param: true
                                               options:
                                                 type: object
+                                                additionalProperties: false
                                                 description: Required validator has no options
                                                 x-nter-skip-param: true
                                           - x-nter-skip-param: true
                                             type: object
+                                            additionalProperties: false
                                             description: Validate string starts with a value
                                             required:
                                               - type
@@ -5529,6 +5748,7 @@ properties:
                                                 x-nter-skip-param: true
                                               options:
                                                 type: object
+                                                additionalProperties: false
                                                 x-nter-skip-param: true
                                                 required:
                                                   - starts_with
@@ -5544,6 +5764,7 @@ properties:
                                                     x-nter-skip-param: true
                                           - x-nter-skip-param: true
                                             type: object
+                                            additionalProperties: false
                                             description: Validates that a value follows a step. Both start and end options
                                               do not have to sync with the step.
                                               If they do not sync then find the
@@ -5559,6 +5780,7 @@ properties:
                                                 x-nter-skip-param: true
                                               options:
                                                 type: object
+                                                additionalProperties: false
                                                 x-nter-skip-param: true
                                                 required:
                                                   - step
@@ -5579,6 +5801,7 @@ properties:
                                                     x-nter-skip-param: true
                                           - x-nter-skip-param: true
                                             type: object
+                                            additionalProperties: false
                                             description: Validate string matches an URI
                                             required:
                                               - type
@@ -5591,6 +5814,7 @@ properties:
                                                 x-nter-skip-param: true
                                               options:
                                                 type: object
+                                                additionalProperties: false
                                                 x-nter-skip-param: true
                                                 properties:
                                                   schemes:
@@ -5614,6 +5838,7 @@ properties:
                                                     x-nter-skip-param: true
                                           - x-nter-skip-param: true
                                             type: object
+                                            additionalProperties: false
                                             description: Validate value matches a list (white list)
                                             required:
                                               - type
@@ -5626,6 +5851,7 @@ properties:
                                                 x-nter-skip-param: true
                                               options:
                                                 type: object
+                                                additionalProperties: false
                                                 x-nter-skip-param: true
                                                 required:
                                                   - list
@@ -5666,9 +5892,8 @@ properties:
                                         - type: "null"
                                           x-nter-skip-param: true
                                         - x-nter-skip-param: true
-                                          type: string
-                                          description: Entity type
                                           enum:
+                                            - ACT
                                             - BAT
                                             - CON
                                             - CTX
@@ -5680,10 +5905,11 @@ properties:
                                             - PART
                                             - PGM
                                             - PRJ
+                                            - PUSH
                                             - QUE
                                             - RES
+                                            - ROLE
                                             - SRES
-                                            - TEN
                                             - UNIT
                                             - USER
                                             - VEN
@@ -5691,9 +5917,8 @@ properties:
                                             - WOR
                                     apply_to:
                                       x-nter-skip-param: true
-                                      type: string
-                                      description: Entity type
                                       enum:
+                                        - ACT
                                         - BAT
                                         - CON
                                         - CTX
@@ -5705,10 +5930,11 @@ properties:
                                         - PART
                                         - PGM
                                         - PRJ
+                                        - PUSH
                                         - QUE
                                         - RES
+                                        - ROLE
                                         - SRES
-                                        - TEN
                                         - UNIT
                                         - USER
                                         - VEN
@@ -5786,6 +6012,7 @@ properties:
                                 anyOf:
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: This filter will set the value based on a list of approved values.
                                       If the value is not in the list, it will
                                       then be set to empty unless the default
@@ -5801,6 +6028,7 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         x-nter-skip-param: true
                                         required:
                                           - approved_values
@@ -5824,6 +6052,7 @@ properties:
                                             x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: This filter will remove all non numbers from the value
                                     required:
                                       - type
@@ -5836,10 +6065,12 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         description: This filter has no options
                                         x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: This filter will make the value true or false
                                     required:
                                       - type
@@ -5852,10 +6083,12 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         description: This filter has no options
                                         x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Make the value camelCase
                                     required:
                                       - type
@@ -5868,10 +6101,12 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         description: This filter has no options
                                         x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Filter to transform a value into a date
                                     required:
                                       - type
@@ -5884,10 +6119,12 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         description: Date filter has no options
                                         x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: This filter will remove all numbers from the value
                                     required:
                                       - type
@@ -5900,10 +6137,12 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         description: This filter has no options
                                         x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Filter to transform values into null. This is helpful when trying
                                       to make a value required
                                     required:
@@ -5917,10 +6156,12 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         description: empty filter has no options
                                         x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Filter to transform a value into a float. Non numeric characters
                                       (including comma) will be removed
                                     required:
@@ -5934,6 +6175,7 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         x-nter-skip-param: true
                                         properties:
                                           precision:
@@ -5945,6 +6187,7 @@ properties:
                                             x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Make the value kebab-case
                                     required:
                                       - type
@@ -5957,10 +6200,12 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         description: This filter has no options
                                         x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Make the value lowercase
                                     required:
                                       - type
@@ -5973,10 +6218,12 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         description: This filter has no options
                                         x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Filter to transform a value into a number. Non numeric characters
                                       (including comma and decimal points) will
                                       be removed
@@ -5991,10 +6238,12 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         description: Number filter has no options
                                         x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Add a prefix to the start of a string. If the string already start
                                       with the prefix, it will not prepend.
                                     required:
@@ -6008,6 +6257,7 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         x-nter-skip-param: true
                                         required:
                                           - prefix
@@ -6018,6 +6268,7 @@ properties:
                                             x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Make the value snake_case
                                     required:
                                       - type
@@ -6030,10 +6281,12 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         description: This filter has no options
                                         x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Filter to transform a value into a string
                                     required:
                                       - type
@@ -6046,12 +6299,14 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         description: String filter has no options
                                         x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     description: Add a suffix to the start of a string. If the string already start
                                       with the suffix, it will not append.
                                     type: object
+                                    additionalProperties: false
                                     required:
                                       - type
                                       - options
@@ -6063,6 +6318,7 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         x-nter-skip-param: true
                                         required:
                                           - suffix
@@ -6073,6 +6329,7 @@ properties:
                                             x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Filter to trim whitespace from a value
                                     required:
                                       - type
@@ -6085,6 +6342,7 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         description: By default will trim from the start and end
                                         x-nter-skip-param: true
                                         properties:
@@ -6100,6 +6358,7 @@ properties:
                                             x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Make the value UPPERCASE
                                     required:
                                       - type
@@ -6112,6 +6371,7 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         description: This filter has no options
                                         x-nter-skip-param: true
                             validators:
@@ -6123,6 +6383,7 @@ properties:
                                 anyOf:
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: This is always valid
                                     required:
                                       - type
@@ -6135,10 +6396,12 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         description: This validator has no options
                                         x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Validate number is between two values. By default, min and max are
                                       included
                                     required:
@@ -6152,6 +6415,7 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         x-nter-skip-param: true
                                         required:
                                           - min
@@ -6179,6 +6443,7 @@ properties:
                                             x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Validate value does not match a list (black list)
                                     required:
                                       - type
@@ -6191,6 +6456,7 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         x-nter-skip-param: true
                                         required:
                                           - list
@@ -6210,6 +6476,7 @@ properties:
                                             x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Validate string contains a value
                                     required:
                                       - type
@@ -6222,6 +6489,7 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         x-nter-skip-param: true
                                         required:
                                           - contains
@@ -6237,6 +6505,7 @@ properties:
                                             x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Validate string is a correct email address
                                     required:
                                       - type
@@ -6249,6 +6518,7 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         x-nter-skip-param: true
                                         properties:
                                           strict:
@@ -6264,6 +6534,7 @@ properties:
                                             x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Validate string ends with a value
                                     required:
                                       - type
@@ -6276,6 +6547,7 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         x-nter-skip-param: true
                                         required:
                                           - ends_with
@@ -6291,6 +6563,7 @@ properties:
                                             x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Validate number equals a value
                                     required:
                                       - type
@@ -6303,6 +6576,7 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         x-nter-skip-param: true
                                         required:
                                           - value
@@ -6320,6 +6594,7 @@ properties:
                                             x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Validate number is greater than a value. By default, this will
                                       check if value is greater than or equals
                                       to
@@ -6334,6 +6609,7 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         x-nter-skip-param: true
                                         required:
                                           - value
@@ -6356,6 +6632,7 @@ properties:
                                             x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Validate string has a correct DNS records
                                     required:
                                       - type
@@ -6368,6 +6645,7 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         x-nter-skip-param: true
                                         properties:
                                           record_type:
@@ -6419,6 +6697,7 @@ properties:
                                             x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Validate string matches an IP address format. Defaults to matching
                                       IPv4
                                     required:
@@ -6432,6 +6711,7 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         x-nter-skip-param: true
                                         properties:
                                           version:
@@ -6443,6 +6723,7 @@ properties:
                                             x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Validate string is a certain length
                                     required:
                                       - type
@@ -6455,6 +6736,7 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         x-nter-skip-param: true
                                         required:
                                           - length
@@ -6476,6 +6758,7 @@ properties:
                                             x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Validate number is less than a value. By default, this will check
                                       if value is less than or equals to
                                     required:
@@ -6489,6 +6772,7 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         x-nter-skip-param: true
                                         required:
                                           - value
@@ -6511,6 +6795,7 @@ properties:
                                             x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Validate string matches an MAC address format
                                     required:
                                       - type
@@ -6523,10 +6808,12 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         description: This validator has no options
                                         x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Validate string matches a regular expression
                                     required:
                                       - type
@@ -6539,6 +6826,7 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         x-nter-skip-param: true
                                         required:
                                           - mask
@@ -6549,6 +6837,7 @@ properties:
                                             x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: This is never valid
                                     required:
                                       - type
@@ -6561,10 +6850,12 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         description: This validator has no options
                                         x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Validates that the value is present and not set to 'null', '0' or
                                       an empty string
                                     required:
@@ -6578,10 +6869,12 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         description: Required validator has no options
                                         x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Validate string starts with a value
                                     required:
                                       - type
@@ -6594,6 +6887,7 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         x-nter-skip-param: true
                                         required:
                                           - starts_with
@@ -6609,6 +6903,7 @@ properties:
                                             x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Validates that a value follows a step. Both start and end options
                                       do not have to sync with the step. If they
                                       do not sync then find the nearest step.
@@ -6623,6 +6918,7 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         x-nter-skip-param: true
                                         required:
                                           - step
@@ -6643,6 +6939,7 @@ properties:
                                             x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Validate string matches an URI
                                     required:
                                       - type
@@ -6655,6 +6952,7 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         x-nter-skip-param: true
                                         properties:
                                           schemes:
@@ -6678,6 +6976,7 @@ properties:
                                             x-nter-skip-param: true
                                   - x-nter-skip-param: true
                                     type: object
+                                    additionalProperties: false
                                     description: Validate value matches a list (white list)
                                     required:
                                       - type
@@ -6690,6 +6989,7 @@ properties:
                                         x-nter-skip-param: true
                                       options:
                                         type: object
+                                        additionalProperties: false
                                         x-nter-skip-param: true
                                         required:
                                           - list
@@ -6730,9 +7030,8 @@ properties:
                                 - type: "null"
                                   x-nter-skip-param: true
                                 - x-nter-skip-param: true
-                                  type: string
-                                  description: Entity type
                                   enum:
+                                    - ACT
                                     - BAT
                                     - CON
                                     - CTX
@@ -6744,10 +7043,11 @@ properties:
                                     - PART
                                     - PGM
                                     - PRJ
+                                    - PUSH
                                     - QUE
                                     - RES
+                                    - ROLE
                                     - SRES
-                                    - TEN
                                     - UNIT
                                     - USER
                                     - VEN
@@ -6755,9 +7055,8 @@ properties:
                                     - WOR
                             apply_to:
                               x-nter-skip-param: true
-                              type: string
-                              description: Entity type
                               enum:
+                                - ACT
                                 - BAT
                                 - CON
                                 - CTX
@@ -6769,10 +7068,11 @@ properties:
                                 - PART
                                 - PGM
                                 - PRJ
+                                - PUSH
                                 - QUE
                                 - RES
+                                - ROLE
                                 - SRES
-                                - TEN
                                 - UNIT
                                 - USER
                                 - VEN
@@ -6850,6 +7150,7 @@ properties:
                             anyOf:
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: This filter will set the value based on a list of approved values.
                                   If the value is not in the list, it will then
                                   be set to empty unless the default option is
@@ -6865,6 +7166,7 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     x-nter-skip-param: true
                                     required:
                                       - approved_values
@@ -6888,6 +7190,7 @@ properties:
                                         x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: This filter will remove all non numbers from the value
                                 required:
                                   - type
@@ -6900,10 +7203,12 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     description: This filter has no options
                                     x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: This filter will make the value true or false
                                 required:
                                   - type
@@ -6916,10 +7221,12 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     description: This filter has no options
                                     x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Make the value camelCase
                                 required:
                                   - type
@@ -6932,10 +7239,12 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     description: This filter has no options
                                     x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Filter to transform a value into a date
                                 required:
                                   - type
@@ -6948,10 +7257,12 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     description: Date filter has no options
                                     x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: This filter will remove all numbers from the value
                                 required:
                                   - type
@@ -6964,10 +7275,12 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     description: This filter has no options
                                     x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Filter to transform values into null. This is helpful when trying
                                   to make a value required
                                 required:
@@ -6981,10 +7294,12 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     description: empty filter has no options
                                     x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Filter to transform a value into a float. Non numeric characters
                                   (including comma) will be removed
                                 required:
@@ -6998,6 +7313,7 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     x-nter-skip-param: true
                                     properties:
                                       precision:
@@ -7009,6 +7325,7 @@ properties:
                                         x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Make the value kebab-case
                                 required:
                                   - type
@@ -7021,10 +7338,12 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     description: This filter has no options
                                     x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Make the value lowercase
                                 required:
                                   - type
@@ -7037,10 +7356,12 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     description: This filter has no options
                                     x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Filter to transform a value into a number. Non numeric characters
                                   (including comma and decimal points) will be
                                   removed
@@ -7055,10 +7376,12 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     description: Number filter has no options
                                     x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Add a prefix to the start of a string. If the string already start
                                   with the prefix, it will not prepend.
                                 required:
@@ -7072,6 +7395,7 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     x-nter-skip-param: true
                                     required:
                                       - prefix
@@ -7082,6 +7406,7 @@ properties:
                                         x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Make the value snake_case
                                 required:
                                   - type
@@ -7094,10 +7419,12 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     description: This filter has no options
                                     x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Filter to transform a value into a string
                                 required:
                                   - type
@@ -7110,12 +7437,14 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     description: String filter has no options
                                     x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 description: Add a suffix to the start of a string. If the string already start
                                   with the suffix, it will not append.
                                 type: object
+                                additionalProperties: false
                                 required:
                                   - type
                                   - options
@@ -7127,6 +7456,7 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     x-nter-skip-param: true
                                     required:
                                       - suffix
@@ -7137,6 +7467,7 @@ properties:
                                         x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Filter to trim whitespace from a value
                                 required:
                                   - type
@@ -7149,6 +7480,7 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     description: By default will trim from the start and end
                                     x-nter-skip-param: true
                                     properties:
@@ -7164,6 +7496,7 @@ properties:
                                         x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Make the value UPPERCASE
                                 required:
                                   - type
@@ -7176,6 +7509,7 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     description: This filter has no options
                                     x-nter-skip-param: true
                         validators:
@@ -7187,6 +7521,7 @@ properties:
                             anyOf:
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: This is always valid
                                 required:
                                   - type
@@ -7199,10 +7534,12 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     description: This validator has no options
                                     x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Validate number is between two values. By default, min and max are
                                   included
                                 required:
@@ -7216,6 +7553,7 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     x-nter-skip-param: true
                                     required:
                                       - min
@@ -7243,6 +7581,7 @@ properties:
                                         x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Validate value does not match a list (black list)
                                 required:
                                   - type
@@ -7255,6 +7594,7 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     x-nter-skip-param: true
                                     required:
                                       - list
@@ -7274,6 +7614,7 @@ properties:
                                         x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Validate string contains a value
                                 required:
                                   - type
@@ -7286,6 +7627,7 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     x-nter-skip-param: true
                                     required:
                                       - contains
@@ -7301,6 +7643,7 @@ properties:
                                         x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Validate string is a correct email address
                                 required:
                                   - type
@@ -7313,6 +7656,7 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     x-nter-skip-param: true
                                     properties:
                                       strict:
@@ -7328,6 +7672,7 @@ properties:
                                         x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Validate string ends with a value
                                 required:
                                   - type
@@ -7340,6 +7685,7 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     x-nter-skip-param: true
                                     required:
                                       - ends_with
@@ -7355,6 +7701,7 @@ properties:
                                         x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Validate number equals a value
                                 required:
                                   - type
@@ -7367,6 +7714,7 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     x-nter-skip-param: true
                                     required:
                                       - value
@@ -7384,6 +7732,7 @@ properties:
                                         x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Validate number is greater than a value. By default, this will
                                   check if value is greater than or equals to
                                 required:
@@ -7397,6 +7746,7 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     x-nter-skip-param: true
                                     required:
                                       - value
@@ -7419,6 +7769,7 @@ properties:
                                         x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Validate string has a correct DNS records
                                 required:
                                   - type
@@ -7431,6 +7782,7 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     x-nter-skip-param: true
                                     properties:
                                       record_type:
@@ -7482,6 +7834,7 @@ properties:
                                         x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Validate string matches an IP address format. Defaults to matching
                                   IPv4
                                 required:
@@ -7495,6 +7848,7 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     x-nter-skip-param: true
                                     properties:
                                       version:
@@ -7506,6 +7860,7 @@ properties:
                                         x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Validate string is a certain length
                                 required:
                                   - type
@@ -7518,6 +7873,7 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     x-nter-skip-param: true
                                     required:
                                       - length
@@ -7539,6 +7895,7 @@ properties:
                                         x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Validate number is less than a value. By default, this will check
                                   if value is less than or equals to
                                 required:
@@ -7552,6 +7909,7 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     x-nter-skip-param: true
                                     required:
                                       - value
@@ -7574,6 +7932,7 @@ properties:
                                         x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Validate string matches an MAC address format
                                 required:
                                   - type
@@ -7586,10 +7945,12 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     description: This validator has no options
                                     x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Validate string matches a regular expression
                                 required:
                                   - type
@@ -7602,6 +7963,7 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     x-nter-skip-param: true
                                     required:
                                       - mask
@@ -7612,6 +7974,7 @@ properties:
                                         x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: This is never valid
                                 required:
                                   - type
@@ -7624,10 +7987,12 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     description: This validator has no options
                                     x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Validates that the value is present and not set to 'null', '0' or
                                   an empty string
                                 required:
@@ -7641,10 +8006,12 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     description: Required validator has no options
                                     x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Validate string starts with a value
                                 required:
                                   - type
@@ -7657,6 +8024,7 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     x-nter-skip-param: true
                                     required:
                                       - starts_with
@@ -7672,6 +8040,7 @@ properties:
                                         x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Validates that a value follows a step. Both start and end options
                                   do not have to sync with the step. If they do
                                   not sync then find the nearest step.
@@ -7686,6 +8055,7 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     x-nter-skip-param: true
                                     required:
                                       - step
@@ -7706,6 +8076,7 @@ properties:
                                         x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Validate string matches an URI
                                 required:
                                   - type
@@ -7718,6 +8089,7 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     x-nter-skip-param: true
                                     properties:
                                       schemes:
@@ -7741,6 +8113,7 @@ properties:
                                         x-nter-skip-param: true
                               - x-nter-skip-param: true
                                 type: object
+                                additionalProperties: false
                                 description: Validate value matches a list (white list)
                                 required:
                                   - type
@@ -7753,6 +8126,7 @@ properties:
                                     x-nter-skip-param: true
                                   options:
                                     type: object
+                                    additionalProperties: false
                                     x-nter-skip-param: true
                                     required:
                                       - list
@@ -7793,9 +8167,8 @@ properties:
                             - type: "null"
                               x-nter-skip-param: true
                             - x-nter-skip-param: true
-                              type: string
-                              description: Entity type
                               enum:
+                                - ACT
                                 - BAT
                                 - CON
                                 - CTX
@@ -7807,10 +8180,11 @@ properties:
                                 - PART
                                 - PGM
                                 - PRJ
+                                - PUSH
                                 - QUE
                                 - RES
+                                - ROLE
                                 - SRES
-                                - TEN
                                 - UNIT
                                 - USER
                                 - VEN
@@ -7818,9 +8192,8 @@ properties:
                                 - WOR
                         apply_to:
                           x-nter-skip-param: true
-                          type: string
-                          description: Entity type
                           enum:
+                            - ACT
                             - BAT
                             - CON
                             - CTX
@@ -7832,10 +8205,11 @@ properties:
                             - PART
                             - PGM
                             - PRJ
+                            - PUSH
                             - QUE
                             - RES
+                            - ROLE
                             - SRES
-                            - TEN
                             - UNIT
                             - USER
                             - VEN
@@ -7912,11 +8286,11 @@ properties:
                     x-patternProperties:
                       "^[A-Za-z][A-Za-z0-9-]*$":
                         oneOf:
-                          - &a14
-                            $schema: http://json-schema.org/draft-07/schema#
+                          - $schema: http://json-schema.org/draft-07/schema#
                             $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/function/allocateUnitsToProject.json
                             description: Allocates units to a project.
                             type: object
+                            additionalProperties: false
                             required:
                               - step_type
                               - label
@@ -7966,6 +8340,7 @@ properties:
                                 description: Values to set on the context
                                 items:
                                   type: object
+                                  additionalProperties: false
                                   required:
                                     - key
                                     - value
@@ -7988,6 +8363,7 @@ properties:
                                     $schema: http://json-schema.org/draft-07/schema#
                                     $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepError.json
                                     type: object
+                                    additionalProperties: false
                                     required:
                                       - retry
                                       - finally
@@ -8005,6 +8381,7 @@ properties:
                                         default: 0
                                       finally:
                                         type: object
+                                        additionalProperties: false
                                         description: What to do after all retries
                                         properties:
                                           actions: *a2
@@ -8018,6 +8395,7 @@ properties:
                                     additionalProperties: false
                               options:
                                 type: object
+                                additionalProperties: false
                                 required:
                                   - function
                                   - payload
@@ -8032,6 +8410,7 @@ properties:
                                       - allocate-unit-to-project
                                   payload:
                                     type: object
+                                    additionalProperties: false
                                     required:
                                       - part_id
                                       - project_id
@@ -8054,11 +8433,12 @@ properties:
                                       status:
                                         type: string
                                         description: Only assign units which are in this status
-                          - &a15
+                          - &a14
                             $schema: http://json-schema.org/draft-07/schema#
                             $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/function/setEntityStatus.json
                             description: Updates the status on the Work Flow entity.
                             type: object
+                            additionalProperties: false
                             required:
                               - step_type
                               - label
@@ -8077,6 +8457,7 @@ properties:
                               on_timeout: *a10
                               options:
                                 type: object
+                                additionalProperties: false
                                 required:
                                   - function
                                   - payload
@@ -8088,6 +8469,7 @@ properties:
                                       - set-entity-status
                                   payload:
                                     type: object
+                                    additionalProperties: false
                                     required:
                                       - status
                                     properties:
@@ -8128,12 +8510,13 @@ properties:
                                             description: For something that is Complete
                                             status: Complete
                                             order: 7
-                          - &a16
+                          - &a15
                             $schema: http://json-schema.org/draft-07/schema#
                             $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/followPDFInstructions.json
                             description: Display a link or modal to a user which contains instructions from
                               a PDF
                             type: object
+                            additionalProperties: false
                             required:
                               - step_type
                               - label
@@ -8156,6 +8539,7 @@ properties:
                               on_timeout: *a10
                               options:
                                 type: object
+                                additionalProperties: false
                                 required:
                                   - component
                                   - payload
@@ -8165,6 +8549,7 @@ properties:
                                       - follow-pdf-instructions
                                   payload:
                                     type: object
+                                    additionalProperties: false
                                     required:
                                       - attachment_id
                                     properties:
@@ -8173,11 +8558,12 @@ properties:
                                         type: string
                                         readOnly: true
                                         pattern: ^[0-9a-zA-Z-_]+$
-                          - &a17
+                          - &a16
                             $schema: http://json-schema.org/draft-07/schema#
                             $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/manualDataEntry.json
                             description: Ask the user to manually enter (or confirm) data for an entity
                             type: object
+                            additionalProperties: false
                             required:
                               - step_type
                               - label
@@ -8196,12 +8582,14 @@ properties:
                               on_timeout: *a10
                               options:
                                 type: object
+                                additionalProperties: false
                                 properties:
                                   component:
                                     enum:
                                       - manual-data-entry
                                   payload:
                                     type: object
+                                    additionalProperties: false
                                     required:
                                       - fields
                                     properties:
@@ -8210,6 +8598,7 @@ properties:
                                         description: Configuration for each field
                                         items:
                                           type: object
+                                          additionalProperties: false
                                           required:
                                             - input_type
                                             - label
@@ -8241,11 +8630,12 @@ properties:
                                                 context is assumed. Otherwise
                                                 the data will be set on the
                                                 context path
-                          - &a18
+                          - &a17
                             $schema: http://json-schema.org/draft-07/schema#
                             $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/taskList.json
                             description: Ask the user to follow a list and check off boxes
                             type: object
+                            additionalProperties: false
                             required:
                               - step_type
                               - label
@@ -8264,12 +8654,14 @@ properties:
                               on_timeout: *a10
                               options:
                                 type: object
+                                additionalProperties: false
                                 properties:
                                   component:
                                     enum:
                                       - task-list
                                   payload:
                                     type: object
+                                    additionalProperties: false
                                     required:
                                       - items
                                     properties:
@@ -8283,6 +8675,7 @@ properties:
                                         description: Configuration for each task list item
                                         items:
                                           type: object
+                                          additionalProperties: false
                                           required:
                                             - label
                                             - evaluated
@@ -8308,11 +8701,12 @@ properties:
                                             na_field:
                                               type: boolean
                                               description: Allow the user to select the N/A option when checking off the list
-                          - &a19
+                          - &a18
                             $schema: http://json-schema.org/draft-07/schema#
                             $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/machine/aceIos.json
                             description: Run the ACE-IOS application to provision iOS devices
                             type: object
+                            additionalProperties: false
                             required:
                               - step_type
                               - label
@@ -8334,6 +8728,7 @@ properties:
                               on_timeout: *a10
                               options:
                                 type: object
+                                additionalProperties: false
                                 required:
                                   - application
                                   - configuration
@@ -8343,6 +8738,7 @@ properties:
                                     description: Name of the UI component
                                   application:
                                     type: object
+                                    additionalProperties: false
                                     required:
                                       - application_id
                                     properties:
@@ -8356,6 +8752,7 @@ properties:
                                           type: string
                                   configuration:
                                     type: object
+                                    additionalProperties: false
                                     description: ACE Configuration options
                                     properties:
                                       pairing_cert:
@@ -8397,6 +8794,7 @@ properties:
                                         description: List of fields to map to the device
                                         items:
                                           type: object
+                                          additionalProperties: false
                                           properties:
                                             from:
                                               type: string
@@ -8472,6 +8870,7 @@ properties:
                                 description: Context variable to check
                                 items:
                                   type: object
+                                  additionalProperties: false
                                   maxProperties: 2
                                   minProperties: 2
                                   properties:
@@ -8586,6 +8985,7 @@ properties:
                                 description: List of events and conditions to listen for to trigger
                                 items:
                                   type: object
+                                  additionalProperties: false
                                   required:
                                     - event
                                   properties:
@@ -8699,6 +9099,7 @@ properties:
                                             - WOR.moved-to
                                     event_value:
                                       type: object
+                                      additionalProperties: false
                                       description: The event conditions that have to be met
                                       allOf:
                                         - *a13
@@ -8758,12 +9159,12 @@ properties:
                                         - *a16
                                         - *a17
                                         - *a18
-                                        - *a19
                                         - *a13
             allOf:
               - description: A count of cycles needed for this entity broken down by status
                   category and active/in-active status
                 type: object
+                additionalProperties: false
                 required:
                   - pending
                   - in_progress
@@ -8838,6 +9239,7 @@ properties:
                     anyOf:
                       - x-nter-skip-param: true
                         type: object
+                        additionalProperties: false
                         description: This filter will set the value based on a list of approved values.
                           If the value is not in the list, it will then be set
                           to empty unless the default option is set
@@ -8852,6 +9254,7 @@ properties:
                             x-nter-skip-param: true
                           options:
                             type: object
+                            additionalProperties: false
                             x-nter-skip-param: true
                             required:
                               - approved_values
@@ -8875,6 +9278,7 @@ properties:
                                 x-nter-skip-param: true
                       - x-nter-skip-param: true
                         type: object
+                        additionalProperties: false
                         description: This filter will remove all non numbers from the value
                         required:
                           - type
@@ -8887,10 +9291,12 @@ properties:
                             x-nter-skip-param: true
                           options:
                             type: object
+                            additionalProperties: false
                             description: This filter has no options
                             x-nter-skip-param: true
                       - x-nter-skip-param: true
                         type: object
+                        additionalProperties: false
                         description: This filter will make the value true or false
                         required:
                           - type
@@ -8903,10 +9309,12 @@ properties:
                             x-nter-skip-param: true
                           options:
                             type: object
+                            additionalProperties: false
                             description: This filter has no options
                             x-nter-skip-param: true
                       - x-nter-skip-param: true
                         type: object
+                        additionalProperties: false
                         description: Make the value camelCase
                         required:
                           - type
@@ -8919,10 +9327,12 @@ properties:
                             x-nter-skip-param: true
                           options:
                             type: object
+                            additionalProperties: false
                             description: This filter has no options
                             x-nter-skip-param: true
                       - x-nter-skip-param: true
                         type: object
+                        additionalProperties: false
                         description: Filter to transform a value into a date
                         required:
                           - type
@@ -8935,10 +9345,12 @@ properties:
                             x-nter-skip-param: true
                           options:
                             type: object
+                            additionalProperties: false
                             description: Date filter has no options
                             x-nter-skip-param: true
                       - x-nter-skip-param: true
                         type: object
+                        additionalProperties: false
                         description: This filter will remove all numbers from the value
                         required:
                           - type
@@ -8951,10 +9363,12 @@ properties:
                             x-nter-skip-param: true
                           options:
                             type: object
+                            additionalProperties: false
                             description: This filter has no options
                             x-nter-skip-param: true
                       - x-nter-skip-param: true
                         type: object
+                        additionalProperties: false
                         description: Filter to transform values into null. This is helpful when trying
                           to make a value required
                         required:
@@ -8968,10 +9382,12 @@ properties:
                             x-nter-skip-param: true
                           options:
                             type: object
+                            additionalProperties: false
                             description: empty filter has no options
                             x-nter-skip-param: true
                       - x-nter-skip-param: true
                         type: object
+                        additionalProperties: false
                         description: Filter to transform a value into a float. Non numeric characters
                           (including comma) will be removed
                         required:
@@ -8985,6 +9401,7 @@ properties:
                             x-nter-skip-param: true
                           options:
                             type: object
+                            additionalProperties: false
                             x-nter-skip-param: true
                             properties:
                               precision:
@@ -8996,6 +9413,7 @@ properties:
                                 x-nter-skip-param: true
                       - x-nter-skip-param: true
                         type: object
+                        additionalProperties: false
                         description: Make the value kebab-case
                         required:
                           - type
@@ -9008,10 +9426,12 @@ properties:
                             x-nter-skip-param: true
                           options:
                             type: object
+                            additionalProperties: false
                             description: This filter has no options
                             x-nter-skip-param: true
                       - x-nter-skip-param: true
                         type: object
+                        additionalProperties: false
                         description: Make the value lowercase
                         required:
                           - type
@@ -9024,10 +9444,12 @@ properties:
                             x-nter-skip-param: true
                           options:
                             type: object
+                            additionalProperties: false
                             description: This filter has no options
                             x-nter-skip-param: true
                       - x-nter-skip-param: true
                         type: object
+                        additionalProperties: false
                         description: Filter to transform a value into a number. Non numeric characters
                           (including comma and decimal points) will be removed
                         required:
@@ -9041,10 +9463,12 @@ properties:
                             x-nter-skip-param: true
                           options:
                             type: object
+                            additionalProperties: false
                             description: Number filter has no options
                             x-nter-skip-param: true
                       - x-nter-skip-param: true
                         type: object
+                        additionalProperties: false
                         description: Add a prefix to the start of a string. If the string already start
                           with the prefix, it will not prepend.
                         required:
@@ -9058,6 +9482,7 @@ properties:
                             x-nter-skip-param: true
                           options:
                             type: object
+                            additionalProperties: false
                             x-nter-skip-param: true
                             required:
                               - prefix
@@ -9068,6 +9493,7 @@ properties:
                                 x-nter-skip-param: true
                       - x-nter-skip-param: true
                         type: object
+                        additionalProperties: false
                         description: Make the value snake_case
                         required:
                           - type
@@ -9080,10 +9506,12 @@ properties:
                             x-nter-skip-param: true
                           options:
                             type: object
+                            additionalProperties: false
                             description: This filter has no options
                             x-nter-skip-param: true
                       - x-nter-skip-param: true
                         type: object
+                        additionalProperties: false
                         description: Filter to transform a value into a string
                         required:
                           - type
@@ -9096,12 +9524,14 @@ properties:
                             x-nter-skip-param: true
                           options:
                             type: object
+                            additionalProperties: false
                             description: String filter has no options
                             x-nter-skip-param: true
                       - x-nter-skip-param: true
                         description: Add a suffix to the start of a string. If the string already start
                           with the suffix, it will not append.
                         type: object
+                        additionalProperties: false
                         required:
                           - type
                           - options
@@ -9113,6 +9543,7 @@ properties:
                             x-nter-skip-param: true
                           options:
                             type: object
+                            additionalProperties: false
                             x-nter-skip-param: true
                             required:
                               - suffix
@@ -9123,6 +9554,7 @@ properties:
                                 x-nter-skip-param: true
                       - x-nter-skip-param: true
                         type: object
+                        additionalProperties: false
                         description: Filter to trim whitespace from a value
                         required:
                           - type
@@ -9135,6 +9567,7 @@ properties:
                             x-nter-skip-param: true
                           options:
                             type: object
+                            additionalProperties: false
                             description: By default will trim from the start and end
                             x-nter-skip-param: true
                             properties:
@@ -9150,6 +9583,7 @@ properties:
                                 x-nter-skip-param: true
                       - x-nter-skip-param: true
                         type: object
+                        additionalProperties: false
                         description: Make the value UPPERCASE
                         required:
                           - type
@@ -9162,6 +9596,7 @@ properties:
                             x-nter-skip-param: true
                           options:
                             type: object
+                            additionalProperties: false
                             description: This filter has no options
                             x-nter-skip-param: true
                 validators:
@@ -9173,6 +9608,7 @@ properties:
                     anyOf:
                       - x-nter-skip-param: true
                         type: object
+                        additionalProperties: false
                         description: This is always valid
                         required:
                           - type
@@ -9185,10 +9621,12 @@ properties:
                             x-nter-skip-param: true
                           options:
                             type: object
+                            additionalProperties: false
                             description: This validator has no options
                             x-nter-skip-param: true
                       - x-nter-skip-param: true
                         type: object
+                        additionalProperties: false
                         description: Validate number is between two values. By default, min and max are
                           included
                         required:
@@ -9202,6 +9640,7 @@ properties:
                             x-nter-skip-param: true
                           options:
                             type: object
+                            additionalProperties: false
                             x-nter-skip-param: true
                             required:
                               - min
@@ -9229,6 +9668,7 @@ properties:
                                 x-nter-skip-param: true
                       - x-nter-skip-param: true
                         type: object
+                        additionalProperties: false
                         description: Validate value does not match a list (black list)
                         required:
                           - type
@@ -9241,6 +9681,7 @@ properties:
                             x-nter-skip-param: true
                           options:
                             type: object
+                            additionalProperties: false
                             x-nter-skip-param: true
                             required:
                               - list
@@ -9260,6 +9701,7 @@ properties:
                                 x-nter-skip-param: true
                       - x-nter-skip-param: true
                         type: object
+                        additionalProperties: false
                         description: Validate string contains a value
                         required:
                           - type
@@ -9272,6 +9714,7 @@ properties:
                             x-nter-skip-param: true
                           options:
                             type: object
+                            additionalProperties: false
                             x-nter-skip-param: true
                             required:
                               - contains
@@ -9287,6 +9730,7 @@ properties:
                                 x-nter-skip-param: true
                       - x-nter-skip-param: true
                         type: object
+                        additionalProperties: false
                         description: Validate string is a correct email address
                         required:
                           - type
@@ -9299,6 +9743,7 @@ properties:
                             x-nter-skip-param: true
                           options:
                             type: object
+                            additionalProperties: false
                             x-nter-skip-param: true
                             properties:
                               strict:
@@ -9314,6 +9759,7 @@ properties:
                                 x-nter-skip-param: true
                       - x-nter-skip-param: true
                         type: object
+                        additionalProperties: false
                         description: Validate string ends with a value
                         required:
                           - type
@@ -9326,6 +9772,7 @@ properties:
                             x-nter-skip-param: true
                           options:
                             type: object
+                            additionalProperties: false
                             x-nter-skip-param: true
                             required:
                               - ends_with
@@ -9341,6 +9788,7 @@ properties:
                                 x-nter-skip-param: true
                       - x-nter-skip-param: true
                         type: object
+                        additionalProperties: false
                         description: Validate number equals a value
                         required:
                           - type
@@ -9353,6 +9801,7 @@ properties:
                             x-nter-skip-param: true
                           options:
                             type: object
+                            additionalProperties: false
                             x-nter-skip-param: true
                             required:
                               - value
@@ -9370,6 +9819,7 @@ properties:
                                 x-nter-skip-param: true
                       - x-nter-skip-param: true
                         type: object
+                        additionalProperties: false
                         description: Validate number is greater than a value. By default, this will
                           check if value is greater than or equals to
                         required:
@@ -9383,6 +9833,7 @@ properties:
                             x-nter-skip-param: true
                           options:
                             type: object
+                            additionalProperties: false
                             x-nter-skip-param: true
                             required:
                               - value
@@ -9405,6 +9856,7 @@ properties:
                                 x-nter-skip-param: true
                       - x-nter-skip-param: true
                         type: object
+                        additionalProperties: false
                         description: Validate string has a correct DNS records
                         required:
                           - type
@@ -9417,6 +9869,7 @@ properties:
                             x-nter-skip-param: true
                           options:
                             type: object
+                            additionalProperties: false
                             x-nter-skip-param: true
                             properties:
                               record_type:
@@ -9468,6 +9921,7 @@ properties:
                                 x-nter-skip-param: true
                       - x-nter-skip-param: true
                         type: object
+                        additionalProperties: false
                         description: Validate string matches an IP address format. Defaults to matching
                           IPv4
                         required:
@@ -9481,6 +9935,7 @@ properties:
                             x-nter-skip-param: true
                           options:
                             type: object
+                            additionalProperties: false
                             x-nter-skip-param: true
                             properties:
                               version:
@@ -9492,6 +9947,7 @@ properties:
                                 x-nter-skip-param: true
                       - x-nter-skip-param: true
                         type: object
+                        additionalProperties: false
                         description: Validate string is a certain length
                         required:
                           - type
@@ -9504,6 +9960,7 @@ properties:
                             x-nter-skip-param: true
                           options:
                             type: object
+                            additionalProperties: false
                             x-nter-skip-param: true
                             required:
                               - length
@@ -9525,6 +9982,7 @@ properties:
                                 x-nter-skip-param: true
                       - x-nter-skip-param: true
                         type: object
+                        additionalProperties: false
                         description: Validate number is less than a value. By default, this will check
                           if value is less than or equals to
                         required:
@@ -9538,6 +9996,7 @@ properties:
                             x-nter-skip-param: true
                           options:
                             type: object
+                            additionalProperties: false
                             x-nter-skip-param: true
                             required:
                               - value
@@ -9560,6 +10019,7 @@ properties:
                                 x-nter-skip-param: true
                       - x-nter-skip-param: true
                         type: object
+                        additionalProperties: false
                         description: Validate string matches an MAC address format
                         required:
                           - type
@@ -9572,10 +10032,12 @@ properties:
                             x-nter-skip-param: true
                           options:
                             type: object
+                            additionalProperties: false
                             description: This validator has no options
                             x-nter-skip-param: true
                       - x-nter-skip-param: true
                         type: object
+                        additionalProperties: false
                         description: Validate string matches a regular expression
                         required:
                           - type
@@ -9588,6 +10050,7 @@ properties:
                             x-nter-skip-param: true
                           options:
                             type: object
+                            additionalProperties: false
                             x-nter-skip-param: true
                             required:
                               - mask
@@ -9598,6 +10061,7 @@ properties:
                                 x-nter-skip-param: true
                       - x-nter-skip-param: true
                         type: object
+                        additionalProperties: false
                         description: This is never valid
                         required:
                           - type
@@ -9610,10 +10074,12 @@ properties:
                             x-nter-skip-param: true
                           options:
                             type: object
+                            additionalProperties: false
                             description: This validator has no options
                             x-nter-skip-param: true
                       - x-nter-skip-param: true
                         type: object
+                        additionalProperties: false
                         description: Validates that the value is present and not set to 'null', '0' or
                           an empty string
                         required:
@@ -9627,10 +10093,12 @@ properties:
                             x-nter-skip-param: true
                           options:
                             type: object
+                            additionalProperties: false
                             description: Required validator has no options
                             x-nter-skip-param: true
                       - x-nter-skip-param: true
                         type: object
+                        additionalProperties: false
                         description: Validate string starts with a value
                         required:
                           - type
@@ -9643,6 +10111,7 @@ properties:
                             x-nter-skip-param: true
                           options:
                             type: object
+                            additionalProperties: false
                             x-nter-skip-param: true
                             required:
                               - starts_with
@@ -9658,6 +10127,7 @@ properties:
                                 x-nter-skip-param: true
                       - x-nter-skip-param: true
                         type: object
+                        additionalProperties: false
                         description: Validates that a value follows a step. Both start and end options
                           do not have to sync with the step. If they do not sync
                           then find the nearest step.
@@ -9672,6 +10142,7 @@ properties:
                             x-nter-skip-param: true
                           options:
                             type: object
+                            additionalProperties: false
                             x-nter-skip-param: true
                             required:
                               - step
@@ -9692,6 +10163,7 @@ properties:
                                 x-nter-skip-param: true
                       - x-nter-skip-param: true
                         type: object
+                        additionalProperties: false
                         description: Validate string matches an URI
                         required:
                           - type
@@ -9704,6 +10176,7 @@ properties:
                             x-nter-skip-param: true
                           options:
                             type: object
+                            additionalProperties: false
                             x-nter-skip-param: true
                             properties:
                               schemes:
@@ -9727,6 +10200,7 @@ properties:
                                 x-nter-skip-param: true
                       - x-nter-skip-param: true
                         type: object
+                        additionalProperties: false
                         description: Validate value matches a list (white list)
                         required:
                           - type
@@ -9739,6 +10213,7 @@ properties:
                             x-nter-skip-param: true
                           options:
                             type: object
+                            additionalProperties: false
                             x-nter-skip-param: true
                             required:
                               - list
@@ -9779,9 +10254,8 @@ properties:
                     - type: "null"
                       x-nter-skip-param: true
                     - x-nter-skip-param: true
-                      type: string
-                      description: Entity type
                       enum:
+                        - ACT
                         - BAT
                         - CON
                         - CTX
@@ -9793,10 +10267,11 @@ properties:
                         - PART
                         - PGM
                         - PRJ
+                        - PUSH
                         - QUE
                         - RES
+                        - ROLE
                         - SRES
-                        - TEN
                         - UNIT
                         - USER
                         - VEN
@@ -9804,9 +10279,8 @@ properties:
                         - WOR
                 apply_to:
                   x-nter-skip-param: true
-                  type: string
-                  description: Entity type
                   enum:
+                    - ACT
                     - BAT
                     - CON
                     - CTX
@@ -9818,10 +10292,11 @@ properties:
                     - PART
                     - PGM
                     - PRJ
+                    - PUSH
                     - QUE
                     - RES
+                    - ROLE
                     - SRES
-                    - TEN
                     - UNIT
                     - USER
                     - VEN

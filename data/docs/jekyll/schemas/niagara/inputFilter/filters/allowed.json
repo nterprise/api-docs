@@ -2,6 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/allowed.json",
   "type": "object",
+  "additionalProperties": false,
   "description": "This filter will set the value based on a list of approved values. If the value is not in the list, it will then be set to empty unless the default option is set",
   "required": [
     "type",
@@ -15,6 +16,7 @@
     },
     "options": {
       "type": "object",
+      "additionalProperties": false,
       "x-nter-skip-param": true,
       "required": [
         "approved_values"
@@ -34,7 +36,10 @@
           "x-nter-skip-param": true
         },
         "default": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "If this is set and the value is not in the approved_list, set the value to this",
           "x-nter-skip-param": true
         }

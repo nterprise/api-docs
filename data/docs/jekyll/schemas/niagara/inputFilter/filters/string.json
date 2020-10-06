@@ -2,6 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/string.json",
   "type": "object",
+  "additionalProperties": false,
   "description": "Filter to transform a value into a string",
   "required": [
     "type",
@@ -15,6 +16,7 @@
     },
     "options": {
       "type": "object",
+      "additionalProperties": false,
       "description": "String filter has no options",
       "x-nter-skip-param": true
     }

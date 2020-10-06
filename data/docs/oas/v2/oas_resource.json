@@ -52,7 +52,7 @@
     },
     "/resources/{resource_id}/sub-resources": {
       "$ref": "./paths/resource/subResources.json"
-  },
+    },
     "/resources/{resource_id}/actions": {
       "$ref": "./paths/resource/actions.json"
     },

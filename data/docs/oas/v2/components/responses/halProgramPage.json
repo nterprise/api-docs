@@ -4,7 +4,6 @@
     "application/hal+json": {
       "schema": {
         "type": "object",
-        "additionalProperties": false,
         "required": [
           "_embedded",
           "_links",
@@ -28,7 +27,6 @@
           },
           "_embedded": {
             "type": "object",
-            "additionalProperties": false,
             "properties": {
               "nter:programs": {
                 "type": "array",
@@ -41,7 +39,6 @@
           },
           "_links": {
             "type": "object",
-            "additionalProperties": false,
             "properties": {
               "self": {
                 "$ref": "../schemas/link.json"
