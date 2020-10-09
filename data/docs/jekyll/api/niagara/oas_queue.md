@@ -47,7 +47,7 @@ Fetches A Page of queues
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>queue:read-all</li></ul>
+<ul><li>queue:all</li></ul>
 </aside>
 
 <h3 id="fetchallqueues-parameters">Parameters</h3>
@@ -464,7 +464,6 @@ Permissions required:<br>
               "label": "manchuck",
               "created": "2020-01-09T22:12:03.000Z",
               "updated": "2020-01-09T22:12:03.000Z",
-              "external_platform": {},
               "total_programs": 21,
               "total_projects": 42,
               "allowed_statuses": [
@@ -712,7 +711,7 @@ Fetches the relations for a queue
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>queue:relations-read-all</li></ul>
+<ul><li>queue:read</li></ul>
 </aside>
 
 <h3 id="fetchrelationsforqueue-parameters">Parameters</h3>
@@ -1341,6 +1340,8 @@ properties:
                                 maximum: 100
                                 description: The list of approved values
                                 x-nter-skip-param: true
+                                items:
+                                  type: string
                               check_case:
                                 type: boolean
                                 description: Perform a case sensitive match. By default will not match case

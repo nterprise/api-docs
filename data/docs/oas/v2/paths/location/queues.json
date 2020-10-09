@@ -1,6 +1,6 @@
 {
   "get": {
-    "operationId": "fetchAllQueues",
+    "operationId": "fetchQueuesForLocation",
     "summary": "Fetch location queues",
     "description": "Fetches A Page of queues for the location",
     "tags": [

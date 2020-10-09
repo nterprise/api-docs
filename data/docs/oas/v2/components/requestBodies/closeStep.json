@@ -6,7 +6,7 @@
         "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/close/allCloseSteps.json"
       }
     },
-    "application/vnd.fail-step+json": {
+    "application/fail-step+json": {
       "schema": {
         "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/close/failStep.json"
       }

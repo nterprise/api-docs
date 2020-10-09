@@ -468,7 +468,7 @@ properties:
         permission:
           description: The granted permission
           type: string
-          pattern: ^(create|update|delete|read):(CON|CUS|LOC|NOTE|PART|PGM|PRJ|RES|SRES|UNIT|USER|WKF|WOR)$
+          pattern: ^[a-z]+:[a-z\-]+$
         label:
           type: string
           description: Label for the entity

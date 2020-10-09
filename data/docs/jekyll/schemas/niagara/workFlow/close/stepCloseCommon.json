@@ -13,10 +13,7 @@
       "type": "string",
       "description": "Step to mark as complete",
       "pattern": "^[a-z][a-z-]+[a-z]$",
-      "example": "complete",
-      "x-examples": [
-        "complete"
-      ]
+      "const": "complete"
     },
     "type": {
       "type": "string",
@@ -25,11 +22,7 @@
         "fail"
       ],
       "default": "close",
-      "description": "Type of close function for step",
-      "example": "close",
-      "x-examples": [
-        "close"
-      ]
+      "description": "Type of close function for step"
     }
   }
 }

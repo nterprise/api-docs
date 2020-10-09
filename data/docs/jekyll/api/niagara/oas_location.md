@@ -52,7 +52,7 @@ Fetches A Page of facilities
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>location:read-all</li></ul>
+<ul><li>location:all</li></ul>
 </aside>
 
 <h3 id="fetchallfacilities-parameters">Parameters</h3>
@@ -121,7 +121,7 @@ Fetches A Page of locations
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>location:read-all</li></ul>
+<ul><li>location:all</li></ul>
 </aside>
 
 <h3 id="fetchalllocations-parameters">Parameters</h3>
@@ -555,7 +555,7 @@ Fetches A Page of warehouses
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>location:read-all</li></ul>
+<ul><li>location:all</li></ul>
 </aside>
 
 <h3 id="fetchallwarehouses-parameters">Parameters</h3>
@@ -624,7 +624,7 @@ Fetches the relations for a location
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>location:relations-read-all</li></ul>
+<ul><li>location:read</li></ul>
 </aside>
 
 <h3 id="fetchrelationsforlocation-parameters">Parameters</h3>
@@ -792,7 +792,7 @@ Fetches the techs for a location
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>location:relations-read-all</li></ul>
+<ul><li>location:read</li></ul>
 </aside>
 
 <h3 id="fetchtechsforlocation-parameters">Parameters</h3>
@@ -1449,6 +1449,8 @@ properties:
                         maximum: 100
                         description: The list of approved values
                         x-nter-skip-param: true
+                        items:
+                          type: string
                       check_case:
                         type: boolean
                         description: Perform a case sensitive match. By default will not match case

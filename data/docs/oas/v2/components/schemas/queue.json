@@ -26,15 +26,6 @@
     "updated": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/queue.json#/properties/updated"
     },
-    "location": {
-      "type": "object",
-      "deprecated": true,
-      "allOf": [
-        {
-          "$ref": "./location.json"
-        }
-      ]
-    },
     "priority": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/queue.json#/properties/priority"
     },

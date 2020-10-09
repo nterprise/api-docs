@@ -9,10 +9,7 @@
   ],
   "properties": {
     "type": {
-      "example": "fail",
-      "x-examples": [
-        "fail"
-      ]
+      "const": "fail"
     }
   },
   "allOf": [

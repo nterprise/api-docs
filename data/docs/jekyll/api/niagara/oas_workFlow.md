@@ -124,7 +124,6 @@ Permissions required:<br>
     "label": "Niagara Customer",
     "created": "2020-01-09T22:12:03.000Z",
     "updated": "2020-01-09T22:12:03.000Z",
-    "external_platform": {},
     "total_programs": 21,
     "total_projects": 42,
     "allowed_statuses": [
@@ -269,7 +268,6 @@ Permissions required:<br>
     "label": "Niagara Customer",
     "created": "2020-01-09T22:12:03.000Z",
     "updated": "2020-01-09T22:12:03.000Z",
-    "external_platform": {},
     "total_programs": 21,
     "total_projects": 42,
     "allowed_statuses": [
@@ -344,7 +342,7 @@ Fetches A Page of work flows
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>work-flow:read-all</li></ul>
+<ul><li>work-flow:all</li></ul>
 </aside>
 
 <h3 id="fetchallworkflows-parameters">Parameters</h3>
@@ -721,7 +719,6 @@ Permissions required:<br>
           "label": "Niagara Customer",
           "created": "2020-01-09T22:12:03.000Z",
           "updated": "2020-01-09T22:12:03.000Z",
-          "external_platform": {},
           "total_programs": 21,
           "total_projects": 42,
           "allowed_statuses": [
@@ -916,7 +913,6 @@ Permissions required:<br>
     "label": "Niagara Customer",
     "created": "2020-01-09T22:12:03.000Z",
     "updated": "2020-01-09T22:12:03.000Z",
-    "external_platform": {},
     "total_programs": 21,
     "total_projects": 42,
     "allowed_statuses": [
@@ -987,7 +983,7 @@ Fetches the relations for a work flow
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>work-flow:relations-read-all</li></ul>
+<ul><li>work-flow:read</li></ul>
 </aside>
 
 <h3 id="fetchrelationsforworkflow-parameters">Parameters</h3>
@@ -1155,7 +1151,7 @@ Fetches all BOM's for a work flow
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>work-flow:relations-read-all</li></ul>
+<ul><li>work-flow:read</li></ul>
 </aside>
 
 <h3 id="fetchbomsforworkflow-parameters">Parameters</h3>
@@ -1300,7 +1296,6 @@ Permissions required:<br>
             "label": "manchuck",
             "created": "2020-01-09T22:12:03.000Z",
             "updated": "2020-01-09T22:12:03.000Z",
-            "external_platform": {},
             "total_programs": 21,
             "total_projects": 42,
             "allowed_statuses": [
@@ -1849,11 +1844,6 @@ properties:
                           order:
                             type: number
                             description: Order status appears when listing
-                        examples:
-                          - category: COMPLETE
-                            description: For something that is Complete
-                            status: Complete
-                            order: 7
           - &a14
             $schema: http://json-schema.org/draft-07/schema#
             $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/followPDFInstructions.json

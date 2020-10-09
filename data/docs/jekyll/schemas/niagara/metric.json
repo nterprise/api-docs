@@ -28,7 +28,6 @@
       "type": "array",
       "description": "Additional clarifiers for the metric",
       "maxItems": 10,
-      "additionalItems": false,
       "items": {
         "type": "object",
         "additionalProperties": false,

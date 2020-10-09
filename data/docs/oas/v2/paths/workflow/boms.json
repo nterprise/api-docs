@@ -19,7 +19,7 @@
     "security": [
       {
         "niagara": [
-          "work-flow:relations-read-all"
+          "work-flow:read"
         ]
       }
     ]

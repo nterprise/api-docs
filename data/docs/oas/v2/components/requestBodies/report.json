@@ -15,7 +15,6 @@
               "fields": {
                 "type": "array",
                 "description": "List of custom filed keys to return",
-                "unique": true,
                 "items": {
                   "type": "string",
                   "description": "The key of the custom field to return"

@@ -1,7 +1,7 @@
 {
   "description": "Multiple batches to create",
   "content": {
-    "application/vnd.nter.multi-batch+json": {
+    "application/multi-batch+json": {
       "schema": {
         "type": "object",
         "required": [

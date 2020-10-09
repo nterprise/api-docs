@@ -3,12 +3,10 @@
   "required": [
     "start_date",
     "end_date",
-    "customer",
     "allowed_statuses",
     "updated",
     "label",
     "created",
-    "program",
     "project_id",
     "input_filter"
   ],
@@ -30,12 +28,6 @@
     },
     "end_date": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/project.json#/properties/end_date"
-    },
-    "customer": {
-      "$ref": "./customer.json"
-    },
-    "program": {
-      "$ref": "./program.json"
     },
     "allowed_statuses": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/project.json#/properties/allowed_statuses"

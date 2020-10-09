@@ -48,7 +48,7 @@ Fetches A Page of work orders
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>work-order:read-all</li></ul>
+<ul><li>work-order:all</li></ul>
 </aside>
 
 <h3 id="fetchallworkorders-parameters">Parameters</h3>
@@ -91,7 +91,6 @@ Permissions required:<br>
             "label": "manchuck",
             "created": "2020-01-09T22:12:03.000Z",
             "updated": "2020-01-09T22:12:03.000Z",
-            "external_platform": {},
             "total_programs": 21,
             "total_projects": 42,
             "allowed_statuses": [
@@ -144,7 +143,6 @@ Permissions required:<br>
               "label": "manchuck",
               "created": "2020-01-09T22:12:03.000Z",
               "updated": "2020-01-09T22:12:03.000Z",
-              "external_platform": {},
               "total_programs": 21,
               "total_projects": 42,
               "allowed_statuses": [
@@ -388,7 +386,6 @@ Permissions required:<br>
       "label": "manchuck",
       "created": "2020-01-09T22:12:03.000Z",
       "updated": "2020-01-09T22:12:03.000Z",
-      "external_platform": {},
       "total_programs": 21,
       "total_projects": 42,
       "allowed_statuses": [
@@ -645,7 +642,6 @@ Permissions required:<br>
       "label": "manchuck",
       "created": "2020-01-09T22:12:03.000Z",
       "updated": "2020-01-09T22:12:03.000Z",
-      "external_platform": {},
       "total_programs": 21,
       "total_projects": 42,
       "allowed_statuses": [
@@ -937,7 +933,6 @@ Permissions required:<br>
       "label": "manchuck",
       "created": "2020-01-09T22:12:03.000Z",
       "updated": "2020-01-09T22:12:03.000Z",
-      "external_platform": {},
       "total_programs": 21,
       "total_projects": 42,
       "allowed_statuses": [
@@ -1308,7 +1303,6 @@ Permissions required:<br>
           "label": "Niagara Customer",
           "created": "2020-01-09T22:12:03.000Z",
           "updated": "2020-01-09T22:12:03.000Z",
-          "external_platform": {},
           "total_programs": 21,
           "total_projects": 42,
           "allowed_statuses": [
@@ -1507,7 +1501,6 @@ Permissions required:<br>
     "label": "Niagara Customer",
     "created": "2020-01-09T22:12:03.000Z",
     "updated": "2020-01-09T22:12:03.000Z",
-    "external_platform": {},
     "total_programs": 21,
     "total_projects": 42,
     "allowed_statuses": [
@@ -2209,7 +2202,6 @@ Permissions required:<br>
 |&nbsp;&nbsp;&nbsp;&nbsp; label|string|true|none|Label for the entity|
 |&nbsp;&nbsp;&nbsp;&nbsp; created|string(date-time)|true|read-only|Date the entity was created|
 |&nbsp;&nbsp;&nbsp;&nbsp; updated|string(date-time)|true|read-only|Last date the entity was updated|
-|&nbsp;&nbsp;&nbsp;&nbsp; external_platform|object|true|none|External Identifiers for the customer|
 |&nbsp;&nbsp;&nbsp;&nbsp; allowed_statuses|[object]|true|none|List of allowed statuses|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; status|string|true|none|A Custom label for the status|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; category|string|true|none|The classifier for the statues|
@@ -2312,11 +2304,6 @@ properties:
       order:
         type: number
         description: Order status appears when listing
-    example:
-      category: COMPLETE
-      description: For something that is Complete
-      status: Complete
-      order: 7
   project:
     type: object
     deprecated: true
@@ -2369,7 +2356,6 @@ properties:
               - created
               - allowed_statuses
               - customer_id
-              - external_platform
               - total_programs
               - total_projects
               - input_filter
@@ -2392,17 +2378,6 @@ properties:
                 type: string
                 format: date-time
                 readOnly: true
-              external_platform:
-                type: object
-                additionalProperties: false
-                description: External Identifiers for the customer
-                deprecated: true
-                x-patternProperties:
-                  &a1
-                  "^[A-Za-z][A-Za-z0-9_]*$":
-                    type:
-                      - string
-                      - "null"
               allowed_statuses:
                 type: array
                 description: List of allowed statuses
@@ -2436,11 +2411,6 @@ properties:
                     order:
                       type: number
                       description: Order status appears when listing
-                  example:
-                    category: COMPLETE
-                    description: For something that is Complete
-                    status: Complete
-                    order: 7
               total_programs:
                 type: number
                 description: Total programs under the customer
@@ -2507,6 +2477,8 @@ properties:
                                     maximum: 100
                                     description: The list of approved values
                                     x-nter-skip-param: true
+                                    items:
+                                      type: string
                                   check_case:
                                     type: boolean
                                     description: Perform a case sensitive match. By default will not match case
@@ -3597,7 +3569,6 @@ properties:
                       - created
                       - allowed_statuses
                       - customer_id
-                      - external_platform
                       - total_programs
                       - total_projects
                       - input_filter
@@ -3620,12 +3591,6 @@ properties:
                         type: string
                         format: date-time
                         readOnly: true
-                      external_platform:
-                        type: object
-                        additionalProperties: false
-                        description: External Identifiers for the customer
-                        deprecated: true
-                        x-patternProperties: *a1
                       allowed_statuses:
                         type: array
                         description: List of allowed statuses
@@ -3659,11 +3624,6 @@ properties:
                             order:
                               type: number
                               description: Order status appears when listing
-                          example:
-                            category: COMPLETE
-                            description: For something that is Complete
-                            status: Complete
-                            order: 7
                       total_programs:
                         type: number
                         description: Total programs under the customer
@@ -3731,6 +3691,8 @@ properties:
                                             maximum: 100
                                             description: The list of approved values
                                             x-nter-skip-param: true
+                                            items:
+                                              type: string
                                           check_case:
                                             type: boolean
                                             description: Perform a case sensitive match. By default will not match case
@@ -4803,11 +4765,6 @@ properties:
                     order:
                       type: number
                       description: Order status appears when listing
-                  example:
-                    category: COMPLETE
-                    description: For something that is Complete
-                    status: Complete
-                    order: 7
               input_filter:
                 type: array
                 description: Input Filters allow custom fields to be defined for entities
@@ -4868,6 +4825,8 @@ properties:
                                     maximum: 100
                                     description: The list of approved values
                                     x-nter-skip-param: true
+                                    items:
+                                      type: string
                                   check_case:
                                     type: boolean
                                     description: Perform a case sensitive match. By default will not match case
@@ -5939,11 +5898,6 @@ properties:
                 order:
                   type: number
                   description: Order status appears when listing
-              example:
-                category: COMPLETE
-                description: For something that is Complete
-                status: Complete
-                order: 7
           input_filter:
             type: array
             description: Input Filters allow custom fields to be defined for entities
@@ -6004,6 +5958,8 @@ properties:
                                 maximum: 100
                                 description: The list of approved values
                                 x-nter-skip-param: true
+                                items:
+                                  type: string
                               check_case:
                                 type: boolean
                                 description: Perform a case sensitive match. By default will not match case
@@ -7125,16 +7081,16 @@ properties:
                       - options
                     properties:
                       step_type:
-                        &a4
+                        &a3
                         type: string
                         enum:
                           - function
                       label:
-                        &a5
+                        &a4
                         type: string
                         description: Label for the step
                       on_start:
-                        &a2
+                        &a1
                         $schema: http://json-schema.org/draft-07/schema#
                         $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json
                         type: array
@@ -7149,19 +7105,19 @@ properties:
                               type: string
                             options:
                               type: object
-                      on_complete: *a2
+                      on_complete: *a1
                       goto:
-                        &a6
+                        &a5
                         type: string
                         description: Step to move to
                         pattern: ^[A-Za-z][A-Za-z0-9-]*$
                       goto_fail:
-                        &a7
+                        &a6
                         type: string
                         description: Step to transition too if this step cannot be completed
                         pattern: ^[A-Za-z][A-Za-z0-9-]*$
                       context:
-                        &a8
+                        &a7
                         type: array
                         description: Values to set on the context
                         items:
@@ -7183,9 +7139,9 @@ properties:
                               type: boolean
                               description: When trying to set a locked key, do not fail
                       on_error:
-                        &a9
+                        &a8
                         oneOf:
-                          - &a3
+                          - &a2
                             $schema: http://json-schema.org/draft-07/schema#
                             $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepError.json
                             type: object
@@ -7209,13 +7165,13 @@ properties:
                                 additionalProperties: false
                                 description: What to do after all retries
                                 properties:
-                                  actions: *a2
+                                  actions: *a1
                           - type: object
                             additionalProperties: false
                       on_timeout:
-                        &a10
+                        &a9
                         oneOf:
-                          - *a3
+                          - *a2
                           - type: object
                             additionalProperties: false
                       options:
@@ -7226,7 +7182,7 @@ properties:
                           - payload
                         properties:
                           component:
-                            &a11
+                            &a10
                             type: string
                             description: Name of the UI component
                           function:
@@ -7258,7 +7214,7 @@ properties:
                               status:
                                 type: string
                                 description: Only assign units which are in this status
-                  - &a14
+                  - &a13
                     $schema: http://json-schema.org/draft-07/schema#
                     $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/function/setEntityStatus.json
                     description: Updates the status on the Work Flow entity.
@@ -7271,15 +7227,15 @@ properties:
                       - goto_fail
                       - options
                     properties:
-                      step_type: *a4
-                      label: *a5
-                      on_start: *a2
-                      on_complete: *a2
-                      goto: *a6
-                      goto_fail: *a7
-                      context: *a8
-                      on_error: *a9
-                      on_timeout: *a10
+                      step_type: *a3
+                      label: *a4
+                      on_start: *a1
+                      on_complete: *a1
+                      goto: *a5
+                      goto_fail: *a6
+                      context: *a7
+                      on_error: *a8
+                      on_timeout: *a9
                       options:
                         type: object
                         additionalProperties: false
@@ -7287,7 +7243,7 @@ properties:
                           - function
                           - payload
                         properties:
-                          component: *a11
+                          component: *a10
                           function:
                             type: string
                             enum:
@@ -7330,12 +7286,7 @@ properties:
                                   order:
                                     type: number
                                     description: Order status appears when listing
-                                examples:
-                                  - category: COMPLETE
-                                    description: For something that is Complete
-                                    status: Complete
-                                    order: 7
-                  - &a15
+                  - &a14
                     $schema: http://json-schema.org/draft-07/schema#
                     $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/followPDFInstructions.json
                     description: Display a link or modal to a user which contains instructions from
@@ -7350,18 +7301,18 @@ properties:
                       - options
                     properties:
                       step_type:
-                        &a12
+                        &a11
                         type: string
                         enum:
                           - user
-                      label: *a5
-                      on_start: *a2
-                      on_complete: *a2
-                      goto: *a6
-                      goto_fail: *a7
-                      context: *a8
-                      on_error: *a9
-                      on_timeout: *a10
+                      label: *a4
+                      on_start: *a1
+                      on_complete: *a1
+                      goto: *a5
+                      goto_fail: *a6
+                      context: *a7
+                      on_error: *a8
+                      on_timeout: *a9
                       options:
                         type: object
                         additionalProperties: false
@@ -7383,7 +7334,7 @@ properties:
                                 type: string
                                 readOnly: true
                                 pattern: ^[0-9a-zA-Z-_]+$
-                  - &a16
+                  - &a15
                     $schema: http://json-schema.org/draft-07/schema#
                     $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/manualDataEntry.json
                     description: Ask the user to manually enter (or confirm) data for an entity
@@ -7396,15 +7347,15 @@ properties:
                       - goto_fail
                       - options
                     properties:
-                      step_type: *a12
-                      label: *a5
-                      on_start: *a2
-                      on_complete: *a2
-                      goto: *a6
-                      goto_fail: *a7
-                      context: *a8
-                      on_error: *a9
-                      on_timeout: *a10
+                      step_type: *a11
+                      label: *a4
+                      on_start: *a1
+                      on_complete: *a1
+                      goto: *a5
+                      goto_fail: *a6
+                      context: *a7
+                      on_error: *a8
+                      on_timeout: *a9
                       options:
                         type: object
                         additionalProperties: false
@@ -7453,7 +7404,7 @@ properties:
                                         with '$' then the entity on the context
                                         is assumed. Otherwise the data will be
                                         set on the context path
-                  - &a17
+                  - &a16
                     $schema: http://json-schema.org/draft-07/schema#
                     $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/taskList.json
                     description: Ask the user to follow a list and check off boxes
@@ -7466,15 +7417,15 @@ properties:
                       - goto_fail
                       - options
                     properties:
-                      step_type: *a12
-                      label: *a5
-                      on_start: *a2
-                      on_complete: *a2
-                      goto: *a6
-                      goto_fail: *a7
-                      context: *a8
-                      on_error: *a9
-                      on_timeout: *a10
+                      step_type: *a11
+                      label: *a4
+                      on_start: *a1
+                      on_complete: *a1
+                      goto: *a5
+                      goto_fail: *a6
+                      context: *a7
+                      on_error: *a8
+                      on_timeout: *a9
                       options:
                         type: object
                         additionalProperties: false
@@ -7524,7 +7475,7 @@ properties:
                                     na_field:
                                       type: boolean
                                       description: Allow the user to select the N/A option when checking off the list
-                  - &a18
+                  - &a17
                     $schema: http://json-schema.org/draft-07/schema#
                     $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/machine/aceIos.json
                     description: Run the ACE-IOS application to provision iOS devices
@@ -7541,14 +7492,14 @@ properties:
                         type: string
                         enum:
                           - machine
-                      label: *a5
-                      on_start: *a2
-                      on_complete: *a2
-                      goto: *a6
-                      goto_fail: *a7
-                      context: *a8
-                      on_error: *a9
-                      on_timeout: *a10
+                      label: *a4
+                      on_start: *a1
+                      on_complete: *a1
+                      goto: *a5
+                      goto_fail: *a6
+                      context: *a7
+                      on_error: *a8
+                      on_timeout: *a9
                       options:
                         type: object
                         additionalProperties: false
@@ -7662,7 +7613,7 @@ properties:
                                 description: The required battery percentage needed before this step can move on
                                 minimum: 0
                                 maximum: 100
-                  - &a13
+                  - &a12
                     $schema: http://json-schema.org/draft-07/schema#
                     $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepChoice.json
                     description: A Step choice
@@ -7679,14 +7630,14 @@ properties:
                         type: string
                         enum:
                           - decision
-                      label: *a5
-                      on_start: *a2
-                      on_complete: *a2
-                      goto: *a6
-                      goto_fail: *a7
-                      context: *a8
-                      on_error: *a9
-                      on_timeout: *a10
+                      label: *a4
+                      on_start: *a1
+                      on_complete: *a1
+                      goto: *a5
+                      goto_fail: *a6
+                      context: *a7
+                      on_error: *a8
+                      on_timeout: *a9
                       decision:
                         type: array
                         description: Context variable to check
@@ -7725,9 +7676,9 @@ properties:
                         type: string
                         enum:
                           - fail
-                      label: *a5
-                      on_start: *a2
-                      on_complete: *a2
+                      label: *a4
+                      on_start: *a1
+                      on_complete: *a1
                   - $schema: http://json-schema.org/draft-07/schema#
                     $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepPass.json
                     description: Allows executing actions with out performing any function
@@ -7743,14 +7694,14 @@ properties:
                         type: string
                         enum:
                           - pass
-                      label: *a5
-                      on_start: *a2
-                      on_complete: *a2
-                      goto: *a6
-                      goto_fail: *a7
-                      context: *a8
-                      on_error: *a9
-                      on_timeout: *a10
+                      label: *a4
+                      on_start: *a1
+                      on_complete: *a1
+                      goto: *a5
+                      goto_fail: *a6
+                      context: *a7
+                      on_error: *a8
+                      on_timeout: *a9
                   - $schema: http://json-schema.org/draft-07/schema#
                     $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepSuccess.json
                     description: Finial step which is marked as completed successfully
@@ -7764,9 +7715,9 @@ properties:
                         type: string
                         enum:
                           - success
-                      label: *a5
-                      on_start: *a2
-                      on_complete: *a2
+                      label: *a4
+                      on_start: *a1
+                      on_complete: *a1
                   - $schema: http://json-schema.org/draft-07/schema#
                     $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepWait.json
                     description: A step which run at certain times
@@ -7784,14 +7735,14 @@ properties:
                         type: string
                         enum:
                           - wait
-                      label: *a5
-                      on_start: *a2
-                      on_complete: *a2
-                      goto: *a6
-                      goto_fail: *a7
-                      context: *a8
-                      on_error: *a9
-                      on_timeout: *a10
+                      label: *a4
+                      on_start: *a1
+                      on_complete: *a1
+                      goto: *a5
+                      goto_fail: *a6
+                      context: *a7
+                      on_error: *a8
+                      on_timeout: *a9
                       stop_at:
                         type: integer
                         description: Time in seconds to stop this task
@@ -7924,7 +7875,7 @@ properties:
                               additionalProperties: false
                               description: The event conditions that have to be met
                               allOf:
-                                - *a13
+                                - *a12
                   - $schema: http://json-schema.org/draft-07/schema#
                     $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepFunction.json
                     description: A step which allows parallel execution
@@ -7941,14 +7892,14 @@ properties:
                         type: string
                         enum:
                           - parallel
-                      label: *a5
-                      on_start: *a2
-                      on_complete: *a2
-                      goto: *a6
-                      goto_fail: *a7
-                      context: *a8
-                      on_error: *a9
-                      on_timeout: *a10
+                      label: *a4
+                      on_start: *a1
+                      on_complete: *a1
+                      goto: *a5
+                      goto_fail: *a6
+                      context: *a7
+                      on_error: *a8
+                      on_timeout: *a9
                       fail_condition:
                         description: How to treat failures. For ALL, all branches must have failures to
                           be considered failed. ANY means at least one failure
@@ -7975,12 +7926,12 @@ properties:
                           patternProperties:
                             "^[A-Za-z][A-Za-z0-9-]*$":
                               oneOf:
+                                - *a13
                                 - *a14
                                 - *a15
                                 - *a16
                                 - *a17
-                                - *a18
-                                - *a13
+                                - *a12
     allOf:
       - description: A count of cycles needed for this entity broken down by status
           category and active/in-active status
@@ -8086,6 +8037,8 @@ properties:
                         maximum: 100
                         description: The list of approved values
                         x-nter-skip-param: true
+                        items:
+                          type: string
                       check_case:
                         type: boolean
                         description: Perform a case sensitive match. By default will not match case

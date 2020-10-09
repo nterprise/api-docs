@@ -57,7 +57,7 @@ Fetches A Page of batches
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>batch:read-all</li></ul>
+<ul><li>batch:all</li></ul>
 </aside>
 
 <h3 id="fetchallbatches-parameters">Parameters</h3>
@@ -150,7 +150,6 @@ Permissions required:<br>
               "label": "manchuck",
               "created": "2020-01-09T22:12:03.000Z",
               "updated": "2020-01-09T22:12:03.000Z",
-              "external_platform": {},
               "total_programs": 21,
               "total_projects": 42,
               "allowed_statuses": [
@@ -498,7 +497,6 @@ Permissions required:<br>
         "label": "manchuck",
         "created": "2020-01-09T22:12:03.000Z",
         "updated": "2020-01-09T22:12:03.000Z",
-        "external_platform": {},
         "total_programs": 21,
         "total_projects": 42,
         "allowed_statuses": [
@@ -753,320 +751,14 @@ Permissions required:<br>
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |Accept-Patch|header|string|false|none|
-
-> Example responses
-
-> 204 Response
-
-```json
-{
-  "batch_id": "batch",
-  "label": "Batch A",
-  "created": "2019-08-19T00:01:02.000Z",
-  "updated": "2020-08-19T01:01:02.000Z",
-  "queue": {
-    "queue_id": "queue",
-    "label": "Fast Lane",
-    "created": "2019-10-09T19:30:35.639Z",
-    "updated": "2019-10-09T19:30:35.639Z",
-    "location": {
-      "location_id": "location",
-      "label": "Test Label",
-      "created": "2019-08-19T00:01:02.000Z",
-      "updated": "2020-08-19T01:01:02.000Z",
-      "location_type": "warehouse",
-      "formatted_address": "Test Label\n431 Broadway Suite c\nMenands NY 12204 USA",
-      "address": {
-        "country": "USA",
-        "administrative_area": "NY",
-        "sub_administrative_area": "Albany",
-        "locality": "Menands",
-        "postal_code": "12204",
-        "thoroughfare": "431 Broadway",
-        "premise": "Suite c",
-        "sub_premise": "ZIC"
-      },
-      "input_filter": []
-    },
-    "priority": "b",
-    "active_work_orders": 40,
-    "active_batches": 60,
-    "active_cycles": 1,
-    "is_active": true,
-    "min_due_date": "2020-08-19T02:01:02.000Z",
-    "max_due_date": "2022-08-19T02:01:02.000Z"
-  },
-  "order": "a",
-  "number_cycles": 4,
-  "cycles": {
-    "needed": 4,
-    "pending": 0,
-    "in_progress": 0,
-    "verifying": 0,
-    "complete": 0,
-    "blocked": 0,
-    "cancelled": 0,
-    "active": 0,
-    "in_active": 0
-  },
-  "work_order": {
-    "work_order_id": "work-order",
-    "label": "My workOrder",
-    "created": "2019-08-19T00:01:02.000Z",
-    "updated": "2020-08-19T01:01:02.000Z",
-    "description": "Workorder description",
-    "work_order_type": "device",
-    "begin_date": "2021-08-19T02:01:02.000Z",
-    "due_date": "2021-08-19T02:01:02.000Z",
-    "start_date": "2021-08-19T02:01:02.000Z",
-    "end_date": "2021-08-19T02:01:02.000Z",
-    "project": {
-      "project_id": "project",
-      "label": "New York Stores",
-      "description": "Project description",
-      "created": "2020-01-09T22:12:03.000Z",
-      "updated": "2020-01-09T22:12:03.000Z",
-      "customer": {
-        "customer_id": "customer",
-        "label": "manchuck",
-        "created": "2020-01-09T22:12:03.000Z",
-        "updated": "2020-01-09T22:12:03.000Z",
-        "external_platform": {},
-        "total_programs": 21,
-        "total_projects": 42,
-        "allowed_statuses": [
-          {
-            "category": "PENDING",
-            "description": "For something that is Pending",
-            "status": "Pending",
-            "order": 3
-          },
-          {
-            "category": "IN_PROGRESS",
-            "description": "For something that is In Progress",
-            "status": "In Progress",
-            "order": 4
-          },
-          {
-            "category": "VERIFYING",
-            "description": "For something that is Verifying",
-            "status": "Verifying",
-            "order": 5
-          },
-          {
-            "category": "BLOCKED",
-            "description": "For something that is Blocked",
-            "status": "Blocked",
-            "order": 6
-          },
-          {
-            "category": "COMPLETE",
-            "description": "For something that is Complete",
-            "status": "Complete",
-            "order": 7
-          },
-          {
-            "category": "CANCELLED",
-            "description": "For something that is Cancelled",
-            "status": "Cancelled",
-            "order": 8
-          }
-        ],
-        "input_filter": []
-      },
-      "program": {
-        "program_id": "program",
-        "label": "North east stores",
-        "created": "2020-01-09T22:12:03.000Z",
-        "updated": "2020-01-09T22:12:03.000Z",
-        "customer": {
-          "customer_id": "customer",
-          "label": "manchuck",
-          "created": "2020-01-09T22:12:03.000Z",
-          "updated": "2020-01-09T22:12:03.000Z",
-          "external_platform": {},
-          "total_programs": 21,
-          "total_projects": 42,
-          "allowed_statuses": [
-            {
-              "category": "PENDING",
-              "description": "For something that is Pending",
-              "status": "Pending",
-              "order": 3
-            },
-            {
-              "category": "IN_PROGRESS",
-              "description": "For something that is In Progress",
-              "status": "In Progress",
-              "order": 4
-            },
-            {
-              "category": "VERIFYING",
-              "description": "For something that is Verifying",
-              "status": "Verifying",
-              "order": 5
-            },
-            {
-              "category": "BLOCKED",
-              "description": "For something that is Blocked",
-              "status": "Blocked",
-              "order": 6
-            },
-            {
-              "category": "COMPLETE",
-              "description": "For something that is Complete",
-              "status": "Complete",
-              "order": 7
-            },
-            {
-              "category": "CANCELLED",
-              "description": "For something that is Cancelled",
-              "status": "Cancelled",
-              "order": 8
-            }
-          ],
-          "input_filter": []
-        },
-        "end_date": "2020-02-10T22:12:03.000Z",
-        "start_date": "2020-02-10T22:12:03.000Z",
-        "allowed_statuses": [
-          {
-            "category": "PENDING",
-            "description": "For something that is Pending",
-            "status": "Pending",
-            "order": 3
-          },
-          {
-            "category": "VERIFYING",
-            "description": "For something that is Verifying",
-            "status": "Verifying",
-            "order": 5
-          }
-        ],
-        "input_filter": []
-      },
-      "end_date": "2020-02-10T22:12:03.000Z",
-      "start_date": "2020-02-10T22:12:03.000Z",
-      "allowed_statuses": [
-        {
-          "category": "PENDING",
-          "description": "For something that is Pending",
-          "status": "Pending",
-          "order": 3
-        }
-      ],
-      "input_filter": []
-    },
-    "location": {
-      "location_id": "location",
-      "label": "Test Label",
-      "created": "2019-08-19T00:01:02.000Z",
-      "updated": "2020-08-19T01:01:02.000Z",
-      "location_type": "warehouse",
-      "formatted_address": "Test Label\n431 Broadway Suite c\nMenands NY 12204 USA",
-      "address": {
-        "country": "USA",
-        "administrative_area": "NY",
-        "sub_administrative_area": "Albany",
-        "locality": "Menands",
-        "postal_code": "12204",
-        "thoroughfare": "431 Broadway",
-        "premise": "Suite c",
-        "sub_premise": "ZIC"
-      }
-    },
-    "current_status": {
-      "category": "IN_PROGRESS",
-      "description": "For something that is Reticulating Splines",
-      "status": "Reticulating Splines",
-      "order": 2
-    },
-    "cycles": {
-      "needed": 1,
-      "pending": 0,
-      "in_progress": 0,
-      "verifying": 0,
-      "complete": 0,
-      "blocked": 0,
-      "cancelled": 0,
-      "active": 0,
-      "in_active": 0,
-      "assigned": 0,
-      "work_flow": {
-        "work_flow_id": "work-flow",
-        "created": "2019-08-19T00:01:02.000Z",
-        "updated": "2020-08-19T01:01:02.000Z",
-        "label": "My workflow",
-        "schema_version": "1.0",
-        "workflow_version": 7,
-        "applies_to": "UNIT",
-        "starts_at": "work-complete",
-        "metadata": {
-          "meta": "data"
-        },
-        "steps": {
-          "work-complete": {
-            "step_type": "success",
-            "label": "work complete",
-            "on_start": [],
-            "on_complete": []
-          },
-          "stop-poking-me": {
-            "step_type": "fail",
-            "label": "stop poking me",
-            "on_start": [],
-            "on_complete": []
-          }
-        },
-        "triggered_by": [
-          "UNIT.created"
-        ]
-      }
-    },
-    "input_filter": []
-  },
-  "current_status": {
-    "status": "Reticulating Splines",
-    "description": "For something that is Reticulating Splines",
-    "category": "IN_PROGRESS",
-    "order": 2
-  },
-  "total_assigned_users": 0,
-  "assigned_users": [],
-  "_embedded": {
-    "nter:batch-queue": [],
-    "nter:batch-work-order": [],
-    "nter:batch-customer": [],
-    "nter:batch-program": [],
-    "nter:batch-project": [],
-    "nter:batch-location": [],
-    "nter:batch-assigned-users": []
-  },
-  "_links": {
-    "nter:batch-work-order": {
-      "href": "https://api.nterprise.com/work-orders/work-order"
-    },
-    "nter:batch-queue": {
-      "href": "https://api.nterprise.com/queues/queue"
-    },
-    "nter:batch-project": {
-      "href": "https://api.nterprise.com/projects/project"
-    },
-    "nter:batch-program": {
-      "href": "https://api.nterprise.com/programs/program"
-    },
-    "nter:batch-customer": {
-      "href": "https://api.nterprise.com/customers/customer"
-    },
-    "nter:batch-location": {
-      "href": "https://api.nterprise.com/locations/location"
-    },
-    "self": {
-      "href": "https://api.nterprise.com/batches/batch"
-    }
-  }
-}
-```
+|total|body|number|false|Total number of batches to create|
+|queue|body|object|true|none|
+|&nbsp;&nbsp; queue_id|body|string|true|The identifier for the queue|
+|work_order|body|object|true|none|
+|&nbsp;&nbsp; work_order_id|body|string|true|The identifier for the unit|
+|number_cycles|body|integer|true|The number of cycles for this batch|
+|users|body|[object]|false|A List of users to assign as technicians to assign to the batches|
+|&nbsp;&nbsp; user_id|body|string|false|The identifier for the user|
 
 ### GET /batches/{batch_id}
 
@@ -1162,7 +854,6 @@ Permissions required:<br>
         "label": "manchuck",
         "created": "2020-01-09T22:12:03.000Z",
         "updated": "2020-01-09T22:12:03.000Z",
-        "external_platform": {},
         "total_programs": 21,
         "total_projects": 42,
         "allowed_statuses": [
@@ -1494,7 +1185,7 @@ Fetches the relations for a batch
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>batch:relations-read-all</li></ul>
+<ul><li>batch:read</li></ul>
 </aside>
 
 <h3 id="fetchrelationsforbatch-parameters">Parameters</h3>
@@ -1662,7 +1353,7 @@ Fetches the techs for a batch
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>batch:relations-read-tech</li></ul>
+<ul><li>batch:read</li></ul>
 </aside>
 
 <h3 id="fetchtechsforbatch-parameters">Parameters</h3>
@@ -2226,6 +1917,8 @@ properties:
                                         maximum: 100
                                         description: The list of approved values
                                         x-nter-skip-param: true
+                                        items:
+                                          type: string
                                       check_case:
                                         type: boolean
                                         description: Perform a case sensitive match. By default will not match case
@@ -3329,11 +3022,6 @@ properties:
           order:
             type: number
             description: Order status appears when listing
-        example:
-          category: COMPLETE
-          description: For something that is Complete
-          status: Complete
-          order: 7
   number_cycles:
     type: integer
     description: The number of cycles for this batch
@@ -3477,11 +3165,6 @@ properties:
               order:
                 type: number
                 description: Order status appears when listing
-            example:
-              category: COMPLETE
-              description: For something that is Complete
-              status: Complete
-              order: 7
           project:
             type: object
             deprecated: true
@@ -3534,7 +3217,6 @@ properties:
                       - created
                       - allowed_statuses
                       - customer_id
-                      - external_platform
                       - total_programs
                       - total_projects
                       - input_filter
@@ -3557,17 +3239,6 @@ properties:
                         type: string
                         format: date-time
                         readOnly: true
-                      external_platform:
-                        type: object
-                        additionalProperties: false
-                        description: External Identifiers for the customer
-                        deprecated: true
-                        x-patternProperties:
-                          &a1
-                          "^[A-Za-z][A-Za-z0-9_]*$":
-                            type:
-                              - string
-                              - "null"
                       allowed_statuses:
                         type: array
                         description: List of allowed statuses
@@ -3601,11 +3272,6 @@ properties:
                             order:
                               type: number
                               description: Order status appears when listing
-                          example:
-                            category: COMPLETE
-                            description: For something that is Complete
-                            status: Complete
-                            order: 7
                       total_programs:
                         type: number
                         description: Total programs under the customer
@@ -3673,6 +3339,8 @@ properties:
                                             maximum: 100
                                             description: The list of approved values
                                             x-nter-skip-param: true
+                                            items:
+                                              type: string
                                           check_case:
                                             type: boolean
                                             description: Perform a case sensitive match. By default will not match case
@@ -4764,7 +4432,6 @@ properties:
                               - created
                               - allowed_statuses
                               - customer_id
-                              - external_platform
                               - total_programs
                               - total_projects
                               - input_filter
@@ -4787,12 +4454,6 @@ properties:
                                 type: string
                                 format: date-time
                                 readOnly: true
-                              external_platform:
-                                type: object
-                                additionalProperties: false
-                                description: External Identifiers for the customer
-                                deprecated: true
-                                x-patternProperties: *a1
                               allowed_statuses:
                                 type: array
                                 description: List of allowed statuses
@@ -4826,11 +4487,6 @@ properties:
                                     order:
                                       type: number
                                       description: Order status appears when listing
-                                  example:
-                                    category: COMPLETE
-                                    description: For something that is Complete
-                                    status: Complete
-                                    order: 7
                               total_programs:
                                 type: number
                                 description: Total programs under the customer
@@ -4898,6 +4554,8 @@ properties:
                                                     maximum: 100
                                                     description: The list of approved values
                                                     x-nter-skip-param: true
+                                                    items:
+                                                      type: string
                                                   check_case:
                                                     type: boolean
                                                     description: Perform a case sensitive match. By default will not match case
@@ -5973,11 +5631,6 @@ properties:
                             order:
                               type: number
                               description: Order status appears when listing
-                          example:
-                            category: COMPLETE
-                            description: For something that is Complete
-                            status: Complete
-                            order: 7
                       input_filter:
                         type: array
                         description: Input Filters allow custom fields to be defined for entities
@@ -6039,6 +5692,8 @@ properties:
                                             maximum: 100
                                             description: The list of approved values
                                             x-nter-skip-param: true
+                                            items:
+                                              type: string
                                           check_case:
                                             type: boolean
                                             description: Perform a case sensitive match. By default will not match case
@@ -7111,11 +6766,6 @@ properties:
                         order:
                           type: number
                           description: Order status appears when listing
-                      example:
-                        category: COMPLETE
-                        description: For something that is Complete
-                        status: Complete
-                        order: 7
                   input_filter:
                     type: array
                     description: Input Filters allow custom fields to be defined for entities
@@ -7177,6 +6827,8 @@ properties:
                                         maximum: 100
                                         description: The list of approved values
                                         x-nter-skip-param: true
+                                        items:
+                                          type: string
                                       check_case:
                                         type: boolean
                                         description: Perform a case sensitive match. By default will not match case
@@ -8299,16 +7951,16 @@ properties:
                               - options
                             properties:
                               step_type:
-                                &a4
+                                &a3
                                 type: string
                                 enum:
                                   - function
                               label:
-                                &a5
+                                &a4
                                 type: string
                                 description: Label for the step
                               on_start:
-                                &a2
+                                &a1
                                 $schema: http://json-schema.org/draft-07/schema#
                                 $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepActions.json
                                 type: array
@@ -8323,19 +7975,19 @@ properties:
                                       type: string
                                     options:
                                       type: object
-                              on_complete: *a2
+                              on_complete: *a1
                               goto:
-                                &a6
+                                &a5
                                 type: string
                                 description: Step to move to
                                 pattern: ^[A-Za-z][A-Za-z0-9-]*$
                               goto_fail:
-                                &a7
+                                &a6
                                 type: string
                                 description: Step to transition too if this step cannot be completed
                                 pattern: ^[A-Za-z][A-Za-z0-9-]*$
                               context:
-                                &a8
+                                &a7
                                 type: array
                                 description: Values to set on the context
                                 items:
@@ -8357,9 +8009,9 @@ properties:
                                       type: boolean
                                       description: When trying to set a locked key, do not fail
                               on_error:
-                                &a9
+                                &a8
                                 oneOf:
-                                  - &a3
+                                  - &a2
                                     $schema: http://json-schema.org/draft-07/schema#
                                     $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepError.json
                                     type: object
@@ -8384,13 +8036,13 @@ properties:
                                         additionalProperties: false
                                         description: What to do after all retries
                                         properties:
-                                          actions: *a2
+                                          actions: *a1
                                   - type: object
                                     additionalProperties: false
                               on_timeout:
-                                &a10
+                                &a9
                                 oneOf:
-                                  - *a3
+                                  - *a2
                                   - type: object
                                     additionalProperties: false
                               options:
@@ -8401,7 +8053,7 @@ properties:
                                   - payload
                                 properties:
                                   component:
-                                    &a11
+                                    &a10
                                     type: string
                                     description: Name of the UI component
                                   function:
@@ -8433,7 +8085,7 @@ properties:
                                       status:
                                         type: string
                                         description: Only assign units which are in this status
-                          - &a14
+                          - &a13
                             $schema: http://json-schema.org/draft-07/schema#
                             $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/function/setEntityStatus.json
                             description: Updates the status on the Work Flow entity.
@@ -8446,15 +8098,15 @@ properties:
                               - goto_fail
                               - options
                             properties:
-                              step_type: *a4
-                              label: *a5
-                              on_start: *a2
-                              on_complete: *a2
-                              goto: *a6
-                              goto_fail: *a7
-                              context: *a8
-                              on_error: *a9
-                              on_timeout: *a10
+                              step_type: *a3
+                              label: *a4
+                              on_start: *a1
+                              on_complete: *a1
+                              goto: *a5
+                              goto_fail: *a6
+                              context: *a7
+                              on_error: *a8
+                              on_timeout: *a9
                               options:
                                 type: object
                                 additionalProperties: false
@@ -8462,7 +8114,7 @@ properties:
                                   - function
                                   - payload
                                 properties:
-                                  component: *a11
+                                  component: *a10
                                   function:
                                     type: string
                                     enum:
@@ -8505,12 +8157,7 @@ properties:
                                           order:
                                             type: number
                                             description: Order status appears when listing
-                                        examples:
-                                          - category: COMPLETE
-                                            description: For something that is Complete
-                                            status: Complete
-                                            order: 7
-                          - &a15
+                          - &a14
                             $schema: http://json-schema.org/draft-07/schema#
                             $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/followPDFInstructions.json
                             description: Display a link or modal to a user which contains instructions from
@@ -8525,18 +8172,18 @@ properties:
                               - options
                             properties:
                               step_type:
-                                &a12
+                                &a11
                                 type: string
                                 enum:
                                   - user
-                              label: *a5
-                              on_start: *a2
-                              on_complete: *a2
-                              goto: *a6
-                              goto_fail: *a7
-                              context: *a8
-                              on_error: *a9
-                              on_timeout: *a10
+                              label: *a4
+                              on_start: *a1
+                              on_complete: *a1
+                              goto: *a5
+                              goto_fail: *a6
+                              context: *a7
+                              on_error: *a8
+                              on_timeout: *a9
                               options:
                                 type: object
                                 additionalProperties: false
@@ -8558,7 +8205,7 @@ properties:
                                         type: string
                                         readOnly: true
                                         pattern: ^[0-9a-zA-Z-_]+$
-                          - &a16
+                          - &a15
                             $schema: http://json-schema.org/draft-07/schema#
                             $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/manualDataEntry.json
                             description: Ask the user to manually enter (or confirm) data for an entity
@@ -8571,15 +8218,15 @@ properties:
                               - goto_fail
                               - options
                             properties:
-                              step_type: *a12
-                              label: *a5
-                              on_start: *a2
-                              on_complete: *a2
-                              goto: *a6
-                              goto_fail: *a7
-                              context: *a8
-                              on_error: *a9
-                              on_timeout: *a10
+                              step_type: *a11
+                              label: *a4
+                              on_start: *a1
+                              on_complete: *a1
+                              goto: *a5
+                              goto_fail: *a6
+                              context: *a7
+                              on_error: *a8
+                              on_timeout: *a9
                               options:
                                 type: object
                                 additionalProperties: false
@@ -8630,7 +8277,7 @@ properties:
                                                 context is assumed. Otherwise
                                                 the data will be set on the
                                                 context path
-                          - &a17
+                          - &a16
                             $schema: http://json-schema.org/draft-07/schema#
                             $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/taskList.json
                             description: Ask the user to follow a list and check off boxes
@@ -8643,15 +8290,15 @@ properties:
                               - goto_fail
                               - options
                             properties:
-                              step_type: *a12
-                              label: *a5
-                              on_start: *a2
-                              on_complete: *a2
-                              goto: *a6
-                              goto_fail: *a7
-                              context: *a8
-                              on_error: *a9
-                              on_timeout: *a10
+                              step_type: *a11
+                              label: *a4
+                              on_start: *a1
+                              on_complete: *a1
+                              goto: *a5
+                              goto_fail: *a6
+                              context: *a7
+                              on_error: *a8
+                              on_timeout: *a9
                               options:
                                 type: object
                                 additionalProperties: false
@@ -8701,7 +8348,7 @@ properties:
                                             na_field:
                                               type: boolean
                                               description: Allow the user to select the N/A option when checking off the list
-                          - &a18
+                          - &a17
                             $schema: http://json-schema.org/draft-07/schema#
                             $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/machine/aceIos.json
                             description: Run the ACE-IOS application to provision iOS devices
@@ -8718,14 +8365,14 @@ properties:
                                 type: string
                                 enum:
                                   - machine
-                              label: *a5
-                              on_start: *a2
-                              on_complete: *a2
-                              goto: *a6
-                              goto_fail: *a7
-                              context: *a8
-                              on_error: *a9
-                              on_timeout: *a10
+                              label: *a4
+                              on_start: *a1
+                              on_complete: *a1
+                              goto: *a5
+                              goto_fail: *a6
+                              context: *a7
+                              on_error: *a8
+                              on_timeout: *a9
                               options:
                                 type: object
                                 additionalProperties: false
@@ -8840,7 +8487,7 @@ properties:
                                         description: The required battery percentage needed before this step can move on
                                         minimum: 0
                                         maximum: 100
-                          - &a13
+                          - &a12
                             $schema: http://json-schema.org/draft-07/schema#
                             $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepChoice.json
                             description: A Step choice
@@ -8857,14 +8504,14 @@ properties:
                                 type: string
                                 enum:
                                   - decision
-                              label: *a5
-                              on_start: *a2
-                              on_complete: *a2
-                              goto: *a6
-                              goto_fail: *a7
-                              context: *a8
-                              on_error: *a9
-                              on_timeout: *a10
+                              label: *a4
+                              on_start: *a1
+                              on_complete: *a1
+                              goto: *a5
+                              goto_fail: *a6
+                              context: *a7
+                              on_error: *a8
+                              on_timeout: *a9
                               decision:
                                 type: array
                                 description: Context variable to check
@@ -8903,9 +8550,9 @@ properties:
                                 type: string
                                 enum:
                                   - fail
-                              label: *a5
-                              on_start: *a2
-                              on_complete: *a2
+                              label: *a4
+                              on_start: *a1
+                              on_complete: *a1
                           - $schema: http://json-schema.org/draft-07/schema#
                             $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepPass.json
                             description: Allows executing actions with out performing any function
@@ -8921,14 +8568,14 @@ properties:
                                 type: string
                                 enum:
                                   - pass
-                              label: *a5
-                              on_start: *a2
-                              on_complete: *a2
-                              goto: *a6
-                              goto_fail: *a7
-                              context: *a8
-                              on_error: *a9
-                              on_timeout: *a10
+                              label: *a4
+                              on_start: *a1
+                              on_complete: *a1
+                              goto: *a5
+                              goto_fail: *a6
+                              context: *a7
+                              on_error: *a8
+                              on_timeout: *a9
                           - $schema: http://json-schema.org/draft-07/schema#
                             $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepSuccess.json
                             description: Finial step which is marked as completed successfully
@@ -8942,9 +8589,9 @@ properties:
                                 type: string
                                 enum:
                                   - success
-                              label: *a5
-                              on_start: *a2
-                              on_complete: *a2
+                              label: *a4
+                              on_start: *a1
+                              on_complete: *a1
                           - $schema: http://json-schema.org/draft-07/schema#
                             $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepWait.json
                             description: A step which run at certain times
@@ -8962,14 +8609,14 @@ properties:
                                 type: string
                                 enum:
                                   - wait
-                              label: *a5
-                              on_start: *a2
-                              on_complete: *a2
-                              goto: *a6
-                              goto_fail: *a7
-                              context: *a8
-                              on_error: *a9
-                              on_timeout: *a10
+                              label: *a4
+                              on_start: *a1
+                              on_complete: *a1
+                              goto: *a5
+                              goto_fail: *a6
+                              context: *a7
+                              on_error: *a8
+                              on_timeout: *a9
                               stop_at:
                                 type: integer
                                 description: Time in seconds to stop this task
@@ -9102,7 +8749,7 @@ properties:
                                       additionalProperties: false
                                       description: The event conditions that have to be met
                                       allOf:
-                                        - *a13
+                                        - *a12
                           - $schema: http://json-schema.org/draft-07/schema#
                             $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepFunction.json
                             description: A step which allows parallel execution
@@ -9119,14 +8766,14 @@ properties:
                                 type: string
                                 enum:
                                   - parallel
-                              label: *a5
-                              on_start: *a2
-                              on_complete: *a2
-                              goto: *a6
-                              goto_fail: *a7
-                              context: *a8
-                              on_error: *a9
-                              on_timeout: *a10
+                              label: *a4
+                              on_start: *a1
+                              on_complete: *a1
+                              goto: *a5
+                              goto_fail: *a6
+                              context: *a7
+                              on_error: *a8
+                              on_timeout: *a9
                               fail_condition:
                                 description: How to treat failures. For ALL, all branches must have failures to
                                   be considered failed. ANY means at least one
@@ -9154,12 +8801,12 @@ properties:
                                   patternProperties:
                                     "^[A-Za-z][A-Za-z0-9-]*$":
                                       oneOf:
+                                        - *a13
                                         - *a14
                                         - *a15
                                         - *a16
                                         - *a17
-                                        - *a18
-                                        - *a13
+                                        - *a12
             allOf:
               - description: A count of cycles needed for this entity broken down by status
                   category and active/in-active status
@@ -9265,6 +8912,8 @@ properties:
                                 maximum: 100
                                 description: The list of approved values
                                 x-nter-skip-param: true
+                                items:
+                                  type: string
                               check_case:
                                 type: boolean
                                 description: Perform a case sensitive match. By default will not match case
@@ -10310,7 +9959,94 @@ properties:
     description: Top five users assigned to the batch
     maxItems: 5
     items:
-      $ret: https://docs.nterprise.com/schemas/niagara/user.json
+      type: object
+      description: User Information
+      additionalProperties: false
+      required:
+        - entity_id
+        - entity_type
+        - email
+      properties:
+        user_id:
+          type: string
+          description: The identifier for the user
+          pattern: ^[0-9a-zA-Z-_]+$
+        entity_id:
+          x-no-api-doc: true
+          type: string
+          description: Entity identifier
+          readOnly: true
+          pattern: ^[0-9a-zA-Z-_]+$
+        entity_type:
+          x-no-api-doc: true
+          enum:
+            - USER
+        label:
+          type: string
+          description: Label for the entity
+        slug:
+          type: string
+          description: Slug for the entity (Auto-generated from the label)
+          readOnly: true
+          deprecated: true
+          pattern: ^[a-z0-9]+(?:-[a-z0-9]+)*$
+        created:
+          description: Date the entity was created
+          type: string
+          format: date-time
+          readOnly: true
+        updated:
+          description: Last date the entity was updated
+          type: string
+          format: date-time
+          readOnly: true
+        email:
+          type: string
+          format: email
+          description: Email address
+        name:
+          type: string
+          description: Human readable name
+        picture:
+          type: string
+          nullable: true
+          description: Image for the user
+        profile:
+          type: string
+          nullable: true
+          description: Link to the users profile
+        user_attributes:
+          type: array
+          description: Array of user attributes
+          items:
+            type: object
+            additionalProperties: false
+            description: User Attribute
+            maxItems: 15
+            required:
+              - key
+              - value
+            properties:
+              key:
+                description: Attribute Key
+                type: string
+              value:
+                description: Attribute value
+                type: string
+        notifications:
+          type: object
+          additionalProperties: false
+          description: Notification settings
+          properties:
+            in_app:
+              type: boolean
+              description: In app notifications allowed
+            email:
+              type: boolean
+              description: Email notifications allowed
+            sms:
+              type: boolean
+              description: SMS notifications allowed
 
 ```
 

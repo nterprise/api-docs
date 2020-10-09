@@ -53,7 +53,7 @@ Fetches A Page of projects
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>project:read-all</li></ul>
+<ul><li>project:all</li></ul>
 </aside>
 
 <h3 id="fetchallprojects-parameters">Parameters</h3>
@@ -85,7 +85,6 @@ Permissions required:<br>
           "label": "manchuck",
           "created": "2020-01-09T22:12:03.000Z",
           "updated": "2020-01-09T22:12:03.000Z",
-          "external_platform": {},
           "total_programs": 21,
           "total_projects": 42,
           "allowed_statuses": [
@@ -286,7 +285,6 @@ Permissions required:<br>
     "label": "manchuck",
     "created": "2020-01-09T22:12:03.000Z",
     "updated": "2020-01-09T22:12:03.000Z",
-    "external_platform": {},
     "total_programs": 21,
     "total_projects": 42,
     "allowed_statuses": [
@@ -468,7 +466,6 @@ Permissions required:<br>
     "label": "manchuck",
     "created": "2020-01-09T22:12:03.000Z",
     "updated": "2020-01-09T22:12:03.000Z",
-    "external_platform": {},
     "total_programs": 21,
     "total_projects": 42,
     "allowed_statuses": [
@@ -663,7 +660,6 @@ Permissions required:<br>
     "label": "manchuck",
     "created": "2020-01-09T22:12:03.000Z",
     "updated": "2020-01-09T22:12:03.000Z",
-    "external_platform": {},
     "total_programs": 21,
     "total_projects": 42,
     "allowed_statuses": [
@@ -891,7 +887,7 @@ Fetches the relations for a project
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>project:relations-read-all</li></ul>
+<ul><li>project:read</li></ul>
 </aside>
 
 <h3 id="fetchrelationsforproject-parameters">Parameters</h3>
@@ -1103,7 +1099,6 @@ Permissions required:<br>
             "label": "manchuck",
             "created": "2020-01-09T22:12:03.000Z",
             "updated": "2020-01-09T22:12:03.000Z",
-            "external_platform": {},
             "total_programs": 21,
             "total_projects": 42,
             "allowed_statuses": [
@@ -1156,7 +1151,6 @@ Permissions required:<br>
               "label": "manchuck",
               "created": "2020-01-09T22:12:03.000Z",
               "updated": "2020-01-09T22:12:03.000Z",
-              "external_platform": {},
               "total_programs": 21,
               "total_projects": 42,
               "allowed_statuses": [
@@ -1520,7 +1514,6 @@ Permissions required:<br>
 |&nbsp;&nbsp; label|string|true|none|Label for the entity|
 |&nbsp;&nbsp; created|string(date-time)|true|read-only|Date the entity was created|
 |&nbsp;&nbsp; updated|string(date-time)|true|read-only|Last date the entity was updated|
-|&nbsp;&nbsp; external_platform|object|true|none|External Identifiers for the customer|
 |&nbsp;&nbsp; allowed_statuses|[object]|true|none|List of allowed statuses|
 |&nbsp;&nbsp;&nbsp;&nbsp; status|string|true|none|A Custom label for the status|
 |&nbsp;&nbsp;&nbsp;&nbsp; category|string|true|none|The classifier for the statues|
@@ -1581,7 +1574,6 @@ properties:
       - created
       - allowed_statuses
       - customer_id
-      - external_platform
       - total_programs
       - total_projects
       - input_filter
@@ -1604,17 +1596,6 @@ properties:
         type: string
         format: date-time
         readOnly: true
-      external_platform:
-        type: object
-        additionalProperties: false
-        description: External Identifiers for the customer
-        deprecated: true
-        x-patternProperties:
-          &a1
-          "^[A-Za-z][A-Za-z0-9_]*$":
-            type:
-              - string
-              - "null"
       allowed_statuses:
         type: array
         description: List of allowed statuses
@@ -1648,11 +1629,6 @@ properties:
             order:
               type: number
               description: Order status appears when listing
-          example:
-            category: COMPLETE
-            description: For something that is Complete
-            status: Complete
-            order: 7
       total_programs:
         type: number
         description: Total programs under the customer
@@ -1719,6 +1695,8 @@ properties:
                             maximum: 100
                             description: The list of approved values
                             x-nter-skip-param: true
+                            items:
+                              type: string
                           check_case:
                             type: boolean
                             description: Perform a case sensitive match. By default will not match case
@@ -2808,7 +2786,6 @@ properties:
               - created
               - allowed_statuses
               - customer_id
-              - external_platform
               - total_programs
               - total_projects
               - input_filter
@@ -2831,12 +2808,6 @@ properties:
                 type: string
                 format: date-time
                 readOnly: true
-              external_platform:
-                type: object
-                additionalProperties: false
-                description: External Identifiers for the customer
-                deprecated: true
-                x-patternProperties: *a1
               allowed_statuses:
                 type: array
                 description: List of allowed statuses
@@ -2870,11 +2841,6 @@ properties:
                     order:
                       type: number
                       description: Order status appears when listing
-                  example:
-                    category: COMPLETE
-                    description: For something that is Complete
-                    status: Complete
-                    order: 7
               total_programs:
                 type: number
                 description: Total programs under the customer
@@ -2941,6 +2907,8 @@ properties:
                                     maximum: 100
                                     description: The list of approved values
                                     x-nter-skip-param: true
+                                    items:
+                                      type: string
                                   check_case:
                                     type: boolean
                                     description: Perform a case sensitive match. By default will not match case
@@ -4012,11 +3980,6 @@ properties:
             order:
               type: number
               description: Order status appears when listing
-          example:
-            category: COMPLETE
-            description: For something that is Complete
-            status: Complete
-            order: 7
       input_filter:
         type: array
         description: Input Filters allow custom fields to be defined for entities
@@ -4077,6 +4040,8 @@ properties:
                             maximum: 100
                             description: The list of approved values
                             x-nter-skip-param: true
+                            items:
+                              type: string
                           check_case:
                             type: boolean
                             description: Perform a case sensitive match. By default will not match case
@@ -5147,11 +5112,6 @@ properties:
         order:
           type: number
           description: Order status appears when listing
-      example:
-        category: COMPLETE
-        description: For something that is Complete
-        status: Complete
-        order: 7
   input_filter:
     type: array
     description: Input Filters allow custom fields to be defined for entities
@@ -5212,6 +5172,8 @@ properties:
                         maximum: 100
                         description: The list of approved values
                         x-nter-skip-param: true
+                        items:
+                          type: string
                       check_case:
                         type: boolean
                         description: Perform a case sensitive match. By default will not match case

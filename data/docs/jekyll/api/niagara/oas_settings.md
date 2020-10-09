@@ -194,10 +194,34 @@ Defines the properties for a status
 #### Specification
 
 ```yaml
-category: COMPLETE
-description: For something that is Complete
-status: Complete
-order: 7
+type: object
+description: Defines the properties for a status
+additionalProperties: false
+required:
+  - status
+  - category
+properties:
+  status:
+    type: string
+    description: A Custom label for the status
+    pattern: ^[A-Za-z][0-9a-zA-Z-_ ]+$
+  category:
+    type: string
+    description: The classifier for the statues
+    enum:
+      - PENDING
+      - IN_PROGRESS
+      - VERIFYING
+      - COMPLETE
+      - CANCELLED
+      - BLOCKED
+  description:
+    type: string
+    nullable: true
+    description: A description for the status
+  order:
+    type: number
+    description: Order status appears when listing
 
 ```
 

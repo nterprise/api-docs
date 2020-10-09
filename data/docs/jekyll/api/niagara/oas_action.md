@@ -44,7 +44,7 @@ Fetch a page of actions
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>action:read-all</li></ul>
+<ul><li>action:all</li></ul>
 </aside>
 
 > Example responses

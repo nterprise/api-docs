@@ -48,7 +48,7 @@ Fetches A Page of manufacturers
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>manufacturer:read-all</li></ul>
+<ul><li>manufacturer:all</li></ul>
 </aside>
 
 <h3 id="fetchallmanufacturer-parameters">Parameters</h3>
@@ -348,7 +348,6 @@ Permissions required:<br>
           "label": "manchuck",
           "created": "2020-01-09T22:12:03.000Z",
           "updated": "2020-01-09T22:12:03.000Z",
-          "external_platform": {},
           "total_programs": 21,
           "total_projects": 42,
           "input_filter": [],
@@ -436,7 +435,7 @@ Fetches the relations for a manufacturer
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>manufacturer:relations-read-all</li></ul>
+<ul><li>manufacturer:read</li></ul>
 </aside>
 
 <h3 id="fetchrelationsformanufacturer-parameters">Parameters</h3>
@@ -654,7 +653,6 @@ Permissions required:<br>
             "label": "manchuck",
             "created": "2020-01-09T22:12:03.000Z",
             "updated": "2020-01-09T22:12:03.000Z",
-            "external_platform": {},
             "total_programs": 21,
             "total_projects": 42,
             "allowed_statuses": [
@@ -1130,6 +1128,8 @@ properties:
                         maximum: 100
                         description: The list of approved values
                         x-nter-skip-param: true
+                        items:
+                          type: string
                       check_case:
                         type: boolean
                         description: Perform a case sensitive match. By default will not match case

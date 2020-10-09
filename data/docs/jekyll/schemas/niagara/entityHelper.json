@@ -120,9 +120,6 @@
       "description": "Data for the entity as a key value pair",
       "additionalProperties": {
         "type": "string"
-      },
-      "propertyNames": {
-        "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
       }
     }
   }

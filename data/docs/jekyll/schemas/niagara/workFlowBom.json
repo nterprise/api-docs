@@ -51,7 +51,6 @@
       "maxItems": 100,
       "minItems": 1,
       "description": "List of parts from the work flow that are at this location",
-      "additionalItems": false,
       "additionalProperties": false,
       "items": {
         "type": "object",

@@ -6,7 +6,6 @@
     "created",
     "allowed_statuses",
     "customer_id",
-    "external_platform",
     "total_programs",
     "total_projects",
     "input_filter"
@@ -23,9 +22,6 @@
     },
     "updated": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/customer.json#/properties/updated"
-    },
-    "external_platform": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/customer.json#/properties/external_platform"
     },
     "allowed_statuses": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/customer.json#/properties/allowed_statuses"

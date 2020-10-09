@@ -9,7 +9,6 @@
       "properties": {
         "_links": {
           "type": "object",
-          "additinalProperties": false,
           "properties": {
             "nter:queue-location": {
               "$ref": "./link.json"

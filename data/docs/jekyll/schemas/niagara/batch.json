@@ -76,7 +76,7 @@
       "description": "Top five users assigned to the batch",
       "maxItems": 5,
       "items": {
-        "$ret": "https://docs.nterprise.com/schemas/niagara/user.json"
+        "$ref": "https://docs.nterprise.com/schemas/niagara/user.json"
       }
     }
   }

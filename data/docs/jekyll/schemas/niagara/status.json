@@ -37,13 +37,5 @@
       "type": "number",
       "description": "Order status appears when listing"
     }
-  },
-  "examples": [
-    {
-      "category": "COMPLETE",
-      "description": "For something that is Complete",
-      "status": "Complete",
-      "order": 7
-    }
-  ]
+  }
 }

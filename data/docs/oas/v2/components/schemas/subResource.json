@@ -5,9 +5,7 @@
     "label",
     "updated",
     "resource_type",
-    "location",
     "meta",
-    "resource",
     "sub_resource_id",
     "input_filter"
   ],
@@ -29,24 +27,6 @@
     },
     "meta": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/resource.json#/properties/meta"
-    },
-    "location": {
-      "type": "object",
-      "deprecated": true,
-      "allOf": [
-        {
-          "$ref": "./location.json"
-        }
-      ]
-    },
-    "resource": {
-      "type": "object",
-      "deprecated": true,
-      "allOf": [
-        {
-          "$ref": "./resource.json"
-        }
-      ]
     },
     "input_filter": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter.json"

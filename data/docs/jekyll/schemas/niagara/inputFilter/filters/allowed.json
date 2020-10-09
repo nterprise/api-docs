@@ -27,7 +27,10 @@
           "minimum": 1,
           "maximum": 100,
           "description": "The list of approved values",
-          "x-nter-skip-param": true
+          "x-nter-skip-param": true,
+          "items": {
+            "type": "string"
+          }
         },
         "check_case": {
           "type": "boolean",

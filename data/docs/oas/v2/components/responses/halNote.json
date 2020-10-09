@@ -18,7 +18,7 @@
                     "description": "The user who created the note",
                     "maxItems": 1,
                     "items": {
-                      "$ref": "./halUser.json"
+                      "$ref": "../schemas/halUser.json"
                     }
                   }
                 }

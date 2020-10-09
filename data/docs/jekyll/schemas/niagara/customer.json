@@ -37,20 +37,6 @@
     "updated": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/updated"
     },
-    "external_platform": {
-      "type": "object",
-      "additionalProperties": false,
-      "description": "External Identifiers for the customer",
-      "deprecated": true,
-      "patternProperties": {
-        "^[A-Za-z][A-Za-z0-9_]*$": {
-          "type": [
-            "string",
-            "null"
-          ]
-        }
-      }
-    },
     "allowed_statuses": {
       "type": "array",
       "description": "List of allowed statuses",

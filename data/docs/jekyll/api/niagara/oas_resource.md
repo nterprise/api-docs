@@ -57,7 +57,7 @@ Fetches A Page of resources
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>resource:read-all</li></ul>
+<ul><li>resource:all</li></ul>
 </aside>
 
 <h3 id="fetchallresources-parameters">Parameters</h3>
@@ -542,7 +542,6 @@ Permissions required:<br>
           "label": "Niagara Customer",
           "created": "2020-01-09T22:12:03.000Z",
           "updated": "2020-01-09T22:12:03.000Z",
-          "external_platform": {},
           "total_programs": 21,
           "total_projects": 42,
           "allowed_statuses": [
@@ -661,7 +660,7 @@ Fetches the relations for a resource
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>resource:relations-read-all</li></ul>
+<ul><li>resource:read</li></ul>
 </aside>
 
 <h3 id="fetchrelationsforresource-parameters">Parameters</h3>
@@ -1867,8 +1866,6 @@ properties:
     description: Data for the entity as a key value pair
     additionalProperties:
       type: string
-    propertyNames:
-      pattern: ^[A-Za-z][A-Za-z0-9_]*$
   location:
     type: object
     deprecated: true
@@ -2258,6 +2255,8 @@ properties:
                                 maximum: 100
                                 description: The list of approved values
                                 x-nter-skip-param: true
+                                items:
+                                  type: string
                               check_case:
                                 type: boolean
                                 description: Perform a case sensitive match. By default will not match case
@@ -3355,6 +3354,8 @@ properties:
                         maximum: 100
                         description: The list of approved values
                         x-nter-skip-param: true
+                        items:
+                          type: string
                       check_case:
                         type: boolean
                         description: Perform a case sensitive match. By default will not match case
@@ -4474,8 +4475,6 @@ properties:
     description: Data for the entity as a key value pair
     additionalProperties:
       type: string
-    propertyNames:
-      pattern: ^[A-Za-z][A-Za-z0-9_]*$
   location:
     type: object
     deprecated: true
@@ -4865,6 +4864,8 @@ properties:
                                 maximum: 100
                                 description: The list of approved values
                                 x-nter-skip-param: true
+                                items:
+                                  type: string
                               check_case:
                                 type: boolean
                                 description: Perform a case sensitive match. By default will not match case
@@ -5944,8 +5945,6 @@ properties:
             description: Data for the entity as a key value pair
             additionalProperties:
               type: string
-            propertyNames:
-              pattern: ^[A-Za-z][A-Za-z0-9_]*$
           location:
             type: object
             deprecated: true
@@ -6336,6 +6335,8 @@ properties:
                                         maximum: 100
                                         description: The list of approved values
                                         x-nter-skip-param: true
+                                        items:
+                                          type: string
                                       check_case:
                                         type: boolean
                                         description: Perform a case sensitive match. By default will not match case
@@ -7434,6 +7435,8 @@ properties:
                                 maximum: 100
                                 description: The list of approved values
                                 x-nter-skip-param: true
+                                items:
+                                  type: string
                               check_case:
                                 type: boolean
                                 description: Perform a case sensitive match. By default will not match case
@@ -8531,6 +8534,8 @@ properties:
                         maximum: 100
                         description: The list of approved values
                         x-nter-skip-param: true
+                        items:
+                          type: string
                       check_case:
                         type: boolean
                         description: Perform a case sensitive match. By default will not match case

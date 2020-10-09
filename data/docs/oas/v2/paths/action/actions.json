@@ -14,7 +14,7 @@
     "security": [
       {
         "niagara": [
-          "action:read-all"
+          "action:all"
         ]
       }
     ]

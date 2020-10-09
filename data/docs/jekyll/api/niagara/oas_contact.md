@@ -47,7 +47,7 @@ Fetches A Page of contacts
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>contact:read-all</li></ul>
+<ul><li>contact:all</li></ul>
 </aside>
 
 <h3 id="fetchallcontacts-parameters">Parameters</h3>
@@ -592,6 +592,8 @@ properties:
                         maximum: 100
                         description: The list of approved values
                         x-nter-skip-param: true
+                        items:
+                          type: string
                       check_case:
                         type: boolean
                         description: Perform a case sensitive match. By default will not match case

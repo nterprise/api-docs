@@ -32,9 +32,6 @@
     "/reports": {
       "$ref": "./paths/report/reports.json"
     },
-    "/reports/{report_id}": {
-      "$ref": "./paths/report/export.json"
-    },
     "/reports/{report_id}/download": {
       "$ref": "./paths/report/export.json"
     }
