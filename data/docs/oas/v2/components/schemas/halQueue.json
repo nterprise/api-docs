@@ -1,5 +1,7 @@
 {
   "type": "object",
+  "x-model": "HalProject",
+  "x-hal": true,
   "allOf": [
     {
       "$ref": "./queue.json"

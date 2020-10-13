@@ -1,5 +1,6 @@
 {
   "type": "object",
+  "x-model": "Project",
   "required": [
     "start_date",
     "end_date",

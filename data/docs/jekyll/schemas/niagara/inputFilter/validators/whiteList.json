@@ -2,6 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/whiteList.json",
   "type": "object",
+  "x-model": "ValidatorWhiteList",
   "additionalProperties": false,
   "description": "Validate value matches a list (white list)",
   "required": [

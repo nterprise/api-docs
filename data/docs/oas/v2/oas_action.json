@@ -52,7 +52,7 @@
               "action:update": "Allows editing a action",
               "action:delete": "Allows deleting a action",
               "action:read": "Allows access to a action (for an entity)",
-              "action:read-all": "Allows reading all actions"
+              "action:all": "Allows reading all actions"
             }
           }
         }

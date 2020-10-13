@@ -26,7 +26,7 @@
                     "maxItems": 1,
                     "minItems": 1,
                     "items": {
-                      "$ref": "./halWorkFlow.json"
+                      "$ref": "../schemas/halWorkFlow.json"
                     }
                   },
                   "nter:bom-work-order": {
@@ -34,7 +34,7 @@
                     "maxItems": 1,
                     "minItems": 1,
                     "items": {
-                      "$ref": "./halWorkOrder.json"
+                      "$ref": "../schemas/halWorkOrder.json"
                     }
                   },
                   "nter:bom-available-parts": {

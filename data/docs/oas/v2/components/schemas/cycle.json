@@ -1,5 +1,6 @@
 {
   "type": "object",
+  "x-model": "Cycle",
   "properties": {
     "cycle_id": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/cycle.json#/properties/cycle_id"

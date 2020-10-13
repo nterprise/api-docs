@@ -21,7 +21,7 @@
                     "type": "array",
                     "maxItems": 1,
                     "items": {
-                      "$ref": "./halUser.json"
+                      "$ref": "../schemas/halUser.json"
                     }
                   },
                   "nter:notification-regarding": {

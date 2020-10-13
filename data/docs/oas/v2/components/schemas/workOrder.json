@@ -1,5 +1,6 @@
 {
   "type": "object",
+  "x-model": "WorkOrder",
   "required": [
     "work_order_id",
     "label",

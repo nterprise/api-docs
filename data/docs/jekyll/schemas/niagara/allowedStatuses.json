@@ -1,0 +1,11 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.nterprise.com/schemas/niagara/allowedStatuses.json",
+  "type": "array",
+  "x-model": "AllowedStatuses",
+  "description": "List of allowed statuses",
+  "uniqueItems": true,
+  "items": {
+    "$ref": "https://docs.nterprise.com/schemas/niagara/status.json"
+  }
+}

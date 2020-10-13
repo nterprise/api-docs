@@ -2,6 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/between.json",
   "type": "object",
+  "x-model": "ValidatorBetween",
   "additionalProperties": false,
   "description": "Validate number is between two values. By default, min and max are included",
   "required": [

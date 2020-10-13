@@ -1,10 +1,10 @@
 {
   "type": "object",
+  "x-model": "Queue",
   "required": [
     "updated",
     "label",
     "created",
-    "location",
     "priority",
     "active_work_orders",
     "active_batches",

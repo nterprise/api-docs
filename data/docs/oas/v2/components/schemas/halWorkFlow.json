@@ -1,5 +1,7 @@
 {
   "type": "object",
+  "x-model": "HalWorkFlow",
+  "x-hal": true,
   "allOf": [
     {
       "$ref": "./workFlow.json"

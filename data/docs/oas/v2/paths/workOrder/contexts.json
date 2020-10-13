@@ -26,28 +26,5 @@
         ]
       }
     ]
-  },
-  "post": {
-    "operationId": "createContextForWorkOrder",
-    "summary": "Create context for a work order",
-    "description": "Starts a context for a work order",
-    "tags": [
-      "Work Order"
-    ],
-    "requestBody": {
-      "$ref": "../../components/requestBodies/workOrderContext.json"
-    },
-    "responses": {
-      "200": {
-        "$ref": "../../components/responses/halContext.json"
-      }
-    },
-    "security": [
-      {
-        "niagara": [
-          "work-order:read"
-        ]
-      }
-    ]
   }
 }

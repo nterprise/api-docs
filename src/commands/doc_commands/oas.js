@@ -451,6 +451,7 @@ exports.handler = async (argv) => {
     const apis = argv.api
         ? _.flatten([argv.api])
         : ['auth', 'caapi', 'niagara'];
+
     logger.debug('API to process', apis);
     const files = _.reduce(
         [argv.file],

@@ -1,5 +1,6 @@
 {
   "type": "object",
+  "x-model": "Context",
   "properties": {
     "context_id": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/context.json#/properties/context_id"

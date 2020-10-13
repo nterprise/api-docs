@@ -1,3 +1,6 @@
+---
+layout: blank
+---
 # nterprise Software As A Service agreement
 
 **IMPORTANT-READ THIS NTERPRISE SOFTWARE AS A SERVICE AGREEMENT (THE "AGREEMENT") CAREFULLY BEFORE CONTINUING. BY (1)
@@ -8,38 +11,38 @@ YOU HAVE THE AUTHORITY TO BIND SUCH ENTITY TO THE TERMS AND CONDITIONS OF THIS A
 "YOUR" AS USED IN THIS AGREEMENT SHALL REFER TO SUCH ENTITY. IF YOU DO NOT HAVE SUCH AUTHORITY, OR IF YOU DO NOT AGREE
 TO ALL THE TERMS AND CONDITIONS IN THIS AGREEMENT, YOU MUST DECLINE USE OF THE SERVICES.**
 
-This Agreement by and between nfrastructure Technologies, LLC(" **nfrastructure**") and the person or entity accepting
-this agreement as described above (" **You"** ) is effective as of the date that You first use or access the Services
-(" **Effective Date**"). By clicking the "I accept" button, otherwise accepting this Agreement through a document that
+This Agreement by and between nfrastructure Technologies, LLC(" **nfrastructure** ") and the person or entity accepting
+this agreement as described above (" **You** ") is effective as of the date that You first use or access the Services
+(" **Effective Date** "). By clicking the "I accept" button, otherwise accepting this Agreement through a document that
 incorporates this Agreement, or using or accessing the Services, You agree to be bound by this Agreement. If You do not
 agree or do not wish to bind yourself to the terms in this Agreement, You must not access or use the Services.
 
 ## 1. GENERAL DEFINITIONS.
 
-**1.1. "Affiliate"** means an entity that owns, is owned by, or is under common ownership with, a Party.
+**1.1. "Affiliate" ** means an entity that owns, is owned by, or is under common ownership with, a Party.
 
-**1.2. "Confidential Information"** means information that is owned or possessed by a Party, its Affiliates or its or
+**1.2. "Confidential Information" ** means information that is owned or possessed by a Party, its Affiliates or its or
 their Personnel, that either is marked as "confidential" or "proprietary" or otherwise due to its nature reasonably
 would be deemed to be confidential, and that is disclosed or accessed pursuant to this Agreement.
 
-**1.3. "Data"** means data or information originated by You that You submit to the Services or Software environment.
+**1.3. "Data" ** means data or information originated by You that You submit to the Services or Software environment.
 
-**1.4. "Documentation"** means explanatory materials in printed, electronic, or online form accompanying the
+**1.4. "Documentation" ** means explanatory materials in printed, electronic, or online form accompanying the
 Services or Software.
 
-**1.5. "Party"** means nfrastructure or You, and "**Parties**" means nfrastructure and You.
+**1.5. "Party" ** means nfrastructure or You, and " **Parties** " means nfrastructure and You.
 
-**1.6. "Services"** means the software and infrastructure in a hosted environment, provided and maintained by
+**1.6. "Services" ** means the software and infrastructure in a hosted environment, provided and maintained by
 nfrastructure to which You are being granted access under this Agreement, as well as any other related services
 nfrastructure performs with respect to the Software under this Agreement.
 
-**1.7. "Software"** means the proprietary software applications, program, and interfaces made available to You by
+**1.7. "Software" ** means the proprietary software applications, program, and interfaces made available to You by
 nfrastructure as part of the Services.
 
-**1.8."Suggestions"** means any feedback, comments, ideas, improvements, or suggestions provided by You to
+**1.8."Suggestions" ** means any feedback, comments, ideas, improvements, or suggestions provided by You to
 nfrastructure with respect to the Services or Software.
 
-**1.9.****"You, Your, or User"** refers to the individual or entity that is accessing or using the Services.
+**1.9.**** "You, Your, or User" ** refers to the individual or entity that is accessing or using the Services.
 
 ## 2. RIGHTS GRANTED.
 
@@ -206,7 +209,7 @@ Data or network as a result of accessing or using the Services.
 
 ### 6.1. Purpose of Disclosure.
 
-Each Party ("**Discloser**") may disclose certain of its Confidential Information to the other Party ("**Receiver**"),
+Each Party (" **Discloser** ") may disclose certain of its Confidential Information to the other Party (" **Receiver** "),
 and Receiver agrees that it will only use Discloser's Confidential Information for the purposes contemplated
 hereunder.
 
@@ -260,7 +263,7 @@ THE SOFTWARE AND THE SERVICES.
 
 You agree to defend, indemnify and hold harmless nfrastructure, nfrastructure 's Affiliates, and all of their respective
 officers, directors, agents and employees, from and against any and all claims, including liabilities, actions,
-judgments, costs, and expenses and reasonable attorneys' fees (each, a "**Claim**"), asserted by a third party arising
+judgments, costs, and expenses and reasonable attorneys' fees (each, a " **Claim** "), asserted by a third party arising
 out of or related to any alleged infringement or violation of any third party's copyright, trade secret, trademark, or
 patent or other intellectual property right by Your Data.
 
@@ -285,7 +288,7 @@ of giving nfrastructure a release from all liability with respect to all Claims.
 
 Any notice required or permitted under this Agreement to be delivered to nfrastructure shall be deemed valid and to have
  been duly given when: (i) delivered by hand with written confirmation of receipt; or (ii) delivered by a nationally
- recognized overnight delivery service with package tracking ("**Notice**"). The addresses and recipients for Notice
+ recognized overnight delivery service with package tracking (" **Notice** "). The addresses and recipients for Notice
  shall be as set forth below. Any notice required or permitted under this Agreement for You shall be deemed valid and
  duly give when delivered by either of the above referenced methods to the address You provide to nfrastructure.
 
@@ -342,7 +345,7 @@ provide such notice.
 ### 11.2. Amendments.
 
 This Agreement may be updated from time to time by nfrastructure in nfrastructure's sole discretion by nfrastructure
-publishing an updated or amended version of this Agreement ("**Amendment**").
+publishing an updated or amended version of this Agreement (" **Amendment** ").
 
 ### 11.3. Assignment.
 
@@ -370,8 +373,8 @@ any delay or failure in performance caused in whole or in part by any circumstan
 including, without limitation, the following: accidents, fires, floods, severe weather, or other acts of God or nature;
 sabotage, riot, insurrection, war or other acts or threatened acts of violence or terrorism; embargoes, quarantine
 restrictions, changing laws or regulations or other government actions or requirements; carrier, labor or supplier
-interruptions or stoppages, or other third party delays; equipment or network outages or failures ("**Force Majeure
-Event**"). In the event of nfrastructure 's delay or failure in performance due to a Force Majeure Event, nfrastructure
+interruptions or stoppages, or other third party delays; equipment or network outages or failures (" **Force Majeure
+Event** "). In the event of nfrastructure 's delay or failure in performance due to a Force Majeure Event, nfrastructure
 agrees to make commercially reasonable efforts to minimize the hindering effect of such Force Majeure Event and resume
 performance with commercially reasonable dispatch.
 

@@ -1,5 +1,6 @@
 {
   "type": "object",
+  "x-model": "File",
   "properties": {
     "file_id": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/file.json#/properties/file_id"

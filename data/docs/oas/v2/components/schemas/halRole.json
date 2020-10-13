@@ -1,5 +1,7 @@
 {
   "type": "object",
+  "x-model": "HalRole",
+  "x-hal": true,
   "allOf": [
     {
       "$ref": "./role.json"

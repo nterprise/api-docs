@@ -1,5 +1,6 @@
 {
   "type": "object",
+  "x-model": "Diff",
   "properties": {
     "diff_id": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/diff.json#/properties/diff_id"

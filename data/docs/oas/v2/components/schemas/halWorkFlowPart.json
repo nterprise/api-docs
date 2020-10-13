@@ -1,5 +1,7 @@
 {
   "type": "object",
+  "x-model": "HalPart",
+  "x-hal": true,
   "allOf": [
     {
       "$ref": "https://docs.nterprise.com/schemas/niagara/workFlowBom.json#/properties/parts_available/items",
@@ -29,6 +31,5 @@
         }
       }
     }
-
   ]
 }

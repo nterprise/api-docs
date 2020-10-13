@@ -1,5 +1,6 @@
 {
   "type": "object",
+  "x-model": "SearchResult",
   "properties": {
     "data": {
       "type": "object",

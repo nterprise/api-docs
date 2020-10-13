@@ -41,6 +41,8 @@ const apiToPath = {
 };
 
 let inputFilter = null;
+const models = {};
+const modelsInFile = {};
 exports.handler = async (argv) => {
     const logger = argv.logger;
     logger.info('Merge OAS files');
@@ -75,16 +77,52 @@ exports.handler = async (argv) => {
 
     const mergeAllOf = (allOf, spec) => _.reduce(
         allOf,
-        (merged, value, key) => {
+        (merged, value) => {
             _.unset(merged, 'allOf');
             return _.merge(merged, value);
         },
         spec,
     );
 
-    const jsonSchemaToOas = (logger, spec) => _.reduce(
+    const jsonSchemaToOas = (logger, file, spec) => _.reduce(
         spec,
         (fixed, value, key) => {
+            const modelName = _.get(value, 'x-model', null);
+
+            if (modelName) {
+                _.set(
+                    modelsInFile,
+                    path.basename(file).replace('.json', ''),
+                    [
+                        modelName,
+                        ..._.get(
+                            modelsInFile,
+                            path.basename(file).replace('.json', ''),
+                            [],
+                        ),
+                    ],
+                );
+
+                if (!_.has(modelName, modelName)) {
+                    _.set(
+                        models,
+                        modelName,
+                        jsonSchemaToOas(
+                            logger,
+                            file,
+                            value,
+                        ),
+                    );
+                }
+
+                _.set(
+                    fixed,
+                    key,
+                    {'$ref': `#/components/schemas/${modelName}`},
+                );
+                return fixed;
+            }
+
             const hasNullType = _.filter(value, {type: 'null'}).length !== 0;
             if (key === 'oneOf' && value.length === 2 && hasNullType) {
                 fixed = _.head(_.filter(value, {type: 'object'}));
@@ -95,23 +133,10 @@ exports.handler = async (argv) => {
                 );
                 fixed = jsonSchemaToOas(
                     logger,
+                    file,
                     fixed,
                 );
                 return fixed;
-            }
-            if (key === 'allOf') {
-                fixed = jsonSchemaToOas(
-                    logger,
-                    mergeAllOf(value, spec),
-                );
-                return fixed;
-            }
-
-            if (key === 'input_filter') {
-                inputFilter = !inputFilter
-                    ? jsonSchemaToOas(logger, value)
-                    : inputFilter;
-                value = {'$ref': '#/components/schemas/InputFilter'};
             }
 
             if (key === 'example') {
@@ -151,7 +176,7 @@ exports.handler = async (argv) => {
                     _.map(
                         value,
                         (child) => _.isObject(child)
-                            ? jsonSchemaToOas(logger, child)
+                            ? jsonSchemaToOas(logger, file, child)
                             // If this is an array then something is wrong
                             : child,
                     ),
@@ -160,13 +185,12 @@ exports.handler = async (argv) => {
             }
 
             if (_.isObject(value)) {
-                value = jsonSchemaToOas(logger, value);
+                value = jsonSchemaToOas(logger, file, value);
                 _.set(fixed, key, value);
                 return fixed;
             }
 
             if (_.includes(removeKeys, key)) {
-                logger.debug(`Removing ${key}`);
                 return fixed;
             }
 
@@ -200,7 +224,7 @@ exports.handler = async (argv) => {
         process.exit(1);
     }
 
-    await Promise.all(_.map(
+    const specs = await Promise.all(_.map(
         files,
         async (file) => {
             logger.debug(`setting CWD to ${path.dirname(file)}`);
@@ -211,7 +235,33 @@ exports.handler = async (argv) => {
                 {resolve: {local: localResolver}},
             );
 
-            const spec = jsonSchemaToOas(logger, deRefed);
+            return [jsonSchemaToOas(logger, file, deRefed), file];
+        },
+    ));
+
+    const merged = _.reduce(
+        specs,
+        (merged, [spec, file]) => {
+            _.reduce(
+                _.uniq(modelsInFile[path.basename(file).replace('.json', '')]).
+                    sort(),
+                (schemas, model) => {
+                    _.set(
+                        schemas,
+                        model,
+                        _.get(models, model),
+                    );
+                    return schemas;
+                },
+                {},
+            );
+
+            _.set(
+                spec,
+                'components.schemas',
+                models,
+            );
+
             if (inputFilter) {
                 _.set(
                     spec,
@@ -225,8 +275,16 @@ exports.handler = async (argv) => {
                 `${folders.jekyllPath}/api/niagara/${path.basename(file)}`,
                 JSON.stringify(spec, null, 2),
             );
+            _.merge(merged, spec);
+            return merged;
         },
-    ));
+        {},
+    );
+
+    argv._writeFile(
+        `${folders.jekyllPath}/api/niagara/oas_niagara.json`,
+        JSON.stringify(merged, null, 2),
+    );
 
     logger.info('Converted OAS files to markdown');
 };

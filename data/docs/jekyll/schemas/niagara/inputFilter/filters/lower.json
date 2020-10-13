@@ -2,6 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/lower.json",
   "type": "object",
+  "x-model": "FilterLower",
   "additionalProperties": false,
   "description": "Make the value lowercase",
   "required": [

@@ -1,5 +1,7 @@
 {
   "type": "object",
+  "x-model": "HalRelation",
+  "x-hal": true,
   "allOf": [
     {
       "$ref": "./relation.json"

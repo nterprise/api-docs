@@ -1,5 +1,7 @@
 {
   "type": "object",
+  "x-model": "HalWorkFlowBom",
+  "x-hal": true,
   "properties": {
     "bom_id": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/workFlowBom.json#/properties/bom_id"

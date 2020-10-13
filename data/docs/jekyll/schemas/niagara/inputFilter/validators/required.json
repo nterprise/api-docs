@@ -2,6 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/required.json",
   "type": "object",
+  "x-model": "ValidatorRequired",
   "additionalProperties": false,
   "description": "Validates that the value is present and not set to 'null', '0' or an empty string",
   "required": [

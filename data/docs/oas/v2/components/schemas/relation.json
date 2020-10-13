@@ -1,5 +1,6 @@
 {
   "type": "object",
+  "x-model": "Relation",
   "required": [
     "updated",
     "created",

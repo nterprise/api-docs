@@ -2,6 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://docs.nterprise.com/schemas/niagara/status.json",
   "type": "object",
+  "x-model": "Status",
   "description": "Defines the properties for a status",
   "additionalProperties": false,
   "required": [

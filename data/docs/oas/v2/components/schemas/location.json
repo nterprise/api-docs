@@ -1,5 +1,6 @@
 {
   "type": "object",
+  "x-model": "Location",
   "required": [
     "updated",
     "label",

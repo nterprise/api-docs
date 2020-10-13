@@ -1,5 +1,6 @@
 {
   "type": "object",
+  "x-model": "Note",
   "properties": {
     "note_id": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/note.json#/properties/note_id"

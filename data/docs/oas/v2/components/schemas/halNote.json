@@ -1,5 +1,7 @@
 {
   "type": "object",
+  "x-model": "HalNote",
+  "x-hal": true,
   "allOf": [
     {
       "$ref": "note.json"

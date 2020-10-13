@@ -4,6 +4,8 @@
     "application/hal+json": {
       "schema": {
         "type": "object",
+        "x-model": "HalBatchPage",
+        "x-hal": true,
         "required": [
           "_embedded",
           "_links",

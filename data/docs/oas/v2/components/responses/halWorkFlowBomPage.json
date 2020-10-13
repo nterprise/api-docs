@@ -4,6 +4,8 @@
     "application/hal+json": {
       "schema": {
         "type": "object",
+        "x-model": "HalWorkFlowBomPage",
+        "x-hal": true,
         "required": [
           "_embedded",
           "_links",
@@ -89,8 +91,6 @@
             "href": "https://api.nterprise.com/notes?limit=42"
           }
         }
-
-
       }
     }
   }

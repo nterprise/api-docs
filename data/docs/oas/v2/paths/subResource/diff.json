@@ -25,7 +25,7 @@
     "security": [
       {
         "niagara": [
-          "sub-resource:read"
+          "resource:read"
         ]
       }
     ]

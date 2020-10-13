@@ -2,6 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/digits.json",
   "type": "object",
+  "x-model": "FilterDigits",
   "additionalProperties": false,
   "description": "This filter will remove all numbers from the value",
   "required": [

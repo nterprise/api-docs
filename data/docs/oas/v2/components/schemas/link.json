@@ -8,10 +8,6 @@
       "type": "string",
       "description": "Href for the url",
       "format": "uri"
-    },
-    "templated": {
-      "type": "boolean",
-      "description": "Describes if the link is templated"
     }
   }
 }

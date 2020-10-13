@@ -2,6 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/hostname.json",
   "type": "object",
+  "x-model": "ValidatorHostName",
   "additionalProperties": false,
   "description": "Validate string has a correct DNS records",
   "required": [

@@ -2,6 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/blackList.json",
   "type": "object",
+  "x-model": "ValidatorBlackList",
   "additionalProperties": false,
   "description": "Validate value does not match a list (black list)",
   "required": [

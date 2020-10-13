@@ -2,6 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/boolean.json",
   "type": "object",
+  "x-model": "FilterBoolean",
   "additionalProperties": false,
   "description": "This filter will make the value true or false",
   "required": [

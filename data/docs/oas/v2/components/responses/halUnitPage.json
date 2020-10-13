@@ -4,6 +4,7 @@
     "application/hal+json": {
       "schema": {
         "type": "object",
+        "x-model": "Action",
         "required": [
           "_embedded",
           "_links",

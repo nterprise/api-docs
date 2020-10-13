@@ -1,5 +1,6 @@
 {
   "type": "object",
+  "x-model": "Batch",
   "required": [
     "batch_id",
     "created",

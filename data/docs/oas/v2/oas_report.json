@@ -23,7 +23,7 @@
     }
   ],
   "paths": {
-    "/fields": {
+    "/fields/{entity_type}": {
       "$ref": "./paths/report/fields.json"
     },
     "/metrics": {

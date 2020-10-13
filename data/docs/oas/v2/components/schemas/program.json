@@ -1,5 +1,6 @@
 {
   "type": "object",
+  "x-model": "Program",
   "required": [
     "created",
     "label",

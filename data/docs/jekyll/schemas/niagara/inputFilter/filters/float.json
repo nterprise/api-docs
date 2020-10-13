@@ -2,6 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/float.json",
   "type": "object",
+  "x-model": "FilterFloat",
   "additionalProperties": false,
   "description": "Filter to transform a value into a float. Non numeric characters (including comma) will be removed",
   "required": [

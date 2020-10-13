@@ -19,7 +19,8 @@
     "security": [
       {
         "niagara": [
-          "action:read"
+          "action:read",
+          "work-order:read"
         ]
       }
     ]
@@ -47,7 +48,8 @@
     "security": [
       {
         "niagara": [
-          "action:create"
+          "action:create",
+          "work-order:read"
         ]
       }
     ]

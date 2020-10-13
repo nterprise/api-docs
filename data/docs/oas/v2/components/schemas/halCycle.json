@@ -1,5 +1,7 @@
 {
   "type": "object",
+  "x-model": "HalCycle",
+  "x-hal": true,
   "allOf": [
     {
       "$ref": "./cycle.json"

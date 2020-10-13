@@ -2,6 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/lessThan.json",
   "type": "object",
+  "x-model": "ValidatorLessThan",
   "additionalProperties": false,
   "description": "Validate number is less than a value. By default, this will check if value is less than or equals to",
   "required": [

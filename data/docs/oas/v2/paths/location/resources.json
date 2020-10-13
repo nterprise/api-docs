@@ -1,6 +1,6 @@
 {
   "get": {
-    "operationId": "fetchAllResources",
+    "operationId": "fetchResourcesForLocation",
     "summary": "Fetch location resources",
     "description": "Fetches A Page of resources for the location",
     "tags": [
