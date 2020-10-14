@@ -43,11 +43,17 @@
       "description": "Email address"
     },
     "name": {
-      "type": "string",
+      "type": [
+        "string",
+        "null"
+      ],
       "description": "Contact name"
     },
     "phone": {
-      "type": "string",
+      "type": [
+        "string",
+        "null"
+      ],
       "description": "Phone number"
     },
     "input_filter": {
