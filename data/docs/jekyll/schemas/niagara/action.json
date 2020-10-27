@@ -13,8 +13,7 @@
     "entity_type",
     "event",
     "label",
-    "updated",
-    "when"
+    "updated"
   ],
   "properties": {
     "action_id": {
@@ -79,14 +78,10 @@
       "items": {
         "type": "object",
         "required": [
-          "entity",
           "property",
           "operator"
         ],
         "properties": {
-          "entity": {
-            "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_type"
-          },
           "property": {
             "type": "string",
             "description": "Property on entity"
