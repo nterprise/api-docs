@@ -157,62 +157,16 @@
     "data": {
       "type": "object",
       "description": "Data set for the context",
-      "additionalProperties": true,
-      "readOnly": true
+      "additionalProperties": true
     },
     "entity": {
-      "oneOf": [
-        {
-          "$ref": "https://docs.nterprise.com/schemas/niagara/contact.json"
-        },
-        {
-          "$ref": "https://docs.nterprise.com/schemas/niagara/customer.json"
-        },
-        {
-          "$ref": "https://docs.nterprise.com/schemas/niagara/part.json"
-        },
-        {
-          "$ref": "https://docs.nterprise.com/schemas/niagara/program.json"
-        },
-        {
-          "$ref": "https://docs.nterprise.com/schemas/niagara/project.json"
-        },
-        {
-          "$ref": "https://docs.nterprise.com/schemas/niagara/unit.json"
-        }
-      ]
+      "type": ["object", "null"],
+      "additionalProperties": true
     },
     "using": {
       "$comment": "Remove all other entities and just make this a cycle after the cycle entity update has been deployed to production",
-      "anyOf": [
-        {
-          "type": "null"
-        },
-        {
-          "$ref": "https://docs.nterprise.com/schemas/niagara/batch.json"
-        },
-        {
-          "$ref": "https://docs.nterprise.com/schemas/niagara/contact.json"
-        },
-        {
-          "$ref": "https://docs.nterprise.com/schemas/niagara/customer.json"
-        },
-        {
-          "$ref": "https://docs.nterprise.com/schemas/niagara/part.json"
-        },
-        {
-          "$ref": "https://docs.nterprise.com/schemas/niagara/program.json"
-        },
-        {
-          "$ref": "https://docs.nterprise.com/schemas/niagara/project.json"
-        },
-        {
-          "$ref": "https://docs.nterprise.com/schemas/niagara/unit.json"
-        },
-        {
-          "$ref": "https://docs.nterprise.com/schemas/niagara/cycle.json"
-        }
-      ]
+      "type": ["object", "null"],
+      "additionalProperties": true
     }
   }
 }

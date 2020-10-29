@@ -44,7 +44,6 @@
     },
     "manufacturer": {
       "type": "object",
-      "additionalProperties": false,
       "description": "Manufacturer information for the part",
       "required": [
         "label",
