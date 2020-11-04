@@ -39,14 +39,23 @@
     },
     "text": {
       "type": "string",
-      "description": "Text for the note"
+      "description": "Text for the note",
+      "minLength": 1,
+      "maxLength": 1000
     },
     "created_by": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/user.json"
     },
     "thread_id": {
-      "$ref": "#/properties/note_id",
-      "description": "The id of the note which started a thread"
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/properties/note_id",
+          "description": "The id of the note which started a thread"
+        }
+      ]
     },
     "issue": {
       "type": "boolean",
