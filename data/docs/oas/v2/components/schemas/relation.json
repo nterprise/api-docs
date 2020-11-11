@@ -91,6 +91,17 @@
           "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/updated"
         }
       }
+    },
+    "inherited": {
+      "description": "Parent entity the relation was inherited from",
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_type"
+        }
+      ]
     }
   }
 }

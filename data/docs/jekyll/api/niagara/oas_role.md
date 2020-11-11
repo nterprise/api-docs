@@ -425,6 +425,7 @@ This operation does not require authentication
 
 ```yaml
 type: object
+x-model: Role
 required:
   - updated
   - label
@@ -442,13 +443,13 @@ properties:
     type: string
     description: Label for the entity
   created:
-    description: Date the entity was created
     type: string
+    description: Date the entity was created
     format: date-time
     readOnly: true
   updated:
-    description: Last date the entity was updated
     type: string
+    description: Last date the entity was updated
     format: date-time
     readOnly: true
   grants:
