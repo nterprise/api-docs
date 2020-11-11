@@ -2,8 +2,8 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://docs.nterprise.com/schemas/niagara/customer.json",
   "type": "object",
-  "description": "Customer",
   "additionalProperties": false,
+  "description": "Customer",
   "required": [
     "label",
     "entity_id",
@@ -37,26 +37,8 @@
     "updated": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/updated"
     },
-    "external_platform": {
-      "type": "object",
-      "description": "External Identifiers for the customer",
-      "deprecated": true,
-      "patternProperties": {
-        "^[A-Za-z][A-Za-z0-9_]*$": {
-          "type": [
-            "string",
-            "null"
-          ]
-        }
-      }
-    },
     "allowed_statuses": {
-      "type": "array",
-      "description": "List of allowed statuses",
-      "uniqueItems": true,
-      "items": {
-        "$ref": "./status.json"
-      }
+      "$ref": "https://docs.nterprise.com/schemas/niagara/allowedStatuses.json"
     },
     "total_programs": {
       "type": "number",

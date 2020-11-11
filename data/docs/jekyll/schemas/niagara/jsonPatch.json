@@ -55,8 +55,8 @@
           },
           {
             "type": "object",
-            "description": "The test operation",
             "additionalProperties": false,
+            "description": "The test operation",
             "required": [
               "value",
               "op",

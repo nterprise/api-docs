@@ -15,14 +15,7 @@
       }
     ],
     "requestBody": {
-      "description": "The step to complete",
-      "content": {
-        "application/json": {
-          "schema": {
-            "$ref": "../../components/requestBodies/closeStep.json"
-          }
-        }
-      }
+      "$ref": "../../components/requestBodies/closeStep.json"
     },
     "responses": {
       "200": {

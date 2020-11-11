@@ -2,6 +2,8 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/equals.json",
   "type": "object",
+  "x-model": "ValidatorEquals",
+  "additionalProperties": false,
   "description": "Validate number equals a value",
   "required": [
     "type",
@@ -15,13 +17,18 @@
     },
     "options": {
       "type": "object",
+      "additionalProperties": false,
       "x-nter-skip-param": true,
       "required": [
         "value"
       ],
       "properties": {
         "value": {
-          "type": ["number", "string", "boolean"],
+          "type": [
+            "number",
+            "string",
+            "boolean"
+          ],
           "description": "The value to compare against",
           "x-nter-skip-param": true
         },

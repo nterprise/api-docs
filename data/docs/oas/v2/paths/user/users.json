@@ -22,7 +22,7 @@
     "security": [
       {
         "niagara": [
-          "user:read-all"
+          "user:all"
         ]
       }
     ]
@@ -45,7 +45,7 @@
     "security": [
       {
         "niagara": [
-          "user:read-all"
+          "user:all"
         ]
       }
     ]

@@ -75,7 +75,10 @@
               "work-order:read": "Allows access to a work order",
               "work-order:attach": "Allows attaching a relation from a work order",
               "work-order:detach": "Allows detaching a relation from a work order",
-              "work-order:all": "Allows reading all work order"
+              "work-order:all": "Allows reading all work order",
+              "context:read": "Allows reading a context",
+              "context:create": "Allows starting a context",
+              "context:step": "Allows completing a work flow step"
             }
           }
         }

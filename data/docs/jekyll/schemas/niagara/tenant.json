@@ -41,7 +41,10 @@
       "description": "Tenant is active or not"
     },
     "bucket": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "description": "Location for the tenants s3 bucket"
     },
     "cognito": {
@@ -56,7 +59,10 @@
       }
     },
     "dns": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "description": "URI to the tenant's UI domain",
       "pattern": "^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\\-]*[A-Za-z0-9])$"
     },

@@ -2,6 +2,8 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/greaterThan.json",
   "type": "object",
+  "x-model": "ValidatorGreaterThan",
+  "additionalProperties": false,
   "description": "Validate number is greater than a value. By default, this will check if value is greater than or equals to",
   "required": [
     "type",
@@ -15,6 +17,7 @@
     },
     "options": {
       "type": "object",
+      "additionalProperties": false,
       "x-nter-skip-param": true,
       "required": [
         "value"

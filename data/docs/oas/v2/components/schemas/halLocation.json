@@ -1,5 +1,7 @@
 {
   "type": "object",
+  "x-model": "HalLocation",
+  "x-hal": true,
   "allOf": [
     {
       "$ref": "./location.json"

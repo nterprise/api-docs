@@ -4,7 +4,8 @@
     "application/hal+json": {
       "schema": {
         "type": "object",
-        "additionalProperties": false,
+        "x-model": "HalProgramPage",
+        "x-hal": true,
         "required": [
           "_embedded",
           "_links",
@@ -28,7 +29,6 @@
           },
           "_embedded": {
             "type": "object",
-            "additionalProperties": false,
             "properties": {
               "nter:programs": {
                 "type": "array",
@@ -41,7 +41,6 @@
           },
           "_links": {
             "type": "object",
-            "additionalProperties": false,
             "properties": {
               "self": {
                 "$ref": "../schemas/link.json"
@@ -69,7 +68,6 @@
                 "label": "manchuck",
                 "created": "2020-01-09T22:12:03.000Z",
                 "updated": "2020-01-09T22:12:03.000Z",
-                "external_platform": {},
                 "total_programs": 21,
                 "total_projects": 42,
                 "input_filter": [],

@@ -1,10 +1,11 @@
 {
-  "description": "A paged response for files",
+  "description": "A Page of work flow BOM's",
   "content": {
     "application/hal+json": {
       "schema": {
         "type": "object",
-        "additionalProperties": false,
+        "x-model": "HalWorkFlowBomPage",
+        "x-hal": true,
         "required": [
           "_embedded",
           "_links",
@@ -28,12 +29,15 @@
           },
           "_embedded": {
             "type": "object",
+            "required": [
+              "nter:boms"
+            ],
             "properties": {
-              "nter:files": {
+              "nter:boms": {
                 "type": "array",
                 "maxItems": 100,
                 "items": {
-                  "$ref": "../schemas/halFile.json"
+                  "$ref": "../schemas/halWorkFlowBom.json"
                 }
               }
             }
@@ -42,15 +46,9 @@
             "type": "object",
             "properties": {
               "self": {
-                "x-example": {
-                  "href": "https://api.nterprise.com/files"
-                },
                 "$ref": "../schemas/link.json"
               },
               "next": {
-                "x-example": {
-                  "href": "https://api.nterprise.com/files?offset=QVBrO2wm13iEyl&limit=100"
-                },
                 "$ref": "../schemas/link.json"
               }
             }
@@ -62,17 +60,24 @@
         "limit": 42,
         "offset": "next-offset",
         "_embedded": {
-          "nter:attachments": [
+          "nter:boms": [
             {
-              "attachment_id": "attachment",
-              "label": "Test Attachment.pdf",
-              "created": "2019-09-16T21:26:14.000Z",
-              "updated": "2019-09-16T21:27:14.000Z",
-              "content_type": "application/pdf",
-              "content_length": 13396,
+              "bom_id": "bom",
+              "label": "BOM for my work flow @ clifton part warehouse",
+              "created": "2019-08-19T00:01:02.000Z",
+              "updated": "2020-08-19T01:01:02.000Z",
               "_links": {
+                "nter:bom-work-order": {
+                  "href": "https://api.nterprise.com/work-orders/work-order"
+                },
+                "nter:bom-work-flow": {
+                  "href": "https://api.nterprise.com/work-flows/work-flow"
+                },
+                "nter:bom-location": {
+                  "href": "https://api.nterprise.com/locations/location"
+                },
                 "self": {
-                  "href": "https://api.nterprise.com/attachments/attachment"
+                  "href": "https://api.nterprise.com/boms/bom"
                 }
               }
             }
@@ -80,10 +85,10 @@
         },
         "_links": {
           "next": {
-            "href": "https://api.nterprise.com/attachments?limit=42&offset=next-offset"
+            "href": "https://api.nterprise.com/notes?limit=42&offset=next-offset"
           },
           "self": {
-            "href": "https://api.nterprise.com/attachments?limit=42"
+            "href": "https://api.nterprise.com/notes?limit=42"
           }
         }
       }

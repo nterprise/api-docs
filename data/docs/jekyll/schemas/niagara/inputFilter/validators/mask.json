@@ -2,6 +2,8 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/mask.json",
   "type": "object",
+  "x-model": "ValidatorMask",
+  "additionalProperties": false,
   "description": "Validate string matches a regular expression",
   "required": [
     "type",
@@ -15,6 +17,7 @@
     },
     "options": {
       "type": "object",
+      "additionalProperties": false,
       "x-nter-skip-param": true,
       "required": [
         "mask"

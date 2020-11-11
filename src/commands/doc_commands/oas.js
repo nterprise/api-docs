@@ -7,9 +7,6 @@ const RefParser = require('json-schema-ref-parser');
 const converter = require('widdershins');
 const jp = require('jsonpath');
 const Ajv = require('ajv');
-const ajv = new Ajv({
-    allErrors: true,
-});
 const yaml = require('yaml');
 
 const widdershinsOptions = {
@@ -281,7 +278,7 @@ const buildFontMatter = (oas) => _.reduce(
     {layout: 'page'},
 );
 
-const processFile = async (logger, file, {validateExample = false}) => {
+const processFile = async (logger, ajv, validateExample, file) => {
     const localResolver = {
         order: 1,
 
@@ -411,7 +408,16 @@ const processFile = async (logger, file, {validateExample = false}) => {
 };
 
 exports.builder = (yargs) => yargs.
+    option(
+        'validate',
+        {
+            describe: 'Validate examples to schemas',
+            default: false,
+            boolean: true,
+        },
+    ).
     defaults('overwrite', true);
+
 
 exports.command = 'oas [file]';
 exports.describe = 'Generate Markdown from Open API';
@@ -433,6 +439,11 @@ const apiToPath = {
 
 exports.handler = async (argv) => {
     const logger = argv.logger;
+    const ajv = new Ajv({
+        allErrors: true,
+        removeAdditional: false,
+        logger: logger
+    });
     logger.info('Generating pages from OAS');
     logger.info('argv', argv);
     logger.debug(`${widdershinsOptions.user_templates}`);
@@ -440,6 +451,7 @@ exports.handler = async (argv) => {
     const apis = argv.api
         ? _.flatten([argv.api])
         : ['auth', 'caapi', 'niagara'];
+
     logger.debug('API to process', apis);
     const files = _.reduce(
         [argv.file],
@@ -483,6 +495,8 @@ exports.handler = async (argv) => {
         _.partial(
             processFile,
             logger,
+            ajv,
+            argv.validate,
         ),
     ));
 

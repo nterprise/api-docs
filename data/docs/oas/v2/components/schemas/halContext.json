@@ -1,5 +1,7 @@
 {
   "type": "object",
+  "x-model": "HalContext",
+  "x-hal": true,
   "allOf": [
     {
       "$ref": "./context.json"

@@ -53,7 +53,9 @@
       "description": "Marks the note as an issue"
     },
     "edited": {
-      "type": ["null", "string"],
+      "type": [
+        "string"
+      ],
       "description": "Date of the last edit for the note"
     }
   }

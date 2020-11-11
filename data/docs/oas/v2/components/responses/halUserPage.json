@@ -4,7 +4,8 @@
     "application/hal+json": {
       "schema": {
         "type": "object",
-        "additionalProperties": false,
+        "x-model": "HalUserPage",
+        "x-hal": true,
         "required": [
           "_embedded",
           "_links",
@@ -51,7 +52,7 @@
           }
         }
       },
-      "example":  {
+      "example": {
         "total_count": 21,
         "limit": 42,
         "offset": "next-offset",

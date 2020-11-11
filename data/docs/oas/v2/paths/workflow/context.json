@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchContextsForWorkflow",
-    "summary": "Fetch contexts for workflow",
-    "description": "Fetches A Page of active contexts for a workflow",
+    "summary": "Fetch contexts for work flow",
+    "description": "Fetches A Page of active contexts for a work flow",
     "tags": [
       "Work Flow"
     ],
@@ -32,8 +32,8 @@
   },
   "post": {
     "operationId": "startWorkflow",
-    "summary": "Start workflow",
-    "description": "Starts a workflow on an entity",
+    "summary": "Start work flow",
+    "description": "Starts a work flow on an entity",
     "tags": [
       "Work Flow"
     ],
@@ -49,7 +49,7 @@
             "type": "object",
             "properties": {
               "entity_type": {
-                "$ref": "https://docs.nterprise.com/schemas/niagara/entityHelper.json#/properties/entity_type"
+                "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_type"
               },
               "entity_id": {
                 "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_id"

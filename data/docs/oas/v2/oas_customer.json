@@ -68,6 +68,9 @@
     "schemas": {
       "Customer": {
         "$ref": "components/schemas/customer.json"
+      },
+      "Action": {
+        "$ref": "components/schemas/action.json"
       }
     },
     "securitySchemes": {
@@ -79,6 +82,8 @@
             "tokenUrl": "https://auth.nterprise.com/oauth/token",
             "scopes": {
               "customer:create": "Allows creating a customer",
+              "action:create": "Allows creating a customer",
+              "action:read": "Allows creating a customer",
               "customer:update": "Allows editing a customer",
               "customer:delete": "Allows deleting a customer",
               "customer:read": "Allows access to a customer",

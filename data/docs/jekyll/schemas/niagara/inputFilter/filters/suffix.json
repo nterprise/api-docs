@@ -3,6 +3,8 @@
   "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/suffix.json",
   "description": "Add a suffix to the start of a string. If the string already start with the suffix, it will not append.",
   "type": "object",
+  "x-model": "FilterSuffix",
+  "additionalProperties": false,
   "required": [
     "type",
     "options"
@@ -15,6 +17,7 @@
     },
     "options": {
       "type": "object",
+      "additionalProperties": false,
       "x-nter-skip-param": true,
       "required": [
         "suffix"

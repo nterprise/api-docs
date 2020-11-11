@@ -3,6 +3,7 @@
   "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/function/setEntityStatus.json",
   "description": "Updates the status on the Work Flow entity.",
   "type": "object",
+  "additionalProperties": false,
   "required": [
     "step_type",
     "label",
@@ -40,6 +41,7 @@
     },
     "options": {
       "type": "object",
+      "additionalProperties": false,
       "required": [
         "function",
         "payload"
@@ -56,6 +58,7 @@
         },
         "payload": {
           "type": "object",
+          "additionalProperties": false,
           "required": [
             "status"
           ],

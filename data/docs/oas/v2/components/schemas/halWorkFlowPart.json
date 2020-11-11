@@ -1,0 +1,35 @@
+{
+  "type": "object",
+  "x-model": "HalPart",
+  "x-hal": true,
+  "allOf": [
+    {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlowBom.json#/properties/parts_available/items",
+      "$comment": "Here to override the imported value from above",
+      "additionalProperties": true
+    },
+    {
+      "type": "object",
+      "required": [
+        "_links"
+      ],
+      "properties": {
+        "_links": {
+          "type": "object",
+          "required": [
+            "self",
+            "nter:bom-part"
+          ],
+          "properties": {
+            "nter:bom-part": {
+              "$ref": "./link.json"
+            },
+            "self": {
+              "$ref": "./link.json"
+            }
+          }
+        }
+      }
+    }
+  ]
+}

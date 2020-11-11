@@ -1,11 +1,11 @@
 {
   "type": "object",
+  "x-model": "Program",
   "required": [
     "created",
     "label",
     "updated",
     "allowed_statuses",
-    "customer",
     "end_date",
     "program_id",
     "start_date",
@@ -29,15 +29,6 @@
     },
     "end_date": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/program.json#/properties/end_date"
-    },
-    "customer": {
-      "type": "object",
-      "deprecated": true,
-      "allOf": [
-        {
-          "$ref": "./customer.json"
-        }
-      ]
     },
     "allowed_statuses": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/program.json#/properties/allowed_statuses"

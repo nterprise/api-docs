@@ -117,16 +117,13 @@ Permissions required:<br>
   "time_to_run": 2,
   "active": false,
   "waiting_for_user": false,
-  "data": {
-    "fizz": "buzz"
-  },
+  "data": {},
   "entity": {
     "entity_id": "customer",
     "entity_type": "CUS",
     "label": "Niagara Customer",
     "created": "2020-01-09T22:12:03.000Z",
     "updated": "2020-01-09T22:12:03.000Z",
-    "external_platform": {},
     "total_programs": 21,
     "total_projects": 42,
     "allowed_statuses": [
@@ -264,16 +261,13 @@ Permissions required:<br>
   "time_to_run": 2,
   "active": false,
   "waiting_for_user": false,
-  "data": {
-    "fizz": "buzz"
-  },
+  "data": {},
   "entity": {
     "entity_id": "customer",
     "entity_type": "CUS",
     "label": "Niagara Customer",
     "created": "2020-01-09T22:12:03.000Z",
     "updated": "2020-01-09T22:12:03.000Z",
-    "external_platform": {},
     "total_programs": 21,
     "total_projects": 42,
     "allowed_statuses": [
@@ -344,11 +338,11 @@ Permissions required:<br>
 
 <a id="opIdfetchAllWorkflows"></a>
 
-Fetches A Page of workflows
+Fetches A Page of work flows
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>work-flow:read-all</li></ul>
+<ul><li>work-flow:all</li></ul>
 </aside>
 
 <h3 id="fetchallworkflows-parameters">Parameters</h3>
@@ -421,11 +415,79 @@ Permissions required:<br>
 }
 ```
 
+### POST /work-flows
+
+<a id="opIdcreateWorkflow"></a>
+
+Creates a new work flow
+
+<aside class="warning">
+Permissions required:<br>
+<ul><li>work-flow:create</li></ul>
+</aside>
+
+> Body parameter
+
+<h3 id="createworkflow-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|label|body|string|true|Entity identifier|
+|schema_version|body|string|true|Version of the workflow schema used|
+|applies_to|body|string|true|The entity type this work flow applies too|
+|starts_at|body|string|true|Starting step|
+|steps|body|object|true|Steps for the workflow|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "work_flow_id": "work-flow",
+  "label": "My workflow",
+  "created": "2019-08-19T00:01:02.000Z",
+  "updated": "2020-08-19T01:01:02.000Z",
+  "workflow_version": 7,
+  "applies_to": "UNIT",
+  "starts_at": "work-complete",
+  "schema_version": "1.0",
+  "triggered_by": [
+    "UNIT.created"
+  ],
+  "metadata": {
+    "meta": "data"
+  },
+  "steps": {
+    "work-complete": {
+      "label": "work complete",
+      "on_complete": [],
+      "on_start": [],
+      "step_type": "success"
+    },
+    "stop-poking-me": {
+      "label": "stop poking me",
+      "on_complete": [],
+      "on_start": [],
+      "step_type": "fail"
+    }
+  },
+  "_links": {
+    "nter:work-flow-contexts": {
+      "href": "https://api.nterprise.com/work-flows/work-flow/contexts"
+    },
+    "self": {
+      "href": "https://api.nterprise.com/work-flows/work-flow"
+    }
+  }
+}
+```
+
 ### GET /work-flows/{workflow_id}
 
 <a id="opIdfetchWorkflowById"></a>
 
-Fetches a workflow
+Fetches a work flow
 
 <aside class="warning">
 Permissions required:<br>
@@ -573,7 +635,7 @@ Permissions required:<br>
 
 <a id="opIdfetchContextsForWorkflow"></a>
 
-Fetches A Page of active contexts for a workflow
+Fetches A Page of active contexts for a work flow
 
 <aside class="warning">
 Permissions required:<br>
@@ -650,16 +712,13 @@ Permissions required:<br>
         "time_to_run": 2,
         "active": false,
         "waiting_for_user": false,
-        "data": {
-          "fizz": "buzz"
-        },
+        "data": {},
         "entity": {
           "entity_id": "customer",
           "entity_type": "CUS",
           "label": "Niagara Customer",
           "created": "2020-01-09T22:12:03.000Z",
           "updated": "2020-01-09T22:12:03.000Z",
-          "external_platform": {},
           "total_programs": 21,
           "total_projects": 42,
           "allowed_statuses": [
@@ -774,7 +833,7 @@ Permissions required:<br>
 
 <a id="opIdstartWorkflow"></a>
 
-Starts a workflow on an entity
+Starts a work flow on an entity
 
 <aside class="warning">
 Permissions required:<br>
@@ -788,7 +847,7 @@ Permissions required:<br>
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |workflow_id|path|string|true|Id for the workflow|
-|entity_type|body|string|false|Entity type|
+|entity_type|body|any|false|none|
 |entity_id|body|string|false|Entity identifier|
 
 > Example responses
@@ -847,16 +906,13 @@ Permissions required:<br>
   "time_to_run": 2,
   "active": false,
   "waiting_for_user": false,
-  "data": {
-    "fizz": "buzz"
-  },
+  "data": {},
   "entity": {
     "entity_id": "customer",
     "entity_type": "CUS",
     "label": "Niagara Customer",
     "created": "2020-01-09T22:12:03.000Z",
     "updated": "2020-01-09T22:12:03.000Z",
-    "external_platform": {},
     "total_programs": 21,
     "total_projects": 42,
     "allowed_statuses": [
@@ -923,11 +979,11 @@ Permissions required:<br>
 
 <a id="opIdfetchRelationsForWorkFlow"></a>
 
-Fetches the relations for a workFlow
+Fetches the relations for a work flow
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>work-flow:relations-read-all</li></ul>
+<ul><li>work-flow:read</li></ul>
 </aside>
 
 <h3 id="fetchrelationsforworkflow-parameters">Parameters</h3>
@@ -1007,7 +1063,7 @@ Permissions required:<br>
 |relation|body|string|true|Type of relation|
 |entity|body|object|true|none|
 |&nbsp;&nbsp; entity_id|body|string|true|Entity identifier|
-|&nbsp;&nbsp; entity_type|body|string|true|Entity type|
+|&nbsp;&nbsp; entity_type|body|any|true|none|
 
 > Example responses
 
@@ -1043,7 +1099,7 @@ Permissions required:<br>
 
 <a id="opIddeleteRelationForWorkFlow"></a>
 
-Deletes a relation for a workFlow
+Deletes a relation for a work flow
 
 <aside class="warning">
 Permissions required:<br>
@@ -1087,32 +1143,22 @@ Permissions required:<br>
 }
 ```
 
-<h1 id="work-flows-workflow">Workflow</h1>
+### GET /work-flows/{workflow_id}/boms
 
-## Operations
+<a id="opIdfetchBomsForWorkFlow"></a>
 
-### POST /work-flows
-
-<a id="opIdcreateWorkflow"></a>
-
-Creates a new workflow
+Fetches all BOM's for a work flow
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>work-flow:create</li></ul>
+<ul><li>work-flow:read</li></ul>
 </aside>
 
-> Body parameter
-
-<h3 id="createworkflow-parameters">Parameters</h3>
+<h3 id="fetchbomsforworkflow-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|label|body|string|true|Entity identifier|
-|schema_version|body|string|true|Version of the workflow schema used|
-|applies_to|body|string|true|The entity type this work flow applies too|
-|starts_at|body|string|true|Starting step|
-|steps|body|object|true|Steps for the workflow|
+|workflow_id|path|string|true|Id for the workflow|
 
 > Example responses
 
@@ -1120,40 +1166,376 @@ Permissions required:<br>
 
 ```json
 {
-  "work_flow_id": "work-flow",
-  "label": "My workflow",
-  "created": "2019-08-19T00:01:02.000Z",
-  "updated": "2020-08-19T01:01:02.000Z",
-  "workflow_version": 7,
-  "applies_to": "UNIT",
-  "starts_at": "work-complete",
-  "schema_version": "1.0",
-  "triggered_by": [
-    "UNIT.created"
-  ],
-  "metadata": {
-    "meta": "data"
-  },
-  "steps": {
-    "work-complete": {
-      "label": "work complete",
-      "on_complete": [],
-      "on_start": [],
-      "step_type": "success"
-    },
-    "stop-poking-me": {
-      "label": "stop poking me",
-      "on_complete": [],
-      "on_start": [],
-      "step_type": "fail"
-    }
+  "total_count": 21,
+  "limit": 42,
+  "offset": "next-offset",
+  "_embedded": {
+    "nter:boms": [
+      {
+        "bom_id": "bom",
+        "label": "BOM for my work flow @ clifton part warehouse",
+        "created": "2019-08-19T00:01:02.000Z",
+        "updated": "2020-08-19T01:01:02.000Z",
+        "_links": {
+          "nter:bom-work-order": {
+            "href": "https://api.nterprise.com/work-orders/work-order"
+          },
+          "nter:bom-work-flow": {
+            "href": "https://api.nterprise.com/work-flows/work-flow"
+          },
+          "nter:bom-location": {
+            "href": "https://api.nterprise.com/locations/location"
+          },
+          "self": {
+            "href": "https://api.nterprise.com/boms/bom"
+          }
+        }
+      }
+    ]
   },
   "_links": {
-    "nter:work-flow-contexts": {
-      "href": "https://api.nterprise.com/work-flows/work-flow/contexts"
+    "next": {
+      "href": "https://api.nterprise.com/notes?limit=42&offset=next-offset"
     },
     "self": {
+      "href": "https://api.nterprise.com/notes?limit=42"
+    }
+  }
+}
+```
+
+### GET /work-flows/{workflow_id}/boms/{location_id}
+
+<a id="opIdfetchLocationBomForWorkFlow"></a>
+
+Fetches a BOM for a location
+
+<aside class="warning">
+Permissions required:<br>
+<ul><li>work-flow:read</li></ul>
+</aside>
+
+<h3 id="fetchlocationbomforworkflow-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|workflow_id|path|string|true|Id for the workflow|
+|location_id|path|string|true|Id for the location|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "bom_id": "bom",
+  "label": "BOM for my work flow @ clifton part warehouse",
+  "created": "2019-08-19T00:01:02.000Z",
+  "updated": "2020-08-19T01:01:02.000Z",
+  "_embedded": {
+    "nter:bom-work-flow": [
+      {
+        "work_flow_id": "work-flow",
+        "label": "My workflow",
+        "created": "2019-08-19T00:01:02.000Z",
+        "updated": "2020-08-19T01:01:02.000Z",
+        "workflow_version": 7,
+        "applies_to": "UNIT",
+        "starts_at": "work-complete",
+        "schema_version": "1.0",
+        "triggered_by": [
+          "UNIT.created"
+        ],
+        "metadata": {
+          "meta": "data"
+        },
+        "steps": {
+          "work-complete": {
+            "label": "work complete",
+            "on_complete": [],
+            "on_start": [],
+            "step_type": "success"
+          },
+          "stop-poking-me": {
+            "label": "stop poking me",
+            "on_complete": [],
+            "on_start": [],
+            "step_type": "fail"
+          }
+        },
+        "_links": {
+          "nter:work-flow-contexts": {
+            "href": "https://api.nterprise.com/work-flows/work-flow/contexts"
+          },
+          "self": {
+            "href": "https://api.nterprise.com/work-flows/work-flow"
+          }
+        }
+      }
+    ],
+    "nter:bom-work-order": [
+      {
+        "work_order_id": "work-order",
+        "label": "My workOrder",
+        "created": "2019-08-19T00:01:02.000Z",
+        "updated": "2020-08-19T01:01:02.000Z",
+        "description": "Workorder description",
+        "work_order_type": "device",
+        "begin_date": "2021-08-19T02:01:02.000Z",
+        "due_date": "2021-08-19T02:01:02.000Z",
+        "start_date": "2021-08-19T02:01:02.000Z",
+        "end_date": "2021-08-19T02:01:02.000Z",
+        "project": {
+          "project_id": "project",
+          "label": "New York Stores",
+          "description": "Project description",
+          "created": "2020-01-09T22:12:03.000Z",
+          "updated": "2020-01-09T22:12:03.000Z",
+          "customer": {
+            "customer_id": "customer",
+            "label": "manchuck",
+            "created": "2020-01-09T22:12:03.000Z",
+            "updated": "2020-01-09T22:12:03.000Z",
+            "total_programs": 21,
+            "total_projects": 42,
+            "allowed_statuses": [
+              {
+                "category": "PENDING",
+                "description": "For something that is Pending",
+                "status": "Pending",
+                "order": 3
+              },
+              {
+                "category": "IN_PROGRESS",
+                "description": "For something that is In Progress",
+                "status": "In Progress",
+                "order": 4
+              },
+              {
+                "category": "VERIFYING",
+                "description": "For something that is Verifying",
+                "status": "Verifying",
+                "order": 5
+              },
+              {
+                "category": "BLOCKED",
+                "description": "For something that is Blocked",
+                "status": "Blocked",
+                "order": 6
+              },
+              {
+                "category": "COMPLETE",
+                "description": "For something that is Complete",
+                "status": "Complete",
+                "order": 7
+              },
+              {
+                "category": "CANCELLED",
+                "description": "For something that is Cancelled",
+                "status": "Cancelled",
+                "order": 8
+              }
+            ],
+            "input_filter": []
+          },
+          "program": {
+            "program_id": "program",
+            "label": "North east stores",
+            "created": "2020-01-09T22:12:03.000Z",
+            "updated": "2020-01-09T22:12:03.000Z",
+            "customer": {
+              "customer_id": "customer",
+              "label": "manchuck",
+              "created": "2020-01-09T22:12:03.000Z",
+              "updated": "2020-01-09T22:12:03.000Z",
+              "external_platform": {},
+              "total_programs": 21,
+              "total_projects": 42,
+              "allowed_statuses": [
+                {
+                  "category": "PENDING",
+                  "description": "For something that is Pending",
+                  "status": "Pending",
+                  "order": 3
+                },
+                {
+                  "category": "IN_PROGRESS",
+                  "description": "For something that is In Progress",
+                  "status": "In Progress",
+                  "order": 4
+                },
+                {
+                  "category": "VERIFYING",
+                  "description": "For something that is Verifying",
+                  "status": "Verifying",
+                  "order": 5
+                },
+                {
+                  "category": "BLOCKED",
+                  "description": "For something that is Blocked",
+                  "status": "Blocked",
+                  "order": 6
+                },
+                {
+                  "category": "COMPLETE",
+                  "description": "For something that is Complete",
+                  "status": "Complete",
+                  "order": 7
+                },
+                {
+                  "category": "CANCELLED",
+                  "description": "For something that is Cancelled",
+                  "status": "Cancelled",
+                  "order": 8
+                }
+              ],
+              "input_filter": []
+            },
+            "end_date": "2020-02-10T22:12:03.000Z",
+            "start_date": "2020-02-10T22:12:03.000Z",
+            "allowed_statuses": [
+              {
+                "category": "PENDING",
+                "description": "For something that is Pending",
+                "status": "Pending",
+                "order": 3
+              },
+              {
+                "category": "VERIFYING",
+                "description": "For something that is Verifying",
+                "status": "Verifying",
+                "order": 5
+              }
+            ],
+            "input_filter": []
+          },
+          "end_date": "2020-02-10T22:12:03.000Z",
+          "start_date": "2020-02-10T22:12:03.000Z",
+          "allowed_statuses": [
+            {
+              "category": "PENDING",
+              "description": "For something that is Pending",
+              "status": "Pending",
+              "order": 3
+            }
+          ],
+          "input_filter": []
+        },
+        "location": {
+          "location_id": "location",
+          "label": "Test Label",
+          "created": "2019-08-19T00:01:02.000Z",
+          "updated": "2020-08-19T01:01:02.000Z",
+          "location_type": "warehouse",
+          "formatted_address": "Test Label\n431 Broadway Suite c\nMenands NY 12204 USA",
+          "address": {
+            "country": "USA",
+            "administrative_area": "NY",
+            "sub_administrative_area": "Albany",
+            "locality": "Menands",
+            "postal_code": "12204",
+            "thoroughfare": "431 Broadway",
+            "premise": "Suite c",
+            "sub_premise": "ZIC"
+          }
+        },
+        "current_status": {
+          "category": "IN_PROGRESS",
+          "description": "For something that is Reticulating Splines",
+          "status": "Reticulating Splines",
+          "order": 2
+        },
+        "cycles": {
+          "needed": 1,
+          "pending": 1,
+          "in_progress": 0,
+          "verifying": 0,
+          "complete": 0,
+          "blocked": 0,
+          "cancelled": 0,
+          "active": 1,
+          "in_active": 0,
+          "assigned": 0,
+          "work_flow": {
+            "work_flow_id": "work-flow",
+            "created": "2019-08-19T00:01:02.000Z",
+            "updated": "2020-08-19T01:01:02.000Z",
+            "label": "My workflow",
+            "schema_version": "1.0",
+            "workflow_version": 7,
+            "applies_to": "UNIT",
+            "starts_at": "work-complete",
+            "metadata": {
+              "meta": "data"
+            },
+            "steps": {
+              "work-complete": {
+                "step_type": "success",
+                "label": "work complete",
+                "on_start": [],
+                "on_complete": []
+              },
+              "stop-poking-me": {
+                "step_type": "fail",
+                "label": "stop poking me",
+                "on_start": [],
+                "on_complete": []
+              }
+            },
+            "triggered_by": [
+              "UNIT.created"
+            ]
+          }
+        },
+        "input_filter": [],
+        "_embedded": {
+          "nter:work-order-project": [],
+          "nter:work-order-location": [],
+          "nter:work-order-program": [],
+          "nter:work-order-customer": []
+        },
+        "_links": {
+          "nter:work-order-batches": {
+            "href": "https://api.nterprise.com/work-orders/work-order/batches"
+          },
+          "nter:work-order-queues": {
+            "href": "https://api.nterprise.com/work-orders/work-order/queues"
+          },
+          "self": {
+            "href": "https://api.nterprise.com/work-orders/work-order"
+          }
+        }
+      }
+    ],
+    "nter:bom-available-parts": [
+      {
+        "part_id": "part",
+        "label": "Apple iPad",
+        "needed": 2,
+        "available": 42,
+        "_links": {
+          "self": {
+            "href": "https://api.nterprise.com/boms/bom_id/parts/part"
+          },
+          "nter:bom-part": {
+            "href": "https://api.nterprise.com/parts/part"
+          }
+        }
+      }
+    ]
+  },
+  "_links": {
+    "nter:bom-work-order": {
+      "href": "https://api.nterprise.com/work-orders/work-order"
+    },
+    "nter:bom-work-flow": {
       "href": "https://api.nterprise.com/work-flows/work-flow"
+    },
+    "nter:bom-location": {
+      "href": "https://api.nterprise.com/locations/location"
+    },
+    "self": {
+      "href": "https://api.nterprise.com/boms/bom"
     }
   }
 }
@@ -1245,11 +1627,11 @@ properties:
     x-patternProperties:
       "^[A-Za-z][A-Za-z0-9-]*$":
         oneOf:
-          - &a13
-            $schema: http://json-schema.org/draft-07/schema#
+          - $schema: http://json-schema.org/draft-07/schema#
             $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/function/allocateUnitsToProject.json
             description: Allocates units to a project.
             type: object
+            additionalProperties: false
             required:
               - step_type
               - label
@@ -1299,6 +1681,7 @@ properties:
                 description: Values to set on the context
                 items:
                   type: object
+                  additionalProperties: false
                   required:
                     - key
                     - value
@@ -1321,6 +1704,7 @@ properties:
                     $schema: http://json-schema.org/draft-07/schema#
                     $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepError.json
                     type: object
+                    additionalProperties: false
                     required:
                       - retry
                       - finally
@@ -1336,6 +1720,7 @@ properties:
                         default: 0
                       finally:
                         type: object
+                        additionalProperties: false
                         description: What to do after all retries
                         properties:
                           actions: *a1
@@ -1349,6 +1734,7 @@ properties:
                     additionalProperties: false
               options:
                 type: object
+                additionalProperties: false
                 required:
                   - function
                   - payload
@@ -1363,6 +1749,7 @@ properties:
                       - allocate-unit-to-project
                   payload:
                     type: object
+                    additionalProperties: false
                     required:
                       - part_id
                       - project_id
@@ -1385,11 +1772,12 @@ properties:
                       status:
                         type: string
                         description: Only assign units which are in this status
-          - &a14
+          - &a13
             $schema: http://json-schema.org/draft-07/schema#
             $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/function/setEntityStatus.json
             description: Updates the status on the Work Flow entity.
             type: object
+            additionalProperties: false
             required:
               - step_type
               - label
@@ -1408,6 +1796,7 @@ properties:
               on_timeout: *a9
               options:
                 type: object
+                additionalProperties: false
                 required:
                   - function
                   - payload
@@ -1419,6 +1808,7 @@ properties:
                       - set-entity-status
                   payload:
                     type: object
+                    additionalProperties: false
                     required:
                       - status
                     properties:
@@ -1454,17 +1844,13 @@ properties:
                           order:
                             type: number
                             description: Order status appears when listing
-                        examples:
-                          - category: COMPLETE
-                            description: For something that is Complete
-                            status: Complete
-                            order: 7
-          - &a15
+          - &a14
             $schema: http://json-schema.org/draft-07/schema#
             $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/followPDFInstructions.json
             description: Display a link or modal to a user which contains instructions from
               a PDF
             type: object
+            additionalProperties: false
             required:
               - step_type
               - label
@@ -1487,6 +1873,7 @@ properties:
               on_timeout: *a9
               options:
                 type: object
+                additionalProperties: false
                 required:
                   - component
                   - payload
@@ -1496,6 +1883,7 @@ properties:
                       - follow-pdf-instructions
                   payload:
                     type: object
+                    additionalProperties: false
                     required:
                       - attachment_id
                     properties:
@@ -1504,11 +1892,12 @@ properties:
                         type: string
                         readOnly: true
                         pattern: ^[0-9a-zA-Z-_]+$
-          - &a16
+          - &a15
             $schema: http://json-schema.org/draft-07/schema#
             $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/manualDataEntry.json
             description: Ask the user to manually enter (or confirm) data for an entity
             type: object
+            additionalProperties: false
             required:
               - step_type
               - label
@@ -1527,12 +1916,14 @@ properties:
               on_timeout: *a9
               options:
                 type: object
+                additionalProperties: false
                 properties:
                   component:
                     enum:
                       - manual-data-entry
                   payload:
                     type: object
+                    additionalProperties: false
                     required:
                       - fields
                     properties:
@@ -1541,6 +1932,7 @@ properties:
                         description: Configuration for each field
                         items:
                           type: object
+                          additionalProperties: false
                           required:
                             - input_type
                             - label
@@ -1569,11 +1961,12 @@ properties:
                                 with '$' then the entity on the context is
                                 assumed. Otherwise the data will be set on the
                                 context path
-          - &a17
+          - &a16
             $schema: http://json-schema.org/draft-07/schema#
             $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/taskList.json
             description: Ask the user to follow a list and check off boxes
             type: object
+            additionalProperties: false
             required:
               - step_type
               - label
@@ -1592,12 +1985,14 @@ properties:
               on_timeout: *a9
               options:
                 type: object
+                additionalProperties: false
                 properties:
                   component:
                     enum:
                       - task-list
                   payload:
                     type: object
+                    additionalProperties: false
                     required:
                       - items
                     properties:
@@ -1610,6 +2005,7 @@ properties:
                         description: Configuration for each task list item
                         items:
                           type: object
+                          additionalProperties: false
                           required:
                             - label
                             - evaluated
@@ -1635,11 +2031,12 @@ properties:
                             na_field:
                               type: boolean
                               description: Allow the user to select the N/A option when checking off the list
-          - &a18
+          - &a17
             $schema: http://json-schema.org/draft-07/schema#
             $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/machine/aceIos.json
             description: Run the ACE-IOS application to provision iOS devices
             type: object
+            additionalProperties: false
             required:
               - step_type
               - label
@@ -1661,6 +2058,7 @@ properties:
               on_timeout: *a9
               options:
                 type: object
+                additionalProperties: false
                 required:
                   - application
                   - configuration
@@ -1670,6 +2068,7 @@ properties:
                     description: Name of the UI component
                   application:
                     type: object
+                    additionalProperties: false
                     required:
                       - application_id
                     properties:
@@ -1683,6 +2082,7 @@ properties:
                           type: string
                   configuration:
                     type: object
+                    additionalProperties: false
                     description: ACE Configuration options
                     properties:
                       pairing_cert:
@@ -1724,6 +2124,7 @@ properties:
                         description: List of fields to map to the device
                         items:
                           type: object
+                          additionalProperties: false
                           properties:
                             from:
                               type: string
@@ -1796,6 +2197,7 @@ properties:
                 description: Context variable to check
                 items:
                   type: object
+                  additionalProperties: false
                   maxProperties: 2
                   minProperties: 2
                   properties:
@@ -1910,6 +2312,7 @@ properties:
                 description: List of events and conditions to listen for to trigger
                 items:
                   type: object
+                  additionalProperties: false
                   required:
                     - event
                   properties:
@@ -2023,6 +2426,7 @@ properties:
                             - WOR.moved-to
                     event_value:
                       type: object
+                      additionalProperties: false
                       description: The event conditions that have to be met
                       allOf:
                         - *a12
@@ -2081,7 +2485,6 @@ properties:
                         - *a15
                         - *a16
                         - *a17
-                        - *a18
                         - *a12
 
 ```

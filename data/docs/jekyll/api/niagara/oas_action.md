@@ -44,7 +44,7 @@ Fetch a page of actions
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>action:read-all</li></ul>
+<ul><li>action:all</li></ul>
 </aside>
 
 > Example responses
@@ -326,6 +326,7 @@ properties:
     description: Order to process the action
   entity:
     type: object
+    additionalProperties: false
     description: Entity the action is configured for
     required:
       - entity_id
@@ -338,9 +339,11 @@ properties:
         pattern: ^[0-9a-zA-Z-_]+$
       entity_type:
         enum:
+          - ACT
           - BAT
           - CON
           - CTX
+          - CUS
           - FILE
           - LOC
           - MFR
@@ -351,8 +354,8 @@ properties:
           - PUSH
           - QUE
           - RES
-          - SRES
           - ROLE
+          - SRES
           - UNIT
           - USER
           - VEN
@@ -475,6 +478,7 @@ properties:
     maxItems: 10
     items:
       type: object
+      additionalProperties: false
       required:
         - entity
         - property
@@ -482,9 +486,11 @@ properties:
       properties:
         entity:
           enum:
+            - ACT
             - BAT
             - CON
             - CTX
+            - CUS
             - FILE
             - LOC
             - MFR
@@ -495,8 +501,8 @@ properties:
             - PUSH
             - QUE
             - RES
-            - SRES
             - ROLE
+            - SRES
             - UNIT
             - USER
             - VEN
@@ -536,6 +542,7 @@ properties:
                 - notify
             options:
               type: object
+              additionalProperties: false
               description: Options for the effect
               required:
                 - contacts
@@ -579,6 +586,7 @@ properties:
                 - notify
             options:
               type: object
+              additionalProperties: false
               description: Options for the effect
               required:
                 - entity
@@ -587,9 +595,11 @@ properties:
               properties:
                 entity:
                   enum:
+                    - ACT
                     - BAT
                     - CON
                     - CTX
+                    - CUS
                     - FILE
                     - LOC
                     - MFR
@@ -600,8 +610,8 @@ properties:
                     - PUSH
                     - QUE
                     - RES
-                    - SRES
                     - ROLE
+                    - SRES
                     - UNIT
                     - USER
                     - VEN

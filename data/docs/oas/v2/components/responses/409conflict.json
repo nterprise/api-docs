@@ -4,7 +4,12 @@
     "application/problem+json": {
       "schema": {
         "type": "object",
-        "additionalProperties": false,
+        "required": [
+          "type",
+          "detail",
+          "status",
+          "title"
+        ],
         "properties": {
           "title": {
             "const": "Conflict"

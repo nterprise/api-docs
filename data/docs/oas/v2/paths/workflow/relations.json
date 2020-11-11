@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchRelationsForWorkFlow",
-    "summary": "Fetch WorkFlow relations",
-    "description": "Fetches the relations for a workFlow",
+    "summary": "Fetch Work Flow relations",
+    "description": "Fetches the relations for a work flow",
     "tags": [
       "Work Flow"
     ],
@@ -28,7 +28,7 @@
     "security": [
       {
         "niagara": [
-          "work-flow:relations-read-all"
+          "work-flow:read"
         ]
       }
     ]

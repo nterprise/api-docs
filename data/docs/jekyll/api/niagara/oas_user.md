@@ -51,7 +51,7 @@ Fetches A Page of users
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>user:read-all</li></ul>
+<ul><li>user:all</li></ul>
 </aside>
 
 <h3 id="fetchallusers-parameters">Parameters</h3>
@@ -107,7 +107,7 @@ Creates a new user
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>user:read-all</li></ul>
+<ul><li>user:all</li></ul>
 </aside>
 
 > Body parameter
@@ -521,6 +521,7 @@ properties:
     description: Array of user attributes
     items:
       type: object
+      additionalProperties: false
       description: User Attribute
       maxItems: 15
       required:

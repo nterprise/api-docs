@@ -2,8 +2,8 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://docs.nterprise.com/schemas/niagara/action.json",
   "type": "object",
-  "description": "Action",
   "additionalProperties": false,
+  "description": "Action",
   "required": [
     "created",
     "criteria",
@@ -42,6 +42,7 @@
     },
     "entity": {
       "type": "object",
+      "additionalProperties": false,
       "description": "Entity the action is configured for",
       "required": [
         "entity_id",
@@ -77,6 +78,7 @@
       "maxItems": 10,
       "items": {
         "type": "object",
+        "additionalProperties": false,
         "required": [
           "property",
           "operator"
@@ -96,7 +98,11 @@
             ]
           },
           "value": {
-            "type": ["string", "object", "null"],
+            "type": [
+              "string",
+              "object",
+              "null"
+            ],
             "description": "The value to compare"
           }
         }

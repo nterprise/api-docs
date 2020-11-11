@@ -1,5 +1,6 @@
 {
   "type": "object",
+  "x-model": "Context",
   "properties": {
     "context_id": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/context.json#/properties/context_id"
@@ -12,15 +13,6 @@
     },
     "updated": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/context.json#/properties/updated"
-    },
-    "workflow": {
-      "type": "object",
-      "deprecated": true,
-      "allOf": [
-        {
-          "$ref": "./workFlow.json"
-        }
-      ]
     },
     "current_step": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/context.json#/properties/current_step"

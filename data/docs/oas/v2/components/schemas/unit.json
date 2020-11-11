@@ -1,22 +1,16 @@
 {
   "type": "object",
+  "x-model": "Unit",
   "required": [
-    "location",
     "created",
     "label",
     "updated",
-    "manufacturer",
     "input_filter",
-    "customer",
-    "resource",
     "current_status",
     "tenant_part_number",
-    "current_location",
-    "part",
     "raw_serial_number",
     "serial_number",
-    "unit_id",
-    "vendor"
+    "unit_id"
   ],
   "properties": {
     "unit_id": {
@@ -39,84 +33,6 @@
     },
     "tenant_part_number": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/unit.json#/properties/tenant_part_number"
-    },
-    "manufacturer": {
-      "type": "object",
-      "deprecated": true,
-      "allOf": [
-        {
-          "$ref": "./manufacturer.json"
-        }
-      ]
-    },
-    "vendor": {
-      "deprecated": true,
-      "anyOf": [
-        {
-          "type": "null"
-        },
-        {
-          "$ref": "./vendor.json"
-        }
-      ]
-    },
-    "part": {
-      "type": "object",
-      "deprecated": true,
-      "allOf": [
-        {
-          "$ref": "./part.json"
-        }
-      ]
-    },
-    "customer": {
-      "type": "object",
-      "deprecated": true,
-      "allOf": [
-        {
-          "$ref": "./customer.json"
-        }
-      ]
-    },
-    "current_location": {
-      "type": "object",
-      "deprecated": true,
-      "allOf": [
-        {
-          "$ref": "./location.json"
-        }
-      ]
-    },
-    "location": {
-      "type": "object",
-      "deprecated": true,
-      "allOf": [
-        {
-          "$ref": "./location.json"
-        }
-      ]
-    },
-    "resource": {
-      "deprecated": true,
-      "anyOf": [
-        {
-          "type": "null"
-        },
-        {
-          "$ref": "./resource.json"
-        }
-      ]
-    },
-    "sub_resource": {
-      "deprecated": true,
-      "anyOf": [
-        {
-          "type": "null"
-        },
-        {
-          "$ref": "./subResource.json"
-        }
-      ]
     },
     "input_filter": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/unit.json#/properties/input_filter"

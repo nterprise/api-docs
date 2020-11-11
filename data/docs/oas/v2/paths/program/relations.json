@@ -28,7 +28,7 @@
     "security": [
       {
         "niagara": [
-          "program:relations-read-all"
+          "program:read"
         ]
       }
     ]

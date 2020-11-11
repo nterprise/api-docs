@@ -2,8 +2,8 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://docs.nterprise.com/schemas/niagara/contact.json",
   "type": "object",
-  "description": "Contact Information",
   "additionalProperties": false,
+  "description": "Contact Information",
   "required": [
     "label",
     "entity_id",
@@ -61,6 +61,7 @@
     },
     "notifications": {
       "type": "object",
+      "additionalProperties": false,
       "description": "Notification settings",
       "properties": {
         "in_app": {

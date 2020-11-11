@@ -4,7 +4,8 @@
     "application/hal+json": {
       "schema": {
         "type": "object",
-        "additionalProperties": false,
+        "x-model": "HalLocationPage",
+        "x-hal": true,
         "required": [
           "_embedded",
           "_links",

@@ -1,6 +1,6 @@
 {
   "get": {
-    "operationId": "fetchAllVendor",
+    "operationId": "fetchAllVendors",
     "summary": "Fetch vendors",
     "description": "Fetches A Page of vendor",
     "tags": [

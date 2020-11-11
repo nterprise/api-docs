@@ -2,6 +2,8 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/validators/blackList.json",
   "type": "object",
+  "x-model": "ValidatorBlackList",
+  "additionalProperties": false,
   "description": "Validate value does not match a list (black list)",
   "required": [
     "type",
@@ -15,6 +17,7 @@
     },
     "options": {
       "type": "object",
+      "additionalProperties": false,
       "x-nter-skip-param": true,
       "required": [
         "list"
@@ -26,7 +29,11 @@
           "maximum": 100,
           "description": "The list of approved values",
           "items": {
-            "type": ["string", "number", "boolean"]
+            "type": [
+              "string",
+              "number",
+              "boolean"
+            ]
           },
           "x-nter-skip-param": true
         },

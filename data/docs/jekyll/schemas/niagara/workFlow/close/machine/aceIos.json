@@ -2,10 +2,12 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/close/machine/aceIos.json",
   "type": "object",
+  "additionalProperties": false,
   "description": "Complete an ACE-IOS step",
   "properties": {
     "options": {
       "type": "object",
+      "additionalProperties": false,
       "required": [
         "application",
         "configuration"
@@ -22,6 +24,7 @@
           "description": "Field values to set",
           "items": {
             "type": "object",
+            "additionalProperties": false,
             "required": [
               "value",
               "label"
@@ -29,36 +32,27 @@
             "properties": {
               "value": {
                 "type": "string",
-                "description": "Value to set on 'entity_path'. Note: this MUST always be passed as a string. The input filter is responsible for transforming the value to the correct data type",
-                "example": "AX-7784899",
-                "x-examples": [
-                  "AX-7784899"
-                ]
+                "description": "Value to set on 'entity_path'. Note: this MUST always be passed as a string. The input filter is responsible for transforming the value to the correct data type"
               },
               "entity_field": {
                 "type": "string",
-                "description": "JSON Path to the field on the entity. If the path does not start with '$' then the entity on the context is assumed. Otherwise the data will be set on the context path",
-                "example": "$.input_filter[?(@.key = 'asset-tag')]",
-                "x-examples": [
-                  "$.input_filter[?(@.key = 'asset-tag')]"
-                ]
+                "description": "JSON Path to the field on the entity. If the path does not start with '$' then the entity on the context is assumed. Otherwise the data will be set on the context path"
               }
             }
           }
         },
         "icon_layout": {
           "type": "array",
-          "description": "An ordered nested list of icons on the home screen."
+          "description": "An ordered nested list of icons on the home screen.",
+          "items": {
+            "type": "string"
+          }
         },
         "installed_apps": {
           "type": "array",
           "description": "A list of applications installed on the device.",
           "items": {
-            "type": "string",
-            "example": "com.apple.itunes",
-            "x-examples": [
-              "com.apple.itunes"
-            ]
+            "type": "string"
           }
         },
         "battery_charge": {

@@ -2,6 +2,8 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/number.json",
   "type": "object",
+  "x-model": "FilterNumber",
+  "additionalProperties": false,
   "description": "Filter to transform a value into a number. Non numeric characters (including comma and decimal points) will be removed",
   "required": [
     "type",
@@ -15,6 +17,7 @@
     },
     "options": {
       "type": "object",
+      "additionalProperties": false,
       "description": "Number filter has no options",
       "x-nter-skip-param": true
     }

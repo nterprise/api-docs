@@ -102,7 +102,6 @@ Permissions required:<br>
         "label": "manchuck",
         "created": "2020-01-09T22:12:03.000Z",
         "updated": "2020-01-09T22:12:03.000Z",
-        "external_platform": {},
         "total_programs": 21,
         "total_projects": 42,
         "allowed_statuses": [

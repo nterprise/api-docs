@@ -1,5 +1,6 @@
 {
   "type": "object",
+  "x-model": "WorkFlow",
   "required": [
     "work_flow_id",
     "label",

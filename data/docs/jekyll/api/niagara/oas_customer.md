@@ -34,6 +34,8 @@ Customers are considered a top-level `entity.` `Users` must be granted the `crea
 |Scope|Scope Description|
 |---|---|
 |customer:create|Allows creating a customer|
+|action:create|Allows creating a customer|
+|action:read|Allows creating a customer|
 |customer:update|Allows editing a customer|
 |customer:delete|Allows deleting a customer|
 |customer:read|Allows access to a customer|
@@ -53,7 +55,7 @@ Fetches A Page of customers
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>customer:read-all</li></ul>
+<ul><li>customer:all</li></ul>
 </aside>
 
 <h3 id="fetchallcustomers-parameters">Parameters</h3>
@@ -79,7 +81,6 @@ Permissions required:<br>
         "label": "manchuck",
         "created": "2020-01-09T22:12:03.000Z",
         "updated": "2020-01-09T22:12:03.000Z",
-        "external_platform": {},
         "total_programs": 21,
         "total_projects": 42,
         "allowed_statuses": [
@@ -170,7 +171,6 @@ Permissions required:<br>
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |label|body|string|true|Label for the entity|
-|external_platform|body|object|false|External Identifiers for the customer|
 |allowed_statuses|body|[object]|true|List of allowed statuses|
 |&nbsp;&nbsp; status|body|string|true|A Custom label for the status|
 |&nbsp;&nbsp; category|body|string|true|The classifier for the statues|
@@ -188,7 +188,6 @@ Permissions required:<br>
   "label": "Niagara Customer",
   "created": "2020-01-09T22:12:03.000Z",
   "updated": "2020-01-09T22:12:03.000Z",
-  "external_platform": {},
   "total_programs": 21,
   "total_projects": 42,
   "allowed_statuses": [
@@ -280,7 +279,6 @@ Permissions required:<br>
   "label": "Niagara Customer",
   "created": "2020-01-09T22:12:03.000Z",
   "updated": "2020-01-09T22:12:03.000Z",
-  "external_platform": {},
   "total_programs": 21,
   "total_projects": 42,
   "allowed_statuses": [
@@ -364,7 +362,6 @@ Permissions required:<br>
 |---|---|---|---|---|
 |customer_id|path|string|true|Id of the customer|
 |label|body|string|true|Label for the entity|
-|external_platform|body|object|false|External Identifiers for the customer|
 |allowed_statuses|body|[object]|true|List of allowed statuses|
 |&nbsp;&nbsp; status|body|string|true|A Custom label for the status|
 |&nbsp;&nbsp; category|body|string|true|The classifier for the statues|
@@ -382,7 +379,6 @@ Permissions required:<br>
   "label": "Niagara Customer",
   "created": "2020-01-09T22:12:03.000Z",
   "updated": "2020-01-09T22:12:03.000Z",
-  "external_platform": {},
   "total_programs": 21,
   "total_projects": 42,
   "allowed_statuses": [
@@ -562,7 +558,6 @@ Permissions required:<br>
           "label": "manchuck",
           "created": "2020-01-09T22:12:03.000Z",
           "updated": "2020-01-09T22:12:03.000Z",
-          "external_platform": {},
           "total_programs": 21,
           "total_projects": 42,
           "input_filter": [],
@@ -682,7 +677,6 @@ Permissions required:<br>
           "label": "manchuck",
           "created": "2020-01-09T22:12:03.000Z",
           "updated": "2020-01-09T22:12:03.000Z",
-          "external_platform": {},
           "total_programs": 21,
           "total_projects": 42,
           "input_filter": [],
@@ -808,7 +802,6 @@ Permissions required:<br>
           "label": "manchuck",
           "created": "2020-01-09T22:12:03.000Z",
           "updated": "2020-01-09T22:12:03.000Z",
-          "external_platform": {},
           "total_programs": 21,
           "total_projects": 42,
           "allowed_statuses": [
@@ -972,7 +965,7 @@ Fetches the relations for a customer
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>customer:relations-read-all</li></ul>
+<ul><li>customer:read</li></ul>
 </aside>
 
 <h3 id="fetchrelationsforcustomer-parameters">Parameters</h3>
@@ -1052,7 +1045,7 @@ Permissions required:<br>
 |relation|body|string|true|Type of relation|
 |entity|body|object|true|none|
 |&nbsp;&nbsp; entity_id|body|string|true|Entity identifier|
-|&nbsp;&nbsp; entity_type|body|string|true|Entity type|
+|&nbsp;&nbsp; entity_type|body|any|true|none|
 
 > Example responses
 
@@ -1190,7 +1183,6 @@ Permissions required:<br>
             "label": "manchuck",
             "created": "2020-01-09T22:12:03.000Z",
             "updated": "2020-01-09T22:12:03.000Z",
-            "external_platform": {},
             "total_programs": 21,
             "total_projects": 42,
             "allowed_statuses": [
@@ -1436,7 +1428,6 @@ Permissions required:<br>
             "label": "manchuck",
             "created": "2020-01-09T22:12:03.000Z",
             "updated": "2020-01-09T22:12:03.000Z",
-            "external_platform": {},
             "total_programs": 21,
             "total_projects": 42,
             "allowed_statuses": [
@@ -1489,7 +1480,6 @@ Permissions required:<br>
               "label": "manchuck",
               "created": "2020-01-09T22:12:03.000Z",
               "updated": "2020-01-09T22:12:03.000Z",
-              "external_platform": {},
               "total_programs": 21,
               "total_projects": 42,
               "allowed_statuses": [
@@ -1846,7 +1836,6 @@ Permissions required:<br>
 |label|string|true|none|Label for the entity|
 |created|string(date-time)|true|read-only|Date the entity was created|
 |updated|string(date-time)|true|read-only|Last date the entity was updated|
-|external_platform|object|true|none|External Identifiers for the customer|
 |allowed_statuses|[object]|true|none|List of allowed statuses|
 |&nbsp;&nbsp; status|string|true|none|A Custom label for the status|
 |&nbsp;&nbsp; category|string|true|none|The classifier for the statues|
@@ -1866,7 +1855,6 @@ required:
   - created
   - allowed_statuses
   - customer_id
-  - external_platform
   - total_programs
   - total_projects
   - input_filter
@@ -1889,15 +1877,6 @@ properties:
     type: string
     format: date-time
     readOnly: true
-  external_platform:
-    type: object
-    description: External Identifiers for the customer
-    deprecated: true
-    x-patternProperties:
-      "^[A-Za-z][A-Za-z0-9_]*$":
-        type:
-          - string
-          - "null"
   allowed_statuses:
     type: array
     description: List of allowed statuses
@@ -1931,11 +1910,6 @@ properties:
         order:
           type: number
           description: Order status appears when listing
-      example:
-        category: COMPLETE
-        description: For something that is Complete
-        status: Complete
-        order: 7
   total_programs:
     type: number
     description: Total programs under the customer
@@ -1976,6 +1950,7 @@ properties:
             anyOf:
               - x-nter-skip-param: true
                 type: object
+                additionalProperties: false
                 description: This filter will set the value based on a list of approved values.
                   If the value is not in the list, it will then be set to empty
                   unless the default option is set
@@ -1990,6 +1965,7 @@ properties:
                     x-nter-skip-param: true
                   options:
                     type: object
+                    additionalProperties: false
                     x-nter-skip-param: true
                     required:
                       - approved_values
@@ -2000,6 +1976,8 @@ properties:
                         maximum: 100
                         description: The list of approved values
                         x-nter-skip-param: true
+                        items:
+                          type: string
                       check_case:
                         type: boolean
                         description: Perform a case sensitive match. By default will not match case
@@ -2013,6 +1991,7 @@ properties:
                         x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                additionalProperties: false
                 description: This filter will remove all non numbers from the value
                 required:
                   - type
@@ -2025,10 +2004,12 @@ properties:
                     x-nter-skip-param: true
                   options:
                     type: object
+                    additionalProperties: false
                     description: This filter has no options
                     x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                additionalProperties: false
                 description: This filter will make the value true or false
                 required:
                   - type
@@ -2041,10 +2022,12 @@ properties:
                     x-nter-skip-param: true
                   options:
                     type: object
+                    additionalProperties: false
                     description: This filter has no options
                     x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                additionalProperties: false
                 description: Make the value camelCase
                 required:
                   - type
@@ -2057,10 +2040,12 @@ properties:
                     x-nter-skip-param: true
                   options:
                     type: object
+                    additionalProperties: false
                     description: This filter has no options
                     x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                additionalProperties: false
                 description: Filter to transform a value into a date
                 required:
                   - type
@@ -2073,10 +2058,12 @@ properties:
                     x-nter-skip-param: true
                   options:
                     type: object
+                    additionalProperties: false
                     description: Date filter has no options
                     x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                additionalProperties: false
                 description: This filter will remove all numbers from the value
                 required:
                   - type
@@ -2089,10 +2076,12 @@ properties:
                     x-nter-skip-param: true
                   options:
                     type: object
+                    additionalProperties: false
                     description: This filter has no options
                     x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                additionalProperties: false
                 description: Filter to transform values into null. This is helpful when trying
                   to make a value required
                 required:
@@ -2106,10 +2095,12 @@ properties:
                     x-nter-skip-param: true
                   options:
                     type: object
+                    additionalProperties: false
                     description: empty filter has no options
                     x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                additionalProperties: false
                 description: Filter to transform a value into a float. Non numeric characters
                   (including comma) will be removed
                 required:
@@ -2123,6 +2114,7 @@ properties:
                     x-nter-skip-param: true
                   options:
                     type: object
+                    additionalProperties: false
                     x-nter-skip-param: true
                     properties:
                       precision:
@@ -2134,6 +2126,7 @@ properties:
                         x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                additionalProperties: false
                 description: Make the value kebab-case
                 required:
                   - type
@@ -2146,10 +2139,12 @@ properties:
                     x-nter-skip-param: true
                   options:
                     type: object
+                    additionalProperties: false
                     description: This filter has no options
                     x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                additionalProperties: false
                 description: Make the value lowercase
                 required:
                   - type
@@ -2162,10 +2157,12 @@ properties:
                     x-nter-skip-param: true
                   options:
                     type: object
+                    additionalProperties: false
                     description: This filter has no options
                     x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                additionalProperties: false
                 description: Filter to transform a value into a number. Non numeric characters
                   (including comma and decimal points) will be removed
                 required:
@@ -2179,10 +2176,12 @@ properties:
                     x-nter-skip-param: true
                   options:
                     type: object
+                    additionalProperties: false
                     description: Number filter has no options
                     x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                additionalProperties: false
                 description: Add a prefix to the start of a string. If the string already start
                   with the prefix, it will not prepend.
                 required:
@@ -2196,6 +2195,7 @@ properties:
                     x-nter-skip-param: true
                   options:
                     type: object
+                    additionalProperties: false
                     x-nter-skip-param: true
                     required:
                       - prefix
@@ -2206,6 +2206,7 @@ properties:
                         x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                additionalProperties: false
                 description: Make the value snake_case
                 required:
                   - type
@@ -2218,10 +2219,12 @@ properties:
                     x-nter-skip-param: true
                   options:
                     type: object
+                    additionalProperties: false
                     description: This filter has no options
                     x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                additionalProperties: false
                 description: Filter to transform a value into a string
                 required:
                   - type
@@ -2234,12 +2237,14 @@ properties:
                     x-nter-skip-param: true
                   options:
                     type: object
+                    additionalProperties: false
                     description: String filter has no options
                     x-nter-skip-param: true
               - x-nter-skip-param: true
                 description: Add a suffix to the start of a string. If the string already start
                   with the suffix, it will not append.
                 type: object
+                additionalProperties: false
                 required:
                   - type
                   - options
@@ -2251,6 +2256,7 @@ properties:
                     x-nter-skip-param: true
                   options:
                     type: object
+                    additionalProperties: false
                     x-nter-skip-param: true
                     required:
                       - suffix
@@ -2261,6 +2267,7 @@ properties:
                         x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                additionalProperties: false
                 description: Filter to trim whitespace from a value
                 required:
                   - type
@@ -2273,6 +2280,7 @@ properties:
                     x-nter-skip-param: true
                   options:
                     type: object
+                    additionalProperties: false
                     description: By default will trim from the start and end
                     x-nter-skip-param: true
                     properties:
@@ -2288,6 +2296,7 @@ properties:
                         x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                additionalProperties: false
                 description: Make the value UPPERCASE
                 required:
                   - type
@@ -2300,6 +2309,7 @@ properties:
                     x-nter-skip-param: true
                   options:
                     type: object
+                    additionalProperties: false
                     description: This filter has no options
                     x-nter-skip-param: true
         validators:
@@ -2311,6 +2321,7 @@ properties:
             anyOf:
               - x-nter-skip-param: true
                 type: object
+                additionalProperties: false
                 description: This is always valid
                 required:
                   - type
@@ -2323,10 +2334,12 @@ properties:
                     x-nter-skip-param: true
                   options:
                     type: object
+                    additionalProperties: false
                     description: This validator has no options
                     x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                additionalProperties: false
                 description: Validate number is between two values. By default, min and max are
                   included
                 required:
@@ -2340,6 +2353,7 @@ properties:
                     x-nter-skip-param: true
                   options:
                     type: object
+                    additionalProperties: false
                     x-nter-skip-param: true
                     required:
                       - min
@@ -2367,6 +2381,7 @@ properties:
                         x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                additionalProperties: false
                 description: Validate value does not match a list (black list)
                 required:
                   - type
@@ -2379,6 +2394,7 @@ properties:
                     x-nter-skip-param: true
                   options:
                     type: object
+                    additionalProperties: false
                     x-nter-skip-param: true
                     required:
                       - list
@@ -2398,6 +2414,7 @@ properties:
                         x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                additionalProperties: false
                 description: Validate string contains a value
                 required:
                   - type
@@ -2410,6 +2427,7 @@ properties:
                     x-nter-skip-param: true
                   options:
                     type: object
+                    additionalProperties: false
                     x-nter-skip-param: true
                     required:
                       - contains
@@ -2425,6 +2443,7 @@ properties:
                         x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                additionalProperties: false
                 description: Validate string is a correct email address
                 required:
                   - type
@@ -2437,6 +2456,7 @@ properties:
                     x-nter-skip-param: true
                   options:
                     type: object
+                    additionalProperties: false
                     x-nter-skip-param: true
                     properties:
                       strict:
@@ -2452,6 +2472,7 @@ properties:
                         x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                additionalProperties: false
                 description: Validate string ends with a value
                 required:
                   - type
@@ -2464,6 +2485,7 @@ properties:
                     x-nter-skip-param: true
                   options:
                     type: object
+                    additionalProperties: false
                     x-nter-skip-param: true
                     required:
                       - ends_with
@@ -2479,6 +2501,7 @@ properties:
                         x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                additionalProperties: false
                 description: Validate number equals a value
                 required:
                   - type
@@ -2491,6 +2514,7 @@ properties:
                     x-nter-skip-param: true
                   options:
                     type: object
+                    additionalProperties: false
                     x-nter-skip-param: true
                     required:
                       - value
@@ -2508,6 +2532,7 @@ properties:
                         x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                additionalProperties: false
                 description: Validate number is greater than a value. By default, this will
                   check if value is greater than or equals to
                 required:
@@ -2521,6 +2546,7 @@ properties:
                     x-nter-skip-param: true
                   options:
                     type: object
+                    additionalProperties: false
                     x-nter-skip-param: true
                     required:
                       - value
@@ -2543,6 +2569,7 @@ properties:
                         x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                additionalProperties: false
                 description: Validate string has a correct DNS records
                 required:
                   - type
@@ -2555,6 +2582,7 @@ properties:
                     x-nter-skip-param: true
                   options:
                     type: object
+                    additionalProperties: false
                     x-nter-skip-param: true
                     properties:
                       record_type:
@@ -2606,6 +2634,7 @@ properties:
                         x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                additionalProperties: false
                 description: Validate string matches an IP address format. Defaults to matching
                   IPv4
                 required:
@@ -2619,6 +2648,7 @@ properties:
                     x-nter-skip-param: true
                   options:
                     type: object
+                    additionalProperties: false
                     x-nter-skip-param: true
                     properties:
                       version:
@@ -2630,6 +2660,7 @@ properties:
                         x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                additionalProperties: false
                 description: Validate string is a certain length
                 required:
                   - type
@@ -2642,6 +2673,7 @@ properties:
                     x-nter-skip-param: true
                   options:
                     type: object
+                    additionalProperties: false
                     x-nter-skip-param: true
                     required:
                       - length
@@ -2663,6 +2695,7 @@ properties:
                         x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                additionalProperties: false
                 description: Validate number is less than a value. By default, this will check
                   if value is less than or equals to
                 required:
@@ -2676,6 +2709,7 @@ properties:
                     x-nter-skip-param: true
                   options:
                     type: object
+                    additionalProperties: false
                     x-nter-skip-param: true
                     required:
                       - value
@@ -2698,6 +2732,7 @@ properties:
                         x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                additionalProperties: false
                 description: Validate string matches an MAC address format
                 required:
                   - type
@@ -2710,10 +2745,12 @@ properties:
                     x-nter-skip-param: true
                   options:
                     type: object
+                    additionalProperties: false
                     description: This validator has no options
                     x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                additionalProperties: false
                 description: Validate string matches a regular expression
                 required:
                   - type
@@ -2726,6 +2763,7 @@ properties:
                     x-nter-skip-param: true
                   options:
                     type: object
+                    additionalProperties: false
                     x-nter-skip-param: true
                     required:
                       - mask
@@ -2736,6 +2774,7 @@ properties:
                         x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                additionalProperties: false
                 description: This is never valid
                 required:
                   - type
@@ -2748,10 +2787,12 @@ properties:
                     x-nter-skip-param: true
                   options:
                     type: object
+                    additionalProperties: false
                     description: This validator has no options
                     x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                additionalProperties: false
                 description: Validates that the value is present and not set to 'null', '0' or
                   an empty string
                 required:
@@ -2765,10 +2806,12 @@ properties:
                     x-nter-skip-param: true
                   options:
                     type: object
+                    additionalProperties: false
                     description: Required validator has no options
                     x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                additionalProperties: false
                 description: Validate string starts with a value
                 required:
                   - type
@@ -2781,6 +2824,7 @@ properties:
                     x-nter-skip-param: true
                   options:
                     type: object
+                    additionalProperties: false
                     x-nter-skip-param: true
                     required:
                       - starts_with
@@ -2796,6 +2840,7 @@ properties:
                         x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                additionalProperties: false
                 description: Validates that a value follows a step. Both start and end options
                   do not have to sync with the step. If they do not sync then
                   find the nearest step.
@@ -2810,6 +2855,7 @@ properties:
                     x-nter-skip-param: true
                   options:
                     type: object
+                    additionalProperties: false
                     x-nter-skip-param: true
                     required:
                       - step
@@ -2830,6 +2876,7 @@ properties:
                         x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                additionalProperties: false
                 description: Validate string matches an URI
                 required:
                   - type
@@ -2842,6 +2889,7 @@ properties:
                     x-nter-skip-param: true
                   options:
                     type: object
+                    additionalProperties: false
                     x-nter-skip-param: true
                     properties:
                       schemes:
@@ -2865,6 +2913,7 @@ properties:
                         x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                additionalProperties: false
                 description: Validate value matches a list (white list)
                 required:
                   - type
@@ -2877,6 +2926,7 @@ properties:
                     x-nter-skip-param: true
                   options:
                     type: object
+                    additionalProperties: false
                     x-nter-skip-param: true
                     required:
                       - list
@@ -2917,9 +2967,8 @@ properties:
             - type: "null"
               x-nter-skip-param: true
             - x-nter-skip-param: true
-              type: string
-              description: Entity type
               enum:
+                - ACT
                 - BAT
                 - CON
                 - CTX
@@ -2931,10 +2980,11 @@ properties:
                 - PART
                 - PGM
                 - PRJ
+                - PUSH
                 - QUE
                 - RES
+                - ROLE
                 - SRES
-                - TEN
                 - UNIT
                 - USER
                 - VEN
@@ -2942,9 +2992,8 @@ properties:
                 - WOR
         apply_to:
           x-nter-skip-param: true
-          type: string
-          description: Entity type
           enum:
+            - ACT
             - BAT
             - CON
             - CTX
@@ -2956,15 +3005,372 @@ properties:
             - PART
             - PGM
             - PRJ
+            - PUSH
             - QUE
             - RES
+            - ROLE
             - SRES
-            - TEN
             - UNIT
             - USER
             - VEN
             - WKF
             - WOR
+
+```
+
+## Action
+<!-- backwards compatibility -->
+<a id="schemaaction"></a>
+<a id="schema_Action"></a>
+<a id="tocSaction"></a>
+<a id="tocsaction"></a>
+
+#### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|action_id|string|false|read-only|Identifier for the Action|
+|label|string|false|none|Label for the entity|
+|created|string(date-time)|false|read-only|Date the entity was created|
+|updated|string(date-time)|false|read-only|Last date the entity was updated|
+|order|string|false|none|Order to process the action|
+|entity|object|false|none|Entity the action is configured for|
+|&nbsp;&nbsp; entity_id|string|true|read-only|Entity identifier|
+|&nbsp;&nbsp; entity_type|any|true|none|none|
+|sequence|string|false|none|When the action should fire|
+|event|string|false|none|Possible entity events|
+|criteria|[object]|false|none|none|
+|&nbsp;&nbsp; entity|any|true|none|none|
+|&nbsp;&nbsp; property|string|true|none|Property on entity|
+|&nbsp;&nbsp; operator|string|true|none|Operation to perform|
+|&nbsp;&nbsp; value|string|false|none|The value to compare|
+|effect|[anyOf]|false|none|Effect to apply|
+
+#### Specification
+
+```yaml
+type: object
+properties:
+  action_id:
+    description: Identifier for the Action
+    type: string
+    readOnly: true
+    pattern: ^[0-9a-zA-Z-_]+$
+  label:
+    type: string
+    description: Label for the entity
+  created:
+    description: Date the entity was created
+    type: string
+    format: date-time
+    readOnly: true
+  updated:
+    description: Last date the entity was updated
+    type: string
+    format: date-time
+    readOnly: true
+  order:
+    type: string
+    description: Order to process the action
+  entity:
+    type: object
+    additionalProperties: false
+    description: Entity the action is configured for
+    required:
+      - entity_id
+      - entity_type
+    properties:
+      entity_id:
+        type: string
+        description: Entity identifier
+        readOnly: true
+        pattern: ^[0-9a-zA-Z-_]+$
+      entity_type:
+        enum:
+          - ACT
+          - BAT
+          - CON
+          - CTX
+          - CUS
+          - FILE
+          - LOC
+          - MFR
+          - NOTE
+          - PART
+          - PGM
+          - PRJ
+          - PUSH
+          - QUE
+          - RES
+          - ROLE
+          - SRES
+          - UNIT
+          - USER
+          - VEN
+          - WKF
+          - WOR
+  sequence:
+    type: string
+    description: When the action should fire
+    enum:
+      - before
+      - after
+    default: before
+  event:
+    type: string
+    description: Possible entity events
+    enum:
+      - CON.created
+      - CON.changed
+      - CON.deleted
+      - CON.removed
+      - CON.relation-added
+      - CON.relation-removed
+      - CTX.created
+      - CTX.changed
+      - CTX.deleted
+      - CTX.removed
+      - CTX.relation-added
+      - CTX.relation-removed
+      - CTX.step-completed
+      - CTX.step-saved
+      - CUS.created
+      - CUS.changed
+      - CUS.deleted
+      - CUS.removed
+      - CUS.relation-added
+      - CUS.relation-removed
+      - LOC.created
+      - LOC.changed
+      - LOC.deleted
+      - LOC.removed
+      - LOC.relation-added
+      - LOC.relation-removed
+      - NOTE.created
+      - NOTE.deleted
+      - NOTE.removed
+      - NOTE.changed
+      - NOTE.relation-added
+      - NOTE.relation-removed
+      - PART.created
+      - PART.changed
+      - PART.deleted
+      - PART.removed
+      - PART.relation-added
+      - PART.relation-removed
+      - PGM.created
+      - PGM.changed
+      - PGM.deleted
+      - PGM.removed
+      - PGM.relation-added
+      - PGM.relation-removed
+      - PGM.moved-from
+      - PGM.moved-to
+      - PRJ.created
+      - PRJ.changed
+      - PRJ.deleted
+      - PRJ.removed
+      - PRJ.relation-added
+      - PRJ.relation-removed
+      - PRJ.moved-from
+      - PRJ.moved-to
+      - RES.created
+      - RES.changed
+      - RES.deleted
+      - RES.removed
+      - RES.relation-added
+      - RES.relation-removed
+      - RES.moved-from
+      - RES.moved-to
+      - SRES.created
+      - SRES.changed
+      - SRES.deleted
+      - SRES.removed
+      - SRES.relation-added
+      - SRES.relation-removed
+      - SRES.moved-from
+      - SRES.moved-to
+      - UNIT.created
+      - UNIT.changed
+      - UNIT.deleted
+      - UNIT.removed
+      - UNIT.relation-added
+      - UNIT.relation-removed
+      - UNIT.location-changed
+      - UNIT.resource-changed
+      - UNIT.moved-from
+      - UNIT.moved-to
+      - USER.created
+      - USER.changed
+      - USER.deleted
+      - USER.removed
+      - USER.relation-added
+      - USER.relation-removed
+      - WKF.created
+      - WKF.changed
+      - WKF.deleted
+      - WKF.removed
+      - WKF.relation-added
+      - WKF.relation-removed
+      - WOR.created
+      - WOR.changed
+      - WOR.deleted
+      - WOR.removed
+      - WOR.relation-added
+      - WOR.relation-removed
+      - WOR.location-changed
+      - WOR.moved-from
+      - WOR.moved-to
+  criteria:
+    type: array
+    maxItems: 10
+    items:
+      type: object
+      additionalProperties: false
+      required:
+        - entity
+        - property
+        - operator
+      properties:
+        entity:
+          enum:
+            - ACT
+            - BAT
+            - CON
+            - CTX
+            - CUS
+            - FILE
+            - LOC
+            - MFR
+            - NOTE
+            - PART
+            - PGM
+            - PRJ
+            - PUSH
+            - QUE
+            - RES
+            - ROLE
+            - SRES
+            - UNIT
+            - USER
+            - VEN
+            - WKF
+            - WOR
+        property:
+          type: string
+          description: Property on entity
+        operator:
+          type: string
+          description: Operation to perform
+          enum:
+            - equals
+            - not_equals
+            - is_null
+        value:
+          type: string
+          description: The value to compare
+  effect:
+    type: array
+    description: Effect to apply
+    maxItems: 10
+    minItems: 1
+    items:
+      anyOf:
+        - type: object
+          description: Effect which notifies a user
+          additionalProperties: false
+          required:
+            - effect_type
+            - options
+          properties:
+            effect_type:
+              type: string
+              description: Name of the effect type
+              enum:
+                - notify
+            options:
+              type: object
+              additionalProperties: false
+              description: Options for the effect
+              required:
+                - contacts
+                - label
+                - message
+                - severity
+              properties:
+                contacts:
+                  type: array
+                  description: List of contacts to notify
+                  maxItems: 10
+                  items:
+                    description: Identifier for the contact
+                    type: string
+                    readOnly: true
+                    pattern: ^[0-9a-zA-Z-_]+$
+                label:
+                  type: string
+                  description: Label for the entity
+                message:
+                  type: string
+                  description: The message
+                severity:
+                  type: string
+                  description: Severity of the notification
+                  enum:
+                    - normal
+                    - issue
+                    - resolved
+        - type: object
+          description: Effect which notifies a user
+          additionalProperties: false
+          required:
+            - effect_type
+            - options
+          properties:
+            effect_type:
+              type: string
+              description: Name of the effect type
+              enum:
+                - notify
+            options:
+              type: object
+              additionalProperties: false
+              description: Options for the effect
+              required:
+                - entity
+                - property
+                - value
+              properties:
+                entity:
+                  enum:
+                    - ACT
+                    - BAT
+                    - CON
+                    - CTX
+                    - CUS
+                    - FILE
+                    - LOC
+                    - MFR
+                    - NOTE
+                    - PART
+                    - PGM
+                    - PRJ
+                    - PUSH
+                    - QUE
+                    - RES
+                    - ROLE
+                    - SRES
+                    - UNIT
+                    - USER
+                    - VEN
+                    - WKF
+                    - WOR
+                property:
+                  type: string
+                  description: Entity property to update
+                value:
+                  type: string
+                  description: Value to set
 
 ```
 

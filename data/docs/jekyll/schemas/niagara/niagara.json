@@ -2,10 +2,20 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://docs.nterprise.com/schemas/niagara/niagara.json",
   "type": "object",
+  "additionalProperties": false,
   "description": "A reference for all niagara entities",
   "properties": {
     "closeSteps": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/close/allCloseSteps.json"
+    },
+    "attachment": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/file.json"
+    },
+    "file": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/file.json"
+    },
+    "action": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/action.json"
     },
     "batch": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/batch.json"

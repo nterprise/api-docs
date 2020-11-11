@@ -5,8 +5,9 @@
       "schema": {
         "type": "object",
         "required": [
+          "description",
           "label",
-          "allowed_statuses"
+          "grants"
         ],
         "properties": {
           "label": {

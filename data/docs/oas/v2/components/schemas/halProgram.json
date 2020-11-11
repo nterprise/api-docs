@@ -1,5 +1,7 @@
 {
   "type": "object",
+  "x-model": "HalProgram",
+  "x-hal": true,
   "allOf": [
     {
       "$ref": "./program.json"

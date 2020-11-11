@@ -4,7 +4,8 @@
     "application/hal+json": {
       "schema": {
         "type": "object",
-        "additionalProperties": false,
+        "x-model": "HalWorkFlowPage",
+        "x-hal": true,
         "required": [
           "_embedded",
           "_links",
@@ -42,22 +43,16 @@
             "type": "object",
             "properties": {
               "self": {
-                "x-example": {
-                  "href": "https://api.nterprise.com/work-flows"
-                },
                 "$ref": "../schemas/link.json"
               },
               "next": {
-                "x-example": {
-                  "href": "https://api.nterprise.com/work-flows?offset=QVBrO2wm13iEyl&limit=100"
-                },
                 "$ref": "../schemas/link.json"
               }
             }
           }
         }
       },
-      "example":  {
+      "example": {
         "total_count": 21,
         "limit": 42,
         "offset": "next-offset",

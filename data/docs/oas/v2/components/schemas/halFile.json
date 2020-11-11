@@ -1,5 +1,7 @@
 {
   "type": "object",
+  "x-model": "HalFile",
+  "x-hal": true,
   "allOf": [
     {
       "$ref": "./file.json"

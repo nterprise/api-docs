@@ -5,7 +5,7 @@
       "schema": {
         "$ref": "../schemas/halContact.json"
       },
-      "example":  {
+      "example": {
         "contact_id": "contact",
         "label": "Major",
         "created": "2019-08-19T00:01:02.000Z",

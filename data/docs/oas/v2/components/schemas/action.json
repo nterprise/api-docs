@@ -1,5 +1,6 @@
 {
   "type": "object",
+  "x-model": "Action",
   "properties": {
     "action_id": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/action.json#/properties/action_id"

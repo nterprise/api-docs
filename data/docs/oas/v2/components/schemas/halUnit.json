@@ -1,5 +1,7 @@
 {
   "type": "object",
+  "x-model": "HalUnit",
+  "x-hal": true,
   "allOf": [
     {
       "$ref": "./unit.json"

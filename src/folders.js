@@ -2,6 +2,7 @@ const path = require('path');
 const fs = require('fs');
 
 const docsPath = path.normalize(`${__dirname}/../data/docs`);
+const buildPath = path.normalize(`${__dirname}/../data/build`);
 const templatePath = `${docsPath}/templates`;
 const oasPath = `${docsPath}/oas`;
 const v2Path = `${oasPath}/v2`;
@@ -24,6 +25,7 @@ const recurseFolder = (base, dir = '') => {
 };
 
 module.exports.folders = {
+    root: __dirname,
     v2Path: v2Path,
     oasPath: oasPath,
     v1Path: v1Path,
@@ -41,6 +43,7 @@ module.exports.folders = {
     hal: `${componentsPath}/schemas/hal`,
     links: `${componentsPath}/schemas/links`,
     examples: `${componentsPath}/examples`,
+    build: `${buildPath}`,
 };
 
 module.exports.recurseFolder = recurseFolder;

@@ -29,7 +29,10 @@
       "const": "PRJ"
     },
     "description": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "description": "Project description"
     },
     "label": {
@@ -51,7 +54,7 @@
       "$ref": "https://docs.nterprise.com/schemas/niagara/program.json"
     },
     "allowed_statuses": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/customer.json#/properties/allowed_statuses"
+      "$ref": "https://docs.nterprise.com/schemas/niagara/allowedStatuses.json"
     },
     "start_date": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/dateRange.json#/properties/start_date"

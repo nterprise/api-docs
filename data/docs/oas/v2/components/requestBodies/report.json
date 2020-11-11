@@ -7,7 +7,7 @@
         "required": [],
         "properties": {
           "base_entity": {
-            "$ref": "https://docs.nterprise.com/schemas/niagara/entityHelper.json#/properties/entity_type"
+            "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_type"
           },
           "custom_fields": {
             "type": "object",
@@ -15,7 +15,6 @@
               "fields": {
                 "type": "array",
                 "description": "List of custom filed keys to return",
-                "unique": true,
                 "items": {
                   "type": "string",
                   "description": "The key of the custom field to return"

@@ -1,0 +1,55 @@
+{
+  "type": "object",
+  "x-model": "HalWorkFlowBom",
+  "x-hal": true,
+  "properties": {
+    "bom_id": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlowBom.json#/properties/bom_id"
+    },
+    "label": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlowBom.json#/properties/label"
+    },
+    "slug": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlowBom.json#/properties/slug"
+    },
+    "created": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlowBom.json#/properties/created"
+    },
+    "updated": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workFlowBom.json#/properties/updated"
+    }
+  },
+  "allOf": [
+    {
+      "type": "object",
+      "required": [
+        "_links"
+      ],
+      "properties": {
+        "_links": {
+          "type": "object",
+          "required": [
+            "self",
+            "nter:bom-work-order",
+            "nter:bom-location",
+            "nter:bom-work-flow"
+          ],
+          "properties": {
+            "self": {
+              "$ref": "./link.json"
+            },
+            "nter:bom-work-order": {
+              "$ref": "./link.json"
+            },
+            "nter:bom-location": {
+              "$ref": "./link.json"
+            },
+            "nter:bom-work-flow": {
+              "$ref": "./link.json"
+            }
+          }
+        }
+      }
+    }
+  ]
+}

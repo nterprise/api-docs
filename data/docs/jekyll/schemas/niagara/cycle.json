@@ -2,8 +2,8 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://docs.nterprise.com/schemas/niagara/cycle.json",
   "type": "object",
-  "description": "Defines the properties for a work order cycle",
   "additionalProperties": false,
+  "description": "Defines the properties for a work order cycle",
   "required": [
     "entity_id",
     "entity_type",

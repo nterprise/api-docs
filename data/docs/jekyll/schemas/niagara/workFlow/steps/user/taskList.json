@@ -3,6 +3,7 @@
   "$id": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/user/taskList.json",
   "description": "Ask the user to follow a list and check off boxes",
   "type": "object",
+  "additionalProperties": false,
   "required": [
     "step_type",
     "label",
@@ -40,6 +41,7 @@
     },
     "options": {
       "type": "object",
+      "additionalProperties": false,
       "properties": {
         "component": {
           "enum": [
@@ -48,6 +50,7 @@
         },
         "payload": {
           "type": "object",
+          "additionalProperties": false,
           "required": [
             "items"
           ],
@@ -61,6 +64,7 @@
               "description": "Configuration for each task list item",
               "items": {
                 "type": "object",
+                "additionalProperties": false,
                 "required": [
                   "label",
                   "evaluated",
@@ -78,7 +82,10 @@
                     "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
                   },
                   "help": {
-                    "type": ["string", "null"],
+                    "type": [
+                      "string",
+                      "null"
+                    ],
                     "description": "Message describing what is needed to be checked"
                   },
                   "evaluated": {

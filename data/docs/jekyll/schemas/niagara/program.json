@@ -47,7 +47,7 @@
       "$ref": "https://docs.nterprise.com/schemas/niagara/customer.json"
     },
     "allowed_statuses": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/customer.json#/properties/allowed_statuses"
+      "$ref": "https://docs.nterprise.com/schemas/niagara/allowedStatuses.json"
     },
     "input_filter": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter.json"

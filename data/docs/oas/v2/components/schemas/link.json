@@ -1,8 +1,12 @@
 {
   "type": "object",
+  "required": [
+    "href"
+  ],
   "properties": {
     "href": {
       "type": "string",
+      "description": "Href for the url",
       "format": "uri"
     }
   }

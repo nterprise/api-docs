@@ -33,7 +33,7 @@
     "/projects": {
       "$ref": "./paths/project/projects.json"
     },
-    "/projects/project_id": {
+    "/projects/{project_id}": {
       "$ref": "./paths/project/project.json"
     },
     "/projects/{project_id}/diff": {

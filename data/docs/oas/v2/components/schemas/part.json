@@ -1,12 +1,11 @@
 {
   "type": "object",
+  "x-model": "Part",
   "required": [
     "created",
     "label",
     "updated",
-    "customer",
     "input_filter",
-    "manufacturer",
     "part_id",
     "serial_prefix"
   ],
@@ -22,24 +21,6 @@
     },
     "updated": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/part.json#/properties/updated"
-    },
-    "customer": {
-      "type": "object",
-      "deprecated": true,
-      "allOf": [
-        {
-          "$ref": "./customer.json"
-        }
-      ]
-    },
-    "manufacturer": {
-      "type": "object",
-      "deprecated": true,
-      "allOf": [
-        {
-          "$ref": "./manufacturer.json"
-        }
-      ]
     },
     "serial_prefix": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/part.json#/properties/serial_prefix"

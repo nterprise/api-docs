@@ -2,8 +2,8 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://docs.nterprise.com/schemas/niagara/batch.json",
   "type": "object",
-  "description": "Defines the properties for a work order batch",
   "additionalProperties": false,
+  "description": "Defines the properties for a work order batch",
   "required": [
     "queue",
     "entity_id",
@@ -76,7 +76,7 @@
       "description": "Top five users assigned to the batch",
       "maxItems": 5,
       "items": {
-        "$ret": "https://docs.nterprise.com/schemas/niagara/user.json"
+        "$ref": "https://docs.nterprise.com/schemas/niagara/user.json"
       }
     }
   }

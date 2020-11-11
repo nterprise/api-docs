@@ -1,5 +1,7 @@
 {
   "type": "object",
+  "x-model": "HalVendor",
+  "x-hal": true,
   "allOf": [
     {
       "$ref": "./vendor.json"

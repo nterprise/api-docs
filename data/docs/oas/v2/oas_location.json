@@ -49,7 +49,7 @@
       "$ref": "./paths/location/resources.json"
     },
     "/locations/{location_id}/queues": {
-      "$ref": "./paths/location/resources.json"
+      "$ref": "./paths/location/queues.json"
     },
     "/ware-houses": {
       "$ref": "./paths/location/warehouses.json"

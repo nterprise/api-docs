@@ -22,7 +22,7 @@
     "security": [
       {
         "niagara": [
-          "unit:read-all"
+          "unit:all"
         ]
       }
     ]

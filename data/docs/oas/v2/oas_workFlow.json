@@ -47,6 +47,12 @@
     },
     "/work-flows/{workflow_id}/relations/{relation_id}": {
       "$ref": "./paths/workFlow/relation.json"
+    },
+    "/work-flows/{workflow_id}/boms": {
+      "$ref": "./paths/workFlow/boms.json"
+    },
+    "/work-flows/{workflow_id}/boms/{location_id}": {
+      "$ref": "./paths/workFlow/bom.json"
     }
   },
   "components": {

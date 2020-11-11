@@ -4,7 +4,8 @@
     "application/hal+json": {
       "schema": {
         "type": "object",
-        "additionalProperties": false,
+        "x-model": "HalNotePage",
+        "x-hal": true,
         "required": [
           "_embedded",
           "_links",
@@ -42,15 +43,9 @@
             "type": "object",
             "properties": {
               "self": {
-                "x-example": {
-                  "href": "https://api.nterprise.com/notes"
-                },
                 "$ref": "../schemas/link.json"
               },
               "next": {
-                "x-example": {
-                  "href": "https://api.nterprise.com/notes?offset=QVBrO2wm13iEyl&limit=100"
-                },
                 "$ref": "../schemas/link.json"
               }
             }
@@ -69,7 +64,7 @@
               "created": "2019-10-09T19:30:35.639Z",
               "updated": "2019-10-09T20:30:35.639Z",
               "text": "Lorem ipsum dolor sit amet",
-              "edited": null,
+              "edited": "2019-10-09T20:30:35.639Z",
               "thread_id": "parent_note",
               "_links": {
                 "nter:note-created-by": {

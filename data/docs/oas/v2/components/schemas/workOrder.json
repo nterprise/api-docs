@@ -1,5 +1,6 @@
 {
   "type": "object",
+  "x-model": "WorkOrder",
   "required": [
     "work_order_id",
     "label",
@@ -12,7 +13,6 @@
     "begin_date",
     "due_date",
     "current_status",
-    "project",
     "cycles",
     "input_filter"
   ],
@@ -49,15 +49,6 @@
     },
     "current_status": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/workOrder.json#/properties/current_status"
-    },
-    "project": {
-      "type": "object",
-      "deprecated": true,
-      "allOf": [
-        {
-          "$ref": "./project.json"
-        }
-      ]
     },
     "cycles": {
       "type": "object",

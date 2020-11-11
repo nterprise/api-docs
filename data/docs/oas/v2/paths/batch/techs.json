@@ -19,7 +19,7 @@
     "security": [
       {
         "niagara": [
-          "batch:relations-read-tech"
+          "batch:read"
         ]
       }
     ]

@@ -1,8 +1,8 @@
 {
   "get": {
     "operationId": "fetchWorkflowById",
-    "summary": "Fetch Workflow",
-    "description": "Fetches a workflow",
+    "summary": "Fetch Work Flow",
+    "description": "Fetches a work flow",
     "tags": [
       "Work Flow"
     ],

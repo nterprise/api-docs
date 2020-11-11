@@ -2,6 +2,8 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/date.json",
   "type": "object",
+  "x-model": "FilterDate",
+  "additionalProperties": false,
   "description": "Filter to transform a value into a date",
   "required": [
     "type",
@@ -15,6 +17,7 @@
     },
     "options": {
       "type": "object",
+      "additionalProperties": false,
       "description": "Date filter has no options",
       "x-nter-skip-param": true
     }

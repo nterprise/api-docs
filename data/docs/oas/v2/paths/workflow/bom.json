@@ -1,0 +1,30 @@
+{
+  "get": {
+    "operationId": "fetchLocationBomForWorkFlow",
+    "summary": "Fetch Work Flow BOM for location",
+    "description": "Fetches a BOM for a location",
+    "tags": [
+      "Work Flow"
+    ],
+    "parameters": [
+      {
+        "$ref": "../../components/parameters/workFlowId.json"
+      },
+      {
+        "$ref": "../../components/parameters/locationId.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../../components/responses/halWorkFlowBom.json"
+      }
+    },
+    "security": [
+      {
+        "niagara": [
+          "work-flow:read"
+        ]
+      }
+    ]
+  }
+}

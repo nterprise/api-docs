@@ -1,8 +1,8 @@
 {
   "delete": {
     "operationId": "deleteRelationForWorkFlow",
-    "summary": "Delete relation for workFlow",
-    "description": "Deletes a relation for a workFlow",
+    "summary": "Delete relation for work flow",
+    "description": "Deletes a relation for a work flow",
     "tags": [
       "Work Flow"
     ],

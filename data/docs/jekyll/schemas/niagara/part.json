@@ -82,7 +82,10 @@
       }
     },
     "serial_prefix": {
-      "type":["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "description": "A serial number prefix for the part"
     },
     "input_filter": {

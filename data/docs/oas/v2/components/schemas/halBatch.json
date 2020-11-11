@@ -1,7 +1,10 @@
 {
   "type": "object",
+  "x-model": "HalBatch",
+  "x-hal": true,
   "allOf": [
     {
+      "x-hal": true,
       "$ref": "./batch.json"
     },
     {

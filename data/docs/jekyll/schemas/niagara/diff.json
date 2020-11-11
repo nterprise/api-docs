@@ -46,11 +46,17 @@
       "description": "The property which has changed"
     },
     "old_value": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "description": "The old value"
     },
     "new_value": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "description": "The new value"
     },
     "by_user": {

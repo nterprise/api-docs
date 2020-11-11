@@ -2,6 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://docs.nterprise.com/schemas/niagara/entityCommon.json",
   "type": "object",
+  "additionalProperties": false,
   "description": "Common Properties to all entities",
   "required": [
     "label"
@@ -26,6 +27,7 @@
     },
     "entity_type": {
       "enum": [
+        "ACT",
         "BAT",
         "CON",
         "CTX",
@@ -40,8 +42,8 @@
         "PUSH",
         "QUE",
         "RES",
-        "SRES",
         "ROLE",
+        "SRES",
         "UNIT",
         "USER",
         "VEN",
@@ -50,14 +52,14 @@
       ]
     },
     "created": {
-      "description": "Date the entity was created",
       "type": "string",
+      "description": "Date the entity was created",
       "format": "date-time",
       "readOnly": true
     },
     "updated": {
-      "description": "Last date the entity was updated",
       "type": "string",
+      "description": "Last date the entity was updated",
       "format": "date-time",
       "readOnly": true
     }

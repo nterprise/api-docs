@@ -28,7 +28,6 @@
       "type": "array",
       "description": "Additional clarifiers for the metric",
       "maxItems": 10,
-      "additionalItems": false,
       "items": {
         "type": "object",
         "additionalProperties": false,
@@ -44,7 +43,10 @@
             "pattern": "^[a-z][a-z0-9_:]+$"
           },
           "value": {
-            "type": ["string","number"],
+            "type": [
+              "string",
+              "number"
+            ],
             "description": "Value for the dimension"
           },
           "label": {

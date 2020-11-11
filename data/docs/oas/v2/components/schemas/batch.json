@@ -1,5 +1,6 @@
 {
   "type": "object",
+  "x-model": "Batch",
   "required": [
     "batch_id",
     "created",
@@ -8,9 +9,7 @@
     "label",
     "number_cycles",
     "order",
-    "queue",
-    "updated",
-    "work_order"
+    "updated"
   ],
   "properties": {
     "batch_id": {
@@ -25,15 +24,6 @@
     "updated": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/batch.json#/properties/updated"
     },
-    "queue": {
-      "type": "object",
-      "deprecated": true,
-      "allOf": [
-        {
-          "$ref": "./queue.json"
-        }
-      ]
-    },
     "order": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/batch.json#/properties/order"
     },
@@ -45,15 +35,6 @@
     },
     "cycles": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/batch.json#/properties/cycles"
-    },
-    "work_order": {
-      "type": "object",
-      "deprecated": true,
-      "allOf": [
-        {
-          "$ref": "./workOrder.json"
-        }
-      ]
     },
     "total_assigned_users": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/batch.json#/properties/total_assigned_users"

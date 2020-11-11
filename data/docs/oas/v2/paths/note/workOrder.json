@@ -19,7 +19,7 @@
     "security": [
       {
         "niagara": [
-          "workOrder:read",
+          "work-order:read",
           "note:read"
         ]
       }
@@ -48,7 +48,7 @@
     "security": [
       {
         "niagara": [
-          "workOrder:read",
+          "work-order:read",
           "note:create"
         ]
       }

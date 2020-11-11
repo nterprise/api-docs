@@ -2,6 +2,8 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://docs.nterprise.com/schemas/niagara/inputFilter/filters/trim.json",
   "type": "object",
+  "x-model": "FilterTrim",
+  "additionalProperties": false,
   "description": "Filter to trim whitespace from a value",
   "required": [
     "type",
@@ -15,6 +17,7 @@
     },
     "options": {
       "type": "object",
+      "additionalProperties": false,
       "description": "By default will trim from the start and end",
       "x-nter-skip-param": true,
       "properties": {
