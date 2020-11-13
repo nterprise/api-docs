@@ -204,6 +204,38 @@ Permissions required:<br>
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |context_id|path|string|true|Id for the context|
+|close_step|body|any|false|none|
+|&nbsp;&nbsp; *anonymous*|body|object|false|How to mark a step as failed|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|none|
+|&nbsp;&nbsp; *anonymous*|body|object|false|Complete an ACE-IOS step|
+|&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|false|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; restore_device|body|boolean|false|Restore device to factory defaults|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; automated_enrollment|body|any|false|Automatically enroll the device to MDM|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; should_mdm_enroll|body|boolean|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mdm_enroll_user|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mdm_enroll_password|body|string|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|body|object|false|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; should_mdm_enroll|body|boolean|true|none|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fields|body|[object]|false|Field values to set|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; value|body|string|true|Value to set on 'entity_path'. Note: this MUST always be passed as a string. The input filter is responsible for transforming the value to the correct data type|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; entity_field|body|string|false|JSON Path to the field on the entity. If the path does not start with '$' then the entity on the context is assumed. Otherwise the data will be set on the context path|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; icon_layout|body|[string]|false|An ordered nested list of icons on the home screen.|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; installed_apps|body|[string]|false|A list of applications installed on the device.|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; battery_charge|body|integer|false|The current battery charge|
+|&nbsp;&nbsp; *anonymous*|body|object|false|Complete the follow-pdf-instructions-step|
+|&nbsp;&nbsp;&nbsp;&nbsp; attachment_id|body|string|true|The identifier for the batch|
+|&nbsp;&nbsp; *anonymous*|body|object|false|Close|
+|&nbsp;&nbsp;&nbsp;&nbsp; fields|body|[object]|true|Configuration for each field|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; value|body|string|true|Value to set on 'entity_path'. Note: this MUST always be passed as a string. The input filter is responsible for transforming the value to the correct data type|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; entity_field|body|string|false|JSON Path to the field on the entity. If the path does not start with '$' then the entity on the context is assumed. Otherwise the data will be set on the context path|
+|&nbsp;&nbsp; *anonymous*|body|object|false|Close the task-list step|
+|&nbsp;&nbsp;&nbsp;&nbsp; items|body|[object]|false|Configuration for each task list item|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; value|body|string¦null|true|Selects which item the user has selected|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; slug|body|string|true|Slug for the item (Auto-generated from the label)|
+|&nbsp;&nbsp; *anonymous*|body|object|false|none|
+|&nbsp;&nbsp;&nbsp;&nbsp; step|body|string|true|Step to mark as complete|
+|&nbsp;&nbsp;&nbsp;&nbsp; type|body|string|true|Type of close function for step|
 
 > Example responses
 
@@ -1568,6 +1600,7 @@ Permissions required:<br>
 
 ```yaml
 type: object
+x-model: WorkFlow
 required:
   - work_flow_id
   - label
@@ -1588,13 +1621,13 @@ properties:
     type: string
     description: Label for the entity
   created:
-    description: Date the entity was created
     type: string
+    description: Date the entity was created
     format: date-time
     readOnly: true
   updated:
-    description: Last date the entity was updated
     type: string
+    description: Last date the entity was updated
     format: date-time
     readOnly: true
   schema_version:
@@ -1816,6 +1849,7 @@ properties:
                         $schema: http://json-schema.org/draft-07/schema#
                         $id: https://docs.nterprise.com/schemas/niagara/status.json
                         type: object
+                        x-model: Status
                         description: Defines the properties for a status
                         additionalProperties: false
                         required:

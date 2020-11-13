@@ -62,7 +62,10 @@
       "$ref": "https://docs.nterprise.com/schemas/niagara/part.json#/properties/manufacturer"
     },
     "vendor": {
-      "type": ["object","null"],
+      "type": [
+        "object",
+        "null"
+      ],
       "additionalProperties": true
     },
     "part": {

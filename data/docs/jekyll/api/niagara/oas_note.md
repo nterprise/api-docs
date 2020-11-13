@@ -243,7 +243,7 @@ Fetches notes for a work order
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>workOrder:read</li><li>note:read</li></ul>
+<ul><li>work-order:read</li><li>note:read</li></ul>
 </aside>
 
 <h3 id="fetchnotesforworkorder-parameters">Parameters</h3>
@@ -301,7 +301,7 @@ Create a note for a workOrder
 
 <aside class="warning">
 Permissions required:<br>
-<ul><li>workOrder:read</li><li>note:create</li></ul>
+<ul><li>work-order:read</li><li>note:create</li></ul>
 </aside>
 
 > Body parameter
@@ -384,6 +384,7 @@ Permissions required:<br>
 
 ```yaml
 type: object
+x-model: Note
 properties:
   note_id:
     description: The identifier for the note
@@ -394,13 +395,13 @@ properties:
     type: string
     description: Label for the entity
   created:
-    description: Date the entity was created
     type: string
+    description: Date the entity was created
     format: date-time
     readOnly: true
   updated:
-    description: Last date the entity was updated
     type: string
+    description: Last date the entity was updated
     format: date-time
     readOnly: true
   text:

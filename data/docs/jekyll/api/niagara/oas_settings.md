@@ -195,6 +195,7 @@ Defines the properties for a status
 
 ```yaml
 type: object
+x-model: Status
 description: Defines the properties for a status
 additionalProperties: false
 required:

@@ -1324,7 +1324,6 @@ Permissions required:<br>
 |sequence|body|string|true|When the action should fire|
 |event|body|string|true|Possible entity events|
 |criteria|body|[object]|true|none|
-|&nbsp;&nbsp; entity|body|any|true|none|
 |&nbsp;&nbsp; property|body|string|true|Property on entity|
 |&nbsp;&nbsp; operator|body|string|true|Operation to perform|
 |&nbsp;&nbsp; value|body|string|false|The value to compare|
@@ -1336,7 +1335,7 @@ Permissions required:<br>
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; label|body|string|true|Label for the entity|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; message|body|string|true|The message|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; severity|body|string|true|Severity of the notification|
-|&nbsp;&nbsp; *anonymous*|body|object|false|Effect which notifies a user|
+|&nbsp;&nbsp; *anonymous*|body|object|false|Effect which updates an entity|
 |&nbsp;&nbsp;&nbsp;&nbsp; effect_type|body|string|true|Name of the effect type|
 |&nbsp;&nbsp;&nbsp;&nbsp; options|body|object|true|Options for the effect|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; entity|body|any|true|none|
@@ -1410,30 +1409,23 @@ Permissions required:<br>
 |updated|string(date-time)|true|read-only|Last date the entity was updated|
 |start_date|string(date-time)¦null|true|none|Start date|
 |end_date|string(date-time)¦null|true|none|End date|
-|customer|object|true|none|none|
-|&nbsp;&nbsp; customer_id|string|true|read-only|Customer identifier|
-|&nbsp;&nbsp; label|string|true|none|Label for the entity|
-|&nbsp;&nbsp; created|string(date-time)|true|read-only|Date the entity was created|
-|&nbsp;&nbsp; updated|string(date-time)|true|read-only|Last date the entity was updated|
-|&nbsp;&nbsp; allowed_statuses|[object]|true|none|List of allowed statuses|
-|&nbsp;&nbsp;&nbsp;&nbsp; status|string|true|none|A Custom label for the status|
-|&nbsp;&nbsp;&nbsp;&nbsp; category|string|true|none|The classifier for the statues|
-|&nbsp;&nbsp;&nbsp;&nbsp; description|string¦null|false|none|A description for the status|
-|&nbsp;&nbsp;&nbsp;&nbsp; order|number|false|none|Order status appears when listing|
-|&nbsp;&nbsp; total_programs|number|true|none|Total programs under the customer|
-|&nbsp;&nbsp; total_projects|number|true|none|Total projects under the customer|
-|&nbsp;&nbsp; input_filter|[object]|true|none|Input Filters allow custom fields to be defined for entities|
+|allowed_statuses|[object]|true|none|List of allowed statuses|
+|&nbsp;&nbsp; status|string|true|none|A Custom label for the status|
+|&nbsp;&nbsp; category|string|true|none|The classifier for the statues|
+|&nbsp;&nbsp; description|string¦null|false|none|A description for the status|
+|&nbsp;&nbsp; order|number|false|none|Order status appears when listing|
+|input_filter|[object]|true|none|Input Filters allow custom fields to be defined for entities|
 
 #### Specification
 
 ```yaml
 type: object
+x-model: Program
 required:
   - created
   - label
   - updated
   - allowed_statuses
-  - customer
   - end_date
   - program_id
   - start_date
@@ -1448,13 +1440,13 @@ properties:
     type: string
     description: Label for the entity
   created:
-    description: Date the entity was created
     type: string
+    description: Date the entity was created
     format: date-time
     readOnly: true
   updated:
-    description: Last date the entity was updated
     type: string
+    description: Last date the entity was updated
     format: date-time
     readOnly: true
   start_date:
@@ -1467,1183 +1459,14 @@ properties:
     nullable: true
     format: date-time
     description: End date
-  customer:
-    type: object
-    deprecated: true
-    allOf:
-      - type: object
-        required:
-          - updated
-          - label
-          - created
-          - allowed_statuses
-          - customer_id
-          - total_programs
-          - total_projects
-          - input_filter
-        properties:
-          customer_id:
-            description: Customer identifier
-            type: string
-            readOnly: true
-            pattern: ^[0-9a-zA-Z-_]+$
-          label:
-            type: string
-            description: Label for the entity
-          created:
-            description: Date the entity was created
-            type: string
-            format: date-time
-            readOnly: true
-          updated:
-            description: Last date the entity was updated
-            type: string
-            format: date-time
-            readOnly: true
-          allowed_statuses:
-            type: array
-            description: List of allowed statuses
-            uniqueItems: true
-            items:
-              type: object
-              description: Defines the properties for a status
-              additionalProperties: false
-              required:
-                - status
-                - category
-              properties:
-                status:
-                  type: string
-                  description: A Custom label for the status
-                  pattern: ^[A-Za-z][0-9a-zA-Z-_ ]+$
-                category:
-                  type: string
-                  description: The classifier for the statues
-                  enum:
-                    - PENDING
-                    - IN_PROGRESS
-                    - VERIFYING
-                    - COMPLETE
-                    - CANCELLED
-                    - BLOCKED
-                description:
-                  type: string
-                  nullable: true
-                  description: A description for the status
-                order:
-                  type: number
-                  description: Order status appears when listing
-          total_programs:
-            type: number
-            description: Total programs under the customer
-          total_projects:
-            type: number
-            description: Total projects under the customer
-          input_filter:
-            type: array
-            description: Input Filters allow custom fields to be defined for entities
-            x-nter-see: https://docs.nterprise.com/niagara/inputFilter.html
-            x-nter-no-example: true
-            items:
-              type: object
-              description: Input filter specification
-              required:
-                - label
-                - key
-                - filters
-                - validators
-              additionalProperties: false
-              properties:
-                label:
-                  type: string
-                  description: Human readable name
-                  x-nter-skip-param: true
-                key:
-                  type: string
-                  description: Slug used to store the property
-                  readOnly: true
-                  pattern: ^[a-z0-9]+(?:_[a-z0-9]+)*$
-                  x-nter-skip-param: true
-                filters:
-                  type: array
-                  description: A Collection of filters applied to the field
-                  maxItems: 100
-                  x-nter-skip-param: true
-                  items:
-                    anyOf:
-                      - x-nter-skip-param: true
-                        type: object
-                        additionalProperties: false
-                        description: This filter will set the value based on a list of approved values.
-                          If the value is not in the list, it will then be set
-                          to empty unless the default option is set
-                        required:
-                          - type
-                          - options
-                        properties:
-                          type:
-                            type: string
-                            enum:
-                              - allowed_list
-                            x-nter-skip-param: true
-                          options:
-                            type: object
-                            additionalProperties: false
-                            x-nter-skip-param: true
-                            required:
-                              - approved_values
-                            properties:
-                              approved_values:
-                                type: array
-                                minimum: 1
-                                maximum: 100
-                                description: The list of approved values
-                                x-nter-skip-param: true
-                                items:
-                                  type: string
-                              check_case:
-                                type: boolean
-                                description: Perform a case sensitive match. By default will not match case
-                                default: false
-                                x-nter-skip-param: true
-                              default:
-                                type: string
-                                nullable: true
-                                description: If this is set and the value is not in the approved_list, set the
-                                  value to this
-                                x-nter-skip-param: true
-                      - x-nter-skip-param: true
-                        type: object
-                        additionalProperties: false
-                        description: This filter will remove all non numbers from the value
-                        required:
-                          - type
-                          - options
-                        properties:
-                          type:
-                            type: string
-                            enum:
-                              - alpha
-                            x-nter-skip-param: true
-                          options:
-                            type: object
-                            additionalProperties: false
-                            description: This filter has no options
-                            x-nter-skip-param: true
-                      - x-nter-skip-param: true
-                        type: object
-                        additionalProperties: false
-                        description: This filter will make the value true or false
-                        required:
-                          - type
-                          - options
-                        properties:
-                          type:
-                            type: string
-                            enum:
-                              - boolean
-                            x-nter-skip-param: true
-                          options:
-                            type: object
-                            additionalProperties: false
-                            description: This filter has no options
-                            x-nter-skip-param: true
-                      - x-nter-skip-param: true
-                        type: object
-                        additionalProperties: false
-                        description: Make the value camelCase
-                        required:
-                          - type
-                          - options
-                        properties:
-                          type:
-                            type: string
-                            enum:
-                              - camel
-                            x-nter-skip-param: true
-                          options:
-                            type: object
-                            additionalProperties: false
-                            description: This filter has no options
-                            x-nter-skip-param: true
-                      - x-nter-skip-param: true
-                        type: object
-                        additionalProperties: false
-                        description: Filter to transform a value into a date
-                        required:
-                          - type
-                          - options
-                        properties:
-                          type:
-                            type: string
-                            enum:
-                              - date
-                            x-nter-skip-param: true
-                          options:
-                            type: object
-                            additionalProperties: false
-                            description: Date filter has no options
-                            x-nter-skip-param: true
-                      - x-nter-skip-param: true
-                        type: object
-                        additionalProperties: false
-                        description: This filter will remove all numbers from the value
-                        required:
-                          - type
-                          - options
-                        properties:
-                          type:
-                            type: string
-                            enum:
-                              - digits
-                            x-nter-skip-param: true
-                          options:
-                            type: object
-                            additionalProperties: false
-                            description: This filter has no options
-                            x-nter-skip-param: true
-                      - x-nter-skip-param: true
-                        type: object
-                        additionalProperties: false
-                        description: Filter to transform values into null. This is helpful when trying
-                          to make a value required
-                        required:
-                          - type
-                          - options
-                        properties:
-                          type:
-                            type: string
-                            enum:
-                              - empty
-                            x-nter-skip-param: true
-                          options:
-                            type: object
-                            additionalProperties: false
-                            description: empty filter has no options
-                            x-nter-skip-param: true
-                      - x-nter-skip-param: true
-                        type: object
-                        additionalProperties: false
-                        description: Filter to transform a value into a float. Non numeric characters
-                          (including comma) will be removed
-                        required:
-                          - type
-                          - options
-                        properties:
-                          type:
-                            type: string
-                            enum:
-                              - float
-                            x-nter-skip-param: true
-                          options:
-                            type: object
-                            additionalProperties: false
-                            x-nter-skip-param: true
-                            properties:
-                              precision:
-                                type: integer
-                                minimum: 1
-                                maximum: 8
-                                default: 3
-                                description: How many decimal places to preserve
-                                x-nter-skip-param: true
-                      - x-nter-skip-param: true
-                        type: object
-                        additionalProperties: false
-                        description: Make the value kebab-case
-                        required:
-                          - type
-                          - options
-                        properties:
-                          type:
-                            type: string
-                            enum:
-                              - kebab
-                            x-nter-skip-param: true
-                          options:
-                            type: object
-                            additionalProperties: false
-                            description: This filter has no options
-                            x-nter-skip-param: true
-                      - x-nter-skip-param: true
-                        type: object
-                        additionalProperties: false
-                        description: Make the value lowercase
-                        required:
-                          - type
-                          - options
-                        properties:
-                          type:
-                            type: string
-                            enum:
-                              - lower
-                            x-nter-skip-param: true
-                          options:
-                            type: object
-                            additionalProperties: false
-                            description: This filter has no options
-                            x-nter-skip-param: true
-                      - x-nter-skip-param: true
-                        type: object
-                        additionalProperties: false
-                        description: Filter to transform a value into a number. Non numeric characters
-                          (including comma and decimal points) will be removed
-                        required:
-                          - type
-                          - options
-                        properties:
-                          type:
-                            type: string
-                            enum:
-                              - number
-                            x-nter-skip-param: true
-                          options:
-                            type: object
-                            additionalProperties: false
-                            description: Number filter has no options
-                            x-nter-skip-param: true
-                      - x-nter-skip-param: true
-                        type: object
-                        additionalProperties: false
-                        description: Add a prefix to the start of a string. If the string already start
-                          with the prefix, it will not prepend.
-                        required:
-                          - type
-                          - options
-                        properties:
-                          type:
-                            type: string
-                            enum:
-                              - prefix
-                            x-nter-skip-param: true
-                          options:
-                            type: object
-                            additionalProperties: false
-                            x-nter-skip-param: true
-                            required:
-                              - prefix
-                            properties:
-                              prefix:
-                                type: string
-                                description: The prefix to add
-                                x-nter-skip-param: true
-                      - x-nter-skip-param: true
-                        type: object
-                        additionalProperties: false
-                        description: Make the value snake_case
-                        required:
-                          - type
-                          - options
-                        properties:
-                          type:
-                            type: string
-                            enum:
-                              - snake
-                            x-nter-skip-param: true
-                          options:
-                            type: object
-                            additionalProperties: false
-                            description: This filter has no options
-                            x-nter-skip-param: true
-                      - x-nter-skip-param: true
-                        type: object
-                        additionalProperties: false
-                        description: Filter to transform a value into a string
-                        required:
-                          - type
-                          - options
-                        properties:
-                          type:
-                            type: string
-                            enum:
-                              - string
-                            x-nter-skip-param: true
-                          options:
-                            type: object
-                            additionalProperties: false
-                            description: String filter has no options
-                            x-nter-skip-param: true
-                      - x-nter-skip-param: true
-                        description: Add a suffix to the start of a string. If the string already start
-                          with the suffix, it will not append.
-                        type: object
-                        additionalProperties: false
-                        required:
-                          - type
-                          - options
-                        properties:
-                          type:
-                            type: string
-                            enum:
-                              - suffix
-                            x-nter-skip-param: true
-                          options:
-                            type: object
-                            additionalProperties: false
-                            x-nter-skip-param: true
-                            required:
-                              - suffix
-                            properties:
-                              suffix:
-                                type: string
-                                description: The suffix to add
-                                x-nter-skip-param: true
-                      - x-nter-skip-param: true
-                        type: object
-                        additionalProperties: false
-                        description: Filter to trim whitespace from a value
-                        required:
-                          - type
-                          - options
-                        properties:
-                          type:
-                            type: string
-                            enum:
-                              - trim
-                            x-nter-skip-param: true
-                          options:
-                            type: object
-                            additionalProperties: false
-                            description: By default will trim from the start and end
-                            x-nter-skip-param: true
-                            properties:
-                              start:
-                                type: boolean
-                                description: Remove white space from the start of the string
-                                default: true
-                                x-nter-skip-param: true
-                              end:
-                                type: boolean
-                                description: Remove white space from the end of the string
-                                default: true
-                                x-nter-skip-param: true
-                      - x-nter-skip-param: true
-                        type: object
-                        additionalProperties: false
-                        description: Make the value UPPERCASE
-                        required:
-                          - type
-                          - options
-                        properties:
-                          type:
-                            type: string
-                            enum:
-                              - upper
-                            x-nter-skip-param: true
-                          options:
-                            type: object
-                            additionalProperties: false
-                            description: This filter has no options
-                            x-nter-skip-param: true
-                validators:
-                  type: array
-                  description: A set of validators to use for this field
-                  maxItems: 100
-                  x-nter-skip-param: true
-                  items:
-                    anyOf:
-                      - x-nter-skip-param: true
-                        type: object
-                        additionalProperties: false
-                        description: This is always valid
-                        required:
-                          - type
-                          - options
-                        properties:
-                          type:
-                            type: string
-                            enum:
-                              - always
-                            x-nter-skip-param: true
-                          options:
-                            type: object
-                            additionalProperties: false
-                            description: This validator has no options
-                            x-nter-skip-param: true
-                      - x-nter-skip-param: true
-                        type: object
-                        additionalProperties: false
-                        description: Validate number is between two values. By default, min and max are
-                          included
-                        required:
-                          - type
-                          - options
-                        properties:
-                          type:
-                            type: string
-                            enum:
-                              - between
-                            x-nter-skip-param: true
-                          options:
-                            type: object
-                            additionalProperties: false
-                            x-nter-skip-param: true
-                            required:
-                              - min
-                              - max
-                            properties:
-                              min:
-                                type: number
-                                description: Minimum value to check
-                                x-nter-skip-param: true
-                              max:
-                                type: number
-                                description: The maximum value to check
-                                x-nter-skip-param: true
-                              precision:
-                                type: integer
-                                description: When number is a float, this will set the decimal precision
-                                minimum: 1
-                                maximum: 8
-                                default: 3
-                                x-nter-skip-param: true
-                              include:
-                                type: boolean
-                                description: Include the value in the check
-                                default: true
-                                x-nter-skip-param: true
-                      - x-nter-skip-param: true
-                        type: object
-                        additionalProperties: false
-                        description: Validate value does not match a list (black list)
-                        required:
-                          - type
-                          - options
-                        properties:
-                          type:
-                            type: string
-                            enum:
-                              - black_list
-                            x-nter-skip-param: true
-                          options:
-                            type: object
-                            additionalProperties: false
-                            x-nter-skip-param: true
-                            required:
-                              - list
-                            properties:
-                              list:
-                                type: array
-                                minimum: 1
-                                maximum: 100
-                                description: The list of approved values
-                                items:
-                                  type: string
-                                x-nter-skip-param: true
-                              check_case:
-                                type: boolean
-                                description: Perform a case sensitive match. By default will not match case
-                                default: false
-                                x-nter-skip-param: true
-                      - x-nter-skip-param: true
-                        type: object
-                        additionalProperties: false
-                        description: Validate string contains a value
-                        required:
-                          - type
-                          - options
-                        properties:
-                          type:
-                            type: string
-                            enum:
-                              - contains
-                            x-nter-skip-param: true
-                          options:
-                            type: object
-                            additionalProperties: false
-                            x-nter-skip-param: true
-                            required:
-                              - contains
-                            properties:
-                              contains:
-                                type: string
-                                description: String must contain with this value
-                                x-nter-skip-param: true
-                              check_case:
-                                type: boolean
-                                description: Perform a case sensitive match. By default will not match case
-                                default: false
-                                x-nter-skip-param: true
-                      - x-nter-skip-param: true
-                        type: object
-                        additionalProperties: false
-                        description: Validate string is a correct email address
-                        required:
-                          - type
-                          - options
-                        properties:
-                          type:
-                            type: string
-                            enum:
-                              - email_address
-                            x-nter-skip-param: true
-                          options:
-                            type: object
-                            additionalProperties: false
-                            x-nter-skip-param: true
-                            properties:
-                              strict:
-                                type: boolean
-                                description: Enforce strict standards from ARPA. This will enforce the length of
-                                  the string
-                                default: true
-                                x-nter-skip-param: true
-                              lookup:
-                                type: boolean
-                                description: Look up the host name and check if it has a valid MX record
-                                default: false
-                                x-nter-skip-param: true
-                      - x-nter-skip-param: true
-                        type: object
-                        additionalProperties: false
-                        description: Validate string ends with a value
-                        required:
-                          - type
-                          - options
-                        properties:
-                          type:
-                            type: string
-                            enum:
-                              - ends_with
-                            x-nter-skip-param: true
-                          options:
-                            type: object
-                            additionalProperties: false
-                            x-nter-skip-param: true
-                            required:
-                              - ends_with
-                            properties:
-                              ends_with:
-                                type: string
-                                description: String must end with this value
-                                x-nter-skip-param: true
-                              check_case:
-                                type: boolean
-                                description: Perform a case sensitive match. By default will not match case
-                                default: false
-                                x-nter-skip-param: true
-                      - x-nter-skip-param: true
-                        type: object
-                        additionalProperties: false
-                        description: Validate number equals a value
-                        required:
-                          - type
-                          - options
-                        properties:
-                          type:
-                            type: string
-                            enum:
-                              - equals
-                            x-nter-skip-param: true
-                          options:
-                            type: object
-                            additionalProperties: false
-                            x-nter-skip-param: true
-                            required:
-                              - value
-                            properties:
-                              value:
-                                type: number
-                                description: The value to compare against
-                                x-nter-skip-param: true
-                              precision:
-                                type: integer
-                                description: When value is a float, this will set the decimal precision
-                                minimum: 1
-                                maximum: 8
-                                default: 3
-                                x-nter-skip-param: true
-                      - x-nter-skip-param: true
-                        type: object
-                        additionalProperties: false
-                        description: Validate number is greater than a value. By default, this will
-                          check if value is greater than or equals to
-                        required:
-                          - type
-                          - options
-                        properties:
-                          type:
-                            type: string
-                            enum:
-                              - greater_than
-                            x-nter-skip-param: true
-                          options:
-                            type: object
-                            additionalProperties: false
-                            x-nter-skip-param: true
-                            required:
-                              - value
-                            properties:
-                              value:
-                                type: number
-                                description: The value to compare against
-                                x-nter-skip-param: true
-                              precision:
-                                type: integer
-                                description: When number is a float, this will set the decimal precision
-                                minimum: 1
-                                maximum: 8
-                                default: 3
-                                x-nter-skip-param: true
-                              include:
-                                type: boolean
-                                description: Include the value in the check
-                                default: true
-                                x-nter-skip-param: true
-                      - x-nter-skip-param: true
-                        type: object
-                        additionalProperties: false
-                        description: Validate string has a correct DNS records
-                        required:
-                          - type
-                          - options
-                        properties:
-                          type:
-                            type: string
-                            enum:
-                              - hostname
-                            x-nter-skip-param: true
-                          options:
-                            type: object
-                            additionalProperties: false
-                            x-nter-skip-param: true
-                            properties:
-                              record_type:
-                                type: string
-                                description: DNS record type to validate
-                                default: A
-                                enum:
-                                  - A
-                                  - AAAA
-                                  - AFSDB
-                                  - APL
-                                  - CAA
-                                  - CDNSKEY
-                                  - CDS
-                                  - CERT
-                                  - CNAME
-                                  - CSYNC
-                                  - DHCID
-                                  - DLV
-                                  - DNAME
-                                  - DNSKEY
-                                  - DS
-                                  - HIP
-                                  - IPSECKEY
-                                  - KEY
-                                  - KX
-                                  - LOC
-                                  - MX
-                                  - NAPTR
-                                  - NS
-                                  - NSEC
-                                  - NSEC3
-                                  - NSEC3PARAM
-                                  - OPENPGPKEY
-                                  - PTR
-                                  - RRSIG
-                                  - RP
-                                  - SIG
-                                  - SMIMEA
-                                  - SOA
-                                  - SRV
-                                  - SSHFP
-                                  - TA
-                                  - TKEY
-                                  - TLSA
-                                  - TSIG
-                                  - TXT
-                                  - URI
-                                x-nter-skip-param: true
-                      - x-nter-skip-param: true
-                        type: object
-                        additionalProperties: false
-                        description: Validate string matches an IP address format. Defaults to matching
-                          IPv4
-                        required:
-                          - type
-                          - options
-                        properties:
-                          type:
-                            type: string
-                            enum:
-                              - ip_address
-                            x-nter-skip-param: true
-                          options:
-                            type: object
-                            additionalProperties: false
-                            x-nter-skip-param: true
-                            properties:
-                              version:
-                                type: string
-                                description: IP Version to match against
-                                enum:
-                                  - IPv4
-                                  - IPv6
-                                x-nter-skip-param: true
-                      - x-nter-skip-param: true
-                        type: object
-                        additionalProperties: false
-                        description: Validate string is a certain length
-                        required:
-                          - type
-                          - options
-                        properties:
-                          type:
-                            type: string
-                            enum:
-                              - length
-                            x-nter-skip-param: true
-                          options:
-                            type: object
-                            additionalProperties: false
-                            x-nter-skip-param: true
-                            required:
-                              - length
-                            properties:
-                              length:
-                                type: number
-                                description: Length to compare with
-                                x-nter-skip-param: true
-                              operator:
-                                type: string
-                                description: Which type of length comparision to make
-                                default: equals
-                                enum:
-                                  - equals
-                                  - less_than
-                                  - less_than_equals
-                                  - greater_than
-                                  - greater_than_equals
-                                x-nter-skip-param: true
-                      - x-nter-skip-param: true
-                        type: object
-                        additionalProperties: false
-                        description: Validate number is less than a value. By default, this will check
-                          if value is less than or equals to
-                        required:
-                          - type
-                          - options
-                        properties:
-                          type:
-                            type: string
-                            enum:
-                              - less_than
-                            x-nter-skip-param: true
-                          options:
-                            type: object
-                            additionalProperties: false
-                            x-nter-skip-param: true
-                            required:
-                              - value
-                            properties:
-                              value:
-                                type: number
-                                description: The value to compare against
-                                x-nter-skip-param: true
-                              precision:
-                                type: integer
-                                description: When number is a float, this will set the decimal precision
-                                minimum: 1
-                                maximum: 8
-                                default: 3
-                                x-nter-skip-param: true
-                              include:
-                                type: boolean
-                                description: Include the value in the check
-                                default: true
-                                x-nter-skip-param: true
-                      - x-nter-skip-param: true
-                        type: object
-                        additionalProperties: false
-                        description: Validate string matches an MAC address format
-                        required:
-                          - type
-                          - options
-                        properties:
-                          type:
-                            type: string
-                            enum:
-                              - mac_address
-                            x-nter-skip-param: true
-                          options:
-                            type: object
-                            additionalProperties: false
-                            description: This validator has no options
-                            x-nter-skip-param: true
-                      - x-nter-skip-param: true
-                        type: object
-                        additionalProperties: false
-                        description: Validate string matches a regular expression
-                        required:
-                          - type
-                          - options
-                        properties:
-                          type:
-                            type: string
-                            enum:
-                              - mask
-                            x-nter-skip-param: true
-                          options:
-                            type: object
-                            additionalProperties: false
-                            x-nter-skip-param: true
-                            required:
-                              - mask
-                            properties:
-                              mask:
-                                type: string
-                                description: Mask to validate against
-                                x-nter-skip-param: true
-                      - x-nter-skip-param: true
-                        type: object
-                        additionalProperties: false
-                        description: This is never valid
-                        required:
-                          - type
-                          - options
-                        properties:
-                          type:
-                            type: string
-                            enum:
-                              - never
-                            x-nter-skip-param: true
-                          options:
-                            type: object
-                            additionalProperties: false
-                            description: This validator has no options
-                            x-nter-skip-param: true
-                      - x-nter-skip-param: true
-                        type: object
-                        additionalProperties: false
-                        description: Validates that the value is present and not set to 'null', '0' or
-                          an empty string
-                        required:
-                          - type
-                          - options
-                        properties:
-                          type:
-                            type: string
-                            enum:
-                              - required
-                            x-nter-skip-param: true
-                          options:
-                            type: object
-                            additionalProperties: false
-                            description: Required validator has no options
-                            x-nter-skip-param: true
-                      - x-nter-skip-param: true
-                        type: object
-                        additionalProperties: false
-                        description: Validate string starts with a value
-                        required:
-                          - type
-                          - options
-                        properties:
-                          type:
-                            type: string
-                            enum:
-                              - starts_with
-                            x-nter-skip-param: true
-                          options:
-                            type: object
-                            additionalProperties: false
-                            x-nter-skip-param: true
-                            required:
-                              - starts_with
-                            properties:
-                              starts_with:
-                                type: string
-                                description: String must start with this value
-                                x-nter-skip-param: true
-                              check_case:
-                                type: boolean
-                                description: Perform a case sensitive match. By default will not match case
-                                default: false
-                                x-nter-skip-param: true
-                      - x-nter-skip-param: true
-                        type: object
-                        additionalProperties: false
-                        description: Validates that a value follows a step. Both start and end options
-                          do not have to sync with the step. If they do not sync
-                          then find the nearest step.
-                        required:
-                          - type
-                          - options
-                        properties:
-                          type:
-                            type: string
-                            enum:
-                              - step
-                            x-nter-skip-param: true
-                          options:
-                            type: object
-                            additionalProperties: false
-                            x-nter-skip-param: true
-                            required:
-                              - step
-                            properties:
-                              step:
-                                type: number
-                                description: The step value
-                                x-nter-skip-param: true
-                              start:
-                                type: number
-                                nullable: true
-                                description: Start stepping at this value
-                                x-nter-skip-param: true
-                              end:
-                                type: number
-                                nullable: true
-                                description: End stepping at this value
-                                x-nter-skip-param: true
-                      - x-nter-skip-param: true
-                        type: object
-                        additionalProperties: false
-                        description: Validate string matches an URI
-                        required:
-                          - type
-                          - options
-                        properties:
-                          type:
-                            type: string
-                            enum:
-                              - uri
-                            x-nter-skip-param: true
-                          options:
-                            type: object
-                            additionalProperties: false
-                            x-nter-skip-param: true
-                            properties:
-                              schemes:
-                                type: array
-                                description: Schemes to match. By default all are matched
-                                items:
-                                  type: string
-                                  enum:
-                                    - "http:"
-                                    - "https:"
-                                    - "sip:"
-                                    - "sips:"
-                                    - "ftp:"
-                                    - "ftps:"
-                                    - "ldap:"
-                                    - "ldaps:"
-                                    - "file:"
-                                    - "udp:"
-                                    - "tcp:"
-                                    - "urn:"
-                                x-nter-skip-param: true
-                      - x-nter-skip-param: true
-                        type: object
-                        additionalProperties: false
-                        description: Validate value matches a list (white list)
-                        required:
-                          - type
-                          - options
-                        properties:
-                          type:
-                            type: string
-                            enum:
-                              - white_list
-                            x-nter-skip-param: true
-                          options:
-                            type: object
-                            additionalProperties: false
-                            x-nter-skip-param: true
-                            required:
-                              - list
-                            properties:
-                              list:
-                                type: array
-                                minimum: 1
-                                maximum: 100
-                                description: The list of approved values
-                                items:
-                                  type: string
-                                x-nter-skip-param: true
-                              check_case:
-                                type: boolean
-                                description: Perform a case sensitive match. By default will not match case
-                                default: false
-                                x-nter-skip-param: true
-                locked:
-                  type: boolean
-                  description: Defines the field as being locked higher up in the hierarchy. This
-                    prevents child entities from making changes to the filters
-                    or validators
-                  x-nter-skip-param: true
-                description:
-                  type: string
-                  nullable: true
-                  description: Provide a description for the field
-                  x-nter-skip-param: true
-                value:
-                  type: string
-                  nullable: true
-                  description: The validated and filtered value. This is always a string so
-                    consumers MUST extrapolate out type
-                  x-nter-skip-param: true
-                inherited_from:
-                  x-nter-skip-param: true
-                  oneOf:
-                    - type: "null"
-                      x-nter-skip-param: true
-                    - x-nter-skip-param: true
-                      enum:
-                        - ACT
-                        - BAT
-                        - CON
-                        - CTX
-                        - CUS
-                        - FILE
-                        - LOC
-                        - MFR
-                        - NOTE
-                        - PART
-                        - PGM
-                        - PRJ
-                        - PUSH
-                        - QUE
-                        - RES
-                        - ROLE
-                        - SRES
-                        - UNIT
-                        - USER
-                        - VEN
-                        - WKF
-                        - WOR
-                apply_to:
-                  x-nter-skip-param: true
-                  enum:
-                    - ACT
-                    - BAT
-                    - CON
-                    - CTX
-                    - CUS
-                    - FILE
-                    - LOC
-                    - MFR
-                    - NOTE
-                    - PART
-                    - PGM
-                    - PRJ
-                    - PUSH
-                    - QUE
-                    - RES
-                    - ROLE
-                    - SRES
-                    - UNIT
-                    - USER
-                    - VEN
-                    - WKF
-                    - WOR
   allowed_statuses:
     type: array
+    x-model: AllowedStatuses
     description: List of allowed statuses
     uniqueItems: true
     items:
       type: object
+      x-model: Status
       description: Defines the properties for a status
       additionalProperties: false
       required:
@@ -2673,6 +1496,7 @@ properties:
           description: Order status appears when listing
   input_filter:
     type: array
+    x-model: InputFilter
     description: Input Filters allow custom fields to be defined for entities
     x-nter-see: https://docs.nterprise.com/niagara/inputFilter.html
     x-nter-no-example: true
@@ -2705,6 +1529,7 @@ properties:
             anyOf:
               - x-nter-skip-param: true
                 type: object
+                x-model: FilterAllowed
                 additionalProperties: false
                 description: This filter will set the value based on a list of approved values.
                   If the value is not in the list, it will then be set to empty
@@ -2746,6 +1571,7 @@ properties:
                         x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                x-model: FilterAlpha
                 additionalProperties: false
                 description: This filter will remove all non numbers from the value
                 required:
@@ -2764,6 +1590,7 @@ properties:
                     x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                x-model: FilterBoolean
                 additionalProperties: false
                 description: This filter will make the value true or false
                 required:
@@ -2782,6 +1609,7 @@ properties:
                     x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                x-model: FilterCamelCase
                 additionalProperties: false
                 description: Make the value camelCase
                 required:
@@ -2800,6 +1628,7 @@ properties:
                     x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                x-model: FilterDate
                 additionalProperties: false
                 description: Filter to transform a value into a date
                 required:
@@ -2818,6 +1647,7 @@ properties:
                     x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                x-model: FilterDigits
                 additionalProperties: false
                 description: This filter will remove all numbers from the value
                 required:
@@ -2836,6 +1666,7 @@ properties:
                     x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                x-model: FilterEmpty
                 additionalProperties: false
                 description: Filter to transform values into null. This is helpful when trying
                   to make a value required
@@ -2855,6 +1686,7 @@ properties:
                     x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                x-model: FilterFloat
                 additionalProperties: false
                 description: Filter to transform a value into a float. Non numeric characters
                   (including comma) will be removed
@@ -2881,6 +1713,7 @@ properties:
                         x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                x-model: FilterKebabCase
                 additionalProperties: false
                 description: Make the value kebab-case
                 required:
@@ -2899,6 +1732,7 @@ properties:
                     x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                x-model: FilterLower
                 additionalProperties: false
                 description: Make the value lowercase
                 required:
@@ -2917,6 +1751,7 @@ properties:
                     x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                x-model: FilterNumber
                 additionalProperties: false
                 description: Filter to transform a value into a number. Non numeric characters
                   (including comma and decimal points) will be removed
@@ -2936,6 +1771,7 @@ properties:
                     x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                x-model: FilterPrefix
                 additionalProperties: false
                 description: Add a prefix to the start of a string. If the string already start
                   with the prefix, it will not prepend.
@@ -2961,6 +1797,7 @@ properties:
                         x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                x-model: FilterSnakeCase
                 additionalProperties: false
                 description: Make the value snake_case
                 required:
@@ -2979,6 +1816,7 @@ properties:
                     x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                x-model: FilterString
                 additionalProperties: false
                 description: Filter to transform a value into a string
                 required:
@@ -2999,6 +1837,7 @@ properties:
                 description: Add a suffix to the start of a string. If the string already start
                   with the suffix, it will not append.
                 type: object
+                x-model: FilterSuffix
                 additionalProperties: false
                 required:
                   - type
@@ -3022,6 +1861,7 @@ properties:
                         x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                x-model: FilterTrim
                 additionalProperties: false
                 description: Filter to trim whitespace from a value
                 required:
@@ -3051,6 +1891,7 @@ properties:
                         x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                x-model: FilterUpper
                 additionalProperties: false
                 description: Make the value UPPERCASE
                 required:
@@ -3076,6 +1917,7 @@ properties:
             anyOf:
               - x-nter-skip-param: true
                 type: object
+                x-model: ValidatorAlways
                 additionalProperties: false
                 description: This is always valid
                 required:
@@ -3094,6 +1936,7 @@ properties:
                     x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                x-model: ValidatorBetween
                 additionalProperties: false
                 description: Validate number is between two values. By default, min and max are
                   included
@@ -3136,6 +1979,7 @@ properties:
                         x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                x-model: ValidatorBlackList
                 additionalProperties: false
                 description: Validate value does not match a list (black list)
                 required:
@@ -3169,6 +2013,7 @@ properties:
                         x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                x-model: ValidatorContains
                 additionalProperties: false
                 description: Validate string contains a value
                 required:
@@ -3198,6 +2043,7 @@ properties:
                         x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                x-model: ValidatorEmailAddress
                 additionalProperties: false
                 description: Validate string is a correct email address
                 required:
@@ -3227,6 +2073,7 @@ properties:
                         x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                x-model: ValidatorEndsWith
                 additionalProperties: false
                 description: Validate string ends with a value
                 required:
@@ -3256,6 +2103,7 @@ properties:
                         x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                x-model: ValidatorEquals
                 additionalProperties: false
                 description: Validate number equals a value
                 required:
@@ -3287,6 +2135,7 @@ properties:
                         x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                x-model: ValidatorGreaterThan
                 additionalProperties: false
                 description: Validate number is greater than a value. By default, this will
                   check if value is greater than or equals to
@@ -3324,6 +2173,7 @@ properties:
                         x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                x-model: ValidatorHostName
                 additionalProperties: false
                 description: Validate string has a correct DNS records
                 required:
@@ -3389,6 +2239,7 @@ properties:
                         x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                x-model: ValidatorIPAddress
                 additionalProperties: false
                 description: Validate string matches an IP address format. Defaults to matching
                   IPv4
@@ -3415,6 +2266,7 @@ properties:
                         x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                x-model: ValidatorLength
                 additionalProperties: false
                 description: Validate string is a certain length
                 required:
@@ -3450,6 +2302,7 @@ properties:
                         x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                x-model: ValidatorLessThan
                 additionalProperties: false
                 description: Validate number is less than a value. By default, this will check
                   if value is less than or equals to
@@ -3487,6 +2340,7 @@ properties:
                         x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                x-model: ValidatorMacAddress
                 additionalProperties: false
                 description: Validate string matches an MAC address format
                 required:
@@ -3505,6 +2359,7 @@ properties:
                     x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                x-model: ValidatorMask
                 additionalProperties: false
                 description: Validate string matches a regular expression
                 required:
@@ -3529,6 +2384,7 @@ properties:
                         x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                x-model: ValidatorNever
                 additionalProperties: false
                 description: This is never valid
                 required:
@@ -3547,6 +2403,7 @@ properties:
                     x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                x-model: ValidatorRequired
                 additionalProperties: false
                 description: Validates that the value is present and not set to 'null', '0' or
                   an empty string
@@ -3566,6 +2423,7 @@ properties:
                     x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                x-model: ValidatorStartsWith
                 additionalProperties: false
                 description: Validate string starts with a value
                 required:
@@ -3595,6 +2453,7 @@ properties:
                         x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                x-model: ValidatorStep
                 additionalProperties: false
                 description: Validates that a value follows a step. Both start and end options
                   do not have to sync with the step. If they do not sync then
@@ -3631,6 +2490,7 @@ properties:
                         x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                x-model: ValidatorUri
                 additionalProperties: false
                 description: Validate string matches an URI
                 required:
@@ -3668,6 +2528,7 @@ properties:
                         x-nter-skip-param: true
               - x-nter-skip-param: true
                 type: object
+                x-model: ValidatorWhiteList
                 additionalProperties: false
                 description: Validate value matches a list (white list)
                 required:

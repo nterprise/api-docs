@@ -448,6 +448,12 @@ Permissions required:<br>
 
 > Body parameter
 
+<h3 id="updatenotification-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|notification_id|path|string|true|Id of the notification|
+
 > Example responses
 
 > 200 Response
@@ -505,7 +511,7 @@ Permissions required:<br>
 
 ### GET /me/vendors
 
-<a id="opIdfetchAllVendor"></a>
+<a id="opIdfetchMeVendors"></a>
 
 Fetches A Page of vendor
 
@@ -514,7 +520,7 @@ Permissions required:<br>
 <ul><li>me:profile</li></ul>
 </aside>
 
-<h3 id="fetchallvendor-parameters">Parameters</h3>
+<h3 id="fetchmevendors-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|

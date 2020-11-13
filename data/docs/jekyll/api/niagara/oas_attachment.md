@@ -213,6 +213,7 @@ Permissions required:<br>
 
 ```yaml
 type: object
+x-model: File
 properties:
   file_id:
     description: The identifier for the batch
@@ -223,13 +224,13 @@ properties:
     type: string
     description: Label for the entity
   created:
-    description: Date the entity was created
     type: string
+    description: Date the entity was created
     format: date-time
     readOnly: true
   updated:
-    description: Last date the entity was updated
     type: string
+    description: Last date the entity was updated
     format: date-time
     readOnly: true
   content_type:

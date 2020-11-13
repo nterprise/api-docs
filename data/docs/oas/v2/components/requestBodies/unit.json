@@ -61,7 +61,7 @@
                 "$ref": "https://docs.nterprise.com/schemas/niagara/vendor.json#/properties/vendor_id"
               },
               "part_number": {
-                "$ref": "https://docs.nterprise.com/schemas/niagara/unit.json#/properties/vendor/anyOf/1/properties/part_number"
+                "type": "string"
               }
             }
           },
