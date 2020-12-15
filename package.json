@@ -75,10 +75,10 @@
   },
   "dependencies": {
     "@nterprise/niagara-winston-logger": "^1.0.3",
-    "ajv": "^6.12.5",
+    "ajv": "^6.12.6",
     "chance": "^1.1.7",
     "faker": "^5.1.0",
-    "json-schema-faker": "^0.5.0-rcv.29",
+    "json-schema-faker": "^0.5.0-rcv.32",
     "jsonpath": "^1.0.2",
     "lodash": "^4",
     "winston": "^3.3.3",
@@ -87,8 +87,8 @@
   },
   "devDependencies": {
     "@nterprise/niagara-winston-logger": "^1.0.3",
-    "yargs": "^16.0.3",
-    "eslint": "^7.9.0",
+    "yargs": "^16.2.0",
+    "eslint": "^7.15.0",
     "eslint-config-google": "^0.14.0",
     "glob": "^7.1.6",
     "json-schema-ref-parser": "^9.0.6",
