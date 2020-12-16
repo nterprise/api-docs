@@ -1,5 +1,6 @@
 ---
-layout: null
+title: Terms of Service
+layout: tos
 ---
 # nterprise Software As A Service agreement
 
