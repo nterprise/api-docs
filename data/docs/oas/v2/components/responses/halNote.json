@@ -35,8 +35,10 @@
         "label": "A Note",
         "created": "2019-10-09T19:30:35.639Z",
         "updated": "2019-10-09T20:30:35.639Z",
-        "edited": "2019-10-09T20:30:35.639Z",
         "text": "Lorem ipsum dolor sit amet",
+        "thread_id": "parent_note",
+        "issue": true,
+        "closed": true,
         "_embedded": {
           "nter:note-created-by": [
             {

@@ -13,13 +13,16 @@
             "$ref": "https://docs.nterprise.com/schemas/niagara/note.json#/properties/label"
           },
           "text": {
-            "$ref": "https://docs.nterprise.com/schemas/niagara/note.json#/properties/label"
+            "$ref": "https://docs.nterprise.com/schemas/niagara/note.json#/properties/text"
           },
           "thread_id": {
             "$ref": "https://docs.nterprise.com/schemas/niagara/note.json#/properties/thread_id"
           },
           "issue": {
             "$ref": "https://docs.nterprise.com/schemas/niagara/note.json#/properties/issue"
+          },
+          "closed": {
+            "$ref": "https://docs.nterprise.com/schemas/niagara/note.json#/properties/closed"
           },
           "notify": {
             "type": "array",

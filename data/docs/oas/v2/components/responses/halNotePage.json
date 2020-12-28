@@ -64,8 +64,9 @@
               "created": "2019-10-09T19:30:35.639Z",
               "updated": "2019-10-09T20:30:35.639Z",
               "text": "Lorem ipsum dolor sit amet",
-              "edited": "2019-10-09T20:30:35.639Z",
               "thread_id": "parent_note",
+              "issue": true,
+              "closed": true,
               "_links": {
                 "nter:note-created-by": {
                   "href": "https://api.nterprise.com/users/3dddba3e-6122-46a8-ae26-8c7c95bd82d7"

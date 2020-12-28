@@ -63,8 +63,10 @@ Permissions required:<br>
   "label": "A Note",
   "created": "2019-10-09T19:30:35.639Z",
   "updated": "2019-10-09T20:30:35.639Z",
-  "edited": "2019-10-09T20:30:35.639Z",
+  "thread_id": "parent_note",
   "text": "Lorem ipsum dolor sit amet",
+  "issue": true,
+  "closed": true,
   "_embedded": {
     "nter:note-created-by": [
       {
@@ -144,9 +146,10 @@ Permissions required:<br>
         "label": "A Note",
         "created": "2019-10-09T19:30:35.639Z",
         "updated": "2019-10-09T20:30:35.639Z",
-        "text": "Lorem ipsum dolor sit amet",
-        "edited": "2019-10-09T20:30:35.639Z",
         "thread_id": "parent_note",
+        "text": "Lorem ipsum dolor sit amet",
+        "issue": true,
+        "closed": true,
         "_links": {
           "nter:note-created-by": {
             "href": "https://api.nterprise.com/users/3dddba3e-6122-46a8-ae26-8c7c95bd82d7"
@@ -189,7 +192,9 @@ Permissions required:<br>
 |unit_id|path|string|true|Id for the unit|
 |label|body|string|true|Label for the entity|
 |text|body|string|true|Label for the entity|
-|thread_id|body|string|false|The id of the note which started a thread|
+|thread_id|body|any|false|none|
+|&nbsp;&nbsp; *anonymous*|body|null|false|none|
+|&nbsp;&nbsp; *anonymous*|body|string|false|The id of the note which started a thread|
 |issue|body|boolean|false|Marks the note as an issue|
 |notify|body|[object]|false|List of contacts to notify about this note|
 |&nbsp;&nbsp; contact_id|body|string|false|Identifier for the contact|
@@ -204,8 +209,10 @@ Permissions required:<br>
   "label": "A Note",
   "created": "2019-10-09T19:30:35.639Z",
   "updated": "2019-10-09T20:30:35.639Z",
-  "edited": "2019-10-09T20:30:35.639Z",
+  "thread_id": "parent_note",
   "text": "Lorem ipsum dolor sit amet",
+  "issue": true,
+  "closed": true,
   "_embedded": {
     "nter:note-created-by": [
       {
@@ -268,9 +275,10 @@ Permissions required:<br>
         "label": "A Note",
         "created": "2019-10-09T19:30:35.639Z",
         "updated": "2019-10-09T20:30:35.639Z",
-        "text": "Lorem ipsum dolor sit amet",
-        "edited": "2019-10-09T20:30:35.639Z",
         "thread_id": "parent_note",
+        "text": "Lorem ipsum dolor sit amet",
+        "issue": true,
+        "closed": true,
         "_links": {
           "nter:note-created-by": {
             "href": "https://api.nterprise.com/users/3dddba3e-6122-46a8-ae26-8c7c95bd82d7"
@@ -313,7 +321,9 @@ Permissions required:<br>
 |work_order_id|path|string|true|Id for the work order|
 |label|body|string|true|Label for the entity|
 |text|body|string|true|Label for the entity|
-|thread_id|body|string|false|The id of the note which started a thread|
+|thread_id|body|any|false|none|
+|&nbsp;&nbsp; *anonymous*|body|null|false|none|
+|&nbsp;&nbsp; *anonymous*|body|string|false|The id of the note which started a thread|
 |issue|body|boolean|false|Marks the note as an issue|
 |notify|body|[object]|false|List of contacts to notify about this note|
 |&nbsp;&nbsp; contact_id|body|string|false|Identifier for the contact|
@@ -328,8 +338,10 @@ Permissions required:<br>
   "label": "A Note",
   "created": "2019-10-09T19:30:35.639Z",
   "updated": "2019-10-09T20:30:35.639Z",
-  "edited": "2019-10-09T20:30:35.639Z",
+  "thread_id": "parent_note",
   "text": "Lorem ipsum dolor sit amet",
+  "issue": true,
+  "closed": true,
   "_embedded": {
     "nter:note-created-by": [
       {
@@ -378,7 +390,7 @@ Permissions required:<br>
 |updated|string(date-time)|false|read-only|Last date the entity was updated|
 |text|string|false|none|Text for the note|
 |issue|boolean|false|none|Marks the note as an issue|
-|edited|string|false|none|Date of the last edit for the note|
+|closed|boolean|false|none|Marks the note as closed|
 
 #### Specification
 
@@ -407,12 +419,14 @@ properties:
   text:
     type: string
     description: Text for the note
+    minLength: 1
+    maxLength: 1000
   issue:
     type: boolean
     description: Marks the note as an issue
-  edited:
-    type: string
-    description: Date of the last edit for the note
+  closed:
+    type: boolean
+    description: Marks the note as closed
 
 ```
 
