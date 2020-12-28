@@ -61,11 +61,9 @@
       "type": "boolean",
       "description": "Marks the note as an issue"
     },
-    "edited": {
-      "type": [
-        "string"
-      ],
-      "description": "Date of the last edit for the note"
+    "closed": {
+      "type": "boolean",
+      "description": "Marks the note as closed"
     }
   }
 }

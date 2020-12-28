@@ -17,11 +17,14 @@
     "text": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/note.json#/properties/text"
     },
+    "thread_id": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/note.json#/properties/thread_id"
+    },
     "issue": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/note.json#/properties/issue"
     },
-    "edited": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/note.json#/properties/edited"
+    "closed": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/note.json#/properties/closed"
     }
   }
 }
