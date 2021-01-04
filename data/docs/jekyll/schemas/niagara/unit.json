@@ -12,7 +12,8 @@
     "updated",
     "part",
     "location",
-    "tenant_part_number"
+    "tenant_part_number",
+    "note_count"
   ],
   "properties": {
     "unit_id": {
@@ -106,6 +107,9 @@
     },
     "current_status": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/status.json"
+    },
+    "note_count": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/noteCount.json"
     }
   }
 }

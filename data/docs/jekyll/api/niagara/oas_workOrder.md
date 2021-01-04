@@ -581,6 +581,11 @@ Permissions required:<br>
     }
   },
   "input_filter": [],
+  "note_count": {
+    "total": 13,
+    "closed_issues": 3,
+    "open_issues": 1
+  },
   "_embedded": {
     "nter:work-order-project": [],
     "nter:work-order-location": [],
@@ -837,6 +842,11 @@ Permissions required:<br>
     }
   },
   "input_filter": [],
+  "note_count": {
+    "total": 13,
+    "closed_issues": 3,
+    "open_issues": 1
+  },
   "_embedded": {
     "nter:work-order-project": [],
     "nter:work-order-location": [],
@@ -1128,6 +1138,11 @@ Permissions required:<br>
     }
   },
   "input_filter": [],
+  "note_count": {
+    "total": 13,
+    "closed_issues": 3,
+    "open_issues": 1
+  },
   "_embedded": {
     "nter:work-order-project": [],
     "nter:work-order-location": [],
@@ -4268,6 +4283,27 @@ properties:
             - VEN
             - WKF
             - WOR
+  note_count:
+    type: object
+    description: Defines the properties for note count
+    additionalProperties: false
+    required:
+      - total
+      - open_issues
+      - closed_issues
+    properties:
+      total:
+        description: The total count of notes
+        type: number
+        minimum: 0
+      open_issues:
+        description: The count of open issue notes
+        type: number
+        minimum: 0
+      closed_issues:
+        description: The count of closed issue notes
+        type: number
+        minimum: 0
 
 ```
 

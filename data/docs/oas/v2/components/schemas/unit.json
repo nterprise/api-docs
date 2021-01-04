@@ -39,6 +39,9 @@
     },
     "current_status": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/unit.json#/properties/current_status"
+    },
+    "note_count": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/unit.json#/properties/note_count"
     }
   }
 }

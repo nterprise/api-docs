@@ -264,6 +264,11 @@
         },
         "resource": null,
         "input_filter": [],
+        "note_count": {
+          "total": 13,
+          "closed_issues": 3,
+          "open_issues": 1
+        },
         "_embedded": {
           "nter:unit-manufacturer": [],
           "nter:unit-part": [],
