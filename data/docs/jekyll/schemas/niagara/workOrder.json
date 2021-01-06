@@ -15,7 +15,8 @@
     "location",
     "cycles",
     "begin_date",
-    "due_date"
+    "due_date",
+    "note_count"
   ],
   "properties": {
     "work_order_id": {
@@ -111,6 +112,9 @@
     },
     "input_filter": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter.json"
+    },
+    "note_count": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/noteCount.json"
     },
     "input_from": {
       "description": "Resource or location where components arrive from",

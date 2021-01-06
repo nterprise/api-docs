@@ -63,8 +63,8 @@ Permissions required:<br>
   "label": "A Note",
   "created": "2019-10-09T19:30:35.639Z",
   "updated": "2019-10-09T20:30:35.639Z",
-  "thread_id": "parent_note",
   "text": "Lorem ipsum dolor sit amet",
+  "thread_id": "parent_note",
   "issue": true,
   "closed": true,
   "_embedded": {
@@ -146,8 +146,8 @@ Permissions required:<br>
         "label": "A Note",
         "created": "2019-10-09T19:30:35.639Z",
         "updated": "2019-10-09T20:30:35.639Z",
-        "thread_id": "parent_note",
         "text": "Lorem ipsum dolor sit amet",
+        "thread_id": "parent_note",
         "issue": true,
         "closed": true,
         "_links": {
@@ -191,11 +191,12 @@ Permissions required:<br>
 |---|---|---|---|---|
 |unit_id|path|string|true|Id for the unit|
 |label|body|string|true|Label for the entity|
-|text|body|string|true|Label for the entity|
+|text|body|string|true|Text for the note|
 |thread_id|body|any|false|none|
 |&nbsp;&nbsp; *anonymous*|body|null|false|none|
 |&nbsp;&nbsp; *anonymous*|body|string|false|The id of the note which started a thread|
 |issue|body|boolean|false|Marks the note as an issue|
+|closed|body|boolean|false|Marks the note as closed|
 |notify|body|[object]|false|List of contacts to notify about this note|
 |&nbsp;&nbsp; contact_id|body|string|false|Identifier for the contact|
 
@@ -209,8 +210,8 @@ Permissions required:<br>
   "label": "A Note",
   "created": "2019-10-09T19:30:35.639Z",
   "updated": "2019-10-09T20:30:35.639Z",
-  "thread_id": "parent_note",
   "text": "Lorem ipsum dolor sit amet",
+  "thread_id": "parent_note",
   "issue": true,
   "closed": true,
   "_embedded": {
@@ -275,8 +276,8 @@ Permissions required:<br>
         "label": "A Note",
         "created": "2019-10-09T19:30:35.639Z",
         "updated": "2019-10-09T20:30:35.639Z",
-        "thread_id": "parent_note",
         "text": "Lorem ipsum dolor sit amet",
+        "thread_id": "parent_note",
         "issue": true,
         "closed": true,
         "_links": {
@@ -320,11 +321,12 @@ Permissions required:<br>
 |---|---|---|---|---|
 |work_order_id|path|string|true|Id for the work order|
 |label|body|string|true|Label for the entity|
-|text|body|string|true|Label for the entity|
+|text|body|string|true|Text for the note|
 |thread_id|body|any|false|none|
 |&nbsp;&nbsp; *anonymous*|body|null|false|none|
 |&nbsp;&nbsp; *anonymous*|body|string|false|The id of the note which started a thread|
 |issue|body|boolean|false|Marks the note as an issue|
+|closed|body|boolean|false|Marks the note as closed|
 |notify|body|[object]|false|List of contacts to notify about this note|
 |&nbsp;&nbsp; contact_id|body|string|false|Identifier for the contact|
 
@@ -338,8 +340,8 @@ Permissions required:<br>
   "label": "A Note",
   "created": "2019-10-09T19:30:35.639Z",
   "updated": "2019-10-09T20:30:35.639Z",
-  "thread_id": "parent_note",
   "text": "Lorem ipsum dolor sit amet",
+  "thread_id": "parent_note",
   "issue": true,
   "closed": true,
   "_embedded": {
@@ -389,8 +391,7 @@ Permissions required:<br>
 |created|string(date-time)|false|read-only|Date the entity was created|
 |updated|string(date-time)|false|read-only|Last date the entity was updated|
 |text|string|false|none|Text for the note|
-|issue|boolean|false|none|Marks the note as an issue|
-|closed|boolean|false|none|Marks the note as closed|
+|thread_id|any|false|none|none|
 
 #### Specification
 
@@ -421,6 +422,13 @@ properties:
     description: Text for the note
     minLength: 1
     maxLength: 1000
+  thread_id:
+    oneOf:
+      - type: "null"
+      - description: The id of the note which started a thread
+        type: string
+        readOnly: true
+        pattern: ^[0-9a-zA-Z-_]+$
   issue:
     type: boolean
     description: Marks the note as an issue
