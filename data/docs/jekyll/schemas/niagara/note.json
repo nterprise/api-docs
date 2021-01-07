@@ -64,6 +64,32 @@
     "closed": {
       "type": "boolean",
       "description": "Marks the note as closed"
+    },
+    "entity": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "description": "Entity the note is for",
+          "additionalProperties": false,
+          "required": [
+            "entity_type",
+            "entity_id"
+          ],
+          "properties": {
+            "entity_type": {
+              "description": "The type of entity the note is for",
+              "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_type"
+            },
+            "entity_id": {
+              "description": "The identifier for the entity the note is for",
+              "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/entity_id"
+            }
+          }
+        }
+      ]
     }
   }
 }
