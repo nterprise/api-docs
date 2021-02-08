@@ -63,12 +63,26 @@
       "minimum": 2,
       "items": {
         "type": "object",
-        "description": "Steps for the branch",
-        "uniqueItems": true,
+        "required": [
+          "starts_at",
+          "steps"
+        ],
         "additionalProperties": false,
-        "patternProperties": {
-          "^[A-Za-z][A-Za-z0-9-]*$": {
-            "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/branchSteps.json#/properties/step"
+        "properties": {
+          "starts_at": {
+            "type": "string",
+            "description": "Starting step"
+          },
+          "steps": {
+            "type": "object",
+            "description": "Steps for the branch",
+            "uniqueItems": true,
+            "additionalProperties": false,
+            "patternProperties": {
+              "^[A-Za-z][A-Za-z0-9-]*$": {
+                "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/branchSteps.json#/properties/step"
+              }
+            }
           }
         }
       }

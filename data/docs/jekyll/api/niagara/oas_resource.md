@@ -519,7 +519,15 @@ Permissions required:<br>
             }
           }
         },
-        "current_step": "work-complete",
+        "current_steps": [
+          "work-complete"
+        ],
+        "failed_steps": [
+          {
+            "step": "work-complete",
+            "count": 2
+          }
+        ],
         "last_steps": [
           {
             "step_name": "work-complete",

@@ -14,8 +14,11 @@
     "updated": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/context.json#/properties/updated"
     },
-    "current_step": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/context.json#/properties/current_step"
+    "current_steps": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/context.json#/properties/current_steps"
+    },
+    "failed_steps": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/context.json#/properties/failed_steps"
     },
     "last_steps": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/context.json#/properties/last_steps"

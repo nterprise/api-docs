@@ -23,6 +23,9 @@
         },
         {
           "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepChoice.json"
+        },
+        {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepPass.json"
         }
       ]
     }
