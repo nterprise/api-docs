@@ -117,7 +117,7 @@ Permissions required:<br>
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |email|body|string(email)|true|Email address|
-|name|body|string|false|Human readable name|
+|name|body|string¦null|false|Human readable name|
 |picture|body|string¦null|false|Image for the user|
 |profile|body|string¦null|false|Link to the users profile|
 |user_attributes|body|[object]|false|Array of user attributes|
@@ -225,7 +225,7 @@ Permissions required:<br>
 |---|---|---|---|---|
 |user_id|path|string|true|Id of the user|
 |email|body|string(email)|true|Email address|
-|name|body|string|false|Human readable name|
+|name|body|string¦null|false|Human readable name|
 |picture|body|string¦null|false|Image for the user|
 |profile|body|string¦null|false|Link to the users profile|
 |user_attributes|body|[object]|false|Array of user attributes|
@@ -506,6 +506,7 @@ allOf:
         description: Email address
       name:
         type: string
+        nullable: true
         description: Human readable name
 properties:
   picture:

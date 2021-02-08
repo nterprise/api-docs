@@ -24,10 +24,24 @@
       "const": "USER"
     },
     "label": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/label"
+      "oneOf": [
+        {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/label"
+        },
+        {
+          "type": "null"
+        }
+      ]
     },
     "slug": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/slug"
+      "oneOf": [
+        {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/slug"
+        },
+        {
+          "const": ""
+        }
+      ]
     },
     "created": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/created"
@@ -41,7 +55,10 @@
       "description": "Email address"
     },
     "name": {
-      "type": "string",
+      "type": [
+        "string",
+        "null"
+      ],
       "description": "Human readable name"
     },
     "picture": {
