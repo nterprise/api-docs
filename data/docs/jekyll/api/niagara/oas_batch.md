@@ -1585,14 +1585,19 @@ properties:
           enum:
             - USER
         label:
-          type: string
-          description: Label for the entity
+          oneOf:
+            - type: string
+              description: Label for the entity
+            - type: "null"
         slug:
-          type: string
-          description: Slug for the entity (Auto-generated from the label)
-          readOnly: true
-          deprecated: true
-          pattern: ^[a-z0-9]+(?:-[a-z0-9]+)*$
+          oneOf:
+            - type: string
+              description: Slug for the entity (Auto-generated from the label)
+              readOnly: true
+              deprecated: true
+              pattern: ^[a-z0-9]+(?:-[a-z0-9]+)*$
+            - enum:
+                - ""
         created:
           type: string
           description: Date the entity was created
@@ -1609,6 +1614,7 @@ properties:
           description: Email address
         name:
           type: string
+          nullable: true
           description: Human readable name
         picture:
           type: string
