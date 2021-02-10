@@ -13,7 +13,8 @@
     "entity",
     "using",
     "waiting_for_user",
-    "current_step",
+    "current_steps",
+    "failed_steps",
     "location",
     "active",
     "started_at"
@@ -76,10 +77,35 @@
         }
       ]
     },
-    "current_step": {
-      "type": "string",
-      "description": "The current step to execute",
-      "readOnly": true
+    "current_steps": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": "Key of current step to execute",
+        "readOnly": true
+      }
+    },
+    "failed_steps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "step",
+          "failed_count"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "step": {
+            "type": "string",
+            "description": "Key of a failed step"
+          },
+          "failed_count": {
+            "type": "number",
+            "description": "Number of times the step failed"
+          }
+        },
+        "readOnly": true
+      }
     },
     "last_steps": {
       "type": "array",

@@ -1298,7 +1298,15 @@ Permissions required:<br>
             }
           }
         },
-        "current_step": "work-complete",
+        "current_steps": [
+          "work-complete"
+        ],
+        "failed_steps": [
+          {
+            "step": "work-complete",
+            "count": 2
+          }
+        ],
         "last_steps": [
           {
             "step_name": "work-complete",
@@ -2849,7 +2857,8 @@ properties:
                       label: *a4
                       on_start: *a1
                       on_complete: *a1
-                  - $schema: http://json-schema.org/draft-07/schema#
+                  - &a18
+                    $schema: http://json-schema.org/draft-07/schema#
                     $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepPass.json
                     description: Allows executing actions with out performing any function
                     type: object
@@ -3090,18 +3099,29 @@ properties:
                         minimum: 2
                         items:
                           type: object
-                          description: Steps for the branch
-                          uniqueItems: true
+                          required:
+                            - starts_at
+                            - steps
                           additionalProperties: false
-                          patternProperties:
-                            "^[A-Za-z][A-Za-z0-9-]*$":
-                              oneOf:
-                                - *a13
-                                - *a14
-                                - *a15
-                                - *a16
-                                - *a17
-                                - *a12
+                          properties:
+                            starts_at:
+                              type: string
+                              description: Starting step
+                            steps:
+                              type: object
+                              description: Steps for the branch
+                              uniqueItems: true
+                              additionalProperties: false
+                              patternProperties:
+                                "^[A-Za-z][A-Za-z0-9-]*$":
+                                  oneOf:
+                                    - *a13
+                                    - *a14
+                                    - *a15
+                                    - *a16
+                                    - *a17
+                                    - *a12
+                                    - *a18
     allOf:
       - description: A count of cycles needed for this entity broken down by status
           category and active/in-active status
