@@ -2498,7 +2498,7 @@ properties:
                       allOf:
                         - *a12
           - $schema: http://json-schema.org/draft-07/schema#
-            $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepFunction.json
+            $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepFastTrack.json
             description: A step which allows parallel execution
             type: object
             required:
