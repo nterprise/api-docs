@@ -70,14 +70,28 @@
       ]
     },
     "assigned_user": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/user.json#/properties/user_id"
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/user.json#/properties/user_id"
+        }
+      ]
     },
     "is_retry": {
       "type": "boolean",
       "description": "Weather this is a retry cycle"
     },
     "context_id": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/context.json#/properties/context_id"
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/context.json#/properties/context_id"
+        }
+      ]
     }
   }
 }
