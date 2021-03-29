@@ -1,0 +1,61 @@
+{
+  "openapi": "3.0.3",
+  "x-api": "niagara",
+  "x-nter-docs-parent": "Niagara API",
+  "x-nter-docs-nav-order": 5,
+  "info": {
+    "version": "2.0.0",
+    "description": "Context",
+    "title": "contexts"
+  },
+  "servers": [
+    {
+      "url": "https://{environment}.nterprise.com",
+      "variables": {
+        "environment": {
+          "default": "api",
+          "enum": [
+            "api",
+            "api.dev"
+          ]
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/contexts/{context_id}": {
+      "$ref": "./paths/context/context.json"
+    },
+    "/contexts/{context_id}/{slug_id}": {
+      "$ref": "./paths/context/step.json"
+    }
+  },
+  "components": {
+    "schemas": {
+      "context": {
+        "$ref": "components/schemas/context.json"
+      },
+      "Action": {
+        "$ref": "components/schemas/action.json"
+      }
+    },
+    "securitySchemes": {
+      "niagara": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "https://auth.nterprise.com/oauth/authorize",
+            "tokenUrl": "https://auth.nterprise.com/oauth/token",
+            "scopes": {
+              "context:create": "Allows creating a context",
+              "context:update": "Allows editing a context",
+              "context:delete": "Allows deleting a context",
+              "context:read": "Allows access to a context",
+              "context:all": "Allows reading all contexts"
+            }
+          }
+        }
+      }
+    }
+  }
+}
