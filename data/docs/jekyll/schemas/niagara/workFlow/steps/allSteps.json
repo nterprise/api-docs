@@ -10,6 +10,9 @@
           "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/function/allocateUnitsToProject.json"
         },
         {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/function/setEntityLocation.json"
+        },
+        {
           "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/function/setEntityStatus.json"
         },
         {
