@@ -1,0 +1,10 @@
+{
+  "description": "Details about the ship order",
+  "content": {
+    "application/hal+json": {
+      "schema": {
+        "$ref": "../schemas/shipOrderDetails.json"
+      }
+    }
+  }
+}

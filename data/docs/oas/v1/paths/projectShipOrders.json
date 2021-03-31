@@ -1,0 +1,38 @@
+{
+  "get": {
+    "operationId": "fetchProjectShipOrders",
+    "summary": "Fetches ship orders for a project",
+    "description": "Fetches all the ship orders for a project",
+    "tags": [
+      "Project"
+    ],
+    "parameters": [
+      {
+        "$ref": "../components/parameters/page.json"
+      },
+      {
+        "$ref": "../components/parameters/pageSize.json"
+      },
+      {
+        "$ref": "../components/parameters/minDate.json"
+      },
+      {
+        "$ref": "../components/parameters/maxDate.json"
+      },
+      {
+        "$ref": "../components/parameters/shipOrderStatus.json"
+      },
+      {
+        "$ref": "../components/parameters/shipOrderNumber.json"
+      },
+      {
+        "$ref": "../components/parameters/projectId.json"
+      }
+    ],
+    "responses": {
+      "200": {
+        "$ref": "../components/responses/shipOrderCollection.json"
+      }
+    }
+  }
+}

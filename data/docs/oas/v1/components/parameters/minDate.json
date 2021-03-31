@@ -1,0 +1,9 @@
+{
+  "name": "filter[min_date]",
+  "in": "query",
+  "description": "Filter where the date is greater than this value",
+  "schema": {
+    "type": "string",
+    "format": "date-time"
+  }
+}

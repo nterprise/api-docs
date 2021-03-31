@@ -1,0 +1,16 @@
+{
+  "name": "filter[status]",
+  "in": "query",
+  "description": "Filter where the ship order status is this value",
+  "schema": {
+    "type": "string",
+    "enum": [
+      "drafting",
+      "released_to_warehouse",
+      "order_complete",
+      "shipped",
+      "installed",
+      "received_at_warehouse"
+    ]
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "description": "A ship order with line details",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "./shipOrder.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "lines":{
+          "description": "The ship order lines",
+          "type": "array",
+          "items": {
+            "description": "A ship order line",
+            "type": "object",
+            "properties": {
+              "line_number": {
+                "description": "The ship order line line number",
+                "type": "string"
+              },
+              "part_number": {
+                "description": "The ship order line part number",
+                "type": "string"
+              },
+              "product_name": {
+                "description": "The ship order line product name",
+                "type": "string"
+              },
+              "tracking_type": {
+                "description": "The ship order line tracking type",
+                "type": "string"
+              },
+              "product_id": {
+                "description": "The ship order line product id",
+                "type": "string"
+              },
+              "quantity": {
+                "description": "The ship order line quantity",
+                "type": "number"
+              },
+              "quantity_added": {
+                "description": "The ship order line quantity added",
+                "type": "number"
+              },
+              "serial_numbers": {
+                "description": "The ship order line serial numbers",
+                "type": "array",
+                "items": {
+                  "description": "A ship order line serial number",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}
