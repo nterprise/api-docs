@@ -1837,6 +1837,61 @@ properties:
                       status:
                         type: string
                         description: Only assign units which are in this status
+          - $schema: http://json-schema.org/draft-07/schema#
+            $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/function/setEntityLocation.json
+            description: Updates the location on the Work Flow entity.
+            type: object
+            additionalProperties: false
+            required:
+              - step_type
+              - label
+              - goto
+              - goto_fail
+              - options
+            properties:
+              step_type: *a3
+              label: *a4
+              on_start: *a1
+              on_complete: *a1
+              goto: *a5
+              goto_fail: *a6
+              context: *a7
+              on_error: *a8
+              on_timeout: *a9
+              options:
+                type: object
+                additionalProperties: false
+                required:
+                  - function
+                  - payload
+                properties:
+                  component: *a10
+                  function:
+                    type: string
+                    enum:
+                      - set-entity-location
+                  payload:
+                    type: object
+                    additionalProperties: false
+                    required:
+                      - location_type
+                    properties:
+                      location_type:
+                        type: string
+                        enum:
+                          - location_id
+                          - resource_id
+                          - sub_resource_id
+                          - context
+                          - work_order
+                          - work_order_input_from
+                          - work_order_output_to
+                      location_id:
+                        description: The identifier for the location (required for location_id,
+                          resource_id, or sub_resource_id)
+                        type: string
+                        readOnly: true
+                        pattern: ^[0-9a-zA-Z-_]+$
           - &a13
             $schema: http://json-schema.org/draft-07/schema#
             $id: https://docs.nterprise.com/schemas/niagara/workFlow/steps/function/setEntityStatus.json
