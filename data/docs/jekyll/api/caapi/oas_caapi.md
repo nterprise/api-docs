@@ -3,6 +3,7 @@ layout: page
 nav_order: 2
 title: Customer accessible API
 ---
+<!-- Generator: Widdershins v4.0.1 -->
 
 <h1 id="customer-accessible-api">Customer accessible API</h1>
 
@@ -11,31 +12,36 @@ title: Customer accessible API
 
 Customer API for FTM and CIMS
 
+# Authentication
+
+* API Key (signedToken)
+    - Parameter Name: **Authorization**, in: header. To Generate an API Follow these steps:
+ 1. concatenate KEY + URL + REQUEST BODY
+ 1. create SHA512 hash of step 1 string
+ 1. concatenate USER + ":" + SHA512 hash
+ 1. base64 encode string from step 3
+ 1. Pass in as a Bearer token
+
 <h1 id="customer-accessible-api-customer">Customer</h1>
 
 ## Operations
 
-### GET /customers/{customer_id} - *Fetches information about a customer*
+### GET /customers/{customer_id}
 
 <a id="opIdfetchCustomerById"></a>
 
-*Fetches information about a customer*
-
 Fetches information about a customer the account has access too
+
+<aside class="warning">
+Permissions required:<br>
+
+</aside>
 
 <h3 id="fetchcustomerbyid-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |customer_id|path|number(int32)|true|The id of the customer to retrieve|
-
-<!-- START responses.def -->
-
-<h3 id="fetchcustomerbyid-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Details about the customer|Inline|
 
 > Example responses
 
@@ -105,17 +111,16 @@ Fetches information about a customer the account has access too
 }
 ```
 
-<h3 id="fetchcustomerbyid-responseschema">Response Schema</h3>
-
-<!-- END responses.def -->
-
-### GET /customers/ - *List all customers*
+### GET /customers/
 
 <a id="opIdfetchAllCustomers"></a>
 
-*List all customers*
-
 Fetches all the account has access too
+
+<aside class="warning">
+Permissions required:<br>
+
+</aside>
 
 <h3 id="fetchallcustomers-parameters">Parameters</h3>
 
@@ -123,14 +128,6 @@ Fetches all the account has access too
 |---|---|---|---|---|
 |page|query|number|false|The page number to fetch|
 |page_size|query|number|false|How many items to return at one time (max 100)|
-
-<!-- START responses.def -->
-
-<h3 id="fetchallcustomers-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|A paged array of customers|Inline|
 
 > Example responses
 
@@ -282,43 +279,16 @@ Fetches all the account has access too
 }
 ```
 
-<h3 id="fetchallcustomers-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; _embedded|object|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; customers|[allOf]|false|none|none|
-
-*allOf*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|A Customer|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; customer_id|string|false|read-only|The Customer Id|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cName|string|true|read-only|The name of the customer|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; total_projects|number|false|read-only|Total Projects for the customer|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; total_sites|number|false|read-only|Total Sites for the customer|
-
-*and*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _links|object|false|read-only|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self|object|false|read-only|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; href|string(url)|false|read-only|none|
-
-<!-- END responses.def -->
-
-### GET /customers/{customer_id}/projects - *Fetches all projects for a customer*
+### GET /customers/{customer_id}/projects
 
 <a id="opIdfetchCustomerProjects"></a>
 
-*Fetches all projects for a customer*
-
 List all projects for a customer
+
+<aside class="warning">
+Permissions required:<br>
+
+</aside>
 
 <h3 id="fetchcustomerprojects-parameters">Parameters</h3>
 
@@ -328,14 +298,6 @@ List all projects for a customer
 |page_size|query|number|false|How many items to return at one time (max 100)|
 |customer_id|path|number(int32)|true|The id of the customer to retrieve|
 |sort|query|string|false|Sort by field|
-
-<!-- START responses.def -->
-
-<h3 id="fetchcustomerprojects-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|A paged array of projects|Inline|
 
 > Example responses
 
@@ -517,49 +479,16 @@ List all projects for a customer
 }
 ```
 
-<h3 id="fetchcustomerprojects-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; _embedded|object|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; projects|[allOf]|false|none|none|
-
-*allOf*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|A Project|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; project_id|string|false|read-only|The Project Id|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pLabel|string|true|read-only|The name of the project|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pStart_dt|string(date-time)¦null|false|read-only|Project Start date|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pEnd_dt|string(date-time)¦null|false|read-only|Project end date|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pDesc|string|false|read-only|Project Description|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; total_work_orders|number|false|read-only|Total work orders for the project|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; total_work_orders_status|object|false|read-only|Work order counts by status|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; active|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pending|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; complete|number|false|none|none|
-
-*and*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _links|object|false|read-only|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self|object|false|read-only|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; href|string(url)|false|read-only|none|
-
-<!-- END responses.def -->
-
-### GET /customers/{customer_id}/sites - *Fetches all sites for a customer*
+### GET /customers/{customer_id}/sites
 
 <a id="opIdfetchCustomerSites"></a>
 
-*Fetches all sites for a customer*
-
 List all sites for a customer
+
+<aside class="warning">
+Permissions required:<br>
+
+</aside>
 
 <h3 id="fetchcustomersites-parameters">Parameters</h3>
 
@@ -571,14 +500,6 @@ List all sites for a customer
 |filter[site_group]|query|string|false|Filter where the site group is this value|
 |filter[county]|query|string|false|Filter where the county is this value|
 |filter[state]|query|string|false|Filter where the state is this value|
-
-<!-- START responses.def -->
-
-<h3 id="fetchcustomersites-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|A paged array of sites|Inline|
 
 > Example responses
 
@@ -793,60 +714,20 @@ List all sites for a customer
 }
 ```
 
-<h3 id="fetchcustomersites-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; _embedded|object|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; projects|[allOf]|false|none|none|
-
-*allOf*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|A Site|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; project_id|string|false|read-only|The Project Id|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; customer_id|any|false|read-only|The Customer Id|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; siteName|string|true|none|The name of the site|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; siteLabel|string|false|none|The label of the site|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; siteGroup|string|false|none|The group name of the site|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; addr1|string|false|none|The address|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; addr2|string|false|none|The address|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; city|string|false|none|The city|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; state|string|false|none|The state|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; zip|string|false|none|The zip code|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; country|string|false|none|The country|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; lng|number|false|none|The longitude coordinates|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; lat|number|false|none|The latitude coordinates|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sTZ|string|false|none|Standard time zone|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; contactName|string|false|none|Name of the site contact|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; contactPhone|string|false|none|Phone number of the site contact|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; contactEmail|string|false|none|Email of the site contact|
-
-*and*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _links|object|false|read-only|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self|object|false|read-only|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; href|string(url)|false|read-only|none|
-
-<!-- END responses.def -->
-
 <h1 id="customer-accessible-api-project">Project</h1>
 
 ## Operations
 
-### GET /projects/ - *List all projects*
+### GET /projects/
 
 <a id="opIdfetchAllProjects"></a>
 
-*List all projects*
-
 Fetches all the account has access too
+
+<aside class="warning">
+Permissions required:<br>
+
+</aside>
 
 <h3 id="fetchallprojects-parameters">Parameters</h3>
 
@@ -856,14 +737,6 @@ Fetches all the account has access too
 |page_size|query|number|false|How many items to return at one time (max 100)|
 |filter[customer_id]|query|string|false|Filter where the customer id is this value|
 |sort|query|string|false|Sort by field|
-
-<!-- START responses.def -->
-
-<h3 id="fetchallprojects-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|A paged array of projects|Inline|
 
 > Example responses
 
@@ -1045,63 +918,22 @@ Fetches all the account has access too
 }
 ```
 
-<h3 id="fetchallprojects-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; _embedded|object|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; projects|[allOf]|false|none|none|
-
-*allOf*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|A Project|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; project_id|string|false|read-only|The Project Id|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pLabel|string|true|read-only|The name of the project|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pStart_dt|string(date-time)¦null|false|read-only|Project Start date|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pEnd_dt|string(date-time)¦null|false|read-only|Project end date|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pDesc|string|false|read-only|Project Description|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; total_work_orders|number|false|read-only|Total work orders for the project|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; total_work_orders_status|object|false|read-only|Work order counts by status|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; active|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pending|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; complete|number|false|none|none|
-
-*and*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _links|object|false|read-only|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self|object|false|read-only|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; href|string(url)|false|read-only|none|
-
-<!-- END responses.def -->
-
-### GET /projects/{project_id} - *Fetch Project*
+### GET /projects/{project_id}
 
 <a id="opIdfetchProjectById"></a>
 
-*Fetch Project*
-
 Fetches information about a project the account has access too
+
+<aside class="warning">
+Permissions required:<br>
+
+</aside>
 
 <h3 id="fetchprojectbyid-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |project_id|path|string|true|The id of the project to retrieve|
-
-<!-- START responses.def -->
-
-<h3 id="fetchprojectbyid-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Details about the project|Inline|
 
 > Example responses
 
@@ -1201,17 +1033,16 @@ Fetches information about a project the account has access too
 }
 ```
 
-<h3 id="fetchprojectbyid-responseschema">Response Schema</h3>
-
-<!-- END responses.def -->
-
-### GET /projects/{project_id}/inventory - *Fetch project inventory*
+### GET /projects/{project_id}/inventory
 
 <a id="opIdfetchAllProjectInventory"></a>
 
-*Fetch project inventory*
-
 Fetches all the inventory for a project
+
+<aside class="warning">
+Permissions required:<br>
+
+</aside>
 
 <h3 id="fetchallprojectinventory-parameters">Parameters</h3>
 
@@ -1224,14 +1055,6 @@ Fetches all the inventory for a project
 |filter[part_number]|query|string|false|Filter where the part number is this value|
 |filter[location_code]|query|string|false|Filter where the location code is this value|
 |filter[asset_tag]|query|string|false|Filter where the asset tag is this value|
-
-<!-- START responses.def -->
-
-<h3 id="fetchallprojectinventory-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|A paged array of inventory|Inline|
 
 > Example responses
 
@@ -1393,46 +1216,16 @@ Fetches all the inventory for a project
 }
 ```
 
-<h3 id="fetchallprojectinventory-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; _embedded|object|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; inventory|[allOf]|false|none|none|
-
-*allOf*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|A Listing of inventory|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; inventory_id|string|false|read-only|inventory id, not required for "Q" type inventory|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; project_id|string|false|read-only|project id of inventory|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PartNo|string|false|read-only|product referenced part number|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; InventoryType|string|false|read-only|inventory type, "Q" ( quantity ) or "S" (serialized)|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Status|string|false|read-only|inventory status|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Quantity|number|false|read-only|inventory count, will be "1" for S type inventory|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SerialNumber|string|false|none|inventory serial number, will be empty for Q type inventory|
-
-*and*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _links|object|false|read-only|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self|object|false|read-only|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; href|string(url)|false|read-only|none|
-
-<!-- END responses.def -->
-
-### GET /projects/{project_id}/inventory/{inventory_id} - *Fetch inventory for project*
+### GET /projects/{project_id}/inventory/{inventory_id}
 
 <a id="opIdfetchProjectInventory"></a>
 
-*Fetch inventory for project*
-
 Fetches all the inventory for a project
+
+<aside class="warning">
+Permissions required:<br>
+
+</aside>
 
 <h3 id="fetchprojectinventory-parameters">Parameters</h3>
 
@@ -1442,14 +1235,6 @@ Fetches all the inventory for a project
 |page_size|query|number|false|How many items to return at one time (max 100)|
 |project_id|path|string|true|The id of the project to retrieve|
 |inventory_id|path|string|true|The id of the inventory to retrieve|
-
-<!-- START responses.def -->
-
-<h3 id="fetchprojectinventory-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Details about the project|Inline|
 
 > Example responses
 
@@ -1529,17 +1314,225 @@ Fetches all the inventory for a project
 }
 ```
 
-<h3 id="fetchprojectinventory-responseschema">Response Schema</h3>
+### GET /projects/{project_id}/inventory/{inventory_id}/history
 
-<!-- END responses.def -->
+<a id="opIdfetchProjectInventoryHistory"></a>
 
-### GET /projects/{project_id}/products - *Fetches projects products*
+Fetches the project inventory history
+
+<aside class="warning">
+Permissions required:<br>
+
+</aside>
+
+<h3 id="fetchprojectinventoryhistory-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|page|query|number|false|The page number to fetch|
+|page_size|query|number|false|How many items to return at one time (max 100)|
+|project_id|path|string|true|The id of the project to retrieve|
+|inventory_id|path|string|true|The id of the inventory to retrieve|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "properties": {
+    "_embedded": {
+      "type": "object",
+      "properties": {
+        "projects": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "allOf": [
+              {
+                "type": "object",
+                "description": "An inventory history event",
+                "properties": {
+                  "inventory_id": {
+                    "type": "string",
+                    "description": "inventory id",
+                    "readOnly": true
+                  },
+                  "project_id": {
+                    "type": "string",
+                    "description": "project id of inventory",
+                    "readOnly": true
+                  },
+                  "event_id": {
+                    "type": "string",
+                    "description": "event id of inventory history record",
+                    "readOnly": true
+                  },
+                  "event_type": {
+                    "event_id": {
+                      "type": "string",
+                      "enum": [
+                        "receipt",
+                        "doa",
+                        "shipment",
+                        "installation",
+                        "kit",
+                        "transfer",
+                        "configuration",
+                        "audit",
+                        "trans_project",
+                        "mark_refreshed",
+                        "return_receipt",
+                        "cancel_last_event",
+                        "transfer_out",
+                        "transfer_in"
+                      ],
+                      "description": "event type of inventory history record",
+                      "readOnly": true
+                    }
+                  },
+                  "event_date": {
+                    "description": "The inventory history event date",
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true
+                  },
+                  "new_status": {
+                    "description": "The inventory history event new status",
+                    "type": "string",
+                    "enum": [
+                      "received",
+                      "raw",
+                      "in_configuration",
+                      "configured",
+                      "shipped",
+                      "installed",
+                      "doa",
+                      "other",
+                      "in_noc",
+                      "eol",
+                      "in_transit"
+                    ],
+                    "readOnly": true
+                  },
+                  "comments": {
+                    "description": "The inventory history event comments",
+                    "type": "string",
+                    "readOnly": true
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "_links": {
+                    "type": "object",
+                    "readOnly": true,
+                    "properties": {
+                      "self": {
+                        "type": "object",
+                        "readOnly": true,
+                        "properties": {
+                          "href": {
+                            "type": "string",
+                            "format": "url",
+                            "readOnly": true,
+                            "example": "https://api.nterprise.com/{entity}/{entity_id}"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "type": "object",
+      "properties": {
+        "total_count": {
+          "type": "number",
+          "readOnly": true,
+          "minimum": 0,
+          "example": 32
+        },
+        "per_page": {
+          "type": "number",
+          "readOnly": true,
+          "minimum": 1,
+          "maximum": 100,
+          "example": 50
+        },
+        "page": {
+          "type": "number",
+          "readOnly": true,
+          "minimum": 1,
+          "maximum": 100,
+          "example": 50
+        },
+        "_links": {
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "next": {
+              "type": "object",
+              "description": "Link to the next page",
+              "properties": {
+                "href": {
+                  "type": "string",
+                  "format": "url",
+                  "example": "https://api.neterprise.com/foo?page=2&per_page=50"
+                }
+              }
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "type": "object",
+          "properties": {
+            "_links": {
+              "type": "object",
+              "readOnly": true,
+              "properties": {
+                "self": {
+                  "type": "object",
+                  "readOnly": true,
+                  "properties": {
+                    "href": {
+                      "type": "string",
+                      "format": "url",
+                      "readOnly": true,
+                      "example": "https://api.nterprise.com/{entity}/{entity_id}"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
+```
+
+### GET /projects/{project_id}/products
 
 <a id="opIdfetchProjectProducts"></a>
 
-*Fetches projects products*
-
 Fetches all the products for a project
+
+<aside class="warning">
+Permissions required:<br>
+
+</aside>
 
 <h3 id="fetchprojectproducts-parameters">Parameters</h3>
 
@@ -1548,14 +1541,6 @@ Fetches all the products for a project
 |page|query|number|false|The page number to fetch|
 |page_size|query|number|false|How many items to return at one time (max 100)|
 |project_id|path|string|true|The id of the project to retrieve|
-
-<!-- START responses.def -->
-
-<h3 id="fetchprojectproducts-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|A paged array of products|Inline|
 
 > Example responses
 
@@ -1727,48 +1712,16 @@ Fetches all the products for a project
 }
 ```
 
-<h3 id="fetchprojectproducts-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; _embedded|object|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; projects|[allOf]|false|none|none|
-
-*allOf*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|A product|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; project_id|string|false|read-only|The Project Id|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; product_id|string|false|read-only|The Product Id|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ProductType|string|true|none|The product type|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ProductName|string|false|none|The product name|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; AltPartNo|string|false|none|Alternate Part Number|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PartNo|string|false|none|Part Number|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TrackingType|string|false|none|Tracking type|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; total_inventory|number|false|none|Total Inventory|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; total_inventory_status|string|false|none|Total Inventory|
-
-*and*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _links|object|false|read-only|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self|object|false|read-only|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; href|string(url)|false|read-only|none|
-
-<!-- END responses.def -->
-
-### GET /projects/{project_id}/kits/{kit_id} - *Fetch project kit*
+### GET /projects/{project_id}/kits/{kit_id}
 
 <a id="opIdfetchProjectKit"></a>
 
-*Fetch project kit*
-
 Fetches all the kit for a project
+
+<aside class="warning">
+Permissions required:<br>
+
+</aside>
 
 <h3 id="fetchprojectkit-parameters">Parameters</h3>
 
@@ -1778,14 +1731,6 @@ Fetches all the kit for a project
 |page_size|query|number|false|How many items to return at one time (max 100)|
 |project_id|path|string|true|The id of the project to retrieve|
 |kit_id|path|string|true|The id of the kit to retrieve|
-
-<!-- START responses.def -->
-
-<h3 id="fetchprojectkit-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Details about the kit|Inline|
 
 > Example responses
 
@@ -1833,27 +1778,16 @@ Fetches all the kit for a project
 }
 ```
 
-<h3 id="fetchprojectkit-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; project_id|string|false|read-only|The Project Id|
-|&nbsp;&nbsp;&nbsp;&nbsp; kit_id|string|false|read-only|Kit definition id|
-|&nbsp;&nbsp;&nbsp;&nbsp; KitName|string|false|read-only|Kit name|
-|&nbsp;&nbsp;&nbsp;&nbsp; KitType|string|false|read-only|Kit Type ( P or C )|
-|&nbsp;&nbsp;&nbsp;&nbsp; MainPartNo|string|false|read-only|Kit referenced Part Number, will be empty for KitType = 'P'|
-
-<!-- END responses.def -->
-
-### GET /projects/{project_id}/products/{product_id} - *Fetches products for a project*
+### GET /projects/{project_id}/products/{product_id}
 
 <a id="opIdfetchProjectProduct"></a>
 
-*Fetches products for a project*
-
 Fetches all the product for a project
+
+<aside class="warning">
+Permissions required:<br>
+
+</aside>
 
 <h3 id="fetchprojectproduct-parameters">Parameters</h3>
 
@@ -1863,14 +1797,6 @@ Fetches all the product for a project
 |page_size|query|number|false|How many items to return at one time (max 100)|
 |project_id|path|string|true|The id of the project to retrieve|
 |product_id|path|string|true|The id of the product to retrieve|
-
-<!-- START responses.def -->
-
-<h3 id="fetchprojectproduct-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Details about the product|Inline|
 
 > Example responses
 
@@ -1937,35 +1863,469 @@ Fetches all the product for a project
 }
 ```
 
-<h3 id="fetchprojectproduct-responseschema">Response Schema</h3>
+### GET /projects/{project_id}/ship-orders
 
-Status Code **200**
+<a id="opIdfetchProjectShipOrders"></a>
 
-|Name|Type|Required|Restrictions|Description|
+Fetches all the ship orders for a project
+
+<aside class="warning">
+Permissions required:<br>
+
+</aside>
+
+<h3 id="fetchprojectshiporders-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; project_id|string|false|read-only|The Project Id|
-|&nbsp;&nbsp;&nbsp;&nbsp; product_id|string|false|read-only|The Product Id|
-|&nbsp;&nbsp;&nbsp;&nbsp; ProductType|string|true|none|The product type|
-|&nbsp;&nbsp;&nbsp;&nbsp; ProductName|string|false|none|The product name|
-|&nbsp;&nbsp;&nbsp;&nbsp; AltPartNo|string|false|none|Alternate Part Number|
-|&nbsp;&nbsp;&nbsp;&nbsp; PartNo|string|false|none|Part Number|
-|&nbsp;&nbsp;&nbsp;&nbsp; TrackingType|string|false|none|Tracking type|
-|&nbsp;&nbsp;&nbsp;&nbsp; total_inventory|number|false|none|Total Inventory|
-|&nbsp;&nbsp;&nbsp;&nbsp; total_inventory_status|string|false|none|Total Inventory|
+|page|query|number|false|The page number to fetch|
+|page_size|query|number|false|How many items to return at one time (max 100)|
+|filter[min_date]|query|string(date-time)|false|Filter where the date is greater than this value|
+|filter[max_date]|query|string(date-time)|false|Filter where the date is less than this value|
+|filter[status]|query|string|false|Filter where the ship order status is this value|
+|filter[order_number]|query|string|false|Filter where the ship order number contains this value|
+|project_id|path|string|true|The id of the project to retrieve|
 
-<!-- END responses.def -->
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "properties": {
+    "_embedded": {
+      "type": "object",
+      "properties": {
+        "projects": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "allOf": [
+              {
+                "description": "A ship order",
+                "type": "object",
+                "properties": {
+                  "ship_order_id": {
+                    "description": "The ship order ID",
+                    "readOnly": true,
+                    "type": "string"
+                  },
+                  "project_id": {
+                    "description": "The project ID",
+                    "readOnly": true,
+                    "type": "string"
+                  },
+                  "order_number": {
+                    "description": "The ship order number",
+                    "type": "string"
+                  },
+                  "ship_to": {
+                    "description": "The destination address",
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "description": "The destination recipient name",
+                        "type": "string"
+                      },
+                      "address_line_1": {
+                        "description": "The destination address line 1",
+                        "type": "string"
+                      },
+                      "address_line_2": {
+                        "description": "The destination address line 2",
+                        "type": "string"
+                      },
+                      "city": {
+                        "description": "The destination city",
+                        "type": "string"
+                      },
+                      "state": {
+                        "description": "The destination state",
+                        "type": "string"
+                      },
+                      "european_province": {
+                        "description": "The destination european province",
+                        "type": "string"
+                      },
+                      "zip": {
+                        "description": "The destination zip",
+                        "type": "string"
+                      },
+                      "country": {
+                        "description": "The destination country",
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "order_date": {
+                    "description": "The ship order date",
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "ship_date": {
+                    "description": "The ship order ship date",
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "status": {
+                    "description": "The ship order status",
+                    "type": "string",
+                    "enum": [
+                      "drafting",
+                      "released_to_warehouse",
+                      "order_complete",
+                      "shipped",
+                      "installed",
+                      "received_at_warehouse"
+                    ]
+                  },
+                  "carrier_code": {
+                    "description": "The ship order carrier code",
+                    "type": "string"
+                  },
+                  "carrier_tracking_number": {
+                    "description": "The ship order carrier tracking number",
+                    "type": "string"
+                  },
+                  "instructions": {
+                    "description": "The ship order instructions",
+                    "type": "string"
+                  },
+                  "team": {
+                    "description": "The ship order team",
+                    "type": "string"
+                  },
+                  "shipped_date": {
+                    "description": "The ship order shipped date",
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "warehouse_code": {
+                    "description": "The ship order warehouse code",
+                    "type": "string"
+                  },
+                  "delivered_date": {
+                    "description": "The ship order delivered date",
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "customer_po": {
+                    "description": "The ship order customer PO",
+                    "type": "string"
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "_links": {
+                    "type": "object",
+                    "readOnly": true,
+                    "properties": {
+                      "self": {
+                        "type": "object",
+                        "readOnly": true,
+                        "properties": {
+                          "href": {
+                            "type": "string",
+                            "format": "url",
+                            "readOnly": true,
+                            "example": "https://api.nterprise.com/{entity}/{entity_id}"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "type": "object",
+      "properties": {
+        "total_count": {
+          "type": "number",
+          "readOnly": true,
+          "minimum": 0,
+          "example": 32
+        },
+        "per_page": {
+          "type": "number",
+          "readOnly": true,
+          "minimum": 1,
+          "maximum": 100,
+          "example": 50
+        },
+        "page": {
+          "type": "number",
+          "readOnly": true,
+          "minimum": 1,
+          "maximum": 100,
+          "example": 50
+        },
+        "_links": {
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "next": {
+              "type": "object",
+              "description": "Link to the next page",
+              "properties": {
+                "href": {
+                  "type": "string",
+                  "format": "url",
+                  "example": "https://api.neterprise.com/foo?page=2&per_page=50"
+                }
+              }
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "type": "object",
+          "properties": {
+            "_links": {
+              "type": "object",
+              "readOnly": true,
+              "properties": {
+                "self": {
+                  "type": "object",
+                  "readOnly": true,
+                  "properties": {
+                    "href": {
+                      "type": "string",
+                      "format": "url",
+                      "readOnly": true,
+                      "example": "https://api.nterprise.com/{entity}/{entity_id}"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
+```
+
+### GET /projects/{project_id}/ship-orders/{ship_order_id}
+
+<a id="opIdfetchProjectShipOrder"></a>
+
+Fetches a ship order for a project
+
+<aside class="warning">
+Permissions required:<br>
+
+</aside>
+
+<h3 id="fetchprojectshiporder-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|project_id|path|string|true|The id of the project to retrieve|
+|ship_order_id|path|string|true|The id of the ship order to retrieve|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "description": "A ship order with line details",
+  "type": "object",
+  "allOf": [
+    {
+      "description": "A ship order",
+      "type": "object",
+      "properties": {
+        "ship_order_id": {
+          "description": "The ship order ID",
+          "readOnly": true,
+          "type": "string"
+        },
+        "project_id": {
+          "description": "The project ID",
+          "readOnly": true,
+          "type": "string"
+        },
+        "order_number": {
+          "description": "The ship order number",
+          "type": "string"
+        },
+        "ship_to": {
+          "description": "The destination address",
+          "type": "object",
+          "properties": {
+            "name": {
+              "description": "The destination recipient name",
+              "type": "string"
+            },
+            "address_line_1": {
+              "description": "The destination address line 1",
+              "type": "string"
+            },
+            "address_line_2": {
+              "description": "The destination address line 2",
+              "type": "string"
+            },
+            "city": {
+              "description": "The destination city",
+              "type": "string"
+            },
+            "state": {
+              "description": "The destination state",
+              "type": "string"
+            },
+            "european_province": {
+              "description": "The destination european province",
+              "type": "string"
+            },
+            "zip": {
+              "description": "The destination zip",
+              "type": "string"
+            },
+            "country": {
+              "description": "The destination country",
+              "type": "string"
+            }
+          }
+        },
+        "order_date": {
+          "description": "The ship order date",
+          "type": "string",
+          "format": "date-time"
+        },
+        "ship_date": {
+          "description": "The ship order ship date",
+          "type": "string",
+          "format": "date-time"
+        },
+        "status": {
+          "description": "The ship order status",
+          "type": "string",
+          "enum": [
+            "drafting",
+            "released_to_warehouse",
+            "order_complete",
+            "shipped",
+            "installed",
+            "received_at_warehouse"
+          ]
+        },
+        "carrier_code": {
+          "description": "The ship order carrier code",
+          "type": "string"
+        },
+        "carrier_tracking_number": {
+          "description": "The ship order carrier tracking number",
+          "type": "string"
+        },
+        "instructions": {
+          "description": "The ship order instructions",
+          "type": "string"
+        },
+        "team": {
+          "description": "The ship order team",
+          "type": "string"
+        },
+        "shipped_date": {
+          "description": "The ship order shipped date",
+          "type": "string",
+          "format": "date-time"
+        },
+        "warehouse_code": {
+          "description": "The ship order warehouse code",
+          "type": "string"
+        },
+        "delivered_date": {
+          "description": "The ship order delivered date",
+          "type": "string",
+          "format": "date-time"
+        },
+        "customer_po": {
+          "description": "The ship order customer PO",
+          "type": "string"
+        }
+      }
+    },
+    {
+      "type": "object",
+      "properties": {
+        "lines": {
+          "description": "The ship order lines",
+          "type": "array",
+          "items": {
+            "description": "A ship order line",
+            "type": "object",
+            "properties": {
+              "line_number": {
+                "description": "The ship order line line number",
+                "type": "string"
+              },
+              "part_number": {
+                "description": "The ship order line part number",
+                "type": "string"
+              },
+              "product_name": {
+                "description": "The ship order line product name",
+                "type": "string"
+              },
+              "tracking_type": {
+                "description": "The ship order line tracking type",
+                "type": "string"
+              },
+              "product_id": {
+                "description": "The ship order line product id",
+                "type": "string"
+              },
+              "quantity": {
+                "description": "The ship order line quantity",
+                "type": "number"
+              },
+              "quantity_added": {
+                "description": "The ship order line quantity added",
+                "type": "number"
+              },
+              "serial_numbers": {
+                "description": "The ship order line serial numbers",
+                "type": "array",
+                "items": {
+                  "description": "A ship order line serial number",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}
+```
 
 <h1 id="customer-accessible-api-site">Site</h1>
 
 ## Operations
 
-### GET /sites/ - *List all sites*
+### GET /sites/
 
 <a id="opIdfetchAllSites"></a>
 
-*List all sites*
-
 Fetches all the sites the account has access too
+
+<aside class="warning">
+Permissions required:<br>
+
+</aside>
 
 <h3 id="fetchallsites-parameters">Parameters</h3>
 
@@ -1979,14 +2339,6 @@ Fetches all the sites the account has access too
 |filter[site_group]|query|string|false|Filter where the site group is this value|
 |filter[county]|query|string|false|Filter where the county is this value|
 |filter[state]|query|string|false|Filter where the state is this value|
-
-<!-- START responses.def -->
-
-<h3 id="fetchallsites-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|A paged array of sites|Inline|
 
 > Example responses
 
@@ -2201,70 +2553,22 @@ Fetches all the sites the account has access too
 }
 ```
 
-<h3 id="fetchallsites-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; _embedded|object|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; projects|[allOf]|false|none|none|
-
-*allOf*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|A Site|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; project_id|string|false|read-only|The Project Id|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; customer_id|any|false|read-only|The Customer Id|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; siteName|string|true|none|The name of the site|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; siteLabel|string|false|none|The label of the site|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; siteGroup|string|false|none|The group name of the site|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; addr1|string|false|none|The address|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; addr2|string|false|none|The address|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; city|string|false|none|The city|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; state|string|false|none|The state|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; zip|string|false|none|The zip code|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; country|string|false|none|The country|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; lng|number|false|none|The longitude coordinates|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; lat|number|false|none|The latitude coordinates|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sTZ|string|false|none|Standard time zone|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; contactName|string|false|none|Name of the site contact|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; contactPhone|string|false|none|Phone number of the site contact|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; contactEmail|string|false|none|Email of the site contact|
-
-*and*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _links|object|false|read-only|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self|object|false|read-only|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; href|string(url)|false|read-only|none|
-
-<!-- END responses.def -->
-
-### GET /sites/{site_id} - *Fetch site*
+### GET /sites/{site_id}
 
 <a id="opIdfetchSiteById"></a>
 
-*Fetch site*
-
 Fetches information about a site the account has access too
+
+<aside class="warning">
+Permissions required:<br>
+
+</aside>
 
 <h3 id="fetchsitebyid-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |site_id|path|string|true|The id of the site to retrieve|
-
-<!-- START responses.def -->
-
-<h3 id="fetchsitebyid-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Details about the site|Inline|
 
 > Example responses
 
@@ -2397,21 +2701,20 @@ Fetches information about a site the account has access too
 }
 ```
 
-<h3 id="fetchsitebyid-responseschema">Response Schema</h3>
-
-<!-- END responses.def -->
-
 <h1 id="customer-accessible-api-work-request">Work Request</h1>
 
 ## Operations
 
-### GET /work-requests/{work_request_id} - *List all work request submissions*
+### GET /work-requests/{work_request_id}
 
 <a id="opIdfetchAllWorkRequests"></a>
 
-*List all work request submissions*
-
 Fetches all the work requests the account has access too
+
+<aside class="warning">
+Permissions required:<br>
+
+</aside>
 
 <h3 id="fetchallworkrequests-parameters">Parameters</h3>
 
@@ -2420,14 +2723,6 @@ Fetches all the work requests the account has access too
 |page|query|number|false|The page number to fetch|
 |page_size|query|number|false|How many items to return at one time (max 100)|
 |sort|query|string|false|Sort by field|
-
-<!-- START responses.def -->
-
-<h3 id="fetchallworkrequests-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|A paged array of work requests|Inline|
 
 > Example responses
 
@@ -2615,66 +2910,22 @@ Fetches all the work requests the account has access too
 }
 ```
 
-<h3 id="fetchallworkrequests-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; _embedded|object|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; customers|[allOf]|false|none|none|
-
-*allOf*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|A request to create a workorder|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; work_request_id|string|true|none|The Id of the template to follow|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; work_request_submission_id|string|false|none|The Id of the submission|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; project_id|string|false|read-only|The Project Id|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; requestor|string|false|none|Work Request Submission submitter user name|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; insert_dt|string(date-time)|false|none|Work Request Submission insert date/time|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; wrStatus|string|false|read-only|Work Request Submission status|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; is_approved|boolean|false|none|Approved boolean|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; approved_by|string|false|none|User that approved the Work Request Submission|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; approved_dt|string(date-time)|false|none|Date the Work Request Submission was approved|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; data_count|number|false|none|count of work request submission name/value records|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; data|[object]|false|none|array of Work Request Submission name/value records|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; name|string|false|none|The name of the work request property to set|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; value|string|false|none|the value to set to the property|
-
-*and*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *anonymous*|object|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; _links|object|false|read-only|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; self|object|false|read-only|none|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; href|string(url)|false|read-only|none|
-
-<!-- END responses.def -->
-
-### GET /work-requests/{work_request_id}/submissions - *fetch submission*
+### GET /work-requests/{work_request_id}/submissions
 
 <a id="opIdfetchWorkRequestById"></a>
 
-*fetch submission*
-
 Fetches information about a work request the account has access too
+
+<aside class="warning">
+Permissions required:<br>
+
+</aside>
 
 <h3 id="fetchworkrequestbyid-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |work_request_id|path|number(int32)|true|The id of the work request to retrieve|
-
-<!-- START responses.def -->
-
-<h3 id="fetchworkrequestbyid-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Details about the work request|Inline|
 
 > Example responses
 
@@ -2779,10 +3030,6 @@ Fetches information about a work request the account has access too
   ]
 }
 ```
-
-<h3 id="fetchworkrequestbyid-responseschema">Response Schema</h3>
-
-<!-- END responses.def -->
 
 # Embedded Schemas
 
@@ -3042,9 +3289,9 @@ A Project
 |pDesc|string|false|read-only|Project Description|
 |total_work_orders|number|false|read-only|Total work orders for the project|
 |total_work_orders_status|object|false|read-only|Work order counts by status|
-|&nbsp;&nbsp;&nbsp;&nbsp; active|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; pending|number|false|none|none|
-|&nbsp;&nbsp;&nbsp;&nbsp; complete|number|false|none|none|
+|&nbsp;&nbsp; active|number|false|none|none|
+|&nbsp;&nbsp; pending|number|false|none|none|
+|&nbsp;&nbsp; complete|number|false|none|none|
 
 #### Specification
 
@@ -3286,8 +3533,8 @@ A request to create a workorder
 |approved_dt|string(date-time)|false|none|Date the Work Request Submission was approved|
 |data_count|number|false|none|count of work request submission name/value records|
 |data|[object]|false|none|array of Work Request Submission name/value records|
-|&nbsp;&nbsp;&nbsp;&nbsp; name|string|false|none|The name of the work request property to set|
-|&nbsp;&nbsp;&nbsp;&nbsp; value|string|false|none|the value to set to the property|
+|&nbsp;&nbsp; name|string|false|none|The name of the work request property to set|
+|&nbsp;&nbsp; value|string|false|none|the value to set to the property|
 
 #### Specification
 
