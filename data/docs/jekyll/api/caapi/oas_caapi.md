@@ -3143,6 +3143,93 @@ properties:
 
 ```
 
+## Inventory History
+<!-- backwards compatibility -->
+<a id="schemainventory history"></a>
+<a id="schema_Inventory History"></a>
+<a id="tocSinventory history"></a>
+<a id="tocsinventory history"></a>
+
+An inventory history event
+
+#### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|inventory_id|string|false|read-only|inventory id|
+|project_id|string|false|read-only|project id of inventory|
+|event_id|string|false|read-only|event id of inventory history record|
+|event_type|any|false|none|none|
+|event_date|string(date-time)|false|read-only|The inventory history event date|
+|new_status|string|false|read-only|The inventory history event new status|
+|comments|string|false|read-only|The inventory history event comments|
+
+#### Specification
+
+```yaml
+type: object
+description: An inventory history event
+properties:
+  inventory_id:
+    type: string
+    description: inventory id
+    readOnly: true
+  project_id:
+    type: string
+    description: project id of inventory
+    readOnly: true
+  event_id:
+    type: string
+    description: event id of inventory history record
+    readOnly: true
+  event_type:
+    event_id:
+      type: string
+      enum:
+        - receipt
+        - doa
+        - shipment
+        - installation
+        - kit
+        - transfer
+        - configuration
+        - audit
+        - trans_project
+        - mark_refreshed
+        - return_receipt
+        - cancel_last_event
+        - transfer_out
+        - transfer_in
+      description: event type of inventory history record
+      readOnly: true
+  event_date:
+    description: The inventory history event date
+    type: string
+    format: date-time
+    readOnly: true
+  new_status:
+    description: The inventory history event new status
+    type: string
+    enum:
+      - received
+      - raw
+      - in_configuration
+      - configured
+      - shipped
+      - installed
+      - doa
+      - other
+      - in_noc
+      - eol
+      - in_transit
+    readOnly: true
+  comments:
+    description: The inventory history event comments
+    type: string
+    readOnly: true
+
+```
+
 ## Kit
 <!-- backwards compatibility -->
 <a id="schemakit"></a>
@@ -3191,6 +3278,135 @@ properties:
     type: string
     description: Kit referenced Part Number, will be empty for KitType = 'P'
     readOnly: true
+
+```
+
+## Ship Order
+<!-- backwards compatibility -->
+<a id="schemaship order"></a>
+<a id="schema_Ship Order"></a>
+<a id="tocSship order"></a>
+<a id="tocsship order"></a>
+
+A ship order
+
+#### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|ship_order_id|string|false|read-only|The ship order ID|
+|project_id|string|false|read-only|The project ID|
+|order_number|string|false|none|The ship order number|
+|ship_to|object|false|none|The destination address|
+|&nbsp;&nbsp; name|string|false|none|The destination recipient name|
+|&nbsp;&nbsp; address_line_1|string|false|none|The destination address line 1|
+|&nbsp;&nbsp; address_line_2|string|false|none|The destination address line 2|
+|&nbsp;&nbsp; city|string|false|none|The destination city|
+|&nbsp;&nbsp; state|string|false|none|The destination state|
+|&nbsp;&nbsp; european_province|string|false|none|The destination european province|
+|&nbsp;&nbsp; zip|string|false|none|The destination zip|
+|&nbsp;&nbsp; country|string|false|none|The destination country|
+|order_date|string(date-time)|false|none|The ship order date|
+|ship_date|string(date-time)|false|none|The ship order ship date|
+|status|string|false|none|The ship order status|
+|carrier_code|string|false|none|The ship order carrier code|
+|carrier_tracking_number|string|false|none|The ship order carrier tracking number|
+|instructions|string|false|none|The ship order instructions|
+|team|string|false|none|The ship order team|
+|shipped_date|string(date-time)|false|none|The ship order shipped date|
+|warehouse_code|string|false|none|The ship order warehouse code|
+|delivered_date|string(date-time)|false|none|The ship order delivered date|
+|customer_po|string|false|none|The ship order customer PO|
+
+#### Specification
+
+```yaml
+description: A ship order
+type: object
+properties:
+  ship_order_id:
+    description: The ship order ID
+    readOnly: true
+    type: string
+  project_id:
+    description: The project ID
+    readOnly: true
+    type: string
+  order_number:
+    description: The ship order number
+    type: string
+  ship_to:
+    description: The destination address
+    type: object
+    properties:
+      name:
+        description: The destination recipient name
+        type: string
+      address_line_1:
+        description: The destination address line 1
+        type: string
+      address_line_2:
+        description: The destination address line 2
+        type: string
+      city:
+        description: The destination city
+        type: string
+      state:
+        description: The destination state
+        type: string
+      european_province:
+        description: The destination european province
+        type: string
+      zip:
+        description: The destination zip
+        type: string
+      country:
+        description: The destination country
+        type: string
+  order_date:
+    description: The ship order date
+    type: string
+    format: date-time
+  ship_date:
+    description: The ship order ship date
+    type: string
+    format: date-time
+  status:
+    description: The ship order status
+    type: string
+    enum:
+      - drafting
+      - released_to_warehouse
+      - order_complete
+      - shipped
+      - installed
+      - received_at_warehouse
+  carrier_code:
+    description: The ship order carrier code
+    type: string
+  carrier_tracking_number:
+    description: The ship order carrier tracking number
+    type: string
+  instructions:
+    description: The ship order instructions
+    type: string
+  team:
+    description: The ship order team
+    type: string
+  shipped_date:
+    description: The ship order shipped date
+    type: string
+    format: date-time
+  warehouse_code:
+    description: The ship order warehouse code
+    type: string
+  delivered_date:
+    description: The ship order delivered date
+    type: string
+    format: date-time
+  customer_po:
+    description: The ship order customer PO
+    type: string
 
 ```
 
