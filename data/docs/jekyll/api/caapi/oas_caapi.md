@@ -1923,6 +1923,10 @@ Permissions required:<br>
                     "description": "The destination address",
                     "type": "object",
                     "properties": {
+                      "location_code": {
+                        "description": "The destination location code",
+                        "type": "string"
+                      },
                       "name": {
                         "description": "The destination recipient name",
                         "type": "string"
@@ -2165,6 +2169,10 @@ Permissions required:<br>
           "description": "The destination address",
           "type": "object",
           "properties": {
+            "location_code": {
+              "description": "The destination location code",
+              "type": "string"
+            },
             "name": {
               "description": "The destination recipient name",
               "type": "string"
