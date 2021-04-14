@@ -84,7 +84,9 @@
     "schemas": {
       "Customer": {"$ref": "./components/schemas/customer.json"},
       "Inventory": {"$ref": "./components/schemas/inventory.json"},
+      "Inventory History": {"$ref": "./components/schemas/inventoryHistory.json"},
       "Kit": {"$ref": "./components/schemas/kit.json"},
+      "Ship Order": {"$ref": "./components/schemas/shipOrder.json"},
       "Note": {"$ref": "./components/schemas/note.json"},
       "Project": {"$ref": "./components/schemas/project.json"},
       "Problem": {"$ref": "./components/schemas/problem.json"},
