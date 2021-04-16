@@ -29,6 +29,9 @@
     "customer": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/customer.json"
     },
+    "cycle": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/cycle.json"
+    },
     "inputFilter": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/inputFilter.json"
     },

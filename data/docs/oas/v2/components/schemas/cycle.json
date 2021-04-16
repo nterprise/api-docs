@@ -20,8 +20,11 @@
     "updated": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/cycle.json#/properties/updated"
     },
-    "work_order_id": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/cycle.json#/properties/work_order_id"
+    "work_order": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/cycle.json#/properties/work_order"
+    },
+    "batch": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/cycle.json#/properties/batch"
     },
     "location_id": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/cycle.json#/properties/location_id"
