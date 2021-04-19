@@ -11,7 +11,8 @@
     "created",
     "updated",
     "current_status",
-    "work_order_id",
+    "work_order",
+    "batch",
     "location_id",
     "resource_id",
     "assigned_user",
@@ -53,14 +54,24 @@
     "updated": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/entityCommon.json#/properties/updated"
     },
-    "work_order_id": {
-      "$ref": "https://docs.nterprise.com/schemas/niagara/workOrder.json#/properties/work_order_id"
+    "work_order": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/workOrder.json"
+    },
+    "batch": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "https://docs.nterprise.com/schemas/niagara/batch.json"
+        }
+      ]
     },
     "location_id": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/location.json#/properties/location_id"
     },
     "resource_id": {
-      "oneOf": [
+      "anyOf": [
         {
           "$ref": "https://docs.nterprise.com/schemas/niagara/resource.json#/properties/resource_id"
         },
