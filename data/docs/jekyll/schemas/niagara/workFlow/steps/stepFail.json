@@ -15,6 +15,15 @@
         "fail"
       ]
     },
+    "options": {
+      "type": "object",
+      "properties": {
+        "component": {
+          "type": "string",
+          "description": "Name of the UI component"
+        }
+      }
+    },
     "label": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepCommon.json#/properties/label"
     },

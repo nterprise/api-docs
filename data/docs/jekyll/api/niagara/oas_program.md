@@ -183,7 +183,7 @@ Permissions required:<br>
 |---|---|---|---|---|
 |label|body|string|true|Label for the entity|
 |customer|body|object|false|none|
-|&nbsp;&nbsp; customer_id|body|string|true|Customer identifier|
+|&nbsp;&nbsp; customer_id|body|string|true|Entity identifier|
 |allowed_statuses|body|[object]|false|List of allowed statuses|
 |&nbsp;&nbsp; status|body|string|true|A Custom label for the status|
 |&nbsp;&nbsp; category|body|string|true|The classifier for the statues|
@@ -412,7 +412,7 @@ Permissions required:<br>
 |program_id|path|string|true|Id for the program|
 |label|body|string|true|Label for the entity|
 |customer|body|object|false|none|
-|&nbsp;&nbsp; customer_id|body|string|true|Customer identifier|
+|&nbsp;&nbsp; customer_id|body|string|true|Entity identifier|
 |allowed_statuses|body|[object]|false|List of allowed statuses|
 |&nbsp;&nbsp; status|body|string|true|A Custom label for the status|
 |&nbsp;&nbsp; category|body|string|true|The classifier for the statues|

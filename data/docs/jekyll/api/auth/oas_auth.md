@@ -3,6 +3,7 @@ layout: page
 nav_order: 1
 title: Niagara Authentication API
 ---
+<!-- Generator: Widdershins v4.0.1 -->
 
 <h1 id="niagara-authentication-api">Niagara Authentication API</h1>
 
@@ -15,26 +16,19 @@ OAuth authentication for the niagara API
 
 ## Operations
 
-### GET /elevio/sign-in - *Sign-in to elevio*
+### GET /elevio/sign-in
 
 <a id="opIdelevioSignin"></a>
 
-*Sign-in to elevio*
+<aside class="success">
+This operation does not require authentication
+</aside>
 
 <h3 id="eleviosignin-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
 |return_url|query|string|true|The url to return back to elevio|
-
-<!-- START responses.def -->
-
-<h3 id="eleviosignin-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|302|[Found](https://tools.ietf.org/html/rfc7231#section-6.4.3)|Authorization endpoint for oauth|None|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad Request|Inline|
 
 > Example responses
 
@@ -74,30 +68,19 @@ OAuth authentication for the niagara API
 }
 ```
 
-<h3 id="eleviosignin-responseschema">Response Schema</h3>
-
-Status Code **400**
-
-*Bad Request*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; error|string(uri)|false|none|An absolute URI that identifies the error type|
-|&nbsp;&nbsp;&nbsp;&nbsp; error_description|string|false|none|A short, summary of the error type|
-
 ### Response Headers
 
 |Status|Header|Type|Format|Description|
 |---|---|---|---|---|
 |302|Location|string||none|
 
-<!-- END responses.def -->
-
-### GET /elevio/verify - *Verify Elevio*
+### GET /elevio/verify
 
 <a id="opIdelevioVerify"></a>
 
-*Verify Elevio*
+<aside class="success">
+This operation does not require authentication
+</aside>
 
 <h3 id="elevioverify-parameters">Parameters</h3>
 
@@ -106,15 +89,6 @@ Status Code **400**
 |code|query|string|true|oAuth Access code|
 |state|query|string|true|State parameter|
 
-<!-- START responses.def -->
-
-<h3 id="elevioverify-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|302|[Found](https://tools.ietf.org/html/rfc7231#section-6.4.3)|Authorization endpoint for oauth|None|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad Request|Inline|
-
 > Example responses
 
 > 400 Response
@@ -153,34 +127,23 @@ Status Code **400**
 }
 ```
 
-<h3 id="elevioverify-responseschema">Response Schema</h3>
-
-Status Code **400**
-
-*Bad Request*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; error|string(uri)|false|none|An absolute URI that identifies the error type|
-|&nbsp;&nbsp;&nbsp;&nbsp; error_description|string|false|none|A short, summary of the error type|
-
 ### Response Headers
 
 |Status|Header|Type|Format|Description|
 |---|---|---|---|---|
 |302|Location|string||none|
 
-<!-- END responses.def -->
-
 <h1 id="niagara-authentication-api-oauth">oAuth</h1>
 
 ## Operations
 
-### GET /oauth/authorize - *Authorization Code Grant*
+### GET /oauth/authorize
 
 <a id="opIdauthorize"></a>
 
-*Authorization Code Grant*
+<aside class="success">
+This operation does not require authentication
+</aside>
 
 <h3 id="authorize-parameters">Parameters</h3>
 
@@ -192,16 +155,6 @@ Status Code **400**
 |state|query|string|false|This gives your app a chance to persist data between the user being directed to the authorization server and back again, such as using the state parameter as a session key|
 |login_hint|query|string|false|If the client_id supports SSO, this parameter will pass along to the SSO service|
 
-<!-- START responses.def -->
-
-<h3 id="authorize-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|302|[Found](https://tools.ietf.org/html/rfc7231#section-6.4.3)|Authorization endpoint for oauth|None|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad Request|Inline|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Resource not found|Inline|
-
 > Example responses
 
 > 400 Response
@@ -240,51 +193,23 @@ Status Code **400**
 }
 ```
 
-<h3 id="authorize-responseschema">Response Schema</h3>
-
-Status Code **400**
-
-*Bad Request*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; error|string(uri)|false|none|An absolute URI that identifies the error type|
-|&nbsp;&nbsp;&nbsp;&nbsp; error_description|string|false|none|A short, summary of the error type|
-
-Status Code **404**
-
-*Not Found*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; error|string(uri)|false|none|An absolute URI that identifies the error type|
-|&nbsp;&nbsp;&nbsp;&nbsp; error_description|string|false|none|A short, summary of the error type|
-
 ### Response Headers
 
 |Status|Header|Type|Format|Description|
 |---|---|---|---|---|
 |302|Location|string||none|
 
-<!-- END responses.def -->
-
-### POST /oauth/token - *OAuth code exchange*
+### POST /oauth/token
 
 <a id="opIdfetchToken"></a>
 
-*OAuth code exchange*
-
 Fetches the current user information
 
+<aside class="success">
+This operation does not require authentication
+</aside>
+
 > Body parameter
-
-<!-- START responses.def -->
-
-<h3 id="fetchtoken-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Entry point for the application|Inline|
 
 > Example responses
 
@@ -318,36 +243,14 @@ Fetches the current user information
 }
 ```
 
-<h3 id="fetchtoken-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-*OAuth Token*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; access_token|string|false|none|OAuth 2 Access token|
-|&nbsp;&nbsp;&nbsp;&nbsp; refresh_token|string|false|none|OAuth 2 Access token|
-|&nbsp;&nbsp;&nbsp;&nbsp; token_type|string|false|none|OAuth 2 Token type|
-|&nbsp;&nbsp;&nbsp;&nbsp; expires_in|number(int32)|false|none|OAuth 2 Expires time|
-
-<!-- END responses.def -->
-
-### DELETE /oauth/token - *Revoke token*
+### DELETE /oauth/token
 
 <a id="opIddeleteToken"></a>
 
-*Revoke token*
+<aside class="warning">
+Permissions required:<br>
 
-<!-- START responses.def -->
-
-<h3 id="deletetoken-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|302|[Found](https://tools.ietf.org/html/rfc7231#section-6.4.3)|Authorization endpoint for oauth|None|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad Request|Inline|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Resource not found|Inline|
+</aside>
 
 > Example responses
 
@@ -387,33 +290,11 @@ Status Code **200**
 }
 ```
 
-<h3 id="deletetoken-responseschema">Response Schema</h3>
-
-Status Code **400**
-
-*Bad Request*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; error|string(uri)|false|none|An absolute URI that identifies the error type|
-|&nbsp;&nbsp;&nbsp;&nbsp; error_description|string|false|none|A short, summary of the error type|
-
-Status Code **404**
-
-*Not Found*
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|&nbsp;&nbsp;&nbsp;&nbsp; error|string(uri)|false|none|An absolute URI that identifies the error type|
-|&nbsp;&nbsp;&nbsp;&nbsp; error_description|string|false|none|A short, summary of the error type|
-
 ### Response Headers
 
 |Status|Header|Type|Format|Description|
 |---|---|---|---|---|
 |302|Location|string||none|
-
-<!-- END responses.def -->
 
 # Embedded Schemas
 

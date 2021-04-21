@@ -1973,7 +1973,7 @@ Permissions required:<br>
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|batch_id|string|true|read-only|The identifier for the batch|
+|batch_id|string|true|read-only|Entity identifier|
 |label|string|true|none|Label for the entity|
 |created|string(date-time)|true|read-only|Date the entity was created|
 |updated|string(date-time)|true|read-only|Last date the entity was updated|
@@ -1996,8 +1996,8 @@ required:
   - updated
 properties:
   batch_id:
-    description: The identifier for the batch
     type: string
+    description: Entity identifier
     readOnly: true
     pattern: ^[0-9a-zA-Z-_]+$
   label:
@@ -2117,11 +2117,11 @@ properties:
           description: The identifier for the user
           pattern: ^[0-9a-zA-Z-_]+$
         entity_id:
-          x-no-api-doc: true
           type: string
           description: Entity identifier
           readOnly: true
           pattern: ^[0-9a-zA-Z-_]+$
+          x-no-api-doc: true
         entity_type:
           x-no-api-doc: true
           enum:
