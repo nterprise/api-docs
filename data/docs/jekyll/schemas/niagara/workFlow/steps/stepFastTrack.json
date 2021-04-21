@@ -42,6 +42,16 @@
     "on_timeout": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/workFlow/steps/stepNext.json#/properties/on_timeout"
     },
+    "options": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "component": {
+          "type": "string",
+          "description": "Name of the UI component"
+        }
+      }
+    },
     "fail_condition": {
       "description": "How to treat failures. For ALL, all branches must have failures to be considered failed. ANY means at least one failure will fail the step. NONE means allow failures.",
       "type": "string",

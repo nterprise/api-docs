@@ -2576,6 +2576,13 @@ properties:
               context: *a7
               on_error: *a8
               on_timeout: *a9
+              options:
+                type: object
+                additionalProperties: false
+                properties:
+                  component:
+                    type: string
+                    description: Name of the UI component
               fail_condition:
                 description: How to treat failures. For ALL, all branches must have failures to
                   be considered failed. ANY means at least one failure will fail
