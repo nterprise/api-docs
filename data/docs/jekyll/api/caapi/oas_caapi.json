@@ -3118,6 +3118,10 @@
                                     "description": "The destination address",
                                     "type": "object",
                                     "properties": {
+                                      "location_code": {
+                                        "description": "The destination location code",
+                                        "type": "string"
+                                      },
                                       "name": {
                                         "description": "The destination recipient name",
                                         "type": "string"
@@ -3394,6 +3398,10 @@
                           "description": "The destination address",
                           "type": "object",
                           "properties": {
+                            "location_code": {
+                              "description": "The destination location code",
+                              "type": "string"
+                            },
                             "name": {
                               "description": "The destination recipient name",
                               "type": "string"
