@@ -194,7 +194,7 @@ Permissions required:<br>
 |text|body|string|true|Text for the note|
 |thread_id|body|any|false|none|
 |&nbsp;&nbsp; *anonymous*|body|null|false|none|
-|&nbsp;&nbsp; *anonymous*|body|string|false|The id of the note which started a thread|
+|&nbsp;&nbsp; *anonymous*|body|string|false|The identifier for the note|
 |issue|body|boolean|false|Marks the note as an issue|
 |closed|body|boolean|false|Marks the note as closed|
 |notify|body|[object]|false|List of contacts to notify about this note|
@@ -324,7 +324,7 @@ Permissions required:<br>
 |text|body|string|true|Text for the note|
 |thread_id|body|any|false|none|
 |&nbsp;&nbsp; *anonymous*|body|null|false|none|
-|&nbsp;&nbsp; *anonymous*|body|string|false|The id of the note which started a thread|
+|&nbsp;&nbsp; *anonymous*|body|string|false|The identifier for the note|
 |issue|body|boolean|false|Marks the note as an issue|
 |closed|body|boolean|false|Marks the note as closed|
 |notify|body|[object]|false|List of contacts to notify about this note|
@@ -425,7 +425,7 @@ properties:
   thread_id:
     oneOf:
       - type: "null"
-      - description: The id of the note which started a thread
+      - description: The identifier for the note
         type: string
         readOnly: true
         pattern: ^[0-9a-zA-Z-_]+$

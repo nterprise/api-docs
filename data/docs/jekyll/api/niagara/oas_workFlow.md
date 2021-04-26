@@ -2351,6 +2351,12 @@ properties:
                 type: string
                 enum:
                   - fail
+              options:
+                type: object
+                properties:
+                  component:
+                    type: string
+                    description: Name of the UI component
               label: *a4
               on_start: *a1
               on_complete: *a1
@@ -2391,6 +2397,12 @@ properties:
                 type: string
                 enum:
                   - success
+              options:
+                type: object
+                properties:
+                  component:
+                    type: string
+                    description: Name of the UI component
               label: *a4
               on_start: *a1
               on_complete: *a1
