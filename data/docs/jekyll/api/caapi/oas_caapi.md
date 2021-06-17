@@ -3306,6 +3306,7 @@ A ship order
 |project_id|string|false|read-only|The project ID|
 |order_number|string|false|none|The ship order number|
 |ship_to|object|false|none|The destination address|
+|&nbsp;&nbsp; location_code|string|false|none|The destination location code|
 |&nbsp;&nbsp; name|string|false|none|The destination recipient name|
 |&nbsp;&nbsp; address_line_1|string|false|none|The destination address line 1|
 |&nbsp;&nbsp; address_line_2|string|false|none|The destination address line 2|
@@ -3347,6 +3348,9 @@ properties:
     description: The destination address
     type: object
     properties:
+      location_code:
+        description: The destination location code
+        type: string
       name:
         description: The destination recipient name
         type: string

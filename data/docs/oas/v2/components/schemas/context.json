@@ -17,6 +17,9 @@
     "current_steps": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/context.json#/properties/current_steps"
     },
+    "interactive_steps": {
+      "$ref": "https://docs.nterprise.com/schemas/niagara/context.json#/properties/interactive_steps"
+    },
     "failed_steps": {
       "$ref": "https://docs.nterprise.com/schemas/niagara/context.json#/properties/failed_steps"
     },

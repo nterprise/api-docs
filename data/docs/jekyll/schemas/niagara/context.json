@@ -14,6 +14,7 @@
     "using",
     "waiting_for_user",
     "current_steps",
+    "interactive_steps",
     "failed_steps",
     "location",
     "active",
@@ -82,6 +83,14 @@
       "items": {
         "type": "string",
         "description": "Key of current step to execute",
+        "readOnly": true
+      }
+    },
+    "interactive_steps": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": "Key of current interactive step to execute",
         "readOnly": true
       }
     },

@@ -104,6 +104,7 @@ Permissions required:<br>
   "current_steps": [
     "work-complete"
   ],
+  "interactive_steps": [],
   "failed_steps": [
     {
       "step": "work-complete",
@@ -288,6 +289,7 @@ Permissions required:<br>
   "current_steps": [
     "work-complete"
   ],
+  "interactive_steps": [],
   "failed_steps": [
     {
       "step": "work-complete",
@@ -747,6 +749,7 @@ Permissions required:<br>
         "current_steps": [
           "work-complete"
         ],
+        "interactive_steps": [],
         "failed_steps": [
           {
             "step": "work-complete",
@@ -949,6 +952,7 @@ Permissions required:<br>
   "current_steps": [
     "work-complete"
   ],
+  "interactive_steps": [],
   "failed_steps": [
     {
       "step": "work-complete",
