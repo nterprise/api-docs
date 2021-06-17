@@ -93,6 +93,7 @@ Permissions required:<br>
   "current_steps": [
     "work-complete"
   ],
+  "interactive_steps": [],
   "failed_steps": [
     {
       "step": "work-complete",
@@ -277,6 +278,7 @@ Permissions required:<br>
   "current_steps": [
     "work-complete"
   ],
+  "interactive_steps": [],
   "failed_steps": [
     {
       "step": "work-complete",
@@ -385,6 +387,7 @@ Permissions required:<br>
 |created|string(date-time)|false|read-only|Date the entity was created|
 |updated|string(date-time)|false|read-only|Last date the entity was updated|
 |current_steps|[string]|false|none|none|
+|interactive_steps|[string]|false|none|none|
 |failed_steps|[object]|false|none|none|
 |&nbsp;&nbsp; step|string|true|none|Key of a failed step|
 |&nbsp;&nbsp; failed_count|number|true|none|Number of times the step failed|
@@ -433,6 +436,12 @@ properties:
     items:
       type: string
       description: Key of current step to execute
+      readOnly: true
+  interactive_steps:
+    type: array
+    items:
+      type: string
+      description: Key of current interactive step to execute
       readOnly: true
   failed_steps:
     type: array

@@ -259,7 +259,7 @@ Permissions required:<br>
 |---|---|---|---|---|
 |label|body|string|true|Label for the entity|
 |program|body|object|false|none|
-|&nbsp;&nbsp; program_id|body|string|true|Entity identifier|
+|&nbsp;&nbsp; program_id|body|string|true|Unique identifier|
 |allowed_statuses|body|[object]|false|List of allowed statuses|
 |&nbsp;&nbsp; status|body|string|true|A Custom label for the status|
 |&nbsp;&nbsp; category|body|string|true|The classifier for the statues|
@@ -634,7 +634,7 @@ Permissions required:<br>
 |project_id|path|string|true|Id for the project|
 |label|body|string|true|Label for the entity|
 |program|body|object|false|none|
-|&nbsp;&nbsp; program_id|body|string|true|Entity identifier|
+|&nbsp;&nbsp; program_id|body|string|true|Unique identifier|
 |allowed_statuses|body|[object]|false|List of allowed statuses|
 |&nbsp;&nbsp; status|body|string|true|A Custom label for the status|
 |&nbsp;&nbsp; category|body|string|true|The classifier for the statues|

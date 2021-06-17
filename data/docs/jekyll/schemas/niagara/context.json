@@ -85,6 +85,14 @@
         "readOnly": true
       }
     },
+    "interactive_steps": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": "Key of current interactive step to execute",
+        "readOnly": true
+      }
+    },
     "failed_steps": {
       "type": "array",
       "items": {
