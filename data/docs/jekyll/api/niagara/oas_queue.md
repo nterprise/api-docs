@@ -433,6 +433,7 @@ Permissions required:<br>
         "number_cycles": 4,
         "cycles": {
           "needed": 4,
+          "additional": 0,
           "pending": 0,
           "in_progress": 0,
           "verifying": 0,
@@ -616,6 +617,7 @@ Permissions required:<br>
           },
           "cycles": {
             "needed": 1,
+            "additional": 0,
             "pending": 0,
             "in_progress": 0,
             "verifying": 0,

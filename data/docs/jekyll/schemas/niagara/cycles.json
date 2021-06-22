@@ -21,6 +21,10 @@
       "description": "The number of cycles needed",
       "minimum": 1
     },
+    "additional": {
+      "type": "integer",
+      "description": "The number of cycles additional"
+    },
     "in_progress": {
       "type": "integer",
       "description": "The number of cycles in progress"
