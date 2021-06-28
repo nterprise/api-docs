@@ -1515,6 +1515,7 @@ Permissions required:<br>
         },
         "cycles": {
           "needed": 1,
+          "additional": 0,
           "pending": 1,
           "in_progress": 0,
           "verifying": 0,

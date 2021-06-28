@@ -119,6 +119,7 @@ Permissions required:<br>
         "number_cycles": 4,
         "cycles": {
           "needed": 4,
+          "additional": 0,
           "pending": 0,
           "in_progress": 0,
           "verifying": 0,
@@ -302,6 +303,7 @@ Permissions required:<br>
           },
           "cycles": {
             "needed": 1,
+            "additional": 0,
             "pending": 0,
             "in_progress": 0,
             "verifying": 0,
@@ -466,6 +468,7 @@ Permissions required:<br>
   "number_cycles": 4,
   "cycles": {
     "needed": 4,
+    "additional": 0,
     "pending": 0,
     "in_progress": 0,
     "verifying": 0,
@@ -648,6 +651,7 @@ Permissions required:<br>
     },
     "cycles": {
       "needed": 1,
+      "additional": 0,
       "pending": 0,
       "in_progress": 0,
       "verifying": 0,
@@ -823,6 +827,7 @@ Permissions required:<br>
   "number_cycles": 4,
   "cycles": {
     "needed": 4,
+    "additional": 0,
     "pending": 0,
     "in_progress": 0,
     "verifying": 0,
@@ -1005,6 +1010,7 @@ Permissions required:<br>
     },
     "cycles": {
       "needed": 1,
+      "additional": 0,
       "pending": 0,
       "in_progress": 0,
       "verifying": 0,
@@ -1318,6 +1324,7 @@ Permissions required:<br>
           },
           "cycles": {
             "needed": 1,
+            "additional": 0,
             "pending": 1,
             "in_progress": 0,
             "verifying": 0,
@@ -1423,6 +1430,7 @@ Permissions required:<br>
           "number_cycles": 4,
           "cycles": {
             "needed": 4,
+            "additional": 0,
             "pending": 0,
             "in_progress": 0,
             "verifying": 0,
@@ -1605,6 +1613,7 @@ Permissions required:<br>
             },
             "cycles": {
               "needed": 1,
+              "additional": 0,
               "pending": 0,
               "in_progress": 0,
               "verifying": 0,
@@ -2071,6 +2080,9 @@ properties:
         type: integer
         description: The number of cycles needed
         minimum: 1
+      additional:
+        type: integer
+        description: The number of cycles additional
       in_progress:
         type: integer
         description: The number of cycles in progress
